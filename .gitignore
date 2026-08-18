@@ -1,0 +1,65 @@
+# ----------------------------------------------------------------------
+# Operating-system / editor files
+# ----------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+*~
+*.swp
+*.swo
+
+# ----------------------------------------------------------------------
+# Python environments and caches
+# ----------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# ----------------------------------------------------------------------
+# Secrets / credentials
+# ----------------------------------------------------------------------
+.env
+.env.*
+secrets/
+credentials/
+*.pem
+*.key
+*.p12
+*.token
+
+# ----------------------------------------------------------------------
+# Large research data and generated outputs
+# These belong outside GitHub or in a separate archival data deposit.
+# ----------------------------------------------------------------------
+raw/
+derived/
+output/
+outputs/
+cache/
+tmp/
+temp/
+logs/
+
+*.parquet
+*.feather
+*.arrow
+*.pgn
+*.pgn.zst
+*.ndjson
+*.ndjson.zst
+*.zst
+*.tar
+*.tar.gz
+
+# ----------------------------------------------------------------------
+# Local backups / superseded script snapshots
+# Preserve locally for provenance, but do not mix them into canonical code.
+# ----------------------------------------------------------------------
+*.pre_*
+*.bak
+*.backup
+code/_backups/
