@@ -1,0 +1,35 @@
+{
+  "block_totals": {
+    "bridge_10m": 20175915,
+    "early_11m": 21600308,
+    "late_3m": 5810797
+  },
+  "certification_note": "Supersedes the earlier needs_review flag. The prior audit incorrectly required every node-like column, including sf100k_nodes_searched telemetry, to equal 100000. The correct invariant is sf100k_nodes_requested == 100000, which holds for all 489 parquet files.",
+  "corrective_review_root": "/Volumes/XT_Pro/lichess_kindness/output/SF100K_FULL_24M_AUDIT_REVIEW_20260817_185317",
+  "duplicate_audit": {
+    "distinct_game_ids": 47587020,
+    "duplicate_game_id_rows": 0,
+    "duplicate_game_ids": 0,
+    "duplicate_samples_csv": "/Volumes/XT_Pro/lichess_kindness/output/SF100K_FULL_24M_AUDIT_REVIEW_20260817_185317/duplicate_game_id_samples.csv",
+    "total_rows_seen": 47587020
+  },
+  "expected_total_rows": 47587020,
+  "final_checks": {
+    "all_24_expected_months_present": true,
+    "basic_schema_ok": true,
+    "global_game_ids_unique": true,
+    "no_error_rows": true,
+    "row_month_part_checks_clean": true,
+    "sf100k_nodes_requested_all_100000": true,
+    "sf100k_nodes_requested_column_present_all_files": true,
+    "total_rows_match_expected": true
+  },
+  "n_months": 24,
+  "n_parquet_files": 489,
+  "path_list": "/Volumes/XT_Pro/lichess_kindness/output/SF100K_FULL_24M_AUDIT_20260817_161831/sf100k_full_24m_parquet_paths.txt",
+  "prior_audit_root": "/Volumes/XT_Pro/lichess_kindness/output/SF100K_FULL_24M_AUDIT_20260817_161831",
+  "status": "certified_ok",
+  "total_error_rows": 0,
+  "total_ok_rows": 47587020,
+  "total_rows": 47587020
+}
