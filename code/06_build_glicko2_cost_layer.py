@@ -2104,6 +2104,19 @@ def finalize_month(
 
         tmp.replace(final)
 
+        # Sigma is stored in float32 state arrays/checkpoints.  The exact
+        # float32 representation of a nominal ceiling such as 0.1 is
+        # 0.10000000149011612, which is microscopically above the Python
+        # float literal 0.1.  Final QA therefore distinguishes:
+        #
+        # * sigma_above_nominal_max: useful diagnostic count at > 0.1; and
+        # * sigma_out_of_bounds: true violations above the representable
+        #   float32 storage ceiling.
+        #
+        # This preserves a strict fail-closed upper bound without falsely
+        # rejecting states that were correctly clamped before float32 storage.
+        sigma_storage_ceiling = float(np.float32(config.max_sigma))
+
         qa = con.execute(
             f"""
             SELECT
@@ -2133,10 +2146,13 @@ def finalize_month(
                            OR disconnected_pre_rd_v2 < {config.min_rd}
                            OR disconnected_pre_rd_v2 > {config.max_rd}
                          THEN 1 ELSE 0 END)::BIGINT AS rd_out_of_bounds,
-                sum(CASE WHEN chooser_pre_sigma_v2 <= 0
-                           OR chooser_pre_sigma_v2 > {config.max_sigma}
-                           OR disconnected_pre_sigma_v2 <= 0
+                sum(CASE WHEN chooser_pre_sigma_v2 > {config.max_sigma}
                            OR disconnected_pre_sigma_v2 > {config.max_sigma}
+                         THEN 1 ELSE 0 END)::BIGINT AS sigma_above_nominal_max,
+                sum(CASE WHEN chooser_pre_sigma_v2 <= 0
+                           OR chooser_pre_sigma_v2 > {sigma_storage_ceiling!r}
+                           OR disconnected_pre_sigma_v2 <= 0
+                           OR disconnected_pre_sigma_v2 > {sigma_storage_ceiling!r}
                          THEN 1 ELSE 0 END)::BIGINT AS sigma_out_of_bounds,
                 sum(CASE WHEN NOT white_rating_source_match
                            OR NOT black_rating_source_match
@@ -2301,6 +2317,10 @@ def finalize_all(config: Config, supported_speeds: Sequence[str]) -> dict[str, A
         "target_end_month": config.target_end_month,
         "months": len(records),
         "speeds": list(supported_speeds),
+        "speed_source_script_sha256s": {
+            speed: read_json(speed_summary_path(config, speed)).get("script_sha256")
+            for speed in supported_speeds
+        },
         "total_rows": total_rows,
         "expected_total_rows": config.expected_stage05_rows,
         "both_ratingdiff_null_rows": both_null_rows,
@@ -2323,6 +2343,9 @@ def finalize_all(config: Config, supported_speeds: Sequence[str]) -> dict[str, A
                 "summary": str(manifests / "latest_summary.json"),
                 "total_rows": total_rows,
                 "script_sha256": config.script_sha256,
+                "speed_source_script_sha256s": summary.get(
+                    "speed_source_script_sha256s", {}
+                ),
             },
         )
     else:
@@ -2431,6 +2454,17 @@ def run_self_tests() -> dict[str, Any]:
     if premium <= 0:
         raise AssertionError("Win premium must be positive")
     tests.append("win_premium_identity")
+
+    # Storage-bound regression: state arrays/checkpoints use float32.  A value
+    # correctly clamped to the nominal MAX_SIGMA=0.1 is represented as
+    # 0.10000000149011612 after float32 storage and must not be treated as a
+    # true upper-bound violation during final QA.
+    sigma_storage_ceiling = float(np.float32(MAX_SIGMA))
+    if sigma_storage_ceiling < MAX_SIGMA:
+        raise AssertionError("float32 sigma ceiling unexpectedly below nominal max")
+    if not sigma_storage_ceiling >= MAX_SIGMA:
+        raise AssertionError("float32 sigma storage-ceiling test failed")
+    tests.append("float32_sigma_storage_ceiling")
 
     result = {
         "created_at": utc_now(),
