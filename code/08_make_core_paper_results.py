@@ -36,7 +36,7 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 
 
-SCRIPT_VERSION = "1.1.0"
+SCRIPT_VERSION = "1.2.0"
 
 PROJECT = Path("/Volumes/XT_Pro/lichess_kindness")
 REPOSITORY = PROJECT / "replication_package"
@@ -1033,7 +1033,7 @@ def fit_lpm_cluster(
 
 
 def run_numerical_self_test() -> None:
-    """Cross-check the exact absorber against an explicit dummy regression."""
+    """Cross-check numerical kernels, including full-sample-only paths."""
     rng = np.random.default_rng(20260818)
     rows = 1_800
     chooser_levels = 90
@@ -1065,10 +1065,44 @@ def run_numerical_self_test() -> None:
             f"maximum_scaled_group_mean={orthogonality:.3e}"
         )
 
+    tied_spearman = spearman_correlation(
+        np.array([1.0, 2.0, 2.0, 4.0]),
+        np.array([4.0, 1.0, 2.0, 3.0]),
+    )
+    expected_tied_spearman = -0.31622776601683794
+    if not math.isclose(tied_spearman, expected_tied_spearman, rel_tol=0.0, abs_tol=1e-14):
+        raise RuntimeError(
+            "Internal Spearman tie-handling self-test failed: "
+            f"expected={expected_tied_spearman:.16f}, actual={tied_spearman:.16f}"
+        )
+
+    split_input = pd.DataFrame(
+        {
+            "n0": np.arange(1, 13, dtype=np.int64),
+            "n1": np.arange(12, 0, -1, dtype=np.int64),
+            "k0": np.array([0, 1, 0, 1, 2, 0, 3, 1, 4, 2, 5, 3], dtype=np.int64),
+            "k1": np.array([1, 0, 2, 1, 0, 3, 1, 2, 0, 3, 1, 1], dtype=np.int64),
+        }
+    )
+    split_correlations, split_transitions, split_scatter = summarize_split(
+        split_input,
+        "numerical_self_test",
+    )
+    if len(split_correlations) != len(SPLIT_MIN_OPPORTUNITIES):
+        raise RuntimeError("Split-half self-test returned an unexpected correlation grid")
+    if len(split_transitions) != 2 * len(SPLIT_MIN_OPPORTUNITIES):
+        raise RuntimeError("Split-half self-test returned an unexpected transition grid")
+    if split_scatter.empty:
+        raise RuntimeError("Split-half self-test returned an empty scatter grid")
+    if not np.isfinite(split_correlations["spearman_unweighted"].to_numpy(dtype=np.float64)).all():
+        raise RuntimeError("Split-half self-test produced a non-finite Spearman correlation")
+
     print("STAGE08_NUMERICAL_SELF_TEST_OK")
     print(f"method: {method}")
     print(f"maximum_dummy_regression_difference: {maximum_difference:.3e}")
     print(f"maximum_scaled_group_mean: {orthogonality:.3e}")
+    print(f"spearman_tie_test: {tied_spearman:.16f}")
+    print(f"split_half_cutoff_rows_tested: {len(split_correlations)}")
 
 
 def linear_combination(result: dict[str, Any], weights: dict[str, float]) -> dict[str, float]:
@@ -1503,6 +1537,19 @@ def weighted_correlation(x: np.ndarray, y: np.ndarray, weights: np.ndarray) -> f
     return covariance / math.sqrt(variance_x * variance_y)
 
 
+def spearman_correlation(x: np.ndarray, y: np.ndarray) -> float:
+    """Spearman correlation with average ranks and no optional SciPy dependency."""
+    x = np.asarray(x, dtype=np.float64)
+    y = np.asarray(y, dtype=np.float64)
+    finite = np.isfinite(x) & np.isfinite(y)
+    x, y = x[finite], y[finite]
+    if len(x) < 3:
+        return math.nan
+    rank_x = pd.Series(x, copy=False).rank(method="average").to_numpy(dtype=np.float64)
+    rank_y = pd.Series(y, copy=False).rank(method="average").to_numpy(dtype=np.float64)
+    return weighted_correlation(rank_x, rank_y, np.ones(len(rank_x), dtype=np.float64))
+
+
 def normal_rate_interval(kind_draws: float, rows: float) -> tuple[float, float]:
     if rows <= 0:
         return math.nan, math.nan
@@ -1531,7 +1578,10 @@ def summarize_split(wide: pd.DataFrame, design: str) -> tuple[pd.DataFrame, pd.D
                 "fair_opportunities": int(sample.total_n.sum()),
                 "kind_draws": int(sample.total_k.sum()),
                 "pearson_unweighted": float(sample.rate0.corr(sample.rate1)),
-                "spearman_unweighted": float(sample.rate0.corr(sample.rate1, method="spearman")),
+                "spearman_unweighted": spearman_correlation(
+                    sample.rate0.to_numpy(dtype=np.float64),
+                    sample.rate1.to_numpy(dtype=np.float64),
+                ),
                 "pearson_weighted_total_opportunities": weighted_correlation(
                     sample.rate0.to_numpy(), sample.rate1.to_numpy(), sample.total_n.to_numpy()
                 ),
