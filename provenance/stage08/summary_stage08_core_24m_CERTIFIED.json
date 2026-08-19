@@ -1,0 +1,564 @@
+{
+  "core_qa": {
+    "core": {
+      "choosers": 3556701,
+      "clearly_worse_rows": 26090163,
+      "costly_rows": 24849501,
+      "excluded_middle_rows": 4168727,
+      "fair_rows": 17328130,
+      "kind_draws": 669503,
+      "nonnegative_rows": 22737519,
+      "rows": 47587020,
+      "strict_positive_rows": 22075834
+    },
+    "source": {
+      "kind_draws": 669503,
+      "missing_chooser": 0,
+      "missing_draw_payoff": 0,
+      "missing_eval": 0,
+      "missing_win_premium": 0,
+      "months": 24,
+      "rows": 47587020
+    }
+  },
+  "created_at_utc": "2026-08-19T03:47:53Z",
+  "descriptive": {
+    "clearly_worse_rows": 26090163,
+    "excluded_middle_rows": 4168727,
+    "fair_rows": 17328130,
+    "fine_eval_rows": 47587020,
+    "overall": {
+      "binomial_se_pp": 0.0017073045978303848,
+      "choosers": 3556701.0,
+      "kind_draws": 669503.0,
+      "kind_rate": 0.014069025545201192,
+      "kind_rate_pct": 1.4069025545201193,
+      "rows": 47587020.0
+    },
+    "table01_rows": 47587020,
+    "table06_rows": 43418293
+  },
+  "full_24_month_run": true,
+  "git": {
+    "branch": "main",
+    "head": "f8702654a5280763022f78c43e438d8621224164",
+    "remote_url": "https://github.com/ravideepsethi/intrinsic-prosociality.git",
+    "status_porcelain": ""
+  },
+  "manifest_files": 30,
+  "manifest_sha256": "1cde9cfb91ca90c50901f03e3480edead9aec09dff069107b6f749e879435556",
+  "month_end": "2025-10",
+  "month_start": "2023-11",
+  "months": [
+    "2023-11",
+    "2023-12",
+    "2024-01",
+    "2024-02",
+    "2024-03",
+    "2024-04",
+    "2024-05",
+    "2024-06",
+    "2024-07",
+    "2024-08",
+    "2024-09",
+    "2024-10",
+    "2024-11",
+    "2024-12",
+    "2025-01",
+    "2025-02",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10"
+  ],
+  "output_qa": {
+    "expected_outputs_checked": 14,
+    "kind_draws": 669503,
+    "rows": 47587020,
+    "selected_months": 24,
+    "status": "STAGE08_OUTPUT_QA_OK"
+  },
+  "piecewise": {
+    "table03": [
+      {
+        "beta_minus_pp_per_rating_point": -0.590494058413271,
+        "beta_plus_pp_per_rating_point": 0.1694801029394311,
+        "chooser_clusters": 1081003,
+        "rows_identifying": 7452210,
+        "rows_raw": 8025008,
+        "se_beta_minus": 0.04970280681685723,
+        "se_beta_plus": 0.04872599892630016,
+        "se_slope_asymmetry": 0.06952341612920125,
+        "se_threshold_jump_pp": 0.017897496266287498,
+        "slope_asymmetry_beta_plus_plus_beta_minus": -0.42101395547383985,
+        "t_slope_asymmetry": -6.055714447222127,
+        "threshold_jump_pp": 0.06709541825820975,
+        "window": "abs_payoff_le_0.5",
+        "window_half_width": 0.5
+      },
+      {
+        "beta_minus_pp_per_rating_point": -0.36971315954657724,
+        "beta_plus_pp_per_rating_point": 0.17882529860682247,
+        "chooser_clusters": 1342525,
+        "rows_identifying": 11342044,
+        "rows_raw": 11937702,
+        "se_beta_minus": 0.020616558768275516,
+        "se_beta_plus": 0.02086265062080194,
+        "se_slope_asymmetry": 0.029461400685551375,
+        "se_threshold_jump_pp": 0.013456999809180291,
+        "slope_asymmetry_beta_plus_plus_beta_minus": -0.19088786093975477,
+        "t_slope_asymmetry": -6.479252734014478,
+        "threshold_jump_pp": 0.10819926845172761,
+        "window": "abs_payoff_le_1",
+        "window_half_width": 1.0
+      },
+      {
+        "beta_minus_pp_per_rating_point": -0.23926697241041617,
+        "beta_plus_pp_per_rating_point": 0.2166468665406598,
+        "chooser_clusters": 1543402,
+        "rows_identifying": 14522888,
+        "rows_raw": 15152264,
+        "se_beta_minus": 0.010351511010382227,
+        "se_beta_plus": 0.010956249123177103,
+        "se_slope_asymmetry": 0.01524498599893201,
+        "se_threshold_jump_pp": 0.010977250632261591,
+        "slope_asymmetry_beta_plus_plus_beta_minus": -0.02262010586975638,
+        "t_slope_asymmetry": -1.4837734761672483,
+        "threshold_jump_pp": 0.141960628598035,
+        "window": "abs_payoff_le_2",
+        "window_half_width": 2.0
+      },
+      {
+        "beta_minus_pp_per_rating_point": -0.006719576971106138,
+        "beta_plus_pp_per_rating_point": 0.00015756302027886832,
+        "chooser_clusters": 1801942,
+        "rows_identifying": 16444544,
+        "rows_raw": 17328130,
+        "se_beta_minus": 0.0011220131163171313,
+        "se_beta_plus": 0.0012721126520584343,
+        "se_slope_asymmetry": 0.002079341574331092,
+        "se_threshold_jump_pp": 0.007457004125518774,
+        "slope_asymmetry_beta_plus_plus_beta_minus": -0.00656201395082727,
+        "t_slope_asymmetry": -3.1558133746920434,
+        "threshold_jump_pp": 0.43947730757174397,
+        "window": "full_fair_range",
+        "window_half_width": null
+      }
+    ],
+    "table04_rows": 8,
+    "table05_rows": 18
+  },
+  "runtime_seconds": 272.336,
+  "scope": {
+    "chooser_cluster_authority": "chooser_username_norm (mapped losslessly to run-local chooser_fe_id)",
+    "clearly_worse_definition": "engine_eval_cp_disconnected <= -300",
+    "excluded": [
+      "patron/profile analyses",
+      "opening familiarity",
+      "abandonment/reentry",
+      "post-sample holdouts",
+      "historical rating-rule validation",
+      "rendered publication tables and figures"
+    ],
+    "fair_definition": "engine_eval_cp_disconnected >= -100",
+    "hashed_split": "parity of final hexadecimal digit of md5(game_id)",
+    "included": "panel-only core paper results and analytical plot data",
+    "paper_favorable_definition": "chooser_draw_payoff_v2 >= 0",
+    "prior_kind_windows": "first 12 months classify; second 12 months evaluate"
+  },
+  "script_path": "/Volumes/XT_Pro/lichess_kindness/replication_package/code/08_make_core_paper_results.py",
+  "script_sha256": "e9dd80c52da5ffef3d406c3af25912bd924f6423f123ca535cf4077cb039c41f",
+  "script_version": "1.2.0",
+  "software": {
+    "duckdb": "1.5.2",
+    "numpy": "2.4.4",
+    "pandas": "3.0.3",
+    "platform": "macOS-26.4.1-arm64-arm-64bit-Mach-O",
+    "pyarrow": "24.0.0",
+    "python": "3.13.9"
+  },
+  "stage07": {
+    "monthly_inputs": [
+      {
+        "bytes": 599046148,
+        "month": "2023-11",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2023-11/analysis_panel.parquet",
+        "rows": 2015809,
+        "sha256": "f156ac22c7a58f91e1cd32769bd68b12458e27dc5204a1a1ca0d371ee52c4645"
+      },
+      {
+        "bytes": 622364566,
+        "month": "2023-12",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2023-12/analysis_panel.parquet",
+        "rows": 2101110,
+        "sha256": "b72f14d79c1659211f6a87d6fc975ee94e270c022b14bd27dc5f71f66eeb6442"
+      },
+      {
+        "bytes": 609476437,
+        "month": "2024-01",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-01/analysis_panel.parquet",
+        "rows": 2049292,
+        "sha256": "03846320137b76ce64f1c1b6f2e3542d7844747ffff3d8d2c404c1e5077dba4a"
+      },
+      {
+        "bytes": 571958520,
+        "month": "2024-02",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-02/analysis_panel.parquet",
+        "rows": 1931143,
+        "sha256": "f331f0ce4b039a13f183b3075c2ddf48abf6c602bb7e5a25255a75d9a74ef4e9"
+      },
+      {
+        "bytes": 599646499,
+        "month": "2024-03",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-03/analysis_panel.parquet",
+        "rows": 2021798,
+        "sha256": "fc6acd7539f5c9bfc31f7e6a8c9377b5649cf1de7d5f1b9d82c666381bae72a0"
+      },
+      {
+        "bytes": 570000005,
+        "month": "2024-04",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-04/analysis_panel.parquet",
+        "rows": 1917136,
+        "sha256": "541eb6be595b0d6886286163989d3a404fcf082b32d666f30f0141081bb55e43"
+      },
+      {
+        "bytes": 595686488,
+        "month": "2024-05",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-05/analysis_panel.parquet",
+        "rows": 2011399,
+        "sha256": "e29b5b4afa35531279005a4cef20bfcf8cdb80be76a099b0c5c96d18a85d9574"
+      },
+      {
+        "bytes": 565743912,
+        "month": "2024-06",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-06/analysis_panel.parquet",
+        "rows": 1903139,
+        "sha256": "fe2ef3f7c60211327ca7b7b1dc06de07da1ce3d32ea97042bd390021fd9e9b52"
+      },
+      {
+        "bytes": 561724122,
+        "month": "2024-07",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-07/analysis_panel.parquet",
+        "rows": 1893461,
+        "sha256": "df0105cd160b28dfe356cc326259c16f3794df524dde16c36162eef6897f53d9"
+      },
+      {
+        "bytes": 569839882,
+        "month": "2024-08",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-08/analysis_panel.parquet",
+        "rows": 1923975,
+        "sha256": "65ddf9fd2f1ce5559a53474aaa85827547d5c1ed011f63be4c99731e60e908ba"
+      },
+      {
+        "bytes": 544966207,
+        "month": "2024-09",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-09/analysis_panel.parquet",
+        "rows": 1832046,
+        "sha256": "1e033974f8e46620400cd0ba0874520bad77459f013d5b754b60ff0489fb2d03"
+      },
+      {
+        "bytes": 590221231,
+        "month": "2024-10",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-10/analysis_panel.parquet",
+        "rows": 1990765,
+        "sha256": "b76688b0857d9833c7151da5fb3e48ec7b5f611c1ffc61c8246d1a73e9f09048"
+      },
+      {
+        "bytes": 563061159,
+        "month": "2024-11",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-11/analysis_panel.parquet",
+        "rows": 1892495,
+        "sha256": "b0a847f18c0e5560c39481868f4155a4364115367554fdb6faf2b3d8f3494a32"
+      },
+      {
+        "bytes": 606083736,
+        "month": "2024-12",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-12/analysis_panel.parquet",
+        "rows": 2036228,
+        "sha256": "26d05ef331105809c2aea93a0662ac56e8c469ae19df8c861d253e1be68d352e"
+      },
+      {
+        "bytes": 608278686,
+        "month": "2025-01",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-01/analysis_panel.parquet",
+        "rows": 2050213,
+        "sha256": "fe3ce93ee474a8a83ca6d055028865a5249a29da5071e7bfbbe666b99f8add6f"
+      },
+      {
+        "bytes": 564265176,
+        "month": "2025-02",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-02/analysis_panel.parquet",
+        "rows": 1894447,
+        "sha256": "b45ec957f43db7e882d4af7176dad1dfc6c04109e22e0e4ba93379db70418e5d"
+      },
+      {
+        "bytes": 623177452,
+        "month": "2025-03",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-03/analysis_panel.parquet",
+        "rows": 2100718,
+        "sha256": "5518f4b268b8bcae51044e14ccdbd8d9354abff983217db87887905f739740f1"
+      },
+      {
+        "bytes": 595705624,
+        "month": "2025-04",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-04/analysis_panel.parquet",
+        "rows": 2004376,
+        "sha256": "de36e7c2730b4cfc5c443161068bb9fa416071a04771110aa32a9add90a58cf9"
+      },
+      {
+        "bytes": 617104067,
+        "month": "2025-05",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-05/analysis_panel.parquet",
+        "rows": 2072890,
+        "sha256": "d119fbe2cae30f389005f8c90ee66014e5116ab71942e14cdf245f65754ccb9d"
+      },
+      {
+        "bytes": 605892648,
+        "month": "2025-06",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-06/analysis_panel.parquet",
+        "rows": 2042105,
+        "sha256": "fca6c52e78b00dfbeda2597123d60f3261bfd07e1bda359dc7c41806f62834e9"
+      },
+      {
+        "bytes": 622959427,
+        "month": "2025-07",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-07/analysis_panel.parquet",
+        "rows": 2091678,
+        "sha256": "7513f0ec085b754350517d0ca31cba05b21244e76c0ebcc975e6e0c83bff2517"
+      },
+      {
+        "bytes": 572687493,
+        "month": "2025-08",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-08/analysis_panel.parquet",
+        "rows": 1930170,
+        "sha256": "f2d7d0f1ba3d6264bdf25f49458a675e46aa3015e3029778e628d453c796674e"
+      },
+      {
+        "bytes": 557925428,
+        "month": "2025-09",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-09/analysis_panel.parquet",
+        "rows": 1881564,
+        "sha256": "254be31157c851ed658ba6d98c947142325088761176ef74401e9b76048b18a4"
+      },
+      {
+        "bytes": 595420307,
+        "month": "2025-10",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-10/analysis_panel.parquet",
+        "rows": 1999063,
+        "sha256": "7d741c6f1c23c88600b54d286972cee8e77eb9ae0e25142bf13a420d8eb0b52e"
+      }
+    ],
+    "producer_sha256": "0411d4061ea9831c20449208a9782aaf668e160139918d106a2b7d63aaa56e6e",
+    "selected_bytes": 14133235220,
+    "selected_rows": 47587020,
+    "success_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/_SUCCESS.json",
+    "success_sha256": "8b7010b528ae5c6f1e1a9b517258648204c14c17ca41a2a6796f8ee5a1ed6db7"
+  },
+  "status": "STAGE08_CORE_24M_CERTIFIED_OK",
+  "table02_and_figure02": {
+    "figure02_beta_win_premium_pp": 0.024862930392355913,
+    "local_choosers": 2425210,
+    "local_rows_abs_payoff_le_6": 16706384,
+    "table02_main": [
+      {
+        "absorption_iterations": 1,
+        "absorption_max_scaled_group_mean": 2.193528888042547e-15,
+        "absorption_method": "one_way_exact",
+        "bandwidth": 0.5,
+        "chooser_clusters": 1081003,
+        "coefficient_pp": 0.23340933286297083,
+        "favorable_definition": "draw_payoff>=0",
+        "matrix_columns": 2,
+        "matrix_rank": 2,
+        "model": "chooser_fe_plus_win_premium",
+        "rows_identifying": 7452210,
+        "rows_raw": 8025008,
+        "sample": "fair_abs_draw_payoff_le_0.5",
+        "se_pp": 0.009965102336777209,
+        "t": 23.42267294150611,
+        "variable": "favorable"
+      },
+      {
+        "absorption_iterations": 1,
+        "absorption_max_scaled_group_mean": 2.5514084274412063e-15,
+        "absorption_method": "one_way_exact",
+        "bandwidth": 1.0,
+        "chooser_clusters": 1342525,
+        "coefficient_pp": 0.31642391305275586,
+        "favorable_definition": "draw_payoff>=0",
+        "matrix_columns": 2,
+        "matrix_rank": 2,
+        "model": "chooser_fe_plus_win_premium",
+        "rows_identifying": 11342044,
+        "rows_raw": 11937702,
+        "sample": "fair_abs_draw_payoff_le_1",
+        "se_pp": 0.008243349454937099,
+        "t": 38.385357163676176,
+        "variable": "favorable"
+      },
+      {
+        "absorption_iterations": 1,
+        "absorption_max_scaled_group_mean": 2.4946734987319413e-15,
+        "absorption_method": "one_way_exact",
+        "bandwidth": 2.0,
+        "chooser_clusters": 1543402,
+        "coefficient_pp": 0.40851163298595683,
+        "favorable_definition": "draw_payoff>=0",
+        "matrix_columns": 2,
+        "matrix_rank": 2,
+        "model": "chooser_fe_plus_win_premium",
+        "rows_identifying": 14522888,
+        "rows_raw": 15152264,
+        "sample": "fair_abs_draw_payoff_le_2",
+        "se_pp": 0.007551125101691743,
+        "t": 54.09943915436317,
+        "variable": "favorable"
+      },
+      {
+        "absorption_iterations": 1,
+        "absorption_max_scaled_group_mean": 3.2534944515949998e-15,
+        "absorption_method": "one_way_exact",
+        "bandwidth": 4.0,
+        "chooser_clusters": 1660819,
+        "coefficient_pp": 0.4351584141996137,
+        "favorable_definition": "draw_payoff>=0",
+        "matrix_columns": 2,
+        "matrix_rank": 2,
+        "model": "chooser_fe_plus_win_premium",
+        "rows_identifying": 15635959,
+        "rows_raw": 16320242,
+        "sample": "fair_abs_draw_payoff_le_4",
+        "se_pp": 0.007421876005620217,
+        "t": 58.63186260051905,
+        "variable": "favorable"
+      },
+      {
+        "absorption_iterations": 1,
+        "absorption_max_scaled_group_mean": 3.5249220404452376e-15,
+        "absorption_method": "one_way_exact",
+        "bandwidth": 6.0,
+        "chooser_clusters": 1706584,
+        "coefficient_pp": 0.4446190283117199,
+        "favorable_definition": "draw_payoff>=0",
+        "matrix_columns": 2,
+        "matrix_rank": 2,
+        "model": "chooser_fe_plus_win_premium",
+        "rows_identifying": 15987680,
+        "rows_raw": 16706384,
+        "sample": "fair_abs_draw_payoff_le_6",
+        "se_pp": 0.007399276798252568,
+        "t": 60.089525021786216,
+        "variable": "favorable"
+      }
+    ]
+  },
+  "table07": {
+    "documented_clock_control_collinearity": "log_clock_ratio = log_chooser_clock - log_disconnected_clock; the pseudo-inverse estimates the same control span as the two independent log-clock terms",
+    "models": [
+      {
+        "chooser_clusters": 2685525,
+        "matrix_columns": 4,
+        "matrix_rank": 4,
+        "model": "pooled_no_controls",
+        "premium_at_0cp_pp": 0.5452351062413818,
+        "premium_at_600cp_pp": 0.4190901510701881,
+        "premium_at_minus100cp_pp": 0.5662592654365808,
+        "rows_identifying": 17328130,
+        "rows_raw": 17328130,
+        "se_at_0cp": 0.009980826854673205,
+        "se_at_600cp": 0.02367523200586885,
+        "se_at_minus100cp": 0.01285768490463559
+      },
+      {
+        "chooser_clusters": 2685511,
+        "matrix_columns": 8,
+        "matrix_rank": 7,
+        "model": "pooled_plus_controls",
+        "premium_at_0cp_pp": 0.554067244834787,
+        "premium_at_600cp_pp": 0.38400622172528986,
+        "premium_at_minus100cp_pp": 0.5824107486863699,
+        "rows_identifying": 17327868,
+        "rows_raw": 17327868,
+        "se_at_0cp": 0.009981826594147002,
+        "se_at_600cp": 0.023636894488243784,
+        "se_at_minus100cp": 0.012855308016685076
+      },
+      {
+        "chooser_clusters": 1799558,
+        "matrix_columns": 3,
+        "matrix_rank": 3,
+        "model": "chooser_fe_no_controls",
+        "premium_at_0cp_pp": 0.45409295274645534,
+        "premium_at_600cp_pp": 0.3047959378463204,
+        "premium_at_minus100cp_pp": 0.4789757885631445,
+        "rows_identifying": 16439298,
+        "rows_raw": 17328130,
+        "se_at_0cp": 0.008605895573982619,
+        "se_at_600cp": 0.020368320382810397,
+        "se_at_minus100cp": 0.01116584285981485
+      },
+      {
+        "chooser_clusters": 1801928,
+        "matrix_columns": 7,
+        "matrix_rank": 6,
+        "model": "chooser_fe_plus_controls",
+        "premium_at_0cp_pp": 0.4579946245061176,
+        "premium_at_600cp_pp": 0.28575216647147583,
+        "premium_at_minus100cp_pp": 0.48670170084522457,
+        "rows_identifying": 16444285,
+        "rows_raw": 17327868,
+        "se_at_0cp": 0.008606099438204144,
+        "se_at_600cp": 0.0203538116325181,
+        "se_at_minus100cp": 0.011164979495956587
+      }
+    ],
+    "rows": 17328130
+  },
+  "type_and_split": {
+    "early_type_choosers": 1744924,
+    "later_choosers_with_early_type": 872826,
+    "later_rows_with_early_type": 5782414,
+    "split_min4": [
+      {
+        "choosers": 1116325,
+        "fair_opportunities": 14726527,
+        "kind_draws": 372842,
+        "min_total_fair_opportunities": 4,
+        "pearson_unweighted": 0.5898137593631668,
+        "pearson_weighted_harmonic_half_opportunities": 0.6969527734732729,
+        "pearson_weighted_total_opportunities": 0.6836768755988741,
+        "spearman_unweighted": 0.45191085622234245,
+        "split_design": "hash_md5_game_id"
+      },
+      {
+        "choosers": 738024,
+        "fair_opportunities": 11617545,
+        "kind_draws": 286406,
+        "min_total_fair_opportunities": 4,
+        "pearson_unweighted": 0.5316303656739635,
+        "pearson_weighted_harmonic_half_opportunities": 0.6381564379096226,
+        "pearson_weighted_total_opportunities": 0.6066374432999242,
+        "spearman_unweighted": 0.40246758127912224,
+        "split_design": "temporal_first12_second12"
+      }
+    ],
+    "table08_models": [
+      {
+        "chooser_clusters": 66053,
+        "prior_kind_type": "ever_kind",
+        "rows_identifying": 570516,
+        "rows_raw": 585234
+      },
+      {
+        "chooser_clusters": 620304,
+        "prior_kind_type": "never_kind",
+        "rows_identifying": 5025429,
+        "rows_raw": 5197180
+      }
+    ]
+  }
+}

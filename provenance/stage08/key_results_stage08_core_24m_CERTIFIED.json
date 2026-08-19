@@ -1,0 +1,287 @@
+{
+  "certified": true,
+  "created_at_utc": "2026-08-19T03:47:53Z",
+  "fairness_gradient": {
+    "cells": [
+      {
+        "binomial_se_pp": "0.0099945055470297",
+        "fairness_bin": "disconnected_clearly_better",
+        "kind_draws": "128259",
+        "kind_rate": "0.0364645954334462",
+        "kind_rate_pct": "3.64645954334462",
+        "rows": "3517357"
+      },
+      {
+        "binomial_se_pp": "0.00845524036691261",
+        "fairness_bin": "disconnected_better",
+        "kind_draws": "80471",
+        "kind_rate": "0.0242819458869665",
+        "kind_rate_pct": "2.42819458869665",
+        "rows": "3314026"
+      },
+      {
+        "binomial_se_pp": "0.00495990309340994",
+        "fairness_bin": "roughly_equal",
+        "kind_draws": "278440",
+        "kind_rate": "0.0265263133426003",
+        "kind_rate_pct": "2.65263133426003",
+        "rows": "10496747"
+      },
+      {
+        "binomial_se_pp": "0.00540962954766742",
+        "fairness_bin": "modestly_worse_excluded",
+        "kind_draws": "51492",
+        "kind_rate": "0.0123519721967881",
+        "kind_rate_pct": "1.23519721967881",
+        "rows": "4168727"
+      },
+      {
+        "binomial_se_pp": "0.00138294023313703",
+        "fairness_bin": "clearly_worse",
+        "kind_draws": "130841",
+        "kind_rate": "0.00501495525344169",
+        "kind_rate_pct": "0.501495525344169",
+        "rows": "26090163"
+      }
+    ],
+    "clearly_worse_kind_rate_pct": 0.501495525344169,
+    "fair_kind_rate_pct": 2.8114401265456803,
+    "fair_minus_clearly_worse_pp": 2.3099446012015115,
+    "fair_over_clearly_worse_ratio": 5.606112087672628
+  },
+  "output_manifest_sha256": "1cde9cfb91ca90c50901f03e3480edead9aec09dff069107b6f749e879435556",
+  "persistence": {
+    "prior_ever_over_never_later_rate_ratio": 14.39622060914393,
+    "prior_kindness_levels": [
+      {
+        "later_choosers": "80771",
+        "later_kind_draws": "87486",
+        "later_kind_rate_pct": "14.9488922379766",
+        "later_rows": "585234",
+        "prior_kind_type": "ever_kind"
+      },
+      {
+        "later_choosers": "792055",
+        "later_kind_draws": "53967",
+        "later_kind_rate_pct": "1.03839004998865",
+        "later_rows": "5197180",
+        "prior_kind_type": "never_kind"
+      }
+    ],
+    "second_half_by_first_half_behavior_min4": [
+      {
+        "choosers": "1015919",
+        "first_half_any_kind": "0",
+        "min_total_fair_opportunities": "4",
+        "normal_95ci_high_pct": "0.952981466322787",
+        "normal_95ci_low_pct": "0.938245953306761",
+        "second_half_fair_opportunities": "6628711",
+        "second_half_kind_draws": "62682",
+        "second_half_kind_rate_pct": "0.945613709814774",
+        "split_design": "hash_md5_game_id"
+      },
+      {
+        "choosers": "100406",
+        "first_half_any_kind": "1",
+        "min_total_fair_opportunities": "4",
+        "normal_95ci_high_pct": "16.8320202035411",
+        "normal_95ci_low_pct": "16.6614718493914",
+        "second_half_fair_opportunities": "736561",
+        "second_half_kind_draws": "123350",
+        "second_half_kind_rate_pct": "16.7467460264662",
+        "split_design": "hash_md5_game_id"
+      },
+      {
+        "choosers": "664464",
+        "first_half_any_kind": "0",
+        "min_total_fair_opportunities": "4",
+        "normal_95ci_high_pct": "0.986325111864688",
+        "normal_95ci_low_pct": "0.969140885817367",
+        "second_half_fair_opportunities": "5038083",
+        "second_half_kind_draws": "49259",
+        "second_half_kind_rate_pct": "0.977732998841027",
+        "split_design": "temporal_first12_second12"
+      },
+      {
+        "choosers": "73560",
+        "first_half_any_kind": "1",
+        "min_total_fair_opportunities": "4",
+        "normal_95ci_high_pct": "14.80088134161",
+        "normal_95ci_low_pct": "14.6180155668404",
+        "second_half_fair_opportunities": "576507",
+        "second_half_kind_draws": "84801",
+        "second_half_kind_rate_pct": "14.7094484542252",
+        "split_design": "temporal_first12_second12"
+      }
+    ],
+    "split_half_statistics_min4": [
+      {
+        "choosers": "1116325",
+        "fair_opportunities": "14726527",
+        "kind_draws": "372842",
+        "min_total_fair_opportunities": "4",
+        "pearson_unweighted": "0.589813759363167",
+        "pearson_weighted_harmonic_half_opportunities": "0.696952773473273",
+        "pearson_weighted_total_opportunities": "0.683676875598874",
+        "spearman_unweighted": "0.451910856222342",
+        "split_design": "hash_md5_game_id"
+      },
+      {
+        "choosers": "738024",
+        "fair_opportunities": "11617545",
+        "kind_draws": "286406",
+        "min_total_fair_opportunities": "4",
+        "pearson_unweighted": "0.531630365673963",
+        "pearson_weighted_harmonic_half_opportunities": "0.638156437909623",
+        "pearson_weighted_total_opportunities": "0.606637443299924",
+        "spearman_unweighted": "0.402467581279122",
+        "split_design": "temporal_first12_second12"
+      }
+    ]
+  },
+  "price_decomposition": {
+    "clearly_worse_favorable_minus_costly_pp": 0.011330785985712022,
+    "fair_favorable_minus_costly_pp": 0.5492352872795498,
+    "table07_chooser_fe_plus_controls": {
+      "chooser_clusters": "1801928",
+      "matrix_columns": "7",
+      "matrix_rank": "6",
+      "model": "chooser_fe_plus_controls",
+      "premium_at_0cp_pp": "0.457994624506118",
+      "premium_at_600cp_pp": "0.285752166471476",
+      "premium_at_minus100cp_pp": "0.486701700845225",
+      "rows_identifying": "16444285",
+      "rows_raw": "17327868",
+      "se_at_0cp": "0.00860609943820414",
+      "se_at_600cp": "0.0203538116325181",
+      "se_at_minus100cp": "0.0111649794959566"
+    }
+  },
+  "production_git_head": "f8702654a5280763022f78c43e438d8621224164",
+  "repository_boundary": {
+    "generated_result_table_csvs_committed": false,
+    "manifest_files_authenticated": 30,
+    "output_root_machine_specific": "/Volumes/XT_Pro/lichess_kindness/derived/replication/paper_results_core_24m_sf100k",
+    "row_level_data_committed": false
+  },
+  "robustness_diagnostics": {
+    "nonzero_placebo_cutoffs_abs_t_ge_1_96": {
+      "window_0.5": 3,
+      "window_1": 6
+    },
+    "placebo_interpretation": "Several nonzero cutoffs also reject slope smoothness, especially in the one-point window. Table 05 therefore does not establish that the slope kink is unique to zero; this is distinct from the Table 02 zero-threshold level contrast.",
+    "table04_max_scaled_fixed_effect_group_mean": 1.4210854715202e-14
+  },
+  "sample": {
+    "choosers": 3556701,
+    "clearly_worse_rows": 26090163,
+    "costly_rows": 24849501,
+    "excluded_middle_rows": 4168727,
+    "fair_rows": 17328130,
+    "kind_draws": 669503,
+    "month_end": "2025-10",
+    "month_start": "2023-11",
+    "months": 24,
+    "nonnegative_rows": 22737519,
+    "overall_kind_rate_pct": 1.406902554520119,
+    "rows": 47587020,
+    "strict_positive_rows": 22075834
+  },
+  "script_sha256": "e9dd80c52da5ffef3d406c3af25912bd924f6423f123ca535cf4077cb039c41f",
+  "script_version": "1.2.0",
+  "stage07_success_sha256": "8b7010b528ae5c6f1e1a9b517258648204c14c17ca41a2a6796f8ee5a1ed6db7",
+  "status": "STAGE08_CORE_24M_CERTIFIED_OK",
+  "success_receipt_sha256": "a2fd1a868299cba8499de1e72365dbeb4e49ec77768e01e8af84f58f3ceac958",
+  "zero_threshold_main": [
+    {
+      "absorption_iterations": "1",
+      "absorption_max_scaled_group_mean": "2.19352888804255e-15",
+      "absorption_method": "one_way_exact",
+      "bandwidth": "0.5",
+      "chooser_clusters": "1081003",
+      "coefficient_pp": "0.233409332862971",
+      "favorable_definition": "draw_payoff>=0",
+      "matrix_columns": "2",
+      "matrix_rank": "2",
+      "model": "chooser_fe_plus_win_premium",
+      "rows_identifying": "7452210",
+      "rows_raw": "8025008",
+      "sample": "fair_abs_draw_payoff_le_0.5",
+      "se_pp": "0.00996510233677721",
+      "t": "23.4226729415061",
+      "variable": "favorable"
+    },
+    {
+      "absorption_iterations": "1",
+      "absorption_max_scaled_group_mean": "2.55140842744121e-15",
+      "absorption_method": "one_way_exact",
+      "bandwidth": "1",
+      "chooser_clusters": "1342525",
+      "coefficient_pp": "0.316423913052756",
+      "favorable_definition": "draw_payoff>=0",
+      "matrix_columns": "2",
+      "matrix_rank": "2",
+      "model": "chooser_fe_plus_win_premium",
+      "rows_identifying": "11342044",
+      "rows_raw": "11937702",
+      "sample": "fair_abs_draw_payoff_le_1",
+      "se_pp": "0.0082433494549371",
+      "t": "38.3853571636762",
+      "variable": "favorable"
+    },
+    {
+      "absorption_iterations": "1",
+      "absorption_max_scaled_group_mean": "2.49467349873194e-15",
+      "absorption_method": "one_way_exact",
+      "bandwidth": "2",
+      "chooser_clusters": "1543402",
+      "coefficient_pp": "0.408511632985957",
+      "favorable_definition": "draw_payoff>=0",
+      "matrix_columns": "2",
+      "matrix_rank": "2",
+      "model": "chooser_fe_plus_win_premium",
+      "rows_identifying": "14522888",
+      "rows_raw": "15152264",
+      "sample": "fair_abs_draw_payoff_le_2",
+      "se_pp": "0.00755112510169174",
+      "t": "54.0994391543632",
+      "variable": "favorable"
+    },
+    {
+      "absorption_iterations": "1",
+      "absorption_max_scaled_group_mean": "3.253494451595e-15",
+      "absorption_method": "one_way_exact",
+      "bandwidth": "4",
+      "chooser_clusters": "1660819",
+      "coefficient_pp": "0.435158414199614",
+      "favorable_definition": "draw_payoff>=0",
+      "matrix_columns": "2",
+      "matrix_rank": "2",
+      "model": "chooser_fe_plus_win_premium",
+      "rows_identifying": "15635959",
+      "rows_raw": "16320242",
+      "sample": "fair_abs_draw_payoff_le_4",
+      "se_pp": "0.00742187600562022",
+      "t": "58.631862600519",
+      "variable": "favorable"
+    },
+    {
+      "absorption_iterations": "1",
+      "absorption_max_scaled_group_mean": "3.52492204044524e-15",
+      "absorption_method": "one_way_exact",
+      "bandwidth": "6",
+      "chooser_clusters": "1706584",
+      "coefficient_pp": "0.44461902831172",
+      "favorable_definition": "draw_payoff>=0",
+      "matrix_columns": "2",
+      "matrix_rank": "2",
+      "model": "chooser_fe_plus_win_premium",
+      "rows_identifying": "15987680",
+      "rows_raw": "16706384",
+      "sample": "fair_abs_draw_payoff_le_6",
+      "se_pp": "0.00739927679825257",
+      "t": "60.0895250217862",
+      "variable": "favorable"
+    }
+  ]
+}
