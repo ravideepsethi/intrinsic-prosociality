@@ -4,12 +4,14 @@ Replication code and documentation for:
 
 **The Structure of Intrinsic Prosociality: Field Evidence from Online Chess**
 
-This repository is currently under active construction while the empirical analysis is
-being expanded to a two-year main sample.
+This repository is under active construction. The canonical two-year Stage 07
+analysis panel is now certified; paper-facing tables and figures remain in progress.
 
 ## Current research design
 
 - Main sample: November 1, 2023 through October 31, 2025.
+- Canonical opportunity sample: 47,587,020 unique games, including 669,503 kind draws.
+- Stage 07 analysis panel: certified over all 24 months with 157 columns.
 - Setting: discretionary resolution of opponent disconnections in rated games on Lichess.
 - Final paper-facing board evaluation: Stockfish 18 at 100,000 nodes.
 - Planned deep engine audit: Stockfish 18 at 1,000,000 nodes on a sampled audit.
@@ -32,11 +34,18 @@ Current stages include:
 - `04b_normalize_legacy_stage04_late.py` — normalize audited legacy late-period API material.
 - `04c_reconcile_stage04_24m.py` — reconcile the 24-month API-enrichment layer.
 - `05_build_timeout_opportunity_panel.py` — construct the canonical timeout-opportunity panel.
+- `06_build_glicko2_cost_layer.py` — construct the canonical chooser-cost layer.
+- `stockfish_100k/080_...py` through `085_...py` — build and certify the 100k-node engine layer.
+- `07_build_analysis_panel.py` — join the frozen authorities into the certified 24-month panel.
 
 `operations/` contains operational scripts needed to document or reproduce production
 workflows.
 
 `manifests/` contains small provenance and checksum files suitable for version control.
+
+`docs/` contains human-readable certification and design documentation.
+
+`provenance/` contains small authenticated summaries, schemas, and path manifests; it does not contain research data.
 
 ## Data
 
@@ -67,5 +76,8 @@ Canonical production stages are designed to provide, where applicable:
 
 ## Status
 
-**Work in progress.** The repository should not yet be treated as the final replication
-archive for the paper.
+**Work in progress.** Stages 00–07, the certified Stockfish 100k layer, and the
+47,587,020-row canonical Stage 07 analysis panel are complete. Paper-facing
+tables, figures, robustness analyses, the planned deep-engine audit, and final
+archival-data instructions remain in progress. The large research datasets are
+not stored in this repository.

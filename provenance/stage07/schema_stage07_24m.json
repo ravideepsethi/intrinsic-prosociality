@@ -1,0 +1,787 @@
+[
+  {
+    "name": "month",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "game_id",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "api_status",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "source_block",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "provenance_class",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "candidate_source_class",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "site",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "event",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "utc_date",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "utc_time",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "white_username_pgn",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "black_username_pgn",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "white_elo_pgn",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "black_elo_pgn",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "white_rating_diff_pgn",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "black_rating_diff_pgn",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "pgn_result",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "pgn_termination",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "time_control",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "tc_base_s",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "tc_inc_s",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "last_mover_color",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "chooser_username",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "chooser_username_norm",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "chooser_color",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "chooser_elo",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "disconnected_username",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "disconnected_username_norm",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "disconnected_color",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "disconnected_elo",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "white_clock_last_obs_s",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "black_clock_last_obs_s",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "chooser_clock_last_obs_s",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "disconnected_clock_last_obs_s",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "clock_gap_chooser_minus_disconnected_s",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "disconnected_clock_positive",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "five_second_rule_passed",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "pgn_chooser_raw_win",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "pgn_raw_draw",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "last_move_uci",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "last_move_san",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "ply_count",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "side_to_move_after_last",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "fen_after_last_move",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "tournament_like_event",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "api_winner",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "api_is_draw_raw_diagnostic",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "api_speed",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "api_perf",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "api_rated",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "api_variant",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "api_created_at_ms",
+    "nullable": true,
+    "type": "int64"
+  },
+  {
+    "name": "api_last_move_at_ms",
+    "nullable": true,
+    "type": "int64"
+  },
+  {
+    "name": "pgn_api_result_consistent",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "timeout_draw",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "timeout_chooser_win",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "timeout_chooser_loss",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "chooser_has_mating_material",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "timeout_draw_no_mating_material",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "outcome_kind_draw",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "chooser_material_pts",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "disconnected_material_pts",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "disconnected_minus_chooser_material",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "chooser_pawns",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "chooser_knights",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "chooser_bishops",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "chooser_rooks",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "chooser_queens",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "disconnected_pawns",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "disconnected_knights",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "disconnected_bishops",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "disconnected_rooks",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "disconnected_queens",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "chooser_pieces",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "disconnected_pieces",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "total_pieces",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "material_total",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "material_advantage_chooser",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "avg_rating",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "rating_gap",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "rating_gap_abs",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "rating_gap_100",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "chooser_higher_rated",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "archive_ordinal",
+    "nullable": true,
+    "type": "int64"
+  },
+  {
+    "name": "utc_ms",
+    "nullable": true,
+    "type": "int64"
+  },
+  {
+    "name": "white_id",
+    "nullable": true,
+    "type": "int64"
+  },
+  {
+    "name": "black_id",
+    "nullable": true,
+    "type": "int64"
+  },
+  {
+    "name": "white_elo_replay",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "black_elo_replay",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "chooser_user_id",
+    "nullable": true,
+    "type": "int64"
+  },
+  {
+    "name": "disconnected_user_id",
+    "nullable": true,
+    "type": "int64"
+  },
+  {
+    "name": "chooser_elo_v2_source",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "disconnected_elo_v2_source",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "chooser_pre_rd_v2",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "chooser_pre_sigma_v2",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "disconnected_pre_rd_v2",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "disconnected_pre_sigma_v2",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "chooser_draw_payoff_v2",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "chooser_win_payoff_v2",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "chooser_win_premium_v2",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "favorable_draw_v2",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "white_pre_rd_v2",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "black_pre_rd_v2",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "white_pre_sigma_v2",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "black_pre_sigma_v2",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "white_draw_ratingdiff_v2",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "white_win_ratingdiff_v2",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "white_win_premium_v2",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "black_draw_ratingdiff_v2",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "black_win_ratingdiff_v2",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "black_win_premium_v2",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "white_realized_pred_ratingdiff_v2",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "black_realized_pred_ratingdiff_v2",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "both_ratingdiff_null",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "hidden_state_update_applied",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "color_adv_applied",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "white_rating_source_match",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "black_rating_source_match",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "white_ratingdiff_source_match",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "black_ratingdiff_source_match",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "speed_source_match",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "month_source_match",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "api_minus_pgn_created_ms",
+    "nullable": true,
+    "type": "int64"
+  },
+  {
+    "name": "sf100k_source_block",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "sf100k_source_part_id",
+    "nullable": true,
+    "type": "int16"
+  },
+  {
+    "name": "sf100k_stockfish_name",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "sf100k_stockfish_sha256",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "sf100k_nodes_requested",
+    "nullable": true,
+    "type": "int64"
+  },
+  {
+    "name": "sf100k_nodes_searched",
+    "nullable": true,
+    "type": "int64"
+  },
+  {
+    "name": "sf100k_threads",
+    "nullable": true,
+    "type": "int64"
+  },
+  {
+    "name": "sf100k_hash_mb",
+    "nullable": true,
+    "type": "int64"
+  },
+  {
+    "name": "sf100k_depth",
+    "nullable": true,
+    "type": "int64"
+  },
+  {
+    "name": "sf100k_seldepth",
+    "nullable": true,
+    "type": "int64"
+  },
+  {
+    "name": "sf100k_eval_method",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "sf100k_fen_turn_color",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "sf100k_disconnected_color_for_perspective",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "sf100k_perspective_assumption",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "sf100k_fen_turn_matches_disconnected_color",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "sf100k_score_type_side_to_move",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "sf100k_score_value_side_to_move",
+    "nullable": true,
+    "type": "int64"
+  },
+  {
+    "name": "sf100k_score_cp_side_to_move",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "sf100k_mate_ply_side_to_move",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "engine_eval_cp_disconnected_raw",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "engine_eval_cp_disconnected",
+    "nullable": true,
+    "type": "int32"
+  },
+  {
+    "name": "engine_eval_cp_disconnected_capped600",
+    "nullable": true,
+    "type": "int16"
+  },
+  {
+    "name": "engine_eval_hundreds_capped600",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "engine_eval_is_mate",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "engine_eval_mate_ply_disconnected",
+    "nullable": true,
+    "type": "double"
+  },
+  {
+    "name": "engine_fairness_bin",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "fairness_region",
+    "nullable": true,
+    "type": "string"
+  },
+  {
+    "name": "fair_competitive",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "clearly_worse",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "excluded_middle",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "kind_draw",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "draw_nonnegative",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "draw_strict_positive",
+    "nullable": true,
+    "type": "bool"
+  },
+  {
+    "name": "draw_costly",
+    "nullable": true,
+    "type": "bool"
+  }
+]
