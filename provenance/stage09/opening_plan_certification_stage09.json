@@ -1,0 +1,74 @@
+{
+  "api_contract": {
+    "concurrency": 1,
+    "endpoint": "POST https://lichess.org/api/games/export/_ids",
+    "on_429": "honor Retry-After when supplied; otherwise exponential backoff beginning at 60 seconds",
+    "parameters": {
+      "accuracy": "false",
+      "clocks": "false",
+      "division": "false",
+      "evals": "false",
+      "literate": "false",
+      "moves": "false",
+      "opening": "true",
+      "pgnInJson": "false",
+      "tags": "true"
+    },
+    "request_body": "comma-separated game IDs",
+    "request_ids_max": 300
+  },
+  "certified_plan": true,
+  "checkpoint_parent_git_head": "a7ce86a06c406cf7cfbeb4927cdf40ba5bce4bee",
+  "coordination_guardrail": "Do not run opening metadata acquisition concurrently with the active patron/profile API acquisition.",
+  "created_at_utc": "2026-08-21T06:02:02Z",
+  "current_analysis_producer_sha256": "d9a73f8a51deacc9772bfb6e972ccd369a34708d6831461ccc740a5b3c84c2ee",
+  "current_fetch_producer_sha256": "33c81848a07f53637d729c97cc08c72a62e770a427d688bd489e6d97f0e27835",
+  "current_prepare_producer_sha256": "3402e2215074e9aa73814318f9f03a431388ca29ac16b0031adbf36891434547",
+  "full_opening_analysis_certified": false,
+  "full_opening_metadata_acquisition_complete": false,
+  "legacy_contract": {
+    "audit_repository_path": "provenance/stage09/opening_legacy_contract_recovery.csv",
+    "legacy_rows": 2370477,
+    "legacy_rows_intersecting_stage07_overlap": 2157351,
+    "legacy_unique_game_ids": 2370477,
+    "ply_count_max": 10,
+    "recovery_method": "unique exact game-ID equality over 2023-11 through 2024-09",
+    "rule": "ply_count <= 10"
+  },
+  "legacy_mapping_without_machine_path": {
+    "bytes": 20333902,
+    "columns": [
+      "game_id",
+      "eco",
+      "opening_name"
+    ],
+    "rows": 2370477,
+    "sha256": "4b9d087baf31ecd11312991f94c9b720aa4ba38ced0adb3414c9176bac5d4a65"
+  },
+  "network_requests_made_by_plan": 0,
+  "plan_qa": {
+    "fetch_relative_path": "targets/opening_targets_needing_fetch.parquet",
+    "fetch_rows": 2579932,
+    "macro_batches_120k": 22,
+    "request_batches_300": 8600,
+    "reusable_seed_rows": 2157351,
+    "seed_relative_path": "seed/legacy_opening_mapping_stage07_overlap.parquet",
+    "target_months": 24,
+    "target_relative_path": "targets/opening_targets_all.parquet",
+    "target_rows": 4737283,
+    "unique_target_ids": 4737283
+  },
+  "repository_boundary": {
+    "completion_ledgers_committed": false,
+    "parquet_files_committed": false,
+    "raw_api_responses_committed": false,
+    "target_game_ids_committed": false
+  },
+  "source_plan_file_count": 6,
+  "source_plan_file_hashes_sha256": "28fee95825d024b12e460b9f48fef4255c481ed79466e3ed9a01ee4ddcf920c2",
+  "source_plan_producer_sha256": "a5a39fc8623a9717918dec144606d4bbef25b4a827405d71a4d51c55be4668a3",
+  "source_plan_producer_version": "1.0.0",
+  "source_success_receipt_sha256": "2c8bc601d50e23fa55e9f3d09969096cd5212177c31eb6e508dc699ec95a38ca",
+  "stage07_success_sha256": "8b7010b528ae5c6f1e1a9b517258648204c14c17ca41a2a6796f8ee5a1ed6db7",
+  "status": "OPENING_FAMILIARITY_PLAN_CERTIFIED_OK"
+}

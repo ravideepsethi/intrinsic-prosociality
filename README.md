@@ -5,7 +5,8 @@ Replication code and documentation for:
 **The Structure of Intrinsic Prosociality: Field Evidence from Online Chess**
 
 This repository is under active construction. The canonical two-year Stage 07
-analysis panel and Stage 08 panel-only core results are now certified.
+analysis panel, Stage 08 panel-only core results, and Stage 09 panel-robustness
+results are now certified. External-input extensions remain in progress.
 
 ## Current research design
 
@@ -13,6 +14,9 @@ analysis panel and Stage 08 panel-only core results are now certified.
 - Canonical opportunity sample: 47,587,020 unique games, including 669,503 kind draws.
 - Stage 07 analysis panel: certified over all 24 months with 157 columns.
 - Stage 08 core results: certified Tables 1–9 and analytical figure data.
+- Stage 09 panel robustness: certified support, exact-zero, heterogeneity, cutoff, and magnitude results.
+- Opening familiarity: target plan certified; metadata acquisition and full analysis remain pending.
+- Patron/profile extension: 24-month profile acquisition remains in progress.
 - Setting: discretionary resolution of opponent disconnections in rated games on Lichess.
 - Final paper-facing board evaluation: Stockfish 18 at 100,000 nodes.
 - Planned deep engine audit: Stockfish 18 at 1,000,000 nodes on a sampled audit.
@@ -39,6 +43,10 @@ Current stages include:
 - `stockfish_100k/080_...py` through `085_...py` — build and certify the 100k-node engine layer.
 - `07_build_analysis_panel.py` — join the frozen authorities into the certified 24-month panel.
 - `08_make_core_paper_results.py` — produce the certified panel-only core paper results.
+- `09_build_panel_robustness.py` — produce the certified Stage 09 panel-only robustness results.
+- `09_prepare_opening_familiarity.py` — build and authenticate the 24-month opening target plan.
+- `09_fetch_opening_metadata.py` — acquire missing opening metadata with resumable checkpoints.
+- `09_analyze_opening_familiarity.py` — estimate opening-familiarity results after acquisition.
 
 `operations/` contains operational scripts needed to document or reproduce production
 workflows.
@@ -79,7 +87,9 @@ Canonical production stages are designed to provide, where applicable:
 ## Status
 
 **Work in progress.** Stages 00–08, the certified Stockfish 100k layer, the
-47,587,020-row Stage 07 panel, and the Stage 08 panel-only core results are
-complete. External-input extensions, post-sample holdouts, publication rendering,
-the planned deep-engine audit, and final archival-data instructions remain in
-progress. The large research datasets are not stored in this repository.
+47,587,020-row Stage 07 panel, the Stage 08 core results, and the Stage 09
+panel-only robustness results are complete. The opening target plan is certified,
+but opening metadata acquisition, full opening-familiarity analysis, patron/profile
+analysis, post-sample holdouts, publication rendering, the planned deep-engine
+audit, and final archival-data instructions remain in progress. The large research
+datasets are not stored in this repository.

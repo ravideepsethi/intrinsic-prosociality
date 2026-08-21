@@ -1,0 +1,76 @@
+{
+  "byte_identical_files": 9,
+  "common_files_compared": 11,
+  "comparison_tolerance": {
+    "absolute": 1e-10,
+    "relative": 1e-12
+  },
+  "files": [
+    {
+      "maximum_absolute_difference": 1.021405182655144e-14,
+      "path": "figure_data/figureR01_draw_payoff_density.csv",
+      "status": "semantic_float_match"
+    },
+    {
+      "maximum_absolute_difference": 0.0,
+      "path": "tables/tableR01_density_symmetry.csv",
+      "status": "byte_identical"
+    },
+    {
+      "maximum_absolute_difference": 0.0,
+      "path": "tables/tableR02_running_variable_heaping.csv",
+      "status": "byte_identical"
+    },
+    {
+      "maximum_absolute_difference": 0.0,
+      "path": "tables/tableR03_subgroup_fairness_rates_long.csv",
+      "status": "byte_identical"
+    },
+    {
+      "maximum_absolute_difference": 0.0,
+      "path": "tables/tableR04_subgroup_fairness_contrasts.csv",
+      "status": "byte_identical"
+    },
+    {
+      "maximum_absolute_difference": 0.0,
+      "path": "tables/tableR05_subgroup_zero_threshold_models.csv",
+      "status": "byte_identical"
+    },
+    {
+      "maximum_absolute_difference": 0.0,
+      "path": "tables/tableR06_eval_cutoff_rate_grid.csv",
+      "status": "byte_identical"
+    },
+    {
+      "maximum_absolute_difference": 0.0,
+      "path": "tables/tableR07_eval_cutoff_zero_threshold_models.csv",
+      "status": "byte_identical"
+    },
+    {
+      "maximum_absolute_difference": 1.862645149230957e-08,
+      "path": "tables/tableR08_economic_magnitude.csv",
+      "status": "semantic_float_match"
+    },
+    {
+      "maximum_absolute_difference": 0.0,
+      "path": "tables/tableR09_economic_counterfactual_cells.csv",
+      "status": "byte_identical"
+    },
+    {
+      "maximum_absolute_difference": 0.0,
+      "path": "tables/tableR10_descriptive_excess_kindness.csv",
+      "status": "byte_identical"
+    }
+  ],
+  "interpretation": "The two differences are machine-scale parallel floating-point aggregation differences; all counts, labels, schemas, row order, and substantive numerical results match.",
+  "new_v1_1_manifest_paths": [
+    "tables/tableR11_exact_zero_payoff_descriptives.csv",
+    "tables/tableR12_exact_zero_payoff_models.csv"
+  ],
+  "semantic_float_match_files": 2,
+  "status": "STAGE09_V110_SEMANTIC_EQUIVALENCE_OK",
+  "v1_0_output_manifest_sha256": "d21a247f146567d89b35b9fd4e14d33355c2184f7eaf16bc6f6eb2537cc2357c",
+  "v1_0_success_receipt_sha256": "95f072cc9bd55cc85f7e79108d9e255c5ca02e2022a38c266d35645b3ec86797",
+  "v1_1_output_manifest_sha256": "2321277ae52a54629919c9e982a4c16a6dcf5bfaeaf62c74dbf74366693150a9",
+  "v1_1_success_receipt_sha256": "5107e4dabd11054724691f6c3c6937e495b8b15648302ecd578217e81d55b6e7"
+}
