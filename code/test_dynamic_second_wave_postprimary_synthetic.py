@@ -4,7 +4,8 @@
 from __future__ import annotations
 
 import importlib.util
-import math
+import json
+import tempfile
 from pathlib import Path
 
 import numpy as np
@@ -59,6 +60,89 @@ def main() -> None:
         values = [adjusted[key] for key in ordered]
         assert values == sorted(values)
         assert all(0.0 <= value <= 1.0 for value in values)
+
+    # Reproduction checks compare the primitive estimate and validate each derived
+    # p-value internally. Tiny recomputation drift in a derived p-value is harmless.
+    current = {
+        "coefficient": -0.005,
+        "standard_error": 0.004,
+        "p_value_two_sided": module.normal_p(-0.005 / 0.004),
+        "rows": 100,
+    }
+    source_coefficient = current["coefficient"] + 5e-13
+    source = {
+        "coefficient": source_coefficient,
+        "standard_error": current["standard_error"],
+        "p_value_two_sided": module.normal_p(
+            source_coefficient / current["standard_error"]
+        ),
+        "rows": 100,
+    }
+    module.assert_estimate_reproduced(
+        current, source, "synthetic reproduction", exact_fields=("rows",)
+    )
+    malformed = {**source, "p_value_two_sided": 0.5}
+    try:
+        module.assert_normal_p_consistent(malformed, "malformed synthetic result")
+    except RuntimeError:
+        pass
+    else:
+        raise AssertionError("Malformed derived p-value was accepted")
+
+    # The v1.0.1 migration accepts only its exact, empty startup state.
+    with tempfile.TemporaryDirectory(prefix="postprimary-v101-state-") as temporary:
+        state = Path(temporary)
+        (state / "b2_randomizations").mkdir()
+        (state / "duckdb_temp").mkdir()
+        (state / "duckdb_temp/model_E1").mkdir()
+        current_config = {
+            "script_version": module.SCRIPT_VERSION,
+            "authorities": {
+                "git_head": "new-head",
+                "script_producer_commit": "new-head",
+                "script_sha256": "new-script",
+                "unchanged_authority": "same",
+            },
+            "unchanged_setting": [1, 2, 3],
+        }
+        previous_config = {
+            **current_config,
+            "script_version": module.PREVIOUS_SCRIPT_VERSION,
+            "authorities": {
+                **current_config["authorities"],
+                "git_head": module.PREVIOUS_GIT_HEAD,
+                "script_producer_commit": module.PREVIOUS_GIT_HEAD,
+                "script_sha256": module.PREVIOUS_SCRIPT_SHA,
+            },
+        }
+        saved = {
+            "status": "DYNAMIC_SECOND_WAVE_POSTPRIMARY_PRIVATE_STATE_OK",
+            "created_utc": "synthetic",
+            "config": previous_config,
+            "config_sha256": module.sha256_json(previous_config),
+        }
+        (state / "CONFIG.json").write_text(
+            json.dumps(saved, sort_keys=True) + "\n", encoding="utf-8"
+        )
+        payload = {
+            "state": state,
+            "config": current_config,
+            "config_sha256": module.sha256_json(current_config),
+        }
+        module.initialize_state(payload)
+        migrated = module.load_json(state / "CONFIG.json")
+        assert migrated["config"] == current_config
+        assert migrated["config_sha256"] == payload["config_sha256"]
+
+    with tempfile.TemporaryDirectory(prefix="postprimary-v101-dirty-state-") as temporary:
+        state = Path(temporary)
+        (state / "b2_randomizations").mkdir()
+        (state / "duckdb_temp/model_E1").mkdir(parents=True)
+        (state / "duckdb_temp/model_E1/unexpected.bin").write_bytes(b"not empty")
+        (state / "CONFIG.json").write_text(
+            json.dumps(saved, sort_keys=True) + "\n", encoding="utf-8"
+        )
+        assert not module.migrate_v101_startup_state(state, saved, payload)
 
     # A three-way FE projection must remove every group mean without erasing a
     # genuinely varying regressor.

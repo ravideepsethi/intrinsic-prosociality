@@ -1,4 +1,4 @@
-# Dynamic second-wave additional analyses v1.0.1
+# Dynamic second-wave additional analyses v1.0.2
 
 This package runs additional robustness, descriptive, and mechanism analyses
 using the completed dynamic second-wave outputs and their authenticated private
@@ -27,15 +27,27 @@ histories and E1 scores are reused. B2 randomizations checkpoint in 250-draw
 batches; rerunning the launcher authenticates and resumes them. Other bounded
 phases rerun if interrupted.
 
-## Recovery from v1.0.0
+## Repair and resume from v1.0.1
 
-The v1.0.0 launcher stopped before committing or estimating because a Markdown
-whitespace check failed. This launcher recognizes only that exact partial
-installation: the expected four uncommitted files and the corresponding
-two-entry script-manifest extension at the recovery commit. It authenticates
-that state, replaces it with v1.0.1, reruns all tests, and then follows the normal
-commit, push, and estimation path. Any unrelated repository change causes a
-fail-closed stop.
+Version 1.0.1 correctly repaired and committed the earlier partial installation,
+then stopped at the first E1 reproduction guard. The source and recomputed row
+counts, identifying sample, chooser clusters, coefficient, and standard error
+had already matched; only a separately recomputed derived p-value triggered the
+stop.
+
+Version 1.0.2 compares the primitive estimates and independently verifies that
+each reported p-value is consistent with its own coefficient and standard
+error. This avoids requiring two valid floating-point recomputations to produce
+an identical derived value. The same correction is applied to the later
+personal-salience and round-number reproduction guards.
+
+The launcher accepts only the exact clean v1.0.1 repository commit (or its exact
+v1.0.2 repair child). It also migrates only the exact empty private startup state
+left by the v1.0.1 stop: `CONFIG.json`, an empty `b2_randomizations` directory,
+and at most the empty `duckdb_temp/model_E1` directory created while assembling
+the first model. Any data file, additional checkpoint, or unrelated repository
+change causes a fail-closed stop. The analysis definitions are unchanged, so the
+v1.0.1 analysis document is retained without alteration.
 
 ## Repository files
 

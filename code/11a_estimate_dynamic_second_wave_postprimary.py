@@ -29,7 +29,11 @@ from typing import Any, Iterable, Sequence
 PROJECT_ROOT = Path("/Volumes/XT_Pro/lichess_kindness")
 SOURCE_RUN_ID = "20260822T150914Z"
 DEFAULT_RUN_ID = SOURCE_RUN_ID + "_postprimary_v100"
-SCRIPT_VERSION = "1.0.1"
+SCRIPT_VERSION = "1.0.2"
+
+PREVIOUS_SCRIPT_VERSION = "1.0.1"
+PREVIOUS_SCRIPT_SHA = "ca12ba9e6a42702e3465ab450d9777db1c3004775abfb8dce124fe4cf1820875"
+PREVIOUS_GIT_HEAD = "fdd1cda9ea8208e0fbccc79c988564625d49abff"
 
 EXPECTED_RECOVERY_COMMIT = "f0342a60f77a19b4ac75ab14e0309bbccd5f7620"
 EXPECTED_SOURCE_B2_SCRIPT_SHA = (
@@ -155,6 +159,54 @@ def normal_p(z_value: float) -> float:
     if not math.isfinite(z_value):
         return math.nan
     return math.erfc(abs(z_value) / math.sqrt(2.0))
+
+
+def assert_normal_p_consistent(row: dict[str, Any], label: str) -> None:
+    """Validate a reported p-value from its coefficient and standard error."""
+
+    coefficient = float(row["coefficient"])
+    standard_error = float(row["standard_error"])
+    observed = float(row["p_value_two_sided"])
+    z_value = coefficient / standard_error if standard_error > 0 else math.nan
+    expected = normal_p(z_value)
+    if math.isnan(expected):
+        if not math.isnan(observed):
+            raise RuntimeError(f"{label} has a finite p-value with no finite z-value")
+        return
+    if not math.isclose(observed, expected, rel_tol=1e-12, abs_tol=1e-12):
+        raise RuntimeError(
+            f"{label} p-value is inconsistent with its coefficient and standard error: "
+            f"observed={observed:.17g} expected={expected:.17g}"
+        )
+
+
+def assert_estimate_reproduced(
+    current: dict[str, Any],
+    source: dict[str, Any],
+    label: str,
+    *,
+    exact_fields: Sequence[str] = (),
+    rel_tol: float = 1e-11,
+    abs_tol: float = 1e-11,
+) -> None:
+    """Compare primitive estimates; validate derived p-values within each result."""
+
+    for field in exact_fields:
+        if current[field] != source[field]:
+            raise RuntimeError(
+                f"{label} replication mismatch: {field}: "
+                f"current={current[field]!r} source={source[field]!r}"
+            )
+    for field in ("coefficient", "standard_error"):
+        left = float(current[field])
+        right = float(source[field])
+        if not math.isclose(left, right, rel_tol=rel_tol, abs_tol=abs_tol):
+            raise RuntimeError(
+                f"{label} replication mismatch: {field}: "
+                f"current={left:.17g} source={right:.17g}"
+            )
+    assert_normal_p_consistent(current, f"{label} current result")
+    assert_normal_p_consistent(source, f"{label} source result")
 
 
 def quantile(values: Any, probability: float) -> float:
@@ -372,18 +424,74 @@ def authenticate_payload(args: argparse.Namespace, script_path: Path) -> dict[st
     }
 
 
+def migrate_v101_startup_state(
+    root: Path, saved: dict[str, Any], payload: dict[str, Any]
+) -> bool:
+    """Migrate only the exact empty state left by the v1.0.1 startup failure."""
+
+    previous_config = saved.get("config")
+    if not isinstance(previous_config, dict):
+        return False
+    if saved.get("status") != "DYNAMIC_SECOND_WAVE_POSTPRIMARY_PRIVATE_STATE_OK":
+        return False
+    if saved.get("config_sha256") != sha256_json(previous_config):
+        return False
+    expected_previous = {
+        **payload["config"],
+        "script_version": PREVIOUS_SCRIPT_VERSION,
+        "authorities": {
+            **payload["config"]["authorities"],
+            "git_head": PREVIOUS_GIT_HEAD,
+            "script_producer_commit": PREVIOUS_GIT_HEAD,
+            "script_sha256": PREVIOUS_SCRIPT_SHA,
+        },
+    }
+    if previous_config != expected_previous:
+        return False
+    expected_entries = {"CONFIG.json", "b2_randomizations", "duckdb_temp"}
+    if {path.name for path in root.iterdir()} != expected_entries:
+        return False
+    b2_directory = root / "b2_randomizations"
+    if not b2_directory.is_dir() or any(b2_directory.iterdir()):
+        return False
+    duckdb_directory = root / "duckdb_temp"
+    if not duckdb_directory.is_dir():
+        return False
+    duckdb_entries = list(duckdb_directory.iterdir())
+    if any(path.name != "model_E1" or not path.is_dir() for path in duckdb_entries):
+        return False
+    if any(path.is_file() or path.is_symlink() for path in duckdb_directory.rglob("*")):
+        return False
+    atomic_json(
+        root / "CONFIG.json",
+        {
+            "status": "DYNAMIC_SECOND_WAVE_POSTPRIMARY_PRIVATE_STATE_OK",
+            "created_utc": saved.get("created_utc", utc_now()),
+            "updated_utc": utc_now(),
+            "config": payload["config"],
+            "config_sha256": payload["config_sha256"],
+            "migrated_from_script_version": PREVIOUS_SCRIPT_VERSION,
+            "privacy": "PRIVATE CHECKPOINTS; DO NOT COMMIT OR PUBLISH",
+        },
+    )
+    print("POSTPRIMARY_V101_EMPTY_STARTUP_STATE_MIGRATED_OK", flush=True)
+    return True
+
+
 def initialize_state(payload: dict[str, Any]) -> None:
     root = payload["state"]
     root.mkdir(parents=True, exist_ok=True)
     config_path = root / "CONFIG.json"
     if config_path.is_file():
         saved = load_json(config_path)
-        if saved.get("config") != payload["config"] or saved.get(
+        if saved.get("config") == payload["config"] and saved.get(
             "config_sha256"
-        ) != payload["config_sha256"]:
-            raise RuntimeError("Additional-analysis private-state configuration mismatch")
-        print("POSTPRIMARY_PRIVATE_STATE_AUTHENTICATED_OK", flush=True)
-        return
+        ) == payload["config_sha256"]:
+            print("POSTPRIMARY_PRIVATE_STATE_AUTHENTICATED_OK", flush=True)
+            return
+        if migrate_v101_startup_state(root, saved, payload):
+            return
+        raise RuntimeError("Additional-analysis private-state configuration mismatch")
     if any(root.iterdir()):
         raise RuntimeError("Nonempty additional-analysis state lacks CONFIG.json")
     (root / "b2_randomizations").mkdir()
@@ -695,20 +803,14 @@ def run_e1(payload: dict[str, Any], base: Any, stage08: Any) -> tuple[list[dict[
     source_fit = base.fit_panel_branch(stage08, frame, "E1")
     source_summary = load_json(payload["source_results"] / "summary.json")
     source_e1 = next(row for row in source_summary["models"] if row["analysis"] == "E1")
-    for field in (
-        "rows_raw",
-        "rows_identifying",
-        "chooser_clusters",
-        "coefficient",
-        "standard_error",
-        "p_value_two_sided",
-    ):
-        left, right = source_fit[field], source_e1[field]
-        if isinstance(left, float):
-            if not math.isclose(left, right, rel_tol=1e-12, abs_tol=1e-12):
-                raise RuntimeError(f"Source E1 replication mismatch: {field}")
-        elif left != right:
-            raise RuntimeError(f"Source E1 replication mismatch: {field}")
+    assert_estimate_reproduced(
+        source_fit,
+        source_e1,
+        "Source E1",
+        exact_fields=("rows_raw", "rows_identifying", "chooser_clusters"),
+        rel_tol=1e-12,
+        abs_tol=1e-12,
+    )
 
     rows: list[dict[str, Any]] = [
         {
@@ -1403,11 +1505,9 @@ def run_personal_salience(payload: dict[str, Any], base: Any) -> tuple[list[dict
             and row["grid"] == grid
             and row.get("sensitivity", "") == ""
         )
-        for field in ("coefficient", "standard_error", "p_value_two_sided"):
-            if not math.isclose(
-                float(results[offset][field]), float(source[field]), rel_tol=1e-11, abs_tol=1e-11
-            ):
-                raise RuntimeError(f"Personal salience reproduction mismatch: {offset} {field}")
+        assert_estimate_reproduced(
+            results[offset], source, f"Personal salience offset {offset:+d}"
+        )
 
     valid_p = {
         offset: float(result["p_value_two_sided"])
@@ -1665,20 +1765,11 @@ def run_f2_downstream(
         source_round = base.fit_panel_branch(
             stage08, frame, "F2-R", maximum_rd
         )
-        for field, source_field in (
-            ("coefficient", "coefficient"),
-            ("standard_error", "standard_error"),
-            ("p_value_two_sided", "p_value_two_sided"),
-        ):
-            if not math.isclose(
-                float(round_contrast[field]),
-                float(source_round[source_field]),
-                rel_tol=1e-11,
-                abs_tol=1e-11,
-            ):
-                raise RuntimeError(
-                    f"F2-R downstream replication mismatch at RD {maximum_rd}: {field}"
-                )
+        assert_estimate_reproduced(
+            round_contrast,
+            source_round,
+            f"F2-R downstream RD {maximum_rd}",
+        )
         round_contrast["source_result_reproduced"] = True
         round_rows.append(round_contrast)
 
@@ -1890,6 +1981,12 @@ def self_test() -> None:
     p = {"a": 0.01, "b": 0.03, "c": 0.2}
     assert holm_adjust(p)["a"] == 0.03
     assert 0 <= bh_adjust(p)["a"] <= 1
+    estimate = {
+        "coefficient": -0.005,
+        "standard_error": 0.004,
+        "p_value_two_sided": normal_p(-0.005 / 0.004),
+    }
+    assert_normal_p_consistent(estimate, "self-test estimate")
     print("DYNAMIC_SECOND_WAVE_POSTPRIMARY_V100_SELF_TEST_OK")
 
 
