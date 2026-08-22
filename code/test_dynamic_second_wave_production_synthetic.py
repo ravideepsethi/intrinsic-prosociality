@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import os
 import tempfile
 from pathlib import Path
@@ -60,6 +61,54 @@ def matching_pair(connection: duckdb.DuckDBPyConnection) -> tuple[int, int]:
 def write(path: Path, mapping: dict[str, object]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     pq.write_table(pa.table(mapping), path, compression="zstd")
+
+
+def test_legacy_state_reentry(root: Path) -> None:
+    state = root / "legacy_state"
+    state.mkdir(parents=True)
+    new_config = {
+        "script_version": history.SCRIPT_VERSION,
+        "script_sha256": "new-history-script",
+        "git_head": "new-history-commit",
+        "sample_denominator": history.SAMPLE_DENOMINATOR,
+        "identifier_buckets": history.IDENTIFIER_BUCKETS,
+    }
+    legacy_config = dict(new_config)
+    legacy_config.update(
+        {
+            "script_version": "1.0.0",
+            "script_sha256": history.LEGACY_HISTORY_SCRIPT_SHA256,
+            "git_head": history.LEGACY_HISTORY_PRODUCER_COMMIT,
+        }
+    )
+    legacy_sha = history.sha256_json(legacy_config)
+    (state / "CONFIG.json").write_text(
+        json.dumps(
+            {
+                "status": "DYNAMIC_SECOND_WAVE_HISTORY_PRIVATE_STATE_OK",
+                "config": legacy_config,
+                "config_sha256": legacy_sha,
+                "privacy": "PRIVATE; DO NOT COMMIT OR PUBLISH",
+            },
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    payload = {
+        "state": state,
+        "config": new_config,
+        "producer_config_sha256": history.sha256_json(new_config),
+        "config_sha256": history.sha256_json(new_config),
+        "state_recovery_mode": "native_v101",
+    }
+    history.initialize_state(payload)
+    assert payload["config_sha256"] == legacy_sha
+    assert (
+        payload["state_recovery_mode"]
+        == "authenticated_v100_empty_bucket_recovery"
+    )
 
 
 def test_history_sql(root: Path) -> None:
@@ -143,6 +192,60 @@ def test_history_sql(root: Path) -> None:
     pair_target = pair_table.filter(pc.equal(pair_table["game_id"], "p2"))
     assert pair_target.num_rows == 1
     assert pair_target["pair_sequence"][0].as_py() == 3
+
+    # Sampling and bucketing reused the same hash in production v1.0.0.
+    # Since gcd(50, 16) = 2, odd partitions are structurally impossible.
+    # The recovery must create typed empty outputs for those partitions so
+    # downstream union_by_name reads have the same schema as populated files.
+    empty_bucket = next(
+        bucket
+        for bucket in range(history.IDENTIFIER_BUCKETS)
+        if history.structurally_empty_bucket(bucket)
+    )
+    empty_user = history.user_bucket_worker(
+        empty_bucket, str(user_root), str(target), str(state), "config", "1GB"
+    )
+    empty_pair = history.pair_bucket_worker(
+        empty_bucket, str(pair_root), str(target), str(state), "config", "1GB"
+    )
+    assert empty_user["structural_empty_bucket"] is True
+    assert empty_pair["structural_empty_bucket"] is True
+    assert empty_user["input_files"] == 0
+    assert empty_pair["input_files"] == 0
+    assert empty_user["output_rows"] == 0
+    assert empty_pair["output_rows"] == 0
+    assert pq.read_schema(empty_user["output_path"]) == pq.read_schema(
+        user_saved["output_path"]
+    )
+    assert pq.read_schema(empty_pair["output_path"]) == pq.read_schema(
+        pair_saved["output_path"]
+    )
+
+    # A partition that is attainable under the congruence rule must never be
+    # synthesized when its event input is absent. This preserves the original
+    # fail-closed protection for genuinely incomplete event layers.
+    missing_user_even = next(
+        bucket
+        for bucket in range(history.IDENTIFIER_BUCKETS)
+        if not history.structurally_empty_bucket(bucket)
+        and not (user_root / f"user_bucket={bucket}").exists()
+    )
+    missing_pair_even = next(
+        bucket
+        for bucket in range(history.IDENTIFIER_BUCKETS)
+        if not history.structurally_empty_bucket(bucket)
+        and not (pair_root / f"pair_bucket={bucket}").exists()
+    )
+    for worker, bucket, event_root, label in (
+        (history.user_bucket_worker, missing_user_even, user_root, "user"),
+        (history.pair_bucket_worker, missing_pair_even, pair_root, "pair"),
+    ):
+        try:
+            worker(bucket, str(event_root), str(target), str(state), "config", "1GB")
+        except RuntimeError as exc:
+            assert f"No {label} event files for populated bucket {bucket}" in str(exc)
+        else:
+            raise AssertionError(f"Missing populated {label} bucket did not fail closed")
 
 
 def test_e1_scoring(root: Path) -> None:
@@ -359,6 +462,7 @@ def test_stage07_model_path(root: Path) -> None:
 def main() -> None:
     with tempfile.TemporaryDirectory(prefix="dynamic_second_wave_synthetic_") as directory:
         root = Path(directory)
+        test_legacy_state_reentry(root / "reentry")
         test_history_sql(root / "history")
         test_e1_scoring(root / "e1")
         test_salience_query(root / "salience")

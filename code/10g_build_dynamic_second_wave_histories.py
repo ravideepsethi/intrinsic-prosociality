@@ -13,6 +13,7 @@ import csv
 import datetime as dt
 import hashlib
 import json
+import math
 import multiprocessing as mp
 import os
 import shutil
@@ -25,7 +26,7 @@ from pathlib import Path
 from typing import Any, Iterable, Sequence
 
 
-SCRIPT_VERSION = "1.0.0"
+SCRIPT_VERSION = "1.0.1"
 PROJECT_ROOT = Path("/Volumes/XT_Pro/lichess_kindness")
 EXPECTED_GIT_BASE = "55124c10f746a6de6e5c186c8ddf7796fef5fb2a"
 EXPECTED_PLAN_SHA256 = (
@@ -53,6 +54,17 @@ EXPECTED_CHRONOLOGY_FILES = 852
 EXPECTED_CHRONOLOGY_ROWS = 7_763_847_245
 EXPECTED_STAGE07_ROWS = 47_587_020
 EXPECTED_STAGE07_FAIR_ROWS = 17_328_130
+
+# Production v1.0.0 selected identifiers with hash(...) % 50 = 0 and then
+# partitioned the same hash modulo 16. Because gcd(50, 16) = 2, only even
+# bucket numbers can occur. The v1.0.1 recovery treats the mathematically
+# impossible odd buckets as typed, zero-row structural checkpoints.
+LEGACY_HISTORY_SCRIPT_SHA256 = (
+    "668c8f158bcb3c67462b2eb748ed71ca4810fddf16b6dd02caef44f47e910649"
+)
+LEGACY_HISTORY_PRODUCER_COMMIT = (
+    "1418976974e1b7857407f1b2a717a5c11f9c88a1"
+)
 
 USER_SEED = 2026082202
 PAIR_SEED = 2026082203
@@ -111,6 +123,18 @@ def canonical_json(value: Any) -> str:
 
 def sha256_json(value: Any) -> str:
     return hashlib.sha256(canonical_json(value).encode()).hexdigest()
+
+
+def structurally_empty_bucket(bucket: int) -> bool:
+    """Return whether congruence makes this identifier bucket impossible.
+
+    Every retained identifier satisfies H % SAMPLE_DENOMINATOR == 0 and was
+    partitioned using the same H % IDENTIFIER_BUCKETS. Therefore its bucket
+    must be divisible by gcd(SAMPLE_DENOMINATOR, IDENTIFIER_BUCKETS).
+    """
+
+    divisor = math.gcd(SAMPLE_DENOMINATOR, IDENTIFIER_BUCKETS)
+    return bucket % divisor != 0
 
 
 def load_json(path: Path) -> Any:
@@ -352,7 +376,9 @@ def make_payload(args: argparse.Namespace, script_path: Path) -> dict[str, Any]:
         "worker_memory": args.worker_memory,
         "authorities": authorities,
         "config": config,
+        "producer_config_sha256": sha256_json(config),
         "config_sha256": sha256_json(config),
+        "state_recovery_mode": "native_v101",
     }
 
 
@@ -362,9 +388,42 @@ def initialize_state(payload: dict[str, Any]) -> None:
     config_path = state / "CONFIG.json"
     if config_path.is_file():
         saved = load_json(config_path)
-        if saved.get("config_sha256") != payload["config_sha256"]:
+        saved_config = saved.get("config")
+        saved_sha = saved.get("config_sha256")
+        if (
+            saved.get("status") != "DYNAMIC_SECOND_WAVE_HISTORY_PRIVATE_STATE_OK"
+            or not isinstance(saved_config, dict)
+            or saved_sha != sha256_json(saved_config)
+        ):
+            raise RuntimeError("Private history CONFIG.json is not self-authenticating")
+
+        if saved_sha == payload["producer_config_sha256"] and saved_config == payload["config"]:
+            print("DYNAMIC_SECOND_WAVE_HISTORY_STATE_AUTHENTICATED_OK", flush=True)
+            return
+
+        legacy_config = dict(payload["config"])
+        legacy_config.update(
+            {
+                "script_version": "1.0.0",
+                "script_sha256": LEGACY_HISTORY_SCRIPT_SHA256,
+                "git_head": LEGACY_HISTORY_PRODUCER_COMMIT,
+            }
+        )
+        legacy_sha = sha256_json(legacy_config)
+        if saved_sha != legacy_sha or saved_config != legacy_config:
             raise RuntimeError("Private history state belongs to another configuration")
-        print("DYNAMIC_SECOND_WAVE_HISTORY_STATE_AUTHENTICATED_OK", flush=True)
+
+        # Preserve the authenticated v1.0.0 checkpoint namespace. Existing
+        # source, target, and event-layer receipts all bind to this digest;
+        # new bucket receipts must use the same digest to form one coherent
+        # resumable state. The final aggregate receipt separately records the
+        # v1.0.1 producer configuration and recovery mode.
+        payload["config_sha256"] = legacy_sha
+        payload["state_recovery_mode"] = "authenticated_v100_empty_bucket_recovery"
+        print(
+            "DYNAMIC_SECOND_WAVE_HISTORY_V100_STATE_RECOVERY_AUTHENTICATED_OK",
+            flush=True,
+        )
         return
     if any(state.iterdir()):
         raise RuntimeError("Nonempty history state has no CONFIG.json")
@@ -791,8 +850,15 @@ def user_bucket_worker(
     output.parent.mkdir(parents=True, exist_ok=True)
     temporary = output.with_name(output.name + f".tmp.{uuid.uuid4().hex}.parquet")
     inputs = sorted((root / f"user_bucket={bucket}").glob("*.parquet"))
-    if not inputs:
-        raise RuntimeError(f"No user event files for bucket {bucket}")
+    structural_empty = not inputs
+    input_file_count = len(inputs)
+    if structural_empty:
+        if not structurally_empty_bucket(bucket):
+            raise RuntimeError(f"No user event files for populated bucket {bucket}")
+        representatives = sorted(root.glob("user_bucket=*/*.parquet"))
+        if not representatives:
+            raise RuntimeError("No representative user event file exists")
+        inputs = [representatives[0]]
     connection = duckdb.connect()
     configure(connection, memory, state / "duckdb_temp" / f"user_{bucket:02d}", 1)
     sources = path_list_literal(inputs)
@@ -851,15 +917,18 @@ def user_bucket_worker(
         )
         SELECT *
         FROM eligible
-        WHERE is_stage07_target
-           OR (
-             utc_ms >= {MAIN_START_MS} AND utc_ms < {MAIN_END_EXCLUSIVE_MS}
-             AND rating_diff IS NOT NULL AND rating_diff > 0
-             AND post_rating IS NOT NULL
-             AND COALESCE(prior_same_pool_games, 0) >= 25
-             AND utc_ms - first_prior_pool_utc_ms >= {365 * DAY_MS}
-             AND (near_round100 OR near_round50 OR near_shift37 OR near_personal_grid)
-           )
+        WHERE (
+          is_stage07_target
+          OR (
+            utc_ms >= {MAIN_START_MS} AND utc_ms < {MAIN_END_EXCLUSIVE_MS}
+            AND rating_diff IS NOT NULL AND rating_diff > 0
+            AND post_rating IS NOT NULL
+            AND COALESCE(prior_same_pool_games, 0) >= 25
+            AND utc_ms - first_prior_pool_utc_ms >= {365 * DAY_MS}
+            AND (near_round100 OR near_round50 OR near_shift37 OR near_personal_grid)
+          )
+        )
+        {"AND FALSE" if structural_empty else ""}
       ) TO {sql_literal(temporary)}
         (FORMAT PARQUET, COMPRESSION ZSTD, ROW_GROUP_SIZE 250000)
     """
@@ -872,6 +941,8 @@ def user_bucket_worker(
         "created_utc": utc_now(),
         "config_sha256": config_sha,
         "bucket": bucket,
+        "input_files": input_file_count,
+        "structural_empty_bucket": structural_empty,
         "output_path": str(output),
         "output_rows": int(pq.ParquetFile(output).metadata.num_rows),
         "output_bytes": output.stat().st_size,
@@ -903,8 +974,15 @@ def pair_bucket_worker(
     output.parent.mkdir(parents=True, exist_ok=True)
     temporary = output.with_name(output.name + f".tmp.{uuid.uuid4().hex}.parquet")
     inputs = sorted((root / f"pair_bucket={bucket}").glob("*.parquet"))
-    if not inputs:
-        raise RuntimeError(f"No pair event files for bucket {bucket}")
+    structural_empty = not inputs
+    input_file_count = len(inputs)
+    if structural_empty:
+        if not structurally_empty_bucket(bucket):
+            raise RuntimeError(f"No pair event files for populated bucket {bucket}")
+        representatives = sorted(root.glob("pair_bucket=*/*.parquet"))
+        if not representatives:
+            raise RuntimeError("No representative pair event file exists")
+        inputs = [representatives[0]]
     connection = duckdb.connect()
     configure(connection, memory, state / "duckdb_temp" / f"pair_{bucket:02d}", 1)
     sources = path_list_literal(inputs)
@@ -943,8 +1021,11 @@ def pair_bucket_worker(
           EXTRACT('isodow' FROM TO_TIMESTAMP(utc_ms / 1000.0)) IN (6, 7)
             AS weekend
         FROM marked
-        WHERE is_stage07_target
-           OR (utc_ms >= {E1_TRAIN_START_MS} AND utc_ms < {E1_TRAIN_END_EXCLUSIVE_MS})
+        WHERE (
+          is_stage07_target
+          OR (utc_ms >= {E1_TRAIN_START_MS} AND utc_ms < {E1_TRAIN_END_EXCLUSIVE_MS})
+        )
+        {"AND FALSE" if structural_empty else ""}
         ORDER BY utc_ms, low_id, high_id, archive_ordinal, game_id
       ) TO {sql_literal(temporary)}
         (FORMAT PARQUET, COMPRESSION ZSTD, ROW_GROUP_SIZE 250000)
@@ -958,6 +1039,8 @@ def pair_bucket_worker(
         "created_utc": utc_now(),
         "config_sha256": config_sha,
         "bucket": bucket,
+        "input_files": input_file_count,
+        "structural_empty_bucket": structural_empty,
         "output_path": str(output),
         "output_rows": int(pq.ParquetFile(output).metadata.num_rows),
         "output_bytes": output.stat().st_size,
@@ -980,7 +1063,12 @@ def authenticate_bucket(
     if not output.is_file() or not receipt.is_file():
         raise RuntimeError(f"Partial {label} bucket {bucket}")
     saved = load_json(receipt)
+    expected_status = {
+        "user": "DYNAMIC_SECOND_WAVE_USER_BUCKET_OK",
+        "pair": "DYNAMIC_SECOND_WAVE_PAIR_BUCKET_OK",
+    }[label]
     expected = {
+        "status": expected_status,
         "config_sha256": config_sha,
         "bucket": bucket,
         "output_path": str(output),
@@ -991,6 +1079,9 @@ def authenticate_bucket(
     for key, value in expected.items():
         if saved.get(key) != value:
             raise RuntimeError(f"{label} bucket mismatch {bucket}: {key}")
+    if bool(saved.get("structural_empty_bucket", False)):
+        if not structurally_empty_bucket(bucket) or expected["output_rows"] != 0:
+            raise RuntimeError(f"Invalid structural-empty {label} bucket {bucket}")
     return saved
 
 
@@ -1073,7 +1164,9 @@ def write_public_receipt(
         "created_utc": utc_now(),
         "script_version": SCRIPT_VERSION,
         "authorities": payload["authorities"],
-        "config_sha256": payload["config_sha256"],
+        "config_sha256": payload["producer_config_sha256"],
+        "checkpoint_config_sha256": payload["config_sha256"],
+        "state_recovery_mode": payload["state_recovery_mode"],
         "ordinary_chronology_files": len(chronology),
         "ordinary_chronology_rows": sum(row["rows"] for row in chronology),
         "selected_game_rows": selected_rows,
@@ -1103,7 +1196,9 @@ def write_public_receipt(
         "run_id": payload["run_id"],
         "script_sha256": payload["authorities"]["script_sha256"],
         "git_head": payload["authorities"]["git_head"],
-        "config_sha256": payload["config_sha256"],
+        "config_sha256": payload["producer_config_sha256"],
+        "checkpoint_config_sha256": payload["config_sha256"],
+        "state_recovery_mode": payload["state_recovery_mode"],
         "summary_sha256": sha256_file(staging / "summary.json"),
         "report_manifest_sha256": sha256_file(staging / "report_file_hashes.tsv"),
         "private_target_sha256": sha256_file(
@@ -1157,6 +1252,8 @@ def self_test() -> None:
     assert len(rows) == 3
     assert all(0 <= row[1] < SAMPLE_DENOMINATOR for row in rows)
     assert all(0 <= row[2] < SAMPLE_DENOMINATOR for row in rows)
+    assert math.gcd(SAMPLE_DENOMINATOR, IDENTIFIER_BUCKETS) == 2
+    assert all(structurally_empty_bucket(bucket) == (bucket % 2 == 1) for bucket in range(16))
     assert parse_partition("/x/speed=blitz/month=2024-01/a.parquet") == (
         "blitz",
         "2024-01",

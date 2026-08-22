@@ -1,78 +1,58 @@
-# Dynamic prosociality second-wave production recovery v1.0.2
+# Dynamic prosociality second-wave production recovery v1.0.3
 
-This recovery package supersedes launcher package v1.0.0. That launcher passed all
-pre-mutation tests, copied the frozen producers into the repository, and then stopped
-at `git diff --check` because three metadata lines in the implementation amendment
-used Markdown hard-break spaces. It stopped before staging, committing, pushing, or
-reading any second-wave outcome.
+This package resumes frozen second-wave run `20260822T150914Z` after a deterministic
+partition-support failure in the shared-history producer. It supersedes recovery
+launcher v1.0.2 for this run.
 
-The original launcher had already staged those seven package-controlled changes when
-its cached-diff whitespace check stopped. Recovery v1.0.1 incorrectly expected the
-same contents to be unstaged and therefore also stopped before any mutation. Recovery
-v1.0.2 authenticates the exact staged state: six added files and the modified script-
-hash manifest, with both working-tree and Git-index bytes checked against the failed
-v1.0.0 package. It then replaces only those package-controlled files and changes the
-three metadata lines to a Markdown list. Because the producers authenticate the
-amendment by SHA-256, their embedded amendment hash and the script-hash manifest are
-re-frozen accordingly. No estimand, sample, model, test, execution setting, or output
-contract changes.
+## Preserved completed work
 
-This authenticated package freezes and runs the four-slot second-wave family:
+The package authenticates and preserves:
 
-- **B2:** first-observed-grant dynamics relative to 4,999 exact conditional draws;
-- **E1:** the past-only, leave-focal-pair-out shadow of future interaction;
-- **F2-R:** a round-number reference-point contrast, gated by Lichess stopping salience;
-- **F2-P:** a prior personal-peak contrast, gated by Lichess stopping salience.
+- producer commit `1418976974e1b7857407f1b2a717a5c11f9c88a1`;
+- the fixed private run authority and run ID;
+- the completed B2 aggregate;
+- all 686 selected-source checkpoints;
+- the 685,731-row sampled Stage 07 target checkpoint;
+- the 309,961,276-row user event layer; and
+- the 154,693,194-row pair event layer.
 
-The producer does not use Patron/profile data. F1 remains retired.
+None of those artifacts is rebuilt or overwritten.
 
-## Pre-outcome freeze
+## Repair
 
-The launcher first authenticates either clean Git HEAD
-`55124c10f746a6de6e5c186c8ddf7796fef5fb2a` or the exact staged v1.0.0 state at that
-HEAD. It installs the three producers, synthetic integration test, production
-protocol, and dated v1.0.2 implementation amendment, updates
-`manifests/script_hashes.tsv`, commits, and pushes. It makes no second-wave outcome
-read unless that push succeeds. On a later invocation, it accepts the already-
-committed identical producers and resumes.
+Sampling used `H % 50 == 0` and event bucketing reused the same `H % 16`. Since
+`gcd(50,16)=2`, only even event buckets can exist. Producer v1.0.0 stopped when it did
+not find odd bucket 3. Producer v1.0.1 creates typed, zero-row checkpoints only for the
+mathematically impossible odd buckets and continues to fail closed if an attainable
+even bucket is missing.
 
-## Runtime and resource use
+The recovery changes no sample, estimand, model, statistical test, or result contract.
+The package commits and pushes the repaired history producer, expanded integration
+test, recovery note, and production protocol before history processing resumes.
 
-Expected first-run wall time is approximately **12--48 hours**, depending primarily on
-XT_Pro sustained throughput. The broad range is deliberate: the source projection must
-scan the canonical 7.76-billion-row chronology once. B2 and the chronology projection
-run concurrently. The downstream salience, E1 monthly scores, and kindness models run
-after their private histories authenticate.
+## Remaining runtime
 
-The launcher requires at least 300 GiB free on XT_Pro. It uses four one-thread source
-workers, three B2 workers, 16 user/pair history buckets, projected Parquet columns,
-Zstandard checkpoints, DuckDB 1.5.2, and single-threaded BLAS inside workers. This is
-designed for the work Mac plus XT_Pro rather than a high-memory server.
+Expected remaining wall time is approximately **6--36 hours**, depending on XT_Pro
+throughput. The expensive chronology projection and event-layer reductions have
+already completed. The remaining work processes the populated history buckets, builds
+E1 monthly scores, estimates E1/F2 models, and writes compact aggregate outputs.
 
-## Resumption
-
-Run the same command again after an interruption. A private run authority on XT_Pro
-fixes the production Git commit and run ID. Valid source-file, event-layer,
-identifier-bucket, B2-randomization, and E1-month checkpoints are reused. A partial or
-hash-mismatched checkpoint fails closed rather than being silently overwritten.
+Rerunning the same launcher resumes authenticated checkpoints. It does not rerun the
+completed B2 randomizations.
 
 ## Storage and privacy
 
-All important files are on XT_Pro:
+Account identifiers, sampled games, event layers, running rating peaks, pair histories,
+and score assignments remain private under:
 
 ```text
 /Volumes/XT_Pro/lichess_kindness/derived/replication/dynamic_second_wave_*_PRIVATE
-/Volumes/XT_Pro/lichess_kindness/output/dynamic_second_wave_*
-/Volumes/XT_Pro/lichess_kindness/logs/dynamic_second_wave
 ```
 
-Only compact aggregate outputs are copied into a transfer ZIP under
-`/Users/u6025368/Desktop/Lichess_Desktop`. Account identifiers, selected-game rows,
-running peaks, pair histories, and score assignments remain private on XT_Pro and must
-not be committed or uploaded.
+Only compact aggregate outputs are included in the transfer ZIP. No Patron/profile
+input or API request is used.
 
 ## After completion
 
-The production run does not commit results. The next step is an aggregate semantic and
-numerical audit. Only after that audit passes should compact results, receipts,
-documentation, and hashes be frozen in GitHub.
+The run does not commit its results. The next gate is an aggregate semantic and
+numerical audit. Only an audited compact receipt should later be frozen in GitHub.
