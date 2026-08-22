@@ -1,0 +1,38 @@
+{
+  "certification_status": "DYNAMIC_PROSOCIALITY_CORE_AND_POSTAUDIT_CERTIFIED_OK",
+  "certification_date": "2026-08-22",
+  "repository_parent_head": "7fa2cf415b43c69f4d8d5fc973442d81dbb6ecbf",
+  "stage07_success_sha256": "8b7010b528ae5c6f1e1a9b517258648204c14c17ca41a2a6796f8ee5a1ed6db7",
+  "core": {
+    "run_id": "20260822T022146Z",
+    "status": "DYNAMIC_PROSOCIALITY_CORE_V102_OK",
+    "archive_sha256": "1f60cb043ae291cf2f0e166c8fff36e9972478bcb4e01eaac2f0a78d6755dc3d",
+    "success_sha256": "bd64005162bf8f37f9488d47e95c2ea4dd946d1227e909930a42dd8e4904f009",
+    "summary_sha256": "fa49fb15e095fb961a3f4cca5b937d903bc890467ed8404e37683858dd20a269",
+    "report_manifest_sha256": "e2724dab02a2b7b7c10f68b63ed40ddc67f2345947aa923d851912df946d16d8",
+    "script_version": "1.0.2",
+    "script_sha256": "2dcf0dd19f7cfe8f694d348e6590df88083a37882404112229d6ef05ebc42713",
+    "analysis_plan_sha256": "b11b546ea6fde608140619cffadffad1a7aab054b6fd1a9dcbee8900c98d0a6f",
+    "arm_partition_amendment_sha256": "db951a0ea42945cbe4ec8a86cf436a839b1821a2225d73442dddb6262e908ec5",
+    "parallel_execution_note_sha256": "a2759dead0c1a67cf0e5a3976075389702a4c8900343ff5134cb74e106feea4d"
+  },
+  "postoutcome_audit": {
+    "run_id": "20260822T041411Z",
+    "status": "DYNAMIC_PROSOCIALITY_POSTOUTCOME_AUDIT_V101_OK",
+    "archive_sha256": "c8ab72432ee1b7a5b45e3dfd22050f67303b59916af961cfb42552c372edd473",
+    "success_sha256": "ba8c97841b6abe35986c5c6532d2800185cb7ef8d06936158c17984bb29719ad",
+    "summary_sha256": "0a4d3718446a987a6d8fb29fb1054a1a700255d39d17377d1a7dc0250bef8b09",
+    "report_manifest_sha256": "68f875358d1245a878268302ae6aaca02e322369785bed7c440a05b44ee869e5",
+    "script_version": "1.0.1",
+    "script_sha256": "f1279072391e5933e4e2936df7e07abcc431a03a1f03aabceb147949257b1e6f",
+    "audit_plan_sha256": "29eae92125b625d4919b11ebd51b6d80d69a1f487ac402e0018d41764334bbd0",
+    "boolean_recovery_note_sha256": "d126ac5bd7200142456658dbf86b5b74edc74aa9221f53740932e1de721a3627",
+    "checkpoint_recovery_mode": "authenticated_v100_checkpoint",
+    "private_pretrend_rows": 1543725
+  },
+  "privacy": {
+    "repository_contents": "code, documentation, and aggregate provenance only",
+    "account_level_outputs": "PRIVATE; retained on XT_Pro; not committed or published",
+    "patron_profile_data_read": false
+  }
+}

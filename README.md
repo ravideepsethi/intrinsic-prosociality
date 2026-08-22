@@ -5,8 +5,9 @@ Replication code and documentation for:
 **The Structure of Intrinsic Prosociality: Field Evidence from Online Chess**
 
 This repository is under active construction. The canonical two-year Stage 07
-analysis panel, Stage 08 panel-only core results, and Stage 09 panel-robustness
-results are now certified. External-input extensions remain in progress.
+analysis panel, Stage 08 panel-only core results, Stage 09 panel-robustness
+results, and the dynamic-prosociality core are now certified. External-input
+extensions remain in progress.
 
 ## Current research design
 
@@ -15,6 +16,7 @@ results are now certified. External-input extensions remain in progress.
 - Stage 07 analysis panel: certified over all 24 months with 157 columns.
 - Stage 08 core results: certified Tables 1–9 and analytical figure data.
 - Stage 09 panel robustness: certified support, exact-zero, heterogeneity, cutoff, and magnitude results.
+- Dynamic prosociality: certified mercy-transmission, engagement, and conditional-exchangeability tests.
 - Opening familiarity: target plan certified; metadata acquisition and full analysis remain pending.
 - Patron/profile extension: 24-month profile acquisition remains in progress.
 - Setting: discretionary resolution of opponent disconnections in rated games on Lichess.
@@ -47,6 +49,8 @@ Current stages include:
 - `09_prepare_opening_familiarity.py` — build and authenticate the 24-month opening target plan.
 - `09_fetch_opening_metadata.py` — acquire missing opening metadata with resumable checkpoints.
 - `09_analyze_opening_familiarity.py` — estimate opening-familiarity results after acquisition.
+- `10c_estimate_dynamic_prosociality_core.py` — estimate the frozen recipient and chooser dynamics.
+- `10d_audit_dynamic_prosociality_core.py` — run the secondary post-outcome diagnostic audit.
 
 `operations/` contains operational scripts needed to document or reproduce production
 workflows.
@@ -86,10 +90,11 @@ Canonical production stages are designed to provide, where applicable:
 
 ## Status
 
-**Work in progress.** Stages 00–08, the certified Stockfish 100k layer, the
-47,587,020-row Stage 07 panel, the Stage 08 core results, and the Stage 09
-panel-only robustness results are complete. The opening target plan is certified,
-but opening metadata acquisition, full opening-familiarity analysis, patron/profile
-analysis, post-sample holdouts, publication rendering, the planned deep-engine
-audit, and final archival-data instructions remain in progress. The large research
-datasets are not stored in this repository.
+**Work in progress.** Stages 00–09, the certified Stockfish 100k layer, the
+47,587,020-row Stage 07 panel, the Stage 08 core results, the Stage 09 panel-only
+robustness results, and the dynamic-prosociality core and post-outcome audit are
+complete. The opening target plan is certified, but opening metadata acquisition,
+full opening-familiarity analysis, patron/profile analysis, post-sample holdouts,
+publication rendering, the planned deep-engine audit, and final archival-data
+instructions remain in progress. The large research datasets are not stored in
+this repository.
