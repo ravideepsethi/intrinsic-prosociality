@@ -1,0 +1,19 @@
+{
+  "B2": {
+    "basis": "certified B1 sample and cross-fitted static propensities",
+    "ready": true
+  },
+  "E1": {
+    "basis": "past-only all-history ids, ratings, time, and speed partitions",
+    "ready": true
+  },
+  "F2_personal_best_salience": {
+    "basis": "all-history replay contains ratings, diffs, ids, and complete coverage",
+    "ready": true
+  },
+  "F2_round_salience": {
+    "basis": "all-history replay ratings/diffs",
+    "ready": true
+  },
+  "all_three_families_ready_without_source_amendment": true
+}

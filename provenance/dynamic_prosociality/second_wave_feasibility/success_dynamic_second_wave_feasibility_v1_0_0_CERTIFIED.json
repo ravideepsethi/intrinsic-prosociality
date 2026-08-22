@@ -1,0 +1,48 @@
+{
+  "account_level_output_retained": false,
+  "analysis_plan_sha256": "4f572bb8da7531bfa1b894cfde92da280a936d695bdee72d9bbde6ca4545f039",
+  "b1_choosers": 64331,
+  "b1_rows": 1017944,
+  "certified_first_ever_pair_share_from_core": 0.9293482979776923,
+  "chronology_files": 852,
+  "chronology_rows": 7763847245,
+  "created_utc": "2026-08-22T13:42:53.182016+00:00",
+  "git_head": "f0f92fb38efb9dea59d4f41d90049fae3e6c57fa",
+  "new_kindness_effects_estimated": false,
+  "next_step": "Review only support/readiness. If no source amendment is required, freeze the plan and full producer in Git before estimating B2, F2 salience, E1, or downstream kindness effects.",
+  "patron_profile_input_read": false,
+  "post_first_kindness_rate_tabulated": false,
+  "rating_input_files": 945,
+  "rating_input_rows": 939153041,
+  "re_pair_outcome_constructed": false,
+  "readiness": {
+    "B2": {
+      "basis": "certified B1 sample and cross-fitted static propensities",
+      "ready": true
+    },
+    "E1": {
+      "basis": "past-only all-history ids, ratings, time, and speed partitions",
+      "ready": true
+    },
+    "F2_personal_best_salience": {
+      "basis": "all-history replay contains ratings, diffs, ids, and complete coverage",
+      "ready": true
+    },
+    "F2_round_salience": {
+      "basis": "all-history replay ratings/diffs",
+      "ready": true
+    },
+    "all_three_families_ready_without_source_amendment": true
+  },
+  "report_files_hashed": 10,
+  "report_manifest_sha256": "a32971c271e87e24dc9e09da14747b26b8f41ab17950ce567bb094d338f7621f",
+  "run_id": "20260822T134125Z",
+  "runtime_seconds": 83.07786512374878,
+  "salience_stopping_outcome_read": false,
+  "script_sha256": "8c42293fb21dbfe6ba7f6f5b36d057b4eee0393c0a46f8c9d65e93a98c7b2297",
+  "script_version": "1.0.0",
+  "stage07_fair_rows": 17328130,
+  "stage07_hashes_verified": true,
+  "stage07_rows": 47587020,
+  "status": "DYNAMIC_SECOND_WAVE_FEASIBILITY_V100_OK"
+}

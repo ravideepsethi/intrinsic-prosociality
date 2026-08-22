@@ -1,0 +1,43 @@
+{
+  "bytes": 25292676482,
+  "files": 945,
+  "months": [
+    "2024-10",
+    "2024-11",
+    "2024-12",
+    "2025-01",
+    "2025-02",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07"
+  ],
+  "present": true,
+  "root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/rating_replay_inputs",
+  "rows": 939153041,
+  "schema": {
+    "columns": [
+      "archive_ordinal",
+      "black_elo",
+      "black_rating_diff",
+      "black_username_norm",
+      "event_raw",
+      "game_id",
+      "result_code",
+      "speed",
+      "time_control_raw",
+      "utc_date_raw",
+      "utc_ms",
+      "utc_time_raw",
+      "variant_raw",
+      "white_elo",
+      "white_rating_diff",
+      "white_username_norm"
+    ],
+    "missing_required_columns": [],
+    "required_columns_present": true
+  },
+  "utc_ms_max": 1754006399000,
+  "utc_ms_min": 1727740800000
+}
