@@ -88,6 +88,22 @@ def test_schur_matches_dense_dummy_regression(audit) -> None:
     assert diagnostics["absorption_max_group_mean"] < 1e-10
 
 
+def test_schur_accepts_all_671_e1_cell_levels(audit) -> None:
+    rng = np.random.default_rng(671)
+    chooser = np.repeat(np.arange(900), 8)
+    within = np.tile(np.arange(8), 900)
+    cell = (chooser * 17 + within * 83) % 671
+    assert np.unique(cell).size == 671
+    source = rng.normal(size=(len(chooser), 4))
+    transformed, diagnostics = audit.residualize_two_way_schur(
+        source, chooser, cell
+    )
+    assert transformed.shape == source.shape
+    assert diagnostics["schur_levels"] == 671
+    assert diagnostics["schur_rank"] == 670
+    assert diagnostics["absorption_max_group_mean"] < 1e-10
+
+
 def test_tight_ap_matches_schur_coefficient(audit) -> None:
     rng = np.random.default_rng(202)
     chooser = np.repeat(np.arange(40), 15)
@@ -233,13 +249,50 @@ def test_nonidentified_risk_is_not_reported_as_zero(audit) -> None:
     assert scaled["p_value_two_sided"] is None
 
 
+def test_recovery_solver_plan_and_agreement_guard(audit) -> None:
+    assert audit.SPECIFICATIONS == (
+        "independent_schur_two_way",
+        "tight_ap_same_spec_two_way",
+        "assignment_unit_tight_ap_two_way",
+    )
+    rows = [
+        {
+            "solver": "independent_dense_small_side_schur",
+            "specification": "same_additive_month_and_exact_cell",
+            "covariance": "chooser",
+            "coefficient_per_unit_risk": 0.125,
+            "standard_error_per_unit_risk": 0.02,
+        },
+        {
+            "solver": "tight_recursive_singleton_alternating_projection",
+            "specification": "same_additive_month_and_exact_cell",
+            "covariance": "chooser",
+            "coefficient_per_unit_risk": 0.125 + 5e-10,
+            "standard_error_per_unit_risk": 0.0205,
+        },
+    ]
+    agreement = audit.validate_cross_solver(rows)
+    assert agreement["status"] == (
+        "E1_INDEPENDENT_AND_TIGHT_SOLVER_AGREEMENT_OK"
+    )
+    rows[1]["coefficient_per_unit_risk"] = 0.125 + 2e-8
+    try:
+        audit.validate_cross_solver(rows)
+    except RuntimeError as error:
+        assert "solver disagreement" in str(error)
+    else:
+        raise AssertionError("Recovery solver disagreement guard did not fail")
+
+
 def main() -> None:
     audit = load_audit()
     test_schur_matches_dense_dummy_regression(audit)
+    test_schur_accepts_all_671_e1_cell_levels(audit)
     test_tight_ap_matches_schur_coefficient(audit)
     test_recursive_singleton_pruning(audit)
     test_cache_round_trip(audit)
     test_nonidentified_risk_is_not_reported_as_zero(audit)
+    test_recovery_solver_plan_and_agreement_guard(audit)
     audit.self_test()
     print("DYNAMIC_SECOND_WAVE_E1_AUDIT_SYNTHETIC_INTEGRATION_OK")
 

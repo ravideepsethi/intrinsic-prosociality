@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
-"""Run an independent numerical and specification audit of second-wave E1.
+"""Run the recovered independent numerical and specification audit of E1.
 
 The audit reuses the authenticated E1 score Parquets and the locked Stage 07 panel.
 It does not rebuild the all-game chronology.  It writes only aggregate diagnostics.
+Version 1.0.1 excludes the Stage 08 exact two-way benchmark from the audit fits
+because that solver deliberately accepts at most 512 levels in its smaller fixed
+effect, whereas the E1 exact-cell specification has 671 levels.  Stage 08 remains
+unchanged and is still used for its applicable source-result reproduction.
 """
 
 from __future__ import annotations
@@ -27,10 +31,10 @@ from typing import Any, Sequence
 PROJECT_ROOT = Path("/Volumes/XT_Pro/lichess_kindness")
 SOURCE_RUN_ID = "20260822T150914Z"
 POSTPRIMARY_RUN_ID = SOURCE_RUN_ID + "_postprimary_v100"
-DEFAULT_RUN_ID = SOURCE_RUN_ID + "_e1_audit_v100"
-SCRIPT_VERSION = "1.0.0"
+DEFAULT_RUN_ID = SOURCE_RUN_ID + "_e1_audit_v101"
+SCRIPT_VERSION = "1.0.1"
 
-EXPECTED_BASE_COMMIT = "ad2d6f77256c29563b74c267f264f7bff6b90021"
+EXPECTED_BASE_COMMIT = "6b494e94e015fcf3a253f4ee1580dd6f135a4d60"
 EXPECTED_ADDITIONAL_SCRIPT_SHA = (
     "983e1f9ea4758aa3bb4ff22404c4a732ca993233f41ed1b7a52774a2caa5f5d2"
 )
@@ -64,7 +68,6 @@ AP_TOLERANCE = 1e-12
 AP_MAXIMUM_ITERATIONS = 30_000
 IDENTIFYING_ROW_TOLERANCE = 1e-10
 SPECIFICATIONS = (
-    "stage08_exact_chooser",
     "independent_schur_two_way",
     "tight_ap_same_spec_two_way",
     "assignment_unit_tight_ap_two_way",
@@ -75,7 +78,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--project-root", type=Path, default=PROJECT_ROOT)
     parser.add_argument("--run-id", default=DEFAULT_RUN_ID)
-    parser.add_argument("--workers", type=int, default=4)
+    parser.add_argument("--workers", type=int, default=3)
     parser.add_argument("--execute", action="store_true")
     parser.add_argument("--self-test", action="store_true")
     return parser.parse_args(argv)
@@ -207,8 +210,8 @@ def authenticate_payload(args: argparse.Namespace, script_path: Path) -> dict[st
         project / "derived/replication/dynamic_second_wave_estimation_v100_PRIVATE"
     )
     stage07 = project / "derived/replication/analysis_panel_24m_sf100k"
-    state = project / "derived/replication/dynamic_second_wave_e1_audit_v100_PRIVATE"
-    output = project / "output/dynamic_second_wave_e1_audit_v100"
+    state = project / "derived/replication/dynamic_second_wave_e1_audit_v101_PRIVATE"
+    output = project / "output/dynamic_second_wave_e1_audit_v101"
 
     fixed = {
         source_estimator: EXPECTED_SOURCE_ESTIMATOR_SHA,
@@ -691,53 +694,6 @@ def scaled_row(
     return public
 
 
-def worker_stage08_exact(
-    frame: Any, cache_metadata: dict[str, Any], stage08_path: str
-) -> list[dict[str, Any]]:
-    import numpy as np
-
-    stage08 = load_module(
-        Path(stage08_path), "e1_audit_stage08_worker", EXPECTED_STAGE08_SHA
-    )
-    controls = frame[cache_metadata["control_columns"]].to_numpy(dtype=np.float64)
-    months, month_names = month_dummies(frame["month_code"].to_numpy())
-    x = np.column_stack(
-        [frame["re_pair_risk"].to_numpy(dtype=np.float64), controls, months]
-    )
-    names = ["re_pair_risk", *cache_metadata["control_names"], *month_names]
-    chooser = frame["chooser_code"].to_numpy(dtype=np.int64)
-    cell = frame["cell_code"].to_numpy(dtype=np.int64)
-    result = stage08.fit_lpm_cluster(
-        frame["kind_draw"].to_numpy(dtype=np.float64),
-        x,
-        names,
-        chooser,
-        fixed_effect_codes=(chooser, cell),
-    )
-    fit = {
-        "specification": "same_additive_month_and_exact_cell",
-        "solver": "stage08_two_way_schur_exact",
-        "rows_raw": int(result["n_rows_raw"]),
-        "rows_after_singleton_pruning": int(result["n_rows_identifying"]),
-        "rows_identifying": int(result["n_rows_identifying"]),
-        "matrix_rank": int(result["rank"]),
-        "beta": np.asarray(result["beta"], dtype=np.float64),
-        "covariance_chooser": np.asarray(result["covariance"], dtype=np.float64),
-        "chooser_clusters": int(result["n_clusters"]),
-        "assignment_clusters": math.nan,
-        "intersection_clusters": math.nan,
-        "absorption_method": result["absorption_method"],
-        "absorption_iterations": 1,
-        "absorption_max_group_mean": float(result["absorption_last_adjustment"]),
-        "singleton_pruning_rounds": math.nan,
-        "risk_after_fe_std": math.nan,
-        "risk_after_fe_and_controls_std": math.nan,
-        "risk_after_fe_and_controls_ss": math.nan,
-        "status": "OK",
-    }
-    return [scaled_row(fit, "covariance_chooser", cache_metadata)]
-
-
 def worker_independent_schur(
     frame: Any, cache_metadata: dict[str, Any]
 ) -> list[dict[str, Any]]:
@@ -838,11 +794,8 @@ def run_worker(
     specification: str,
     cache_path: str,
     metadata_path: str,
-    stage08_path: str,
 ) -> list[dict[str, Any]]:
     frame, metadata = read_cache(cache_path, metadata_path)
-    if specification == "stage08_exact_chooser":
-        return worker_stage08_exact(frame, metadata, stage08_path)
     if specification == "independent_schur_two_way":
         return worker_independent_schur(frame, metadata)
     if specification == "tight_ap_same_spec_two_way":
@@ -1097,12 +1050,6 @@ def reference_rows(payload: dict[str, Any]) -> list[dict[str, Any]]:
 
 
 def validate_cross_solver(rows: Sequence[dict[str, Any]]) -> dict[str, Any]:
-    stage08 = next(
-        row
-        for row in rows
-        if row.get("solver") == "stage08_two_way_schur_exact"
-        and row.get("covariance") == "chooser"
-    )
     schur = next(
         row
         for row in rows
@@ -1117,39 +1064,26 @@ def validate_cross_solver(rows: Sequence[dict[str, Any]]) -> dict[str, Any]:
         and row.get("covariance") == "chooser"
     )
     differences = {
-        "stage08_minus_independent_schur_per_unit": float(
-            stage08["coefficient_per_unit_risk"]
-            - schur["coefficient_per_unit_risk"]
-        ),
         "tight_ap_minus_independent_schur_per_unit": float(
             tight["coefficient_per_unit_risk"]
             - schur["coefficient_per_unit_risk"]
-        ),
-        "stage08_se_minus_independent_schur_chooser_per_unit": float(
-            stage08["standard_error_per_unit_risk"]
-            - schur["standard_error_per_unit_risk"]
         ),
         "tight_ap_se_minus_independent_schur_chooser_per_unit": float(
             tight["standard_error_per_unit_risk"]
             - schur["standard_error_per_unit_risk"]
         ),
     }
-    coefficient_ok = (
-        abs(differences["stage08_minus_independent_schur_per_unit"]) <= 1e-8
-        and abs(differences["tight_ap_minus_independent_schur_per_unit"]) <= 1e-8
-    )
-    # Stage08 and the independent Schur implementation encode calendar month as
-    # nuisance columns and therefore use the same finite-sample correction.  The
-    # tight AP fit absorbs month instead; its coefficient must agree, while its
-    # small-sample correction is allowed to differ slightly.
-    se_ok = (
-        abs(differences["stage08_se_minus_independent_schur_chooser_per_unit"])
-        <= 1e-6
-    )
-    if not coefficient_ok or not se_ok:
+    # These are independent implementations of the same coefficient.  The tight
+    # AP fit absorbs month instead of representing it with nuisance columns, so
+    # its finite-sample covariance correction can differ slightly.  Agreement of
+    # the coefficient is the hard numerical invariant; the SE difference is
+    # retained in the public diagnostic rather than used as a false equality test.
+    if abs(differences["tight_ap_minus_independent_schur_per_unit"]) > 1e-8:
         raise RuntimeError(f"Independent E1 solver disagreement: {differences}")
     return {
-        "status": "E1_INDEPENDENT_SOLVER_AGREEMENT_OK",
+        "status": "E1_INDEPENDENT_AND_TIGHT_SOLVER_AGREEMENT_OK",
+        "coefficient_tolerance_per_unit": 1e-8,
+        "standard_error_difference_is_diagnostic_only": True,
         **differences,
     }
 
@@ -1223,7 +1157,7 @@ def write_results(
         if row.get("solver") == "reported_additional_analysis"
     )
     summary = {
-        "status": "DYNAMIC_SECOND_WAVE_E1_AUDIT_V100_OK",
+        "status": "DYNAMIC_SECOND_WAVE_E1_AUDIT_V101_OK",
         "created_utc": utc_now(),
         "script_version": SCRIPT_VERSION,
         "source_run_id": SOURCE_RUN_ID,
@@ -1246,7 +1180,7 @@ def write_results(
     report = manifest_rows(staging)
     write_tsv(staging / "report_file_hashes.tsv", report)
     success = {
-        "status": "DYNAMIC_SECOND_WAVE_E1_AUDIT_V100_OK",
+        "status": "DYNAMIC_SECOND_WAVE_E1_AUDIT_V101_OK",
         "created_utc": utc_now(),
         "run_id": payload["run_id"],
         "script_sha256": payload["authorities"]["script_sha256"],
@@ -1269,7 +1203,7 @@ def execute(payload: dict[str, Any]) -> Path:
     final = payload["output"] / payload["run_id"]
     if final.is_dir() and (final / "_SUCCESS.json").is_file():
         status = load_json(final / "_SUCCESS.json").get("status")
-        if status != "DYNAMIC_SECOND_WAVE_E1_AUDIT_V100_OK":
+        if status != "DYNAMIC_SECOND_WAVE_E1_AUDIT_V101_OK":
             raise RuntimeError("Existing E1 audit output has an invalid status")
         print(f"E1_AUDIT_RESULTS_ALREADY_COMPLETE: {final}", flush=True)
         return final
@@ -1302,7 +1236,6 @@ def execute(payload: dict[str, Any]) -> Path:
                 specification,
                 str(payload["cache"]),
                 str(payload["cache_metadata"]),
-                str(payload["stage08"]),
             ): specification
             for specification in SPECIFICATIONS
         }
@@ -1317,7 +1250,6 @@ def execute(payload: dict[str, Any]) -> Path:
             )
     ordering = {name: index for index, name in enumerate(SPECIFICATIONS)}
     solver_to_spec = {
-        "stage08_two_way_schur_exact": "stage08_exact_chooser",
         "independent_dense_small_side_schur": "independent_schur_two_way",
         "tight_recursive_singleton_alternating_projection": "tight_ap_same_spec_two_way",
     }
@@ -1336,10 +1268,10 @@ def execute(payload: dict[str, Any]) -> Path:
         )
     )
     agreement = validate_cross_solver(worker_rows)
-    print("E1_INDEPENDENT_SOLVER_AGREEMENT_OK", flush=True)
+    print("E1_INDEPENDENT_AND_TIGHT_SOLVER_AGREEMENT_OK", flush=True)
     all_rows = [*reference_rows(payload), *worker_rows]
     final = write_results(payload, all_rows, cache_metadata, agreement)
-    print(f"DYNAMIC_SECOND_WAVE_E1_AUDIT_V100_OK: {final}", flush=True)
+    print(f"DYNAMIC_SECOND_WAVE_E1_AUDIT_V101_OK: {final}", flush=True)
     print(f"runtime_seconds: {time.time() - started:.1f}", flush=True)
     return final
 
@@ -1406,11 +1338,11 @@ def self_test() -> None:
     keep, rounds, removed = recursive_singleton_keep((fixed_a, fixed_b))
     if rounds < 1 or int(keep.sum()) >= len(keep) or sum(removed) < 1:
         raise AssertionError("Recursive singleton pruning test failed")
-    print("DYNAMIC_SECOND_WAVE_E1_AUDIT_V100_SELF_TEST_OK")
+    print("DYNAMIC_SECOND_WAVE_E1_AUDIT_V101_SELF_TEST_OK")
 
 
 def print_plan(payload: dict[str, Any]) -> None:
-    print("DYNAMIC_SECOND_WAVE_E1_AUDIT_V100_PLAN_OK")
+    print("DYNAMIC_SECOND_WAVE_E1_AUDIT_V101_PLAN_OK")
     print("script_version:", SCRIPT_VERSION)
     print("script_sha256:", payload["authorities"]["script_sha256"])
     print("git_head:", payload["authorities"]["git_head"])
