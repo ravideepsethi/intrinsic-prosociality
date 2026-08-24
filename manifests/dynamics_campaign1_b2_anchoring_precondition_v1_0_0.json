@@ -1,0 +1,35 @@
+{
+  "adjudication": {
+    "b2_requires_rerun_for_anchoring_issue": false,
+    "c9_additional_requirement": "Under every draw, recompute the Section 3 session and speed-pool partitions relative to that draw's pseudo-first grant.",
+    "c9_may_inherit_b2_randomization_machinery": true,
+    "campaign_estimation_authorized_now": false,
+    "next_early_allowed_work": "support-only/treatment-blind Campaign 1 feasibility audit"
+  },
+  "audit": {
+    "audit_type": "read-only historical-source/provenance audit",
+    "report_filename": "B2_FIRST_GRANT_ANCHORING_TARGETED_20260824T203108Z.txt",
+    "report_sha256": "02a6aed69593970e202ec7959f42bdd1a3d98ca4ed6af19393c242d89965267f",
+    "repository_mutated": false
+  },
+  "campaign_effective_plan": {
+    "amendment_v1_0_1_sha256": "01c0ed96bfca62b1659a98d978bedaaf9a4540fcdc5a30a075e2f032e35e05ee",
+    "base_plan_sha256": "ded9965994b6c00ed613adc90eaff3f976b257e9eb6dafdda61819916dde49fe",
+    "git_authority_before_receipt": "679d71a9ecbeb4095f97e44e35a549965f698385"
+  },
+  "contract": {
+    "required_rule": "Each conditional-randomization draw identifies its own pseudo-first grant, and post-first-grant windows are anchored to that draw's pseudo-first grant.",
+    "verified": true
+  },
+  "date": "2026-08-24",
+  "historical_b2_producer": {
+    "commit": "1418976974e1b7857407f1b2a717a5c11f9c88a1",
+    "git_blob": "58000cfb8b1581947d803e73300407037726539b",
+    "path": "code/10f_estimate_b2_first_grant_dynamics.py",
+    "randomizations": 4999
+  },
+  "non_claim": "This receipt resolves only the first-grant anchoring precondition. It does not independently recertify every aspect of B2.",
+  "receipt_version": "1.0.0",
+  "scope": "Campaign 1 C9 implementation precondition only",
+  "status": "B2_SEQUENCE_SPECIFIC_FIRST_GRANT_ANCHORING_VERIFIED"
+}
