@@ -1,0 +1,19 @@
+{
+  "campaign": "dynamics_paper2_campaign1",
+  "plan_version": "1.0.0",
+  "freeze_status": "FROZEN_PRE_OUTCOME",
+  "freeze_timestamp_utc": "2026-08-24T14:00:12Z",
+  "plan_path": "docs/dynamics_paper2_campaign1_analysis_plan_v1_0_0.md",
+  "plan_sha256": "ded9965994b6c00ed613adc90eaff3f976b257e9eb6dafdda61819916dde49fe",
+  "source_draft_sha256": "51b34d41f1b0cfeeeadaca3bd77c9f84e737e02d79bad63ba139bb1d503c8a7c",
+  "authority_template_path": "manifests/dynamics_campaign1_input_authorities.template.json",
+  "authority_template_sha256": "bafeaf062bfa133a971c80efea9acf1277e00224a21ffb8ad2655fedcda0a2e8",
+  "pre_freeze_git_authority": "6cc9cd4f78692c78c14774ee91991916ae00c3ab",
+  "campaign_estimation_authorized": false,
+  "flagship_submission_required_before_estimation": true,
+  "treatment_blind_feasibility_audit_may_run_early": true,
+  "b2_readonly_anchor_audit_may_run_early": true,
+  "b2_c9_anchor_precondition_status": "UNRESOLVED_BLOCKING_PRECONDITION",
+  "profile_fallback_allowed": false,
+  "notes": "The plan is an internal pre-outcome analysis plan, not a public preregistration. Runtime data authorities are bound separately before use."
+}

@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0.0",
+  "campaign": "dynamics_paper2_campaign1",
+  "plan_version": "1.0.0",
+  "purpose": "Fail-closed runtime binding of certified Campaign 1 input authorities. This template is committed with the frozen scientific plan; a run may read an authority only after the corresponding entry is BOUND with an exact canonical path, certification marker, and SHA-256 copied from that authority's own success/manifest record.",
+  "rules": {
+    "silent_substitution_forbidden": true,
+    "api_requests_forbidden": true,
+    "chronology_rebuild_forbidden": true,
+    "patron_status_join_forbidden": true,
+    "pending_authority_may_be_read": false,
+    "profile_fallback_allowed": false,
+    "runtime_manifest_must_be_hashed_before_read": true,
+    "all_bound_authorities_must_authenticate_fail_closed": true
+  },
+  "authorities": [
+    {
+      "id": "stage07_analysis_panel_24m_sf100k",
+      "binding_status": "PARTIALLY_BOUND_FROM_PLAN",
+      "required_for": ["C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10"],
+      "canonical_path": null,
+      "certification_marker": "STAGE07_24M_CERTIFIED_OK",
+      "script_sha256": "0411d4061ea9831c20449208a9782aaf668e160139918d106a2b7d63aaa56e6e",
+      "authority_sha256": "8b7010b528ae5c6f1e1a9b517258648204c14c17ca41a2a6796f8ee5a1ed6db7",
+      "notes": "47,587,020 rows; 669,503 kind draws. Bind exact canonical Stage 07 path from its certification receipt before runtime."
+    },
+    {
+      "id": "canonical_chronological_rating_replay_histories",
+      "binding_status": "TO_BIND",
+      "required_for": ["C1", "C2", "C3", "C4", "C5", "C6", "C9", "C10"],
+      "canonical_path": null,
+      "certification_marker": null,
+      "authority_sha256": null,
+      "notes": "7,763,847,245 rows across 852 authenticated files. Copy exact authority fields from the second-wave chronology manifest."
+    },
+    {
+      "id": "second_wave_user_history_layer",
+      "binding_status": "TO_BIND",
+      "required_for": ["C6", "C9", "C10"],
+      "canonical_path_hint": "/Volumes/XT_Pro/lichess_kindness/output/dynamic_second_wave_history_v100/20260822T150914Z",
+      "canonical_path": null,
+      "certification_marker": null,
+      "authority_sha256": null,
+      "notes": "Sampled user-history events; bind from the certified second-wave success/manifest record."
+    },
+    {
+      "id": "second_wave_pair_history_layer",
+      "binding_status": "TO_BIND",
+      "required_for": ["C7"],
+      "canonical_path_hint": "/Volumes/XT_Pro/lichess_kindness/output/dynamic_second_wave_history_v100/20260822T150914Z",
+      "canonical_path": null,
+      "certification_marker": null,
+      "authority_sha256": null,
+      "notes": "Deterministic 2% cluster sample of whole unordered pairs; bind exact pair-history authority from the certified second-wave manifest."
+    },
+    {
+      "id": "a2_account_window_cache",
+      "binding_status": "TO_BIND",
+      "required_for": ["C10"],
+      "canonical_path": null,
+      "certification_marker": null,
+      "authority_sha256": null,
+      "run_id": "20260823T141145Z",
+      "notes": "1,642,449 rows. Bind exact cache authority from its certified success/manifest record."
+    },
+    {
+      "id": "profile_covariates_24m",
+      "binding_status": "PENDING_CERTIFICATION",
+      "required_for": ["C4", "C5"],
+      "canonical_path": null,
+      "certification_marker": null,
+      "authority_sha256": null,
+      "allowed_fields": ["createdAt", "count.all", "per_pool_game_counts"],
+      "forbidden_fields": ["patron_status"],
+      "fallback_allowed": false,
+      "notes": "Only the certified full 24-month profile authority is permitted. If unavailable at execution, profile-dependent analyses are deferred."
+    }
+  ],
+  "implementation_preconditions": [
+    {
+      "id": "b2_c9_per_draw_pseudo_first_grant_anchor",
+      "status": "UNRESOLVED_BLOCKING_PRECONDITION",
+      "rule": "Every conditional-randomization draw must locate its own simulated first grant and recompute all C9 post-first-grant windows and session/pool partitions relative to that pseudo-first grant.",
+      "failure_action": "Block C9 estimation and hold family-D inference until corrected machinery is independently audited; separately escalate any inherited B2 provenance issue."
+    }
+  ]
+}
