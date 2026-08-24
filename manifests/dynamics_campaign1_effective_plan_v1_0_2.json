@@ -1,0 +1,38 @@
+{
+  "b2_c9_anchoring_precondition_required_status": "B2_SEQUENCE_SPECIFIC_FIRST_GRANT_ANCHORING_VERIFIED",
+  "campaign_estimation_authorized_after_prespecified_feasibility_and_authority_gates": true,
+  "campaign_modules": "C1-C14",
+  "changed_only": [
+    "execution sequencing",
+    "paper destination / flagship non-interference"
+  ],
+  "cross_paper_promotion_allowed": true,
+  "date": "2026-08-24",
+  "holm_family_D": [
+    "C1",
+    "C2",
+    "C5",
+    "C6",
+    "C9"
+  ],
+  "ordered_plan_layers": [
+    {
+      "path": "docs/dynamics_paper2_campaign1_analysis_plan_v1_0_0.md",
+      "role": "base",
+      "sha256": "ded9965994b6c00ed613adc90eaff3f976b257e9eb6dafdda61819916dde49fe"
+    },
+    {
+      "path": "docs/dynamics_paper2_campaign1_analysis_plan_v1_0_1_amendment.md",
+      "role": "amendment",
+      "sha256": "01c0ed96bfca62b1659a98d978bedaaf9a4540fcdc5a30a075e2f032e35e05ee"
+    },
+    {
+      "path": "docs/dynamics_paper2_campaign1_analysis_plan_v1_0_2_amendment.md",
+      "role": "amendment",
+      "sha256": "7eeca3ab8591620a196badbd1b9d3184236d67a031cf9eff06b76584995c0049"
+    }
+  ],
+  "scientific_design_changed_by_v1_0_2": false,
+  "status": "DYNAMICS_CAMPAIGN1_EFFECTIVE_PLAN_V1_0_2",
+  "submission_wait_required": false
+}
