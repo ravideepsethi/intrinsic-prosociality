@@ -1,0 +1,23 @@
+{
+  "campaign": "dynamics_paper2_campaign1",
+  "effective_plan_version": "1.0.1",
+  "composition_rule": "ORDERED_PAIR_BASE_PLUS_ADDITIVE_AMENDMENT",
+  "base": {
+    "path": "docs/dynamics_paper2_campaign1_analysis_plan_v1_0_0.md",
+    "sha256": "ded9965994b6c00ed613adc90eaff3f976b257e9eb6dafdda61819916dde49fe",
+    "freeze_receipt": "manifests/dynamics_campaign1_plan_freeze_v1_0_0.json"
+  },
+  "amendments": [
+    {
+      "version": "1.0.1",
+      "path": "docs/dynamics_paper2_campaign1_analysis_plan_v1_0_1_amendment.md",
+      "sha256": "01c0ed96bfca62b1659a98d978bedaaf9a4540fcdc5a30a075e2f032e35e05ee",
+      "freeze_receipt": "manifests/dynamics_campaign1_plan_amendment_freeze_v1_0_1.json"
+    }
+  ],
+  "effective_modules": ["C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", "C11", "C12", "C13", "C14"],
+  "holm_family_D": ["C1", "C2", "C5", "C6", "C9"],
+  "campaign_estimation_authorized": false,
+  "early_allowed_work": ["read_only_B2_anchoring_audit", "support_only_feasibility_audit"],
+  "b2_c9_anchor_precondition_status": "UNRESOLVED_BLOCKING_PRECONDITION"
+}

@@ -1,0 +1,17 @@
+{
+  "campaign": "dynamics_paper2_campaign1",
+  "amendment_version": "1.0.1",
+  "freeze_status": "FROZEN_PRE_OUTCOME_AMENDMENT",
+  "freeze_timestamp_utc": "2026-08-24T20:28:36Z",
+  "base_plan_path": "docs/dynamics_paper2_campaign1_analysis_plan_v1_0_0.md",
+  "base_plan_sha256": "ded9965994b6c00ed613adc90eaff3f976b257e9eb6dafdda61819916dde49fe",
+  "amendment_path": "docs/dynamics_paper2_campaign1_analysis_plan_v1_0_1_amendment.md",
+  "amendment_sha256": "01c0ed96bfca62b1659a98d978bedaaf9a4540fcdc5a30a075e2f032e35e05ee",
+  "pre_amendment_git_authority": "5e6e9c66d514211382e6f9df130b2017a10a8ec4",
+  "campaign_estimation_authorized": false,
+  "flagship_submission_required_before_estimation": true,
+  "holm_family_changed": false,
+  "added_modules": ["C11", "C12", "C13", "C14"],
+  "new_api_pull_authorized": false,
+  "notes": "Additive pre-outcome amendment. Frozen v1.0.0 remains immutable; effective plan is base plus amendment."
+}
