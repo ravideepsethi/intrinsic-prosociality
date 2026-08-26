@@ -1,0 +1,190 @@
+{
+  "collector_version": "1.0.2",
+  "contains_private_row_level_data": false,
+  "created_utc": "2026-08-26T01:16:21.801779+00:00",
+  "files": [
+    {
+      "bytes": 1969,
+      "path": "executed_package_source/PACKAGE_CONTENTS.sha256",
+      "sha256": "d07112dfa6ee65f48c64066f53a8520f0e1dd3645750b9698bfc279b7093021c"
+    },
+    {
+      "bytes": 2746,
+      "path": "executed_package_source/README_FIRST.md",
+      "sha256": "19559e5c1253da057b2daba048d9ca9218f24f5961b7b1fdc7a0ef7278e02085"
+    },
+    {
+      "bytes": 4201,
+      "path": "executed_package_source/RUN_KINDNESS_PRICE_ELASTICITY_RECOVERY_v1_0_2.command",
+      "sha256": "8691c1bafce6a1c925ca3a131018054de76b1fa043db5b947f2b2742f0b26844"
+    },
+    {
+      "bytes": 102322,
+      "path": "executed_package_source/payload/authorities/06_build_glicko2_cost_layer.py",
+      "sha256": "e1a72414b4c4a18dca5b583b704cbbf97e0bff7de2a837e6ad85e078ecf00cca"
+    },
+    {
+      "bytes": 89481,
+      "path": "executed_package_source/payload/authorities/08_make_core_paper_results.py",
+      "sha256": "e9dd80c52da5ffef3d406c3af25912bd924f6423f123ca535cf4077cb039c41f"
+    },
+    {
+      "bytes": 10466,
+      "path": "executed_package_source/payload/authorities/key_results_stage08_core_24m_CERTIFIED.json",
+      "sha256": "6f8654c1a8d95cf502b71c7b616f5518777a8274106144ab87cf8d04ac0f1602"
+    },
+    {
+      "bytes": 7041,
+      "path": "executed_package_source/payload/authorities/schema_contract_stage07_v1_3_0.json",
+      "sha256": "e7f4e269b29144e2abd1394565a10ee741c6f15fbc17e088bdfc59105e8e38db"
+    },
+    {
+      "bytes": 27816,
+      "path": "executed_package_source/payload/authorities/summary_stage07_24m_CERTIFIED.json",
+      "sha256": "8b7010b528ae5c6f1e1a9b517258648204c14c17ca41a2a6796f8ee5a1ed6db7"
+    },
+    {
+      "bytes": 21328,
+      "path": "executed_package_source/payload/authorities/summary_stage08_core_24m_CERTIFIED.json",
+      "sha256": "a2fd1a868299cba8499de1e72365dbeb4e49ec77768e01e8af84f58f3ceac958"
+    },
+    {
+      "bytes": 8304,
+      "path": "executed_package_source/payload/code/collect_kindness_price_elasticity_results_v102.py",
+      "sha256": "2168861b735ece5c353d9a5a238f831565565184a7fdb9ab5ee6ce0710c0fb38"
+    },
+    {
+      "bytes": 30056,
+      "path": "executed_package_source/payload/code/kindness_price_elasticity_common_v102.py",
+      "sha256": "97ed66c254ac900e37fc23c34a83f5929c8fbf6f7e0d1a2c32108a947c47f21b"
+    },
+    {
+      "bytes": 68235,
+      "path": "executed_package_source/payload/code/run_kindness_price_elasticity_v102.py",
+      "sha256": "2e99aa0cc75ed72f4e8ce8f60400b6a567065b41594a1923ebacded71f90e4dd"
+    },
+    {
+      "bytes": 2736,
+      "path": "executed_package_source/payload/code/test_kindness_price_elasticity_collector_v102.py",
+      "sha256": "7b9798733cb69398a4b50d05fb5fccab7ee917b5914607545124f86b49133ff5"
+    },
+    {
+      "bytes": 8656,
+      "path": "executed_package_source/payload/code/test_kindness_price_elasticity_synthetic_v102.py",
+      "sha256": "6a4df23a00f630ea66540097347159e2298fae9104fa3d35a54503b7a002d97f"
+    },
+    {
+      "bytes": 9875,
+      "path": "executed_package_source/payload/docs/kindness_price_elasticity_exploratory_plan_v1_0_2_2026-08-25.md",
+      "sha256": "beea91a620cc52c16801e916fe9a3f6ed98ce07a36c94e4a118652b6e2ed94d8"
+    },
+    {
+      "bytes": 2981,
+      "path": "executed_package_source/payload/docs/kindness_price_elasticity_v1_0_1_preoutcome_recovery.md",
+      "sha256": "cd95cde43516c383e2ebd27400f146e385514031c81b23e6eb6495d2cdf6ea7f"
+    },
+    {
+      "bytes": 2494,
+      "path": "executed_package_source/payload/docs/kindness_price_elasticity_v1_0_2_preoutcome_recovery.md",
+      "sha256": "b2eb31ac2a260dec7008498a07ade05ed04c5a18bb2c7e94af322d6d51ae5081"
+    },
+    {
+      "bytes": 619,
+      "path": "inspection.json",
+      "sha256": "1271a6bb25785ea3b8e85c950bf2f23b4bd10a875503d4469b59b8da3378ad21"
+    },
+    {
+      "bytes": 15912,
+      "path": "logs/launcher.log",
+      "sha256": "91d5dc6803d4e0b7e2dafe4c51a4f031a32da5cd1261a0d5b0f5ffad8a4d399e"
+    },
+    {
+      "bytes": 1468,
+      "path": "public_results/_SUCCESS.json",
+      "sha256": "84d85a87f06e8d9d44dcce99c60985deb975a08b38ced6acb698d214e7106f42"
+    },
+    {
+      "bytes": 4676,
+      "path": "public_results/adjacent_arc_elasticities.csv",
+      "sha256": "de0fc28ba329bedcc393e18c790419d8df4799841ef5ada59b032c62c9eb304b"
+    },
+    {
+      "bytes": 1402,
+      "path": "public_results/attempted_unestimable_or_unidentified.json",
+      "sha256": "6b2cc634ff2ad3855501aac1bb25f761a56926e8687f9b829fc8d23fd93e34af"
+    },
+    {
+      "bytes": 51504,
+      "path": "public_results/elasticity_models.csv",
+      "sha256": "d785aa8a3cf8b82a0764386a70f3bbe77a89ba1e77130291304bbe7f3a8f9f46"
+    },
+    {
+      "bytes": 126716,
+      "path": "public_results/elasticity_models.json",
+      "sha256": "1c53264688401cdadaee943ef39c138828e5f66ddbe33adb9bd5b0626ed662ac"
+    },
+    {
+      "bytes": 2582,
+      "path": "public_results/heterogeneity_support.csv",
+      "sha256": "e95a9462ffafac41e0e40688740b86364bd0f9fa5cf3ab80fc067cf1a49e1508"
+    },
+    {
+      "bytes": 8891,
+      "path": "public_results/input_authorities.json",
+      "sha256": "f502ca69884997a816ec3ddccbcf154cf2458d2634ae423f2a53dd117352a7c8"
+    },
+    {
+      "bytes": 3791,
+      "path": "public_results/model_attempts.csv",
+      "sha256": "6e2f7487ba9e593ceb8f5fead30978c6625cdbf7f194366416e567808f1ed2ba"
+    },
+    {
+      "bytes": 7110,
+      "path": "public_results/model_attempts.json",
+      "sha256": "629e7829da769ef6e1ace9e7c224c070218b7081dcd6ec8cf363945b5765275a"
+    },
+    {
+      "bytes": 4532,
+      "path": "public_results/nonparametric_price_bins.csv",
+      "sha256": "5bc821fa360b0874c160c2729c6e0eb9734526d0a1790a5715587096bdbe48b6"
+    },
+    {
+      "bytes": 5354,
+      "path": "public_results/price_support.json",
+      "sha256": "51a203656c33fa943f029710e0cde0477ba15a4c191c3c0cff5487530a52e22e"
+    },
+    {
+      "bytes": 706,
+      "path": "public_results/primary_interpretation.json",
+      "sha256": "45562948122b94ca8662fafdc995a450d363d9748f564510a3c62f1338c844d0"
+    },
+    {
+      "bytes": 1737,
+      "path": "public_results/replication_audits.json",
+      "sha256": "35d14c469e32808356ec3386f3fc404662c7ed7c1d8d85f0b90abf52af25185f"
+    },
+    {
+      "bytes": 1250,
+      "path": "public_results/report_file_hashes.tsv",
+      "sha256": "4f3877a7fd1a673617b80ab043360148ef36478093f96c76aaf2609a07e6366b"
+    }
+  ],
+  "files_fingerprint_sha256": "8a2859666276bd3a8c465b6b48bb5a46079eabb901bc544dc8ca535c5813f0e8",
+  "inspection": {
+    "claim_boundary": "functional-form-sensitive conditional association with a premium deterministically generated by rating state; not a causal price elasticity",
+    "direction": "positive: conditionally upward-sloping; not a causal demand curve",
+    "models_attempted": 41,
+    "models_estimated": 38,
+    "models_failed_retained": 3,
+    "primary_ci95_high": 0.17882113600491725,
+    "primary_ci95_low": 0.13523488247668117,
+    "primary_elasticity": 0.1570280092407992,
+    "primary_model": "X_primary_lpm_log_price_chooser_fe_draw50_fe_adjusted",
+    "scientific_success": true,
+    "status": "KINDNESS_PRICE_ELASTICITY_V102_OK"
+  },
+  "parquet_files_in_bundle": 0,
+  "public_result_files_authenticated": 13,
+  "run_id": "20260826T010817Z",
+  "status": "KINDNESS_PRICE_ELASTICITY_COLLECTION_OK"
+}

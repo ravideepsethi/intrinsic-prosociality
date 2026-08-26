@@ -1,0 +1,52 @@
+{
+  "minimum_primary_complete_case_preservation_share": 0.9,
+  "primary_complete_case_preservation_share": 0.9999954041794392,
+  "primary_complete_case_rows": 217588,
+  "primary_decoded_rows": 217589,
+  "prior_invalid_run_B_complete_case_rows": 108543,
+  "prior_invalid_run_B_not_used": true,
+  "secondary_streak3": {
+    "candidate_choosers": 14352,
+    "candidate_loss_streak_rows": 12188,
+    "candidate_rows_before_complete_case_filter": 27511,
+    "candidate_win_streak_rows": 15323,
+    "chooser_clusters": 14352,
+    "complete_case_preservation_share": 1.0,
+    "complete_case_rows": 27511,
+    "contrast": "three_or_more_consecutive_losses_minus_three_or_more_consecutive_wins",
+    "epistemic_label": "S",
+    "minimum_complete_case_rows_for_frozen_FE_producer": 1000,
+    "minimum_sane_candidates_per_arm": 250,
+    "minimum_sane_direct_candidates": 1000,
+    "output": "c1_secondary_streak3.csv",
+    "status": "ESTIMATED",
+    "streak_support_sanity_gate": "PASS"
+  },
+  "specifications": [
+    {
+      "complete_case_preservation_share": 0.9999954041794392,
+      "complete_case_rows": 217588,
+      "decoded_rows_before_complete_case_filter": 217589,
+      "specification": "session_30"
+    },
+    {
+      "complete_case_preservation_share": 0.9999946797756993,
+      "complete_case_rows": 187961,
+      "decoded_rows_before_complete_case_filter": 187962,
+      "specification": "session_15"
+    },
+    {
+      "complete_case_preservation_share": 0.9999957739931539,
+      "complete_case_rows": 236629,
+      "decoded_rows_before_complete_case_filter": 236630,
+      "specification": "session_60"
+    },
+    {
+      "complete_case_preservation_share": 0.9999952959328635,
+      "complete_case_rows": 212581,
+      "decoded_rows_before_complete_case_filter": 212582,
+      "specification": "session_30_same_pool"
+    }
+  ],
+  "status": "C1_CORRECTED_ESTIMATION_ROW_CONSERVATION_OK"
+}

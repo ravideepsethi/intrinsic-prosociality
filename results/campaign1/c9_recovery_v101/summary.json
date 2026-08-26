@@ -1,0 +1,313 @@
+{
+  "authorities": {
+    "amendment_101": {
+      "path": "/Volumes/XT_Pro/lichess_kindness/replication_package/docs/dynamics_paper2_campaign1_analysis_plan_v1_0_1_amendment.md",
+      "sha256": "01c0ed96bfca62b1659a98d978bedaaf9a4540fcdc5a30a075e2f032e35e05ee"
+    },
+    "amendment_102": {
+      "path": "/Volumes/XT_Pro/lichess_kindness/replication_package/docs/dynamics_paper2_campaign1_analysis_plan_v1_0_2_amendment.md",
+      "sha256": "7eeca3ab8591620a196badbd1b9d3184236d67a031cf9eff06b76584995c0049"
+    },
+    "amendment_103": {
+      "path": "/Volumes/XT_Pro/lichess_kindness/replication_package/docs/dynamics_paper2_campaign1_analysis_plan_v1_0_3_amendment.md",
+      "sha256": "96530f7ffd43b7d68ff84c794200f7db98b2b455ea2994efb5b73ce5cb370a07"
+    },
+    "b1_propensity": {
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/dynamic_prosociality_core_v102_PRIVATE/b1_crossfit_propensity_private.parquet",
+      "sha256": "0aebdbb279c52308140a819c940655e4341524b3160bcc385cfa8a92030b02df"
+    },
+    "b1_sample": {
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/dynamic_prosociality_core_v102_PRIVATE/b1_repeat_granter_private.parquet",
+      "sha256": "08429d99aa839c0fc087e3d4d4de270c322086287c3814886f2bcd3bf32e7d56"
+    },
+    "b2_anchoring_precondition": {
+      "path": "/Volumes/XT_Pro/lichess_kindness/replication_package/manifests/dynamics_campaign1_b2_anchoring_precondition_v1_0_0.json",
+      "sha256": "19a89d0ce9161887a3b4f1807535c5ed685c1c14b56bcf5e123f350aa7e02331"
+    },
+    "b2_success": {
+      "path": "/Volumes/XT_Pro/lichess_kindness/output/dynamic_second_wave_b2_v100/20260822T150914Z/_SUCCESS.json",
+      "sha256": "0e4a58c848bb18a2d7d5fcb2a13b4176679c59e60c86aca2161870e0751ba558"
+    },
+    "b2_summary": {
+      "path": "/Volumes/XT_Pro/lichess_kindness/output/dynamic_second_wave_b2_v100/20260822T150914Z/summary.json",
+      "sha256": "3e39fb453094c644201870191b42fe0dc9315a3ce209cd00bd600ef395d7045d"
+    },
+    "base_plan": {
+      "path": "/Volumes/XT_Pro/lichess_kindness/replication_package/docs/dynamics_paper2_campaign1_analysis_plan_v1_0_0.md",
+      "sha256": "ded9965994b6c00ed613adc90eaff3f976b257e9eb6dafdda61819916dde49fe"
+    }
+  },
+  "b1_stage07_mapping": {
+    "ambiguous_b1_rows": 0,
+    "attempts": [
+      {
+        "b1_rows_exactly_one_candidate": 1017944,
+        "b1_rows_with_candidate": 1017944,
+        "candidate_rows": 1017944,
+        "chooser_indices_with_candidate": 64331,
+        "chooser_indices_with_unique_user": 64331,
+        "time_field": "api_last_move_at_ms"
+      },
+      {
+        "b1_rows_exactly_one_candidate": 0,
+        "b1_rows_with_candidate": 0,
+        "candidate_rows": 0,
+        "chooser_indices_with_candidate": 0,
+        "chooser_indices_with_unique_user": 0,
+        "time_field": "utc_ms"
+      }
+    ],
+    "canonical_stage07_speed_rows_missing": 0,
+    "current_speed_code_used_as_literal_speed": false,
+    "mapped_b1_rows": 1017944,
+    "mapped_chooser_indices": 64331,
+    "mapping_uses_kind_draw": false,
+    "selected_time_field": "api_last_move_at_ms",
+    "status": "C9_B1_STAGE07_NONOUTCOME_BRIDGE_OK"
+  },
+  "b2_exact_reproduction": {
+    "checks": [
+      {
+        "expected": {
+          "null_mean_rate": 0.3386070240077344,
+          "observed_denominator": 2925,
+          "observed_numerator": 1512,
+          "observed_rate": 0.5169230769230769,
+          "randomization_p_two_sided": 0.0004
+        },
+        "reproduced": {
+          "horizon_hours": 6.0,
+          "null_mean_rate": 0.33860702400773446,
+          "observed_denominator": 2925,
+          "observed_numerator": 1512,
+          "observed_rate": 0.5169230769230769,
+          "randomization_p_two_sided": 0.0004
+        }
+      },
+      {
+        "expected": {
+          "null_mean_rate": 0.3311503198948426,
+          "observed_denominator": 6190,
+          "observed_numerator": 3079,
+          "observed_rate": 0.4974151857835218,
+          "randomization_p_two_sided": 0.0004
+        },
+        "reproduced": {
+          "horizon_hours": 24.0,
+          "null_mean_rate": 0.3311503198948426,
+          "observed_denominator": 6190,
+          "observed_numerator": 3079,
+          "observed_rate": 0.4974151857835218,
+          "randomization_p_two_sided": 0.0004
+        }
+      },
+      {
+        "expected": {
+          "null_mean_rate": 0.3161657264738204,
+          "observed_denominator": 28949,
+          "observed_numerator": 12505,
+          "observed_rate": 0.4319665618846938,
+          "randomization_p_two_sided": 0.0004
+        },
+        "reproduced": {
+          "horizon_hours": 168.0,
+          "null_mean_rate": 0.31616572647382046,
+          "observed_denominator": 28949,
+          "observed_numerator": 12505,
+          "observed_rate": 0.4319665618846938,
+          "randomization_p_two_sided": 0.0004
+        }
+      }
+    ],
+    "historical_randomizations": 4999,
+    "historical_seed": 2026082201,
+    "status": "C9_EXACT_B2_RANDOMIZATION_REPRODUCTION_OK"
+  },
+  "checkpoint_recovery_inventory": {
+    "existing_batches": 20,
+    "expected_batches": 20,
+    "expected_randomizations": 4999,
+    "new_randomizations_drawn": 0,
+    "pending_batches": 0,
+    "require_existing": true,
+    "status": "C9_RANDOMIZATION_CHECKPOINT_INVENTORY_AUTHENTICATED"
+  },
+  "component_csv_schema": [
+    "category",
+    "epistemic_role",
+    "epistemic_label",
+    "holm_adjusted_p_value",
+    "interpretation",
+    "observed_numerator",
+    "observed_denominator",
+    "observed_rate",
+    "observed_rate_pct",
+    "null_mean_rate",
+    "null_mean_rate_pct",
+    "excess_percentage_points",
+    "effect_relative_to_null_mean_pct",
+    "randomization_p_two_sided",
+    "lower_tail_plus_one",
+    "upper_tail_plus_one",
+    "null_p025",
+    "null_p975",
+    "randomizations"
+  ],
+  "component_csv_schema_uniform": true,
+  "created_utc": "2026-08-25T17:30:35.052278+00:00",
+  "epistemic_label_primary": "C",
+  "git_head": "46abb7409621e98c74dc8aa3eb3b3885a644080d",
+  "historical_b2": {
+    "blob": "58000cfb8b1581947d803e73300407037726539b",
+    "commit": "1418976974e1b7857407f1b2a717a5c11f9c88a1",
+    "randomizations": 4999,
+    "seed": 2026082201,
+    "source_sha256": "9696925b13a4b9d2c502eda64e21c96506ecd6b76162038ecc2fae312645f6e9"
+  },
+  "holm_family_note": "C9 raw p-value is reported. Final Holm adjustment awaits the valid corrected C1 result plus C5 and C6; the prior invalid C1 lineages must never enter the family calculation.",
+  "inherited_caveats": [
+    "first observed grant in the locked panel, not necessarily first lifetime grant",
+    "repeat-granter scope",
+    "timing evidence, not a causal claim"
+  ],
+  "new_randomizations_drawn": 0,
+  "packaged_recovery_evidence": {
+    "classification": {
+      "exact_b2_reproduction_passed": true,
+      "failure_type": "CSV_SERIALIZATION_ONLY",
+      "new_randomizations_authorized": false,
+      "original_runner_sha256": "e553af77d16cf944a956b4ae266c3468806e08257a4aa1bff6fb953c619d8830",
+      "scientific_randomization_complete": true
+    },
+    "docs/dynamics_paper2_campaign1_v1_0_5_postoutcome_correction.md": {
+      "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/docs/dynamics_paper2_campaign1_v1_0_5_postoutcome_correction.md",
+      "sha256": "14cb718408788ea15f94d555eaabc84c27f2dc42b1ca85c03b46daf43e366787"
+    },
+    "prior_evidence/c9_v100_failed/FAILURE_DIAGNOSTIC.json": {
+      "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/prior_evidence/c9_v100_failed/FAILURE_DIAGNOSTIC.json",
+      "sha256": "c1bccdb1347d2e2d2edc4c65499af2f03107ad65a4c78681193153e04ad845f8"
+    },
+    "prior_evidence/c9_v100_failed/c9_exact_b2_reproduction.json": {
+      "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/prior_evidence/c9_v100_failed/c9_exact_b2_reproduction.json",
+      "sha256": "d7e9661aa55aba7eabc151099401afa37a6641994f421c44f75319701cc49074"
+    },
+    "prior_evidence/c9_v100_failed/c9_partition_components.csv": {
+      "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/prior_evidence/c9_v100_failed/c9_partition_components.csv",
+      "sha256": "f0c8c6871f92cb7082865a1e0b3fe0257a18a5cc75c4e0d1aa9339a52caed9bf"
+    },
+    "prior_evidence/c9_v100_failed/c9_support_frozen.json": {
+      "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/prior_evidence/c9_v100_failed/c9_support_frozen.json",
+      "sha256": "ada56d140a6e6232fc9339a7da6b607218e54c944005489ad00980a2170b4e0e"
+    }
+  },
+  "primary": {
+    "category": "later_session_7d",
+    "effect_relative_to_null_mean_pct": 35.31650478322614,
+    "epistemic_label": "C",
+    "epistemic_role": "C_primary",
+    "excess_percentage_points": 11.105202218891035,
+    "holm_adjusted_p_value": "PENDING_C5_C6_AND_FAMILY_COMPLETION",
+    "interpretation": "positive excess is consistent with habit/identity transfer beyond the initiating session",
+    "lower_tail_plus_one": 1.0,
+    "null_mean_rate": 0.3144479411837363,
+    "null_mean_rate_pct": 31.444794118373633,
+    "null_p025": 0.309423462163429,
+    "null_p975": 0.31940472186886004,
+    "observed_denominator": 27302,
+    "observed_numerator": 11617,
+    "observed_rate": 0.4254999633726467,
+    "observed_rate_pct": 42.549996337264666,
+    "randomization_p_two_sided": 0.0004,
+    "randomizations": 4999,
+    "upper_tail_plus_one": 0.0002
+  },
+  "primary_estimand": "later-session post-pseudo-first-grant kindness excess within 7 days",
+  "primary_excess_percentage_points": 11.105202218891035,
+  "primary_null_mean_rate_pct": 31.444794118373633,
+  "primary_observed_rate_pct": 42.549996337264666,
+  "primary_raw_p_value": 0.0004,
+  "privacy": {
+    "account_level_output": false,
+    "api_requests": 0,
+    "patron_profile_read": false,
+    "private_checkpoint_or_cache_mutation": false,
+    "private_checkpoints_root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/dynamics_campaign1_c9_v100_PRIVATE"
+  },
+  "producer_source": {
+    "original_v100_runner_sha256": "e553af77d16cf944a956b4ae266c3468806e08257a4aa1bff6fb953c619d8830",
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/code/run_campaign1_c9_recovery_v101.py",
+    "sha256": "83fbbdc71e425bae6337d7fc3ee7115c4ff4daf071360fcea0229e09f84dcdd9"
+  },
+  "recovery_classification": "SERIALIZATION_ONLY",
+  "runtime_seconds": 23.78602123260498,
+  "secondary_contrasts": [
+    {
+      "contrast": "same_session_minus_later_session_excess_7d",
+      "epistemic_label": "S",
+      "excess_difference_pp": 8.075257475228536,
+      "lower_tail_plus_one": 1.0,
+      "mechanism_role": "state_component_size",
+      "null_mean_rate_difference": 0.0329095748076727,
+      "null_mean_rate_difference_pp": 3.2909574807672697,
+      "null_p025": 0.010324061743244456,
+      "null_p975": 0.055634752041696864,
+      "observed_rate_difference": 0.11366214955995807,
+      "observed_rate_difference_pp": 11.366214955995806,
+      "randomization_p_two_sided": 0.0004,
+      "randomizations": 4999,
+      "upper_tail_plus_one": 0.0002
+    },
+    {
+      "contrast": "same_pool_minus_cross_pool_excess_24h",
+      "epistemic_label": "S",
+      "excess_difference_pp": 6.984095964107939,
+      "lower_tail_plus_one": 0.9996,
+      "mechanism_role": "context_boundness",
+      "null_mean_rate_difference": -0.033951665176356165,
+      "null_mean_rate_difference_pp": -3.3951665176356163,
+      "null_p025": -0.07746913601637695,
+      "null_p975": 0.008707360192702596,
+      "observed_rate_difference": 0.03588929446472322,
+      "observed_rate_difference_pp": 3.588929446472322,
+      "randomization_p_two_sided": 0.0012,
+      "randomizations": 4999,
+      "upper_tail_plus_one": 0.0006
+    }
+  ],
+  "session_mapping": {
+    "b1_rows": 1017944,
+    "b1_rows_with_session": 1017944,
+    "b1_session_resolution_share": 1.0,
+    "canonical_stage07_speed_rows_missing": 0,
+    "chronology_files_read": 150,
+    "chronology_metadata_rows_in_selected_files": 2324127469,
+    "persisted_cache_contains_actual_user_id": false,
+    "persisted_cache_contains_game_id": false,
+    "persisted_private_cache": "/Volumes/XT_Pro/lichess_kindness/derived/replication/dynamics_campaign1_c9_v100_PRIVATE/b1_c9_session_private.parquet",
+    "persisted_private_cache_sha256": "28d76ab8a27fd04cc849d402b28e3944bcafcabcea06af80e293baedafd97604",
+    "repeat_granter_all_game_rows": 217135654,
+    "repeat_granter_users": 64331,
+    "session_definition": "consecutive all-rated-game start timestamps with gap < 30m",
+    "speed_source": "Stage07 api_speed via non-outcome B1-to-Stage07 row bridge",
+    "status": "C9_ALL_GAME_SESSION_CACHE_OK",
+    "timestamp_mode": "start_to_start_v1_0_3_fallback"
+  },
+  "status": "DYNAMICS_CAMPAIGN1_C9_RECOVERY_V101_OK",
+  "support": {
+    "anchors_with_any_post_24h": 92400,
+    "anchors_with_any_post_7d": 354367,
+    "anchors_with_cross_pool_post_24h": 6192,
+    "anchors_with_later_session_post_7d": 342091,
+    "anchors_with_same_pool_post_24h": 86707,
+    "anchors_with_same_session_post_7d": 22258,
+    "cross_pool_opportunity_pairs_24h": 6560,
+    "kind_draw_read": false,
+    "later_session_opportunity_pairs_7d": 511186,
+    "possible_anchor_rows": 1017944,
+    "pseudo_first_grant_used": false,
+    "same_pool_opportunity_pairs_24h": 96172,
+    "same_session_opportunity_pairs_7d": 23268,
+    "status": "C9_OUTCOME_BLIND_SUPPORT_FROZEN",
+    "support_definition": "all structurally possible B1 anchor positions"
+  }
+}

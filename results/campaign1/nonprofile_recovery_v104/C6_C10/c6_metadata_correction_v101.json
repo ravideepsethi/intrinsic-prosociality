@@ -1,0 +1,16 @@
+{
+  "corrections": [
+    {
+      "corrected_value": "rated_games_in_next_90_days",
+      "estimand": "denominator_diagnostic",
+      "field": "effect_units",
+      "original_value": "events_per_1000_rated_games",
+      "outcome": "c6_rated_games_90d",
+      "reason": "The outcome is the 90-day rated-game denominator itself."
+    }
+  ],
+  "numerical_estimates_changed": false,
+  "original_files_retained_unchanged": true,
+  "source_result_bundle_sha256": "529cc7b5667c1eca36a2869d5ec4e7ad2d3b96a5dad0472b533aedb8ae0a9a1a",
+  "status": "C6_AGGREGATE_METADATA_CORRECTION_V101"
+}

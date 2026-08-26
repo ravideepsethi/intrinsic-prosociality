@@ -1,0 +1,104 @@
+{
+  "corrected_rebuild_authorized_by": "v1.0.5 post-outcome technical correction",
+  "created_utc": "2026-08-25T17:30:37.361405+00:00",
+  "invalid_results_enter_holm": false,
+  "machine_prior_output_inventory": {
+    "all_discovered_prior_primaries_invalidated": true,
+    "discovery_rule": "coefficient fingerprint, not colliding package/folder name",
+    "prior_primary_csvs_found": 2,
+    "run_A_found": false,
+    "run_B_found": true,
+    "runs": [
+      {
+        "classification": "INVALID_RESULT_CODE_SEMANTICS",
+        "lineage": "Run_B_production_lineage",
+        "primary_csv": "/Volumes/XT_Pro/lichess_kindness/output/dynamics_campaign1_c1_completion_v101/20260825T033227Z_FAILED/c1_prior_result_state_dependence.csv",
+        "primary_csv_sha256": "45fe1b81a1838462a5bbec15c3a1c13a8da8eb249123a3bd9d8d3a5b86ce6eeb",
+        "primary_effect_pp": -0.8317125360007418,
+        "result_tree": {
+          "file_count": 6,
+          "root": "/Volumes/XT_Pro/lichess_kindness/output/dynamics_campaign1_c1_completion_v101/20260825T033227Z_FAILED",
+          "total_bytes": 14877,
+          "tree_manifest_sha256": "04ceb80dcb172d6fe395461f32666ade326a45a4e21946baca519f60fdc696f3"
+        }
+      },
+      {
+        "classification": "INVALID_RESULT_CODE_SEMANTICS",
+        "lineage": "Run_B_production_lineage",
+        "primary_csv": "/Volumes/XT_Pro/lichess_kindness/output/dynamics_campaign1_c1_completion_v102/20260825T033537Z/c1_prior_result_state_dependence.csv",
+        "primary_csv_sha256": "ec1bc91b012f63205192160b29377344d83e65c195ac9b6ed7176732c34c5ee9",
+        "primary_effect_pp": -0.8317125360007347,
+        "result_tree": {
+          "file_count": 9,
+          "root": "/Volumes/XT_Pro/lichess_kindness/output/dynamics_campaign1_c1_completion_v102/20260825T033537Z",
+          "total_bytes": 32593,
+          "tree_manifest_sha256": "bf770bd2a2df542c2e304f580aa4f9a24bdcdffdaf6a7732dc3472bcfc6f1546"
+        }
+      }
+    ],
+    "status": "C1_PRIOR_OUTPUT_INVENTORY_COMPLETE",
+    "unknown_prior_primaries": 0
+  },
+  "mechanism": {
+    "true_black_wins_raw_0": "mislabeled as draw",
+    "true_draws_raw_1": "mislabeled as chooser win/loss according to color",
+    "true_white_wins_raw_2": "mapped to +/-2 and filtered out"
+  },
+  "old_outputs_mutated": false,
+  "packaged_prior_evidence": {
+    "prior_prior_evidence_c1_run_b_v101_FAILURE_DIAGNOSTIC.json": {
+      "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/prior_evidence/c1_run_b_v101/FAILURE_DIAGNOSTIC.json",
+      "sha256": "e43d4c1d6e877ca1a0e05518af1c7e600aee00ac0cd75d5f2d02845dad320378"
+    },
+    "prior_prior_evidence_c1_run_b_v101_c1_chronology_authority.json": {
+      "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/prior_evidence/c1_run_b_v101/c1_chronology_authority.json",
+      "sha256": "ed0d5f67110da8f7860034ea89c7dbe6798c5a17b7ac417de2a0434f12cd48a8"
+    },
+    "prior_prior_evidence_c1_run_b_v101_c1_prior_result_state_dependence.csv": {
+      "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/prior_evidence/c1_run_b_v101/c1_prior_result_state_dependence.csv",
+      "sha256": "45fe1b81a1838462a5bbec15c3a1c13a8da8eb249123a3bd9d8d3a5b86ce6eeb"
+    },
+    "prior_prior_evidence_c1_run_b_v101_c1_result_bridge_coverage.json": {
+      "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/prior_evidence/c1_run_b_v101/c1_result_bridge_coverage.json",
+      "sha256": "cacbefa519441d03c9e9f1aebbb7ac92e5cb8935b247254c8daa8bd5b2c0449d"
+    },
+    "prior_prior_evidence_c1_run_b_v102__SUCCESS.json": {
+      "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/prior_evidence/c1_run_b_v102/_SUCCESS.json",
+      "sha256": "04e24374b931549b4721e416bb4b29c0b1744b7ece6e822e40f3aa1d9e6175e6"
+    },
+    "prior_prior_evidence_c1_run_b_v102_c1_chronology_authority.json": {
+      "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/prior_evidence/c1_run_b_v102/c1_chronology_authority.json",
+      "sha256": "ed0d5f67110da8f7860034ea89c7dbe6798c5a17b7ac417de2a0434f12cd48a8"
+    },
+    "prior_prior_evidence_c1_run_b_v102_c1_prior_result_state_dependence.csv": {
+      "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/prior_evidence/c1_run_b_v102/c1_prior_result_state_dependence.csv",
+      "sha256": "ec1bc91b012f63205192160b29377344d83e65c195ac9b6ed7176732c34c5ee9"
+    },
+    "prior_prior_evidence_c1_run_b_v102_c1_secondary_streak3_STATUS.json": {
+      "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/prior_evidence/c1_run_b_v102/c1_secondary_streak3_STATUS.json",
+      "sha256": "ee6c3e417ad1ee52c474004f8fad28881d0c1cbd14185eed9dcfab68504967e4"
+    },
+    "prior_prior_evidence_c1_run_b_v102_summary.json": {
+      "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/prior_evidence/c1_run_b_v102/summary.json",
+      "sha256": "770ba886f5417c4b186736408965f4d07596d99002a1169dd7b541df67416c7d"
+    }
+  },
+  "physical_decision_branch": "RAW_0_1_2",
+  "run_A_audit_lineage": {
+    "classification": "INVALID_RESULT_CODE_SEMANTICS",
+    "exact_artifact_present_in_corrective_collection": false,
+    "fingerprint_autopsy_required_for_validity": false,
+    "reported_mapping": "raw result_code for White; negated raw result_code for Black; retain {-1,0,+1}",
+    "reported_primary_effect_pp": 0.245,
+    "source_package_sha256": "cb2798b1cfbc6e14dca222c932f29cf77cfe2589eb284056474adc6be55e9caa"
+  },
+  "run_B_production_lineage": {
+    "classification": "INVALID_RESULT_CODE_SEMANTICS",
+    "direct_loss_or_win_streak_rows": 2,
+    "primary_effect_pp": -0.8317125360007347,
+    "regression_rows": 108543,
+    "resolved_primary_bridge_rows": 217589,
+    "resolved_streak_triples": 112725
+  },
+  "status": "C1_PRIOR_LINEAGES_INVALIDATED_RESULT_CODE_SEMANTICS"
+}

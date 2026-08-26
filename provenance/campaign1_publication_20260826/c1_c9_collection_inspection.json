@@ -1,0 +1,102 @@
+{
+  "c1_execution": {
+    "copied": true,
+    "copied_as": "/Volumes/XT_Pro/lichess_kindness/output/campaign1_c1_c9_corrective_launcher_v100/20260825T173001Z/authenticated_upload_stage/public_results/C1",
+    "result_root": "/Volumes/XT_Pro/lichess_kindness/output/dynamics_campaign1_c1_corrected_v105/20260825T173035Z",
+    "status": "DYNAMICS_CAMPAIGN1_C1_CORRECTED_V105_OK",
+    "success_sha256": "43eed1305f48adb58095e99c58ffd036ca517852513e7643670ce28ef3f9169a"
+  },
+  "c1_inspection": {
+    "bridge": {
+      "chooser_result_counts": {
+        "-1": 210831,
+        "0": 18813,
+        "1": 230085
+      },
+      "needed_result_rows": 461213,
+      "perspective_validation": {
+        "alignment_share_among_nonzero": 1.0,
+        "decisive_rating_diff_nonnull": 438521,
+        "decisive_rating_diff_nonzero": 436923,
+        "decisive_rating_diff_zero": 1598,
+        "decisive_rows": 440916,
+        "decisive_sign_aligned": 436923,
+        "decisive_sign_contradictory": 0,
+        "minimum_alignment_share": 0.99,
+        "rating_diff_validation_only": true,
+        "result_constructed_from_rating_diff": false,
+        "status": "C1_CHOOSER_PERSPECTIVE_VALIDATION_OK"
+      },
+      "raw_result_code_counts": {
+        "0": 211672,
+        "1": 18813,
+        "2": 229244
+      },
+      "resolved_bridge_rows": 459729
+    },
+    "primary": {
+      "chooser_clusters": "43339",
+      "complete_case_preservation_share": "0.9999954041794392",
+      "decoded_rows_before_complete_case_filter": "217589",
+      "effect_pp": "0.17641313966423625",
+      "p_value_two_sided": "0.006046717201351934",
+      "raw_loss_rate_pct": "2.7422768529447676",
+      "raw_win_rate_pct": "2.3526646051465665",
+      "rows": "217588",
+      "se_pp": "0.06425836407238845"
+    },
+    "secondary_streak3": {
+      "candidate_choosers": 14352,
+      "candidate_loss_streak_rows": 12188,
+      "candidate_rows_before_complete_case_filter": 27511,
+      "candidate_win_streak_rows": 15323,
+      "chooser_clusters": 14352,
+      "complete_case_preservation_share": 1.0,
+      "complete_case_rows": 27511,
+      "contrast": "three_or_more_consecutive_losses_minus_three_or_more_consecutive_wins",
+      "epistemic_label": "S",
+      "minimum_complete_case_rows_for_frozen_FE_producer": 1000,
+      "minimum_sane_candidates_per_arm": 250,
+      "minimum_sane_direct_candidates": 1000,
+      "output": "c1_secondary_streak3.csv",
+      "status": "ESTIMATED",
+      "streak_support_sanity_gate": "PASS"
+    },
+    "status": "DYNAMICS_CAMPAIGN1_C1_CORRECTED_V105_OK",
+    "success_sha256": "43eed1305f48adb58095e99c58ffd036ca517852513e7643670ce28ef3f9169a"
+  },
+  "c9_execution": {
+    "copied": true,
+    "copied_as": "/Volumes/XT_Pro/lichess_kindness/output/campaign1_c1_c9_corrective_launcher_v100/20260825T173001Z/authenticated_upload_stage/public_results/C9",
+    "result_root": "/Volumes/XT_Pro/lichess_kindness/output/dynamics_campaign1_c9_recovery_v101/20260825T173011Z",
+    "status": "DYNAMICS_CAMPAIGN1_C9_RECOVERY_V101_OK",
+    "success_sha256": "2656ef75438ef99daa9a64e7410b0acc4b0912f0b894a8a0f644e35b498aa9aa"
+  },
+  "c9_inspection": {
+    "checkpoint_recovery": {
+      "existing_batches": 20,
+      "expected_batches": 20,
+      "expected_randomizations": 4999,
+      "new_randomizations_drawn": 0,
+      "pending_batches": 0,
+      "require_existing": true,
+      "status": "C9_RANDOMIZATION_CHECKPOINT_INVENTORY_AUTHENTICATED"
+    },
+    "exact_b2_reproduction": true,
+    "primary": {
+      "excess_percentage_points": 11.105202218891035,
+      "holm_adjusted_p_value": "PENDING_C5_C6_AND_FAMILY_COMPLETION",
+      "null_mean_rate_pct": 31.444794118373633,
+      "observed_denominator": 27302,
+      "observed_numerator": 11617,
+      "observed_rate_pct": 42.549996337264666,
+      "randomization_p_two_sided": 0.0004,
+      "randomizations": 4999
+    },
+    "status": "DYNAMICS_CAMPAIGN1_C9_RECOVERY_V101_OK",
+    "success_sha256": "2656ef75438ef99daa9a64e7410b0acc4b0912f0b894a8a0f644e35b498aa9aa"
+  },
+  "private_row_level_files_included": false,
+  "run_id": "20260825T173001Z",
+  "status": "CAMPAIGN1_C1_C9_CORRECTIVE_COLLECTION_COMPLETE"
+}

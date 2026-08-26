@@ -1,0 +1,195 @@
+{
+  "config": {
+    "all_new_models_epistemic_label": "X",
+    "common_sha256": "97ed66c254ac900e37fc23c34a83f5929c8fbf6f7e0d1a2c32108a947c47f21b",
+    "memory_limit": "16GB",
+    "package_manifest_sha256": "4a1aaf58fcc6009983a81d67ea6892827ecc13b628098c7e0197b2829ee4c692",
+    "plan_sha256": "beea91a620cc52c16801e916fe9a3f6ed98ce07a36c94e4a118652b6e2ed94d8",
+    "primary_model": "X_primary_lpm_log_price_chooser_fe_draw50_fe_adjusted",
+    "script_sha256": "2e99aa0cc75ed72f4e8ce8f60400b6a567065b41594a1923ebacded71f90e4dd",
+    "script_version": "1.0.2",
+    "stage07_success_sha256": "8b7010b528ae5c6f1e1a9b517258648204c14c17ca41a2a6796f8ee5a1ed6db7",
+    "threads": 8
+  },
+  "config_sha256": "3e3e5691a1460a51b147360239ad176f4321b283d944880bb92cefb23d272e13",
+  "stage07": {
+    "fair_rows": 17328130,
+    "monthly_files": 24,
+    "monthly_inputs": [
+      {
+        "bytes": 599046148,
+        "month": "2023-11",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2023-11/analysis_panel.parquet",
+        "rows": 2015809,
+        "sha256": "f156ac22c7a58f91e1cd32769bd68b12458e27dc5204a1a1ca0d371ee52c4645"
+      },
+      {
+        "bytes": 622364566,
+        "month": "2023-12",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2023-12/analysis_panel.parquet",
+        "rows": 2101110,
+        "sha256": "b72f14d79c1659211f6a87d6fc975ee94e270c022b14bd27dc5f71f66eeb6442"
+      },
+      {
+        "bytes": 609476437,
+        "month": "2024-01",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-01/analysis_panel.parquet",
+        "rows": 2049292,
+        "sha256": "03846320137b76ce64f1c1b6f2e3542d7844747ffff3d8d2c404c1e5077dba4a"
+      },
+      {
+        "bytes": 571958520,
+        "month": "2024-02",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-02/analysis_panel.parquet",
+        "rows": 1931143,
+        "sha256": "f331f0ce4b039a13f183b3075c2ddf48abf6c602bb7e5a25255a75d9a74ef4e9"
+      },
+      {
+        "bytes": 599646499,
+        "month": "2024-03",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-03/analysis_panel.parquet",
+        "rows": 2021798,
+        "sha256": "fc6acd7539f5c9bfc31f7e6a8c9377b5649cf1de7d5f1b9d82c666381bae72a0"
+      },
+      {
+        "bytes": 570000005,
+        "month": "2024-04",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-04/analysis_panel.parquet",
+        "rows": 1917136,
+        "sha256": "541eb6be595b0d6886286163989d3a404fcf082b32d666f30f0141081bb55e43"
+      },
+      {
+        "bytes": 595686488,
+        "month": "2024-05",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-05/analysis_panel.parquet",
+        "rows": 2011399,
+        "sha256": "e29b5b4afa35531279005a4cef20bfcf8cdb80be76a099b0c5c96d18a85d9574"
+      },
+      {
+        "bytes": 565743912,
+        "month": "2024-06",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-06/analysis_panel.parquet",
+        "rows": 1903139,
+        "sha256": "fe2ef3f7c60211327ca7b7b1dc06de07da1ce3d32ea97042bd390021fd9e9b52"
+      },
+      {
+        "bytes": 561724122,
+        "month": "2024-07",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-07/analysis_panel.parquet",
+        "rows": 1893461,
+        "sha256": "df0105cd160b28dfe356cc326259c16f3794df524dde16c36162eef6897f53d9"
+      },
+      {
+        "bytes": 569839882,
+        "month": "2024-08",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-08/analysis_panel.parquet",
+        "rows": 1923975,
+        "sha256": "65ddf9fd2f1ce5559a53474aaa85827547d5c1ed011f63be4c99731e60e908ba"
+      },
+      {
+        "bytes": 544966207,
+        "month": "2024-09",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-09/analysis_panel.parquet",
+        "rows": 1832046,
+        "sha256": "1e033974f8e46620400cd0ba0874520bad77459f013d5b754b60ff0489fb2d03"
+      },
+      {
+        "bytes": 590221231,
+        "month": "2024-10",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-10/analysis_panel.parquet",
+        "rows": 1990765,
+        "sha256": "b76688b0857d9833c7151da5fb3e48ec7b5f611c1ffc61c8246d1a73e9f09048"
+      },
+      {
+        "bytes": 563061159,
+        "month": "2024-11",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-11/analysis_panel.parquet",
+        "rows": 1892495,
+        "sha256": "b0a847f18c0e5560c39481868f4155a4364115367554fdb6faf2b3d8f3494a32"
+      },
+      {
+        "bytes": 606083736,
+        "month": "2024-12",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-12/analysis_panel.parquet",
+        "rows": 2036228,
+        "sha256": "26d05ef331105809c2aea93a0662ac56e8c469ae19df8c861d253e1be68d352e"
+      },
+      {
+        "bytes": 608278686,
+        "month": "2025-01",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-01/analysis_panel.parquet",
+        "rows": 2050213,
+        "sha256": "fe3ce93ee474a8a83ca6d055028865a5249a29da5071e7bfbbe666b99f8add6f"
+      },
+      {
+        "bytes": 564265176,
+        "month": "2025-02",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-02/analysis_panel.parquet",
+        "rows": 1894447,
+        "sha256": "b45ec957f43db7e882d4af7176dad1dfc6c04109e22e0e4ba93379db70418e5d"
+      },
+      {
+        "bytes": 623177452,
+        "month": "2025-03",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-03/analysis_panel.parquet",
+        "rows": 2100718,
+        "sha256": "5518f4b268b8bcae51044e14ccdbd8d9354abff983217db87887905f739740f1"
+      },
+      {
+        "bytes": 595705624,
+        "month": "2025-04",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-04/analysis_panel.parquet",
+        "rows": 2004376,
+        "sha256": "de36e7c2730b4cfc5c443161068bb9fa416071a04771110aa32a9add90a58cf9"
+      },
+      {
+        "bytes": 617104067,
+        "month": "2025-05",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-05/analysis_panel.parquet",
+        "rows": 2072890,
+        "sha256": "d119fbe2cae30f389005f8c90ee66014e5116ab71942e14cdf245f65754ccb9d"
+      },
+      {
+        "bytes": 605892648,
+        "month": "2025-06",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-06/analysis_panel.parquet",
+        "rows": 2042105,
+        "sha256": "fca6c52e78b00dfbeda2597123d60f3261bfd07e1bda359dc7c41806f62834e9"
+      },
+      {
+        "bytes": 622959427,
+        "month": "2025-07",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-07/analysis_panel.parquet",
+        "rows": 2091678,
+        "sha256": "7513f0ec085b754350517d0ca31cba05b21244e76c0ebcc975e6e0c83bff2517"
+      },
+      {
+        "bytes": 572687493,
+        "month": "2025-08",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-08/analysis_panel.parquet",
+        "rows": 1930170,
+        "sha256": "f2d7d0f1ba3d6264bdf25f49458a675e46aa3015e3029778e628d453c796674e"
+      },
+      {
+        "bytes": 557925428,
+        "month": "2025-09",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-09/analysis_panel.parquet",
+        "rows": 1881564,
+        "sha256": "254be31157c851ed658ba6d98c947142325088761176ef74401e9b76048b18a4"
+      },
+      {
+        "bytes": 595420307,
+        "month": "2025-10",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-10/analysis_panel.parquet",
+        "rows": 1999063,
+        "sha256": "7d741c6f1c23c88600b54d286972cee8e77eb9ae0e25142bf13a420d8eb0b52e"
+      }
+    ],
+    "physical_manifest_sha256": "e666d0e68b051600b11ea41067c6ea755c72e21040940b11b0ce40c544b08db3",
+    "producer_sha256": "0411d4061ea9831c20449208a9782aaf668e160139918d106a2b7d63aaa56e6e",
+    "rows": 47587020,
+    "selected_bytes": 14133235220,
+    "status": "STAGE07_PHYSICAL_AUTHENTICATION_OK",
+    "success_sha256": "8b7010b528ae5c6f1e1a9b517258648204c14c17ca41a2a6796f8ee5a1ed6db7"
+  }
+}

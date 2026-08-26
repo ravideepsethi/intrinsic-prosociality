@@ -1,0 +1,17 @@
+{
+  "candidate_choosers": 14352,
+  "candidate_loss_streak_rows": 12188,
+  "candidate_rows_before_complete_case_filter": 27511,
+  "candidate_win_streak_rows": 15323,
+  "chooser_clusters": 14352,
+  "complete_case_preservation_share": 1.0,
+  "complete_case_rows": 27511,
+  "contrast": "three_or_more_consecutive_losses_minus_three_or_more_consecutive_wins",
+  "epistemic_label": "S",
+  "minimum_complete_case_rows_for_frozen_FE_producer": 1000,
+  "minimum_sane_candidates_per_arm": 250,
+  "minimum_sane_direct_candidates": 1000,
+  "output": "c1_secondary_streak3.csv",
+  "status": "ESTIMATED",
+  "streak_support_sanity_gate": "PASS"
+}

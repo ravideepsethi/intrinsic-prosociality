@@ -1,0 +1,3 @@
+contrast,epistemic_label,mechanism_role,observed_rate_difference,observed_rate_difference_pp,null_mean_rate_difference,null_mean_rate_difference_pp,excess_difference_pp,randomization_p_two_sided,lower_tail_plus_one,upper_tail_plus_one,null_p025,null_p975,randomizations
+same_session_minus_later_session_excess_7d,S,state_component_size,0.11366214955995807,11.366214955995806,0.0329095748076727,3.2909574807672697,8.075257475228536,0.0004,1.0,0.0002,0.010324061743244456,0.055634752041696864,4999
+same_pool_minus_cross_pool_excess_24h,S,context_boundness,0.03588929446472322,3.588929446472322,-0.033951665176356165,-3.3951665176356163,6.984095964107939,0.0012,0.9996,0.0006,-0.07746913601637695,0.008707360192702596,4999

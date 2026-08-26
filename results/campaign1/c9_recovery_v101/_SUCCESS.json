@@ -1,0 +1,17 @@
+{
+  "account_level_output": false,
+  "created_utc": "2026-08-25T17:30:35.052278+00:00",
+  "exact_b2_reproduction": true,
+  "existing_checkpoint_batches_authenticated": 20,
+  "git_head": "46abb7409621e98c74dc8aa3eb3b3885a644080d",
+  "holm_family_adjustment_complete": false,
+  "new_randomizations_drawn": 0,
+  "primary_excess_percentage_points": 11.105202218891035,
+  "primary_raw_p_value": 0.0004,
+  "private_checkpoint_or_cache_mutation": false,
+  "randomizations": 4999,
+  "report_file_hashes_sha256": "01ed0b871d1ac8ae808413bec3212288d5a82336347c104975cc2d2f4801fa1f",
+  "serialization_only_recovery": true,
+  "status": "DYNAMICS_CAMPAIGN1_C9_RECOVERY_V101_OK",
+  "summary_sha256": "78d574dd103d68afc7d052fd038e122602d494348d492458d798b59b0e7978f6"
+}

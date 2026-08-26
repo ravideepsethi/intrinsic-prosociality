@@ -1,0 +1,168 @@
+{
+  "ambient_kindness_numerator_read": false,
+  "config_sha256": "47c8bb458b76510a65015341c609e7ef2309e8ac2ada7cc6181d2e87c4c0eb62",
+  "created_utc": "2026-08-25T23:02:35.195895+00:00",
+  "primary_other_n28_median": 136490.0,
+  "primary_other_n28_min": 0,
+  "primary_other_n28_p10": 28081.0,
+  "primary_supported_rows": 17101141,
+  "primary_supported_share": 0.9869005484146298,
+  "primary_thin_excluded_rows": 226989,
+  "rows": 17328130,
+  "status": "C13_DENOMINATOR_SUPPORT_FROZEN_BEFORE_AMBIENT_NUMERATOR",
+  "superseded_wave0_supported_rows": 17104149,
+  "support_authority": "outcome-blind v1.0.2 exact reconstruction",
+  "support_by_cell": [
+    {
+      "chooser_rating_band": 0,
+      "focal_rows": 270,
+      "median_other_n28": 10.0,
+      "speed_code": 0,
+      "supported_rows": 0
+    },
+    {
+      "chooser_rating_band": 1,
+      "focal_rows": 131,
+      "median_other_n28": 5.0,
+      "speed_code": 0,
+      "supported_rows": 0
+    },
+    {
+      "chooser_rating_band": 2,
+      "focal_rows": 28,
+      "median_other_n28": 2.0,
+      "speed_code": 0,
+      "supported_rows": 0
+    },
+    {
+      "chooser_rating_band": 3,
+      "focal_rows": 2,
+      "median_other_n28": 0.0,
+      "speed_code": 0,
+      "supported_rows": 0
+    },
+    {
+      "chooser_rating_band": 0,
+      "focal_rows": 1005779,
+      "median_other_n28": 37184.0,
+      "speed_code": 1,
+      "supported_rows": 1000251
+    },
+    {
+      "chooser_rating_band": 1,
+      "focal_rows": 537888,
+      "median_other_n28": 18703.0,
+      "speed_code": 1,
+      "supported_rows": 532558
+    },
+    {
+      "chooser_rating_band": 2,
+      "focal_rows": 207196,
+      "median_other_n28": 7163.5,
+      "speed_code": 1,
+      "supported_rows": 201988
+    },
+    {
+      "chooser_rating_band": 3,
+      "focal_rows": 22888,
+      "median_other_n28": 818.0,
+      "speed_code": 1,
+      "supported_rows": 0
+    },
+    {
+      "chooser_rating_band": 0,
+      "focal_rows": 6123324,
+      "median_other_n28": 235484.0,
+      "speed_code": 2,
+      "supported_rows": 6114483
+    },
+    {
+      "chooser_rating_band": 1,
+      "focal_rows": 3059753,
+      "median_other_n28": 117487.0,
+      "speed_code": 2,
+      "supported_rows": 3051212
+    },
+    {
+      "chooser_rating_band": 2,
+      "focal_rows": 726799,
+      "median_other_n28": 28146.0,
+      "speed_code": 2,
+      "supported_rows": 721739
+    },
+    {
+      "chooser_rating_band": 3,
+      "focal_rows": 28583,
+      "median_other_n28": 1102.0,
+      "speed_code": 2,
+      "supported_rows": 0
+    },
+    {
+      "chooser_rating_band": 0,
+      "focal_rows": 3700416,
+      "median_other_n28": 140379.0,
+      "speed_code": 3,
+      "supported_rows": 3690566
+    },
+    {
+      "chooser_rating_band": 1,
+      "focal_rows": 1384690,
+      "median_other_n28": 53435.0,
+      "speed_code": 3,
+      "supported_rows": 1378766
+    },
+    {
+      "chooser_rating_band": 2,
+      "focal_rows": 221445,
+      "median_other_n28": 8665.0,
+      "speed_code": 3,
+      "supported_rows": 216192
+    },
+    {
+      "chooser_rating_band": 3,
+      "focal_rows": 4481,
+      "median_other_n28": 170.0,
+      "speed_code": 3,
+      "supported_rows": 0
+    },
+    {
+      "chooser_rating_band": 0,
+      "focal_rows": 198657,
+      "median_other_n28": 7883.0,
+      "speed_code": 4,
+      "supported_rows": 193386
+    },
+    {
+      "chooser_rating_band": 1,
+      "focal_rows": 96209,
+      "median_other_n28": 3806.0,
+      "speed_code": 4,
+      "supported_rows": 0
+    },
+    {
+      "chooser_rating_band": 2,
+      "focal_rows": 9435,
+      "median_other_n28": 372.0,
+      "speed_code": 4,
+      "supported_rows": 0
+    },
+    {
+      "chooser_rating_band": 3,
+      "focal_rows": 156,
+      "median_other_n28": 7.0,
+      "speed_code": 4,
+      "supported_rows": 0
+    }
+  ],
+  "support_by_specification": {
+    "cell_14d": 16533936,
+    "cell_28d": 17101141,
+    "cell_28d_washout7": 16934163,
+    "cell_56d": 17192224,
+    "speed_14d": 17266455,
+    "speed_28d": 17294093,
+    "speed_56d": 17294093
+  },
+  "support_threshold_other_fair_opportunities": 5000,
+  "wave0_minus_corrected_rows": 3008
+}

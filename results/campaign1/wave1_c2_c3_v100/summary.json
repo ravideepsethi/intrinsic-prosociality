@@ -1,0 +1,66 @@
+{
+  "account_level_output": false,
+  "api_requests": 0,
+  "authorities": {
+    "history_success_sha256": "62e4b8335b188f374f83bf1debedc19c62a91769f89a7c12368a628cb26d6de5",
+    "sampled_target_rows": 685731,
+    "sampled_targets_receipt_sha256": "e30c387f5b0f5ef79fd01064dcf48dc2c43e68c0cf630c31bf27a1611431f461",
+    "stage07_rows": 47587020,
+    "user_events_receipt_sha256": "ef83e38a92c6daaa3aae9ad05ea8f4f2e431e91948ca8a6713c3f4abf2483c21",
+    "user_history_parquet_files": 8,
+    "user_history_rows": 309961276
+  },
+  "causal_claim": false,
+  "created_utc": "2026-08-25T02:06:20.299976+00:00",
+  "git_head": "46abb7409621e98c74dc8aa3eb3b3885a644080d",
+  "holm_family_note": "C2 raw p-value is reported. C1 remains untested because no rating-diff proxy is allowed; Holm adjustment awaits C1,C5,C6,C9.",
+  "modules": {
+    "C1": {
+      "bridge": {
+        "rating_diff_used_to_infer_result": false,
+        "selected_game_mapping": {
+          "black_id": "black_id",
+          "game_id": "game_id",
+          "result": null,
+          "white_id": "white_id"
+        },
+        "selected_games_root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/dynamic_second_wave_history_v100_PRIVATE/selected_games",
+        "status": "BLOCKED_SELECTED_GAMES_RESULT_SCHEMA_UNRESOLVED"
+      },
+      "label": "C",
+      "primary_file": null,
+      "status": "PENDING_RESULT_BRIDGE"
+    },
+    "C2": {
+      "label": "C",
+      "primary_file": "c2_session_pnl_state_dependence.csv",
+      "status": "ESTIMATED"
+    },
+    "C3": {
+      "files": [
+        "c3_session_position_raw.csv",
+        "c3_session_position_adjusted.csv",
+        "c3_session_elapsed_adjusted.csv"
+      ],
+      "label": "X",
+      "status": "ESTIMATED"
+    }
+  },
+  "patron_status_read": false,
+  "runtime_seconds": 436.7576639652252,
+  "session_timestamp_mode": "start_to_start_v1_0_3_fallback",
+  "status": "DYNAMICS_CAMPAIGN1_WAVE1_C1_C3_V100_OK",
+  "support": {
+    "fair_choosers": 53716,
+    "fair_rows": 345624,
+    "fair_with_prior_same_session_15": 188547,
+    "fair_with_prior_same_session_30": 218267,
+    "fair_with_prior_same_session_60": 237358,
+    "kindness_by_history_exposure_tabulated_at_gate": false,
+    "session_timestamp_mode": "start_to_start_v1_0_3_fallback",
+    "share_15": 0.5455263523366433,
+    "share_30": 0.63151575122098,
+    "share_60": 0.6867520774020323,
+    "status": "C1_C3_SESSION_SUPPORT_FROZEN_BEFORE_EXPOSURE_OUTCOME_TABULATION"
+  }
+}

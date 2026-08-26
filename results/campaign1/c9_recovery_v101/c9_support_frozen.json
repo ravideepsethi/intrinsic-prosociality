@@ -1,0 +1,17 @@
+{
+  "anchors_with_any_post_24h": 92400,
+  "anchors_with_any_post_7d": 354367,
+  "anchors_with_cross_pool_post_24h": 6192,
+  "anchors_with_later_session_post_7d": 342091,
+  "anchors_with_same_pool_post_24h": 86707,
+  "anchors_with_same_session_post_7d": 22258,
+  "cross_pool_opportunity_pairs_24h": 6560,
+  "kind_draw_read": false,
+  "later_session_opportunity_pairs_7d": 511186,
+  "possible_anchor_rows": 1017944,
+  "pseudo_first_grant_used": false,
+  "same_pool_opportunity_pairs_24h": 96172,
+  "same_session_opportunity_pairs_7d": 23268,
+  "status": "C9_OUTCOME_BLIND_SUPPORT_FROZEN",
+  "support_definition": "all structurally possible B1 anchor positions"
+}

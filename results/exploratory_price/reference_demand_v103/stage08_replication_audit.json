@@ -1,0 +1,20 @@
+{
+  "differences": {
+    "beta_minus_pp_per_rating_point": -5.837344496661956e-16,
+    "beta_plus_pp_per_rating_point": -8.398230028072717e-16,
+    "threshold_jump_pp": -5.551115123125783e-16
+  },
+  "expected": {
+    "beta_minus_pp_per_rating_point": -0.006719576971106138,
+    "beta_plus_pp_per_rating_point": 0.00015756302027886832,
+    "threshold_jump_pp": 0.43947730757174397
+  },
+  "observed": {
+    "beta_minus_pp_per_rating_point": -0.006719576971106722,
+    "beta_plus_pp_per_rating_point": 0.0001575630202780285,
+    "threshold_jump_pp": 0.4394773075717434
+  },
+  "status": "REFERENCE_STAGE08_EXACT_REPRODUCTION_OK",
+  "tolerance_pp": 5e-10,
+  "validation_precedes_new_interpretation": true
+}

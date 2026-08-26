@@ -1,0 +1,18 @@
+{
+  "b1_rows": 1017944,
+  "b1_rows_with_session": 1017944,
+  "b1_session_resolution_share": 1.0,
+  "canonical_stage07_speed_rows_missing": 0,
+  "chronology_files_read": 150,
+  "chronology_metadata_rows_in_selected_files": 2324127469,
+  "persisted_cache_contains_actual_user_id": false,
+  "persisted_cache_contains_game_id": false,
+  "persisted_private_cache": "/Volumes/XT_Pro/lichess_kindness/derived/replication/dynamics_campaign1_c9_v100_PRIVATE/b1_c9_session_private.parquet",
+  "persisted_private_cache_sha256": "28d76ab8a27fd04cc849d402b28e3944bcafcabcea06af80e293baedafd97604",
+  "repeat_granter_all_game_rows": 217135654,
+  "repeat_granter_users": 64331,
+  "session_definition": "consecutive all-rated-game start timestamps with gap < 30m",
+  "speed_source": "Stage07 api_speed via non-outcome B1-to-Stage07 row bridge",
+  "status": "C9_ALL_GAME_SESSION_CACHE_OK",
+  "timestamp_mode": "start_to_start_v1_0_3_fallback"
+}

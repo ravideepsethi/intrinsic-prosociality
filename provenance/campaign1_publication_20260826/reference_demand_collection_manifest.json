@@ -1,0 +1,297 @@
+{
+  "collector_version": "1.0.3",
+  "contains_private_row_level_data": false,
+  "created_utc": "2026-08-26T02:29:06.798757+00:00",
+  "files": [
+    {
+      "bytes": 3510,
+      "path": "executed_package_source/PACKAGE_CONTENTS.sha256",
+      "sha256": "72e06a4c106c06af3b5ffea1be35ff2e88aa04cd473ac50d27b7622df21f87cc"
+    },
+    {
+      "bytes": 3066,
+      "path": "executed_package_source/README_FIRST.md",
+      "sha256": "1603b824cfd6154affd9691a5b708f761e354f1ca0b157d62f7d43375ee2a666"
+    },
+    {
+      "bytes": 4484,
+      "path": "executed_package_source/RUN_KINDNESS_REFERENCE_DEMAND_v1_0_3.command",
+      "sha256": "cd767140a9ca6bc7237b57f11ed1809070ce633505eed36bf68943df2bce8133"
+    },
+    {
+      "bytes": 102322,
+      "path": "executed_package_source/payload/authorities/06_build_glicko2_cost_layer.py",
+      "sha256": "e1a72414b4c4a18dca5b583b704cbbf97e0bff7de2a837e6ad85e078ecf00cca"
+    },
+    {
+      "bytes": 89481,
+      "path": "executed_package_source/payload/authorities/08_make_core_paper_results.py",
+      "sha256": "e9dd80c52da5ffef3d406c3af25912bd924f6423f123ca535cf4077cb039c41f"
+    },
+    {
+      "bytes": 817051,
+      "path": "executed_package_source/payload/authorities/conceptual/Intrinsic_Prosociality_2026-08-12.pdf",
+      "sha256": "91daf2fb807a20694bfc70a160854bd81c8c5669e4525851d41cd65a55a43e45"
+    },
+    {
+      "bytes": 289845,
+      "path": "executed_package_source/payload/authorities/conceptual/lichess_kindness_consolidated_handoff_v23_2026-08-12.md",
+      "sha256": "2edda469872e9e22845b4baefe55d1ad3bd4acd5a0543f5274e6f6741bfdf6a0"
+    },
+    {
+      "bytes": 10466,
+      "path": "executed_package_source/payload/authorities/key_results_stage08_core_24m_CERTIFIED.json",
+      "sha256": "6f8654c1a8d95cf502b71c7b616f5518777a8274106144ab87cf8d04ac0f1602"
+    },
+    {
+      "bytes": 7041,
+      "path": "executed_package_source/payload/authorities/schema_contract_stage07_v1_3_0.json",
+      "sha256": "e7f4e269b29144e2abd1394565a10ee741c6f15fbc17e088bdfc59105e8e38db"
+    },
+    {
+      "bytes": 27816,
+      "path": "executed_package_source/payload/authorities/summary_stage07_24m_CERTIFIED.json",
+      "sha256": "8b7010b528ae5c6f1e1a9b517258648204c14c17ca41a2a6796f8ee5a1ed6db7"
+    },
+    {
+      "bytes": 21328,
+      "path": "executed_package_source/payload/authorities/summary_stage08_core_24m_CERTIFIED.json",
+      "sha256": "a2fd1a868299cba8499de1e72365dbeb4e49ec77768e01e8af84f58f3ceac958"
+    },
+    {
+      "bytes": 10181,
+      "path": "executed_package_source/payload/code/collect_kindness_reference_demand_results_v103.py",
+      "sha256": "a90e064ade8def91170da86fc8df78fe923ced4c45f8243b18febff8e9989411"
+    },
+    {
+      "bytes": 30056,
+      "path": "executed_package_source/payload/code/kindness_price_elasticity_common_v102.py",
+      "sha256": "97ed66c254ac900e37fc23c34a83f5929c8fbf6f7e0d1a2c32108a947c47f21b"
+    },
+    {
+      "bytes": 68235,
+      "path": "executed_package_source/payload/code/run_kindness_price_elasticity_v102.py",
+      "sha256": "2e99aa0cc75ed72f4e8ce8f60400b6a567065b41594a1923ebacded71f90e4dd"
+    },
+    {
+      "bytes": 82858,
+      "path": "executed_package_source/payload/code/run_kindness_reference_demand_v103.py",
+      "sha256": "3b6e216f9a85ce63d61c74945b67c4a9228614b294bb216f02f3ba635093c777"
+    },
+    {
+      "bytes": 3607,
+      "path": "executed_package_source/payload/code/test_kindness_reference_demand_collector_v103.py",
+      "sha256": "40fc7ab95fd89de9435774ef2652ffb7db7b33feeaa7d89d434d0eaf99bb7283"
+    },
+    {
+      "bytes": 8984,
+      "path": "executed_package_source/payload/code/test_kindness_reference_demand_synthetic_v103.py",
+      "sha256": "0091106207f4b69beb338a1a175852ba440224926d325e93c8d7e0307dff4966"
+    },
+    {
+      "bytes": 9875,
+      "path": "executed_package_source/payload/docs/kindness_price_elasticity_exploratory_plan_v1_0_2_2026-08-25.md",
+      "sha256": "beea91a620cc52c16801e916fe9a3f6ed98ce07a36c94e4a118652b6e2ed94d8"
+    },
+    {
+      "bytes": 2981,
+      "path": "executed_package_source/payload/docs/kindness_price_elasticity_v1_0_1_preoutcome_recovery.md",
+      "sha256": "cd95cde43516c383e2ebd27400f146e385514031c81b23e6eb6495d2cdf6ea7f"
+    },
+    {
+      "bytes": 2494,
+      "path": "executed_package_source/payload/docs/kindness_price_elasticity_v1_0_2_preoutcome_recovery.md",
+      "sha256": "b2eb31ac2a260dec7008498a07ade05ed04c5a18bb2c7e94af322d6d51ae5081"
+    },
+    {
+      "bytes": 7785,
+      "path": "executed_package_source/payload/docs/kindness_reference_demand_exploratory_plan_v1_0_3_2026-08-25.md",
+      "sha256": "793980a7d2cd3bf6835dfebad888efe0e867005b35e5c7239e71a096c756198a"
+    },
+    {
+      "bytes": 3686,
+      "path": "executed_package_source/payload/docs/kindness_reference_demand_v1_0_3_postoutcome_correction.md",
+      "sha256": "21b4bdcb0abef95551693603fb5490aa131c7d0b0e1613d4893c59e30861f4cd"
+    },
+    {
+      "bytes": 1468,
+      "path": "executed_package_source/payload/prior_evidence/v102_SUCCESS.json",
+      "sha256": "84d85a87f06e8d9d44dcce99c60985deb975a08b38ced6acb698d214e7106f42"
+    },
+    {
+      "bytes": 51504,
+      "path": "executed_package_source/payload/prior_evidence/v102_elasticity_models.csv",
+      "sha256": "d785aa8a3cf8b82a0764386a70f3bbe77a89ba1e77130291304bbe7f3a8f9f46"
+    },
+    {
+      "bytes": 15912,
+      "path": "executed_package_source/payload/prior_evidence/v102_launcher.log",
+      "sha256": "91d5dc6803d4e0b7e2dafe4c51a4f031a32da5cd1261a0d5b0f5ffad8a4d399e"
+    },
+    {
+      "bytes": 4532,
+      "path": "executed_package_source/payload/prior_evidence/v102_nonparametric_premium_bins.csv",
+      "sha256": "5bc821fa360b0874c160c2729c6e0eb9734526d0a1790a5715587096bdbe48b6"
+    },
+    {
+      "bytes": 5354,
+      "path": "executed_package_source/payload/prior_evidence/v102_price_support.json",
+      "sha256": "51a203656c33fa943f029710e0cde0477ba15a4c191c3c0cff5487530a52e22e"
+    },
+    {
+      "bytes": 706,
+      "path": "executed_package_source/payload/prior_evidence/v102_primary_interpretation.json",
+      "sha256": "45562948122b94ca8662fafdc995a450d363d9748f564510a3c62f1338c844d0"
+    },
+    {
+      "bytes": 1737,
+      "path": "executed_package_source/payload/prior_evidence/v102_replication_audits.json",
+      "sha256": "35d14c469e32808356ec3386f3fc404662c7ed7c1d8d85f0b90abf52af25185f"
+    },
+    {
+      "bytes": 1064,
+      "path": "inspection.json",
+      "sha256": "a9cfb8ffeb6c3737a7167d017f73a12b15bd7777b23d0d18ab289fefa28dd41b"
+    },
+    {
+      "bytes": 40579,
+      "path": "logs/launcher.log",
+      "sha256": "ebac79dbd05a0dc141b77e9b76a8a00f3fb8b4e285fb8db27a98e42ce21ed882"
+    },
+    {
+      "bytes": 4797,
+      "path": "public_results/_SUCCESS.json",
+      "sha256": "5299856c550b65e12baacbfb2bcb76c778227f5ebbe915e95823b8ce37aa72f9"
+    },
+    {
+      "bytes": 2067,
+      "path": "public_results/adjacent_zero_bins.json",
+      "sha256": "f2b8253b9cfadac3783cf06a293c032d74dd9f94ab558045491836c00a66dbea"
+    },
+    {
+      "bytes": 4349,
+      "path": "public_results/donut_grid.csv",
+      "sha256": "a5f529ba4c5eaa1465a4ba44aeb2f8b0a595051fea3045e96af5991032112c8d"
+    },
+    {
+      "bytes": 2938,
+      "path": "public_results/heterogeneity_support.csv",
+      "sha256": "20cc884b1cc7cae1ab009e9574a4773077d93892a9dca74147d43496f6d96aae"
+    },
+    {
+      "bytes": 10206,
+      "path": "public_results/input_authorities.json",
+      "sha256": "9262a68e5847c646665a094e437affa2f19936d8b0cf032d4a6b1c5567162a21"
+    },
+    {
+      "bytes": 1820,
+      "path": "public_results/loss_side_local_elasticities.csv",
+      "sha256": "c3437e9b25b2f7c4aff4427a939ec0bbc0088ce1d730a994876da39c94ad6c50"
+    },
+    {
+      "bytes": 3249,
+      "path": "public_results/matched_window_contrasts.csv",
+      "sha256": "7bfa3c7be89aa5d540b3135b136c348ee909ec39396d68b9166c822f83acac6a"
+    },
+    {
+      "bytes": 9857,
+      "path": "public_results/model_attempts.csv",
+      "sha256": "06b6b1a1cc635c4f7b67b358963f3097fa2d2c9e2e1d4166d099fb853cb17955"
+    },
+    {
+      "bytes": 18916,
+      "path": "public_results/model_attempts.json",
+      "sha256": "069d806426582a619814b0ea86c7c5b6a1a8c0a85f2a54ba12d5c84336ee7533"
+    },
+    {
+      "bytes": 2431,
+      "path": "public_results/not_defined_or_not_identified.json",
+      "sha256": "273e32a9b2e6f71250d70a3592c93ab1f5b0c1f97d67c4160bcb36cf2afaff4f"
+    },
+    {
+      "bytes": 1982,
+      "path": "public_results/placebo_cutoffs.csv",
+      "sha256": "2d414b445329bf186ed597d5b4e0dc45970556ae88b75bdc11cdc350daf1fd49"
+    },
+    {
+      "bytes": 3800,
+      "path": "public_results/primary_interpretation.json",
+      "sha256": "dee388be746b3078f4d03eea4ce2c4a2d3dfe92957076b01dc2bb189deda6b86"
+    },
+    {
+      "bytes": 4255,
+      "path": "public_results/private_cache_authentication.json",
+      "sha256": "9bd049b4879d08707e60d774c08aa56d4f579f1e8bfaa493ccead31537c04c4c"
+    },
+    {
+      "bytes": 6307,
+      "path": "public_results/reference_balance_by_window.csv",
+      "sha256": "9089a0b6659d578d0b3171f1e40cf8f31e0a9b4a3983178a0fcf23c2ac57cb99"
+    },
+    {
+      "bytes": 1930,
+      "path": "public_results/reference_density_bins.csv",
+      "sha256": "3d4f3972a2f313680f356cf9c0857143f8f410eb94555280a5553d214e1c35a1"
+    },
+    {
+      "bytes": 94520,
+      "path": "public_results/reference_model_results.csv",
+      "sha256": "880a00466ad856e82ca5f10b7a067e7c72c67800378af546f01a763faa759fe9"
+    },
+    {
+      "bytes": 328300,
+      "path": "public_results/reference_model_results.json",
+      "sha256": "c250c926d40ae556a001eafaeb9661563df288519d8020022fb70ab8a8fd2de2"
+    },
+    {
+      "bytes": 1616,
+      "path": "public_results/reference_price_support.json",
+      "sha256": "e9f6cdf63667017fffdc14a17e1d92d4656d3f6591056fc9a25598e2eaabcc02"
+    },
+    {
+      "bytes": 4873,
+      "path": "public_results/reference_schedule_arcs.csv",
+      "sha256": "da18239ea5dddf87f6ee40aaf6c9a6f399f75006a4d17fdfebfc13b6c7d349d3"
+    },
+    {
+      "bytes": 4627,
+      "path": "public_results/reference_schedule_bins.csv",
+      "sha256": "53aeb09574f38c21e511e05f4130d687a63973413e167e4484e952d1b69c2a75"
+    },
+    {
+      "bytes": 2044,
+      "path": "public_results/report_file_hashes.tsv",
+      "sha256": "405b4283c026af5433ba80c53afb3ea20e99dfde34a01b4caa95449f72b60bf9"
+    },
+    {
+      "bytes": 702,
+      "path": "public_results/stage08_replication_audit.json",
+      "sha256": "4febdc3727ac2e427b47abaff0fca9ea75cf39054ff3759c1c8701a8a66dcb31"
+    }
+  ],
+  "files_fingerprint_sha256": "f6906210436a7c5ade6dc7b27d8646b914a11c3f6303c4768829b038868638fb",
+  "inspection": {
+    "claim_boundary": "All v1.0.3 estimates are exploratory within-chooser conditional associations. The design identifies a reduced-form reference-dependent schedule, not a causal or structural price elasticity.",
+    "full_gain_slope_pp_per_point": 0.012000387750474522,
+    "full_loss_slope_pp_per_point": 0.005803740905190115,
+    "global_signed_log_elasticity_status": "NOT_MATHEMATICALLY_DEFINED",
+    "headline_object": "reference-dependent demand schedule, not one global elasticity",
+    "loss_log_ci95_high": -0.04011397843292399,
+    "loss_log_ci95_low": -0.04763627104031371,
+    "loss_log_elasticity": -0.04387512473661885,
+    "loss_log_model": "X_primary_loss_log_elasticity_chooser_fe_premium20_fe",
+    "models_attempted": 111,
+    "models_estimated": 108,
+    "models_failed_retained": 3,
+    "prior_v102_premium_elasticity": 0.1570280092407992,
+    "scientific_success": true,
+    "status": "KINDNESS_REFERENCE_DEMAND_V103_OK",
+    "zero_w0p5_ci95_high_pp": 0.25331844596356323,
+    "zero_w0p5_ci95_low_pp": 0.2142548986635434,
+    "zero_w0p5_contrast_pp": 0.23378667231355332
+  },
+  "parquet_files_in_bundle": 0,
+  "public_result_files_authenticated": 21,
+  "run_id": "20260826T021723Z",
+  "status": "KINDNESS_REFERENCE_DEMAND_COLLECTION_OK"
+}

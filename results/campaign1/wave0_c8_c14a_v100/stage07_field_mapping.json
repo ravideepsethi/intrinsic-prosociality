@@ -1,0 +1,11 @@
+{
+  "chooser": "chooser_username_norm",
+  "elo": "chooser_elo",
+  "eval": "engine_eval_cp_disconnected",
+  "game_id": "game_id",
+  "kind": "outcome_kind_draw",
+  "month": "month",
+  "payoff": "chooser_draw_payoff_v2",
+  "speed": "api_speed",
+  "time_ms": "api_last_move_at_ms"
+}

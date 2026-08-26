@@ -1,0 +1,248 @@
+[
+  {
+    "error": null,
+    "model": "V_certified_stage08_full24_piecewise_reproduction",
+    "runtime_seconds": 6.536281108856201,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_current_temporal_first_half_piecewise_price_bridge",
+    "runtime_seconds": 2.1365110874176025,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_lpm_level_price_chooser_fe_piecewise_reference",
+    "runtime_seconds": 5.8536460399627686,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_lpm_log_price_chooser_fe_no_reference",
+    "runtime_seconds": 2.707943916320801,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_lpm_log_price_chooser_fe_piecewise_reference",
+    "runtime_seconds": 5.679563999176025,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_lpm_log_price_chooser_fe_cubic_reference",
+    "runtime_seconds": 7.2973527908325195,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_lpm_log_price_chooser_fe_draw20_fe",
+    "runtime_seconds": 5.215809106826782,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_lpm_log_price_chooser_fe_draw50_fe",
+    "runtime_seconds": 5.50053596496582,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_primary_lpm_log_price_chooser_fe_draw50_fe_adjusted",
+    "runtime_seconds": 41.53359389305115,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_lpm_level_price_chooser_fe_draw50_fe_adjusted",
+    "runtime_seconds": 35.92931294441223,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_lpm_log_price_trim_p01_p99_draw50_fe_adjusted",
+    "runtime_seconds": 36.950355052948,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_lpm_log_price_winsor_p01_p99_draw50_fe_adjusted",
+    "runtime_seconds": 35.535499811172485,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_pooled_lpm_log_price_piecewise_reference_controls",
+    "runtime_seconds": 23.26901602745056,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_nonparametric_price20_chooser_fe_piecewise_reference",
+    "runtime_seconds": 23.422927856445312,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_heterogeneity_rating_band_below_1600_log_price_draw20_fe",
+    "runtime_seconds": 2.8147060871124268,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_heterogeneity_rating_band_1600_1999_log_price_draw20_fe",
+    "runtime_seconds": 1.270110845565796,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_heterogeneity_rating_band_2000_2399_log_price_draw20_fe",
+    "runtime_seconds": 0.31028199195861816,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_heterogeneity_rating_band_2400_plus_log_price_draw20_fe",
+    "runtime_seconds": 0.018897056579589844,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": "RuntimeError: X_heterogeneity_speed_ultrabullet_log_price_draw20_fe: fewer than 1,000 rows",
+    "model": "X_heterogeneity_speed_ultrabullet_log_price_draw20_fe",
+    "runtime_seconds": 0.003168821334838867,
+    "status": "FAILED_RETAINED"
+  },
+  {
+    "error": null,
+    "model": "X_heterogeneity_speed_bullet_log_price_draw20_fe",
+    "runtime_seconds": 0.47254490852355957,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_heterogeneity_speed_blitz_log_price_draw20_fe",
+    "runtime_seconds": 2.448415994644165,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_heterogeneity_speed_rapid_log_price_draw20_fe",
+    "runtime_seconds": 1.3311150074005127,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_heterogeneity_speed_classical_log_price_draw20_fe",
+    "runtime_seconds": 0.08277130126953125,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": "RuntimeError: X_heterogeneity_speed_correspondence_log_price_draw20_fe: fewer than 1,000 rows",
+    "model": "X_heterogeneity_speed_correspondence_log_price_draw20_fe",
+    "runtime_seconds": 0.0005528926849365234,
+    "status": "FAILED_RETAINED"
+  },
+  {
+    "error": null,
+    "model": "X_heterogeneity_eval_band_below_0cp_log_price_draw20_fe",
+    "runtime_seconds": 1.2149691581726074,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_heterogeneity_eval_band_0_100cp_log_price_draw20_fe",
+    "runtime_seconds": 1.502474069595337,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_heterogeneity_eval_band_101_300cp_log_price_draw20_fe",
+    "runtime_seconds": 0.8663091659545898,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_heterogeneity_eval_band_301_600cp_log_price_draw20_fe",
+    "runtime_seconds": 0.6326899528503418,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_heterogeneity_eval_band_above_600cp_log_price_draw20_fe",
+    "runtime_seconds": 0.27606678009033203,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_heterogeneity_temporal_half_first12_log_price_draw20_fe",
+    "runtime_seconds": 2.180791139602661,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_heterogeneity_temporal_half_second12_log_price_draw20_fe",
+    "runtime_seconds": 2.2149782180786133,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_heterogeneity_rating_certainty_either_rd_above_110_log_price_draw20_fe",
+    "runtime_seconds": 0.4325218200683594,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_heterogeneity_rating_certainty_both_rd_le_110_log_price_draw20_fe",
+    "runtime_seconds": 3.9673521518707275,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": "RuntimeError: Exposure has no residual variation: log_price",
+    "model": "X_heterogeneity_activity_quartile_q1_log_price_draw20_fe",
+    "runtime_seconds": 0.16506171226501465,
+    "status": "FAILED_RETAINED"
+  },
+  {
+    "error": null,
+    "model": "X_heterogeneity_activity_quartile_q2_log_price_draw20_fe",
+    "runtime_seconds": 0.33275818824768066,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_heterogeneity_activity_quartile_q3_log_price_draw20_fe",
+    "runtime_seconds": 0.7817637920379639,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_heterogeneity_activity_quartile_q4_log_price_draw20_fe",
+    "runtime_seconds": 3.0676541328430176,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_heterogeneity_lagged_kindness_none_prior_log_price_draw20_fe",
+    "runtime_seconds": 4.053346157073975,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_heterogeneity_lagged_kindness_one_prior_log_price_draw20_fe",
+    "runtime_seconds": 0.2170698642730713,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_heterogeneity_lagged_kindness_two_plus_prior_log_price_draw20_fe",
+    "runtime_seconds": 0.16355490684509277,
+    "status": "ESTIMATED"
+  },
+  {
+    "error": null,
+    "model": "X_conditional_chooser_fe_poisson_log_price_piecewise_controls",
+    "runtime_seconds": 8.903913974761963,
+    "status": "ESTIMATED"
+  }
+]

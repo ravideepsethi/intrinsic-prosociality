@@ -1,0 +1,1110 @@
+{
+  "account_level_output": false,
+  "api_requests": 0,
+  "created_utc": "2026-08-25T00:56:04.498312+00:00",
+  "field_mapping": {
+    "chooser": "chooser_username_norm",
+    "elo": "chooser_elo",
+    "eval": "engine_eval_cp_disconnected",
+    "game_id": "game_id",
+    "kind": "outcome_kind_draw",
+    "month": "month",
+    "payoff": "chooser_draw_payoff_v2",
+    "speed": "api_speed",
+    "time_ms": "api_last_move_at_ms"
+  },
+  "git_head": "c0d7cb3da145b7702a6020c09f8eaf19db6fe8c1",
+  "holm_family_member_estimated": false,
+  "modules": {
+    "C13": {
+      "label": "X",
+      "status": "SUPPORT_ONLY_NOT_ESTIMATED",
+      "support": "c13_support_only.json"
+    },
+    "C14A": {
+      "label": "X",
+      "note": "current-state-adjusted month profile remains for the consolidated downstream producer; raw and exact chooser-FE profiles are complete here.",
+      "outputs": [
+        "c14a_monthly_fair_rates_raw.csv",
+        "c14a_monthly_chooser_fe_profile.csv"
+      ],
+      "status": "ESTIMATED"
+    },
+    "C8": {
+      "label": "X",
+      "outputs": [
+        "c8_rating_tier_five_bin_rates.csv",
+        "c8_rating_tier_region_price_cells.csv",
+        "c8_rating_tier_split_half_persistence.csv"
+      ],
+      "status": "ESTIMATED"
+    }
+  },
+  "patron_status_read": false,
+  "plan_layers": {
+    "amd101": "/Volumes/XT_Pro/lichess_kindness/replication_package/docs/dynamics_paper2_campaign1_analysis_plan_v1_0_1_amendment.md",
+    "amd102": "/Volumes/XT_Pro/lichess_kindness/replication_package/docs/dynamics_paper2_campaign1_analysis_plan_v1_0_2_amendment.md",
+    "base": "/Volumes/XT_Pro/lichess_kindness/replication_package/docs/dynamics_paper2_campaign1_analysis_plan_v1_0_0.md"
+  },
+  "runtime_seconds": 11.98918604850769,
+  "stage07_kind_draws": 669503,
+  "stage07_parquet_files": 24,
+  "stage07_rows": 47587020,
+  "stage07_success": {
+    "json": {
+      "authority_sha256": {
+        "/Volumes/XT_Pro/lichess_kindness/derived/replication/glicko2_cost_layer/_SUCCESS.json": "5b9b992d1f7cf3024fcda9f89d59f24dd0a3c49ea58cb38f7f806df9788ed9ce",
+        "/Volumes/XT_Pro/lichess_kindness/derived/replication/glicko2_cost_layer/_manifests/latest_summary.json": "670905eb0e7144825d82591ffa7059bed8427f37d2c7e1ec117bd355bdb5ba15",
+        "/Volumes/XT_Pro/lichess_kindness/derived/replication/timeout_opportunity_panel/_SUCCESS.json": "61d8ef3d8e1a43566b8d7595c074593c209d181b19bcd6428f14d6e5a53f4863",
+        "/Volumes/XT_Pro/lichess_kindness/derived/replication/timeout_opportunity_panel/_manifests/latest_summary.json": "61d8ef3d8e1a43566b8d7595c074593c209d181b19bcd6428f14d6e5a53f4863",
+        "/Volumes/XT_Pro/lichess_kindness/output/SF100K_FULL_24M_AUDIT_20260817_161831/sf100k_full_24m_parquet_paths.txt": "3b7fa5550d9ff80e6269451530ca63e1fd12c4c53c50bfd8d04723f1c65f3fda",
+        "/Volumes/XT_Pro/lichess_kindness/output/SF100K_FULL_24M_AUDIT_REVIEW_20260817_185317/summary_sf100k_full_24m_CERTIFIED.json": "2c9a1f4a9c9fcfe5bb8290976463178f90b4cfe1c0455b725ae7365d7b915deb",
+        "/Volumes/XT_Pro/lichess_kindness/replication_package/code/05_build_timeout_opportunity_panel.py": "eb8f7e7629c323ee8d5a9f7d4a96b5f9982980189cf27500289582457f0dfe80",
+        "/Volumes/XT_Pro/lichess_kindness/replication_package/code/06_build_glicko2_cost_layer.py": "e1a72414b4c4a18dca5b583b704cbbf97e0bff7de2a837e6ad85e078ecf00cca"
+      },
+      "created_at": "2026-08-19T02:30:44Z",
+      "final_ok": true,
+      "git_head": "b73a7fbaf25ecd063d842bbc36f4efed7cd9ab24",
+      "global_finalization_seconds": 19.695378065109253,
+      "global_qa": {
+        "both_ratingdiff_null_rows": 268386,
+        "clearly_worse_rows": 26090163,
+        "color_adv_rows": 0,
+        "draw_costly_rows": 24849501,
+        "draw_nonnegative_rows": 22737519,
+        "draw_strict_positive_rows": 22075834,
+        "excluded_middle_rows": 4168727,
+        "fair_rows": 17328130,
+        "fairness_partition_mismatch_rows": 0,
+        "favorable_definition_mismatch_rows": 0,
+        "kind_alias_mismatch_rows": 0,
+        "kind_draws": 669503,
+        "missing_chooser_cluster_rows": 0,
+        "months": 24,
+        "nonfinite_core_analysis_rows": 0,
+        "null_core_analysis_rows": 0,
+        "null_game_ids": 0,
+        "requested_nodes_mismatch_rows": 0,
+        "rows": 47587020,
+        "timeout_chooser_losses": 75,
+        "unique_game_ids": 47587020
+      },
+      "month_end": "2025-10",
+      "month_start": "2023-11",
+      "monthly_outputs": [
+        {
+          "month": "2023-11",
+          "output_sha256": "f156ac22c7a58f91e1cd32769bd68b12458e27dc5204a1a1ca0d371ee52c4645",
+          "output_size_bytes": 599046148,
+          "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2023-11/analysis_panel.parquet",
+          "rows": 2015809,
+          "runtime_seconds": 16.022217988967896,
+          "status": "STAGE07_MONTH_CERTIFIED_OK"
+        },
+        {
+          "month": "2023-12",
+          "output_sha256": "b72f14d79c1659211f6a87d6fc975ee94e270c022b14bd27dc5f71f66eeb6442",
+          "output_size_bytes": 622364566,
+          "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2023-12/analysis_panel.parquet",
+          "rows": 2101110,
+          "runtime_seconds": 9.879859924316406,
+          "status": "STAGE07_MONTH_CERTIFIED_OK"
+        },
+        {
+          "month": "2024-01",
+          "output_sha256": "03846320137b76ce64f1c1b6f2e3542d7844747ffff3d8d2c404c1e5077dba4a",
+          "output_size_bytes": 609476437,
+          "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-01/analysis_panel.parquet",
+          "rows": 2049292,
+          "runtime_seconds": 9.201555013656616,
+          "status": "STAGE07_MONTH_CERTIFIED_OK"
+        },
+        {
+          "month": "2024-02",
+          "output_sha256": "f331f0ce4b039a13f183b3075c2ddf48abf6c602bb7e5a25255a75d9a74ef4e9",
+          "output_size_bytes": 571958520,
+          "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-02/analysis_panel.parquet",
+          "rows": 1931143,
+          "runtime_seconds": 7.850879907608032,
+          "status": "STAGE07_MONTH_CERTIFIED_OK"
+        },
+        {
+          "month": "2024-03",
+          "output_sha256": "fc6acd7539f5c9bfc31f7e6a8c9377b5649cf1de7d5f1b9d82c666381bae72a0",
+          "output_size_bytes": 599646499,
+          "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-03/analysis_panel.parquet",
+          "rows": 2021798,
+          "runtime_seconds": 8.744237899780273,
+          "status": "STAGE07_MONTH_CERTIFIED_OK"
+        },
+        {
+          "month": "2024-04",
+          "output_sha256": "541eb6be595b0d6886286163989d3a404fcf082b32d666f30f0141081bb55e43",
+          "output_size_bytes": 570000005,
+          "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-04/analysis_panel.parquet",
+          "rows": 1917136,
+          "runtime_seconds": 8.03652811050415,
+          "status": "STAGE07_MONTH_CERTIFIED_OK"
+        },
+        {
+          "month": "2024-05",
+          "output_sha256": "e29b5b4afa35531279005a4cef20bfcf8cdb80be76a099b0c5c96d18a85d9574",
+          "output_size_bytes": 595686488,
+          "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-05/analysis_panel.parquet",
+          "rows": 2011399,
+          "runtime_seconds": 9.028029918670654,
+          "status": "STAGE07_MONTH_CERTIFIED_OK"
+        },
+        {
+          "month": "2024-06",
+          "output_sha256": "fe2ef3f7c60211327ca7b7b1dc06de07da1ce3d32ea97042bd390021fd9e9b52",
+          "output_size_bytes": 565743912,
+          "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-06/analysis_panel.parquet",
+          "rows": 1903139,
+          "runtime_seconds": 8.339539051055908,
+          "status": "STAGE07_MONTH_CERTIFIED_OK"
+        },
+        {
+          "month": "2024-07",
+          "output_sha256": "df0105cd160b28dfe356cc326259c16f3794df524dde16c36162eef6897f53d9",
+          "output_size_bytes": 561724122,
+          "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-07/analysis_panel.parquet",
+          "rows": 1893461,
+          "runtime_seconds": 7.889422178268433,
+          "status": "STAGE07_MONTH_CERTIFIED_OK"
+        },
+        {
+          "month": "2024-08",
+          "output_sha256": "65ddf9fd2f1ce5559a53474aaa85827547d5c1ed011f63be4c99731e60e908ba",
+          "output_size_bytes": 569839882,
+          "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-08/analysis_panel.parquet",
+          "rows": 1923975,
+          "runtime_seconds": 8.262503147125244,
+          "status": "STAGE07_MONTH_CERTIFIED_OK"
+        },
+        {
+          "month": "2024-09",
+          "output_sha256": "1e033974f8e46620400cd0ba0874520bad77459f013d5b754b60ff0489fb2d03",
+          "output_size_bytes": 544966207,
+          "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-09/analysis_panel.parquet",
+          "rows": 1832046,
+          "runtime_seconds": 8.193991899490356,
+          "status": "STAGE07_MONTH_CERTIFIED_OK"
+        },
+        {
+          "month": "2024-10",
+          "output_sha256": "b76688b0857d9833c7151da5fb3e48ec7b5f611c1ffc61c8246d1a73e9f09048",
+          "output_size_bytes": 590221231,
+          "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-10/analysis_panel.parquet",
+          "rows": 1990765,
+          "runtime_seconds": 7.703560829162598,
+          "status": "STAGE07_MONTH_CERTIFIED_OK"
+        },
+        {
+          "month": "2024-11",
+          "output_sha256": "b0a847f18c0e5560c39481868f4155a4364115367554fdb6faf2b3d8f3494a32",
+          "output_size_bytes": 563061159,
+          "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-11/analysis_panel.parquet",
+          "rows": 1892495,
+          "runtime_seconds": 7.81449294090271,
+          "status": "STAGE07_MONTH_CERTIFIED_OK"
+        },
+        {
+          "month": "2024-12",
+          "output_sha256": "26d05ef331105809c2aea93a0662ac56e8c469ae19df8c861d253e1be68d352e",
+          "output_size_bytes": 606083736,
+          "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2024-12/analysis_panel.parquet",
+          "rows": 2036228,
+          "runtime_seconds": 8.417353868484497,
+          "status": "STAGE07_MONTH_CERTIFIED_OK"
+        },
+        {
+          "month": "2025-01",
+          "output_sha256": "fe3ce93ee474a8a83ca6d055028865a5249a29da5071e7bfbbe666b99f8add6f",
+          "output_size_bytes": 608278686,
+          "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-01/analysis_panel.parquet",
+          "rows": 2050213,
+          "runtime_seconds": 8.617987155914307,
+          "status": "STAGE07_MONTH_CERTIFIED_OK"
+        },
+        {
+          "month": "2025-02",
+          "output_sha256": "b45ec957f43db7e882d4af7176dad1dfc6c04109e22e0e4ba93379db70418e5d",
+          "output_size_bytes": 564265176,
+          "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-02/analysis_panel.parquet",
+          "rows": 1894447,
+          "runtime_seconds": 7.827470779418945,
+          "status": "STAGE07_MONTH_CERTIFIED_OK"
+        },
+        {
+          "month": "2025-03",
+          "output_sha256": "5518f4b268b8bcae51044e14ccdbd8d9354abff983217db87887905f739740f1",
+          "output_size_bytes": 623177452,
+          "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-03/analysis_panel.parquet",
+          "rows": 2100718,
+          "runtime_seconds": 9.12429690361023,
+          "status": "STAGE07_MONTH_CERTIFIED_OK"
+        },
+        {
+          "month": "2025-04",
+          "output_sha256": "de36e7c2730b4cfc5c443161068bb9fa416071a04771110aa32a9add90a58cf9",
+          "output_size_bytes": 595705624,
+          "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-04/analysis_panel.parquet",
+          "rows": 2004376,
+          "runtime_seconds": 8.646004915237427,
+          "status": "STAGE07_MONTH_CERTIFIED_OK"
+        },
+        {
+          "month": "2025-05",
+          "output_sha256": "d119fbe2cae30f389005f8c90ee66014e5116ab71942e14cdf245f65754ccb9d",
+          "output_size_bytes": 617104067,
+          "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-05/analysis_panel.parquet",
+          "rows": 2072890,
+          "runtime_seconds": 9.79875898361206,
+          "status": "STAGE07_MONTH_CERTIFIED_OK"
+        },
+        {
+          "month": "2025-06",
+          "output_sha256": "fca6c52e78b00dfbeda2597123d60f3261bfd07e1bda359dc7c41806f62834e9",
+          "output_size_bytes": 605892648,
+          "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-06/analysis_panel.parquet",
+          "rows": 2042105,
+          "runtime_seconds": 8.089037895202637,
+          "status": "STAGE07_MONTH_CERTIFIED_OK"
+        },
+        {
+          "month": "2025-07",
+          "output_sha256": "7513f0ec085b754350517d0ca31cba05b21244e76c0ebcc975e6e0c83bff2517",
+          "output_size_bytes": 622959427,
+          "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-07/analysis_panel.parquet",
+          "rows": 2091678,
+          "runtime_seconds": 9.408867835998535,
+          "status": "STAGE07_MONTH_CERTIFIED_OK"
+        },
+        {
+          "month": "2025-08",
+          "output_sha256": "f2d7d0f1ba3d6264bdf25f49458a675e46aa3015e3029778e628d453c796674e",
+          "output_size_bytes": 572687493,
+          "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-08/analysis_panel.parquet",
+          "rows": 1930170,
+          "runtime_seconds": 9.5935959815979,
+          "status": "STAGE07_MONTH_CERTIFIED_OK"
+        },
+        {
+          "month": "2025-09",
+          "output_sha256": "254be31157c851ed658ba6d98c947142325088761176ef74401e9b76048b18a4",
+          "output_size_bytes": 557925428,
+          "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-09/analysis_panel.parquet",
+          "rows": 1881564,
+          "runtime_seconds": 7.857481002807617,
+          "status": "STAGE07_MONTH_CERTIFIED_OK"
+        },
+        {
+          "month": "2025-10",
+          "output_sha256": "7d741c6f1c23c88600b54d286972cee8e77eb9ae0e25142bf13a420d8eb0b52e",
+          "output_size_bytes": 595420307,
+          "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/month=2025-10/analysis_panel.parquet",
+          "rows": 1999063,
+          "runtime_seconds": 8.303925037384033,
+          "status": "STAGE07_MONTH_CERTIFIED_OK"
+        }
+      ],
+      "months": 24,
+      "next_step": "Build two-year Stockfish-100k paper results only from this certified panel.",
+      "output_root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k",
+      "output_schema": [
+        {
+          "name": "month",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "game_id",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "api_status",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "source_block",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "provenance_class",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "candidate_source_class",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "site",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "event",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "utc_date",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "utc_time",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "white_username_pgn",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "black_username_pgn",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "white_elo_pgn",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "black_elo_pgn",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "white_rating_diff_pgn",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "black_rating_diff_pgn",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "pgn_result",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "pgn_termination",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "time_control",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "tc_base_s",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "tc_inc_s",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "last_mover_color",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "chooser_username",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "chooser_username_norm",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "chooser_color",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "chooser_elo",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "disconnected_username",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "disconnected_username_norm",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "disconnected_color",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "disconnected_elo",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "white_clock_last_obs_s",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "black_clock_last_obs_s",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "chooser_clock_last_obs_s",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "disconnected_clock_last_obs_s",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "clock_gap_chooser_minus_disconnected_s",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "disconnected_clock_positive",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "five_second_rule_passed",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "pgn_chooser_raw_win",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "pgn_raw_draw",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "last_move_uci",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "last_move_san",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "ply_count",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "side_to_move_after_last",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "fen_after_last_move",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "tournament_like_event",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "api_winner",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "api_is_draw_raw_diagnostic",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "api_speed",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "api_perf",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "api_rated",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "api_variant",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "api_created_at_ms",
+          "nullable": true,
+          "type": "int64"
+        },
+        {
+          "name": "api_last_move_at_ms",
+          "nullable": true,
+          "type": "int64"
+        },
+        {
+          "name": "pgn_api_result_consistent",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "timeout_draw",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "timeout_chooser_win",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "timeout_chooser_loss",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "chooser_has_mating_material",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "timeout_draw_no_mating_material",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "outcome_kind_draw",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "chooser_material_pts",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "disconnected_material_pts",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "disconnected_minus_chooser_material",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "chooser_pawns",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "chooser_knights",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "chooser_bishops",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "chooser_rooks",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "chooser_queens",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "disconnected_pawns",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "disconnected_knights",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "disconnected_bishops",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "disconnected_rooks",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "disconnected_queens",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "chooser_pieces",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "disconnected_pieces",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "total_pieces",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "material_total",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "material_advantage_chooser",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "avg_rating",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "rating_gap",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "rating_gap_abs",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "rating_gap_100",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "chooser_higher_rated",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "archive_ordinal",
+          "nullable": true,
+          "type": "int64"
+        },
+        {
+          "name": "utc_ms",
+          "nullable": true,
+          "type": "int64"
+        },
+        {
+          "name": "white_id",
+          "nullable": true,
+          "type": "int64"
+        },
+        {
+          "name": "black_id",
+          "nullable": true,
+          "type": "int64"
+        },
+        {
+          "name": "white_elo_replay",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "black_elo_replay",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "chooser_user_id",
+          "nullable": true,
+          "type": "int64"
+        },
+        {
+          "name": "disconnected_user_id",
+          "nullable": true,
+          "type": "int64"
+        },
+        {
+          "name": "chooser_elo_v2_source",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "disconnected_elo_v2_source",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "chooser_pre_rd_v2",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "chooser_pre_sigma_v2",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "disconnected_pre_rd_v2",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "disconnected_pre_sigma_v2",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "chooser_draw_payoff_v2",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "chooser_win_payoff_v2",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "chooser_win_premium_v2",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "favorable_draw_v2",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "white_pre_rd_v2",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "black_pre_rd_v2",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "white_pre_sigma_v2",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "black_pre_sigma_v2",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "white_draw_ratingdiff_v2",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "white_win_ratingdiff_v2",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "white_win_premium_v2",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "black_draw_ratingdiff_v2",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "black_win_ratingdiff_v2",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "black_win_premium_v2",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "white_realized_pred_ratingdiff_v2",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "black_realized_pred_ratingdiff_v2",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "both_ratingdiff_null",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "hidden_state_update_applied",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "color_adv_applied",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "white_rating_source_match",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "black_rating_source_match",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "white_ratingdiff_source_match",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "black_ratingdiff_source_match",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "speed_source_match",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "month_source_match",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "api_minus_pgn_created_ms",
+          "nullable": true,
+          "type": "int64"
+        },
+        {
+          "name": "sf100k_source_block",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "sf100k_source_part_id",
+          "nullable": true,
+          "type": "int16"
+        },
+        {
+          "name": "sf100k_stockfish_name",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "sf100k_stockfish_sha256",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "sf100k_nodes_requested",
+          "nullable": true,
+          "type": "int64"
+        },
+        {
+          "name": "sf100k_nodes_searched",
+          "nullable": true,
+          "type": "int64"
+        },
+        {
+          "name": "sf100k_threads",
+          "nullable": true,
+          "type": "int64"
+        },
+        {
+          "name": "sf100k_hash_mb",
+          "nullable": true,
+          "type": "int64"
+        },
+        {
+          "name": "sf100k_depth",
+          "nullable": true,
+          "type": "int64"
+        },
+        {
+          "name": "sf100k_seldepth",
+          "nullable": true,
+          "type": "int64"
+        },
+        {
+          "name": "sf100k_eval_method",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "sf100k_fen_turn_color",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "sf100k_disconnected_color_for_perspective",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "sf100k_perspective_assumption",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "sf100k_fen_turn_matches_disconnected_color",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "sf100k_score_type_side_to_move",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "sf100k_score_value_side_to_move",
+          "nullable": true,
+          "type": "int64"
+        },
+        {
+          "name": "sf100k_score_cp_side_to_move",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "sf100k_mate_ply_side_to_move",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "engine_eval_cp_disconnected_raw",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "engine_eval_cp_disconnected",
+          "nullable": true,
+          "type": "int32"
+        },
+        {
+          "name": "engine_eval_cp_disconnected_capped600",
+          "nullable": true,
+          "type": "int16"
+        },
+        {
+          "name": "engine_eval_hundreds_capped600",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "engine_eval_is_mate",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "engine_eval_mate_ply_disconnected",
+          "nullable": true,
+          "type": "double"
+        },
+        {
+          "name": "engine_fairness_bin",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "fairness_region",
+          "nullable": true,
+          "type": "string"
+        },
+        {
+          "name": "fair_competitive",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "clearly_worse",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "excluded_middle",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "kind_draw",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "draw_nonnegative",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "draw_strict_positive",
+          "nullable": true,
+          "type": "bool"
+        },
+        {
+          "name": "draw_costly",
+          "nullable": true,
+          "type": "bool"
+        }
+      ],
+      "script_sha256": "0411d4061ea9831c20449208a9782aaf668e160139918d106a2b7d63aaa56e6e",
+      "script_version": "1.3.0",
+      "status": "STAGE07_24M_CERTIFIED_OK"
+    },
+    "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/_SUCCESS.json",
+    "sha256": "8b7010b528ae5c6f1e1a9b517258648204c14c17ca41a2a6796f8ee5a1ed6db7"
+  },
+  "status": "DYNAMICS_CAMPAIGN1_WAVE0_STAGE07_ACTUAL_V100_OK"
+}

@@ -1,0 +1,44 @@
+[
+  {
+    "analysis": "Single global log elasticity with respect to signed draw payoff",
+    "reason": "Draw payoff has negative, zero, and positive support; log(draw payoff) is not a real-valued regressor on the full support.",
+    "replacement_reported": "signed schedule, zero contrasts, and separate loss/gain sides",
+    "saved_for_later": false,
+    "status": "NOT_MATHEMATICALLY_DEFINED"
+  },
+  {
+    "analysis": "Elasticity exactly at the pre-game-rating reference",
+    "reason": "The price magnitude is zero at the reference, so a proportional price change and log derivative are undefined.",
+    "replacement_reported": "matched-window differences and local slopes",
+    "saved_for_later": false,
+    "status": "NOT_MATHEMATICALLY_DEFINED"
+  },
+  {
+    "analysis": "Structural reference-dependent utility-cost elasticity",
+    "reason": "A structural subjective cost would require specifying and identifying v(win payoff)-v(draw payoff), including reference curvature and loss aversion. The paper estimates reduced-form behavior and does not impose that primitive.",
+    "replacement_reported": "reduced-form reference-dependent demand schedule",
+    "saved_for_later": false,
+    "status": "NOT_IDENTIFIED_WITHOUT_A_VALUE_FUNCTION"
+  },
+  {
+    "analysis": "Causal reference-price elasticity",
+    "reason": "Draw payoff and relative rating are the same ordering variable under the Glicko update and are not randomly assigned. Estimates are within-chooser conditional associations, not causal price effects.",
+    "replacement_reported": "chooser-FE descriptive schedule plus placebos and balance diagnostics",
+    "saved_for_later": false,
+    "status": "NOT_IDENTIFIED"
+  },
+  {
+    "analysis": "Dollar-price elasticity",
+    "reason": "The reference margin is denominated in rating points and has no supported cardinal dollar conversion.",
+    "replacement_reported": "rating-point slopes and elasticities",
+    "saved_for_later": false,
+    "status": "NOT_DEFINED"
+  },
+  {
+    "analysis": "November 18 2025 color-advantage rule-change event study in this authority",
+    "reason": "The certified Stage07 authority ends in October 2025. A separate post-change reference-location branch already exists and is not concealed or reserved here.",
+    "replacement_reported": "none in this lineage",
+    "saved_for_later": false,
+    "status": "NOT_ESTIMABLE_IN_CURRENT_CERTIFIED_24M_AUTHORITY_PRIOR_BRANCH_EXISTS"
+  }
+]

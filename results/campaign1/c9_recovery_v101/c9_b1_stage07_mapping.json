@@ -1,0 +1,28 @@
+{
+  "ambiguous_b1_rows": 0,
+  "attempts": [
+    {
+      "b1_rows_exactly_one_candidate": 1017944,
+      "b1_rows_with_candidate": 1017944,
+      "candidate_rows": 1017944,
+      "chooser_indices_with_candidate": 64331,
+      "chooser_indices_with_unique_user": 64331,
+      "time_field": "api_last_move_at_ms"
+    },
+    {
+      "b1_rows_exactly_one_candidate": 0,
+      "b1_rows_with_candidate": 0,
+      "candidate_rows": 0,
+      "chooser_indices_with_candidate": 0,
+      "chooser_indices_with_unique_user": 0,
+      "time_field": "utc_ms"
+    }
+  ],
+  "canonical_stage07_speed_rows_missing": 0,
+  "current_speed_code_used_as_literal_speed": false,
+  "mapped_b1_rows": 1017944,
+  "mapped_chooser_indices": 64331,
+  "mapping_uses_kind_draw": false,
+  "selected_time_field": "api_last_move_at_ms",
+  "status": "C9_B1_STAGE07_NONOUTCOME_BRIDGE_OK"
+}

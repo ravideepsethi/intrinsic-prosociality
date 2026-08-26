@@ -1,0 +1,37 @@
+{
+  "all_discovered_prior_primaries_invalidated": true,
+  "discovery_rule": "coefficient fingerprint, not colliding package/folder name",
+  "prior_primary_csvs_found": 2,
+  "run_A_found": false,
+  "run_B_found": true,
+  "runs": [
+    {
+      "classification": "INVALID_RESULT_CODE_SEMANTICS",
+      "lineage": "Run_B_production_lineage",
+      "primary_csv": "/Volumes/XT_Pro/lichess_kindness/output/dynamics_campaign1_c1_completion_v101/20260825T033227Z_FAILED/c1_prior_result_state_dependence.csv",
+      "primary_csv_sha256": "45fe1b81a1838462a5bbec15c3a1c13a8da8eb249123a3bd9d8d3a5b86ce6eeb",
+      "primary_effect_pp": -0.8317125360007418,
+      "result_tree": {
+        "file_count": 6,
+        "root": "/Volumes/XT_Pro/lichess_kindness/output/dynamics_campaign1_c1_completion_v101/20260825T033227Z_FAILED",
+        "total_bytes": 14877,
+        "tree_manifest_sha256": "04ceb80dcb172d6fe395461f32666ade326a45a4e21946baca519f60fdc696f3"
+      }
+    },
+    {
+      "classification": "INVALID_RESULT_CODE_SEMANTICS",
+      "lineage": "Run_B_production_lineage",
+      "primary_csv": "/Volumes/XT_Pro/lichess_kindness/output/dynamics_campaign1_c1_completion_v102/20260825T033537Z/c1_prior_result_state_dependence.csv",
+      "primary_csv_sha256": "ec1bc91b012f63205192160b29377344d83e65c195ac9b6ed7176732c34c5ee9",
+      "primary_effect_pp": -0.8317125360007347,
+      "result_tree": {
+        "file_count": 9,
+        "root": "/Volumes/XT_Pro/lichess_kindness/output/dynamics_campaign1_c1_completion_v102/20260825T033537Z",
+        "total_bytes": 32593,
+        "tree_manifest_sha256": "bf770bd2a2df542c2e304f580aa4f9a24bdcdffdaf6a7732dc3472bcfc6f1546"
+      }
+    }
+  ],
+  "status": "C1_PRIOR_OUTPUT_INVENTORY_COMPLETE",
+  "unknown_prior_primaries": 0
+}

@@ -1,0 +1,33 @@
+{
+  "artifact": "Campaign 1 canonical public overlay",
+  "created_utc_date": "2026-08-26",
+  "target_repository": "https://github.com/ravideepsethi/intrinsic-prosociality.git",
+  "required_base_commit": "46abb7409621e98c74dc8aa3eb3b3885a644080d",
+  "target_branch": "main",
+  "commit_message": "Publish canonical Campaign 1 and price analyses",
+  "source_result_bundles": {
+    "CAMPAIGN1_C1_C9_CORRECTIVE_RESULTS_20260825T173001Z.zip": "3c21fc4a1a1beadebc67fd0421e1b10d4499933ee5adcfc9fc58d4de6c15884e",
+    "CAMPAIGN1_NONPROFILE_RECOVERY_RESULTS_20260825T230132Z.zip": "d2568055e9bf0a58bc32c0566521b7de3f667aff241eb9e0fece8370d2c8d872",
+    "KINDNESS_PRICE_ELASTICITY_RESULTS_20260826T010817Z.zip": "fd1b8b9198c3478adc951e3727d491a95a0c5fb08bd7bc2ad671a6fa11b75264",
+    "KINDNESS_REFERENCE_DEMAND_RESULTS_20260826T021723Z.zip": "8f09446c7def7455367cc3d6acdf0ee066809999aabb56d0e96a5afc1a803852"
+  },
+  "included_scopes": [
+    "code/campaign1",
+    "code/exploratory_price",
+    "docs/campaign1",
+    "docs/exploratory_price",
+    "results/campaign1",
+    "results/exploratory_price",
+    "provenance/campaign1_publication_20260826"
+  ],
+  "public_data_boundary": {
+    "aggregate_outputs_only": true,
+    "row_level_records_included": false,
+    "account_identifiers_included": false,
+    "parquet_included": false,
+    "raw_pgn_included": false,
+    "api_objects_included": false
+  },
+  "historical_serialization_note": "The exact malformed C14A numerical JSON and its original matching manifest are retained beside a content-identical valid-JSON correction and replacement manifest.",
+  "scientific_status_authority": "docs/campaign1/CAMPAIGN1_CANONICAL_STATUS_2026-08-26.md"
+}

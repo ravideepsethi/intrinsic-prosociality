@@ -1,0 +1,47 @@
+{
+  "chooser_result_mapping": "decode raw code to White-signed result, then negate only for Black chooser",
+  "chronology_files": 852,
+  "chronology_manifest": "/Volumes/XT_Pro/lichess_kindness/output/dynamic_prosociality_a3_chronology_gate_v100/20260821T234626Z/chronology_input_manifest.tsv",
+  "chronology_manifest_sha256": "1d4648bb17cafd9e58c14ab78d32abe855f0bc62a6fb75ac88e02494a73337cd",
+  "chronology_rows": 7763847245,
+  "different_artifact_explicitly_rejected_as_semantic_authority": "replication_package/code/02_extract_rating_replay_inputs.py",
+  "historical_producer": {
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/authorities/c1/032_make_sorted_replay_events_v2_time.py",
+    "sha256": "02a14d3de5ef7fadf59909b703ad481ca23625fea39c43a5d09cdc86cfbc4458"
+  },
+  "physical_decider_json": {
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/authorities/c1/result_code_physical_decider.json",
+    "sha256": "f5cfb8836f1425a7083f55a41934a843fd143a15fbca9ff59bd6661a4385b7b2"
+  },
+  "physical_revalidation": {
+    "decision_branch": "RAW_0_1_2",
+    "null_result_code_rows": 0,
+    "performed_before_current_kindness_read": true,
+    "physical_file": "/Volumes/XT_Pro/lichess_kindness/derived/glicko2_replay/rating_events_replay_sorted_v2_time/events_replay_sorted_time/speed=blitz/month=2024-10/part-00000.parquet",
+    "physical_file_rows": 44144371,
+    "physical_file_size_bytes": 857854340,
+    "result_code_counts": {
+      "0": 20340159,
+      "1": 1916130,
+      "2": 21888082
+    },
+    "status": "C1_PHYSICAL_RESULT_CODE_REVALIDATED_V105"
+  },
+  "postoutcome_correction_v105": {
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/docs/dynamics_paper2_campaign1_v1_0_5_postoutcome_correction.md",
+    "sha256": "14cb718408788ea15f94d555eaabc84c27f2dc42b1ca85c03b46daf43e366787"
+  },
+  "rating_diff_used_for_validation_only": true,
+  "rating_diff_used_to_infer_result": false,
+  "raw_result_code_semantics": {
+    "0": "Black win",
+    "1": "draw",
+    "2": "White win"
+  },
+  "status": "C1_CHRONOLOGY_AUTHORITY_AUTHENTICATED_V105",
+  "white_signed_decode": {
+    "0": -1,
+    "1": 0,
+    "2": 1
+  }
+}

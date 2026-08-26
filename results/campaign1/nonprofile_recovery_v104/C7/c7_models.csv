@@ -1,0 +1,4 @@
+model,status,epistemic_label,rows,treated_rows,control_rows,chooser_clusters,causal_claim
+C7_latest_reversed_arm_decision_primary,NOT_HDFE_ESTIMABLE_LOW_SUPPORT,X,590,33,557,502,False
+C7_latest_reversed_arm_decision_same_speed,NOT_HDFE_ESTIMABLE_LOW_SUPPORT,X,563,29,534,484,False
+C7_any_prior_arm_decision_exclusive_histories,NOT_HDFE_ESTIMABLE_LOW_SUPPORT,X,571,28,543,498,False

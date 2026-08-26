@@ -1,0 +1,14 @@
+{
+  "decision_branch": "RAW_0_1_2",
+  "null_result_code_rows": 0,
+  "performed_before_current_kindness_read": true,
+  "physical_file": "/Volumes/XT_Pro/lichess_kindness/derived/glicko2_replay/rating_events_replay_sorted_v2_time/events_replay_sorted_time/speed=blitz/month=2024-10/part-00000.parquet",
+  "physical_file_rows": 44144371,
+  "physical_file_size_bytes": 857854340,
+  "result_code_counts": {
+    "0": 20340159,
+    "1": 1916130,
+    "2": 21888082
+  },
+  "status": "C1_PHYSICAL_RESULT_CODE_REVALIDATED_V105"
+}

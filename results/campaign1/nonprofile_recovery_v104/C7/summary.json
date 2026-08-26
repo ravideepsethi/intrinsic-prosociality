@@ -1,0 +1,39 @@
+{
+  "account_level_output": false,
+  "api_requests": 0,
+  "benefactor_facing_fair_opportunities": 33,
+  "created_utc": "2026-08-25T18:52:50.704145+00:00",
+  "focal_kind_outcome_estimated": true,
+  "gate_pass": false,
+  "primary": {
+    "causal_claim": false,
+    "chooser_clusters": 502,
+    "control_rows": 557,
+    "epistemic_label": "X",
+    "model": "C7_latest_reversed_arm_decision_primary",
+    "rows": 590,
+    "status": "NOT_HDFE_ESTIMABLE_LOW_SUPPORT",
+    "treated_rows": 33
+  },
+  "profile_or_patron_reads": 0,
+  "result_status": "C7_ESTIMATED_EXPLORATORY_LOW_SUPPORT_GATE_FAILED",
+  "runtime_seconds": 35.56031513214111,
+  "status": "CAMPAIGN1_C7_V101_OK",
+  "unadjusted_primary": {
+    "causal_claim": false,
+    "control_kind_draws": 25,
+    "control_kind_rate_pct": 4.488330341113106,
+    "control_rows": 557,
+    "difference_percentage_points": 31.875306022523258,
+    "epistemic_label": "X",
+    "fisher_exact_two_sided_p_value": 8.31754480783071e-08,
+    "inference_warning": "descriptive opportunity-level inference ignores repeated-chooser dependence; use the clustered HDFE attempt when estimable",
+    "model": "C7_latest_reversed_arm_decision_unadjusted",
+    "naive_unclustered_normal_p_value": 0.00015323096400503863,
+    "naive_unclustered_standard_error_percentage_points": 8.419759614075794,
+    "status": "DESCRIPTIVE_TWO_ARM_ESTIMATED",
+    "treated_kind_draws": 12,
+    "treated_kind_rate_pct": 36.36363636363637,
+    "treated_rows": 33
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "claim_boundary": "All v1.0.3 estimates are exploratory within-chooser conditional associations. The design identifies a reduced-form reference-dependent schedule, not a causal or structural price elasticity.",
+  "full_gain_slope_pp_per_point": 0.012000387750474522,
+  "full_loss_slope_pp_per_point": 0.005803740905190115,
+  "global_signed_log_elasticity_status": "NOT_MATHEMATICALLY_DEFINED",
+  "headline_object": "reference-dependent demand schedule, not one global elasticity",
+  "loss_log_ci95_high": -0.04011397843292399,
+  "loss_log_ci95_low": -0.04763627104031371,
+  "loss_log_elasticity": -0.04387512473661885,
+  "loss_log_model": "X_primary_loss_log_elasticity_chooser_fe_premium20_fe",
+  "models_attempted": 111,
+  "models_estimated": 108,
+  "models_failed_retained": 3,
+  "prior_v102_premium_elasticity": 0.1570280092407992,
+  "scientific_success": true,
+  "status": "KINDNESS_REFERENCE_DEMAND_V103_OK",
+  "zero_w0p5_ci95_high_pp": 0.25331844596356323,
+  "zero_w0p5_ci95_low_pp": 0.2142548986635434,
+  "zero_w0p5_contrast_pp": 0.23378667231355332
+}

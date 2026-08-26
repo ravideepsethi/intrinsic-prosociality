@@ -1,0 +1,36 @@
+{
+  "appendix_A11_comparison_status": "NONIDENTICAL_ENGINE_AND_CALENDAR_WINDOW_NO_PASS_FAIL",
+  "appendix_A11_historical_10k_expected_rounded": {
+    "negative_draw_payoff": -0.00586,
+    "positive_draw_payoff": 0.03966,
+    "price": 0.01023
+  },
+  "appendix_A11_note": "The displayed draft A11 coefficients came from the predecessor 10k-node 2023-10 through 2024-09 window (8,648,684 fair rows). The current certified Stage07 authority begins in 2023-11, so this bridge instead estimates its actual first temporal half, 2023-11 through 2024-10 (8,575,710 fair rows). It is an openly reported cross-window comparison, not a reproduction test.",
+  "current_temporal_first_half_minus_historical_A11_differences": {
+    "negative_draw_payoff": -0.003569573301971065,
+    "positive_draw_payoff": -0.03499021168578328,
+    "price": 0.003565596286806333
+  },
+  "current_temporal_first_half_observed": {
+    "negative_draw_payoff": -0.009429573301971065,
+    "positive_draw_payoff": 0.004669788314216726,
+    "price": 0.013795596286806332
+  },
+  "stage08_full24_differences": {
+    "beta_minus_pp_per_rating_point": -5.160802341031001e-16,
+    "beta_plus_pp_per_rating_point": -8.506650245321268e-16,
+    "threshold_jump_pp": 6.217248937900877e-15
+  },
+  "stage08_full24_expected": {
+    "beta_minus_pp_per_rating_point": -0.006719576971106138,
+    "beta_plus_pp_per_rating_point": 0.00015756302027886832,
+    "threshold_jump_pp": 0.43947730757174397
+  },
+  "stage08_full24_observed": {
+    "beta_minus_pp_per_rating_point": -0.006719576971106654,
+    "beta_plus_pp_per_rating_point": 0.00015756302027801765,
+    "threshold_jump_pp": 0.4394773075717502
+  },
+  "stage08_tolerance_pp": 5e-10,
+  "status": "KINDNESS_PRICE_REPLICATION_AUDITS_OK"
+}

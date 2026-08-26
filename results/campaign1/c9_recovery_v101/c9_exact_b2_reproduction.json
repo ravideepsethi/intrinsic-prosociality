@@ -1,0 +1,58 @@
+{
+  "checks": [
+    {
+      "expected": {
+        "null_mean_rate": 0.3386070240077344,
+        "observed_denominator": 2925,
+        "observed_numerator": 1512,
+        "observed_rate": 0.5169230769230769,
+        "randomization_p_two_sided": 0.0004
+      },
+      "reproduced": {
+        "horizon_hours": 6.0,
+        "null_mean_rate": 0.33860702400773446,
+        "observed_denominator": 2925,
+        "observed_numerator": 1512,
+        "observed_rate": 0.5169230769230769,
+        "randomization_p_two_sided": 0.0004
+      }
+    },
+    {
+      "expected": {
+        "null_mean_rate": 0.3311503198948426,
+        "observed_denominator": 6190,
+        "observed_numerator": 3079,
+        "observed_rate": 0.4974151857835218,
+        "randomization_p_two_sided": 0.0004
+      },
+      "reproduced": {
+        "horizon_hours": 24.0,
+        "null_mean_rate": 0.3311503198948426,
+        "observed_denominator": 6190,
+        "observed_numerator": 3079,
+        "observed_rate": 0.4974151857835218,
+        "randomization_p_two_sided": 0.0004
+      }
+    },
+    {
+      "expected": {
+        "null_mean_rate": 0.3161657264738204,
+        "observed_denominator": 28949,
+        "observed_numerator": 12505,
+        "observed_rate": 0.4319665618846938,
+        "randomization_p_two_sided": 0.0004
+      },
+      "reproduced": {
+        "horizon_hours": 168.0,
+        "null_mean_rate": 0.31616572647382046,
+        "observed_denominator": 28949,
+        "observed_numerator": 12505,
+        "observed_rate": 0.4319665618846938,
+        "randomization_p_two_sided": 0.0004
+      }
+    }
+  ],
+  "historical_randomizations": 4999,
+  "historical_seed": 2026082201,
+  "status": "C9_EXACT_B2_RANDOMIZATION_REPRODUCTION_OK"
+}

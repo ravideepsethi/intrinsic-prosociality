@@ -1,0 +1,56 @@
+{
+  "bonferroni_guaranteed_rejections_at_0_05": [
+    "C1",
+    "C6",
+    "C9"
+  ],
+  "effective_members": [
+    "C1",
+    "C2",
+    "C5",
+    "C6",
+    "C9"
+  ],
+  "family_size": 5,
+  "final_holm_computed": false,
+  "guarantee_rule": "family_size * raw_p <= 0.05; sufficient under any ordering of missing p-values",
+  "invalid_C1_lineages_included": false,
+  "members": {
+    "C1": {
+      "effect_pp": 0.17641313966423625,
+      "raw_p": 0.006046717201351934,
+      "status": "VALID_CORRECTED_HOLM_PENDING"
+    },
+    "C2": {
+      "effect_pp": -0.1347416,
+      "raw_p": 0.0363121,
+      "status": "VALID_OPPOSITE_PRESPECIFIED_SIGN_HOLM_PENDING"
+    },
+    "C5": {
+      "effect_pp": null,
+      "raw_p": null,
+      "status": "BLOCKED_PROFILE_AUTHORITY"
+    },
+    "C6": {
+      "effect": -1.7937438637756953,
+      "effect_units": "events_per_1000_rated_games",
+      "raw_p": 5.334843209911397e-07,
+      "status": "VALID_GATE_PASSED_HOLM_PENDING"
+    },
+    "C9": {
+      "effect_pp": 11.105202218891035,
+      "raw_p": 0.0004,
+      "status": "VALID_RECOVERED_HOLM_PENDING"
+    }
+  },
+  "missing_raw_p_values": [
+    "C5"
+  ],
+  "observed_raw_p_values": {
+    "C1": 0.006046717201351934,
+    "C2": 0.0363121,
+    "C6": 5.334843209911397e-07,
+    "C9": 0.0004
+  },
+  "status": "FINAL_HOLM_PENDING_MISSING_EFFECTIVE_FAMILY_MEMBER"
+}

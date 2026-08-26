@@ -1,0 +1,11 @@
+{
+  "final_status": "UNESTIMABLE_RETAINED",
+  "model": "C12_primary_by_chooser_rating_band_3",
+  "numerical_estimate_emitted": false,
+  "prior_results_sha256": "7c1ebc5a22c8d7fba1ab83ce57db9c9a9b7fa8fda6ba36893bda322fda55be66",
+  "prior_summary_sha256": "eb17480e70c5c4a772aa47ae57e5080e2580f3ef6b09d44678d86ca4a2877770",
+  "reason": "v1.0.2 silently skipped subgroups below its eligibility threshold",
+  "requested_chooser_clusters": 435,
+  "requested_rows": 464,
+  "selection_on_result": false
+}

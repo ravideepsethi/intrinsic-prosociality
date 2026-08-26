@@ -1,0 +1,26 @@
+[
+  {
+    "analysis": "November 18 2025 color-advantage rule-change event study",
+    "reason": "Certified Stage07 ends in October 2025 and contains no post-change observations. A separate Aug-Dec 2025 branch already estimated this reference-location design; it is not being concealed or reserved here.",
+    "saved_for_later": false,
+    "status": "NOT_ESTIMABLE_IN_CURRENT_AUTHORITY_PRIOR_BRANCH_EXISTS"
+  },
+  {
+    "analysis": "Alternative fixed-RD and local-RD price elasticities",
+    "reason": "The certified Stage07 schema contains only the v2 reconstructed payoff and premium fields; predecessor price fields are not row-level members of this authority.",
+    "saved_for_later": false,
+    "status": "ATTEMPTED_UNESTIMABLE_CURRENT_AUTHORITY"
+  },
+  {
+    "analysis": "Causal demand elasticity",
+    "reason": "The premium is a deterministic nonlinear function of chooser RD, opponent RD, and expected score. These rating states and matchmaking are not randomly assigned and may directly proxy activity, provisional status, tenure, rustiness, and opponent selection.",
+    "saved_for_later": false,
+    "status": "NOT_IDENTIFIED"
+  },
+  {
+    "analysis": "Dollar-price elasticity",
+    "reason": "The decision price is denominated in rating points and cannot be converted to money without an unsupported cardinal exchange rate.",
+    "saved_for_later": false,
+    "status": "NOT_DEFINED"
+  }
+]

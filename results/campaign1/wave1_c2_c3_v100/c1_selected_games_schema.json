@@ -1,0 +1,36 @@
+{
+  "mapping": {
+    "black_id": "black_id",
+    "game_id": "game_id",
+    "result": null,
+    "white_id": "white_id"
+  },
+  "parquet_files": 686,
+  "sample_schema": {
+    "columns": [
+      "utc_ms",
+      "archive_ordinal",
+      "game_id",
+      "white_id",
+      "black_id",
+      "white_elo",
+      "black_elo",
+      "white_rating_diff",
+      "black_rating_diff",
+      "speed"
+    ],
+    "rows": 2826,
+    "types": {
+      "archive_ordinal": "int64",
+      "black_elo": "int32",
+      "black_id": "int64",
+      "black_rating_diff": "int32",
+      "game_id": "string",
+      "speed": "string",
+      "utc_ms": "int64",
+      "white_elo": "int32",
+      "white_id": "int64",
+      "white_rating_diff": "int32"
+    }
+  }
+}

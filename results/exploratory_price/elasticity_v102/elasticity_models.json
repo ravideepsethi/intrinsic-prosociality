@@ -1,0 +1,3143 @@
+[
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 1.3148006987560247e-14,
+    "absorption_method": "one_way_exact",
+    "adjusted_controls": false,
+    "analysis_role": "validation",
+    "causal_claim": false,
+    "chooser_clusters": 1801942,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 588.0663086961664,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.05860276140794659,
+      "ci95_low": 0.05021643924971501,
+      "definition": "d Pr(kind)/d price multiplied by price scale and divided by sample Pr(kind)",
+      "estimate": 0.0544096003288308,
+      "price_scale": 9.977606383043597,
+      "standard_error_delta_quantity_fixed": 0.0021394072096175814,
+      "term": "price"
+    },
+    "elasticity_at_median_price": {
+      "causal": false,
+      "ci95_high": 0.03338228255558351,
+      "ci95_low": 0.028605125828455702,
+      "definition": "d Pr(kind)/d price multiplied by price scale and divided by sample Pr(kind)",
+      "estimate": 0.030993704192019605,
+      "price_scale": 5.68361059282762,
+      "standard_error_delta_quantity_fixed": 0.0012186848240093712,
+      "term": "price"
+    },
+    "epistemic_label": "V",
+    "exposure_residual_norms": {
+      "price": 43293.153295719996
+    },
+    "fixed_effect_count": 1,
+    "matrix_columns": 4,
+    "matrix_rank": 4,
+    "model": "V_certified_stage08_full24_piecewise_reproduction",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.028114401265456803,
+    "price_mean": 9.977606383043597,
+    "price_median": 5.68361059282762,
+    "reference_control": "piecewise",
+    "reference_quantile_fixed_effect_bins": null,
+    "rows_identifying": 16444544,
+    "rows_raw": 17328130,
+    "sample": "rows_selected=17328130",
+    "sample_sha256": "392e0f0c55fa42413d0c1b870d8f773ed51826ae5afc22af6aa255bbbde93f80",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.015331265612336751,
+        "coefficient_probability_units": 0.0001533126561233675,
+        "p_value_two_sided": 1.1141545414212056e-142,
+        "standard_error_percentage_points": 0.0006028314853512209,
+        "standard_error_probability_units": 6.028314853512208e-06,
+        "t_cluster": 25.43209169541712,
+        "term": "price"
+      },
+      {
+        "coefficient_percentage_points": 0.00015756302027801765,
+        "coefficient_probability_units": 1.5756302027801765e-06,
+        "p_value_two_sided": 0.9014266551804361,
+        "standard_error_percentage_points": 0.0012721126520584768,
+        "standard_error_probability_units": 1.272112652058477e-05,
+        "t_cluster": 0.12385932961444576,
+        "term": "positive_draw_payoff"
+      },
+      {
+        "coefficient_percentage_points": -0.006719576971106654,
+        "coefficient_probability_units": -6.719576971106654e-05,
+        "p_value_two_sided": 2.113198561164394e-09,
+        "standard_error_percentage_points": 0.001122013116317143,
+        "standard_error_probability_units": 1.122013116317143e-05,
+        "t_cluster": -5.988857771255617,
+        "term": "negative_draw_payoff"
+      },
+      {
+        "coefficient_percentage_points": 0.4394773075717502,
+        "coefficient_probability_units": 0.004394773075717502,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.007457004125518975,
+        "standard_error_probability_units": 7.457004125518975e-05,
+        "t_cluster": 58.934834978539655,
+        "term": "draw_nonnegative"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 1.1532223232376708e-14,
+    "absorption_method": "one_way_exact",
+    "analysis_role": "historical_cross_window_bridge",
+    "causal_claim": false,
+    "chooser_clusters": 1147212,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 13.327569730526616,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.054238023043363386,
+      "ci95_low": 0.041872647252834024,
+      "definition": "d Pr(kind)/d price multiplied by price scale and divided by sample Pr(kind)",
+      "estimate": 0.048055335148098705,
+      "price_scale": 9.764320475394175,
+      "standard_error_delta_quantity_fixed": 0.003154490564129207,
+      "term": "price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "price": 27866.48230055388
+    },
+    "fixed_effect_count": 1,
+    "matrix_columns": 3,
+    "matrix_rank": 3,
+    "model": "X_current_temporal_first_half_piecewise_price_bridge",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.028031148441353543,
+    "price_mean": 9.764320475394175,
+    "price_median": 5.683557252894337,
+    "rows_identifying": 7977997,
+    "rows_raw": 8575710,
+    "sample": "current temporal first half: 2023-11 through 2024-10",
+    "sample_sha256": "2a022ef4cd731d795fcedef0aa0a524c9e1d5dfeb502b25f17dc5ca2dc45a851",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.004669788314216726,
+        "coefficient_probability_units": 4.6697883142167256e-05,
+        "p_value_two_sided": 0.01184081900966227,
+        "standard_error_percentage_points": 0.0018554075857998413,
+        "standard_error_probability_units": 1.8554075857998413e-05,
+        "t_cluster": 2.5168530892923147,
+        "term": "positive_draw_payoff"
+      },
+      {
+        "coefficient_percentage_points": -0.009429573301971065,
+        "coefficient_probability_units": -9.429573301971065e-05,
+        "p_value_two_sided": 1.5847770852417506e-08,
+        "standard_error_percentage_points": 0.0016683240202054457,
+        "standard_error_probability_units": 1.6683240202054457e-05,
+        "t_cluster": -5.652123441110595,
+        "term": "negative_draw_payoff"
+      },
+      {
+        "coefficient_percentage_points": 0.013795596286806332,
+        "coefficient_probability_units": 0.00013795596286806332,
+        "p_value_two_sided": 2.1049813691626156e-52,
+        "standard_error_percentage_points": 0.0009055826617200956,
+        "standard_error_probability_units": 9.055826617200957e-06,
+        "t_cluster": 15.233944806984809,
+        "term": "price"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 1.3148006987560247e-14,
+    "absorption_method": "one_way_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_main_or_sensitivity",
+    "causal_claim": false,
+    "chooser_clusters": 1801942,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 588.0663086961664,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.05860276140794659,
+      "ci95_low": 0.05021643924971501,
+      "definition": "d Pr(kind)/d price multiplied by price scale and divided by sample Pr(kind)",
+      "estimate": 0.0544096003288308,
+      "price_scale": 9.977606383043597,
+      "standard_error_delta_quantity_fixed": 0.0021394072096175814,
+      "term": "price"
+    },
+    "elasticity_at_median_price": {
+      "causal": false,
+      "ci95_high": 0.03338228255558351,
+      "ci95_low": 0.028605125828455702,
+      "definition": "d Pr(kind)/d price multiplied by price scale and divided by sample Pr(kind)",
+      "estimate": 0.030993704192019605,
+      "price_scale": 5.68361059282762,
+      "standard_error_delta_quantity_fixed": 0.0012186848240093712,
+      "term": "price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "price": 43293.153295719996
+    },
+    "fixed_effect_count": 1,
+    "matrix_columns": 4,
+    "matrix_rank": 4,
+    "model": "X_lpm_level_price_chooser_fe_piecewise_reference",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.028114401265456803,
+    "price_mean": 9.977606383043597,
+    "price_median": 5.68361059282762,
+    "reference_control": "piecewise",
+    "reference_quantile_fixed_effect_bins": null,
+    "rows_identifying": 16444544,
+    "rows_raw": 17328130,
+    "sample": "rows_selected=17328130",
+    "sample_sha256": "f3363bd6e8e56f53e5d8a956a8afd623cc7d83f43a9d60dc86e608dbde300dcc",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.015331265612336751,
+        "coefficient_probability_units": 0.0001533126561233675,
+        "p_value_two_sided": 1.1141545414212056e-142,
+        "standard_error_percentage_points": 0.0006028314853512209,
+        "standard_error_probability_units": 6.028314853512208e-06,
+        "t_cluster": 25.43209169541712,
+        "term": "price"
+      },
+      {
+        "coefficient_percentage_points": 0.00015756302027801765,
+        "coefficient_probability_units": 1.5756302027801765e-06,
+        "p_value_two_sided": 0.9014266551804361,
+        "standard_error_percentage_points": 0.0012721126520584768,
+        "standard_error_probability_units": 1.272112652058477e-05,
+        "t_cluster": 0.12385932961444576,
+        "term": "positive_draw_payoff"
+      },
+      {
+        "coefficient_percentage_points": -0.006719576971106654,
+        "coefficient_probability_units": -6.719576971106654e-05,
+        "p_value_two_sided": 2.113198561164394e-09,
+        "standard_error_percentage_points": 0.001122013116317143,
+        "standard_error_probability_units": 1.122013116317143e-05,
+        "t_cluster": -5.988857771255617,
+        "term": "negative_draw_payoff"
+      },
+      {
+        "coefficient_percentage_points": 0.4394773075717502,
+        "coefficient_probability_units": 0.004394773075717502,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.007457004125518975,
+        "standard_error_probability_units": 7.457004125518975e-05,
+        "t_cluster": 58.934834978539655,
+        "term": "draw_nonnegative"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 1.9539510774803352e-15,
+    "absorption_method": "one_way_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_main_or_sensitivity",
+    "causal_claim": false,
+    "chooser_clusters": 1801942,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 1.0,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.24810026151920872,
+      "ci95_low": 0.2267225561923441,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.2374114088557764,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.00545359646796809,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 1241.9802436912512
+    },
+    "fixed_effect_count": 1,
+    "matrix_columns": 1,
+    "matrix_rank": 1,
+    "model": "X_lpm_log_price_chooser_fe_no_reference",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.028114401265456803,
+    "price_mean": 9.977606383043597,
+    "price_median": 5.68361059282762,
+    "reference_control": "none",
+    "reference_quantile_fixed_effect_bins": null,
+    "rows_identifying": 16444544,
+    "rows_raw": 17328130,
+    "sample": "rows_selected=17328130",
+    "sample_sha256": "d1ca4ae0ed24acf3bf523c72befcf967e187d53a408aad716a5e021d73e1d364",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.6674679613568723,
+        "coefficient_probability_units": 0.006674679613568723,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.015332459944033284,
+        "standard_error_probability_units": 0.00015332459944033283,
+        "t_cluster": 43.532998866018325,
+        "term": "log_price"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 1.3148006987560247e-14,
+    "absorption_method": "one_way_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_main_or_sensitivity",
+    "causal_claim": false,
+    "chooser_clusters": 1801942,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 393.0931975259066,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.24027957811808742,
+      "ci95_low": 0.21851680319625227,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.22939819065716985,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.005551830312571337,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 1241.9802436911643
+    },
+    "fixed_effect_count": 1,
+    "matrix_columns": 4,
+    "matrix_rank": 4,
+    "model": "X_lpm_log_price_chooser_fe_piecewise_reference",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.028114401265456803,
+    "price_mean": 9.977606383043597,
+    "price_median": 5.68361059282762,
+    "reference_control": "piecewise",
+    "reference_quantile_fixed_effect_bins": null,
+    "rows_identifying": 16444544,
+    "rows_raw": 17328130,
+    "sample": "rows_selected=17328130",
+    "sample_sha256": "a0ed09ab038a1bf1c75555cf2ca1728546cb2e48fead5e890f75bef87b361cf9",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.6449392781705438,
+        "coefficient_probability_units": 0.006449392781705437,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.0156086385165357,
+        "standard_error_probability_units": 0.00015608638516535702,
+        "t_cluster": 41.3193807702894,
+        "term": "log_price"
+      },
+      {
+        "coefficient_percentage_points": 0.007387377004629786,
+        "coefficient_probability_units": 7.387377004629786e-05,
+        "p_value_two_sided": 6.157989513115715e-12,
+        "standard_error_percentage_points": 0.0010743797549069164,
+        "standard_error_probability_units": 1.0743797549069163e-05,
+        "t_cluster": 6.87594583841523,
+        "term": "positive_draw_payoff"
+      },
+      {
+        "coefficient_percentage_points": 0.0009398655214685927,
+        "coefficient_probability_units": 9.398655214685927e-06,
+        "p_value_two_sided": 0.31267402341359635,
+        "standard_error_percentage_points": 0.0009309037010316,
+        "standard_error_probability_units": 9.309037010316e-06,
+        "t_cluster": 1.0096270112870551,
+        "term": "negative_draw_payoff"
+      },
+      {
+        "coefficient_percentage_points": 0.4413142662884281,
+        "coefficient_probability_units": 0.004413142662884281,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.007454485123660043,
+        "standard_error_probability_units": 7.454485123660044e-05,
+        "t_cluster": 59.20117338321943,
+        "term": "draw_nonnegative"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 1.429750186235671e-14,
+    "absorption_method": "one_way_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_main_or_sensitivity",
+    "causal_claim": false,
+    "chooser_clusters": 1801942,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 9165194.160755929,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.2504004335462467,
+      "ci95_low": 0.2289403389180159,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.2396703862321313,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.0054746145330999115,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 1241.9802436911643
+    },
+    "fixed_effect_count": 1,
+    "matrix_columns": 5,
+    "matrix_rank": 5,
+    "model": "X_lpm_log_price_chooser_fe_cubic_reference",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.028114401265456803,
+    "price_mean": 9.977606383043597,
+    "price_median": 5.68361059282762,
+    "reference_control": "cubic",
+    "reference_quantile_fixed_effect_bins": null,
+    "rows_identifying": 16444544,
+    "rows_raw": 17328130,
+    "sample": "rows_selected=17328130",
+    "sample_sha256": "bd6cd0a8a87898556ca2550e629e7a424807c46820b2ddba2b50bbc9fe30d328",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.6738189409977153,
+        "coefficient_probability_units": 0.006738189409977153,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.015391550975727235,
+        "standard_error_probability_units": 0.00015391550975727236,
+        "t_cluster": 43.7784952315943,
+        "term": "log_price"
+      },
+      {
+        "coefficient_percentage_points": 0.06100902261790911,
+        "coefficient_probability_units": 0.0006100902261790911,
+        "p_value_two_sided": 5.788840752942595e-09,
+        "standard_error_percentage_points": 0.010477705846456386,
+        "standard_error_probability_units": 0.00010477705846456385,
+        "t_cluster": 5.822746268310508,
+        "term": "draw_z"
+      },
+      {
+        "coefficient_percentage_points": 0.00014275453631449865,
+        "coefficient_probability_units": 1.4275453631449864e-06,
+        "p_value_two_sided": 0.5596249459561122,
+        "standard_error_percentage_points": 0.00024469465069163973,
+        "standard_error_probability_units": 2.446946506916397e-06,
+        "t_cluster": 0.5833986804002333,
+        "term": "draw_z2"
+      },
+      {
+        "coefficient_percentage_points": -2.556587861850774e-05,
+        "coefficient_probability_units": -2.556587861850774e-07,
+        "p_value_two_sided": 8.846803897252645e-05,
+        "standard_error_percentage_points": 6.521541212321259e-06,
+        "standard_error_probability_units": 6.521541212321259e-08,
+        "t_cluster": -3.9202203568392218,
+        "term": "draw_z3"
+      },
+      {
+        "coefficient_percentage_points": 0.4369537796404054,
+        "coefficient_probability_units": 0.0043695377964040535,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.007528457992565904,
+        "standard_error_probability_units": 7.528457992565904e-05,
+        "t_cluster": 58.04027598638159,
+        "term": "draw_nonnegative"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 3.2993730764026172e-15,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_main_or_sensitivity",
+    "causal_claim": false,
+    "chooser_clusters": 1801942,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 1.0,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.22733620377132338,
+      "ci95_low": 0.2046446390335467,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.21599042140243505,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.00578877084394531,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 1116.7426518645761
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 1,
+    "matrix_rank": 1,
+    "model": "X_lpm_log_price_chooser_fe_draw20_fe",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.028114401265456803,
+    "price_mean": 9.977606383043597,
+    "price_median": 5.68361059282762,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 20,
+    "rows_identifying": 16444544,
+    "rows_raw": 17328130,
+    "sample": "rows_selected=17328130",
+    "sample_sha256": "8653d6b2899fa7f37c5ec22bbe685894fd827ceea0196446a51bfdf284e083dd",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.6072441376803168,
+        "coefficient_probability_units": 0.006072441376803168,
+        "p_value_two_sided": 1.0498415678070013e-304,
+        "standard_error_percentage_points": 0.016274782634045547,
+        "standard_error_probability_units": 0.00016274782634045546,
+        "t_cluster": 37.31196608488095,
+        "term": "log_price"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 2.6807034721651314e-15,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_main_or_sensitivity",
+    "causal_claim": false,
+    "chooser_clusters": 1801942,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 1.0,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.21309028313328118,
+      "ci95_low": 0.18925199281590296,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.20117113797459207,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.0060813082550015204,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 1023.2062610419056
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 1,
+    "matrix_rank": 1,
+    "model": "X_lpm_log_price_chooser_fe_draw50_fe",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.028114401265456803,
+    "price_mean": 9.977606383043597,
+    "price_median": 5.68361059282762,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 50,
+    "rows_identifying": 16444544,
+    "rows_raw": 17328130,
+    "sample": "rows_selected=17328130",
+    "sample_sha256": "e442b973d125e98e2ae382b6ba38596139b5bdcfd29064503737cf815a32e125",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.5655806096046256,
+        "coefficient_probability_units": 0.005655806096046256,
+        "p_value_two_sided": 5.718098523895345e-240,
+        "standard_error_percentage_points": 0.017097234050004764,
+        "standard_error_probability_units": 0.00017097234050004765,
+        "t_cluster": 33.08024022777345,
+        "term": "log_price"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 3.3583417970253946e-14,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": true,
+    "analysis_role": "exploratory_main_or_sensitivity",
+    "causal_claim": false,
+    "chooser_clusters": 1801945,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 14853727.432450918,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.17882113600491725,
+      "ci95_low": 0.13523488247668117,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.1570280092407992,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.01111914654351786,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 1023.206261041957
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 15,
+    "matrix_rank": 15,
+    "model": "X_primary_lpm_log_price_chooser_fe_draw50_fe_adjusted",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.028114401265456803,
+    "price_mean": 9.977606383043597,
+    "price_median": 5.68361059282762,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 50,
+    "rows_identifying": 16444550,
+    "rows_raw": 17328130,
+    "sample": "rows_selected=17328130",
+    "sample_sha256": "6b1af9b84632bd1a626e0f035746c3a69e996a468dbda6408974b6eb3041e1f3",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.4414748461711688,
+        "coefficient_probability_units": 0.004414748461711688,
+        "p_value_two_sided": 2.767769031818194e-45,
+        "standard_error_percentage_points": 0.03126081476538782,
+        "standard_error_probability_units": 0.0003126081476538782,
+        "t_cluster": 14.12230773524088,
+        "term": "log_price"
+      },
+      {
+        "coefficient_percentage_points": 3.3462776129883083,
+        "coefficient_probability_units": 0.03346277612988308,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.028555402938603147,
+        "standard_error_probability_units": 0.00028555402938603146,
+        "t_cluster": 117.18544543682769,
+        "term": "z_engine_eval_cp"
+      },
+      {
+        "coefficient_percentage_points": -0.04939121926939771,
+        "coefficient_probability_units": -0.0004939121926939771,
+        "p_value_two_sided": 0.012071436276185255,
+        "standard_error_percentage_points": 0.01967739138092106,
+        "standard_error_probability_units": 0.00019677391380921061,
+        "t_cluster": -2.5100491377778247,
+        "term": "z_chooser_rd"
+      },
+      {
+        "coefficient_percentage_points": 0.027740509007641273,
+        "coefficient_probability_units": 0.00027740509007641274,
+        "p_value_two_sided": 3.421452143448909e-09,
+        "standard_error_percentage_points": 0.004693839884803668,
+        "standard_error_probability_units": 4.693839884803668e-05,
+        "t_cluster": 5.909981952612257,
+        "term": "z_opponent_rd"
+      },
+      {
+        "coefficient_percentage_points": -0.5262236835469231,
+        "coefficient_probability_units": -0.005262236835469231,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.010414628643710013,
+        "standard_error_probability_units": 0.00010414628643710013,
+        "t_cluster": -50.52735930865279,
+        "term": "z_log_chooser_clock"
+      },
+      {
+        "coefficient_percentage_points": 1.1846654668422074,
+        "coefficient_probability_units": 0.011846654668422074,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.011515460750059459,
+        "standard_error_probability_units": 0.00011515460750059459,
+        "t_cluster": 102.87608047607566,
+        "term": "z_log_opponent_clock"
+      },
+      {
+        "coefficient_percentage_points": 0.7824707792684601,
+        "coefficient_probability_units": 0.0078247077926846,
+        "p_value_two_sided": 0.3444123478536164,
+        "standard_error_percentage_points": 0.8275884204983602,
+        "standard_error_probability_units": 0.008275884204983602,
+        "t_cluster": 0.9454829960009216,
+        "term": "log_opponent_clock_missing"
+      },
+      {
+        "coefficient_percentage_points": -0.4018527786786841,
+        "coefficient_probability_units": -0.004018527786786841,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.0037068101189815326,
+        "standard_error_probability_units": 3.706810118981533e-05,
+        "t_cluster": -108.40932386067172,
+        "term": "engine_eval_z2"
+      },
+      {
+        "coefficient_percentage_points": -1.7149742876703127,
+        "coefficient_probability_units": -0.017149742876703126,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.033990404146639216,
+        "standard_error_probability_units": 0.00033990404146639215,
+        "t_cluster": -50.4546600938218,
+        "term": "tournament"
+      },
+      {
+        "coefficient_percentage_points": -0.0836696765739292,
+        "coefficient_probability_units": -0.0008366967657392919,
+        "p_value_two_sided": 2.1537023368251316e-55,
+        "standard_error_percentage_points": 0.0053369068388592145,
+        "standard_error_probability_units": 5.336906838859214e-05,
+        "t_cluster": -15.67755988632058,
+        "term": "month_trend_z"
+      },
+      {
+        "coefficient_percentage_points": -0.024395300836119484,
+        "coefficient_probability_units": -0.00024395300836119483,
+        "p_value_two_sided": 1.266976128264448e-06,
+        "standard_error_percentage_points": 0.00503528981326044,
+        "standard_error_probability_units": 5.03528981326044e-05,
+        "t_cluster": -4.844865288960019,
+        "term": "month_trend_z2"
+      },
+      {
+        "coefficient_percentage_points": -3.1811293344433444,
+        "coefficient_probability_units": -0.031811293344433444,
+        "p_value_two_sided": 0.010017934356554344,
+        "standard_error_percentage_points": 1.2352894584225074,
+        "standard_error_probability_units": 0.012352894584225074,
+        "t_cluster": -2.575209650461778,
+        "term": "speed_1"
+      },
+      {
+        "coefficient_percentage_points": -3.8720493627493635,
+        "coefficient_probability_units": -0.038720493627493635,
+        "p_value_two_sided": 0.0017283868221502343,
+        "standard_error_percentage_points": 1.2357642123406067,
+        "standard_error_probability_units": 0.012357642123406067,
+        "t_cluster": -3.1333237555208733,
+        "term": "speed_2"
+      },
+      {
+        "coefficient_percentage_points": -4.616195270693835,
+        "coefficient_probability_units": -0.04616195270693835,
+        "p_value_two_sided": 0.00018819072940307442,
+        "standard_error_percentage_points": 1.2361398694633663,
+        "standard_error_probability_units": 0.012361398694633664,
+        "t_cluster": -3.7343632259817165,
+        "term": "speed_3"
+      },
+      {
+        "coefficient_percentage_points": -5.4307240189107375,
+        "coefficient_probability_units": -0.054307240189107375,
+        "p_value_two_sided": 1.1593031137410654e-05,
+        "standard_error_percentage_points": 1.238448133836658,
+        "standard_error_probability_units": 0.01238448133836658,
+        "t_cluster": -4.385104123889785,
+        "term": "speed_4"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 3.3583417970253946e-14,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": true,
+    "analysis_role": "exploratory_main_or_sensitivity",
+    "causal_claim": false,
+    "chooser_clusters": 1801945,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 26756622.3714066,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": -0.01113880541509188,
+      "ci95_low": -0.0288280130183887,
+      "definition": "d Pr(kind)/d price multiplied by price scale and divided by sample Pr(kind)",
+      "estimate": -0.01998340921674029,
+      "price_scale": 9.977606383043597,
+      "standard_error_delta_quantity_fixed": 0.004512635880767972,
+      "term": "price"
+    },
+    "elasticity_at_median_price": {
+      "causal": false,
+      "ci95_high": -0.006345072156409323,
+      "ci95_low": -0.01642149368008103,
+      "definition": "d Pr(kind)/d price multiplied by price scale and divided by sample Pr(kind)",
+      "estimate": -0.011383282918245176,
+      "price_scale": 5.68361059282762,
+      "standard_error_delta_quantity_fixed": 0.0025705629295112646,
+      "term": "price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "price": 38320.83585601662
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 15,
+    "matrix_rank": 15,
+    "model": "X_lpm_level_price_chooser_fe_draw50_fe_adjusted",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.028114401265456803,
+    "price_mean": 9.977606383043597,
+    "price_median": 5.68361059282762,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 50,
+    "rows_identifying": 16444550,
+    "rows_raw": 17328130,
+    "sample": "rows_selected=17328130",
+    "sample_sha256": "acd067500f8aa4fae93aaac4a54666df290810d97f09843e33e8f22c889f05aa",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": -0.00563082530822272,
+        "coefficient_probability_units": -5.6308253082227196e-05,
+        "p_value_two_sided": 9.496861218139836e-06,
+        "standard_error_percentage_points": 0.0012715480150872424,
+        "standard_error_probability_units": 1.2715480150872423e-05,
+        "t_cluster": -4.4283229900967465,
+        "term": "price"
+      },
+      {
+        "coefficient_percentage_points": 3.3478964728939804,
+        "coefficient_probability_units": 0.033478964728939804,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.02855766268758418,
+        "standard_error_probability_units": 0.0002855766268758418,
+        "t_cluster": 117.23286003898079,
+        "term": "z_engine_eval_cp"
+      },
+      {
+        "coefficient_percentage_points": 0.2798900291937187,
+        "coefficient_probability_units": 0.0027989002919371867,
+        "p_value_two_sided": 2.3395495612659227e-23,
+        "standard_error_percentage_points": 0.02810856631109611,
+        "standard_error_probability_units": 0.0002810856631109611,
+        "t_cluster": 9.957463717501293,
+        "term": "z_chooser_rd"
+      },
+      {
+        "coefficient_percentage_points": -0.004608862692138033,
+        "coefficient_probability_units": -4.6088626921380325e-05,
+        "p_value_two_sided": 0.26907509502300925,
+        "standard_error_percentage_points": 0.0041701804802213045,
+        "standard_error_probability_units": 4.1701804802213045e-05,
+        "t_cluster": -1.1051950182965338,
+        "term": "z_opponent_rd"
+      },
+      {
+        "coefficient_percentage_points": -0.5260094133422993,
+        "coefficient_probability_units": -0.005260094133422994,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.010414688382384463,
+        "standard_error_probability_units": 0.00010414688382384462,
+        "t_cluster": -50.5064956366816,
+        "term": "z_log_chooser_clock"
+      },
+      {
+        "coefficient_percentage_points": 1.1866294263069097,
+        "coefficient_probability_units": 0.011866294263069097,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.011517104390952604,
+        "standard_error_probability_units": 0.00011517104390952604,
+        "t_cluster": 103.03192417349975,
+        "term": "z_log_opponent_clock"
+      },
+      {
+        "coefficient_percentage_points": 0.7675841279744189,
+        "coefficient_probability_units": 0.007675841279744189,
+        "p_value_two_sided": 0.35363407934071234,
+        "standard_error_percentage_points": 0.8275273801799747,
+        "standard_error_probability_units": 0.008275273801799748,
+        "t_cluster": 0.9275634212942668,
+        "term": "log_opponent_clock_missing"
+      },
+      {
+        "coefficient_percentage_points": -0.402055828890892,
+        "coefficient_probability_units": -0.00402055828890892,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.0037071081961007374,
+        "standard_error_probability_units": 3.7071081961007376e-05,
+        "t_cluster": -108.45538021085761,
+        "term": "engine_eval_z2"
+      },
+      {
+        "coefficient_percentage_points": -1.7582530633396325,
+        "coefficient_probability_units": -0.017582530633396324,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.03389788864475982,
+        "standard_error_probability_units": 0.00033897888644759825,
+        "t_cluster": -51.86910257938545,
+        "term": "tournament"
+      },
+      {
+        "coefficient_percentage_points": -0.08356927039374756,
+        "coefficient_probability_units": -0.0008356927039374757,
+        "p_value_two_sided": 2.9754385603453103e-55,
+        "standard_error_percentage_points": 0.0053374974118584025,
+        "standard_error_probability_units": 5.337497411858403e-05,
+        "t_cluster": -15.657013754813331,
+        "term": "month_trend_z"
+      },
+      {
+        "coefficient_percentage_points": -0.025221454583999988,
+        "coefficient_probability_units": -0.0002522145458399999,
+        "p_value_two_sided": 5.469340167806582e-07,
+        "standard_error_percentage_points": 0.005035156159627793,
+        "standard_error_probability_units": 5.0351561596277924e-05,
+        "t_cluster": -5.009070977028924,
+        "term": "month_trend_z2"
+      },
+      {
+        "coefficient_percentage_points": -3.172229268612625,
+        "coefficient_probability_units": -0.03172229268612625,
+        "p_value_two_sided": 0.010252699688759971,
+        "standard_error_percentage_points": 1.2356824740562935,
+        "standard_error_probability_units": 0.012356824740562935,
+        "t_cluster": -2.5671880399819518,
+        "term": "speed_1"
+      },
+      {
+        "coefficient_percentage_points": -3.8581613946617743,
+        "coefficient_probability_units": -0.03858161394661774,
+        "p_value_two_sided": 0.0018018205183799095,
+        "standard_error_percentage_points": 1.2361577413918532,
+        "standard_error_probability_units": 0.012361577413918532,
+        "t_cluster": -3.1210914800547003,
+        "term": "speed_2"
+      },
+      {
+        "coefficient_percentage_points": -4.586547134765073,
+        "coefficient_probability_units": -0.04586547134765073,
+        "p_value_two_sided": 0.0002079208094844578,
+        "standard_error_percentage_points": 1.2365350102605273,
+        "standard_error_probability_units": 0.012365350102605272,
+        "t_cluster": -3.70919310549786,
+        "term": "speed_3"
+      },
+      {
+        "coefficient_percentage_points": -5.373850400150504,
+        "coefficient_probability_units": -0.05373850400150504,
+        "p_value_two_sided": 1.4391508375454264e-05,
+        "standard_error_percentage_points": 1.2388419533603434,
+        "standard_error_probability_units": 0.012388419533603433,
+        "t_cluster": -4.337801432679933,
+        "term": "speed_4"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 1.9781227468614167e-14,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": true,
+    "analysis_role": "exploratory_main_or_sensitivity",
+    "causal_claim": false,
+    "chooser_clusters": 1775307,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 16941726.09037823,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.35854647724562083,
+      "ci95_low": 0.27281203738968207,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.31567925731765145,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.02187143246819866,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 914.8661928313468
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 15,
+    "matrix_rank": 15,
+    "model": "X_lpm_log_price_trim_p01_p99_draw50_fe_adjusted",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.02786321355757178,
+    "price_mean": 8.177366967441237,
+    "price_median": 5.68361059282762,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 50,
+    "rows_identifying": 16168673,
+    "rows_raw": 16981566,
+    "sample": "rows_selected=16981566",
+    "sample_sha256": "507d70e1c09112cdcbb1e4f27a594b8bcbc2ae535ac8fc2ff916658770c16bd8",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.8795838562337377,
+        "coefficient_probability_units": 0.008795838562337377,
+        "p_value_two_sided": 3.18935642358662e-47,
+        "standard_error_percentage_points": 0.060940839367142854,
+        "standard_error_probability_units": 0.0006094083936714285,
+        "t_cluster": 14.433405666348241,
+        "term": "log_price"
+      },
+      {
+        "coefficient_percentage_points": 3.3356932250905205,
+        "coefficient_probability_units": 0.033356932250905205,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.028618821718602132,
+        "standard_error_probability_units": 0.00028618821718602133,
+        "t_cluster": 116.55592455514449,
+        "term": "z_engine_eval_cp"
+      },
+      {
+        "coefficient_percentage_points": -0.2704229028589345,
+        "coefficient_probability_units": -0.002704229028589345,
+        "p_value_two_sided": 5.900977781575495e-19,
+        "standard_error_percentage_points": 0.0304054933130904,
+        "standard_error_probability_units": 0.000304054933130904,
+        "t_cluster": -8.893883091267263,
+        "term": "z_chooser_rd"
+      },
+      {
+        "coefficient_percentage_points": 0.05225930738370307,
+        "coefficient_probability_units": 0.0005225930738370307,
+        "p_value_two_sided": 1.7281048056968787e-21,
+        "standard_error_percentage_points": 0.005489295379638298,
+        "standard_error_probability_units": 5.489295379638298e-05,
+        "t_cluster": 9.520221407204826,
+        "term": "z_opponent_rd"
+      },
+      {
+        "coefficient_percentage_points": -0.5181306106679527,
+        "coefficient_probability_units": -0.005181306106679527,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.010361971003982203,
+        "standard_error_probability_units": 0.00010361971003982202,
+        "t_cluster": -50.003094051202254,
+        "term": "z_log_chooser_clock"
+      },
+      {
+        "coefficient_percentage_points": 1.1692042712065667,
+        "coefficient_probability_units": 0.011692042712065667,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.0114349243085374,
+        "standard_error_probability_units": 0.000114349243085374,
+        "t_cluster": 102.24853612136549,
+        "term": "z_log_opponent_clock"
+      },
+      {
+        "coefficient_percentage_points": 0.8748192805101234,
+        "coefficient_probability_units": 0.008748192805101234,
+        "p_value_two_sided": 0.29095162532794133,
+        "standard_error_percentage_points": 0.8283988632774775,
+        "standard_error_probability_units": 0.008283988632774774,
+        "t_cluster": 1.0560363120839982,
+        "term": "log_opponent_clock_missing"
+      },
+      {
+        "coefficient_percentage_points": -0.3995319433036303,
+        "coefficient_probability_units": -0.003995319433036303,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.0037057151886337146,
+        "standard_error_probability_units": 3.705715188633715e-05,
+        "t_cluster": -107.81507022695298,
+        "term": "engine_eval_z2"
+      },
+      {
+        "coefficient_percentage_points": -1.7446820401417171,
+        "coefficient_probability_units": -0.017446820401417172,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.03416276598731348,
+        "standard_error_probability_units": 0.0003416276598731348,
+        "t_cluster": -51.069695023804975,
+        "term": "tournament"
+      },
+      {
+        "coefficient_percentage_points": -0.08365073470974392,
+        "coefficient_probability_units": -0.0008365073470974392,
+        "p_value_two_sided": 2.3838480241030407e-55,
+        "standard_error_percentage_points": 0.005337895151165223,
+        "standard_error_probability_units": 5.337895151165223e-05,
+        "t_cluster": -15.671108618812715,
+        "term": "month_trend_z"
+      },
+      {
+        "coefficient_percentage_points": -0.025203803565055326,
+        "coefficient_probability_units": -0.00025203803565055326,
+        "p_value_two_sided": 6.030230226645147e-07,
+        "standard_error_percentage_points": 0.00505061298174936,
+        "standard_error_probability_units": 5.05061298174936e-05,
+        "t_cluster": -4.990246462385955,
+        "term": "month_trend_z2"
+      },
+      {
+        "coefficient_percentage_points": -3.291222981403319,
+        "coefficient_probability_units": -0.03291222981403319,
+        "p_value_two_sided": 0.022594721138070668,
+        "standard_error_percentage_points": 1.4433804045871486,
+        "standard_error_probability_units": 0.014433804045871485,
+        "t_cluster": -2.280218694215064,
+        "term": "speed_1"
+      },
+      {
+        "coefficient_percentage_points": -3.9863662693164326,
+        "coefficient_probability_units": -0.039863662693164326,
+        "p_value_two_sided": 0.005763328908501254,
+        "standard_error_percentage_points": 1.443838009069129,
+        "standard_error_probability_units": 0.014438380090691288,
+        "t_cluster": -2.760951190006781,
+        "term": "speed_2"
+      },
+      {
+        "coefficient_percentage_points": -4.737541878197993,
+        "coefficient_probability_units": -0.04737541878197993,
+        "p_value_two_sided": 0.0010364823998774745,
+        "standard_error_percentage_points": 1.4441823062218087,
+        "standard_error_probability_units": 0.014441823062218086,
+        "t_cluster": -3.2804320187193627,
+        "term": "speed_3"
+      },
+      {
+        "coefficient_percentage_points": -5.619667848065113,
+        "coefficient_probability_units": -0.05619667848065113,
+        "p_value_two_sided": 0.00010232908622938709,
+        "standard_error_percentage_points": 1.4465032415116703,
+        "standard_error_probability_units": 0.014465032415116702,
+        "t_cluster": -3.8850019044494304,
+        "term": "speed_4"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 3.3583417970253946e-14,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": true,
+    "analysis_role": "exploratory_main_or_sensitivity",
+    "causal_claim": false,
+    "chooser_clusters": 1801945,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 14853736.58511019,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.14748233065560315,
+      "ci95_low": 0.1079658348089099,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.12772408273225652,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.010080923975745048,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 974.3253550784185
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 15,
+    "matrix_rank": 15,
+    "model": "X_lpm_log_price_winsor_p01_p99_draw50_fe_adjusted",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.028114401265456803,
+    "price_mean": 9.977606383043597,
+    "price_median": 5.68361059282762,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 50,
+    "rows_identifying": 16444550,
+    "rows_raw": 17328130,
+    "sample": "rows_selected=17328130",
+    "sample_sha256": "73e574efd61547e390f7d6696253753af08d21415274caac0a598c7e303dcca3",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.3590886113197062,
+        "coefficient_probability_units": 0.003590886113197062,
+        "p_value_two_sided": 8.684872456083519e-37,
+        "standard_error_percentage_points": 0.028341914178066037,
+        "standard_error_probability_units": 0.0002834191417806604,
+        "t_cluster": 12.669878578547346,
+        "term": "log_price"
+      },
+      {
+        "coefficient_percentage_points": 3.3461596042321755,
+        "coefficient_probability_units": 0.03346159604232175,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.028555472261490578,
+        "standard_error_probability_units": 0.0002855547226149058,
+        "t_cluster": 117.18102833637072,
+        "term": "z_engine_eval_cp"
+      },
+      {
+        "coefficient_percentage_points": 0.01069761317943748,
+        "coefficient_probability_units": 0.0001069761317943748,
+        "p_value_two_sided": 0.5369508475880527,
+        "standard_error_percentage_points": 0.017326021594281454,
+        "standard_error_probability_units": 0.00017326021594281455,
+        "t_cluster": 0.6174304424835926,
+        "term": "z_chooser_rd"
+      },
+      {
+        "coefficient_percentage_points": 0.01490540401399653,
+        "coefficient_probability_units": 0.0001490540401399653,
+        "p_value_two_sided": 0.0006148393669435877,
+        "standard_error_percentage_points": 0.004351965207404104,
+        "standard_error_probability_units": 4.351965207404104e-05,
+        "t_cluster": 3.424982347891386,
+        "term": "z_opponent_rd"
+      },
+      {
+        "coefficient_percentage_points": -0.5261029824496941,
+        "coefficient_probability_units": -0.005261029824496942,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.010414587684674542,
+        "standard_error_probability_units": 0.00010414587684674543,
+        "t_cluster": -50.51596840687937,
+        "term": "z_log_chooser_clock"
+      },
+      {
+        "coefficient_percentage_points": 1.1849107001865467,
+        "coefficient_probability_units": 0.011849107001865467,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.011515783337562849,
+        "standard_error_probability_units": 0.0001151578333756285,
+        "t_cluster": 102.89449405682515,
+        "term": "z_log_opponent_clock"
+      },
+      {
+        "coefficient_percentage_points": 0.7818917905864647,
+        "coefficient_probability_units": 0.007818917905864647,
+        "p_value_two_sided": 0.3447477450589092,
+        "standard_error_percentage_points": 0.8275511449954474,
+        "standard_error_probability_units": 0.008275511449954474,
+        "t_cluster": 0.9448259425594367,
+        "term": "log_opponent_clock_missing"
+      },
+      {
+        "coefficient_percentage_points": -0.4018396117744579,
+        "coefficient_probability_units": -0.004018396117744579,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.0037068207578778906,
+        "standard_error_probability_units": 3.7068207578778905e-05,
+        "t_cluster": -108.40546064183211,
+        "term": "engine_eval_z2"
+      },
+      {
+        "coefficient_percentage_points": -1.7187407853492291,
+        "coefficient_probability_units": -0.017187407853492292,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.034006315139675745,
+        "standard_error_probability_units": 0.0003400631513967575,
+        "t_cluster": -50.54181196315343,
+        "term": "tournament"
+      },
+      {
+        "coefficient_percentage_points": -0.08360356592711696,
+        "coefficient_probability_units": -0.0008360356592711695,
+        "p_value_two_sided": 2.6348750818658923e-55,
+        "standard_error_percentage_points": 0.005337052728887631,
+        "standard_error_probability_units": 5.337052728887631e-05,
+        "t_cluster": -15.664744227577067,
+        "term": "month_trend_z"
+      },
+      {
+        "coefficient_percentage_points": -0.02451193738022375,
+        "coefficient_probability_units": -0.0002451193738022375,
+        "p_value_two_sided": 1.1272366757341312e-06,
+        "standard_error_percentage_points": 0.005035302396020441,
+        "standard_error_probability_units": 5.03530239602044e-05,
+        "t_cluster": -4.868016943648969,
+        "term": "month_trend_z2"
+      },
+      {
+        "coefficient_percentage_points": -3.1841441850894547,
+        "coefficient_probability_units": -0.03184144185089455,
+        "p_value_two_sided": 0.009955097965533502,
+        "standard_error_percentage_points": 1.2354165534544863,
+        "standard_error_probability_units": 0.012354165534544864,
+        "t_cluster": -2.57738507403508,
+        "term": "speed_1"
+      },
+      {
+        "coefficient_percentage_points": -3.8744222411614793,
+        "coefficient_probability_units": -0.03874422241161479,
+        "p_value_two_sided": 0.001719002239200858,
+        "standard_error_percentage_points": 1.2358913909130933,
+        "standard_error_probability_units": 0.012358913909130933,
+        "t_cluster": -3.134921296198207,
+        "term": "speed_2"
+      },
+      {
+        "coefficient_percentage_points": -4.61572790298912,
+        "coefficient_probability_units": -0.046157279029891196,
+        "p_value_two_sided": 0.00018876237453063316,
+        "standard_error_percentage_points": 1.2362674615624656,
+        "standard_error_probability_units": 0.012362674615624656,
+        "t_cluster": -3.7335997642091936,
+        "term": "speed_3"
+      },
+      {
+        "coefficient_percentage_points": -5.421007813643586,
+        "coefficient_probability_units": -0.05421007813643586,
+        "p_value_two_sided": 1.2042918613577837e-05,
+        "standard_error_percentage_points": 1.2385752482629353,
+        "standard_error_probability_units": 0.012385752482629353,
+        "t_cluster": -4.376809419731572,
+        "term": "speed_4"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 0,
+    "absorption_max_scaled_group_mean": 0.0,
+    "absorption_method": "none",
+    "analysis_role": "exploratory_between_within_comparison",
+    "causal_claim": false,
+    "chooser_clusters": 2685525,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 17523459.87826318,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.631251287382313,
+      "ci95_low": 0.5940050165125609,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.6126281519474369,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.009501774309004144,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 8430.084202776496
+    },
+    "fixed_effect_count": 0,
+    "matrix_columns": 19,
+    "matrix_rank": 19,
+    "model": "X_pooled_lpm_log_price_piecewise_reference_controls",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.028114401265456803,
+    "price_mean": 9.977606383043597,
+    "price_median": 5.68361059282762,
+    "rows_identifying": 17328130,
+    "rows_raw": 17328130,
+    "sample": "all fair rows",
+    "sample_sha256": "60c9b0b490279311410813a515c4aee219e4aea4612a500896cc032873341530",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 4.961712124384121,
+        "coefficient_probability_units": 0.04961712124384121,
+        "p_value_two_sided": 2.5224112593207575e-05,
+        "standard_error_percentage_points": 1.1777748236200378,
+        "standard_error_probability_units": 0.011777748236200378,
+        "t_cluster": 4.212785011937749,
+        "term": "intercept"
+      },
+      {
+        "coefficient_percentage_points": 1.7223673690365482,
+        "coefficient_probability_units": 0.017223673690365482,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.026713669565715102,
+        "standard_error_probability_units": 0.00026713669565715104,
+        "t_cluster": 64.47513190951015,
+        "term": "log_price"
+      },
+      {
+        "coefficient_percentage_points": 0.00462971259960589,
+        "coefficient_probability_units": 4.6297125996058903e-05,
+        "p_value_two_sided": 0.0005658266204965465,
+        "standard_error_percentage_points": 0.0013429236855810446,
+        "standard_error_probability_units": 1.3429236855810447e-05,
+        "t_cluster": 3.447487485190006,
+        "term": "positive_draw_payoff"
+      },
+      {
+        "coefficient_percentage_points": -0.0011051099024760383,
+        "coefficient_probability_units": -1.1051099024760383e-05,
+        "p_value_two_sided": 0.21091618883583568,
+        "standard_error_percentage_points": 0.0008833458202713846,
+        "standard_error_probability_units": 8.833458202713845e-06,
+        "t_cluster": -1.2510501290836726,
+        "term": "negative_draw_payoff"
+      },
+      {
+        "coefficient_percentage_points": 0.49070174054835836,
+        "coefficient_probability_units": 0.004907017405483584,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.008712466944345,
+        "standard_error_probability_units": 8.712466944345e-05,
+        "t_cluster": 56.321790795069596,
+        "term": "draw_nonnegative"
+      },
+      {
+        "coefficient_percentage_points": 2.7469054676830806,
+        "coefficient_probability_units": 0.027469054676830806,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.033342847623259,
+        "standard_error_probability_units": 0.00033342847623259,
+        "t_cluster": 82.38364937273441,
+        "term": "z_engine_eval_cp"
+      },
+      {
+        "coefficient_percentage_points": -0.3995168588180831,
+        "coefficient_probability_units": -0.003995168588180831,
+        "p_value_two_sided": 1.2163742775867994e-141,
+        "standard_error_percentage_points": 0.015767452334905174,
+        "standard_error_probability_units": 0.00015767452334905174,
+        "t_cluster": -25.338073033755315,
+        "term": "z_chooser_rd"
+      },
+      {
+        "coefficient_percentage_points": 0.14989849962444846,
+        "coefficient_probability_units": 0.0014989849962444846,
+        "p_value_two_sided": 4.542402494944814e-151,
+        "standard_error_percentage_points": 0.005725783865166829,
+        "standard_error_probability_units": 5.7257838651668284e-05,
+        "t_cluster": 26.179559542295255,
+        "term": "z_opponent_rd"
+      },
+      {
+        "coefficient_percentage_points": -0.9052584896549594,
+        "coefficient_probability_units": -0.009052584896549594,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.01247893688635451,
+        "standard_error_probability_units": 0.0001247893688635451,
+        "t_cluster": -72.54291754971875,
+        "term": "z_log_chooser_clock"
+      },
+      {
+        "coefficient_percentage_points": 1.7046891301726375,
+        "coefficient_probability_units": 0.017046891301726375,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.015301308194004756,
+        "standard_error_probability_units": 0.00015301308194004757,
+        "t_cluster": 111.40806449742355,
+        "term": "z_log_opponent_clock"
+      },
+      {
+        "coefficient_percentage_points": 0.28698142297093576,
+        "coefficient_probability_units": 0.0028698142297093575,
+        "p_value_two_sided": 0.7082584784605608,
+        "standard_error_percentage_points": 0.7669280298134266,
+        "standard_error_probability_units": 0.007669280298134265,
+        "t_cluster": 0.3741960285905195,
+        "term": "log_opponent_clock_missing"
+      },
+      {
+        "coefficient_percentage_points": -0.32874791994736,
+        "coefficient_probability_units": -0.0032874791994736002,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.004316484325579617,
+        "standard_error_probability_units": 4.3164843255796166e-05,
+        "t_cluster": -76.16103642475659,
+        "term": "engine_eval_z2"
+      },
+      {
+        "coefficient_percentage_points": -1.093560109702984,
+        "coefficient_probability_units": -0.010935601097029839,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.025207090056946088,
+        "standard_error_probability_units": 0.0002520709005694609,
+        "t_cluster": -43.38303656758831,
+        "term": "tournament"
+      },
+      {
+        "coefficient_percentage_points": -0.012767848260909178,
+        "coefficient_probability_units": -0.0001276784826090918,
+        "p_value_two_sided": 0.02843407613923549,
+        "standard_error_percentage_points": 0.005826755536227086,
+        "standard_error_probability_units": 5.8267555362270856e-05,
+        "t_cluster": -2.191244884314566,
+        "term": "month_trend_z"
+      },
+      {
+        "coefficient_percentage_points": -0.009652982803412948,
+        "coefficient_probability_units": -9.652982803412947e-05,
+        "p_value_two_sided": 0.09516305174670595,
+        "standard_error_percentage_points": 0.0057844910798794235,
+        "standard_error_probability_units": 5.784491079879424e-05,
+        "t_cluster": -1.6687695892538503,
+        "term": "month_trend_z2"
+      },
+      {
+        "coefficient_percentage_points": -3.8307955968207352,
+        "coefficient_probability_units": -0.03830795596820735,
+        "p_value_two_sided": 0.0011195362781865805,
+        "standard_error_percentage_points": 1.1755865882865324,
+        "standard_error_probability_units": 0.011755865882865325,
+        "t_cluster": -3.258624787821272,
+        "term": "speed_1"
+      },
+      {
+        "coefficient_percentage_points": -5.131826746367096,
+        "coefficient_probability_units": -0.051318267463670963,
+        "p_value_two_sided": 1.2774684305814303e-05,
+        "standard_error_percentage_points": 1.1759646692236123,
+        "standard_error_probability_units": 0.011759646692236123,
+        "t_cluster": -4.36392936001657,
+        "term": "speed_2"
+      },
+      {
+        "coefficient_percentage_points": -6.191915685860749,
+        "coefficient_probability_units": -0.061919156858607494,
+        "p_value_two_sided": 1.4222783036595422e-07,
+        "standard_error_percentage_points": 1.1766452143237438,
+        "standard_error_probability_units": 0.011766452143237438,
+        "t_cluster": -5.262347231335526,
+        "term": "speed_3"
+      },
+      {
+        "coefficient_percentage_points": -7.464586372168469,
+        "coefficient_probability_units": -0.07464586372168469,
+        "p_value_two_sided": 2.4347063965610586e-10,
+        "standard_error_percentage_points": 1.1790406997560496,
+        "standard_error_probability_units": 0.011790406997560496,
+        "t_cluster": -6.3310675990344825,
+        "term": "speed_4"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 1.3148006987560247e-14,
+    "absorption_method": "one_way_exact",
+    "analysis_role": "exploratory_nonparametric",
+    "causal_claim": false,
+    "chooser_clusters": 1801928,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 14557.142918337975,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "price_bin_1": 853.9895002457328,
+      "price_bin_10": 857.4036166524809,
+      "price_bin_11": 852.9287957757873,
+      "price_bin_12": 849.9800604812511,
+      "price_bin_13": 845.2510717682824,
+      "price_bin_14": 825.0775910908019,
+      "price_bin_15": 794.8063343211286,
+      "price_bin_16": 757.3439948415548,
+      "price_bin_17": 714.205659020925,
+      "price_bin_18": 652.5433502219884,
+      "price_bin_19": 522.2530884490722,
+      "price_bin_2": 859.5646625944015,
+      "price_bin_3": 859.2218349198612,
+      "price_bin_4": 836.5779790559131,
+      "price_bin_5": 850.203423980064,
+      "price_bin_6": 856.0306077653685,
+      "price_bin_7": 858.5552753896552,
+      "price_bin_8": 859.3957235622264,
+      "price_bin_9": 859.0168641174803
+    },
+    "fixed_effect_count": 1,
+    "matrix_columns": 22,
+    "matrix_rank": 22,
+    "model": "X_nonparametric_price20_chooser_fe_piecewise_reference",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.028114401265456803,
+    "price_bin_reference": 0,
+    "price_mean": null,
+    "rows_identifying": 16444516,
+    "rows_raw": 17328130,
+    "sample": "all fair rows",
+    "sample_sha256": "dfe2c5c662627e92aed8a45c49c515bafc5f481ad0474c3ccf4e21425829f558",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.09988816206020915,
+        "coefficient_probability_units": 0.0009988816206020915,
+        "p_value_two_sided": 7.629777476998349e-07,
+        "standard_error_percentage_points": 0.020201437593307604,
+        "standard_error_probability_units": 0.00020201437593307604,
+        "t_cluster": 4.944606620139767,
+        "term": "price_bin_1"
+      },
+      {
+        "coefficient_percentage_points": 0.07217502321387181,
+        "coefficient_probability_units": 0.0007217502321387181,
+        "p_value_two_sided": 0.0003338594665633302,
+        "standard_error_percentage_points": 0.020118454678510554,
+        "standard_error_probability_units": 0.00020118454678510553,
+        "t_cluster": 3.5875033329953157,
+        "term": "price_bin_2"
+      },
+      {
+        "coefficient_percentage_points": 0.011534895012889361,
+        "coefficient_probability_units": 0.0001153489501288936,
+        "p_value_two_sided": 0.5620416266275281,
+        "standard_error_percentage_points": 0.019894209793931715,
+        "standard_error_probability_units": 0.00019894209793931716,
+        "t_cluster": 0.5798116704493497,
+        "term": "price_bin_3"
+      },
+      {
+        "coefficient_percentage_points": -0.005326611729191983,
+        "coefficient_probability_units": -5.326611729191983e-05,
+        "p_value_two_sided": 0.790243899471522,
+        "standard_error_percentage_points": 0.020025314621442147,
+        "standard_error_probability_units": 0.00020025314621442147,
+        "t_cluster": -0.2659939097030966,
+        "term": "price_bin_4"
+      },
+      {
+        "coefficient_percentage_points": 0.053411733177877584,
+        "coefficient_probability_units": 0.0005341173317787759,
+        "p_value_two_sided": 0.007962503888378571,
+        "standard_error_percentage_points": 0.020127605199814075,
+        "standard_error_probability_units": 0.00020127605199814075,
+        "t_cluster": 2.6536556459469387,
+        "term": "price_bin_5"
+      },
+      {
+        "coefficient_percentage_points": 0.08256120804444499,
+        "coefficient_probability_units": 0.0008256120804444499,
+        "p_value_two_sided": 4.3401121823048977e-05,
+        "standard_error_percentage_points": 0.020193097136289164,
+        "standard_error_probability_units": 0.00020193097136289164,
+        "t_cluster": 4.08858569278477,
+        "term": "price_bin_6"
+      },
+      {
+        "coefficient_percentage_points": 0.11210296733498251,
+        "coefficient_probability_units": 0.001121029673349825,
+        "p_value_two_sided": 3.052467556615916e-08,
+        "standard_error_percentage_points": 0.020241036975684894,
+        "standard_error_probability_units": 0.00020241036975684895,
+        "t_cluster": 5.538400402590504,
+        "term": "price_bin_7"
+      },
+      {
+        "coefficient_percentage_points": 0.13308012570239358,
+        "coefficient_probability_units": 0.0013308012570239357,
+        "p_value_two_sided": 7.102109314162995e-11,
+        "standard_error_percentage_points": 0.020415806445838697,
+        "standard_error_probability_units": 0.00020415806445838697,
+        "t_cluster": 6.518484883535862,
+        "term": "price_bin_8"
+      },
+      {
+        "coefficient_percentage_points": 0.1645332989408467,
+        "coefficient_probability_units": 0.001645332989408467,
+        "p_value_two_sided": 1.1859651405353154e-15,
+        "standard_error_percentage_points": 0.020551506807125974,
+        "standard_error_probability_units": 0.00020551506807125973,
+        "t_cluster": 8.005899542304942,
+        "term": "price_bin_9"
+      },
+      {
+        "coefficient_percentage_points": 0.2077692857100217,
+        "coefficient_probability_units": 0.002077692857100217,
+        "p_value_two_sided": 9.377870739269053e-24,
+        "standard_error_percentage_points": 0.020677736193295156,
+        "standard_error_probability_units": 0.00020677736193295157,
+        "t_cluster": 10.047970617663252,
+        "term": "price_bin_10"
+      },
+      {
+        "coefficient_percentage_points": 0.30756617522461016,
+        "coefficient_probability_units": 0.0030756617522461017,
+        "p_value_two_sided": 1.0793648704355801e-47,
+        "standard_error_percentage_points": 0.021199873494591473,
+        "standard_error_probability_units": 0.00021199873494591473,
+        "t_cluster": 14.507925026207193,
+        "term": "price_bin_11"
+      },
+      {
+        "coefficient_percentage_points": 0.2921865826298775,
+        "coefficient_probability_units": 0.002921865826298775,
+        "p_value_two_sided": 2.7659827888705894e-43,
+        "standard_error_percentage_points": 0.021182002921380626,
+        "standard_error_probability_units": 0.00021182002921380628,
+        "t_cluster": 13.794096040603936,
+        "term": "price_bin_12"
+      },
+      {
+        "coefficient_percentage_points": 0.3553260102161479,
+        "coefficient_probability_units": 0.003553260102161479,
+        "p_value_two_sided": 4.271584113121286e-60,
+        "standard_error_percentage_points": 0.021731008152450545,
+        "standard_error_probability_units": 0.00021731008152450545,
+        "t_cluster": 16.351105651583808,
+        "term": "price_bin_13"
+      },
+      {
+        "coefficient_percentage_points": 0.3850914785928589,
+        "coefficient_probability_units": 0.003850914785928589,
+        "p_value_two_sided": 1.0100552218581144e-65,
+        "standard_error_percentage_points": 0.022490494958273894,
+        "standard_error_probability_units": 0.00022490494958273894,
+        "t_cluster": 17.12241012513555,
+        "term": "price_bin_14"
+      },
+      {
+        "coefficient_percentage_points": 0.4178435143483306,
+        "coefficient_probability_units": 0.004178435143483306,
+        "p_value_two_sided": 8.583197763040129e-69,
+        "standard_error_percentage_points": 0.023837056449359004,
+        "standard_error_probability_units": 0.00023837056449359004,
+        "t_cluster": 17.529157395588026,
+        "term": "price_bin_15"
+      },
+      {
+        "coefficient_percentage_points": 0.5489263834998254,
+        "coefficient_probability_units": 0.005489263834998254,
+        "p_value_two_sided": 2.695078041597675e-102,
+        "standard_error_percentage_points": 0.025561757086490652,
+        "standard_error_probability_units": 0.00025561757086490654,
+        "t_cluster": 21.474516859012486,
+        "term": "price_bin_16"
+      },
+      {
+        "coefficient_percentage_points": 0.6327658528522575,
+        "coefficient_probability_units": 0.0063276585285225746,
+        "p_value_two_sided": 4.839068788027378e-119,
+        "standard_error_percentage_points": 0.027277470486548643,
+        "standard_error_probability_units": 0.00027277470486548644,
+        "t_cluster": 23.197380166327875,
+        "term": "price_bin_17"
+      },
+      {
+        "coefficient_percentage_points": 0.9287437071482857,
+        "coefficient_probability_units": 0.009287437071482857,
+        "p_value_two_sided": 7.575116305866647e-198,
+        "standard_error_percentage_points": 0.03094923222929307,
+        "standard_error_probability_units": 0.0003094923222929307,
+        "t_cluster": 30.00861863930961,
+        "term": "price_bin_18"
+      },
+      {
+        "coefficient_percentage_points": 1.393167076631031,
+        "coefficient_probability_units": 0.013931670766310309,
+        "p_value_two_sided": 4.580185520684372e-264,
+        "standard_error_percentage_points": 0.04013084976786282,
+        "standard_error_probability_units": 0.0004013084976786282,
+        "t_cluster": 34.715613666040355,
+        "term": "price_bin_19"
+      },
+      {
+        "coefficient_percentage_points": 0.012000387750474824,
+        "coefficient_probability_units": 0.00012000387750474824,
+        "p_value_two_sided": 1.0379151255966754e-27,
+        "standard_error_percentage_points": 0.001099991264613591,
+        "standard_error_probability_units": 1.0999912646135911e-05,
+        "t_cluster": 10.909530044941187,
+        "term": "positive_draw_payoff"
+      },
+      {
+        "coefficient_percentage_points": 0.005803740905190734,
+        "coefficient_probability_units": 5.8037409051907343e-05,
+        "p_value_two_sided": 5.185554385016857e-10,
+        "standard_error_percentage_points": 0.0009340708672104241,
+        "standard_error_probability_units": 9.34070867210424e-06,
+        "t_cluster": 6.2133839186350395,
+        "term": "negative_draw_payoff"
+      },
+      {
+        "coefficient_percentage_points": 0.4408303246889565,
+        "coefficient_probability_units": 0.004408303246889565,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.007456600517634365,
+        "standard_error_probability_units": 7.456600517634365e-05,
+        "t_cluster": 59.11947725326334,
+        "term": "draw_nonnegative"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 2.3277894563330755e-15,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_heterogeneity",
+    "causal_claim": false,
+    "chooser_clusters": 1254586,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 1.0,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.24198321760430208,
+      "ci95_low": 0.21639846890875686,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.22919084325652947,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.006526841538251326,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 938.1066910787364
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 1,
+    "matrix_rank": 1,
+    "model": "X_heterogeneity_rating_band_below_1600_log_price_draw20_fe",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.030587083619940652,
+    "price_mean": 11.129612682023605,
+    "price_median": 5.6883917886078095,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 20,
+    "rows_identifying": 10290666,
+    "rows_raw": 11028446,
+    "sample": "rows_selected=11028446",
+    "sample_sha256": "9032bac08db12cf7ff6636e6ba0f5b1be9973b25347e50510068801c3cf9311f",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.7010279487612178,
+        "coefficient_probability_units": 0.0070102794876121775,
+        "p_value_two_sided": 3.962248752570744e-270,
+        "standard_error_percentage_points": 0.019963704790459537,
+        "standard_error_probability_units": 0.00019963704790459537,
+        "t_cluster": 35.11512297538242,
+        "term": "log_price"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 1.969912346595244e-15,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_heterogeneity",
+    "causal_claim": false,
+    "chooser_clusters": 554044,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 1.0,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.1458355599424176,
+      "ci95_low": 0.08676423220224565,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.11629989607233163,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.015069493165721171,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 419.50461589380546
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 1,
+    "matrix_rank": 1,
+    "model": "X_heterogeneity_rating_band_1600_1999_log_price_draw20_fe",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.024211649071184175,
+    "price_mean": 7.999281516878319,
+    "price_median": 5.680067962587844,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 20,
+    "rows_identifying": 4789334,
+    "rows_raw": 5078671,
+    "sample": "rows_selected=5078671",
+    "sample_sha256": "fb2af2fcdb2f305578ca492aa202eb8f5d15c17bab7503d4027814d0174e5458",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.2815812270718484,
+        "coefficient_probability_units": 0.002815812270718484,
+        "p_value_two_sided": 1.1856670569828444e-14,
+        "standard_error_percentage_points": 0.036485728020904926,
+        "standard_error_probability_units": 0.0003648572802090493,
+        "t_cluster": 7.717571838240781,
+        "term": "log_price"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 1.1522103698406461e-15,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_heterogeneity",
+    "causal_claim": false,
+    "chooser_clusters": 153307,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 1.0,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.21489703100561214,
+      "ci95_low": 0.05299530482978031,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.13394616791769623,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.04130221969711995,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 174.23497864001962
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 1,
+    "matrix_rank": 1,
+    "model": "X_heterogeneity_rating_band_2000_2399_log_price_draw20_fe",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.0218241347133624,
+    "price_mean": 7.7866788603584425,
+    "price_median": 5.681068176060549,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 20,
+    "rows_identifying": 1068623,
+    "rows_raw": 1164903,
+    "sample": "rows_selected=1164903",
+    "sample_sha256": "66caa4d26ea1298626ebd2a1deb83529e843ad9acf4008a490b8f6cfdd9b572a",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.29232592129744633,
+        "coefficient_probability_units": 0.0029232592129744633,
+        "p_value_two_sided": 0.001182473633093023,
+        "standard_error_percentage_points": 0.09013852066308357,
+        "standard_error_probability_units": 0.0009013852066308358,
+        "t_cluster": 3.243074316585373,
+        "term": "log_price"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 1.214526632712612e-15,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_heterogeneity",
+    "causal_claim": false,
+    "chooser_clusters": 10704,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 1.0,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.5203175687670559,
+      "ci95_low": -0.14945978937554885,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.18542888969575352,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.17086471063390019,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 32.76139165873628
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 1,
+    "matrix_rank": 1,
+    "model": "X_heterogeneity_rating_band_2400_plus_log_price_draw20_fe",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.025949028693637497,
+    "price_mean": 8.099864632377534,
+    "price_median": 5.684296154743624,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 20,
+    "rows_identifying": 43762,
+    "rows_raw": 56110,
+    "sample": "rows_selected=56110",
+    "sample_sha256": "7eef958e3f735bec0626c62448cd4d75fee027177596998304b7bbd315c3b451",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.4811699579344451,
+        "coefficient_probability_units": 0.004811699579344451,
+        "p_value_two_sided": 0.2778162245781453,
+        "standard_error_percentage_points": 0.4433773278969144,
+        "standard_error_probability_units": 0.004433773278969144,
+        "t_cluster": 1.0852380752457362,
+        "term": "log_price"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 1.150513254173653e-15,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_heterogeneity",
+    "causal_claim": false,
+    "chooser_clusters": 266832,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 1.0,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.23299945870638056,
+      "ci95_low": 0.12162232026299358,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.17731088948468707,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.02841305741378812,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 190.23831739687327
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 1,
+    "matrix_rank": 1,
+    "model": "X_heterogeneity_speed_bullet_log_price_draw20_fe",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.027652133811341052,
+    "price_mean": 8.79069698157275,
+    "price_median": 5.678917147300779,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 20,
+    "rows_identifying": 1522272,
+    "rows_raw": 1773751,
+    "sample": "rows_selected=1773751",
+    "sample_sha256": "2c3e3b02b3c15702f0e40ca9cffabab59af8d25fce7eb9b77eaf46ca4528617f",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.4903024442238472,
+        "coefficient_probability_units": 0.004903024442238472,
+        "p_value_two_sided": 4.3625245890511775e-10,
+        "standard_error_percentage_points": 0.0785681665595385,
+        "standard_error_probability_units": 0.000785681665595385,
+        "t_cluster": 6.240472009134881,
+        "term": "log_price"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 1.956892071293219e-15,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_heterogeneity",
+    "causal_claim": false,
+    "chooser_clusters": 1045959,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 1.0,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.25643359098931323,
+      "ci95_low": 0.2140105229865052,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.2352220569879092,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.010822410089531179,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 586.5545452897611
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 1,
+    "matrix_rank": 1,
+    "model": "X_heterogeneity_speed_blitz_log_price_draw20_fe",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.02655713526614136,
+    "price_mean": 8.492650185475117,
+    "price_median": 5.6812890158432445,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 20,
+    "rows_identifying": 9362914,
+    "rows_raw": 9938459,
+    "sample": "rows_selected=9938459",
+    "sample_sha256": "c1dadca67566bed0d1b07964adbb4096da0f3ad8195b8e983c0f73a12602825f",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.6246823985007917,
+        "coefficient_probability_units": 0.006246823985007917,
+        "p_value_two_sided": 9.63682729767118e-105,
+        "standard_error_percentage_points": 0.028741220865333254,
+        "standard_error_probability_units": 0.00028741220865333253,
+        "t_cluster": 21.73472036653334,
+        "term": "log_price"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 1.6101249349804064e-15,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_heterogeneity",
+    "causal_claim": false,
+    "chooser_clusters": 682500,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 1.0,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.284752600198905,
+      "ci95_low": 0.24295543282088605,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.26385401650989554,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.010662738628798721,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 585.9061266555173
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 1,
+    "matrix_rank": 1,
+    "model": "X_heterogeneity_speed_rapid_log_price_draw20_fe",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.03059593691018996,
+    "price_mean": 12.11960528182805,
+    "price_median": 5.717830861353107,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 20,
+    "rows_identifying": 4759834,
+    "rows_raw": 5311032,
+    "sample": "rows_selected=5311032",
+    "sample_sha256": "062f4165b558d94bac335bf836e94c277c0ef777871e9a200aaa680f7b54a4bd",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.8072860842636984,
+        "coefficient_probability_units": 0.008072860842636984,
+        "p_value_two_sided": 3.47244606302051e-135,
+        "standard_error_percentage_points": 0.03262364783765711,
+        "standard_error_probability_units": 0.0003262364783765711,
+        "t_cluster": 24.745426639011754,
+        "term": "log_price"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 4.2389469984414013e-16,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_heterogeneity",
+    "causal_claim": false,
+    "chooser_clusters": 40357,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 1.0,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.23066672446438838,
+      "ci95_low": 0.12112772610699687,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.17589722528569263,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.027944135509994358,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 172.75737209559531
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 1,
+    "matrix_rank": 1,
+    "model": "X_heterogeneity_speed_classical_log_price_draw20_fe",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.03831739785913939,
+    "price_mean": 27.973258721862358,
+    "price_median": 7.519649090880348,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 20,
+    "rows_identifying": 231144,
+    "rows_raw": 304457,
+    "sample": "rows_selected=304457",
+    "sample_sha256": "b30a6fa1882a3a4ea516f0a5a8f1b3e7bf72025b3de909cf9c6f0e6d2f8eceb3",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.6739923963590557,
+        "coefficient_probability_units": 0.006739923963590557,
+        "p_value_two_sided": 3.0818857417711727e-10,
+        "standard_error_percentage_points": 0.10707465581661588,
+        "standard_error_probability_units": 0.0010707465581661587,
+        "t_cluster": 6.294602501579701,
+        "term": "log_price"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 1.1705191357358754e-15,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_heterogeneity",
+    "causal_claim": false,
+    "chooser_clusters": 878564,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 1.0,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.229799174353095,
+      "ci95_low": 0.17563254318432586,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.20271585876871043,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.01381827206929021,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 466.05603020056776
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 1,
+    "matrix_rank": 1,
+    "model": "X_heterogeneity_eval_band_below_0cp_log_price_draw20_fe",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.023727841120529686,
+    "price_mean": 9.793912608343303,
+    "price_median": 5.6832691410430956,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 20,
+    "rows_identifying": 4024370,
+    "rows_raw": 4761748,
+    "sample": "rows_selected=4761748",
+    "sample_sha256": "d2a435fd1160c4134452f2e980952b3734c2cddeb51b683fa8d0ae44d0372bdf",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.4810009689475696,
+        "coefficient_probability_units": 0.004810009689475696,
+        "p_value_two_sided": 1.0015180350399658e-48,
+        "standard_error_percentage_points": 0.03278777642203711,
+        "standard_error_probability_units": 0.0003278777642203711,
+        "t_cluster": 14.67013080595128,
+        "term": "log_price"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 2.1917775124988127e-15,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_heterogeneity",
+    "causal_claim": false,
+    "chooser_clusters": 987086,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 1.0,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.1982219865816115,
+      "ci95_low": 0.15371084199037244,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.17596641428599197,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.011355092476784599,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 523.3340162772008
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 1,
+    "matrix_rank": 1,
+    "model": "X_heterogeneity_eval_band_0_100cp_log_price_draw20_fe",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.028849874254555232,
+    "price_mean": 9.74143474256123,
+    "price_median": 5.682939336196221,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 20,
+    "rows_identifying": 4974109,
+    "rows_raw": 5734999,
+    "sample": "rows_selected=5734999",
+    "sample_sha256": "9e3b7d56476517eafdbde4bc5839c2a7c83d71583c4cd0c55dd5328a7a15e003",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.507660892517584,
+        "coefficient_probability_units": 0.005076608925175839,
+        "p_value_two_sided": 3.6519611469712677e-54,
+        "standard_error_percentage_points": 0.03275929901040818,
+        "standard_error_probability_units": 0.0003275929901040818,
+        "t_cluster": 15.496695834556519,
+        "term": "log_price"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 9.336597133029564e-16,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_heterogeneity",
+    "causal_claim": false,
+    "chooser_clusters": 644175,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 1.0,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.2764090735136291,
+      "ci95_low": 0.20195981218274267,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.23918444284818588,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.018992507494559257,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 345.4822295879003
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 1,
+    "matrix_rank": 1,
+    "model": "X_heterogeneity_eval_band_101_300cp_log_price_draw20_fe",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.02428506670685351,
+    "price_mean": 9.525791583587273,
+    "price_median": 5.683029063334257,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 20,
+    "rows_identifying": 2654824,
+    "rows_raw": 3324471,
+    "sample": "rows_selected=3324471",
+    "sample_sha256": "859428d37874233280143cdfe4dbf4393e609b3470b3a9c800b7305bcf7aab6d",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.5808610149809785,
+        "coefficient_probability_units": 0.005808610149809785,
+        "p_value_two_sided": 2.289255789108978e-36,
+        "standard_error_percentage_points": 0.04612343114357868,
+        "standard_error_probability_units": 0.0004612343114357868,
+        "t_cluster": 12.593621085404575,
+        "term": "log_price"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 9.959967656753263e-16,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_heterogeneity",
+    "causal_claim": false,
+    "chooser_clusters": 506171,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 1.0,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.25834383679626827,
+      "ci95_low": 0.18909494861218284,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.22371939270422556,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.01766585731429552,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 301.9060969010971
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 1,
+    "matrix_rank": 1,
+    "model": "X_heterogeneity_eval_band_301_600cp_log_price_draw20_fe",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.032485879620373886,
+    "price_mean": 10.27613093010686,
+    "price_median": 5.6851207621567275,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 20,
+    "rows_identifying": 1893462,
+    "rows_raw": 2525959,
+    "sample": "rows_selected=2525959",
+    "sample_sha256": "620738e6c9f41c87711afded897f1f12c4cc6b9d1f2cb11539e38c84bb5d516a",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.7267721260132624,
+        "coefficient_probability_units": 0.007267721260132623,
+        "p_value_two_sided": 9.367475245651945e-37,
+        "standard_error_percentage_points": 0.057389091410290576,
+        "standard_error_probability_units": 0.0005738909141029058,
+        "t_cluster": 12.663942016739144,
+        "term": "log_price"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 7.792726859216109e-16,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_heterogeneity",
+    "causal_claim": false,
+    "chooser_clusters": 182935,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 1.0,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.29961413746478993,
+      "ci95_low": 0.20226297128916873,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.2509385543769793,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.024834937515055062,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 177.57128359293864
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 1,
+    "matrix_rank": 1,
+    "model": "X_heterogeneity_eval_band_above_600cp_log_price_draw20_fe",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.046828951030273624,
+    "price_mean": 13.012544874565943,
+    "price_median": 5.69165466756755,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 20,
+    "rows_identifying": 559039,
+    "rows_raw": 980953,
+    "sample": "rows_selected=980953",
+    "sample_sha256": "2b901bc99a3656f994114a19f573197cbf1e64b6d9042222495392cafee0b2aa",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 1.1751189274527218,
+        "coefficient_probability_units": 0.011751189274527219,
+        "p_value_two_sided": 5.289579385352273e-24,
+        "standard_error_percentage_points": 0.1162994072732419,
+        "standard_error_probability_units": 0.001162994072732419,
+        "t_cluster": 10.10425551603901,
+        "term": "log_price"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 2.093825313238607e-15,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_heterogeneity",
+    "causal_claim": false,
+    "chooser_clusters": 1147212,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 1.0,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.21522125213108229,
+      "ci95_low": 0.18201243548801282,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.19861684380954756,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.008471792569918729,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 723.2326382979371
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 1,
+    "matrix_rank": 1,
+    "model": "X_heterogeneity_temporal_half_first12_log_price_draw20_fe",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.028031148441353543,
+    "price_mean": 9.764320475394175,
+    "price_median": 5.683557252894337,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 20,
+    "rows_identifying": 7977997,
+    "rows_raw": 8575710,
+    "sample": "rows_selected=8575710",
+    "sample_sha256": "2b0365c8f500c63c462a124c0e9a70f4e3fc7a47a32b9a83467ed015a9a8ad07",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.5567458231778559,
+        "coefficient_probability_units": 0.005567458231778559,
+        "p_value_two_sided": 1.5046147412018799e-121,
+        "standard_error_percentage_points": 0.02374740750917479,
+        "standard_error_probability_units": 0.00023747407509174792,
+        "t_cluster": 23.444488538917675,
+        "term": "log_price"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 2.0267668958111566e-15,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_heterogeneity",
+    "causal_claim": false,
+    "chooser_clusters": 1177516,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 1.0,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.22588257092928457,
+      "ci95_low": 0.19323218920633503,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.2095573800678098,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.008329332064387815,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 741.9113050368327
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 1,
+    "matrix_rank": 1,
+    "model": "X_heterogeneity_temporal_half_second12_log_price_draw20_fe",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.028195973227975804,
+    "price_mean": 10.186586081354264,
+    "price_median": 5.683662582427554,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 20,
+    "rows_identifying": 8116507,
+    "rows_raw": 8752420,
+    "sample": "rows_selected=8752420",
+    "sample_sha256": "877e598144b065b359a25ebad88c822372c5f3fc4581b5047a16362cf276f46d",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.5908674278116716,
+        "coefficient_probability_units": 0.0059086742781167155,
+        "p_value_two_sided": 1.1274629984387983e-139,
+        "standard_error_percentage_points": 0.023485362389439924,
+        "standard_error_probability_units": 0.00023485362389439923,
+        "t_cluster": 25.158965742736513,
+        "term": "log_price"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 1.4604219216058763e-15,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_heterogeneity",
+    "causal_claim": false,
+    "chooser_clusters": 273049,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 1.0,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.18594498093040757,
+      "ci95_low": 0.1435407593598948,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.16474287014515118,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.010817602237845142,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 432.3833109377458
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 1,
+    "matrix_rank": 1,
+    "model": "X_heterogeneity_rating_certainty_either_rd_above_110_log_price_draw20_fe",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.03877365060762158,
+    "price_mean": 40.172263281987746,
+    "price_median": 8.611143297388487,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 20,
+    "rows_identifying": 824361,
+    "rows_raw": 1629715,
+    "sample": "rows_selected=1629715",
+    "sample_sha256": "bb527a35071ab1223a0d0b754c840f502f6c4934cf010c2c1451d3ed24a408a5",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.6387682487104864,
+        "coefficient_probability_units": 0.006387682487104864,
+        "p_value_two_sided": 2.2652272474180917e-52,
+        "standard_error_percentage_points": 0.041943792958243284,
+        "standard_error_probability_units": 0.00041943792958243283,
+        "t_cluster": 15.229148430767948,
+        "term": "log_price"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 1.2506885759824165e-15,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_heterogeneity",
+    "causal_claim": false,
+    "chooser_clusters": 1648796,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 1.0,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.26011943404021,
+      "ci95_low": 0.22601179579007444,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.2430656149151422,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.0087010880095686,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 705.3130905955502
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 1,
+    "matrix_rank": 1,
+    "model": "X_heterogeneity_rating_certainty_both_rd_le_110_log_price_draw20_fe",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.027007822127265716,
+    "price_mean": 6.842978761843448,
+    "price_median": 5.68302489145095,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 20,
+    "rows_identifying": 15037196,
+    "rows_raw": 15698415,
+    "sample": "rows_selected=15698415",
+    "sample_sha256": "605c6bd9a669ab3d6e2510eb2dfbaa82ee4dca8ff90d70ec6a904f53ec8b95bf",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.6564672892882625,
+        "coefficient_probability_units": 0.006564672892882625,
+        "p_value_two_sided": 1.0006705897093469e-171,
+        "standard_error_percentage_points": 0.023499743727611325,
+        "standard_error_probability_units": 0.00023499743727611324,
+        "t_cluster": 27.935082905476023,
+        "term": "log_price"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 4.2864246585994945e-16,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_heterogeneity",
+    "causal_claim": false,
+    "chooser_clusters": 459180,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 1.0,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.1350002239511605,
+      "ci95_low": 0.09346779445137005,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.11423400920126527,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.010595202214783776,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 387.54058022267685
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 1,
+    "matrix_rank": 1,
+    "model": "X_heterogeneity_activity_quartile_q2_log_price_draw20_fe",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.04355093822632847,
+    "price_mean": 22.625984813139222,
+    "price_median": 9.0099748822704,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 20,
+    "rows_identifying": 978287,
+    "rows_raw": 1190491,
+    "sample": "rows_selected=1190491",
+    "sample_sha256": "eeedf758d7fd39fbbede61a5d8c7c07be3f58218030971cf68a8b6f280a9ffbb",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.49749982780701413,
+        "coefficient_probability_units": 0.004974998278070141,
+        "p_value_two_sided": 4.201717926639083e-27,
+        "standard_error_percentage_points": 0.046143099715150675,
+        "standard_error_probability_units": 0.00046143099715150674,
+        "t_cluster": 10.781673335301843,
+        "term": "log_price"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 4.309905281174708e-15,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_heterogeneity",
+    "causal_claim": false,
+    "chooser_clusters": 671381,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 1.0,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.16321120121723154,
+      "ci95_low": 0.1348253330181921,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.14901826711771182,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.007241425970819758,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 656.7679905342171
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 1,
+    "matrix_rank": 1,
+    "model": "X_heterogeneity_activity_quartile_q3_log_price_draw20_fe",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.0373210723511436,
+    "price_mean": 10.79681997827884,
+    "price_median": 5.812170262327172,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 20,
+    "rows_identifying": 3025315,
+    "rows_raw": 3025315,
+    "sample": "rows_selected=3025315",
+    "sample_sha256": "11b83fd12cba0db57528723da64c5fed55e51b43959d9e25f9415385e14a0bb6",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.5561521528742166,
+        "coefficient_probability_units": 0.005561521528742166,
+        "p_value_two_sided": 4.27003391485967e-94,
+        "standard_error_percentage_points": 0.027025778258241442,
+        "standard_error_probability_units": 0.00027025778258241444,
+        "t_cluster": 20.57858047823727,
+        "term": "log_price"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 4.040275762209037e-15,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_heterogeneity",
+    "causal_claim": false,
+    "chooser_clusters": 671381,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 1.0,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.31573843665867274,
+      "ci95_low": 0.27667509342728636,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.29620676504297955,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.009965321694559952,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 808.269555723946
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 1,
+    "matrix_rank": 1,
+    "model": "X_heterogeneity_activity_quartile_q4_log_price_draw20_fe",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.023270665517128846,
+    "price_mean": 6.9067286250651705,
+    "price_median": 5.679476586801929,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 20,
+    "rows_identifying": 12440942,
+    "rows_raw": 12440942,
+    "sample": "rows_selected=12440942",
+    "sample_sha256": "65e13185ff22fa400bcd15586aaeaa0c714934913a4fc3b146b3511f3d03b9fe",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.6892928553225951,
+        "coefficient_probability_units": 0.006892928553225951,
+        "p_value_two_sided": 3.788166378358866e-194,
+        "standard_error_percentage_points": 0.02318996679246923,
+        "standard_error_probability_units": 0.0002318996679246923,
+        "t_cluster": 29.723753444374825,
+        "term": "log_price"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 2.835474434467735e-15,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_heterogeneity",
+    "causal_claim": false,
+    "chooser_clusters": 1731315,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 1.0,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": -0.4062687922431625,
+      "ci95_low": -0.43249325946560546,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": -0.41938102585438397,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.00669003803878497,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 1066.690065825728
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 1,
+    "matrix_rank": 1,
+    "model": "X_heterogeneity_lagged_kindness_none_prior_log_price_draw20_fe",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.015675091801061206,
+    "price_mean": 10.220874646423452,
+    "price_median": 5.68406686558574,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 20,
+    "rows_identifying": 14928501,
+    "rows_raw": 15882714,
+    "sample": "rows_selected=15882714",
+    "sample_sha256": "dd3289927b102932cc6453bc84440f23d9d82a89142965baf0a00fc45c89912e",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": -0.6573836079890691,
+        "coefficient_probability_units": -0.006573836079890692,
+        "p_value_two_sided": 0.0,
+        "standard_error_percentage_points": 0.010486696041054587,
+        "standard_error_probability_units": 0.00010486696041054587,
+        "t_cluster": -62.6873903291813,
+        "term": "log_price"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 9.011483558174756e-16,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_heterogeneity",
+    "causal_claim": false,
+    "chooser_clusters": 110724,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 1.0,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.058806005781357355,
+      "ci95_low": 0.0047739802916376625,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.03178999303649751,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.013783933254875452,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 183.83485762471085
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 1,
+    "matrix_rank": 1,
+    "model": "X_heterogeneity_lagged_kindness_one_prior_log_price_draw20_fe",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.09041841814474329,
+    "price_mean": 7.442221958516774,
+    "price_median": 5.681038069819603,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 20,
+    "rows_identifying": 809179,
+    "rows_raw": 877830,
+    "sample": "rows_selected=877830",
+    "sample_sha256": "091f65f08febdfb13e3dca1c4a00b48ac48573db6325b3e16d7ebc48781e3f9c",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 0.28744008831925094,
+        "coefficient_probability_units": 0.002874400883192509,
+        "p_value_two_sided": 0.021093438579208607,
+        "standard_error_percentage_points": 0.12463214407185609,
+        "standard_error_probability_units": 0.001246321440718561,
+        "t_cluster": 2.3063078185795205,
+        "term": "log_price"
+      }
+    ]
+  },
+  {
+    "absorption_iterations": 1,
+    "absorption_max_scaled_group_mean": 1.779030410843846e-15,
+    "absorption_method": "two_way_schur_exact",
+    "adjusted_controls": false,
+    "analysis_role": "exploratory_heterogeneity",
+    "causal_claim": false,
+    "chooser_clusters": 54212,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "condition_number_xtx": 1.0,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.07776199297721118,
+      "ci95_low": 0.02317179376711035,
+      "definition": "d Pr(kind)/d log(price) divided by sample Pr(kind)",
+      "estimate": 0.05046689337216076,
+      "price_scale": null,
+      "standard_error_delta_quantity_fixed": 0.013926327126595526,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "exposure_residual_norms": {
+      "log_price": 139.15335451130932
+    },
+    "fixed_effect_count": 2,
+    "matrix_columns": 1,
+    "matrix_rank": 1,
+    "model": "X_heterogeneity_lagged_kindness_two_plus_prior_log_price_draw20_fe",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcome_mean": 0.27984305462079756,
+    "price_mean": 7.091482089709194,
+    "price_median": 5.679822201287701,
+    "reference_control": "bins",
+    "reference_quantile_fixed_effect_bins": 20,
+    "rows_identifying": 557225,
+    "rows_raw": 567586,
+    "sample": "rows_selected=567586",
+    "sample_sha256": "7fb165c7400f36f3fc6cd058e1303f3e9797b8a03f249edc38f2e014889aca19",
+    "status": "ESTIMATED",
+    "terms": [
+      {
+        "coefficient_percentage_points": 1.412280959848755,
+        "coefficient_probability_units": 0.01412280959848755,
+        "p_value_two_sided": 0.00029025216869328076,
+        "standard_error_percentage_points": 0.38971859227549666,
+        "standard_error_probability_units": 0.0038971859227549667,
+        "t_cluster": 3.6238480479022077,
+        "term": "log_price"
+      }
+    ]
+  },
+  {
+    "all_zero_chooser_groups_excluded": 2436562,
+    "analysis_role": "exploratory_log_link_sensitivity",
+    "causal_claim": false,
+    "chooser_groups_all_finite": 2685525,
+    "chooser_groups_informative_positive_total": 248963,
+    "cluster": "chooser_username_norm mapped losslessly to chooser_index",
+    "conditional_log_likelihood_up_to_constant": -1029884.6899741036,
+    "economic_price": "chooser_win_premium_v2: rating points forgone by draw versus win",
+    "elasticity": {
+      "causal": false,
+      "ci95_high": 0.2155740638338946,
+      "ci95_low": 0.18465121727348577,
+      "estimate": 0.20011264055369019,
+      "interpretation": "direct elasticity under conditional Poisson log-link QMLE",
+      "standard_error": 0.007888626220768415,
+      "term": "log_price"
+    },
+    "epistemic_label": "X",
+    "estimator": "conditional chooser-fixed-effect Poisson QMLE",
+    "iterations": 5,
+    "last_maximum_newton_step": 9.478359865309971e-13,
+    "matrix_rank_information": 18,
+    "model": "X_conditional_chooser_fe_poisson_log_price_piecewise_controls",
+    "multiple_testing_family": "outside Campaign 1 confirmatory Holm family",
+    "outcome": "indicator for kind draw",
+    "outcomes_in_informative_sample": 487170,
+    "rows_all_finite": 17328130,
+    "rows_informative_positive_total": 2452388,
+    "sample": "all fair rows",
+    "status": "ESTIMATED",
+    "support_note": "all-zero chooser groups are excluded by the conditional likelihood",
+    "terms": [
+      {
+        "coefficient": 0.20011264055369019,
+        "p_value_two_sided": 5.8006056824894056e-142,
+        "standard_error_clustered": 0.007888626220768415,
+        "t_cluster": 25.36723568253911,
+        "term": "log_price"
+      },
+      {
+        "coefficient": 0.014132319371599873,
+        "p_value_two_sided": 1.0321070706781282e-07,
+        "standard_error_clustered": 0.002655962595429775,
+        "t_cluster": 5.32097831344385,
+        "term": "positive_draw_payoff_z"
+      },
+      {
+        "coefficient": 0.012519243278826524,
+        "p_value_two_sided": 2.497874468554385e-08,
+        "standard_error_clustered": 0.0022462410765175305,
+        "t_cluster": 5.573419260160528,
+        "term": "negative_draw_payoff_z"
+      },
+      {
+        "coefficient": 0.08027972942542252,
+        "p_value_two_sided": 0.0,
+        "standard_error_clustered": 0.00142846349033394,
+        "t_cluster": 56.200056892357175,
+        "term": "draw_nonnegative_z"
+      },
+      {
+        "coefficient": 1.236668475542963,
+        "p_value_two_sided": 0.0,
+        "standard_error_clustered": 0.0095563150320801,
+        "t_cluster": 129.40850855078816,
+        "term": "engine_eval_z"
+      },
+      {
+        "coefficient": -0.14948574163637415,
+        "p_value_two_sided": 0.0,
+        "standard_error_clustered": 0.0012294159972388924,
+        "t_cluster": -121.5908544968502,
+        "term": "engine_eval_z2"
+      },
+      {
+        "coefficient": -0.04442425597738695,
+        "p_value_two_sided": 2.8742610434824318e-18,
+        "standard_error_clustered": 0.005096683910702327,
+        "t_cluster": -8.716305887461884,
+        "term": "z_chooser_rd"
+      },
+      {
+        "coefficient": 0.011944154150047626,
+        "p_value_two_sided": 9.683470915270242e-15,
+        "standard_error_clustered": 0.0015425057165508469,
+        "t_cluster": 7.743345144130557,
+        "term": "z_opponent_rd"
+      },
+      {
+        "coefficient": -0.17060391173743425,
+        "p_value_two_sided": 0.0,
+        "standard_error_clustered": 0.003111540474736292,
+        "t_cluster": -54.82940463819395,
+        "term": "z_log_chooser_clock"
+      },
+      {
+        "coefficient": 0.48530280344445426,
+        "p_value_two_sided": 0.0,
+        "standard_error_clustered": 0.005175544424606172,
+        "t_cluster": 93.76845480007312,
+        "term": "z_log_opponent_clock"
+      },
+      {
+        "coefficient": 0.523600589539955,
+        "p_value_two_sided": 0.339792883374817,
+        "standard_error_clustered": 0.5485172213501714,
+        "t_cluster": 0.95457456787066,
+        "term": "log_opponent_clock_missing"
+      },
+      {
+        "coefficient": -0.7322734111477224,
+        "p_value_two_sided": 0.0,
+        "standard_error_clustered": 0.016940948110603867,
+        "t_cluster": -43.225054841491996,
+        "term": "tournament"
+      },
+      {
+        "coefficient": -0.03155257108980382,
+        "p_value_two_sided": 6.731956493260725e-49,
+        "standard_error_clustered": 0.0021468627657904855,
+        "t_cluster": -14.697060097451551,
+        "term": "month_trend_z"
+      },
+      {
+        "coefficient": -0.009736064113189563,
+        "p_value_two_sided": 1.3301907187578984e-06,
+        "standard_error_clustered": 0.002013584941256244,
+        "t_cluster": -4.835189176134475,
+        "term": "month_trend_z2"
+      },
+      {
+        "coefficient": -1.2637832515667042,
+        "p_value_two_sided": 0.0002770075663833758,
+        "standard_error_clustered": 0.34758433600339256,
+        "t_cluster": -3.635903925067467,
+        "term": "speed_1"
+      },
+      {
+        "coefficient": -1.618780631651524,
+        "p_value_two_sided": 3.2428991092482344e-06,
+        "standard_error_clustered": 0.3477656252023993,
+        "t_cluster": -4.6548034490453025,
+        "term": "speed_2"
+      },
+      {
+        "coefficient": -1.9884378704462873,
+        "p_value_two_sided": 1.1050379432655262e-08,
+        "standard_error_clustered": 0.3480083602338732,
+        "t_cluster": -5.713764661027082,
+        "term": "speed_3"
+      },
+      {
+        "coefficient": -2.390422668385379,
+        "p_value_two_sided": 7.295282906776565e-12,
+        "standard_error_clustered": 0.3488777694700767,
+        "t_cluster": -6.851748312929999,
+        "term": "speed_4"
+      }
+    ]
+  }
+]

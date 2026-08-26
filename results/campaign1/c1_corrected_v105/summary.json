@@ -1,0 +1,1008 @@
+{
+  "C1": {
+    "epistemic_label": "C",
+    "primary": "30-minute loss-preceded minus win-preceded chooser-FE contrast",
+    "primary_output": "c1_prior_result_state_dependence.csv",
+    "secondary_output": "c1_secondary_streak3.csv",
+    "secondary_status": {
+      "candidate_choosers": 14352,
+      "candidate_loss_streak_rows": 12188,
+      "candidate_rows_before_complete_case_filter": 27511,
+      "candidate_win_streak_rows": 15323,
+      "chooser_clusters": 14352,
+      "complete_case_preservation_share": 1.0,
+      "complete_case_rows": 27511,
+      "contrast": "three_or_more_consecutive_losses_minus_three_or_more_consecutive_wins",
+      "epistemic_label": "S",
+      "minimum_complete_case_rows_for_frozen_FE_producer": 1000,
+      "minimum_sane_candidates_per_arm": 250,
+      "minimum_sane_direct_candidates": 1000,
+      "output": "c1_secondary_streak3.csv",
+      "status": "ESTIMATED",
+      "streak_support_sanity_gate": "PASS"
+    },
+    "status": "ESTIMATED"
+  },
+  "account_level_output": false,
+  "api_requests": 0,
+  "chronology_authority": {
+    "chooser_result_mapping": "decode raw code to White-signed result, then negate only for Black chooser",
+    "chronology_files": 852,
+    "chronology_manifest": "/Volumes/XT_Pro/lichess_kindness/output/dynamic_prosociality_a3_chronology_gate_v100/20260821T234626Z/chronology_input_manifest.tsv",
+    "chronology_manifest_sha256": "1d4648bb17cafd9e58c14ab78d32abe855f0bc62a6fb75ac88e02494a73337cd",
+    "chronology_rows": 7763847245,
+    "different_artifact_explicitly_rejected_as_semantic_authority": "replication_package/code/02_extract_rating_replay_inputs.py",
+    "historical_producer": {
+      "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/authorities/c1/032_make_sorted_replay_events_v2_time.py",
+      "sha256": "02a14d3de5ef7fadf59909b703ad481ca23625fea39c43a5d09cdc86cfbc4458"
+    },
+    "physical_decider_json": {
+      "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/authorities/c1/result_code_physical_decider.json",
+      "sha256": "f5cfb8836f1425a7083f55a41934a843fd143a15fbca9ff59bd6661a4385b7b2"
+    },
+    "physical_revalidation": {
+      "decision_branch": "RAW_0_1_2",
+      "null_result_code_rows": 0,
+      "performed_before_current_kindness_read": true,
+      "physical_file": "/Volumes/XT_Pro/lichess_kindness/derived/glicko2_replay/rating_events_replay_sorted_v2_time/events_replay_sorted_time/speed=blitz/month=2024-10/part-00000.parquet",
+      "physical_file_rows": 44144371,
+      "physical_file_size_bytes": 857854340,
+      "result_code_counts": {
+        "0": 20340159,
+        "1": 1916130,
+        "2": 21888082
+      },
+      "status": "C1_PHYSICAL_RESULT_CODE_REVALIDATED_V105"
+    },
+    "postoutcome_correction_v105": {
+      "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/docs/dynamics_paper2_campaign1_v1_0_5_postoutcome_correction.md",
+      "sha256": "14cb718408788ea15f94d555eaabc84c27f2dc42b1ca85c03b46daf43e366787"
+    },
+    "rating_diff_used_for_validation_only": true,
+    "rating_diff_used_to_infer_result": false,
+    "raw_result_code_semantics": {
+      "0": "Black win",
+      "1": "draw",
+      "2": "White win"
+    },
+    "status": "C1_CHRONOLOGY_AUTHORITY_AUTHENTICATED_V105",
+    "white_signed_decode": {
+      "0": -1,
+      "1": 0,
+      "2": 1
+    }
+  },
+  "created_utc": "2026-08-25T17:31:32.500889+00:00",
+  "estimation_row_conservation": {
+    "minimum_primary_complete_case_preservation_share": 0.9,
+    "primary_complete_case_preservation_share": 0.9999954041794392,
+    "primary_complete_case_rows": 217588,
+    "primary_decoded_rows": 217589,
+    "prior_invalid_run_B_complete_case_rows": 108543,
+    "prior_invalid_run_B_not_used": true,
+    "secondary_streak3": {
+      "candidate_choosers": 14352,
+      "candidate_loss_streak_rows": 12188,
+      "candidate_rows_before_complete_case_filter": 27511,
+      "candidate_win_streak_rows": 15323,
+      "chooser_clusters": 14352,
+      "complete_case_preservation_share": 1.0,
+      "complete_case_rows": 27511,
+      "contrast": "three_or_more_consecutive_losses_minus_three_or_more_consecutive_wins",
+      "epistemic_label": "S",
+      "minimum_complete_case_rows_for_frozen_FE_producer": 1000,
+      "minimum_sane_candidates_per_arm": 250,
+      "minimum_sane_direct_candidates": 1000,
+      "output": "c1_secondary_streak3.csv",
+      "status": "ESTIMATED",
+      "streak_support_sanity_gate": "PASS"
+    },
+    "specifications": [
+      {
+        "complete_case_preservation_share": 0.9999954041794392,
+        "complete_case_rows": 217588,
+        "decoded_rows_before_complete_case_filter": 217589,
+        "specification": "session_30"
+      },
+      {
+        "complete_case_preservation_share": 0.9999946797756993,
+        "complete_case_rows": 187961,
+        "decoded_rows_before_complete_case_filter": 187962,
+        "specification": "session_15"
+      },
+      {
+        "complete_case_preservation_share": 0.9999957739931539,
+        "complete_case_rows": 236629,
+        "decoded_rows_before_complete_case_filter": 236630,
+        "specification": "session_60"
+      },
+      {
+        "complete_case_preservation_share": 0.9999952959328635,
+        "complete_case_rows": 212581,
+        "decoded_rows_before_complete_case_filter": 212582,
+        "specification": "session_30_same_pool"
+      }
+    ],
+    "status": "C1_CORRECTED_ESTIMATION_ROW_CONSERVATION_OK"
+  },
+  "git_head": "46abb7409621e98c74dc8aa3eb3b3885a644080d",
+  "holm_family_note": "Corrected C1 and prior C2 raw p-values are available. Invalid C1 lineages are excluded. Holm adjustment remains pending family completion.",
+  "patron_status_read": false,
+  "persistent_private_cache_mutation": false,
+  "physical_result_code_revalidation": {
+    "decision_branch": "RAW_0_1_2",
+    "null_result_code_rows": 0,
+    "performed_before_current_kindness_read": true,
+    "physical_file": "/Volumes/XT_Pro/lichess_kindness/derived/glicko2_replay/rating_events_replay_sorted_v2_time/events_replay_sorted_time/speed=blitz/month=2024-10/part-00000.parquet",
+    "physical_file_rows": 44144371,
+    "physical_file_size_bytes": 857854340,
+    "result_code_counts": {
+      "0": 20340159,
+      "1": 1916130,
+      "2": 21888082
+    },
+    "status": "C1_PHYSICAL_RESULT_CODE_REVALIDATED_V105"
+  },
+  "prior_lineages_invalidation": {
+    "corrected_rebuild_authorized_by": "v1.0.5 post-outcome technical correction",
+    "created_utc": "2026-08-25T17:30:37.361405+00:00",
+    "invalid_results_enter_holm": false,
+    "machine_prior_output_inventory": {
+      "all_discovered_prior_primaries_invalidated": true,
+      "discovery_rule": "coefficient fingerprint, not colliding package/folder name",
+      "prior_primary_csvs_found": 2,
+      "run_A_found": false,
+      "run_B_found": true,
+      "runs": [
+        {
+          "classification": "INVALID_RESULT_CODE_SEMANTICS",
+          "lineage": "Run_B_production_lineage",
+          "primary_csv": "/Volumes/XT_Pro/lichess_kindness/output/dynamics_campaign1_c1_completion_v101/20260825T033227Z_FAILED/c1_prior_result_state_dependence.csv",
+          "primary_csv_sha256": "45fe1b81a1838462a5bbec15c3a1c13a8da8eb249123a3bd9d8d3a5b86ce6eeb",
+          "primary_effect_pp": -0.8317125360007418,
+          "result_tree": {
+            "file_count": 6,
+            "root": "/Volumes/XT_Pro/lichess_kindness/output/dynamics_campaign1_c1_completion_v101/20260825T033227Z_FAILED",
+            "total_bytes": 14877,
+            "tree_manifest_sha256": "04ceb80dcb172d6fe395461f32666ade326a45a4e21946baca519f60fdc696f3"
+          }
+        },
+        {
+          "classification": "INVALID_RESULT_CODE_SEMANTICS",
+          "lineage": "Run_B_production_lineage",
+          "primary_csv": "/Volumes/XT_Pro/lichess_kindness/output/dynamics_campaign1_c1_completion_v102/20260825T033537Z/c1_prior_result_state_dependence.csv",
+          "primary_csv_sha256": "ec1bc91b012f63205192160b29377344d83e65c195ac9b6ed7176732c34c5ee9",
+          "primary_effect_pp": -0.8317125360007347,
+          "result_tree": {
+            "file_count": 9,
+            "root": "/Volumes/XT_Pro/lichess_kindness/output/dynamics_campaign1_c1_completion_v102/20260825T033537Z",
+            "total_bytes": 32593,
+            "tree_manifest_sha256": "bf770bd2a2df542c2e304f580aa4f9a24bdcdffdaf6a7732dc3472bcfc6f1546"
+          }
+        }
+      ],
+      "status": "C1_PRIOR_OUTPUT_INVENTORY_COMPLETE",
+      "unknown_prior_primaries": 0
+    },
+    "mechanism": {
+      "true_black_wins_raw_0": "mislabeled as draw",
+      "true_draws_raw_1": "mislabeled as chooser win/loss according to color",
+      "true_white_wins_raw_2": "mapped to +/-2 and filtered out"
+    },
+    "old_outputs_mutated": false,
+    "packaged_prior_evidence": {
+      "prior_prior_evidence_c1_run_b_v101_FAILURE_DIAGNOSTIC.json": {
+        "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/prior_evidence/c1_run_b_v101/FAILURE_DIAGNOSTIC.json",
+        "sha256": "e43d4c1d6e877ca1a0e05518af1c7e600aee00ac0cd75d5f2d02845dad320378"
+      },
+      "prior_prior_evidence_c1_run_b_v101_c1_chronology_authority.json": {
+        "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/prior_evidence/c1_run_b_v101/c1_chronology_authority.json",
+        "sha256": "ed0d5f67110da8f7860034ea89c7dbe6798c5a17b7ac417de2a0434f12cd48a8"
+      },
+      "prior_prior_evidence_c1_run_b_v101_c1_prior_result_state_dependence.csv": {
+        "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/prior_evidence/c1_run_b_v101/c1_prior_result_state_dependence.csv",
+        "sha256": "45fe1b81a1838462a5bbec15c3a1c13a8da8eb249123a3bd9d8d3a5b86ce6eeb"
+      },
+      "prior_prior_evidence_c1_run_b_v101_c1_result_bridge_coverage.json": {
+        "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/prior_evidence/c1_run_b_v101/c1_result_bridge_coverage.json",
+        "sha256": "cacbefa519441d03c9e9f1aebbb7ac92e5cb8935b247254c8daa8bd5b2c0449d"
+      },
+      "prior_prior_evidence_c1_run_b_v102__SUCCESS.json": {
+        "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/prior_evidence/c1_run_b_v102/_SUCCESS.json",
+        "sha256": "04e24374b931549b4721e416bb4b29c0b1744b7ece6e822e40f3aa1d9e6175e6"
+      },
+      "prior_prior_evidence_c1_run_b_v102_c1_chronology_authority.json": {
+        "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/prior_evidence/c1_run_b_v102/c1_chronology_authority.json",
+        "sha256": "ed0d5f67110da8f7860034ea89c7dbe6798c5a17b7ac417de2a0434f12cd48a8"
+      },
+      "prior_prior_evidence_c1_run_b_v102_c1_prior_result_state_dependence.csv": {
+        "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/prior_evidence/c1_run_b_v102/c1_prior_result_state_dependence.csv",
+        "sha256": "ec1bc91b012f63205192160b29377344d83e65c195ac9b6ed7176732c34c5ee9"
+      },
+      "prior_prior_evidence_c1_run_b_v102_c1_secondary_streak3_STATUS.json": {
+        "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/prior_evidence/c1_run_b_v102/c1_secondary_streak3_STATUS.json",
+        "sha256": "ee6c3e417ad1ee52c474004f8fad28881d0c1cbd14185eed9dcfab68504967e4"
+      },
+      "prior_prior_evidence_c1_run_b_v102_summary.json": {
+        "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/prior_evidence/c1_run_b_v102/summary.json",
+        "sha256": "770ba886f5417c4b186736408965f4d07596d99002a1169dd7b541df67416c7d"
+      }
+    },
+    "physical_decision_branch": "RAW_0_1_2",
+    "run_A_audit_lineage": {
+      "classification": "INVALID_RESULT_CODE_SEMANTICS",
+      "exact_artifact_present_in_corrective_collection": false,
+      "fingerprint_autopsy_required_for_validity": false,
+      "reported_mapping": "raw result_code for White; negated raw result_code for Black; retain {-1,0,+1}",
+      "reported_primary_effect_pp": 0.245,
+      "source_package_sha256": "cb2798b1cfbc6e14dca222c932f29cf77cfe2589eb284056474adc6be55e9caa"
+    },
+    "run_B_production_lineage": {
+      "classification": "INVALID_RESULT_CODE_SEMANTICS",
+      "direct_loss_or_win_streak_rows": 2,
+      "primary_effect_pp": -0.8317125360007347,
+      "regression_rows": 108543,
+      "resolved_primary_bridge_rows": 217589,
+      "resolved_streak_triples": 112725
+    },
+    "status": "C1_PRIOR_LINEAGES_INVALIDATED_RESULT_CODE_SEMANTICS"
+  },
+  "prior_wave1_summary_sha256": "66e1b1a9cc59be928d8535a8887c81e2241b021b6c0e1c38c2ca314463308e2f",
+  "producer_source": {
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Dynamics_Paper2_Campaign1_C1_C9_CORRECTIVE_v1_0_0_20260825/payload/code/run_campaign1_c1_corrected_v105.py",
+    "sha256": "9154a6c49ba0ae61561926d00feeb118fd1c6d9ffde0c96b27db87b4ccf53585",
+    "wave1_common_sha256": "23388353e546f34b1a8c23fad9b10bfc42fbc7850a79c41108ddd3c0821efce2"
+  },
+  "result_bridge_coverage": {
+    "bridge_validation": {
+      "chooser_result_counts": {
+        "-1": 210831,
+        "0": 18813,
+        "1": 230085
+      },
+      "chooser_support": [
+        -1,
+        0,
+        1
+      ],
+      "decoder": "2->+1, 1->0, 0->-1 White-signed; negate for Black chooser",
+      "kindness_by_prior_result_tabulated": false,
+      "needed_result_rows": 461213,
+      "perspective_validation": {
+        "alignment_share_among_nonzero": 1.0,
+        "decisive_rating_diff_nonnull": 438521,
+        "decisive_rating_diff_nonzero": 436923,
+        "decisive_rating_diff_zero": 1598,
+        "decisive_rows": 440916,
+        "decisive_sign_aligned": 436923,
+        "decisive_sign_contradictory": 0,
+        "minimum_alignment_share": 0.99,
+        "rating_diff_validation_only": true,
+        "result_constructed_from_rating_diff": false,
+        "status": "C1_CHOOSER_PERSPECTIVE_VALIDATION_OK"
+      },
+      "raw_result_code_counts": {
+        "0": 211672,
+        "1": 18813,
+        "2": 229244
+      },
+      "raw_support": [
+        0,
+        1,
+        2
+      ],
+      "resolved_bridge_rows": 459729,
+      "row_conservation_pass": true,
+      "status": "C1_RESULT_BRIDGE_DECODE_AND_ROW_CONSERVATION_OK",
+      "unresolved_needed_rows": 1484
+    },
+    "kindness_by_prior_result_tabulated": false,
+    "minimum_resolution_share": 0.99,
+    "rating_diff_used_to_infer_result": false,
+    "raw_result_code_decoder": "2->+1, 1->0, 0->-1 White-signed",
+    "session_15": {
+      "eligible": 188547,
+      "resolved": 187962,
+      "resolved_share": 0.9968973253353275
+    },
+    "session_30_primary": {
+      "eligible": 218267,
+      "resolved": 217589,
+      "resolved_share": 0.9968937127463153
+    },
+    "session_60": {
+      "eligible": 237358,
+      "resolved": 236630,
+      "resolved_share": 0.996932903040976
+    },
+    "status": "C1_RESULT_BRIDGE_COVERAGE_FROZEN_BEFORE_KINDNESS_BY_RESULT",
+    "streak3": {
+      "eligible": 113126,
+      "resolved_all_three": 112725,
+      "resolved_share": 0.9964552799533264
+    }
+  },
+  "result_bridge_validation": {
+    "chooser_result_counts": {
+      "-1": 210831,
+      "0": 18813,
+      "1": 230085
+    },
+    "chooser_support": [
+      -1,
+      0,
+      1
+    ],
+    "decoder": "2->+1, 1->0, 0->-1 White-signed; negate for Black chooser",
+    "kindness_by_prior_result_tabulated": false,
+    "needed_result_rows": 461213,
+    "perspective_validation": {
+      "alignment_share_among_nonzero": 1.0,
+      "decisive_rating_diff_nonnull": 438521,
+      "decisive_rating_diff_nonzero": 436923,
+      "decisive_rating_diff_zero": 1598,
+      "decisive_rows": 440916,
+      "decisive_sign_aligned": 436923,
+      "decisive_sign_contradictory": 0,
+      "minimum_alignment_share": 0.99,
+      "rating_diff_validation_only": true,
+      "result_constructed_from_rating_diff": false,
+      "status": "C1_CHOOSER_PERSPECTIVE_VALIDATION_OK"
+    },
+    "raw_result_code_counts": {
+      "0": 211672,
+      "1": 18813,
+      "2": 229244
+    },
+    "raw_support": [
+      0,
+      1,
+      2
+    ],
+    "resolved_bridge_rows": 459729,
+    "row_conservation_pass": true,
+    "status": "C1_RESULT_BRIDGE_DECODE_AND_ROW_CONSERVATION_OK",
+    "unresolved_needed_rows": 1484
+  },
+  "result_source_set": {
+    "chronology_files_selected": 123,
+    "chronology_rows_selected_metadata": 2320981870,
+    "kindness_by_prior_result_tabulated": false,
+    "needed_month_max": "2025-10",
+    "needed_month_min": "2023-10",
+    "needed_month_speed_groups": 123,
+    "needed_result_rows": 461213,
+    "partitions": [
+      {
+        "month": "2023-10",
+        "needed_rows": 29,
+        "speed": "blitz"
+      },
+      {
+        "month": "2023-10",
+        "needed_rows": 10,
+        "speed": "bullet"
+      },
+      {
+        "month": "2023-10",
+        "needed_rows": 15,
+        "speed": "rapid"
+      },
+      {
+        "month": "2023-11",
+        "needed_rows": 11531,
+        "speed": "blitz"
+      },
+      {
+        "month": "2023-11",
+        "needed_rows": 2429,
+        "speed": "bullet"
+      },
+      {
+        "month": "2023-11",
+        "needed_rows": 208,
+        "speed": "classical"
+      },
+      {
+        "month": "2023-11",
+        "needed_rows": 4710,
+        "speed": "rapid"
+      },
+      {
+        "month": "2023-11",
+        "needed_rows": 12,
+        "speed": "ultrabullet"
+      },
+      {
+        "month": "2023-12",
+        "needed_rows": 12385,
+        "speed": "blitz"
+      },
+      {
+        "month": "2023-12",
+        "needed_rows": 2649,
+        "speed": "bullet"
+      },
+      {
+        "month": "2023-12",
+        "needed_rows": 195,
+        "speed": "classical"
+      },
+      {
+        "month": "2023-12",
+        "needed_rows": 4922,
+        "speed": "rapid"
+      },
+      {
+        "month": "2023-12",
+        "needed_rows": 5,
+        "speed": "ultrabullet"
+      },
+      {
+        "month": "2024-01",
+        "needed_rows": 11968,
+        "speed": "blitz"
+      },
+      {
+        "month": "2024-01",
+        "needed_rows": 2612,
+        "speed": "bullet"
+      },
+      {
+        "month": "2024-01",
+        "needed_rows": 201,
+        "speed": "classical"
+      },
+      {
+        "month": "2024-01",
+        "needed_rows": 4761,
+        "speed": "rapid"
+      },
+      {
+        "month": "2024-01",
+        "needed_rows": 10,
+        "speed": "ultrabullet"
+      },
+      {
+        "month": "2024-02",
+        "needed_rows": 11537,
+        "speed": "blitz"
+      },
+      {
+        "month": "2024-02",
+        "needed_rows": 2454,
+        "speed": "bullet"
+      },
+      {
+        "month": "2024-02",
+        "needed_rows": 189,
+        "speed": "classical"
+      },
+      {
+        "month": "2024-02",
+        "needed_rows": 4615,
+        "speed": "rapid"
+      },
+      {
+        "month": "2024-02",
+        "needed_rows": 16,
+        "speed": "ultrabullet"
+      },
+      {
+        "month": "2024-03",
+        "needed_rows": 11787,
+        "speed": "blitz"
+      },
+      {
+        "month": "2024-03",
+        "needed_rows": 2345,
+        "speed": "bullet"
+      },
+      {
+        "month": "2024-03",
+        "needed_rows": 180,
+        "speed": "classical"
+      },
+      {
+        "month": "2024-03",
+        "needed_rows": 4820,
+        "speed": "rapid"
+      },
+      {
+        "month": "2024-03",
+        "needed_rows": 13,
+        "speed": "ultrabullet"
+      },
+      {
+        "month": "2024-04",
+        "needed_rows": 11404,
+        "speed": "blitz"
+      },
+      {
+        "month": "2024-04",
+        "needed_rows": 2339,
+        "speed": "bullet"
+      },
+      {
+        "month": "2024-04",
+        "needed_rows": 148,
+        "speed": "classical"
+      },
+      {
+        "month": "2024-04",
+        "needed_rows": 4598,
+        "speed": "rapid"
+      },
+      {
+        "month": "2024-04",
+        "needed_rows": 6,
+        "speed": "ultrabullet"
+      },
+      {
+        "month": "2024-05",
+        "needed_rows": 12149,
+        "speed": "blitz"
+      },
+      {
+        "month": "2024-05",
+        "needed_rows": 2500,
+        "speed": "bullet"
+      },
+      {
+        "month": "2024-05",
+        "needed_rows": 145,
+        "speed": "classical"
+      },
+      {
+        "month": "2024-05",
+        "needed_rows": 4741,
+        "speed": "rapid"
+      },
+      {
+        "month": "2024-05",
+        "needed_rows": 14,
+        "speed": "ultrabullet"
+      },
+      {
+        "month": "2024-06",
+        "needed_rows": 11335,
+        "speed": "blitz"
+      },
+      {
+        "month": "2024-06",
+        "needed_rows": 2470,
+        "speed": "bullet"
+      },
+      {
+        "month": "2024-06",
+        "needed_rows": 165,
+        "speed": "classical"
+      },
+      {
+        "month": "2024-06",
+        "needed_rows": 4774,
+        "speed": "rapid"
+      },
+      {
+        "month": "2024-06",
+        "needed_rows": 13,
+        "speed": "ultrabullet"
+      },
+      {
+        "month": "2024-07",
+        "needed_rows": 11541,
+        "speed": "blitz"
+      },
+      {
+        "month": "2024-07",
+        "needed_rows": 2350,
+        "speed": "bullet"
+      },
+      {
+        "month": "2024-07",
+        "needed_rows": 127,
+        "speed": "classical"
+      },
+      {
+        "month": "2024-07",
+        "needed_rows": 4699,
+        "speed": "rapid"
+      },
+      {
+        "month": "2024-07",
+        "needed_rows": 6,
+        "speed": "ultrabullet"
+      },
+      {
+        "month": "2024-08",
+        "needed_rows": 11646,
+        "speed": "blitz"
+      },
+      {
+        "month": "2024-08",
+        "needed_rows": 2469,
+        "speed": "bullet"
+      },
+      {
+        "month": "2024-08",
+        "needed_rows": 136,
+        "speed": "classical"
+      },
+      {
+        "month": "2024-08",
+        "needed_rows": 4475,
+        "speed": "rapid"
+      },
+      {
+        "month": "2024-08",
+        "needed_rows": 14,
+        "speed": "ultrabullet"
+      },
+      {
+        "month": "2024-09",
+        "needed_rows": 11367,
+        "speed": "blitz"
+      },
+      {
+        "month": "2024-09",
+        "needed_rows": 2265,
+        "speed": "bullet"
+      },
+      {
+        "month": "2024-09",
+        "needed_rows": 115,
+        "speed": "classical"
+      },
+      {
+        "month": "2024-09",
+        "needed_rows": 4453,
+        "speed": "rapid"
+      },
+      {
+        "month": "2024-09",
+        "needed_rows": 7,
+        "speed": "ultrabullet"
+      },
+      {
+        "month": "2024-10",
+        "needed_rows": 11428,
+        "speed": "blitz"
+      },
+      {
+        "month": "2024-10",
+        "needed_rows": 2487,
+        "speed": "bullet"
+      },
+      {
+        "month": "2024-10",
+        "needed_rows": 134,
+        "speed": "classical"
+      },
+      {
+        "month": "2024-10",
+        "needed_rows": 4680,
+        "speed": "rapid"
+      },
+      {
+        "month": "2024-10",
+        "needed_rows": 7,
+        "speed": "ultrabullet"
+      },
+      {
+        "month": "2024-11",
+        "needed_rows": 10883,
+        "speed": "blitz"
+      },
+      {
+        "month": "2024-11",
+        "needed_rows": 2337,
+        "speed": "bullet"
+      },
+      {
+        "month": "2024-11",
+        "needed_rows": 154,
+        "speed": "classical"
+      },
+      {
+        "month": "2024-11",
+        "needed_rows": 4601,
+        "speed": "rapid"
+      },
+      {
+        "month": "2024-11",
+        "needed_rows": 4,
+        "speed": "ultrabullet"
+      },
+      {
+        "month": "2024-12",
+        "needed_rows": 11975,
+        "speed": "blitz"
+      },
+      {
+        "month": "2024-12",
+        "needed_rows": 2492,
+        "speed": "bullet"
+      },
+      {
+        "month": "2024-12",
+        "needed_rows": 183,
+        "speed": "classical"
+      },
+      {
+        "month": "2024-12",
+        "needed_rows": 4973,
+        "speed": "rapid"
+      },
+      {
+        "month": "2024-12",
+        "needed_rows": 4,
+        "speed": "ultrabullet"
+      },
+      {
+        "month": "2025-01",
+        "needed_rows": 11770,
+        "speed": "blitz"
+      },
+      {
+        "month": "2025-01",
+        "needed_rows": 2565,
+        "speed": "bullet"
+      },
+      {
+        "month": "2025-01",
+        "needed_rows": 191,
+        "speed": "classical"
+      },
+      {
+        "month": "2025-01",
+        "needed_rows": 4916,
+        "speed": "rapid"
+      },
+      {
+        "month": "2025-01",
+        "needed_rows": 10,
+        "speed": "ultrabullet"
+      },
+      {
+        "month": "2025-02",
+        "needed_rows": 10721,
+        "speed": "blitz"
+      },
+      {
+        "month": "2025-02",
+        "needed_rows": 2327,
+        "speed": "bullet"
+      },
+      {
+        "month": "2025-02",
+        "needed_rows": 168,
+        "speed": "classical"
+      },
+      {
+        "month": "2025-02",
+        "needed_rows": 4691,
+        "speed": "rapid"
+      },
+      {
+        "month": "2025-02",
+        "needed_rows": 8,
+        "speed": "ultrabullet"
+      },
+      {
+        "month": "2025-03",
+        "needed_rows": 11563,
+        "speed": "blitz"
+      },
+      {
+        "month": "2025-03",
+        "needed_rows": 2673,
+        "speed": "bullet"
+      },
+      {
+        "month": "2025-03",
+        "needed_rows": 146,
+        "speed": "classical"
+      },
+      {
+        "month": "2025-03",
+        "needed_rows": 5031,
+        "speed": "rapid"
+      },
+      {
+        "month": "2025-03",
+        "needed_rows": 4,
+        "speed": "ultrabullet"
+      },
+      {
+        "month": "2025-04",
+        "needed_rows": 11427,
+        "speed": "blitz"
+      },
+      {
+        "month": "2025-04",
+        "needed_rows": 2526,
+        "speed": "bullet"
+      },
+      {
+        "month": "2025-04",
+        "needed_rows": 162,
+        "speed": "classical"
+      },
+      {
+        "month": "2025-04",
+        "needed_rows": 4801,
+        "speed": "rapid"
+      },
+      {
+        "month": "2025-04",
+        "needed_rows": 12,
+        "speed": "ultrabullet"
+      },
+      {
+        "month": "2025-05",
+        "needed_rows": 12287,
+        "speed": "blitz"
+      },
+      {
+        "month": "2025-05",
+        "needed_rows": 2698,
+        "speed": "bullet"
+      },
+      {
+        "month": "2025-05",
+        "needed_rows": 197,
+        "speed": "classical"
+      },
+      {
+        "month": "2025-05",
+        "needed_rows": 5025,
+        "speed": "rapid"
+      },
+      {
+        "month": "2025-05",
+        "needed_rows": 15,
+        "speed": "ultrabullet"
+      },
+      {
+        "month": "2025-06",
+        "needed_rows": 12774,
+        "speed": "blitz"
+      },
+      {
+        "month": "2025-06",
+        "needed_rows": 2712,
+        "speed": "bullet"
+      },
+      {
+        "month": "2025-06",
+        "needed_rows": 174,
+        "speed": "classical"
+      },
+      {
+        "month": "2025-06",
+        "needed_rows": 4925,
+        "speed": "rapid"
+      },
+      {
+        "month": "2025-06",
+        "needed_rows": 11,
+        "speed": "ultrabullet"
+      },
+      {
+        "month": "2025-07",
+        "needed_rows": 13056,
+        "speed": "blitz"
+      },
+      {
+        "month": "2025-07",
+        "needed_rows": 2966,
+        "speed": "bullet"
+      },
+      {
+        "month": "2025-07",
+        "needed_rows": 130,
+        "speed": "classical"
+      },
+      {
+        "month": "2025-07",
+        "needed_rows": 5007,
+        "speed": "rapid"
+      },
+      {
+        "month": "2025-07",
+        "needed_rows": 14,
+        "speed": "ultrabullet"
+      },
+      {
+        "month": "2025-08",
+        "needed_rows": 10887,
+        "speed": "blitz"
+      },
+      {
+        "month": "2025-08",
+        "needed_rows": 3867,
+        "speed": "bullet"
+      },
+      {
+        "month": "2025-08",
+        "needed_rows": 106,
+        "speed": "classical"
+      },
+      {
+        "month": "2025-08",
+        "needed_rows": 4702,
+        "speed": "rapid"
+      },
+      {
+        "month": "2025-08",
+        "needed_rows": 7,
+        "speed": "ultrabullet"
+      },
+      {
+        "month": "2025-09",
+        "needed_rows": 10461,
+        "speed": "blitz"
+      },
+      {
+        "month": "2025-09",
+        "needed_rows": 3799,
+        "speed": "bullet"
+      },
+      {
+        "month": "2025-09",
+        "needed_rows": 124,
+        "speed": "classical"
+      },
+      {
+        "month": "2025-09",
+        "needed_rows": 4305,
+        "speed": "rapid"
+      },
+      {
+        "month": "2025-09",
+        "needed_rows": 4,
+        "speed": "ultrabullet"
+      },
+      {
+        "month": "2025-10",
+        "needed_rows": 11068,
+        "speed": "blitz"
+      },
+      {
+        "month": "2025-10",
+        "needed_rows": 3964,
+        "speed": "bullet"
+      },
+      {
+        "month": "2025-10",
+        "needed_rows": 119,
+        "speed": "classical"
+      },
+      {
+        "month": "2025-10",
+        "needed_rows": 4663,
+        "speed": "rapid"
+      },
+      {
+        "month": "2025-10",
+        "needed_rows": 13,
+        "speed": "ultrabullet"
+      }
+    ],
+    "physical_decider_partition_in_selected_source_set": true,
+    "status": "C1_RESULT_SOURCE_SET_FROZEN_BEFORE_KINDNESS_BY_RESULT"
+  },
+  "runtime_seconds": 57.18498682975769,
+  "session_support": {
+    "eligible15": 188547,
+    "eligible30": 218267,
+    "eligible60": 237358,
+    "eligible_three_prior_games_same_30m_session": 113126,
+    "history_left_buffer_hours": 2,
+    "kindness_by_prior_result_tabulated": false,
+    "session_timestamp_mode": "start_to_start_v1_0_3_fallback",
+    "status": "C1_SESSION_SUPPORT_FROZEN_BEFORE_RESULT_OUTCOME_TABULATION"
+  },
+  "session_timestamp_mode": "start_to_start_v1_0_3_fallback",
+  "status": "DYNAMICS_CAMPAIGN1_C1_CORRECTED_V105_OK"
+}

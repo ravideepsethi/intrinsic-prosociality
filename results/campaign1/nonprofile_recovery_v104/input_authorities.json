@@ -1,0 +1,88 @@
+{
+  "c12_source_manifest_sha256": "a19d1be385b8207ac6cab6f49c179ea906e59dd71a7c08f17737eeb364d98681",
+  "c13_source_manifest_sha256": "bc8b0f378479f96ac1815d2e72b976fde54261aa36583a47ce360942acec2df8",
+  "config_sha256": "47c8bb458b76510a65015341c609e7ef2309e8ac2ada7cc6181d2e87c4c0eb62",
+  "created_utc": "2026-08-25T23:01:58.828701+00:00",
+  "free_bytes_at_launch": 1381040676864,
+  "machine": {
+    "stage07_fair_rows": 17328130,
+    "stage07_physical_month_manifest_sha256": "e666d0e68b051600b11ea41067c6ea755c72e21040940b11b0ce40c544b08db3",
+    "stage07_rows": 47587020,
+    "stage07_success_sha256": "8b7010b528ae5c6f1e1a9b517258648204c14c17ca41a2a6796f8ee5a1ed6db7"
+  },
+  "package": {
+    "c13_fair_numerator_authority": {
+      "all_stage07_kind_draws": 669503,
+      "all_stage07_rows": 47587020,
+      "created_at_utc": "2026-08-21T13:49:49Z",
+      "fair_kind_draws": 487170,
+      "fair_rows": 17328130,
+      "git": {
+        "branch": "main",
+        "head": "a7ce86a06c406cf7cfbeb4927cdf40ba5bce4bee",
+        "remote_url": "https://github.com/ravideepsethi/intrinsic-prosociality.git",
+        "status_porcelain": "?? code/09_analyze_opening_familiarity.py\n?? code/09_build_panel_robustness.py\n?? code/09_fetch_opening_metadata.py\n?? code/09_prepare_opening_familiarity.py"
+      },
+      "predates_campaign1_c13_recovery": true,
+      "producer_sha256": "f0b3d8d638523e22e4bc3b665d3067a261bcfb1c3d2831d9bf8fb81e6c521431",
+      "stage07_summary_sha256": "8b7010b528ae5c6f1e1a9b517258648204c14c17ca41a2a6796f8ee5a1ed6db7",
+      "status": "STAGE09_PANEL_ROBUSTNESS_24M_CERTIFIED_OK",
+      "summary_sha256": "5107e4dabd11054724691f6c3c6937e495b8b15648302ecd578217e81d55b6e7"
+    },
+    "failed_c13_source_sha256": "7d920ed8ff8f18c81d722851c004a2986d96c8d9409e3ce3f6652c871257c9ef",
+    "failed_c13_v103_source_sha256": "b0dd2592a2947450000cc89169c53fe5396ecc3934863a24d5f87821d5cb402c",
+    "ledger_sha256": "e8a5bf4ed230ebd9a415e8254533dfb6f5172a3a6a8d082a6326c383852085df",
+    "package_manifest_sha256": "d96cf89206faf3d1a8794cc6f85e927dc59fdce25e040f712dd921f69f1d12ee",
+    "packaged_files_sha256": "76843bf142c47a8187ed27494bceebd7cb77c7e1d9ece4cc7ffca1ec3747e622",
+    "plan_hashes": {
+      "dynamics_paper2_campaign1_analysis_plan_v1_0_0.md": "ded9965994b6c00ed613adc90eaff3f976b257e9eb6dafdda61819916dde49fe",
+      "dynamics_paper2_campaign1_analysis_plan_v1_0_1_amendment.md": "01c0ed96bfca62b1659a98d978bedaaf9a4540fcdc5a30a075e2f032e35e05ee",
+      "dynamics_paper2_campaign1_analysis_plan_v1_0_2_amendment.md": "7eeca3ab8591620a196badbd1b9d3184236d67a031cf9eff06b76584995c0049",
+      "dynamics_paper2_campaign1_analysis_plan_v1_0_3_amendment.md": "96530f7ffd43b7d68ff84c794200f7db98b2b455ea2994efb5b73ce5cb370a07",
+      "dynamics_paper2_campaign1_v1_0_5_postoutcome_correction.md": "14cb718408788ea15f94d555eaabc84c27f2dc42b1ca85c03b46daf43e366787"
+    },
+    "prior_v102": {
+      "collection_inspection_sha256": "78222cb3139a7ec419bff5f60001c0cfb2d0a2bf90e5c01080b7fa1176287f4a",
+      "failure_diagnostic_sha256": "b0ab8596334232306c369402efe26bb0119e3363de17ac388f4d1e493201cb26",
+      "files_authenticated": 23,
+      "module_status_sha256": "aa8027e84d83638f8e2d3f411eb243629065969e49173c91311f04c8dabef87b",
+      "private_row_level_files_embedded": false,
+      "report_manifest_sha256": "014f00fd15fc6738509c5c07e0814fb7ae1205375438a520213ae8f961f2c3eb",
+      "source_bundle_sha256": "e7df2a259ce3ea2a6392a8f0528e11fc4430ddea98bfb75cc7adb29d56327e76"
+    },
+    "prior_v103": {
+      "c13_reconciliation_sha256": "009b20d0aeb21505eeb33c36cce4b8d2ef68e849d2668bc487821ae15bf2f24b",
+      "c13_support_sha256": "370d787885fc16a936fbaf3b4e1111bec9b6b34e5f552d374f6c76f058776b1f",
+      "collection_inspection_sha256": "d338200e7ffc1764b0c76dfc153245c9685d71bc8871080ae9f4ecef61d449f3",
+      "failure_diagnostic_sha256": "e590d9116fe5c6970333b4550ab7f8e769d75a68841e3e80b9a3cad8b9750a32",
+      "files_authenticated": 27,
+      "module_status_sha256": "6bd3fb140d054e15d0658deafbf9fce1aeb9385a9df86ac57d5ee21778e07d28",
+      "private_row_level_files_embedded": false,
+      "report_manifest_sha256": "90e7f29a1c8eecf7ee342720e71ad25fbfe53c118b59c90993e4bcc1ff430425",
+      "source_bundle_sha256": "e5a3d3ec3adaf337311ccb3ebe5005312bb90a5a53bbaccf2dfa77c990f1bb48"
+    },
+    "wave0_c13": {
+      "ambient_kindness_numerator_computed": false,
+      "executable_producer_preserved_in_git_or_result_tree": false,
+      "field_mapping": {
+        "chooser": "chooser_username_norm",
+        "elo": "chooser_elo",
+        "eval": "engine_eval_cp_disconnected",
+        "game_id": "game_id",
+        "kind": "outcome_kind_draw",
+        "month": "month",
+        "payoff": "chooser_draw_payoff_v2",
+        "speed": "api_speed",
+        "time_ms": "api_last_move_at_ms"
+      },
+      "git_head": "c0d7cb3da145b7702a6020c09f8eaf19db6fe8c1",
+      "hashes": {
+        "c13_support_only.json": "1f69ab4663c92a8246f0617acf824c03c598a7849e1c74b1ce324644cca763fe",
+        "report_file_hashes.tsv": "08aaadd8cde1c70c717c41fd38a35f16c1428d9b30281c4e2d610164e32703cf",
+        "stage07_field_mapping.json": "4cfce6356a6aa99994a94fb9361802efe392b05b45776dfbeaf09cbc5924550b",
+        "summary.json": "46e274ef86812faf33178ceecf88ca686bcd4a2be35267fb63fba345e0548f05"
+      },
+      "result_root": "/Volumes/XT_Pro/lichess_kindness/output/dynamics_campaign1_wave0_stage07_actual_v100/20260825T005552Z"
+    }
+  }
+}

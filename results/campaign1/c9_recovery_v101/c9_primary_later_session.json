@@ -1,0 +1,21 @@
+{
+  "category": "later_session_7d",
+  "effect_relative_to_null_mean_pct": 35.31650478322614,
+  "epistemic_label": "C",
+  "epistemic_role": "C_primary",
+  "excess_percentage_points": 11.105202218891035,
+  "holm_adjusted_p_value": "PENDING_C5_C6_AND_FAMILY_COMPLETION",
+  "interpretation": "positive excess is consistent with habit/identity transfer beyond the initiating session",
+  "lower_tail_plus_one": 1.0,
+  "null_mean_rate": 0.3144479411837363,
+  "null_mean_rate_pct": 31.444794118373633,
+  "null_p025": 0.309423462163429,
+  "null_p975": 0.31940472186886004,
+  "observed_denominator": 27302,
+  "observed_numerator": 11617,
+  "observed_rate": 0.4254999633726467,
+  "observed_rate_pct": 42.549996337264666,
+  "randomization_p_two_sided": 0.0004,
+  "randomizations": 4999,
+  "upper_tail_plus_one": 0.0002
+}

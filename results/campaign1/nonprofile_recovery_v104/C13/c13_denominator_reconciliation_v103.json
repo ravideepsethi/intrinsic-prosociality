@@ -1,0 +1,53 @@
+{
+  "corrected_reproducible_authority": {
+    "algorithm": "preceding 28 complete UTC days; speed-pool x frozen chooser-rating-band; subtract the focal chooser's own opportunities by normalized chooser identity",
+    "other_n28_median": 136490.0,
+    "other_n28_min": 0,
+    "other_n28_p10": 28081.0,
+    "source": "authenticated v1.0.2 Stage-07 denominator Parquets, reused read-only",
+    "supported_rows": 17101141,
+    "supported_share": 0.9869005484146298,
+    "thin_excluded_rows": 226989
+  },
+  "created_utc": "2026-08-25T23:02:42.207810+00:00",
+  "focal_fair_rows": 17328130,
+  "gate_passes_under_correction": true,
+  "gate_passes_under_wave0": true,
+  "scientific_design_changed": false,
+  "selection_on_c13_outcome": false,
+  "status": "C13_V103_OUTCOME_BLIND_DENOMINATOR_CORRECTION_FROZEN",
+  "support_threshold_other_fair_opportunities": 5000,
+  "timing": "after C12 outcomes; before any C13 ambient-kindness numerator or rate was read",
+  "wave0": {
+    "authority": {
+      "ambient_kindness_numerator_computed": false,
+      "executable_producer_preserved_in_git_or_result_tree": false,
+      "field_mapping": {
+        "chooser": "chooser_username_norm",
+        "elo": "chooser_elo",
+        "eval": "engine_eval_cp_disconnected",
+        "game_id": "game_id",
+        "kind": "outcome_kind_draw",
+        "month": "month",
+        "payoff": "chooser_draw_payoff_v2",
+        "speed": "api_speed",
+        "time_ms": "api_last_move_at_ms"
+      },
+      "git_head": "c0d7cb3da145b7702a6020c09f8eaf19db6fe8c1",
+      "hashes": {
+        "c13_support_only.json": "1f69ab4663c92a8246f0617acf824c03c598a7849e1c74b1ce324644cca763fe",
+        "report_file_hashes.tsv": "08aaadd8cde1c70c717c41fd38a35f16c1428d9b30281c4e2d610164e32703cf",
+        "stage07_field_mapping.json": "4cfce6356a6aa99994a94fb9361802efe392b05b45776dfbeaf09cbc5924550b",
+        "summary.json": "46e274ef86812faf33178ceecf88ca686bcd4a2be35267fb63fba345e0548f05"
+      },
+      "result_root": "/Volumes/XT_Pro/lichess_kindness/output/dynamics_campaign1_wave0_stage07_actual_v100/20260825T005552Z"
+    },
+    "disposition": "superseded denominator-feasibility aggregate; retained for provenance",
+    "executable_producer_preserved": false,
+    "other_n28_median": 136108.0,
+    "other_n28_min": 0,
+    "other_n28_p10": 27902.0,
+    "supported_rows": 17104149
+  },
+  "wave0_minus_corrected_supported_rows": 3008
+}

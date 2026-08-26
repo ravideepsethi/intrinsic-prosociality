@@ -1,0 +1,16 @@
+{
+  "bridge": {
+    "rating_diff_used_to_infer_result": false,
+    "selected_game_mapping": {
+      "black_id": "black_id",
+      "game_id": "game_id",
+      "result": null,
+      "white_id": "white_id"
+    },
+    "selected_games_root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/dynamic_second_wave_history_v100_PRIVATE/selected_games",
+    "status": "BLOCKED_SELECTED_GAMES_RESULT_SCHEMA_UNRESOLVED"
+  },
+  "holm_family_member_status": "PENDING_NOT_TESTED",
+  "rating_diff_substitution_used": false,
+  "status": "C1_NOT_ESTIMATED_RESULT_BRIDGE_UNRESOLVED"
+}

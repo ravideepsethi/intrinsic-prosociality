@@ -1,0 +1,20 @@
+{
+  "execution_pointer": {
+    "report_manifest_sha256": "e0912d0e3bd71e7564f0fd5ba74f3b2fcb52af87e9a7be9e62cb876f7be654d1",
+    "result_root": "/Volumes/XT_Pro/lichess_kindness/output/dynamics_campaign1_nonprofile_recovery_v104/20260825T230132Z",
+    "run_id": "20260825T230132Z",
+    "status": "DYNAMICS_CAMPAIGN1_NONPROFILE_RECOVERY_V104_OK",
+    "success_sha256": "ee28165991125f5807231a4916b4065fdcacf622c28580b3e972dd0b981bff74"
+  },
+  "private_row_level_files_included": false,
+  "result_authentication": {
+    "failure_sha256": null,
+    "files_authenticated": 35,
+    "private_row_level_files_included": false,
+    "report_manifest_sha256": "e0912d0e3bd71e7564f0fd5ba74f3b2fcb52af87e9a7be9e62cb876f7be654d1",
+    "status": "DYNAMICS_CAMPAIGN1_NONPROFILE_RECOVERY_V104_OK",
+    "success_sha256": "ee28165991125f5807231a4916b4065fdcacf622c28580b3e972dd0b981bff74"
+  },
+  "run_id": "20260825T230132Z",
+  "status": "CAMPAIGN1_NONPROFILE_RECOVERY_V104_COLLECTION_COMPLETE"
+}
