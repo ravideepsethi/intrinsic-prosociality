@@ -1,0 +1,20 @@
+{
+  "cache_bytes": 77333789,
+  "cache_path": "/Volumes/XT_Pro/lichess_kindness/output/PATRON_STAGE10_PRODUCTION_V100/private_cache/opportunity_cells_private.parquet",
+  "cache_sha256": "f6ee10fc947776601d513f40ede3d1d897db03ffba1121db68450ac204d3ee80",
+  "contains_private_identifiers": true,
+  "created_utc": "2026-08-27T01:16:15.834302+00:00",
+  "patron_outcome_in_cache": false,
+  "publish": false,
+  "qa": {
+    "chooser_accounts": 1305683,
+    "collapsed_rows": 29562512,
+    "kind_draw_mismatch": 0,
+    "kind_draws": 669433,
+    "opportunities": 32858962,
+    "returned_without_panel_rows": 0,
+    "total_opportunity_mismatch": 0,
+    "unplanned_panel_users": 0
+  },
+  "status": "PATRON_STAGE10_OPPORTUNITY_CACHE_OK"
+}

@@ -1,0 +1,28 @@
+{
+  "cache_bytes": 191292646,
+  "cache_path": "/Volumes/XT_Pro/lichess_kindness/output/PATRON_STAGE10_PRODUCTION_V100/private_cache/chooser_design_features_private.parquet",
+  "cache_sha256": "a0be630ac68f3624b35b0c3d388bc34ecb35be7575c7b911acbf4322354baeee",
+  "contains_private_identifiers": true,
+  "created_utc": "2026-08-27T01:02:48.825682+00:00",
+  "publish": false,
+  "qa": {
+    "fair_kind_mismatch": 0,
+    "fair_opp_mismatch": 0,
+    "fairness_partition_mismatch": 0,
+    "five_bin_partition_mismatch": 0,
+    "matched_groups": 326468,
+    "middle_kind_mismatch": 0,
+    "middle_opp_mismatch": 0,
+    "missing_panel_features": 0,
+    "price_partition_mismatch": 0,
+    "rows": 1305872,
+    "total_kind_mismatch": 0,
+    "total_opp_mismatch": 0,
+    "unique_users": 1305872,
+    "worse_kind_mismatch": 0,
+    "worse_opp_mismatch": 0
+  },
+  "status": "PATRON_STAGE10_CHOOSER_CACHE_OK",
+  "support_receipt_sha256": "56e12519bc4fe53a0233c0ecc0514b6520f97dd23b4f1f54d980fd0cbe040ee1",
+  "version": "1.0.0"
+}

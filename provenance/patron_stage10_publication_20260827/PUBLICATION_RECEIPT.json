@@ -1,0 +1,43 @@
+{
+  "artifact": "Patron Stage 10 certified public overlay",
+  "commit_message": "Publish certified Patron Stage 10 results",
+  "created_utc_date": "2026-08-27",
+  "excluded_artifacts": {
+    "color_advantage_worktrees": true,
+    "generated_primary_bytecode_sha256": "7962031e1b15d86ba8b4ca3fda64cd5b191ceaf14d5beb70b5ffb7b219837f06",
+    "private_caches": true,
+    "raw_profile_rows": true,
+    "usernames_and_account_identifiers": true
+  },
+  "included_scopes": [
+    "README.md",
+    "code/patron_stage10",
+    "docs/patron_stage10",
+    "results/patron_stage10",
+    "provenance/patron_stage10_publication_20260827"
+  ],
+  "primary_publication_correction": {
+    "certified_report_manifest_sha256": "4a3b082e655de50c5bc554d1b684387f4ed9ef7da24745d65b9c9c919b8f3f2d",
+    "publication_report_manifest_sha256": "d369d56bc24d38a3859b7071236d7e0fbe9577c8b3b4e171731d1cb2047be686",
+    "replacement": "three non-strict NaN metadata placeholders to JSON null",
+    "scientific_values_changed": false
+  },
+  "public_data_boundary": {
+    "account_identifiers_included": false,
+    "aggregate_outputs_only": true,
+    "api_objects_included": false,
+    "parquet_included": false,
+    "private_cache_bytes_included": false,
+    "raw_profile_json_included": false,
+    "row_level_records_included": false,
+    "usernames_included": false
+  },
+  "required_base_commit": "6ab3003a2b829ad0449daa7da738e040be4090bf",
+  "scientific_status_authority": "docs/patron_stage10/PATRON_STAGE10_FINAL_AUTHORITY_LEDGER_v1_0_0_20260827.md",
+  "source_result_bundles": {
+    "PATRON_STAGE10_POSTCERT_ADDENDUM_V100_RESULTS_20260827T022036Z.zip": "4a4b233b4d1a6ccb58f7668c8c00c7448d0c47c129eb93390cb75741f7f7ef5e",
+    "PATRON_STAGE10_PRODUCTION_V101_RESULTS_20260827T011828Z.zip": "84c3067272a5adec9a4bfdfb5b84ffb7d7df8c6230b8ca49b5e1c696107768fd"
+  },
+  "target_branch": "main",
+  "target_repository": "https://github.com/ravideepsethi/intrinsic-prosociality.git"
+}

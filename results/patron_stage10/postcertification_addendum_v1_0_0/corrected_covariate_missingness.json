@@ -1,0 +1,111 @@
+{
+  "construction": "created_at_ms and seen_at_ms remain missing when absent; only observed timestamps are transformed to nonnegative days; imputation then uses within-cell medians with indicators",
+  "created_utc": "2026-08-27T02:19:39.351376+00:00",
+  "diagnostics": {
+    "account_age_days_at_query": {
+      "cells_all_missing": 0,
+      "global_fallback_median": 1329.9760233101852,
+      "missing": 69094,
+      "missing_share": 0.052917898142198376
+    },
+    "count_all": {
+      "cells_all_missing": 41,
+      "global_fallback_median": 0.0,
+      "missing": 1305683,
+      "missing_share": 1.0
+    },
+    "count_draw": {
+      "cells_all_missing": 41,
+      "global_fallback_median": 0.0,
+      "missing": 1305683,
+      "missing_share": 1.0
+    },
+    "count_loss": {
+      "cells_all_missing": 41,
+      "global_fallback_median": 0.0,
+      "missing": 1305683,
+      "missing_share": 1.0
+    },
+    "count_rated": {
+      "cells_all_missing": 41,
+      "global_fallback_median": 0.0,
+      "missing": 1305683,
+      "missing_share": 1.0
+    },
+    "count_win": {
+      "cells_all_missing": 41,
+      "global_fallback_median": 0.0,
+      "missing": 1305683,
+      "missing_share": 1.0
+    },
+    "current_blitz_games": {
+      "cells_all_missing": 0,
+      "global_fallback_median": 552.0,
+      "missing": 69094,
+      "missing_share": 0.052917898142198376
+    },
+    "current_blitz_rating": {
+      "cells_all_missing": 0,
+      "global_fallback_median": 1406.0,
+      "missing": 69094,
+      "missing_share": 0.052917898142198376
+    },
+    "current_bullet_games": {
+      "cells_all_missing": 0,
+      "global_fallback_median": 20.0,
+      "missing": 69094,
+      "missing_share": 0.052917898142198376
+    },
+    "current_bullet_rating": {
+      "cells_all_missing": 0,
+      "global_fallback_median": 1415.0,
+      "missing": 69094,
+      "missing_share": 0.052917898142198376
+    },
+    "current_classical_games": {
+      "cells_all_missing": 0,
+      "global_fallback_median": 0.0,
+      "missing": 69094,
+      "missing_share": 0.052917898142198376
+    },
+    "current_classical_rating": {
+      "cells_all_missing": 0,
+      "global_fallback_median": 1500.0,
+      "missing": 69094,
+      "missing_share": 0.052917898142198376
+    },
+    "current_correspondence_rating": {
+      "cells_all_missing": 0,
+      "global_fallback_median": 1500.0,
+      "missing": 69094,
+      "missing_share": 0.052917898142198376
+    },
+    "current_rapid_games": {
+      "cells_all_missing": 0,
+      "global_fallback_median": 134.0,
+      "missing": 69094,
+      "missing_share": 0.052917898142198376
+    },
+    "current_rapid_rating": {
+      "cells_all_missing": 0,
+      "global_fallback_median": 1500.0,
+      "missing": 69094,
+      "missing_share": 0.052917898142198376
+    },
+    "days_since_seen_at_query": {
+      "cells_all_missing": 0,
+      "global_fallback_median": 32.11944166666667,
+      "missing": 69094,
+      "missing_share": 0.052917898142198376
+    },
+    "play_time_total_seconds": {
+      "cells_all_missing": 0,
+      "global_fallback_median": 772892.0,
+      "missing": 70812,
+      "missing_share": 0.054233684592661466
+    }
+  },
+  "outcome_used_for_imputation": false,
+  "status": "CORRECTED_ACCOUNT_DATE_MISSINGNESS_RETAINED_OK",
+  "typed_count_field_note": "Snapshot total/rated/win/loss/draw count fields may be entirely unavailable; unsupported terms are retained in receipts and deterministically dropped by the estimator."
+}

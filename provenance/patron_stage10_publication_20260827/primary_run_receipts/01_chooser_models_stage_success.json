@@ -1,0 +1,45 @@
+{
+  "coefficient_rows": 6736,
+  "created_utc": "2026-08-27T01:16:04.518760+00:00",
+  "fixture": false,
+  "models": 237,
+  "primary_coefficient_pp": 0.30566139502999906,
+  "primary_model": "main_fair_kind_1to3_01_match_cell_fe_only_HC1",
+  "public_output_hashes": {
+    "chooser_model_coefficients.csv": "ded784a7257c509518d94a4b3de46fe075e40f7e4986403d89c6166d850b0c5e",
+    "chooser_model_contrasts.csv": "eda53da37c698d5b2fcbaeba45c498629cafbcb5522de0d1189e1371a95f69bf",
+    "chooser_models.json": "19b8092a751719d0979a61785afcc685e7400fe179eca5376f5dc252ef795e0f",
+    "chooser_primary_interpretation.json": "5f209bade63d1b4c758fb03f76324b665acbc2b93bc9aa79c7a4f74a9c400306",
+    "common_support_samples.csv": "dd1d8f517696cfea3856edc34835bf804136511515909bb0c5d0cbb2fde5fb5e",
+    "covariate_imputation_receipt.json": "15aa7bfdf5b4e7a849f591a6cc6730304b2f982579384b770c8fc34a726d103e",
+    "diagnostic_kindness_raw_groups.csv": "04e136017dcf04c36ce50b02016ddf1a3f71ef762dc739e7e605ac6ae3cc674c",
+    "diagnostic_kindness_support.csv": "f69060f923ea3e5991274e1b9ae53262048c101c084a4e9eb3e07b0de1238aa9",
+    "dose_response_raw_rates.csv": "2182763dda0a70c3da2138a5bb300579d2bc8da02c148eef324712b966079705",
+    "exact_mapping_resolution.json": "2674a5532adc40471810e7398f09587612145b175b38783b56d12403862c98c5",
+    "input_authorities.json": "6157942f55721fc028e9009108c54bb4b47b5e9e1bef9e4fa212409afd63ff1a",
+    "one_to_one_fixed_slots.csv": "2a1291762db26a8bda4759b262d61b3b73af981c12da1cae7fed43aa40442140",
+    "patron_outcome_semantics_qa.json": "39a8d64e95616d7169f9409c6907c51d8ddb6faa843b14d39a0a4a72e0a1619a",
+    "preoutcome_support_receipt.json": "56e12519bc4fe53a0233c0ecc0514b6520f97dd23b4f1f54d980fd0cbe040ee1",
+    "price_side_support.csv": "cdba725bfc04ee67d018426ce38510ce5db9240617eb0a01aa8c0f6246fe7ac2",
+    "profile_field_missingness_by_role.csv": "c0485451879fafe2bd84034bc8cfa0dc0e86e7f58bda7319333e9d2b31fb5d97",
+    "raw_matched_patron_comparisons.csv": "fe5aebfef93509f1cf2b3369cef5ab7a0c1155078619d2be305fcbc9aa6ae627",
+    "repeated_rematch_long.csv": "c7e990699e4a26b634615d7b20168610fc09e14888bc6a16da73da7a567175f6",
+    "repeated_rematch_summary.csv": "fee0ad4fbc71516d4c4d2fc35b8e43d0788aa95cda77dfda87194b31ea3a68fe",
+    "return_and_patron_coverage_by_match_cell.csv": "1949ceea9ad66a849e8a31a99d218a4a058333e57ecd6f42ffcba571d14a6fca"
+  },
+  "rematches": 100,
+  "runtime": {
+    "created_utc": "2026-08-27T01:16:04.659840+00:00",
+    "platform": "macOS-26.4.1-arm64-arm-64bit-Mach-O",
+    "python": "3.13.9",
+    "software": {
+      "duckdb": "1.5.2",
+      "numpy": "2.4.4",
+      "pandas": "3.0.3",
+      "pyarrow": "24.0.0"
+    }
+  },
+  "runtime_seconds": 271.789,
+  "status": "PATRON_STAGE10_CHOOSER_MODELS_OK",
+  "version": "1.0.1"
+}

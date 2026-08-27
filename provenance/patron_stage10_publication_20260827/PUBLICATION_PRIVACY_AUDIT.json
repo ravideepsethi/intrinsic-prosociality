@@ -1,0 +1,27 @@
+{
+  "account_identifier_columns_detected": 0,
+  "aggregate_outputs_only": true,
+  "audited_bytes_before_audit_and_inventory": 3689743,
+  "audited_files_before_audit_and_inventory": 104,
+  "created_utc_date": "2026-08-27",
+  "forbidden_artifacts_detected": 0,
+  "forbidden_binary_or_private_file_types_detected": 0,
+  "generated_bytecode_included": false,
+  "json_files_strict_before_audit_and_inventory": 29,
+  "parquet_or_database_files_included": false,
+  "private_cache_bytes_included": false,
+  "raw_account_rows_included": false,
+  "raw_profile_json_included": false,
+  "row_level_game_records_included": false,
+  "status": "PATRON_STAGE10_PUBLICATION_PRIVACY_AUDIT_OK",
+  "tabular_files_checked_before_inventory": 29,
+  "tabular_rows_checked_before_inventory": 8427,
+  "usernames_included": false,
+  "verification_scope": [
+    "README.md",
+    "code/patron_stage10",
+    "docs/patron_stage10",
+    "results/patron_stage10",
+    "provenance/patron_stage10_publication_20260827"
+  ]
+}

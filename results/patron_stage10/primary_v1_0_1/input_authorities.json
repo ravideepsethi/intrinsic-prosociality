@@ -1,0 +1,47 @@
+{
+  "fixture": false,
+  "plan": {
+    "manifest": {
+      "files": 11,
+      "manifest_sha256": "59f969e7062e1d03140cd4cdabb291691bce7cfa63991571c92c4f51b6118e50"
+    },
+    "root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/patron_profile_acquisition_24m_plan_v100",
+    "status": "PROFILE_ACQUISITION_PLAN_CERTIFIED_OK",
+    "success_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/patron_profile_acquisition_24m_plan_v100/_SUCCESS.json",
+    "success_sha256": "2838aa942e20027561763855c387a454d74bb0a92d0a8b62ca47343511897e57"
+  },
+  "runtime": {
+    "created_utc": "2026-08-27T01:02:15.961183+00:00",
+    "platform": "macOS-26.4.1-arm64-arm-64bit-Mach-O",
+    "python": "3.13.9",
+    "software": {
+      "duckdb": "1.5.2",
+      "numpy": "2.4.4",
+      "pandas": "3.0.3",
+      "pyarrow": "24.0.0"
+    }
+  },
+  "snapshot": {
+    "columns": 81,
+    "manifest": {
+      "files": 9,
+      "manifest_sha256": "be1b69ac46d2a0e44180868e0ccead43ad0043299cffeb0203346c6c0c28aa3e"
+    },
+    "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/patron_profile_snapshot_24m_v100_FINAL_CERTIFIED/profile_snapshot_24m_private_lossless.parquet",
+    "root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/patron_profile_snapshot_24m_v100_FINAL_CERTIFIED",
+    "rows_from_parquet_metadata": 1305872,
+    "sha256": "f42f28a6540a65c0a83f0da488663b4adddf60d1001daeed556f1ffbb961e238",
+    "status": "PROFILE_SNAPSHOT_24M_CERTIFIED_OK"
+  },
+  "stage07": {
+    "columns": 157,
+    "months": 24,
+    "producer_path": "/Volumes/XT_Pro/lichess_kindness/replication_package/code/07_build_analysis_panel.py",
+    "producer_sha256": "0411d4061ea9831c20449208a9782aaf668e160139918d106a2b7d63aaa56e6e",
+    "root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k",
+    "rows_from_parquet_metadata": 47587020,
+    "status": "STAGE07_24M_CERTIFIED_OK",
+    "success_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k/_SUCCESS.json",
+    "success_sha256": "8b7010b528ae5c6f1e1a9b517258648204c14c17ca41a2a6796f8ee5a1ed6db7"
+  }
+}

@@ -6,8 +6,8 @@ Replication code and documentation for:
 
 This repository is under active construction. The canonical two-year Stage 07
 analysis panel, Stage 08 panel-only core results, Stage 09 panel-robustness
-results, and the dynamic-prosociality core are now certified. External-input
-extensions remain in progress.
+results, the dynamic-prosociality core, and the Patron Stage 10 current-profile
+extension are now certified. Other external-input extensions remain in progress.
 
 ## Current research design
 
@@ -18,7 +18,8 @@ extensions remain in progress.
 - Stage 09 panel robustness: certified support, exact-zero, heterogeneity, cutoff, and magnitude results.
 - Dynamic prosociality: certified mercy-transmission, engagement, and conditional-exchangeability tests.
 - Opening familiarity: target plan certified; metadata acquisition and full analysis remain pending.
-- Patron/profile extension: 24-month profile acquisition remains in progress.
+- Patron/profile extension: certified current-profile snapshot and Stage 10 v1.0.1
+  matched analysis, with a separately certified post-certification addendum.
 - Setting: discretionary resolution of opponent disconnections in rated games on Lichess.
 - Final paper-facing board evaluation: Stockfish 18 at 100,000 nodes.
 - Planned deep engine audit: Stockfish 18 at 1,000,000 nodes on a sampled audit.
@@ -51,6 +52,10 @@ Current stages include:
 - `09_analyze_opening_familiarity.py` — estimate opening-familiarity results after acquisition.
 - `10c_estimate_dynamic_prosociality_core.py` — estimate the frozen recipient and chooser dynamics.
 - `10d_audit_dynamic_prosociality_core.py` — run the secondary post-outcome diagnostic audit.
+- `patron_stage10/primary_v1_0_1/` — build and verify the certified current-Patron
+  matched analysis and opportunity appendix.
+- `patron_stage10/postcertification_addendum_v1_0_0/` — reproduce the separate
+  missing-date, five-bin, and price-count/rate sensitivities.
 
 `operations/` contains operational scripts needed to document or reproduce production
 workflows.
@@ -60,6 +65,9 @@ workflows.
 `docs/` contains human-readable certification and design documentation.
 
 `provenance/` contains small authenticated summaries, schemas, and path manifests; it does not contain research data.
+
+`results/` contains aggregate-only public outputs and their success/hash receipts.
+The Patron results contain no usernames, row-level profile records, or private caches.
 
 ## Data
 
@@ -92,9 +100,10 @@ Canonical production stages are designed to provide, where applicable:
 
 **Work in progress.** Stages 00–09, the certified Stockfish 100k layer, the
 47,587,020-row Stage 07 panel, the Stage 08 core results, the Stage 09 panel-only
-robustness results, and the dynamic-prosociality core and post-outcome audit are
-complete. The opening target plan is certified, but opening metadata acquisition,
-full opening-familiarity analysis, patron/profile analysis, post-sample holdouts,
-publication rendering, the planned deep-engine audit, and final archival-data
-instructions remain in progress. The large research datasets are not stored in
-this repository.
+robustness results, the dynamic-prosociality core and post-outcome audit, and
+Patron Stage 10 are complete. The Patron primary is a current-status
+cross-sectional association, not Patron adoption or causality. The opening target
+plan is certified, but opening metadata acquisition, full opening-familiarity
+analysis, post-sample holdouts, publication rendering, the planned deep-engine
+audit, and final archival-data instructions remain in progress. The large
+research datasets are not stored in this repository.

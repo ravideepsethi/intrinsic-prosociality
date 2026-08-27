@@ -1,0 +1,109 @@
+{
+  "created_utc": "2026-08-27T01:11:44.010839+00:00",
+  "diagnostics": {
+    "account_age_days_at_query": {
+      "cells_all_missing": 0,
+      "global_fallback_median": 1276.1925453356482,
+      "missing": 0,
+      "missing_share": 0.0
+    },
+    "count_all": {
+      "cells_all_missing": 41,
+      "global_fallback_median": 0.0,
+      "missing": 1305683,
+      "missing_share": 1.0
+    },
+    "count_draw": {
+      "cells_all_missing": 41,
+      "global_fallback_median": 0.0,
+      "missing": 1305683,
+      "missing_share": 1.0
+    },
+    "count_loss": {
+      "cells_all_missing": 41,
+      "global_fallback_median": 0.0,
+      "missing": 1305683,
+      "missing_share": 1.0
+    },
+    "count_rated": {
+      "cells_all_missing": 41,
+      "global_fallback_median": 0.0,
+      "missing": 1305683,
+      "missing_share": 1.0
+    },
+    "count_win": {
+      "cells_all_missing": 41,
+      "global_fallback_median": 0.0,
+      "missing": 1305683,
+      "missing_share": 1.0
+    },
+    "current_blitz_games": {
+      "cells_all_missing": 0,
+      "global_fallback_median": 552.0,
+      "missing": 69094,
+      "missing_share": 0.052917898142198376
+    },
+    "current_blitz_rating": {
+      "cells_all_missing": 0,
+      "global_fallback_median": 1406.0,
+      "missing": 69094,
+      "missing_share": 0.052917898142198376
+    },
+    "current_bullet_games": {
+      "cells_all_missing": 0,
+      "global_fallback_median": 20.0,
+      "missing": 69094,
+      "missing_share": 0.052917898142198376
+    },
+    "current_bullet_rating": {
+      "cells_all_missing": 0,
+      "global_fallback_median": 1415.0,
+      "missing": 69094,
+      "missing_share": 0.052917898142198376
+    },
+    "current_classical_games": {
+      "cells_all_missing": 0,
+      "global_fallback_median": 0.0,
+      "missing": 69094,
+      "missing_share": 0.052917898142198376
+    },
+    "current_classical_rating": {
+      "cells_all_missing": 0,
+      "global_fallback_median": 1500.0,
+      "missing": 69094,
+      "missing_share": 0.052917898142198376
+    },
+    "current_correspondence_rating": {
+      "cells_all_missing": 0,
+      "global_fallback_median": 1500.0,
+      "missing": 69094,
+      "missing_share": 0.052917898142198376
+    },
+    "current_rapid_games": {
+      "cells_all_missing": 0,
+      "global_fallback_median": 134.0,
+      "missing": 69094,
+      "missing_share": 0.052917898142198376
+    },
+    "current_rapid_rating": {
+      "cells_all_missing": 0,
+      "global_fallback_median": 1500.0,
+      "missing": 69094,
+      "missing_share": 0.052917898142198376
+    },
+    "days_since_seen_at_query": {
+      "cells_all_missing": 0,
+      "global_fallback_median": 22.261035127314816,
+      "missing": 0,
+      "missing_share": 0.0
+    },
+    "play_time_total_seconds": {
+      "cells_all_missing": 0,
+      "global_fallback_median": 772892.0,
+      "missing": 70812,
+      "missing_share": 0.054233684592661466
+    }
+  },
+  "outcome_used_for_imputation": false,
+  "rule": "within-match-cell median, global median only for all-missing cells; indicators retained"
+}

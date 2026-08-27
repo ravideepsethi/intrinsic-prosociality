@@ -1,0 +1,34 @@
+{
+  "cache_qa": {
+    "chooser_accounts": 1305683,
+    "collapsed_rows": 29562512,
+    "kind_draw_mismatch": 0,
+    "kind_draws": 669433,
+    "opportunities": 32858962,
+    "returned_without_panel_rows": 0,
+    "total_opportunity_mismatch": 0,
+    "unplanned_panel_users": 0
+  },
+  "created_utc": "2026-08-27T01:18:19.388564+00:00",
+  "interpretation": "These appendix regressions condition on current patron status and describe how patrons behave across desert and price states. They do not estimate patron adoption or a causal patron effect.",
+  "models": [
+    {
+      "chooser_clusters": 1305683,
+      "collapsed_rows": 29562512,
+      "model": "patron_by_five_bin_desert_gradient",
+      "opportunities": 32858962
+    },
+    {
+      "chooser_clusters": 1233060,
+      "collapsed_rows": 11589903,
+      "model": "patron_by_favorable_price_in_fair_states",
+      "opportunities": 12399592
+    },
+    {
+      "chooser_clusters": 1297950,
+      "collapsed_rows": 26814055,
+      "model": "patron_by_fair_state_by_favorable_price",
+      "opportunities": 29999290
+    }
+  ]
+}

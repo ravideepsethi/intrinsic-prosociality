@@ -1,0 +1,26 @@
+{
+  "coefficient_rows": 314,
+  "created_utc": "2026-08-27T01:18:21.517898+00:00",
+  "fixture": false,
+  "models": 3,
+  "opportunity_cache_sha256": "f6ee10fc947776601d513f40ede3d1d897db03ffba1121db68450ac204d3ee80",
+  "public_output_hashes": {
+    "opportunity_model_coefficients.csv": "7b0b442bc7273004ca73ab9b1c8d1b98859010bcd7aa6c1ddfedd6c6ece9caa9",
+    "opportunity_models.json": "7aa6513ee25e0ecf4c5ec1aed2e9a9512f7fe104d7f2a7c66ab73872b8bc720f",
+    "opportunity_support.json": "fe94b1221c6ec51682fdb49af762d8ab63d32c31ba667aa690828e5d0c18e854"
+  },
+  "runtime": {
+    "created_utc": "2026-08-27T01:18:21.660090+00:00",
+    "platform": "macOS-26.4.1-arm64-arm-64bit-Mach-O",
+    "python": "3.13.9",
+    "software": {
+      "duckdb": "1.5.2",
+      "numpy": "2.4.4",
+      "pandas": "3.0.3",
+      "pyarrow": "24.0.0"
+    }
+  },
+  "runtime_seconds": 133.375,
+  "status": "PATRON_STAGE10_OPPORTUNITY_MODELS_OK",
+  "version": "1.0.1"
+}

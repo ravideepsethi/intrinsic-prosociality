@@ -1,0 +1,1434 @@
+[
+  {
+    "cluster": null,
+    "clusters": null,
+    "covariance": "HC1",
+    "dropped_regressors": {},
+    "estimand_class": "postcertification_secondary",
+    "fixed_effect_levels": 41,
+    "fixed_effects": "match_cell",
+    "kept_regressors": [
+      "ever_kind_eval_clearly_better",
+      "ever_kind_eval_better",
+      "ever_kind_eval_roughly_equal",
+      "ever_kind_eval_modestly_worse",
+      "ever_kind_eval_clearly_worse",
+      "log_eval_clearly_better_opps",
+      "log_eval_better_opps",
+      "log_eval_roughly_equal_opps",
+      "log_eval_modestly_worse_opps",
+      "log_eval_clearly_worse_opps"
+    ],
+    "model": "five_bin_chooser_min0_exposure_HC1",
+    "n": 1305683,
+    "outcome": "patron_pp",
+    "rank": 10,
+    "requested_regressors": [
+      "ever_kind_eval_clearly_better",
+      "ever_kind_eval_better",
+      "ever_kind_eval_roughly_equal",
+      "ever_kind_eval_modestly_worse",
+      "ever_kind_eval_clearly_worse",
+      "log_eval_clearly_better_opps",
+      "log_eval_better_opps",
+      "log_eval_roughly_equal_opps",
+      "log_eval_modestly_worse_opps",
+      "log_eval_clearly_worse_opps"
+    ],
+    "standardization": {
+      "log_eval_better_opps": {
+        "mean": 0.7202224239451557,
+        "sd_population": 0.7413591703215969
+      },
+      "log_eval_clearly_better_opps": {
+        "mean": 0.7373288745909593,
+        "sd_population": 0.7538099568143591
+      },
+      "log_eval_clearly_worse_opps": {
+        "mean": 2.0037611608602637,
+        "sd_population": 1.200779721792247
+      },
+      "log_eval_modestly_worse_opps": {
+        "mean": 0.7999581770427152,
+        "sd_population": 0.7942221273637923
+      },
+      "log_eval_roughly_equal_opps": {
+        "mean": 1.4326193727355903,
+        "sd_population": 0.9551081108683155
+      }
+    },
+    "status": "estimated"
+  },
+  {
+    "cluster": null,
+    "clusters": null,
+    "covariance": "HC1",
+    "dropped_regressors": {
+      "count_all__missing": "zero_after_fixed_effect_absorption",
+      "count_rated__missing": "zero_after_fixed_effect_absorption",
+      "current_blitz_games__missing": "deterministically_collinear",
+      "current_blitz_rating__missing": "deterministically_collinear",
+      "current_bullet_games__missing": "deterministically_collinear",
+      "current_bullet_rating__missing": "deterministically_collinear",
+      "current_classical_games__missing": "deterministically_collinear",
+      "current_classical_rating__missing": "deterministically_collinear",
+      "current_correspondence_rating__missing": "deterministically_collinear",
+      "current_rapid_games__missing": "deterministically_collinear",
+      "current_rapid_rating__missing": "deterministically_collinear",
+      "days_since_seen_at_query__missing": "deterministically_collinear",
+      "log1p_count_all": "zero_after_fixed_effect_absorption",
+      "log1p_count_rated": "zero_after_fixed_effect_absorption",
+      "share_clearly_worse": "deterministically_collinear",
+      "share_fair": "deterministically_collinear",
+      "share_fair_costly": "deterministically_collinear",
+      "share_speed_other": "zero_after_fixed_effect_absorption"
+    },
+    "estimand_class": "postcertification_secondary",
+    "fixed_effect_levels": 37,
+    "fixed_effects": "match_cell",
+    "kept_regressors": [
+      "ever_kind_eval_clearly_better",
+      "ever_kind_eval_better",
+      "ever_kind_eval_roughly_equal",
+      "ever_kind_eval_modestly_worse",
+      "ever_kind_eval_clearly_worse",
+      "log_eval_clearly_better_opps",
+      "log_eval_better_opps",
+      "log_eval_roughly_equal_opps",
+      "log_eval_modestly_worse_opps",
+      "log_eval_clearly_worse_opps",
+      "log_fair_opps",
+      "log_total_opps",
+      "account_age_days_at_query",
+      "days_since_seen_at_query",
+      "log_playtime_total",
+      "account_age_days_at_query__missing",
+      "play_time_total_seconds__missing",
+      "share_eval_disconnected_better",
+      "share_eval_roughly_equal",
+      "share_eval_modestly_worse",
+      "share_eval_clearly_worse",
+      "mean_eval_capped600",
+      "share_fair_nonnegative",
+      "panel_mean_draw_payoff_fair",
+      "panel_mean_win_premium_fair",
+      "active_months",
+      "share_speed_bullet",
+      "share_speed_blitz",
+      "share_speed_rapid",
+      "share_speed_classical_long",
+      "share_tournament",
+      "log1p_current_bullet_games",
+      "log1p_current_blitz_games",
+      "log1p_current_rapid_games",
+      "log1p_current_classical_games",
+      "mean_chooser_elo",
+      "sd_chooser_elo",
+      "rating_tier_1200_1599",
+      "rating_tier_1600_1999",
+      "rating_tier_2000_2399",
+      "rating_tier_2400_plus",
+      "current_bullet_rating",
+      "current_blitz_rating",
+      "current_rapid_rating",
+      "current_classical_rating",
+      "current_correspondence_rating"
+    ],
+    "model": "five_bin_chooser_min0_full_HC1",
+    "n": 1233060,
+    "outcome": "patron_pp",
+    "rank": 46,
+    "requested_regressors": [
+      "ever_kind_eval_clearly_better",
+      "ever_kind_eval_better",
+      "ever_kind_eval_roughly_equal",
+      "ever_kind_eval_modestly_worse",
+      "ever_kind_eval_clearly_worse",
+      "log_eval_clearly_better_opps",
+      "log_eval_better_opps",
+      "log_eval_roughly_equal_opps",
+      "log_eval_modestly_worse_opps",
+      "log_eval_clearly_worse_opps",
+      "log_fair_opps",
+      "log_total_opps",
+      "account_age_days_at_query",
+      "days_since_seen_at_query",
+      "log_playtime_total",
+      "account_age_days_at_query__missing",
+      "days_since_seen_at_query__missing",
+      "play_time_total_seconds__missing",
+      "share_eval_disconnected_better",
+      "share_eval_roughly_equal",
+      "share_eval_modestly_worse",
+      "share_eval_clearly_worse",
+      "mean_eval_capped600",
+      "share_fair",
+      "share_clearly_worse",
+      "share_fair_nonnegative",
+      "share_fair_costly",
+      "panel_mean_draw_payoff_fair",
+      "panel_mean_win_premium_fair",
+      "active_months",
+      "share_speed_bullet",
+      "share_speed_blitz",
+      "share_speed_rapid",
+      "share_speed_classical_long",
+      "share_speed_other",
+      "share_tournament",
+      "log1p_count_all",
+      "log1p_count_rated",
+      "log1p_current_bullet_games",
+      "log1p_current_blitz_games",
+      "log1p_current_rapid_games",
+      "log1p_current_classical_games",
+      "count_all__missing",
+      "count_rated__missing",
+      "current_bullet_games__missing",
+      "current_blitz_games__missing",
+      "current_rapid_games__missing",
+      "current_classical_games__missing",
+      "mean_chooser_elo",
+      "sd_chooser_elo",
+      "rating_tier_1200_1599",
+      "rating_tier_1600_1999",
+      "rating_tier_2000_2399",
+      "rating_tier_2400_plus",
+      "current_bullet_rating",
+      "current_blitz_rating",
+      "current_rapid_rating",
+      "current_classical_rating",
+      "current_correspondence_rating",
+      "current_bullet_rating__missing",
+      "current_blitz_rating__missing",
+      "current_rapid_rating__missing",
+      "current_classical_rating__missing",
+      "current_correspondence_rating__missing"
+    ],
+    "standardization": {
+      "account_age_days_at_query": {
+        "mean": 1569.7928051181427,
+        "sd_population": 871.4400307122484
+      },
+      "active_months": {
+        "mean": 8.074571391497575,
+        "sd_population": 6.486003396395274
+      },
+      "current_blitz_rating": {
+        "mean": 1397.954170924367,
+        "sd_population": 371.80434866956654
+      },
+      "current_bullet_rating": {
+        "mean": 1379.223957471656,
+        "sd_population": 359.4396877867315
+      },
+      "current_classical_rating": {
+        "mean": 1498.5938968906623,
+        "sd_population": 202.74107490076406
+      },
+      "current_correspondence_rating": {
+        "mean": 1506.026837299077,
+        "sd_population": 125.91161274370181
+      },
+      "current_rapid_rating": {
+        "mean": 1481.0429265404766,
+        "sd_population": 356.6665236467752
+      },
+      "days_since_seen_at_query": {
+        "mean": 164.5707857903188,
+        "sd_population": 241.95252134915603
+      },
+      "log1p_count_all": {
+        "mean": 0.0,
+        "sd_population": 0.0
+      },
+      "log1p_count_rated": {
+        "mean": 0.0,
+        "sd_population": 0.0
+      },
+      "log1p_current_blitz_games": {
+        "mean": 5.8622326096824535,
+        "sd_population": 2.7599602321618915
+      },
+      "log1p_current_bullet_games": {
+        "mean": 3.678670763195397,
+        "sd_population": 3.0744684203749326
+      },
+      "log1p_current_classical_games": {
+        "mean": 1.1192242995059236,
+        "sd_population": 1.685775819426564
+      },
+      "log1p_current_rapid_games": {
+        "mean": 4.659836118911281,
+        "sd_population": 2.437563311901463
+      },
+      "log_eval_better_opps": {
+        "mean": 0.7626410516633275,
+        "sd_population": 0.7413727643664785
+      },
+      "log_eval_clearly_better_opps": {
+        "mean": 0.7807550135131687,
+        "sd_population": 0.7535191031593848
+      },
+      "log_eval_clearly_worse_opps": {
+        "mean": 2.0725876883762653,
+        "sd_population": 1.195513640005942
+      },
+      "log_eval_modestly_worse_opps": {
+        "mean": 0.8363857162459473,
+        "sd_population": 0.7985617614634994
+      },
+      "log_eval_roughly_equal_opps": {
+        "mean": 1.5169957345559208,
+        "sd_population": 0.9154016744906873
+      },
+      "log_fair_opps": {
+        "mean": 1.9420326606703533,
+        "sd_population": 0.9267218355870003
+      },
+      "log_playtime_total": {
+        "mean": 13.424166292663367,
+        "sd_population": 1.7071882259362632
+      },
+      "log_total_opps": {
+        "mean": 2.7109860853480003,
+        "sd_population": 1.1345541581324166
+      },
+      "mean_chooser_elo": {
+        "mean": 1409.5265677031423,
+        "sd_population": 383.318996011926
+      },
+      "mean_eval_capped600": {
+        "mean": -201.28639063304684,
+        "sd_population": 177.624392959837
+      },
+      "panel_mean_draw_payoff_fair": {
+        "mean": -0.31272596793366103,
+        "sd_population": 16.30682857988608
+      },
+      "panel_mean_win_premium_fair": {
+        "mean": 15.882162275701603,
+        "sd_population": 31.971974041146996
+      },
+      "sd_chooser_elo": {
+        "mean": 71.78086474030115,
+        "sd_population": 55.07972973538614
+      },
+      "share_clearly_worse": {
+        "mean": 0.4618858925736513,
+        "sd_population": 0.21199297149033428
+      },
+      "share_eval_clearly_worse": {
+        "mean": 0.4618858925736513,
+        "sd_population": 0.21199297149033428
+      },
+      "share_eval_disconnected_better": {
+        "mean": 0.08504491519693158,
+        "sd_population": 0.1413278967750731
+      },
+      "share_eval_modestly_worse": {
+        "mean": 0.07582500618041507,
+        "sd_population": 0.08643758832000599
+      },
+      "share_eval_roughly_equal": {
+        "mean": 0.27417264998382196,
+        "sd_population": 0.21625753438128048
+      },
+      "share_fair": {
+        "mean": 0.4622891012459336,
+        "sd_population": 0.22393256671624376
+      },
+      "share_fair_costly": {
+        "mean": 0.4936209936663941,
+        "sd_population": 0.2937015864519941
+      },
+      "share_fair_nonnegative": {
+        "mean": 0.5063790063336059,
+        "sd_population": 0.2937015864519941
+      },
+      "share_speed_blitz": {
+        "mean": 0.5029410128355246,
+        "sd_population": 0.42655398180393406
+      },
+      "share_speed_bullet": {
+        "mean": 0.11512600295608387,
+        "sd_population": 0.26337551919996555
+      },
+      "share_speed_classical_long": {
+        "mean": 0.024493954548098745,
+        "sd_population": 0.12859975478984362
+      },
+      "share_speed_other": {
+        "mean": 0.0,
+        "sd_population": 0.0
+      },
+      "share_speed_rapid": {
+        "mean": 0.3574030151368152,
+        "sd_population": 0.4204171637907933
+      },
+      "share_tournament": {
+        "mean": 0.05169996574395922,
+        "sd_population": 0.17863591772641804
+      }
+    },
+    "status": "estimated"
+  },
+  {
+    "cluster": null,
+    "clusters": null,
+    "covariance": "HC1",
+    "dropped_regressors": {},
+    "estimand_class": "postcertification_secondary",
+    "fixed_effect_levels": 20,
+    "fixed_effects": "match_cell",
+    "kept_regressors": [
+      "ever_kind_eval_clearly_better",
+      "ever_kind_eval_better",
+      "ever_kind_eval_roughly_equal",
+      "ever_kind_eval_modestly_worse",
+      "ever_kind_eval_clearly_worse",
+      "log_eval_clearly_better_opps",
+      "log_eval_better_opps",
+      "log_eval_roughly_equal_opps",
+      "log_eval_modestly_worse_opps",
+      "log_eval_clearly_worse_opps"
+    ],
+    "model": "five_bin_chooser_min2_exposure_HC1",
+    "n": 254832,
+    "outcome": "patron_pp",
+    "rank": 10,
+    "requested_regressors": [
+      "ever_kind_eval_clearly_better",
+      "ever_kind_eval_better",
+      "ever_kind_eval_roughly_equal",
+      "ever_kind_eval_modestly_worse",
+      "ever_kind_eval_clearly_worse",
+      "log_eval_clearly_better_opps",
+      "log_eval_better_opps",
+      "log_eval_roughly_equal_opps",
+      "log_eval_modestly_worse_opps",
+      "log_eval_clearly_worse_opps"
+    ],
+    "standardization": {
+      "log_eval_better_opps": {
+        "mean": 1.7647093495514976,
+        "sd_population": 0.5171610697503486
+      },
+      "log_eval_clearly_better_opps": {
+        "mean": 1.788122791861732,
+        "sd_population": 0.5519921440334137
+      },
+      "log_eval_clearly_worse_opps": {
+        "mean": 3.4371579030241493,
+        "sd_population": 0.6507620029081227
+      },
+      "log_eval_modestly_worse_opps": {
+        "mean": 1.849800323602204,
+        "sd_population": 0.5435315177152139
+      },
+      "log_eval_roughly_equal_opps": {
+        "mean": 2.6036962386918137,
+        "sd_population": 0.6389203707757982
+      }
+    },
+    "status": "estimated"
+  },
+  {
+    "cluster": null,
+    "clusters": null,
+    "covariance": "HC1",
+    "dropped_regressors": {
+      "count_all__missing": "zero_after_fixed_effect_absorption",
+      "count_rated__missing": "zero_after_fixed_effect_absorption",
+      "current_blitz_games__missing": "deterministically_collinear",
+      "current_blitz_rating__missing": "deterministically_collinear",
+      "current_bullet_games__missing": "deterministically_collinear",
+      "current_bullet_rating__missing": "deterministically_collinear",
+      "current_classical_games__missing": "deterministically_collinear",
+      "current_classical_rating__missing": "deterministically_collinear",
+      "current_correspondence_rating__missing": "deterministically_collinear",
+      "current_rapid_games__missing": "deterministically_collinear",
+      "current_rapid_rating__missing": "deterministically_collinear",
+      "days_since_seen_at_query__missing": "deterministically_collinear",
+      "log1p_count_all": "zero_after_fixed_effect_absorption",
+      "log1p_count_rated": "zero_after_fixed_effect_absorption",
+      "share_clearly_worse": "deterministically_collinear",
+      "share_fair": "deterministically_collinear",
+      "share_fair_costly": "deterministically_collinear",
+      "share_speed_other": "zero_after_fixed_effect_absorption"
+    },
+    "estimand_class": "postcertification_secondary",
+    "fixed_effect_levels": 20,
+    "fixed_effects": "match_cell",
+    "kept_regressors": [
+      "ever_kind_eval_clearly_better",
+      "ever_kind_eval_better",
+      "ever_kind_eval_roughly_equal",
+      "ever_kind_eval_modestly_worse",
+      "ever_kind_eval_clearly_worse",
+      "log_eval_clearly_better_opps",
+      "log_eval_better_opps",
+      "log_eval_roughly_equal_opps",
+      "log_eval_modestly_worse_opps",
+      "log_eval_clearly_worse_opps",
+      "log_fair_opps",
+      "log_total_opps",
+      "account_age_days_at_query",
+      "days_since_seen_at_query",
+      "log_playtime_total",
+      "account_age_days_at_query__missing",
+      "play_time_total_seconds__missing",
+      "share_eval_disconnected_better",
+      "share_eval_roughly_equal",
+      "share_eval_modestly_worse",
+      "share_eval_clearly_worse",
+      "mean_eval_capped600",
+      "share_fair_nonnegative",
+      "panel_mean_draw_payoff_fair",
+      "panel_mean_win_premium_fair",
+      "active_months",
+      "share_speed_bullet",
+      "share_speed_blitz",
+      "share_speed_rapid",
+      "share_speed_classical_long",
+      "share_tournament",
+      "log1p_current_bullet_games",
+      "log1p_current_blitz_games",
+      "log1p_current_rapid_games",
+      "log1p_current_classical_games",
+      "mean_chooser_elo",
+      "sd_chooser_elo",
+      "rating_tier_1200_1599",
+      "rating_tier_1600_1999",
+      "rating_tier_2000_2399",
+      "rating_tier_2400_plus",
+      "current_bullet_rating",
+      "current_blitz_rating",
+      "current_rapid_rating",
+      "current_classical_rating",
+      "current_correspondence_rating"
+    ],
+    "model": "five_bin_chooser_min2_full_HC1",
+    "n": 254832,
+    "outcome": "patron_pp",
+    "rank": 46,
+    "requested_regressors": [
+      "ever_kind_eval_clearly_better",
+      "ever_kind_eval_better",
+      "ever_kind_eval_roughly_equal",
+      "ever_kind_eval_modestly_worse",
+      "ever_kind_eval_clearly_worse",
+      "log_eval_clearly_better_opps",
+      "log_eval_better_opps",
+      "log_eval_roughly_equal_opps",
+      "log_eval_modestly_worse_opps",
+      "log_eval_clearly_worse_opps",
+      "log_fair_opps",
+      "log_total_opps",
+      "account_age_days_at_query",
+      "days_since_seen_at_query",
+      "log_playtime_total",
+      "account_age_days_at_query__missing",
+      "days_since_seen_at_query__missing",
+      "play_time_total_seconds__missing",
+      "share_eval_disconnected_better",
+      "share_eval_roughly_equal",
+      "share_eval_modestly_worse",
+      "share_eval_clearly_worse",
+      "mean_eval_capped600",
+      "share_fair",
+      "share_clearly_worse",
+      "share_fair_nonnegative",
+      "share_fair_costly",
+      "panel_mean_draw_payoff_fair",
+      "panel_mean_win_premium_fair",
+      "active_months",
+      "share_speed_bullet",
+      "share_speed_blitz",
+      "share_speed_rapid",
+      "share_speed_classical_long",
+      "share_speed_other",
+      "share_tournament",
+      "log1p_count_all",
+      "log1p_count_rated",
+      "log1p_current_bullet_games",
+      "log1p_current_blitz_games",
+      "log1p_current_rapid_games",
+      "log1p_current_classical_games",
+      "count_all__missing",
+      "count_rated__missing",
+      "current_bullet_games__missing",
+      "current_blitz_games__missing",
+      "current_rapid_games__missing",
+      "current_classical_games__missing",
+      "mean_chooser_elo",
+      "sd_chooser_elo",
+      "rating_tier_1200_1599",
+      "rating_tier_1600_1999",
+      "rating_tier_2000_2399",
+      "rating_tier_2400_plus",
+      "current_bullet_rating",
+      "current_blitz_rating",
+      "current_rapid_rating",
+      "current_classical_rating",
+      "current_correspondence_rating",
+      "current_bullet_rating__missing",
+      "current_blitz_rating__missing",
+      "current_rapid_rating__missing",
+      "current_classical_rating__missing",
+      "current_correspondence_rating__missing"
+    ],
+    "standardization": {
+      "account_age_days_at_query": {
+        "mean": 1764.007339236233,
+        "sd_population": 854.0065129224017
+      },
+      "active_months": {
+        "mean": 15.892580209706788,
+        "sd_population": 5.706503435845722
+      },
+      "current_blitz_rating": {
+        "mean": 1429.8063626232185,
+        "sd_population": 337.3059361449565
+      },
+      "current_bullet_rating": {
+        "mean": 1345.636629230238,
+        "sd_population": 336.1007447153383
+      },
+      "current_classical_rating": {
+        "mean": 1502.715863784768,
+        "sd_population": 201.14247550845087
+      },
+      "current_correspondence_rating": {
+        "mean": 1507.822879387204,
+        "sd_population": 125.47100902761339
+      },
+      "current_rapid_rating": {
+        "mean": 1518.271186507189,
+        "sd_population": 317.25886737621624
+      },
+      "days_since_seen_at_query": {
+        "mean": 72.59070900477342,
+        "sd_population": 159.96879013460253
+      },
+      "log1p_count_all": {
+        "mean": 0.0,
+        "sd_population": 0.0
+      },
+      "log1p_count_rated": {
+        "mean": 0.0,
+        "sd_population": 0.0
+      },
+      "log1p_current_blitz_games": {
+        "mean": 7.457463008576679,
+        "sd_population": 2.6034019381196303
+      },
+      "log1p_current_bullet_games": {
+        "mean": 3.8840230627119907,
+        "sd_population": 3.1475248002733647
+      },
+      "log1p_current_classical_games": {
+        "mean": 1.403585866832584,
+        "sd_population": 1.9439393031967214
+      },
+      "log1p_current_rapid_games": {
+        "mean": 5.611704115105194,
+        "sd_population": 2.737784495862296
+      },
+      "log_eval_better_opps": {
+        "mean": 1.7647093495514976,
+        "sd_population": 0.5171610697503486
+      },
+      "log_eval_clearly_better_opps": {
+        "mean": 1.788122791861732,
+        "sd_population": 0.5519921440334137
+      },
+      "log_eval_clearly_worse_opps": {
+        "mean": 3.4371579030241493,
+        "sd_population": 0.6507620029081227
+      },
+      "log_eval_modestly_worse_opps": {
+        "mean": 1.849800323602204,
+        "sd_population": 0.5435315177152139
+      },
+      "log_eval_roughly_equal_opps": {
+        "mean": 2.6036962386918137,
+        "sd_population": 0.6389203707757982
+      },
+      "log_fair_opps": {
+        "mean": 3.189421097724444,
+        "sd_population": 0.5460054877064121
+      },
+      "log_playtime_total": {
+        "mean": 14.916374194118617,
+        "sd_population": 0.9485719403038321
+      },
+      "log_total_opps": {
+        "mean": 4.110020799596697,
+        "sd_population": 0.5708680730115594
+      },
+      "mean_chooser_elo": {
+        "mean": 1443.725216215101,
+        "sd_population": 336.6467796969716
+      },
+      "mean_eval_capped600": {
+        "mean": -235.62536194891894,
+        "sd_population": 71.27347497613088
+      },
+      "panel_mean_draw_payoff_fair": {
+        "mean": -0.03331271238276231,
+        "sd_population": 3.102228966916862
+      },
+      "panel_mean_win_premium_fair": {
+        "mean": 6.728164245892646,
+        "sd_population": 7.421762467700394
+      },
+      "sd_chooser_elo": {
+        "mean": 78.60286087291767,
+        "sd_population": 43.6254943485176
+      },
+      "share_clearly_worse": {
+        "mean": 0.5090261879192775,
+        "sd_population": 0.09553380103543546
+      },
+      "share_eval_clearly_worse": {
+        "mean": 0.5090261879192775,
+        "sd_population": 0.09553380103543546
+      },
+      "share_eval_disconnected_better": {
+        "mean": 0.08688559919844147,
+        "sd_population": 0.03973351788278451
+      },
+      "share_eval_modestly_worse": {
+        "mean": 0.09417540778672195,
+        "sd_population": 0.03809603121084115
+      },
+      "share_eval_roughly_equal": {
+        "mean": 0.21731774530002457,
+        "sd_population": 0.06999928393555004
+      },
+      "share_fair": {
+        "mean": 0.39679840429400065,
+        "sd_population": 0.08776243779813901
+      },
+      "share_fair_costly": {
+        "mean": 0.492267793761795,
+        "sd_population": 0.13450344681454116
+      },
+      "share_fair_nonnegative": {
+        "mean": 0.5077322062382049,
+        "sd_population": 0.13450344681454116
+      },
+      "share_speed_blitz": {
+        "mean": 0.603534396142078,
+        "sd_population": 0.414861509988866
+      },
+      "share_speed_bullet": {
+        "mean": 0.07031361016237371,
+        "sd_population": 0.1968635274603395
+      },
+      "share_speed_classical_long": {
+        "mean": 0.015035905869094772,
+        "sd_population": 0.09585699390926006
+      },
+      "share_speed_other": {
+        "mean": 0.0,
+        "sd_population": 0.0
+      },
+      "share_speed_rapid": {
+        "mean": 0.3111129896763206,
+        "sd_population": 0.40248372545807004
+      },
+      "share_tournament": {
+        "mean": 0.0328927172437377,
+        "sd_population": 0.1313674602302117
+      }
+    },
+    "status": "estimated"
+  },
+  {
+    "cluster": null,
+    "clusters": null,
+    "covariance": "HC1",
+    "dropped_regressors": {},
+    "estimand_class": "postcertification_secondary",
+    "fixed_effect_levels": 16,
+    "fixed_effects": "match_cell",
+    "kept_regressors": [
+      "ever_kind_eval_clearly_better",
+      "ever_kind_eval_better",
+      "ever_kind_eval_roughly_equal",
+      "ever_kind_eval_modestly_worse",
+      "ever_kind_eval_clearly_worse",
+      "log_eval_clearly_better_opps",
+      "log_eval_better_opps",
+      "log_eval_roughly_equal_opps",
+      "log_eval_modestly_worse_opps",
+      "log_eval_clearly_worse_opps"
+    ],
+    "model": "five_bin_chooser_min4_exposure_HC1",
+    "n": 100904,
+    "outcome": "patron_pp",
+    "rank": 10,
+    "requested_regressors": [
+      "ever_kind_eval_clearly_better",
+      "ever_kind_eval_better",
+      "ever_kind_eval_roughly_equal",
+      "ever_kind_eval_modestly_worse",
+      "ever_kind_eval_clearly_worse",
+      "log_eval_clearly_better_opps",
+      "log_eval_better_opps",
+      "log_eval_roughly_equal_opps",
+      "log_eval_modestly_worse_opps",
+      "log_eval_clearly_worse_opps"
+    ],
+    "standardization": {
+      "log_eval_better_opps": {
+        "mean": 2.1779915902386637,
+        "sd_population": 0.43227935644468324
+      },
+      "log_eval_clearly_better_opps": {
+        "mean": 2.2167644229624988,
+        "sd_population": 0.4740786791339416
+      },
+      "log_eval_clearly_worse_opps": {
+        "mean": 3.8634360376943926,
+        "sd_population": 0.5360304653204289
+      },
+      "log_eval_modestly_worse_opps": {
+        "mean": 2.2346107071797094,
+        "sd_population": 0.4585956244506748
+      },
+      "log_eval_roughly_equal_opps": {
+        "mean": 3.0100106631702297,
+        "sd_population": 0.5477317669066956
+      }
+    },
+    "status": "estimated"
+  },
+  {
+    "cluster": null,
+    "clusters": null,
+    "covariance": "HC1",
+    "dropped_regressors": {
+      "count_all__missing": "zero_after_fixed_effect_absorption",
+      "count_rated__missing": "zero_after_fixed_effect_absorption",
+      "current_blitz_games__missing": "deterministically_collinear",
+      "current_blitz_rating__missing": "deterministically_collinear",
+      "current_bullet_games__missing": "deterministically_collinear",
+      "current_bullet_rating__missing": "deterministically_collinear",
+      "current_classical_games__missing": "deterministically_collinear",
+      "current_classical_rating__missing": "deterministically_collinear",
+      "current_correspondence_rating__missing": "deterministically_collinear",
+      "current_rapid_games__missing": "deterministically_collinear",
+      "current_rapid_rating__missing": "deterministically_collinear",
+      "days_since_seen_at_query__missing": "deterministically_collinear",
+      "log1p_count_all": "zero_after_fixed_effect_absorption",
+      "log1p_count_rated": "zero_after_fixed_effect_absorption",
+      "share_clearly_worse": "deterministically_collinear",
+      "share_fair": "deterministically_collinear",
+      "share_fair_costly": "deterministically_collinear",
+      "share_speed_other": "zero_after_fixed_effect_absorption"
+    },
+    "estimand_class": "postcertification_secondary",
+    "fixed_effect_levels": 16,
+    "fixed_effects": "match_cell",
+    "kept_regressors": [
+      "ever_kind_eval_clearly_better",
+      "ever_kind_eval_better",
+      "ever_kind_eval_roughly_equal",
+      "ever_kind_eval_modestly_worse",
+      "ever_kind_eval_clearly_worse",
+      "log_eval_clearly_better_opps",
+      "log_eval_better_opps",
+      "log_eval_roughly_equal_opps",
+      "log_eval_modestly_worse_opps",
+      "log_eval_clearly_worse_opps",
+      "log_fair_opps",
+      "log_total_opps",
+      "account_age_days_at_query",
+      "days_since_seen_at_query",
+      "log_playtime_total",
+      "account_age_days_at_query__missing",
+      "play_time_total_seconds__missing",
+      "share_eval_disconnected_better",
+      "share_eval_roughly_equal",
+      "share_eval_modestly_worse",
+      "share_eval_clearly_worse",
+      "mean_eval_capped600",
+      "share_fair_nonnegative",
+      "panel_mean_draw_payoff_fair",
+      "panel_mean_win_premium_fair",
+      "active_months",
+      "share_speed_bullet",
+      "share_speed_blitz",
+      "share_speed_rapid",
+      "share_speed_classical_long",
+      "share_tournament",
+      "log1p_current_bullet_games",
+      "log1p_current_blitz_games",
+      "log1p_current_rapid_games",
+      "log1p_current_classical_games",
+      "mean_chooser_elo",
+      "sd_chooser_elo",
+      "rating_tier_1200_1599",
+      "rating_tier_1600_1999",
+      "rating_tier_2000_2399",
+      "rating_tier_2400_plus",
+      "current_bullet_rating",
+      "current_blitz_rating",
+      "current_rapid_rating",
+      "current_classical_rating",
+      "current_correspondence_rating"
+    ],
+    "model": "five_bin_chooser_min4_full_HC1",
+    "n": 100904,
+    "outcome": "patron_pp",
+    "rank": 46,
+    "requested_regressors": [
+      "ever_kind_eval_clearly_better",
+      "ever_kind_eval_better",
+      "ever_kind_eval_roughly_equal",
+      "ever_kind_eval_modestly_worse",
+      "ever_kind_eval_clearly_worse",
+      "log_eval_clearly_better_opps",
+      "log_eval_better_opps",
+      "log_eval_roughly_equal_opps",
+      "log_eval_modestly_worse_opps",
+      "log_eval_clearly_worse_opps",
+      "log_fair_opps",
+      "log_total_opps",
+      "account_age_days_at_query",
+      "days_since_seen_at_query",
+      "log_playtime_total",
+      "account_age_days_at_query__missing",
+      "days_since_seen_at_query__missing",
+      "play_time_total_seconds__missing",
+      "share_eval_disconnected_better",
+      "share_eval_roughly_equal",
+      "share_eval_modestly_worse",
+      "share_eval_clearly_worse",
+      "mean_eval_capped600",
+      "share_fair",
+      "share_clearly_worse",
+      "share_fair_nonnegative",
+      "share_fair_costly",
+      "panel_mean_draw_payoff_fair",
+      "panel_mean_win_premium_fair",
+      "active_months",
+      "share_speed_bullet",
+      "share_speed_blitz",
+      "share_speed_rapid",
+      "share_speed_classical_long",
+      "share_speed_other",
+      "share_tournament",
+      "log1p_count_all",
+      "log1p_count_rated",
+      "log1p_current_bullet_games",
+      "log1p_current_blitz_games",
+      "log1p_current_rapid_games",
+      "log1p_current_classical_games",
+      "count_all__missing",
+      "count_rated__missing",
+      "current_bullet_games__missing",
+      "current_blitz_games__missing",
+      "current_rapid_games__missing",
+      "current_classical_games__missing",
+      "mean_chooser_elo",
+      "sd_chooser_elo",
+      "rating_tier_1200_1599",
+      "rating_tier_1600_1999",
+      "rating_tier_2000_2399",
+      "rating_tier_2400_plus",
+      "current_bullet_rating",
+      "current_blitz_rating",
+      "current_rapid_rating",
+      "current_classical_rating",
+      "current_correspondence_rating",
+      "current_bullet_rating__missing",
+      "current_blitz_rating__missing",
+      "current_rapid_rating__missing",
+      "current_classical_rating__missing",
+      "current_correspondence_rating__missing"
+    ],
+    "standardization": {
+      "account_age_days_at_query": {
+        "mean": 1781.3757480688398,
+        "sd_population": 832.6247023258015
+      },
+      "active_months": {
+        "mean": 18.637249266629667,
+        "sd_population": 4.970442281023374
+      },
+      "current_blitz_rating": {
+        "mean": 1422.1145296519464,
+        "sd_population": 325.6678069470883
+      },
+      "current_bullet_rating": {
+        "mean": 1318.3368003250614,
+        "sd_population": 325.74419710683503
+      },
+      "current_classical_rating": {
+        "mean": 1495.9326141679219,
+        "sd_population": 200.84858085784316
+      },
+      "current_correspondence_rating": {
+        "mean": 1504.8741377943393,
+        "sd_population": 123.15008745983874
+      },
+      "current_rapid_rating": {
+        "mean": 1505.2780315943867,
+        "sd_population": 308.23489021252226
+      },
+      "days_since_seen_at_query": {
+        "mean": 56.30635532881988,
+        "sd_population": 137.70996292412624
+      },
+      "log1p_count_all": {
+        "mean": 0.0,
+        "sd_population": 0.0
+      },
+      "log1p_count_rated": {
+        "mean": 0.0,
+        "sd_population": 0.0
+      },
+      "log1p_current_blitz_games": {
+        "mean": 7.819479681655127,
+        "sd_population": 2.69450146234585
+      },
+      "log1p_current_bullet_games": {
+        "mean": 3.6978737506954285,
+        "sd_population": 3.1097765615596766
+      },
+      "log1p_current_classical_games": {
+        "mean": 1.5061122355367864,
+        "sd_population": 2.0412989926731693
+      },
+      "log1p_current_rapid_games": {
+        "mean": 5.910476552049562,
+        "sd_population": 2.876378022609251
+      },
+      "log_eval_better_opps": {
+        "mean": 2.1779915902386637,
+        "sd_population": 0.43227935644468324
+      },
+      "log_eval_clearly_better_opps": {
+        "mean": 2.2167644229624988,
+        "sd_population": 0.4740786791339416
+      },
+      "log_eval_clearly_worse_opps": {
+        "mean": 3.8634360376943926,
+        "sd_population": 0.5360304653204289
+      },
+      "log_eval_modestly_worse_opps": {
+        "mean": 2.2346107071797094,
+        "sd_population": 0.4585956244506748
+      },
+      "log_eval_roughly_equal_opps": {
+        "mean": 3.0100106631702297,
+        "sd_population": 0.5477317669066956
+      },
+      "log_fair_opps": {
+        "mean": 3.626796491328523,
+        "sd_population": 0.4456419055129425
+      },
+      "log_playtime_total": {
+        "mean": 15.333655225445032,
+        "sd_population": 0.8194175562599645
+      },
+      "log_total_opps": {
+        "mean": 4.5438627346881315,
+        "sd_population": 0.4636278424680746
+      },
+      "mean_chooser_elo": {
+        "mean": 1440.8927144404659,
+        "sd_population": 320.3881336850808
+      },
+      "mean_eval_capped600": {
+        "mean": -231.67087204016605,
+        "sd_population": 61.746043107513934
+      },
+      "panel_mean_draw_payoff_fair": {
+        "mean": -0.0137460443462979,
+        "sd_population": 2.9506919227068864
+      },
+      "panel_mean_win_premium_fair": {
+        "mean": 6.348044064883677,
+        "sd_population": 7.131930554293127
+      },
+      "sd_chooser_elo": {
+        "mean": 77.37442533287764,
+        "sd_population": 42.339197940891985
+      },
+      "share_clearly_worse": {
+        "mean": 0.5068424246215046,
+        "sd_population": 0.08118345787098458
+      },
+      "share_eval_clearly_worse": {
+        "mean": 0.5068424246215046,
+        "sd_population": 0.08118345787098458
+      },
+      "share_eval_disconnected_better": {
+        "mean": 0.08922779889675339,
+        "sd_population": 0.033792045213903464
+      },
+      "share_eval_modestly_worse": {
+        "mean": 0.09331671328907644,
+        "sd_population": 0.030203168782445958
+      },
+      "share_eval_roughly_equal": {
+        "mean": 0.21464128860107862,
+        "sd_population": 0.06015461451198473
+      },
+      "share_fair": {
+        "mean": 0.39984086208941905,
+        "sd_population": 0.0748069056389064
+      },
+      "share_fair_costly": {
+        "mean": 0.49154952983248307,
+        "sd_population": 0.1136314727957499
+      },
+      "share_fair_nonnegative": {
+        "mean": 0.508450470167517,
+        "sd_population": 0.11363147279574988
+      },
+      "share_speed_blitz": {
+        "mean": 0.6237718939373862,
+        "sd_population": 0.41648073740018277
+      },
+      "share_speed_bullet": {
+        "mean": 0.05051192796427231,
+        "sd_population": 0.1633323765059808
+      },
+      "share_speed_classical_long": {
+        "mean": 0.015179618003151929,
+        "sd_population": 0.09942534459864881
+      },
+      "share_speed_other": {
+        "mean": 0.0,
+        "sd_population": 0.0
+      },
+      "share_speed_rapid": {
+        "mean": 0.3105361083103804,
+        "sd_population": 0.4061318391123852
+      },
+      "share_tournament": {
+        "mean": 0.02815545686506182,
+        "sd_population": 0.12114069418078253
+      }
+    },
+    "status": "estimated"
+  },
+  {
+    "cluster": "match_cell",
+    "clusters": 16,
+    "covariance": "CR1",
+    "dropped_regressors": {
+      "count_all__missing": "zero_after_fixed_effect_absorption",
+      "count_rated__missing": "zero_after_fixed_effect_absorption",
+      "current_blitz_games__missing": "deterministically_collinear",
+      "current_blitz_rating__missing": "deterministically_collinear",
+      "current_bullet_games__missing": "deterministically_collinear",
+      "current_bullet_rating__missing": "deterministically_collinear",
+      "current_classical_games__missing": "deterministically_collinear",
+      "current_classical_rating__missing": "deterministically_collinear",
+      "current_correspondence_rating__missing": "deterministically_collinear",
+      "current_rapid_games__missing": "deterministically_collinear",
+      "current_rapid_rating__missing": "deterministically_collinear",
+      "days_since_seen_at_query__missing": "deterministically_collinear",
+      "log1p_count_all": "zero_after_fixed_effect_absorption",
+      "log1p_count_rated": "zero_after_fixed_effect_absorption",
+      "share_clearly_worse": "deterministically_collinear",
+      "share_fair": "deterministically_collinear",
+      "share_fair_costly": "deterministically_collinear",
+      "share_speed_other": "zero_after_fixed_effect_absorption"
+    },
+    "estimand_class": "postcertification_sensitivity",
+    "fixed_effect_levels": 16,
+    "fixed_effects": "match_cell",
+    "kept_regressors": [
+      "ever_kind_eval_clearly_better",
+      "ever_kind_eval_better",
+      "ever_kind_eval_roughly_equal",
+      "ever_kind_eval_modestly_worse",
+      "ever_kind_eval_clearly_worse",
+      "log_eval_clearly_better_opps",
+      "log_eval_better_opps",
+      "log_eval_roughly_equal_opps",
+      "log_eval_modestly_worse_opps",
+      "log_eval_clearly_worse_opps",
+      "log_fair_opps",
+      "log_total_opps",
+      "account_age_days_at_query",
+      "days_since_seen_at_query",
+      "log_playtime_total",
+      "account_age_days_at_query__missing",
+      "play_time_total_seconds__missing",
+      "share_eval_disconnected_better",
+      "share_eval_roughly_equal",
+      "share_eval_modestly_worse",
+      "share_eval_clearly_worse",
+      "mean_eval_capped600",
+      "share_fair_nonnegative",
+      "panel_mean_draw_payoff_fair",
+      "panel_mean_win_premium_fair",
+      "active_months",
+      "share_speed_bullet",
+      "share_speed_blitz",
+      "share_speed_rapid",
+      "share_speed_classical_long",
+      "share_tournament",
+      "log1p_current_bullet_games",
+      "log1p_current_blitz_games",
+      "log1p_current_rapid_games",
+      "log1p_current_classical_games",
+      "mean_chooser_elo",
+      "sd_chooser_elo",
+      "rating_tier_1200_1599",
+      "rating_tier_1600_1999",
+      "rating_tier_2000_2399",
+      "rating_tier_2400_plus",
+      "current_bullet_rating",
+      "current_blitz_rating",
+      "current_rapid_rating",
+      "current_classical_rating",
+      "current_correspondence_rating"
+    ],
+    "model": "five_bin_chooser_min4_full_CR1",
+    "n": 100904,
+    "outcome": "patron_pp",
+    "rank": 46,
+    "requested_regressors": [
+      "ever_kind_eval_clearly_better",
+      "ever_kind_eval_better",
+      "ever_kind_eval_roughly_equal",
+      "ever_kind_eval_modestly_worse",
+      "ever_kind_eval_clearly_worse",
+      "log_eval_clearly_better_opps",
+      "log_eval_better_opps",
+      "log_eval_roughly_equal_opps",
+      "log_eval_modestly_worse_opps",
+      "log_eval_clearly_worse_opps",
+      "log_fair_opps",
+      "log_total_opps",
+      "account_age_days_at_query",
+      "days_since_seen_at_query",
+      "log_playtime_total",
+      "account_age_days_at_query__missing",
+      "days_since_seen_at_query__missing",
+      "play_time_total_seconds__missing",
+      "share_eval_disconnected_better",
+      "share_eval_roughly_equal",
+      "share_eval_modestly_worse",
+      "share_eval_clearly_worse",
+      "mean_eval_capped600",
+      "share_fair",
+      "share_clearly_worse",
+      "share_fair_nonnegative",
+      "share_fair_costly",
+      "panel_mean_draw_payoff_fair",
+      "panel_mean_win_premium_fair",
+      "active_months",
+      "share_speed_bullet",
+      "share_speed_blitz",
+      "share_speed_rapid",
+      "share_speed_classical_long",
+      "share_speed_other",
+      "share_tournament",
+      "log1p_count_all",
+      "log1p_count_rated",
+      "log1p_current_bullet_games",
+      "log1p_current_blitz_games",
+      "log1p_current_rapid_games",
+      "log1p_current_classical_games",
+      "count_all__missing",
+      "count_rated__missing",
+      "current_bullet_games__missing",
+      "current_blitz_games__missing",
+      "current_rapid_games__missing",
+      "current_classical_games__missing",
+      "mean_chooser_elo",
+      "sd_chooser_elo",
+      "rating_tier_1200_1599",
+      "rating_tier_1600_1999",
+      "rating_tier_2000_2399",
+      "rating_tier_2400_plus",
+      "current_bullet_rating",
+      "current_blitz_rating",
+      "current_rapid_rating",
+      "current_classical_rating",
+      "current_correspondence_rating",
+      "current_bullet_rating__missing",
+      "current_blitz_rating__missing",
+      "current_rapid_rating__missing",
+      "current_classical_rating__missing",
+      "current_correspondence_rating__missing"
+    ],
+    "standardization": {
+      "account_age_days_at_query": {
+        "mean": 1781.3757480688398,
+        "sd_population": 832.6247023258015
+      },
+      "active_months": {
+        "mean": 18.637249266629667,
+        "sd_population": 4.970442281023374
+      },
+      "current_blitz_rating": {
+        "mean": 1422.1145296519464,
+        "sd_population": 325.6678069470883
+      },
+      "current_bullet_rating": {
+        "mean": 1318.3368003250614,
+        "sd_population": 325.74419710683503
+      },
+      "current_classical_rating": {
+        "mean": 1495.9326141679219,
+        "sd_population": 200.84858085784316
+      },
+      "current_correspondence_rating": {
+        "mean": 1504.8741377943393,
+        "sd_population": 123.15008745983874
+      },
+      "current_rapid_rating": {
+        "mean": 1505.2780315943867,
+        "sd_population": 308.23489021252226
+      },
+      "days_since_seen_at_query": {
+        "mean": 56.30635532881988,
+        "sd_population": 137.70996292412624
+      },
+      "log1p_count_all": {
+        "mean": 0.0,
+        "sd_population": 0.0
+      },
+      "log1p_count_rated": {
+        "mean": 0.0,
+        "sd_population": 0.0
+      },
+      "log1p_current_blitz_games": {
+        "mean": 7.819479681655127,
+        "sd_population": 2.69450146234585
+      },
+      "log1p_current_bullet_games": {
+        "mean": 3.6978737506954285,
+        "sd_population": 3.1097765615596766
+      },
+      "log1p_current_classical_games": {
+        "mean": 1.5061122355367864,
+        "sd_population": 2.0412989926731693
+      },
+      "log1p_current_rapid_games": {
+        "mean": 5.910476552049562,
+        "sd_population": 2.876378022609251
+      },
+      "log_eval_better_opps": {
+        "mean": 2.1779915902386637,
+        "sd_population": 0.43227935644468324
+      },
+      "log_eval_clearly_better_opps": {
+        "mean": 2.2167644229624988,
+        "sd_population": 0.4740786791339416
+      },
+      "log_eval_clearly_worse_opps": {
+        "mean": 3.8634360376943926,
+        "sd_population": 0.5360304653204289
+      },
+      "log_eval_modestly_worse_opps": {
+        "mean": 2.2346107071797094,
+        "sd_population": 0.4585956244506748
+      },
+      "log_eval_roughly_equal_opps": {
+        "mean": 3.0100106631702297,
+        "sd_population": 0.5477317669066956
+      },
+      "log_fair_opps": {
+        "mean": 3.626796491328523,
+        "sd_population": 0.4456419055129425
+      },
+      "log_playtime_total": {
+        "mean": 15.333655225445032,
+        "sd_population": 0.8194175562599645
+      },
+      "log_total_opps": {
+        "mean": 4.5438627346881315,
+        "sd_population": 0.4636278424680746
+      },
+      "mean_chooser_elo": {
+        "mean": 1440.8927144404659,
+        "sd_population": 320.3881336850808
+      },
+      "mean_eval_capped600": {
+        "mean": -231.67087204016605,
+        "sd_population": 61.746043107513934
+      },
+      "panel_mean_draw_payoff_fair": {
+        "mean": -0.0137460443462979,
+        "sd_population": 2.9506919227068864
+      },
+      "panel_mean_win_premium_fair": {
+        "mean": 6.348044064883677,
+        "sd_population": 7.131930554293127
+      },
+      "sd_chooser_elo": {
+        "mean": 77.37442533287764,
+        "sd_population": 42.339197940891985
+      },
+      "share_clearly_worse": {
+        "mean": 0.5068424246215046,
+        "sd_population": 0.08118345787098458
+      },
+      "share_eval_clearly_worse": {
+        "mean": 0.5068424246215046,
+        "sd_population": 0.08118345787098458
+      },
+      "share_eval_disconnected_better": {
+        "mean": 0.08922779889675339,
+        "sd_population": 0.033792045213903464
+      },
+      "share_eval_modestly_worse": {
+        "mean": 0.09331671328907644,
+        "sd_population": 0.030203168782445958
+      },
+      "share_eval_roughly_equal": {
+        "mean": 0.21464128860107862,
+        "sd_population": 0.06015461451198473
+      },
+      "share_fair": {
+        "mean": 0.39984086208941905,
+        "sd_population": 0.0748069056389064
+      },
+      "share_fair_costly": {
+        "mean": 0.49154952983248307,
+        "sd_population": 0.1136314727957499
+      },
+      "share_fair_nonnegative": {
+        "mean": 0.508450470167517,
+        "sd_population": 0.11363147279574988
+      },
+      "share_speed_blitz": {
+        "mean": 0.6237718939373862,
+        "sd_population": 0.41648073740018277
+      },
+      "share_speed_bullet": {
+        "mean": 0.05051192796427231,
+        "sd_population": 0.1633323765059808
+      },
+      "share_speed_classical_long": {
+        "mean": 0.015179618003151929,
+        "sd_population": 0.09942534459864881
+      },
+      "share_speed_other": {
+        "mean": 0.0,
+        "sd_population": 0.0
+      },
+      "share_speed_rapid": {
+        "mean": 0.3105361083103804,
+        "sd_population": 0.4061318391123852
+      },
+      "share_tournament": {
+        "mean": 0.02815545686506182,
+        "sd_population": 0.12114069418078253
+      }
+    },
+    "status": "estimated"
+  }
+]

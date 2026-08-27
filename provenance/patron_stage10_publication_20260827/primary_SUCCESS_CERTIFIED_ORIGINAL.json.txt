@@ -1,0 +1,45 @@
+{
+  "created_utc": "2026-08-27T01:18:26.669935+00:00",
+  "files_authenticated": 23,
+  "fixture": false,
+  "interpretation": "Current patron status is a cross-sectional stable-type association; patron timing and causal adoption are not identified.",
+  "primary_model": {
+    "ci95_high_pp": 0.3393948639696857,
+    "ci95_low_pp": 0.2719279260903123,
+    "clusters": NaN,
+    "coefficient_pp": 0.305661395029999,
+    "covariance": "HC1",
+    "drop_reason": NaN,
+    "estimand_class": "confirmatory",
+    "fixed_effects": "match_cell",
+    "model": "main_fair_kind_1to3_01_match_cell_fe_only_HC1",
+    "n": 995606,
+    "p_two_sided_approx": 1.458495073663686e-70,
+    "rank": 1,
+    "se_pp": 0.0172112698017779,
+    "statistic": 17.759375022894776,
+    "status": "estimated",
+    "variable": "is_kind_role"
+  },
+  "privacy": {
+    "private_caches_excluded_from_transfer": true,
+    "raw_profile_json_in_public_results": false,
+    "row_level_profile_data_in_public_results": false,
+    "usernames_in_public_results": false
+  },
+  "report_file_hashes_sha256": "4a3b082e655de50c5bc554d1b684387f4ed9ef7da24745d65b9c9c919b8f3f2d",
+  "runtime": {
+    "created_utc": "2026-08-27T01:18:26.679909+00:00",
+    "platform": "macOS-26.4.1-arm64-arm-64bit-Mach-O",
+    "python": "3.13.9",
+    "software": {
+      "duckdb": "1.5.2",
+      "numpy": "2.4.4",
+      "pandas": "3.0.3",
+      "pyarrow": "24.0.0"
+    }
+  },
+  "runtime_seconds": 2.141,
+  "status": "PATRON_STAGE10_PRODUCTION_CERTIFIED_OK",
+  "version": "1.0.1"
+}

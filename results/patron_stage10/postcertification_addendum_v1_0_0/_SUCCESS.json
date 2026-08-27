@@ -1,0 +1,46 @@
+{
+  "base_primary_coefficient_pp": 0.305661395029999,
+  "base_v101_status": "PATRON_STAGE10_PRODUCTION_CERTIFIED_OK",
+  "corrected_rich_control_coefficient_pp": 0.2699092687062855,
+  "created_utc": "2026-08-27T02:20:34.520116+00:00",
+  "files_authenticated": 15,
+  "five_bin_min4_full_endpoint_contrast_pp": 0.4532214877715299,
+  "fixture": false,
+  "interpretation": "Separate secondary/sensitivity addendum. The certified v1.0.1 primary remains unchanged; current patron status is cross-sectional, not patron adoption or causality.",
+  "price_min4_full_standardized_contrasts": [
+    {
+      "contrast": "standardized_costly_minus_nonnegative_count",
+      "difference_pp": -0.0899452436946965,
+      "model": "price_count_min4_full_HC1",
+      "p_two_sided_approx": 0.0136783304051328,
+      "se_pp": 0.0364800366370346
+    },
+    {
+      "contrast": "standardized_costly_minus_nonnegative_rate",
+      "difference_pp": -0.1229540695932772,
+      "model": "price_rate_min4_full_HC1",
+      "p_two_sided_approx": 0.0061570465381694,
+      "se_pp": 0.0448852415186014
+    }
+  ],
+  "privacy": {
+    "private_caches_excluded_from_transfer": true,
+    "row_level_profile_data_in_public_results": false,
+    "usernames_in_public_results": false
+  },
+  "report_file_hashes_sha256": "63060d1c64a806cd1e1b08f23ff4d4653d2462e12642c43f733900074fb47605",
+  "runtime": {
+    "created_utc": "2026-08-27T02:20:34.529025+00:00",
+    "platform": "macOS-26.4.1-arm64-arm-64bit-Mach-O",
+    "python": "3.13.9",
+    "software": {
+      "duckdb": "1.5.2",
+      "numpy": "2.4.4",
+      "pandas": "3.0.3",
+      "pyarrow": "24.0.0"
+    }
+  },
+  "runtime_seconds": 2.189,
+  "status": "PATRON_STAGE10_POSTCERTIFICATION_ADDENDUM_CERTIFIED_OK",
+  "version": "1.0.0"
+}

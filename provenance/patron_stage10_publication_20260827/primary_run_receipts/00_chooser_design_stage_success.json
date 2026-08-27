@@ -1,0 +1,16 @@
+{
+  "chooser_cache_receipt_sha256": "1fd93eb66d210e537a5a9bb414bdc9ed4524961b94fcdde6b99e5829ec687722",
+  "created_utc": "2026-08-27T01:02:51.054518+00:00",
+  "fixture": false,
+  "input_authorities_sha256": "6157942f55721fc028e9009108c54bb4b47b5e9e1bef9e4fa212409afd63ff1a",
+  "mapping_resolution_sha256": "2674a5532adc40471810e7398f09587612145b175b38783b56d12403862c98c5",
+  "runtime_seconds": 39.206,
+  "software": {
+    "duckdb": "1.5.2",
+    "numpy": "2.4.4",
+    "pandas": "3.0.3",
+    "pyarrow": "24.0.0"
+  },
+  "status": "PATRON_STAGE10_CHOOSER_DESIGN_STAGE_OK",
+  "version": "1.0.0"
+}
