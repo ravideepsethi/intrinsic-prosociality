@@ -16,7 +16,7 @@ extension are now certified. Other external-input extensions remain in progress.
 - Stage 07 analysis panel: certified over all 24 months with 157 columns.
 - Stage 08 core results: certified Tables 1–9 and analytical figure data.
 - Stage 09 panel robustness: certified support, exact-zero, heterogeneity, cutoff, and magnitude results.
-- Dynamic prosociality: certified mercy-transmission, engagement, and conditional-exchangeability tests.
+- Dynamic prosociality: certified mercy-transmission, engagement, and conditional-exchangeability tests, with public A1 reciprocity/session/composition and exact unconditional first-opportunity audits.
 - Opening familiarity: target plan certified; metadata acquisition and full analysis remain pending.
 - Patron/profile extension: certified current-profile snapshot and Stage 10 v1.0.1
   matched analysis, with a separately certified post-certification addendum.
@@ -52,6 +52,7 @@ Current stages include:
 - `09_analyze_opening_familiarity.py` — estimate opening-familiarity results after acquisition.
 - `10c_estimate_dynamic_prosociality_core.py` — estimate the frozen recipient and chooser dynamics.
 - `10d_audit_dynamic_prosociality_core.py` — run the secondary post-outcome diagnostic audit.
+- `a1_audits/` — reproduce the certified A1 result and run the September 2026 evidence-gap and zero-coded first-opportunity audits.
 - `patron_stage10/primary_v1_0_1/` — build and verify the certified current-Patron
   matched analysis and opportunity appendix.
 - `patron_stage10/postcertification_addendum_v1_0_0/` — reproduce the separate
@@ -100,7 +101,8 @@ Canonical production stages are designed to provide, where applicable:
 
 **Work in progress.** Stages 00–09, the certified Stockfish 100k layer, the
 47,587,020-row Stage 07 panel, the Stage 08 core results, the Stage 09 panel-only
-robustness results, the dynamic-prosociality core and post-outcome audit, and
+robustness results, the dynamic-prosociality core, post-outcome audit, and
+September 2026 A1 evidence-gap audits, and
 Patron Stage 10 are complete. The Patron primary is a current-status
 cross-sectional association, not Patron adoption or causality. The opening target
 plan is certified, but opening metadata acquisition, full opening-familiarity
