@@ -1,0 +1,4 @@
+sample,estimate_pp,se_cr1_pp,t,p_normal,rows,chooser_clusters,regressors_after_fe,finite_sample_correction,specification
+all,2.176520385565518,0.009087386365779014,239.5100525011007,0.0,43418293,3475075,1,1.0870006913616008,y_pp ~ fair + chooser FE; chooser-clustered CR1
+first,2.1750335765479,0.009201337671153076,236.38232334052938,0.0,37928074,3402991,1,1.098566084376399,y_pp ~ fair + chooser FE; chooser-clustered CR1
+repeat,1.9131053253143269,0.019787609053695428,96.68198518188561,0.0,5490219,1239274,1,1.291530170755611,y_pp ~ fair + chooser FE; chooser-clustered CR1

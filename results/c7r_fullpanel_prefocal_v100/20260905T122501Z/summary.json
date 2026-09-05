@@ -1,0 +1,48 @@
+{
+  "chronology_scope": "Authenticated ordinary-speed chronology files through 2025-10; later files are unnecessary for a pre-focal classification.",
+  "config_sha256": "b62a1bb92068e4cdd66f4ac4676e54c5070f618a831cb744845fe29122c83964",
+  "created_utc": "2026-09-05T12:46:00.675666+00:00",
+  "fair_first_rate_pct": 2.7967356445532428,
+  "fair_repeat_rate_pct": 2.913747133277675,
+  "first_rows": 41597026,
+  "full_stage07_rows": 47587020,
+  "minimal_fe_first_gradient_pp": 2.1750335765479,
+  "minimal_fe_interaction_p_normal": 0.04178992296515273,
+  "minimal_fe_interaction_pp": 0.03050668764058822,
+  "minimal_fe_repeat_gradient_pp": 1.9131053253143269,
+  "ordering": [
+    "utc_ms",
+    "archive_ordinal",
+    "game_id"
+  ],
+  "preoutcome_support_receipt": {
+    "config_sha256": "b62a1bb92068e4cdd66f4ac4676e54c5070f618a831cb744845fe29122c83964",
+    "created_utc": "2026-09-05T12:45:14.175745+00:00",
+    "definition": "First iff focal (utc_ms, archive_ordinal, game_id) equals the earliest authenticated ordinary-speed rated event for its unordered pair.",
+    "first_rows": 41597026,
+    "flags_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/c7r_fullpanel_prefocal_v100_PRIVATE/stage07_prefocal_first_repeat_flags_private.parquet",
+    "flags_sha256": "432ca7637e95ffe74831b4825467691c9f9dd14b1ea596d0331e3892b22638f0",
+    "ordering": [
+      "utc_ms",
+      "archive_ordinal",
+      "game_id"
+    ],
+    "outcome_read_before_freeze": false,
+    "repeat_rows": 5989994,
+    "repeat_share": 0.12587453469454485,
+    "rows": 47587020,
+    "status": "C7R_FULLPANEL_PREOUTCOME_SUPPORT_FROZEN_OK"
+  },
+  "private_flags_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/c7r_fullpanel_prefocal_v100_PRIVATE/stage07_prefocal_first_repeat_flags_private.parquet",
+  "private_pair_first_event_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/c7r_fullpanel_prefocal_v100_PRIVATE/pair_first_rated_event_private.parquet",
+  "public_privacy": "Aggregate-only; no account IDs or game IDs are included.",
+  "raw_first_desert_gap_pp": 2.3032183087311395,
+  "raw_repeat_desert_gap_pp": 2.3573941283526074,
+  "repeat_rows": 5989994,
+  "repeat_share_clearly_worse_pct": 12.696911859078842,
+  "repeat_share_competitive_pct": 12.56669934955474,
+  "repeat_share_pct": 12.587453469454484,
+  "run_id": "20260905T122501Z",
+  "script_version": "1.0.0",
+  "status": "C7R_FULLPANEL_PREFOCAL_V100_OK"
+}

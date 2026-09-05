@@ -1,0 +1,15 @@
+{
+  "historical_sampled_c7r": {
+    "adjusted_first_gradient_pp": 1.5669,
+    "adjusted_interaction_p": 0.938,
+    "adjusted_interaction_pp": -0.0087,
+    "adjusted_repeat_gradient_pp": 1.3342,
+    "fair_first_rate_pct": 2.8431,
+    "fair_repeat_rate_pct": 2.8602,
+    "first_n": 831622,
+    "note": "Historical adjusted coefficients came from the frozen C7R v1.0.2 model family. The new minimal chooser-FE census models are a separate, transparent specification and must not be mislabeled as an exact C7R-v1.0.2 model reproduction.",
+    "repeat_n": 119895,
+    "repeat_share": 0.126004,
+    "sample_n": 951517
+  }
+}
