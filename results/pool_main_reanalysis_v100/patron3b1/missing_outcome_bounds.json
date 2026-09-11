@@ -1,0 +1,376 @@
+{
+  "assumptions": "Unknown Patron indicators lie in {0,1}; all target memberships and new match cells are fixed.",
+  "by_cell": [
+    {
+      "control_missing": 8,
+      "control_target": 48360,
+      "kind_missing": 1,
+      "kind_target": 16120,
+      "lower_gap_pp": 0.22125723738626962,
+      "match_cell": "01__blitz",
+      "upper_gap_pp": 0.24400330851943758,
+      "weight": 12090.0
+    },
+    {
+      "control_missing": 2,
+      "control_target": 11415,
+      "kind_missing": 2,
+      "kind_target": 3805,
+      "lower_gap_pp": 0.11388523872098116,
+      "match_cell": "01__bullet",
+      "upper_gap_pp": 0.18396846254927723,
+      "weight": 2853.75
+    },
+    {
+      "control_missing": 18,
+      "control_target": 3606,
+      "kind_missing": 0,
+      "kind_target": 1202,
+      "lower_gap_pp": -0.11092623405435384,
+      "match_cell": "01__classical_or_long",
+      "upper_gap_pp": 0.3882418191902385,
+      "weight": 901.5
+    },
+    {
+      "control_missing": 38,
+      "control_target": 46257,
+      "kind_missing": 3,
+      "kind_target": 15419,
+      "lower_gap_pp": -0.019456514689668584,
+      "match_cell": "01__rapid",
+      "upper_gap_pp": 0.08214972868971183,
+      "weight": 11564.25
+    },
+    {
+      "control_missing": 9,
+      "control_target": 36831,
+      "kind_missing": 1,
+      "kind_target": 12277,
+      "lower_gap_pp": 0.016290624745459024,
+      "match_cell": "02__blitz",
+      "upper_gap_pp": 0.04887187423637698,
+      "weight": 9207.75
+    },
+    {
+      "control_missing": 0,
+      "control_target": 8388,
+      "kind_missing": 0,
+      "kind_target": 2796,
+      "lower_gap_pp": 0.15498330948974728,
+      "match_cell": "02__bullet",
+      "upper_gap_pp": 0.15498330948974728,
+      "weight": 2097.0
+    },
+    {
+      "control_missing": 5,
+      "control_target": 1512,
+      "kind_missing": 0,
+      "kind_target": 504,
+      "lower_gap_pp": -0.13227513227513227,
+      "match_cell": "02__classical_or_long",
+      "upper_gap_pp": 0.1984126984126984,
+      "weight": 378.0
+    },
+    {
+      "control_missing": 14,
+      "control_target": 28125,
+      "kind_missing": 3,
+      "kind_target": 9375,
+      "lower_gap_pp": 0.1706666666666667,
+      "match_cell": "02__rapid",
+      "upper_gap_pp": 0.25244444444444447,
+      "weight": 7031.25
+    },
+    {
+      "control_missing": 4,
+      "control_target": 29364,
+      "kind_missing": 1,
+      "kind_target": 9788,
+      "lower_gap_pp": 0.3133088135131453,
+      "match_cell": "03__blitz",
+      "upper_gap_pp": 0.3371475275847977,
+      "weight": 7341.0
+    },
+    {
+      "control_missing": 0,
+      "control_target": 6678,
+      "kind_missing": 0,
+      "kind_target": 2226,
+      "lower_gap_pp": 0.41928721174004185,
+      "match_cell": "03__bullet",
+      "upper_gap_pp": 0.41928721174004185,
+      "weight": 1669.5
+    },
+    {
+      "control_missing": 1,
+      "control_target": 780,
+      "kind_missing": 0,
+      "kind_target": 260,
+      "lower_gap_pp": -0.38461538461538464,
+      "match_cell": "03__classical_or_long",
+      "upper_gap_pp": -0.2564102564102564,
+      "weight": 195.0
+    },
+    {
+      "control_missing": 8,
+      "control_target": 21111,
+      "kind_missing": 0,
+      "kind_target": 7037,
+      "lower_gap_pp": 0.23684335180711472,
+      "match_cell": "03__rapid",
+      "upper_gap_pp": 0.27473828809625306,
+      "weight": 5277.75
+    },
+    {
+      "control_missing": 2,
+      "control_target": 24150,
+      "kind_missing": 1,
+      "kind_target": 8050,
+      "lower_gap_pp": 0.31055900621118016,
+      "match_cell": "04__blitz",
+      "upper_gap_pp": 0.33126293995859213,
+      "weight": 6037.5
+    },
+    {
+      "control_missing": 0,
+      "control_target": 5682,
+      "kind_missing": 0,
+      "kind_target": 1894,
+      "lower_gap_pp": 0.35198873636043637,
+      "match_cell": "04__bullet",
+      "upper_gap_pp": 0.35198873636043637,
+      "weight": 1420.5
+    },
+    {
+      "control_missing": 0,
+      "control_target": 552,
+      "kind_missing": 1,
+      "kind_target": 184,
+      "lower_gap_pp": -0.3623188405797102,
+      "match_cell": "04__classical_or_long",
+      "upper_gap_pp": 0.18115942028985502,
+      "weight": 138.0
+    },
+    {
+      "control_missing": 5,
+      "control_target": 15504,
+      "kind_missing": 1,
+      "kind_target": 5168,
+      "lower_gap_pp": 0.06449948400412794,
+      "match_cell": "04__rapid",
+      "upper_gap_pp": 0.11609907120743033,
+      "weight": 3876.0
+    },
+    {
+      "control_missing": 12,
+      "control_target": 82995,
+      "kind_missing": 5,
+      "kind_target": 27665,
+      "lower_gap_pp": 0.42050725947346235,
+      "match_cell": "05_09__blitz",
+      "upper_gap_pp": 0.45303933971926025,
+      "weight": 20748.75
+    },
+    {
+      "control_missing": 2,
+      "control_target": 17220,
+      "kind_missing": 0,
+      "kind_target": 5740,
+      "lower_gap_pp": 0.7897793263646922,
+      "match_cell": "05_09__bullet",
+      "upper_gap_pp": 0.8013937282229966,
+      "weight": 4305.0
+    },
+    {
+      "control_missing": 0,
+      "control_target": 1440,
+      "kind_missing": 0,
+      "kind_target": 480,
+      "lower_gap_pp": 0.3472222222222222,
+      "match_cell": "05_09__classical_or_long",
+      "upper_gap_pp": 0.3472222222222222,
+      "weight": 360.0
+    },
+    {
+      "control_missing": 24,
+      "control_target": 48129,
+      "kind_missing": 5,
+      "kind_target": 16043,
+      "lower_gap_pp": 0.1911529431319994,
+      "match_cell": "05_09__rapid",
+      "upper_gap_pp": 0.27218516902491224,
+      "weight": 12032.25
+    },
+    {
+      "control_missing": 0,
+      "control_target": 570,
+      "kind_missing": 0,
+      "kind_target": 190,
+      "lower_gap_pp": -0.1754385964912281,
+      "match_cell": "101_plus__blitz",
+      "upper_gap_pp": -0.1754385964912281,
+      "weight": 142.5
+    },
+    {
+      "control_missing": 0,
+      "control_target": 21,
+      "kind_missing": 0,
+      "kind_target": 7,
+      "lower_gap_pp": 0.0,
+      "match_cell": "101_plus__bullet",
+      "upper_gap_pp": 0.0,
+      "weight": 5.25
+    },
+    {
+      "control_missing": 0,
+      "control_target": 9,
+      "kind_missing": 0,
+      "kind_target": 3,
+      "lower_gap_pp": 0.0,
+      "match_cell": "101_plus__classical_or_long",
+      "upper_gap_pp": 0.0,
+      "weight": 2.25
+    },
+    {
+      "control_missing": 0,
+      "control_target": 309,
+      "kind_missing": 0,
+      "kind_target": 103,
+      "lower_gap_pp": 0.32362459546925554,
+      "match_cell": "101_plus__rapid",
+      "upper_gap_pp": 0.32362459546925554,
+      "weight": 77.25
+    },
+    {
+      "control_missing": 7,
+      "control_target": 77250,
+      "kind_missing": 0,
+      "kind_target": 25750,
+      "lower_gap_pp": 0.4142394822006473,
+      "match_cell": "10_20__blitz",
+      "upper_gap_pp": 0.4233009708737865,
+      "weight": 19312.5
+    },
+    {
+      "control_missing": 3,
+      "control_target": 12660,
+      "kind_missing": 1,
+      "kind_target": 4220,
+      "lower_gap_pp": 0.6398104265402844,
+      "match_cell": "10_20__bullet",
+      "upper_gap_pp": 0.6872037914691943,
+      "weight": 3165.0
+    },
+    {
+      "control_missing": 0,
+      "control_target": 942,
+      "kind_missing": 0,
+      "kind_target": 314,
+      "lower_gap_pp": 0.5307855626326964,
+      "match_cell": "10_20__classical_or_long",
+      "upper_gap_pp": 0.5307855626326964,
+      "weight": 235.5
+    },
+    {
+      "control_missing": 7,
+      "control_target": 35796,
+      "kind_missing": 2,
+      "kind_target": 11932,
+      "lower_gap_pp": 0.32126494580400045,
+      "match_cell": "10_20__rapid",
+      "upper_gap_pp": 0.3575818527209744,
+      "weight": 8949.0
+    },
+    {
+      "control_missing": 7,
+      "control_target": 42369,
+      "kind_missing": 2,
+      "kind_target": 14123,
+      "lower_gap_pp": 0.41539805046142225,
+      "match_cell": "21_50__blitz",
+      "upper_gap_pp": 0.4460808610068682,
+      "weight": 10592.25
+    },
+    {
+      "control_missing": 1,
+      "control_target": 4560,
+      "kind_missing": 0,
+      "kind_target": 1520,
+      "lower_gap_pp": 0.6140350877192983,
+      "match_cell": "21_50__bullet",
+      "upper_gap_pp": 0.6359649122807017,
+      "weight": 1140.0
+    },
+    {
+      "control_missing": 0,
+      "control_target": 492,
+      "kind_missing": 0,
+      "kind_target": 164,
+      "lower_gap_pp": 1.0162601626016259,
+      "match_cell": "21_50__classical_or_long",
+      "upper_gap_pp": 1.0162601626016259,
+      "weight": 123.0
+    },
+    {
+      "control_missing": 0,
+      "control_target": 16929,
+      "kind_missing": 1,
+      "kind_target": 5643,
+      "lower_gap_pp": 0.3603284305038691,
+      "match_cell": "21_50__rapid",
+      "upper_gap_pp": 0.37804950085651845,
+      "weight": 4232.25
+    },
+    {
+      "control_missing": 0,
+      "control_target": 5742,
+      "kind_missing": 0,
+      "kind_target": 1914,
+      "lower_gap_pp": 0.034831069313827956,
+      "match_cell": "51_100__blitz",
+      "upper_gap_pp": 0.034831069313827956,
+      "weight": 1435.5
+    },
+    {
+      "control_missing": 0,
+      "control_target": 414,
+      "kind_missing": 0,
+      "kind_target": 138,
+      "lower_gap_pp": 0.0,
+      "match_cell": "51_100__bullet",
+      "upper_gap_pp": 0.0,
+      "weight": 103.5
+    },
+    {
+      "control_missing": 0,
+      "control_target": 76,
+      "kind_missing": 0,
+      "kind_target": 28,
+      "lower_gap_pp": 0.0,
+      "match_cell": "51_100__classical_or_long",
+      "upper_gap_pp": 0.0,
+      "weight": 20.46153846153846
+    },
+    {
+      "control_missing": 0,
+      "control_target": 2331,
+      "kind_missing": 0,
+      "kind_target": 777,
+      "lower_gap_pp": -0.04290004290004295,
+      "match_cell": "51_100__rapid",
+      "upper_gap_pp": -0.04290004290004295,
+      "weight": 582.75
+    }
+  ],
+  "cell_fe_lower_pp": 0.2843832654758981,
+  "cell_fe_upper_pp": 0.3261951222391496,
+  "control_missing": 177,
+  "kind_missing": 30,
+  "not_bounds_on_full_profile_covariate_models": true,
+  "not_confidence_intervals": true,
+  "raw_lower_pp": 0.28437781165385667,
+  "raw_upper_pp": 0.32618987464048127,
+  "scope": "all fixed primary target accounts, including unavailable focal profiles",
+  "target_control": 638569,
+  "target_kind": 212859
+}

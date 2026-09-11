@@ -1,0 +1,76 @@
+{
+  "bash_syntax": "PASS",
+  "built_utc": "2026-09-11T18:08:43.565433+00:00",
+  "full_synthetic_pipeline_preflight": "mocked; full private input authentication runs on the user machine",
+  "private_data_estimated_during_build": false,
+  "python_sources_syntax_checked": 10,
+  "runtime_estimate_basis": "Completed original C9 took 192.519565 seconds. Additional masks and conditioned draws are new work; session chronology cache is reused.",
+  "runtime_estimate_minutes": [
+    5,
+    20
+  ],
+  "scientific_sources_modified": false,
+  "source_inventory": [
+    {
+      "path": "runner/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runner/checkpoints.py",
+      "sha256": "5f7b5393f381108fa9fad31789b98c012645fb525d8d4dfc4cfa6cb18b0958f5"
+    },
+    {
+      "path": "runner/common.py",
+      "sha256": "1fe1ed09e574b9631afce6a99cfc03aa573d1a91d058a188e9d786f26f94e66a"
+    },
+    {
+      "path": "runner/ply_engine.py",
+      "sha256": "ba6f4d94595c623fcaf840322d2bf31e6d6afde89ac3bc86d132c19c17936ead"
+    },
+    {
+      "path": "runner/run_c9.py",
+      "sha256": "1d07368d67febfc34b557ecf75f96525342b54f870cd62f111f2838647cc872a"
+    },
+    {
+      "path": "runner/run_ply.py",
+      "sha256": "59315cf84b088aa8d2111462f6319f055084ca7719b33908969c89aa7fc5bf42"
+    },
+    {
+      "path": "runner/test_c9.py",
+      "sha256": "a7709fc70566c1435d8369033267a0fea44a88ad5e70418169dfadfd6ace3b81"
+    },
+    {
+      "path": "runner/test_ply.py",
+      "sha256": "d1dca97255a14f8d505695e5e3b122be32dc267a9bbb04c668ba3dcc399d981e"
+    },
+    {
+      "path": "source/b2_reference.py",
+      "sha256": "9696925b13a4b9d2c502eda64e21c96506ecd6b76162038ecc2fae312645f6e9"
+    },
+    {
+      "path": "source/run_campaign1_c9_v100.py",
+      "sha256": "e553af77d16cf944a956b4ae266c3468806e08257a4aa1bff6fb953c619d8830"
+    }
+  ],
+  "status": "PACKAGE_BUILD_VALIDATED",
+  "test_command": "python -B -m unittest -v runner.test_c9 runner.test_ply",
+  "test_result": {
+    "elapsed_seconds": 2.82,
+    "errors": 0,
+    "failed": 0,
+    "passed": 12
+  },
+  "validated_behaviors": [
+    "Original conditional law by enumeration and unchanged source hashes",
+    "Real completed C9 archive hashes, manifest, authority and session cache receipt",
+    "Strict ply boundaries and missingness",
+    "Per-draw first-grant anchoring and both session partitions against naive counting",
+    "Conditional sampling within chooser-ply strata and fixed grant counts",
+    "No silent omission of zero-denominator null draws",
+    "Existing C9/Patron queue lock and duplicate-run rejection",
+    "Full 4999-draw synthetic run with exact original C9 and B2 array reproduction",
+    "Aggregate result publication, archive inventory and private-file exclusion",
+    "Completed checkpoint reuse, corrupted/config-mismatched rejection and one-sided checkpoint preservation"
+  ],
+  "version": "C9-PLY-1.0.0"
+}

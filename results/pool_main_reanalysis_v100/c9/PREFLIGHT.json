@@ -1,0 +1,102 @@
+{
+  "cardinality_constant_rebindings": {
+    "EXPECTED_B1_CHOOSERS": 55359,
+    "EXPECTED_B1_KIND": 234993,
+    "EXPECTED_B1_ROWS": 832948,
+    "EXPECTED_STAGE07_ROWS": 41534331
+  },
+  "chronology": {
+    "selected_bytes": 45330015661,
+    "selected_files": 150,
+    "selected_rows": 2324127469,
+    "verification": "SHA-256 of frozen manifest; file sizes, Parquet row counts, required columns and UTC ranges; not whole-file chronology SHA-256"
+  },
+  "inputs": {
+    "Wave 2B1 chronology manifest": {
+      "bytes": 247478,
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/dynamic_prosociality_a3_chronology_gate_v100/POOL_MAIN_WAVE2B1_A3/chronology_input_manifest.tsv",
+      "sha256": "c169bf9e346defde62047a3c2048758c296b1f0598fee70d2cc1e660121536d8"
+    },
+    "Wave 2B1 status": {
+      "bytes": 17079,
+      "path": "/Volumes/XT_Pro/lichess_kindness/output/pool_main_reanalysis_v100/wave2b1/WAVE2B1_RUN_STATUS.json",
+      "sha256": "d3010bb7b4dd41fbb486b4ce829dcde9d58e6c2f8c14e45c16b3093d77eebc67"
+    },
+    "executed Wave 2B1 B2 producer": {
+      "bytes": 39447,
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/replication_package/code/10f_estimate_b2_first_grant_dynamics.py",
+      "sha256": "3d2e391fc2a2c4a72b1847ef0e60e7412a2d8f9d60f8ce880110cdb6f563ecd8"
+    },
+    "new-sample B1": {
+      "bytes": 37505006,
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/derived/replication/dynamic_prosociality_core_v102_PRIVATE/b1_repeat_granter_private.parquet",
+      "sha256": "e95f5f61f06b417c96048bab4ed4c8cbf1850e518dbd1e482d2cda6793a5a118"
+    },
+    "new-sample B1 propensities": {
+      "bytes": 8966240,
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/derived/replication/dynamic_prosociality_core_v102_PRIVATE/b1_crossfit_propensity_private.parquet",
+      "sha256": "a4a39f0f65e1ee8c7c0e586199915b3e5d1ca1161a9ea3ebfa356db7f12e917b"
+    },
+    "new-sample B2 horizons": {
+      "bytes": 1083,
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/dynamic_second_wave_b2_v100/POOL_MAIN_WAVE2B1_SECOND/b2_first_grant_horizons.csv",
+      "sha256": "d3c3a3541d05f243a786c701168032f35734e931f6aef37532c918ba303bcb48"
+    },
+    "new-sample B2 success": {
+      "bytes": 985,
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/dynamic_second_wave_b2_v100/POOL_MAIN_WAVE2B1_SECOND/_SUCCESS.json",
+      "sha256": "2ae8d02a3bd8bb9799ce60066caab4fa9aebed2deffb0d6cb74f02513bd0b368"
+    },
+    "new-sample B2 summary": {
+      "bytes": 8589,
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/dynamic_second_wave_b2_v100/POOL_MAIN_WAVE2B1_SECOND/summary.json",
+      "sha256": "46c5023448a1c2bf4e02a0b22a966d3f2f7918c2e0195e5c9a0b19ed98fec447"
+    }
+  },
+  "network_requests": 0,
+  "original_c9_sha256": "e553af77d16cf944a956b4ae266c3468806e08257a4aa1bff6fb953c619d8830",
+  "original_estimator_function_bodies_changed": false,
+  "package": {
+    "bytes": 581906,
+    "files": 23,
+    "manifest_sha256": "028745571b71498fe6fceb55aef43b58ad808736b93d5d38bbce62dde17a4a66",
+    "status": "POOL_MAIN_C9_PACKAGE_AUTHENTICATED_OK"
+  },
+  "reference_b2_batches_authenticated": 20,
+  "sample_authority": {
+    "fair_kind_draws": 419463,
+    "fair_rows": 15207423,
+    "fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "kind_draws": 570091,
+    "literal_immediate_rematches_certified": false,
+    "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "months": 24,
+    "observed_screen_certified": true,
+    "panel_root_machine_specific": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+    "report_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "rows": 41534331,
+    "sample_name": "main_pool_nonadjacent",
+    "sample_status": "POOL_MAIN_SAMPLE_24M_CERTIFIED_OK",
+    "status": "POOL_MAIN_SAMPLE_AUTHENTICATED_OK"
+  },
+  "science_function_ast_sha256": {
+    "b1_stage07_mapping": "2ba3d152e651d25cdf0fbe632305e170e118565e6937601992f847e29b32f76f",
+    "b2_validation": "2361b2a47175a30462f57df4985cc10f075b3a6d5603ffe094556e0d678b0e43",
+    "build_session_cache": "ab1ba239abb3abb9556a3d08a5b30469b15c3189557cda73644da05f77f04e8b",
+    "c9_totals": "b04781a99475a19351850db038f11962c9020a1ed473fcc282eff25742b0c3ef",
+    "initialize_worker": "855f4d5c85a11f41646b05c22212e70ceecdceeb4945807137b15d1546b41305",
+    "observed_totals": "7ab5d0a20fea799b2996826fd4463a7d67232ef6f986789ff43b74c5591ceb76",
+    "outcome_blind_support": "d18023ddaac88fcf156c752416f172b49cc4ed539f62c2574d6530ae24d88373",
+    "run_randomizations": "5c0a3d22dc8583a43e79cc2c7574719a1facee77c84c725a9cd1d160beb19022",
+    "summarize_c9": "2401c146bbe4d4e5ade45a30949fd2a0b77ef5e8680ad1ee407b60c15aba0956",
+    "worker_batch": "06ff93e5f7dfe404b7f565fe1910650d432ec5074da703562f303223429f291e"
+  },
+  "status": "POOL_MAIN_C9_PREFLIGHT_READY",
+  "versions": {
+    "duckdb": "1.5.5",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1",
+    "python": "3.13.9"
+  }
+}

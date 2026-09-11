@@ -1,0 +1,17 @@
+{
+  "chronology_manifest_sha256": "1d4648bb17cafd9e58c14ab78d32abe855f0bc62a6fb75ac88e02494a73337cd",
+  "comparison_authority_sha256": "d04fabae492d2e33d9dd0ebe576a3384ce456d69c8ad65d0c4f28e73455f4100",
+  "first_exposure_rule": "first fair non-tournament-like main-sample event as disconnected recipient; then arm/realtime/first observed pair/complete90",
+  "focal_main_rule": "source='pool' and previous_classification_status='not_mutually_adjacent_observed'",
+  "main_report_sha256": "0ef50e424e004c5698c0c3dbc9815748627e5f23e6504fdaedfd526225ee184e",
+  "outcome_rule": "first fair main-sample different-opponent game started after focal anchor; decision within90d",
+  "package_manifest_sha256": "2b635ebdfce96171944ea2a313884b29e62508adf2d78818fa2ee0d9a1e11438",
+  "primary_history": "full Stage07 all-source",
+  "version": "1.0.1",
+  "versions": {
+    "duckdb": "1.5.4",
+    "numpy": "2.3.5",
+    "pyarrow": "21.0.0",
+    "python": "3.13.9"
+  }
+}

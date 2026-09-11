@@ -1,0 +1,105 @@
+{
+  "status": "POOL_MAIN_ANALYSIS_RESET_LEDGER_WAVE2A_V101_SUCCESS_STATE",
+  "created_at_utc": "2026-09-10T00:00:00Z",
+  "applies_when": "Wave-2A return bundle status is POOL_MAIN_REANALYSIS_WAVE2A_TRANSFER_OK",
+  "rule": "No old sample-dependent estimate is current until its named reset unit succeeds.",
+  "sample_fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+  "analyses": [
+    {
+      "analysis": "Sample authentication",
+      "reset_unit": "wave1",
+      "status": "recomputed_and_authenticated",
+      "dependency": "Certified report and 24 full Parquet hashes"
+    },
+    {
+      "analysis": "Core tables, desert, game stage, persistence",
+      "reset_unit": "wave1",
+      "status": "recomputed_and_authenticated",
+      "dependency": "New-sample Stage 08"
+    },
+    {
+      "analysis": "Panel robustness and payoff diagnostics",
+      "reset_unit": "wave1",
+      "status": "recomputed_and_authenticated",
+      "dependency": "New-sample Stage 09"
+    },
+    {
+      "analysis": "Rating-gap, expected-score, and K/RD decomposition",
+      "reset_unit": "wave1",
+      "status": "recomputed_and_authenticated",
+      "dependency": "New-sample structural surface"
+    },
+    {
+      "analysis": "Nonparametric relative-strength closure",
+      "reset_unit": "wave1",
+      "status": "recomputed_and_authenticated",
+      "dependency": "33 of 33 model receipts pass"
+    },
+    {
+      "analysis": "Controlled reference-price diagnostic",
+      "reset_unit": "wave1",
+      "status": "recomputed_and_authenticated",
+      "dependency": "Model v1.1.0 and corrected figure v1.1.1; does not by itself update the manuscript's adjacent displayed-gap claim"
+    },
+    {
+      "analysis": "Adjacent displayed-gap crossing and 1500/high-RD exact-zero decomposition",
+      "reset_unit": "wave2a",
+      "status": "recomputed_and_independently_verified_on_wave2a_success",
+      "dependency": "Rebuild Figure 2/Table 2 Panel A; separate post-Wave-1 diagnostic models; manuscript wording remains gated on return review"
+    },
+    {
+      "analysis": "Equality/FEN commonness and engine-zero placebo audit",
+      "reset_unit": "wave2a",
+      "status": "recomputed_on_wave2a_success",
+      "dependency": "New outcome-blind FEN cache and independent verifier"
+    },
+    {
+      "analysis": "Dynamics physical-input and support inventory",
+      "reset_unit": "wave2a",
+      "status": "inventoried_on_wave2a_success_estimates_stale",
+      "dependency": "New A1/A3/B1/second-wave counts and chronology authority"
+    },
+    {
+      "analysis": "First/repeat-meeting and any-repeat-dyad analyses",
+      "reset_unit": "wave2b",
+      "status": "stale",
+      "dependency": "Rebuild sample joins and repeat/focal flags"
+    },
+    {
+      "analysis": "A1/A3/B1 core dynamics and A1 audits",
+      "reset_unit": "wave2b",
+      "status": "stale",
+      "dependency": "Rebuild first eligible exposures and histories"
+    },
+    {
+      "analysis": "Second-wave and Campaign dynamics",
+      "reset_unit": "wave2b",
+      "status": "stale",
+      "dependency": "Depends on rebuilt dynamic core and hash targets"
+    },
+    {
+      "analysis": "C7R/C7X targeted memory and C6/C9 retrofits",
+      "reset_unit": "wave2b",
+      "status": "stale",
+      "dependency": "Rebuild focal flags and samples"
+    },
+    {
+      "analysis": "Chooser-leniency IV/placebo",
+      "reset_unit": "wave2b",
+      "status": "stale",
+      "dependency": "Rebuild instruments and comparison frame; include chooser-role timeout, disconnector-role timeout, and active-resolution-given-candidate selection decomposition"
+    },
+    {
+      "analysis": "Patron matching, primary, and addendum",
+      "reset_unit": "wave3",
+      "status": "stale",
+      "dependency": "Recompute chooser signals and matching; retain snapshot-date caveat"
+    },
+    {
+      "analysis": "Unified figures, tables, and manuscript numbers",
+      "reset_unit": "wave3",
+      "status": "stale",
+      "dependency": "Only after every upstream reset receipt passes"
+    }
+  ]
+}

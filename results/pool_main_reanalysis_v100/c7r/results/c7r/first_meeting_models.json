@@ -1,0 +1,562 @@
+[
+  {
+    "absorption_iterations": 299,
+    "absorption_last_adjustment": 9.59812003034974e-10,
+    "absorption_maximum_iterations": 2000,
+    "absorption_tolerance": 1e-09,
+    "analysis_role": "post-gate exploratory C7R",
+    "causal_claim": false,
+    "cluster": "chooser_id",
+    "cluster_correction": 1.0000124334750382,
+    "clusters": 533531,
+    "clusters_requested": 533531,
+    "epistemic_label": "X",
+    "exposure_means": {
+      "fair_minus_clearly_worse": 0.40220498755355405
+    },
+    "fair_minus_clearly_worse_ones_requested": 304729,
+    "fair_minus_clearly_worse_zeros_requested": 452917,
+    "fixed_effects": [
+      "chooser_id",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "fixed_effects_requested": [
+      "chooser_id",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "matrix_rank": 9,
+    "model": "X_C7R_fair_vs_clearly_worse_all_meetings",
+    "numeric_controls": [
+      "z_draw_payoff",
+      "z_win_premium",
+      "z_chooser_clock",
+      "z_opponent_clock",
+      "z_chooser_elo",
+      "z_opponent_elo",
+      "z_chooser_rd",
+      "z_opponent_rd"
+    ],
+    "outcome_mean": 0.014069895439294869,
+    "results": [
+      {
+        "coefficient": 0.015631764768450185,
+        "p_value_two_sided": 2.501761543941127e-192,
+        "standard_error": 0.0005284107120532623,
+        "t_cluster": 29.582603856968266,
+        "term": "fair_minus_clearly_worse"
+      }
+    ],
+    "rows": 757646,
+    "rows_requested": 757646,
+    "sample_specification_sha256": "405bcbf789df4decb815920b4f6ec07565670ff56b9119e7e75dbf7803091991",
+    "smallest_singular_value": 47.65105162092607,
+    "status": "ESTIMATED"
+  },
+  {
+    "absorption_iterations": 303,
+    "absorption_last_adjustment": 9.469972220629696e-10,
+    "absorption_maximum_iterations": 2000,
+    "absorption_tolerance": 1e-09,
+    "analysis_role": "post-gate exploratory C7R",
+    "causal_claim": false,
+    "cluster": "chooser_id",
+    "cluster_correction": 1.0000133064995906,
+    "clusters": 513717,
+    "clusters_requested": 513717,
+    "epistemic_label": "X",
+    "exposure_means": {
+      "fair_minus_clearly_worse": 0.4006989074778272
+    },
+    "fair_minus_clearly_worse_ones_requested": 282189,
+    "fair_minus_clearly_worse_zeros_requested": 422053,
+    "fixed_effects": [
+      "chooser_id",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "fixed_effects_requested": [
+      "chooser_id",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "matrix_rank": 9,
+    "model": "X_C7R_fair_vs_clearly_worse_first_meetings",
+    "numeric_controls": [
+      "z_draw_payoff",
+      "z_win_premium",
+      "z_chooser_clock",
+      "z_opponent_clock",
+      "z_chooser_elo",
+      "z_opponent_elo",
+      "z_chooser_rd",
+      "z_opponent_rd"
+    ],
+    "outcome_mean": 0.014335981097406858,
+    "results": [
+      {
+        "coefficient": 0.016157518061178457,
+        "p_value_two_sided": 3.3515223396694243e-174,
+        "standard_error": 0.0005742221575516137,
+        "t_cluster": 28.138095767797235,
+        "term": "fair_minus_clearly_worse"
+      }
+    ],
+    "rows": 704242,
+    "rows_requested": 704242,
+    "sample_specification_sha256": "0f7ca2d27e9d53c7f3a65ac6cc05011d5055497b4c8743a42571738dc0276f71",
+    "smallest_singular_value": 44.73497199230517,
+    "status": "ESTIMATED"
+  },
+  {
+    "causal_claim": false,
+    "cluster": "chooser_id",
+    "clusters_requested": 46742,
+    "epistemic_label": "X",
+    "error_message": "HDFE absorption did not converge: iterations=2000 tolerance=1.000e-09 last_adjustment=1.631e-06",
+    "error_type": "RuntimeError",
+    "fair_minus_clearly_worse_ones_requested": 22540,
+    "fair_minus_clearly_worse_zeros_requested": 30864,
+    "fixed_effects_requested": [
+      "chooser_id",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "model": "X_C7R_fair_vs_clearly_worse_repeat_meetings",
+    "rows_requested": 53404,
+    "status": "ESTIMATION_FAILURE_RETAINED"
+  },
+  {
+    "absorption_iterations": 299,
+    "absorption_last_adjustment": 9.59812003034974e-10,
+    "absorption_maximum_iterations": 2000,
+    "absorption_tolerance": 1e-09,
+    "analysis_role": "post-gate exploratory C7R",
+    "causal_claim": false,
+    "cluster": "chooser_id",
+    "cluster_correction": 1.0000150733014281,
+    "clusters": 533531,
+    "clusters_requested": 533531,
+    "epistemic_label": "X",
+    "exposure_means": {
+      "fair": 0.40220498755355405,
+      "fair_x_repeat": 0.02975004157614506,
+      "repeat": 0.07048674446905283
+    },
+    "fair_ones_requested": 304729,
+    "fair_x_repeat_ones_requested": 22540,
+    "fair_x_repeat_zeros_requested": 735106,
+    "fair_zeros_requested": 452917,
+    "fixed_effects": [
+      "chooser_id",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "fixed_effects_requested": [
+      "chooser_id",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "matrix_rank": 11,
+    "model": "X_C7R_fair_repeat_interaction_all_meetings",
+    "numeric_controls": [
+      "z_draw_payoff",
+      "z_win_premium",
+      "z_chooser_clock",
+      "z_opponent_clock",
+      "z_chooser_elo",
+      "z_opponent_elo",
+      "z_chooser_rd",
+      "z_opponent_rd"
+    ],
+    "outcome_mean": 0.014069895439294869,
+    "repeat_ones_requested": 53404,
+    "repeat_zeros_requested": 704242,
+    "results": [
+      {
+        "coefficient": 0.015943340790702507,
+        "p_value_two_sided": 4.5863060425501315e-187,
+        "standard_error": 0.0005465562360270706,
+        "t_cluster": 29.170540449039617,
+        "term": "fair"
+      },
+      {
+        "coefficient": 0.001323140961929891,
+        "p_value_two_sided": 0.0473361449549783,
+        "standard_error": 0.000667147785112481,
+        "t_cluster": 1.9832801538969507,
+        "term": "repeat"
+      },
+      {
+        "coefficient": -0.0031497184121758058,
+        "p_value_two_sided": 0.021997636204636968,
+        "standard_error": 0.001375177462798302,
+        "t_cluster": -2.2904086907929324,
+        "term": "fair_x_repeat"
+      }
+    ],
+    "rows": 757646,
+    "rows_requested": 757646,
+    "sample_specification_sha256": "dece314a44d3aa2873442254e096c25ea34933d15beb30f05867c75d84ee0d31",
+    "smallest_singular_value": 47.648816991493355,
+    "status": "ESTIMATED"
+  },
+  {
+    "absorption_iterations": 540,
+    "absorption_last_adjustment": 9.677836503130925e-10,
+    "absorption_maximum_iterations": 2000,
+    "absorption_tolerance": 1e-09,
+    "analysis_role": "post-gate exploratory C7R",
+    "causal_claim": false,
+    "cluster": "chooser_id",
+    "cluster_correction": 1.0000301544007502,
+    "clusters": 256366,
+    "clusters_requested": 256366,
+    "epistemic_label": "X",
+    "exposure_means": {
+      "repeat_meeting": 0.07396736116352562
+    },
+    "fixed_effects": [
+      "chooser_id",
+      "eval_bin",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "fixed_effects_requested": [
+      "chooser_id",
+      "eval_bin",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "matrix_rank": 9,
+    "model": "X_C7R_repeat_association_within_fair",
+    "numeric_controls": [
+      "z_draw_payoff",
+      "z_win_premium",
+      "z_chooser_clock",
+      "z_opponent_clock",
+      "z_chooser_elo",
+      "z_opponent_elo",
+      "z_chooser_rd",
+      "z_opponent_rd"
+    ],
+    "outcome_mean": 0.028041308835063287,
+    "repeat_meeting_ones_requested": 22540,
+    "repeat_meeting_zeros_requested": 282189,
+    "results": [
+      {
+        "coefficient": 0.0012813552466203462,
+        "p_value_two_sided": 0.42736114056675695,
+        "standard_error": 0.0016143762208293859,
+        "t_cluster": 0.7937153868396611,
+        "term": "repeat_meeting"
+      }
+    ],
+    "rows": 304729,
+    "rows_requested": 304729,
+    "sample_specification_sha256": "508bd8e7bab53686c7c2f71a35704b4fb7f180eac64151cd1fed6945b3ec162e",
+    "smallest_singular_value": 21.204288417510146,
+    "status": "ESTIMATED"
+  },
+  {
+    "absorption_iterations": 540,
+    "absorption_last_adjustment": 9.677836503130925e-10,
+    "absorption_maximum_iterations": 2000,
+    "absorption_tolerance": 1e-09,
+    "analysis_role": "post-gate exploratory C7R",
+    "causal_claim": false,
+    "cluster": "chooser_id",
+    "cluster_correction": 1.0000268726113282,
+    "clusters": 256366,
+    "clusters_requested": 256366,
+    "epistemic_label": "X",
+    "exposure_means": {
+      "nonnegative_minus_costly": 0.5078479567090759
+    },
+    "fixed_effects": [
+      "chooser_id",
+      "eval_bin",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "fixed_effects_requested": [
+      "chooser_id",
+      "eval_bin",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "matrix_rank": 8,
+    "model": "X_C7R_nonnegative_vs_costly_all_meetings",
+    "nonnegative_minus_costly_ones_requested": 154756,
+    "nonnegative_minus_costly_zeros_requested": 149973,
+    "numeric_controls": [
+      "z_win_premium",
+      "z_chooser_clock",
+      "z_opponent_clock",
+      "z_chooser_elo",
+      "z_opponent_elo",
+      "z_chooser_rd",
+      "z_opponent_rd"
+    ],
+    "outcome_mean": 0.028041308835063287,
+    "results": [
+      {
+        "coefficient": -0.0008437231836919495,
+        "p_value_two_sided": 0.5491703159192661,
+        "standard_error": 0.0014085438365336518,
+        "t_cluster": -0.5990038519271828,
+        "term": "nonnegative_minus_costly"
+      }
+    ],
+    "rows": 304729,
+    "rows_requested": 304729,
+    "sample_specification_sha256": "7bebdca67ca721949cef166fd44795e830957acdd828b99f6b4b5fa38986e5c6",
+    "smallest_singular_value": 18.041391631492445,
+    "status": "ESTIMATED"
+  },
+  {
+    "absorption_iterations": 557,
+    "absorption_last_adjustment": 9.904517926202606e-10,
+    "absorption_maximum_iterations": 2000,
+    "absorption_tolerance": 1e-09,
+    "analysis_role": "post-gate exploratory C7R",
+    "causal_claim": false,
+    "cluster": "chooser_id",
+    "cluster_correction": 1.0000289279864059,
+    "clusters": 242654,
+    "clusters_requested": 242654,
+    "epistemic_label": "X",
+    "exposure_means": {
+      "nonnegative_minus_costly": 0.507666847396603
+    },
+    "fixed_effects": [
+      "chooser_id",
+      "eval_bin",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "fixed_effects_requested": [
+      "chooser_id",
+      "eval_bin",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "matrix_rank": 8,
+    "model": "X_C7R_nonnegative_vs_costly_first_meetings",
+    "nonnegative_minus_costly_ones_requested": 143258,
+    "nonnegative_minus_costly_zeros_requested": 138931,
+    "numeric_controls": [
+      "z_win_premium",
+      "z_chooser_clock",
+      "z_opponent_clock",
+      "z_chooser_elo",
+      "z_opponent_elo",
+      "z_chooser_rd",
+      "z_opponent_rd"
+    ],
+    "outcome_mean": 0.02860494207782727,
+    "results": [
+      {
+        "coefficient": -0.0016538229209880875,
+        "p_value_two_sided": 0.31329532168946905,
+        "standard_error": 0.0016401578639719382,
+        "t_cluster": -1.0083315498564613,
+        "term": "nonnegative_minus_costly"
+      }
+    ],
+    "rows": 282189,
+    "rows_requested": 282189,
+    "sample_specification_sha256": "368b1f93473e3f20474d4b7119987feda9079a2f32ea84c5637eace44e4cba94",
+    "smallest_singular_value": 16.04479069798526,
+    "status": "ESTIMATED"
+  },
+  {
+    "causal_claim": false,
+    "cluster": "chooser_id",
+    "clusters_requested": 21131,
+    "epistemic_label": "X",
+    "error_message": "HDFE absorption did not converge: iterations=2000 tolerance=1.000e-09 last_adjustment=3.384e-04",
+    "error_type": "RuntimeError",
+    "fixed_effects_requested": [
+      "chooser_id",
+      "eval_bin",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "model": "X_C7R_nonnegative_vs_costly_repeat_meetings",
+    "nonnegative_minus_costly_ones_requested": 11498,
+    "nonnegative_minus_costly_zeros_requested": 11042,
+    "rows_requested": 22540,
+    "status": "ESTIMATION_FAILURE_RETAINED"
+  },
+  {
+    "absorption_iterations": 547,
+    "absorption_last_adjustment": 9.688896226664052e-10,
+    "absorption_maximum_iterations": 2000,
+    "absorption_tolerance": 1e-09,
+    "analysis_role": "post-gate exploratory C7R",
+    "causal_claim": false,
+    "cluster": "chooser_id",
+    "cluster_correction": 1.0000272741386038,
+    "clusters": 253118,
+    "clusters_requested": 253118,
+    "epistemic_label": "X",
+    "exposure_means": {
+      "positive_minus_negative": 0.5003181880274674
+    },
+    "fixed_effects": [
+      "chooser_id",
+      "eval_bin",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "fixed_effects_requested": [
+      "chooser_id",
+      "eval_bin",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "matrix_rank": 8,
+    "model": "X_C7R_positive_vs_negative_all_meetings",
+    "numeric_controls": [
+      "z_win_premium",
+      "z_chooser_clock",
+      "z_opponent_clock",
+      "z_chooser_elo",
+      "z_opponent_elo",
+      "z_chooser_rd",
+      "z_opponent_rd"
+    ],
+    "outcome_mean": 0.02799388279352429,
+    "positive_minus_negative_ones_requested": 150164,
+    "positive_minus_negative_zeros_requested": 149973,
+    "results": [
+      {
+        "coefficient": -0.000825841625820879,
+        "p_value_two_sided": 0.5659819138779094,
+        "standard_error": 0.0014388007525242,
+        "t_cluster": -0.5739791450428705,
+        "term": "positive_minus_negative"
+      }
+    ],
+    "rows": 300137,
+    "rows_requested": 300137,
+    "sample_specification_sha256": "17c20e56a025a78a4b0a47134fb0db25a5adee3c9d73c1ae4142237dfc845f73",
+    "smallest_singular_value": 17.79856594597504,
+    "status": "ESTIMATED"
+  },
+  {
+    "absorption_iterations": 564,
+    "absorption_last_adjustment": 9.81461363490451e-10,
+    "absorption_maximum_iterations": 2000,
+    "absorption_tolerance": 1e-09,
+    "analysis_role": "post-gate exploratory C7R",
+    "causal_claim": false,
+    "cluster": "chooser_id",
+    "cluster_correction": 1.0000293552319761,
+    "clusters": 239548,
+    "clusters_requested": 239548,
+    "epistemic_label": "X",
+    "exposure_means": {
+      "positive_minus_negative": 0.500248201438849
+    },
+    "fixed_effects": [
+      "chooser_id",
+      "eval_bin",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "fixed_effects_requested": [
+      "chooser_id",
+      "eval_bin",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "matrix_rank": 8,
+    "model": "X_C7R_positive_vs_negative_first_meetings",
+    "numeric_controls": [
+      "z_win_premium",
+      "z_chooser_clock",
+      "z_opponent_clock",
+      "z_chooser_elo",
+      "z_opponent_elo",
+      "z_chooser_rd",
+      "z_opponent_rd"
+    ],
+    "outcome_mean": 0.02855755395683453,
+    "positive_minus_negative_ones_requested": 139069,
+    "positive_minus_negative_zeros_requested": 138931,
+    "results": [
+      {
+        "coefficient": -0.0017716381232670043,
+        "p_value_two_sided": 0.2886173109531122,
+        "standard_error": 0.0016695300917883929,
+        "t_cluster": -1.0611597430803021,
+        "term": "positive_minus_negative"
+      }
+    ],
+    "rows": 278000,
+    "rows_requested": 278000,
+    "sample_specification_sha256": "78045a864d480938d17caa23994e72e93b9e261b645149cb519f9773f9bc5061",
+    "smallest_singular_value": 15.838652746259125,
+    "status": "ESTIMATED"
+  },
+  {
+    "causal_claim": false,
+    "cluster": "chooser_id",
+    "clusters_requested": 20773,
+    "epistemic_label": "X",
+    "error_message": "HDFE absorption did not converge: iterations=2000 tolerance=1.000e-09 last_adjustment=3.254e-04",
+    "error_type": "RuntimeError",
+    "fixed_effects_requested": [
+      "chooser_id",
+      "eval_bin",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "model": "X_C7R_positive_vs_negative_repeat_meetings",
+    "positive_minus_negative_ones_requested": 11095,
+    "positive_minus_negative_zeros_requested": 11042,
+    "rows_requested": 22137,
+    "status": "ESTIMATION_FAILURE_RETAINED"
+  }
+]

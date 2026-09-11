@@ -1,0 +1,212 @@
+{
+  "created_at_utc": "2026-09-10T01:39:47Z",
+  "input_snapshot_unchanged_after_design": true,
+  "repository": {
+    "adaptation": "Authority-only reset to the selected pool/observed-predecessor-nonadjacent sample; estimands and model grid unchanged",
+    "head": "0dc981cbc6da157d365015a95f2b7157ecda4859",
+    "live_repository_not_required": true,
+    "scientific_design": "Kindness_Equality_FEN_Audit_v1_0_1_20260827",
+    "status": "BUNDLED_SOURCE_AUTHORITY_OK"
+  },
+  "stage07": {
+    "full_monthly_sha256_recomputed": true,
+    "kind_draws": 570091,
+    "monthly_files_authenticated": 24,
+    "producer_sha256": "7c54b775194916308f861129ddece3bca52ebea4aad0af3284322d1ac6172fb4",
+    "rows": 41534331,
+    "short_rows": 4137265,
+    "status": "POOL_MAIN_SAMPLE_24M_CERTIFIED_OK",
+    "success_sha256": "978348a457d8d21a9690cc146065a85c1d9022f70d787cf8e1d9273afcede855"
+  },
+  "upstream": {
+    "literal_immediate_rematches_certified": false,
+    "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "observed_screen_certified": true,
+    "sample_fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "sample_report_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "stage07_months": [
+      {
+        "bytes": 525366982,
+        "full_sha256_recomputed": true,
+        "month": "2023-11",
+        "rows": 1732360,
+        "sha256": "c02044d655912eb79a847ce643fa3493acb10c9a60db5e502e828bd088e99853"
+      },
+      {
+        "bytes": 545269740,
+        "full_sha256_recomputed": true,
+        "month": "2023-12",
+        "rows": 1811457,
+        "sha256": "1a02534b373659634b9979552faaa6177fca58b5513fc85ede85586c1847bc42"
+      },
+      {
+        "bytes": 537484485,
+        "full_sha256_recomputed": true,
+        "month": "2024-01",
+        "rows": 1768148,
+        "sha256": "ed56eb0589410084e8c19bbe7abb6d09028b0480dd926ab4aebbcd5cff9b2deb"
+      },
+      {
+        "bytes": 504179337,
+        "full_sha256_recomputed": true,
+        "month": "2024-02",
+        "rows": 1674269,
+        "sha256": "fe379d9aea20805c2b9b976a31f34601c6e6d9c2bd16aa58d929fba4c9b7ee96"
+      },
+      {
+        "bytes": 529450225,
+        "full_sha256_recomputed": true,
+        "month": "2024-03",
+        "rows": 1753915,
+        "sha256": "7dc6f955b612bc50761a2cff0596cae567bf963e1f96d725c688a017992e62d2"
+      },
+      {
+        "bytes": 506822333,
+        "full_sha256_recomputed": true,
+        "month": "2024-04",
+        "rows": 1666762,
+        "sha256": "a3cd8c8a0386e0b0ff657f0d4fbcf96c38c3d582a92655729151295e86c1f463"
+      },
+      {
+        "bytes": 526880757,
+        "full_sha256_recomputed": true,
+        "month": "2024-05",
+        "rows": 1748806,
+        "sha256": "e851bd49e7c4c0986bd2f3e11df1d86f7d916016ca792978cc996952475cdfda"
+      },
+      {
+        "bytes": 503731549,
+        "full_sha256_recomputed": true,
+        "month": "2024-06",
+        "rows": 1657041,
+        "sha256": "fb00fe3a7361518e8d5bd72d0b1103977ffd3d397fac4c3580afb4077a94aa04"
+      },
+      {
+        "bytes": 498217763,
+        "full_sha256_recomputed": true,
+        "month": "2024-07",
+        "rows": 1648142,
+        "sha256": "8d0450a7845ba99ec8ed1c7d800194280d7181cd0eb9c988d1d9feb573497cbc"
+      },
+      {
+        "bytes": 504930186,
+        "full_sha256_recomputed": true,
+        "month": "2024-08",
+        "rows": 1674961,
+        "sha256": "0c5839511ec70dd16bc3ec3dc942788b9de6ffc19be5212fcc17ec49590879cc"
+      },
+      {
+        "bytes": 489956063,
+        "full_sha256_recomputed": true,
+        "month": "2024-09",
+        "rows": 1608915,
+        "sha256": "1659a81498090834deafecf4166f777c65852c48fa7af95fd61b0426324d1593"
+      },
+      {
+        "bytes": 526970390,
+        "full_sha256_recomputed": true,
+        "month": "2024-10",
+        "rows": 1746838,
+        "sha256": "481a6a72f0c64947bb4b7963401ae1a5ccde682411a9cc326dd73db5402681cb"
+      },
+      {
+        "bytes": 503729444,
+        "full_sha256_recomputed": true,
+        "month": "2024-11",
+        "rows": 1658234,
+        "sha256": "8a76734dd7656ce1ef5868a156f5a3785114b67fab59ab8e26b4444192f983b6"
+      },
+      {
+        "bytes": 542836227,
+        "full_sha256_recomputed": true,
+        "month": "2024-12",
+        "rows": 1784921,
+        "sha256": "2c4d6dafa7df18c9eae818e4269e589d3d707f4fcff6920bbff527b0bfe92b93"
+      },
+      {
+        "bytes": 542757327,
+        "full_sha256_recomputed": true,
+        "month": "2025-01",
+        "rows": 1797999,
+        "sha256": "98b4c80dbc42a37f7eefd8bf749cf20fce30d7194f1c3443ed048b203b9fa855"
+      },
+      {
+        "bytes": 506920181,
+        "full_sha256_recomputed": true,
+        "month": "2025-02",
+        "rows": 1662781,
+        "sha256": "036106a6f5013cfb891c76d6a1f0c0f2ba4f0ee85dcfbeebb153e8213f97f017"
+      },
+      {
+        "bytes": 555445776,
+        "full_sha256_recomputed": true,
+        "month": "2025-03",
+        "rows": 1840994,
+        "sha256": "ac5289dcb3903e9b0a2ce72906b6a304b02c6784bea1a1f0e7f780802e7bbddb"
+      },
+      {
+        "bytes": 532717379,
+        "full_sha256_recomputed": true,
+        "month": "2025-04",
+        "rows": 1757491,
+        "sha256": "70da333d2375d13fe4fa05c0883ff500d480af1e83db1601284706cccb5cc9be"
+      },
+      {
+        "bytes": 551566247,
+        "full_sha256_recomputed": true,
+        "month": "2025-05",
+        "rows": 1813281,
+        "sha256": "6a4bf14c17a9329517369bb441b05d5f5ef3063f6169937ce5686585d8327158"
+      },
+      {
+        "bytes": 538302548,
+        "full_sha256_recomputed": true,
+        "month": "2025-06",
+        "rows": 1783426,
+        "sha256": "18d31aa3d2ef36ce5e0bc917c88233f9d686b8a8db7e14b71eba4d8248e3355f"
+      },
+      {
+        "bytes": 556485283,
+        "full_sha256_recomputed": true,
+        "month": "2025-07",
+        "rows": 1826264,
+        "sha256": "b9519063a990303d6df8e8420d9888e34315ce39c22635e33831b7c709b6b65e"
+      },
+      {
+        "bytes": 512537827,
+        "full_sha256_recomputed": true,
+        "month": "2025-08",
+        "rows": 1695692,
+        "sha256": "fb32cb7a8c490c7106c0c1fc249c5335c91b4805acb97ed0218344f8aa6c2b1b"
+      },
+      {
+        "bytes": 501388838,
+        "full_sha256_recomputed": true,
+        "month": "2025-09",
+        "rows": 1660248,
+        "sha256": "ec1f739d96a0be68476ad0f1e5de112ec991274cd3323d33aa48fe76c986468c"
+      },
+      {
+        "bytes": 537109178,
+        "full_sha256_recomputed": true,
+        "month": "2025-10",
+        "rows": 1761386,
+        "sha256": "5108e115bbe965d4997ffda4542ecd140a76dabb3cf1f1483b7ba727575b0f9b"
+      }
+    ],
+    "stage07_producer_sha256": "7c54b775194916308f861129ddece3bca52ebea4aad0af3284322d1ac6172fb4",
+    "stage07_success_sha256": "978348a457d8d21a9690cc146065a85c1d9022f70d787cf8e1d9273afcede855",
+    "stage08": {
+      "sample_fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+      "source_program_sha256": "e9dd80c52da5ffef3d406c3af25912bd924f6423f123ca535cf4077cb039c41f",
+      "status": "POOL_MAIN_STAGE08_CORE_24M_REESTIMATED_OK",
+      "success_sha256": "343f3482898ca08784591785b284c5a90403fa8baf8c4ef6ed3a45692a1d30df"
+    },
+    "stage09": {
+      "sample_fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+      "source_program_sha256": "f0b3d8d638523e22e4bc3b665d3067a261bcfb1c3d2831d9bf8fb81e6c521431",
+      "status": "POOL_MAIN_STAGE09_PANEL_ROBUSTNESS_24M_REESTIMATED_OK",
+      "success_sha256": "fb4f9e2ffdd503b8803a61dd940980d7177ca089469bfb98320d88f1b8ddae64"
+    }
+  }
+}

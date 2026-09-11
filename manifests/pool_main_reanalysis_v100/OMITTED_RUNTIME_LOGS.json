@@ -1,0 +1,134 @@
+[
+  {
+    "source_path": "results/wave2a/logs/collect.log",
+    "sha256": "e7d63a58d064699029653f5b513442252e47dbf5e1eb3625f7b238cb732e533b",
+    "bytes": 1471,
+    "reason": "Runtime log; aggregate results and execution receipts retained."
+  },
+  {
+    "source_path": "results/wave2a/logs/crossing_audit.log",
+    "sha256": "79789f610467e5db430b5af8ae871c8bc276f5a78504f961ff1eb13c996c9c5a",
+    "bytes": 4137,
+    "reason": "Runtime log; aggregate results and execution receipts retained."
+  },
+  {
+    "source_path": "results/wave2a/logs/crossing_verify.log",
+    "sha256": "175b78b26d004265e97861867c8a674b20086d3299042510d85dd239f9a18334",
+    "bytes": 349,
+    "reason": "Runtime log; aggregate results and execution receipts retained."
+  },
+  {
+    "source_path": "results/wave2a/logs/dynamics_inventory.log",
+    "sha256": "1386831845af3e4b364cc7ad73d9f54a899b0ec3ad426c2d84da7c4e9531efb2",
+    "bytes": 919,
+    "reason": "Runtime log; aggregate results and execution receipts retained."
+  },
+  {
+    "source_path": "results/wave2a/logs/fen_analysis.log",
+    "sha256": "daad838c448e0b9bcc39e4278eb4ad6d22ac7c6851f83f61449c6d1eb20b421f",
+    "bytes": 8458,
+    "reason": "Runtime log; aggregate results and execution receipts retained."
+  },
+  {
+    "source_path": "results/wave2a/logs/fen_design.log",
+    "sha256": "8bce2023687c0469a9dddb1005143a9182f95731432f8922fca2a29d85eec58e",
+    "bytes": 2473,
+    "reason": "Runtime log; aggregate results and execution receipts retained."
+  },
+  {
+    "source_path": "results/wave2a/logs/fen_verify.log",
+    "sha256": "9040b0f34b5f5baa3e29d2083bc52b1ad2dd665d1c3ba3718aae1845576f9206",
+    "bytes": 1278,
+    "reason": "Runtime log; aggregate results and execution receipts retained."
+  },
+  {
+    "source_path": "results/wave2a/logs/preflight.log",
+    "sha256": "235797583356004c873de76a02704bfc8f471ed195063434f4cc5058948e6507",
+    "bytes": 1374,
+    "reason": "Runtime log; aggregate results and execution receipts retained."
+  },
+  {
+    "source_path": "results/wave2b1/logs/01_a3_gate.log",
+    "sha256": "5c14adac14ead795f220ba4037c1127d1b284ab4c4c3e0f8d99f97b26272b532",
+    "bytes": 6290,
+    "reason": "Runtime log; aggregate results and execution receipts retained."
+  },
+  {
+    "source_path": "results/wave2b1/logs/02_dynamic_core.log",
+    "sha256": "7b6227e8375ed98cfd1c0223e0eb34296a37853e5013688e0e922136605a6e83",
+    "bytes": 21072,
+    "reason": "Runtime log; aggregate results and execution receipts retained."
+  },
+  {
+    "source_path": "results/wave2b1/logs/03_postoutcome_audit.log",
+    "sha256": "a7780afb27aca1475c5a7e4786c29257fa1528481c40f65cc75bc776e1e4b4da",
+    "bytes": 3803,
+    "reason": "Runtime log; aggregate results and execution receipts retained."
+  },
+  {
+    "source_path": "results/wave2b1/logs/04_remaining_a1_a2.log",
+    "sha256": "8eea0e1fef20aaea1c457da86549054dc6c4d196f415dbe3006d0a1f95774905",
+    "bytes": 1999,
+    "reason": "Runtime log; aggregate results and execution receipts retained."
+  },
+  {
+    "source_path": "results/wave2b1/logs/05_a1_evidence_gap.log",
+    "sha256": "975dae2def8f0e124b7c399609b48f3d0246df3eb4515df3e148641808527220",
+    "bytes": 22782,
+    "reason": "Runtime log; aggregate results and execution receipts retained."
+  },
+  {
+    "source_path": "results/wave2b1/logs/06_a1_unconditional.log",
+    "sha256": "a85d40a63f72cc35f1ae78bc88c778e77994254a4eda77b54d04230007c9ea17",
+    "bytes": 2474,
+    "reason": "Runtime log; aggregate results and execution receipts retained."
+  },
+  {
+    "source_path": "results/wave2b1/logs/07_second_wave_feasibility.log",
+    "sha256": "164b9217f33efd3d46932435d288131390b01b02f4305f13a2b9934836d54f2c",
+    "bytes": 3704,
+    "reason": "Runtime log; aggregate results and execution receipts retained."
+  },
+  {
+    "source_path": "results/wave2b1/logs/08_b2_first_grant.log",
+    "sha256": "1ebc1ee3f16447d7df60d46070f70d9e4f9a2024b54a6b8b5888ba57421f51a5",
+    "bytes": 11976,
+    "reason": "Runtime log; aggregate results and execution receipts retained."
+  },
+  {
+    "source_path": "results/wave2b1/logs/09_second_wave_histories.log",
+    "sha256": "71c6ee0b56961d6c4e4a45bc086207470c19a13b2db0b5261b2fa6027695c54c",
+    "bytes": 8261,
+    "reason": "Runtime log; aggregate results and execution receipts retained."
+  },
+  {
+    "source_path": "results/wave2b1/logs/10_second_wave_results.log",
+    "sha256": "99f1d4dcd81f5c46c37c1ab5277b697884adc68d1edd68d50d475b1751d1b17f",
+    "bytes": 5232,
+    "reason": "Runtime log; aggregate results and execution receipts retained."
+  },
+  {
+    "source_path": "results/wave2b1/logs/11_second_wave_postprimary.log",
+    "sha256": "f638042ed5a404b3929f1480eabc9561056ed682d2e76a4b7196958de20379fb",
+    "bytes": 11660,
+    "reason": "Runtime log; aggregate results and execution receipts retained."
+  },
+  {
+    "source_path": "results/wave2b1/logs/12_e1_numerical_audit.log",
+    "sha256": "5abd0e8faa43fb5e78c3a44530c794110ed094eb2db41ac6cf57a67b8ee7ecd7",
+    "bytes": 2239,
+    "reason": "Runtime log; aggregate results and execution receipts retained."
+  },
+  {
+    "source_path": "results/wave2b1/logs/13_c7r_first_repeat.log",
+    "sha256": "6235f71d455d1afd31ce68a547ebb1d182944e98e8785359a355080d386b5dfe",
+    "bytes": 15953707,
+    "reason": "Runtime log; aggregate results and execution receipts retained."
+  },
+  {
+    "source_path": "results/wave2b1/logs/launcher.log",
+    "sha256": "795c0a14312ad1d7320e9d64ea28cb922662eedc5933c2cc1006823539161b92",
+    "bytes": 16085896,
+    "reason": "Runtime log; aggregate results and execution receipts retained."
+  }
+]

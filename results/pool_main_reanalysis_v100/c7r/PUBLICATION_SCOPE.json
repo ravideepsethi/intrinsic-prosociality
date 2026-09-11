@@ -1,0 +1,34 @@
+{
+  "c7x_c7r_gate_policy": "C7X produced no selected-panel primary estimate because its frozen support gate failed. The same-run C7R reproduction gate is therefore not applicable; C7R first/repeat estimates remain independent, and C7R relationship attempts are retained only as explicitly low-support exploratory diagnostics.",
+  "historical_reference_policy": "The former 2% sample support and outcome cells are retained as diagnostics, not equality gates, because the main sample authority changed.",
+  "included": [
+    "C7X full selected-panel latest reversed-arm analysis, with its primary retained as not estimable under the frozen 1,000-rows-per-arm gate",
+    "C7X duplicate-order, same-speed, exclusive-history, recency, tie-independent, nontournament, and ply>10 diagnostics",
+    "C7R exact first-versus-repeat meeting closure",
+    "C7R chooser/opponent and directed-pair relationship attempts, including ply>10 and <=7-day models, explicitly labeled with the failed parent-C7X support gate"
+  ],
+  "manuscript_policy": "These results may be drafted into a tracked provisional manuscript, but final section 5-6 numbers and paper-wide claims remain gated on Waves 2B2B and 3.",
+  "sample_authority": {
+    "fair_kind_draws": 419463,
+    "fair_rows": 15207423,
+    "fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "kind_draws": 570091,
+    "literal_immediate_rematches_certified": false,
+    "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "months": 24,
+    "observed_screen_certified": true,
+    "panel_root_machine_specific": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+    "report_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "rows": 41534331,
+    "sample_name": "main_pool_nonadjacent",
+    "sample_status": "POOL_MAIN_SAMPLE_24M_CERTIFIED_OK",
+    "status": "POOL_MAIN_SAMPLE_AUTHENTICATED_OK"
+  },
+  "status": "POOL_MAIN_WAVE2B2A_SCOPE_DECLARED_OK",
+  "still_blocked": [
+    "Frequent-dyad census sensitivity on the new C7X classification",
+    "Campaign-1 C1/C6/C9/C12/C13 recovery, remaining ply retrofits, and manuscript-wide Holm reconciliation (Wave 2B2B)",
+    "Patron matching and Patron heterogeneity (Wave 3)",
+    "unified manuscript tables, figures, abstract count, and final section 5-6 numerical revision"
+  ]
+}

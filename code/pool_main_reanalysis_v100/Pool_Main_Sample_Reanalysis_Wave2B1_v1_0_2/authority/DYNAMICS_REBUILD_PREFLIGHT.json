@@ -1,0 +1,336 @@
+{
+  "bundled_source_inventory": {
+    "bytes": 1489623,
+    "entries": [
+      {
+        "bytes": 60864,
+        "relative_path": "10b_build_a3_chronology_gate.py",
+        "sha256": "156bfe3f4256a428ea3a00fcc42a6544b51d6048379b1e2875c8e71f31cd8f14"
+      },
+      {
+        "bytes": 175771,
+        "relative_path": "10c_estimate_dynamic_prosociality_core.py",
+        "sha256": "2dcf0dd19f7cfe8f694d348e6590df88083a37882404112229d6ef05ebc42713"
+      },
+      {
+        "bytes": 52078,
+        "relative_path": "10d_audit_dynamic_prosociality_core.py",
+        "sha256": "f1279072391e5933e4e2936df7e07abcc431a03a1f03aabceb147949257b1e6f"
+      },
+      {
+        "bytes": 46865,
+        "relative_path": "10e_audit_dynamic_second_wave_feasibility.py",
+        "sha256": "8c42293fb21dbfe6ba7f6f5b36d057b4eee0393c0a46f8c9d65e93a98c7b2297"
+      },
+      {
+        "bytes": 40581,
+        "relative_path": "10f_estimate_b2_first_grant_dynamics.py",
+        "sha256": "9696925b13a4b9d2c502eda64e21c96506ecd6b76162038ecc2fae312645f6e9"
+      },
+      {
+        "bytes": 52686,
+        "relative_path": "10g_build_dynamic_second_wave_histories.py",
+        "sha256": "e36375f432aab7405f7481d286dd913d506f7691edf5e4c98ee931f39a349d61"
+      },
+      {
+        "bytes": 70465,
+        "relative_path": "10h_estimate_dynamic_second_wave.py",
+        "sha256": "ae525dc989afa32bee49030feeaa86c37894448c121805fedc8a6f2fd31b15a4"
+      },
+      {
+        "bytes": 84373,
+        "relative_path": "11a_estimate_dynamic_second_wave_postprimary.py",
+        "sha256": "983e1f9ea4758aa3bb4ff22404c4a732ca993233f41ed1b7a52774a2caa5f5d2"
+      },
+      {
+        "bytes": 52736,
+        "relative_path": "11b_audit_dynamic_second_wave_e1.py",
+        "sha256": "dfa2df51074d4d88246a11f43adc47abf2369de0c0b7daa0af7534d7bbd0e23b"
+      },
+      {
+        "bytes": 43268,
+        "relative_path": "12_complete_remaining_dynamic_analyses.py",
+        "sha256": "e7b302bae6c73e2f35d3b004c7206e8b2ff07fd77d49a63871f5d72d9467a73a"
+      },
+      {
+        "bytes": 19778,
+        "relative_path": "Dynamic_Prosociality_Analysis_Plan_v1_0_1_2026-08-21.md",
+        "sha256": "b11b546ea6fde608140619cffadffad1a7aab054b6fd1a9dcbee8900c98d0a6f"
+      },
+      {
+        "bytes": 175771,
+        "relative_path": "a1_audits/10c_estimate_dynamic_prosociality_core.py",
+        "sha256": "2dcf0dd19f7cfe8f694d348e6590df88083a37882404112229d6ef05ebc42713"
+      },
+      {
+        "bytes": 1031,
+        "relative_path": "a1_audits/README.md",
+        "sha256": "dd4d61f03e4308934602871a2c48040e082ee23b7000d6a4ac092699e6ba8215"
+      },
+      {
+        "bytes": 66669,
+        "relative_path": "a1_audits/a1_evidence_gap_audit_v100.py",
+        "sha256": "efc8b443b6db762b438868556416cd69774ad7db27fa3bcd805eda1618dd1f21"
+      },
+      {
+        "bytes": 26852,
+        "relative_path": "a1_audits/a1_unconditional_first_opportunity_audit_v100.py",
+        "sha256": "23d52975cadf165842efcffe9d5d4bcc6a1674548e3175eee8a8abc44613159e"
+      },
+      {
+        "bytes": 58227,
+        "relative_path": "c7r_fullpanel_prefocal/run_c7r_fullpanel_prefocal_v100.py",
+        "sha256": "7663e28237d671659e8a0c490406c1f99e024784e1a1322fdd0f7f9e18d129c6"
+      },
+      {
+        "bytes": 6353,
+        "relative_path": "campaign1/campaign1_c12_supplement_v103.py",
+        "sha256": "7cc5c57434cc71455c89113ad738c93d432ad971ff8a16ce12e528b9a5713087"
+      },
+      {
+        "bytes": 37767,
+        "relative_path": "campaign1/campaign1_c12_v102.py",
+        "sha256": "7f009eca37770e730759e4448147b0a416aac870414e0cc01df356b11202b277"
+      },
+      {
+        "bytes": 53379,
+        "relative_path": "campaign1/campaign1_c13_v104.py",
+        "sha256": "2b8e19fe130c5387ea9097eb011332918ef4761ea67afd7df30f91e2f69c535d"
+      },
+      {
+        "bytes": 59718,
+        "relative_path": "campaign1/campaign1_c6_c10_v100.py",
+        "sha256": "f0071a82d6824260f77db26f79fc02ab5f18a241c9dc26ee990f8921771965a5"
+      },
+      {
+        "bytes": 31752,
+        "relative_path": "campaign1/campaign1_c7_v101.py",
+        "sha256": "caf99e018f8388e59acf4233f25ca6b26828ff8a91617f88ab43f0a7079dcf49"
+      },
+      {
+        "bytes": 22701,
+        "relative_path": "campaign1/campaign1_nonprofile_common_v102.py",
+        "sha256": "f629876216c797180265d1b848a4424f211fe9a43cffa4dabdb3de67acbc5f1c"
+      },
+      {
+        "bytes": 9745,
+        "relative_path": "campaign1/collect_campaign1_c1_c9_corrective_results_v100.py",
+        "sha256": "dd4bcda9336a47d3767e97fc556e76f44ebd6970e74f241d06feffaa5117ff84"
+      },
+      {
+        "bytes": 10990,
+        "relative_path": "campaign1/collect_campaign1_nonprofile_recovery_results_v104.py",
+        "sha256": "e3b3e298d3d25eba1cc4d103d360476910a52256a4b29272e56bfb8b36c58db5"
+      },
+      {
+        "bytes": 62945,
+        "relative_path": "campaign1/run_campaign1_c1_corrected_v105.py",
+        "sha256": "9154a6c49ba0ae61561926d00feeb118fd1c6d9ffde0c96b27db87b4ccf53585"
+      },
+      {
+        "bytes": 68527,
+        "relative_path": "campaign1/run_campaign1_c9_recovery_v101.py",
+        "sha256": "83fbbdc71e425bae6337d7fc3ee7115c4ff4daf071360fcea0229e09f84dcdd9"
+      },
+      {
+        "bytes": 41086,
+        "relative_path": "campaign1/run_campaign1_nonprofile_recovery_v104.py",
+        "sha256": "b9f6a9af2873f40a71971fb48d1881f037725eb29a93e0b84b684a86017ccc64"
+      },
+      {
+        "bytes": 56645,
+        "relative_path": "campaign1/wave1_common_v100.py",
+        "sha256": "23388353e546f34b1a8c23fad9b10bfc42fbc7850a79c41108ddd3c0821efce2"
+      }
+    ],
+    "files": 28,
+    "inventory_sha256": "34720128d26470829096c770e077c3dfa0a25980c75cc7cfdc37be309a00fef5",
+    "root": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave2A_v1_0_0/source/dynamics",
+    "status": "BUNDLED_DYNAMIC_SOURCE_INVENTORY_OK"
+  },
+  "canonical_chronology": {
+    "exists": true,
+    "files": 852,
+    "manifest": "/Volumes/XT_Pro/lichess_kindness/output/dynamic_prosociality_a3_chronology_gate_v100/20260821T234626Z/chronology_input_manifest.tsv",
+    "manifest_sha256": "1d4648bb17cafd9e58c14ab78d32abe855f0bc62a6fb75ac88e02494a73337cd",
+    "missing_files": 0,
+    "ordering_failures": 0,
+    "rows": 7763847245,
+    "size_mismatches": 0,
+    "status": "CANONICAL_CHRONOLOGY_MANIFEST_AUTHENTICATED_OK",
+    "utc_ms_max": 1777593598000,
+    "utc_ms_min": 0
+  },
+  "created_at_utc": "2026-09-10T01:39:16Z",
+  "existing_old_lineage_inputs": {
+    "a3_old_private": {
+      "bytes_shallow": 124502362,
+      "exists": true,
+      "json_receipts": 160,
+      "parquet_files": 158,
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/dynamic_prosociality_a3_chronology_gate_v100_PRIVATE",
+      "reuse_policy": "upstream history/lookup only if semantically invariant; never treat old sample-dependent estimates or caches as current",
+      "status": "PRESENT_NOT_CURRENT",
+      "type": "directory"
+    },
+    "campaign_old_private": {
+      "bytes_shallow": 7398,
+      "exists": true,
+      "json_receipts": 8,
+      "parquet_files": 7,
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/dynamics_campaign1_nonprofile_recovery_v104_PRIVATE",
+      "reuse_policy": "upstream history/lookup only if semantically invariant; never treat old sample-dependent estimates or caches as current",
+      "status": "PRESENT_NOT_CURRENT",
+      "type": "directory"
+    },
+    "core_old_private": {
+      "bytes_shallow": 797911946,
+      "exists": true,
+      "json_receipts": 868,
+      "parquet_files": 1711,
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/dynamic_prosociality_core_v102_PRIVATE",
+      "reuse_policy": "upstream history/lookup only if semantically invariant; never treat old sample-dependent estimates or caches as current",
+      "status": "PRESENT_NOT_CURRENT",
+      "type": "directory"
+    },
+    "frequent_dyad_flags": {
+      "bytes_shallow": 0,
+      "exists": true,
+      "json_receipts": 0,
+      "parquet_files": 24,
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/frequent_dyad_census_24m_v101_PRIVATE/stage07_frequency_flags_private",
+      "reuse_policy": "upstream history/lookup only if semantically invariant; never treat old sample-dependent estimates or caches as current",
+      "status": "PRESENT_NOT_CURRENT",
+      "type": "directory"
+    },
+    "original_stage07": {
+      "bytes_shallow": 27816,
+      "exists": true,
+      "json_receipts": 40,
+      "parquet_files": 24,
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_24m_sf100k",
+      "reuse_policy": "upstream history/lookup only if semantically invariant; never treat old sample-dependent estimates or caches as current",
+      "status": "PRESENT_NOT_CURRENT",
+      "type": "directory"
+    },
+    "patron_snapshot": {
+      "bytes": 437116733,
+      "exists": true,
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/patron_profile_snapshot_24m_v100_FINAL_CERTIFIED/profile_snapshot_24m_private_lossless.parquet",
+      "reuse_policy": "upstream history/lookup only if semantically invariant; never treat old sample-dependent estimates or caches as current",
+      "sha256": "f42f28a6540a65c0a83f0da488663b4adddf60d1001daeed556f1ffbb961e238",
+      "status": "PRESENT_NOT_CURRENT",
+      "type": "file"
+    },
+    "second_wave_old_private": {
+      "bytes_shallow": 47181570,
+      "exists": true,
+      "json_receipts": 722,
+      "parquet_files": 735,
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/dynamic_second_wave_history_v100_PRIVATE",
+      "reuse_policy": "upstream history/lookup only if semantically invariant; never treat old sample-dependent estimates or caches as current",
+      "status": "PRESENT_NOT_CURRENT",
+      "type": "directory"
+    }
+  },
+  "new_sample_support_counts": {
+    "a3_first_fair_recipient": {
+      "a1_90d_followup_eligible_within_sample_panel": 2182125,
+      "chooser_loss": 26,
+      "claimed_win": 2296931,
+      "invalid_anchor": 0,
+      "invalid_arm_partition": 0,
+      "maximum_anchor_ms": 1761955309538,
+      "minimum_anchor_ms": 1698796802623,
+      "no_mating_draw": 3609,
+      "received_mercy": 68964,
+      "rows": 2369530,
+      "unique_normalized_recipients": 2369530,
+      "unique_numeric_recipients": 2369530
+    },
+    "b1_repeat_granter": {
+      "choosers": 55359,
+      "kind_draws": 234993,
+      "maximum_kind_draws": 182,
+      "maximum_opportunities": 283,
+      "minimum_kind_draws": 2,
+      "minimum_opportunities": 4,
+      "opportunities": 832948
+    },
+    "panel_end_api_last_move_at_ms": 1761956196752,
+    "ply_le_10_rows": 4137265,
+    "second_wave_hash_targets": {
+      "denominator": 50,
+      "distinct_union_games": 601926,
+      "pair_sample_rows": 304729,
+      "pair_seed": 2026082203,
+      "sampled_chooser_ids": 48747,
+      "union_rows": 601926,
+      "user_sample_rows": 303240,
+      "user_seed": 2026082202
+    },
+    "status": "POOL_MAIN_DYNAMIC_SUPPORT_COUNTS_OK"
+  },
+  "new_sample_support_integrity": {
+    "arm_partition_failures": 0,
+    "first_fair_recipient_rows_equal_normalized_and_numeric_users": true,
+    "invalid_anchors": 0,
+    "status": "POOL_MAIN_DYNAMIC_SUPPORT_INTEGRITY_OK"
+  },
+  "resources": {
+    "free_gb": 667.6987762451172,
+    "memory_limit": "12GB",
+    "minimum_free_gb_for_next_wave": 80.0,
+    "threads": 8
+  },
+  "rewrite_contract": {
+    "b1_support_and_propensities_must_be_rebuilt": true,
+    "campaign_and_targeted_memory_outputs_must_be_reestimated": true,
+    "canonical_all_game_chronology_reusable": true,
+    "first_eligible_exposures_must_be_rebuilt": true,
+    "literal_end_to_start_immediate_rematches_certified": false,
+    "old_sample_dependent_dynamic_caches_current": false,
+    "second_wave_target_and_pair_joins_must_be_rebuilt": true
+  },
+  "sample_authority": {
+    "fair_kind_draws": 419463,
+    "fair_rows": 15207423,
+    "fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "kind_draws": 570091,
+    "literal_immediate_rematches_certified": false,
+    "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "months": 24,
+    "observed_screen_certified": true,
+    "panel_root_machine_specific": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+    "report_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "rows": 41534331,
+    "sample_name": "main_pool_nonadjacent",
+    "sample_status": "POOL_MAIN_SAMPLE_24M_CERTIFIED_OK",
+    "status": "POOL_MAIN_SAMPLE_AUTHENTICATED_OK"
+  },
+  "status": "POOL_MAIN_WAVE2B_PREFLIGHT_READY",
+  "wave1": {
+    "modules": {
+      "core_stage08": {
+        "bytes": 24033,
+        "exists": true,
+        "failures": [],
+        "observed_status": "POOL_MAIN_STAGE08_CORE_24M_REESTIMATED_OK",
+        "path": "/Volumes/XT_Pro/lichess_kindness/output/pool_main_reanalysis_v100/wave1/core_stage08/_SUCCESS.json",
+        "sha256": "343f3482898ca08784591785b284c5a90403fa8baf8c4ef6ed3a45692a1d30df",
+        "status": "AUTHENTICATED_OK"
+      },
+      "panel_robustness_stage09": {
+        "bytes": 14631,
+        "exists": true,
+        "failures": [],
+        "observed_status": "POOL_MAIN_STAGE09_PANEL_ROBUSTNESS_24M_REESTIMATED_OK",
+        "path": "/Volumes/XT_Pro/lichess_kindness/output/pool_main_reanalysis_v100/wave1/panel_robustness_stage09/_SUCCESS.json",
+        "sha256": "fb4f9e2ffdd503b8803a61dd940980d7177ca089469bfb98320d88f1b8ddae64",
+        "status": "AUTHENTICATED_OK"
+      }
+    },
+    "root": "/Volumes/XT_Pro/lichess_kindness/output/pool_main_reanalysis_v100/wave1",
+    "status": "POOL_MAIN_WAVE1_INPUTS_AUTHENTICATED_OK"
+  }
+}

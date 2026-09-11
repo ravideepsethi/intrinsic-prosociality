@@ -1,0 +1,599 @@
+{
+  "adapter": {
+    "bytes": 2830,
+    "lineage": "pool_main_adapter",
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave1_v1_0_0/runner/run_core.py",
+    "repository": null,
+    "repository_head_inspected": null,
+    "sha256": "b804eb86544976fda689cbf31ba0d8a0c56a4571b0ee5b73faa71efc40d57b48"
+  },
+  "certification_scope": "Re-estimated from the authenticated pool/observed-nonadjacent panel; the original producer's fixed full-panel authority was replaced by this sample receipt.",
+  "core_qa": {
+    "core": {
+      "choosers": 3224173,
+      "clearly_worse_rows": 22664818,
+      "costly_rows": 21324778,
+      "excluded_middle_rows": 3662090,
+      "fair_rows": 15207423,
+      "kind_draws": 570091,
+      "nonnegative_rows": 20209553,
+      "rows": 41534331,
+      "strict_positive_rows": 19595964
+    },
+    "source": {
+      "kind_draws": 570091,
+      "missing_chooser": 0,
+      "missing_draw_payoff": 0,
+      "missing_eval": 0,
+      "missing_win_premium": 0,
+      "months": 24,
+      "rows": 41534331
+    }
+  },
+  "created_at_utc": "2026-09-09T21:00:16Z",
+  "descriptive": {
+    "clearly_worse_rows": 22664818,
+    "excluded_middle_rows": 3662090,
+    "fair_rows": 15207423,
+    "fine_eval_rows": 41534331,
+    "overall": {
+      "binomial_se_pp": 0.0018053595763255366,
+      "choosers": 3224173.0,
+      "kind_draws": 570091.0,
+      "kind_rate": 0.013725777839060415,
+      "kind_rate_pct": 1.3725777839060416,
+      "rows": 41534331.0
+    },
+    "table01_rows": 41534331,
+    "table06_rows": 37872241
+  },
+  "full_24_month_run": true,
+  "git": {
+    "branch": "main",
+    "head": "0dc981cbc6da157d365015a95f2b7157ecda4859",
+    "note": "Bundled byte-identical source inspected at this public repository HEAD",
+    "remote_url": "https://github.com/ravideepsethi/intrinsic-prosociality.git",
+    "status_porcelain": ""
+  },
+  "manifest_files": 30,
+  "manifest_sha256": "b6e4327038f8cfa043c13c6fb0bd788657b553cfcf8a9e3c850b899abedd5aef",
+  "month_end": "2025-10",
+  "month_start": "2023-11",
+  "months": [
+    "2023-11",
+    "2023-12",
+    "2024-01",
+    "2024-02",
+    "2024-03",
+    "2024-04",
+    "2024-05",
+    "2024-06",
+    "2024-07",
+    "2024-08",
+    "2024-09",
+    "2024-10",
+    "2024-11",
+    "2024-12",
+    "2025-01",
+    "2025-02",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10"
+  ],
+  "output_qa": {
+    "expected_outputs_checked": 14,
+    "kind_draws": 570091,
+    "rows": 41534331,
+    "selected_months": 24,
+    "status": "STAGE08_OUTPUT_QA_OK"
+  },
+  "piecewise": {
+    "table03": [
+      {
+        "beta_minus_pp_per_rating_point": -0.6397582102019155,
+        "beta_plus_pp_per_rating_point": 0.1277839993753496,
+        "chooser_clusters": 1026739,
+        "rows_identifying": 6875419,
+        "rows_raw": 7426641,
+        "se_beta_minus": 0.0515051756215034,
+        "se_beta_plus": 0.0504644778774375,
+        "se_slope_asymmetry": 0.07200647128642212,
+        "se_threshold_jump_pp": 0.01849466819684469,
+        "slope_asymmetry_beta_plus_plus_beta_minus": -0.5119742108265659,
+        "t_slope_asymmetry": -7.110113878377292,
+        "threshold_jump_pp": 0.0696307901225049,
+        "window": "abs_payoff_le_0.5",
+        "window_half_width": 0.5
+      },
+      {
+        "beta_minus_pp_per_rating_point": -0.3986747376112296,
+        "beta_plus_pp_per_rating_point": 0.15731791835880968,
+        "chooser_clusters": 1273062,
+        "rows_identifying": 10400102,
+        "rows_raw": 10973354,
+        "se_beta_minus": 0.021503824004952942,
+        "se_beta_plus": 0.021665050513986154,
+        "se_slope_asymmetry": 0.03064612818471058,
+        "se_threshold_jump_pp": 0.013937391356131918,
+        "slope_asymmetry_beta_plus_plus_beta_minus": -0.24135681925241995,
+        "t_slope_asymmetry": -7.875605616399967,
+        "threshold_jump_pp": 0.11007065085657791,
+        "window": "abs_payoff_le_1",
+        "window_half_width": 1.0
+      },
+      {
+        "beta_minus_pp_per_rating_point": -0.2718131770564396,
+        "beta_plus_pp_per_rating_point": 0.1818121477308194,
+        "chooser_clusters": 1455949,
+        "rows_identifying": 13189264,
+        "rows_raw": 13794068,
+        "se_beta_minus": 0.010831577162204063,
+        "se_beta_plus": 0.011409057640900062,
+        "se_slope_asymmetry": 0.015864205236532043,
+        "se_threshold_jump_pp": 0.011382423341363055,
+        "slope_asymmetry_beta_plus_plus_beta_minus": -0.09000102932562018,
+        "t_slope_asymmetry": -5.673213878900538,
+        "threshold_jump_pp": 0.14700015395954363,
+        "window": "abs_payoff_le_2",
+        "window_half_width": 2.0
+      },
+      {
+        "beta_minus_pp_per_rating_point": -0.01443536762512907,
+        "beta_plus_pp_per_rating_point": -0.007931575526673784,
+        "chooser_clusters": 1643038,
+        "rows_identifying": 14407885,
+        "rows_raw": 15207423,
+        "se_beta_minus": 0.0011576587753138266,
+        "se_beta_plus": 0.0013226643633387776,
+        "se_slope_asymmetry": 0.0021575516508232063,
+        "se_threshold_jump_pp": 0.007745430305262849,
+        "slope_asymmetry_beta_plus_plus_beta_minus": -0.022366943151802855,
+        "t_slope_asymmetry": -10.366817009117176,
+        "threshold_jump_pp": 0.42215106907858435,
+        "window": "full_fair_range",
+        "window_half_width": null
+      }
+    ],
+    "table04_rows": 8,
+    "table05_rows": 18
+  },
+  "runtime_seconds": 239.72,
+  "sample_authority": {
+    "fair_kind_draws": 419463,
+    "fair_rows": 15207423,
+    "fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "kind_draws": 570091,
+    "literal_immediate_rematches_certified": false,
+    "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "months": 24,
+    "observed_screen_certified": true,
+    "panel_root_machine_specific": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+    "report_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "rows": 41534331,
+    "sample_name": "main_pool_nonadjacent",
+    "sample_status": "POOL_MAIN_SAMPLE_24M_CERTIFIED_OK",
+    "status": "POOL_MAIN_SAMPLE_AUTHENTICATED_OK"
+  },
+  "scope": {
+    "chooser_cluster_authority": "chooser_username_norm (mapped losslessly to run-local chooser_fe_id)",
+    "clearly_worse_definition": "engine_eval_cp_disconnected <= -300",
+    "excluded": [
+      "patron/profile analyses",
+      "opening familiarity",
+      "abandonment/reentry",
+      "post-sample holdouts",
+      "historical rating-rule validation",
+      "rendered publication tables and figures"
+    ],
+    "fair_definition": "engine_eval_cp_disconnected >= -100",
+    "hashed_split": "parity of final hexadecimal digit of md5(game_id)",
+    "included": "panel-only core paper results and analytical plot data",
+    "paper_favorable_definition": "chooser_draw_payoff_v2 >= 0",
+    "prior_kind_windows": "first 12 months classify; second 12 months evaluate"
+  },
+  "script_path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave1_v1_0_0/runner/run_core.py",
+  "script_sha256": "b804eb86544976fda689cbf31ba0d8a0c56a4571b0ee5b73faa71efc40d57b48",
+  "script_version": "1.2.0+pool-main-wave1",
+  "software": {
+    "duckdb": "1.5.5",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "platform": "macOS-26.4.1-arm64-arm-64bit-Mach-O",
+    "pyarrow": "25.0.1",
+    "python": "3.13.9"
+  },
+  "source_program": {
+    "bytes": 89481,
+    "lineage": "public_repository",
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave1_v1_0_0/source/core/08_make_core_paper_results.py",
+    "repository": "https://github.com/ravideepsethi/intrinsic-prosociality.git",
+    "repository_head_inspected": "0dc981cbc6da157d365015a95f2b7157ecda4859",
+    "sha256": "e9dd80c52da5ffef3d406c3af25912bd924f6423f123ca535cf4077cb039c41f"
+  },
+  "stage07": {
+    "monthly_inputs": [
+      {
+        "bytes": 525366982,
+        "month": "2023-11",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2023-11/analysis_panel.parquet",
+        "rows": 1732360,
+        "sha256": "c02044d655912eb79a847ce643fa3493acb10c9a60db5e502e828bd088e99853"
+      },
+      {
+        "bytes": 545269740,
+        "month": "2023-12",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2023-12/analysis_panel.parquet",
+        "rows": 1811457,
+        "sha256": "1a02534b373659634b9979552faaa6177fca58b5513fc85ede85586c1847bc42"
+      },
+      {
+        "bytes": 537484485,
+        "month": "2024-01",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2024-01/analysis_panel.parquet",
+        "rows": 1768148,
+        "sha256": "ed56eb0589410084e8c19bbe7abb6d09028b0480dd926ab4aebbcd5cff9b2deb"
+      },
+      {
+        "bytes": 504179337,
+        "month": "2024-02",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2024-02/analysis_panel.parquet",
+        "rows": 1674269,
+        "sha256": "fe379d9aea20805c2b9b976a31f34601c6e6d9c2bd16aa58d929fba4c9b7ee96"
+      },
+      {
+        "bytes": 529450225,
+        "month": "2024-03",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2024-03/analysis_panel.parquet",
+        "rows": 1753915,
+        "sha256": "7dc6f955b612bc50761a2cff0596cae567bf963e1f96d725c688a017992e62d2"
+      },
+      {
+        "bytes": 506822333,
+        "month": "2024-04",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2024-04/analysis_panel.parquet",
+        "rows": 1666762,
+        "sha256": "a3cd8c8a0386e0b0ff657f0d4fbcf96c38c3d582a92655729151295e86c1f463"
+      },
+      {
+        "bytes": 526880757,
+        "month": "2024-05",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2024-05/analysis_panel.parquet",
+        "rows": 1748806,
+        "sha256": "e851bd49e7c4c0986bd2f3e11df1d86f7d916016ca792978cc996952475cdfda"
+      },
+      {
+        "bytes": 503731549,
+        "month": "2024-06",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2024-06/analysis_panel.parquet",
+        "rows": 1657041,
+        "sha256": "fb00fe3a7361518e8d5bd72d0b1103977ffd3d397fac4c3580afb4077a94aa04"
+      },
+      {
+        "bytes": 498217763,
+        "month": "2024-07",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2024-07/analysis_panel.parquet",
+        "rows": 1648142,
+        "sha256": "8d0450a7845ba99ec8ed1c7d800194280d7181cd0eb9c988d1d9feb573497cbc"
+      },
+      {
+        "bytes": 504930186,
+        "month": "2024-08",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2024-08/analysis_panel.parquet",
+        "rows": 1674961,
+        "sha256": "0c5839511ec70dd16bc3ec3dc942788b9de6ffc19be5212fcc17ec49590879cc"
+      },
+      {
+        "bytes": 489956063,
+        "month": "2024-09",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2024-09/analysis_panel.parquet",
+        "rows": 1608915,
+        "sha256": "1659a81498090834deafecf4166f777c65852c48fa7af95fd61b0426324d1593"
+      },
+      {
+        "bytes": 526970390,
+        "month": "2024-10",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2024-10/analysis_panel.parquet",
+        "rows": 1746838,
+        "sha256": "481a6a72f0c64947bb4b7963401ae1a5ccde682411a9cc326dd73db5402681cb"
+      },
+      {
+        "bytes": 503729444,
+        "month": "2024-11",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2024-11/analysis_panel.parquet",
+        "rows": 1658234,
+        "sha256": "8a76734dd7656ce1ef5868a156f5a3785114b67fab59ab8e26b4444192f983b6"
+      },
+      {
+        "bytes": 542836227,
+        "month": "2024-12",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2024-12/analysis_panel.parquet",
+        "rows": 1784921,
+        "sha256": "2c4d6dafa7df18c9eae818e4269e589d3d707f4fcff6920bbff527b0bfe92b93"
+      },
+      {
+        "bytes": 542757327,
+        "month": "2025-01",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2025-01/analysis_panel.parquet",
+        "rows": 1797999,
+        "sha256": "98b4c80dbc42a37f7eefd8bf749cf20fce30d7194f1c3443ed048b203b9fa855"
+      },
+      {
+        "bytes": 506920181,
+        "month": "2025-02",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2025-02/analysis_panel.parquet",
+        "rows": 1662781,
+        "sha256": "036106a6f5013cfb891c76d6a1f0c0f2ba4f0ee85dcfbeebb153e8213f97f017"
+      },
+      {
+        "bytes": 555445776,
+        "month": "2025-03",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2025-03/analysis_panel.parquet",
+        "rows": 1840994,
+        "sha256": "ac5289dcb3903e9b0a2ce72906b6a304b02c6784bea1a1f0e7f780802e7bbddb"
+      },
+      {
+        "bytes": 532717379,
+        "month": "2025-04",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2025-04/analysis_panel.parquet",
+        "rows": 1757491,
+        "sha256": "70da333d2375d13fe4fa05c0883ff500d480af1e83db1601284706cccb5cc9be"
+      },
+      {
+        "bytes": 551566247,
+        "month": "2025-05",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2025-05/analysis_panel.parquet",
+        "rows": 1813281,
+        "sha256": "6a4bf14c17a9329517369bb441b05d5f5ef3063f6169937ce5686585d8327158"
+      },
+      {
+        "bytes": 538302548,
+        "month": "2025-06",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2025-06/analysis_panel.parquet",
+        "rows": 1783426,
+        "sha256": "18d31aa3d2ef36ce5e0bc917c88233f9d686b8a8db7e14b71eba4d8248e3355f"
+      },
+      {
+        "bytes": 556485283,
+        "month": "2025-07",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2025-07/analysis_panel.parquet",
+        "rows": 1826264,
+        "sha256": "b9519063a990303d6df8e8420d9888e34315ce39c22635e33831b7c709b6b65e"
+      },
+      {
+        "bytes": 512537827,
+        "month": "2025-08",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2025-08/analysis_panel.parquet",
+        "rows": 1695692,
+        "sha256": "fb32cb7a8c490c7106c0c1fc249c5335c91b4805acb97ed0218344f8aa6c2b1b"
+      },
+      {
+        "bytes": 501388838,
+        "month": "2025-09",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2025-09/analysis_panel.parquet",
+        "rows": 1660248,
+        "sha256": "ec1f739d96a0be68476ad0f1e5de112ec991274cd3323d33aa48fe76c986468c"
+      },
+      {
+        "bytes": 537109178,
+        "month": "2025-10",
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2025-10/analysis_panel.parquet",
+        "rows": 1761386,
+        "sha256": "5108e115bbe965d4997ffda4542ecd140a76dabb3cf1f1483b7ba727575b0f9b"
+      }
+    ],
+    "producer_sha256": "7c54b775194916308f861129ddece3bca52ebea4aad0af3284322d1ac6172fb4",
+    "selected_bytes": 12581056065,
+    "selected_rows": 41534331,
+    "success_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/_SUCCESS.json",
+    "success_sha256": "978348a457d8d21a9690cc146065a85c1d9022f70d787cf8e1d9273afcede855"
+  },
+  "status": "POOL_MAIN_STAGE08_CORE_24M_REESTIMATED_OK",
+  "table02_and_figure02": {
+    "figure02_beta_win_premium_pp": 0.02626960655254458,
+    "local_choosers": 2268165,
+    "local_rows_abs_payoff_le_6": 14806746,
+    "table02_main": [
+      {
+        "absorption_iterations": 1,
+        "absorption_max_scaled_group_mean": 2.644355636092073e-15,
+        "absorption_method": "one_way_exact",
+        "bandwidth": 0.5,
+        "chooser_clusters": 1026739,
+        "coefficient_pp": 0.23733740465201156,
+        "favorable_definition": "draw_payoff>=0",
+        "matrix_columns": 2,
+        "matrix_rank": 2,
+        "model": "chooser_fe_plus_win_premium",
+        "rows_identifying": 6875419,
+        "rows_raw": 7426641,
+        "sample": "fair_abs_draw_payoff_le_0.5",
+        "se_pp": 0.010321969970798452,
+        "t": 22.993421345291164,
+        "variable": "favorable"
+      },
+      {
+        "absorption_iterations": 1,
+        "absorption_max_scaled_group_mean": 2.9249602074843112e-15,
+        "absorption_method": "one_way_exact",
+        "bandwidth": 1.0,
+        "chooser_clusters": 1273062,
+        "coefficient_pp": 0.3197865730430062,
+        "favorable_definition": "draw_payoff>=0",
+        "matrix_columns": 2,
+        "matrix_rank": 2,
+        "model": "chooser_fe_plus_win_premium",
+        "rows_identifying": 10400102,
+        "rows_raw": 10973354,
+        "sample": "fair_abs_draw_payoff_le_1",
+        "se_pp": 0.008544422700614491,
+        "t": 37.426352165373096,
+        "variable": "favorable"
+      },
+      {
+        "absorption_iterations": 1,
+        "absorption_max_scaled_group_mean": 2.214837877203502e-15,
+        "absorption_method": "one_way_exact",
+        "bandwidth": 2.0,
+        "chooser_clusters": 1455949,
+        "coefficient_pp": 0.40852816517122836,
+        "favorable_definition": "draw_payoff>=0",
+        "matrix_columns": 2,
+        "matrix_rank": 2,
+        "model": "chooser_fe_plus_win_premium",
+        "rows_identifying": 13189264,
+        "rows_raw": 13794068,
+        "sample": "fair_abs_draw_payoff_le_2",
+        "se_pp": 0.007836265837671344,
+        "t": 52.133015090849476,
+        "variable": "favorable"
+      },
+      {
+        "absorption_iterations": 1,
+        "absorption_max_scaled_group_mean": 3.542071358566681e-15,
+        "absorption_method": "one_way_exact",
+        "bandwidth": 4.0,
+        "chooser_clusters": 1550524,
+        "coefficient_pp": 0.4258330666763407,
+        "favorable_definition": "draw_payoff>=0",
+        "matrix_columns": 2,
+        "matrix_rank": 2,
+        "model": "chooser_fe_plus_win_premium",
+        "rows_identifying": 13966520,
+        "rows_raw": 14622488,
+        "sample": "fair_abs_draw_payoff_le_4",
+        "se_pp": 0.007718571551499112,
+        "t": 55.16993187601335,
+        "variable": "favorable"
+      },
+      {
+        "absorption_iterations": 1,
+        "absorption_max_scaled_group_mean": 3.6264879963619296e-15,
+        "absorption_method": "one_way_exact",
+        "bandwidth": 6.0,
+        "chooser_clusters": 1581374,
+        "coefficient_pp": 0.426716836338089,
+        "favorable_definition": "draw_payoff>=0",
+        "matrix_columns": 2,
+        "matrix_rank": 2,
+        "model": "chooser_fe_plus_win_premium",
+        "rows_identifying": 14119890,
+        "rows_raw": 14806746,
+        "sample": "fair_abs_draw_payoff_le_6",
+        "se_pp": 0.00770219554450762,
+        "t": 55.40197387514755,
+        "variable": "favorable"
+      }
+    ]
+  },
+  "table07": {
+    "documented_clock_control_collinearity": "log_clock_ratio = log_chooser_clock - log_disconnected_clock; the pseudo-inverse estimates the same control span as the two independent log-clock terms",
+    "models": [
+      {
+        "chooser_clusters": 2442576,
+        "matrix_columns": 4,
+        "matrix_rank": 4,
+        "model": "pooled_no_controls",
+        "premium_at_0cp_pp": 0.5098190123204365,
+        "premium_at_600cp_pp": 0.36926633073517845,
+        "premium_at_minus100cp_pp": 0.5332444592513128,
+        "rows_identifying": 15207423,
+        "rows_raw": 15207423,
+        "se_at_0cp": 0.010359909791000736,
+        "se_at_600cp": 0.025069491297528775,
+        "se_at_minus100cp": 0.013455871971250458
+      },
+      {
+        "chooser_clusters": 2442576,
+        "matrix_columns": 8,
+        "matrix_rank": 7,
+        "model": "pooled_plus_controls",
+        "premium_at_0cp_pp": 0.5089700499214551,
+        "premium_at_600cp_pp": 0.3281241714448986,
+        "premium_at_minus100cp_pp": 0.5391110296675479,
+        "rows_identifying": 15207423,
+        "rows_raw": 15207423,
+        "se_at_0cp": 0.010356691785614974,
+        "se_at_600cp": 0.025034176237301302,
+        "se_at_minus100cp": 0.013449879885234904
+      },
+      {
+        "chooser_clusters": 1641251,
+        "matrix_columns": 3,
+        "matrix_rank": 3,
+        "model": "chooser_fe_no_controls",
+        "premium_at_0cp_pp": 0.4413896497994866,
+        "premium_at_600cp_pp": 0.2865739371420718,
+        "premium_at_minus100cp_pp": 0.4671922685757224,
+        "rows_identifying": 14403922,
+        "rows_raw": 15207423,
+        "se_at_0cp": 0.008964800093139857,
+        "se_at_600cp": 0.021606823721621232,
+        "se_at_minus100cp": 0.011691133264335537
+      },
+      {
+        "chooser_clusters": 1643038,
+        "matrix_columns": 7,
+        "matrix_rank": 6,
+        "model": "chooser_fe_plus_controls",
+        "premium_at_0cp_pp": 0.439633144550584,
+        "premium_at_600cp_pp": 0.263474168384931,
+        "premium_at_minus100cp_pp": 0.46899297391152617,
+        "rows_identifying": 14407885,
+        "rows_raw": 15207423,
+        "se_at_0cp": 0.008963359878837923,
+        "se_at_600cp": 0.02159270737126734,
+        "se_at_minus100cp": 0.011688659656099509
+      }
+    ],
+    "rows": 15207423
+  },
+  "type_and_split": {
+    "early_type_choosers": 1583835,
+    "later_choosers_with_early_type": 793363,
+    "later_rows_with_early_type": 5039700,
+    "split_min4": [
+      {
+        "choosers": 1006355,
+        "fair_opportunities": 12812375,
+        "kind_draws": 319404,
+        "min_total_fair_opportunities": 4,
+        "pearson_unweighted": 0.6004171295083455,
+        "pearson_weighted_harmonic_half_opportunities": 0.7027410454516659,
+        "pearson_weighted_total_opportunities": 0.689785612795246,
+        "spearman_unweighted": 0.46377724880314797,
+        "split_design": "hash_md5_game_id"
+      },
+      {
+        "choosers": 666131,
+        "fair_opportunities": 10071691,
+        "kind_draws": 245374,
+        "min_total_fair_opportunities": 4,
+        "pearson_unweighted": 0.5453033906387954,
+        "pearson_weighted_harmonic_half_opportunities": 0.6469775042388475,
+        "pearson_weighted_total_opportunities": 0.6178202657854929,
+        "spearman_unweighted": 0.4163638693426947,
+        "split_design": "temporal_first12_second12"
+      }
+    ],
+    "table08_models": [
+      {
+        "chooser_clusters": 56057,
+        "prior_kind_type": "ever_kind",
+        "rows_identifying": 460574,
+        "rows_raw": 473683
+      },
+      {
+        "chooser_clusters": 563724,
+        "prior_kind_type": "never_kind",
+        "rows_identifying": 4405544,
+        "rows_raw": 4566017
+      }
+    ]
+  },
+  "upstream_producer_status": "STAGE08_CORE_24M_CERTIFIED_OK"
+}

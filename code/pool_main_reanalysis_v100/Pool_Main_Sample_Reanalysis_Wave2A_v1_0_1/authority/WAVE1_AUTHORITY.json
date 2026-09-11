@@ -1,0 +1,45 @@
+{
+  "status": "POOL_MAIN_REANALYSIS_WAVE1_AUTHORITY_OK",
+  "sample_fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+  "public_root_relative": "output/pool_main_reanalysis_v100/wave1",
+  "sample_success_sha256": "978348a457d8d21a9690cc146065a85c1d9022f70d787cf8e1d9273afcede855",
+  "modules": {
+    "core_stage08": {
+      "relative_path": "core_stage08/_SUCCESS.json",
+      "status": "POOL_MAIN_STAGE08_CORE_24M_REESTIMATED_OK",
+      "sha256": "343f3482898ca08784591785b284c5a90403fa8baf8c4ef6ed3a45692a1d30df"
+    },
+    "panel_robustness_stage09": {
+      "relative_path": "panel_robustness_stage09/_SUCCESS.json",
+      "status": "POOL_MAIN_STAGE09_PANEL_ROBUSTNESS_24M_REESTIMATED_OK",
+      "sha256": "fb4f9e2ffdd503b8803a61dd940980d7177ca089469bfb98320d88f1b8ddae64"
+    }
+  },
+  "crossing_authorities": {
+    "controlled_reference_model_v110": {
+      "relative_path": "controlled_reference_model_v110/receipts/completion_receipt.json",
+      "status": "CONTROLLED_REFERENCE_PRICE_FIGURE_COMPLETE",
+      "sha256": "654a509bb2c5e8025eb58b8bc904ec027ed3d18b08589483ee5dc29a3dbee450",
+      "results_relative_path": "controlled_reference_model_v110/tables/controlled_local_h1_results.csv",
+      "results_sha256": "737eaf15822e260e5662373538d822c997c9e69bd00125f642ac20d2dbf57602"
+    },
+    "stage09_exact_zero_descriptives": {
+      "relative_path": "panel_robustness_stage09/tables/tableR11_exact_zero_payoff_descriptives.csv",
+      "sha256": "b721d2ffa3fccb82a40dbf920509e4455adb8b175ac561928fd8136ac43d9008"
+    },
+    "stage09_exact_zero_models": {
+      "relative_path": "panel_robustness_stage09/tables/tableR12_exact_zero_payoff_models.csv",
+      "sha256": "687f859c7c63c44acee20e5ea16f06384a66795f2e63d55e39db3665fa20e77c"
+    }
+  },
+  "returned_transfer": {
+    "filename": "POOL_MAIN_REANALYSIS_WAVE1_RESULTS_20260909T211555Z.zip",
+    "sha256": "33c7caf28302b866944b4f21567100c1977ab2e1a6249a35295be86aca238569",
+    "outer_manifest_files": 256,
+    "all_seven_stages_complete": true,
+    "controlled_internal_manifests_valid": true,
+    "nonparametric_model_receipts_ok": 33,
+    "nonparametric_model_failures": 0,
+    "minor_receipt_note": "parallel_progress.json retained status RUNNING despite completed=33,total=33; canonical settings status and all model receipts are complete"
+  }
+}

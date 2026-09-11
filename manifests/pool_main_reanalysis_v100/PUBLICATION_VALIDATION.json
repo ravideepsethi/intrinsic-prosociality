@@ -1,0 +1,20 @@
+{
+  "status": "PUBLICATION_CHECKS_PASSED",
+  "date": "2026-09-11",
+  "base_commit": "0dc981cbc6da157d365015a95f2b7157ecda4859",
+  "main_sample_opportunities": 41534331,
+  "result_groups": 15,
+  "source_archives": 32,
+  "extracted_current_packages": 16,
+  "byte_preserved_result_files": 793,
+  "omitted_runtime_logs": 22,
+  "aggregate_parquet_tables": 67,
+  "embedded_aggregate_parquet_occurrences": 122,
+  "python_files_syntax_checked": 314,
+  "source_and_result_bytes_changed": false,
+  "models_rerun_for_publication": false,
+  "c13_status": "PREPARED_NOT_RETURNED",
+  "full_family_d_status": "MISSING_NEW_C1_C2_C5",
+  "manuscript_status": "REWRITE_HANDOFF_ONLY_NOT_COMPILED",
+  "full_handoff_zip_sha256": "52a60ccdb06fb0c5d4b931816c23fd2548ea5e14576e200a9ad98a7fb94eb89f"
+}

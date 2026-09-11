@@ -1,0 +1,18 @@
+{
+  "frozen_common_source_sha256": "f629876216c797180265d1b848a4424f211fe9a43cffa4dabdb3de67acbc5f1c",
+  "model_cache": {
+    "bytes": 63820554,
+    "path_machine_specific": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b2a/c7r_state_v102/c7r_pair_model_private.parquet",
+    "rows": 830991,
+    "sha256": "05e3a7a245da7bfe72ea7e628fbd3e2a7a8c01555c76f5889ac6249f648d6f7a"
+  },
+  "network_requests": 0,
+  "sample_fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+  "status": "C7R_LINEAR_COMBINATION_INPUTS_AUTHENTICATED_OK",
+  "wave2b2a_c7r_success": {
+    "path_machine_specific": "/Volumes/XT_Pro/lichess_kindness/output/pool_main_reanalysis_v100/wave2b2a/c7r/POOL_MAIN_WAVE2B2A_C7R/_SUCCESS.json",
+    "sha256": "a022d7490a378b1176fb38997e8ab6cc8af2a28b5d1a92cbd678cc9f3ac8dee8",
+    "status": "CAMPAIGN1_C7R_CLOSURE_OK"
+  },
+  "wave2b2a_first_meeting_models_sha256": "8fa37cf49cab2f667bc2750892d4c30a67e88e44a53d0a7dcc291aed72445751"
+}

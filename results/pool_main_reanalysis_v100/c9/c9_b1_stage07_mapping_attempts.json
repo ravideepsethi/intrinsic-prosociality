@@ -1,0 +1,23 @@
+{
+  "attempts": [
+    {
+      "b1_rows_exactly_one_candidate": 832948,
+      "b1_rows_with_candidate": 832948,
+      "candidate_rows": 832948,
+      "chooser_indices_with_candidate": 55359,
+      "chooser_indices_with_unique_user": 55359,
+      "time_field": "api_last_move_at_ms"
+    },
+    {
+      "b1_rows_exactly_one_candidate": 0,
+      "b1_rows_with_candidate": 0,
+      "candidate_rows": 0,
+      "chooser_indices_with_candidate": 0,
+      "chooser_indices_with_unique_user": 0,
+      "time_field": "utc_ms"
+    }
+  ],
+  "current_speed_code_used_as_literal_speed": false,
+  "mapping_uses_kind_draw": false,
+  "status": "C9_B1_STAGE07_MAPPING_ATTEMPTS_COMPLETE"
+}

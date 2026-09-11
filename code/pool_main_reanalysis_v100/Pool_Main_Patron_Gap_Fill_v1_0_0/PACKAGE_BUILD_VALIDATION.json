@@ -1,0 +1,29 @@
+{
+  "package": "Pool_Main_Patron_Gap_Fill_v1_0_0",
+  "version": "1.0.0",
+  "built_utc_date": "2026-09-11",
+  "status": "OFFLINE_TESTS_PASSED",
+  "behavioral_tests_passed": 10,
+  "synthetic_full_execution": "PASS: 285 synthetic targets; 208 profiles returned; 77 unknown outcomes retained; private Parquet, aggregate ZIP, SHA sidecar, and unchanged synthetic August source verified",
+  "python_and_shell_parse_checks": "PASS",
+  "frozen_source_bindings": "8 SHA-256 matches",
+  "bundled_wave3a_report": "Sidecar authority, CRC, exact inventory, and 10 member hashes checked",
+  "runtime_test_environment": {
+    "python": "3.12",
+    "duckdb": "1.5.5",
+    "pyarrow": "25.0.1"
+  },
+  "live_profile_api_called_during_build": false,
+  "private_production_data_available_during_build": false,
+  "target_counts_from_verified_wave3a_report": {
+    "all_missing_accounts": 285,
+    "primary_missing_accounts": 207,
+    "not_queried_in_august": 122,
+    "queried_nonreturns": 163
+  },
+  "production_preflight_reauthenticates_exact_private_gap_membership": true,
+  "production_uses_fixed_new_matches": true,
+  "current_profiles_claimed_as_august_outcomes": false,
+  "expected_elapsed_minutes": [2, 5],
+  "runtime_estimate_basis": "Prior Wave-3A authentication runtime and at most two normal omission waits; API backoff can extend runtime"
+}

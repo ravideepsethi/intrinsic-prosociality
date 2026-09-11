@@ -1,0 +1,38 @@
+{
+  "status": "PACKAGE_BUILD_VALIDATION_PASS",
+  "original_archive_sha256": "a2c2048d5329fc883ead00147ed2a00bb00b1380dfad7a5db50da44a0be0e5ba",
+  "original_producer_sha256": "e553af77d16cf944a956b4ae266c3468806e08257a4aa1bff6fb953c619d8830",
+  "original_estimator_source_unchanged": true,
+  "tests_passed": 4,
+  "synthetic_draws": 4999,
+  "synthetic_scope": [
+    "Exact conditional-Bernoulli law by exhaustive enumeration",
+    "Changing pseudo-first and exact horizon boundaries",
+    "Outcome-blind row bridge; ordinary-game session bridging; exactly-30-minute break",
+    "Spawned randomization; equality with B2 of all 4999 draws at three horizons",
+    "Checkpoint resume without mutation; config and changed-draw rejection",
+    "CSV primary-only field serialization"
+  ],
+  "test_runtime_seconds": 1.049,
+  "test_environment": {
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1",
+    "duckdb": "1.5.5"
+  },
+  "python_syntax": "PASS",
+  "shell_syntax": "PASS",
+  "full_private_data_run_executed_here": false,
+  "runtime_estimate_minutes": [
+    45,
+    120
+  ],
+  "runtime_estimate_is_benchmark": false,
+  "remaining": [
+    "C9 ply retrofit",
+    "C9 15/60-minute session sensitivity",
+    "C13 if retained",
+    "Full new-sample family reconciliation"
+  ]
+}

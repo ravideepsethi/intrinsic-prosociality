@@ -1,0 +1,34 @@
+{
+  "config_sha256": "24c6d608556a8378246863e9ab4ff78e8b48ea1ccc01a1c00d3847d7e8223762",
+  "created_utc": "2026-09-11T18:14:24Z",
+  "draws_per_law": 4999,
+  "exact_original_C9_and_B2_reproduction": true,
+  "inference_limit": "New post-outcome sensitivity; fixed ply-band grant totals are descriptive conditioning, not a causal design.",
+  "laws": [
+    "original",
+    "ply_band_conditioned"
+  ],
+  "new_chronology_or_API_requests": false,
+  "new_sensitivities_added_to_Holm_family": false,
+  "original_confirmatory_estimate_changed": false,
+  "outcome_rules": [
+    "all",
+    "outcome_gt4",
+    "outcome_gt10",
+    "outcome_gt20",
+    "anchor_and_outcome_gt10"
+  ],
+  "remaining": [
+    "C13 if retained",
+    "global Holm reconciliation",
+    "C9 alternative session cutoffs and singleton appendix if retained",
+    "integrated manuscript updates"
+  ],
+  "row_level_outputs_transferred": false,
+  "runtime_seconds_this_invocation": 207.21407212503254,
+  "sample_fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+  "session_cache_reused": true,
+  "status": "C9_PLY_SENSITIVITIES_COMPLETE",
+  "unsupported_rows": 0,
+  "version": "C9-PLY-1.0.0"
+}

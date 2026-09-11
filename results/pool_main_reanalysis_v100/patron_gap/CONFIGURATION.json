@@ -1,0 +1,20 @@
+{
+  "api_url": "https://lichess.org/api/users?profile=true&rank=true",
+  "august_snapshot_sha256": "f42f28a6540a65c0a83f0da488663b4adddf60d1001daeed556f1ffbb961e238",
+  "august_snapshot_write_authorized": false,
+  "coverage_sha256": "4ce59c983af1e03c035d0aee3f0cfea5e26c8c0bf8c5ff26bcbd7c8a1404b27e",
+  "first_successful_response_retained": true,
+  "max_successful_response_rounds": 3,
+  "max_transport_attempts_per_round_per_invocation": 4,
+  "minimum_start_interval_seconds": 30.0,
+  "omission_retry_delay_seconds": 60.0,
+  "package_manifest_sha256": "f7ecad74864453c785f7c16636c665d7a653a5864d225b05994adc5eb9a37b7a",
+  "primary_target_count": 207,
+  "profile_dates": "actual request start UTC",
+  "query_scope": "frozen_285_missing_accounts_only",
+  "target_count": 285,
+  "target_records_sha256": "aeb6bff0b0fae9c9e9c2c618f146dee617c19962ac7ae25f5a04b69078d046fc",
+  "version": "1.0.0",
+  "wave3a_config_sha256": "f9dfa2718056083161d58175b5907e1a8b2dfbbc58a1244c45c878c78c3bd238",
+  "wave3a_report_sha256": "f56407f3de5bdd02366df28858e689da5f10a05c657f6c5e2feb71a7e227a592"
+}

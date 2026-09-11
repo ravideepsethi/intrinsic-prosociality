@@ -1,0 +1,36 @@
+{
+  "analysis_plan_sha256": "b11b546ea6fde608140619cffadffad1a7aab054b6fd1a9dcbee8900c98d0a6f",
+  "arm_blind_anchor_bounds": {
+    "chronology_scan_lower_exclusive_ms": 1698796802623,
+    "chronology_scan_upper_inclusive_ms": 1764548126467,
+    "maximum_anchor_utc_ms": 1761956126467,
+    "minimum_anchor_utc_ms": 1698796802623,
+    "qualifying_exposure_rows": 15207423,
+    "treatment_or_choice_outcome_read": false
+  },
+  "chronology_footer_plan_sha256": "48386050ee190323fb707ac605a4500e3b5a76b64cef88b738529730dc2ec6c5",
+  "git": {
+    "branch": "main",
+    "clean": true,
+    "head": "0dc981cbc6da157d365015a95f2b7157ecda4859"
+  },
+  "prior_feasibility": {
+    "report_files_authenticated": 1,
+    "root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/dynamic_prosociality_feasibility_v101/POOL_MAIN_WAVE2B1_FROZEN_DESIGN_GATE",
+    "status": "POOL_MAIN_WAVE2B1_FROZEN_DESIGN_GATE_OK",
+    "success_sha256": "7a1038d3794887297cffbfb25edc23857bcd3ba83bd5bcbdff70441a4e4c091a",
+    "transfer_zip_sha256_recorded": "design-authority-not-a-transfer"
+  },
+  "reentry_audit": {
+    "authenticated_report_files": 1,
+    "directory_manifest_sha256": "03387927f4ac2002c5519821040c218a4a660a7f6c14dac264fe32ee847a57ca",
+    "files": 2,
+    "historical_clock_rule": "disc_clock_s >= 347.0",
+    "root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/reentry_source_contract_audits/POOL_MAIN_WAVE2B1_source_contract_final_v121",
+    "status": "POOL_MAIN_WAVE2B1_REENTRY_CONTRACT_BRIDGE_OK",
+    "summary_sha256": "c1f076dfb99564f7c14b36e39becbb5d6e3bc3ca015fd83732d3c935c8faff38"
+  },
+  "resume_config_sha256": "8f5e24a8b706074d83a08bd8f3fc8d0b2346b5896d3e9442db481fc219d0019e",
+  "script_sha256": "b3ebd8d2f5eff2017dd1f55db1bd156e22f0407dead692d49e6e6910f568d6ad",
+  "stage07_success_sha256": "d5f41028371f49e3d6a6347e5fd3d2bfbda341c0affe46f52258bf428a2dd453"
+}

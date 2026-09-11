@@ -1,0 +1,3 @@
+benchmark,treated_rows,treated_rate_pct,comparison_rate_pct,implied_excess_kind_draws,share_of_fair_kind_draws,interpretation
+fairness_gap_descriptive,15207423,2.758277980431,0.470138343930227,347967.073353336,0.829553675421516,Descriptive benchmark; not a causal estimand
+favorable_vs_costly_within_fair_descriptive,7728611,3.0054818388453,2.5028172923721,38848.9874318274,0.0926160053016056,Descriptive benchmark; not a causal estimand

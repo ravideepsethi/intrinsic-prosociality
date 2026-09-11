@@ -1,0 +1,181 @@
+{
+  "adapter": {
+    "bytes": 10247,
+    "lineage": "pool_main_adapter",
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave1_v1_0_0/runner/run_controlled_reference.py",
+    "repository": null,
+    "repository_head_inspected": null,
+    "sha256": "ffc158e463d0468f60c50375a82988551514798c62425e9ba6814747946da5bf"
+  },
+  "code_sha256": "04f2389dbf895e94f9108ef98b100bb23233a3fea8a5a1fea397203ada1012d6",
+  "completed_at": "2026-09-09T21:15:41Z",
+  "elapsed_seconds": 52.42440504184924,
+  "figure_files": [
+    "figures/figure_controlled_draw_payoff_local.pdf",
+    "figures/figure_controlled_draw_payoff_local.png",
+    "figures/figure_controlled_draw_payoff_local.svg",
+    "figures/figure_controlled_reference_price.pdf",
+    "figures/figure_controlled_reference_price.png",
+    "figures/figure_controlled_reference_price.svg"
+  ],
+  "frozen_model_sha256": "a7cb4e723599705e3aae7416431d5b46fad27ea0bbd8a92671f1390f132b178f",
+  "horizontal_axis": "actual chooser draw payoff r_G, in rating points; local dots at bin means",
+  "local_adjusted_data": "local model residual + local payoff component, centered at local outcome mean",
+  "local_model_authentication": {
+    "absolute_tolerance": 2e-06,
+    "all_retained_and_dropped_terms_identical": true,
+    "all_sample_totals_identical": true,
+    "coefficient_count": 69,
+    "max_absolute_coefficient_or_se_difference": 1.7763568394002505e-15,
+    "relative_tolerance": 2e-06,
+    "status": "V110_LOCAL_MODEL_REPRODUCED"
+  },
+  "local_model_contrasts": {
+    "exact_zero_minus_left_limit": {
+      "ci95_high": 0.21173053477669174,
+      "ci95_low": 0.07333180455628413,
+      "estimate": 0.14253116966648793,
+      "p": 5.414532873467445e-05,
+      "se": 0.03530644728986837,
+      "t": 4.0369728649358905
+    },
+    "exact_zero_minus_right_limit": {
+      "ci95_high": 0.15752722599122382,
+      "ci95_low": 0.018704229141948678,
+      "estimate": 0.08811572756658625,
+      "p": 0.012842291653041325,
+      "se": 0.03541468056155451,
+      "t": 2.488113013286444
+    },
+    "gain_side_slope": {
+      "ci95_high": 0.05324861065655517,
+      "ci95_low": -0.38763115731216635,
+      "estimate": -0.1671912733278056,
+      "p": 0.13714093783766934,
+      "se": 0.11247139525173036,
+      "t": -1.4865226216283947
+    },
+    "loss_minus_gain_slope": {
+      "ci95_high": 0.6414776832971738,
+      "ci95_low": 0.3423284081472262,
+      "estimate": 0.4919030457222,
+      "p": 1.1507308567888146e-10,
+      "se": 0.07631499290537962,
+      "t": 6.445693395164093
+    },
+    "loss_side_slope": {
+      "ci95_high": 0.545634333476593,
+      "ci95_low": 0.1037892113121959,
+      "estimate": 0.3247117723943944,
+      "p": 0.003967261300804798,
+      "se": 0.11271766360239653,
+      "t": 2.8807532201855417
+    },
+    "right_minus_left_level": {
+      "ci95_high": 0.09501518114269566,
+      "ci95_low": 0.013815703057107685,
+      "estimate": 0.05441544209990168,
+      "p": 0.00861613373015129,
+      "se": 0.020714533207262766,
+      "t": 2.6269209909505933
+    }
+  },
+  "local_model_stats": {
+    "clusters": 1223918,
+    "kinds": 251740.0,
+    "n": 10116759,
+    "n_fe": 1398783,
+    "sum_y": 25174000.0
+  },
+  "local_plot_checks": {
+    "adjustment_model_is_local_fit": true,
+    "bin_and_fit_uncertainty_conditions_on_display_normalization": true,
+    "display_anchor_pct": 2.5509693901009314,
+    "exact_zero_point_minus_fit_pp": -1.8286261393996028e-11,
+    "exact_zero_se_minus_fit_se_pp": 1.8041124150158794e-16,
+    "local_bin_count": 9,
+    "local_mean_outcome_pct": 2.4883463172346003,
+    "local_mean_price_design": [
+      -0.18720465992047497,
+      0.1878766447459303,
+      0.4906023757213155,
+      0.02020241858089137
+    ],
+    "local_sample": {
+      "clusters": 1223918,
+      "n": 10116759,
+      "n_fe": 1398783
+    },
+    "max_price_normal_equation_per_row": 1.6015157646478577e-11,
+    "weighted_adjusted_mean_error_pp": -4.440892098500626e-16,
+    "x_is_actual_payoff_bin_mean": true
+  },
+  "private_cache_modified": false,
+  "private_rows_exported": false,
+  "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:11:29) [Clang 20.1.8 ]",
+  "reused_aggregate_tables": [
+    "tables/controlled_reference_price_bins.csv",
+    "tables/controlled_reference_price_bins.parquet",
+    "tables/controlled_reference_price_bin_coefficients.csv",
+    "tables/controlled_reference_price_bin_coefficients.parquet",
+    "tables/sample_flow.csv",
+    "tables/sample_flow.parquet",
+    "tables/source_identity_checks.csv",
+    "tables/source_identity_checks.parquet",
+    "tables/source_month_inventory.csv",
+    "tables/source_month_inventory.parquet",
+    "tables/legacy_v101_bridge_h1_results.csv",
+    "tables/legacy_v101_bridge_h1_results.parquet",
+    "tables/legacy_v101_bridge_h1_coefficients.csv",
+    "tables/legacy_v101_bridge_h1_coefficients.parquet"
+  ],
+  "sample_authority": {
+    "fair_kind_draws": 419463,
+    "fair_rows": 15207423,
+    "fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "kind_draws": 570091,
+    "literal_immediate_rematches_certified": false,
+    "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "months": 24,
+    "observed_screen_certified": true,
+    "panel_root_machine_specific": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+    "report_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "rows": 41534331,
+    "sample_name": "main_pool_nonadjacent",
+    "sample_status": "POOL_MAIN_SAMPLE_24M_CERTIFIED_OK",
+    "status": "POOL_MAIN_SAMPLE_AUTHENTICATED_OK"
+  },
+  "scientific_specification_changed": false,
+  "settings": {
+    "batch_rows": 32768,
+    "local_bandwidth": 1.0,
+    "local_bin_width": 0.25,
+    "memory": "12GB",
+    "threads": 8
+  },
+  "source_cache_bytes": 535909253,
+  "source_cache_mtime_ns": 1788988402925845940,
+  "source_files_verified": 27,
+  "source_manifest_sha256": "2a0fed7153f2ceca396395abd2d3c4f834b193b25c413513bba90a53a100499b",
+  "source_private_cache": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave1/controlled_reference_model_v110/controlled_reference_price_local_h1_private.parquet",
+  "source_program": {
+    "bytes": 29928,
+    "lineage": "controlled_reference_price_v1.1.1",
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave1_v1_0_0/source/controlled/controlled_reference_price_figure.py",
+    "repository": null,
+    "repository_head_inspected": null,
+    "sha256": "04f2389dbf895e94f9108ef98b100bb23233a3fea8a5a1fea397203ada1012d6"
+  },
+  "source_run": "/Volumes/XT_Pro/lichess_kindness/output/pool_main_reanalysis_v100/wave1/controlled_reference_model_v110",
+  "started_at": "2026-09-09T21:14:48Z",
+  "status": "POOL_MAIN_CONTROLLED_REFERENCE_PRICE_FIX_V111_COMPLETE",
+  "synthetic_validation": false,
+  "upstream_producer_status": "CONTROLLED_REFERENCE_PRICE_FIX_COMPLETE",
+  "version": "1.1.1",
+  "versions": {
+    "duckdb": "1.5.5",
+    "matplotlib": "3.11.1",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5"
+  }
+}

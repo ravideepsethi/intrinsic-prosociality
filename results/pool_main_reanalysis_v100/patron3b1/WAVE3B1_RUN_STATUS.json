@@ -1,0 +1,439 @@
+{
+  "coverage_resolution": "August-only source-family estimates and a separately labelled sensitivity adding 122 September profiles (77 primary controls). Full-target bounds are reported for each cohort; 130 primary outcomes remain unknown after supplementation. No replacement matches or API fetch.",
+  "created_utc": "2026-09-11T15:56:41Z",
+  "sample": {
+    "fair_kind_draws": 419463,
+    "fair_rows": 15207423,
+    "fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "kind_draws": 570091,
+    "literal_immediate_rematches_certified": false,
+    "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "months": 24,
+    "observed_screen_certified": true,
+    "panel_root_machine_specific": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+    "report_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "rows": 41534331,
+    "sample_name": "main_pool_nonadjacent",
+    "sample_status": "POOL_MAIN_SAMPLE_24M_CERTIFIED_OK",
+    "status": "POOL_MAIN_SAMPLE_AUTHENTICATED_OK"
+  },
+  "source_wave3a_coverage_gate": "BLOCKED_INCOMPLETE_AUGUST_PROFILE_COVERAGE",
+  "status": "PATRON_WAVE3B1_CORE_ESTIMATES_COMPLETE",
+  "still_pending": [
+    "100 deterministic full-control rematches",
+    "five-bin postcertification chooser models",
+    "Patron opportunity-level and ply/dyad sensitivities",
+    "integrated manuscript figures and tables"
+  ],
+  "summary": {
+    "august_only": {
+      "config_sha256": "9a64f1f9b8f87d62f10a5584937c44909a7a262601c2d6c7ec1751c7b67205bb",
+      "created_utc": "2026-09-11T15:54:26Z",
+      "elapsed_seconds": 238.26920291688293,
+      "files": [
+        {
+          "bytes": 224295,
+          "name": "chooser_coefficients.csv",
+          "sha256": "f91668fabbddf53e873d8e87309b596e4f5037a98270594ad65b97132167a848"
+        },
+        {
+          "bytes": 3777,
+          "name": "chooser_contrasts.csv",
+          "sha256": "047af6390a0269954eb587373a4e4120871b6c44154ee403fc60b111dc6b7ec5"
+        },
+        {
+          "bytes": 182098,
+          "name": "chooser_models.json",
+          "sha256": "88f1a02680800a6b479a01b3693a3cf355f229ab83c8a458215e0bcfcb58c515"
+        },
+        {
+          "bytes": 51318,
+          "name": "corrected_dates_coefficients.csv",
+          "sha256": "cfa9d65797db8478ee0867d312cab710549c4f7277d0486a8195a860d3375d60"
+        },
+        {
+          "bytes": 729,
+          "name": "corrected_dates_contrasts.csv",
+          "sha256": "3b127ed62819801c3530a0e11e59cdaeec54b7c022f7aec66b9579961213745d"
+        },
+        {
+          "bytes": 2995,
+          "name": "corrected_dates_imputation.json",
+          "sha256": "1c88744e0e6d53a66295b98e36817c131c1d17a1898cacb0ed9914dfc66da2b0"
+        },
+        {
+          "bytes": 36591,
+          "name": "corrected_dates_models.json",
+          "sha256": "4fc52bc89cdd65c289baf5d8b8ff628e96b42fe33eb10cf45e0f8b565bdf2ec9"
+        },
+        {
+          "bytes": 2884,
+          "name": "covariate_imputation_receipt.json",
+          "sha256": "400bf142c43977ac9e73bde8773bbe3267fc373d9c1661499a40698e11ce9675"
+        },
+        {
+          "bytes": 725,
+          "name": "diagnostic_kindness_raw_groups.csv",
+          "sha256": "81417e3a93457a2664ef168a8571e0f3053beb1a459eb9d3bb65a6d62304276b"
+        },
+        {
+          "bytes": 128,
+          "name": "diagnostic_kindness_support.csv",
+          "sha256": "6523a0e0a4d8e23be9a7fd14d32b22c7a0edc8f63e752984baaa3a89bb94f543"
+        },
+        {
+          "bytes": 310,
+          "name": "dose_response_raw_rates.csv",
+          "sha256": "0f26b6e9b84ebdd872e1d1f325d79fb9a9dcb434ccb2a742d11e0e1f593660a5"
+        },
+        {
+          "bytes": 10178,
+          "name": "missing_outcome_bounds.json",
+          "sha256": "0f5201be3dcab2083e7d1c76b1f012f434924323a7e14f22576e80cf0034785c"
+        },
+        {
+          "bytes": 616,
+          "name": "original_snapshot_outcome_qa.json",
+          "sha256": "39a8d64e95616d7169f9409c6907c51d8ddb6faa843b14d39a0a4a72e0a1619a"
+        },
+        {
+          "bytes": 527,
+          "name": "outcome_coverage_flow.csv",
+          "sha256": "92462ea03db4f4db838e244ffc584b5181680b13b22245463e65e68ca50de439"
+        },
+        {
+          "bytes": 8739,
+          "name": "preoutcome_support_receipt.json",
+          "sha256": "71fde5c3756e6e5857ed6282523fa8a2ffbcb2fc41ce3c3fc5028584f5b25a20"
+        },
+        {
+          "bytes": 178,
+          "name": "price_side_support.csv",
+          "sha256": "bd8039624d1fda02579cc9380a68fdfebf7b95adca6b9b6c1167a89f614e77fa"
+        },
+        {
+          "bytes": 1516,
+          "name": "raw_matched_patron_comparisons.csv",
+          "sha256": "ea4c527338739964d54a26b12397f330d1b0906ea6f66c3f8b0e78880c1d108d"
+        },
+        {
+          "bytes": 306,
+          "name": "sample_flow.csv",
+          "sha256": "10e80bd49d26a49e08803d70b0c282302cc454e56be05e8808a2a0b7c16277dc"
+        }
+      ],
+      "status": "CHECKPOINT_COMPLETE",
+      "summary": {
+        "date_sensitivity": {
+          "models": 4
+        },
+        "missing_bounds": {
+          "assumptions": "Unknown Patron indicators lie in {0,1}; all target memberships and new match cells are fixed.",
+          "cell_fe_lower_pp": 0.2843832654758981,
+          "cell_fe_upper_pp": 0.3261951222391496,
+          "control_missing": 177,
+          "kind_missing": 30,
+          "not_bounds_on_full_profile_covariate_models": true,
+          "not_confidence_intervals": true,
+          "raw_lower_pp": 0.28437781165385667,
+          "raw_upper_pp": 0.32618987464048127,
+          "scope": "all fixed primary target accounts, including unavailable focal profiles",
+          "target_control": 638569,
+          "target_kind": 212859
+        },
+        "primary": {
+          "models": 34,
+          "primary_accounts": 851131,
+          "primary_control_accounts": 638302,
+          "primary_kind_accounts": 212829
+        }
+      }
+    },
+    "output_inventory": {
+      "config_sha256": "9a64f1f9b8f87d62f10a5584937c44909a7a262601c2d6c7ec1751c7b67205bb",
+      "created_utc": "2026-09-11T15:56:38Z",
+      "elapsed_seconds": 2.692820040974766,
+      "files": [
+        {
+          "bytes": 8096,
+          "name": "CORE_PATRON_COMPARISON.csv",
+          "sha256": "276c9e589e10d13ca9afb38247aab4cff73fe1bc9a9ca017049311f240dcbb07"
+        },
+        {
+          "bytes": 224295,
+          "name": "chooser_coefficients.csv",
+          "sha256": "f91668fabbddf53e873d8e87309b596e4f5037a98270594ad65b97132167a848"
+        },
+        {
+          "bytes": 3777,
+          "name": "chooser_contrasts.csv",
+          "sha256": "047af6390a0269954eb587373a4e4120871b6c44154ee403fc60b111dc6b7ec5"
+        },
+        {
+          "bytes": 182098,
+          "name": "chooser_models.json",
+          "sha256": "88f1a02680800a6b479a01b3693a3cf355f229ab83c8a458215e0bcfcb58c515"
+        },
+        {
+          "bytes": 51318,
+          "name": "corrected_dates_coefficients.csv",
+          "sha256": "cfa9d65797db8478ee0867d312cab710549c4f7277d0486a8195a860d3375d60"
+        },
+        {
+          "bytes": 729,
+          "name": "corrected_dates_contrasts.csv",
+          "sha256": "3b127ed62819801c3530a0e11e59cdaeec54b7c022f7aec66b9579961213745d"
+        },
+        {
+          "bytes": 2995,
+          "name": "corrected_dates_imputation.json",
+          "sha256": "1c88744e0e6d53a66295b98e36817c131c1d17a1898cacb0ed9914dfc66da2b0"
+        },
+        {
+          "bytes": 36591,
+          "name": "corrected_dates_models.json",
+          "sha256": "4fc52bc89cdd65c289baf5d8b8ff628e96b42fe33eb10cf45e0f8b565bdf2ec9"
+        },
+        {
+          "bytes": 2884,
+          "name": "covariate_imputation_receipt.json",
+          "sha256": "400bf142c43977ac9e73bde8773bbe3267fc373d9c1661499a40698e11ce9675"
+        },
+        {
+          "bytes": 725,
+          "name": "diagnostic_kindness_raw_groups.csv",
+          "sha256": "81417e3a93457a2664ef168a8571e0f3053beb1a459eb9d3bb65a6d62304276b"
+        },
+        {
+          "bytes": 128,
+          "name": "diagnostic_kindness_support.csv",
+          "sha256": "6523a0e0a4d8e23be9a7fd14d32b22c7a0edc8f63e752984baaa3a89bb94f543"
+        },
+        {
+          "bytes": 310,
+          "name": "dose_response_raw_rates.csv",
+          "sha256": "0f26b6e9b84ebdd872e1d1f325d79fb9a9dcb434ccb2a742d11e0e1f593660a5"
+        },
+        {
+          "bytes": 10178,
+          "name": "missing_outcome_bounds.json",
+          "sha256": "0f5201be3dcab2083e7d1c76b1f012f434924323a7e14f22576e80cf0034785c"
+        },
+        {
+          "bytes": 616,
+          "name": "original_snapshot_outcome_qa.json",
+          "sha256": "39a8d64e95616d7169f9409c6907c51d8ddb6faa843b14d39a0a4a72e0a1619a"
+        },
+        {
+          "bytes": 527,
+          "name": "outcome_coverage_flow.csv",
+          "sha256": "92462ea03db4f4db838e244ffc584b5181680b13b22245463e65e68ca50de439"
+        },
+        {
+          "bytes": 8739,
+          "name": "preoutcome_support_receipt.json",
+          "sha256": "71fde5c3756e6e5857ed6282523fa8a2ffbcb2fc41ce3c3fc5028584f5b25a20"
+        },
+        {
+          "bytes": 178,
+          "name": "price_side_support.csv",
+          "sha256": "bd8039624d1fda02579cc9380a68fdfebf7b95adca6b9b6c1167a89f614e77fa"
+        },
+        {
+          "bytes": 1516,
+          "name": "raw_matched_patron_comparisons.csv",
+          "sha256": "ea4c527338739964d54a26b12397f330d1b0906ea6f66c3f8b0e78880c1d108d"
+        },
+        {
+          "bytes": 306,
+          "name": "sample_flow.csv",
+          "sha256": "10e80bd49d26a49e08803d70b0c282302cc454e56be05e8808a2a0b7c16277dc"
+        },
+        {
+          "bytes": 531,
+          "name": "supplemented_PROFILE_OBSERVATION_LINEAGE.json",
+          "sha256": "e87c783b6f0a75743f156c81c76063629c91fd183ce4c143087f0f834f27f6eb"
+        },
+        {
+          "bytes": 53369,
+          "name": "supplemented_chooser_coefficients.csv",
+          "sha256": "16a5afb7c29a7db5a8421a7857769ec39e458ef007e29c0d2669ab38eae02729"
+        },
+        {
+          "bytes": 746,
+          "name": "supplemented_chooser_contrasts.csv",
+          "sha256": "4ed7b80953c15075d3ab280a75057a7ed22303f8266a875b6d8a60442b8cc27a"
+        },
+        {
+          "bytes": 37725,
+          "name": "supplemented_chooser_models.json",
+          "sha256": "456389f7d77d2b24b10a457611b3ecfa8448d4492aba1a67541a0795f8de2715"
+        },
+        {
+          "bytes": 54105,
+          "name": "supplemented_corrected_dates_coefficients.csv",
+          "sha256": "b3379b5a58e2a3a21e24472605bfc008a8f884c10146aed7fd6bbe9b291dc895"
+        },
+        {
+          "bytes": 757,
+          "name": "supplemented_corrected_dates_contrasts.csv",
+          "sha256": "7f11a4a1c64cf8246f8c888d3a91fdd023d31f476d1bc42b9ba336b48e06be4c"
+        },
+        {
+          "bytes": 3047,
+          "name": "supplemented_corrected_dates_imputation.json",
+          "sha256": "b44b1a37d3c6853bcbf1c2a4285b06c4bbb715cbb20389cfa51280c157f24a08"
+        },
+        {
+          "bytes": 36661,
+          "name": "supplemented_corrected_dates_models.json",
+          "sha256": "0027f0bd48f7d83ea6702dd413c6754bf639a273a36361bc46393c0cbef06ad2"
+        },
+        {
+          "bytes": 2904,
+          "name": "supplemented_covariate_imputation_receipt.json",
+          "sha256": "97008ad19535b35cfac71899f35950dc6ba80571b268ef7b783cc63d495322ad"
+        },
+        {
+          "bytes": 10171,
+          "name": "supplemented_missing_outcome_bounds.json",
+          "sha256": "d5ae3e74e7cbba1cf0022e4e244929faa7c9c322e10fdedff90d08d109a01120"
+        },
+        {
+          "bytes": 706,
+          "name": "supplemented_outcome_coverage_flow.csv",
+          "sha256": "7c7987dde110dc3fd0b1d7d48051f24b78071d17e0ce5f0762d7181a00ac6bf7"
+        },
+        {
+          "bytes": 1183,
+          "name": "supplemented_raw_matched_patron_comparisons.csv",
+          "sha256": "60bc5eb2141590f33a4b96427d51f83fbe07b36a16e0df7e2a26ea152df662a8"
+        },
+        {
+          "bytes": 197,
+          "name": "supplemented_sample_flow.csv",
+          "sha256": "424809e655574cb5d6c4c001b711ae87eced05757b013bab4c15fc7d2e0bc706"
+        }
+      ],
+      "status": "CHECKPOINT_COMPLETE",
+      "summary": {
+        "august_models": 38,
+        "dates_not_pooled_without_labels": true,
+        "source_results_separate": true,
+        "supplemented_models": 10,
+        "total_models": 48
+      }
+    },
+    "profile_gap_fill": {
+      "config_sha256": "2c3aaceee64b55d9efcfd718bc91b4b59ddb0670c36e32a5657700fec066195b",
+      "membership": {
+        "bad_provenance": 0,
+        "mismatches": 0,
+        "nonreturn_mismatch": 0,
+        "recovered": 122,
+        "recovered_primary": 77,
+        "recovery_mismatch": 0,
+        "rows": 285,
+        "unique_users": 285
+      },
+      "observed_at_utc": "2026-09-11T15:30:44.718996+00:00",
+      "report_sha256": "99938ce0e0ebc2306e449148f76b50d87771677805ea4c35afc45066889b8737",
+      "supplement_sha256": "39a9c911bb0030d2dacc7c73f77d0bb94bc27981be347dd3e03f30af8b0482aa"
+    },
+    "supplemented_sensitivity": {
+      "config_sha256": "9a64f1f9b8f87d62f10a5584937c44909a7a262601c2d6c7ec1751c7b67205bb",
+      "created_utc": "2026-09-11T15:56:33Z",
+      "elapsed_seconds": 98.15358787495643,
+      "files": [
+        {
+          "bytes": 531,
+          "name": "PROFILE_OBSERVATION_LINEAGE.json",
+          "sha256": "e87c783b6f0a75743f156c81c76063629c91fd183ce4c143087f0f834f27f6eb"
+        },
+        {
+          "bytes": 53369,
+          "name": "chooser_coefficients.csv",
+          "sha256": "16a5afb7c29a7db5a8421a7857769ec39e458ef007e29c0d2669ab38eae02729"
+        },
+        {
+          "bytes": 746,
+          "name": "chooser_contrasts.csv",
+          "sha256": "4ed7b80953c15075d3ab280a75057a7ed22303f8266a875b6d8a60442b8cc27a"
+        },
+        {
+          "bytes": 37725,
+          "name": "chooser_models.json",
+          "sha256": "456389f7d77d2b24b10a457611b3ecfa8448d4492aba1a67541a0795f8de2715"
+        },
+        {
+          "bytes": 54105,
+          "name": "corrected_dates_coefficients.csv",
+          "sha256": "b3379b5a58e2a3a21e24472605bfc008a8f884c10146aed7fd6bbe9b291dc895"
+        },
+        {
+          "bytes": 757,
+          "name": "corrected_dates_contrasts.csv",
+          "sha256": "7f11a4a1c64cf8246f8c888d3a91fdd023d31f476d1bc42b9ba336b48e06be4c"
+        },
+        {
+          "bytes": 3047,
+          "name": "corrected_dates_imputation.json",
+          "sha256": "b44b1a37d3c6853bcbf1c2a4285b06c4bbb715cbb20389cfa51280c157f24a08"
+        },
+        {
+          "bytes": 36661,
+          "name": "corrected_dates_models.json",
+          "sha256": "0027f0bd48f7d83ea6702dd413c6754bf639a273a36361bc46393c0cbef06ad2"
+        },
+        {
+          "bytes": 2904,
+          "name": "covariate_imputation_receipt.json",
+          "sha256": "97008ad19535b35cfac71899f35950dc6ba80571b268ef7b783cc63d495322ad"
+        },
+        {
+          "bytes": 10171,
+          "name": "missing_outcome_bounds.json",
+          "sha256": "d5ae3e74e7cbba1cf0022e4e244929faa7c9c322e10fdedff90d08d109a01120"
+        },
+        {
+          "bytes": 706,
+          "name": "outcome_coverage_flow.csv",
+          "sha256": "7c7987dde110dc3fd0b1d7d48051f24b78071d17e0ce5f0762d7181a00ac6bf7"
+        },
+        {
+          "bytes": 1183,
+          "name": "raw_matched_patron_comparisons.csv",
+          "sha256": "60bc5eb2141590f33a4b96427d51f83fbe07b36a16e0df7e2a26ea152df662a8"
+        },
+        {
+          "bytes": 197,
+          "name": "sample_flow.csv",
+          "sha256": "424809e655574cb5d6c4c001b711ae87eced05757b013bab4c15fc7d2e0bc706"
+        }
+      ],
+      "status": "CHECKPOINT_COMPLETE",
+      "summary": {
+        "corrected_date_models": 4,
+        "missing_bounds": {
+          "assumptions": "Unknown Patron indicators lie in {0,1}; all target memberships and new match cells are fixed.",
+          "cell_fe_lower_pp": 0.29644136649001934,
+          "cell_fe_upper_pp": 0.3261951222391496,
+          "control_missing": 100,
+          "kind_missing": 30,
+          "not_bounds_on_full_profile_covariate_models": true,
+          "not_confidence_intervals": true,
+          "raw_lower_pp": 0.29643602306092465,
+          "raw_upper_pp": 0.32618987464048127,
+          "scope": "all fixed primary target accounts, including unavailable focal profiles",
+          "target_control": 638569,
+          "target_kind": 212859
+        },
+        "models": 6,
+        "primary_accounts": 851208,
+        "primary_control_accounts": 638379,
+        "primary_kind_accounts": 212829
+      }
+    }
+  },
+  "version": "3B1-1.0.1"
+}

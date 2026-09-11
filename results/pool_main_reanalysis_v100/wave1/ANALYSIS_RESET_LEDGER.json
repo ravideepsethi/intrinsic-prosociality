@@ -1,0 +1,107 @@
+{
+  "analyses": [
+    {
+      "analysis": "Sample authentication",
+      "dependency": "Certified report and all 24 panel files",
+      "status": "recomputed",
+      "wave": "wave1"
+    },
+    {
+      "analysis": "Core tables, desert, game stage, persistence",
+      "dependency": "Public Stage-08 producer",
+      "status": "recomputed",
+      "wave": "wave1"
+    },
+    {
+      "analysis": "Panel robustness and payoff diagnostics",
+      "dependency": "Public Stage-09 producer",
+      "status": "recomputed",
+      "wave": "wave1"
+    },
+    {
+      "analysis": "Rating-gap / expected-score / K-RD decomposition",
+      "dependency": "Surface package v1.0.0",
+      "status": "recomputed",
+      "wave": "wave1"
+    },
+    {
+      "analysis": "Nonparametric relative-strength closure",
+      "dependency": "Engineering v1.1.0; same scientific estimands",
+      "status": "recomputed",
+      "wave": "wave1"
+    },
+    {
+      "analysis": "Controlled reference-price diagnostic",
+      "dependency": "Model v1.1.0 plus corrected display v1.1.1",
+      "status": "recomputed",
+      "wave": "wave1"
+    },
+    {
+      "analysis": "Equality/FEN commonness audit",
+      "dependency": "Must rebuild position-frequency cache",
+      "status": "stale",
+      "wave": "wave2"
+    },
+    {
+      "analysis": "First/repeat-meeting and any-repeat-dyad analyses",
+      "dependency": "Reuse chronology, rebuild sample joins",
+      "status": "stale",
+      "wave": "wave2"
+    },
+    {
+      "analysis": "A1/A3/B1 core dynamics and A1 audits",
+      "dependency": "Rebuild first eligible exposure and histories",
+      "status": "stale",
+      "wave": "wave2"
+    },
+    {
+      "analysis": "Second-wave and Campaign dynamics",
+      "dependency": "Depends on rebuilt dynamic core",
+      "status": "stale",
+      "wave": "wave2"
+    },
+    {
+      "analysis": "C7R/C7X targeted memory and C6/C9 retrofits",
+      "dependency": "Rebuild focal flags and samples",
+      "status": "stale",
+      "wave": "wave2"
+    },
+    {
+      "analysis": "Chooser-leniency IV/placebo",
+      "dependency": "Rebuild instruments and ordinary-game placebo samples",
+      "status": "stale",
+      "wave": "wave2"
+    },
+    {
+      "analysis": "Patron matching, primary, and addendum",
+      "dependency": "Recompute chooser signals and matching; preserve snapshot-date caveat",
+      "status": "stale",
+      "wave": "wave3"
+    },
+    {
+      "analysis": "Unified figures, tables, manuscript numbers",
+      "dependency": "Only after all upstream receipts pass",
+      "status": "stale",
+      "wave": "wave3"
+    }
+  ],
+  "created_at_utc": "2026-09-09T20:55:30Z",
+  "rule": "No old sample-dependent estimate is current until the named reset wave succeeds.",
+  "sample_authority": {
+    "fair_kind_draws": 419463,
+    "fair_rows": 15207423,
+    "fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "kind_draws": 570091,
+    "literal_immediate_rematches_certified": false,
+    "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "months": 24,
+    "observed_screen_certified": true,
+    "panel_root_machine_specific": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+    "report_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "rows": 41534331,
+    "sample_name": "main_pool_nonadjacent",
+    "sample_status": "POOL_MAIN_SAMPLE_24M_CERTIFIED_OK",
+    "status": "POOL_MAIN_SAMPLE_AUTHENTICATED_OK"
+  },
+  "status": "POOL_MAIN_ANALYSIS_RESET_LEDGER_ACTIVE"
+}

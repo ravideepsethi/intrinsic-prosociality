@@ -1,0 +1,18 @@
+{
+  "csv_files_scanned": 74,
+  "forbidden_identifier_columns": [
+    "chooser_user_id",
+    "chooser_username",
+    "chooser_username_norm",
+    "disconnected_user_id",
+    "disconnected_username",
+    "disconnected_username_norm",
+    "game_id",
+    "matched_kind_chooser_id",
+    "username",
+    "username_norm"
+  ],
+  "parquet_files_scanned": 61,
+  "status": "PUBLIC_TRANSFER_PRIVACY_SCAN_OK",
+  "violations": 0
+}

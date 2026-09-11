@@ -1,0 +1,94 @@
+{
+  "causal_claim": false,
+  "conflicting_history_opportunities": 19,
+  "descriptive_categories": [
+    {
+      "category": "prior_claimer",
+      "kind_draws": 25,
+      "kind_rate_pct": 4.488330341113106,
+      "opportunities": 557
+    },
+    {
+      "category": "prior_benefactor",
+      "kind_draws": 12,
+      "kind_rate_pct": 36.36363636363637,
+      "opportunities": 33
+    },
+    {
+      "category": "prior_other_timeout",
+      "kind_draws": 1,
+      "kind_rate_pct": 100.0,
+      "opportunities": 1
+    },
+    {
+      "category": "prior_meeting_no_reversed_decision",
+      "kind_draws": 1210,
+      "kind_rate_pct": 2.811207657636727,
+      "opportunities": 43042
+    }
+  ],
+  "epistemic_label": "X",
+  "focal_kind_outcome_estimated": true,
+  "low_support_warning": "Only 33 benefactor-facing opportunities were available; all C7 estimates are exploratory, fragile, and excluded from Holm family D",
+  "primary": {
+    "causal_claim": false,
+    "chooser_clusters": 502,
+    "control_rows": 557,
+    "epistemic_label": "X",
+    "model": "C7_latest_reversed_arm_decision_primary",
+    "rows": 590,
+    "status": "NOT_HDFE_ESTIMABLE_LOW_SUPPORT",
+    "treated_rows": 33
+  },
+  "scope_note": "bounds anonymity; does not reopen E1",
+  "sensitivities": [
+    {
+      "causal_claim": false,
+      "chooser_clusters": 484,
+      "control_rows": 534,
+      "epistemic_label": "X",
+      "model": "C7_latest_reversed_arm_decision_same_speed",
+      "rows": 563,
+      "status": "NOT_HDFE_ESTIMABLE_LOW_SUPPORT",
+      "treated_rows": 29
+    },
+    {
+      "causal_claim": false,
+      "chooser_clusters": 498,
+      "control_rows": 543,
+      "epistemic_label": "X",
+      "model": "C7_any_prior_arm_decision_exclusive_histories",
+      "rows": 571,
+      "status": "NOT_HDFE_ESTIMABLE_LOW_SUPPORT",
+      "treated_rows": 28
+    }
+  ],
+  "status": "C7_ESTIMATED_EXPLORATORY_LOW_SUPPORT_GATE_FAILED",
+  "support_gate": {
+    "benefactor_facing_fair_opportunities": 33,
+    "config_sha256": "f44a90e424dc8400891277caa85104a1b4d97fd29ca984a5e07f1d4794c379dc",
+    "created_utc": "2026-08-25T18:52:26.219224+00:00",
+    "disposition": "ESTIMATE_EXPLORATORY_WITH_LOW_SUPPORT_WARNING",
+    "focal_kind_outcome_read": false,
+    "gate_pass": false,
+    "minimum_benefactor_facing_fair_opportunities": 1000,
+    "status": "C7_TREATMENT_OUTCOME_BLIND_SUPPORT_GATE_FROZEN"
+  },
+  "unadjusted_primary": {
+    "causal_claim": false,
+    "control_kind_draws": 25,
+    "control_kind_rate_pct": 4.488330341113106,
+    "control_rows": 557,
+    "difference_percentage_points": 31.875306022523258,
+    "epistemic_label": "X",
+    "fisher_exact_two_sided_p_value": 8.31754480783071e-08,
+    "inference_warning": "descriptive opportunity-level inference ignores repeated-chooser dependence; use the clustered HDFE attempt when estimable",
+    "model": "C7_latest_reversed_arm_decision_unadjusted",
+    "naive_unclustered_normal_p_value": 0.00015323096400503863,
+    "naive_unclustered_standard_error_percentage_points": 8.419759614075794,
+    "status": "DESCRIPTIVE_TWO_ARM_ESTIMATED",
+    "treated_kind_draws": 12,
+    "treated_kind_rate_pct": 36.36363636363637,
+    "treated_rows": 33
+  }
+}

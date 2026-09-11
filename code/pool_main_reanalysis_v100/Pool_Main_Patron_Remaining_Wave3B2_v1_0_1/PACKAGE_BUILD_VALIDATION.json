@@ -1,0 +1,54 @@
+{
+  "status": "READY_FOR_MAC_RUN",
+  "version": "3B2-1.0.1",
+  "created_utc": "2026-09-11T17:14:19.881757+00:00",
+  "synthetic_validation": {
+    "tests": 9,
+    "passed": 9,
+    "elapsed_seconds": 2.639,
+    "expanded_row_OLS_HC1_CR1": "PASS",
+    "unchanged_estimator_plus_serialization": "PASS",
+    "full_chooser_and_opportunity_and_ply_and_dyad_fixture": "PASS",
+    "missing_slots_and_checkpoint_resume": "PASS",
+    "tampered_checkpoint_rejected": "PASS",
+    "private_rows_excluded_and_report_hashes": "PASS",
+    "C9_wait_and_duplicate_run_lock": "PASS",
+    "authenticated_actual_Wave3B1_catalogue_and_invalid_shapes": "PASS",
+    "core_reproduction_frozen_writer_and_checkpoint_resume": "PASS",
+    "numerical_gate_rejects_changed_reference_coefficient": "PASS"
+  },
+  "syntax": {
+    "python_files": 22,
+    "bash": "PASS"
+  },
+  "test_runtime": {
+    "python": "3.12.14",
+    "duckdb": "1.5.5",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1"
+  },
+  "full_private_data_run_performed": false,
+  "runtime_estimate_minutes": [
+    60,
+    180
+  ],
+  "C9_wait_excluded_from_estimate": true,
+  "scheduled_fits": {
+    "core_reproduction_gate": 2,
+    "rematch": 200,
+    "five_bin": 7,
+    "price_count_rate": 10,
+    "opportunity": 3,
+    "ply": 12
+  },
+  "dyad_rematch_restrictions": 4,
+  "validation_scope": "Eight numerical/integration/schema checks plus one authenticated public-report check; no private-data benchmark.",
+  "frozen_sources_authority_evidence_and_scope_unchanged": true,
+  "repair": "Read chooser_models.json as a validated nonempty list of model objects; retain the object-only authority loader.",
+  "public_reference_regression": {
+    "archive_sha256": "34b71da5e684ee07cf1abfbb9d9406dbc3601db20ff099e2737574790f0a5616",
+    "catalogue_records": 34,
+    "core_model_candidate_rows": 851131
+  }
+}

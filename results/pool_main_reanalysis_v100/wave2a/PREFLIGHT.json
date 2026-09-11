@@ -1,0 +1,89 @@
+{
+  "created_at_utc": "2026-09-10T03:07:27Z",
+  "fen_package": {
+    "bytes": 253391,
+    "files": 10,
+    "manifest_sha256": "233c1dc14bb7db01f774ed496e4768f7ea94f4d4e23cfe17e009db285ff701a0",
+    "status": "POOL_MAIN_WAVE2A_PACKAGE_AUTHENTICATED_OK"
+  },
+  "full_monthly_hashes": "performed once by outcome-blind FEN design stage",
+  "monthly_files_footer_and_size_authenticated": 24,
+  "package": {
+    "bytes": 2380540,
+    "files": 76,
+    "manifest_sha256": "3c54e66c2ebd45dd5c97680082ca9f61ed386d9a93a11f31d944bb523e149ed8",
+    "status": "POOL_MAIN_WAVE2A_PACKAGE_AUTHENTICATED_OK"
+  },
+  "resources": {
+    "free_gb": 666.8526763916016,
+    "minimum_free_gb": 80.0,
+    "private_base": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2a"
+  },
+  "runtime": {
+    "executable": "/Users/u6025368/Desktop/Lichess_Desktop/pool_main_wave1_python.KT7f8H/bin/python",
+    "packages": {
+      "duckdb": "1.5.5",
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.3",
+      "pandas": "3.0.5",
+      "pyarrow": "25.0.1"
+    },
+    "platform": "macOS-26.4.1-arm64-arm-64bit-Mach-O",
+    "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:11:29) [Clang 20.1.8 ]"
+  },
+  "sample_authority": {
+    "fair_kind_draws": 419463,
+    "fair_rows": 15207423,
+    "fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "kind_draws": 570091,
+    "literal_immediate_rematches_certified": false,
+    "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "months": 24,
+    "observed_screen_certified": true,
+    "panel_root_machine_specific": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+    "report_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "rows": 41534331,
+    "sample_name": "main_pool_nonadjacent",
+    "sample_status": "POOL_MAIN_SAMPLE_24M_CERTIFIED_OK",
+    "status": "POOL_MAIN_SAMPLE_AUTHENTICATED_OK"
+  },
+  "sample_success_sha256": "978348a457d8d21a9690cc146065a85c1d9022f70d787cf8e1d9273afcede855",
+  "scope": {
+    "inventoried_not_reestimated": [
+      "A1/A3/B1 dynamics",
+      "repeat-dyad and second-wave dynamics",
+      "Campaign and targeted-memory dynamics",
+      "chooser-leniency analyses"
+    ],
+    "old_sample_dependent_dynamic_caches_current": false,
+    "recomputed_in_wave2a": [
+      "equality/FEN commonness audit",
+      "engine-zero placebo-knot audit"
+    ]
+  },
+  "status": "POOL_MAIN_REANALYSIS_WAVE2A_PREFLIGHT_OK",
+  "wave1": {
+    "modules": {
+      "core_stage08": {
+        "bytes": 24033,
+        "exists": true,
+        "failures": [],
+        "observed_status": "POOL_MAIN_STAGE08_CORE_24M_REESTIMATED_OK",
+        "path": "/Volumes/XT_Pro/lichess_kindness/output/pool_main_reanalysis_v100/wave1/core_stage08/_SUCCESS.json",
+        "sha256": "343f3482898ca08784591785b284c5a90403fa8baf8c4ef6ed3a45692a1d30df",
+        "status": "AUTHENTICATED_OK"
+      },
+      "panel_robustness_stage09": {
+        "bytes": 14631,
+        "exists": true,
+        "failures": [],
+        "observed_status": "POOL_MAIN_STAGE09_PANEL_ROBUSTNESS_24M_REESTIMATED_OK",
+        "path": "/Volumes/XT_Pro/lichess_kindness/output/pool_main_reanalysis_v100/wave1/panel_robustness_stage09/_SUCCESS.json",
+        "sha256": "fb4f9e2ffdd503b8803a61dd940980d7177ca089469bfb98320d88f1b8ddae64",
+        "status": "AUTHENTICATED_OK"
+      }
+    },
+    "root": "/Volumes/XT_Pro/lichess_kindness/output/pool_main_reanalysis_v100/wave1",
+    "status": "POOL_MAIN_WAVE1_INPUTS_AUTHENTICATED_OK"
+  }
+}

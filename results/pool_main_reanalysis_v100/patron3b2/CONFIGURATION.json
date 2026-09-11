@@ -1,0 +1,19 @@
+{
+  "design_sha256": "ccb11403158091dd0ecca466f5e04bdeda57b727d0dd262f382367ad5848526c",
+  "memory_limit": "12GB",
+  "package_manifest_sha256": "3a101f3b01e5eea586787a0fc741fb638fcc24f0c57687c89cb67ca80fae8a82",
+  "prior_config_sha256": "9a64f1f9b8f87d62f10a5584937c44909a7a262601c2d6c7ec1751c7b67205bb",
+  "prior_report_sha256": "34b71da5e684ee07cf1abfbb9d9406dbc3601db20ff099e2737574790f0a5616",
+  "runtime": {
+    "duckdb": "1.5.5",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1",
+    "python": "3.13.9"
+  },
+  "sample_fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+  "scope_sha256": "ebc67d0a8952e03fa8a7338c80f099a15f3b45bd44a038eff80fbe274f753241",
+  "snapshot_sha256": "f42f28a6540a65c0a83f0da488663b4adddf60d1001daeed556f1ffbb961e238",
+  "threads": 8,
+  "version": "3B2-1.0.1"
+}

@@ -1,0 +1,159 @@
+{
+  "checkpoint_receipts": {
+    "chooser_summary": {
+      "config_sha256": "f9dfa2718056083161d58175b5907e1a8b2dfbbc58a1244c45c878c78c3bd238",
+      "created_utc": "2026-09-11T13:47:36Z",
+      "elapsed_seconds": 30.596410375088453,
+      "files": [
+        {
+          "bytes": 141666080,
+          "name": "chooser_summary_private.parquet",
+          "sha256": "d3df2c87210fe2d903275fabcffc356dd4f27699c3054505682985ee9fe45b0e"
+        }
+      ],
+      "status": "CHECKPOINT_COMPLETE",
+      "summary": {
+        "any_kind_choosers": 276482,
+        "choosers": 3224173,
+        "duplicate_choosers": 0,
+        "fair_choosers": 2442576,
+        "fair_kind_choosers": 212859,
+        "fair_kind_draws": 419463,
+        "fair_rows": 15207423,
+        "invalid_summaries": 0,
+        "kind_draws": 570091,
+        "rows": 41534331
+      }
+    },
+    "coverage": {
+      "config_sha256": "f9dfa2718056083161d58175b5907e1a8b2dfbbc58a1244c45c878c78c3bd238",
+      "created_utc": "2026-09-11T13:47:52Z",
+      "elapsed_seconds": 4.625698750140145,
+      "files": [
+        {
+          "bytes": 43447,
+          "name": "aggregate_coverage.json",
+          "sha256": "a4b21e356e876bf046f0b1880432ce0f5b77d07bca5e267d6a4775582ef54f7c"
+        },
+        {
+          "bytes": 2027053,
+          "name": "group_coverage_private.parquet",
+          "sha256": "da8c70feed4493448e5829d53fddd3460f8f1ad019b1530f5b59f616ce31ec54"
+        },
+        {
+          "bytes": 11453825,
+          "name": "target_coverage_private.parquet",
+          "sha256": "4ce59c983af1e03c035d0aee3f0cfea5e26c8c0bf8c5ff26bcbd7c8a1404b27e"
+        }
+      ],
+      "status": "CHECKPOINT_COMPLETE",
+      "summary": {
+        "gates": {
+          "all_any_kind_groups": {
+            "models_estimated": false,
+            "planned_nonreturns": 163,
+            "status": "BLOCKED_INCOMPLETE_AUGUST_PROFILE_COVERAGE",
+            "unplanned_target_accounts": 122
+          },
+          "primary_fair_kind_groups": {
+            "models_estimated": false,
+            "planned_nonreturns": 130,
+            "status": "BLOCKED_INCOMPLETE_AUGUST_PROFILE_COVERAGE",
+            "unplanned_target_accounts": 77
+          }
+        },
+        "snapshot_membership_qa": {
+          "control_role": 979404,
+          "duplicate_or_null_ids": 0,
+          "invalid_rows": 0,
+          "kind_role": 326468,
+          "nonreturned": 189,
+          "planned": 1305872,
+          "returned": 1305683
+        }
+      }
+    },
+    "matching": {
+      "config_sha256": "f9dfa2718056083161d58175b5907e1a8b2dfbbc58a1244c45c878c78c3bd238",
+      "created_utc": "2026-09-11T13:47:46Z",
+      "elapsed_seconds": 7.435809792019427,
+      "files": [
+        {
+          "bytes": 57938596,
+          "name": "acquisition_users_private.parquet",
+          "sha256": "6b14aad34a726addd62bc192b7d443bfa743d54944aec3b08963151b143b9bf8"
+        },
+        {
+          "bytes": 1677,
+          "name": "cell_counts_private.parquet",
+          "sha256": "104b70576aef7573e53fa8964a32b9f9cccd1bf9003b5e91633051320e6ad1c0"
+        },
+        {
+          "bytes": 2618850,
+          "name": "kind_groups_private.parquet",
+          "sha256": "e25e3d80c90133b27f894b8fa43a57acd1b73e63a529543452862887da97a737"
+        },
+        {
+          "bytes": 9272685,
+          "name": "matching_pairs_private.parquet",
+          "sha256": "ad023d9fd5f0ab2bb43a854b2fd6f0ed2c02e80360e55705b71ddc9d461261f8"
+        }
+      ],
+      "status": "CHECKPOINT_COMPLETE",
+      "summary": {
+        "duplicate_users": 0,
+        "exact_three_groups": 276473,
+        "invalid_groups": 0,
+        "invalid_pairs": 0,
+        "kind_groups": 276482,
+        "selected_controls": 829437,
+        "target_users": 1105919,
+        "unsupported_groups": 0
+      }
+    }
+  },
+  "coverage_gates": {
+    "all_any_kind_groups": {
+      "models_estimated": false,
+      "planned_nonreturns": 163,
+      "status": "BLOCKED_INCOMPLETE_AUGUST_PROFILE_COVERAGE",
+      "unplanned_target_accounts": 122
+    },
+    "primary_fair_kind_groups": {
+      "models_estimated": false,
+      "planned_nonreturns": 130,
+      "status": "BLOCKED_INCOMPLETE_AUGUST_PROFILE_COVERAGE",
+      "unplanned_target_accounts": 77
+    }
+  },
+  "created_utc": "2026-09-11T13:47:55Z",
+  "elapsed_seconds_this_invocation": 64.8084539170377,
+  "models_estimated": false,
+  "profile_membership_columns_decoded": [
+    "username_norm",
+    "returned",
+    "acquisition_role",
+    "match_cell",
+    "matched_kind_chooser_id",
+    "control_slot"
+  ],
+  "profile_outcome_columns_decoded": [],
+  "sample": {
+    "fair_kind_draws": 419463,
+    "fair_rows": 15207423,
+    "fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "kind_draws": 570091,
+    "literal_immediate_rematches_certified": false,
+    "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "months": 24,
+    "observed_screen_certified": true,
+    "panel_root_machine_specific": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+    "report_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "rows": 41534331,
+    "sample_name": "main_pool_nonadjacent",
+    "sample_status": "POOL_MAIN_SAMPLE_24M_CERTIFIED_OK",
+    "status": "POOL_MAIN_SAMPLE_AUTHENTICATED_OK"
+  },
+  "status": "PATRON_WAVE3A_DESIGN_INPUTS_COMPLETE",
+  "version": "3A-1.0.0"
+}

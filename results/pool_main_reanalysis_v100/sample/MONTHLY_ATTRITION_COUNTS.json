@@ -1,0 +1,962 @@
+[
+  {
+    "fair_kind_draws": 1,
+    "fair_rows": 9,
+    "kind_draws": 1,
+    "main_exclusion_reason": "pool_ambiguous_order",
+    "month": "2023-11",
+    "rows": 12
+  },
+  {
+    "fair_kind_draws": 1837,
+    "fair_rows": 56515,
+    "kind_draws": 2698,
+    "main_exclusion_reason": "not_pool",
+    "month": "2023-11",
+    "rows": 155260
+  },
+  {
+    "fair_kind_draws": 17559,
+    "fair_rows": 633507,
+    "kind_draws": 23631,
+    "main_exclusion_reason": "included_main",
+    "month": "2023-11",
+    "rows": 1732360
+  },
+  {
+    "fair_kind_draws": 989,
+    "fair_rows": 33009,
+    "kind_draws": 1426,
+    "main_exclusion_reason": "pool_adjacent_candidate",
+    "month": "2023-11",
+    "rows": 100850
+  },
+  {
+    "fair_kind_draws": 316,
+    "fair_rows": 8792,
+    "kind_draws": 461,
+    "main_exclusion_reason": "pool_missing_previous",
+    "month": "2023-11",
+    "rows": 27327
+  },
+  {
+    "fair_kind_draws": 18154,
+    "fair_rows": 653331,
+    "kind_draws": 24706,
+    "main_exclusion_reason": "included_main",
+    "month": "2023-12",
+    "rows": 1811457
+  },
+  {
+    "fair_kind_draws": 1016,
+    "fair_rows": 34075,
+    "kind_draws": 1514,
+    "main_exclusion_reason": "pool_adjacent_candidate",
+    "month": "2023-12",
+    "rows": 106218
+  },
+  {
+    "fair_kind_draws": 256,
+    "fair_rows": 7253,
+    "kind_draws": 369,
+    "main_exclusion_reason": "pool_missing_previous",
+    "month": "2023-12",
+    "rows": 23002
+  },
+  {
+    "fair_kind_draws": 1868,
+    "fair_rows": 58474,
+    "kind_draws": 2770,
+    "main_exclusion_reason": "not_pool",
+    "month": "2023-12",
+    "rows": 160407
+  },
+  {
+    "fair_kind_draws": 1,
+    "fair_rows": 18,
+    "kind_draws": 1,
+    "main_exclusion_reason": "pool_ambiguous_order",
+    "month": "2023-12",
+    "rows": 26
+  },
+  {
+    "fair_kind_draws": 0,
+    "fair_rows": 23,
+    "kind_draws": 0,
+    "main_exclusion_reason": "pool_ambiguous_order",
+    "month": "2024-01",
+    "rows": 34
+  },
+  {
+    "fair_kind_draws": 1937,
+    "fair_rows": 57392,
+    "kind_draws": 2885,
+    "main_exclusion_reason": "not_pool",
+    "month": "2024-01",
+    "rows": 157684
+  },
+  {
+    "fair_kind_draws": 17798,
+    "fair_rows": 636666,
+    "kind_draws": 24180,
+    "main_exclusion_reason": "included_main",
+    "month": "2024-01",
+    "rows": 1768148
+  },
+  {
+    "fair_kind_draws": 232,
+    "fair_rows": 6085,
+    "kind_draws": 332,
+    "main_exclusion_reason": "pool_missing_previous",
+    "month": "2024-01",
+    "rows": 19619
+  },
+  {
+    "fair_kind_draws": 1014,
+    "fair_rows": 33246,
+    "kind_draws": 1474,
+    "main_exclusion_reason": "pool_adjacent_candidate",
+    "month": "2024-01",
+    "rows": 103807
+  },
+  {
+    "fair_kind_draws": 1663,
+    "fair_rows": 52780,
+    "kind_draws": 2543,
+    "main_exclusion_reason": "not_pool",
+    "month": "2024-02",
+    "rows": 145217
+  },
+  {
+    "fair_kind_draws": 877,
+    "fair_rows": 30589,
+    "kind_draws": 1271,
+    "main_exclusion_reason": "pool_adjacent_candidate",
+    "month": "2024-02",
+    "rows": 95110
+  },
+  {
+    "fair_kind_draws": 16965,
+    "fair_rows": 606130,
+    "kind_draws": 22980,
+    "main_exclusion_reason": "included_main",
+    "month": "2024-02",
+    "rows": 1674269
+  },
+  {
+    "fair_kind_draws": 183,
+    "fair_rows": 5170,
+    "kind_draws": 278,
+    "main_exclusion_reason": "pool_missing_previous",
+    "month": "2024-02",
+    "rows": 16521
+  },
+  {
+    "fair_kind_draws": 0,
+    "fair_rows": 20,
+    "kind_draws": 0,
+    "main_exclusion_reason": "pool_ambiguous_order",
+    "month": "2024-02",
+    "rows": 26
+  },
+  {
+    "fair_kind_draws": 1751,
+    "fair_rows": 55100,
+    "kind_draws": 2693,
+    "main_exclusion_reason": "not_pool",
+    "month": "2024-03",
+    "rows": 151645
+  },
+  {
+    "fair_kind_draws": 17439,
+    "fair_rows": 630770,
+    "kind_draws": 23806,
+    "main_exclusion_reason": "included_main",
+    "month": "2024-03",
+    "rows": 1753915
+  },
+  {
+    "fair_kind_draws": 898,
+    "fair_rows": 31712,
+    "kind_draws": 1374,
+    "main_exclusion_reason": "pool_adjacent_candidate",
+    "month": "2024-03",
+    "rows": 100225
+  },
+  {
+    "fair_kind_draws": 174,
+    "fair_rows": 4887,
+    "kind_draws": 259,
+    "main_exclusion_reason": "pool_missing_previous",
+    "month": "2024-03",
+    "rows": 15986
+  },
+  {
+    "fair_kind_draws": 1,
+    "fair_rows": 20,
+    "kind_draws": 1,
+    "main_exclusion_reason": "pool_ambiguous_order",
+    "month": "2024-03",
+    "rows": 27
+  },
+  {
+    "fair_kind_draws": 0,
+    "fair_rows": 19,
+    "kind_draws": 0,
+    "main_exclusion_reason": "pool_ambiguous_order",
+    "month": "2024-04",
+    "rows": 24
+  },
+  {
+    "fair_kind_draws": 16976,
+    "fair_rows": 607989,
+    "kind_draws": 22871,
+    "main_exclusion_reason": "included_main",
+    "month": "2024-04",
+    "rows": 1666762
+  },
+  {
+    "fair_kind_draws": 871,
+    "fair_rows": 30633,
+    "kind_draws": 1285,
+    "main_exclusion_reason": "pool_adjacent_candidate",
+    "month": "2024-04",
+    "rows": 94777
+  },
+  {
+    "fair_kind_draws": 158,
+    "fair_rows": 4348,
+    "kind_draws": 227,
+    "main_exclusion_reason": "pool_missing_previous",
+    "month": "2024-04",
+    "rows": 14328
+  },
+  {
+    "fair_kind_draws": 1652,
+    "fair_rows": 52181,
+    "kind_draws": 2468,
+    "main_exclusion_reason": "not_pool",
+    "month": "2024-04",
+    "rows": 141245
+  },
+  {
+    "fair_kind_draws": 1,
+    "fair_rows": 14,
+    "kind_draws": 1,
+    "main_exclusion_reason": "pool_ambiguous_order",
+    "month": "2024-05",
+    "rows": 20
+  },
+  {
+    "fair_kind_draws": 17868,
+    "fair_rows": 642670,
+    "kind_draws": 23992,
+    "main_exclusion_reason": "included_main",
+    "month": "2024-05",
+    "rows": 1748806
+  },
+  {
+    "fair_kind_draws": 177,
+    "fair_rows": 4514,
+    "kind_draws": 249,
+    "main_exclusion_reason": "pool_missing_previous",
+    "month": "2024-05",
+    "rows": 14457
+  },
+  {
+    "fair_kind_draws": 912,
+    "fair_rows": 31800,
+    "kind_draws": 1331,
+    "main_exclusion_reason": "pool_adjacent_candidate",
+    "month": "2024-05",
+    "rows": 98612
+  },
+  {
+    "fair_kind_draws": 1802,
+    "fair_rows": 55685,
+    "kind_draws": 2649,
+    "main_exclusion_reason": "not_pool",
+    "month": "2024-05",
+    "rows": 149504
+  },
+  {
+    "fair_kind_draws": 1615,
+    "fair_rows": 52012,
+    "kind_draws": 2405,
+    "main_exclusion_reason": "not_pool",
+    "month": "2024-06",
+    "rows": 139173
+  },
+  {
+    "fair_kind_draws": 16815,
+    "fair_rows": 611498,
+    "kind_draws": 22513,
+    "main_exclusion_reason": "included_main",
+    "month": "2024-06",
+    "rows": 1657041
+  },
+  {
+    "fair_kind_draws": 898,
+    "fair_rows": 30670,
+    "kind_draws": 1300,
+    "main_exclusion_reason": "pool_adjacent_candidate",
+    "month": "2024-06",
+    "rows": 94020
+  },
+  {
+    "fair_kind_draws": 124,
+    "fair_rows": 4032,
+    "kind_draws": 176,
+    "main_exclusion_reason": "pool_missing_previous",
+    "month": "2024-06",
+    "rows": 12876
+  },
+  {
+    "fair_kind_draws": 2,
+    "fair_rows": 20,
+    "kind_draws": 2,
+    "main_exclusion_reason": "pool_ambiguous_order",
+    "month": "2024-06",
+    "rows": 29
+  },
+  {
+    "fair_kind_draws": 1644,
+    "fair_rows": 52681,
+    "kind_draws": 2353,
+    "main_exclusion_reason": "not_pool",
+    "month": "2024-07",
+    "rows": 138734
+  },
+  {
+    "fair_kind_draws": 0,
+    "fair_rows": 14,
+    "kind_draws": 1,
+    "main_exclusion_reason": "pool_ambiguous_order",
+    "month": "2024-07",
+    "rows": 21
+  },
+  {
+    "fair_kind_draws": 16697,
+    "fair_rows": 614155,
+    "kind_draws": 22505,
+    "main_exclusion_reason": "included_main",
+    "month": "2024-07",
+    "rows": 1648142
+  },
+  {
+    "fair_kind_draws": 919,
+    "fair_rows": 31191,
+    "kind_draws": 1281,
+    "main_exclusion_reason": "pool_adjacent_candidate",
+    "month": "2024-07",
+    "rows": 94058
+  },
+  {
+    "fair_kind_draws": 146,
+    "fair_rows": 3855,
+    "kind_draws": 214,
+    "main_exclusion_reason": "pool_missing_previous",
+    "month": "2024-07",
+    "rows": 12506
+  },
+  {
+    "fair_kind_draws": 1640,
+    "fair_rows": 52567,
+    "kind_draws": 2358,
+    "main_exclusion_reason": "not_pool",
+    "month": "2024-08",
+    "rows": 139419
+  },
+  {
+    "fair_kind_draws": 16570,
+    "fair_rows": 620562,
+    "kind_draws": 22634,
+    "main_exclusion_reason": "included_main",
+    "month": "2024-08",
+    "rows": 1674961
+  },
+  {
+    "fair_kind_draws": 892,
+    "fair_rows": 31862,
+    "kind_draws": 1301,
+    "main_exclusion_reason": "pool_adjacent_candidate",
+    "month": "2024-08",
+    "rows": 97055
+  },
+  {
+    "fair_kind_draws": 120,
+    "fair_rows": 3835,
+    "kind_draws": 174,
+    "main_exclusion_reason": "pool_missing_previous",
+    "month": "2024-08",
+    "rows": 12513
+  },
+  {
+    "fair_kind_draws": 0,
+    "fair_rows": 17,
+    "kind_draws": 0,
+    "main_exclusion_reason": "pool_ambiguous_order",
+    "month": "2024-08",
+    "rows": 27
+  },
+  {
+    "fair_kind_draws": 0,
+    "fair_rows": 14,
+    "kind_draws": 0,
+    "main_exclusion_reason": "pool_ambiguous_order",
+    "month": "2024-09",
+    "rows": 19
+  },
+  {
+    "fair_kind_draws": 16203,
+    "fair_rows": 595702,
+    "kind_draws": 21946,
+    "main_exclusion_reason": "included_main",
+    "month": "2024-09",
+    "rows": 1608915
+  },
+  {
+    "fair_kind_draws": 842,
+    "fair_rows": 29392,
+    "kind_draws": 1187,
+    "main_exclusion_reason": "pool_adjacent_candidate",
+    "month": "2024-09",
+    "rows": 89349
+  },
+  {
+    "fair_kind_draws": 149,
+    "fair_rows": 4017,
+    "kind_draws": 217,
+    "main_exclusion_reason": "pool_missing_previous",
+    "month": "2024-09",
+    "rows": 13444
+  },
+  {
+    "fair_kind_draws": 1466,
+    "fair_rows": 45454,
+    "kind_draws": 2114,
+    "main_exclusion_reason": "not_pool",
+    "month": "2024-09",
+    "rows": 120319
+  },
+  {
+    "fair_kind_draws": 17651,
+    "fair_rows": 641390,
+    "kind_draws": 23973,
+    "main_exclusion_reason": "included_main",
+    "month": "2024-10",
+    "rows": 1746838
+  },
+  {
+    "fair_kind_draws": 888,
+    "fair_rows": 30823,
+    "kind_draws": 1300,
+    "main_exclusion_reason": "pool_adjacent_candidate",
+    "month": "2024-10",
+    "rows": 95446
+  },
+  {
+    "fair_kind_draws": 162,
+    "fair_rows": 4602,
+    "kind_draws": 243,
+    "main_exclusion_reason": "pool_missing_previous",
+    "month": "2024-10",
+    "rows": 15315
+  },
+  {
+    "fair_kind_draws": 1,
+    "fair_rows": 16,
+    "kind_draws": 1,
+    "main_exclusion_reason": "pool_ambiguous_order",
+    "month": "2024-10",
+    "rows": 21
+  },
+  {
+    "fair_kind_draws": 1597,
+    "fair_rows": 49903,
+    "kind_draws": 2333,
+    "main_exclusion_reason": "not_pool",
+    "month": "2024-10",
+    "rows": 133145
+  },
+  {
+    "fair_kind_draws": 1559,
+    "fair_rows": 48537,
+    "kind_draws": 2330,
+    "main_exclusion_reason": "not_pool",
+    "month": "2024-11",
+    "rows": 129851
+  },
+  {
+    "fair_kind_draws": 0,
+    "fair_rows": 16,
+    "kind_draws": 0,
+    "main_exclusion_reason": "pool_ambiguous_order",
+    "month": "2024-11",
+    "rows": 26
+  },
+  {
+    "fair_kind_draws": 16471,
+    "fair_rows": 603341,
+    "kind_draws": 22374,
+    "main_exclusion_reason": "included_main",
+    "month": "2024-11",
+    "rows": 1658234
+  },
+  {
+    "fair_kind_draws": 805,
+    "fair_rows": 28942,
+    "kind_draws": 1177,
+    "main_exclusion_reason": "pool_adjacent_candidate",
+    "month": "2024-11",
+    "rows": 90723
+  },
+  {
+    "fair_kind_draws": 159,
+    "fair_rows": 4181,
+    "kind_draws": 219,
+    "main_exclusion_reason": "pool_missing_previous",
+    "month": "2024-11",
+    "rows": 13661
+  },
+  {
+    "fair_kind_draws": 928,
+    "fair_rows": 31461,
+    "kind_draws": 1322,
+    "main_exclusion_reason": "pool_adjacent_candidate",
+    "month": "2024-12",
+    "rows": 97136
+  },
+  {
+    "fair_kind_draws": 18069,
+    "fair_rows": 652863,
+    "kind_draws": 24682,
+    "main_exclusion_reason": "included_main",
+    "month": "2024-12",
+    "rows": 1784921
+  },
+  {
+    "fair_kind_draws": 175,
+    "fair_rows": 4475,
+    "kind_draws": 238,
+    "main_exclusion_reason": "pool_missing_previous",
+    "month": "2024-12",
+    "rows": 14393
+  },
+  {
+    "fair_kind_draws": 1742,
+    "fair_rows": 52301,
+    "kind_draws": 2582,
+    "main_exclusion_reason": "not_pool",
+    "month": "2024-12",
+    "rows": 139750
+  },
+  {
+    "fair_kind_draws": 0,
+    "fair_rows": 17,
+    "kind_draws": 0,
+    "main_exclusion_reason": "pool_ambiguous_order",
+    "month": "2024-12",
+    "rows": 28
+  },
+  {
+    "fair_kind_draws": 18427,
+    "fair_rows": 647012,
+    "kind_draws": 25042,
+    "main_exclusion_reason": "included_main",
+    "month": "2025-01",
+    "rows": 1797999
+  },
+  {
+    "fair_kind_draws": 920,
+    "fair_rows": 30837,
+    "kind_draws": 1337,
+    "main_exclusion_reason": "pool_adjacent_candidate",
+    "month": "2025-01",
+    "rows": 96639
+  },
+  {
+    "fair_kind_draws": 185,
+    "fair_rows": 4539,
+    "kind_draws": 255,
+    "main_exclusion_reason": "pool_missing_previous",
+    "month": "2025-01",
+    "rows": 15278
+  },
+  {
+    "fair_kind_draws": 1,
+    "fair_rows": 27,
+    "kind_draws": 1,
+    "main_exclusion_reason": "pool_ambiguous_order",
+    "month": "2025-01",
+    "rows": 35
+  },
+  {
+    "fair_kind_draws": 1706,
+    "fair_rows": 51774,
+    "kind_draws": 2558,
+    "main_exclusion_reason": "not_pool",
+    "month": "2025-01",
+    "rows": 140262
+  },
+  {
+    "fair_kind_draws": 0,
+    "fair_rows": 22,
+    "kind_draws": 0,
+    "main_exclusion_reason": "pool_ambiguous_order",
+    "month": "2025-02",
+    "rows": 27
+  },
+  {
+    "fair_kind_draws": 1625,
+    "fair_rows": 47711,
+    "kind_draws": 2442,
+    "main_exclusion_reason": "not_pool",
+    "month": "2025-02",
+    "rows": 130694
+  },
+  {
+    "fair_kind_draws": 17023,
+    "fair_rows": 600065,
+    "kind_draws": 23142,
+    "main_exclusion_reason": "included_main",
+    "month": "2025-02",
+    "rows": 1662781
+  },
+  {
+    "fair_kind_draws": 164,
+    "fair_rows": 4038,
+    "kind_draws": 234,
+    "main_exclusion_reason": "pool_missing_previous",
+    "month": "2025-02",
+    "rows": 13426
+  },
+  {
+    "fair_kind_draws": 835,
+    "fair_rows": 27659,
+    "kind_draws": 1220,
+    "main_exclusion_reason": "pool_adjacent_candidate",
+    "month": "2025-02",
+    "rows": 87519
+  },
+  {
+    "fair_kind_draws": 18657,
+    "fair_rows": 661586,
+    "kind_draws": 25651,
+    "main_exclusion_reason": "included_main",
+    "month": "2025-03",
+    "rows": 1840994
+  },
+  {
+    "fair_kind_draws": 178,
+    "fair_rows": 4146,
+    "kind_draws": 247,
+    "main_exclusion_reason": "pool_missing_previous",
+    "month": "2025-03",
+    "rows": 13867
+  },
+  {
+    "fair_kind_draws": 875,
+    "fair_rows": 29711,
+    "kind_draws": 1284,
+    "main_exclusion_reason": "pool_adjacent_candidate",
+    "month": "2025-03",
+    "rows": 94183
+  },
+  {
+    "fair_kind_draws": 2008,
+    "fair_rows": 56961,
+    "kind_draws": 2963,
+    "main_exclusion_reason": "not_pool",
+    "month": "2025-03",
+    "rows": 151649
+  },
+  {
+    "fair_kind_draws": 0,
+    "fair_rows": 19,
+    "kind_draws": 0,
+    "main_exclusion_reason": "pool_ambiguous_order",
+    "month": "2025-03",
+    "rows": 25
+  },
+  {
+    "fair_kind_draws": 1991,
+    "fair_rows": 56075,
+    "kind_draws": 2923,
+    "main_exclusion_reason": "not_pool",
+    "month": "2025-04",
+    "rows": 146665
+  },
+  {
+    "fair_kind_draws": 18284,
+    "fair_rows": 646100,
+    "kind_draws": 24845,
+    "main_exclusion_reason": "included_main",
+    "month": "2025-04",
+    "rows": 1757491
+  },
+  {
+    "fair_kind_draws": 830,
+    "fair_rows": 28332,
+    "kind_draws": 1236,
+    "main_exclusion_reason": "pool_adjacent_candidate",
+    "month": "2025-04",
+    "rows": 87554
+  },
+  {
+    "fair_kind_draws": 130,
+    "fair_rows": 3779,
+    "kind_draws": 186,
+    "main_exclusion_reason": "pool_missing_previous",
+    "month": "2025-04",
+    "rows": 12643
+  },
+  {
+    "fair_kind_draws": 0,
+    "fair_rows": 16,
+    "kind_draws": 0,
+    "main_exclusion_reason": "pool_ambiguous_order",
+    "month": "2025-04",
+    "rows": 23
+  },
+  {
+    "fair_kind_draws": 2066,
+    "fair_rows": 60737,
+    "kind_draws": 2985,
+    "main_exclusion_reason": "not_pool",
+    "month": "2025-05",
+    "rows": 156718
+  },
+  {
+    "fair_kind_draws": 18403,
+    "fair_rows": 671998,
+    "kind_draws": 25146,
+    "main_exclusion_reason": "included_main",
+    "month": "2025-05",
+    "rows": 1813281
+  },
+  {
+    "fair_kind_draws": 855,
+    "fair_rows": 29298,
+    "kind_draws": 1235,
+    "main_exclusion_reason": "pool_adjacent_candidate",
+    "month": "2025-05",
+    "rows": 90690
+  },
+  {
+    "fair_kind_draws": 133,
+    "fair_rows": 3751,
+    "kind_draws": 191,
+    "main_exclusion_reason": "pool_missing_previous",
+    "month": "2025-05",
+    "rows": 12179
+  },
+  {
+    "fair_kind_draws": 0,
+    "fair_rows": 18,
+    "kind_draws": 0,
+    "main_exclusion_reason": "pool_ambiguous_order",
+    "month": "2025-05",
+    "rows": 22
+  },
+  {
+    "fair_kind_draws": 18672,
+    "fair_rows": 668662,
+    "kind_draws": 25232,
+    "main_exclusion_reason": "included_main",
+    "month": "2025-06",
+    "rows": 1783426
+  },
+  {
+    "fair_kind_draws": 875,
+    "fair_rows": 29607,
+    "kind_draws": 1255,
+    "main_exclusion_reason": "pool_adjacent_candidate",
+    "month": "2025-06",
+    "rows": 90121
+  },
+  {
+    "fair_kind_draws": 151,
+    "fair_rows": 3717,
+    "kind_draws": 223,
+    "main_exclusion_reason": "pool_missing_previous",
+    "month": "2025-06",
+    "rows": 12028
+  },
+  {
+    "fair_kind_draws": 1,
+    "fair_rows": 19,
+    "kind_draws": 2,
+    "main_exclusion_reason": "pool_ambiguous_order",
+    "month": "2025-06",
+    "rows": 27
+  },
+  {
+    "fair_kind_draws": 2138,
+    "fair_rows": 61077,
+    "kind_draws": 3034,
+    "main_exclusion_reason": "not_pool",
+    "month": "2025-06",
+    "rows": 156503
+  },
+  {
+    "fair_kind_draws": 0,
+    "fair_rows": 23,
+    "kind_draws": 0,
+    "main_exclusion_reason": "pool_ambiguous_order",
+    "month": "2025-07",
+    "rows": 29
+  },
+  {
+    "fair_kind_draws": 2180,
+    "fair_rows": 62516,
+    "kind_draws": 3115,
+    "main_exclusion_reason": "not_pool",
+    "month": "2025-07",
+    "rows": 161344
+  },
+  {
+    "fair_kind_draws": 18843,
+    "fair_rows": 690569,
+    "kind_draws": 25565,
+    "main_exclusion_reason": "included_main",
+    "month": "2025-07",
+    "rows": 1826264
+  },
+  {
+    "fair_kind_draws": 905,
+    "fair_rows": 30616,
+    "kind_draws": 1289,
+    "main_exclusion_reason": "pool_adjacent_candidate",
+    "month": "2025-07",
+    "rows": 92455
+  },
+  {
+    "fair_kind_draws": 138,
+    "fair_rows": 3603,
+    "kind_draws": 197,
+    "main_exclusion_reason": "pool_missing_previous",
+    "month": "2025-07",
+    "rows": 11586
+  },
+  {
+    "fair_kind_draws": 16247,
+    "fair_rows": 616492,
+    "kind_draws": 22379,
+    "main_exclusion_reason": "included_main",
+    "month": "2025-08",
+    "rows": 1695692
+  },
+  {
+    "fair_kind_draws": 759,
+    "fair_rows": 26740,
+    "kind_draws": 1166,
+    "main_exclusion_reason": "pool_adjacent_candidate",
+    "month": "2025-08",
+    "rows": 85076
+  },
+  {
+    "fair_kind_draws": 115,
+    "fair_rows": 3327,
+    "kind_draws": 169,
+    "main_exclusion_reason": "pool_missing_previous",
+    "month": "2025-08",
+    "rows": 11048
+  },
+  {
+    "fair_kind_draws": 1767,
+    "fair_rows": 51171,
+    "kind_draws": 2572,
+    "main_exclusion_reason": "not_pool",
+    "month": "2025-08",
+    "rows": 138334
+  },
+  {
+    "fair_kind_draws": 1,
+    "fair_rows": 11,
+    "kind_draws": 1,
+    "main_exclusion_reason": "pool_ambiguous_order",
+    "month": "2025-08",
+    "rows": 20
+  },
+  {
+    "fair_kind_draws": 1,
+    "fair_rows": 15,
+    "kind_draws": 1,
+    "main_exclusion_reason": "pool_ambiguous_order",
+    "month": "2025-09",
+    "rows": 18
+  },
+  {
+    "fair_kind_draws": 1556,
+    "fair_rows": 46609,
+    "kind_draws": 2384,
+    "main_exclusion_reason": "not_pool",
+    "month": "2025-09",
+    "rows": 126759
+  },
+  {
+    "fair_kind_draws": 16606,
+    "fair_rows": 610898,
+    "kind_draws": 22613,
+    "main_exclusion_reason": "included_main",
+    "month": "2025-09",
+    "rows": 1660248
+  },
+  {
+    "fair_kind_draws": 725,
+    "fair_rows": 25528,
+    "kind_draws": 1091,
+    "main_exclusion_reason": "pool_adjacent_candidate",
+    "month": "2025-09",
+    "rows": 81334
+  },
+  {
+    "fair_kind_draws": 148,
+    "fair_rows": 3862,
+    "kind_draws": 212,
+    "main_exclusion_reason": "pool_missing_previous",
+    "month": "2025-09",
+    "rows": 13205
+  },
+  {
+    "fair_kind_draws": 1754,
+    "fair_rows": 50383,
+    "kind_draws": 2689,
+    "main_exclusion_reason": "not_pool",
+    "month": "2025-10",
+    "rows": 138518
+  },
+  {
+    "fair_kind_draws": 17066,
+    "fair_rows": 643467,
+    "kind_draws": 23683,
+    "main_exclusion_reason": "included_main",
+    "month": "2025-10",
+    "rows": 1761386
+  },
+  {
+    "fair_kind_draws": 771,
+    "fair_rows": 26831,
+    "kind_draws": 1114,
+    "main_exclusion_reason": "pool_adjacent_candidate",
+    "month": "2025-10",
+    "rows": 84731
+  },
+  {
+    "fair_kind_draws": 159,
+    "fair_rows": 4323,
+    "kind_draws": 212,
+    "main_exclusion_reason": "pool_missing_previous",
+    "month": "2025-10",
+    "rows": 14412
+  },
+  {
+    "fair_kind_draws": 1,
+    "fair_rows": 9,
+    "kind_draws": 1,
+    "main_exclusion_reason": "pool_ambiguous_order",
+    "month": "2025-10",
+    "rows": 16
+  }
+]

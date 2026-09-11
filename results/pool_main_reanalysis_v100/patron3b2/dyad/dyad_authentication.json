@@ -1,0 +1,44 @@
+{
+  "invariant_index": {
+    "buckets": 128,
+    "chronology_games": 2229237137,
+    "config_sha256": "dcd49e52e55b4ca71350b4c175276e4752b1248454ef0dee436f11f8b08c336f",
+    "player_rows": 4664095,
+    "player_sha256": "fb484ef67e06cc511fa43a1bc1fabc80edc5dc6b091018e3be08577864bae248",
+    "repeated_pair_rows": 216759824,
+    "source_state_mutated": false,
+    "state_root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/frequent_dyad_census_24m_v101_PRIVATE",
+    "status": "INVARIANT_FREQUENT_DYAD_INDEX_AUTHENTICATED_OK"
+  },
+  "new_flags": {
+    "config_sha256": "7af6e33e4c4ce176f2d46b78fc06e5fab51b0af34c56c9f90b115fa00142ebfc",
+    "created_utc": "2026-09-11T17:46:15Z",
+    "exclusions": {
+      "10": {
+        "dyad": 39947,
+        "either_player": 22322303
+      },
+      "2": {
+        "dyad": 3759906,
+        "either_player": 41492835
+      },
+      "3": {
+        "dyad": 1066867,
+        "either_player": 40958515
+      },
+      "5": {
+        "dyad": 239926,
+        "either_player": 36508842
+      }
+    },
+    "focal_kind_outcome_read": false,
+    "output_bytes": 358605477,
+    "output_files": 24,
+    "output_fingerprint_sha256": "17ad696c04835f83ff7a69681078dbd5297f0c0bac8d9785d44665e0a5ab7bd7",
+    "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave3b2_patron/7af6e33e4c4c/dyad_flags/stage07_frequency_flags_private",
+    "privacy": "PRIVATE GAME-LEVEL FLAGS; DO NOT PUBLISH",
+    "rows": 41534331,
+    "status": "STAGE07_FREQUENT_DYAD_FLAGS_PRIVATE_OK",
+    "unique_games": 41534331
+  }
+}

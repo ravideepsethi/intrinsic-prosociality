@@ -1,0 +1,92 @@
+{
+  "authority_constants_changed": [
+    "EXPECTED_B1_PROPENSITY_SHA256",
+    "EXPECTED_B1_SAMPLE_SHA256",
+    "EXPECTED_CHOOSERS",
+    "EXPECTED_CORE_CODE_SHA256",
+    "EXPECTED_CORE_SUCCESS_SHA256",
+    "EXPECTED_FEASIBILITY_SUCCESS_SHA256",
+    "EXPECTED_KIND_DRAWS",
+    "EXPECTED_ROWS",
+    "PROJECT_ROOT"
+  ],
+  "changes": [
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_B1_PROPENSITY_SHA256",
+      "original_sha256": "758c9e840cc4c5731ba95fe5f49625c43a882a74849c385112977713aa626b3a",
+      "replacement_sha256": "6ae8297badc759965eae62be8f9eb0e8d1d345fd2226ffb089d784b8038ae072"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_B1_SAMPLE_SHA256",
+      "original_sha256": "326bad078ed38611ee77dfbbe632db0a996a76ee83854225dbf0fcbe9608f3a7",
+      "replacement_sha256": "bc06313cfe89f0811c46a692bb6f2d29b6f2eb617398576933bddc701e3a3e0f"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_CHOOSERS",
+      "original_sha256": "a4b09cec971794d3fff4ae45bcc50ff2d733113c7c46bdb780962d77216faafa",
+      "replacement_sha256": "f8f2e0ae3168952e5a43f30126c0101b293e4ac7ff5bf209db277d51079c03aa"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_CORE_CODE_SHA256",
+      "original_sha256": "1d0d53a8e98d34a3ceb2100d6ddede8221a33ebfa271e1aaa8f0b374b2129f3a",
+      "replacement_sha256": "2e2aac6cf63774e82ab5841cfdb39c9625a01b0efedbe964f5f7c767f8f42d30"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_CORE_SUCCESS_SHA256",
+      "original_sha256": "eec0e3849223c9008addf6e42ebfe103a9c8e9150b138adbc3af868d9f00088d",
+      "replacement_sha256": "2ff6dcdacd3b2a707f02cabe1c9ca5e00cc926e35a884fc2c090c92aaf1f708f"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_FEASIBILITY_SUCCESS_SHA256",
+      "original_sha256": "a2172df6588e334b398d746bc5bd1bcdbaaf5c17bea31240a9ab8a98c6a6a265",
+      "replacement_sha256": "f23dd78863f2b433a1c4d65844fa8909fab20843235041d6a842ed3b7ee3c9d8"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_KIND_DRAWS",
+      "original_sha256": "4a3d318dd9eec9a95740e03ddb20370d0d7af79dd007bd4cd22fc603fdd2e8d0",
+      "replacement_sha256": "5ef8c5074ee333d4671d746b9aeb16230b247a23d2bdea1f364c9e05845c5cac"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_ROWS",
+      "original_sha256": "f83dbfe36d44c53fdbec42eeb4c668cb11c173f387ab23c7fa6ba12a496f52da",
+      "replacement_sha256": "6e3cf1bb13853f9206206c7ce64e583fd8a891d048eb042e4d2425c005fa2750"
+    },
+    {
+      "category": "authority_constant",
+      "name": "PROJECT_ROOT",
+      "original_sha256": "ea649bf0b6a75443fbb9ad307fc962ead3c42dceeed0b9be1c9c4817de245c72",
+      "replacement_sha256": "3dad5031f45d8332eb615904171909ab9572bd6f0a63ef54143d32de1d01f3e8"
+    },
+    {
+      "category": "repository_guard",
+      "name": "authenticate_git",
+      "original_sha256": "cbd00bd8812d77239db4f1e232b4126e40ccbcf2dc7b37150a4919b64d702342",
+      "replacement_sha256": "e5c16b5370f160095a00a200871ea058f61c0a4facc72143e85419960ad2b9d3"
+    }
+  ],
+  "created_at_utc": "2026-09-11T02:07:35Z",
+  "estimator_function_bodies_changed": false,
+  "generated_bytes": 39447,
+  "generated_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/replication_package/code/10f_estimate_b2_first_grant_dynamics.py",
+  "generated_sha256": "3d2e391fc2a2c4a72b1847ef0e60e7412a2d8f9d60f8ce880110cdb6f563ecd8",
+  "repository_guards_changed": [
+    "authenticate_git"
+  ],
+  "source": {
+    "bytes": 40581,
+    "lineage": "public_repository",
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave2B1_v1_0_2/source/dynamics/10f_estimate_b2_first_grant_dynamics.py",
+    "repository": "https://github.com/ravideepsethi/intrinsic-prosociality.git",
+    "repository_head_inspected": "0dc981cbc6da157d365015a95f2b7157ecda4859",
+    "sha256": "9696925b13a4b9d2c502eda64e21c96506ecd6b76162038ecc2fae312645f6e9"
+  },
+  "status": "POOL_MAIN_SOURCE_AUTHORITY_BINDING_OK"
+}

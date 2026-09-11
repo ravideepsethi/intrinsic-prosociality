@@ -1,111 +1,82 @@
 # Intrinsic Prosociality
 
-Replication code and documentation for:
+Replication code, aggregate results and documentation for **The Structure of
+Intrinsic Prosociality: Field Evidence from Online Chess**.
 
-**The Structure of Intrinsic Prosociality: Field Evidence from Online Chess**
+## Current main sample
 
-This repository is under active construction. The canonical two-year Stage 07
-analysis panel, Stage 08 panel-only core results, Stage 09 panel-robustness
-results, the dynamic-prosociality core, and the Patron Stage 10 current-profile
-extension are now certified. Other external-input extensions remain in progress.
+**41,534,331 pool/observed-nonadjacent opportunities**, November 1, 2023 through
+October 31, 2025 UTC. The sample contains **570,091 kind draws**; the competitive
+subset contains **15,207,423 opportunities and 419,463 grants**. The previous
+47,587,020-opportunity sample is historical comparison only.
 
-## Current research design
+Selection: `source = 'pool' AND previous_classification_status =
+'not_mutually_adjacent_observed'`. This jointly restricts source and observed
+adjacency; changes relative to the old sample do not identify the contribution of
+either restriction separately. Observed nonadjacency is not proof that players
+never met or never recognized each other.
 
-- Main sample: November 1, 2023 through October 31, 2025.
-- Canonical opportunity sample: 47,587,020 unique games, including 669,503 kind draws.
-- Stage 07 analysis panel: certified over all 24 months with 157 columns.
-- Stage 08 core results: certified Tables 1–9 and analytical figure data.
-- Stage 09 panel robustness: certified support, exact-zero, heterogeneity, cutoff, and magnitude results.
-- Dynamic prosociality: certified mercy-transmission, engagement, and conditional-exchangeability tests, with public A1 reciprocity/session/composition and exact unconditional first-opportunity audits.
-- Opening familiarity: target plan certified; metadata acquisition and full analysis remain pending.
-- Patron/profile extension: certified current-profile snapshot and Stage 10 v1.0.1
-  matched analysis, with a separately certified post-certification addendum.
-- Setting: discretionary resolution of opponent disconnections in rated games on Lichess.
-- Final paper-facing board evaluation: Stockfish 18 at 100,000 nodes.
-- Planned deep engine audit: Stockfish 18 at 1,000,000 nodes on a sampled audit.
+Start with [the current release and analysis status](docs/pool_main_reanalysis_v100/README.md),
+[the detailed rewrite handoff](docs/pool_main_reanalysis_v100/Lichess_New_Main_Sample_Handoff_v1_0_2.md),
+and [the runnable package index](operations/pool_main_reanalysis_v100/README.md).
+The governing [sample report](results/pool_main_reanalysis_v100/sample/MAIN_SAMPLE_REPORT.json)
+and [sample decision](manifests/pool_main_reanalysis_v100/SAMPLE_DECISION.json) provide
+the exact authority.
 
-The repository is being built in parallel with the empirical reconstruction so that the
-final paper can be reproduced from a clean, documented pipeline rather than from
-exploratory scripts.
+## Reanalysis status
+
+The repository now includes the new-sample core results, crossing/equality
+diagnostics, rebuilt dynamics, C7R covariance-based contrasts, C6/C10/C12, fresh
+C9 randomization and ply checks, the chooser IV and selection addendum, and the
+completed Patron analysis sequence. The C7X parent support gate fails, so there is
+no adjusted main-sample targeted-memory estimate.
+
+**Still open:** C13 has prepared code but no returned main-sample estimate; exact
+full Campaign family-D reconciliation lacks new C1/C2/C5 inputs. Conservative
+five-slot C6/C9 decisions are available. The integrated manuscript, its final
+figures/tables, and compilation are still being updated. Old estimates must not
+fill missing main-sample cells. Existing old-sample results remain preserved as
+historical authorities.
+
+The Patron analyses use a fixed current-profile snapshot and estimate conditional
+associations; they do not identify Patron adoption effects. Failed or unsupported
+models remain documented in their own report ledgers.
 
 ## Repository structure
 
-`code/` contains the canonical numbered replication stages currently available.
+- `code/`: original numbered replication stages and versioned extensions;
+  `code/pool_main_reanalysis_v100/` adds the 16 pool-main/IV source packages.
+- `operations/pool_main_reanalysis_v100/`: 32 immutable source archives, sidecars,
+  package instructions, and an offline release verifier.
+- `results/pool_main_reanalysis_v100/`: 15 new-sample report groups with aggregate
+  estimates, plots, source bindings and execution receipts.
+- `docs/pool_main_reanalysis_v100/`: current status, corrected detailed handoff,
+  selected results, and the manuscript change map.
+- `manifests/pool_main_reanalysis_v100/`: sample decision, original archive checks,
+  exact publication inventory, omitted-log record and release hashes.
+- Existing `docs/`, `results/`, `provenance/` and source paths retain the historical
+  replication lineage. Dates, hashes and sample identities determine authority.
 
-Current stages include:
+## Data and reproduction
 
-- `00_acquire_raw_data.py` — acquire and verify monthly Lichess PGN archives.
-- `01_extract_pgn_candidate_parquets.py` — extract PGN time-forfeit candidates.
-- `02_extract_rating_replay_inputs.py` — construct compact all-game rating-replay inputs.
-- `03_delete_verified_raw_pgns.py` — audited cleanup of verified raw archives.
-- `04_enrich_timeout_candidates.py` — enrich candidate games through the Lichess API.
-- `04b_normalize_legacy_stage04_late.py` — normalize audited legacy late-period API material.
-- `04c_reconcile_stage04_24m.py` — reconcile the 24-month API-enrichment layer.
-- `05_build_timeout_opportunity_panel.py` — construct the canonical timeout-opportunity panel.
-- `06_build_glicko2_cost_layer.py` — construct the canonical chooser-cost layer.
-- `stockfish_100k/080_...py` through `085_...py` — build and certify the 100k-node engine layer.
-- `07_build_analysis_panel.py` — join the frozen authorities into the certified 24-month panel.
-- `08_make_core_paper_results.py` — produce the certified panel-only core paper results.
-- `09_build_panel_robustness.py` — produce the certified Stage 09 panel-only robustness results.
-- `09_prepare_opening_familiarity.py` — build and authenticate the 24-month opening target plan.
-- `09_fetch_opening_metadata.py` — acquire missing opening metadata with resumable checkpoints.
-- `09_analyze_opening_familiarity.py` — estimate opening-familiarity results after acquisition.
-- `10c_estimate_dynamic_prosociality_core.py` — estimate the frozen recipient and chooser dynamics.
-- `10d_audit_dynamic_prosociality_core.py` — run the secondary post-outcome diagnostic audit.
-- `a1_audits/` — reproduce the certified A1 result and run the September 2026 evidence-gap and zero-coded first-opportunity audits.
-- `patron_stage10/primary_v1_0_1/` — build and verify the certified current-Patron
-  matched analysis and opportunity appendix.
-- `patron_stage10/postcertification_addendum_v1_0_0/` — reproduce the separate
-  missing-date, five-bin, and price-count/rate sensitivities.
+Full raw/derived datasets, PGNs, API responses, user profiles and private
+checkpoints are held outside Git. The small Parquet files in the new public
+results are audited aggregate count/coefficient/plot/model-metadata tables; their
+schemas and hashes are inventoried separately. Large research datasets remain
+excluded. Public source packages also include small aggregate input certificates.
 
-`operations/` contains operational scripts needed to document or reproduce production
-workflows.
+Production packages retain their original source bindings, input contracts,
+checkpoints and runtime guidance. They require the authenticated local inputs;
+publishing this repository does not rerun the models or certify an unavailable
+raw-data reconstruction. Source acquisition starts with the existing numbered
+replication stages. The paper-facing board evaluation is Stockfish 18 at 100,000
+nodes. Other exploratory extensions retain their own status and prerequisites.
 
-`manifests/` contains small provenance and checksum files suitable for version control.
+From the repository root, verify the new release without running analyses:
 
-`docs/` contains human-readable certification and design documentation.
+```bash
+python3 operations/pool_main_reanalysis_v100/verify_public_release.py
+```
 
-`provenance/` contains small authenticated summaries, schemas, and path manifests; it does not contain research data.
-
-`results/` contains aggregate-only public outputs and their success/hash receipts.
-The Patron results contain no usernames, row-level profile records, or private caches.
-
-## Data
-
-The full raw and derived datasets are intentionally **not stored in this Git repository**.
-
-Raw Lichess standard-rated PGN archives are publicly reacquirable. The replication
-pipeline begins with a checkpointed acquisition script that records and verifies the
-source material.
-
-Large API responses, Parquet datasets, engine outputs, caches, and intermediate
-analysis products are also kept outside Git. The final replication release will document
-which derived materials can be deposited separately and how all remaining inputs can be
-reconstructed.
-
-## Reproducibility principles
-
-Canonical production stages are designed to provide, where applicable:
-
-- explicit input and output contracts;
-- deterministic ordering and partitioning;
-- dry-run versus execution modes;
-- restartable checkpoints;
-- structured manifests and receipts;
-- input, script, and output hashes;
-- row-count, coverage, uniqueness, and schema checks;
-- software and dependency information; and
-- post-run verification.
-
-## Status
-
-**Work in progress.** Stages 00–09, the certified Stockfish 100k layer, the
-47,587,020-row Stage 07 panel, the Stage 08 core results, the Stage 09 panel-only
-robustness results, the dynamic-prosociality core, post-outcome audit, and
-September 2026 A1 evidence-gap audits, and
-Patron Stage 10 are complete. The Patron primary is a current-status
-cross-sectional association, not Patron adoption or causality. The opening target
-plan is certified, but opening metadata acquisition, full opening-familiarity
-analysis, post-sample holdouts, publication rendering, the planned deep-engine
-audit, and final archival-data instructions remain in progress. The large
-research datasets are not stored in this repository.
+Expected time: **5–30 seconds**. See the release README for the distinction
+between original complete-report manifests and this public subset's manifest.

@@ -1,0 +1,18 @@
+{
+  "causal_claims_authorized": false,
+  "fixed_effect_tolerance": 1e-08,
+  "input_no_mutation": true,
+  "privacy": {
+    "status": "AGGREGATE_ONLY_PRIVACY_SCAN_OK",
+    "structured_files_checked": 21
+  },
+  "required_files": 19,
+  "short_rows": 4137265,
+  "stage07_kind_draws": 570091,
+  "stage07_rows": 41534331,
+  "stage08_raw_reproduction_ok": true,
+  "stage08_raw_reproduction_required": true,
+  "status": "POOL_MAIN_EQUALITY_FEN_AUDIT_INDEPENDENTLY_VERIFIED_OK",
+  "synthetic": false,
+  "verified_at_utc": "2026-09-10T03:16:45Z"
+}

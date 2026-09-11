@@ -1,0 +1,230 @@
+{
+  "chooser_iv_disposition": "Already launched as a separate authenticated branch; intentionally not duplicated. Confirm its requested role-selection decomposition when the branches are merged.",
+  "chooser_iv_included": false,
+  "created_at_utc": "2026-09-11T02:07:59Z",
+  "network_requests": 0,
+  "project_view": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view",
+  "result_roots": {
+    "a1_evidence_gap": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/a1_evidence_gap_audit_v100/POOL_MAIN_WAVE2B1_A1_EVIDENCE",
+    "a1_unconditional": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/a1_unconditional_first_opportunity_audit_v100/POOL_MAIN_WAVE2B1_A1_UNCONDITIONAL",
+    "a3_gate": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/dynamic_prosociality_a3_chronology_gate_v100/POOL_MAIN_WAVE2B1_A3",
+    "b2_first_grant": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/dynamic_second_wave_b2_v100/POOL_MAIN_WAVE2B1_SECOND",
+    "c7r_first_repeat": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/c7r_fullpanel_prefocal_v100/POOL_MAIN_WAVE2B1_C7R",
+    "dynamic_core": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/dynamic_prosociality_core_v102/POOL_MAIN_WAVE2B1_CORE",
+    "e1_numerical_audit": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/dynamic_second_wave_e1_audit_v101/POOL_MAIN_WAVE2B1_SECOND_e1_audit_v101",
+    "postoutcome_audit": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/dynamic_prosociality_core_v102_postaudit/POOL_MAIN_WAVE2B1_POSTAUDIT",
+    "remaining_a1_a2": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/remaining_dynamic_completion_v100/POOL_MAIN_WAVE2B1_REMAINING",
+    "second_wave_feasibility": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/dynamic_second_wave_feasibility_v100/POOL_MAIN_WAVE2B1_FEASIBILITY",
+    "second_wave_histories": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/dynamic_second_wave_history_v100/POOL_MAIN_WAVE2B1_SECOND",
+    "second_wave_postprimary": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/dynamic_second_wave_postprimary_v100/POOL_MAIN_WAVE2B1_SECOND_postprimary_v100",
+    "second_wave_results": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/dynamic_second_wave_results_v100/POOL_MAIN_WAVE2B1_SECOND"
+  },
+  "sample_authority": {
+    "fair_kind_draws": 419463,
+    "fair_rows": 15207423,
+    "fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "kind_draws": 570091,
+    "literal_immediate_rematches_certified": false,
+    "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "months": 24,
+    "observed_screen_certified": true,
+    "panel_root_machine_specific": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+    "report_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "rows": 41534331,
+    "sample_name": "main_pool_nonadjacent",
+    "sample_status": "POOL_MAIN_SAMPLE_24M_CERTIFIED_OK",
+    "status": "POOL_MAIN_SAMPLE_AUTHENTICATED_OK"
+  },
+  "source_bindings": {
+    "10b": {
+      "estimator_function_bodies_changed": false,
+      "generated_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/replication_package/code/10b_build_a3_chronology_gate.py",
+      "generated_sha256": "b3ebd8d2f5eff2017dd1f55db1bd156e22f0407dead692d49e6e6910f568d6ad",
+      "source_sha256": "156bfe3f4256a428ea3a00fcc42a6544b51d6048379b1e2875c8e71f31cd8f14"
+    },
+    "10c": {
+      "estimator_function_bodies_changed": false,
+      "generated_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/replication_package/code/10c_estimate_dynamic_prosociality_core.py",
+      "generated_sha256": "8d2c218ef17342528326fead84ed883e1b9ec0344e21104003553052589b03da",
+      "source_sha256": "5b17e0c95087852d78fec6184119b1f4298e56b5d7a36ab2df15cbfa6b9db0f0"
+    },
+    "10d": {
+      "estimator_function_bodies_changed": false,
+      "generated_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/replication_package/code/10d_audit_dynamic_prosociality_core.py",
+      "generated_sha256": "0054e6f2805ca8facf4028227bbf4278766f832fc276bc26b683a9c8589ce1b7",
+      "source_sha256": "f1279072391e5933e4e2936df7e07abcc431a03a1f03aabceb147949257b1e6f"
+    },
+    "10e": {
+      "estimator_function_bodies_changed": false,
+      "generated_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/replication_package/code/10e_audit_dynamic_second_wave_feasibility.py",
+      "generated_sha256": "8f5e1eaeb5f651bc81b35062c8fa4637f76ff49981c85552cd81f9b09459d81b",
+      "source_sha256": "8c42293fb21dbfe6ba7f6f5b36d057b4eee0393c0a46f8c9d65e93a98c7b2297"
+    },
+    "10f": {
+      "estimator_function_bodies_changed": false,
+      "generated_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/replication_package/code/10f_estimate_b2_first_grant_dynamics.py",
+      "generated_sha256": "3d2e391fc2a2c4a72b1847ef0e60e7412a2d8f9d60f8ce880110cdb6f563ecd8",
+      "source_sha256": "9696925b13a4b9d2c502eda64e21c96506ecd6b76162038ecc2fae312645f6e9"
+    },
+    "10g": {
+      "estimator_function_bodies_changed": false,
+      "generated_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/replication_package/code/10g_build_dynamic_second_wave_histories.py",
+      "generated_sha256": "18672bbbbe8a06f7b7a2a2a139d46a05bf4d9671fd535e36485fb80b3d2f5252",
+      "source_sha256": "e36375f432aab7405f7481d286dd913d506f7691edf5e4c98ee931f39a349d61"
+    },
+    "10h": {
+      "estimator_function_bodies_changed": false,
+      "generated_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/replication_package/code/10h_estimate_dynamic_second_wave.py",
+      "generated_sha256": "6111f2ec1e912c636a260aac8be688bb7dfe5e27d856f31ef807560fb4812a20",
+      "source_sha256": "ae525dc989afa32bee49030feeaa86c37894448c121805fedc8a6f2fd31b15a4"
+    },
+    "11a": {
+      "estimator_function_bodies_changed": false,
+      "generated_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/replication_package/code/11a_estimate_dynamic_second_wave_postprimary.py",
+      "generated_sha256": "0d5b137f2e898791f1b2353f2dfe3bd48fa93d53553bc4465d36aea0abbf1663",
+      "source_sha256": "983e1f9ea4758aa3bb4ff22404c4a732ca993233f41ed1b7a52774a2caa5f5d2"
+    },
+    "11b": {
+      "estimator_function_bodies_changed": false,
+      "generated_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/replication_package/code/11b_audit_dynamic_second_wave_e1.py",
+      "generated_sha256": "af4d7fd9bff72292e769e468831ec5b917bff097e225ded846c5cacab724a2b9",
+      "source_sha256": "dfa2df51074d4d88246a11f43adc47abf2369de0c0b7daa0af7534d7bbd0e23b"
+    },
+    "12": {
+      "estimator_function_bodies_changed": false,
+      "generated_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/replication_package/code/12_complete_remaining_dynamic_analyses.py",
+      "generated_sha256": "bc3f7962bf456a6703133e66c6b1fd65f35d7b27f618ee4d818f6f96b24ea457",
+      "source_sha256": "e7b302bae6c73e2f35d3b004c7206e8b2ff07fd77d49a63871f5d72d9467a73a"
+    },
+    "a1_evidence": {
+      "estimator_function_bodies_changed": false,
+      "generated_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/replication_package/code/a1_evidence_gap_audit_v100.py",
+      "generated_sha256": "e4e9bd044280abb277f7cf1dfb410380c04ec7d99f671b89f7a50c3e4ba2dc63",
+      "source_sha256": "514d855b20e31be7c3e3eaa76cc0f11e4db9e0b642466b05639b46ef0da420b6"
+    },
+    "a1_unconditional": {
+      "estimator_function_bodies_changed": false,
+      "generated_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/replication_package/code/a1_unconditional_first_opportunity_audit_v100.py",
+      "generated_sha256": "55283c103794c1bfc6f867ae9263adab4f19b0a01eb430090f06e5694d8698d6",
+      "source_sha256": "06c0bde8b240d055b76aa2c2ed345dcb0484d83f156e480c09046f4fe513bd26"
+    },
+    "c7r": {
+      "estimator_function_bodies_changed": false,
+      "generated_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/replication_package/code/run_c7r_fullpanel_prefocal_v100.py",
+      "generated_sha256": "43712dafb0318b40f65d22b7d79b7e0b14a5bf2c5775d7c4191eac586fe56af8",
+      "source_sha256": "7663e28237d671659e8a0c490406c1f99e024784e1a1322fdd0f7f9e18d129c6"
+    }
+  },
+  "stage_range": {
+    "start_at": "a3_gate",
+    "stop_after": "c7r_first_repeat"
+  },
+  "stages": {
+    "a1_evidence_gap": {
+      "adopted_existing": true,
+      "manifest_files_authenticated": 14,
+      "root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/a1_evidence_gap_audit_v100/POOL_MAIN_WAVE2B1_A1_EVIDENCE",
+      "status": "A1_EVIDENCE_GAP_AUDIT_V100_OK",
+      "success_sha256": "7d0c7aa6aa8d09a0c71e790f08202295076a423760b6083d24cd33d19940e8e4",
+      "summary_sha256": "45d0e690f285a8f5ab43a06fbd96de042b53746d4bc8940d7df54399b9d48263"
+    },
+    "a1_unconditional": {
+      "adopted_existing": true,
+      "manifest_files_authenticated": 6,
+      "root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/a1_unconditional_first_opportunity_audit_v100/POOL_MAIN_WAVE2B1_A1_UNCONDITIONAL",
+      "status": "A1_UNCONDITIONAL_FIRST_OPPORTUNITY_AUDIT_V100_OK",
+      "success_sha256": "59e62456f73d2340d5a416e1a316c03d354ab2940dd4d653ed23848766192216",
+      "summary_sha256": "4e2b08e3aa8a044c082c4c729f5091a49a1bde3d0d35c6914ba946359273ee08"
+    },
+    "a3_gate": {
+      "adopted_existing": true,
+      "manifest_files_authenticated": 6,
+      "root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/dynamic_prosociality_a3_chronology_gate_v100/POOL_MAIN_WAVE2B1_A3",
+      "status": "A3_CHRONOLOGY_POOLED_FEASIBILITY_GATE_OK",
+      "success_sha256": "6ae23db5c0ea3c6f70c160dd00d4d336cc61538100286171662aacb72e5af91c",
+      "summary_sha256": "6ae23db5c0ea3c6f70c160dd00d4d336cc61538100286171662aacb72e5af91c"
+    },
+    "b2_first_grant": {
+      "adopted_existing": true,
+      "manifest_files_authenticated": 4,
+      "root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/dynamic_second_wave_b2_v100/POOL_MAIN_WAVE2B1_SECOND",
+      "status": "DYNAMIC_SECOND_WAVE_B2_V100_OK",
+      "success_sha256": "2ae8d02a3bd8bb9799ce60066caab4fa9aebed2deffb0d6cb74f02513bd0b368",
+      "summary_sha256": "46c5023448a1c2bf4e02a0b22a966d3f2f7918c2e0195e5c9a0b19ed98fec447"
+    },
+    "c7r_first_repeat": {
+      "adopted_existing": true,
+      "manifest_files_authenticated": 8,
+      "root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/c7r_fullpanel_prefocal_v100/POOL_MAIN_WAVE2B1_C7R",
+      "status": "C7R_FULLPANEL_PREFOCAL_V100_OK",
+      "success_sha256": "abade2856b8cb9c0420b261ac8e354bf1b499fb65019b9c317bd63318a4f69e9",
+      "summary_sha256": "48b68bd3e1a6cb371bb4dab07679a758a99fab977f6a5565e30945ef9de761e0"
+    },
+    "dynamic_core": {
+      "adopted_existing": true,
+      "manifest_files_authenticated": 11,
+      "root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/dynamic_prosociality_core_v102/POOL_MAIN_WAVE2B1_CORE",
+      "status": "DYNAMIC_PROSOCIALITY_CORE_V102_OK",
+      "success_sha256": "3216c51c76cea28b54d2aa17362625ff22e6c269ebde55079df1df477cf8af71",
+      "summary_sha256": "7941c119aff4806e4bff3959b24b1ecacd2f9a036a11c5331cf1489f108715a7"
+    },
+    "e1_numerical_audit": {
+      "adopted_existing": true,
+      "manifest_files_authenticated": 5,
+      "root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/dynamic_second_wave_e1_audit_v101/POOL_MAIN_WAVE2B1_SECOND_e1_audit_v101",
+      "status": "DYNAMIC_SECOND_WAVE_E1_AUDIT_V101_OK",
+      "success_sha256": "77162660f40d7d38110b67358985ea5e14f65e15d539589fa5075e643e068c89",
+      "summary_sha256": "80f0ae74aa68564decca8b8ae52e1e7bb71b8532d873e93609341d795847ef2f"
+    },
+    "postoutcome_audit": {
+      "adopted_existing": true,
+      "manifest_files_authenticated": 9,
+      "root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/dynamic_prosociality_core_v102_postaudit/POOL_MAIN_WAVE2B1_POSTAUDIT",
+      "status": "DYNAMIC_PROSOCIALITY_POSTOUTCOME_AUDIT_V101_OK",
+      "success_sha256": "6a9cd6ee558b8e90d0bfd2b0a13869df25dbd8824ba18a427938f0e81dc21e7e",
+      "summary_sha256": "49edde7267a860447a88e5df85be095c1949655fd5dcb874b6d9d8e083ed1ca9"
+    },
+    "remaining_a1_a2": {
+      "adopted_existing": true,
+      "manifest_files_authenticated": 7,
+      "root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/remaining_dynamic_completion_v100/POOL_MAIN_WAVE2B1_REMAINING",
+      "status": "REMAINING_DYNAMIC_COMPLETION_V100_OK",
+      "success_sha256": "fdf62efba7739d5e985f6b3d350157d9a348cf8be7bef4cf51fcfd156dd5e0c9",
+      "summary_sha256": "19aaf90140dcac7da39351b515d4ac41fbbc373f98c9e8f642dcdbc77b9ef5f6"
+    },
+    "second_wave_feasibility": {
+      "adopted_existing": true,
+      "manifest_files_authenticated": 10,
+      "root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/dynamic_second_wave_feasibility_v100/POOL_MAIN_WAVE2B1_FEASIBILITY",
+      "status": "DYNAMIC_SECOND_WAVE_FEASIBILITY_V100_OK",
+      "success_sha256": "dacfec2a3be569420a3b51a0e40e8eac370b320d53605a69067df2a4ee32f3be",
+      "summary_sha256": null
+    },
+    "second_wave_histories": {
+      "adopted_existing": true,
+      "manifest_files_authenticated": 1,
+      "root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/dynamic_second_wave_history_v100/POOL_MAIN_WAVE2B1_SECOND",
+      "status": "DYNAMIC_SECOND_WAVE_HISTORY_V100_OK",
+      "success_sha256": "2e5ba421a1c628591e5004e6a60a89a39d7d017a3f5578ba88b4809f6853b417",
+      "summary_sha256": "61400d62e8b92bc0b8fe7e7a9746f650e37144fd63de49d92699aaf0e1f103d7"
+    },
+    "second_wave_postprimary": {
+      "adopted_existing": true,
+      "manifest_files_authenticated": 17,
+      "root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/dynamic_second_wave_postprimary_v100/POOL_MAIN_WAVE2B1_SECOND_postprimary_v100",
+      "status": "DYNAMIC_SECOND_WAVE_POSTPRIMARY_V100_OK",
+      "success_sha256": "1ab01928489d666edda7bbd0915e3ffa16a0d8e75464abfaf9d7b107d301b524",
+      "summary_sha256": "17ba678acc75b106746c42cb5fbd0caf9395d3b0c9695e76e42dc4892c825ce6"
+    },
+    "second_wave_results": {
+      "adopted_existing": true,
+      "manifest_files_authenticated": 10,
+      "root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/dynamic_second_wave_results_v100/POOL_MAIN_WAVE2B1_SECOND",
+      "status": "DYNAMIC_SECOND_WAVE_RESULTS_V100_OK",
+      "success_sha256": "a1089146e09734e556588c97d992edc47db20ce764466ace6d632b3c65364335",
+      "summary_sha256": "46c0082a786551cfccc24515ed27e77a38a41bb40854eccfbd23881e7bf65647"
+    }
+  },
+  "status": "POOL_MAIN_WAVE2B1_ALL_STAGES_OK",
+  "wave_version": "2B1-1.0.2"
+}

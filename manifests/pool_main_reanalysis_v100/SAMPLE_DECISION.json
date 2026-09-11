@@ -1,0 +1,18 @@
+{
+  "status": "CONFIRMED_BY_USER",
+  "user_clarification": "to be clear, its the new 41 million sample that should be main.",
+  "main_sample": {
+    "opportunities": 41534331,
+    "kind_draws": 570091,
+    "competitive_opportunities": 15207423,
+    "competitive_kind_draws": 419463,
+    "window": "2023-11-01 through 2025-10-31 UTC",
+    "predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "authority": "results/sample/MAIN_SAMPLE_REPORT.json"
+  },
+  "old_sample_role": "Historical comparison only; not a replacement for a missing main-sample estimate.",
+  "old_sample_opportunities": 47587020,
+  "rewrite_source": "draft_source/SIP_Sept3_original.tex",
+  "new_models_estimated_in_this_revision": false
+}

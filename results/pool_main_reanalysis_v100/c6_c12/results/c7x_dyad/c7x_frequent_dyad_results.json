@@ -1,0 +1,432 @@
+{
+  "account_level_output": false,
+  "claim_boundary": "Descriptive low-support diagnostic only; no controlled or causal targeted-memory estimate is generated.",
+  "controlled_models_run": 0,
+  "created_utc": "2026-09-11T13:22:33Z",
+  "epistemic_label": "X",
+  "flags_receipt": {
+    "arms": {
+      "benefactor": {
+        "exclusions": {
+          "10": {
+            "dyad": 6,
+            "either_player": 76
+          },
+          "2": {
+            "dyad": 125,
+            "either_player": 125
+          },
+          "3": {
+            "dyad": 46,
+            "either_player": 125
+          },
+          "5": {
+            "dyad": 16,
+            "either_player": 117
+          }
+        },
+        "rows": 125
+      },
+      "claimer": {
+        "exclusions": {
+          "10": {
+            "dyad": 427,
+            "either_player": 7195
+          },
+          "2": {
+            "dyad": 10356,
+            "either_player": 10356
+          },
+          "3": {
+            "dyad": 3865,
+            "either_player": 10342
+          },
+          "5": {
+            "dyad": 1324,
+            "either_player": 9879
+          }
+        },
+        "rows": 10356
+      }
+    },
+    "classification_sha256": "27e351f5bd8c493c022e2c261590d5e21e8e32ed6ab5c51d20aae8bcec46912c",
+    "config_sha256": "91cfa3b0eafc7de7d9574f48b6fdfcdbfdb214fa86b97c27cdadf78d05dc0e65",
+    "created_utc": "2026-09-11T13:22:31Z",
+    "exclusions": {
+      "10": {
+        "dyad": 433,
+        "either_player": 7271
+      },
+      "2": {
+        "dyad": 10481,
+        "either_player": 10481
+      },
+      "3": {
+        "dyad": 3911,
+        "either_player": 10467
+      },
+      "5": {
+        "dyad": 1340,
+        "either_player": 9996
+      }
+    },
+    "focal_kind_outcome_read": false,
+    "output_bytes": 99311,
+    "output_rows": 10481,
+    "output_sha256": "632d190e2964c09d4d621d092114835cf8fc9340b4c1d722e94f212d88297f74",
+    "privacy": "PRIVATE C7X GAME-LEVEL FLAGS; DO NOT PUBLISH",
+    "rows": 10481,
+    "status": "C7X_FREQUENT_DYAD_FLAGS_PRIVATE_OK",
+    "unique_games": 10481
+  },
+  "invariant_dyad_index_reused": true,
+  "network_requests": 0,
+  "parent_c7x_status": "NOT_ESTIMABLE_RETAINED_LOW_SUPPORT",
+  "parent_minimum_rows_per_arm": 1000,
+  "raw_cells": [
+    {
+      "arm": "claimer",
+      "kind_draws": 174,
+      "kind_rate_pct": 1.6801853997682503,
+      "rows": 10356,
+      "sample": "all",
+      "sample_definition": "All current C7X rows"
+    },
+    {
+      "arm": "benefactor",
+      "kind_draws": 4,
+      "kind_rate_pct": 3.2,
+      "rows": 125,
+      "sample": "all",
+      "sample_definition": "All current C7X rows"
+    },
+    {
+      "arm": "claimer",
+      "kind_draws": 36,
+      "kind_rate_pct": 1.4167650531286895,
+      "rows": 2541,
+      "sample": "dyad_pair_games_3_4",
+      "sample_definition": "Three or four dyad games"
+    },
+    {
+      "arm": "benefactor",
+      "kind_draws": 1,
+      "kind_rate_pct": 3.3333333333333335,
+      "rows": 30,
+      "sample": "dyad_pair_games_3_4",
+      "sample_definition": "Three or four dyad games"
+    },
+    {
+      "arm": "claimer",
+      "kind_draws": 16,
+      "kind_rate_pct": 1.7837235228539576,
+      "rows": 897,
+      "sample": "dyad_pair_games_5_9",
+      "sample_definition": "Five to nine dyad games"
+    },
+    {
+      "arm": "benefactor",
+      "kind_draws": 0,
+      "kind_rate_pct": 0.0,
+      "rows": 10,
+      "sample": "dyad_pair_games_5_9",
+      "sample_definition": "Five to nine dyad games"
+    },
+    {
+      "arm": "claimer",
+      "kind_draws": 103,
+      "kind_rate_pct": 1.5868125096287167,
+      "rows": 6491,
+      "sample": "dyad_pair_games_eq_2",
+      "sample_definition": "Exactly two in-window dyad games"
+    },
+    {
+      "arm": "benefactor",
+      "kind_draws": 3,
+      "kind_rate_pct": 3.7974683544303796,
+      "rows": 79,
+      "sample": "dyad_pair_games_eq_2",
+      "sample_definition": "Exactly two in-window dyad games"
+    },
+    {
+      "arm": "claimer",
+      "kind_draws": 19,
+      "kind_rate_pct": 4.4496487119437935,
+      "rows": 427,
+      "sample": "dyad_pair_games_ge_10",
+      "sample_definition": "Ten or more dyad games"
+    },
+    {
+      "arm": "benefactor",
+      "kind_draws": 0,
+      "kind_rate_pct": 0.0,
+      "rows": 6,
+      "sample": "dyad_pair_games_ge_10",
+      "sample_definition": "Ten or more dyad games"
+    },
+    {
+      "arm": "claimer",
+      "kind_draws": 155,
+      "kind_rate_pct": 1.561083694229026,
+      "rows": 9929,
+      "sample": "dyad_pair_games_lt_10",
+      "sample_definition": "Exclude dyads with 10+ games"
+    },
+    {
+      "arm": "benefactor",
+      "kind_draws": 4,
+      "kind_rate_pct": 3.361344537815126,
+      "rows": 119,
+      "sample": "dyad_pair_games_lt_10",
+      "sample_definition": "Exclude dyads with 10+ games"
+    },
+    {
+      "arm": "claimer",
+      "kind_draws": 103,
+      "kind_rate_pct": 1.5868125096287167,
+      "rows": 6491,
+      "sample": "dyad_pair_games_lt_3",
+      "sample_definition": "Exclude dyads with 3+ games"
+    },
+    {
+      "arm": "benefactor",
+      "kind_draws": 3,
+      "kind_rate_pct": 3.7974683544303796,
+      "rows": 79,
+      "sample": "dyad_pair_games_lt_3",
+      "sample_definition": "Exclude dyads with 3+ games"
+    },
+    {
+      "arm": "claimer",
+      "kind_draws": 139,
+      "kind_rate_pct": 1.5389725420726306,
+      "rows": 9032,
+      "sample": "dyad_pair_games_lt_5",
+      "sample_definition": "Exclude dyads with 5+ games"
+    },
+    {
+      "arm": "benefactor",
+      "kind_draws": 4,
+      "kind_rate_pct": 3.669724770642202,
+      "rows": 109,
+      "sample": "dyad_pair_games_lt_5",
+      "sample_definition": "Exclude dyads with 5+ games"
+    },
+    {
+      "arm": "claimer",
+      "kind_draws": 60,
+      "kind_rate_pct": 1.8981335020563113,
+      "rows": 3161,
+      "sample": "either_player_max_lt_10",
+      "sample_definition": "Neither player has a 10+ game dyad"
+    },
+    {
+      "arm": "benefactor",
+      "kind_draws": 3,
+      "kind_rate_pct": 6.122448979591836,
+      "rows": 49,
+      "sample": "either_player_max_lt_10",
+      "sample_definition": "Neither player has a 10+ game dyad"
+    },
+    {
+      "arm": "claimer",
+      "kind_draws": 1,
+      "kind_rate_pct": 7.142857142857143,
+      "rows": 14,
+      "sample": "either_player_max_lt_3",
+      "sample_definition": "Neither player has a 3+ game dyad"
+    },
+    {
+      "arm": "claimer",
+      "kind_draws": 11,
+      "kind_rate_pct": 2.3060796645702304,
+      "rows": 477,
+      "sample": "either_player_max_lt_5",
+      "sample_definition": "Neither player has a 5+ game dyad"
+    },
+    {
+      "arm": "benefactor",
+      "kind_draws": 1,
+      "kind_rate_pct": 12.5,
+      "rows": 8,
+      "sample": "either_player_max_lt_5",
+      "sample_definition": "Neither player has a 5+ game dyad"
+    }
+  ],
+  "raw_contrasts": [
+    {
+      "benefactor_kind_draws": 4,
+      "benefactor_kind_rate_pct": 3.2,
+      "benefactor_minus_claimer_raw_pp": 1.5198146002317499,
+      "benefactor_rows": 125,
+      "claimer_kind_draws": 174,
+      "claimer_kind_rate_pct": 1.6801853997682503,
+      "claimer_rows": 10356,
+      "controlled_model_status": "NOT_ESTIMABLE_PARENT_C7X_SUPPORT_GATE_FAILED",
+      "parent_1000_per_arm_gate_pass": false,
+      "sample": "all",
+      "sample_definition": "All current C7X rows"
+    },
+    {
+      "benefactor_kind_draws": 0,
+      "benefactor_kind_rate_pct": null,
+      "benefactor_minus_claimer_raw_pp": null,
+      "benefactor_rows": 0,
+      "claimer_kind_draws": 0,
+      "claimer_kind_rate_pct": null,
+      "claimer_rows": 0,
+      "controlled_model_status": "NOT_ESTIMABLE_PARENT_C7X_SUPPORT_GATE_FAILED",
+      "parent_1000_per_arm_gate_pass": false,
+      "sample": "dyad_pair_games_eq_1",
+      "sample_definition": "No other in-window dyad game"
+    },
+    {
+      "benefactor_kind_draws": 3,
+      "benefactor_kind_rate_pct": 3.7974683544303796,
+      "benefactor_minus_claimer_raw_pp": 2.210655844801663,
+      "benefactor_rows": 79,
+      "claimer_kind_draws": 103,
+      "claimer_kind_rate_pct": 1.5868125096287167,
+      "claimer_rows": 6491,
+      "controlled_model_status": "NOT_ESTIMABLE_PARENT_C7X_SUPPORT_GATE_FAILED",
+      "parent_1000_per_arm_gate_pass": false,
+      "sample": "dyad_pair_games_lt_3",
+      "sample_definition": "Exclude dyads with 3+ games"
+    },
+    {
+      "benefactor_kind_draws": 4,
+      "benefactor_kind_rate_pct": 3.669724770642202,
+      "benefactor_minus_claimer_raw_pp": 2.1307522285695715,
+      "benefactor_rows": 109,
+      "claimer_kind_draws": 139,
+      "claimer_kind_rate_pct": 1.5389725420726306,
+      "claimer_rows": 9032,
+      "controlled_model_status": "NOT_ESTIMABLE_PARENT_C7X_SUPPORT_GATE_FAILED",
+      "parent_1000_per_arm_gate_pass": false,
+      "sample": "dyad_pair_games_lt_5",
+      "sample_definition": "Exclude dyads with 5+ games"
+    },
+    {
+      "benefactor_kind_draws": 4,
+      "benefactor_kind_rate_pct": 3.361344537815126,
+      "benefactor_minus_claimer_raw_pp": 1.8002608435861,
+      "benefactor_rows": 119,
+      "claimer_kind_draws": 155,
+      "claimer_kind_rate_pct": 1.561083694229026,
+      "claimer_rows": 9929,
+      "controlled_model_status": "NOT_ESTIMABLE_PARENT_C7X_SUPPORT_GATE_FAILED",
+      "parent_1000_per_arm_gate_pass": false,
+      "sample": "dyad_pair_games_lt_10",
+      "sample_definition": "Exclude dyads with 10+ games"
+    },
+    {
+      "benefactor_kind_draws": 3,
+      "benefactor_kind_rate_pct": 3.7974683544303796,
+      "benefactor_minus_claimer_raw_pp": 2.210655844801663,
+      "benefactor_rows": 79,
+      "claimer_kind_draws": 103,
+      "claimer_kind_rate_pct": 1.5868125096287167,
+      "claimer_rows": 6491,
+      "controlled_model_status": "NOT_ESTIMABLE_PARENT_C7X_SUPPORT_GATE_FAILED",
+      "parent_1000_per_arm_gate_pass": false,
+      "sample": "dyad_pair_games_eq_2",
+      "sample_definition": "Exactly two in-window dyad games"
+    },
+    {
+      "benefactor_kind_draws": 1,
+      "benefactor_kind_rate_pct": 3.3333333333333335,
+      "benefactor_minus_claimer_raw_pp": 1.916568280204644,
+      "benefactor_rows": 30,
+      "claimer_kind_draws": 36,
+      "claimer_kind_rate_pct": 1.4167650531286895,
+      "claimer_rows": 2541,
+      "controlled_model_status": "NOT_ESTIMABLE_PARENT_C7X_SUPPORT_GATE_FAILED",
+      "parent_1000_per_arm_gate_pass": false,
+      "sample": "dyad_pair_games_3_4",
+      "sample_definition": "Three or four dyad games"
+    },
+    {
+      "benefactor_kind_draws": 0,
+      "benefactor_kind_rate_pct": 0.0,
+      "benefactor_minus_claimer_raw_pp": -1.7837235228539576,
+      "benefactor_rows": 10,
+      "claimer_kind_draws": 16,
+      "claimer_kind_rate_pct": 1.7837235228539576,
+      "claimer_rows": 897,
+      "controlled_model_status": "NOT_ESTIMABLE_PARENT_C7X_SUPPORT_GATE_FAILED",
+      "parent_1000_per_arm_gate_pass": false,
+      "sample": "dyad_pair_games_5_9",
+      "sample_definition": "Five to nine dyad games"
+    },
+    {
+      "benefactor_kind_draws": 0,
+      "benefactor_kind_rate_pct": 0.0,
+      "benefactor_minus_claimer_raw_pp": -4.4496487119437935,
+      "benefactor_rows": 6,
+      "claimer_kind_draws": 19,
+      "claimer_kind_rate_pct": 4.4496487119437935,
+      "claimer_rows": 427,
+      "controlled_model_status": "NOT_ESTIMABLE_PARENT_C7X_SUPPORT_GATE_FAILED",
+      "parent_1000_per_arm_gate_pass": false,
+      "sample": "dyad_pair_games_ge_10",
+      "sample_definition": "Ten or more dyad games"
+    },
+    {
+      "benefactor_kind_draws": 0,
+      "benefactor_kind_rate_pct": null,
+      "benefactor_minus_claimer_raw_pp": null,
+      "benefactor_rows": 0,
+      "claimer_kind_draws": 0,
+      "claimer_kind_rate_pct": null,
+      "claimer_rows": 0,
+      "controlled_model_status": "NOT_ESTIMABLE_PARENT_C7X_SUPPORT_GATE_FAILED",
+      "parent_1000_per_arm_gate_pass": false,
+      "sample": "either_player_max_lt_2",
+      "sample_definition": "Neither player has a repeated in-window dyad"
+    },
+    {
+      "benefactor_kind_draws": 0,
+      "benefactor_kind_rate_pct": null,
+      "benefactor_minus_claimer_raw_pp": null,
+      "benefactor_rows": 0,
+      "claimer_kind_draws": 1,
+      "claimer_kind_rate_pct": 7.142857142857143,
+      "claimer_rows": 14,
+      "controlled_model_status": "NOT_ESTIMABLE_PARENT_C7X_SUPPORT_GATE_FAILED",
+      "parent_1000_per_arm_gate_pass": false,
+      "sample": "either_player_max_lt_3",
+      "sample_definition": "Neither player has a 3+ game dyad"
+    },
+    {
+      "benefactor_kind_draws": 1,
+      "benefactor_kind_rate_pct": 12.5,
+      "benefactor_minus_claimer_raw_pp": 10.19392033542977,
+      "benefactor_rows": 8,
+      "claimer_kind_draws": 11,
+      "claimer_kind_rate_pct": 2.3060796645702304,
+      "claimer_rows": 477,
+      "controlled_model_status": "NOT_ESTIMABLE_PARENT_C7X_SUPPORT_GATE_FAILED",
+      "parent_1000_per_arm_gate_pass": false,
+      "sample": "either_player_max_lt_5",
+      "sample_definition": "Neither player has a 5+ game dyad"
+    },
+    {
+      "benefactor_kind_draws": 3,
+      "benefactor_kind_rate_pct": 6.122448979591836,
+      "benefactor_minus_claimer_raw_pp": 4.224315477535525,
+      "benefactor_rows": 49,
+      "claimer_kind_draws": 60,
+      "claimer_kind_rate_pct": 1.8981335020563113,
+      "claimer_rows": 3161,
+      "controlled_model_status": "NOT_ESTIMABLE_PARENT_C7X_SUPPORT_GATE_FAILED",
+      "parent_1000_per_arm_gate_pass": false,
+      "sample": "either_player_max_lt_10",
+      "sample_definition": "Neither player has a 10+ game dyad"
+    }
+  ],
+  "reason_models_not_run": "The parent C7X benefactor arm has 125 rows, below the frozen 1,000-per-arm gate. Subset fixed-effect fits cannot rehabilitate it.",
+  "runtime_seconds": 6.222733020782471,
+  "sample_authority_scope": "selected_pool_nonadjacent_panel",
+  "status": "C7X_FREQUENT_DYAD_CURRENT_LOW_SUPPORT_DIAGNOSTIC_OK",
+  "why_invariant": "The exact 24-month all-game dyad census depends on chronology and dates, not on which timeout candidates enter the selected main panel."
+}

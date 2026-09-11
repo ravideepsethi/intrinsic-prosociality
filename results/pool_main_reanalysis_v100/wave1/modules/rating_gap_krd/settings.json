@@ -1,0 +1,122 @@
+{
+  "adapter": {
+    "bytes": 3714,
+    "lineage": "pool_main_adapter",
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave1_v1_0_0/runner/run_krd.py",
+    "repository": null,
+    "repository_head_inspected": null,
+    "sha256": "a22c9b00eee2ce863e1404cf4825e7a7ea3186bc226cc892e373b3e2fb82ae57"
+  },
+  "authority": {
+    "engine": "Stockfish 18 nodes=100,000",
+    "months": 24,
+    "panel": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+    "rows": 41534331
+  },
+  "board_eval_bands": [
+    [
+      "m600_m300",
+      -600.0,
+      -300.0
+    ],
+    [
+      "m300_m100",
+      -300.0,
+      -100.0
+    ],
+    [
+      "m100_p100",
+      -100.0,
+      100.0
+    ],
+    [
+      "p100_p300",
+      100.0,
+      300.0
+    ],
+    [
+      "p300_p600",
+      300.0,
+      600.0000001
+    ]
+  ],
+  "created_utc": "2026-09-09T21:04:15.582110+00:00",
+  "glicko_scale": 173.7178,
+  "privacy": "private cache contains chooser identifiers and must not be committed or uploaded; public CSV outputs contain aggregates/model coefficients only.",
+  "private_cache": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave1/rating_gap_krd/private_cache/rating_gap_krd_derived_private.parquet",
+  "rating_gap_buckets": [
+    [
+      "far_weaker",
+      -600.0,
+      -200.0
+    ],
+    [
+      "near_weaker",
+      -200.0,
+      -50.0
+    ],
+    [
+      "near_equal",
+      -50.0,
+      50.0000001
+    ],
+    [
+      "near_stronger",
+      50.0,
+      200.0
+    ],
+    [
+      "far_stronger",
+      200.0,
+      600.0000001
+    ]
+  ],
+  "rating_gap_definition": "disconnected_elo - chooser_elo; positive means disconnected opponent higher-rated",
+  "render_program": {
+    "bytes": 3698,
+    "lineage": "surface_package_v1.0.0",
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave1_v1_0_0/source/structural/render_rating_gap_krd.py",
+    "repository": null,
+    "repository_head_inspected": null,
+    "sha256": "c009c53fd0bf29fb7474ba7dfcad2f18b49833e874d641e4be1d17ab0420fa3b"
+  },
+  "sample_authority": {
+    "fair_kind_draws": 419463,
+    "fair_rows": 15207423,
+    "fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "kind_draws": 570091,
+    "literal_immediate_rematches_certified": false,
+    "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "months": 24,
+    "observed_screen_certified": true,
+    "panel_root_machine_specific": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+    "report_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "rows": 41534331,
+    "sample_name": "main_pool_nonadjacent",
+    "sample_status": "POOL_MAIN_SAMPLE_24M_CERTIFIED_OK",
+    "status": "POOL_MAIN_SAMPLE_AUTHENTICATED_OK"
+  },
+  "scientific_status": "exploratory diagnostic re-estimated on the selected pool/observed-nonadjacent sample",
+  "software": {
+    "duckdb": "1.5.5",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "platform": "macOS-26.4.1-arm64-arm-64bit-Mach-O",
+    "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:11:29) [Clang 20.1.8 ]"
+  },
+  "source_program": {
+    "bytes": 26753,
+    "lineage": "surface_package_v1.0.0",
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave1_v1_0_0/source/structural/rating_gap_krd_decomposition.py",
+    "repository": null,
+    "repository_head_inspected": null,
+    "sha256": "2b481180e25562632f568e8bc0737da17415593c34124372295bb1d5227a7eda"
+  },
+  "stages": [
+    "all",
+    "ply_le_10",
+    "ply_gt_10"
+  ],
+  "status": "POOL_MAIN_RATING_GAP_KRD_DECOMPOSITION_OK",
+  "upstream_producer_status": "RATING_GAP_KRD_DECOMPOSITION_OK"
+}

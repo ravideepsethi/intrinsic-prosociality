@@ -1,0 +1,12 @@
+{
+  "forbidden_identifier_columns": [
+    "chooser_id",
+    "game_id",
+    "opponent_id",
+    "username",
+    "username_norm"
+  ],
+  "private_row_level_files_transferred": false,
+  "status": "C7R_LINEAR_COMBINATION_PUBLIC_PRIVACY_OK",
+  "violations": 0
+}

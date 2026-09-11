@@ -1,0 +1,63 @@
+{
+  "authority_constants_changed": [
+    "DESKTOP_ROOT",
+    "EXPECTED_CHRONOLOGY_MANIFEST_SHA256",
+    "EXPECTED_STAGE07_FAIR_ROWS",
+    "EXPECTED_STAGE07_ROWS",
+    "EXPECTED_STAGE07_SUCCESS_SHA256",
+    "PROJECT_ROOT"
+  ],
+  "changes": [
+    {
+      "category": "authority_constant",
+      "name": "DESKTOP_ROOT",
+      "original_sha256": "e0d66702691380873f1ffd166183546d15d0dd90ddd44bf810a5db27d8c29dbc",
+      "replacement_sha256": "316a07b3d55e600e26d126cf1db8efec61852ef9505ca55007c92388ea21be1e"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_CHRONOLOGY_MANIFEST_SHA256",
+      "original_sha256": "c064873c6109a6b124d27427ce06fc99adb03bd96f1f136bb74b3f2c0eb9c0de",
+      "replacement_sha256": "9f7a62d97ab17fa59ecd6a7244ce73cdb574889984b0f1cac3727e72c06b7787"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_STAGE07_FAIR_ROWS",
+      "original_sha256": "07749efd70d49667a4d4a142fc723d892521734cce69d385592dc39a51efa3df",
+      "replacement_sha256": "894d40c42337222df03cecdf12b1e3c13359368d360442bd5490ec7c71cea8f2"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_STAGE07_ROWS",
+      "original_sha256": "f7f040f1deff48d3cabb8dd95e0208b7f338db6c05e80dfce3d197a74f0c71dd",
+      "replacement_sha256": "ecc3725ec338909534381888a96d125f4af200613958daf217ad4f0f9c044bba"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_STAGE07_SUCCESS_SHA256",
+      "original_sha256": "4c882c4b819ca23331e6c538d12f335d103692c374e670d2f2214a607662a547",
+      "replacement_sha256": "14e513dc4ae9e1901304e7916ef951d93f8a2b55d93390d30096403b9bb6c0f3"
+    },
+    {
+      "category": "authority_constant",
+      "name": "PROJECT_ROOT",
+      "original_sha256": "ea649bf0b6a75443fbb9ad307fc962ead3c42dceeed0b9be1c9c4817de245c72",
+      "replacement_sha256": "3dad5031f45d8332eb615904171909ab9572bd6f0a63ef54143d32de1d01f3e8"
+    }
+  ],
+  "created_at_utc": "2026-09-11T02:07:57Z",
+  "estimator_function_bodies_changed": false,
+  "generated_bytes": 58369,
+  "generated_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/replication_package/code/run_c7r_fullpanel_prefocal_v100.py",
+  "generated_sha256": "43712dafb0318b40f65d22b7d79b7e0b14a5bf2c5775d7c4191eac586fe56af8",
+  "repository_guards_changed": [],
+  "source": {
+    "bytes": 58227,
+    "lineage": "public_repository",
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave2B1_v1_0_2/source/dynamics/c7r_fullpanel_prefocal/run_c7r_fullpanel_prefocal_v100.py",
+    "repository": "https://github.com/ravideepsethi/intrinsic-prosociality.git",
+    "repository_head_inspected": "0dc981cbc6da157d365015a95f2b7157ecda4859",
+    "sha256": "7663e28237d671659e8a0c490406c1f99e024784e1a1322fdd0f7f9e18d129c6"
+  },
+  "status": "POOL_MAIN_SOURCE_AUTHORITY_BINDING_OK"
+}

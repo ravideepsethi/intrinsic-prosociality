@@ -1,0 +1,28 @@
+{
+  "personal_best": {
+    "branch": "personal",
+    "contrast_p_two_sided": 0.15896797401122612,
+    "contrast_standard_error": 0.018751082842185837,
+    "contrast_z": 1.408551008458629,
+    "passed": false,
+    "rule": "true positive p<0.05 and true-minus-average-placebo positive p<0.05",
+    "status": "FAILED",
+    "true_coefficient": 0.009928833730509765,
+    "true_minus_average_placebo": 0.026411856647052156,
+    "true_p_two_sided": 2.3388340401748066e-06,
+    "true_standard_error": 0.002102809842179637
+  },
+  "round_number": {
+    "branch": "round",
+    "contrast_p_two_sided": 3.9011807282796695e-276,
+    "contrast_standard_error": 0.0013027061925058416,
+    "contrast_z": 35.5065038417798,
+    "passed": true,
+    "rule": "true positive p<0.05 and true-minus-average-placebo positive p<0.05",
+    "status": "PASSED",
+    "true_coefficient": 0.049461005106801195,
+    "true_minus_average_placebo": 0.04625454242891899,
+    "true_p_two_sided": 0.0,
+    "true_standard_error": 0.001229574013805468
+  }
+}

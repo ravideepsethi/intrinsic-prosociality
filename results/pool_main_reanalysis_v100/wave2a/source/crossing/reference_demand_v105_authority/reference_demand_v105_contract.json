@@ -1,0 +1,98 @@
+{
+  "status": "REFERENCE_DEMAND_V105_CONTRACT_FROZEN",
+  "frozen_date_utc": "2026-08-27",
+  "project_root": "/Volumes/XT_Pro/lichess_kindness",
+  "versioning": {
+    "v104_status": "certified immutable no-ply baseline",
+    "v105_status": "append-only game-stage closure",
+    "v104_scope_omission": "The v1.0.4 amendment was frozen after the Equality/FEN audit but inadvertently preserved the v1.0.2 cache schema without ply_count. v1.0.5 never rewrites or relabels v1.0.4.",
+    "ply_and_long_game_timing": "required before v1.0.4 execution by the Equality/FEN result; implemented after v1.0.4 outcomes",
+    "side_specific_decomposition_timing": "post-v1.0.4 exploratory diagnostic prompted by the pooled K/M results"
+  },
+  "v104_authority": {
+    "transfer_zip_sha256": "6e87b76ea1b4c6af68a11e1a1f4f9275c367f6f30172d0804851045aa0751473",
+    "report_manifest_sha256": "f3500da0779c3256e4dd34db030d9d8bf835a469d21ba989b7f05fba0917c232",
+    "executed_package_manifest_sha256": "98977c7e4c1f9c61ed74c2025961b2a302637f94bcad0e57816865449182aa96",
+    "transfer_manifest_sha256": "c2faab320024da1d2c5a1db511201a458de62f956829e3ef89ad747bbbd48f8f",
+    "transfer_manifest_files": 37,
+    "required_models": 141
+  },
+  "original_private_cache": {
+    "relative_path": "derived/private/kindness_price_elasticity_v102_PRIVATE/fair_price_model_private.parquet",
+    "sha256": "809af587ac614d7311d8fc041deb872451d4c51e406f6bb57c69d0a35c403e47",
+    "bytes": 739941942,
+    "rows": 17328130,
+    "kind_draws": 487170,
+    "choosers": 2685525,
+    "exact_zero_rows": 244300
+  },
+  "augmented_private_cache": {
+    "relative_parent": "derived/private/KINDNESS_REFERENCE_DEMAND_CLOSURE_V105/CACHE_V100",
+    "filename": "fair_price_model_with_ply_private.parquet",
+    "receipt": "fair_price_model_with_ply_receipt.json",
+    "source_mapping": "stage07_fair_ply_mapping_private.parquet",
+    "policy": "new append-only private cache; original v1.0.2 cache and Stage 07 inputs remain read-only"
+  },
+  "stage07": {
+    "success_sha256": "8b7010b528ae5c6f1e1a9b517258648204c14c17ca41a2a6796f8ee5a1ed6db7",
+    "producer_sha256": "0411d4061ea9831c20449208a9782aaf668e160139918d106a2b7d63aaa56e6e",
+    "rows": 47587020,
+    "fair_rows": 17328130,
+    "fair_kind_draws": 487170,
+    "fair_choosers": 2685525
+  },
+  "ply": {
+    "field": "ply_count",
+    "nonnegative_integer_required": true,
+    "short_definition": "ply_count <= 10",
+    "long_definition": "ply_count > 10",
+    "bands": [
+      {"code": 0, "label": "0_4", "minimum": 0, "maximum": 4},
+      {"code": 1, "label": "5_6", "minimum": 5, "maximum": 6},
+      {"code": 2, "label": "7_8", "minimum": 7, "maximum": 8},
+      {"code": 3, "label": "9_10", "minimum": 9, "maximum": 10},
+      {"code": 4, "label": "11_20", "minimum": 11, "maximum": 20},
+      {"code": 5, "label": "21_40", "minimum": 21, "maximum": 40},
+      {"code": 6, "label": "41_80", "minimum": 41, "maximum": 80},
+      {"code": 7, "label": "81_plus", "minimum": 81, "maximum": null}
+    ]
+  },
+  "new_model_family": {
+    "v104_exact_replications": 141,
+    "stage_adjusted_zero_models": 20,
+    "stage_adjusted_local_piecewise_models": 10,
+    "stage_adjusted_E1_E5_models": 14,
+    "side_specific_K_M_models": 4,
+    "side_specific_log_abs_D_models": 4,
+    "full_gap_schedule_models": 120,
+    "long_near_zero_gap_schedule_models": 20,
+    "joint_adjacent_gap_models": 2,
+    "new_models": 194,
+    "total_required_models": 335
+  },
+  "zero_windows": [0.5, 1.0, 2.0, 4.0, 6.0],
+  "displayed_gap": {
+    "reference": -1,
+    "full_minimum": -30,
+    "full_maximum": 30,
+    "long_near_minimum": -5,
+    "long_near_maximum": 5,
+    "variants": ["primary", "plus_log_K_sensitivity"]
+  },
+  "rd_cutoff": 110.0,
+  "replication_tolerance_pp": 5e-10,
+  "canonical_versions": {
+    "duckdb": "1.5.2",
+    "numpy": "2.4.4",
+    "pandas": "3.0.3",
+    "pyarrow": "24.0.0"
+  },
+  "threads": 8,
+  "memory_limit": "16GB",
+  "causal_claim_authorized": false,
+  "unique_zero_claim_authorized": false,
+  "structural_loss_aversion_claim_authorized": false,
+  "git_mutation_authorized": false,
+  "network_access_authorized": false,
+  "private_rows_in_transfer_authorized": false
+}

@@ -1,0 +1,128 @@
+[
+  {
+    "destination": "source/patron_stage10_common.py",
+    "source": "build/Pool_Main_Patron_Estimation_Wave3B1_v1_0_1/source/patron_stage10_common.py",
+    "sha256": "b9dafa18bb616199db63d39a617fd1eff7168bf54123ee9f7d0e34778e32e7c0",
+    "modification": "none"
+  },
+  {
+    "destination": "source/pool_sample_common_v100.py",
+    "source": "build/Pool_Main_Patron_Estimation_Wave3B1_v1_0_1/source/pool_sample_common_v100.py",
+    "sha256": "b0953daa5090d901372f44191f503911eef34913926f2905d3693ece0a01831f",
+    "modification": "none"
+  },
+  {
+    "destination": "source/wave3a_design.py",
+    "source": "build/Pool_Main_Patron_Estimation_Wave3B1_v1_0_1/source/wave3a_design.py",
+    "sha256": "9a3534c64d646e1b91c848f9996987a2ed413318c344d7c339707021ce9513e0",
+    "modification": "none"
+  },
+  {
+    "destination": "source/acquisition_planner_v100.py",
+    "source": "build/Pool_Main_Patron_Estimation_Wave3B1_v1_0_1/source/acquisition_planner_v100.py",
+    "sha256": "aaaa70e119456258c2fd351dca5b59e52cfe6924421fe6103211e6e812f730de",
+    "modification": "none"
+  },
+  {
+    "destination": "source/cache_builder_v101.py",
+    "source": "build/Pool_Main_Patron_Estimation_Wave3B1_v1_0_1/source/cache_builder_v101.py",
+    "sha256": "77bd8970e98e5f79e311e3758ac84d173fcfd94612f9b15dbd0849bbd8c8e353",
+    "modification": "none"
+  },
+  {
+    "destination": "source/chooser_models_v101.py",
+    "source": "build/Pool_Main_Patron_Estimation_Wave3B1_v1_0_1/source/chooser_models_v101.py",
+    "sha256": "b9cfb4502bb529c0668746e279b09cdc7c45111baedb407c03e0c96a07d1bacd",
+    "modification": "none"
+  },
+  {
+    "destination": "source/wave3b1_helpers.py",
+    "source": "build/Pool_Main_Patron_Estimation_Wave3B1_v1_0_1/runner/run.py",
+    "sha256": "90cd70d1e08e5b7bab468ebbbd6f64f560d8793306accc8273f1a7f38473d0f0",
+    "modification": "none"
+  },
+  {
+    "destination": "authority/SAMPLE_AUTHORITY.json",
+    "source": "build/Pool_Main_Patron_Estimation_Wave3B1_v1_0_1/authority/SAMPLE_AUTHORITY.json",
+    "sha256": "81c34113e7a888629a834a17235a71dcf369a2d590755fd9412ee42151d9b2f3",
+    "modification": "none"
+  },
+  {
+    "destination": "authority/PATRON_STAGE10_IMPLEMENTATION_CONTRACT_v1.0.0.md",
+    "source": "build/Pool_Main_Patron_Estimation_Wave3B1_v1_0_1/authority/PATRON_STAGE10_IMPLEMENTATION_CONTRACT_v1.0.0.md",
+    "sha256": "786409406e0ff12bcd98e0c13f260b85ed920aca90fa183efad1cc3c874160a3",
+    "modification": "none"
+  },
+  {
+    "destination": "evidence/Pool_Main_Sample_24M_Report.zip",
+    "source": "build/Pool_Main_Patron_Estimation_Wave3B1_v1_0_1/evidence/Pool_Main_Sample_24M_Report.zip",
+    "sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "modification": "none"
+  },
+  {
+    "destination": "evidence/Pool_Main_Sample_24M_Report.zip.sha256",
+    "source": "build/Pool_Main_Patron_Estimation_Wave3B1_v1_0_1/evidence/Pool_Main_Sample_24M_Report.zip.sha256",
+    "sha256": "d2e6c0953ff2de7cc7235b98d568c884e4fa8067b8aa81d22efe1ac3484d6f59",
+    "modification": "none"
+  },
+  {
+    "destination": "evidence/WAVE3A_RESULTS.zip",
+    "source": "build/Pool_Main_Patron_Estimation_Wave3B1_v1_0_1/evidence/WAVE3A_RESULTS.zip",
+    "sha256": "f56407f3de5bdd02366df28858e689da5f10a05c657f6c5e2feb71a7e227a592",
+    "modification": "none"
+  },
+  {
+    "destination": "evidence/WAVE3B1_RESULTS.zip",
+    "source": "upload/POOL_MAIN_PATRON_WAVE3B1_RESULTS_20260911T155646Z.zip",
+    "sha256": "34b71da5e684ee07cf1abfbb9d9406dbc3601db20ff099e2737574790f0a5616",
+    "modification": "none"
+  },
+  {
+    "destination": "source/postcertification_v100.py",
+    "source": "repo/code/patron_stage10/postcertification_addendum_v1_0_0/code/00_run_postcertification_addendum.py",
+    "sha256": "6a6d7b612161ff52635b8fba9ac266f69bd550ab35f9dcd0acfd97d953a6f702",
+    "modification": "none"
+  },
+  {
+    "destination": "source/opportunity_models_v101.py",
+    "source": "repo/code/patron_stage10/primary_v1_0_1/code/02_estimate_patron_opportunity_models.py",
+    "sha256": "61f42a7e6f09431ef6ad7c918a36f65ac0a7ffcefa40bbb216667f3e02ff4796",
+    "modification": "none"
+  },
+  {
+    "destination": "source/synthetic_fixture_v101.py",
+    "source": "repo/code/patron_stage10/primary_v1_0_1/code/04_make_synthetic_fixture.py",
+    "sha256": "3d308d5ccd7dd80f1918616b2034f5ae4aa76d41f917dada176f317e1910ad7c",
+    "modification": "none"
+  },
+  {
+    "destination": "source/paperwide_dyad_v100.py",
+    "source": "inspected_packages/Lichess_Paperwide_Repeat_Dyad_Audit_v1_0_1_20260904/code/paperwide_repeat_dyad_audit_v100.py",
+    "sha256": "79e2fbf36a4d2a05591b15ea9797212fb50ac8affa039f5db92217fdc891a3d2",
+    "modification": "none"
+  },
+  {
+    "destination": "source/frequent_dyad_v101.py",
+    "source": "build/Pool_Main_Sample_Reanalysis_Wave2B2B1_v1_0_0/source/frequent_dyad/frequent_dyad_census_v101.py",
+    "sha256": "de468744408ebb29107d09c00e11d407dfc6ded036caf78f4b3e86077a2309aa",
+    "modification": "none"
+  },
+  {
+    "destination": "source/wave2b2b1_preflight_original.py",
+    "source": "build/Pool_Main_Sample_Reanalysis_Wave2B2B1_v1_0_0/runner/preflight.py",
+    "sha256": "237a003936ab19f7700cb38fa9583c3efad3fc39226210f08860ce281009116f",
+    "modification": "none"
+  },
+  {
+    "destination": "source/opportunity_models_cov_v100.py",
+    "source": "source/opportunity_models_v101.py",
+    "sha256": "10c34ca94eb315d02729e8a01220838b84ebcf6a4946273b3d4432cd12cafcc0",
+    "modification": "Serialize existing beta, hc_cov and cr_cov before returning; no estimation change."
+  },
+  {
+    "destination": "source/dyad_auth.py",
+    "source": "source/wave2b2b1_preflight_original.py",
+    "sha256": "10bfbd0250ce99f672d437ebe25ae9aab95b1fa92b7d98ef65d532b8b2911f49",
+    "modification": "Extract three byte-identical functions and the same constants; import the shared authentication helper under common."
+  }
+]

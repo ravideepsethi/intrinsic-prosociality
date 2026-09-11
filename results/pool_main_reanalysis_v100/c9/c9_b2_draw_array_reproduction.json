@@ -1,0 +1,109 @@
+{
+  "batches": [
+    {
+      "all_three_horizon_arrays_equal": true,
+      "start": 0,
+      "stop_exclusive": 250
+    },
+    {
+      "all_three_horizon_arrays_equal": true,
+      "start": 250,
+      "stop_exclusive": 500
+    },
+    {
+      "all_three_horizon_arrays_equal": true,
+      "start": 500,
+      "stop_exclusive": 750
+    },
+    {
+      "all_three_horizon_arrays_equal": true,
+      "start": 750,
+      "stop_exclusive": 1000
+    },
+    {
+      "all_three_horizon_arrays_equal": true,
+      "start": 1000,
+      "stop_exclusive": 1250
+    },
+    {
+      "all_three_horizon_arrays_equal": true,
+      "start": 1250,
+      "stop_exclusive": 1500
+    },
+    {
+      "all_three_horizon_arrays_equal": true,
+      "start": 1500,
+      "stop_exclusive": 1750
+    },
+    {
+      "all_three_horizon_arrays_equal": true,
+      "start": 1750,
+      "stop_exclusive": 2000
+    },
+    {
+      "all_three_horizon_arrays_equal": true,
+      "start": 2000,
+      "stop_exclusive": 2250
+    },
+    {
+      "all_three_horizon_arrays_equal": true,
+      "start": 2250,
+      "stop_exclusive": 2500
+    },
+    {
+      "all_three_horizon_arrays_equal": true,
+      "start": 2500,
+      "stop_exclusive": 2750
+    },
+    {
+      "all_three_horizon_arrays_equal": true,
+      "start": 2750,
+      "stop_exclusive": 3000
+    },
+    {
+      "all_three_horizon_arrays_equal": true,
+      "start": 3000,
+      "stop_exclusive": 3250
+    },
+    {
+      "all_three_horizon_arrays_equal": true,
+      "start": 3250,
+      "stop_exclusive": 3500
+    },
+    {
+      "all_three_horizon_arrays_equal": true,
+      "start": 3500,
+      "stop_exclusive": 3750
+    },
+    {
+      "all_three_horizon_arrays_equal": true,
+      "start": 3750,
+      "stop_exclusive": 4000
+    },
+    {
+      "all_three_horizon_arrays_equal": true,
+      "start": 4000,
+      "stop_exclusive": 4250
+    },
+    {
+      "all_three_horizon_arrays_equal": true,
+      "start": 4250,
+      "stop_exclusive": 4500
+    },
+    {
+      "all_three_horizon_arrays_equal": true,
+      "start": 4500,
+      "stop_exclusive": 4750
+    },
+    {
+      "all_three_horizon_arrays_equal": true,
+      "start": 4750,
+      "stop_exclusive": 4999
+    }
+  ],
+  "draws": 4999,
+  "old_sample_draws_used": false,
+  "reference_arrays_used_only_for_validation": true,
+  "reference_config_sha256": "bedbf68c8b0d4e324ef12393ca8604dfb566825cca8078ba826764cb478b0cdd",
+  "status": "C9_NEW_SAMPLE_B2_ALL_DRAW_ARRAYS_IDENTICAL"
+}

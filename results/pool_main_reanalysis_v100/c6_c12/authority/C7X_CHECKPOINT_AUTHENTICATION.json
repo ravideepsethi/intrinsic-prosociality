@@ -1,0 +1,136 @@
+{
+  "classification": {
+    "config_sha256": "89d6d08185b31ec19a5687be7a858d383df664bfa42742d0432e937249123e9f",
+    "created_utc": "2026-09-11T03:20:57.621775+00:00",
+    "output_bytes": 1208229,
+    "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b2a/c7x_state_v101/c7x_classification_private.parquet",
+    "output_rows": 10481,
+    "output_sha256": "27e351f5bd8c493c022e2c261590d5e21e8e32ed6ab5c51d20aae8bcec46912c",
+    "privacy": "PRIVATE ROW-LEVEL PARQUET; DO NOT PUBLISH",
+    "qa": {
+      "bad_gap_rows": 0,
+      "bad_ply_rows": 0,
+      "chooser_clusters": 9892,
+      "conflicting_histories": 1,
+      "exclusive_benefactor_only": 124,
+      "exclusive_claimer_only": 10356,
+      "focal_kind_outcome_read": false,
+      "latest_benefactor": 125,
+      "latest_claimer": 10356,
+      "old_sample_validation": {
+        "conflicting_histories": 0,
+        "exclusive_benefactor_only": 3,
+        "exclusive_claimer_only": 213,
+        "latest_benefactor": 3,
+        "latest_claimer": 213,
+        "same_speed_benefactor": 3,
+        "same_speed_claimer": 213
+      },
+      "pair_clusters": 10400,
+      "recency_support": {
+        "le180_benefactor": 105,
+        "le180_claimer": 7922,
+        "le30_benefactor": 52,
+        "le30_claimer": 4159,
+        "le365_benefactor": 119,
+        "le365_claimer": 9584,
+        "le7_benefactor": 25,
+        "le7_claimer": 1971
+      },
+      "rows": 10481,
+      "same_speed_benefactor": 122,
+      "same_speed_claimer": 10304,
+      "tie_break_dependent_rows": 0,
+      "tie_break_independent_rows": 10481,
+      "unique_games": 10481,
+      "within_chooser_both_latest_arms": 7,
+      "within_pair_both_latest_arms": 1
+    },
+    "status": "C7X_CLASSIFICATION_PRIVATE_OK"
+  },
+  "fair_focal": {
+    "config_sha256": "89d6d08185b31ec19a5687be7a858d383df664bfa42742d0432e937249123e9f",
+    "created_utc": "2026-09-11T03:20:19.591063+00:00",
+    "output_bytes": 1317448182,
+    "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b2a/c7x_state_v101/c7x_fair_focal_private.parquet",
+    "output_rows": 15207423,
+    "output_sha256": "eaeb721ee37bd4b9c69256a2e4b2d4b589d15410688c4c2ade31f92386395c27",
+    "privacy": "PRIVATE ROW-LEVEL PARQUET; DO NOT PUBLISH",
+    "qa": {
+      "focal_outcome_columns_present": [],
+      "null_key_rows": 0,
+      "rows": 15207423,
+      "unique_games": 15207423
+    },
+    "status": "C7X_FAIR_FOCAL_PRIVATE_OK"
+  },
+  "latest_arm": {
+    "config_sha256": "89d6d08185b31ec19a5687be7a858d383df664bfa42742d0432e937249123e9f",
+    "created_utc": "2026-09-11T03:20:38.181160+00:00",
+    "output_bytes": 1152829,
+    "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b2a/c7x_state_v101/c7x_latest_reversed_arm_private.parquet",
+    "output_rows": 10481,
+    "output_sha256": "0512c6b95bbb775d6d74830950816470a74893919a98bf54b035428a3b301ff8",
+    "privacy": "PRIVATE ROW-LEVEL PARQUET; DO NOT PUBLISH",
+    "qa": {
+      "bad_arm_rows": 0,
+      "focal_outcome_columns_present": [],
+      "focal_source_key_tied_with_prior_rows": 0,
+      "latest_benefactor": 125,
+      "latest_claimer": 10356,
+      "nonprior_order_rows": 0,
+      "rows": 10481,
+      "selected_prior_duplicate_source_key_rows": 0,
+      "unique_games": 10481
+    },
+    "status": "C7X_LATEST_REVERSED_ARM_PRIVATE_OK"
+  },
+  "prior_arms": {
+    "config_sha256": "89d6d08185b31ec19a5687be7a858d383df664bfa42742d0432e937249123e9f",
+    "created_utc": "2026-09-11T03:20:02.963081+00:00",
+    "output_bytes": 1342991885,
+    "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b2a/c7x_state_v101/c7x_prior_arms_private.parquet",
+    "output_rows": 41513364,
+    "output_sha256": "bb79a27524d0244dd84ad3842aa9565e260ace60cc084b0efef711e3dfdef65c",
+    "privacy": "PRIVATE ROW-LEVEL PARQUET; DO NOT PUBLISH",
+    "qa": {
+      "bad_arm_rows": 0,
+      "claim_rows": 40943273,
+      "duplicate_order_diagnostic": {
+        "branch_authorized": true,
+        "causal_claim": false,
+        "duplicate_source_order_excess_rows": 0,
+        "duplicate_source_order_groups": 0,
+        "epistemic_label": "X",
+        "focal_kind_outcome_read": false,
+        "game_id_direction": "ascending; latest prior is lexicographic maximum",
+        "groups_with_repeated_game_ids": 0,
+        "maximum_duplicate_group_rows": 0,
+        "mixed_mercy_claim_groups": 0,
+        "null_total_order_fields": 0,
+        "prior_rows": 41513364,
+        "rows_in_duplicate_source_order_groups": 0,
+        "script_version": "1.0.1",
+        "selected_recovery_branch": "UTC_ARCHIVE_UNIQUE_GAME_ID_TIEBREAK_DORMANT",
+        "status": "C7X_DUPLICATE_ORDER_DIAGNOSTIC_COMPLETE",
+        "tie_dependent_sensitivity": "exclude focal rows sharing the source key with an eligible prior or whose selected prior belongs to a duplicate source-key group",
+        "total_order_rule": [
+          "utc_ms",
+          "archive_ordinal",
+          "game_id"
+        ],
+        "unique_prior_game_ids": 41513364,
+        "v100_failure_reproduced_as_source_order_collisions": false
+      },
+      "maximum_source_order_multiplicity": 0,
+      "mercy_rows": 570091,
+      "null_key_rows": 0,
+      "overlap_rows": 0,
+      "rows": 41513364,
+      "rows_in_duplicate_pair_role_order_keys": 0,
+      "unique_games": 41513364
+    },
+    "status": "C7X_PRIOR_ARMS_PRIVATE_OK"
+  },
+  "private_paths_are_provenance_only": true
+}

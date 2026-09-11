@@ -1,0 +1,26 @@
+{
+  "design_seed": "intrinsic-prosociality-profile-acquisition-v1-20260819",
+  "matching_population": "full_new_panel; all any-kind versus never-kind; original bin x speed cells; up to 3 controls without replacement",
+  "memory_limit": "12GB",
+  "package_manifest_sha256": "13d546f9525194b0ac5be2badca9a46516d23f586172aaf9dda813eac05df055",
+  "plan_success_sha256": "2838aa942e20027561763855c387a454d74bb0a92d0a8b62ca47343511897e57",
+  "primary_group_subset": "new fair-kind focal chooser; matched under all-any-kind acquisition design",
+  "profile_membership_columns": [
+    "username_norm",
+    "returned",
+    "acquisition_role",
+    "match_cell",
+    "matched_kind_chooser_id",
+    "control_slot"
+  ],
+  "runtime": {
+    "duckdb": "1.5.5",
+    "platform": "macOS-26.4.1-arm64-arm-64bit-Mach-O",
+    "pyarrow": "25.0.1",
+    "python": "3.13.9"
+  },
+  "sample_fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+  "snapshot_sha256": "f42f28a6540a65c0a83f0da488663b4adddf60d1001daeed556f1ffbb961e238",
+  "threads": 8,
+  "version": "3A-1.0.0"
+}

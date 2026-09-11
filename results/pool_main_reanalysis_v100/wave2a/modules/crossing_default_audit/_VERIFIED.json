@@ -1,0 +1,36 @@
+{
+  "created_at_utc": "2026-09-10T03:12:22Z",
+  "displayed_gap_schedule": {
+    "rows": 25,
+    "tests": 24
+  },
+  "exact_zero": {
+    "exact_zero_rows": 227407,
+    "rows": 13
+  },
+  "manifest_files_before_verifier_receipt": 9,
+  "models": {
+    "controlled_contrasts": 30,
+    "joint_terms": 12
+  },
+  "privacy": {
+    "csv_files_scanned": 6,
+    "forbidden_identifier_columns": [
+      "chooser_user_id",
+      "chooser_username",
+      "chooser_username_norm",
+      "disconnected_user_id",
+      "disconnected_username",
+      "disconnected_username_norm",
+      "game_id",
+      "matched_kind_chooser_id",
+      "username",
+      "username_norm"
+    ],
+    "parquet_files_scanned": 0,
+    "status": "PUBLIC_TRANSFER_PRIVACY_SCAN_OK",
+    "violations": 0
+  },
+  "sample_fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+  "status": "POOL_MAIN_CROSSING_DEFAULT_DECOMPOSITION_V101_VERIFIED_OK"
+}

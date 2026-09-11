@@ -1,0 +1,32 @@
+{
+  "authorities": {
+    "a3_success_sha256": "6ae23db5c0ea3c6f70c160dd00d4d336cc61538100286171662aacb72e5af91c",
+    "analysis_plan_sha256": "4f572bb8da7531bfa1b894cfde92da280a936d695bdee72d9bbde6ca4545f039",
+    "chronology_manifest_sha256": "c169bf9e346defde62047a3c2048758c296b1f0598fee70d2cc1e660121536d8",
+    "feasibility_success_sha256": "dacfec2a3be569420a3b51a0e40e8eac370b320d53605a69067df2a4ee32f3be",
+    "git_head": "0dc981cbc6da157d365015a95f2b7157ecda4859",
+    "implementation_amendment_sha256": "1ec12b336344f46a2dc9f4429366bbe526d36202b7949293fac55da32eec9b8b",
+    "script_sha256": "18672bbbbe8a06f7b7a2a2a139d46a05bf4d9671fd535e36485fb80b3d2f5252",
+    "source_amendment_sha256": "79d300c3b1b7b6272b26452c016820b31df8430887fa17a3fc669c69fb92a6bf",
+    "stage07_success_sha256": "d5f41028371f49e3d6a6347e5fd3d2bfbda341c0affe46f52258bf428a2dd453"
+  },
+  "checkpoint_config_sha256": "08b276df68d7bd5a424f8813f6300c4e3f8db1c9d362883c322288e62b476349",
+  "config_sha256": "08b276df68d7bd5a424f8813f6300c4e3f8db1c9d362883c322288e62b476349",
+  "created_utc": "2026-09-10T17:01:52.641101+00:00",
+  "hypothesis_effect_estimated": false,
+  "identifier_buckets": 16,
+  "ordinary_chronology_files": 686,
+  "ordinary_chronology_rows": 7736881491,
+  "pair_sample_denominator": 50,
+  "patron_profile_input_read": false,
+  "privacy": "Only aggregate build metadata; histories remain private on XT_Pro.",
+  "private_state_root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/derived/replication/dynamic_second_wave_history_v100_PRIVATE",
+  "processed_pair_rows": 66236172,
+  "processed_user_rows": 29036757,
+  "script_version": "1.0.1",
+  "selected_game_rows": 455423047,
+  "selected_game_share": 0.058863903696828646,
+  "state_recovery_mode": "native_v101",
+  "status": "DYNAMIC_SECOND_WAVE_HISTORY_V100_OK",
+  "user_sample_denominator": 50
+}

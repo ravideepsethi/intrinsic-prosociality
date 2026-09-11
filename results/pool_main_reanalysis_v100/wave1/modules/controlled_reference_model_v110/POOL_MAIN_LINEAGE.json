@@ -1,0 +1,39 @@
+{
+  "adapter": {
+    "bytes": 10247,
+    "lineage": "pool_main_adapter",
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave1_v1_0_0/runner/run_controlled_reference.py",
+    "repository": null,
+    "repository_head_inspected": null,
+    "sha256": "ffc158e463d0468f60c50375a82988551514798c62425e9ba6814747946da5bf"
+  },
+  "created_at_utc": "2026-09-09T21:14:44Z",
+  "new_sample_authentication": "24 monthly panel bytes authenticated against the certified pool-main report",
+  "old_full_panel_numeric_bridge_authentication_requested": false,
+  "private_cache": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave1/controlled_reference_model_v110",
+  "sample_authority": {
+    "fair_kind_draws": 419463,
+    "fair_rows": 15207423,
+    "fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "kind_draws": 570091,
+    "literal_immediate_rematches_certified": false,
+    "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "months": 24,
+    "observed_screen_certified": true,
+    "panel_root_machine_specific": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+    "report_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "rows": 41534331,
+    "sample_name": "main_pool_nonadjacent",
+    "sample_status": "POOL_MAIN_SAMPLE_24M_CERTIFIED_OK",
+    "status": "POOL_MAIN_SAMPLE_AUTHENTICATED_OK"
+  },
+  "source_program": {
+    "bytes": 62615,
+    "lineage": "controlled_reference_price_v1.1.0",
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave1_v1_0_0/source/controlled/reference_price_model_v110.py",
+    "repository": null,
+    "repository_head_inspected": null,
+    "sha256": "a7cb4e723599705e3aae7416431d5b46fad27ea0bbd8a92671f1390f132b178f"
+  },
+  "status": "POOL_MAIN_CONTROLLED_REFERENCE_PRICE_MODEL_V110_COMPLETE"
+}

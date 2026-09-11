@@ -1,0 +1,82 @@
+{
+  "adapter": {
+    "bytes": 4393,
+    "lineage": "pool_main_adapter",
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave1_v1_0_0/runner/run_nonparametric.py",
+    "repository": null,
+    "repository_head_inspected": null,
+    "sha256": "3995d6f21ecb64ea3d1c3b7dae06aa34dbf43d380f6ed51650a199086e318086"
+  },
+  "created_utc": "2026-09-09T21:12:48.357963+00:00",
+  "gap_bin_definition": "50-Elo bins; omitted [-25,+25); modeled centers -550..+550",
+  "parallel_config": {
+    "logical_cpus": 12,
+    "model_workers": 4,
+    "physical_ram_gb": 18.0,
+    "worker_memory_limit": "2.5GB",
+    "worker_threads": 1
+  },
+  "prep_memory_limit": "12GB",
+  "prep_threads": 8,
+  "primary_controls": "chooser FE; chooser-clustered CR1; K20 FE; month FE; speed FE; ply FE; cubic within-band eval; win premium",
+  "primary_gap_definition": "disconnected_elo - chooser_elo",
+  "privacy": "private_cache contains chooser identifiers; never upload or commit",
+  "private_cache": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave1/rating_gap_nonparametric/private_cache",
+  "render_program": {
+    "bytes": 3853,
+    "lineage": "rating_gap_nonparametric_v1.1.0",
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave1_v1_0_0/source/structural/render_rating_gap_nonparametric_closure.py",
+    "repository": null,
+    "repository_head_inspected": null,
+    "sha256": "73aba5e088a71945bb959739d29a88e90d0aea5d37e0d33537d3fdfb0ae1c477"
+  },
+  "sample_authority": {
+    "fair_kind_draws": 419463,
+    "fair_rows": 15207423,
+    "fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "kind_draws": 570091,
+    "literal_immediate_rematches_certified": false,
+    "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "months": 24,
+    "observed_screen_certified": true,
+    "panel_root_machine_specific": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+    "report_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "rows": 41534331,
+    "sample_name": "main_pool_nonadjacent",
+    "sample_status": "POOL_MAIN_SAMPLE_24M_CERTIFIED_OK",
+    "status": "POOL_MAIN_SAMPLE_AUTHENTICATED_OK"
+  },
+  "scientific_status": "exploratory closure; scientific design unchanged from v1.0.x",
+  "software": {
+    "duckdb": "1.5.5",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "platform": "macOS-26.4.1-arm64-arm-64bit-Mach-O",
+    "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:11:29) [Clang 20.1.8 ]"
+  },
+  "source_authentication": {
+    "authority": {
+      "max_identity_error": 1.3642420526593924e-12,
+      "max_month": "2025-10",
+      "min_month": "2023-11",
+      "months": 24,
+      "n": 41534331
+    },
+    "created_utc": "2026-09-09T21:04:24.521118+00:00",
+    "source_cache": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave1/rating_gap_krd/private_cache/rating_gap_krd_derived_private.parquet",
+    "source_settings": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave1/rating_gap_krd/settings.json",
+    "source_settings_sha256": "034457d3a9885df6e9a25f44e12c68bff9c2d8da4ca992ae6263e00f233ff0c8",
+    "status": "SOURCE_AUTHENTICATED_OK"
+  },
+  "source_program": {
+    "bytes": 38653,
+    "lineage": "rating_gap_nonparametric_v1.1.0",
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave1_v1_0_0/source/structural/rating_gap_nonparametric_closure_parallel.py",
+    "repository": null,
+    "repository_head_inspected": null,
+    "sha256": "458b6545d8a563180397dd3b568efab3b08f19c086893610a59260734722f1ff"
+  },
+  "status": "POOL_MAIN_RATING_GAP_NONPARAMETRIC_CLOSURE_V110_OK",
+  "storage_policy": "Parquet-first for all tabular inputs/intermediates/outputs",
+  "upstream_producer_status": "RATING_GAP_NONPARAMETRIC_CLOSURE_V110_OK"
+}

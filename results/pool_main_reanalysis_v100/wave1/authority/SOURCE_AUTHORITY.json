@@ -1,0 +1,47 @@
+{
+  "status": "POOL_MAIN_REANALYSIS_WAVE1_SOURCE_AUTHORITY_OK",
+  "public_repository": "https://github.com/ravideepsethi/intrinsic-prosociality.git",
+  "public_repository_head_inspected": "0dc981cbc6da157d365015a95f2b7157ecda4859",
+  "sources": [
+    {
+      "relative_path": "source/core/08_make_core_paper_results.py",
+      "lineage": "public_repository",
+      "sha256": "e9dd80c52da5ffef3d406c3af25912bd924f6423f123ca535cf4077cb039c41f"
+    },
+    {
+      "relative_path": "source/core/09_build_panel_robustness.py",
+      "lineage": "public_repository",
+      "sha256": "f0b3d8d638523e22e4bc3b665d3067a261bcfb1c3d2831d9bf8fb81e6c521431"
+    },
+    {
+      "relative_path": "source/structural/rating_gap_krd_decomposition.py",
+      "lineage": "Rating-gap K/RD decomposition v1.0.0",
+      "sha256": "2b481180e25562632f568e8bc0737da17415593c34124372295bb1d5227a7eda"
+    },
+    {
+      "relative_path": "source/structural/render_rating_gap_krd.py",
+      "lineage": "Rating-gap K/RD decomposition v1.0.0",
+      "sha256": "c009c53fd0bf29fb7474ba7dfcad2f18b49833e874d641e4be1d17ab0420fa3b"
+    },
+    {
+      "relative_path": "source/structural/rating_gap_nonparametric_closure_parallel.py",
+      "lineage": "Rating-gap nonparametric closure v1.1.0",
+      "sha256": "458b6545d8a563180397dd3b568efab3b08f19c086893610a59260734722f1ff"
+    },
+    {
+      "relative_path": "source/structural/render_rating_gap_nonparametric_closure.py",
+      "lineage": "Rating-gap nonparametric closure v1.1.0",
+      "sha256": "73aba5e088a71945bb959739d29a88e90d0aea5d37e0d33537d3fdfb0ae1c477"
+    },
+    {
+      "relative_path": "source/controlled/reference_price_model_v110.py",
+      "lineage": "Controlled reference-price model v1.1.0",
+      "sha256": "a7cb4e723599705e3aae7416431d5b46fad27ea0bbd8a92671f1390f132b178f"
+    },
+    {
+      "relative_path": "source/controlled/controlled_reference_price_figure.py",
+      "lineage": "Controlled reference-price display correction v1.1.1",
+      "sha256": "04f2389dbf895e94f9108ef98b100bb23233a3fea8a5a1fea397203ada1012d6"
+    }
+  ]
+}

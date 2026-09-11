@@ -1,0 +1,16 @@
+{
+  "analysis": "B3_secondary_costly_vs_favorable",
+  "confirmatory": false,
+  "excess_difference": -0.019588184140400037,
+  "excess_difference_percentage_points": -1.9588184140400038,
+  "excess_reference_interval_95_high": 0.005698086155400094,
+  "excess_reference_interval_95_high_pp": 0.5698086155400094,
+  "excess_reference_interval_95_low": -0.04568019385535304,
+  "excess_reference_interval_95_low_pp": -4.568019385535304,
+  "horizon_hours": 24.0,
+  "null_mean_rate_difference": -0.0005408591278209226,
+  "null_p025": -0.025827129423621052,
+  "null_p975": 0.02555115058713208,
+  "observed_rate_difference": -0.02012904326822096,
+  "randomization_p_two_sided": 0.1232
+}

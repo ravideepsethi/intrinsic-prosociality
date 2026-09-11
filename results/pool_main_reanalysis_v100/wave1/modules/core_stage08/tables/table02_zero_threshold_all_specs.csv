@@ -1,0 +1,16 @@
+model,sample,variable,coefficient_pp,se_pp,t,rows_raw,rows_identifying,chooser_clusters,matrix_columns,matrix_rank,absorption_iterations,absorption_method,absorption_max_scaled_group_mean,bandwidth,favorable_definition
+chooser_fe_plus_abs_payoff_win_premium,fair_abs_draw_payoff_le_0.5,favorable,0.234357776760354,0.0103363070346156,22.6732599927136,7426641,6875419,1026739,3,3,1,one_way_exact,2.64435563609207e-15,0.5,draw_payoff>=0
+chooser_fe_plus_win_premium,fair_abs_draw_payoff_le_0.5,favorable,0.237337404652012,0.0103219699707985,22.9934213452912,7426641,6875419,1026739,2,2,1,one_way_exact,2.64435563609207e-15,0.5,draw_payoff>=0
+chooser_fe_sign_only,fair_abs_draw_payoff_le_0.5,favorable,0.23856430276604,0.0103224271983713,23.1112603829923,7426641,6333540,820149,1,1,1,one_way_exact,1.35859234701962e-15,0.5,draw_payoff>=0
+chooser_fe_plus_abs_payoff_win_premium,fair_abs_draw_payoff_le_1,favorable,0.318026728959509,0.00855048843639416,37.1939838671514,10973354,10400102,1273062,3,3,1,one_way_exact,2.92496020748431e-15,1,draw_payoff>=0
+chooser_fe_plus_win_premium,fair_abs_draw_payoff_le_1,favorable,0.319786573043006,0.00854442270061449,37.4263521653731,10973354,10400102,1273062,2,2,1,one_way_exact,2.92496020748431e-15,1,draw_payoff>=0
+chooser_fe_sign_only,fair_abs_draw_payoff_le_1,favorable,0.320624389060264,0.00854470444468266,37.5231690149081,10973354,9780686,1045028,1,1,1,one_way_exact,1.89247443194486e-15,1,draw_payoff>=0
+chooser_fe_plus_abs_payoff_win_premium,fair_abs_draw_payoff_le_2,favorable,0.407586191578127,0.00784077433877812,51.9829004084875,13794068,13189264,1455949,3,3,1,one_way_exact,2.2148378772035e-15,2,draw_payoff>=0
+chooser_fe_plus_win_premium,fair_abs_draw_payoff_le_2,favorable,0.408528165171228,0.00783626583767134,52.1330150908495,13794068,13189264,1455949,2,2,1,one_way_exact,2.2148378772035e-15,2,draw_payoff>=0
+chooser_fe_sign_only,fair_abs_draw_payoff_le_2,favorable,0.409027800369526,0.0078365153312235,52.1951126337763,13794068,12498972,1208215,1,1,1,one_way_exact,1.88508744623131e-15,2,draw_payoff>=0
+chooser_fe_plus_abs_payoff_win_premium,fair_abs_draw_payoff_le_4,favorable,0.425746098756528,0.00772366774559437,55.1222699862221,14622488,13966520,1550524,3,3,1,one_way_exact,3.54207135856668e-15,4,draw_payoff>=0
+chooser_fe_plus_win_premium,fair_abs_draw_payoff_le_4,favorable,0.425833066676341,0.00771857155149911,55.1699318760134,14622488,13966520,1550524,2,2,1,one_way_exact,3.54207135856668e-15,4,draw_payoff>=0
+chooser_fe_sign_only,fair_abs_draw_payoff_le_4,favorable,0.426087620618403,0.00771882334453215,55.2011105319874,14622488,13220242,1282967,1,1,1,one_way_exact,1.83983264257301e-15,4,draw_payoff>=0
+chooser_fe_plus_abs_payoff_win_premium,fair_abs_draw_payoff_le_6,favorable,0.426991446710604,0.00770671796976849,55.405095708132,14806746,14119890,1581374,3,3,1,one_way_exact,3.62648799636193e-15,6,draw_payoff>=0
+chooser_fe_plus_win_premium,fair_abs_draw_payoff_le_6,favorable,0.426716836338089,0.00770219554450762,55.4019738751475,14806746,14119890,1581374,2,2,1,one_way_exact,3.62648799636193e-15,6,draw_payoff>=0
+chooser_fe_sign_only,fair_abs_draw_payoff_le_6,favorable,0.426873702356166,0.00770246714371078,55.4203860129046,14806746,13352273,1305262,1,1,1,one_way_exact,1.83284752833157e-15,6,draw_payoff>=0

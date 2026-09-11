@@ -1,0 +1,27 @@
+[
+  {
+    "receipts": 68964,
+    "rows": 2369530,
+    "step": "first_fair_nontournament_main_exposure"
+  },
+  {
+    "receipts": 68964,
+    "rows": 2365895,
+    "step": "grant_or_claim_arm"
+  },
+  {
+    "receipts": 68964,
+    "rows": 2365895,
+    "step": "real_time"
+  },
+  {
+    "receipts": 67485,
+    "rows": 2296716,
+    "step": "first_observed_pair"
+  },
+  {
+    "receipts": 62304,
+    "rows": 2112795,
+    "step": "complete_90_days"
+  }
+]

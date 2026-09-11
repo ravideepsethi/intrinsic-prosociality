@@ -1,0 +1,34 @@
+{
+  "c1_c2_c3_outcomes_seen_before_amendment": false,
+  "changed_only": [
+    "C1-C3 session timestamp operationalization when explicit game-end timestamps are unavailable"
+  ],
+  "date": "2026-08-24",
+  "git_authority_before_freeze": "c0d7cb3da145b7702a6020c09f8eaf19db6fe8c1",
+  "holm_family_D": [
+    "C1",
+    "C2",
+    "C5",
+    "C6",
+    "C9"
+  ],
+  "plan_layers": [
+    {
+      "path": "docs/dynamics_paper2_campaign1_analysis_plan_v1_0_0.md",
+      "sha256": "ded9965994b6c00ed613adc90eaff3f976b257e9eb6dafdda61819916dde49fe"
+    },
+    {
+      "path": "docs/dynamics_paper2_campaign1_analysis_plan_v1_0_1_amendment.md",
+      "sha256": "01c0ed96bfca62b1659a98d978bedaaf9a4540fcdc5a30a075e2f032e35e05ee"
+    },
+    {
+      "path": "docs/dynamics_paper2_campaign1_analysis_plan_v1_0_2_amendment.md",
+      "sha256": "7eeca3ab8591620a196badbd1b9d3184236d67a031cf9eff06b76584995c0049"
+    },
+    {
+      "path": "docs/dynamics_paper2_campaign1_analysis_plan_v1_0_3_amendment.md",
+      "sha256": "96530f7ffd43b7d68ff84c794200f7db98b2b455ea2994efb5b73ce5cb370a07"
+    }
+  ],
+  "status": "DYNAMICS_CAMPAIGN1_EFFECTIVE_PLAN_V1_0_3"
+}

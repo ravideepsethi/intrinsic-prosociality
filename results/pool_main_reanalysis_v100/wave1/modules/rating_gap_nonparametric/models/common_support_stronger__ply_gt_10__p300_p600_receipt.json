@@ -1,0 +1,20 @@
+{
+  "status": "MODEL_OK",
+  "model_id": "common_support_stronger__ply_gt_10__p300_p600",
+  "rows": 36536,
+  "clusters": 9160,
+  "terms_requested": 53,
+  "terms_kept": 53,
+  "rank": 53,
+  "condition_number": 37575133.16057531,
+  "runtime_seconds": 1.4110870361328125,
+  "dropped_terms": [],
+  "key_terms": [
+    "is_stronger"
+  ],
+  "coefficient_parquet": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave1/rating_gap_nonparametric/models/common_support_stronger__ply_gt_10__p300_p600_coefficients.parquet",
+  "coefficient_parquet_sha256": "80558397dc1e535c03c46a112db88cc15907498845db8b28bb1ce215a035d15b",
+  "worker_pid": 13475,
+  "worker_threads": 1,
+  "worker_memory_limit": "2.5GB"
+}

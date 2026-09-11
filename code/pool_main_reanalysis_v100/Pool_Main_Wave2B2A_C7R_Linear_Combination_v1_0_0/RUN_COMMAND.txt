@@ -1,0 +1,12 @@
+/bin/bash <<'BASH'
+set -euo pipefail
+
+task_desktop="$HOME/Desktop/Lichess_Desktop"
+task_zip="$task_desktop/Pool_Main_Wave2B2A_C7R_Linear_Combination_v1_0_0.zip"
+task_sidecar="$task_zip.sha256"
+
+cd "$task_desktop"
+/usr/bin/shasum -a 256 -c "$task_sidecar"
+/usr/bin/ditto -x -k "$task_zip" "$task_desktop"
+/bin/bash "$task_desktop/Pool_Main_Wave2B2A_C7R_Linear_Combination_v1_0_0/RUN_CLOSURE.command"
+BASH

@@ -1,0 +1,73 @@
+{
+  "command": {
+    "argv": [
+      "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave1_v1_0_0/runner/orchestrate.py",
+      "--project-root",
+      "/Volumes/XT_Pro/lichess_kindness",
+      "--sample-root",
+      "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE",
+      "--transfer-root",
+      "/Users/u6025368/Desktop/Lichess_Desktop",
+      "--threads",
+      "8",
+      "--hash-workers",
+      "8",
+      "--model-workers",
+      "4",
+      "--memory-limit",
+      "12GB",
+      "--worker-memory-limit",
+      "2.5GB"
+    ],
+    "created_at_utc": "2026-09-09T20:55:35Z",
+    "free_gb_at_start": 673.3141899108887,
+    "hash_workers": 8,
+    "memory_limit": "12GB",
+    "model_workers": 4,
+    "private_base": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave1",
+    "project_root": "/Volumes/XT_Pro/lichess_kindness",
+    "public_base": "/Volumes/XT_Pro/lichess_kindness/output/pool_main_reanalysis_v100/wave1",
+    "python": "/Users/u6025368/Desktop/Lichess_Desktop/pool_main_wave1_python.KT7f8H/bin/python",
+    "requested_stages": [
+      "preflight",
+      "core",
+      "robustness",
+      "krd",
+      "nonparametric",
+      "controlled",
+      "collect"
+    ],
+    "sample_root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE",
+    "threads": 8,
+    "transfer_root": "/Users/u6025368/Desktop/Lichess_Desktop",
+    "worker_memory_limit": "2.5GB"
+  },
+  "completed_stages": [
+    "preflight",
+    "core",
+    "robustness",
+    "krd",
+    "nonparametric",
+    "controlled"
+  ],
+  "compute_completed_at_utc": "2026-09-09T21:15:52Z",
+  "last_completed_at_utc": "2026-09-09T21:15:50Z",
+  "sample_authority": {
+    "fair_kind_draws": 419463,
+    "fair_rows": 15207423,
+    "fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "kind_draws": 570091,
+    "literal_immediate_rematches_certified": false,
+    "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "months": 24,
+    "observed_screen_certified": true,
+    "panel_root_machine_specific": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+    "report_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "rows": 41534331,
+    "sample_name": "main_pool_nonadjacent",
+    "sample_status": "POOL_MAIN_SAMPLE_24M_CERTIFIED_OK",
+    "status": "POOL_MAIN_SAMPLE_AUTHENTICATED_OK"
+  },
+  "started_at_utc": "2026-09-09T20:55:37Z",
+  "status": "POOL_MAIN_REANALYSIS_WAVE1_COMPUTE_OK"
+}

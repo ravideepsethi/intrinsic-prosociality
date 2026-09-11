@@ -1,0 +1,464 @@
+{
+  "batches": [
+    {
+      "bytes": 72693,
+      "conditioned_seed_components": [
+        2026082201,
+        20260911,
+        1,
+        0,
+        250
+      ],
+      "config_sha256": "24c6d608556a8378246863e9ab4ff78e8b48ea1ccc01a1c00d3847d7e8223762",
+      "created_utc": "2026-09-11T18:12:31Z",
+      "elapsed_seconds": 56.88996966695413,
+      "original_and_B2_all_arrays_reproduced": true,
+      "original_seed_components": [
+        2026082201,
+        0,
+        250
+      ],
+      "sha256": "46a845eb346542e4c20b87c77a27c3636227ce063b2315460ef86c62fc03a1e0",
+      "start": 0,
+      "status": "C9_PLY_BATCH_COMPLETE",
+      "stop_exclusive": 250
+    },
+    {
+      "bytes": 72497,
+      "conditioned_seed_components": [
+        2026082201,
+        20260911,
+        1,
+        250,
+        500
+      ],
+      "config_sha256": "24c6d608556a8378246863e9ab4ff78e8b48ea1ccc01a1c00d3847d7e8223762",
+      "created_utc": "2026-09-11T18:12:31Z",
+      "elapsed_seconds": 56.63403483410366,
+      "original_and_B2_all_arrays_reproduced": true,
+      "original_seed_components": [
+        2026082201,
+        250,
+        500
+      ],
+      "sha256": "513208857149f6f7f786f06973775be637d81d0cc9e55c6e3f3b1cc5324111bf",
+      "start": 250,
+      "status": "C9_PLY_BATCH_COMPLETE",
+      "stop_exclusive": 500
+    },
+    {
+      "bytes": 72629,
+      "conditioned_seed_components": [
+        2026082201,
+        20260911,
+        1,
+        500,
+        750
+      ],
+      "config_sha256": "24c6d608556a8378246863e9ab4ff78e8b48ea1ccc01a1c00d3847d7e8223762",
+      "created_utc": "2026-09-11T18:12:31Z",
+      "elapsed_seconds": 56.851493834052235,
+      "original_and_B2_all_arrays_reproduced": true,
+      "original_seed_components": [
+        2026082201,
+        500,
+        750
+      ],
+      "sha256": "acf6331e832c587fade5ac91c187cb74a08bd6061b5078550508ccc3c82ee018",
+      "start": 500,
+      "status": "C9_PLY_BATCH_COMPLETE",
+      "stop_exclusive": 750
+    },
+    {
+      "bytes": 72488,
+      "conditioned_seed_components": [
+        2026082201,
+        20260911,
+        1,
+        750,
+        1000
+      ],
+      "config_sha256": "24c6d608556a8378246863e9ab4ff78e8b48ea1ccc01a1c00d3847d7e8223762",
+      "created_utc": "2026-09-11T18:12:31Z",
+      "elapsed_seconds": 56.52504283399321,
+      "original_and_B2_all_arrays_reproduced": true,
+      "original_seed_components": [
+        2026082201,
+        750,
+        1000
+      ],
+      "sha256": "01680e864a33bbeaa5404967fee3587197e7e1d230915fbdc66039bf80283895",
+      "start": 750,
+      "status": "C9_PLY_BATCH_COMPLETE",
+      "stop_exclusive": 1000
+    },
+    {
+      "bytes": 72633,
+      "conditioned_seed_components": [
+        2026082201,
+        20260911,
+        1,
+        1000,
+        1250
+      ],
+      "config_sha256": "24c6d608556a8378246863e9ab4ff78e8b48ea1ccc01a1c00d3847d7e8223762",
+      "created_utc": "2026-09-11T18:12:32Z",
+      "elapsed_seconds": 57.07520704111084,
+      "original_and_B2_all_arrays_reproduced": true,
+      "original_seed_components": [
+        2026082201,
+        1000,
+        1250
+      ],
+      "sha256": "64bfe761037e997d1dad1e304d4f5071e72bb9f3f6b483e014f63751abae17c9",
+      "start": 1000,
+      "status": "C9_PLY_BATCH_COMPLETE",
+      "stop_exclusive": 1250
+    },
+    {
+      "bytes": 72533,
+      "conditioned_seed_components": [
+        2026082201,
+        20260911,
+        1,
+        1250,
+        1500
+      ],
+      "config_sha256": "24c6d608556a8378246863e9ab4ff78e8b48ea1ccc01a1c00d3847d7e8223762",
+      "created_utc": "2026-09-11T18:12:31Z",
+      "elapsed_seconds": 56.70793429110199,
+      "original_and_B2_all_arrays_reproduced": true,
+      "original_seed_components": [
+        2026082201,
+        1250,
+        1500
+      ],
+      "sha256": "529afb46f299bbf5ba645bec4ad764dac82b07499fafbb7c118a04cd73fa2783",
+      "start": 1250,
+      "status": "C9_PLY_BATCH_COMPLETE",
+      "stop_exclusive": 1500
+    },
+    {
+      "bytes": 72490,
+      "conditioned_seed_components": [
+        2026082201,
+        20260911,
+        1,
+        1500,
+        1750
+      ],
+      "config_sha256": "24c6d608556a8378246863e9ab4ff78e8b48ea1ccc01a1c00d3847d7e8223762",
+      "created_utc": "2026-09-11T18:12:32Z",
+      "elapsed_seconds": 56.76218224992044,
+      "original_and_B2_all_arrays_reproduced": true,
+      "original_seed_components": [
+        2026082201,
+        1500,
+        1750
+      ],
+      "sha256": "641a4cfe8e75bbca471fb0389328d13351852ec61a79d390cf4c269cd8014e30",
+      "start": 1500,
+      "status": "C9_PLY_BATCH_COMPLETE",
+      "stop_exclusive": 1750
+    },
+    {
+      "bytes": 72603,
+      "conditioned_seed_components": [
+        2026082201,
+        20260911,
+        1,
+        1750,
+        2000
+      ],
+      "config_sha256": "24c6d608556a8378246863e9ab4ff78e8b48ea1ccc01a1c00d3847d7e8223762",
+      "created_utc": "2026-09-11T18:12:32Z",
+      "elapsed_seconds": 57.07341075013392,
+      "original_and_B2_all_arrays_reproduced": true,
+      "original_seed_components": [
+        2026082201,
+        1750,
+        2000
+      ],
+      "sha256": "8545d96d145dbc3d52fb62c6383cfa6d989faf808a5e68955b5e100d7a22000e",
+      "start": 1750,
+      "status": "C9_PLY_BATCH_COMPLETE",
+      "stop_exclusive": 2000
+    },
+    {
+      "bytes": 72496,
+      "conditioned_seed_components": [
+        2026082201,
+        20260911,
+        1,
+        2000,
+        2250
+      ],
+      "config_sha256": "24c6d608556a8378246863e9ab4ff78e8b48ea1ccc01a1c00d3847d7e8223762",
+      "created_utc": "2026-09-11T18:12:32Z",
+      "elapsed_seconds": 57.124671292025596,
+      "original_and_B2_all_arrays_reproduced": true,
+      "original_seed_components": [
+        2026082201,
+        2000,
+        2250
+      ],
+      "sha256": "ac7418cd57ccc20d73c38d1c1523d7ca7259d0dcd827142e315e8efaa938674c",
+      "start": 2000,
+      "status": "C9_PLY_BATCH_COMPLETE",
+      "stop_exclusive": 2250
+    },
+    {
+      "bytes": 72435,
+      "conditioned_seed_components": [
+        2026082201,
+        20260911,
+        1,
+        2250,
+        2500
+      ],
+      "config_sha256": "24c6d608556a8378246863e9ab4ff78e8b48ea1ccc01a1c00d3847d7e8223762",
+      "created_utc": "2026-09-11T18:13:29Z",
+      "elapsed_seconds": 56.11118237487972,
+      "original_and_B2_all_arrays_reproduced": true,
+      "original_seed_components": [
+        2026082201,
+        2250,
+        2500
+      ],
+      "sha256": "2398647e1382e816e7c51d3b2861ebe10d0afe4f953d71e08268b6e90bac5bf7",
+      "start": 2250,
+      "status": "C9_PLY_BATCH_COMPLETE",
+      "stop_exclusive": 2500
+    },
+    {
+      "bytes": 72512,
+      "conditioned_seed_components": [
+        2026082201,
+        20260911,
+        1,
+        2500,
+        2750
+      ],
+      "config_sha256": "24c6d608556a8378246863e9ab4ff78e8b48ea1ccc01a1c00d3847d7e8223762",
+      "created_utc": "2026-09-11T18:13:29Z",
+      "elapsed_seconds": 56.10604533320293,
+      "original_and_B2_all_arrays_reproduced": true,
+      "original_seed_components": [
+        2026082201,
+        2500,
+        2750
+      ],
+      "sha256": "d77ee82a268a5d5741d200d024b8b6218dbb799ade4e168849c16ba94a3bb006",
+      "start": 2500,
+      "status": "C9_PLY_BATCH_COMPLETE",
+      "stop_exclusive": 2750
+    },
+    {
+      "bytes": 72704,
+      "conditioned_seed_components": [
+        2026082201,
+        20260911,
+        1,
+        2750,
+        3000
+      ],
+      "config_sha256": "24c6d608556a8378246863e9ab4ff78e8b48ea1ccc01a1c00d3847d7e8223762",
+      "created_utc": "2026-09-11T18:13:30Z",
+      "elapsed_seconds": 56.40524012502283,
+      "original_and_B2_all_arrays_reproduced": true,
+      "original_seed_components": [
+        2026082201,
+        2750,
+        3000
+      ],
+      "sha256": "2b9c1f112848d6ee14ed582d6d0201d83d9798c09e015b77d50a31bad320859a",
+      "start": 2750,
+      "status": "C9_PLY_BATCH_COMPLETE",
+      "stop_exclusive": 3000
+    },
+    {
+      "bytes": 72751,
+      "conditioned_seed_components": [
+        2026082201,
+        20260911,
+        1,
+        3000,
+        3250
+      ],
+      "config_sha256": "24c6d608556a8378246863e9ab4ff78e8b48ea1ccc01a1c00d3847d7e8223762",
+      "created_utc": "2026-09-11T18:13:30Z",
+      "elapsed_seconds": 56.40531145897694,
+      "original_and_B2_all_arrays_reproduced": true,
+      "original_seed_components": [
+        2026082201,
+        3000,
+        3250
+      ],
+      "sha256": "b5022d25fa9436360bb82aead01016f7bb5b61e61dae2c18190c8ee1501b6d2b",
+      "start": 3000,
+      "status": "C9_PLY_BATCH_COMPLETE",
+      "stop_exclusive": 3250
+    },
+    {
+      "bytes": 72641,
+      "conditioned_seed_components": [
+        2026082201,
+        20260911,
+        1,
+        3250,
+        3500
+      ],
+      "config_sha256": "24c6d608556a8378246863e9ab4ff78e8b48ea1ccc01a1c00d3847d7e8223762",
+      "created_utc": "2026-09-11T18:13:30Z",
+      "elapsed_seconds": 56.405172125203535,
+      "original_and_B2_all_arrays_reproduced": true,
+      "original_seed_components": [
+        2026082201,
+        3250,
+        3500
+      ],
+      "sha256": "acc6afc08a25988c902d936768175fd93bff0900d2d41075cfc28f2991259ea5",
+      "start": 3250,
+      "status": "C9_PLY_BATCH_COMPLETE",
+      "stop_exclusive": 3500
+    },
+    {
+      "bytes": 72450,
+      "conditioned_seed_components": [
+        2026082201,
+        20260911,
+        1,
+        3500,
+        3750
+      ],
+      "config_sha256": "24c6d608556a8378246863e9ab4ff78e8b48ea1ccc01a1c00d3847d7e8223762",
+      "created_utc": "2026-09-11T18:13:30Z",
+      "elapsed_seconds": 56.247401415836066,
+      "original_and_B2_all_arrays_reproduced": true,
+      "original_seed_components": [
+        2026082201,
+        3500,
+        3750
+      ],
+      "sha256": "4e5d3c92bb2f0fd93beba8fc47717402868a861af652c408ebb0a9d2f3e2dbd3",
+      "start": 3500,
+      "status": "C9_PLY_BATCH_COMPLETE",
+      "stop_exclusive": 3750
+    },
+    {
+      "bytes": 72477,
+      "conditioned_seed_components": [
+        2026082201,
+        20260911,
+        1,
+        3750,
+        4000
+      ],
+      "config_sha256": "24c6d608556a8378246863e9ab4ff78e8b48ea1ccc01a1c00d3847d7e8223762",
+      "created_utc": "2026-09-11T18:13:31Z",
+      "elapsed_seconds": 56.65512579190545,
+      "original_and_B2_all_arrays_reproduced": true,
+      "original_seed_components": [
+        2026082201,
+        3750,
+        4000
+      ],
+      "sha256": "bfa3422e8bfa29847343e7aedcc78ef690452e0d91bc2f6d32ab15eb668caa39",
+      "start": 3750,
+      "status": "C9_PLY_BATCH_COMPLETE",
+      "stop_exclusive": 4000
+    },
+    {
+      "bytes": 72718,
+      "conditioned_seed_components": [
+        2026082201,
+        20260911,
+        1,
+        4000,
+        4250
+      ],
+      "config_sha256": "24c6d608556a8378246863e9ab4ff78e8b48ea1ccc01a1c00d3847d7e8223762",
+      "created_utc": "2026-09-11T18:13:31Z",
+      "elapsed_seconds": 56.74869241705164,
+      "original_and_B2_all_arrays_reproduced": true,
+      "original_seed_components": [
+        2026082201,
+        4000,
+        4250
+      ],
+      "sha256": "b3f17bc4df1cef4ac6863de66128bcc9a3d8989939a3b53f372586b053f031ff",
+      "start": 4000,
+      "status": "C9_PLY_BATCH_COMPLETE",
+      "stop_exclusive": 4250
+    },
+    {
+      "bytes": 72620,
+      "conditioned_seed_components": [
+        2026082201,
+        20260911,
+        1,
+        4250,
+        4500
+      ],
+      "config_sha256": "24c6d608556a8378246863e9ab4ff78e8b48ea1ccc01a1c00d3847d7e8223762",
+      "created_utc": "2026-09-11T18:13:31Z",
+      "elapsed_seconds": 56.77187391696498,
+      "original_and_B2_all_arrays_reproduced": true,
+      "original_seed_components": [
+        2026082201,
+        4250,
+        4500
+      ],
+      "sha256": "5335d6bb555098a7d89ca78a970e57d0eb719ed02aee3ce73d30fb53984b6b4f",
+      "start": 4250,
+      "status": "C9_PLY_BATCH_COMPLETE",
+      "stop_exclusive": 4500
+    },
+    {
+      "bytes": 72452,
+      "conditioned_seed_components": [
+        2026082201,
+        20260911,
+        1,
+        4500,
+        4750
+      ],
+      "config_sha256": "24c6d608556a8378246863e9ab4ff78e8b48ea1ccc01a1c00d3847d7e8223762",
+      "created_utc": "2026-09-11T18:14:17Z",
+      "elapsed_seconds": 45.08067358308472,
+      "original_and_B2_all_arrays_reproduced": true,
+      "original_seed_components": [
+        2026082201,
+        4500,
+        4750
+      ],
+      "sha256": "6be649e338233f115ad87c0922ea472b96fcb132a8b2c1db31afa3038e6fa0d0",
+      "start": 4500,
+      "status": "C9_PLY_BATCH_COMPLETE",
+      "stop_exclusive": 4750
+    },
+    {
+      "bytes": 72440,
+      "conditioned_seed_components": [
+        2026082201,
+        20260911,
+        1,
+        4750,
+        4999
+      ],
+      "config_sha256": "24c6d608556a8378246863e9ab4ff78e8b48ea1ccc01a1c00d3847d7e8223762",
+      "created_utc": "2026-09-11T18:14:16Z",
+      "elapsed_seconds": 44.77870437479578,
+      "original_and_B2_all_arrays_reproduced": true,
+      "original_seed_components": [
+        2026082201,
+        4750,
+        4999
+      ],
+      "sha256": "fcc2e0af2cdf4aa5b1dd5cbba848f5133fccfff9fc3a688c1e36329e0db1f8d3",
+      "start": 4750,
+      "status": "C9_PLY_BATCH_COMPLETE",
+      "stop_exclusive": 4999
+    }
+  ]
+}

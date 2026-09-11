@@ -1,0 +1,39 @@
+{
+  "account_level_files_transferred": false,
+  "created_at_utc": "2026-09-11T02:08:09Z",
+  "module_statuses": {
+    "a1_evidence_gap": "A1_EVIDENCE_GAP_AUDIT_V100_OK",
+    "a1_unconditional": "A1_UNCONDITIONAL_FIRST_OPPORTUNITY_AUDIT_V100_OK",
+    "a3_gate": "A3_CHRONOLOGY_POOLED_FEASIBILITY_GATE_OK",
+    "b2_first_grant": "DYNAMIC_SECOND_WAVE_B2_V100_OK",
+    "c7r_first_repeat": "C7R_FULLPANEL_PREFOCAL_V100_OK",
+    "dynamic_core": "DYNAMIC_PROSOCIALITY_CORE_V102_OK",
+    "e1_numerical_audit": "DYNAMIC_SECOND_WAVE_E1_AUDIT_V101_OK",
+    "postoutcome_audit": "DYNAMIC_PROSOCIALITY_POSTOUTCOME_AUDIT_V101_OK",
+    "remaining_a1_a2": "REMAINING_DYNAMIC_COMPLETION_V100_OK",
+    "second_wave_feasibility": "DYNAMIC_SECOND_WAVE_FEASIBILITY_V100_OK",
+    "second_wave_histories": "DYNAMIC_SECOND_WAVE_HISTORY_V100_OK",
+    "second_wave_postprimary": "DYNAMIC_SECOND_WAVE_POSTPRIMARY_V100_OK",
+    "second_wave_results": "DYNAMIC_SECOND_WAVE_RESULTS_V100_OK"
+  },
+  "modules": 13,
+  "network_requests": 0,
+  "private_row_level_files_transferred": false,
+  "sample_authority": {
+    "fair_kind_draws": 419463,
+    "fair_rows": 15207423,
+    "fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "kind_draws": 570091,
+    "literal_immediate_rematches_certified": false,
+    "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "months": 24,
+    "observed_screen_certified": true,
+    "panel_root_machine_specific": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+    "report_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "rows": 41534331,
+    "sample_name": "main_pool_nonadjacent",
+    "sample_status": "POOL_MAIN_SAMPLE_24M_CERTIFIED_OK",
+    "status": "POOL_MAIN_SAMPLE_AUTHENTICATED_OK"
+  },
+  "status": "POOL_MAIN_REANALYSIS_WAVE2B1_RESULTS_OK"
+}

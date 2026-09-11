@@ -1,0 +1,40 @@
+{
+  "status": "POOL_MAIN_REANALYSIS_WAVE2A_V101_RELEASE_VALIDATED_OK",
+  "validated_at_utc": "2026-09-10T02:54:58Z",
+  "runtime": {
+    "duckdb": "1.5.5",
+    "matplotlib": "3.11.1",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1"
+  },
+  "checks": {
+    "python_ast_files": 52,
+    "json_parse": "ok",
+    "launcher_bash_syntax": "ok",
+    "top_and_nested_sha256_manifests": "ok",
+    "archived_reference_demand_v105_source_authentication": "ok",
+    "wave1_controlled_source_and_table_authority_binding": "ok",
+    "dynamics_support_sql_smoke": "ok",
+    "crossing_synthetic_end_to_end": "ok",
+    "crossing_independent_synthetic_verifier": "ok",
+    "fen_unit_self_tests": "ok",
+    "fen_full_synthetic_end_to_end": "ok",
+    "fen_independent_synthetic_verifier": "ok"
+  },
+  "synthetic_crossing_run": {
+    "rows": 48000,
+    "pairwise_gap_tests": 24,
+    "joint_adjacent_models": 6,
+    "controlled_crossing_models": 4,
+    "final_status": "POOL_MAIN_CROSSING_DEFAULT_DECOMPOSITION_V101_VERIFIED_OK"
+  },
+  "synthetic_fen_run": {
+    "rows": 24000,
+    "kind_draws": 498,
+    "short_rows": 9816,
+    "verified_report_files": 20,
+    "final_status": "POOL_MAIN_EQUALITY_FEN_AUDIT_V200_OK"
+  },
+  "production_boundary": "Production panel bytes, Wave-1 output authorities, and the external chronology are authenticated on the mounted XT_Pro machine before production estimation. They were not available in the release-build workspace."
+}

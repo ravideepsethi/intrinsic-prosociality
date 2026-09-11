@@ -1,0 +1,77 @@
+{
+  "authority_constants_changed": [
+    "CORE_RUN_ID",
+    "EXPECTED_BASE_CODE_SHA256",
+    "EXPECTED_CORE_SUCCESS_SHA256",
+    "EXPECTED_PRIVATE_RECIPIENT_SHA256",
+    "EXPECTED_RECIPIENT_ROWS",
+    "EXPECTED_STAGE07_ROWS",
+    "EXPECTED_STAGE07_SUCCESS_SHA256",
+    "PROJECT_AUTHORITY"
+  ],
+  "changes": [
+    {
+      "category": "authority_constant",
+      "name": "CORE_RUN_ID",
+      "original_sha256": "206d2eecf307aa75d151494c2588c4b8cbb973a34fbc631c38139acfeffbea0e",
+      "replacement_sha256": "873727604ae2f608d8811bb5684975f81719fc5a1a9aa4a92427fa92e9b583be"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_BASE_CODE_SHA256",
+      "original_sha256": "e4d0d6dac5d153e981cc7f48b890bc3984d737bf87051c616b23f0bc2b7337e5",
+      "replacement_sha256": "3b6cec64b87e6a7e445601d3a4e362a60a5b3dee6d8b881571026fe35c94f233"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_CORE_SUCCESS_SHA256",
+      "original_sha256": "eec0e3849223c9008addf6e42ebfe103a9c8e9150b138adbc3af868d9f00088d",
+      "replacement_sha256": "2ff6dcdacd3b2a707f02cabe1c9ca5e00cc926e35a884fc2c090c92aaf1f708f"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_PRIVATE_RECIPIENT_SHA256",
+      "original_sha256": "9cd426139bbeedb825b66c848a6d432aba792098a3c6a0476b6370b6a74c6bdd",
+      "replacement_sha256": "e27f2e8d469c52d956ae9f20656b6b738f4e03840d6a5ad7bd96b2d03a4290cc"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_RECIPIENT_ROWS",
+      "original_sha256": "58ffc7eb1d28da4a44c26087e30c53e8048148b75d13241adab518107e34cb21",
+      "replacement_sha256": "fbbc9183cd90b1e7ce18f5c67219db6796fb43a2bed2d6bce4a3c95176d011dd"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_STAGE07_ROWS",
+      "original_sha256": "f7f040f1deff48d3cabb8dd95e0208b7f338db6c05e80dfce3d197a74f0c71dd",
+      "replacement_sha256": "ecc3725ec338909534381888a96d125f4af200613958daf217ad4f0f9c044bba"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_STAGE07_SUCCESS_SHA256",
+      "original_sha256": "4c882c4b819ca23331e6c538d12f335d103692c374e670d2f2214a607662a547",
+      "replacement_sha256": "14e513dc4ae9e1901304e7916ef951d93f8a2b55d93390d30096403b9bb6c0f3"
+    },
+    {
+      "category": "authority_constant",
+      "name": "PROJECT_AUTHORITY",
+      "original_sha256": "7935678c7c8e4b1c69423ee6f7c0b62d940b304c309cc656a546e1ff05db2a22",
+      "replacement_sha256": "1efd8672c0b2140c2a8ef6808f838e0293d95c6f176ed9bb8a37ddc366a98a4a"
+    }
+  ],
+  "created_at_utc": "2026-09-11T02:07:18Z",
+  "estimator_function_bodies_changed": false,
+  "generated_bytes": 43313,
+  "generated_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/replication_package/code/12_complete_remaining_dynamic_analyses.py",
+  "generated_sha256": "bc3f7962bf456a6703133e66c6b1fd65f35d7b27f618ee4d818f6f96b24ea457",
+  "repository_guards_changed": [],
+  "source": {
+    "bytes": 43268,
+    "lineage": "public_repository",
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave2B1_v1_0_2/source/dynamics/12_complete_remaining_dynamic_analyses.py",
+    "repository": "https://github.com/ravideepsethi/intrinsic-prosociality.git",
+    "repository_head_inspected": "0dc981cbc6da157d365015a95f2b7157ecda4859",
+    "sha256": "e7b302bae6c73e2f35d3b004c7206e8b2ff07fd77d49a63871f5d72d9467a73a"
+  },
+  "status": "POOL_MAIN_SOURCE_AUTHORITY_BINDING_OK"
+}

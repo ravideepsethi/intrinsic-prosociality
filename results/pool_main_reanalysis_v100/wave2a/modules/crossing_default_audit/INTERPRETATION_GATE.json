@@ -1,0 +1,10 @@
+{
+  "causal_claims_authorized": false,
+  "estimand_guardrail": "Displayed rating equality and reconstructed draw-payoff zero coincide rowwise in this panel, but the adjacent-gap and controlled side-limit models remain different conditional estimands.",
+  "manuscript_authorization": "No automatic levels-flat or tie-specific-effect sentence is authorized. Review estimates and confidence intervals after authenticated return.",
+  "post_wave1_diagnostic": "The 1500/high-RD decomposition and restricted controlled models were added after observing Wave-1 step/spike results; they are diagnostic and exploratory.",
+  "pre_existing_estimand": "Displayed rating gap -12...+12 versus -1 and joint -1/0/+1 models; this directly rebuilds manuscript Figure 2 Panel A and the no-kink table's Panel A.",
+  "provisional_measurement": "The certified panel has no historical API provisional boolean. High RD is defined transparently as pre-game RD > 110; 1500 is never treated as synonymous with provisional status.",
+  "sample_fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+  "status": "POOL_MAIN_CROSSING_MANUSCRIPT_REVIEW_REQUIRED"
+}

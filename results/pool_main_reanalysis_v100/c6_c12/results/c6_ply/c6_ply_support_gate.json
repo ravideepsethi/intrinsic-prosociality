@@ -1,0 +1,16 @@
+{
+  "arm_specific_outcomes_inspected_before_gate": false,
+  "config_sha256": "91cfa3b0eafc7de7d9574f48b6fdfcdbfdb214fa86b97c27cdadf78d05dc0e65",
+  "created_utc": "2026-09-11T13:06:35.378444+00:00",
+  "eligible_exposure_ply_gt10_rows": 1545040,
+  "eligible_first_followup_rows": 2112804,
+  "event_stage_rule": "later timeout ply_count > 10",
+  "exposure_stage_rule": "received act ply_count > 10",
+  "gate_pass": true,
+  "minimum_pooled_clearly_losing_events": 4000,
+  "minimum_recipients_with_any_later_timeout": 4000,
+  "parent_c6_support_gate_pass": true,
+  "pooled_clearly_losing_events_ply_gt10": 5405782,
+  "recipients_with_any_later_timeout_ply_gt10": 1395014,
+  "status": "C6_PLY_RETROFIT_TREATMENT_BLIND_SUPPORT_FROZEN"
+}

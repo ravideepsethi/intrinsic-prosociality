@@ -1,0 +1,26 @@
+{
+  "status": "OFFLINE_TESTS_PASSED",
+  "tests": 16,
+  "skips": 0,
+  "network_requests": 0,
+  "private_production_dataset_executed": false,
+  "checked": [
+    "DuckDB predecessor aggregation vs original start-order adjacency classifier, including ties and cross-file events",
+    "complete synthetic Parquet rerun from first exposure through fresh IV and comparison rows",
+    "pair leave-all-out and exact timestamp cutoff",
+    "cross-fit held-out participant folds",
+    "full earlier history for pair and volume",
+    "excluded/same-opponent/prestarted future games skipped",
+    "complete follow-up boundary",
+    "hash-bound resume and tamper rejection",
+    "direct IV ratio and weak-IV unbounded interval",
+    "model controls and raw/adjusted algebraic equivalence",
+    "bash launcher syntax"
+  ],
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pyarrow": "21.0.0",
+    "duckdb": "1.5.4"
+  }
+}

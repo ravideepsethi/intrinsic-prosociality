@@ -1,0 +1,18 @@
+{
+  "authorities": {
+    "additional_script_sha256": "0d5b137f2e898791f1b2353f2dfe3bd48fa93d53553bc4465d36aea0abbf1663",
+    "git_head": "0dc981cbc6da157d365015a95f2b7157ecda4859",
+    "postprimary_success_sha256": "1ab01928489d666edda7bbd0915e3ffa16a0d8e75464abfaf9d7b107d301b524",
+    "postprimary_summary_sha256": "17ba678acc75b106746c42cb5fbd0caf9395d3b0c9695e76e42dc4892c825ce6",
+    "script_producer_commit": "0dc981cbc6da157d365015a95f2b7157ecda4859",
+    "script_sha256": "af4d7fd9bff72292e769e468831ec5b917bff097e225ded846c5cacab724a2b9",
+    "source_estimator_sha256": "6111f2ec1e912c636a260aac8be688bb7dfe5e27d856f31ef807560fb4812a20",
+    "source_results_success_sha256": "a1089146e09734e556588c97d992edc47db20ce764466ace6d632b3c65364335",
+    "source_results_summary_sha256": "46c0082a786551cfccc24515ed27e77a38a41bb40854eccfbd23881e7bf65647",
+    "stage08_sha256": "e9dd80c52da5ffef3d406c3af25912bd924f6423f123ca535cf4077cb039c41f"
+  },
+  "config_sha256": "193776bee1b03f6c985e29fac67647b62fa8d0de58ea66759a7f915ad2bb44f0",
+  "postprimary_run_id": "POOL_MAIN_WAVE2B1_SECOND_postprimary_v100",
+  "scope": "independent numerical and specification audit",
+  "source_run_id": "POOL_MAIN_WAVE2B1_SECOND"
+}

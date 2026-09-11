@@ -1,0 +1,52 @@
+{
+  "classification_sha256": "27e351f5bd8c493c022e2c261590d5e21e8e32ed6ab5c51d20aae8bcec46912c",
+  "config_sha256": "89d6d08185b31ec19a5687be7a858d383df664bfa42742d0432e937249123e9f",
+  "created_utc": "2026-09-11T03:20:59.736868+00:00",
+  "epistemic_label": "X",
+  "focal_kind_outcome_read": false,
+  "full_stage07_classification": {
+    "bad_gap_rows": 0,
+    "bad_ply_rows": 0,
+    "chooser_clusters": 9892,
+    "conflicting_histories": 1,
+    "exclusive_benefactor_only": 124,
+    "exclusive_claimer_only": 10356,
+    "focal_kind_outcome_read": false,
+    "latest_benefactor": 125,
+    "latest_claimer": 10356,
+    "old_sample_validation": {
+      "conflicting_histories": 0,
+      "exclusive_benefactor_only": 3,
+      "exclusive_claimer_only": 213,
+      "latest_benefactor": 3,
+      "latest_claimer": 213,
+      "same_speed_benefactor": 3,
+      "same_speed_claimer": 213
+    },
+    "pair_clusters": 10400,
+    "recency_support": {
+      "le180_benefactor": 105,
+      "le180_claimer": 7922,
+      "le30_benefactor": 52,
+      "le30_claimer": 4159,
+      "le365_benefactor": 119,
+      "le365_claimer": 9584,
+      "le7_benefactor": 25,
+      "le7_claimer": 1971
+    },
+    "rows": 10481,
+    "same_speed_benefactor": 122,
+    "same_speed_claimer": 10304,
+    "tie_break_dependent_rows": 0,
+    "tie_break_independent_rows": 10481,
+    "unique_games": 10481,
+    "within_chooser_both_latest_arms": 7,
+    "within_pair_both_latest_arms": 1
+  },
+  "old_2pct_sample_gate_remains_failed": true,
+  "old_c7_lineage_mutated": false,
+  "primary_minimum_clusters": 100,
+  "primary_minimum_rows_per_arm": 1000,
+  "primary_support_pass": false,
+  "status": "C7X_FULLPANEL_SUPPORT_FROZEN_BEFORE_FOCAL_OUTCOME"
+}

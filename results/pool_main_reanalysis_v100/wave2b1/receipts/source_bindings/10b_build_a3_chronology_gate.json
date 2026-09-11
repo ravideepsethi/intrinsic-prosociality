@@ -1,0 +1,120 @@
+{
+  "authority_constants_changed": [
+    "EXPECTED_GIT_HEAD",
+    "EXPECTED_PRIMARY_COHORT_ROWS",
+    "EXPECTED_REENTRY_SCRIPT_SHA256",
+    "EXPECTED_REENTRY_STATUS",
+    "EXPECTED_STAGE07_ROWS",
+    "EXPECTED_STAGE07_SCRIPT_SHA256",
+    "EXPECTED_STAGE07_STATUS",
+    "EXPECTED_STAGE07_SUCCESS_SHA256",
+    "EXPECTED_V101_RUN_ID",
+    "EXPECTED_V101_SCRIPT_SHA256",
+    "EXPECTED_V101_STATUS",
+    "EXPECTED_V101_TRANSFER_SHA256",
+    "PROJECT_AUTHORITY"
+  ],
+  "changes": [
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_GIT_HEAD",
+      "original_sha256": "a8e2716c063e71798c05e4faf5dc1f4160c10b72451ab7d568937f17da667930",
+      "replacement_sha256": "463e39bc66bea503662e7c01049a062fe88ba5801fb6147cf1790c5ba0ad827c"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_PRIMARY_COHORT_ROWS",
+      "original_sha256": "370ec9935975ab286852b2da4f58f092bd6d820134eae6b3f0cd0548fe5b9de6",
+      "replacement_sha256": "05621d5be89ad57518b2f357948b9c06c6f238c6d119534276bfe97e28b295d3"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_REENTRY_SCRIPT_SHA256",
+      "original_sha256": "b41289f29bc355455203ade6bbe35f4d5ab7b5926bc67a0b47237446abc2fecf",
+      "replacement_sha256": "6f39454e0e36366f448fc5af9848e461e057ef9b18a128d8468a70bc366c2cdc"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_REENTRY_STATUS",
+      "original_sha256": "27f97d2367faffd0a9a2ec3d0dfd8a42db7dae375553d92ae7d9b91c339219a7",
+      "replacement_sha256": "7c9f831fca69053a6c0e41d70b36a4646780fc6b2fbe1e84a869e3874f8f9476"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_STAGE07_ROWS",
+      "original_sha256": "f7f040f1deff48d3cabb8dd95e0208b7f338db6c05e80dfce3d197a74f0c71dd",
+      "replacement_sha256": "ecc3725ec338909534381888a96d125f4af200613958daf217ad4f0f9c044bba"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_STAGE07_SCRIPT_SHA256",
+      "original_sha256": "f5de81181c066bedf4809bfd17bf689b107244890c97a026a20f8fb4feec0727",
+      "replacement_sha256": "828396434d4e272093c85a5c6fe3db68830220430b02628033c47b16f01e8a00"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_STAGE07_STATUS",
+      "original_sha256": "5596effa53d56666f36fe49e9e0274202cbb4d617e7ba6df28af803f88631a4f",
+      "replacement_sha256": "d94cb267f59e678859fe6369d28d2028b2ea4c9f6bc713537cf889102dc03edb"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_STAGE07_SUCCESS_SHA256",
+      "original_sha256": "4c882c4b819ca23331e6c538d12f335d103692c374e670d2f2214a607662a547",
+      "replacement_sha256": "14e513dc4ae9e1901304e7916ef951d93f8a2b55d93390d30096403b9bb6c0f3"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_V101_RUN_ID",
+      "original_sha256": "fcba98329fc6601dedaa9ee34dd0e4150cf19f79decbf55a21038d14129da2c8",
+      "replacement_sha256": "a1123073c0d63171b34eb2e250947dfce0c5791f55e404936d03096252d9f074"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_V101_SCRIPT_SHA256",
+      "original_sha256": "aa7b578ac5297ec61621d5fa70a9a5d178765f6aac910f84a78ae4f190c0bfee",
+      "replacement_sha256": "dc23a89a7bc9500f3df8fa2d390e9d2eaae86cc2952edcc0aa4529250c1c6191"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_V101_STATUS",
+      "original_sha256": "38295c9e5c1ed7dfde81979a68e273d718028906c9a2d4e4cec46267969f1772",
+      "replacement_sha256": "10678202fe2a35abbc932ad1ac835b706402c20d1e74b05f4b4bdf319d041e78"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_V101_TRANSFER_SHA256",
+      "original_sha256": "e5031d71c2f32abbf45bc3a1197e201c89198f53e85040ac30b811f79984d1e5",
+      "replacement_sha256": "f0ef6b09a888de0a52a0400daeafff0bb78a9031563108e0ac0eda6a6b226b3e"
+    },
+    {
+      "category": "authority_constant",
+      "name": "PROJECT_AUTHORITY",
+      "original_sha256": "7935678c7c8e4b1c69423ee6f7c0b62d940b304c309cc656a546e1ff05db2a22",
+      "replacement_sha256": "1efd8672c0b2140c2a8ef6808f838e0293d95c6f176ed9bb8a37ddc366a98a4a"
+    },
+    {
+      "category": "repository_guard",
+      "name": "git_state",
+      "original_sha256": "8c989830ee91ae8ae051274b3f83561606161c9639075e55ad82a4e0f9350587",
+      "replacement_sha256": "a860adf0174382a949de96001cc18cbd827b57c90b51de4fbdb82f477ca1fa6b"
+    }
+  ],
+  "created_at_utc": "2026-09-11T02:07:02Z",
+  "estimator_function_bodies_changed": false,
+  "generated_bytes": 60585,
+  "generated_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/replication_package/code/10b_build_a3_chronology_gate.py",
+  "generated_sha256": "b3ebd8d2f5eff2017dd1f55db1bd156e22f0407dead692d49e6e6910f568d6ad",
+  "repository_guards_changed": [
+    "git_state"
+  ],
+  "source": {
+    "bytes": 60864,
+    "lineage": "public_repository",
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave2B1_v1_0_2/source/dynamics/10b_build_a3_chronology_gate.py",
+    "repository": "https://github.com/ravideepsethi/intrinsic-prosociality.git",
+    "repository_head_inspected": "0dc981cbc6da157d365015a95f2b7157ecda4859",
+    "sha256": "156bfe3f4256a428ea3a00fcc42a6544b51d6048379b1e2875c8e71f31cd8f14"
+  },
+  "status": "POOL_MAIN_SOURCE_AUTHORITY_BINDING_OK"
+}

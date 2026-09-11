@@ -63,3 +63,6 @@ logs/
 *.bak
 *.backup
 code/_backups/
+
+# Audited aggregate tables only; private panels remain excluded.
+!/results/pool_main_reanalysis_v100/**/*.parquet

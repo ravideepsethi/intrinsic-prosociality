@@ -1,0 +1,312 @@
+#!/usr/bin/env python3
+"""Resumable Wave-1 controller for the selected pool-main sample."""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import shlex
+import shutil
+import subprocess
+import sys
+import time
+import traceback
+from pathlib import Path
+
+from runner import common
+
+
+STAGES = ("preflight", "core", "robustness", "krd", "nonparametric", "controlled", "collect")
+
+
+def parse_args() -> argparse.Namespace:
+    authority = common.load_json(common.AUTHORITY_PATH)
+    project_default = Path(os.environ.get("PROJECT_ROOT", authority["default_project_root"]))
+    sample_default = Path(
+        os.environ.get(
+            "SAMPLE_ROOT",
+            str(project_default / authority["default_sample_root_relative"]),
+        )
+    )
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--project-root", type=Path, default=project_default)
+    parser.add_argument("--sample-root", type=Path, default=sample_default)
+    parser.add_argument("--public-base", type=Path)
+    parser.add_argument("--private-base", type=Path)
+    parser.add_argument(
+        "--transfer-root",
+        type=Path,
+        default=Path(os.environ.get("TRANSFER_ROOT", "/Users/u6025368/Desktop/Lichess_Desktop")),
+    )
+    parser.add_argument("--threads", type=int, default=int(os.environ.get("ANALYSIS_THREADS", "8")))
+    parser.add_argument("--hash-workers", type=int, default=int(os.environ.get("HASH_WORKERS", "8")))
+    parser.add_argument("--memory-limit", default=os.environ.get("ANALYSIS_MEMORY", "12GB"))
+    parser.add_argument("--model-workers", type=int, default=int(os.environ.get("MODEL_WORKERS", "4")))
+    parser.add_argument("--worker-memory-limit", default=os.environ.get("WORKER_MEMORY", "2.5GB"))
+    parser.add_argument("--batch-rows", type=int, default=32768)
+    parser.add_argument("--min-free-gb", type=float, default=45.0)
+    parser.add_argument(
+        "--stages",
+        default=",".join(STAGES),
+        help="Comma-separated ordered subset of: " + ",".join(STAGES),
+    )
+    parser.add_argument("--skip-full-panel-hash", action="store_true")
+    return parser.parse_args()
+
+
+def stage_command(module: str, values: list[object]) -> list[str]:
+    return [sys.executable, "-m", module, *[str(value) for value in values]]
+
+
+def run_logged(stage: str, command: list[str], log_root: Path, environment: dict[str, str]) -> None:
+    log_root.mkdir(parents=True, exist_ok=True)
+    log = log_root / f"{stage}.log"
+    print(f"\n===== {stage.upper()} =====", flush=True)
+    print("COMMAND:", shlex.join(command), flush=True)
+    with log.open("a", encoding="utf-8", newline="") as stream:
+        stream.write(f"\n[{common.utc_now()}] COMMAND {shlex.join(command)}\n")
+        stream.flush()
+        process = subprocess.Popen(
+            command,
+            cwd=common.PACKAGE_ROOT,
+            env=environment,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            bufsize=1,
+        )
+        assert process.stdout is not None
+        for line in process.stdout:
+            print(line, end="", flush=True)
+            stream.write(line)
+            stream.flush()
+        code = process.wait()
+        stream.write(f"[{common.utc_now()}] EXIT {code}\n")
+    if code:
+        raise RuntimeError(f"Stage {stage} exited {code}; see {log}")
+
+
+def write_reset_ledger(public_base: Path, auth: dict) -> None:
+    rows = [
+        ("Sample authentication", "wave1", "recomputed", "Certified report and all 24 panel files"),
+        ("Core tables, desert, game stage, persistence", "wave1", "recomputed", "Public Stage-08 producer"),
+        ("Panel robustness and payoff diagnostics", "wave1", "recomputed", "Public Stage-09 producer"),
+        ("Rating-gap / expected-score / K-RD decomposition", "wave1", "recomputed", "Surface package v1.0.0"),
+        ("Nonparametric relative-strength closure", "wave1", "recomputed", "Engineering v1.1.0; same scientific estimands"),
+        ("Controlled reference-price diagnostic", "wave1", "recomputed", "Model v1.1.0 plus corrected display v1.1.1"),
+        ("Equality/FEN commonness audit", "wave2", "stale", "Must rebuild position-frequency cache"),
+        ("First/repeat-meeting and any-repeat-dyad analyses", "wave2", "stale", "Reuse chronology, rebuild sample joins"),
+        ("A1/A3/B1 core dynamics and A1 audits", "wave2", "stale", "Rebuild first eligible exposure and histories"),
+        ("Second-wave and Campaign dynamics", "wave2", "stale", "Depends on rebuilt dynamic core"),
+        ("C7R/C7X targeted memory and C6/C9 retrofits", "wave2", "stale", "Rebuild focal flags and samples"),
+        ("Chooser-leniency IV/placebo", "wave2", "stale", "Rebuild instruments and ordinary-game placebo samples"),
+        ("Patron matching, primary, and addendum", "wave3", "stale", "Recompute chooser signals and matching; preserve snapshot-date caveat"),
+        ("Unified figures, tables, manuscript numbers", "wave3", "stale", "Only after all upstream receipts pass"),
+    ]
+    ledger = {
+        "status": "POOL_MAIN_ANALYSIS_RESET_LEDGER_ACTIVE",
+        "created_at_utc": common.utc_now(),
+        "sample_authority": common.compact_sample_lineage(auth),
+        "rule": "No old sample-dependent estimate is current until the named reset wave succeeds.",
+        "analyses": [
+            {"analysis": a, "wave": wave, "status": status, "dependency": dependency}
+            for a, wave, status, dependency in rows
+        ],
+    }
+    common.atomic_json(public_base / "ANALYSIS_RESET_LEDGER.json", ledger)
+    lines = [
+        "# Pool-main analysis reset ledger",
+        "",
+        "No estimate from the former 47,587,020-row main sample is current merely because its old output still exists.",
+        "",
+        "| Analysis family | Reset wave | Current status | Dependency |",
+        "|---|---:|---|---|",
+    ]
+    lines.extend(f"| {a} | {wave} | {status} | {dependency} |" for a, wave, status, dependency in rows)
+    lines.extend(
+        [
+            "",
+            "The selected sample is the pool/observed-predecessor-nonadjacent panel. It is not certified as literal end-to-start-rematch-free.",
+            "",
+        ]
+    )
+    common.atomic_text(public_base / "ANALYSIS_RESET_LEDGER.md", "\n".join(lines))
+
+
+def main() -> int:
+    args = parse_args()
+    requested = [item.strip() for item in args.stages.split(",") if item.strip()]
+    unknown = sorted(set(requested) - set(STAGES))
+    if unknown or not requested:
+        raise SystemExit(f"Invalid --stages selection: {unknown or requested}")
+    if not 1 <= args.threads <= 10 or not 1 <= args.hash_workers <= 10:
+        raise SystemExit("Analysis threads and hash workers must be between 1 and 10")
+    project = args.project_root.expanduser().resolve()
+    if not project.is_dir():
+        raise SystemExit(f"Project root is unavailable; connect XT_Pro: {project}")
+    sample = args.sample_root.expanduser().resolve()
+    public = (args.public_base or project / "output/pool_main_reanalysis_v100/wave1").resolve()
+    private = (
+        args.private_base
+        or project / "derived/replication/pool_main_reanalysis_v100_PRIVATE/wave1"
+    ).resolve()
+    for root in (public, private):
+        root.mkdir(parents=True, exist_ok=True)
+    free_gb = shutil.disk_usage(private).free / 1024**3
+    if free_gb < args.min_free_gb:
+        raise SystemExit(
+            f"Insufficient free space at {private}: {free_gb:.1f} GiB available; "
+            f"require at least {args.min_free_gb:.1f} GiB (override only after manual review)."
+        )
+
+    auth = common.authenticate_sample(sample, verify_hashes=False)
+    write_reset_ledger(public, auth)
+    command_record = {
+        "created_at_utc": common.utc_now(),
+        "argv": sys.argv,
+        "python": sys.executable,
+        "project_root": str(project),
+        "sample_root": str(sample),
+        "public_base": str(public),
+        "private_base": str(private),
+        "transfer_root": str(args.transfer_root.expanduser().resolve()),
+        "requested_stages": requested,
+        "threads": args.threads,
+        "hash_workers": args.hash_workers,
+        "memory_limit": args.memory_limit,
+        "model_workers": args.model_workers,
+        "worker_memory_limit": args.worker_memory_limit,
+        "free_gb_at_start": free_gb,
+    }
+    common.atomic_text(public / "RUN_COMMAND.txt", shlex.join([sys.executable, "-m", "runner.orchestrate", *sys.argv[1:]]) + "\n")
+    status_path = public / "WAVE1_RUN_STATUS.json"
+    started = time.monotonic()
+    state = {
+        "status": "POOL_MAIN_REANALYSIS_WAVE1_RUNNING",
+        "started_at_utc": common.utc_now(),
+        "command": command_record,
+        "sample_authority": common.compact_sample_lineage(auth),
+        "completed_stages": [],
+    }
+    common.atomic_json(status_path, state)
+    env = dict(os.environ)
+    env["PYTHONPATH"] = str(common.PACKAGE_ROOT) + (
+        os.pathsep + env["PYTHONPATH"] if env.get("PYTHONPATH") else ""
+    )
+    env["MPLBACKEND"] = "Agg"
+    env.setdefault("OMP_NUM_THREADS", "1")
+    env.setdefault("OPENBLAS_NUM_THREADS", "1")
+    env.setdefault("MKL_NUM_THREADS", "1")
+    logs = public / "_logs"
+    commands = {
+        "preflight": stage_command(
+            "runner.preflight",
+            [
+                "--sample-root", sample,
+                "--receipt", public / "PREFLIGHT.json",
+                "--hash-workers", args.hash_workers,
+                *(["--skip-full-hash"] if args.skip_full_panel_hash else []),
+            ],
+        ),
+        "core": stage_command(
+            "runner.run_core",
+            [
+                "--sample-root", sample,
+                "--output-root", public / "core_stage08",
+                "--threads", args.threads,
+                "--memory-limit", args.memory_limit,
+                "--hash-workers", args.hash_workers,
+            ],
+        ),
+        "robustness": stage_command(
+            "runner.run_panel_robustness",
+            [
+                "--sample-root", sample,
+                "--stage08-root", public / "core_stage08",
+                "--output-root", public / "panel_robustness_stage09",
+                "--threads", args.threads,
+                "--memory-limit", args.memory_limit,
+                "--hash-workers", args.hash_workers,
+            ],
+        ),
+        "krd": stage_command(
+            "runner.run_krd",
+            [
+                "--sample-root", sample,
+                "--output-root", private / "rating_gap_krd",
+                "--threads", args.threads,
+                "--memory-limit", args.memory_limit,
+                "--hash-workers", args.hash_workers,
+            ],
+        ),
+        "nonparametric": stage_command(
+            "runner.run_nonparametric",
+            [
+                "--sample-root", sample,
+                "--krd-root", private / "rating_gap_krd",
+                "--output-root", private / "rating_gap_nonparametric",
+                "--prep-threads", args.threads,
+                "--prep-memory-limit", args.memory_limit,
+                "--model-workers", args.model_workers,
+                "--worker-threads", 1,
+                "--worker-memory-limit", args.worker_memory_limit,
+                "--hash-workers", args.hash_workers,
+            ],
+        ),
+        "controlled": stage_command(
+            "runner.run_controlled_reference",
+            [
+                "--sample-root", sample,
+                "--model-output", public / "controlled_reference_model_v110",
+                "--private-root", private / "controlled_reference_model_v110",
+                "--figure-output", public / "controlled_reference_figure_v111",
+                "--scratch-root", private / "controlled_reference_figure_v111_scratch",
+                "--threads", args.threads,
+                "--memory", args.memory_limit,
+                "--batch-rows", args.batch_rows,
+                "--hash-workers", args.hash_workers,
+            ],
+        ),
+        "collect": stage_command(
+            "runner.collect",
+            [
+                "--sample-root", sample,
+                "--public-base", public,
+                "--private-base", private,
+                "--transfer-root", args.transfer_root.expanduser().resolve(),
+            ],
+        ),
+    }
+
+    try:
+        for stage in requested:
+            if stage == "collect":
+                state["status"] = "POOL_MAIN_REANALYSIS_WAVE1_COMPUTE_OK"
+                state["compute_completed_at_utc"] = common.utc_now()
+                common.atomic_json(status_path, state)
+            run_logged(stage, commands[stage], logs, env)
+            state["completed_stages"].append(stage)
+            state["last_completed_at_utc"] = common.utc_now()
+            common.atomic_json(status_path, state)
+        state["status"] = "POOL_MAIN_REANALYSIS_WAVE1_OK"
+        state["completed_at_utc"] = common.utc_now()
+        state["runtime_seconds"] = round(time.monotonic() - started, 3)
+        common.atomic_json(status_path, state)
+        print("\nPOOL_MAIN_REANALYSIS_WAVE1_OK", flush=True)
+        print(f"public_results: {public}", flush=True)
+        print(f"private_state: {private}", flush=True)
+        return 0
+    except Exception as exc:
+        state["status"] = "POOL_MAIN_REANALYSIS_WAVE1_STOPPED"
+        state["stopped_at_utc"] = common.utc_now()
+        state["runtime_seconds"] = round(time.monotonic() - started, 3)
+        state["error"] = f"{type(exc).__name__}: {exc}"
+        state["traceback"] = traceback.format_exc()
+        common.atomic_json(status_path, state)
+        print(f"POOL_MAIN_REANALYSIS_WAVE1_STOPPED: {exc}", file=sys.stderr, flush=True)
+        return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

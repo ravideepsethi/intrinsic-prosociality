@@ -1,0 +1,64 @@
+{
+  "c7x_model": {
+    "config_sha256": "ad0c8c90beb6329f41de4fcefe1a7b20ecc90656135157e709e167e861fd6109",
+    "created_utc": "2026-09-11T03:40:19.351950+00:00",
+    "output_bytes": 1208868,
+    "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b2a/c7r_state_v102/c7r_c7x_model_private.parquet",
+    "output_rows": 10481,
+    "output_sha256": "9b8041389941ea931745c8b6942b13ec42880a61d207f98817f9cac279f710d3",
+    "privacy": "PRIVATE ROW-LEVEL PARQUET; DO NOT PUBLISH",
+    "qa": {
+      "kind_draws": 178,
+      "null_kind_rows": 0,
+      "rows": 10481,
+      "unique_games": 10481
+    },
+    "status": "C7R_C7X_MODEL_PRIVATE_OK"
+  },
+  "pair_model": {
+    "config_sha256": "ad0c8c90beb6329f41de4fcefe1a7b20ecc90656135157e709e167e861fd6109",
+    "created_utc": "2026-09-11T03:40:14.758986+00:00",
+    "output_bytes": 63820554,
+    "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b2a/c7r_state_v102/c7r_pair_model_private.parquet",
+    "output_rows": 830991,
+    "output_sha256": "05e3a7a245da7bfe72ea7e628fbd3e2a7a8c01555c76f5889ac6249f648d6f7a",
+    "privacy": "PRIVATE ROW-LEVEL PARQUET; DO NOT PUBLISH",
+    "qa": {
+      "kind_draws": 11554,
+      "null_kind_rows": 0,
+      "rows": 830991,
+      "unique_games": 830991
+    },
+    "status": "C7R_PAIR_MODEL_PRIVATE_OK"
+  },
+  "pair_support": {
+    "config_sha256": "ad0c8c90beb6329f41de4fcefe1a7b20ecc90656135157e709e167e861fd6109",
+    "created_utc": "2026-09-11T03:40:05.292794+00:00",
+    "output_bytes": 63795348,
+    "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b2a/c7r_state_v102/c7r_pair_support_private.parquet",
+    "output_rows": 830991,
+    "output_sha256": "d4948de358939aad3b29db4e76645dd49f5fd6aa747914f0fb6701243d934a70",
+    "privacy": "PRIVATE ROW-LEVEL PARQUET; DO NOT PUBLISH",
+    "qa": {
+      "bad_key_or_ply_rows": 0,
+      "bad_pair_sequence_rows": 0,
+      "certified_fair_target_rows": 304729,
+      "certified_fair_target_unique_games": 304729,
+      "direct_stage07_pair_sample_rows": 830991,
+      "direct_stage07_pair_sample_unique_games": 830991,
+      "fair_crosscheck_missing_rows": 0,
+      "fair_crosscheck_pair_sequence_mismatches": 0,
+      "fair_rows_crosschecked": 304729,
+      "fair_unique_games_crosschecked": 304729,
+      "first_meetings": 772371,
+      "focal_kind_outcome_read": false,
+      "focal_outcome_columns_present": [],
+      "pair_sequence_source": "authenticated raw sampled pair-event layer",
+      "repeat_meetings": 58620,
+      "rows": 830991,
+      "unique_games": 830991
+    },
+    "status": "C7R_PAIR_SUPPORT_OUTCOME_FREE_OK"
+  },
+  "private_paths_are_provenance_only": true
+}

@@ -1,0 +1,1060 @@
+{
+  "config_sha256": "91cfa3b0eafc7de7d9574f48b6fdfcdbfdb214fa86b97c27cdadf78d05dc0e65",
+  "created_utc": "2026-09-11T13:09:16.071268+00:00",
+  "focal_kind_outcome_read": false,
+  "rows": 302357,
+  "status": "C12_EXPERIENCE_DECILES_FROZEN_BEFORE_FOCAL_OUTCOME",
+  "support": [
+    {
+      "experience_decile": 1,
+      "opportunities": 1853,
+      "recipient_rating_band": 0,
+      "recipients": 1523,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 2,
+      "opportunities": 1853,
+      "recipient_rating_band": 0,
+      "recipients": 1174,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 3,
+      "opportunities": 1853,
+      "recipient_rating_band": 0,
+      "recipients": 1005,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 4,
+      "opportunities": 1853,
+      "recipient_rating_band": 0,
+      "recipients": 821,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 5,
+      "opportunities": 1853,
+      "recipient_rating_band": 0,
+      "recipients": 735,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 6,
+      "opportunities": 1853,
+      "recipient_rating_band": 0,
+      "recipients": 636,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 7,
+      "opportunities": 1852,
+      "recipient_rating_band": 0,
+      "recipients": 475,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 8,
+      "opportunities": 1852,
+      "recipient_rating_band": 0,
+      "recipients": 387,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 9,
+      "opportunities": 1852,
+      "recipient_rating_band": 0,
+      "recipients": 322,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 10,
+      "opportunities": 1852,
+      "recipient_rating_band": 0,
+      "recipients": 249,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 1,
+      "opportunities": 11020,
+      "recipient_rating_band": 0,
+      "recipients": 7011,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 2,
+      "opportunities": 11020,
+      "recipient_rating_band": 0,
+      "recipients": 5327,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 3,
+      "opportunities": 11020,
+      "recipient_rating_band": 0,
+      "recipients": 4356,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 4,
+      "opportunities": 11019,
+      "recipient_rating_band": 0,
+      "recipients": 3753,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 5,
+      "opportunities": 11019,
+      "recipient_rating_band": 0,
+      "recipients": 3176,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 6,
+      "opportunities": 11019,
+      "recipient_rating_band": 0,
+      "recipients": 2594,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 7,
+      "opportunities": 11019,
+      "recipient_rating_band": 0,
+      "recipients": 2186,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 8,
+      "opportunities": 11019,
+      "recipient_rating_band": 0,
+      "recipients": 1644,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 9,
+      "opportunities": 11019,
+      "recipient_rating_band": 0,
+      "recipients": 1264,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 10,
+      "opportunities": 11019,
+      "recipient_rating_band": 0,
+      "recipients": 873,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 1,
+      "opportunities": 6296,
+      "recipient_rating_band": 0,
+      "recipients": 4819,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 2,
+      "opportunities": 6296,
+      "recipient_rating_band": 0,
+      "recipients": 4102,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 3,
+      "opportunities": 6296,
+      "recipient_rating_band": 0,
+      "recipients": 3684,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 4,
+      "opportunities": 6296,
+      "recipient_rating_band": 0,
+      "recipients": 3241,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 5,
+      "opportunities": 6296,
+      "recipient_rating_band": 0,
+      "recipients": 2774,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 6,
+      "opportunities": 6296,
+      "recipient_rating_band": 0,
+      "recipients": 2334,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 7,
+      "opportunities": 6296,
+      "recipient_rating_band": 0,
+      "recipients": 1882,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 8,
+      "opportunities": 6295,
+      "recipient_rating_band": 0,
+      "recipients": 1447,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 9,
+      "opportunities": 6295,
+      "recipient_rating_band": 0,
+      "recipients": 1024,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 10,
+      "opportunities": 6295,
+      "recipient_rating_band": 0,
+      "recipients": 586,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 1,
+      "opportunities": 238,
+      "recipient_rating_band": 0,
+      "recipients": 227,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 2,
+      "opportunities": 238,
+      "recipient_rating_band": 0,
+      "recipients": 216,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 3,
+      "opportunities": 238,
+      "recipient_rating_band": 0,
+      "recipients": 212,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 4,
+      "opportunities": 238,
+      "recipient_rating_band": 0,
+      "recipients": 184,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 5,
+      "opportunities": 237,
+      "recipient_rating_band": 0,
+      "recipients": 169,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 6,
+      "opportunities": 237,
+      "recipient_rating_band": 0,
+      "recipients": 145,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 7,
+      "opportunities": 237,
+      "recipient_rating_band": 0,
+      "recipients": 153,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 8,
+      "opportunities": 237,
+      "recipient_rating_band": 0,
+      "recipients": 136,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 9,
+      "opportunities": 237,
+      "recipient_rating_band": 0,
+      "recipients": 119,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 10,
+      "opportunities": 237,
+      "recipient_rating_band": 0,
+      "recipients": 123,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 1,
+      "opportunities": 957,
+      "recipient_rating_band": 1,
+      "recipients": 580,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 2,
+      "opportunities": 957,
+      "recipient_rating_band": 1,
+      "recipients": 456,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 3,
+      "opportunities": 957,
+      "recipient_rating_band": 1,
+      "recipients": 400,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 4,
+      "opportunities": 957,
+      "recipient_rating_band": 1,
+      "recipients": 390,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 5,
+      "opportunities": 957,
+      "recipient_rating_band": 1,
+      "recipients": 340,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 6,
+      "opportunities": 957,
+      "recipient_rating_band": 1,
+      "recipients": 311,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 7,
+      "opportunities": 956,
+      "recipient_rating_band": 1,
+      "recipients": 271,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 8,
+      "opportunities": 956,
+      "recipient_rating_band": 1,
+      "recipients": 244,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 9,
+      "opportunities": 956,
+      "recipient_rating_band": 1,
+      "recipients": 173,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 10,
+      "opportunities": 956,
+      "recipient_rating_band": 1,
+      "recipients": 134,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 1,
+      "opportunities": 5352,
+      "recipient_rating_band": 1,
+      "recipients": 2492,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 2,
+      "opportunities": 5352,
+      "recipient_rating_band": 1,
+      "recipients": 1792,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 3,
+      "opportunities": 5352,
+      "recipient_rating_band": 1,
+      "recipients": 1509,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 4,
+      "opportunities": 5352,
+      "recipient_rating_band": 1,
+      "recipients": 1406,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 5,
+      "opportunities": 5352,
+      "recipient_rating_band": 1,
+      "recipients": 1164,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 6,
+      "opportunities": 5352,
+      "recipient_rating_band": 1,
+      "recipients": 1022,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 7,
+      "opportunities": 5352,
+      "recipient_rating_band": 1,
+      "recipients": 897,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 8,
+      "opportunities": 5352,
+      "recipient_rating_band": 1,
+      "recipients": 790,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 9,
+      "opportunities": 5351,
+      "recipient_rating_band": 1,
+      "recipients": 624,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 10,
+      "opportunities": 5351,
+      "recipient_rating_band": 1,
+      "recipients": 443,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 1,
+      "opportunities": 2351,
+      "recipient_rating_band": 1,
+      "recipients": 1539,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 2,
+      "opportunities": 2351,
+      "recipient_rating_band": 1,
+      "recipients": 1083,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 3,
+      "opportunities": 2351,
+      "recipient_rating_band": 1,
+      "recipients": 910,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 4,
+      "opportunities": 2351,
+      "recipient_rating_band": 1,
+      "recipients": 821,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 5,
+      "opportunities": 2351,
+      "recipient_rating_band": 1,
+      "recipients": 688,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 6,
+      "opportunities": 2351,
+      "recipient_rating_band": 1,
+      "recipients": 606,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 7,
+      "opportunities": 2351,
+      "recipient_rating_band": 1,
+      "recipients": 493,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 8,
+      "opportunities": 2350,
+      "recipient_rating_band": 1,
+      "recipients": 418,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 9,
+      "opportunities": 2350,
+      "recipient_rating_band": 1,
+      "recipients": 321,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 10,
+      "opportunities": 2350,
+      "recipient_rating_band": 1,
+      "recipients": 275,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 1,
+      "opportunities": 106,
+      "recipient_rating_band": 1,
+      "recipients": 92,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 2,
+      "opportunities": 106,
+      "recipient_rating_band": 1,
+      "recipients": 81,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 3,
+      "opportunities": 106,
+      "recipient_rating_band": 1,
+      "recipients": 80,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 4,
+      "opportunities": 106,
+      "recipient_rating_band": 1,
+      "recipients": 50,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 5,
+      "opportunities": 106,
+      "recipient_rating_band": 1,
+      "recipients": 55,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 6,
+      "opportunities": 106,
+      "recipient_rating_band": 1,
+      "recipients": 56,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 7,
+      "opportunities": 106,
+      "recipient_rating_band": 1,
+      "recipients": 46,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 8,
+      "opportunities": 105,
+      "recipient_rating_band": 1,
+      "recipients": 32,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 9,
+      "opportunities": 105,
+      "recipient_rating_band": 1,
+      "recipients": 17,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 10,
+      "opportunities": 105,
+      "recipient_rating_band": 1,
+      "recipients": 42,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 1,
+      "opportunities": 350,
+      "recipient_rating_band": 2,
+      "recipients": 247,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 2,
+      "opportunities": 350,
+      "recipient_rating_band": 2,
+      "recipients": 185,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 3,
+      "opportunities": 350,
+      "recipient_rating_band": 2,
+      "recipients": 161,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 4,
+      "opportunities": 350,
+      "recipient_rating_band": 2,
+      "recipients": 157,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 5,
+      "opportunities": 350,
+      "recipient_rating_band": 2,
+      "recipients": 138,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 6,
+      "opportunities": 349,
+      "recipient_rating_band": 2,
+      "recipients": 109,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 7,
+      "opportunities": 349,
+      "recipient_rating_band": 2,
+      "recipients": 69,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 8,
+      "opportunities": 349,
+      "recipient_rating_band": 2,
+      "recipients": 66,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 9,
+      "opportunities": 349,
+      "recipient_rating_band": 2,
+      "recipients": 83,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 10,
+      "opportunities": 349,
+      "recipient_rating_band": 2,
+      "recipients": 86,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 1,
+      "opportunities": 1283,
+      "recipient_rating_band": 2,
+      "recipients": 650,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 2,
+      "opportunities": 1283,
+      "recipient_rating_band": 2,
+      "recipients": 468,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 3,
+      "opportunities": 1283,
+      "recipient_rating_band": 2,
+      "recipients": 394,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 4,
+      "opportunities": 1283,
+      "recipient_rating_band": 2,
+      "recipients": 342,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 5,
+      "opportunities": 1283,
+      "recipient_rating_band": 2,
+      "recipients": 312,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 6,
+      "opportunities": 1283,
+      "recipient_rating_band": 2,
+      "recipients": 291,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 7,
+      "opportunities": 1283,
+      "recipient_rating_band": 2,
+      "recipients": 241,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 8,
+      "opportunities": 1283,
+      "recipient_rating_band": 2,
+      "recipients": 201,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 9,
+      "opportunities": 1283,
+      "recipient_rating_band": 2,
+      "recipients": 165,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 10,
+      "opportunities": 1283,
+      "recipient_rating_band": 2,
+      "recipients": 140,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 1,
+      "opportunities": 339,
+      "recipient_rating_band": 2,
+      "recipients": 257,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 2,
+      "opportunities": 339,
+      "recipient_rating_band": 2,
+      "recipients": 206,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 3,
+      "opportunities": 339,
+      "recipient_rating_band": 2,
+      "recipients": 164,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 4,
+      "opportunities": 339,
+      "recipient_rating_band": 2,
+      "recipients": 154,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 5,
+      "opportunities": 339,
+      "recipient_rating_band": 2,
+      "recipients": 156,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 6,
+      "opportunities": 339,
+      "recipient_rating_band": 2,
+      "recipients": 124,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 7,
+      "opportunities": 338,
+      "recipient_rating_band": 2,
+      "recipients": 111,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 8,
+      "opportunities": 338,
+      "recipient_rating_band": 2,
+      "recipients": 107,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 9,
+      "opportunities": 338,
+      "recipient_rating_band": 2,
+      "recipients": 91,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 10,
+      "opportunities": 338,
+      "recipient_rating_band": 2,
+      "recipients": 90,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 1,
+      "opportunities": 11,
+      "recipient_rating_band": 2,
+      "recipients": 11,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 2,
+      "opportunities": 11,
+      "recipient_rating_band": 2,
+      "recipients": 11,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 3,
+      "opportunities": 11,
+      "recipient_rating_band": 2,
+      "recipients": 9,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 4,
+      "opportunities": 11,
+      "recipient_rating_band": 2,
+      "recipients": 7,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 5,
+      "opportunities": 11,
+      "recipient_rating_band": 2,
+      "recipients": 8,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 6,
+      "opportunities": 11,
+      "recipient_rating_band": 2,
+      "recipients": 4,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 7,
+      "opportunities": 11,
+      "recipient_rating_band": 2,
+      "recipients": 4,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 8,
+      "opportunities": 11,
+      "recipient_rating_band": 2,
+      "recipients": 8,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 9,
+      "opportunities": 10,
+      "recipient_rating_band": 2,
+      "recipients": 8,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 10,
+      "opportunities": 10,
+      "recipient_rating_band": 2,
+      "recipients": 9,
+      "speed_code": 4
+    },
+    {
+      "experience_decile": 1,
+      "opportunities": 29,
+      "recipient_rating_band": 3,
+      "recipients": 26,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 2,
+      "opportunities": 29,
+      "recipient_rating_band": 3,
+      "recipients": 23,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 3,
+      "opportunities": 29,
+      "recipient_rating_band": 3,
+      "recipients": 22,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 4,
+      "opportunities": 29,
+      "recipient_rating_band": 3,
+      "recipients": 21,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 5,
+      "opportunities": 29,
+      "recipient_rating_band": 3,
+      "recipients": 16,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 6,
+      "opportunities": 29,
+      "recipient_rating_band": 3,
+      "recipients": 15,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 7,
+      "opportunities": 29,
+      "recipient_rating_band": 3,
+      "recipients": 16,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 8,
+      "opportunities": 29,
+      "recipient_rating_band": 3,
+      "recipients": 16,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 9,
+      "opportunities": 29,
+      "recipient_rating_band": 3,
+      "recipients": 15,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 10,
+      "opportunities": 28,
+      "recipient_rating_band": 3,
+      "recipients": 10,
+      "speed_code": 1
+    },
+    {
+      "experience_decile": 1,
+      "opportunities": 45,
+      "recipient_rating_band": 3,
+      "recipients": 35,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 2,
+      "opportunities": 45,
+      "recipient_rating_band": 3,
+      "recipients": 32,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 3,
+      "opportunities": 45,
+      "recipient_rating_band": 3,
+      "recipients": 18,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 4,
+      "opportunities": 45,
+      "recipient_rating_band": 3,
+      "recipients": 24,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 5,
+      "opportunities": 45,
+      "recipient_rating_band": 3,
+      "recipients": 20,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 6,
+      "opportunities": 45,
+      "recipient_rating_band": 3,
+      "recipients": 19,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 7,
+      "opportunities": 45,
+      "recipient_rating_band": 3,
+      "recipients": 20,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 8,
+      "opportunities": 45,
+      "recipient_rating_band": 3,
+      "recipients": 23,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 9,
+      "opportunities": 45,
+      "recipient_rating_band": 3,
+      "recipients": 21,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 10,
+      "opportunities": 45,
+      "recipient_rating_band": 3,
+      "recipients": 19,
+      "speed_code": 2
+    },
+    {
+      "experience_decile": 1,
+      "opportunities": 11,
+      "recipient_rating_band": 3,
+      "recipients": 10,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 2,
+      "opportunities": 10,
+      "recipient_rating_band": 3,
+      "recipients": 7,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 3,
+      "opportunities": 10,
+      "recipient_rating_band": 3,
+      "recipients": 9,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 4,
+      "opportunities": 10,
+      "recipient_rating_band": 3,
+      "recipients": 7,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 5,
+      "opportunities": 10,
+      "recipient_rating_band": 3,
+      "recipients": 4,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 6,
+      "opportunities": 10,
+      "recipient_rating_band": 3,
+      "recipients": 3,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 7,
+      "opportunities": 10,
+      "recipient_rating_band": 3,
+      "recipients": 1,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 8,
+      "opportunities": 10,
+      "recipient_rating_band": 3,
+      "recipients": 1,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 9,
+      "opportunities": 10,
+      "recipient_rating_band": 3,
+      "recipients": 2,
+      "speed_code": 3
+    },
+    {
+      "experience_decile": 10,
+      "opportunities": 10,
+      "recipient_rating_band": 3,
+      "recipients": 1,
+      "speed_code": 3
+    }
+  ],
+  "tie_break": "prior count, then focal game hash and game ID"
+}

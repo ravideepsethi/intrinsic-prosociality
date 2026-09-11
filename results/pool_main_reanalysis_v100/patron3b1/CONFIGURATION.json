@@ -1,0 +1,38 @@
+{
+  "gap_fill": {
+    "config_sha256": "2c3aaceee64b55d9efcfd718bc91b4b59ddb0670c36e32a5657700fec066195b",
+    "membership": {
+      "bad_provenance": 0,
+      "mismatches": 0,
+      "nonreturn_mismatch": 0,
+      "recovered": 122,
+      "recovered_primary": 77,
+      "recovery_mismatch": 0,
+      "rows": 285,
+      "unique_users": 285
+    },
+    "observed_at_utc": "2026-09-11T15:30:44.718996+00:00",
+    "report_sha256": "99938ce0e0ebc2306e449148f76b50d87771677805ea4c35afc45066889b8737",
+    "supplement_sha256": "39a9c911bb0030d2dacc7c73f77d0bb94bc27981be347dd3e03f30af8b0482aa"
+  },
+  "memory_limit": "12GB",
+  "missingness_amendment_sha256": "b2f849fe4e212b72590249bab41975c3ba9e82deac39ea72a06c9d2e50e084a5",
+  "package_manifest_sha256": "dc61179247eb1013f955422242407cd7bbec11f387f03a0d935059d0b0be7160",
+  "profile_cohorts": [
+    "august_only",
+    "mixed_date_profile_gap_fill_sensitivity"
+  ],
+  "runtime": {
+    "duckdb": "1.5.5",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "platform": "macOS-26.4.1-arm64-arm-64bit-Mach-O",
+    "pyarrow": "25.0.1",
+    "python": "3.13.9"
+  },
+  "sample_fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+  "snapshot_sha256": "f42f28a6540a65c0a83f0da488663b4adddf60d1001daeed556f1ffbb961e238",
+  "threads": 8,
+  "version": "3B1-1.0.1",
+  "wave3a_config_sha256": "f9dfa2718056083161d58175b5907e1a8b2dfbbc58a1244c45c878c78c3bd238"
+}

@@ -1,0 +1,327 @@
+{
+  "all_batches_bound_to_new_sample": true,
+  "batches": [
+    {
+      "config_sha256": "55d5cbb276393949039b72b65ffb2dd9cb57ed5dbff15b4ed012ecda4d6f88bd",
+      "created_utc": "2026-09-11T16:47:46.192332+00:00",
+      "output_bytes": 8877,
+      "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/c9_fresh_v100/55d5cbb27639/randomizations/c9_0000_0249.npz",
+      "output_sha256": "cf3afebaffea862a918663e158fb12a0539e95b9379ff48fa035a4188d7829c0",
+      "runtime_seconds": 23.208383083343506,
+      "seed_components": [
+        2026082201,
+        0,
+        250
+      ],
+      "start": 0,
+      "status": "DYNAMICS_CAMPAIGN1_C9_RANDOMIZATION_BATCH_OK",
+      "stop_exclusive": 250
+    },
+    {
+      "config_sha256": "55d5cbb276393949039b72b65ffb2dd9cb57ed5dbff15b4ed012ecda4d6f88bd",
+      "created_utc": "2026-09-11T16:47:46.566810+00:00",
+      "output_bytes": 8835,
+      "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/c9_fresh_v100/55d5cbb27639/randomizations/c9_0250_0499.npz",
+      "output_sha256": "31a8c44bdd6e1ce4df6625bc109536884f9d836b8094ba3ac54d1082751c12bc",
+      "runtime_seconds": 23.486302137374878,
+      "seed_components": [
+        2026082201,
+        250,
+        500
+      ],
+      "start": 250,
+      "status": "DYNAMICS_CAMPAIGN1_C9_RANDOMIZATION_BATCH_OK",
+      "stop_exclusive": 500
+    },
+    {
+      "config_sha256": "55d5cbb276393949039b72b65ffb2dd9cb57ed5dbff15b4ed012ecda4d6f88bd",
+      "created_utc": "2026-09-11T16:47:46.566770+00:00",
+      "output_bytes": 8831,
+      "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/c9_fresh_v100/55d5cbb27639/randomizations/c9_0500_0749.npz",
+      "output_sha256": "1c0a29a5383cc18f34eed38d0b7e1123128861d291a5627682ea92eda726bb63",
+      "runtime_seconds": 23.463791847229004,
+      "seed_components": [
+        2026082201,
+        500,
+        750
+      ],
+      "start": 500,
+      "status": "DYNAMICS_CAMPAIGN1_C9_RANDOMIZATION_BATCH_OK",
+      "stop_exclusive": 750
+    },
+    {
+      "config_sha256": "55d5cbb276393949039b72b65ffb2dd9cb57ed5dbff15b4ed012ecda4d6f88bd",
+      "created_utc": "2026-09-11T16:47:46.814135+00:00",
+      "output_bytes": 8822,
+      "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/c9_fresh_v100/55d5cbb27639/randomizations/c9_0750_0999.npz",
+      "output_sha256": "38bae974a73cd5dbfa748dd714a1666e427e934c22872514e06db54eec46573a",
+      "runtime_seconds": 23.693477869033813,
+      "seed_components": [
+        2026082201,
+        750,
+        1000
+      ],
+      "start": 750,
+      "status": "DYNAMICS_CAMPAIGN1_C9_RANDOMIZATION_BATCH_OK",
+      "stop_exclusive": 1000
+    },
+    {
+      "config_sha256": "55d5cbb276393949039b72b65ffb2dd9cb57ed5dbff15b4ed012ecda4d6f88bd",
+      "created_utc": "2026-09-11T16:47:46.566795+00:00",
+      "output_bytes": 8816,
+      "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/c9_fresh_v100/55d5cbb27639/randomizations/c9_1000_1249.npz",
+      "output_sha256": "26a87d44c03d5d12d0bd8c45727373d2314afaad6b6a7334573ed88c8dd81756",
+      "runtime_seconds": 23.440165281295776,
+      "seed_components": [
+        2026082201,
+        1000,
+        1250
+      ],
+      "start": 1000,
+      "status": "DYNAMICS_CAMPAIGN1_C9_RANDOMIZATION_BATCH_OK",
+      "stop_exclusive": 1250
+    },
+    {
+      "config_sha256": "55d5cbb276393949039b72b65ffb2dd9cb57ed5dbff15b4ed012ecda4d6f88bd",
+      "created_utc": "2026-09-11T16:47:46.566780+00:00",
+      "output_bytes": 8811,
+      "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/c9_fresh_v100/55d5cbb27639/randomizations/c9_1250_1499.npz",
+      "output_sha256": "487b8316f0e248d9421bbff7b1d7447e71a049b67b154e08e8402dce26110923",
+      "runtime_seconds": 23.435445070266724,
+      "seed_components": [
+        2026082201,
+        1250,
+        1500
+      ],
+      "start": 1250,
+      "status": "DYNAMICS_CAMPAIGN1_C9_RANDOMIZATION_BATCH_OK",
+      "stop_exclusive": 1500
+    },
+    {
+      "config_sha256": "55d5cbb276393949039b72b65ffb2dd9cb57ed5dbff15b4ed012ecda4d6f88bd",
+      "created_utc": "2026-09-11T16:47:46.814134+00:00",
+      "output_bytes": 8826,
+      "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/c9_fresh_v100/55d5cbb27639/randomizations/c9_1500_1749.npz",
+      "output_sha256": "8e636fcae1d1ccc474848dff6c2cc483df8a5e5d374e14d8699371d6e994318b",
+      "runtime_seconds": 23.67826199531555,
+      "seed_components": [
+        2026082201,
+        1500,
+        1750
+      ],
+      "start": 1500,
+      "status": "DYNAMICS_CAMPAIGN1_C9_RANDOMIZATION_BATCH_OK",
+      "stop_exclusive": 1750
+    },
+    {
+      "config_sha256": "55d5cbb276393949039b72b65ffb2dd9cb57ed5dbff15b4ed012ecda4d6f88bd",
+      "created_utc": "2026-09-11T16:47:46.814150+00:00",
+      "output_bytes": 8852,
+      "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/c9_fresh_v100/55d5cbb27639/randomizations/c9_1750_1999.npz",
+      "output_sha256": "d90791d890f56c0c9e89e3f6112d9b1433543f04847aea4c283410d28f30e749",
+      "runtime_seconds": 23.672574043273926,
+      "seed_components": [
+        2026082201,
+        1750,
+        2000
+      ],
+      "start": 1750,
+      "status": "DYNAMICS_CAMPAIGN1_C9_RANDOMIZATION_BATCH_OK",
+      "stop_exclusive": 2000
+    },
+    {
+      "config_sha256": "55d5cbb276393949039b72b65ffb2dd9cb57ed5dbff15b4ed012ecda4d6f88bd",
+      "created_utc": "2026-09-11T16:47:46.566826+00:00",
+      "output_bytes": 8841,
+      "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/c9_fresh_v100/55d5cbb27639/randomizations/c9_2000_2249.npz",
+      "output_sha256": "f7ec3048c9e22202fa20c41bba8a3e3af95345c02a683d0e8f1531a5915c2d8f",
+      "runtime_seconds": 23.380987882614136,
+      "seed_components": [
+        2026082201,
+        2000,
+        2250
+      ],
+      "start": 2000,
+      "status": "DYNAMICS_CAMPAIGN1_C9_RANDOMIZATION_BATCH_OK",
+      "stop_exclusive": 2250
+    },
+    {
+      "config_sha256": "55d5cbb276393949039b72b65ffb2dd9cb57ed5dbff15b4ed012ecda4d6f88bd",
+      "created_utc": "2026-09-11T16:47:47.183604+00:00",
+      "output_bytes": 8845,
+      "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/c9_fresh_v100/55d5cbb27639/randomizations/c9_2250_2499.npz",
+      "output_sha256": "a2986a12f79000bf97de8fcadce6bf1691bb41c0a3b2133cdccd4030c2ed1ab8",
+      "runtime_seconds": 23.983304262161255,
+      "seed_components": [
+        2026082201,
+        2250,
+        2500
+      ],
+      "start": 2250,
+      "status": "DYNAMICS_CAMPAIGN1_C9_RANDOMIZATION_BATCH_OK",
+      "stop_exclusive": 2500
+    },
+    {
+      "config_sha256": "55d5cbb276393949039b72b65ffb2dd9cb57ed5dbff15b4ed012ecda4d6f88bd",
+      "created_utc": "2026-09-11T16:48:11.184037+00:00",
+      "output_bytes": 8869,
+      "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/c9_fresh_v100/55d5cbb27639/randomizations/c9_2500_2749.npz",
+      "output_sha256": "3b52511d92cf76f9687f90b03aa07f4ee1c87a4d14dd65a016c9da1659a76425",
+      "runtime_seconds": 24.991887092590332,
+      "seed_components": [
+        2026082201,
+        2500,
+        2750
+      ],
+      "start": 2500,
+      "status": "DYNAMICS_CAMPAIGN1_C9_RANDOMIZATION_BATCH_OK",
+      "stop_exclusive": 2750
+    },
+    {
+      "config_sha256": "55d5cbb276393949039b72b65ffb2dd9cb57ed5dbff15b4ed012ecda4d6f88bd",
+      "created_utc": "2026-09-11T16:48:11.946047+00:00",
+      "output_bytes": 8875,
+      "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/c9_fresh_v100/55d5cbb27639/randomizations/c9_2750_2999.npz",
+      "output_sha256": "b21d38fdaa3e43153d6b55c404951febe58b7a5e57ef82e7f3ae67fd8e6d7a50",
+      "runtime_seconds": 25.378811836242676,
+      "seed_components": [
+        2026082201,
+        2750,
+        3000
+      ],
+      "start": 2750,
+      "status": "DYNAMICS_CAMPAIGN1_C9_RANDOMIZATION_BATCH_OK",
+      "stop_exclusive": 3000
+    },
+    {
+      "config_sha256": "55d5cbb276393949039b72b65ffb2dd9cb57ed5dbff15b4ed012ecda4d6f88bd",
+      "created_utc": "2026-09-11T16:48:11.946034+00:00",
+      "output_bytes": 8832,
+      "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/c9_fresh_v100/55d5cbb27639/randomizations/c9_3000_3249.npz",
+      "output_sha256": "fe6538b4acc58a9106308e858111fb2fc9408a9418119760ffebd9d1c4ba79ec",
+      "runtime_seconds": 25.378804922103882,
+      "seed_components": [
+        2026082201,
+        3000,
+        3250
+      ],
+      "start": 3000,
+      "status": "DYNAMICS_CAMPAIGN1_C9_RANDOMIZATION_BATCH_OK",
+      "stop_exclusive": 3250
+    },
+    {
+      "config_sha256": "55d5cbb276393949039b72b65ffb2dd9cb57ed5dbff15b4ed012ecda4d6f88bd",
+      "created_utc": "2026-09-11T16:48:11.775655+00:00",
+      "output_bytes": 8828,
+      "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/c9_fresh_v100/55d5cbb27639/randomizations/c9_3250_3499.npz",
+      "output_sha256": "548222a24c450200420ed93f95c13771049470f5b7a8ee3302e5df64edb9d67d",
+      "runtime_seconds": 25.206537008285522,
+      "seed_components": [
+        2026082201,
+        3250,
+        3500
+      ],
+      "start": 3250,
+      "status": "DYNAMICS_CAMPAIGN1_C9_RANDOMIZATION_BATCH_OK",
+      "stop_exclusive": 3500
+    },
+    {
+      "config_sha256": "55d5cbb276393949039b72b65ffb2dd9cb57ed5dbff15b4ed012ecda4d6f88bd",
+      "created_utc": "2026-09-11T16:48:11.775645+00:00",
+      "output_bytes": 8820,
+      "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/c9_fresh_v100/55d5cbb27639/randomizations/c9_3500_3749.npz",
+      "output_sha256": "7625b08daa5bdcd04760d4f10a8682f494397cc87d07ba6ce0c8fdbc13736cea",
+      "runtime_seconds": 25.206465005874634,
+      "seed_components": [
+        2026082201,
+        3500,
+        3750
+      ],
+      "start": 3500,
+      "status": "DYNAMICS_CAMPAIGN1_C9_RANDOMIZATION_BATCH_OK",
+      "stop_exclusive": 3750
+    },
+    {
+      "config_sha256": "55d5cbb276393949039b72b65ffb2dd9cb57ed5dbff15b4ed012ecda4d6f88bd",
+      "created_utc": "2026-09-11T16:48:11.946068+00:00",
+      "output_bytes": 8803,
+      "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/c9_fresh_v100/55d5cbb27639/randomizations/c9_3750_3999.npz",
+      "output_sha256": "79185bcdc62126d1aabec5527ab2e120dad5a14350fd956401dc0703dd6e0e14",
+      "runtime_seconds": 25.378634929656982,
+      "seed_components": [
+        2026082201,
+        3750,
+        4000
+      ],
+      "start": 3750,
+      "status": "DYNAMICS_CAMPAIGN1_C9_RANDOMIZATION_BATCH_OK",
+      "stop_exclusive": 4000
+    },
+    {
+      "config_sha256": "55d5cbb276393949039b72b65ffb2dd9cb57ed5dbff15b4ed012ecda4d6f88bd",
+      "created_utc": "2026-09-11T16:48:12.196005+00:00",
+      "output_bytes": 8881,
+      "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/c9_fresh_v100/55d5cbb27639/randomizations/c9_4000_4249.npz",
+      "output_sha256": "9f53ddd6439d6d76d055b361bfa7385d10217fb72110f1fcb9b25a118a84e8c7",
+      "runtime_seconds": 25.38093113899231,
+      "seed_components": [
+        2026082201,
+        4000,
+        4250
+      ],
+      "start": 4000,
+      "status": "DYNAMICS_CAMPAIGN1_C9_RANDOMIZATION_BATCH_OK",
+      "stop_exclusive": 4250
+    },
+    {
+      "config_sha256": "55d5cbb276393949039b72b65ffb2dd9cb57ed5dbff15b4ed012ecda4d6f88bd",
+      "created_utc": "2026-09-11T16:48:12.481155+00:00",
+      "output_bytes": 8852,
+      "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/c9_fresh_v100/55d5cbb27639/randomizations/c9_4250_4499.npz",
+      "output_sha256": "41b79cacd0c4000151b846b4cfbaa634bdcd9096496737c165f7ec319ad5c824",
+      "runtime_seconds": 25.666133165359497,
+      "seed_components": [
+        2026082201,
+        4250,
+        4500
+      ],
+      "start": 4250,
+      "status": "DYNAMICS_CAMPAIGN1_C9_RANDOMIZATION_BATCH_OK",
+      "stop_exclusive": 4500
+    },
+    {
+      "config_sha256": "55d5cbb276393949039b72b65ffb2dd9cb57ed5dbff15b4ed012ecda4d6f88bd",
+      "created_utc": "2026-09-11T16:48:12.195989+00:00",
+      "output_bytes": 8831,
+      "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/c9_fresh_v100/55d5cbb27639/randomizations/c9_4500_4749.npz",
+      "output_sha256": "e0b9ad2b157ddc38f15d5a76fd285d5c3876dd9f794f973529cb21ba46b50ddd",
+      "runtime_seconds": 25.38070797920227,
+      "seed_components": [
+        2026082201,
+        4500,
+        4750
+      ],
+      "start": 4500,
+      "status": "DYNAMICS_CAMPAIGN1_C9_RANDOMIZATION_BATCH_OK",
+      "stop_exclusive": 4750
+    },
+    {
+      "config_sha256": "55d5cbb276393949039b72b65ffb2dd9cb57ed5dbff15b4ed012ecda4d6f88bd",
+      "created_utc": "2026-09-11T16:48:12.481140+00:00",
+      "output_bytes": 8772,
+      "output_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/c9_fresh_v100/55d5cbb27639/randomizations/c9_4750_4998.npz",
+      "output_sha256": "0266efc222314aa27abe42fcf61b493a43aac5c3e6edf492658d6c5ccec5e896",
+      "runtime_seconds": 25.29787302017212,
+      "seed_components": [
+        2026082201,
+        4750,
+        4999
+      ],
+      "start": 4750,
+      "status": "DYNAMICS_CAMPAIGN1_C9_RANDOMIZATION_BATCH_OK",
+      "stop_exclusive": 4999
+    }
+  ],
+  "incomplete_batches_preserved": [],
+  "old_C9_checkpoints_used": false
+}

@@ -1,0 +1,119 @@
+{
+  "authority_constants_changed": [
+    "CORE_RUN_ID",
+    "EXPECTED_BASE_PRODUCER_SHA256",
+    "EXPECTED_CORE_MANIFEST_SHA256",
+    "EXPECTED_CORE_SUCCESS_SHA256",
+    "EXPECTED_CORE_SUMMARY_SHA256",
+    "EXPECTED_HEADLINE_COEFFICIENT",
+    "EXPECTED_HEADLINE_CONTROL",
+    "EXPECTED_HEADLINE_ROWS",
+    "EXPECTED_HEADLINE_STANDARD_ERROR",
+    "EXPECTED_HEADLINE_TREATED",
+    "EXPECTED_OVERLAP_PROPENSITY_SHA256",
+    "EXPECTED_PRIVATE_RECIPIENT_SHA256",
+    "EXPECTED_RAW_REACHERS",
+    "PROJECT_ROOT"
+  ],
+  "changes": [
+    {
+      "category": "authority_constant",
+      "name": "CORE_RUN_ID",
+      "original_sha256": "206d2eecf307aa75d151494c2588c4b8cbb973a34fbc631c38139acfeffbea0e",
+      "replacement_sha256": "873727604ae2f608d8811bb5684975f81719fc5a1a9aa4a92427fa92e9b583be"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_BASE_PRODUCER_SHA256",
+      "original_sha256": "515a873fdf5798a9cf8f6b08725778f8660fa3d1b40d493918540c9eba9c6e0b",
+      "replacement_sha256": "50b56a31555eddcd3bd68c2d088eeb7d9ff46ba0463d2b07e61c87160d44a128"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_CORE_MANIFEST_SHA256",
+      "original_sha256": "9886f63aa7eebdfaaa65480c996b660222132aa4eb172f7dbb7b7318c31ed1a5",
+      "replacement_sha256": "d7281646f7bf468478f6f737e12fc7a1159edfecf7f53eaa7247b4d4075d4ab1"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_CORE_SUCCESS_SHA256",
+      "original_sha256": "eec0e3849223c9008addf6e42ebfe103a9c8e9150b138adbc3af868d9f00088d",
+      "replacement_sha256": "2ff6dcdacd3b2a707f02cabe1c9ca5e00cc926e35a884fc2c090c92aaf1f708f"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_CORE_SUMMARY_SHA256",
+      "original_sha256": "e70f3e9a2ff792416f9a2a0ac1c1c38fb74e1a09a7789c8a7d1113b8042aca23",
+      "replacement_sha256": "26f452d9a6a0fed8c7558b45ec910c4b3d8c6f2c491fb494e21788e4b174d047"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_HEADLINE_COEFFICIENT",
+      "original_sha256": "1985dad2f3a3b1139db3570120ecf38fc1af826f809ee361672b22aaec40fbaf",
+      "replacement_sha256": "f364890cab283577142ccf69d54f8871406c23f38efc324ae5f47304b9b7ecb6"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_HEADLINE_CONTROL",
+      "original_sha256": "b9528073e5210f42c6e614dc5ecd263a4f447d4a11a6afb42e076f966bf2bed0",
+      "replacement_sha256": "518e96483220aadf89ebd39f62b0db4937fa367a1d88aa085337e5ab0089f5e4"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_HEADLINE_ROWS",
+      "original_sha256": "26482958c78c15e79c24d0ca7225ed9d271747ba877ec3bfc2f186a811d1275d",
+      "replacement_sha256": "83e23c00858db02d747cd93d3b76ef5452740af4746bff57be6752473f874654"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_HEADLINE_STANDARD_ERROR",
+      "original_sha256": "07e12a3b0f14c0058941a3a66ef673ead21f87ec5abdc0b11e0d61b935705e28",
+      "replacement_sha256": "90605ba487af636e6b04c464f96eb13f7857c6374f288a06a8c0624fc4d9435e"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_HEADLINE_TREATED",
+      "original_sha256": "5d1b922ee2d10408ff85f970e4a4e3f9dfbeab889775a515568014348335ada4",
+      "replacement_sha256": "162e9ac630bf3bcfeb0b3659eded9cc3004961a736698f92633352fd53063c49"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_OVERLAP_PROPENSITY_SHA256",
+      "original_sha256": "6deaf24c77931b1e2dce559808b11fad2d810292f4ec9677ab2f0e6c41e7f807",
+      "replacement_sha256": "057e64d88f04f13c17d57acd295f8317d8fcc8bda69456a8f7a890d23ba960ce"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_PRIVATE_RECIPIENT_SHA256",
+      "original_sha256": "9cd426139bbeedb825b66c848a6d432aba792098a3c6a0476b6370b6a74c6bdd",
+      "replacement_sha256": "e27f2e8d469c52d956ae9f20656b6b738f4e03840d6a5ad7bd96b2d03a4290cc"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_RAW_REACHERS",
+      "original_sha256": "829cbfbc4e2b7d8e7db54df56cfdb505d6dd38cb36b2512ec1d1f21e8b99005f",
+      "replacement_sha256": "e8b9c47b722a532f5a7ffe5728955695ed544be1926455a65116b9a1a080f766"
+    },
+    {
+      "category": "authority_constant",
+      "name": "PROJECT_ROOT",
+      "original_sha256": "ea649bf0b6a75443fbb9ad307fc962ead3c42dceeed0b9be1c9c4817de245c72",
+      "replacement_sha256": "3dad5031f45d8332eb615904171909ab9572bd6f0a63ef54143d32de1d01f3e8"
+    }
+  ],
+  "created_at_utc": "2026-09-11T02:07:22Z",
+  "estimator_function_bodies_changed": false,
+  "generated_bytes": 71374,
+  "generated_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/replication_package/code/a1_evidence_gap_audit_v100.py",
+  "generated_sha256": "e4e9bd044280abb277f7cf1dfb410380c04ec7d99f671b89f7a50c3e4ba2dc63",
+  "repository_guards_changed": [],
+  "source": {
+    "bytes": 71349,
+    "lineage": "public_repository",
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave2B1_v1_0_2/source/dynamics/a1_audits/a1_evidence_gap_audit_v100.py",
+    "repository": "https://github.com/ravideepsethi/intrinsic-prosociality.git",
+    "repository_head_inspected": "0dc981cbc6da157d365015a95f2b7157ecda4859",
+    "sha256": "514d855b20e31be7c3e3eaa76cc0f11e4db9e0b642466b05639b46ef0da420b6"
+  },
+  "status": "POOL_MAIN_SOURCE_AUTHORITY_BINDING_OK"
+}

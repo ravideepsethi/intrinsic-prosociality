@@ -1,0 +1,182 @@
+{
+  "models": [
+    {
+      "benefactor_minus_claimer_ones_requested": 125,
+      "benefactor_minus_claimer_zeros_requested": 10356,
+      "causal_claim": false,
+      "cluster": "chooser_id",
+      "clusters_requested": 9892,
+      "epistemic_label": "X",
+      "error_message": "HDFE absorption did not converge: iterations=2000 tolerance=1.000e-09 last_adjustment=3.508e-04",
+      "error_type": "RuntimeError",
+      "fixed_effects_requested": [
+        "chooser_id",
+        "eval_bin",
+        "speed_code",
+        "month_code",
+        "hour_of_week",
+        "ply_band"
+      ],
+      "interpretation_boundary": "Exploratory C7R attempt retained under its frozen all-attempts rule; the parent C7X primary failed its 1,000-rows-per-arm support gate.",
+      "model": "X_C7R_C7X_primary_exact_replication",
+      "parent_c7x_primary_status": "NOT_ESTIMABLE_RETAINED_LOW_SUPPORT",
+      "parent_c7x_primary_support_gate_pass": false,
+      "rows_requested": 10481,
+      "status": "ESTIMATION_FAILURE_RETAINED"
+    },
+    {
+      "benefactor_minus_claimer_ones_requested": 7,
+      "benefactor_minus_claimer_zeros_requested": 9,
+      "causal_claim": false,
+      "cluster": "chooser_id",
+      "clusters_requested": 7,
+      "epistemic_label": "X",
+      "fixed_effects_requested": [
+        "chooser_id",
+        "eval_bin",
+        "speed_code",
+        "month_code",
+        "hour_of_week",
+        "ply_band"
+      ],
+      "interpretation_boundary": "Exploratory C7R attempt retained under its frozen all-attempts rule; the parent C7X primary failed its 1,000-rows-per-arm support gate.",
+      "model": "X_C7R_C7X_chooser_switchers_only",
+      "parent_c7x_primary_status": "NOT_ESTIMABLE_RETAINED_LOW_SUPPORT",
+      "parent_c7x_primary_support_gate_pass": false,
+      "rows_requested": 16,
+      "status": "NOT_ESTIMABLE_RETAINED_LOW_SUPPORT"
+    },
+    {
+      "benefactor_minus_claimer_ones_requested": 125,
+      "benefactor_minus_claimer_zeros_requested": 10356,
+      "causal_claim": false,
+      "cluster": "chooser_id",
+      "clusters_requested": 9892,
+      "epistemic_label": "X",
+      "error_message": "HDFE absorption did not converge: iterations=10000 tolerance=1.000e-09 last_adjustment=6.631e-06",
+      "error_type": "RuntimeError",
+      "fixed_effects_requested": [
+        "chooser_id",
+        "opponent_id",
+        "eval_bin",
+        "speed_code",
+        "month_code",
+        "hour_of_week",
+        "ply_band"
+      ],
+      "interpretation_boundary": "Exploratory C7R attempt retained under its frozen all-attempts rule; the parent C7X primary failed its 1,000-rows-per-arm support gate.",
+      "model": "X_C7R_C7X_chooser_and_opponent_fe",
+      "parent_c7x_primary_status": "NOT_ESTIMABLE_RETAINED_LOW_SUPPORT",
+      "parent_c7x_primary_support_gate_pass": false,
+      "rows_requested": 10481,
+      "status": "ESTIMATION_FAILURE_RETAINED"
+    },
+    {
+      "benefactor_rows_requested": 125,
+      "causal_claim": false,
+      "claimer_rows_requested": 10356,
+      "clusters_requested": 9892,
+      "epistemic_label": "X",
+      "error_message": "Exposure has no residual variation: benefactor_minus_claimer",
+      "error_type": "RuntimeError",
+      "high_dimensional_fixed_effect": "directed_pair",
+      "interpretation_boundary": "Exploratory C7R attempt retained under its frozen all-attempts rule; the parent C7X primary failed its 1,000-rows-per-arm support gate.",
+      "model": "X_C7R_C7X_directed_pair_fe_chooser_cluster",
+      "parent_c7x_primary_status": "NOT_ESTIMABLE_RETAINED_LOW_SUPPORT",
+      "parent_c7x_primary_support_gate_pass": false,
+      "rows_requested": 10481,
+      "status": "ESTIMATION_FAILURE_RETAINED"
+    },
+    {
+      "benefactor_rows_requested": 125,
+      "causal_claim": false,
+      "claimer_rows_requested": 10356,
+      "clusters_requested": 10400,
+      "epistemic_label": "X",
+      "error_message": "Exposure has no residual variation: benefactor_minus_claimer",
+      "error_type": "RuntimeError",
+      "high_dimensional_fixed_effect": "directed_pair",
+      "interpretation_boundary": "Exploratory C7R attempt retained under its frozen all-attempts rule; the parent C7X primary failed its 1,000-rows-per-arm support gate.",
+      "model": "X_C7R_C7X_directed_pair_fe_unordered_pair_cluster",
+      "parent_c7x_primary_status": "NOT_ESTIMABLE_RETAINED_LOW_SUPPORT",
+      "parent_c7x_primary_support_gate_pass": false,
+      "rows_requested": 10481,
+      "status": "ESTIMATION_FAILURE_RETAINED"
+    },
+    {
+      "benefactor_rows_requested": 99,
+      "causal_claim": false,
+      "claimer_rows_requested": 8102,
+      "clusters_requested": 7839,
+      "epistemic_label": "X",
+      "error_message": "Exposure has no residual variation: benefactor_minus_claimer",
+      "error_type": "RuntimeError",
+      "high_dimensional_fixed_effect": "directed_pair",
+      "interpretation_boundary": "Exploratory C7R attempt retained under its frozen all-attempts rule; the parent C7X primary failed its 1,000-rows-per-arm support gate.",
+      "model": "X_C7R_C7X_directed_pair_fe_ply_gt10",
+      "parent_c7x_primary_status": "NOT_ESTIMABLE_RETAINED_LOW_SUPPORT",
+      "parent_c7x_primary_support_gate_pass": false,
+      "rows_requested": 8201,
+      "status": "ESTIMATION_FAILURE_RETAINED"
+    },
+    {
+      "benefactor_rows_requested": 25,
+      "causal_claim": false,
+      "claimer_rows_requested": 1971,
+      "clusters_requested": 1982,
+      "epistemic_label": "X",
+      "error_message": "Exposure has no residual variation: benefactor_minus_claimer",
+      "error_type": "RuntimeError",
+      "high_dimensional_fixed_effect": "chooser",
+      "interpretation_boundary": "Exploratory C7R attempt retained under its frozen all-attempts rule; the parent C7X primary failed its 1,000-rows-per-arm support gate.",
+      "model": "X_C7R_C7X_le7d_exact_chooser_fe",
+      "parent_c7x_primary_status": "NOT_ESTIMABLE_RETAINED_LOW_SUPPORT",
+      "parent_c7x_primary_support_gate_pass": false,
+      "rows_requested": 1996,
+      "status": "ESTIMATION_FAILURE_RETAINED"
+    },
+    {
+      "benefactor_rows_requested": 25,
+      "causal_claim": false,
+      "claimer_rows_requested": 1971,
+      "clusters_requested": 1982,
+      "epistemic_label": "X",
+      "error_message": "Exposure has no residual variation: benefactor_minus_claimer",
+      "error_type": "RuntimeError",
+      "high_dimensional_fixed_effect": "directed_pair",
+      "interpretation_boundary": "Exploratory C7R attempt retained under its frozen all-attempts rule; the parent C7X primary failed its 1,000-rows-per-arm support gate.",
+      "model": "X_C7R_C7X_le7d_directed_pair_fe",
+      "parent_c7x_primary_status": "NOT_ESTIMABLE_RETAINED_LOW_SUPPORT",
+      "parent_c7x_primary_support_gate_pass": false,
+      "rows_requested": 1996,
+      "status": "ESTIMATION_FAILURE_RETAINED"
+    }
+  ],
+  "qa": {
+    "certified_primary_reproduction": {
+      "absolute_coefficient_difference": null,
+      "absolute_standard_error_difference": null,
+      "disposition": "NOT_APPLICABLE_PARENT_C7X_PRIMARY_LOW_SUPPORT",
+      "expected_coefficient": 0.14556932160589928,
+      "expected_standard_error": 0.020351569816937143,
+      "gate_enforced": false,
+      "numerical_match_to_reference": null,
+      "observed_coefficient": null,
+      "observed_standard_error": null,
+      "parent_c7x_primary_status": "NOT_ESTIMABLE_RETAINED_LOW_SUPPORT",
+      "pass": null,
+      "tolerance": 1e-06
+    },
+    "parent_c7x_primary": {
+      "selected_panel_reference_available": false,
+      "status": "NOT_ESTIMABLE_RETAINED_LOW_SUPPORT",
+      "support_gate_pass": false
+    },
+    "recomputed_support": {
+      "chooser_switchers_recomputed": 7,
+      "directed_pair_switchers_recomputed": 0,
+      "rows_in_chooser_switchers_recomputed": 16,
+      "rows_in_directed_pair_switchers_recomputed": 0
+    }
+  }
+}

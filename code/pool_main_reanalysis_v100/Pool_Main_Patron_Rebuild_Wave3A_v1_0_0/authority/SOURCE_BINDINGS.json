@@ -1,0 +1,50 @@
+[
+  {
+    "packaged_path": "source/acquisition_planner_v100.py",
+    "source_path": "inspected_packages/ProfilePatron_Acquisition_v1_0_0_SELF_CONTAINED_v1_20260819/09a_prepare_patron_profile_acquisition.py",
+    "sha256": "aaaa70e119456258c2fd351dca5b59e52cfe6924421fe6103211e6e812f730de",
+    "unmodified": true
+  },
+  {
+    "packaged_path": "source/pool_sample_common_v100.py",
+    "source_path": "build/Pool_Main_Sample_Reanalysis_Wave2B2B1_v1_0_0/runner/common.py",
+    "sha256": "b0953daa5090d901372f44191f503911eef34913926f2905d3693ece0a01831f",
+    "unmodified": true
+  },
+  {
+    "packaged_path": "authority/SAMPLE_AUTHORITY.json",
+    "source_path": "build/Pool_Main_Sample_Reanalysis_Wave2B2B1_v1_0_0/authority/SAMPLE_AUTHORITY.json",
+    "sha256": "81c34113e7a888629a834a17235a71dcf369a2d590755fd9412ee42151d9b2f3",
+    "unmodified": true
+  },
+  {
+    "packaged_path": "authority/PATRON_STAGE10_IMPLEMENTATION_CONTRACT_v1.0.0.md",
+    "source_path": "inspected_packages/PatronStage10_Inventory_v1_0_0_20260827/PATRON_STAGE10_IMPLEMENTATION_CONTRACT_v1.0.0.md",
+    "sha256": "786409406e0ff12bcd98e0c13f260b85ed920aca90fa183efad1cc3c874160a3",
+    "unmodified": true
+  },
+  {
+    "packaged_path": "authority/PROFILE_ACQUISITION_DESIGN.md",
+    "source_path": "inspected_packages/ProfilePatron_Acquisition_v1_0_0_SELF_CONTAINED_v1_20260819/ProfilePatron_acquisition_design_2026-08-19.md",
+    "sha256": "480a62a413a3ac349e3cddf76eecbc0859d4f32a6127728f4a605ada2b84754b",
+    "unmodified": true
+  },
+  {
+    "packaged_path": "authority/STAGE10_INPUT_AUTHORITIES.json",
+    "source_path": "repo/results/patron_stage10/primary_v1_0_1/input_authorities.json",
+    "sha256": "6157942f55721fc028e9009108c54bb4b47b5e9e1bef9e4fa212409afd63ff1a",
+    "unmodified": true
+  },
+  {
+    "packaged_path": "evidence/Pool_Main_Sample_24M_Report.zip",
+    "source_path": "build/Pool_Main_Sample_Reanalysis_Wave2B2B1_v1_0_0/evidence/Pool_Main_Sample_24M_Report.zip",
+    "sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "unmodified": true
+  },
+  {
+    "packaged_path": "evidence/Pool_Main_Sample_24M_Report.zip.sha256",
+    "source_path": "build/Pool_Main_Sample_Reanalysis_Wave2B2B1_v1_0_0/evidence/Pool_Main_Sample_24M_Report.zip.sha256",
+    "sha256": "d2e6c0953ff2de7cc7235b98d568c884e4fa8067b8aa81d22efe1ac3484d6f59",
+    "unmodified": true
+  }
+]

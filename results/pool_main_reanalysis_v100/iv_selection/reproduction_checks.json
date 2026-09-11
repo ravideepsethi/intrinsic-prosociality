@@ -1,0 +1,482 @@
+[
+  {
+    "checks": {
+      "coefficient_per_unit_score": {
+        "absolute_error": 0.0,
+        "actual": -0.020710395857198218,
+        "expected": -0.020710395857198218
+      },
+      "coefficient_pp_per_current_IV_SD": {
+        "absolute_error": 1.3877787807814457e-17,
+        "actual": -0.12304396255695332,
+        "expected": -0.12304396255695334
+      },
+      "native_residual_score_sd": {
+        "absolute_error": 0.0,
+        "actual": 0.05331185799814437,
+        "expected": 0.05331185799814437
+      },
+      "outcome_mean": {
+        "absolute_error": 0.0,
+        "actual": 0.02175162052916851,
+        "expected": 0.02175162052916851
+      },
+      "standard_error_pp_per_current_IV_SD": {
+        "absolute_error": 0.0,
+        "actual": 0.014699872321286254,
+        "expected": 0.014699872321286254
+      }
+    },
+    "key": "primary|active_timeout|shared_account_CR0"
+  },
+  {
+    "checks": {
+      "coefficient_per_unit_score": {
+        "absolute_error": 0.0,
+        "actual": -0.020710395857198218,
+        "expected": -0.020710395857198218
+      },
+      "coefficient_pp_per_current_IV_SD": {
+        "absolute_error": 1.3877787807814457e-17,
+        "actual": -0.12304396255695332,
+        "expected": -0.12304396255695334
+      },
+      "native_residual_score_sd": {
+        "absolute_error": 0.0,
+        "actual": 0.05331185799814437,
+        "expected": 0.05331185799814437
+      },
+      "outcome_mean": {
+        "absolute_error": 0.0,
+        "actual": 0.02175162052916851,
+        "expected": 0.02175162052916851
+      },
+      "standard_error_pp_per_current_IV_SD": {
+        "absolute_error": 0.0,
+        "actual": 0.014893799587645905,
+        "expected": 0.014893799587645905
+      }
+    },
+    "key": "primary|active_timeout|shared_account_OR_date_CR0"
+  },
+  {
+    "checks": {
+      "coefficient_per_unit_score": {
+        "absolute_error": 0.0,
+        "actual": -0.013741922177834893,
+        "expected": -0.013741922177834893
+      },
+      "coefficient_pp_per_current_IV_SD": {
+        "absolute_error": 0.0,
+        "actual": -0.0816430825160881,
+        "expected": -0.0816430825160881
+      },
+      "native_residual_score_sd": {
+        "absolute_error": 0.0,
+        "actual": 0.05331185799814437,
+        "expected": 0.05331185799814437
+      },
+      "outcome_mean": {
+        "absolute_error": 0.0,
+        "actual": 0.3007136712167471,
+        "expected": 0.3007136712167471
+      },
+      "standard_error_pp_per_current_IV_SD": {
+        "absolute_error": 0.0,
+        "actual": 0.047404236667630946,
+        "expected": 0.047404236667630946
+      }
+    },
+    "key": "primary|passive_outoftime|shared_account_CR0"
+  },
+  {
+    "checks": {
+      "coefficient_per_unit_score": {
+        "absolute_error": 0.0,
+        "actual": -0.013741922177834893,
+        "expected": -0.013741922177834893
+      },
+      "coefficient_pp_per_current_IV_SD": {
+        "absolute_error": 0.0,
+        "actual": -0.0816430825160881,
+        "expected": -0.0816430825160881
+      },
+      "native_residual_score_sd": {
+        "absolute_error": 0.0,
+        "actual": 0.05331185799814437,
+        "expected": 0.05331185799814437
+      },
+      "outcome_mean": {
+        "absolute_error": 0.0,
+        "actual": 0.3007136712167471,
+        "expected": 0.3007136712167471
+      },
+      "standard_error_pp_per_current_IV_SD": {
+        "absolute_error": 0.0,
+        "actual": 0.04606813116975333,
+        "expected": 0.04606813116975333
+      }
+    },
+    "key": "primary|passive_outoftime|shared_account_OR_date_CR0"
+  },
+  {
+    "checks": {
+      "coefficient_per_unit_score": {
+        "absolute_error": 0.0,
+        "actual": -0.019683880847897274,
+        "expected": -0.019683880847897274
+      },
+      "coefficient_pp_per_current_IV_SD": {
+        "absolute_error": 1.3877787807814457e-17,
+        "actual": -0.11694526337034766,
+        "expected": -0.11694526337034768
+      },
+      "native_residual_score_sd": {
+        "absolute_error": 0.0,
+        "actual": 0.053245910938191664,
+        "expected": 0.053245910938191664
+      },
+      "outcome_mean": {
+        "absolute_error": 0.0,
+        "actual": 0.021388485320954626,
+        "expected": 0.021388485320954626
+      },
+      "standard_error_pp_per_current_IV_SD": {
+        "absolute_error": 0.0,
+        "actual": 0.015141368600884114,
+        "expected": 0.015141368600884114
+      }
+    },
+    "key": "lag30|active_timeout|shared_account_CR0"
+  },
+  {
+    "checks": {
+      "coefficient_per_unit_score": {
+        "absolute_error": 0.0,
+        "actual": -0.019683880847897274,
+        "expected": -0.019683880847897274
+      },
+      "coefficient_pp_per_current_IV_SD": {
+        "absolute_error": 1.3877787807814457e-17,
+        "actual": -0.11694526337034766,
+        "expected": -0.11694526337034768
+      },
+      "native_residual_score_sd": {
+        "absolute_error": 0.0,
+        "actual": 0.053245910938191664,
+        "expected": 0.053245910938191664
+      },
+      "outcome_mean": {
+        "absolute_error": 0.0,
+        "actual": 0.021388485320954626,
+        "expected": 0.021388485320954626
+      },
+      "standard_error_pp_per_current_IV_SD": {
+        "absolute_error": 0.0,
+        "actual": 0.015383654333588861,
+        "expected": 0.015383654333588861
+      }
+    },
+    "key": "lag30|active_timeout|shared_account_OR_date_CR0"
+  },
+  {
+    "checks": {
+      "coefficient_per_unit_score": {
+        "absolute_error": 0.0,
+        "actual": -0.007665338262756448,
+        "expected": -0.007665338262756448
+      },
+      "coefficient_pp_per_current_IV_SD": {
+        "absolute_error": 0.0,
+        "actual": -0.045541070324890555,
+        "expected": -0.045541070324890555
+      },
+      "native_residual_score_sd": {
+        "absolute_error": 0.0,
+        "actual": 0.053245910938191664,
+        "expected": 0.053245910938191664
+      },
+      "outcome_mean": {
+        "absolute_error": 0.0,
+        "actual": 0.30255709501957795,
+        "expected": 0.30255709501957795
+      },
+      "standard_error_pp_per_current_IV_SD": {
+        "absolute_error": 0.0,
+        "actual": 0.04942565874668618,
+        "expected": 0.04942565874668618
+      }
+    },
+    "key": "lag30|passive_outoftime|shared_account_CR0"
+  },
+  {
+    "checks": {
+      "coefficient_per_unit_score": {
+        "absolute_error": 0.0,
+        "actual": -0.007665338262756448,
+        "expected": -0.007665338262756448
+      },
+      "coefficient_pp_per_current_IV_SD": {
+        "absolute_error": 0.0,
+        "actual": -0.045541070324890555,
+        "expected": -0.045541070324890555
+      },
+      "native_residual_score_sd": {
+        "absolute_error": 0.0,
+        "actual": 0.053245910938191664,
+        "expected": 0.053245910938191664
+      },
+      "outcome_mean": {
+        "absolute_error": 0.0,
+        "actual": 0.30255709501957795,
+        "expected": 0.30255709501957795
+      },
+      "standard_error_pp_per_current_IV_SD": {
+        "absolute_error": 0.0,
+        "actual": 0.04782521782505352,
+        "expected": 0.04782521782505352
+      }
+    },
+    "key": "lag30|passive_outoftime|shared_account_OR_date_CR0"
+  },
+  {
+    "checks": {
+      "coefficient_per_unit_score": {
+        "absolute_error": 0.0,
+        "actual": -0.014440803011002534,
+        "expected": -0.014440803011002534
+      },
+      "coefficient_pp_per_current_IV_SD": {
+        "absolute_error": 1.3877787807814457e-17,
+        "actual": -0.08579525168083939,
+        "expected": -0.0857952516808394
+      },
+      "native_residual_score_sd": {
+        "absolute_error": 0.0,
+        "actual": 0.073196792942383,
+        "expected": 0.073196792942383
+      },
+      "outcome_mean": {
+        "absolute_error": 0.0,
+        "actual": 0.021935585687550413,
+        "expected": 0.021935585687550413
+      },
+      "standard_error_pp_per_current_IV_SD": {
+        "absolute_error": 0.0,
+        "actual": 0.009912582215576915,
+        "expected": 0.009912582215576915
+      }
+    },
+    "key": "floor1|active_timeout|shared_account_CR0"
+  },
+  {
+    "checks": {
+      "coefficient_per_unit_score": {
+        "absolute_error": 0.0,
+        "actual": -0.014440803011002534,
+        "expected": -0.014440803011002534
+      },
+      "coefficient_pp_per_current_IV_SD": {
+        "absolute_error": 1.3877787807814457e-17,
+        "actual": -0.08579525168083939,
+        "expected": -0.0857952516808394
+      },
+      "native_residual_score_sd": {
+        "absolute_error": 0.0,
+        "actual": 0.073196792942383,
+        "expected": 0.073196792942383
+      },
+      "outcome_mean": {
+        "absolute_error": 0.0,
+        "actual": 0.021935585687550413,
+        "expected": 0.021935585687550413
+      },
+      "standard_error_pp_per_current_IV_SD": {
+        "absolute_error": 0.0,
+        "actual": 0.010034888226309798,
+        "expected": 0.010034888226309798
+      }
+    },
+    "key": "floor1|active_timeout|shared_account_OR_date_CR0"
+  },
+  {
+    "checks": {
+      "coefficient_per_unit_score": {
+        "absolute_error": 0.0,
+        "actual": -0.0006195049784787276,
+        "expected": -0.0006195049784787276
+      },
+      "coefficient_pp_per_current_IV_SD": {
+        "absolute_error": 0.0,
+        "actual": -0.003680583794794492,
+        "expected": -0.003680583794794492
+      },
+      "native_residual_score_sd": {
+        "absolute_error": 0.0,
+        "actual": 0.073196792942383,
+        "expected": 0.073196792942383
+      },
+      "outcome_mean": {
+        "absolute_error": 0.0,
+        "actual": 0.30502029286768667,
+        "expected": 0.30502029286768667
+      },
+      "standard_error_pp_per_current_IV_SD": {
+        "absolute_error": 0.0,
+        "actual": 0.03103898547781478,
+        "expected": 0.03103898547781478
+      }
+    },
+    "key": "floor1|passive_outoftime|shared_account_CR0"
+  },
+  {
+    "checks": {
+      "coefficient_per_unit_score": {
+        "absolute_error": 0.0,
+        "actual": -0.0006195049784787276,
+        "expected": -0.0006195049784787276
+      },
+      "coefficient_pp_per_current_IV_SD": {
+        "absolute_error": 0.0,
+        "actual": -0.003680583794794492,
+        "expected": -0.003680583794794492
+      },
+      "native_residual_score_sd": {
+        "absolute_error": 0.0,
+        "actual": 0.073196792942383,
+        "expected": 0.073196792942383
+      },
+      "outcome_mean": {
+        "absolute_error": 0.0,
+        "actual": 0.30502029286768667,
+        "expected": 0.30502029286768667
+      },
+      "standard_error_pp_per_current_IV_SD": {
+        "absolute_error": 0.0,
+        "actual": 0.03061933178794681,
+        "expected": 0.03061933178794681
+      }
+    },
+    "key": "floor1|passive_outoftime|shared_account_OR_date_CR0"
+  },
+  {
+    "checks": {
+      "coefficient_per_unit_score": {
+        "absolute_error": 0.0,
+        "actual": -0.024742632268326195,
+        "expected": -0.024742632268326195
+      },
+      "coefficient_pp_per_current_IV_SD": {
+        "absolute_error": 0.0,
+        "actual": -0.1470001606621273,
+        "expected": -0.1470001606621273
+      },
+      "native_residual_score_sd": {
+        "absolute_error": 0.0,
+        "actual": 0.04745035333286838,
+        "expected": 0.04745035333286838
+      },
+      "outcome_mean": {
+        "absolute_error": 0.0,
+        "actual": 0.022024972932838515,
+        "expected": 0.022024972932838515
+      },
+      "standard_error_pp_per_current_IV_SD": {
+        "absolute_error": 0.0,
+        "actual": 0.0183017034682376,
+        "expected": 0.0183017034682376
+      }
+    },
+    "key": "floor10|active_timeout|shared_account_CR0"
+  },
+  {
+    "checks": {
+      "coefficient_per_unit_score": {
+        "absolute_error": 0.0,
+        "actual": -0.024742632268326195,
+        "expected": -0.024742632268326195
+      },
+      "coefficient_pp_per_current_IV_SD": {
+        "absolute_error": 0.0,
+        "actual": -0.1470001606621273,
+        "expected": -0.1470001606621273
+      },
+      "native_residual_score_sd": {
+        "absolute_error": 0.0,
+        "actual": 0.04745035333286838,
+        "expected": 0.04745035333286838
+      },
+      "outcome_mean": {
+        "absolute_error": 0.0,
+        "actual": 0.022024972932838515,
+        "expected": 0.022024972932838515
+      },
+      "standard_error_pp_per_current_IV_SD": {
+        "absolute_error": 0.0,
+        "actual": 0.018996643903436545,
+        "expected": 0.018996643903436545
+      }
+    },
+    "key": "floor10|active_timeout|shared_account_OR_date_CR0"
+  },
+  {
+    "checks": {
+      "coefficient_per_unit_score": {
+        "absolute_error": 0.0,
+        "actual": -0.01497013356152858,
+        "expected": -0.01497013356152858
+      },
+      "coefficient_pp_per_current_IV_SD": {
+        "absolute_error": 0.0,
+        "actual": -0.08894009395658668,
+        "expected": -0.08894009395658668
+      },
+      "native_residual_score_sd": {
+        "absolute_error": 0.0,
+        "actual": 0.04745035333286838,
+        "expected": 0.04745035333286838
+      },
+      "outcome_mean": {
+        "absolute_error": 0.0,
+        "actual": 0.29584763225396693,
+        "expected": 0.29584763225396693
+      },
+      "standard_error_pp_per_current_IV_SD": {
+        "absolute_error": 0.0,
+        "actual": 0.05899708697143474,
+        "expected": 0.05899708697143474
+      }
+    },
+    "key": "floor10|passive_outoftime|shared_account_CR0"
+  },
+  {
+    "checks": {
+      "coefficient_per_unit_score": {
+        "absolute_error": 0.0,
+        "actual": -0.01497013356152858,
+        "expected": -0.01497013356152858
+      },
+      "coefficient_pp_per_current_IV_SD": {
+        "absolute_error": 0.0,
+        "actual": -0.08894009395658668,
+        "expected": -0.08894009395658668
+      },
+      "native_residual_score_sd": {
+        "absolute_error": 0.0,
+        "actual": 0.04745035333286838,
+        "expected": 0.04745035333286838
+      },
+      "outcome_mean": {
+        "absolute_error": 0.0,
+        "actual": 0.29584763225396693,
+        "expected": 0.29584763225396693
+      },
+      "standard_error_pp_per_current_IV_SD": {
+        "absolute_error": 0.0,
+        "actual": 0.05930510241248426,
+        "expected": 0.05930510241248426
+      }
+    },
+    "key": "floor10|passive_outoftime|shared_account_OR_date_CR0"
+  }
+]

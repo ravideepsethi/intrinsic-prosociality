@@ -1,0 +1,100 @@
+{
+  "c7x_classification": {
+    "bytes": 1208229,
+    "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b2a/c7x_state_v101/c7x_classification_private.parquet",
+    "rows": 10481,
+    "sha256": "27e351f5bd8c493c022e2c261590d5e21e8e32ed6ab5c51d20aae8bcec46912c"
+  },
+  "config": {
+    "c7x_classification_sha256": "27e351f5bd8c493c022e2c261590d5e21e8e32ed6ab5c51d20aae8bcec46912c",
+    "c7x_relationship_models": [
+      "X_C7R_C7X_primary_exact_replication",
+      "X_C7R_C7X_chooser_switchers_only",
+      "X_C7R_C7X_chooser_and_opponent_fe",
+      "X_C7R_C7X_directed_pair_fe_chooser_cluster",
+      "X_C7R_C7X_directed_pair_fe_unordered_pair_cluster",
+      "X_C7R_C7X_directed_pair_fe_ply_gt10",
+      "X_C7R_C7X_le7d_exact_chooser_fe",
+      "X_C7R_C7X_le7d_directed_pair_fe"
+    ],
+    "causal_claim": false,
+    "common_script_sha256": "0a5ad03711d5c4af1f32480937ed719a2914602548ee49070c34080901e1afbf",
+    "contract_sha256": "7f3d8fa570b2ee2fab9ab8dc06afd9672e2dfad32d967ebd4e18a0ba91c13e94",
+    "epistemic_label": "X",
+    "first_meeting_models": [
+      "X_C7R_fair_vs_clearly_worse_all_meetings",
+      "X_C7R_fair_vs_clearly_worse_first_meetings",
+      "X_C7R_fair_vs_clearly_worse_repeat_meetings",
+      "X_C7R_fair_repeat_interaction_all_meetings",
+      "X_C7R_repeat_association_within_fair",
+      "X_C7R_nonnegative_vs_costly_all_meetings",
+      "X_C7R_nonnegative_vs_costly_first_meetings",
+      "X_C7R_nonnegative_vs_costly_repeat_meetings",
+      "X_C7R_positive_vs_negative_all_meetings",
+      "X_C7R_positive_vs_negative_first_meetings",
+      "X_C7R_positive_vs_negative_repeat_meetings"
+    ],
+    "history_success_sha256": "2e5ba421a1c628591e5004e6a60a89a39d7d017a3f5578ba88b4809f6853b417",
+    "main_script_sha256": "d54e7e926d381c453d14b565503898d3722fb9e91c0c356c8e83994a666a729b",
+    "modeling_script_sha256": "8fe65619941f5d2712827d47ea8a56053a9d865857959243f8908c8cadcaa817",
+    "pair_sample_denominator": 50,
+    "pair_seed": 2026082203,
+    "ply_bands": [
+      "0-4",
+      "5-6",
+      "7-8",
+      "9-10",
+      "11-20",
+      "21-40",
+      "41-80",
+      "81+"
+    ],
+    "script_version": "1.0.2",
+    "stage07_success_sha256": "724cc360c34a7ae204004639d83a10639e57a6ac197c159c448c27fdf054d4c4"
+  },
+  "config_sha256": "ad0c8c90beb6329f41de4fcefe1a7b20ecc90656135157e709e167e861fd6109",
+  "package": [
+    {
+      "bytes": 9411,
+      "file": "payload/code/c7r_modeling_v102.py",
+      "sha256": "8fe65619941f5d2712827d47ea8a56053a9d865857959243f8908c8cadcaa817"
+    },
+    {
+      "bytes": 22773,
+      "file": "payload/code/campaign1_nonprofile_common_v102.py",
+      "sha256": "0a5ad03711d5c4af1f32480937ed719a2914602548ee49070c34080901e1afbf"
+    },
+    {
+      "bytes": 71392,
+      "file": "payload/code/run_campaign1_c7r_closure_v102.py",
+      "sha256": "d54e7e926d381c453d14b565503898d3722fb9e91c0c356c8e83994a666a729b"
+    },
+    {
+      "bytes": 6686,
+      "file": "payload/docs/C7R_FROZEN_ANALYSIS_CONTRACT_20260828.md",
+      "sha256": "7f3d8fa570b2ee2fab9ab8dc06afd9672e2dfad32d967ebd4e18a0ba91c13e94"
+    },
+    {
+      "bytes": 1797,
+      "file": "payload/frozen_c7x/private_checkpoint_authentication.json",
+      "sha256": "908b652664d13fb190022cbb5f2914617aea20f9b4d58a635dfc6f922c9c18dd"
+    }
+  ],
+  "pair_history": {
+    "physical_bucket_manifest_sha256": "cb5cfd10f3270d720a6b44a63f16f74e27d2864e045bc1680226e1f1bf613c75",
+    "processed_bucket_files": 16,
+    "processed_rows": 66236172,
+    "raw_pair_event_files": 8,
+    "raw_pair_event_manifest_sha256": "6192f52d21f3443aefddfc9a2e46da340e7e1ad35445da98c77f7c76bdffd5c4",
+    "raw_pair_event_rows": 154693194,
+    "success_sha256": "2e5ba421a1c628591e5004e6a60a89a39d7d017a3f5578ba88b4809f6853b417"
+  },
+  "stage07": {
+    "fair_rows": 15207423,
+    "monthly_files": 24,
+    "physical_month_manifest_sha256": "372d2b0b2fd118563154f48da0beb28a51ee52ca6c3f85fab13cf31b04eb3072",
+    "rows": 41534331,
+    "success_sha256": "724cc360c34a7ae204004639d83a10639e57a6ac197c159c448c27fdf054d4c4"
+  },
+  "status": "C7R_INPUTS_AUTHENTICATED_OK"
+}

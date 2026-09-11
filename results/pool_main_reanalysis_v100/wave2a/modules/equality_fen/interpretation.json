@@ -1,0 +1,49 @@
+{
+  "adjusted_bump": {
+    "detected_under_frozen_rule": false,
+    "estimate_pp": -0.016130329097723994,
+    "meaning": "chooser/month/speed FE modern analogue with win-premium and clock controls",
+    "se_pp": 0.00924919441592643,
+    "t": -1.7439712446684827
+  },
+  "causal_language_authorized": false,
+  "created_at_utc": "2026-09-10T03:16:35Z",
+  "engine_zero_placebo_uniqueness": {
+    "derivative_change_right_plus_left_distance": {
+      "descriptively_unique_under_frozen_rule": false,
+      "nonzero_placebo_rejections": 3,
+      "zero_holm_p": 2.6136203616416966e-144
+    },
+    "strict_positive_level_shift_pp": {
+      "descriptively_unique_under_frozen_rule": false,
+      "nonzero_placebo_rejections": 2,
+      "zero_holm_p": 2.7852037416467676e-30
+    }
+  },
+  "position_commonness": {
+    "board_model": "C2_board_commonness",
+    "causal_explanation_claim_generated": false,
+    "fen4_model": "C1_fen4_commonness",
+    "implied_effects_file": "tables/position_commonness_implied_equality_effects.csv",
+    "limitation": "terminal-position frequency is not ECO, movetext, or chooser prior familiarity"
+  },
+  "rating_payoff_zero": {
+    "addressed_by_this_package": false,
+    "next_package": "already recomputed in pool-main Wave 1 controlled-reference module"
+  },
+  "raw_bump": {
+    "estimate_pp": 0.21412581805139297,
+    "meaning": "raw roughly-equal minus disconnected-better association",
+    "present": true,
+    "se_pp": 0.010961678911691948,
+    "t": 19.534034866046117
+  },
+  "short_game_concentration": {
+    "detected_under_frozen_rule": true,
+    "interaction_pp": 0.6641741767931393,
+    "meaning": "descriptive equality-by-ply<=10 heterogeneity; not mechanism",
+    "se_pp": 0.03135087190405548,
+    "t": 21.185189963001417
+  },
+  "status": "KINDNESS_EQUALITY_FEN_INTERPRETATION_COMPLETE"
+}

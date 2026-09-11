@@ -1,0 +1,23 @@
+{
+  "adjustment_model_is_local_fit": true,
+  "bin_and_fit_uncertainty_conditions_on_display_normalization": true,
+  "display_anchor_pct": 2.5509693901009314,
+  "exact_zero_point_minus_fit_pp": -1.8286261393996028e-11,
+  "exact_zero_se_minus_fit_se_pp": 1.8041124150158794e-16,
+  "local_bin_count": 9,
+  "local_mean_outcome_pct": 2.4883463172346003,
+  "local_mean_price_design": [
+    -0.18720465992047497,
+    0.1878766447459303,
+    0.4906023757213155,
+    0.02020241858089137
+  ],
+  "local_sample": {
+    "clusters": 1223918,
+    "n": 10116759,
+    "n_fe": 1398783
+  },
+  "max_price_normal_equation_per_row": 1.6015157646478577e-11,
+  "weighted_adjusted_mean_error_pp": -4.440892098500626e-16,
+  "x_is_actual_payoff_bin_mean": true
+}

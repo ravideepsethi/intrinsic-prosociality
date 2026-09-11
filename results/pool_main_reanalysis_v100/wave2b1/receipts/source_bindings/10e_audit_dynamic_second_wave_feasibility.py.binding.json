@@ -1,0 +1,155 @@
+{
+  "authority_constants_changed": [
+    "EXPECTED_A3_GATE_RUN_ID",
+    "EXPECTED_A3_GATE_SUCCESS_SHA256",
+    "EXPECTED_B1_CHOOSERS",
+    "EXPECTED_B1_KIND_DRAWS",
+    "EXPECTED_B1_PROPENSITY_SHA256",
+    "EXPECTED_B1_ROWS",
+    "EXPECTED_B1_SAMPLE_SHA256",
+    "EXPECTED_CHRONOLOGY_MANIFEST_SHA256",
+    "EXPECTED_CORE_RUN_ID",
+    "EXPECTED_CORE_SCRIPT_SHA256",
+    "EXPECTED_CORE_SUCCESS_SHA256",
+    "EXPECTED_GIT_HEAD",
+    "EXPECTED_STAGE07_FAIR_ROWS",
+    "EXPECTED_STAGE07_KIND_DRAWS",
+    "EXPECTED_STAGE07_ROWS",
+    "EXPECTED_STAGE07_SCRIPT_SHA256",
+    "EXPECTED_STAGE07_STATUS",
+    "EXPECTED_STAGE07_SUCCESS_SHA256"
+  ],
+  "changes": [
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_A3_GATE_RUN_ID",
+      "original_sha256": "2c7f1d44b8a259a544a8916072e7280e52bfa3fc6f0bf1a240a331488aebb602",
+      "replacement_sha256": "378d385bb3846a8ad6033ccfdb96977280faa390b21e87bc99969a2597f9732f"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_A3_GATE_SUCCESS_SHA256",
+      "original_sha256": "2eff3d9424f34d7e5efb52712cc22c179215f109627c43745e076d547382de61",
+      "replacement_sha256": "cbdf76978b5254a7d37aad38a728510ae8b75116475af874f940be66c071c152"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_B1_CHOOSERS",
+      "original_sha256": "f18d447b91ee3c089aabc0c20a269863724d088ef42a43f0e41c864f2ce0eb99",
+      "replacement_sha256": "4405948ba907900190ff7d2c843c10f916bada1f54b4cfc21104ed78b3e8ceee"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_B1_KIND_DRAWS",
+      "original_sha256": "0ed37e8d4ba55af194ea2aac0086d200220c426339c8b2ccc1c137e7f1c9915c",
+      "replacement_sha256": "0077ef5199fec8e5328dd498849196bd122c3430eac8cbc440a9492adb54dff8"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_B1_PROPENSITY_SHA256",
+      "original_sha256": "758c9e840cc4c5731ba95fe5f49625c43a882a74849c385112977713aa626b3a",
+      "replacement_sha256": "6ae8297badc759965eae62be8f9eb0e8d1d345fd2226ffb089d784b8038ae072"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_B1_ROWS",
+      "original_sha256": "d41d17a7c6b5f90ee839230ccdcab8039149123a3e4e75231a356505177c2a36",
+      "replacement_sha256": "bb711ab833bf89d810e222f792b1a668d3968cbbb910f20aeb003d353608de5a"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_B1_SAMPLE_SHA256",
+      "original_sha256": "326bad078ed38611ee77dfbbe632db0a996a76ee83854225dbf0fcbe9608f3a7",
+      "replacement_sha256": "bc06313cfe89f0811c46a692bb6f2d29b6f2eb617398576933bddc701e3a3e0f"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_CHRONOLOGY_MANIFEST_SHA256",
+      "original_sha256": "c064873c6109a6b124d27427ce06fc99adb03bd96f1f136bb74b3f2c0eb9c0de",
+      "replacement_sha256": "9f7a62d97ab17fa59ecd6a7244ce73cdb574889984b0f1cac3727e72c06b7787"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_CORE_RUN_ID",
+      "original_sha256": "2f8895a1592aa33a7240d0e5c81c5e8f16695fdc0ab31b1bbb5269eefd8be159",
+      "replacement_sha256": "4fb45d3033dc086729d30f821e248692efeffcf58f7b6bc3f8c4de210ee4ff00"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_CORE_SCRIPT_SHA256",
+      "original_sha256": "e7bc98ee399bec43a40c97f1448e24ef1b071dce77320cf6656b24abc843ac48",
+      "replacement_sha256": "4f917b9f7ce293fa572f7435071d949101a6daaa02f199c7d6a43c8e1ec8d276"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_CORE_SUCCESS_SHA256",
+      "original_sha256": "eec0e3849223c9008addf6e42ebfe103a9c8e9150b138adbc3af868d9f00088d",
+      "replacement_sha256": "2ff6dcdacd3b2a707f02cabe1c9ca5e00cc926e35a884fc2c090c92aaf1f708f"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_GIT_HEAD",
+      "original_sha256": "6b62b14525175d4469be248c946f1abbe26301f8071e64cf48d47a532278e82e",
+      "replacement_sha256": "463e39bc66bea503662e7c01049a062fe88ba5801fb6147cf1790c5ba0ad827c"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_STAGE07_FAIR_ROWS",
+      "original_sha256": "07749efd70d49667a4d4a142fc723d892521734cce69d385592dc39a51efa3df",
+      "replacement_sha256": "894d40c42337222df03cecdf12b1e3c13359368d360442bd5490ec7c71cea8f2"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_STAGE07_KIND_DRAWS",
+      "original_sha256": "d706cc97771e449906720960e6b5590b2d1b1d4cfc93122ca2a634f277bac8a2",
+      "replacement_sha256": "66ad17659c61f141da4f06535bd59b1603f445d4dde120239ec3d736bb7d2b2c"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_STAGE07_ROWS",
+      "original_sha256": "f7f040f1deff48d3cabb8dd95e0208b7f338db6c05e80dfce3d197a74f0c71dd",
+      "replacement_sha256": "ecc3725ec338909534381888a96d125f4af200613958daf217ad4f0f9c044bba"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_STAGE07_SCRIPT_SHA256",
+      "original_sha256": "f5de81181c066bedf4809bfd17bf689b107244890c97a026a20f8fb4feec0727",
+      "replacement_sha256": "828396434d4e272093c85a5c6fe3db68830220430b02628033c47b16f01e8a00"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_STAGE07_STATUS",
+      "original_sha256": "5596effa53d56666f36fe49e9e0274202cbb4d617e7ba6df28af803f88631a4f",
+      "replacement_sha256": "d94cb267f59e678859fe6369d28d2028b2ea4c9f6bc713537cf889102dc03edb"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_STAGE07_SUCCESS_SHA256",
+      "original_sha256": "4c882c4b819ca23331e6c538d12f335d103692c374e670d2f2214a607662a547",
+      "replacement_sha256": "14e513dc4ae9e1901304e7916ef951d93f8a2b55d93390d30096403b9bb6c0f3"
+    },
+    {
+      "category": "repository_guard",
+      "name": "git_state",
+      "original_sha256": "8c989830ee91ae8ae051274b3f83561606161c9639075e55ad82a4e0f9350587",
+      "replacement_sha256": "a860adf0174382a949de96001cc18cbd827b57c90b51de4fbdb82f477ca1fa6b"
+    }
+  ],
+  "created_at_utc": "2026-09-11T02:07:31Z",
+  "estimator_function_bodies_changed": false,
+  "generated_bytes": 46513,
+  "generated_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/replication_package/code/10e_audit_dynamic_second_wave_feasibility.py",
+  "generated_sha256": "8f5e1eaeb5f651bc81b35062c8fa4637f76ff49981c85552cd81f9b09459d81b",
+  "repository_guards_changed": [
+    "git_state"
+  ],
+  "source": {
+    "bytes": 46865,
+    "lineage": "public_repository",
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave2B1_v1_0_2/source/dynamics/10e_audit_dynamic_second_wave_feasibility.py",
+    "repository": "https://github.com/ravideepsethi/intrinsic-prosociality.git",
+    "repository_head_inspected": "0dc981cbc6da157d365015a95f2b7157ecda4859",
+    "sha256": "8c42293fb21dbfe6ba7f6f5b36d057b4eee0393c0a46f8c9d65e93a98c7b2297"
+  },
+  "status": "POOL_MAIN_SOURCE_AUTHORITY_BINDING_OK"
+}

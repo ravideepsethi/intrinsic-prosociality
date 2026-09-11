@@ -1,0 +1,23 @@
+{
+  "config": {
+    "a2_sha256": "23c0fc7c07bbab8c59d91ce314c4ad358b29e33127e56a71d137a21fca24bac9",
+    "adapter_success_sha256": "0b03a40b0c02b5a261e75566411926cac5cfe2fa58d2892bc8dc5980d2c8fd4e",
+    "batch_rows": 500000,
+    "bindings": {
+      "c12": "6b54d0a270096ec3eee6be21fab0e7c38cfa040c17087e69aeb9d5d9a6a883de",
+      "c6_c10": "e8816da68f48c2b9a676583ca017457a08471931745f89da81e0b9dd57049f33",
+      "common": "c1d02fd3d38b8f8cd2cfb251f2f9a857f8c2b14e64cf20a6cd308096230e2659"
+    },
+    "c7x_classification_sha256": "27e351f5bd8c493c022e2c261590d5e21e8e32ed6ab5c51d20aae8bcec46912c",
+    "chronology_manifest_sha256": "1d4648bb17cafd9e58c14ab78d32abe855f0bc62a6fb75ac88e02494a73337cd",
+    "history_success_sha256": "2e5ba421a1c628591e5004e6a60a89a39d7d017a3f5578ba88b4809f6853b417",
+    "invariant_dyad_config_sha256": "dcd49e52e55b4ca71350b4c175276e4752b1248454ef0dee436f11f8b08c336f",
+    "memory_limit": "12GB",
+    "recipient_sha256": "55ffdfae9179007fa6437930e3a838f112b28c7906c36ff6438521214cce261b",
+    "sample_fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "threads": 8,
+    "wave_version": "2B2B1-1.0.0",
+    "workers": 10
+  },
+  "config_sha256": "91cfa3b0eafc7de7d9574f48b6fdfcdbfdb214fa86b97c27cdadf78d05dc0e65"
+}

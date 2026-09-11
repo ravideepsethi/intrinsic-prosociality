@@ -1,0 +1,89 @@
+{
+  "created_at_utc": "2026-09-10T03:16:38Z",
+  "headline": {
+    "adjusted_bump": {
+      "detected_under_frozen_rule": false,
+      "estimate_pp": -0.016130329097723994,
+      "meaning": "chooser/month/speed FE modern analogue with win-premium and clock controls",
+      "se_pp": 0.00924919441592643,
+      "t": -1.7439712446684827
+    },
+    "engine_zero_placebo_uniqueness": {
+      "derivative_change_right_plus_left_distance": {
+        "descriptively_unique_under_frozen_rule": false,
+        "nonzero_placebo_rejections": 3,
+        "zero_holm_p": 2.6136203616416966e-144
+      },
+      "strict_positive_level_shift_pp": {
+        "descriptively_unique_under_frozen_rule": false,
+        "nonzero_placebo_rejections": 2,
+        "zero_holm_p": 2.7852037416467676e-30
+      }
+    },
+    "raw_bump": {
+      "estimate_pp": 0.21412581805139297,
+      "meaning": "raw roughly-equal minus disconnected-better association",
+      "present": true,
+      "se_pp": 0.010961678911691948,
+      "t": 19.534034866046117
+    },
+    "short_game_concentration": {
+      "detected_under_frozen_rule": true,
+      "interaction_pp": 0.6641741767931393,
+      "meaning": "descriptive equality-by-ply<=10 heterogeneity; not mechanism",
+      "se_pp": 0.03135087190405548,
+      "t": 21.185189963001417
+    }
+  },
+  "limitations": [
+    "FEN commonness is a terminal-position proxy, not ECO or prior familiarity.",
+    "Engine-zero local models are descriptive and are not causal RD estimates.",
+    "Rating-payoff zero was separately recomputed in pool-main Wave 1."
+  ],
+  "position_design": {
+    "fen_strings_retained_in_cache": false,
+    "outcome_columns_read": [],
+    "rows": 4137265,
+    "sha256": "fd7e9ddab4f3d0650e98de61a209902ba746e1e771eebc83c809a024fc14192a",
+    "status": "POOL_MAIN_EQUALITY_FEN_POSITION_DESIGN_V200_OK"
+  },
+  "private_model_cache": {
+    "contains_fen_strings": false,
+    "contains_game_ids": false,
+    "contains_usernames": false,
+    "rows": 15852571,
+    "sha256": "499c7e6d6a5662d57fb48dbeb9f21946270fa8d7d6ebf52022881ed4512defe1",
+    "status": "KINDNESS_EQUALITY_FEN_LOCAL_MODEL_CACHE_OK"
+  },
+  "raw": {
+    "five_bin_rows": 41534331,
+    "local_cache_rows": 15852571,
+    "position_commonness_rows_stacked": 8274530,
+    "raw_overall_contrast": {
+      "contrast_family": "overall",
+      "disconnected_better_kind_draws": 69801,
+      "disconnected_better_rate_pct": 2.390879166424043,
+      "disconnected_better_rows": 2919470,
+      "equal_minus_better_pp": 0.21412581805139302,
+      "independent_binomial_se_pp": 0.010362460919415268,
+      "independent_t": 20.663606812760428,
+      "month": null,
+      "ply_band": null,
+      "roughly_equal_kind_draws": 240825,
+      "roughly_equal_rate_pct": 2.605004984475436,
+      "roughly_equal_rows": 9244704,
+      "short_status": null,
+      "speed_code": null
+    },
+    "stage08_raw_reproduction_ok": true
+  },
+  "sample": {
+    "local_model_cache_rows": 15852571,
+    "sample_fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "short_rows": 4137265,
+    "stage07_kind_draws": 570091,
+    "stage07_rows": 41534331
+  },
+  "status": "POOL_MAIN_EQUALITY_FEN_ANALYSIS_STAGE_COMPLETE",
+  "synthetic": false
+}

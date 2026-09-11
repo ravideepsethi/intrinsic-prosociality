@@ -1,0 +1,43 @@
+{
+  "created_at_utc": "2026-09-09T20:55:53Z",
+  "full_monthly_hashes_recomputed": true,
+  "guardrails": {
+    "full_histories_may_be_used_as_upstream_history": true,
+    "literal_immediate_rematches_certified": false,
+    "old_full_panel_outputs_are_current": false,
+    "old_sample_dependent_private_caches_may_be_reused": false
+  },
+  "monthly_files_authenticated": 24,
+  "runtime": {
+    "executable": "/Users/u6025368/Desktop/Lichess_Desktop/pool_main_wave1_python.KT7f8H/bin/python",
+    "packages": {
+      "duckdb": "1.5.5",
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.3",
+      "pandas": "3.0.5",
+      "pyarrow": "25.0.1"
+    },
+    "platform": "macOS-26.4.1-arm64-arm-64bit-Mach-O",
+    "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:11:29) [Clang 20.1.8 ]"
+  },
+  "sample_authority": {
+    "fair_kind_draws": 419463,
+    "fair_rows": 15207423,
+    "fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "kind_draws": 570091,
+    "literal_immediate_rematches_certified": false,
+    "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "months": 24,
+    "observed_screen_certified": true,
+    "panel_root_machine_specific": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+    "report_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "rows": 41534331,
+    "sample_name": "main_pool_nonadjacent",
+    "sample_status": "POOL_MAIN_SAMPLE_24M_CERTIFIED_OK",
+    "status": "POOL_MAIN_SAMPLE_AUTHENTICATED_OK"
+  },
+  "sample_success_sha256": "978348a457d8d21a9690cc146065a85c1d9022f70d787cf8e1d9273afcede855",
+  "schema_columns": 157,
+  "status": "POOL_MAIN_REANALYSIS_WAVE1_PREFLIGHT_OK",
+  "wave_version": "1.0.0"
+}

@@ -1,0 +1,40 @@
+{
+  "config": {
+    "common_sha256": "0a5ad03711d5c4af1f32480937ed719a2914602548ee49070c34080901e1afbf",
+    "epistemic_label": "X",
+    "memory_limit": "12GB",
+    "package_manifest_sha256": "07b9b5b09b7665096dbb1778816e3f224ac1dfa30296f55adc422e5ad9129b7e",
+    "pair_sample_denominator": 50,
+    "pair_seed": 2026082203,
+    "plan_sha256": "c496a2bdbb63041a9f6a09886cd0d51dfdb72249df9b001ca65ffe22665d6c7e",
+    "primary_model": "X_C7X_latest_reversed_arm_chooser_ply_fe_chooser_cluster",
+    "prior_c7_result_sha256": "197d3d287294b792bb0657de04369686afa1ffc8cadc4d6e67ba074c36ce387a",
+    "script_sha256": "a1c2bd51873eb36509999b043d53337f5f0028b1fdd5adc5b956dcb64d3d29bc",
+    "script_version": "1.0.1",
+    "stage07_success_sha256": "724cc360c34a7ae204004639d83a10639e57a6ac197c159c448c27fdf054d4c4",
+    "threads": 8
+  },
+  "config_sha256": "89d6d08185b31ec19a5687be7a858d383df664bfa42742d0432e937249123e9f",
+  "prior_prespecified_c7": {
+    "gate": {
+      "benefactor_facing_fair_opportunities": 33,
+      "config_sha256": "f44a90e424dc8400891277caa85104a1b4d97fd29ca984a5e07f1d4794c379dc",
+      "created_utc": "2026-08-25T18:52:26.219224+00:00",
+      "disposition": "ESTIMATE_EXPLORATORY_WITH_LOW_SUPPORT_WARNING",
+      "focal_kind_outcome_read": false,
+      "gate_pass": false,
+      "minimum_benefactor_facing_fair_opportunities": 1000,
+      "status": "C7_TREATMENT_OUTCOME_BLIND_SUPPORT_GATE_FROZEN"
+    },
+    "lineage_mutated": false,
+    "result_sha256": "197d3d287294b792bb0657de04369686afa1ffc8cadc4d6e67ba074c36ce387a",
+    "status": "C7_ESTIMATED_EXPLORATORY_LOW_SUPPORT_GATE_FAILED"
+  },
+  "stage07": {
+    "fair_rows": 15207423,
+    "monthly_files": 24,
+    "physical_month_manifest_sha256": "372d2b0b2fd118563154f48da0beb28a51ee52ca6c3f85fab13cf31b04eb3072",
+    "rows": 41534331,
+    "success_sha256": "724cc360c34a7ae204004639d83a10639e57a6ac197c159c448c27fdf054d4c4"
+  }
+}

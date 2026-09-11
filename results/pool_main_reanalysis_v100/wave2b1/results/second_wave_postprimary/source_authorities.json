@@ -1,0 +1,19 @@
+{
+  "authorities": {
+    "b1_propensity_sha256": "a4a39f0f65e1ee8c7c0e586199915b3e5d1ca1161a9ea3ebfa356db7f12e917b",
+    "b1_sample_sha256": "e95f5f61f06b417c96048bab4ed4c8cbf1850e518dbd1e482d2cda6793a5a118",
+    "git_head": "0dc981cbc6da157d365015a95f2b7157ecda4859",
+    "postprimary_plan_sha256": "8de396d1520a6c11f5ed1f41d79ec24740d117755421631ff91422d78e0152f9",
+    "script_producer_commit": "0dc981cbc6da157d365015a95f2b7157ecda4859",
+    "script_sha256": "0d5b137f2e898791f1b2353f2dfe3bd48fa93d53553bc4465d36aea0abbf1663",
+    "source_b2_script_sha256": "3d2e391fc2a2c4a72b1847ef0e60e7412a2d8f9d60f8ce880110cdb6f563ecd8",
+    "source_b2_success_sha256": "2ae8d02a3bd8bb9799ce60066caab4fa9aebed2deffb0d6cb74f02513bd0b368",
+    "source_estimator_sha256": "6111f2ec1e912c636a260aac8be688bb7dfe5e27d856f31ef807560fb4812a20",
+    "source_history_success_sha256": "2e5ba421a1c628591e5004e6a60a89a39d7d017a3f5578ba88b4809f6853b417",
+    "source_results_success_sha256": "a1089146e09734e556588c97d992edc47db20ce764466ace6d632b3c65364335",
+    "stage08_sha256": "e9dd80c52da5ffef3d406c3af25912bd924f6423f123ca535cf4077cb039c41f"
+  },
+  "config_sha256": "64bbf28fc3fdaaa8af7a146474a90b98229677ac3f722b732f291f8d118f84db",
+  "epistemic_status": "additional robustness and exploratory analyses",
+  "source_run_id": "POOL_MAIN_WAVE2B1_SECOND"
+}

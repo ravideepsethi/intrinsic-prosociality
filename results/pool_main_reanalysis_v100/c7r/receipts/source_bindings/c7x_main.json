@@ -1,0 +1,62 @@
+{
+  "authority_constants_changed": [
+    "EXPECTED_FAIR_ROWS",
+    "EXPECTED_STAGE07_ROWS",
+    "EXPECTED_STAGE07_SUCCESS_SHA256",
+    "PROJECT_AUTHORITY"
+  ],
+  "created_at_utc": "2026-09-11T03:37:42Z",
+  "estimator_equations_changed": false,
+  "exact_changes": [
+    {
+      "category": "sample_reset_gate_or_label",
+      "label": "resume-old-sample-support-is-diagnostic",
+      "new_sha256": "b53c2e90287fb55125c41e571fd9a90843fd7e7c2505ffd0d9bec76b067ac739",
+      "old_sha256": "0fa74f659eca69329cb240d387a6cf9d0960ec9b4861b24930a886fb319aafb8"
+    },
+    {
+      "category": "sample_reset_gate_or_label",
+      "label": "fresh-old-sample-support-is-diagnostic",
+      "new_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "old_sha256": "c9715383e1efd40b93a5f68dae45c0d5ff9c23a1f4d4f65f727014fa2031d16e"
+    },
+    {
+      "category": "sample_reset_gate_or_label",
+      "label": "historical-support-label",
+      "new_sha256": "1f77154d33b49f1a3955dc7c4ff55f118bf25361a496277d1a8cbac991ae36d3",
+      "old_sha256": "22feffe6a1950025b521164a61678c615a42fc2739b8924f32147d5b818167f1"
+    },
+    {
+      "category": "sample_reset_gate_or_label",
+      "label": "historical-outcome-is-diagnostic",
+      "new_sha256": "71e19caedd3577f59c560ceaf081cef1ade900f5e280b52ebb452bfa1abe94dd",
+      "old_sha256": "5662dae9015810578f5eb0aedffe7a36daa80214b3530f6a921e37e5bf3a8328"
+    },
+    {
+      "category": "sample_reset_gate_or_label",
+      "label": "historical-reference-result-label",
+      "new_sha256": "00ef216a930556a27c2c204b78b39f6b9356cafbd5082beb7f69c80853d38698",
+      "old_sha256": "cc62c04fa1dbf3883d6785a18e1375900790e2548563371d3e39698fdbdcc1e9"
+    },
+    {
+      "category": "sample_reset_gate_or_label",
+      "label": "selected-panel-claim-boundary",
+      "new_sha256": "3d6d9a7ef61cb02f69d762a29eab0622010eff9cefbb8e17bdf6034a737682d3",
+      "old_sha256": "8a07db7ba4553a10be1cb3b80af7b43c7b0f334cdad42ef766cc5e2f84889dd6"
+    }
+  ],
+  "function_bodies_changed": true,
+  "generated_bytes": 71357,
+  "generated_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b2a/execution_packages/c7x_v101_pool_main/payload/code/run_campaign1_c7x_fullpanel_v101.py",
+  "generated_sha256": "a1c2bd51873eb36509999b043d53337f5f0028b1fdd5adc5b956dcb64d3d29bc",
+  "only_declared_sample_gates_or_labels_changed": true,
+  "source": {
+    "bytes": 71360,
+    "lineage": "recovered_frozen_producer",
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave2B2A_v1_0_1/source/c7x/run_campaign1_c7x_fullpanel_v101.py",
+    "repository": null,
+    "repository_head_inspected": null,
+    "sha256": "04fb1366706ed1f934f53b5f946d0dcab7480d233fa894ac7569325d9a125a98"
+  },
+  "status": "POOL_MAIN_WAVE2B2A_SOURCE_RETARGET_OK"
+}

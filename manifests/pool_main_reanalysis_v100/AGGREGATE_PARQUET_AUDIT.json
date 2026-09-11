@@ -1,0 +1,404 @@
+[
+  {
+    "path": "results/pool_main_reanalysis_v100/sample/ATTRITION_COUNTS.parquet",
+    "sha256": "f5dc9655d0fad50a367ee3f6321d8897edc35f6c2476842842ee3b8eb80d260c",
+    "rows": 5,
+    "schema": "main_exclusion_reason: string\nrows: int64\nkind_draws: int64\nfair_rows: int64\nfair_kind_draws: int64\nkindness_pct: double\nfair_kindness_pct: double\nfair_share_pct: double"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/sample/BOARD_STATE_PLY_COUNTS.parquet",
+    "sha256": "1bc5ad4a3f89a2cef5fe83362511ef988fd8b620066b11840e02bb0df58ca468",
+    "rows": 53,
+    "schema": "sample: string\nboard_state: string\ngame_stage: string\nrows: int64\nkind_draws: int64\nfair_rows: int64\nfair_kind_draws: int64\nkindness_pct: double\nfair_kindness_pct: double\nfair_share_pct: double"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/sample/MONTHLY_ATTRITION_COUNTS.parquet",
+    "sha256": "84e7ca97afe75146639a15efbe981296ac0df7e7ac6693b9f6d3165a157132d3",
+    "rows": 120,
+    "schema": "main_exclusion_reason: string\nrows: int64\nkind_draws: int64\nfair_rows: int64\nfair_kind_draws: int64\nmonth: string"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/sample/MONTHLY_COUNTS.parquet",
+    "sha256": "c321bac72901bb34348f80a0efbb9a9d0c95ab6d4328e5706aaf5718726fcdac",
+    "rows": 96,
+    "schema": "month: string\nsample: string\nrows: int64\nkind_draws: int64\nfair_rows: int64\nfair_kind_draws: int64\nchooser_rating_n: int64\nchooser_rating_sum: double\ndisconnected_rating_n: int64\ndisconnected_rating_sum: double\nopponent_minus_chooser_rating_n: int64\nopponent_minus_chooser_rating_sum: double\ndraw_payoff_n: int64\ndraw_payoff_sum: double\ngame_plies_n: int64\ngame_plies_sum: double\ndisconnected_clock_seconds_n: int64\ndisconnected_clock_seconds_sum: double\nchoosers: int64\nfair_choosers: int64\nkind_choosers: int64\nfair_kind_choosers: int64\nkindness_pct: double\nfair_kindness_pct: double\nfair_share_pct: double\nchooser_rating_mean: double\nchooser_rating_missing_or_nonfinite: int64\ndisconnected_rating_mean: double\ndisconnected_rating_missing_or_nonfinite: int64\nopponent_minus_chooser_rating_mean: double\nopponent_minus_chooser_rating_missing_or_nonfinite: int64\ndraw_payoff_mean: double\ndraw_payoff_missing_or_nonfinite: int64\ngame_plies_mean: double\ngame_plies_missing_or_nonfinite: int64\ndisconnected_clock_seconds_mean: double\ndisconnected_clock_seconds_missing_or_nonfinite: int64"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/sample/SAMPLE_COUNTS.parquet",
+    "sha256": "16c438627640c93ca9c72cf8a539861bc590a0470d2032e303abc4a8289da924",
+    "rows": 4,
+    "schema": "sample: string\nrows: int64\nkind_draws: int64\nfair_rows: int64\nfair_kind_draws: int64\nchooser_rating_n: int64\nchooser_rating_sum: double\ndisconnected_rating_n: int64\ndisconnected_rating_sum: double\nopponent_minus_chooser_rating_n: int64\nopponent_minus_chooser_rating_sum: double\ndraw_payoff_n: int64\ndraw_payoff_sum: double\ngame_plies_n: int64\ngame_plies_sum: double\ndisconnected_clock_seconds_n: int64\ndisconnected_clock_seconds_sum: double\nchoosers: int64\nfair_choosers: int64\nkind_choosers: int64\nfair_kind_choosers: int64\nkindness_pct: double\nfair_kindness_pct: double\nfair_share_pct: double\nchooser_rating_mean: double\nchooser_rating_missing_or_nonfinite: int64\ndisconnected_rating_mean: double\ndisconnected_rating_missing_or_nonfinite: int64\nopponent_minus_chooser_rating_mean: double\nopponent_minus_chooser_rating_missing_or_nonfinite: int64\ndraw_payoff_mean: double\ndraw_payoff_missing_or_nonfinite: int64\ngame_plies_mean: double\ngame_plies_missing_or_nonfinite: int64\ndisconnected_clock_seconds_mean: double\ndisconnected_clock_seconds_missing_or_nonfinite: int64"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/sample/SPEED_COUNTS.parquet",
+    "sha256": "0d106f771d3ee5b0c6e7e55406ce02283c5f58bea0f5216612897ec3d2fedd6d",
+    "rows": 17,
+    "schema": "sample: string\nspeed: string\nrows: int64\nkind_draws: int64\nfair_rows: int64\nfair_kind_draws: int64\nkindness_pct: double\nfair_kindness_pct: double\nfair_share_pct: double"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/controlled_reference_figure_v111/tables/controlled_local_h1_adjusted_bin_covariance.parquet",
+    "sha256": "eeb62e10483c1e69151b3fa3188b1513e454882c54a12f8ebf098599179662b9",
+    "rows": 81,
+    "schema": "row_bin_code: int64\ncolumn_bin_code: int64\ncovariance_pp2: double"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/controlled_reference_figure_v111/tables/controlled_local_h1_adjusted_bins.parquet",
+    "sha256": "3b548cb55f90a7b478ab1f80d71c284b997e8d06b3aa39d92a6ab8c55f91a4b5",
+    "rows": 9,
+    "schema": "payoff_bin_code: int64\npayoff_center: double\nside: string\nexact_zero: bool\npayoff_mean: double\nn: int64\nadjusted_rate_pct: double\nclustered_se_pp: double\nci95_low_pct: double\nci95_high_pct: double\nlocal_fitted_at_bin_mean_pct: double\nmean_model_residual_pp: double\nraw_rate_pct_diagnostic_only: double\nnormalization: string\nhorizontal_axis: string"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/controlled_reference_figure_v111/tables/controlled_local_h1_coefficients.parquet",
+    "sha256": "101a636a2887dff20b6aba18df572451b44cefe43638abb78ba6f869f77986ae",
+    "rows": 69,
+    "schema": "term: string\nestimate: double\nclustered_se: double"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/controlled_reference_figure_v111/tables/controlled_local_h1_display_fit.parquet",
+    "sha256": "f0faafa91490854b0767d1776be20aa23b2af61fdcb500adc860d3f70574489f",
+    "rows": 323,
+    "schema": "r_G: double\nside: string\nfitted_rate_pct: double\nclustered_se_pp: double\nci95_low_pct: double\nci95_high_pct: double\ndisplay_anchor_pct: double"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/controlled_reference_figure_v111/tables/controlled_local_h1_results.parquet",
+    "sha256": "c2f8055f118440fb7bfe49663d9d2af759ef71c3f3f9af902c2a28aefb103c5d",
+    "rows": 6,
+    "schema": "estimand: string\nestimate: double\nse: double\nt: double\np: double\nci95_low: double\nci95_high: double"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/controlled_reference_figure_v111/tables/controlled_reference_price_bin_coefficients.parquet",
+    "sha256": "0297e86a170122cb760f4f56cb5c442d503cfa710fa0e2ee79cb49eb815c4106",
+    "rows": 119,
+    "schema": "term: string\nestimate: double\nclustered_se: double"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/controlled_reference_figure_v111/tables/controlled_reference_price_bins.parquet",
+    "sha256": "61e2bd72979a46c7fd2cf6eb9f7d7c85d8b94ff7aa9fa345fa9f47b6fd9275ab",
+    "rows": 41,
+    "schema": "payoff_bin_code: int64\npayoff_center: double\nside: string\nexact_zero: bool\nn: int64\nraw_rate_pct_diagnostic_only: double\nadjusted_rate_pct: double\nclustered_se_pp: double\nci95_low_pct: double\nci95_high_pct: double\nnormalization: string"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/controlled_reference_figure_v111/tables/legacy_v101_bridge_h1_coefficients.parquet",
+    "sha256": "90fe4abb5a8f1a012b03de940f57ed09254b6b9cdd06ebb9326cf306896d9f26",
+    "rows": 42,
+    "schema": "term: string\nestimate: double\nclustered_se: double"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/controlled_reference_figure_v111/tables/legacy_v101_bridge_h1_results.parquet",
+    "sha256": "b6631533076faf77697ba18cc463366e3fdd132f333a5810cc01b3aadcefc355",
+    "rows": 6,
+    "schema": "estimand: string\nestimate: double\nse: double\nt: double\np: double\nci95_low: double\nci95_high: double"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/controlled_reference_figure_v111/tables/sample_flow.parquet",
+    "sha256": "5845c863e506592b6de2f86d81e6b95219898ba19a16eeeef48222bb1b6d199a",
+    "rows": 2,
+    "schema": "sample: string\nn: double\nkinds: double\nclusters: double\nn_fe: double\nmin_bin: double\nmax_bin: double\nbins: double"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/controlled_reference_figure_v111/tables/source_identity_checks.parquet",
+    "sha256": "bf1d9bb71c7fc3954dc01af840b4a2dd24dbeb1380ce73be5c30e2c6e577183d",
+    "rows": 1,
+    "schema": "n: int64\ndistinct_games: int64\nmissing_game_id: int64\nfair_rows: int64"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/controlled_reference_figure_v111/tables/source_month_inventory.parquet",
+    "sha256": "e186f27896eb950ef41116006e1c79b702061f7d441d1f6edd67063cd6c32d4b",
+    "rows": 24,
+    "schema": "source_month: string\nn: int64\nkind: double\nbad: int64"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/controlled_reference_model_v110/tables/controlled_local_h1_coefficients.parquet",
+    "sha256": "101a636a2887dff20b6aba18df572451b44cefe43638abb78ba6f869f77986ae",
+    "rows": 69,
+    "schema": "term: string\nestimate: double\nclustered_se: double"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/controlled_reference_model_v110/tables/controlled_local_h1_display_fit.parquet",
+    "sha256": "259f85682feadb2ad77e2afc8f92d187539a0e81fab4e60458a2fb53b4d31b5d",
+    "rows": 241,
+    "schema": "r_G: double\nside: string\nfitted_rate_pct: double\ndisplay_anchor_pct: double"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/controlled_reference_model_v110/tables/controlled_local_h1_results.parquet",
+    "sha256": "c2f8055f118440fb7bfe49663d9d2af759ef71c3f3f9af902c2a28aefb103c5d",
+    "rows": 6,
+    "schema": "estimand: string\nestimate: double\nse: double\nt: double\np: double\nci95_low: double\nci95_high: double"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/controlled_reference_model_v110/tables/controlled_reference_price_bin_coefficients.parquet",
+    "sha256": "0297e86a170122cb760f4f56cb5c442d503cfa710fa0e2ee79cb49eb815c4106",
+    "rows": 119,
+    "schema": "term: string\nestimate: double\nclustered_se: double"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/controlled_reference_model_v110/tables/controlled_reference_price_bins.parquet",
+    "sha256": "61e2bd72979a46c7fd2cf6eb9f7d7c85d8b94ff7aa9fa345fa9f47b6fd9275ab",
+    "rows": 41,
+    "schema": "payoff_bin_code: int64\npayoff_center: double\nside: string\nexact_zero: bool\nn: int64\nraw_rate_pct_diagnostic_only: double\nadjusted_rate_pct: double\nclustered_se_pp: double\nci95_low_pct: double\nci95_high_pct: double\nnormalization: string"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/controlled_reference_model_v110/tables/legacy_v101_bridge_h1_coefficients.parquet",
+    "sha256": "90fe4abb5a8f1a012b03de940f57ed09254b6b9cdd06ebb9326cf306896d9f26",
+    "rows": 42,
+    "schema": "term: string\nestimate: double\nclustered_se: double"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/controlled_reference_model_v110/tables/legacy_v101_bridge_h1_results.parquet",
+    "sha256": "b6631533076faf77697ba18cc463366e3fdd132f333a5810cc01b3aadcefc355",
+    "rows": 6,
+    "schema": "estimand: string\nestimate: double\nse: double\nt: double\np: double\nci95_low: double\nci95_high: double"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/controlled_reference_model_v110/tables/sample_flow.parquet",
+    "sha256": "5845c863e506592b6de2f86d81e6b95219898ba19a16eeeef48222bb1b6d199a",
+    "rows": 2,
+    "schema": "sample: string\nn: double\nkinds: double\nclusters: double\nn_fe: double\nmin_bin: double\nmax_bin: double\nbins: double"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/controlled_reference_model_v110/tables/source_identity_checks.parquet",
+    "sha256": "bf1d9bb71c7fc3954dc01af840b4a2dd24dbeb1380ce73be5c30e2c6e577183d",
+    "rows": 1,
+    "schema": "n: int64\ndistinct_games: int64\nmissing_game_id: int64\nfair_rows: int64"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/controlled_reference_model_v110/tables/source_month_inventory.parquet",
+    "sha256": "e186f27896eb950ef41116006e1c79b702061f7d441d1f6edd67063cd6c32d4b",
+    "rows": 24,
+    "schema": "source_month: string\nn: int64\nkind: double\nbad: int64"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/00_descriptive_rating_gap_curves.parquet",
+    "sha256": "3744295d4aa4a7d0b2e5f37014181772bc29598fdd750959c39c29faff17425f",
+    "rows": 1035,
+    "schema": "eval_band: large_string\nstage: large_string\nyear_half: large_string\ngap_bin50: int32\ngap_mid: double\nn: int64\nkind_draws: double\nrate_pct: double\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 994"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/common_support_chooser_equal_differences.parquet",
+    "sha256": "1c55133255f0203e89a4fbafb10105f1560f11a0234b1a31d1366a1a13cc6c12",
+    "rows": 6,
+    "schema": "eval_band: large_string\nside: large_string\nchoosers: int64\nequal_rows: int64\nside_rows: int64\nchooser_equal_diff_pp: double\nse_pp: double\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 910"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/fe_nonparametric_coefficients.parquet",
+    "sha256": "1ffe124304437f2370421c82f9b6ed6f2bcee6ecd4f4056c4756eadc656baf1d",
+    "rows": 2426,
+    "schema": "model_id: string\nterm: string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/fe_nonparametric_curves.parquet",
+    "sha256": "9d668aac74011e4eb384d599721c07b277dbafccd6228a3bba189f636b84bdf4",
+    "rows": 621,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\ngap_bin50: int64\ngap_mid: double\nci_lo_pp: double\nci_hi_pp: double\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 1219"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/fe_nonparametric_receipts.parquet",
+    "sha256": "4dfe188302ad1b5e34f60085908d974bd4f3fabac073b484972be960b4e97f82",
+    "rows": 33,
+    "schema": "status: large_string\nmodel_id: large_string\nrows: int64\nclusters: int64\nterms_requested: int64\nterms_kept: int64\nrank: int64\ncondition_number: double\nruntime_seconds: double\ndropped_terms: list<element: string>\n  child 0, element: string\nkey_terms: list<element: string>\n  child 0, element: string\ncoefficient_parquet: large_string\ncoefficient_parquet_sha256: large_string\nworker_pid: int64\nworker_threads: int64\nworker_memory_limit: large_string\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 2058"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/model_plan.parquet",
+    "sha256": "5518abe7d9d466b42bb591fa0a472ab5007279e506cc657244ca286beca0116b",
+    "rows": 33,
+    "schema": "plan_order: int64\nmodel_id: large_string\nfamily: large_string\neval_band: large_string\nstage: large_string\nkfamily: large_string\nextra_filter: large_string\npair_side: large_string\nterm_count: int64\nkey_term_count: int64\nterm_names: large_string\nkey_terms: large_string\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 1466"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/common_support_stronger__ply_gt_10__m100_p100_coefficients.parquet",
+    "sha256": "d0b29d27ac1f44d1e4d19f2a2818ca9d7f11638ca800aaade443a9a2dd6f0466",
+    "rows": 53,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/common_support_stronger__ply_gt_10__p100_p300_coefficients.parquet",
+    "sha256": "8310f203ea597a1fc33764d1a6890dca3fe0bfe49dd0e76572d4cf5618cdcc85",
+    "rows": 53,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/common_support_stronger__ply_gt_10__p300_p600_coefficients.parquet",
+    "sha256": "80558397dc1e535c03c46a112db88cc15907498845db8b28bb1ce215a035d15b",
+    "rows": 53,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/common_support_weaker__ply_gt_10__m100_p100_coefficients.parquet",
+    "sha256": "fdc385bdd33b7ec234e8ab55a211f96db54cf9017c3fc284e6b77699b57a2170",
+    "rows": 53,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/common_support_weaker__ply_gt_10__p100_p300_coefficients.parquet",
+    "sha256": "0a919834dd45cb8c1bd499e21157543afa2532c34fffe613e109384511474a17",
+    "rows": 53,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/common_support_weaker__ply_gt_10__p300_p600_coefficients.parquet",
+    "sha256": "c11565a88309196173450532602ed0d24b26362a6036ff95396778ae5e58767a",
+    "rows": 53,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/k50__ply_gt_10__m100_p100_coefficients.parquet",
+    "sha256": "7e94ddfb994c38cedfc595d5cd44963cce20f1bce6c7b3534ad1fbf39c3f9665",
+    "rows": 104,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/k50__ply_gt_10__p100_p300_coefficients.parquet",
+    "sha256": "40d16f71346c4e6412e70e6bb17b88ee01678f2518ad6923a136b49d6a3665e4",
+    "rows": 104,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/k50__ply_gt_10__p300_p600_coefficients.parquet",
+    "sha256": "a396006ee9d3b82cae45c2329d068abccda9f2041b1bae8235c95cecb78265d8",
+    "rows": 104,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/primary_k20__all__m100_p100_coefficients.parquet",
+    "sha256": "d636d7257f197586886e14e44db3cf3609d3e02d8ffcec40a5e335d018cdc08a",
+    "rows": 78,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/primary_k20__all__m300_m100_coefficients.parquet",
+    "sha256": "b61b169b4630a67afb9f5b0ba91a176fdedc2f34e18ae0e98bda223a7f39b850",
+    "rows": 78,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/primary_k20__all__m600_m300_coefficients.parquet",
+    "sha256": "49d505c92a8603d95acb865a75cf2b536b7c07b936ae68322c2a843208633ae0",
+    "rows": 78,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/primary_k20__all__p100_p300_coefficients.parquet",
+    "sha256": "9dd2c024fe69860267ec55999373002ec8cb38b9a857d911f25d498b490b91a9",
+    "rows": 78,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/primary_k20__all__p300_p600_coefficients.parquet",
+    "sha256": "ee7a1cb24f5dee84c9eca7401faf3cecb67495b2f73c8d6089d8409ad2568bcf",
+    "rows": 78,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/primary_k20__ply_gt_10__m100_p100_coefficients.parquet",
+    "sha256": "c2cb5c1ce06de781db7d69f334691167b4cd3f14aee548c2657e864390641448",
+    "rows": 74,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/primary_k20__ply_gt_10__m300_m100_coefficients.parquet",
+    "sha256": "d3eaa4421aed6217c9869ca45f6b2155b001a467e239f985d33ad48845d2a0e1",
+    "rows": 74,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/primary_k20__ply_gt_10__m600_m300_coefficients.parquet",
+    "sha256": "3208794eae57f4ddaf40783dda51caf87cd0488bf025129347ed31dcd5347517",
+    "rows": 74,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/primary_k20__ply_gt_10__p100_p300_coefficients.parquet",
+    "sha256": "0a498926db93820f555a2b930e662384ece8f8e051b54de28269745b3ce86f84",
+    "rows": 74,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/primary_k20__ply_gt_10__p300_p600_coefficients.parquet",
+    "sha256": "c00ad006e43021b755f5c4ecd32945a58de989496b84bff1683a0b5d4db83b48",
+    "rows": 74,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/primary_k20__ply_le_10__m100_p100_coefficients.parquet",
+    "sha256": "539e4e2692e49c2739af417995efabb5a91babefe98c132236340d60cb9f6bf8",
+    "rows": 74,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/primary_k20__ply_le_10__m300_m100_coefficients.parquet",
+    "sha256": "c9557d93f98996b8610bee7ffd6f67cd3034c5cb49a17be5c0139ec9c0b79f35",
+    "rows": 74,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/primary_k20__ply_le_10__m600_m300_coefficients.parquet",
+    "sha256": "2e27201a82011659b7aa9d6888273659247d6a46c98c5c4716d8af03b4efa09e",
+    "rows": 74,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/primary_k20__ply_le_10__p100_p300_coefficients.parquet",
+    "sha256": "d5c5acc022fa492322afb23aa3ede8bf25273635e9c6d996492623f1134a2d00",
+    "rows": 74,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/primary_k20__ply_le_10__p300_p600_coefficients.parquet",
+    "sha256": "711815670f235c4d13354902dde5aad00beb2abcae4d43ac3122c6c4266ae0fb",
+    "rows": 74,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/stableRD_K95__ply_gt_10__m100_p100_coefficients.parquet",
+    "sha256": "c6838fc56f8cb3a5339255deecb1dc6b77f6cb4e36cfb11c29d399d6f822a436",
+    "rows": 74,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/stableRD_K95__ply_gt_10__p100_p300_coefficients.parquet",
+    "sha256": "929498d558a096a975d4c0820c029fbcafd9ebb586fed9789338b3fce132012d",
+    "rows": 74,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/stableRD_K95__ply_gt_10__p300_p600_coefficients.parquet",
+    "sha256": "f7fb936da4ad844e425a5412daea400b2aaed3ee3bfe12c91946b34099d9064a",
+    "rows": 74,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/year1__ply_gt_10__m100_p100_coefficients.parquet",
+    "sha256": "b10794d52f84a5c9584f81d6454e9c25ad204442cfa0a9ee1ac4df40e2f4d24b",
+    "rows": 74,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/year1__ply_gt_10__p100_p300_coefficients.parquet",
+    "sha256": "b1e0b4655e5e4d8ef323c4bead36a674434b5ad514b50adba8023a180c8ab328",
+    "rows": 74,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/year1__ply_gt_10__p300_p600_coefficients.parquet",
+    "sha256": "f1f57dbedb8bca00a86da297be5eab34bfa0fc57e4cd42513731545f519e8ca0",
+    "rows": 74,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/year2__ply_gt_10__m100_p100_coefficients.parquet",
+    "sha256": "d0403d9261b5c0c720552df83bfea6ce3e7662aa7ab14d292e939a7379439174",
+    "rows": 74,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/year2__ply_gt_10__p100_p300_coefficients.parquet",
+    "sha256": "35e7848af7f00c6039d675ce53a9a6c1cfd038b8b37219e9ee68ca2efa58bdc7",
+    "rows": 74,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  },
+  {
+    "path": "results/pool_main_reanalysis_v100/wave1/modules/rating_gap_nonparametric/models/year2__ply_gt_10__p300_p600_coefficients.parquet",
+    "sha256": "0b4cbc900319636a43dd7d2c086375b6a1ec7f494705b5a55ad51f334c67f965",
+    "rows": 74,
+    "schema": "model_id: large_string\nterm: large_string\ncoef_pp: double\nse_pp: double\nz: double\nidentified: int64\n-- schema metadata --\npandas: '{\"index_columns\": [], \"column_indexes\": [], \"columns\": [{\"name\":' + 755"
+  }
+]

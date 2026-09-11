@@ -1,0 +1,232 @@
+{
+  "authority_constants_changed": [
+    "EXPECTED_A3_ACCOUNTS_ANY_30D",
+    "EXPECTED_A3_GATE_RUN_ID",
+    "EXPECTED_A3_GATE_SCRIPT_SHA256",
+    "EXPECTED_A3_GATE_STATUS",
+    "EXPECTED_A3_GATE_SUCCESS_SHA256",
+    "EXPECTED_A3_GATE_ZIP_SHA256",
+    "EXPECTED_A3_PRIMARY",
+    "EXPECTED_A3_PRIVATE_ROWS",
+    "EXPECTED_A3_PRIVATE_SHA256",
+    "EXPECTED_B1_CHOOSERS",
+    "EXPECTED_B1_KIND_DRAWS",
+    "EXPECTED_B1_OPPORTUNITIES",
+    "EXPECTED_CHRONOLOGY_FOOTER_PLAN_SHA256",
+    "EXPECTED_CHRONOLOGY_MANIFEST_SHA256",
+    "EXPECTED_GIT_HEAD",
+    "EXPECTED_RECIPIENT_ARM_ELIGIBLE",
+    "EXPECTED_RECIPIENT_CLAIMED",
+    "EXPECTED_RECIPIENT_MERCY",
+    "EXPECTED_RECIPIENT_NONARM",
+    "EXPECTED_STAGE07_FAIR_CHOOSERS",
+    "EXPECTED_STAGE07_FAIR_KIND_CHOOSERS",
+    "EXPECTED_STAGE07_FAIR_KIND_DRAWS",
+    "EXPECTED_STAGE07_FAIR_ROWS",
+    "EXPECTED_STAGE07_KIND_DRAWS",
+    "EXPECTED_STAGE07_ROWS",
+    "EXPECTED_STAGE07_SCRIPT_SHA256",
+    "EXPECTED_STAGE07_STATUS",
+    "EXPECTED_STAGE07_SUCCESS_SHA256",
+    "PROJECT_AUTHORITY"
+  ],
+  "changes": [
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_A3_ACCOUNTS_ANY_30D",
+      "original_sha256": "4c955129be197c5a8009e8a0e1858c27d98aa07d83f0555de239ac304946afe8",
+      "replacement_sha256": "b3111ddf78c26b9502c0242723a77a0620cd5ce3d2423af073ad7097350cde8d"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_A3_GATE_RUN_ID",
+      "original_sha256": "2c7f1d44b8a259a544a8916072e7280e52bfa3fc6f0bf1a240a331488aebb602",
+      "replacement_sha256": "378d385bb3846a8ad6033ccfdb96977280faa390b21e87bc99969a2597f9732f"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_A3_GATE_SCRIPT_SHA256",
+      "original_sha256": "c69c398011f40f280ac869d2d770226ddc272f996bb1ff01c8a5c15ecdc5903c",
+      "replacement_sha256": "2800951538874f0fb0ee8aa3a0620221762b64b2343f14622508d27b9be103ac"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_A3_GATE_STATUS",
+      "original_sha256": "5bfc057c00c77498f4d683fd4033f235b35086fd67130eaa21ef3a3746660c3b",
+      "replacement_sha256": "7694fe1bb07892f0e2f3e6ea6a7bb1f435393a42311801737aaca1124c5f77f2"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_A3_GATE_SUCCESS_SHA256",
+      "original_sha256": "2eff3d9424f34d7e5efb52712cc22c179215f109627c43745e076d547382de61",
+      "replacement_sha256": "cbdf76978b5254a7d37aad38a728510ae8b75116475af874f940be66c071c152"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_A3_GATE_ZIP_SHA256",
+      "original_sha256": "633299934daca29311c911ab365dff983ee7d2525a9c2ffac10c15330e69d3a4",
+      "replacement_sha256": "eed44d7614a0babd2cf813b0bbab00a9a34c8d2f1b7e9a3c7302e24ad9ec0394"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_A3_PRIMARY",
+      "original_sha256": "16d0f551d830eac1305593337385ce72f740d6eeedbb1bb8791c4006449cc94b",
+      "replacement_sha256": "83a2a0b362bc5c3a8791231df5b908bdbc2ca40327e4215d7a38d0f83c264ccb"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_A3_PRIVATE_ROWS",
+      "original_sha256": "0db155f45b796f5b73c3fc84a9e17c9f4304263fec299eb3ca8e7f5803b35c97",
+      "replacement_sha256": "5358cc41ed4a114c4d589412ec0bbc16c5f4f17b93435ebf5294d07982fa8b79"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_A3_PRIVATE_SHA256",
+      "original_sha256": "d9b79dff5d19895ff52a27e178b36519e12f1d436aad95f1752eb0b3ce2e3dd4",
+      "replacement_sha256": "13b0290d84bb945d0248295d134482ec1e13f59b9d152de542056901a2184474"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_B1_CHOOSERS",
+      "original_sha256": "f18d447b91ee3c089aabc0c20a269863724d088ef42a43f0e41c864f2ce0eb99",
+      "replacement_sha256": "4405948ba907900190ff7d2c843c10f916bada1f54b4cfc21104ed78b3e8ceee"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_B1_KIND_DRAWS",
+      "original_sha256": "0ed37e8d4ba55af194ea2aac0086d200220c426339c8b2ccc1c137e7f1c9915c",
+      "replacement_sha256": "0077ef5199fec8e5328dd498849196bd122c3430eac8cbc440a9492adb54dff8"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_B1_OPPORTUNITIES",
+      "original_sha256": "81350e364e80a48107a66c4308d2770055211288c33a28c7b8c1af090387f258",
+      "replacement_sha256": "f8f9f2532cdae2e3da5300a999bb851e51799d3f46a34e485e12e1e5488524e4"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_CHRONOLOGY_FOOTER_PLAN_SHA256",
+      "original_sha256": "9cab3bf596c25a68cc5058f6ccaaf320c44f46f385a0ddd79618f7cd8f8b6501",
+      "replacement_sha256": "9aab10a8fe3973daeae4362a60d31c6ab13159e28b04a7c757dafa5ad20209e7"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_CHRONOLOGY_MANIFEST_SHA256",
+      "original_sha256": "c064873c6109a6b124d27427ce06fc99adb03bd96f1f136bb74b3f2c0eb9c0de",
+      "replacement_sha256": "9f7a62d97ab17fa59ecd6a7244ce73cdb574889984b0f1cac3727e72c06b7787"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_GIT_HEAD",
+      "original_sha256": "a8e2716c063e71798c05e4faf5dc1f4160c10b72451ab7d568937f17da667930",
+      "replacement_sha256": "463e39bc66bea503662e7c01049a062fe88ba5801fb6147cf1790c5ba0ad827c"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_RECIPIENT_ARM_ELIGIBLE",
+      "original_sha256": "f84fe6e46cc3d97440e4d789b737595a4ded362586723d058f1795707f815cfd",
+      "replacement_sha256": "c16736c32d713db7503867da64e989dd76a3185fd7471eb9372e52eefb3185f1"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_RECIPIENT_CLAIMED",
+      "original_sha256": "7569a01933e8e3df2a5904d0418152f0eaec6b82e87416e4deba6c8a5d0621d5",
+      "replacement_sha256": "4e57c196ca1369a68b573d4ff51976098dcb9b7da13b6b666a736a4826950e7b"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_RECIPIENT_MERCY",
+      "original_sha256": "b81e1187da9598ea5d5ae086f28bb6e0f3d59603d1d23a97e32fc11b8fd2a71e",
+      "replacement_sha256": "1a309a371dbabf50f4834380fec7d7d140128f01672464151630c6c3aedd2ff5"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_RECIPIENT_NONARM",
+      "original_sha256": "22dc595e0aa56021150f2d0e0aa8e293e2c74d95e51dc3d98c79f1df5efa154e",
+      "replacement_sha256": "e8d6d0304f88c8baad24202e881afdce29cb352d96af155502d9f948be4424e9"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_STAGE07_FAIR_CHOOSERS",
+      "original_sha256": "bc0de6cc232ee66de766d91e471ffb1259c7d801bab0e7fbd61ecb2d0bd66e6d",
+      "replacement_sha256": "88f0ef1d233fc8886604cfc62fb9c0ede14652cf36d7f1146fad14922954dcf8"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_STAGE07_FAIR_KIND_CHOOSERS",
+      "original_sha256": "7afbb84610f61b61358e478525fb00307c7988355093965cf40d0d6b31e4dd4d",
+      "replacement_sha256": "f05cfa82e0b43e1e40c520b846b9c594b24eb06cc6a38aac3be4a4ec9be12d3d"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_STAGE07_FAIR_KIND_DRAWS",
+      "original_sha256": "20bacc6c5a64f4a249e01d6b744d28655e4cee91fb487e44c1c371ebc494dec4",
+      "replacement_sha256": "12b8f4a2fc9c62ebdc4e2a45e69680d151db6c43e3922f77ab1ba7c19dac49d4"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_STAGE07_FAIR_ROWS",
+      "original_sha256": "07749efd70d49667a4d4a142fc723d892521734cce69d385592dc39a51efa3df",
+      "replacement_sha256": "894d40c42337222df03cecdf12b1e3c13359368d360442bd5490ec7c71cea8f2"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_STAGE07_KIND_DRAWS",
+      "original_sha256": "d706cc97771e449906720960e6b5590b2d1b1d4cfc93122ca2a634f277bac8a2",
+      "replacement_sha256": "66ad17659c61f141da4f06535bd59b1603f445d4dde120239ec3d736bb7d2b2c"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_STAGE07_ROWS",
+      "original_sha256": "f7f040f1deff48d3cabb8dd95e0208b7f338db6c05e80dfce3d197a74f0c71dd",
+      "replacement_sha256": "ecc3725ec338909534381888a96d125f4af200613958daf217ad4f0f9c044bba"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_STAGE07_SCRIPT_SHA256",
+      "original_sha256": "f5de81181c066bedf4809bfd17bf689b107244890c97a026a20f8fb4feec0727",
+      "replacement_sha256": "828396434d4e272093c85a5c6fe3db68830220430b02628033c47b16f01e8a00"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_STAGE07_STATUS",
+      "original_sha256": "5596effa53d56666f36fe49e9e0274202cbb4d617e7ba6df28af803f88631a4f",
+      "replacement_sha256": "d94cb267f59e678859fe6369d28d2028b2ea4c9f6bc713537cf889102dc03edb"
+    },
+    {
+      "category": "authority_constant",
+      "name": "EXPECTED_STAGE07_SUCCESS_SHA256",
+      "original_sha256": "4c882c4b819ca23331e6c538d12f335d103692c374e670d2f2214a607662a547",
+      "replacement_sha256": "14e513dc4ae9e1901304e7916ef951d93f8a2b55d93390d30096403b9bb6c0f3"
+    },
+    {
+      "category": "authority_constant",
+      "name": "PROJECT_AUTHORITY",
+      "original_sha256": "7935678c7c8e4b1c69423ee6f7c0b62d940b304c309cc656a546e1ff05db2a22",
+      "replacement_sha256": "1efd8672c0b2140c2a8ef6808f838e0293d95c6f176ed9bb8a37ddc366a98a4a"
+    },
+    {
+      "category": "repository_guard",
+      "name": "git_state",
+      "original_sha256": "8c989830ee91ae8ae051274b3f83561606161c9639075e55ad82a4e0f9350587",
+      "replacement_sha256": "a860adf0174382a949de96001cc18cbd827b57c90b51de4fbdb82f477ca1fa6b"
+    }
+  ],
+  "created_at_utc": "2026-09-11T02:07:08Z",
+  "estimator_function_bodies_changed": false,
+  "generated_bytes": 177363,
+  "generated_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/replication_package/code/10c_estimate_dynamic_prosociality_core.py",
+  "generated_sha256": "8d2c218ef17342528326fead84ed883e1b9ec0344e21104003553052589b03da",
+  "repository_guards_changed": [
+    "git_state"
+  ],
+  "source": {
+    "bytes": 177741,
+    "lineage": "public_repository",
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave2B1_v1_0_2/source/dynamics/10c_estimate_dynamic_prosociality_core.py",
+    "repository": "https://github.com/ravideepsethi/intrinsic-prosociality.git",
+    "repository_head_inspected": "0dc981cbc6da157d365015a95f2b7157ecda4859",
+    "sha256": "5b17e0c95087852d78fec6184119b1f4298e56b5d7a36ab2df15cbfa6b9db0f0"
+  },
+  "status": "POOL_MAIN_SOURCE_AUTHORITY_BINDING_OK"
+}

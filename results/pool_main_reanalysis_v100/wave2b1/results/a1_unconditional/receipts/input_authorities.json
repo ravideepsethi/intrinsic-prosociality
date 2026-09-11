@@ -1,0 +1,28 @@
+{
+  "account_level_outputs_published": false,
+  "config_sha256": "c1324c992dde5ef6dd0e429e02d3e6fb9f09347f257e90c91581a1735d5aae0e",
+  "core": {
+    "manifest_sha256": "a9623805b360c0090c49532700df706b745e988559be5b8d88dcd93aabbb186f",
+    "report_files_authenticated": 11,
+    "root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/dynamic_prosociality_core_v102/POOL_MAIN_WAVE2B1_CORE",
+    "status": "DYNAMIC_PROSOCIALITY_CORE_V102_OK",
+    "success_sha256": "3216c51c76cea28b54d2aa17362625ff22e6c269ebde55079df1df477cf8af71",
+    "summary_sha256": "7941c119aff4806e4bff3959b24b1ecacd2f9a036a11c5331cf1489f108715a7"
+  },
+  "created_utc": "2026-09-10T16:36:33.509986+00:00",
+  "private_recipient": {
+    "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/derived/replication/dynamic_prosociality_core_v102_PRIVATE/recipient_with_chronology_private.parquet",
+    "receipt": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/derived/replication/dynamic_prosociality_core_v102_PRIVATE/recipient_with_chronology_receipt.json",
+    "rows": 2369530,
+    "sha256": "55ffdfae9179007fa6437930e3a838f112b28c7906c36ff6438521214cce261b"
+  },
+  "stage07": {
+    "hash_workers": 0,
+    "months": 24,
+    "parquet_hashes_verified": false,
+    "root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/derived/replication/analysis_panel_24m_sf100k",
+    "selected_input_bytes": 12581056065,
+    "success_sha256": "d5f41028371f49e3d6a6347e5fd3d2bfbda341c0affe46f52258bf428a2dd453"
+  },
+  "status": "A1_UNCONDITIONAL_FIRST_OPPORTUNITY_INPUTS_AUTHENTICATED_OK"
+}

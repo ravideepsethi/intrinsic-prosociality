@@ -1,0 +1,17 @@
+{
+  "new_five_bin_opportunities": 41534331,
+  "new_five_bin_grants": 570091,
+  "new_sample_plus_exclusions": 47587020,
+  "new_fair_bins": 15207423,
+  "new_fair_grants": 419463,
+  "new_equality_ladder_rows": 12164174,
+  "new_slope_covariance_from_reported_SEs": 0.009765554157136435,
+  "new_slope_correlation_from_reported_SEs": 0.7703052030412547,
+  "familyD_C6_conservative_upper": 8.326769740915472e-06,
+  "familyD_C9_conservative_upper": 0.0016,
+  "old_C13_95CI_from_exact_coefficient_SE": [
+    -0.02242181166450792,
+    0.18665232399519377
+  ],
+  "checks_are": "Aggregate arithmetic and file identity only; no new private-data estimation."
+}

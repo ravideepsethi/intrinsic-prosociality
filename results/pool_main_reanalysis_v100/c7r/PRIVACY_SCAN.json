@@ -1,0 +1,15 @@
+{
+  "csv_files_scanned": 7,
+  "forbidden_identifier_columns": [
+    "chooser_id",
+    "chooser_user_id",
+    "disconnected_user_id",
+    "game_id",
+    "opponent_id",
+    "username",
+    "username_norm"
+  ],
+  "parquet_files_scanned": 0,
+  "status": "POOL_MAIN_WAVE2B2A_PUBLIC_TRANSFER_PRIVACY_OK",
+  "violations": 0
+}

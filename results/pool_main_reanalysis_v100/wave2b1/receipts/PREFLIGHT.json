@@ -1,0 +1,51 @@
+{
+  "chronology": {
+    "files": 852,
+    "manifest": "/Volumes/XT_Pro/lichess_kindness/output/dynamic_prosociality_a3_chronology_gate_v100/20260821T234626Z/chronology_input_manifest.tsv",
+    "manifest_sha256": "1d4648bb17cafd9e58c14ab78d32abe855f0bc62a6fb75ac88e02494a73337cd",
+    "physical_inventory_verified": true,
+    "rows": 7763847245
+  },
+  "created_at_utc": "2026-09-11T02:06:48Z",
+  "free_gb": 629.0162162780762,
+  "network_requests": 0,
+  "package": {
+    "bytes": 1436363,
+    "files": 51,
+    "manifest_sha256": "c947bdd4a5173999c5f5cefa0dcc3c365201b14284c1a025315cfe18c1711aea",
+    "status": "POOL_MAIN_WAVE2B1_PACKAGE_AUTHENTICATED_OK"
+  },
+  "runtime": {
+    "executable": "/Users/u6025368/Desktop/Lichess_Desktop/pool_main_wave1_python.KT7f8H/bin/python",
+    "packages": {
+      "duckdb": "1.5.5",
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.3",
+      "pandas": "3.0.5",
+      "pyarrow": "25.0.1"
+    },
+    "platform": "macOS-26.4.1-arm64-arm-64bit-Mach-O",
+    "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:11:29) [Clang 20.1.8 ]"
+  },
+  "sample_authority": {
+    "fair_kind_draws": 419463,
+    "fair_rows": 15207423,
+    "fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "kind_draws": 570091,
+    "literal_immediate_rematches_certified": false,
+    "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "months": 24,
+    "observed_screen_certified": true,
+    "panel_root_machine_specific": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+    "report_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "rows": 41534331,
+    "sample_name": "main_pool_nonadjacent",
+    "sample_status": "POOL_MAIN_SAMPLE_24M_CERTIFIED_OK",
+    "status": "POOL_MAIN_SAMPLE_AUTHENTICATED_OK"
+  },
+  "status": "POOL_MAIN_WAVE2B1_PREFLIGHT_OK",
+  "wave2a_gate": {
+    "sha256": "4301a2a69fd2c7d8862d0858cad0e01ab161a048243c2dada17d14860c560ece",
+    "status": "POOL_MAIN_WAVE2B_PREFLIGHT_READY"
+  }
+}

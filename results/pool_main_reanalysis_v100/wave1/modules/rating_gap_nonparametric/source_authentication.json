@@ -1,0 +1,14 @@
+{
+  "status": "SOURCE_AUTHENTICATED_OK",
+  "created_utc": "2026-09-09T21:04:24.521118+00:00",
+  "source_settings": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave1/rating_gap_krd/settings.json",
+  "source_cache": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave1/rating_gap_krd/private_cache/rating_gap_krd_derived_private.parquet",
+  "source_settings_sha256": "034457d3a9885df6e9a25f44e12c68bff9c2d8da4ca992ae6263e00f233ff0c8",
+  "authority": {
+    "n": 41534331,
+    "months": 24,
+    "min_month": "2023-11",
+    "max_month": "2025-10",
+    "max_identity_error": 1.3642420526593924e-12
+  }
+}

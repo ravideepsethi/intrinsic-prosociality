@@ -1,0 +1,168 @@
+{
+  "cache_contract_sha256": "a0eb3b7261f5a3fb06bf43148f33e5d76738c64c2b63d92502032d1aa82f766f",
+  "sample_authority": {
+    "fair_kind_draws": 419463,
+    "fair_rows": 15207423,
+    "fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "kind_draws": 570091,
+    "literal_immediate_rematches_certified": false,
+    "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "months": 24,
+    "observed_screen_certified": true,
+    "panel_root_machine_specific": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+    "report_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "rows": 41534331,
+    "sample_name": "main_pool_nonadjacent",
+    "sample_status": "POOL_MAIN_SAMPLE_24M_CERTIFIED_OK",
+    "status": "POOL_MAIN_SAMPLE_AUTHENTICATED_OK"
+  },
+  "source": {
+    "adapter": {
+      "bytes": 51633,
+      "lineage": "pool-main crossing adapter",
+      "path": "/Users/u6025368/Desktop/Lichess_Desktop/pool_main_wave2a_v101.WFEWOv/Pool_Main_Sample_Reanalysis_Wave2A_v1_0_1/runner/crossing_audit.py",
+      "repository": null,
+      "repository_head_inspected": null,
+      "sha256": "e5bcc600c5ff6032a410506b7777e3bb5723cf546e25884f0a55d10fc71af4dc"
+    },
+    "controlled_model_v110": {
+      "bytes": 62615,
+      "lineage": "authenticated Wave-1 controlled local estimator",
+      "path": "/Users/u6025368/Desktop/Lichess_Desktop/pool_main_wave2a_v101.WFEWOv/Pool_Main_Sample_Reanalysis_Wave2A_v1_0_1/source/crossing/reference_price_model_v110.py",
+      "repository": null,
+      "repository_head_inspected": null,
+      "sha256": "a7cb4e723599705e3aae7416431d5b46fad27ea0bbd8a92671f1390f132b178f"
+    },
+    "reference_demand_v105_executed_authority": {
+      "files": {
+        "00_run_reference_demand_v104.py": {
+          "bytes": 36826,
+          "lineage": "archived_executed_source_authority",
+          "path": "/Users/u6025368/Desktop/Lichess_Desktop/pool_main_wave2a_v101.WFEWOv/Pool_Main_Sample_Reanalysis_Wave2A_v1_0_1/source/crossing/reference_demand_v105_authority/00_run_reference_demand_v104.py",
+          "repository": null,
+          "repository_head_inspected": null,
+          "sha256": "e0c9cca7d4c53a78f418c0e3a2da70a831c1ad48889e9b1af690b765bf360e1c"
+        },
+        "01_run_reference_demand_v105.py": {
+          "bytes": 47161,
+          "lineage": "archived_executed_source_authority",
+          "path": "/Users/u6025368/Desktop/Lichess_Desktop/pool_main_wave2a_v101.WFEWOv/Pool_Main_Sample_Reanalysis_Wave2A_v1_0_1/source/crossing/reference_demand_v105_authority/01_run_reference_demand_v105.py",
+          "repository": null,
+          "repository_head_inspected": null,
+          "sha256": "5a2f822bc01c5ca7da7e5c3ae9724855c3fe10308e50cd3d1c851f4cbf90c1d0"
+        },
+        "REFERENCE_DEMAND_STAGE_AMENDMENT_v1_0_5.md": {
+          "bytes": 6350,
+          "lineage": "archived_executed_source_authority",
+          "path": "/Users/u6025368/Desktop/Lichess_Desktop/pool_main_wave2a_v101.WFEWOv/Pool_Main_Sample_Reanalysis_Wave2A_v1_0_1/source/crossing/reference_demand_v105_authority/REFERENCE_DEMAND_STAGE_AMENDMENT_v1_0_5.md",
+          "repository": null,
+          "repository_head_inspected": null,
+          "sha256": "150f69f4011d2eeceb49efc5523edbb0fcccd58689674eb4f880cebf43cc611f"
+        },
+        "reference_demand_v105_contract.json": {
+          "bytes": 4186,
+          "lineage": "archived_executed_source_authority",
+          "path": "/Users/u6025368/Desktop/Lichess_Desktop/pool_main_wave2a_v101.WFEWOv/Pool_Main_Sample_Reanalysis_Wave2A_v1_0_1/source/crossing/reference_demand_v105_authority/reference_demand_v105_contract.json",
+          "repository": null,
+          "repository_head_inspected": null,
+          "sha256": "cae1359ed8e45b4c8836d169276f56def34145e7d70e1438ee2b840ac70db526"
+        }
+      },
+      "panel_a_port": "The adapter ports run_gap_schedule/run_adjacent_gap and stage_controls: chooser and month fixed effects, chooser-clustered inference, current-state controls, and the frozen eight ply bands.",
+      "status": "REFERENCE_DEMAND_V105_EXECUTED_SOURCE_AUTHENTICATED_OK"
+    },
+    "two_way_fit_v102": {
+      "bytes": 30056,
+      "lineage": "public exact two-way FE and chooser-clustered estimator",
+      "path": "/Users/u6025368/Desktop/Lichess_Desktop/pool_main_wave2a_v101.WFEWOv/Pool_Main_Sample_Reanalysis_Wave2A_v1_0_1/source/crossing/kindness_price_elasticity_common_v102.py",
+      "repository": null,
+      "repository_head_inspected": null,
+      "sha256": "97ed66c254ac900e37fc23c34a83f5929c8fbf6f7e0d1a2c32108a947c47f21b"
+    }
+  },
+  "status": "POOL_MAIN_CROSSING_INPUT_AUTHORITIES_OK",
+  "wave1": {
+    "controlled_expected": [
+      {
+        "ci95_high": 0.545634333476593,
+        "ci95_low": 0.1037892113121959,
+        "estimand": "loss_side_slope",
+        "estimate": 0.3247117723943944,
+        "p": 0.0039672613008047,
+        "se": 0.1127176636023965,
+        "t": 2.8807532201855417
+      },
+      {
+        "ci95_high": 0.0532486106565551,
+        "ci95_low": -0.3876311573121663,
+        "estimand": "gain_side_slope",
+        "estimate": -0.1671912733278056,
+        "p": 0.1371409378376693,
+        "se": 0.1124713952517303,
+        "t": -1.4865226216283949
+      },
+      {
+        "ci95_high": 0.6414776832971738,
+        "ci95_low": 0.3423284081472262,
+        "estimand": "loss_minus_gain_slope",
+        "estimate": 0.4919030457222,
+        "p": 1.1507308567888145e-10,
+        "se": 0.0763149929053796,
+        "t": 6.445693395164093
+      },
+      {
+        "ci95_high": 0.0950151811426956,
+        "ci95_low": 0.0138157030571076,
+        "estimand": "right_minus_left_level",
+        "estimate": 0.0544154420999016,
+        "p": 0.0086161337301512,
+        "se": 0.0207145332072627,
+        "t": 2.6269209909505933
+      },
+      {
+        "ci95_high": 0.2117305347766917,
+        "ci95_low": 0.0733318045562841,
+        "estimand": "exact_zero_minus_left_limit",
+        "estimate": 0.1425311696664879,
+        "p": 5.414532873467445e-05,
+        "se": 0.0353064472898683,
+        "t": 4.0369728649358905
+      },
+      {
+        "ci95_high": 0.1575272259912238,
+        "ci95_low": 0.0187042291419486,
+        "estimand": "exact_zero_minus_right_limit",
+        "estimate": 0.0881157275665862,
+        "p": 0.0128422916530413,
+        "se": 0.0354146805615545,
+        "t": 2.488113013286444
+      }
+    ],
+    "controlled_local_rows": 10116759,
+    "exact_zero_rows": 227407,
+    "files": {
+      "controlled_receipt": {
+        "bytes": 13543,
+        "path": "/Volumes/XT_Pro/lichess_kindness/output/pool_main_reanalysis_v100/wave1/controlled_reference_model_v110/receipts/completion_receipt.json",
+        "sha256": "654a509bb2c5e8025eb58b8bc904ec027ed3d18b08589483ee5dc29a3dbee450"
+      },
+      "controlled_results": {
+        "bytes": 892,
+        "path": "/Volumes/XT_Pro/lichess_kindness/output/pool_main_reanalysis_v100/wave1/controlled_reference_model_v110/tables/controlled_local_h1_results.csv",
+        "sha256": "737eaf15822e260e5662373538d822c997c9e69bd00125f642ac20d2dbf57602"
+      },
+      "stage09_descriptives": {
+        "bytes": 730,
+        "path": "/Volumes/XT_Pro/lichess_kindness/output/pool_main_reanalysis_v100/wave1/panel_robustness_stage09/tables/tableR11_exact_zero_payoff_descriptives.csv",
+        "sha256": "b721d2ffa3fccb82a40dbf920509e4455adb8b175ac561928fd8136ac43d9008"
+      },
+      "stage09_models": {
+        "bytes": 1309,
+        "path": "/Volumes/XT_Pro/lichess_kindness/output/pool_main_reanalysis_v100/wave1/panel_robustness_stage09/tables/tableR12_exact_zero_payoff_models.csv",
+        "sha256": "687f859c7c63c44acee20e5ea16f06384a66795f2e63d55e39db3665fa20e77c"
+      }
+    },
+    "root": "/Volumes/XT_Pro/lichess_kindness/output/pool_main_reanalysis_v100/wave1",
+    "status": "POOL_MAIN_WAVE1_CROSSING_AUTHORITIES_AUTHENTICATED_OK"
+  }
+}

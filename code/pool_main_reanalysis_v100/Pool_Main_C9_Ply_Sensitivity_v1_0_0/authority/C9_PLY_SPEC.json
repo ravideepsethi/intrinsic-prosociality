@@ -1,0 +1,48 @@
+{
+  "alternative_15_60_sessions_included": false,
+  "anchor_rule": "First observed or simulated grant in the complete original B1 sequence; never replace a short anchor with the next qualifying grant.",
+  "batch_size": 250,
+  "causal_claim": false,
+  "classification": "new_post_outcome_sensitivity_outside_confirmatory_family",
+  "conditioned_law": "Original conditional Bernoulli weights within each chooser-by-ply-band stratum, fixing the observed grant total in that stratum; independent strata.",
+  "conditioned_seed_tag": [
+    20260911,
+    1
+  ],
+  "holm_membership_changed": false,
+  "important_sensitivity": "ply_band_conditioned/all/later_session_7d",
+  "original_c9_config_sha256": "55d5cbb276393949039b72b65ffb2dd9cb57ed5dbff15b4ed012ecda4d6f88bd",
+  "original_c9_report_sha256": "bd0a6471e916f0a483c2309cb1fb916562ece39d72f515624c99d1fafab2f3ca",
+  "original_reproduction_required": "All 4999 original C9 arrays and all B2 horizon arrays, plus original observed numerator/denominator and aggregate summary.",
+  "original_seed": 2026082201,
+  "outcome_rules": [
+    "all",
+    "outcome_gt4",
+    "outcome_gt10",
+    "outcome_gt20",
+    "anchor_and_outcome_gt10"
+  ],
+  "partitions": [
+    "same_session_7d",
+    "later_session_7d"
+  ],
+  "ply_bands": [
+    "00_04",
+    "05_10",
+    "11_20",
+    "21_40",
+    "41_80",
+    "81_plus",
+    "missing"
+  ],
+  "randomization_laws": [
+    "original",
+    "ply_band_conditioned"
+  ],
+  "randomizations_per_law": 4999,
+  "session_cache_sha256": "c287dc17fb6cdf2f127038293cc0ecae8e884f8208e5aac48dfd96649d3fffc9",
+  "session_rule": "Authenticated all-rated-game consecutive-start gaps <30 minutes; no resessionization.",
+  "singleton_dyad_included": false,
+  "version": "C9-PLY-1.0.0",
+  "zero_support_policy": "Do not silently drop null draws. A row requires positive observed denominator and 4999 finite null rates; otherwise mark not estimable."
+}

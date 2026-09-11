@@ -1,0 +1,51 @@
+{
+  "status": "POOL_MAIN_WAVE2B1_V101_CORRECTION_FROZEN_OK",
+  "created_at_utc": "2026-09-10T04:51:45Z",
+  "package_version": "1.0.1",
+  "supersedes_package_version": "1.0.0",
+  "trigger": {
+    "stage": "dynamic_core",
+    "failure": "A3 cache join changed the pooled 30-day total",
+    "old_sample_literal": 2364521,
+    "authenticated_pool_main_total": 2221986
+  },
+  "corrections": [
+    {
+      "scope": "QA only",
+      "description": "Bind the exact accounts-any-game-within-30d total from the completed A3 gate instead of comparing with the prior-sample literal."
+    },
+    {
+      "scope": "descriptive metadata only",
+      "description": "Recompute B1 coverage denominators from the certified pool-main Stage-07 panel instead of retaining prior-sample literals."
+    },
+    {
+      "scope": "provenance guard only",
+      "description": "Update both A1 audit-local base-producer hashes to authenticate the corrected dynamic-core source."
+    }
+  ],
+  "scientific_estimands_changed": false,
+  "model_specifications_changed": false,
+  "treatment_or_outcome_definitions_changed": false,
+  "source_inventory_overrides": [
+    {
+      "bytes": 177741,
+      "relative_path": "10c_estimate_dynamic_prosociality_core.py",
+      "sha256": "5b17e0c95087852d78fec6184119b1f4298e56b5d7a36ab2df15cbfa6b9db0f0"
+    },
+    {
+      "bytes": 177741,
+      "relative_path": "a1_audits/10c_estimate_dynamic_prosociality_core.py",
+      "sha256": "5b17e0c95087852d78fec6184119b1f4298e56b5d7a36ab2df15cbfa6b9db0f0"
+    },
+    {
+      "bytes": 66669,
+      "relative_path": "a1_audits/a1_evidence_gap_audit_v100.py",
+      "sha256": "3ba21032704a1910060a1ba25a8922091ac6a3510766c7541b1b0a988b665a8e"
+    },
+    {
+      "bytes": 26852,
+      "relative_path": "a1_audits/a1_unconditional_first_opportunity_audit_v100.py",
+      "sha256": "06c0bde8b240d055b76aa2c2ed345dcb0484d83f156e480c09046f4fe513bd26"
+    }
+  ]
+}

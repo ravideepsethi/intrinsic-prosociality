@@ -1,0 +1,365 @@
+{
+  "authentication": {
+    "status": "NOT_REQUESTED_OR_SYNTHETIC"
+  },
+  "bin_model": {
+    "condition": 12659067.471791098,
+    "dropped_terms": [
+      "tournament",
+      "chooser_clock_missing",
+      "opponent_clock_missing"
+    ],
+    "normalization": "frequency-weighted adjusted bin mean equals fitted-sample outcome mean",
+    "stats": {
+      "clusters": 1501885,
+      "kinds": 353220.0,
+      "n": 13655632,
+      "n_fe": 1762314,
+      "sum_y": 35322000.0
+    }
+  },
+  "code_sha256": "a7cb4e723599705e3aae7416431d5b46fad27ea0bbd8a92671f1390f132b178f",
+  "completed_at": "2026-09-09T21:14:39Z",
+  "elapsed_seconds": 88.7361330408603,
+  "estimand": {
+    "control_blocks": [
+      "displayed_rating_gap_spline",
+      "expected_score_spline",
+      "premium_spline",
+      "ply",
+      "opponent_rd",
+      "chooser_rd",
+      "evaluation",
+      "context"
+    ],
+    "horizontal_axis": "chooser draw payoff r_G in rating points",
+    "interpretation": "reference-dependent draw price conditional on a smooth relative-strength counterfactual",
+    "relative_strength_controls": "continuous piecewise-linear splines in displayed rating gap and expected-score imbalance; no zero knot"
+  },
+  "figure_files": [
+    "figures/figure_controlled_reference_price.pdf",
+    "figures/figure_controlled_reference_price.png",
+    "figures/figure_controlled_reference_price.svg"
+  ],
+  "inference": "Chooser-clustered CR1 normal intervals conditional on the finite model; not CCT bias-corrected inference.",
+  "legacy_bridge_model": {
+    "condition": 89.33390401463035,
+    "contrasts": {
+      "exact_zero_minus_left_limit": {
+        "ci95_high": 0.25583504864661155,
+        "ci95_low": 0.12238009518646491,
+        "estimate": 0.18910757191653824,
+        "p": 2.7825802339767822e-08,
+        "se": 0.034045256574310116,
+        "t": 5.5545938243636295
+      },
+      "exact_zero_minus_right_limit": {
+        "ci95_high": 0.15991221748234624,
+        "ci95_low": 0.0261382686014401,
+        "estimate": 0.09302524304189316,
+        "p": 0.006412955342415192,
+        "se": 0.03412663445249453,
+        "t": 2.725883889059953
+      },
+      "gain_side_slope": {
+        "ci95_high": 0.19510442489196442,
+        "ci95_low": 0.09937521011404729,
+        "estimate": 0.14723981750300585,
+        "p": 1.6478502119895296e-09,
+        "se": 0.024421166800261882,
+        "t": 6.029188478472983
+      },
+      "loss_minus_gain_slope": {
+        "ci95_high": 0.31453636832346066,
+        "ci95_low": 0.18134841755574152,
+        "estimate": 0.24794239293960108,
+        "p": 2.935360132327817e-13,
+        "se": 0.03397714239095429,
+        "t": 7.29732918933202
+      },
+      "loss_side_slope": {
+        "ci95_high": 0.44111141838404283,
+        "ci95_low": 0.34925300250117103,
+        "estimate": 0.39518221044260693,
+        "p": 8.301329033169865e-64,
+        "se": 0.023433699957611284,
+        "t": 16.863841866945616
+      },
+      "right_minus_left_level": {
+        "ci95_high": 0.12664904130122143,
+        "ci95_low": 0.06551561644806872,
+        "estimate": 0.09608232887464507,
+        "p": 7.234094666377859e-10,
+        "se": 0.0155955480139853,
+        "t": 6.160881861187776
+      }
+    },
+    "dropped_terms": [
+      "eval_belowminus600",
+      "tournament",
+      "chooser_clock_missing",
+      "opponent_clock_missing"
+    ],
+    "stats": {
+      "clusters": 1223918,
+      "kinds": 251740.0,
+      "n": 10116759,
+      "n_fe": 1398783,
+      "sum_y": 25174000.0
+    },
+    "used_for_figure": false
+  },
+  "local_model": {
+    "condition": 35358112.529635966,
+    "contrasts": {
+      "exact_zero_minus_left_limit": {
+        "ci95_high": 0.21173053477669174,
+        "ci95_low": 0.07333180455628413,
+        "estimate": 0.14253116966648793,
+        "p": 5.414532873467445e-05,
+        "se": 0.03530644728986837,
+        "t": 4.0369728649358905
+      },
+      "exact_zero_minus_right_limit": {
+        "ci95_high": 0.15752722599122382,
+        "ci95_low": 0.018704229141948678,
+        "estimate": 0.08811572756658625,
+        "p": 0.012842291653041325,
+        "se": 0.03541468056155451,
+        "t": 2.488113013286444
+      },
+      "gain_side_slope": {
+        "ci95_high": 0.05324861065655517,
+        "ci95_low": -0.38763115731216635,
+        "estimate": -0.1671912733278056,
+        "p": 0.13714093783766934,
+        "se": 0.11247139525173036,
+        "t": -1.4865226216283947
+      },
+      "loss_minus_gain_slope": {
+        "ci95_high": 0.6414776832971738,
+        "ci95_low": 0.3423284081472262,
+        "estimate": 0.4919030457222,
+        "p": 1.1507308567888146e-10,
+        "se": 0.07631499290537962,
+        "t": 6.445693395164093
+      },
+      "loss_side_slope": {
+        "ci95_high": 0.545634333476593,
+        "ci95_low": 0.1037892113121959,
+        "estimate": 0.3247117723943944,
+        "p": 0.003967261300804798,
+        "se": 0.11271766360239653,
+        "t": 2.8807532201855417
+      },
+      "right_minus_left_level": {
+        "ci95_high": 0.09501518114269566,
+        "ci95_low": 0.013815703057107685,
+        "estimate": 0.05441544209990168,
+        "p": 0.00861613373015129,
+        "se": 0.020714533207262766,
+        "t": 2.6269209909505933
+      }
+    },
+    "display_anchor_pct": 2.669777825488468,
+    "dropped_terms": [
+      "gap_hinge_m600",
+      "gap_hinge_m400",
+      "gap_hinge_m250",
+      "gap_hinge_p250",
+      "gap_hinge_p400",
+      "gap_hinge_p600",
+      "gap_below_m800",
+      "gap_above_p800",
+      "expected_imbalance_hinge_m0p75",
+      "expected_imbalance_hinge_m0p5",
+      "expected_imbalance_hinge_p0p5",
+      "expected_imbalance_hinge_p0p75",
+      "expected_imbalance_below_m0p9",
+      "expected_imbalance_above_p0p9",
+      "tournament",
+      "chooser_clock_missing",
+      "opponent_clock_missing"
+    ],
+    "stats": {
+      "clusters": 1223918,
+      "kinds": 251740.0,
+      "n": 10116759,
+      "n_fe": 1398783,
+      "sum_y": 25174000.0
+    }
+  },
+  "panel": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+  "privacy": {
+    "private_cache_contains_chooser_and_game_ids": true,
+    "private_cache_is_excluded_from_archive": true,
+    "public_output_is_aggregate_only": true
+  },
+  "private_output": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave1/controlled_reference_model_v110",
+  "public_output": "/Volumes/XT_Pro/lichess_kindness/output/pool_main_reanalysis_v100/wave1/controlled_reference_model_v110",
+  "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:11:29) [Clang 20.1.8 ]",
+  "sample": {
+    "broad": {
+      "bins": 41.0,
+      "clusters": 1501885.0,
+      "kinds": 353220.0,
+      "max_bin": 40.0,
+      "min_bin": 0.0,
+      "n": 13655632.0,
+      "n_fe": 1762314.0
+    },
+    "cache_reused": false,
+    "identity": {
+      "distinct_games": 41534331,
+      "fair_rows": 15207423,
+      "missing_game_id": 0,
+      "n": 41534331
+    },
+    "local": {
+      "clusters": 1223918.0,
+      "kinds": 251740.0,
+      "n": 10116759.0,
+      "n_fe": 1398783.0
+    },
+    "source_inventory": [
+      {
+        "bytes": 525366982,
+        "mtime_ns": 1788984155654278611,
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2023-11/analysis_panel.parquet"
+      },
+      {
+        "bytes": 545269740,
+        "mtime_ns": 1788984164088440096,
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2023-12/analysis_panel.parquet"
+      },
+      {
+        "bytes": 537484485,
+        "mtime_ns": 1788984172464465597,
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2024-01/analysis_panel.parquet"
+      },
+      {
+        "bytes": 504179337,
+        "mtime_ns": 1788984180460526488,
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2024-02/analysis_panel.parquet"
+      },
+      {
+        "bytes": 529450225,
+        "mtime_ns": 1788984188644588051,
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2024-03/analysis_panel.parquet"
+      },
+      {
+        "bytes": 506822333,
+        "mtime_ns": 1788984196769726794,
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2024-04/analysis_panel.parquet"
+      },
+      {
+        "bytes": 526880757,
+        "mtime_ns": 1788984204902890902,
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2024-05/analysis_panel.parquet"
+      },
+      {
+        "bytes": 503731549,
+        "mtime_ns": 1788984213012321498,
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2024-06/analysis_panel.parquet"
+      },
+      {
+        "bytes": 498217763,
+        "mtime_ns": 1788984221032684112,
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2024-07/analysis_panel.parquet"
+      },
+      {
+        "bytes": 504930186,
+        "mtime_ns": 1788984229261184270,
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2024-08/analysis_panel.parquet"
+      },
+      {
+        "bytes": 489956063,
+        "mtime_ns": 1788984237353893800,
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2024-09/analysis_panel.parquet"
+      },
+      {
+        "bytes": 526970390,
+        "mtime_ns": 1788984245369097976,
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2024-10/analysis_panel.parquet"
+      },
+      {
+        "bytes": 503729444,
+        "mtime_ns": 1788984253052181983,
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2024-11/analysis_panel.parquet"
+      },
+      {
+        "bytes": 542836227,
+        "mtime_ns": 1788984260853951802,
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2024-12/analysis_panel.parquet"
+      },
+      {
+        "bytes": 542757327,
+        "mtime_ns": 1788984268709961921,
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2025-01/analysis_panel.parquet"
+      },
+      {
+        "bytes": 506920181,
+        "mtime_ns": 1788984276686343608,
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2025-02/analysis_panel.parquet"
+      },
+      {
+        "bytes": 555445776,
+        "mtime_ns": 1788984284859267876,
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2025-03/analysis_panel.parquet"
+      },
+      {
+        "bytes": 532717379,
+        "mtime_ns": 1788984292655853465,
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2025-04/analysis_panel.parquet"
+      },
+      {
+        "bytes": 551566247,
+        "mtime_ns": 1788984300574024834,
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2025-05/analysis_panel.parquet"
+      },
+      {
+        "bytes": 538302548,
+        "mtime_ns": 1788984308651039425,
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2025-06/analysis_panel.parquet"
+      },
+      {
+        "bytes": 556485283,
+        "mtime_ns": 1788984316647229775,
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2025-07/analysis_panel.parquet"
+      },
+      {
+        "bytes": 512537827,
+        "mtime_ns": 1788984324491496972,
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2025-08/analysis_panel.parquet"
+      },
+      {
+        "bytes": 501388838,
+        "mtime_ns": 1788984332184462644,
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2025-09/analysis_panel.parquet"
+      },
+      {
+        "bytes": 537109178,
+        "mtime_ns": 1788984339898691652,
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=2025-10/analysis_panel.parquet"
+      }
+    ]
+  },
+  "settings": {
+    "batch_rows": 32768,
+    "bin_width": 0.25,
+    "local_bandwidth": 1.0,
+    "memory": "12GB",
+    "payoff_limit": 5.0,
+    "threads": 8
+  },
+  "started_at": "2026-09-09T21:13:11Z",
+  "status": "CONTROLLED_REFERENCE_PRICE_FIGURE_COMPLETE",
+  "synthetic_smoke_test": false,
+  "version": "1.1.0",
+  "versions": {
+    "duckdb": "1.5.5",
+    "matplotlib": "3.11.1",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5"
+  }
+}

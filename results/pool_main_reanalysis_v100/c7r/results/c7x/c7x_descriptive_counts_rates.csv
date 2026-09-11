@@ -1,0 +1,11 @@
+analysis,benefactor_rows,benefactor_kind_draws,benefactor_kind_rate_pct,claimer_rows,claimer_kind_draws,claimer_kind_rate_pct,benefactor_minus_claimer_raw_pp,inferential_p_value,inference_note,epistemic_label,causal_claim
+latest_reversed_arm_all_gaps,125,4,3.2,10356,174,1.6801853997682505,1.5198146002317496,,raw counts and rates only; use clustered adjusted model attempts,X,False
+latest_reversed_arm_same_speed,122,4,3.278688524590164,10304,173,1.6789596273291925,1.5997288972609718,,raw counts and rates only; use clustered adjusted model attempts,X,False
+any_prior_arm_exclusive_histories,124,4,3.225806451612903,10356,174,1.6801853997682505,1.5456210518446527,,raw counts and rates only; use clustered adjusted model attempts,X,False
+latest_reversed_arm_tie_independent,125,4,3.2,10356,174,1.6801853997682505,1.5198146002317496,,raw counts and rates only; use clustered adjusted model attempts,X,False
+latest_reversed_arm_ply_gt10,99,3,3.0303030303030303,8102,123,1.5181436682300666,1.5121593620729636,,raw counts and rates only; use clustered adjusted model attempts,X,False
+historical_2pct_latest_reversed_arm_replication,3,0,0.0,213,3,1.4084507042253522,-1.4084507042253522,,raw counts and rates only; use clustered adjusted model attempts,X,False
+gap_0_7_days,25,2,8.0,1971,32,1.6235413495687467,6.376458650431253,,raw counts and rates only; use clustered adjusted model attempts,X,False
+gap_8_30_days,27,1,3.7037037037037033,2188,34,1.5539305301645339,2.14977317353917,,raw counts and rates only; use clustered adjusted model attempts,X,False
+gap_31_180_days,53,1,1.8867924528301887,3763,64,1.7007706617060854,0.18602179112410314,,raw counts and rates only; use clustered adjusted model attempts,X,False
+gap_over_180_days,20,0,0.0,2434,44,1.80772391125719,-1.80772391125719,,raw counts and rates only; use clustered adjusted model attempts,X,False

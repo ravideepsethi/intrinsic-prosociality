@@ -1,0 +1,53 @@
+{
+  "bands": [
+    {
+      "band": "00_04",
+      "grants": 36256,
+      "opportunities": 86855,
+      "randomizable_chooser_band_strata": 11372
+    },
+    {
+      "band": "05_10",
+      "grants": 37720,
+      "opportunities": 115819,
+      "randomizable_chooser_band_strata": 14097
+    },
+    {
+      "band": "11_20",
+      "grants": 48759,
+      "opportunities": 181242,
+      "randomizable_chooser_band_strata": 20856
+    },
+    {
+      "band": "21_40",
+      "grants": 66893,
+      "opportunities": 278228,
+      "randomizable_chooser_band_strata": 29598
+    },
+    {
+      "band": "41_80",
+      "grants": 40815,
+      "opportunities": 155435,
+      "randomizable_chooser_band_strata": 18263
+    },
+    {
+      "band": "81_plus",
+      "grants": 4550,
+      "opportunities": 15369,
+      "randomizable_chooser_band_strata": 994
+    },
+    {
+      "band": "missing",
+      "grants": 0,
+      "opportunities": 0,
+      "randomizable_chooser_band_strata": 0
+    }
+  ],
+  "choosers": 55359,
+  "choosers_with_any_randomizable_band": 49604,
+  "conditioned_on_observed_chooser_band_grant_counts": true,
+  "grants": 234993,
+  "missing_ply": 0,
+  "rows": 832948,
+  "support_selected_after_viewing_sensitivity_results": false
+}

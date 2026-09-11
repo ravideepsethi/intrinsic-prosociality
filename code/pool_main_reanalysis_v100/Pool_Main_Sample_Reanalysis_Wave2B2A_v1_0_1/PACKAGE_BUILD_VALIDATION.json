@@ -1,0 +1,48 @@
+{
+  "status": "POOL_MAIN_WAVE2B2A_PACKAGE_BUILD_VALIDATED_OK",
+  "created_at_utc": "2026-09-11T03:33:26Z",
+  "package_version": "1.0.1",
+  "sample_fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+  "source_probe": {
+    "archive_sha256": "291fe30090c383aeb9c6d5a1ee84ed9ff8ca6bbd51ede1245792d5269fc4277e",
+    "status": "POOL_MAIN_WAVE2B2_SOURCE_PROBE_OK",
+    "network_access": false,
+    "parquet_row_data_read": false,
+    "raw_pgn_read": false
+  },
+  "recovered_producers": {
+    "c7x_main_sha256": "04fb1366706ed1f934f53b5f946d0dcab7480d233fa894ac7569325d9a125a98",
+    "c7x_duplicate_diagnostic_sha256": "b48f10e5aa34b5d6b6596a3e21a7ced8e9a1572928fc0cfc8d496e4dbb33767e",
+    "c7r_main_sha256": "87caf0cb2c008635f9a8d0db0bd8e67f758fa10d35ae9a8b00058fe84dda1003",
+    "c7r_modeling_sha256": "8fe65619941f5d2712827d47ea8a56053a9d865857959243f8908c8cadcaa817",
+    "shared_common_sha256": "f629876216c797180265d1b848a4424f211fe9a43cffa4dabdb3de67acbc5f1c"
+  },
+  "tests": {
+    "outer_python_syntax": "PASS",
+    "shell_syntax": "PASS",
+    "c7x_frozen_numerical_self_test": "PASS",
+    "c7r_frozen_numerical_self_test": "PASS",
+    "asserted_retargeting_test": "PASS",
+    "synthetic_c7x_low_support_resume_test": "PASS",
+    "outer_manifest_verification": "PASS"
+  },
+  "source_policy": {
+    "original_recovered_sources_retained": true,
+    "runtime_generated_execution_sources_receipted": true,
+    "estimator_equations_changed": false,
+    "historical_sample_equality_gates_reclassified_as_diagnostics": true,
+    "same_run_c7x_to_c7r_reproduction_gate_enforced": false,
+    "same_run_reproduction_gate_disposition": "NOT_APPLICABLE_PARENT_C7X_PRIMARY_LOW_SUPPORT",
+    "c7x_low_support_result_preserved": true,
+    "c7r_first_repeat_family_unblocked": true
+  },
+  "expected_runtime": {
+    "minutes_low": 15,
+    "minutes_high": 30,
+    "fresh_state_minutes_low": 20,
+    "fresh_state_minutes_high": 40,
+    "historical_c7x_seconds": 174.7125051021576,
+    "historical_c7r_seconds": 877.5280668735504
+  },
+  "network_requests_required_for_analysis": 0
+}

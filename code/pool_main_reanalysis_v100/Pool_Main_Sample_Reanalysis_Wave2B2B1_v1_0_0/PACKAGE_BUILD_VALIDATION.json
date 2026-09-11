@@ -1,0 +1,17 @@
+{
+  "status": "POOL_MAIN_WAVE2B2B1_PACKAGE_BUILD_VALIDATED_OK",
+  "created_at_utc": "2026-09-11T05:10:14Z",
+  "package_version": "1.0.0",
+  "checks": {
+    "python_ast_all_sources": "PASS",
+    "bash_syntax": "PASS",
+    "package_self_test": "PASS",
+    "dependency_bounds_with_duckdb_1_5_5_pyarrow_25_0_1": "PASS",
+    "c7x_dyad_synthetic_duckdb_parquet_execution": "PASS",
+    "c6_ply_synthetic_duckdb_parquet_execution": "PASS",
+    "c12_exact_retarget_rules": "PASS",
+    "source_hash_freeze": "PASS"
+  },
+  "full_data_execution": "DEFERRED_TO_AUTHENTICATED_MAC_PROJECT_VOLUME",
+  "network_requests": 0
+}

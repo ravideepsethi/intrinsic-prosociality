@@ -1,0 +1,13 @@
+{
+  "analysis": "B2_chooser_equal_costly_minus_favorable",
+  "epistemic_status": "robustness",
+  "excess": -0.02103579759710081,
+  "horizon_hours": 24.0,
+  "null_mean": -0.0006508289553797364,
+  "null_p025": -0.02669496834352892,
+  "null_p975": 0.02653732788409055,
+  "observed": -0.021686626552480548,
+  "observed_difference_percentage_points": -2.168662655248055,
+  "randomization_p_two_sided": 0.1056,
+  "randomizations": 4999
+}

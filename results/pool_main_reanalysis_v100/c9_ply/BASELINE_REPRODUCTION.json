@@ -1,0 +1,94 @@
+{
+  "B2_summary": {
+    "checks": [
+      {
+        "expected": {
+          "null_mean_rate": 0.3482631062544706,
+          "observed_denominator": 2360,
+          "observed_numerator": 1217,
+          "observed_rate": 0.5156779661016949,
+          "randomization_p_two_sided": 0.0004
+        },
+        "reproduced": {
+          "horizon_hours": 6.0,
+          "null_mean_rate": 0.34826310625447066,
+          "observed_denominator": 2360,
+          "observed_numerator": 1217,
+          "observed_rate": 0.5156779661016949,
+          "randomization_p_two_sided": 0.0004
+        }
+      },
+      {
+        "expected": {
+          "null_mean_rate": 0.3401907351050501,
+          "observed_denominator": 5060,
+          "observed_numerator": 2562,
+          "observed_rate": 0.5063241106719367,
+          "randomization_p_two_sided": 0.0004
+        },
+        "reproduced": {
+          "horizon_hours": 24.0,
+          "null_mean_rate": 0.34019073510505016,
+          "observed_denominator": 5060,
+          "observed_numerator": 2562,
+          "observed_rate": 0.5063241106719367,
+          "randomization_p_two_sided": 0.0004
+        }
+      },
+      {
+        "expected": {
+          "null_mean_rate": 0.3269667734334468,
+          "observed_denominator": 23761,
+          "observed_numerator": 10591,
+          "observed_rate": 0.4457303985522495,
+          "randomization_p_two_sided": 0.0004
+        },
+        "reproduced": {
+          "horizon_hours": 168.0,
+          "null_mean_rate": 0.3269667734334468,
+          "observed_denominator": 23761,
+          "observed_numerator": 10591,
+          "observed_rate": 0.4457303985522495,
+          "randomization_p_two_sided": 0.0004
+        }
+      }
+    ],
+    "historical_randomizations": 4999,
+    "historical_seed": 2026082201,
+    "status": "C9_EXACT_B2_RANDOMIZATION_REPRODUCTION_OK"
+  },
+  "C9_components": [
+    {
+      "category": "same_session_7d",
+      "excess_percentage_points": 17.348382748558027,
+      "observed_denominator": 1306,
+      "observed_numerator": 689,
+      "status": "REPRODUCED"
+    },
+    {
+      "category": "later_session_7d",
+      "excess_percentage_points": 11.547473124842572,
+      "observed_denominator": 22455,
+      "observed_numerator": 9902,
+      "status": "REPRODUCED"
+    },
+    {
+      "category": "same_pool_24h",
+      "excess_percentage_points": 16.980009603015457,
+      "observed_denominator": 4729,
+      "observed_numerator": 2397,
+      "status": "REPRODUCED"
+    },
+    {
+      "category": "cross_pool_24h",
+      "excess_percentage_points": 11.70006661940906,
+      "observed_denominator": 331,
+      "observed_numerator": 165,
+      "status": "REPRODUCED"
+    }
+  ],
+  "all_draw_arrays_equal": true,
+  "draws": 4999,
+  "preserved_interrupted_checkpoint_pairs": [],
+  "status": "ORIGINAL_C9_AND_B2_REPRODUCED"
+}

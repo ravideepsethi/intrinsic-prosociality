@@ -1,0 +1,27 @@
+[
+  {
+    "path": "runner/common.py",
+    "sha256": "1fe1ed09e574b9631afce6a99cfc03aa573d1a91d058a188e9d786f26f94e66a",
+    "lineage": "unchanged_from_delivered_C9_fresh_v1.0.0"
+  },
+  {
+    "path": "runner/run_c9.py",
+    "sha256": "1d07368d67febfc34b557ecf75f96525342b54f870cd62f111f2838647cc872a",
+    "lineage": "unchanged_from_delivered_C9_fresh_v1.0.0"
+  },
+  {
+    "path": "runner/test_c9.py",
+    "sha256": "a7709fc70566c1435d8369033267a0fea44a88ad5e70418169dfadfd6ace3b81",
+    "lineage": "unchanged_from_delivered_C9_fresh_v1.0.0"
+  },
+  {
+    "path": "source/run_campaign1_c9_v100.py",
+    "sha256": "e553af77d16cf944a956b4ae266c3468806e08257a4aa1bff6fb953c619d8830",
+    "lineage": "unchanged_from_delivered_C9_fresh_v1.0.0"
+  },
+  {
+    "path": "source/b2_reference.py",
+    "sha256": "9696925b13a4b9d2c502eda64e21c96506ecd6b76162038ecc2fae312645f6e9",
+    "lineage": "unchanged_from_delivered_C9_fresh_v1.0.0"
+  }
+]

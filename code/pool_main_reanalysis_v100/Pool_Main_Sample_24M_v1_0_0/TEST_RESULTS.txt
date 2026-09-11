@@ -1,0 +1,33 @@
+Offline package validation, 2026-09-09
+Python: 3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]
+DuckDB: 1.5.5
+PyArrow: 25.0.1
+Platform: Linux-6.18.35-x86_64-with-glibc2.39
+
+test_canonical_contract_digest_is_not_pretty_file_digest (test_main_sample.EvidenceCase.test_canonical_contract_digest_is_not_pretty_file_digest) ... ok
+test_completed_source_union_covers_late_months (test_main_sample.EvidenceCase.test_completed_source_union_covers_late_months) ... ok
+test_completed_receipt_change_rejected (test_main_sample.FixtureCase.test_completed_receipt_change_rejected) ... ok
+test_completed_run_revalidates_output_and_keeps_original_files (test_main_sample.FixtureCase.test_completed_run_revalidates_output_and_keeps_original_files) ... ok
+test_duplicate_join_id_rejected (test_main_sample.FixtureCase.test_duplicate_join_id_rejected) ... ok
+test_false_in_place_of_unknown_rejected (test_main_sample.FixtureCase.test_false_in_place_of_unknown_rejected) ... ok
+test_full_run_preserves_schema_and_every_retained_value (test_main_sample.FixtureCase.test_full_run_preserves_schema_and_every_retained_value) ... ok
+test_future_repairing_and_candidate_start_gap_do_not_determine_membership (test_main_sample.FixtureCase.test_future_repairing_and_candidate_start_gap_do_not_determine_membership) ... ok
+test_global_counts_deduplicate_choosers_and_pool_rates (test_main_sample.FixtureCase.test_global_counts_deduplicate_choosers_and_pool_rates) ... ok
+test_input_bytes_changed_after_receipt_rejected (test_main_sample.FixtureCase.test_input_bytes_changed_after_receipt_rejected) ... ok
+test_monthly_restart_reuses_completed_stage (test_main_sample.FixtureCase.test_monthly_restart_reuses_completed_stage) ... ok
+test_null_kind_or_evaluation_rejected (test_main_sample.FixtureCase.test_null_kind_or_evaluation_rejected) ... ok
+test_per_game_source_mismatch_rejected_even_with_same_source_totals (test_main_sample.FixtureCase.test_per_game_source_mismatch_rejected_even_with_same_source_totals) ... ok
+test_report_is_aggregate_and_checksummed (test_main_sample.FixtureCase.test_report_is_aggregate_and_checksummed) ... ok
+test_role_mismatch_rejected (test_main_sample.FixtureCase.test_role_mismatch_rejected) ... ok
+test_source_id_set_mismatch_rejected_at_same_row_count (test_main_sample.FixtureCase.test_source_id_set_mismatch_rejected_at_same_row_count) ... ok
+test_source_provenance_mismatch_rejected (test_main_sample.FixtureCase.test_source_provenance_mismatch_rejected) ... ok
+test_start_mismatch_rejected (test_main_sample.FixtureCase.test_start_mismatch_rejected) ... ok
+test_unknown_history_and_ties_are_not_recoded_nonadjacent (test_main_sample.FixtureCase.test_unknown_history_and_ties_are_not_recoded_nonadjacent) ... ok
+test_unrecognized_output_preserved (test_main_sample.FixtureCase.test_unrecognized_output_preserved) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 1.750s
+
+OK
+
+Production Mac data: not available in this runtime; no production build was claimed.

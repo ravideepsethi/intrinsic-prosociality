@@ -1,0 +1,219 @@
+{
+  "config_sha256": "91cfa3b0eafc7de7d9574f48b6fdfcdbfdb214fa86b97c27cdadf78d05dc0e65",
+  "created_at_utc": "2026-09-11T13:22:42Z",
+  "network_requests": 0,
+  "private_row_level_outputs_transferred": false,
+  "results": {
+    "c12": {
+      "adopted_existing": false,
+      "manifest_files_authenticated": 9,
+      "root": "/Volumes/XT_Pro/lichess_kindness/output/pool_main_reanalysis_v100/wave2b2b1/modules/c12",
+      "runtime_seconds": 875.8831863750238,
+      "status": "POOL_MAIN_WAVE2B2B1_C12_OK",
+      "success_sha256": "b59e1635e1b446776d3d0114009ca1228d7166b8ebee172f65911b0b473fd461"
+    },
+    "c6_c10": {
+      "adopted_existing": false,
+      "manifest_files_authenticated": 8,
+      "root": "/Volumes/XT_Pro/lichess_kindness/output/pool_main_reanalysis_v100/wave2b2b1/modules/c6_c10",
+      "runtime_seconds": 313.8754540840164,
+      "status": "POOL_MAIN_WAVE2B2B1_C6_C10_OK",
+      "success_sha256": "9bd1f4c6d03ece7905a4c38b7a5a2882eb7dbe27bf726c488f804f51b0416832"
+    },
+    "c6_ply": {
+      "adopted_existing": false,
+      "manifest_files_authenticated": 5,
+      "root": "/Volumes/XT_Pro/lichess_kindness/output/pool_main_reanalysis_v100/wave2b2b1/modules/c6_ply_retrofit",
+      "runtime_seconds": 74.97777287499048,
+      "status": "POOL_MAIN_WAVE2B2B1_C6_PLY_RETROFIT_OK",
+      "success_sha256": "7ab24b9dedd90403da637a667577c49318011ee8b822f2fd2f9ab34d5964a37d"
+    },
+    "c7x_dyad": {
+      "adopted_existing": false,
+      "manifest_files_authenticated": 3,
+      "root": "/Volumes/XT_Pro/lichess_kindness/output/pool_main_reanalysis_v100/wave2b2b1/modules/c7x_frequent_dyad",
+      "runtime_seconds": 10.439030915964395,
+      "status": "POOL_MAIN_WAVE2B2B1_C7X_DYAD_DIAGNOSTIC_OK",
+      "success_sha256": "f3fb7e630884dc61c4037527425e681f0883ff38e092615482fc922669ca31ae"
+    }
+  },
+  "sample_authority": {
+    "fair_kind_draws": 419463,
+    "fair_rows": 15207423,
+    "fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "kind_draws": 570091,
+    "literal_immediate_rematches_certified": false,
+    "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "months": 24,
+    "observed_screen_certified": true,
+    "panel_root_machine_specific": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+    "report_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "rows": 41534331,
+    "sample_name": "main_pool_nonadjacent",
+    "sample_status": "POOL_MAIN_SAMPLE_24M_CERTIFIED_OK",
+    "status": "POOL_MAIN_SAMPLE_AUTHENTICATED_OK"
+  },
+  "scope": {
+    "included": [
+      "C6",
+      "C10",
+      "C6 ply retrofit",
+      "C12",
+      "C7X frequent-dyad diagnostic"
+    ],
+    "not_included": [
+      "C9 fresh randomization",
+      "C13 ambient exposure",
+      "Patron matching",
+      "paper-wide Holm closure"
+    ]
+  },
+  "source_bindings": {
+    "c12": {
+      "authority_constants_changed": [
+        "EXPECTED_HISTORY_SUCCESS_SHA256"
+      ],
+      "created_at_utc": "2026-09-11T13:01:03Z",
+      "estimator_equations_changed": false,
+      "exact_changes": [
+        {
+          "category": "sample_reset_gate_or_label",
+          "label": "pool-main-c12-source-scope",
+          "new_sha256": "f15a7b35f433b07b4f88ca5812355876668f0fa8120184dfc27c355e5a8191d7",
+          "old_sha256": "5f7dbaebecbdbc526ad97bf7be289b94bfdad7ec93a5bf1595b227c988527e22"
+        },
+        {
+          "category": "sample_reset_gate_or_label",
+          "label": "new-sample-outcome-blind-focal-row-gate",
+          "new_sha256": "a01b28f838abc4936c4815a2d9ce299186676258652d7e9e2a293cf8aad2ed9b",
+          "old_sha256": "1d21b47a61a9cf7f7372943485617316ed389bf9d94c65d59587d9876c417c63"
+        },
+        {
+          "category": "sample_reset_gate_or_label",
+          "label": "new-sample-focal-receipt",
+          "new_sha256": "1653b508432f41540a4f793a56b59e12aa57ff43af591833a81aa7bf9726f585",
+          "old_sha256": "17432043333dca59958d37c6bbbaf58a597d794dc0d15299ea463d7623005abe"
+        },
+        {
+          "category": "sample_reset_gate_or_label",
+          "label": "new-sample-modulo-note",
+          "new_sha256": "e7730be06114f5fbd46c1dbe192835453acfba157884c810e50901283ac3a538",
+          "old_sha256": "b470b1a555ee3f21aaa9cc86f8b757d9981796573f99d80c25baf9f2f4411852"
+        },
+        {
+          "category": "sample_reset_gate_or_label",
+          "label": "new-sample-focal-log-label",
+          "new_sha256": "cfa96611b93e1f5b26552a9784b3065c5884f8806c45bf5f5f3cee3fb6f25ca4",
+          "old_sha256": "ccda3362072ab3024ba9a100da566c76fff8c6c83f77433a3fec2710c00fa684"
+        },
+        {
+          "category": "sample_reset_gate_or_label",
+          "label": "new-sample-summary-lineage",
+          "new_sha256": "d49b738292eaaad1416abca5e155cf3c427a9125d5e5851375676b98afef5ddc",
+          "old_sha256": "8a567c5affaf8453edada274be5ec4811c5552c6efd245d57442c128084365d6"
+        }
+      ],
+      "function_bodies_changed": true,
+      "generated_bytes": 37814,
+      "generated_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b2b1/execution_packages/campaign_pool_main/payload/code/campaign1_c12_v102.py",
+      "generated_sha256": "6b54d0a270096ec3eee6be21fab0e7c38cfa040c17087e69aeb9d5d9a6a883de",
+      "only_declared_sample_gates_or_labels_changed": true,
+      "source": {
+        "bytes": 37767,
+        "lineage": "recovered_frozen_producer",
+        "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave2B2B1_v1_0_0/source/campaign/campaign1_c12_v102.py",
+        "repository": null,
+        "repository_head_inspected": null,
+        "sha256": "7f009eca37770e730759e4448147b0a416aac870414e0cc01df356b11202b277"
+      },
+      "status": "POOL_MAIN_WAVE2B2B1_SOURCE_RETARGET_OK"
+    },
+    "c6_c10": {
+      "authority_constants_changed": [
+        "EXPECTED_A2_CACHE_ROWS",
+        "EXPECTED_A2_CACHE_SHA256",
+        "EXPECTED_CHRONOLOGY_MANIFEST_SHA256",
+        "EXPECTED_RECIPIENT_SHA256",
+        "EXPECTED_REMAINING_SUCCESS_SHA256",
+        "EXPECTED_STAGE07_SUCCESS_SHA256"
+      ],
+      "created_at_utc": "2026-09-11T13:00:54Z",
+      "estimator_equations_changed": false,
+      "exact_changes": [],
+      "function_bodies_changed": false,
+      "generated_bytes": 59676,
+      "generated_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b2b1/execution_packages/campaign_pool_main/payload/code/campaign1_c6_c10_v100.py",
+      "generated_sha256": "e8816da68f48c2b9a676583ca017457a08471931745f89da81e0b9dd57049f33",
+      "only_declared_sample_gates_or_labels_changed": true,
+      "source": {
+        "bytes": 59718,
+        "lineage": "recovered_frozen_producer",
+        "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave2B2B1_v1_0_0/source/campaign/campaign1_c6_c10_v100.py",
+        "repository": null,
+        "repository_head_inspected": null,
+        "sha256": "f0071a82d6824260f77db26f79fc02ab5f18a241c9dc26ee990f8921771965a5"
+      },
+      "status": "POOL_MAIN_WAVE2B2B1_SOURCE_RETARGET_OK"
+    },
+    "common": {
+      "authority_constants_changed": [
+        "EXPECTED_PAIR_EVENT_ROWS",
+        "EXPECTED_RECIPIENT_ROWS",
+        "EXPECTED_STAGE07_FAIR_ROWS",
+        "EXPECTED_STAGE07_ROWS",
+        "EXPECTED_USER_EVENT_ROWS",
+        "PROJECT_ROOT"
+      ],
+      "created_at_utc": "2026-09-11T13:00:46Z",
+      "estimator_equations_changed": false,
+      "exact_changes": [],
+      "function_bodies_changed": false,
+      "generated_bytes": 22768,
+      "generated_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b2b1/execution_packages/campaign_pool_main/payload/code/campaign1_nonprofile_common_v102.py",
+      "generated_sha256": "c1d02fd3d38b8f8cd2cfb251f2f9a857f8c2b14e64cf20a6cd308096230e2659",
+      "only_declared_sample_gates_or_labels_changed": true,
+      "source": {
+        "bytes": 22701,
+        "lineage": "recovered_frozen_producer",
+        "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave2B2B1_v1_0_0/source/campaign/campaign1_nonprofile_common_v102.py",
+        "repository": null,
+        "repository_head_inspected": null,
+        "sha256": "f629876216c797180265d1b848a4424f211fe9a43cffa4dabdb3de67acbc5f1c"
+      },
+      "status": "POOL_MAIN_WAVE2B2B1_SOURCE_RETARGET_OK"
+    },
+    "exact_copies": {
+      "10c_estimate_dynamic_prosociality_core.py": {
+        "bytes": 177363,
+        "lineage": "recovered_frozen_producer",
+        "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave2B2B1_v1_0_0/source/engines/10c_estimate_dynamic_prosociality_core.py",
+        "repository": null,
+        "repository_head_inspected": null,
+        "sha256": "8d2c218ef17342528326fead84ed883e1b9ec0344e21104003553052589b03da"
+      },
+      "campaign1_c12_supplement_v103.py": {
+        "bytes": 6353,
+        "lineage": "recovered_frozen_producer",
+        "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave2B2B1_v1_0_0/source/campaign/campaign1_c12_supplement_v103.py",
+        "repository": null,
+        "repository_head_inspected": null,
+        "sha256": "7cc5c57434cc71455c89113ad738c93d432ad971ff8a16ce12e528b9a5713087"
+      },
+      "frequent_dyad_census_v101.py": {
+        "bytes": 73654,
+        "lineage": "recovered_frozen_producer",
+        "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave2B2B1_v1_0_0/source/frequent_dyad/frequent_dyad_census_v101.py",
+        "repository": null,
+        "repository_head_inspected": null,
+        "sha256": "de468744408ebb29107d09c00e11d407dfc6ded036caf78f4b3e86077a2309aa"
+      }
+    },
+    "package_manifest_sha256": "a1a08946aa9aca3c428e7944ce6404213532682039e2f1363ab8f4f057b66a3e"
+  },
+  "stage07_adapter": {
+    "root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b2b1/project_view/derived/replication/analysis_panel_24m_sf100k",
+    "success_sha256": "0b03a40b0c02b5a261e75566411926cac5cfe2fa58d2892bc8dc5980d2c8fd4e"
+  },
+  "status": "POOL_MAIN_WAVE2B2B1_ALL_STAGES_OK",
+  "wave_version": "2B2B1-1.0.0"
+}

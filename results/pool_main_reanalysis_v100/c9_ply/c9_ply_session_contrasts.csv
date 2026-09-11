@@ -1,0 +1,11 @@
+law,rule,contrast,classification,status,difference_in_excess_pp,raw_randomization_p_two_sided,draws
+original,all,same_minus_later_excess_7d,new_sensitivity,ESTIMATED,5.800909623715463,0.0004,4999
+original,outcome_gt4,same_minus_later_excess_7d,new_sensitivity,ESTIMATED,5.8168341064469455,0.0004,4999
+original,outcome_gt10,same_minus_later_excess_7d,new_sensitivity,ESTIMATED,5.4050560224489885,0.0008,4999
+original,outcome_gt20,same_minus_later_excess_7d,new_sensitivity,ESTIMATED,5.416689291304108,0.0044,4999
+original,anchor_and_outcome_gt10,same_minus_later_excess_7d,new_sensitivity,ESTIMATED,5.329694886746582,0.0048,4999
+ply_band_conditioned,all,same_minus_later_excess_7d,new_sensitivity,ESTIMATED,4.603989858864362,0.0004,4999
+ply_band_conditioned,outcome_gt4,same_minus_later_excess_7d,new_sensitivity,ESTIMATED,4.783216946139899,0.0004,4999
+ply_band_conditioned,outcome_gt10,same_minus_later_excess_7d,new_sensitivity,ESTIMATED,4.538100696854805,0.0012,4999
+ply_band_conditioned,outcome_gt20,same_minus_later_excess_7d,new_sensitivity,ESTIMATED,5.208207598214532,0.0008,4999
+ply_band_conditioned,anchor_and_outcome_gt10,same_minus_later_excess_7d,new_sensitivity,ESTIMATED,3.865267691211913,0.0164,4999

@@ -1,0 +1,5 @@
+term,estimate_pp,se_cr1_pp,t,p_normal,rows,chooser_clusters,finite_sample_correction,specification
+fair,2.2106874607746576,0.009589301002736077,230.53687230632255,0.0,37872241,3150582,1.090738645089859,y_pp ~ fair + repeat + fair×repeat + chooser FE; chooser-clustered CR1
+repeat,0.19337007950416105,0.007228141582919786,26.752392338453586,1.1581269768868088e-157,37872241,3150582,1.090738645089859,y_pp ~ fair + repeat + fair×repeat + chooser FE; chooser-clustered CR1
+fair_x_repeat,-0.48415123636214075,0.018238266217542456,-26.545902477092937,2.8637713841541056e-155,37872241,3150582,1.090738645089859,y_pp ~ fair + repeat + fair×repeat + chooser FE; chooser-clustered CR1
+repeat_fair_gradient=fair+fair_x_repeat,1.7265362244125169,0.020330743990472234,84.92243201830873,0.0,37872241,3150582,1.090738645089859,linear combination from interaction model

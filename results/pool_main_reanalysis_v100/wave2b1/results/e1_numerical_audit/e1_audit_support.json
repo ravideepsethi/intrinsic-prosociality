@@ -1,0 +1,29 @@
+{
+  "assignment_levels": 12233,
+  "cell_levels": 662,
+  "chooser_levels": 242654,
+  "coarsening_level_counts": {
+    "1": 282179,
+    "2": 8,
+    "3": 2
+  },
+  "config_sha256": "193776bee1b03f6c985e29fac67647b62fa8d0de58ea66759a7f915ad2bb44f0",
+  "created_utc": "2026-09-10T19:45:32.289400+00:00",
+  "month_levels": 24,
+  "outcome_mean": 0.02860494207782727,
+  "parquet_bytes": 27607798,
+  "risk_p10": 0.08088369282706896,
+  "risk_p90": 0.14710533082308272,
+  "risk_p90_minus_p10": 0.06622163799601376,
+  "rows": 282189,
+  "singleton_chooser_rows": 210466,
+  "source_e1_reproduced": {
+    "chooser_clusters": 32188,
+    "coefficient": -0.009468635540864202,
+    "p_value_two_sided": 0.03885343787550911,
+    "rows_identifying": 71723,
+    "rows_raw": 282189,
+    "standard_error": 0.004583662527513849
+  },
+  "status": "DYNAMIC_SECOND_WAVE_E1_AUDIT_CACHE_OK"
+}

@@ -1,0 +1,106 @@
+{
+  "contract_version": "2.0.0",
+  "created_utc": "2026-09-10T00:00:00Z",
+  "package_name": "Pool_Main_Equality_FEN_Audit_v2_0_0",
+  "project_root": "/Volumes/XT_Pro/lichess_kindness",
+  "public_output_relative": "output/pool_main_reanalysis_v100/wave2a/equality_fen",
+  "private_output_relative": "derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2a/equality_fen",
+  "expected_environment": {
+    "duckdb": ">=1.5.2,<1.6",
+    "numpy": ">=2.3,<2.6",
+    "pandas": ">=2.2,<3.1",
+    "pyarrow": ">=24,<26"
+  },
+  "source_lineage": {
+    "scientific_design": "Kindness_Equality_FEN_Audit_v1_0_1_20260827",
+    "adaptation": "Authority-only reset to the selected pool/observed-predecessor-nonadjacent sample; estimands and model grid unchanged",
+    "public_repository": "https://github.com/ravideepsethi/intrinsic-prosociality.git",
+    "public_repository_head_inspected": "0dc981cbc6da157d365015a95f2b7157ecda4859"
+  },
+  "stage07": {
+    "root_relative": "derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+    "success_relative": "derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/_SUCCESS.json",
+    "success_sha256": "978348a457d8d21a9690cc146065a85c1d9022f70d787cf8e1d9273afcede855",
+    "status": "POOL_MAIN_SAMPLE_24M_CERTIFIED_OK",
+    "producer_sha256": "7c54b775194916308f861129ddece3bca52ebea4aad0af3284322d1ac6172fb4",
+    "report_relative": "evidence/Pool_Main_Sample_24M_Report.zip",
+    "report_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "sample_fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "sample_name": "main_pool_nonadjacent",
+    "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "observed_screen_certified": true,
+    "literal_immediate_rematches_certified": false,
+    "rows": 41534331,
+    "kind_draws": 570091,
+    "fair_rows": 15207423,
+    "clearly_worse_rows": 22664818,
+    "excluded_middle_rows": 3662090,
+    "columns": 157,
+    "short_rows_ply_le_10": 4137265,
+    "required_columns": [
+      "month",
+      "game_id",
+      "archive_ordinal",
+      "chooser_username_norm",
+      "kind_draw",
+      "engine_eval_cp_disconnected",
+      "engine_fairness_bin",
+      "chooser_draw_payoff_v2",
+      "chooser_win_premium_v2",
+      "draw_nonnegative",
+      "api_speed",
+      "chooser_elo",
+      "tournament_like_event",
+      "chooser_clock_last_obs_s",
+      "disconnected_clock_last_obs_s",
+      "ply_count",
+      "fen_after_last_move"
+    ]
+  },
+  "stage08": {
+    "success_relative": "output/pool_main_reanalysis_v100/wave1/core_stage08/_SUCCESS.json",
+    "success_sha256": "343f3482898ca08784591785b284c5a90403fa8baf8c4ef6ed3a45692a1d30df",
+    "status": "POOL_MAIN_STAGE08_CORE_24M_REESTIMATED_OK",
+    "source_program_sha256": "e9dd80c52da5ffef3d406c3af25912bd924f6423f123ca535cf4077cb039c41f",
+    "known_raw_rates": {
+      "roughly_equal_rows": 9244704,
+      "roughly_equal_kind_draws": 240825,
+      "disconnected_better_rows": 2919470,
+      "disconnected_better_kind_draws": 69801
+    }
+  },
+  "stage09": {
+    "success_relative": "output/pool_main_reanalysis_v100/wave1/panel_robustness_stage09/_SUCCESS.json",
+    "success_sha256": "fb4f9e2ffdd503b8803a61dd940980d7177ca089469bfb98320d88f1b8ddae64",
+    "status": "POOL_MAIN_STAGE09_PANEL_ROBUSTNESS_24M_REESTIMATED_OK",
+    "source_program_sha256": "f0b3d8d638523e22e4bc3b665d3067a261bcfb1c3d2831d9bf8fb81e6c521431",
+    "exact_zero_rating_payoff_rows": 227407
+  },
+  "analysis": {
+    "threads": 8,
+    "memory_limit": "12GB",
+    "short_ply_max": 10,
+    "equality_eval_min": -100,
+    "equality_eval_max": 100,
+    "better_eval_min": 101,
+    "better_eval_max": 299,
+    "ply_bands": [[0, 4], [5, 6], [7, 8], [9, 10], [11, 20], [21, 40], [41, 80], [81, null]],
+    "commonness_tiers": [[1, 1], [2, 9], [10, 99], [100, 999], [1000, null]],
+    "engine_zero_windows_cp": [25, 50, 100, 200, 300],
+    "engine_donut_windows_cp": [100, 200],
+    "engine_donuts_cp": [5, 10, 25],
+    "engine_placebo_knots_cp": [-200, -100, 0, 100, 200],
+    "engine_placebo_window_cp": 100,
+    "minimum_public_cell_rows": 100,
+    "fixed_effect_tolerance": 1e-8,
+    "fixed_effect_max_iterations": 500
+  },
+  "safety": {
+    "network_allowed": false,
+    "dependency_install_allowed_during_analysis": false,
+    "git_mutation_allowed": false,
+    "certified_input_write_allowed": false,
+    "private_identifiers_in_transfer_allowed": false,
+    "outcome_blind_design_required": true
+  }
+}

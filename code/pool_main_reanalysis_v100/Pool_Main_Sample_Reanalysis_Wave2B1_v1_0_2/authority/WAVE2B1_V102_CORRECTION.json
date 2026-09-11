@@ -1,0 +1,49 @@
+{
+  "status": "POOL_MAIN_WAVE2B1_V102_CORRECTION_FROZEN_OK",
+  "created_at_utc": "2026-09-10T16:18:00Z",
+  "package_version": "1.0.2",
+  "supersedes_package_version": "1.0.1",
+  "superseded_package_zip_sha256": "7d3ae2105d6eaf87f4f17749d0bd8c94f52e7d841735457fdf3933058f780e30",
+  "trigger": {
+    "stage": "a1_evidence_gap",
+    "failed_estimand": "original_next_same_focal_benefactor_only_descriptive_subgroup",
+    "failure": "Insufficient support for recipient outcome: first_subsequent_kind_draw",
+    "base_support_rule": "at least 100 supported rows and both received-mercy exposure arms",
+    "certified_headline_reproduced_before_failure": true,
+    "certified_headline_rows": 993762,
+    "certified_headline_coefficient_percentage_points_rounded": 0.881658,
+    "returned_terminal_log_sha256": "ef605991c9c936086b2409cef935aaef8b4a2cfeff7b1d8d31e4997c80f1fac0",
+    "returned_terminal_log_bytes": 16548
+  },
+  "corrections": [
+    {
+      "scope": "post-result evidence-gap sensitivities only",
+      "description": "Mirror the certified base estimator's exact pre-fit support gate. If a sensitivity subgroup violates it, publish an explicit unsupported row with sample, exposure-arm, outcome, and row-ID fingerprint diagnostics instead of aborting the independent stages that follow."
+    },
+    {
+      "scope": "report rendering only",
+      "description": "Render an unsupported sensitivity as not estimable with its reason and counts; never print a coefficient, standard error, or p-value for it."
+    },
+    {
+      "scope": "offline tests",
+      "description": "Test one-arm rejection and two-arm acceptance of the support diagnostic."
+    }
+  ],
+  "supported_model_coefficients_changed": false,
+  "primary_estimands_changed": false,
+  "primary_models_changed": false,
+  "treatment_or_outcome_definitions_changed": false,
+  "weights_or_inference_changed": false,
+  "multiple_testing_rules_changed": false,
+  "unsupported_model_fabricated": false,
+  "private_checkpoint_deleted": false,
+  "failed_v101_a1_cache_reused_under_changed_script_identity": false,
+  "failed_v101_a1_cache_archived_recoverably": true,
+  "source_inventory_overrides": [
+    {
+      "bytes": 71349,
+      "relative_path": "a1_audits/a1_evidence_gap_audit_v100.py",
+      "sha256": "514d855b20e31be7c3e3eaa76cc0f11e4db9e0b642466b05639b46ef0da420b6"
+    }
+  ]
+}

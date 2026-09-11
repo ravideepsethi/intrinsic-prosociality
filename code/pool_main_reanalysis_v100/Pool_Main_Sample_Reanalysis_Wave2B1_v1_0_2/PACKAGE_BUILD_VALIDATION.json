@@ -1,0 +1,63 @@
+{
+  "status": "POOL_MAIN_WAVE2B1_PACKAGE_BUILD_VALIDATED_OK",
+  "created_at_utc": "2026-09-10T16:18:00Z",
+  "package_version": "1.0.2",
+  "sample_fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+  "public_repository_head_inspected": "0dc981cbc6da157d365015a95f2b7157ecda4859",
+  "checks": {
+    "bash_syntax": "PASS",
+    "python_runner_compile": "PASS",
+    "python_source_compile": "PASS",
+    "authenticated_python_source_hashes": {
+      "status": "PASS",
+      "files": 14
+    },
+    "source_binding_contracts": {
+      "status": "PASS",
+      "contracts": 13,
+      "all_targets_present_at_module_scope": true,
+      "synthetic_estimator_ast_unchanged": true
+    },
+    "document_and_kernel_authorities": {
+      "status": "PASS",
+      "files": 10
+    },
+    "bundled_estimator_numerical_self_tests": {
+      "status": "PASS",
+      "tests": 13
+    },
+    "v101_regression_correction": {
+      "status": "PASS",
+      "a3_any_30d_authority_is_runtime_bound": true,
+      "b1_coverage_denominators_are_panel_derived": true,
+      "a1_audit_base_producer_guards_updated": true
+    },
+    "v102_thin_subgroup_recovery": {
+      "status": "PASS",
+      "scope": "post-result A1 evidence-gap sensitivities only",
+      "frozen_support_gate_mirrored": true,
+      "unsupported_rows_explicitly_reported": true,
+      "supported_model_estimator_unchanged": true,
+      "report_renderer_handles_unsupported_rows": true,
+      "one_arm_and_two_arm_self_tests_added": true
+    },
+    "sample_dependent_full_run_in_build_environment": false,
+    "full_run_gate": "Must execute on the Mac with XT_Pro; Wave-2A preflight authority is bundled and reauthenticated before execution."
+  },
+  "architecture": {
+    "isolated_project_view": true,
+    "existing_project_results_overwritten": false,
+    "old_sample_dependent_cache_adopted": false,
+    "canonical_all_game_chronology_reused": true,
+    "authority_substitutions_receipted": true,
+    "primary_scientific_estimator_function_bodies_edited": false,
+    "qa_and_descriptive_metadata_correction_applied": true,
+    "post_result_unsupported_subgroup_reporting_applied": true,
+    "post_result_audit_support_dispatch_edited": true,
+    "failed_v101_a1_cache_archived_recoverably": true,
+    "v100_failed_core_state_recovery_is_reversible": true,
+    "stable_resumable_run_ids": true,
+    "public_return_privacy_scan_required": true
+  },
+  "network_requests_during_build_validation": 0
+}

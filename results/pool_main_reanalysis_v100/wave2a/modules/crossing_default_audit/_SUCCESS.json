@@ -1,0 +1,47 @@
+{
+  "controlled_baseline_reproduction": {
+    "estimands": 6,
+    "failures": 0,
+    "status": "WAVE1_CONTROLLED_LOCAL_BASELINE_EXACTLY_REPRODUCED_WITHIN_1E_7_PP"
+  },
+  "created_at_utc": "2026-09-10T03:12:12Z",
+  "outputs": {
+    "controlled_contrasts": 30,
+    "displayed_gap_schedule_rows": 25,
+    "exact_zero_decomposition_rows": 13,
+    "joint_adjacent_terms": 12
+  },
+  "privacy": {
+    "network_requests": 0,
+    "private_caches_excluded_from_transfer": true,
+    "public_output_aggregate_only": true
+  },
+  "runtime_seconds": 277.586,
+  "sample_authority": {
+    "fair_kind_draws": 419463,
+    "fair_rows": 15207423,
+    "fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "kind_draws": 570091,
+    "literal_immediate_rematches_certified": false,
+    "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "months": 24,
+    "observed_screen_certified": true,
+    "panel_root_machine_specific": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+    "report_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "rows": 41534331,
+    "sample_name": "main_pool_nonadjacent",
+    "sample_status": "POOL_MAIN_SAMPLE_24M_CERTIFIED_OK",
+    "status": "POOL_MAIN_SAMPLE_AUTHENTICATED_OK"
+  },
+  "status": "POOL_MAIN_CROSSING_DEFAULT_DECOMPOSITION_V101_OK",
+  "synthetic": false,
+  "version": "1.0.1",
+  "wave1_authority_status": "POOL_MAIN_WAVE1_CROSSING_AUTHORITIES_AUTHENTICATED_OK",
+  "zero_identity_qa": {
+    "displayed_equal_rating_rows": 227407,
+    "exact_zero_tolerance_rows": 227407,
+    "literal_r_equals_zero_rows": 227407,
+    "payoff_zero_displayed_equality_disagreements": 0,
+    "tolerance_zero_but_not_literal_zero_rows": 0
+  }
+}

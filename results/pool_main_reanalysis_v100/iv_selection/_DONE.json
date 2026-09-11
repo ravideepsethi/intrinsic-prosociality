@@ -1,0 +1,51 @@
+{
+  "config_sha256": "4f96d54f47af44d490440791632ba644af3234a66c448cfcb159bb206586bb1d",
+  "files": [
+    {
+      "bytes": 939,
+      "file": "REPORT.md",
+      "sha256": "02a4eaf73bb0c36f707b0ee53597a174d4846dbfd7b177a448186ddab296f6cb"
+    },
+    {
+      "bytes": 639,
+      "file": "config.json",
+      "sha256": "9553d8860abac361ff306a31020686862b8a1a502e63737368db235a9498db20"
+    },
+    {
+      "bytes": 13517,
+      "file": "estimates.csv",
+      "sha256": "65daf1a2e6f6a3c8519185f2e1566481b802a5703679a4cfdf77551981d35d80"
+    },
+    {
+      "bytes": 14221,
+      "file": "reproduction_checks.json",
+      "sha256": "78f86cf153defd6552bcbf8584783c44aff08416abac72b3cd763005cd86af57"
+    },
+    {
+      "bytes": 27491,
+      "file": "results.json",
+      "sha256": "8a2e2fdf826afa3f3ff86e9762153854e323399cf91200c3f6b8dd05f3ff48c0"
+    },
+    {
+      "bytes": 476,
+      "file": "sample_flow.csv",
+      "sha256": "449948ac687de5b1d210cc8462a53fa781e8e79a3279c97b1c338c6234dbf0d7"
+    },
+    {
+      "bytes": 773,
+      "file": "source_verification.json",
+      "sha256": "3b67de19ac834d96b4ac80af1cbf0afd89a435017302f9f9f10317352ebf7bbe"
+    },
+    {
+      "bytes": 4517,
+      "file": "summary.json",
+      "sha256": "280fabcba46e0ba6a28fca28f89c7b1788bbfe9a62e04c312ce5bf5fa93a77cc"
+    },
+    {
+      "bytes": 714,
+      "file": "REPORT_FILE_HASHES.tsv",
+      "sha256": "a99d48fcf6fb9fa28d0ad1cefedd5312be9b0f33fe5a05c0a5543a561d12ecf3"
+    }
+  ],
+  "status": "CHOOSER_IV_SELECTION_ADDENDUM_COMPLETE"
+}

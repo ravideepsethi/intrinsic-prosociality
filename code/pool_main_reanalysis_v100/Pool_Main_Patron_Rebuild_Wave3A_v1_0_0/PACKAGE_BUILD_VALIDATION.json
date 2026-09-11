@@ -1,0 +1,38 @@
+{
+  "status": "SYNTHETIC_AND_SOURCE_VALIDATION_PASSED",
+  "full_private_panel_executed_here": false,
+  "full_runtime_measured": false,
+  "runtime_estimate_minutes": [
+    15,
+    40
+  ],
+  "tested_runtime": {
+    "python": "3.12",
+    "duckdb": "1.5.5",
+    "pyarrow": "25.0.1"
+  },
+  "unittest_cases_passed": 3,
+  "checks": [
+    "unchanged original acquisition planner self-test",
+    "exact source bindings and bundled sample report authentication",
+    "new panel chooser count/kind-count conservation",
+    "independent SHA-256 round-robin match expectations",
+    "thin cells with explicit partial support",
+    "newly selected control not queried in August blocks target membership",
+    "queried nonreturn remains distinct from unqueried",
+    "old kind becomes new control explicitly counted",
+    "fixture has no Patron outcome column",
+    "actual summary/matching/coverage private checkpoint functions",
+    "pre-existing report directory accepted",
+    "aggregate-only report output checked for fixture identities",
+    "checkpoint reuse without recomputation",
+    "corrupted checkpoint rejected",
+    "Mac bash launcher syntax"
+  ],
+  "full_data_validation": "Performed on the user computer by RUN_WAVE3A.command before output can be certified as design-inputs complete.",
+  "not_certified": [
+    "new Patron coefficients",
+    "complete coverage of new matches by August snapshot",
+    "new Patron estimation sample"
+  ]
+}

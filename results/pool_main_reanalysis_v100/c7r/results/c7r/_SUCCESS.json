@@ -1,0 +1,16 @@
+{
+  "certified_c7x_primary_reproduction_pass": null,
+  "config_sha256": "ad0c8c90beb6329f41de4fcefe1a7b20ecc90656135157e709e167e861fd6109",
+  "created_utc": "2026-09-11T03:50:39.852502+00:00",
+  "expected_models": 19,
+  "final_ok": true,
+  "focal_outcome_joined_only_after_support_freeze": true,
+  "models_attempted": 19,
+  "privacy_scan_required": true,
+  "public_run": "/Volumes/XT_Pro/lichess_kindness/output/pool_main_reanalysis_v100/wave2b2a/c7r/POOL_MAIN_WAVE2B2A_C7R",
+  "report_files_hashed": 12,
+  "report_manifest_sha256": "76b5a527ab7292f413504ffb4d63a0454511e96e2cef4d323817e16b884c2333",
+  "runtime_seconds": 664.5483131408691,
+  "script_version": "1.0.2",
+  "status": "CAMPAIGN1_C7R_CLOSURE_OK"
+}

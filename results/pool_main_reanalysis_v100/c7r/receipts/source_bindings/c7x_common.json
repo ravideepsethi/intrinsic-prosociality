@@ -1,0 +1,24 @@
+{
+  "authority_constants_changed": [
+    "EXPECTED_STAGE07_FAIR_ROWS",
+    "EXPECTED_STAGE07_ROWS",
+    "PROJECT_ROOT"
+  ],
+  "created_at_utc": "2026-09-11T03:37:34Z",
+  "estimator_equations_changed": false,
+  "exact_changes": [],
+  "function_bodies_changed": false,
+  "generated_bytes": 22773,
+  "generated_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b2a/execution_packages/c7x_v101_pool_main/payload/code/campaign1_nonprofile_common_v102.py",
+  "generated_sha256": "0a5ad03711d5c4af1f32480937ed719a2914602548ee49070c34080901e1afbf",
+  "only_declared_sample_gates_or_labels_changed": true,
+  "source": {
+    "bytes": 22701,
+    "lineage": "recovered_frozen_producer",
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave2B2A_v1_0_1/source/c7x/campaign1_nonprofile_common_v102.py",
+    "repository": null,
+    "repository_head_inspected": null,
+    "sha256": "f629876216c797180265d1b848a4424f211fe9a43cffa4dabdb3de67acbc5f1c"
+  },
+  "status": "POOL_MAIN_WAVE2B2A_SOURCE_RETARGET_OK"
+}

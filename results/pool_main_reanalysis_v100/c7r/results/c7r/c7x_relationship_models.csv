@@ -1,0 +1,9 @@
+model,status,rows_requested,rows,clusters_requested,clusters,cluster,high_dimensional_fixed_effect,error_type,error_message,epistemic_label,causal_claim
+X_C7R_C7X_primary_exact_replication,ESTIMATION_FAILURE_RETAINED,10481,,9892,,chooser_id,,RuntimeError,HDFE absorption did not converge: iterations=2000 tolerance=1.000e-09 last_adjustment=3.508e-04,X,False
+X_C7R_C7X_chooser_switchers_only,NOT_ESTIMABLE_RETAINED_LOW_SUPPORT,16,,7,,chooser_id,,,,X,False
+X_C7R_C7X_chooser_and_opponent_fe,ESTIMATION_FAILURE_RETAINED,10481,,9892,,chooser_id,,RuntimeError,HDFE absorption did not converge: iterations=10000 tolerance=1.000e-09 last_adjustment=6.631e-06,X,False
+X_C7R_C7X_directed_pair_fe_chooser_cluster,ESTIMATION_FAILURE_RETAINED,10481,,9892,,,directed_pair,RuntimeError,Exposure has no residual variation: benefactor_minus_claimer,X,False
+X_C7R_C7X_directed_pair_fe_unordered_pair_cluster,ESTIMATION_FAILURE_RETAINED,10481,,10400,,,directed_pair,RuntimeError,Exposure has no residual variation: benefactor_minus_claimer,X,False
+X_C7R_C7X_directed_pair_fe_ply_gt10,ESTIMATION_FAILURE_RETAINED,8201,,7839,,,directed_pair,RuntimeError,Exposure has no residual variation: benefactor_minus_claimer,X,False
+X_C7R_C7X_le7d_exact_chooser_fe,ESTIMATION_FAILURE_RETAINED,1996,,1982,,,chooser,RuntimeError,Exposure has no residual variation: benefactor_minus_claimer,X,False
+X_C7R_C7X_le7d_directed_pair_fe,ESTIMATION_FAILURE_RETAINED,1996,,1982,,,directed_pair,RuntimeError,Exposure has no residual variation: benefactor_minus_claimer,X,False

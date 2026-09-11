@@ -1,0 +1,48 @@
+{
+  "chronology_scope": "Authenticated ordinary-speed chronology files through 2025-10; later files are unnecessary for a pre-focal classification.",
+  "config_sha256": "09c1ae7e3e1c843b1933e8e4e9df5567f1569d9d7840917fb343a66f3a62deb6",
+  "created_utc": "2026-09-10T20:02:39.066630+00:00",
+  "fair_first_rate_pct": 2.817078887030943,
+  "fair_repeat_rate_pct": 2.025148075724083,
+  "first_rows": 38599845,
+  "full_stage07_rows": 41534331,
+  "minimal_fe_first_gradient_pp": 2.2115172355725816,
+  "minimal_fe_interaction_p_normal": 2.8637713841541056e-155,
+  "minimal_fe_interaction_pp": -0.48415123636214075,
+  "minimal_fe_repeat_gradient_pp": 1.5169822351445332,
+  "ordering": [
+    "utc_ms",
+    "archive_ordinal",
+    "game_id"
+  ],
+  "preoutcome_support_receipt": {
+    "config_sha256": "09c1ae7e3e1c843b1933e8e4e9df5567f1569d9d7840917fb343a66f3a62deb6",
+    "created_utc": "2026-09-10T20:02:05.237651+00:00",
+    "definition": "First iff focal (utc_ms, archive_ordinal, game_id) equals the earliest authenticated ordinary-speed rated event for its unordered pair.",
+    "first_rows": 38599845,
+    "flags_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/derived/replication/c7r_fullpanel_prefocal_v100_PRIVATE/stage07_prefocal_first_repeat_flags_private.parquet",
+    "flags_sha256": "58f9eaeb9c5acd8527df1b446eae945d86a3762d4a3252b532f92be5e09f9b27",
+    "ordering": [
+      "utc_ms",
+      "archive_ordinal",
+      "game_id"
+    ],
+    "outcome_read_before_freeze": false,
+    "repeat_rows": 2934486,
+    "repeat_share": 0.07065205889556762,
+    "rows": 41534331,
+    "status": "C7R_FULLPANEL_PREOUTCOME_SUPPORT_FROZEN_OK"
+  },
+  "private_flags_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/derived/replication/c7r_fullpanel_prefocal_v100_PRIVATE/stage07_prefocal_first_repeat_flags_private.parquet",
+  "private_pair_first_event_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/derived/replication/c7r_fullpanel_prefocal_v100_PRIVATE/pair_first_rated_event_private.parquet",
+  "public_privacy": "Aggregate-only; no account IDs or game IDs are included.",
+  "raw_first_desert_gap_pp": 2.3342586909254566,
+  "raw_repeat_desert_gap_pp": 1.7282745313036756,
+  "repeat_rows": 2934486,
+  "repeat_share_clearly_worse_pct": 6.8201562439195405,
+  "repeat_share_competitive_pct": 7.425005538413708,
+  "repeat_share_pct": 7.065205889556762,
+  "run_id": "POOL_MAIN_WAVE2B1_C7R",
+  "script_version": "1.0.0",
+  "status": "C7R_FULLPANEL_PREFOCAL_V100_OK"
+}

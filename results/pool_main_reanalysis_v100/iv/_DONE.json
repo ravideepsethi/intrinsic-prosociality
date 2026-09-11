@@ -1,0 +1,71 @@
+{
+  "config_sha256": "ccbc4331487512b8b7ce41b620a8699ed056f6961a25b49c65ad52c2c0da013c",
+  "files": [
+    {
+      "bytes": 1541,
+      "path": "REPORT.md",
+      "sha256": "8933ce38ab86bdc85daf68e647cb860945d01ed55913693362a054fe4f7404d9"
+    },
+    {
+      "bytes": 21630,
+      "path": "balance.csv",
+      "sha256": "2e1dcf09f5da88dbe0ef2b1fd7b17fe9c121c7c371d02c7fbf25e6442495f7c0"
+    },
+    {
+      "bytes": 443,
+      "path": "cohort_flow.json",
+      "sha256": "98cbfdbd7a4449a7cccb8eb0d1b8b5ccb4fbd54538a5f3f4b702a1e8f5f37ac6"
+    },
+    {
+      "bytes": 172,
+      "path": "comparison_adjacency_counts.json",
+      "sha256": "03d9e43c2464e1de93d3a26aadd159f9f7f0d1830175785a8eeeb6bb7a1c9f45"
+    },
+    {
+      "bytes": 64741,
+      "path": "comparison_estimates.csv",
+      "sha256": "82b9d7fcd3d0fa2901a3bd902161d9a9217e579080a2736d9d8f066cc22d64e9"
+    },
+    {
+      "bytes": 148088,
+      "path": "comparison_results.json",
+      "sha256": "91bdeff9b779def9b84ac243e8730cbe58cfdad9c3f1f1f44db18396eb3ac76d"
+    },
+    {
+      "bytes": 951,
+      "path": "config.json",
+      "sha256": "2af4108f900a84492ceb633710a21c9bdc5062a3ceda01563a1f75685bc18ca5"
+    },
+    {
+      "bytes": 6694,
+      "path": "first_stage_strata.csv",
+      "sha256": "3970571465895213dfe1337ec125a42c200db1d2ca84ac1d602f88102d6ec66b"
+    },
+    {
+      "bytes": 259,
+      "path": "history_support.csv",
+      "sha256": "32e9d058df7a82158c7b73b9863bae38ee7f160cd08bbf225ab7832eefa502b0"
+    },
+    {
+      "bytes": 47067,
+      "path": "iv_estimates.csv",
+      "sha256": "b2b9e000a3240e82beac36ea45aa345add83368e79d2156c1866c4ca1d618a8c"
+    },
+    {
+      "bytes": 5611,
+      "path": "iv_primary.json",
+      "sha256": "a31e09da6336e296fc33e6ffb4bf62880b3ae6fd4716d77452460aab7f1b3bbc"
+    },
+    {
+      "bytes": 2193,
+      "path": "joint_balance.csv",
+      "sha256": "c444f4e1cdbf1913b2e9e699df5e6ce295349aa8c357276b7f4ff0a64d244968"
+    },
+    {
+      "bytes": 8644,
+      "path": "summary.json",
+      "sha256": "e800e77fdf2fc6f00634a3fa87802cdc364c5bb85b1d1211bf2bbc89400e51fa"
+    }
+  ],
+  "status": "CHOOSER_IV_MAIN_REBUILD_COMPLETE"
+}

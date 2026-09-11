@@ -1,0 +1,27 @@
+{
+  "authority_constants_changed": [
+    "EXPECTED_PAIR_EVENT_ROWS",
+    "EXPECTED_RECIPIENT_ROWS",
+    "EXPECTED_STAGE07_FAIR_ROWS",
+    "EXPECTED_STAGE07_ROWS",
+    "EXPECTED_USER_EVENT_ROWS",
+    "PROJECT_ROOT"
+  ],
+  "created_at_utc": "2026-09-11T13:00:46Z",
+  "estimator_equations_changed": false,
+  "exact_changes": [],
+  "function_bodies_changed": false,
+  "generated_bytes": 22768,
+  "generated_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b2b1/execution_packages/campaign_pool_main/payload/code/campaign1_nonprofile_common_v102.py",
+  "generated_sha256": "c1d02fd3d38b8f8cd2cfb251f2f9a857f8c2b14e64cf20a6cd308096230e2659",
+  "only_declared_sample_gates_or_labels_changed": true,
+  "source": {
+    "bytes": 22701,
+    "lineage": "recovered_frozen_producer",
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave2B2B1_v1_0_0/source/campaign/campaign1_nonprofile_common_v102.py",
+    "repository": null,
+    "repository_head_inspected": null,
+    "sha256": "f629876216c797180265d1b848a4424f211fe9a43cffa4dabdb3de67acbc5f1c"
+  },
+  "status": "POOL_MAIN_WAVE2B2B1_SOURCE_RETARGET_OK"
+}

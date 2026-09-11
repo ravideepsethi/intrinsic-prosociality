@@ -1,0 +1,74 @@
+{
+  "command": {
+    "argv": [
+      "/Users/u6025368/Desktop/Lichess_Desktop/pool_main_wave2a_v101.WFEWOv/Pool_Main_Sample_Reanalysis_Wave2A_v1_0_1/runner/orchestrate.py",
+      "--project-root",
+      "/Volumes/XT_Pro/lichess_kindness",
+      "--sample-root",
+      "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE",
+      "--wave1-public",
+      "/Volumes/XT_Pro/lichess_kindness/output/pool_main_reanalysis_v100/wave1",
+      "--transfer-root",
+      "/Users/u6025368/Desktop/Lichess_Desktop",
+      "--threads",
+      "10",
+      "--memory-limit",
+      "12GB",
+      "--min-free-gb",
+      "80"
+    ],
+    "memory_limit": "12GB",
+    "minimum_free_gb": 80.0,
+    "private_base": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2a",
+    "project_root": "/Volumes/XT_Pro/lichess_kindness",
+    "public_base": "/Volumes/XT_Pro/lichess_kindness/output/pool_main_reanalysis_v100/wave2a",
+    "python": "/Users/u6025368/Desktop/Lichess_Desktop/pool_main_wave1_python.KT7f8H/bin/python",
+    "requested_stages": [
+      "preflight",
+      "dynamics_inventory",
+      "crossing_audit",
+      "crossing_verify",
+      "fen_design",
+      "fen_analysis",
+      "fen_verify",
+      "collect"
+    ],
+    "sample_root": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE",
+    "threads": 10,
+    "transfer_root": "/Users/u6025368/Desktop/Lichess_Desktop",
+    "wave1_public": "/Volumes/XT_Pro/lichess_kindness/output/pool_main_reanalysis_v100/wave1"
+  },
+  "completed_stages": [
+    "preflight",
+    "dynamics_inventory",
+    "crossing_audit",
+    "crossing_verify",
+    "fen_design",
+    "fen_analysis",
+    "fen_verify"
+  ],
+  "compute_completed_at_utc": "2026-09-10T03:16:54Z",
+  "last_completed_at_utc": "2026-09-10T03:16:51Z",
+  "resumed_stages": [
+    "dynamics_inventory",
+    "fen_design"
+  ],
+  "sample_authority": {
+    "fair_kind_draws": 419463,
+    "fair_rows": 15207423,
+    "fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "kind_draws": 570091,
+    "literal_immediate_rematches_certified": false,
+    "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "months": 24,
+    "observed_screen_certified": true,
+    "panel_root_machine_specific": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+    "report_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "rows": 41534331,
+    "sample_name": "main_pool_nonadjacent",
+    "sample_status": "POOL_MAIN_SAMPLE_24M_CERTIFIED_OK",
+    "status": "POOL_MAIN_SAMPLE_AUTHENTICATED_OK"
+  },
+  "started_at_utc": "2026-09-10T03:07:24Z",
+  "status": "POOL_MAIN_REANALYSIS_WAVE2A_COMPUTE_OK"
+}

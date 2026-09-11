@@ -1,0 +1,59 @@
+{
+  "authority_constants_changed": [
+    "C7X_STATE_RELATIVE",
+    "EXPECTED_C7X_CLASSIFICATION_ROWS",
+    "EXPECTED_C7X_CLASSIFICATION_SHA256",
+    "EXPECTED_C7X_CONFIG_SHA256",
+    "EXPECTED_C7X_PRIMARY_COEFFICIENT",
+    "EXPECTED_C7X_PRIMARY_STANDARD_ERROR",
+    "EXPECTED_FAIR_ROWS",
+    "EXPECTED_HISTORY_SUCCESS_SHA256",
+    "EXPECTED_PAIR_EVENT_ROWS",
+    "EXPECTED_STAGE07_ROWS",
+    "EXPECTED_STAGE07_SUCCESS_SHA256",
+    "HISTORY_STATE_RELATIVE",
+    "PROJECT_AUTHORITY"
+  ],
+  "created_at_utc": "2026-09-11T03:39:28Z",
+  "estimator_equations_changed": false,
+  "exact_changes": [
+    {
+      "category": "sample_reset_gate_or_label",
+      "label": "current-wave2b1-history-public-run",
+      "new_sha256": "930461f4674da6dd5052d40b998138f204a555a0418efdcb85b12f42785be7b9",
+      "old_sha256": "a1aa3c6a623e4cc1cbaccafa843fbafe22ceeaab280efc0d216bcbaee63f9c44"
+    },
+    {
+      "category": "sample_reset_gate_or_label",
+      "label": "current-c7x-switcher-support",
+      "new_sha256": "ccce92c1d53927c49b0e05848737a78dd7ab7ed5db7444be15cb9b6bf5db4113",
+      "old_sha256": "45d46c20a0758cd35b344b55d0472a6f1dd41e8f1027c1f6729f60763b19d08a"
+    },
+    {
+      "category": "sample_reset_gate_or_label",
+      "label": "parent-c7x-low-support-reproduction",
+      "new_sha256": "1a5bc1242e1c99490df87d94c119704ccfa4f67ca39068d48dbead4ef80ba3cb",
+      "old_sha256": "99f575e0483b2ab1af66cc8f5322d39eb0c9d357f9cf15c1fec04cd5989d279a"
+    },
+    {
+      "category": "sample_reset_gate_or_label",
+      "label": "parent-c7x-low-support-call",
+      "new_sha256": "09c2cc674adfdc78053c1c8a448a1211de24354865b2673c7a5d669771a5e4c5",
+      "old_sha256": "0126b2b155b7f4604680a10429dc0c836af2a2207e0123ffcf1d89bbe494fa98"
+    }
+  ],
+  "function_bodies_changed": true,
+  "generated_bytes": 71392,
+  "generated_path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b2a/execution_packages/c7r_v102_pool_main_support_amended/payload/code/run_campaign1_c7r_closure_v102.py",
+  "generated_sha256": "d54e7e926d381c453d14b565503898d3722fb9e91c0c356c8e83994a666a729b",
+  "only_declared_sample_gates_or_labels_changed": true,
+  "source": {
+    "bytes": 69235,
+    "lineage": "recovered_frozen_producer",
+    "path": "/Users/u6025368/Desktop/Lichess_Desktop/Pool_Main_Sample_Reanalysis_Wave2B2A_v1_0_1/source/c7r/run_campaign1_c7r_closure_v102.py",
+    "repository": null,
+    "repository_head_inspected": null,
+    "sha256": "87caf0cb2c008635f9a8d0db0bd8e67f758fa10d35ae9a8b00058fe84dda1003"
+  },
+  "status": "POOL_MAIN_WAVE2B2A_SOURCE_RETARGET_OK"
+}

@@ -1,0 +1,13 @@
+/bin/bash <<'BASH'
+set -euo pipefail
+task_root="$HOME/Desktop/Lichess_Desktop"
+cd "$task_root"
+/usr/bin/shasum -a 256 -c \
+  Pool_Main_Sample_24M_v1_0_0_20260909.zip.sha256
+task_ready="$(/usr/bin/mktemp -d \
+  "$task_root/pool_main_sample_24m.XXXXXX")"
+/usr/bin/ditto -x -k \
+  Pool_Main_Sample_24M_v1_0_0_20260909.zip "$task_ready"
+/usr/bin/caffeinate -dimsu /bin/bash \
+  "$task_ready/Pool_Main_Sample_24M_v1_0_0/RUN_POOL_MAIN_SAMPLE.command"
+BASH

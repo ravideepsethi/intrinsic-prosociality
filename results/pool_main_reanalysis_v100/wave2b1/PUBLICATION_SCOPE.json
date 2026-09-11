@@ -1,0 +1,38 @@
+{
+  "included_current_after_this_bundle": [
+    "A3 arm-blind all-game 7-day/30-day activity linkage and selected outcome gate",
+    "A1/A3/B1 frozen dynamic core and three-primary Holm family",
+    "A1 post-outcome evidence audits and remaining prespecified A1/A2 analyses",
+    "B2 first-grant timing randomization analysis",
+    "second-wave sampled user and dyad histories",
+    "prespecified second-wave E1/F2 results and four-slot Holm family",
+    "postprimary second-wave robustness grid and independent E1 numerical audit",
+    "C7R full-panel pre-focal first-versus-repeat meeting analysis"
+  ],
+  "intentionally_not_duplicated": [
+    "chooser-leniency IV branch, already launched separately; its requested selection-role decomposition must be checked when branches are merged"
+  ],
+  "manuscript_policy": "Do not paste any Wave 2B1 number into the manuscript until the separate IV branch, Wave 2B2, and Wave 3 are reconciled into the manuscript-wide authority ledger.",
+  "sample_authority": {
+    "fair_kind_draws": 419463,
+    "fair_rows": 15207423,
+    "fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "kind_draws": 570091,
+    "literal_immediate_rematches_certified": false,
+    "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "months": 24,
+    "observed_screen_certified": true,
+    "panel_root_machine_specific": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+    "report_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "rows": 41534331,
+    "sample_name": "main_pool_nonadjacent",
+    "sample_status": "POOL_MAIN_SAMPLE_24M_CERTIFIED_OK",
+    "status": "POOL_MAIN_SAMPLE_AUTHENTICATED_OK"
+  },
+  "status": "POOL_MAIN_WAVE2B1_SCOPE_DECLARED_OK",
+  "still_blocked_after_wave2b1": [
+    "Campaign-1 C1/C6/C7/C9/C12/C13 recovery modules and targeted-memory/ply retrofits (Wave 2B2)",
+    "Patron matching and Patron heterogeneity (Wave 3)",
+    "unified manuscript tables, figures, abstract sample count, and section 5-6 numerical revision (Wave 3)"
+  ]
+}

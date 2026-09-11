@@ -1,0 +1,14 @@
+{
+  "build_environment_private_cache_available": false,
+  "end_to_end_model_run_deferred_to_authority_machine": true,
+  "frozen_common_source_sha256": "f629876216c797180265d1b848a4424f211fe9a43cffa4dabdb3de67acbc5f1c",
+  "offline_unit_tests": {
+    "passed": 2,
+    "status": "PASS"
+  },
+  "package_version": "1.0.0",
+  "python_compile": "PASS",
+  "shell_syntax": "PASS",
+  "status": "POOL_MAIN_WAVE2B2A_C7R_LINEAR_COMBINATION_PACKAGE_VALIDATED",
+  "validation_scope": "Static validation, synthetic estimator/covariance tests, frozen-source authentication, package manifest, and clean ZIP extraction. The authenticated private cache remains on the user's analysis volume."
+}

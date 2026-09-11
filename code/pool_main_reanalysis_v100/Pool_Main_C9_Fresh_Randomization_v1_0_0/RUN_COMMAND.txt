@@ -1,0 +1,9 @@
+/bin/bash <<'BASH'
+set -euo pipefail
+cd "$HOME/Desktop/Lichess_Desktop"
+/usr/bin/shasum -a 256 -c Pool_Main_C9_Fresh_Randomization_v1_0_0.zip.sha256
+/usr/bin/ditto -x -k Pool_Main_C9_Fresh_Randomization_v1_0_0.zip .
+export POOL_MAIN_C9_WORKERS=10
+export POOL_MAIN_C9_MEMORY=12GB
+/bin/bash "$PWD/Pool_Main_C9_Fresh_Randomization_v1_0_0/RUN_C9.command"
+BASH

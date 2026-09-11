@@ -1,0 +1,50 @@
+[
+  {
+    "packaged_path": "source/pool_sample_common_v100.py",
+    "source_path": "build/Pool_Main_Patron_Rebuild_Wave3A_v1_0_0/source/pool_sample_common_v100.py",
+    "sha256": "b0953daa5090d901372f44191f503911eef34913926f2905d3693ece0a01831f",
+    "unmodified": true
+  },
+  {
+    "packaged_path": "source/acquisition_planner_v100.py",
+    "source_path": "build/Pool_Main_Patron_Rebuild_Wave3A_v1_0_0/source/acquisition_planner_v100.py",
+    "sha256": "aaaa70e119456258c2fd351dca5b59e52cfe6924421fe6103211e6e812f730de",
+    "unmodified": true
+  },
+  {
+    "packaged_path": "source/wave3a_design.py",
+    "source_path": "build/Pool_Main_Patron_Rebuild_Wave3A_v1_0_0/runner/run.py",
+    "sha256": "9a3534c64d646e1b91c848f9996987a2ed413318c344d7c339707021ce9513e0",
+    "unmodified": true
+  },
+  {
+    "packaged_path": "source/profile_fetcher_v100.py",
+    "source_path": "inspected_packages/ProfilePatron_Acquisition_v1_0_0_SELF_CONTAINED_v1_20260819/09b_fetch_patron_profile_snapshot.py",
+    "sha256": "549d2d7f2102ed7458173c7e45df02a34d36544fb118989c0cb66c3fdf70a0e9",
+    "unmodified": true
+  },
+  {
+    "packaged_path": "authority/SAMPLE_AUTHORITY.json",
+    "source_path": "build/Pool_Main_Patron_Rebuild_Wave3A_v1_0_0/authority/SAMPLE_AUTHORITY.json",
+    "sha256": "81c34113e7a888629a834a17235a71dcf369a2d590755fd9412ee42151d9b2f3",
+    "unmodified": true
+  },
+  {
+    "packaged_path": "evidence/Pool_Main_Sample_24M_Report.zip",
+    "source_path": "build/Pool_Main_Patron_Rebuild_Wave3A_v1_0_0/evidence/Pool_Main_Sample_24M_Report.zip",
+    "sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "unmodified": true
+  },
+  {
+    "packaged_path": "evidence/Pool_Main_Sample_24M_Report.zip.sha256",
+    "source_path": "build/Pool_Main_Patron_Rebuild_Wave3A_v1_0_0/evidence/Pool_Main_Sample_24M_Report.zip.sha256",
+    "sha256": "d2e6c0953ff2de7cc7235b98d568c884e4fa8067b8aa81d22efe1ac3484d6f59",
+    "unmodified": true
+  },
+  {
+    "packaged_path": "evidence/WAVE3A_RESULTS.zip",
+    "source_path": "upload/POOL_MAIN_PATRON_WAVE3A_RESULTS_20260911T134803Z_f9dfa2718056.zip",
+    "sha256": "f56407f3de5bdd02366df28858e689da5f10a05c657f6c5e2feb71a7e227a592",
+    "unmodified": true
+  }
+]

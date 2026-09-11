@@ -1,0 +1,564 @@
+[
+  {
+    "path": "source_packages/Pool_Main_Sample_Reanalysis_Wave1_v1_0_0.zip",
+    "sha256": "d5c9b1593274b95fa7e60a25aa22f65758dcd35a673b7c3388f7a3cd2b757ff0",
+    "bytes": 220652,
+    "launchers": [
+      "Pool_Main_Sample_Reanalysis_Wave1_v1_0_0/RUN_WAVE1.command"
+    ],
+    "runtime_resume_text": [
+      "Planning range: several hours on an external SSD. Hashing, fixed-effect models, available RAM, and disk spill can move the total substantially. The K/RD producer is the least granular restart point; preserve any stopped folder and rerun with a fresh `--private-base` if that stage stops before its receipt."
+    ],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/Pool_Main_Sample_Reanalysis_Wave1_v1_0_0.zip",
+    "repository_extracted_root": "code/pool_main_reanalysis_v100/Pool_Main_Sample_Reanalysis_Wave1_v1_0_0",
+    "publication_role": "NEW_SAMPLE_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/Pool_Main_Sample_Reanalysis_Wave2A_v1_0_1.zip",
+    "sha256": "6df418e3cac1bf89d66f8a991e91e69b39d9861cb015d065f94b8ff7d1a6fba2",
+    "bytes": 789573,
+    "launchers": [
+      "Pool_Main_Sample_Reanalysis_Wave2A_v1_0_1/RUN_WAVE2A.command"
+    ],
+    "runtime_resume_text": [
+      "Wave 2A can take several hours because it hashes all 24 panel files once, scans 41.5 million rows for dependency counts and FEN frequencies, and fits the adjacent-gap, restricted crossing, and FEN clustered fixed-effect models. It is resumable: preserve both output folders and rerun the same launcher after interruption. If v1.0.0 created valid FEN or inventory outputs at these same roots, v1.0.1 authenticates and reuses them while adding the missing crossing stages."
+    ],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/Pool_Main_Sample_Reanalysis_Wave2A_v1_0_1.zip",
+    "repository_extracted_root": "code/pool_main_reanalysis_v100/Pool_Main_Sample_Reanalysis_Wave2A_v1_0_1",
+    "publication_role": "NEW_SAMPLE_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/Pool_Main_Sample_Reanalysis_Wave2B1_v1_0_2.zip",
+    "sha256": "8c1bda59d34d4e8a355ad9bd7577931e1375a22ed5abbe5d18b81a5115e96fcd",
+    "bytes": 456263,
+    "launchers": [
+      "Pool_Main_Sample_Reanalysis_Wave2B1_v1_0_2/RUN_WAVE2B1.command",
+      "Pool_Main_Sample_Reanalysis_Wave2B1_v1_0_2/RESUME_AFTER_V100_FAIL.command",
+      "Pool_Main_Sample_Reanalysis_Wave2B1_v1_0_2/RESUME_AFTER_V101_FAIL.command"
+    ],
+    "runtime_resume_text": [
+      "## Resume after the reported v1.0.1 failure",
+      "cd \"$HOME/Desktop/Lichess_Desktop\" && /usr/bin/shasum -a 256 -c Pool_Main_Sample_Reanalysis_Wave2B1_v1_0_2.zip.sha256 && /usr/bin/ditto -x -k Pool_Main_Sample_Reanalysis_Wave2B1_v1_0_2.zip . && /bin/chmod 700 Pool_Main_Sample_Reanalysis_Wave2B1_v1_0_2/RESUME_AFTER_V101_FAIL.command Pool_Main_Sample_Reanalysis_Wave2B1_v1_0_2/RUN_WAVE2B1.command && /usr/bin/caffeinate -dimsu /bin/bash Pool_Main_Sample_Reanalysis_Wave2B1_v1_0_2/RESUME_AFTER_V101_FAIL.command",
+      "Expected remaining runtime: **4–8 hours**, most likely about **5–6 hours** on",
+      "recoverable backup and rebuilt (about 15–40 minutes). Nothing is deleted.",
+      "Expected fresh-run runtime: **8–14 hours**; budget an overnight run.",
+      "## Resume behavior",
+      "skip; partial producer checkpoints resume under the isolated Wave 2B1 project",
+      "view. To resume explicitly at a later stage, append `--start-at STAGE`, where",
+      "cd \"$HOME/Desktop/Lichess_Desktop\" && /usr/bin/shasum -a 256 -c Pool_Main_Sample_Reanalysis_Wave2B1_v1_0_2.zip.sha256 && /usr/bin/ditto -x -k Pool_Main_Sample_Reanalysis_Wave2B1_v1_0_2.zip . && /bin/chmod 700 Pool_Main_Sample_Reanalysis_Wave2B1_v1_0_2/RESUME_AFTER_V101_FAIL.command Pool_Main_Sample_Reanalysis_Wave2B1_v1_0_2/RUN_WAVE2B1.command && /usr/bin/caffeinate -dimsu /bin/bash Pool_Main_Sample_Reanalysis_Wave2B1_v1_0_2/RESUME_AFTER_V101_FAIL.command"
+    ],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/Pool_Main_Sample_Reanalysis_Wave2B1_v1_0_2.zip",
+    "repository_extracted_root": "code/pool_main_reanalysis_v100/Pool_Main_Sample_Reanalysis_Wave2B1_v1_0_2",
+    "publication_role": "NEW_SAMPLE_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/Pool_Main_Sample_Reanalysis_Wave2B2A_v1_0_1.zip",
+    "sha256": "552f04be3e18be7630f99f189ee46c07ae685ba411e8daa27e4a66101ff9cde3",
+    "bytes": 196267,
+    "launchers": [
+      "Pool_Main_Sample_Reanalysis_Wave2B2A_v1_0_1/RUN_WAVE2B2A.command"
+    ],
+    "runtime_resume_text": [
+      "## Expected runtime",
+      "Approximately **15–30 minutes when resuming the completed v1.0.0 C7X stage**,",
+      "or **20–40 minutes from a fresh state**, on the configured Mac/XT_Pro setup.",
+      "The stages are checkpointed and safe to resume by rerunning the same command."
+    ],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/Pool_Main_Sample_Reanalysis_Wave2B2A_v1_0_1.zip",
+    "repository_extracted_root": "code/pool_main_reanalysis_v100/Pool_Main_Sample_Reanalysis_Wave2B2A_v1_0_1",
+    "publication_role": "NEW_SAMPLE_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/Pool_Main_Sample_Reanalysis_Wave2B2B1_v1_0_0.zip",
+    "sha256": "e3db09a666aeefa5b071ba9fe7dabb30aacd162070660efc300fd2b21a8efbff",
+    "bytes": 266198,
+    "launchers": [
+      "Pool_Main_Sample_Reanalysis_Wave2B2B1_v1_0_0/RUN_WAVE2B2B1.command"
+    ],
+    "runtime_resume_text": [
+      "that invariant census would add roughly 5–12 hours without changing the index.",
+      "## Runtime and resources",
+      "Expected elapsed time is **35–75 minutes** on the previously used 10-core,",
+      "Expected runtime: 35–75 minutes on the prior 10-core / 12-GB setup."
+    ],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/Pool_Main_Sample_Reanalysis_Wave2B2B1_v1_0_0.zip",
+    "repository_extracted_root": "code/pool_main_reanalysis_v100/Pool_Main_Sample_Reanalysis_Wave2B2B1_v1_0_0",
+    "publication_role": "NEW_SAMPLE_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/Pool_Main_Wave2B2A_C7R_Linear_Combination_v1_0_0.zip",
+    "sha256": "1562c8bf9dd677fda607ca3e28d06a6f570d8c8f91a7c90106d300c8ade70b2d",
+    "bytes": 21223,
+    "launchers": [
+      "Pool_Main_Wave2B2A_C7R_Linear_Combination_v1_0_0/RUN_CLOSURE.command"
+    ],
+    "runtime_resume_text": [
+      "## Expected runtime",
+      "Approximately **2–6 minutes** on the configured Mac/XT_Pro setup. Most of the"
+    ],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/Pool_Main_Wave2B2A_C7R_Linear_Combination_v1_0_0.zip",
+    "repository_extracted_root": "code/pool_main_reanalysis_v100/Pool_Main_Wave2B2A_C7R_Linear_Combination_v1_0_0",
+    "publication_role": "NEW_SAMPLE_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/Pool_Main_C9_Fresh_Randomization_v1_0_0.zip",
+    "sha256": "0ea6a1c49e28e5f8f5f9144edda579ca4fe6379a72de8ab67c9767ba77f6b1b2",
+    "bytes": 232613,
+    "launchers": [
+      "Pool_Main_C9_Fresh_Randomization_v1_0_0/RUN_C9.command"
+    ],
+    "runtime_resume_text": [
+      "whole block in `RUN_COMMAND.txt` into Terminal. Expect **45-120 minutes** on",
+      "`.sha256` sidecar on the Desktop. Upload both. The same command resumes after"
+    ],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/Pool_Main_C9_Fresh_Randomization_v1_0_0.zip",
+    "repository_extracted_root": "code/pool_main_reanalysis_v100/Pool_Main_C9_Fresh_Randomization_v1_0_0",
+    "publication_role": "NEW_SAMPLE_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/Pool_Main_Patron_Rebuild_Wave3A_v1_0_0.zip",
+    "sha256": "575d7b087a6820a77ef57d174b2dc51124e839faacf7d8499f4fe14d07bf6227",
+    "bytes": 139841,
+    "launchers": [
+      "Pool_Main_Patron_Rebuild_Wave3A_v1_0_0/RUN_WAVE3A.command"
+    ],
+    "runtime_resume_text": [
+      "Run `RUN_WAVE3A.command` using the command in `RUN_COMMAND.txt`. Expected elapsed time is **15–40 minutes**, an estimate for the previous 10-core machine, 12-GB DuckDB limit and external SSD. The full panel is only on your computer; this package has been tested on synthetic data, not timed on the full panel.",
+      "Upload the two files printed when the command completes. The existing Wave-1 environment is preferred; dependencies are not installed or changed. Tested here with DuckDB 1.5.5 and PyArrow 25.0.1, matching the versions reported in the preceding successful Mac run. Runtime versions and source hashes are recorded in every checkpoint configuration."
+    ],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/Pool_Main_Patron_Rebuild_Wave3A_v1_0_0.zip",
+    "repository_extracted_root": "code/pool_main_reanalysis_v100/Pool_Main_Patron_Rebuild_Wave3A_v1_0_0",
+    "publication_role": "NEW_SAMPLE_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/Pool_Main_Patron_Gap_Fill_v1_0_0.zip",
+    "sha256": "820bf90337060e078f53d3cb0cf0208708bb8a956b0cfe633b57f6c4fc36280e",
+    "bytes": 164328,
+    "launchers": [
+      "Pool_Main_Patron_Gap_Fill_v1_0_0/RUN_GAP_FILL.command"
+    ],
+    "runtime_resume_text": [
+      "Expected elapsed time is **2-5 minutes**, estimated from the earlier Wave-3A",
+      "resumes after interruption without refreshing accounts already returned. A",
+      "completed run with three successful response rounds is not re-queried on resume.",
+      "- `REQUESTS_INCOMPLETE_RESUME_REQUIRED`: temporary request failures exhausted"
+    ],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/Pool_Main_Patron_Gap_Fill_v1_0_0.zip",
+    "repository_extracted_root": "code/pool_main_reanalysis_v100/Pool_Main_Patron_Gap_Fill_v1_0_0",
+    "publication_role": "NEW_SAMPLE_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/Pool_Main_Patron_Estimation_Wave3B1_v1_0_1.zip",
+    "sha256": "2d2f1093fc787e312558e3081dd9543c335bf92b5568402a4f01ded18306b4f7",
+    "bytes": 208490,
+    "launchers": [
+      "Pool_Main_Patron_Estimation_Wave3B1_v1_0_1/RUN_WAVE3B1.command"
+    ],
+    "runtime_resume_text": [
+      "**Expected runtime: 10–30 minutes**, estimated for the Mac that completed Wave 3A in 65 seconds. This job adds regressions and a second profile cohort; its full-data runtime has not yet been measured. It uses the existing Python environment, at most ten hashing workers, eight DuckDB threads by default, and single-threaded BLAS. No dependency changes or API calls are made.",
+      "Both the cache and individual model results are checkpointed. Interrupted models restart; completed models are authenticated and reused. Covariance matrices are retained so resumed contrasts use their off-diagonal terms. All private Parquets stay on your machine. Only aggregate coefficients, support tables, bounds and receipts enter the return ZIP."
+    ],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/Pool_Main_Patron_Estimation_Wave3B1_v1_0_1.zip",
+    "repository_extracted_root": "code/pool_main_reanalysis_v100/Pool_Main_Patron_Estimation_Wave3B1_v1_0_1",
+    "publication_role": "NEW_SAMPLE_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/Pool_Main_Patron_Remaining_Wave3B2_v1_0_1.zip",
+    "sha256": "4c77fc361ee51e569628c18d813dd4148d8e325b51ad8e9684bc631e1769cc95",
+    "bytes": 408912,
+    "launchers": [
+      "Pool_Main_Patron_Remaining_Wave3B2_v1_0_1/RUN_WAVE3B2.command"
+    ],
+    "runtime_resume_text": [
+      "in place. Subsequent runs of v1.0.1 resume its own completed checkpoints.",
+      "Expected elapsed compute: **1–3 hours**, excluding any wait for C9. This is a",
+      "resume completed fits. Successful runs are authenticated and reused."
+    ],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/Pool_Main_Patron_Remaining_Wave3B2_v1_0_1.zip",
+    "repository_extracted_root": "code/pool_main_reanalysis_v100/Pool_Main_Patron_Remaining_Wave3B2_v1_0_1",
+    "publication_role": "NEW_SAMPLE_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/Pool_Main_C9_Ply_Sensitivity_v1_0_0.zip",
+    "sha256": "b9b3b7b33a4d6c9910456165dac16cc0edfc81fd98ba62b80582a28b4e7efe73",
+    "bytes": 270293,
+    "launchers": [
+      "Pool_Main_C9_Ply_Sensitivity_v1_0_0/RUN_C9_PLY.command"
+    ],
+    "runtime_resume_text": [
+      "Expected compute: **5–20 minutes**, excluding any C9/Patron queue time."
+    ],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/Pool_Main_C9_Ply_Sensitivity_v1_0_0.zip",
+    "repository_extracted_root": "code/pool_main_reanalysis_v100/Pool_Main_C9_Ply_Sensitivity_v1_0_0",
+    "publication_role": "NEW_SAMPLE_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/Pool_Main_C13_FamilyD_v1_0_0.zip",
+    "sha256": "baecb00899f178f1ecd9251c8656c62ebd4f330052b64635b31f18eb597722f4",
+    "bytes": 404113,
+    "launchers": [
+      "Pool_Main_C13_FamilyD_v1_0_0/RUN_C13_FAMILYD.command"
+    ],
+    "runtime_resume_text": [
+      "**Expected runtime: 4–8 hours for C13**, excluding any wait for an active",
+      "C9, C9-ply or Patron job. The historical C13 run took about 4.7 hours.",
+      "and any `PARTIAL` archive. Repeat the same command to resume.",
+      "expected runtime is under one minute. This mode does not start C13."
+    ],
+    "status": "Prepared; no completed C13 result returned",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/Pool_Main_C13_FamilyD_v1_0_0.zip",
+    "repository_extracted_root": "code/pool_main_reanalysis_v100/Pool_Main_C13_FamilyD_v1_0_0",
+    "publication_role": "PREPARED_NOT_RETURNED",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/Chooser_IV_Main_Rebuild_v1_0_0.zip",
+    "sha256": "026064f545edce71f11d01e456749c92f267f43b841d95a683f6ce882bcc2850",
+    "bytes": 601860,
+    "launchers": [
+      "Chooser_IV_Main_Rebuild_v1_0_0/RUN_IV_MAIN.command"
+    ],
+    "runtime_resume_text": [
+      "Run the same command to resume. Completed stages and files are checked and reused.",
+      "input signatures for change detection and resume. It does not claim full-byte"
+    ],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/Chooser_IV_Main_Rebuild_v1_0_0.zip",
+    "repository_extracted_root": "code/pool_main_reanalysis_v100/Chooser_IV_Main_Rebuild_v1_0_0",
+    "publication_role": "NEW_SAMPLE_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/Chooser_IV_Selection_Addendum_v1_0_1_1_.zip",
+    "sha256": "9e6d7dbc1cf4d69e36e797245d1ee7932b8d0e6c0f97e5403e8e4a05ea2e1caa",
+    "bytes": 15299,
+    "launchers": [
+      "Chooser_IV_Selection_Addendum_v1_0_1/RUN_ADDENDUM.command"
+    ],
+    "runtime_resume_text": [
+      "Expected runtime: **1–3 minutes** on the same work laptop; the reported v1.0.0"
+    ],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/Chooser_IV_Selection_Addendum_v1_0_1_1_.zip",
+    "repository_extracted_root": "code/pool_main_reanalysis_v100/Chooser_IV_Selection_Addendum_v1_0_1",
+    "publication_role": "NEW_SAMPLE_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/Dynamics_Paper2_Campaign1_C9_IGNITION_TRANSFER_PRODUCTION_v1_0_0_r1_20260825.zip",
+    "sha256": "a2c2048d5329fc883ead00147ed2a00bb00b1380dfad7a5db50da44a0be0e5ba",
+    "bytes": 18678,
+    "launchers": [
+      "Dynamics_Paper2_Campaign1_C9_IGNITION_TRANSFER_PRODUCTION_v1_0_0_r1_20260825/RUN_CAMPAIGN1_C9_IGNITION_TRANSFER_v1_0_0.command"
+    ],
+    "runtime_resume_text": [],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/Dynamics_Paper2_Campaign1_C9_IGNITION_TRANSFER_PRODUCTION_v1_0_0_r1_20260825.zip",
+    "repository_extracted_root": null,
+    "publication_role": "SUPPORTING_OR_HISTORICAL_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/Kindness_Reference_Demand_Closure_v1_0_5_20260827.zip",
+    "sha256": "4a51e031ee0450acf0746d2ed79158f3d7ce955637f70af5a2ee3f7d2e8b9210",
+    "bytes": 410820,
+    "launchers": [
+      "Kindness_Reference_Demand_Closure_v1_0_5_20260827/frozen_authorities/v104/executed_package_source/RUN_KINDNESS_REFERENCE_DEMAND_CLOSURE_V104.command",
+      "Kindness_Reference_Demand_Closure_v1_0_5_20260827/RUN_KINDNESS_REFERENCE_DEMAND_CLOSURE_V105.command"
+    ],
+    "runtime_resume_text": [
+      "Expected production runtime is approximately 60-150 minutes, most likely",
+      "75-110 minutes. Rerunning the exact launcher resumes authenticated model"
+    ],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/Kindness_Reference_Demand_Closure_v1_0_5_20260827.zip",
+    "repository_extracted_root": null,
+    "publication_role": "SUPPORTING_OR_HISTORICAL_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/Chooser_Leniency_Full_Comparison_Home_v1_0_0.zip",
+    "sha256": "1d381baca94a3cfc0dfe08bc188acd1141b772a28c7529cfc2bb1c532a309869",
+    "bytes": 732037,
+    "launchers": [
+      "Chooser_Leniency_Full_Comparison_Home_v1_0_0/IMPORT_RETURN.command",
+      "Chooser_Leniency_Full_Comparison_Home_v1_0_0/PACK_RETURN.command",
+      "Chooser_Leniency_Full_Comparison_Home_v1_0_0/PREPARE_TRANSFER.command",
+      "Chooser_Leniency_Full_Comparison_Home_v1_0_0/RUN_HOME.command",
+      "Chooser_Leniency_Full_Comparison_Home_v1_0_0/SETUP_HOME_PYTHON.command",
+      "Chooser_Leniency_Full_Comparison_Home_v1_0_0/launch.command"
+    ],
+    "runtime_resume_text": [
+      "Preparation estimate: **5–20 minutes**, depending on external-drive speed and other jobs. Up to six local metadata workers; one numerical-library thread per worker. Allow roughly 6–8 GiB memory and at least 4 GiB free on the project drive plus 2 GiB on the Desktop drive. These are planning budgets, not measured benchmarks or OS limits. An input transfer should be on the order of tens to hundreds of MB; the script prints the actual output path and checksum.",
+      "**Download estimate:** roughly **12–30 hours** for 1.765 million IDs. At 30 games/second the estimate is 16.3 hours. Throttling, outages, validation, or a slow connection can extend this. Allow at least **8 GiB free** in the extracted package's drive, including space to create the return ZIP. No external XT_Pro drive is needed at home.",
+      "## API behavior and resume",
+      "- To stop, use Control-C. To resume, run the **same `RUN_HOME.command` in the same extracted folder**. Completed batches are hash-verified and not refetched. Do not extract a fresh copy to resume.",
+      "1. `CHOOSER_COMPARISON_HOME_RETURN_..._PRIVATE.zip` and sidecar: **transfer back to the data Mac**, not to chat. It contains the full inputs and completed raw/Parquet batches. Estimated packaging time 5–20 minutes, depending on disk speed and result size.",
+      "Rerunning import of the same archive verifies and reuses that directory. It never overwrites the certified validity run, Stage07 panel, A1, or IV pilot. Import estimate: 5–20 minutes. The downloaded metadata still needs to be reconciled with the original caches and attached to the analysis frame before estimating the ordinary-game placebo and active-resolution selection models.",
+      "The launcher requires all offline tests, including actual Parquet I/O, to pass before opening production inputs. Tests cover preparation and cache reuse, exact-case IDs, reordered ledgers, preserved orientation, corrupted manifests, partial responses, duplicate/unrequested returns, 429 handling, crash/resume, retrying only nonreturns, full-denominator reporting, archive traversal rejection, and private-return/import round trips.",
+      "A failed preparation preserves its partial output and can be rerun into a fresh transfer directory. Preparation is short and is not checkpoint-resumed. Home downloading is checkpoint-resumed. If metadata flags or nonreturns remain after three passes, send the aggregate report so a targeted repair can be scoped. Do not reset the run to refetch all games."
+    ],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/Chooser_Leniency_Full_Comparison_Home_v1_0_0.zip",
+    "repository_extracted_root": null,
+    "publication_role": "SUPPORTING_OR_HISTORICAL_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/Lichess_Paperwide_Repeat_Dyad_Audit_v1_0_1_20260904.zip",
+    "sha256": "7deff1900ce07b0216c2dca0358c83d55e8b0f128488a542b91e14e465caf2b6",
+    "bytes": 28635,
+    "launchers": [
+      "Lichess_Paperwide_Repeat_Dyad_Audit_v1_0_1_20260904/RUN_PAPERWIDE_REPEAT_DYAD_AUDIT.command"
+    ],
+    "runtime_resume_text": [
+      "Expected first-run runtime: **2–6 hours**. A plausible hardware/spill range is",
+      "**1–10 hours**. If the C9 checkpoints must do unusually heavy SSD spilling, allow",
+      "up to roughly 12 hours. A resumed run with the joined panel and randomization",
+      "checkpoints already complete is typically **30–120 minutes**. After the specific",
+      "v1.0.0 Patron-stage stop corrected by v1.0.1, expected remaining runtime is",
+      "**1–5 hours**, most likely **2–4 hours**, because the joined Stage 07 Parquet and"
+    ],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/Lichess_Paperwide_Repeat_Dyad_Audit_v1_0_1_20260904.zip",
+    "repository_extracted_root": null,
+    "publication_role": "SUPPORTING_OR_HISTORICAL_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/Controlled_Reference_Price_Figure_Runner_v1_1_1.zip",
+    "sha256": "0812f5d361a48fbec79823812d894df01673bc0a999f6d05f2b14da494b961ef",
+    "bytes": 41017,
+    "launchers": [
+      "Controlled_Reference_Price_Figure_Runner_v1_1_1/RUN_CONTROLLED_REFERENCE_PRICE_FIGURE.command"
+    ],
+    "runtime_resume_text": [
+      "**Expected Mac runtime: approximately 1–5 minutes.** Default: 8 threads;",
+      "maximum: 10. This is an estimate based on the completed v1.1.0 runtime; the"
+    ],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/Controlled_Reference_Price_Figure_Runner_v1_1_1.zip",
+    "repository_extracted_root": null,
+    "publication_role": "SUPPORTING_OR_HISTORICAL_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/Kindness_Equality_FEN_Audit_v1_0_1_20260827.zip",
+    "sha256": "18b658a4425c9151f4514afab28006bdb5c59760edc534319ed9f0966d0e50c6",
+    "bytes": 54543,
+    "launchers": [
+      "Kindness_Equality_FEN_Audit_v1_0_1_20260827/RUN_KINDNESS_EQUALITY_FEN_AUDIT.command"
+    ],
+    "runtime_resume_text": [
+      "## Runtime and resumption",
+      "Expected runtime is approximately 30–90 minutes, most likely 45–70 minutes on",
+      "Rerunning the same launcher resumes the latest incomplete authenticated run."
+    ],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/Kindness_Equality_FEN_Audit_v1_0_1_20260827.zip",
+    "repository_extracted_root": null,
+    "publication_role": "SUPPORTING_OR_HISTORICAL_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/Figure_Source_Recovery_v1_0_2_20260903.zip",
+    "sha256": "0a12165845e80a49ae5e2bd0d30e200a84691a69206c0a0a44134ceed8686195",
+    "bytes": 28186,
+    "launchers": [
+      "Figure_Source_Recovery_v1_0_2_20260903/RUN_FIGURE_SOURCE_RECOVERY.command"
+    ],
+    "runtime_resume_text": [
+      "Expected runtime: **2–6 minutes; most likely 3–4 minutes**."
+    ],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/Figure_Source_Recovery_v1_0_2_20260903.zip",
+    "repository_extracted_root": null,
+    "publication_role": "SUPPORTING_OR_HISTORICAL_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/RatingGap_KRD_Decomposition_v1_0_0.zip",
+    "sha256": "f807198ae2762d28768137c224aee01513abd4f06b47671ac509561744df664a",
+    "bytes": 12905,
+    "launchers": [
+      "RatingGap_KRD_Decomposition_v1_0_0/RUN_RATING_GAP_KRD_DECOMPOSITION.command"
+    ],
+    "runtime_resume_text": [],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/RatingGap_KRD_Decomposition_v1_0_0.zip",
+    "repository_extracted_root": null,
+    "publication_role": "SUPPORTING_OR_HISTORICAL_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/PatronStage10_Inventory_v1_0_0_20260827.zip",
+    "sha256": "5564edf7429f2442fe38573c5a4b50285a8e4abc2aa9fb7f26d4e0c37dabb3ce",
+    "bytes": 43695,
+    "launchers": [
+      "RUN_PATRON_STAGE10_INVENTORY.command"
+    ],
+    "runtime_resume_text": [
+      "Expected runtime on XT_Pro: 2-10 minutes. Hashing the 437 MB snapshot is the",
+      "largest fixed task; filesystem discovery may add several minutes."
+    ],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/PatronStage10_Inventory_v1_0_0_20260827.zip",
+    "repository_extracted_root": null,
+    "publication_role": "SUPPORTING_OR_HISTORICAL_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/RatingGap_Nonparametric_Closure_v1_1_0.zip",
+    "sha256": "bc5784838e03b22424c47f11c9f6ac9064a682293156cce3dcb03a590e5c5b55",
+    "bytes": 16184,
+    "launchers": [
+      "RatingGap_Nonparametric_Closure_v1_1_0/RUN_RATING_GAP_NONPARAMETRIC_CLOSURE.command"
+    ],
+    "runtime_resume_text": [
+      "### Resume",
+      "## Expected runtime",
+      "Roughly 45-180 minutes, most likely 75-120 minutes. Actual worker count is"
+    ],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/RatingGap_Nonparametric_Closure_v1_1_0.zip",
+    "repository_extracted_root": null,
+    "publication_role": "SUPPORTING_OR_HISTORICAL_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/LICHESS_FIGURE_SOURCE_RECOVERY_20260903T015436Z.zip",
+    "sha256": "168456e99ae5b4b2ba03de7f22eb2b54659b57bf6d66143697464069ef93e0d3",
+    "bytes": 2920652,
+    "launchers": [],
+    "runtime_resume_text": [],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/LICHESS_FIGURE_SOURCE_RECOVERY_20260903T015436Z.zip",
+    "repository_extracted_root": null,
+    "publication_role": "SUPPORTING_OR_HISTORICAL_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/Dynamic_Prosociality_A3_CHRONOLOGY_GATE_v1_0_0_20260821.zip",
+    "sha256": "7206600a6f0a6f4293330dea8fbda3eee84b4b6ddf0666eeb789dba104f51cc9",
+    "bytes": 31966,
+    "launchers": [
+      "RUN_A3_CHRONOLOGY_GATE_V100.command"
+    ],
+    "runtime_resume_text": [],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/Dynamic_Prosociality_A3_CHRONOLOGY_GATE_v1_0_0_20260821.zip",
+    "repository_extracted_root": null,
+    "publication_role": "SUPPORTING_OR_HISTORICAL_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/ProfilePatron_Acquisition_v1_0_0_SELF_CONTAINED_v1_20260819.zip",
+    "sha256": "aa2c9771f690b7a9141a2f4e3208eb865d6e7ac73544cfee3d99b2a0236456c4",
+    "bytes": 46486,
+    "launchers": [
+      "RUN_PROFILE_ACQUISITION_PREPARE_V100.command",
+      "RUN_PROFILE_ACQUISITION_FETCH_V100.command",
+      "RUN_PROFILE_ACQUISITION_FINAL_AUDIT_V100.command"
+    ],
+    "runtime_resume_text": [],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/ProfilePatron_Acquisition_v1_0_0_SELF_CONTAINED_v1_20260819.zip",
+    "repository_extracted_root": null,
+    "publication_role": "SUPPORTING_OR_HISTORICAL_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/Pool_Main_Sample_24M_v1_0_0_20260909.zip",
+    "sha256": "2c85371b01bb52330494f05dc3303f935900ac1a3404b5a24e4d0993cda46d12",
+    "bytes": 600721,
+    "launchers": [
+      "Pool_Main_Sample_24M_v1_0_0/RUN_POOL_MAIN_SAMPLE.command"
+    ],
+    "runtime_resume_text": [
+      "## Runtime and restart",
+      "Planning estimate: 30–120 minutes on an external SSD, with substantial uncertainty",
+      "Mac. The runner reports elapsed progress every 30 seconds during long stages.",
+      "Rerun the same terminal command to resume. Completed eligibility and monthly stages"
+    ],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/Pool_Main_Sample_24M_v1_0_0_20260909.zip",
+    "repository_extracted_root": "code/pool_main_reanalysis_v100/Pool_Main_Sample_24M_v1_0_0",
+    "publication_role": "NEW_SAMPLE_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/Controlled_Payoff_Figure_Runner_v1_0_1.zip",
+    "sha256": "9d490e484e34262118901bfba6af775178be616e85c95f397c02d1dc387e475c",
+    "bytes": 24280,
+    "launchers": [
+      "Controlled_Payoff_Figure_Runner_v1_0_1/RUN_CONTROLLED_PAYOFF_FIGURE.command"
+    ],
+    "runtime_resume_text": [
+      "## Expected runtime",
+      "Approximately **20-60 minutes** on the MacBook using eight threads. Allow"
+    ],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/Controlled_Payoff_Figure_Runner_v1_0_1.zip",
+    "repository_extracted_root": null,
+    "publication_role": "SUPPORTING_OR_HISTORICAL_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/Chooser_Leniency_Preliminary_Placebo_v1_0_0_20260906.zip",
+    "sha256": "1c8f10fd2e7daa480f1ae27147769f772c1abc06c7b431c5388ef182bdb80340",
+    "bytes": 756211,
+    "launchers": [
+      "Chooser_Leniency_Preliminary_Placebo_v1_0_0_20260906/RUN_PRELIMINARY.command"
+    ],
+    "runtime_resume_text": [
+      "## Run, resources, and resume",
+      "Planning estimate: **5–15 minutes** for cached-metadata/status auditing and independent pilot preparation; **15–40 minutes** if the optional identity/history/placebo stage has sufficient normal-game support. These are planning estimates, not measured benchmarks. Storage and simultaneous jobs can increase runtime.",
+      "Resume with the same package and settings by setting `PRELIM_RESUME_ID` to the printed run ID before running `RUN_PRELIMINARY.command` again. A changed code version or configuration requires a new run. `PRELIM_PYTHON`, `PRELIM_PROJECT_ROOT`, and `PRELIM_DESKTOP_ROOT` are explicit optional path overrides."
+    ],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/Chooser_Leniency_Preliminary_Placebo_v1_0_0_20260906.zip",
+    "repository_extracted_root": null,
+    "publication_role": "SUPPORTING_OR_HISTORICAL_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  },
+  {
+    "path": "source_packages/Immediate_Rematch_Recovery_v1_0_1.zip",
+    "sha256": "b296f24a1aebc452fdf0a29b3292225ce45a8968ab40997adde298a266e02d87",
+    "bytes": 25727,
+    "launchers": [
+      "Immediate_Rematch_Recovery_v1_0_1/RUN_RECOVERY.command"
+    ],
+    "runtime_resume_text": [
+      "**Planning estimate: 2–6 hours**, possibly longer with cold/busy external storage, heavy data skew or repeated validation after interruption. This is not a benchmark of the user's Mac or the full dataset. The program prints measured partition throughput and phase-specific remaining-time estimates."
+    ],
+    "status": "Historical or completed source lineage; use specific report authority",
+    "repository_archive": "operations/pool_main_reanalysis_v100/source_packages/Immediate_Rematch_Recovery_v1_0_1.zip",
+    "repository_extracted_root": null,
+    "publication_role": "SUPPORTING_OR_HISTORICAL_SOURCE_LINEAGE",
+    "original_contents_unchanged": true
+  }
+]

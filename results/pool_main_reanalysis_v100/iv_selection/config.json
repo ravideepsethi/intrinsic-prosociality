@@ -1,0 +1,18 @@
+{
+  "candidate_definition": "active_timeout OR passive_outoftime",
+  "families": [
+    "candidate_incidence",
+    "active_given_candidate"
+  ],
+  "package_manifest_sha256": "3658eb9cef917c4fdf1332c13697fb851540ced9972a1d654dd931c52cd0fe17",
+  "posthoc_selection_diagnostic": true,
+  "primary_specification": "adjusted_7d_floor5",
+  "source_IV_config_sha256": "ccbc4331487512b8b7ce41b620a8699ed056f6961a25b49c65ad52c2c0da013c",
+  "source_comparison_sha256": "8bc92d15b9a63e4cc1191ab8342aedd918a36bd341d9a8ddc427e93bb9f156ae",
+  "version": "1.0.1",
+  "versions": {
+    "numpy": "2.3.5",
+    "pyarrow": "21.0.0",
+    "python": "3.13.9"
+  }
+}

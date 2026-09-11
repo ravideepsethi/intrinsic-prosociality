@@ -1,0 +1,26 @@
+{
+  "branch_authorized": true,
+  "causal_claim": false,
+  "duplicate_source_order_excess_rows": 0,
+  "duplicate_source_order_groups": 0,
+  "epistemic_label": "X",
+  "focal_kind_outcome_read": false,
+  "game_id_direction": "ascending; latest prior is lexicographic maximum",
+  "groups_with_repeated_game_ids": 0,
+  "maximum_duplicate_group_rows": 0,
+  "mixed_mercy_claim_groups": 0,
+  "null_total_order_fields": 0,
+  "prior_rows": 41513364,
+  "rows_in_duplicate_source_order_groups": 0,
+  "script_version": "1.0.1",
+  "selected_recovery_branch": "UTC_ARCHIVE_UNIQUE_GAME_ID_TIEBREAK_DORMANT",
+  "status": "C7X_DUPLICATE_ORDER_DIAGNOSTIC_COMPLETE",
+  "tie_dependent_sensitivity": "exclude focal rows sharing the source key with an eligible prior or whose selected prior belongs to a duplicate source-key group",
+  "total_order_rule": [
+    "utc_ms",
+    "archive_ordinal",
+    "game_id"
+  ],
+  "unique_prior_game_ids": 41513364,
+  "v100_failure_reproduced_as_source_order_collisions": false
+}

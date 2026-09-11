@@ -1,0 +1,18 @@
+{
+  "analysis": "F2_personal_peak_offset_specificity",
+  "comparator_offsets": [
+    -50,
+    -37,
+    -25
+  ],
+  "comparator_rule": "nonzero offsets with primary rows between 0.5x and 2.0x zero-offset rows",
+  "epistemic_status": "exploratory",
+  "p_value_two_sided": 5.545490546223863e-06,
+  "standard_error": 0.0023519446915295297,
+  "standard_error_percentage_points": 0.23519446915295297,
+  "true_coefficient": 0.009928833730499565,
+  "true_minus_comparator_average": 0.010684923572630357,
+  "true_minus_comparator_average_percentage_points": 1.0684923572630356,
+  "true_offset": 0,
+  "z_value": 4.543016513573573
+}

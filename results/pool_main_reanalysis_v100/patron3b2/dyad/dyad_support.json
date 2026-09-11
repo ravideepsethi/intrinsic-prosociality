@@ -1,0 +1,22 @@
+{
+  "all": {
+    "eligible_kind_users_before_support": 212859,
+    "matched_control_users": 638577,
+    "matched_kind_users": 212859
+  },
+  "pair_lt3_24m": {
+    "eligible_kind_users_before_support": 211170,
+    "matched_control_users": 633510,
+    "matched_kind_users": 211170
+  },
+  "pair_lt5_24m": {
+    "eligible_kind_users_before_support": 212470,
+    "matched_control_users": 637410,
+    "matched_kind_users": 212470
+  },
+  "singleton_24m": {
+    "eligible_kind_users_before_support": 205558,
+    "matched_control_users": 616668,
+    "matched_kind_users": 205556
+  }
+}

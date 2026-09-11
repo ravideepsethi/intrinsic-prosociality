@@ -1,0 +1,15 @@
+{
+  "bin_partition_mismatch": 0,
+  "coverage": {
+    "bad_outcomes": 0,
+    "never_queried": 122,
+    "nonreturned": 163,
+    "patrons": 4194,
+    "returned": 1105634,
+    "targets": 1105919
+  },
+  "design": {
+    "mismatches": 0,
+    "rows": 1105919
+  }
+}

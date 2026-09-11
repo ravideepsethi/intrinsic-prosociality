@@ -1,0 +1,84 @@
+{
+  "C13_estimator_equations_changed": false,
+  "bash_syntax": "PASS",
+  "built_utc": "2026-09-11T18:26:32.827305+00:00",
+  "code_inventory": [
+    {
+      "path": "runner/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runner/bind.py",
+      "sha256": "8279d00befdcf36c6744d2c656ce2d5235ab6bbc33977397577c4862bc440299"
+    },
+    {
+      "path": "runner/common.py",
+      "sha256": "6f15ecde7be2c89cc724622af0ae5798220c98f87ca4bcd1a5e8e957bce85c9c"
+    },
+    {
+      "path": "runner/family_d.py",
+      "sha256": "03f7225592c63f654e8ecec5d1eba534f7987d52831f3c61d167951b39cc69eb"
+    },
+    {
+      "path": "runner/models.py",
+      "sha256": "c4c216fe02ba6f183c36978b92fed01a4589ea1f1d93eac41ca6110c35808fbf"
+    },
+    {
+      "path": "runner/pipeline.py",
+      "sha256": "122bb9b64934e3dbfe9275125fe4a9f1ea0c51ac8facdd17f24e6ebba18869fb"
+    },
+    {
+      "path": "runner/run.py",
+      "sha256": "910b71b63bd1560c1af3aa0b3efe9cad5a0a51809c865c71b549292b6590b12e"
+    },
+    {
+      "path": "runner/test_package.py",
+      "sha256": "ff96aefd3068c64d347e433da17d5956e8e841ac9e1dec5188ab75800018ff3c"
+    },
+    {
+      "path": "source/campaign1_c13_v104.py",
+      "sha256": "2b8e19fe130c5387ea9097eb011332918ef4761ea67afd7df30f91e2f69c535d"
+    },
+    {
+      "path": "source/campaign1_nonprofile_common_v102.py",
+      "sha256": "f629876216c797180265d1b848a4424f211fe9a43cffa4dabdb3de67acbc5f1c"
+    }
+  ],
+  "coverage": [
+    "original-source self tests and function-body comparison",
+    "all seven lagged exposure definitions against an independent leave-chooser-out oracle",
+    "all 19 C13 model results equal the frozen producer on the synthetic panel",
+    "support freeze precedes numerator construction",
+    "checkpoint reuse without refitting, integrity checks, and preservation of incomplete pairs",
+    "two real completed report archives and exact five-slot family-D membership",
+    "Holm step-down arithmetic, ties, monotonicity bounds over possible missing p-values",
+    "shared compute queue and duplicate C13 rejection",
+    "aggregate-only public result sealing"
+  ],
+  "final_exact_family_D_complete": false,
+  "missing_new_sample_family_members": [
+    "C1",
+    "C2",
+    "C5"
+  ],
+  "private_main_sample_estimated_during_build": false,
+  "runtime_estimate": {
+    "C13_hours": [
+      4,
+      8
+    ],
+    "aggregate_Holm_minutes_less_than": 1,
+    "historical_C13_seconds": 16763.85616326332,
+    "planning_estimate_not_private_benchmark": true
+  },
+  "status": "PACKAGE_BUILD_VALIDATED",
+  "syntax_checked_python_files": 10,
+  "tests": {
+    "command": "python -B -m unittest -v runner.test_package",
+    "elapsed_seconds": 3.333,
+    "errors": 0,
+    "failed": 0,
+    "passed": 7
+  },
+  "version": "C13-FAMILY-D-1.0.0"
+}

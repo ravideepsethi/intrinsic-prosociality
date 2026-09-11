@@ -1,0 +1,37 @@
+{
+  "status": "POOL_MAIN_REANALYSIS_WAVE1_PACKAGE_VALIDATION_OK",
+  "validated_at_utc": "2026-09-09T20:49:49Z",
+  "production_panel_run_performed": false,
+  "production_run_location": "User Mac with /Volumes/XT_Pro mounted",
+  "checks": {
+    "python_syntax": {
+      "status": "PASS",
+      "files_parsed": 19
+    },
+    "bash_syntax": "PASS",
+    "report_outer_sha256": "PASS",
+    "report_internal_manifest": "PASS",
+    "report_authority_fields": "PASS",
+    "sample_fingerprint": {
+      "status": "PASS",
+      "sha256": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30"
+    },
+    "frozen_source_checksums": "PASS",
+    "stage08_numerical_self_test": "PASS",
+    "stage09_numerical_self_test": "PASS",
+    "nonparametric_estimator_self_test": "PASS",
+    "controlled_v110_complete_synthetic_run": "PASS",
+    "controlled_v111_synthetic_refit_and_render": "PASS",
+    "package_privacy_scan": "PASS",
+    "all_cli_help_paths": "PASS"
+  },
+  "test_runtime_versions": {
+    "python": "3.12.14",
+    "duckdb": "1.5.5",
+    "numpy": "2.5.3",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1",
+    "matplotlib": "3.11.1"
+  },
+  "scope_note": "Release validation covers package integrity and offline deterministic/synthetic tests. The attached report contains no 41.5-million-row panel, so production estimates are not asserted here."
+}

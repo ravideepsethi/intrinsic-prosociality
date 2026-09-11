@@ -1,0 +1,51 @@
+{
+  "adjusted_bump": {
+    "detected_under_frozen_rule": false,
+    "estimate_pp": -0.016130329097723994,
+    "meaning": "chooser/month/speed FE modern analogue with win-premium and clock controls",
+    "se_pp": 0.00924919441592643,
+    "t": -1.7439712446684827
+  },
+  "created_at_utc": "2026-09-10T03:16:49Z",
+  "engine_zero_placebo_uniqueness": {
+    "derivative_change_right_plus_left_distance": {
+      "descriptively_unique_under_frozen_rule": false,
+      "nonzero_placebo_rejections": 3,
+      "zero_holm_p": 2.6136203616416966e-144
+    },
+    "strict_positive_level_shift_pp": {
+      "descriptively_unique_under_frozen_rule": false,
+      "nonzero_placebo_rejections": 2,
+      "zero_holm_p": 2.7852037416467676e-30
+    }
+  },
+  "literal_immediate_rematches_certified": false,
+  "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+  "observed_screen_certified": true,
+  "position_commonness_causal_explanation_claim_generated": false,
+  "rating_payoff_zero_next": "completed in pool-main Wave 1 controlled-reference module",
+  "raw_bump": {
+    "estimate_pp": 0.21412581805139297,
+    "meaning": "raw roughly-equal minus disconnected-better association",
+    "present": true,
+    "se_pp": 0.010961678911691948,
+    "t": 19.534034866046117
+  },
+  "report_bytes": 114891,
+  "report_files": 20,
+  "report_manifest_sha256": "c3d7deb88691591eb1c0d1ed9c14b2e69ce77f39fd105d0c9008c07130baa5df",
+  "sample_fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+  "short_game_concentration": {
+    "detected_under_frozen_rule": true,
+    "interaction_pp": 0.6641741767931393,
+    "meaning": "descriptive equality-by-ply<=10 heterogeneity; not mechanism",
+    "se_pp": 0.03135087190405548,
+    "t": 21.185189963001417
+  },
+  "short_rows": 4137265,
+  "stage07_kind_draws": 570091,
+  "stage07_rows": 41534331,
+  "status": "POOL_MAIN_EQUALITY_FEN_AUDIT_V200_OK",
+  "synthetic": false,
+  "verification_status": "POOL_MAIN_EQUALITY_FEN_AUDIT_INDEPENDENTLY_VERIFIED_OK"
+}

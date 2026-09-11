@@ -1,0 +1,17 @@
+{
+  "drop_other_games_of_players": false,
+  "focal_opportunities_only": true,
+  "frozen_available_profile_rule": "match first using all target accounts, then use returned outcomes; no focal-return group gate in this distinct appendix",
+  "interpretation": "descriptive sensitivity, not pre-focal reputation identification",
+  "matching": "fresh deterministic 1:3 within the frozen new-main target pool; kind role additionally requires a retained fair kind draw",
+  "not_the_main_1to3_estimate": true,
+  "pair_frequency": "all standard-rated games in the whole 24-month census; includes post-focal games",
+  "profile_outcome": "August only; nonreturns and never-queried targets remain missing",
+  "restrictions": [
+    "all",
+    "singleton_24m",
+    "pair_lt3_24m",
+    "pair_lt5_24m"
+  ],
+  "status": "FROZEN_DYAD_APPENDIX_REBUILT"
+}

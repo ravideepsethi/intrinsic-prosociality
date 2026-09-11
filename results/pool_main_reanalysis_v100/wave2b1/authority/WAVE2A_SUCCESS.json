@@ -1,0 +1,57 @@
+{
+  "completed_modules": {
+    "crossing_default_audit": "POOL_MAIN_CROSSING_DEFAULT_DECOMPOSITION_V101_OK",
+    "crossing_default_verification": "POOL_MAIN_CROSSING_DEFAULT_DECOMPOSITION_V101_VERIFIED_OK",
+    "dynamics_rebuild_inventory": "POOL_MAIN_WAVE2B_PREFLIGHT_READY",
+    "equality_fen": "POOL_MAIN_EQUALITY_FEN_AUDIT_V200_OK"
+  },
+  "created_at_utc": "2026-09-10T03:16:57Z",
+  "crossing_public_privacy": {
+    "csv_files_scanned": 6,
+    "forbidden_identifier_columns": [
+      "chooser_user_id",
+      "chooser_username",
+      "chooser_username_norm",
+      "disconnected_user_id",
+      "disconnected_username",
+      "disconnected_username_norm",
+      "game_id",
+      "matched_kind_chooser_id",
+      "username",
+      "username_norm"
+    ],
+    "parquet_files_scanned": 0,
+    "status": "PUBLIC_TRANSFER_PRIVACY_SCAN_OK",
+    "violations": 0
+  },
+  "excluded_private_material": [
+    "game and user identifiers",
+    "hashed terminal-position cache",
+    "local engine/equality row cache",
+    "crossing chooser/game-key caches and model checkpoints",
+    "model checkpoints and DuckDB spill"
+  ],
+  "fen_public_privacy": {
+    "status": "AGGREGATE_ONLY_PRIVACY_SCAN_OK",
+    "structured_files_checked": 21
+  },
+  "sample_authority": {
+    "fair_kind_draws": 419463,
+    "fair_rows": 15207423,
+    "fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "kind_draws": 570091,
+    "literal_immediate_rematches_certified": false,
+    "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "months": 24,
+    "observed_screen_certified": true,
+    "panel_root_machine_specific": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+    "report_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "rows": 41534331,
+    "sample_name": "main_pool_nonadjacent",
+    "sample_status": "POOL_MAIN_SAMPLE_24M_CERTIFIED_OK",
+    "status": "POOL_MAIN_SAMPLE_AUTHENTICATED_OK"
+  },
+  "scope_note": "Wave 2A recomputes equality/FEN analyses, the manuscript's adjacent displayed-gap crossing, and a post-Wave-1 1500/high-RD decomposition. It freezes new-sample support and dependencies for chronology-driven analyses but does not label those analyses current; they require Wave 2B.",
+  "status": "POOL_MAIN_REANALYSIS_WAVE2A_TRANSFER_OK",
+  "wave1_inputs": "POOL_MAIN_WAVE1_INPUTS_AUTHENTICATED_OK"
+}

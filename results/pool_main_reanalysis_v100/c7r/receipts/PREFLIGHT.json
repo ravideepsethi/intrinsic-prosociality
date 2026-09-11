@@ -1,0 +1,48 @@
+{
+  "created_at_utc": "2026-09-11T03:37:24Z",
+  "environment": {
+    "executable": "/Users/u6025368/Desktop/Lichess_Desktop/pool_main_wave1_python.KT7f8H/bin/python",
+    "packages": {
+      "duckdb": "1.5.5",
+      "matplotlib": "3.11.1",
+      "numpy": "2.5.3",
+      "pandas": "3.0.5",
+      "pyarrow": "25.0.1"
+    },
+    "platform": "macOS-26.4.1-arm64-arm-64bit-Mach-O",
+    "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:11:29) [Clang 20.1.8 ]"
+  },
+  "free_gib": 625.3065910339355,
+  "history_public": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/output/dynamic_second_wave_history_v100/POOL_MAIN_WAVE2B1_SECOND",
+  "history_state": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/derived/replication/dynamic_second_wave_history_v100_PRIVATE",
+  "history_success_sha256": "2e5ba421a1c628591e5004e6a60a89a39d7d017a3f5578ba88b4809f6853b417",
+  "history_summary_sha256": "61400d62e8b92bc0b8fe7e7a9746f650e37144fd63de49d92699aaf0e1f103d7",
+  "network_requests": 0,
+  "package": {
+    "bytes": 436725,
+    "files": 31,
+    "manifest_sha256": "987da79badecb6ee6dece9187aa0af65b43c29e727c2cb5b39d3c47b9e0fa317",
+    "status": "POOL_MAIN_WAVE2B2A_PACKAGE_AUTHENTICATED_OK"
+  },
+  "processed_pair_rows": 66236172,
+  "raw_pair_event_rows": 154693194,
+  "sample_authority": {
+    "fair_kind_draws": 419463,
+    "fair_rows": 15207423,
+    "fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "kind_draws": 570091,
+    "literal_immediate_rematches_certified": false,
+    "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "months": 24,
+    "observed_screen_certified": true,
+    "panel_root_machine_specific": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+    "report_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "rows": 41534331,
+    "sample_name": "main_pool_nonadjacent",
+    "sample_status": "POOL_MAIN_SAMPLE_24M_CERTIFIED_OK",
+    "status": "POOL_MAIN_SAMPLE_AUTHENTICATED_OK"
+  },
+  "status": "POOL_MAIN_WAVE2B2A_PREFLIGHT_READY",
+  "wave2b1_status": "/Volumes/XT_Pro/lichess_kindness/output/pool_main_reanalysis_v100/wave2b1/WAVE2B1_RUN_STATUS.json",
+  "wave2b1_status_sha256": "d3010bb7b4dd41fbb486b4ce829dcde9d58e6c2f8c14e45c16b3093d77eebc67"
+}

@@ -1,0 +1,37 @@
+{
+  "c6_ply_policy": "The frozen C6 primary is unchanged. Ply variants are pre-scoped secondary robustness checks and are not added to the confirmatory Holm family.",
+  "c7x_policy": "No frequent-dyad fixed-effect model is fit: the parent selected-panel C7X benefactor arm has 125 rows, below its frozen 1,000-per-arm gate.",
+  "included": [
+    "C6 frozen non-exploitation model and treatment-blind support gate",
+    "C10 denial-decay diagnostics",
+    "C6 pre-scoped ply>10 exposure and later-event robustness checks, outside Holm",
+    "C12 recipient pre-opportunity experience models on a fresh deterministic 2% recipient sample",
+    "C12 v1.0.3 explicit 2400+ model attempt",
+    "C7X frequent-dyad raw diagnostic using the invariant exact all-game dyad index"
+  ],
+  "manuscript_policy": "Results may enter a tracked provisional manuscript only after this return archive is reviewed. Final Sections 5-6 and paper-wide claims remain gated on C9, C13, Holm reconciliation, and Wave 3 Patron work.",
+  "sample_authority": {
+    "fair_kind_draws": 419463,
+    "fair_rows": 15207423,
+    "fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "kind_draws": 570091,
+    "literal_immediate_rematches_certified": false,
+    "main_predicate": "source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'",
+    "months": 24,
+    "observed_screen_certified": true,
+    "panel_root_machine_specific": "/Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel",
+    "report_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "rows": 41534331,
+    "sample_name": "main_pool_nonadjacent",
+    "sample_status": "POOL_MAIN_SAMPLE_24M_CERTIFIED_OK",
+    "status": "POOL_MAIN_SAMPLE_AUTHENTICATED_OK"
+  },
+  "status": "POOL_MAIN_WAVE2B2B1_SCOPE_DECLARED_OK",
+  "still_blocked": [
+    "C9 fresh 4,999-draw conditional randomization and its ply sensitivity",
+    "C13 ambient-exposure rebuild",
+    "Campaign-family-D authenticated Holm closure, including explicit C5 p=1 handling",
+    "Patron matching and Patron heterogeneity on the new main sample",
+    "final unified manuscript tables, figures, and authority ledger"
+  ]
+}

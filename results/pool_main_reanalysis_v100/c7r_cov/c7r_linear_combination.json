@@ -1,0 +1,156 @@
+{
+  "created_at_utc": "2026-09-11T04:42:21.934131+00:00",
+  "estimand_note": "The repeat-meeting fairness gradient is beta_fair + beta_fair_x_repeat. Its variance uses the chooser-clustered covariance from the unchanged frozen model.",
+  "exposure_covariance": {
+    "fair": {
+      "fair": 2.98723719140079e-07,
+      "fair_x_repeat": -1.928617621234487e-07,
+      "repeat": 5.404688836060561e-08
+    },
+    "fair_x_repeat": {
+      "fair": -1.928617621234488e-07,
+      "fair_x_repeat": 1.8911130541883756e-06,
+      "repeat": -4.5424351583749744e-07
+    },
+    "repeat": {
+      "fair": 5.404688836060563e-08,
+      "fair_x_repeat": -4.5424351583749786e-07,
+      "repeat": 4.4508616718048916e-07
+    }
+  },
+  "fair_fair_x_repeat_covariance": -1.928617621234487e-07,
+  "first_meeting_gradient": {
+    "ci95": [
+      0.014872090568089448,
+      0.017014591013315566
+    ],
+    "ci95_percentage_points": [
+      1.4872090568089449,
+      1.7014591013315568
+    ],
+    "coefficient": 0.015943340790702507,
+    "coefficient_percentage_points": 1.5943340790702507,
+    "contrast": "fairness_gradient_first_meetings",
+    "p_value_two_sided": 4.5863060425501315e-187,
+    "standard_error": 0.0005465562360270706,
+    "standard_error_percentage_points": 0.054655623602707065,
+    "t_cluster": 29.170540449039617,
+    "weights": {
+      "fair": 1.0
+    }
+  },
+  "interpretation": "The fairness gradient remains positive at repeat meetings but is smaller than at first meetings; the interaction is descriptive, not causal.",
+  "model": "X_C7R_fair_repeat_interaction_all_meetings",
+  "model_diagnostics": {
+    "absorption_iterations": 299,
+    "absorption_last_adjustment": 9.59812003034974e-10,
+    "absorption_maximum_iterations": 2000,
+    "absorption_tolerance": 1e-09,
+    "cluster_correction": 1.0000150733014281,
+    "clusters": 533531,
+    "matrix_rank": 11,
+    "rows": 757646,
+    "sample_specification_sha256": "dece314a44d3aa2873442254e096c25ea34933d15beb30f05867c75d84ee0d31",
+    "smallest_singular_value": 47.648816991493355
+  },
+  "model_results": [
+    {
+      "coefficient": 0.015943340790702507,
+      "p_value_two_sided": 4.5863060425501315e-187,
+      "standard_error": 0.0005465562360270706,
+      "t_cluster": 29.170540449039617,
+      "term": "fair"
+    },
+    {
+      "coefficient": 0.001323140961929891,
+      "p_value_two_sided": 0.0473361449549783,
+      "standard_error": 0.000667147785112481,
+      "t_cluster": 1.9832801538969507,
+      "term": "repeat"
+    },
+    {
+      "coefficient": -0.0031497184121758058,
+      "p_value_two_sided": 0.021997636204636968,
+      "standard_error": 0.001375177462798302,
+      "t_cluster": -2.2904086907929324,
+      "term": "fair_x_repeat"
+    }
+  ],
+  "original_repeat_only_nonconvergence_preserved": true,
+  "private_row_level_files_transferred": false,
+  "repeat_meeting_gradient": {
+    "ci95": [
+      0.010161003633308983,
+      0.015426241123744418
+    ],
+    "ci95_percentage_points": [
+      1.0161003633308983,
+      1.5426241123744417
+    ],
+    "coefficient": 0.0127936223785267,
+    "coefficient_percentage_points": 1.2793622378526701,
+    "contrast": "fairness_gradient_repeat_meetings",
+    "p_value_two_sided": 1.651588676270791e-21,
+    "standard_error": 0.001343172829192713,
+    "standard_error_percentage_points": 0.1343172829192713,
+    "t_cluster": 9.524926428281049,
+    "weights": {
+      "fair": 1.0,
+      "fair_x_repeat": 1.0
+    }
+  },
+  "repeat_minus_first_gradient": {
+    "ci95": [
+      -0.005845066239260477,
+      -0.0004543705850911339
+    ],
+    "ci95_percentage_points": [
+      -0.5845066239260477,
+      -0.04543705850911339
+    ],
+    "coefficient": -0.0031497184121758058,
+    "coefficient_percentage_points": -0.3149718412175806,
+    "contrast": "repeat_minus_first_fairness_gradient",
+    "p_value_two_sided": 0.021997636204636968,
+    "standard_error": 0.001375177462798302,
+    "standard_error_percentage_points": 0.1375177462798302,
+    "t_cluster": -2.2904086907929324,
+    "weights": {
+      "fair_x_repeat": 1.0
+    }
+  },
+  "repeat_only_model_retried": false,
+  "reproduction": {
+    "checks": [
+      {
+        "coefficient_absolute_difference_from_frozen_constant": 0.0,
+        "coefficient_absolute_difference_from_returned_wave2b2a": 0.0,
+        "pass": true,
+        "standard_error_absolute_difference_from_frozen_constant": 0.0,
+        "standard_error_absolute_difference_from_returned_wave2b2a": 0.0,
+        "term": "fair"
+      },
+      {
+        "coefficient_absolute_difference_from_frozen_constant": 0.0,
+        "coefficient_absolute_difference_from_returned_wave2b2a": 0.0,
+        "pass": true,
+        "standard_error_absolute_difference_from_frozen_constant": 0.0,
+        "standard_error_absolute_difference_from_returned_wave2b2a": 0.0,
+        "term": "repeat"
+      },
+      {
+        "coefficient_absolute_difference_from_frozen_constant": 0.0,
+        "coefficient_absolute_difference_from_returned_wave2b2a": 0.0,
+        "pass": true,
+        "standard_error_absolute_difference_from_frozen_constant": 0.0,
+        "standard_error_absolute_difference_from_returned_wave2b2a": 0.0,
+        "term": "fair_x_repeat"
+      }
+    ],
+    "status": "FROZEN_WAVE2B2A_MODEL_REPRODUCED_OK",
+    "tolerance": 5e-10
+  },
+  "sample_fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+  "script_version": "1.0.0",
+  "status": "C7R_LINEAR_COMBINATION_CLOSURE_OK"
+}

@@ -1,0 +1,40 @@
+{
+  "analysis_disposition": "Separately dated current-profile supplement; does not close the frozen August coverage gate.",
+  "august_missing_all_unchanged": 285,
+  "august_missing_primary_unchanged": 207,
+  "august_outcomes_recovered": 0,
+  "august_snapshot_modified": false,
+  "config_sha256": "2c3aaceee64b55d9efcfd718bc91b4b59ddb0670c36e32a5657700fec066195b",
+  "current_profiles_returned": 122,
+  "elapsed_seconds_this_invocation": 144.86285104206763,
+  "models_run": false,
+  "network_attempts": 3,
+  "observation_end_utc": "2026-09-11T15:30:44.718996+00:00",
+  "observation_start_utc": "2026-09-11T15:30:44.718996+00:00",
+  "primary_current_profiles_returned": 77,
+  "primary_still_unavailable": 130,
+  "primary_target_accounts": 207,
+  "private_file_receipts": [
+    {
+      "bytes": 8256,
+      "name": "gap_targets_private.parquet",
+      "sha256": "947225d8d577e3cc8323d34974346348f40be79fe2650396f1ffa66147e62b6a"
+    },
+    {
+      "bytes": 71928,
+      "name": "current_profile_gap_supplement_private.parquet",
+      "sha256": "39a9c911bb0030d2dacc7c73f77d0bb94bc27981be347dd3e03f30af8b0482aa"
+    },
+    {
+      "bytes": 2101,
+      "name": "REQUEST_FILE_HASHES.json",
+      "sha256": "db14fe4e53d514a8b1e428ec7643dc0c7cd1cefcd5b8e641a3db045bea339d59"
+    }
+  ],
+  "sample_or_matching_changed": false,
+  "status": "COMPLETE_WITH_UNAVAILABLE_ACCOUNTS",
+  "still_unavailable": 163,
+  "successful_response_rounds": 3,
+  "target_accounts": 285,
+  "version": "1.0.0"
+}

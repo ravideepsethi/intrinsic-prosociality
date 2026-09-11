@@ -1,0 +1,110 @@
+{
+  "causal_claim": false,
+  "config_sha256": "ad0c8c90beb6329f41de4fcefe1a7b20ecc90656135157e709e167e861fd6109",
+  "contexts": [
+    {
+      "first_meeting_rows": 772371,
+      "repeat_meeting_rows": 58620,
+      "repeat_meeting_share_pct": 7.054228024130225,
+      "rows": 830991,
+      "scope": "all_sampled"
+    },
+    {
+      "first_meeting_rows": 422053,
+      "repeat_meeting_rows": 30864,
+      "repeat_meeting_share_pct": 6.814493604788515,
+      "rows": 452917,
+      "scope": "clearly_worse"
+    },
+    {
+      "first_meeting_rows": 282189,
+      "repeat_meeting_rows": 22540,
+      "repeat_meeting_share_pct": 7.396736116352562,
+      "rows": 304729,
+      "scope": "fair"
+    }
+  ],
+  "created_utc": "2026-09-11T03:40:07.511602+00:00",
+  "epistemic_label": "X",
+  "fairness_bins": [
+    {
+      "first_meeting_rows": 422053,
+      "repeat_meeting_rows": 30864,
+      "repeat_meeting_share_pct": 6.814493604788515,
+      "rows": 452917,
+      "scope": "clearly_worse"
+    },
+    {
+      "first_meeting_rows": 54426,
+      "repeat_meeting_rows": 4264,
+      "repeat_meeting_share_pct": 7.265292213324246,
+      "rows": 58690,
+      "scope": "disconnected_better"
+    },
+    {
+      "first_meeting_rows": 57298,
+      "repeat_meeting_rows": 3675,
+      "repeat_meeting_share_pct": 6.027257966640972,
+      "rows": 60973,
+      "scope": "disconnected_clearly_better"
+    },
+    {
+      "first_meeting_rows": 68129,
+      "repeat_meeting_rows": 5216,
+      "repeat_meeting_share_pct": 7.111595882473243,
+      "rows": 73345,
+      "scope": "modestly_worse_excluded"
+    },
+    {
+      "first_meeting_rows": 170465,
+      "repeat_meeting_rows": 14601,
+      "repeat_meeting_share_pct": 7.889617757989042,
+      "rows": 185066,
+      "scope": "roughly_equal"
+    }
+  ],
+  "first_meeting_definition": "pair_sequence == 1 in certified rated chronology beginning 2013",
+  "focal_kind_outcome_read": false,
+  "identity_support": {
+    "chooser_ids": 570634,
+    "directed_pairs": 829470,
+    "opponent_ids": 545640,
+    "unordered_pairs": 828861
+  },
+  "pair_sample_rule": "hash(low_id,high_id,2026082203) % 50 = 0",
+  "pair_sequence_bands": [
+    {
+      "clearly_worse_rows": 422053,
+      "fair_rows": 282189,
+      "pair_sequence_band": "1",
+      "rows": 772371
+    },
+    {
+      "clearly_worse_rows": 21679,
+      "fair_rows": 15600,
+      "pair_sequence_band": "2",
+      "rows": 40919
+    },
+    {
+      "clearly_worse_rows": 7630,
+      "fair_rows": 5789,
+      "pair_sequence_band": "3-5",
+      "rows": 14709
+    },
+    {
+      "clearly_worse_rows": 1188,
+      "fair_rows": 879,
+      "pair_sequence_band": "6-10",
+      "rows": 2290
+    },
+    {
+      "clearly_worse_rows": 367,
+      "fair_rows": 272,
+      "pair_sequence_band": "11+",
+      "rows": 702
+    }
+  ],
+  "scope_limit": "does not observe casual, off-platform, or pre-2013 relationships",
+  "status": "C7R_REPEAT_PREVALENCE_FROZEN_BEFORE_FOCAL_OUTCOME",
+  "support_cache_sha256": "d4948de358939aad3b29db4e76645dd49f5fd6aa747914f0fb6701243d934a70"
+}

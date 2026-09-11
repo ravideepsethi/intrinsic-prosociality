@@ -1,0 +1,21 @@
+{
+  "category": "later_session_7d",
+  "effect_relative_to_null_mean_pct": 35.476533050997205,
+  "epistemic_label": "C",
+  "epistemic_role": "C_primary",
+  "excess_percentage_points": 11.547473124842572,
+  "holm_adjusted_p_value": "PENDING_NEW_SAMPLE_COMPLETE_FAMILY_RECONCILIATION",
+  "interpretation": "Timing association beyond the initiating observed session; not a causal effect or unique mechanism identification",
+  "lower_tail_plus_one": 1.0,
+  "null_mean_rate": 0.32549609930156315,
+  "null_mean_rate_pct": 32.549609930156315,
+  "null_p025": 0.3200390283076606,
+  "null_p975": 0.33095380599013247,
+  "observed_denominator": 22455,
+  "observed_numerator": 9902,
+  "observed_rate": 0.44097083054998887,
+  "observed_rate_pct": 44.09708305499889,
+  "randomization_p_two_sided": 0.0004,
+  "randomizations": 4999,
+  "upper_tail_plus_one": 0.0002
+}

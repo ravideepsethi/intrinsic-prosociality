@@ -1,0 +1,13 @@
+{
+  "config_sha256": "91cfa3b0eafc7de7d9574f48b6fdfcdbfdb214fa86b97c27cdadf78d05dc0e65",
+  "created_utc": "2026-09-11T13:03:02.074987+00:00",
+  "eligible_pooled_recipients": 2110400,
+  "family_disposition": "RETAIN_C6_IN_HOLM_FAMILY_D",
+  "gate_pass": true,
+  "minimum_pooled_clearly_losing_events": 4000,
+  "minimum_recipients_with_any_later_timeout": 4000,
+  "pooled_clearly_losing_timeout_events": 5478345,
+  "recipients_with_any_later_timeout": 1448272,
+  "status": "C6_TREATMENT_BLIND_POOLED_SUPPORT_GATE_FROZEN",
+  "treatment_specific_c6_outcomes_tabulated": false
+}
