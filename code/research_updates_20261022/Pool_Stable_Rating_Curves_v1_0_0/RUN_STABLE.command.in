@@ -1,0 +1,42 @@
+#!/bin/bash
+set -euo pipefail
+task_package="$(cd "$(dirname "$0")" && pwd)"
+task_desktop="${LICHESS_TRANSFER_ROOT:-$HOME/Desktop/Lichess_Desktop}"
+task_project="${LICHESS_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+task_workers="${LICHESS_STABLE_WORKERS:-10}"
+mkdir -p "$task_desktop"
+(cd "$task_package" && /usr/bin/shasum -a 256 -c PACKAGE_MANIFEST.sha256)
+
+task_base_python="${LICHESS_STABLE_PYTHON:-$(command -v python3 || true)}"
+task_dependency_check='import sys,numpy,scipy,pyarrow,duckdb,matplotlib; assert sys.version_info >= (3,10); assert (1,26) <= tuple(map(int,numpy.__version__.split(".")[:2])) < (3,0); assert (1,11) <= tuple(map(int,scipy.__version__.split(".")[:2])) < (2,0); assert 17 <= int(pyarrow.__version__.split(".")[0]) < 26; assert duckdb.__version__ == "1.5.5"; assert (3,8) <= tuple(map(int,matplotlib.__version__.split(".")[:2])) < (4,0)'
+task_python=''
+for task_candidate in "$task_base_python" "$task_desktop/within_chooser_k_python_v100/bin/python" "$task_desktop/pooled_competitive_k_python_v100/bin/python" "$task_desktop/stable_rating_curves_python_v100/bin/python"; do
+  if [ -n "$task_candidate" ] && [ -x "$task_candidate" ] && "$task_candidate" -c "$task_dependency_check" >/dev/null 2>&1; then
+    task_python="$task_candidate"
+    break
+  fi
+done
+if [ -z "$task_python" ]; then
+  if [ -z "$task_base_python" ]; then
+    echo 'Python 3.10+ is required. Use your usual conda Terminal.'
+    exit 1
+  fi
+  "$task_base_python" -c 'import sys; assert sys.version_info >= (3,10), "Python 3.10+ required"'
+  task_env="$task_desktop/stable_rating_curves_python_v100"
+  if [ ! -x "$task_env/bin/python" ]; then
+    "$task_base_python" -m venv "$task_env"
+  fi
+  "$task_env/bin/python" -m pip install -r "$task_package/requirements.txt"
+  task_python="$task_env/bin/python"
+fi
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
+export VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1 PYTHONUNBUFFERED=1
+export MPLCONFIGDIR="$task_desktop/matplotlib_stable_rating_cache"
+mkdir -p "$MPLCONFIGDIR"
+task_log="$task_desktop/pool_stable_rating_curves_v100_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+echo "Log: $task_log"
+"$task_python" "$task_package/self_test.py" 2>&1 | tee "$task_log"
+"$task_python" "$task_package/run_stable.py" \
+  --project-root "$task_project" --transfer-root "$task_desktop" \
+  --workers "$task_workers" --hash-workers "${LICHESS_STABLE_HASH_WORKERS:-2}" \
+  --memory-limit "${LICHESS_STABLE_MEMORY:-6GB}" "$@" 2>&1 | tee -a "$task_log"

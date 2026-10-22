@@ -1,0 +1,54 @@
+#!/bin/bash
+# Expected runtime: 10–40 minutes initially; 2–8 minutes on a completed restart.
+set -euo pipefail
+COLOR_PACKAGE="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+COLOR_PROJECT="${COLOR_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+COLOR_DESKTOP="${COLOR_DESKTOP_ROOT:-$HOME/Desktop/Lichess_Desktop}"
+COLOR_PY="${COLOR_PYTHON:-$COLOR_PROJECT/venv/bin/python}"
+if [[ ! -d "$COLOR_PROJECT" ]]; then
+  echo "Mount the project volume first: $COLOR_PROJECT" >&2
+  exit 1
+fi
+if [[ ! -x "$COLOR_PY" ]]; then
+  echo "Existing project Python not found: $COLOR_PY" >&2
+  echo "Set COLOR_PYTHON to the existing mechanism-run environment if its path differs." >&2
+  exit 1
+fi
+mkdir -p "$COLOR_DESKTOP"
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMBA_NUM_THREADS=1
+export PYTHONDONTWRITEBYTECODE=1
+"$COLOR_PY" - "$COLOR_PACKAGE" <<'PY'
+import sys,pathlib,hashlib,importlib
+missing=[]
+for name in ('numpy','pandas','duckdb','pyarrow'):
+    try:importlib.import_module(name)
+    except ModuleNotFoundError as exc:missing.append(name+' ('+str(exc)+')')
+if missing:
+    raise SystemExit('Selected Python: '+sys.executable+'\nMissing required dependency: '+', '.join(missing)+'\nSet COLOR_PYTHON to an existing compatible project environment.')
+import duckdb
+assert sys.version_info >= (3,10), 'Python 3.10 or newer is required'
+assert tuple(map(int,duckdb.__version__.split('.')[:2])) == (1,5), 'Reuse the audited DuckDB 1.5 environment'
+p=pathlib.Path(sys.argv[1])
+for line in (p/'PACKAGE_MANIFEST.sha256').read_text().splitlines():
+    h,n=line.split('  ',1)
+    if hashlib.sha256((p/n).read_bytes()).hexdigest()!=h:
+        raise SystemExit('Package checksum mismatch: '+n)
+print('PACKAGE_SHA256_OK')
+print('Runtime: Python '+sys.version.split()[0]+'; '+', '.join(name+' '+importlib.import_module(name).__version__ for name in ('numpy','pandas','duckdb','pyarrow')))
+sys.path.insert(0,str(p/'code'))
+from numeric import LOGISTIC_BACKEND
+print('Logistic transform: '+LOGISTIC_BACKEND+' (SciPy is optional)')
+PY
+echo "Synthetic self-tests begin; the following small row counts are test fixtures."
+"$COLOR_PY" -m unittest discover -s "$COLOR_PACKAGE/tests" -p 'test_*.py' -q
+echo "SELF_TESTS_OK — starting the private-data run."
+COLOR_LOG="$COLOR_DESKTOP/COLOR_MODEL_RUN_$(date -u +%Y%m%dT%H%M%SZ).log"
+echo "Python: $COLOR_PY"
+echo "Log: $COLOR_LOG"
+echo "Expected runtime: 10–40 minutes initially; 2–8 minutes on restart (estimates)."
+echo "Up to 10 monthly workers; RAM-bounded forecast workers; existing Parquets and repaired fits."
+if [[ -x /usr/bin/caffeinate ]]; then
+  /usr/bin/caffeinate -i "$COLOR_PY" -u "$COLOR_PACKAGE/code/run.py" --project-root "$COLOR_PROJECT" --desktop "$COLOR_DESKTOP" --workers "${COLOR_WORKERS:-10}" --memory-gb "${COLOR_MEMORY_GB:-12}" "$@" 2>&1 | tee "$COLOR_LOG"
+else
+  "$COLOR_PY" -u "$COLOR_PACKAGE/code/run.py" --project-root "$COLOR_PROJECT" --desktop "$COLOR_DESKTOP" --workers "${COLOR_WORKERS:-10}" --memory-gb "${COLOR_MEMORY_GB:-12}" "$@" 2>&1 | tee "$COLOR_LOG"
+fi

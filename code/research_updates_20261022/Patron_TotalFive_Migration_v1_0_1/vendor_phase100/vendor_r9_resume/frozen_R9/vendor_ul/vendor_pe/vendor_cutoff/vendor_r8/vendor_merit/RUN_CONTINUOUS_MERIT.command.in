@@ -1,0 +1,21 @@
+#!/bin/bash
+set -euo pipefail
+cd "$(dirname "$0")"
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
+export VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1 BLIS_NUM_THREADS=1
+runner="${LICHESS_PYTHON:-python3}"
+if ! "$runner" -c 'import sys; assert sys.version_info >= (3,10); import numpy, scipy, pandas, pyarrow, duckdb, matplotlib' >/dev/null 2>&1; then
+  "$runner" -c 'import sys; assert sys.version_info >= (3,10), "Python 3.10+ required; set LICHESS_PYTHON to an installed Python interpreter."'
+  if [ ! -x .venv/bin/python ]; then "$runner" -m venv .venv; fi
+  .venv/bin/python -m pip install -r requirements.txt
+  runner="$PWD/.venv/bin/python"
+fi
+"$runner" -u verify_package.py
+"$runner" -u self_test.py
+mkdir -p logs
+run_log="$PWD/logs/run_$(date -u +%Y%m%dT%H%M%SZ).log"
+if command -v caffeinate >/dev/null 2>&1; then
+  caffeinate -i "$runner" -u run.py "$@" 2>&1 | tee "$run_log"
+else
+  "$runner" -u run.py "$@" 2>&1 | tee "$run_log"
+fi

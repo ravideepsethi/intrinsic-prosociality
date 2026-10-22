@@ -1,0 +1,84 @@
+from pathlib import Path
+import tempfile,sys,unittest
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'code'))
+import prose_checks as p
+import pandas as pd
+import numpy as np
+
+class ProseTests(unittest.TestCase):
+    def test_material_checks_both_roles_and_flagged_nongrants(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);f=root/'panel.parquet'
+            d=pd.DataFrame(dict(chooser_username_norm=['__PRIVATE_VALUE_1__','other','third','fourth'],
+              disconnected_username_norm=['other',' __PRIVATE_VALUE_2__ ','other','other'],
+              outcome_kind_draw=[0,0,1,0],timeout_draw_no_mating_material=[True,False,False,False],
+              engine_eval_cp_disconnected=[0,-400,0,-400]))
+            d.to_parquet(f)
+            a=p.material_counts([f],root/'spill',2,1)
+            self.assertEqual(a['author_games'],2);self.assertEqual(a['flagged'],1)
+            d.iloc[2:].to_parquet(root/'excluded.parquet')
+            b=p.material_counts([root/'excluded.parquet'],root/'spill2',2,1)
+            self.assertEqual(b['author_games'],0);self.assertEqual(b['flagged'],0)
+            self.assertEqual(b['sensitivity_opportunities'],2)
+
+    def test_original_feature_pipeline_and_activity_change(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);rows=[]
+            # All three activity groups in both rating cells, including zero-granters.
+            for user in range(24):
+                n=[4,10,20][user%3]
+                for j in range(n):
+                    e=0 if j%2==0 else -400;y=int(j==0 and user%4==0)
+                    rows.append(dict(month='2023-11',chooser_user_id=user,outcome_kind_draw=y,kind_draw=y,
+                      engine_eval_cp_disconnected=e,fair_competitive=e>=-100,clearly_worse=e<=-300,
+                      api_status='timeout',chooser_elo=1500 if user<12 else 1700,api_speed='blitz',time_control='300+0'))
+            d=pd.DataFrame(rows);f=root/'source.parquet';d.to_parquet(f)
+            auth=dict(month_records=[dict(month='2023-11',path=str(f),expected_sha256=p.sha(f),rows=len(d))])
+            features,receipt,_=p.features.build_features(auth,root/'features','test',workers=2,threads=2,worker_memory='256MB',merge_memory='512MB')
+            frame=pd.read_parquet(features);tables=p.adjustment.analyze_adjustment(frame)
+            self.assertEqual(int(tables['common_support_flow.csv'].query("scope=='all'").common_support_choosers.iloc[0]),24)
+            changed=p.adjustment.analyze_adjustment(frame[frame.chooser!=0])
+            self.assertEqual(int(changed['common_support_flow.csv'].query("scope=='all'").common_support_choosers.iloc[0]),23)
+            self.assertFalse(tables['standardized_activity_comparisons.csv'].equals(changed['standardized_activity_comparisons.csv']))
+            # Check all exported schemas and semantic keys, including cells whose
+            # integer labels are implementation details rather than identities.
+            auth.update(variant='excluded',fingerprint='synthetic',census=dict(
+                competitive=int((d.engine_eval_cp_disconnected>=-100).sum()),
+                competitive_grants=int(d.loc[d.engine_eval_cp_disconnected>=-100,'outcome_kind_draw'].sum()),
+                clearly_worse=int((d.engine_eval_cp_disconnected<=-300).sum()),
+                clearly_worse_grants=int(d.loc[d.engine_eval_cp_disconnected<=-300,'outcome_kind_draw'].sum())))
+            p.activity_stage(auth,root/'stage',2,8)
+            for csv in (root/'stage/report').glob('*.csv'):
+                actual=pd.read_csv(csv)
+                compared=p.semantic_comparison(actual,actual,p.KEYS[csv.name],csv.name,'activity')
+                self.assertTrue(compared)
+                self.assertTrue(all(r['status']=='MATCHED' for r in compared))
+            f.write_bytes(f.read_bytes()+b'corruption')
+            with self.assertRaises(RuntimeError):p.verify(dict(path=str(f),bytes=f.stat().st_size,sha256=auth['month_records'][0]['expected_sha256']))
+
+    def test_reproduction_gate_and_semantic_keys(self):
+        a=pd.DataFrame(dict(scope=['light','heavy'],estimate_pp=[1.,2.],se_pp=[.1,.2]))
+        self.assertEqual(len(p.reproduce(a,a.iloc[::-1],['scope'],'fixture')),2)
+        b=a.copy();b.loc[0,'estimate_pp']=1.01
+        with self.assertRaises(RuntimeError):p.reproduce(b,a,['scope'],'fixture')
+        r=p.semantic_comparison(a,b.iloc[::-1],['scope'],'test.csv','activity')
+        v=next(x for x in r if x['metric']=='estimate_pp' and 'light' in x['key'])
+        self.assertAlmostEqual(v['absolute_change_in_included_se_units'],.1)
+        with self.assertRaises(RuntimeError):p.semantic_comparison(pd.concat([a,a]),b,['scope'],'test.csv','activity')
+
+    def test_joint_contrast_retains_covariance(self):
+        d=np.array([0.,.2,.6,.1,.3]);w=np.column_stack([np.arange(1,6),np.arange(5,0,-1),np.ones(5)])
+        estimates,diffs,cov=p.statistics.estimate(d,w)
+        r=diffs.set_index('comparison').loc['equal_chooser_minus_original_FE']
+        self.assertAlmostEqual(r.se_pp,100*np.sqrt(cov[2,2]+cov[0,0]-2*cov[2,0]))
+        self.assertNotAlmostEqual(r.se_pp,100*np.sqrt(cov[2,2]+cov[0,0]))
+
+    def test_original_patron_bounds_retain_missing_outcomes(self):
+        f=p.original_function(p.ROOT/'vendor/patron/runner/run.py','missing_outcome_bounds')
+        d=pd.DataFrame(dict(group_ever_kind_fair=[True]*4,is_kind_role=[1,1,0,0],match_cell=['a']*4,
+             returned=[True,False,True,False],patron=[1,np.nan,0,np.nan],outcome_status=['observed','missing','observed','missing']))
+        r=f(d);self.assertEqual(r['target_kind'],2);self.assertEqual(r['raw_lower_pp'],0);self.assertEqual(r['raw_upper_pp'],100)
+        d.loc[1,'patron']=0
+        with self.assertRaises(RuntimeError):f(d)
+
+if __name__=='__main__':unittest.main(verbosity=2)

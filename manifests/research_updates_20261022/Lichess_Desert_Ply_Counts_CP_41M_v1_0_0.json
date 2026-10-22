@@ -1,0 +1,105 @@
+{
+  "package": "Lichess_Desert_Ply_Counts_CP_41M_v1_0_0",
+  "archive_name": "Lichess_Desert_Ply_Counts_CP_41M_v1_0_0.zip",
+  "archive_sha256": "2ac9db5c285766278ae07dabea1885c1c05c74c6d36d80e56c2a5d1614bf878a",
+  "archive_size": 750836,
+  "archive_root": "Lichess_Desert_Ply_Counts_CP_41M_v1_0_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "README.md",
+      "published_path": "README.md",
+      "sha256": "4f57d16c02220e2c86581c25a9ffd97a5a91f2045072521d367f0140f2f02a37",
+      "published_sha256": "4f57d16c02220e2c86581c25a9ffd97a5a91f2045072521d367f0140f2f02a37",
+      "size": 3964
+    },
+    {
+      "path": "RUN_DESERT_PLY.command",
+      "published_path": "RUN_DESERT_PLY.command.in",
+      "sha256": "2e3b4d16267de5d2c8b7d1b1e098460dbdf6d51400b407aa9ffc2ec5af06125b",
+      "published_sha256": "2e3b4d16267de5d2c8b7d1b1e098460dbdf6d51400b407aa9ffc2ec5af06125b",
+      "size": 975
+    },
+    {
+      "path": "code/make_desert_ply.py",
+      "published_path": "code/make_desert_ply.py",
+      "sha256": "9de2d3d652e2b09611521f3a7218a9385d40a6d53e253a4e76e7c8428d845a00",
+      "published_sha256": "9de2d3d652e2b09611521f3a7218a9385d40a6d53e253a4e76e7c8428d845a00",
+      "size": 9406
+    },
+    {
+      "path": "requirements.txt",
+      "published_path": "requirements.txt",
+      "sha256": "4b1d4d3fa211c669e388b7dae4dbd2a8c505de2a5e92348171f1526673eb581e",
+      "published_sha256": "4b1d4d3fa211c669e388b7dae4dbd2a8c505de2a5e92348171f1526673eb581e",
+      "size": 46
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "MANIFEST.sha256",
+      "sha256": "e097354fc2e864618c75c210d303cfe884dda531615b658dec00e20b3ae7a7ad",
+      "size": 1508
+    },
+    {
+      "path": "SAMPLE_AUTHORITY.json",
+      "sha256": "173901ef75f46b1da7681e27c8068dd8491039c88a3d923bf71a4fc6e0ccc4f2",
+      "size": 632
+    },
+    {
+      "path": "SOURCE_MANIFEST.json",
+      "sha256": "13cb89199fc3a860b16a51d4b7f1310c3ac73ee14cdc9176c720e30de493fcfc",
+      "size": 803
+    },
+    {
+      "path": "figures/fig1_desert_ply_41M_counts_cp.pdf",
+      "sha256": "b5016597408f2387fd1b4281eda80310fb9ec8fd2dcc1c8cb9e36bfd276bcdf1",
+      "size": 35618
+    },
+    {
+      "path": "figures/fig1_desert_ply_41M_counts_cp.png",
+      "sha256": "6abfa97b4fd20e9b46ff0b740bc655e5dc7ae1b77b08c3fe487861a54720ceeb",
+      "size": 504029
+    },
+    {
+      "path": "figures/fig1_desert_ply_41M_counts_cp.svg",
+      "sha256": "87633a2d72266c8e93139d13d82bf9e6af2e43f97872ba9a7e1d94f8c81dfb2a",
+      "size": 172745
+    },
+    {
+      "path": "plotdata/board_merit_by_ply.csv",
+      "sha256": "9e55666bb4945c16c6a342784e7090f3c2e8e8f1a86f81c33363f258caa2861a",
+      "size": 2110
+    },
+    {
+      "path": "plotdata/heatmap_rates_wide.csv",
+      "sha256": "30ba232b37de7acc393f81e9ed7a8a2ea35eab403623e68ec91eb2a72b8e609e",
+      "size": 878
+    },
+    {
+      "path": "source_data/fairness_bins.csv",
+      "sha256": "4c8252a0b2b373e34515ed196f5ca083025ae03075a64aa0753caf282aa5533d",
+      "size": 523
+    },
+    {
+      "path": "source_data/state_ply.csv",
+      "sha256": "9fb46d2216f1c196da4c1e7c8f3362262623e1d0d4e192dbe7a354ba6a267471",
+      "size": 3117
+    },
+    {
+      "path": "verification/EXPORT_REVIEW.json",
+      "sha256": "e1fd0290d6e2a52b045f9d2dae7882dcff9fc86f052666c5d70b2a12b97537dc",
+      "size": 984
+    },
+    {
+      "path": "verification/VALIDATION.json",
+      "sha256": "cea9ce240949422aa6054a5d64e7c30c81bf72d58f1b61d895c734e4f040ef68",
+      "size": 3511
+    },
+    {
+      "path": "verification/pdf_render.png",
+      "sha256": "87d602b670e7f900ca34b35f5f41d19f5ddbaa082a4821f60689a3da4d134f71",
+      "size": 210009
+    }
+  ]
+}

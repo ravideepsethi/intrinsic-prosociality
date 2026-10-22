@@ -1,0 +1,141 @@
+# R8. The five open analyses
+
+Each item names the `% TODO` it closes, the sample in the paper's own terms, the construction, the model, what to report, how to read it, and where the result lands. Samples, fixed effects, and inference are those already used for the neighbouring tables unless stated. Numbers quoted are from the current manuscript (Oct8.tex) and are the values to reproduce before any new fit.
+
+Conventions: evaluation is Stockfish 18 at 100,000 nodes from the disconnected player's side; "competitive" is evaluation ≥ −100, "clearly worse" ≤ −300; the primary gradient model is the natural cubic spline of Appendix B.1 (boundaries −100/+600, knots 0, +100, +300, separate indicators for ≥ +600 and forced mates) with chooser, stage-band, speed, and month fixed effects, standard errors clustered by chooser, and the three planned contrasts f(100)−f(0), f(300)−f(100), f(500)−f(300) as one Holm family; the IV headline model is Table 5 Panel A (2,682,330 exposures; 4,324 cells of exposure month × exact time control × 100-point bin of the pair's mean rating; exposure-date and hour-of-week effects; the control set listed in Appendix D.2; shared-account-or-exposure-date CR0 covariance; Wald and Anderson–Rubin intervals).
+
+---
+
+## 1. Flagged accounts in the Patron comparison (TODO at 3.2, line 209)
+
+**Question.** Granting in lost positions could mark rating manipulation (sandbagging, boosting, collusion), which the platform flags and which may close the account or make the badge unavailable. If so, the negative lost-position association in Table 3 Panel B (−0.195) could be mechanical rather than a statement about type.
+
+**Sample.** The state-specific Patron sample: 599,045 accounts with at least four competitive and four clearly-worse opportunities, 24 matching cells (Table 3 Panels B and C; Appendix E.3). Secondary: the main matched comparison, 851,131 accounts in 36 cells (Table 3 Panel A).
+
+**Construction.** From the August 2026 profile query, read the two boolean fields of the public user object: `tosViolation` and `disabled`. Define `flagged = tosViolation OR disabled`. Also keep the "queried, no profile returned" status from Table S4.1 as a third category, since a closed account can return no profile at all.
+
+**Report.**
+- (a) Share flagged, and share with no profile returned, in each of the four groups of Table 3 Panel C (granted only in competitive positions; both; neither; only in clearly-worse positions), with counts.
+- (b) Table 3 Panel B re-estimated on the unflagged accounts: the two indicators, their difference, HC1 and cell-clustered SEs, the account count.
+- (c) Table 3 Panel C rates on the unflagged accounts.
+- (d) A bound that treats flagged accounts' badge outcomes as missing rather than as non-Patrons, computed as in S4.1 (least and most favourable fills), for the Panel B competitive and clearly-worse coefficients.
+- (e) Panel A re-estimated without flagged accounts (one row).
+
+**Read.** If flagged shares are similar across the four groups and (b) reproduces 0.388 / −0.195 / 0.583 within a few hundredths, the proposition's reading stands. If the clearly-worse-only group is heavily flagged and the −0.195 shrinks toward zero without them, the lost-position sign is partly the platform's enforcement, and 3.2 and 5.2 must say so; the competitive-position coefficient is the one that must survive.
+
+**Lands.** New subsection E.4 "Flagged accounts" with one table; one sentence in 5.2 after the state-specific result; the TODO deleted. If (b) moves materially, Table 3 gains a flagged-excluded column.
+
+---
+
+## 2. Predicted-outcome balance row (TODO at 6.2, line 511; R7 item A3)
+
+**Question.** Convert whatever imbalance exists on observed pre-exposure traits into the reduced-form bias it implies, so "detect no such group at the precision available" becomes a number read against 0.02039.
+
+**Sample.** S0, the headline exposure rows (2,682,330).
+
+**Construction.** As specified in R7 A1–A3, restated:
+1. On S0 with the fixed effects and X0-NH (the headline controls minus the recipient-history and volume controls), regress the later-grant outcome Y on the fifteen traits T15 entered jointly, each standardised to unit SD on the estimation rows. Keep the fifteen coefficients.
+2. Form Ŷ_i = Σ_k b_k · trait_ik (traits only; no fixed effects, no X0-NH).
+3. Regress Ŷ on the pooled score under the Panel A model (fixed effects, X0-NH, score in reference-SD units of 0.0594), shared-account-or-date covariance.
+4. Repeat 1–3 with the receipt indicator D in place of Y to get the D̂ row.
+
+**Report.** Coefficient and SE of step 3, in percentage points per reference SD; the same for D̂. Also the R² of step 1 (how much of Y the traits predict), since the bias row is only as informative as that fit.
+
+**Read.** The Ŷ coefficient is the implied reduced-form bias from imbalance on observed traits. Against the reduced form 0.02039 (SE 0.009): a value below about 0.002 means observed-trait imbalance can account for at most a tenth of the reduced form; a value near 0.02 means the balance evidence does not separate the two. The D̂ row is read against the first stage 6.912.
+
+**Lands.** A row in Table 5 Panel B beneath the single-trait line ("Implied reduced-form bias from observed traits"), and the 6.2 sentence rewritten as "The recipients at the margin of entry do not differ on the traits that predict the outcome: the imbalance on all fifteen observed traits implies a reduced-form bias of [x] points (SE [s]), against a reduced form of 0.020." The A4(c) version on the F50 entry frame is the natural companion and can replace "at the precision available" in the entry paragraph.
+
+---
+
+## 3. Which account of the board: three analyses (TODO at 7.2, line 536)
+
+The three share one purpose: desert says the chooser responds to the opponent's performance on the board; expectations-based reference dependence says the chooser responds to their own winning chances. The two coincide on the evaluation gradient and differ on what else should matter.
+
+### 3(1). Winning chances held fixed
+
+**Training sample.** Standard rated pool games from the same 24 months that ended by checkmate, resignation, stalemate, agreed draw, repetition, fifty-move rule, or insufficient material. Exclude both timeout statuses (`outoftime` cannot be separated into disconnections and ordinary flag falls) and aborted games. Draw 2,000,000 games, stratified by speed category in the proportions of the analysis sample (Table A.2 Panel B).
+
+**Positions.** One position per game. Sample the ply from the analysis sample's ply distribution within speed (so that the model is fitted where opportunities occur), restricted to plies strictly before the game's final ply. Evaluate it with the same engine and budget, from the side to move's perspective, matching the opportunity convention in which the disconnected player is the side to move. Record both clocks at that ply from the PGN `%clk` comments, both displayed ratings, the time-control base and increment, the speed category, and the ply.
+
+**Model.** A cross-fitted multinomial model (five folds by game; gradient boosting or a flexible logit with splines in evaluation, ply, and both clocks, interacted with speed) of the game's result from the perspective of the side not to move, the chooser's analogue. Output the chooser-analogue's expected score Ê = P(win) + ½·P(draw). Report out-of-fold calibration by decile of Ê and by evaluation band.
+
+**Apply.** Score every opportunity in the primary gradient sample (11,590,459 competitive opportunities after ply ten) with Ê from its final position, last recorded clocks, ratings, time control, speed, and ply. Report the distribution of Ê within the eight evaluation bins of Table B.1 Panel B, to show how much variation in Ê exists at fixed evaluation; that variation (from clocks, ratings, and ply) is the identifying variation.
+
+**Regressions.** Three models on identical rows, the primary gradient model throughout:
+- (i) evaluation spline only (reproduces Table B.1 row 1: 0.241 / 0.529 / 1.021);
+- (ii) Ê only, as a natural cubic spline with knots at its quintiles; report the adjusted grant rate by decile of Ê;
+- (iii) both. Report the three evaluation contrasts at fixed Ê and the Ê decile profile at fixed evaluation.
+
+**Read.** Under reference dependence, the evaluation contrasts in (iii) collapse toward zero and the Ê profile survives. Under desert, the evaluation contrasts survive and the Ê profile flattens. Both surviving means the accounts are not separated at this resolution, which 7.2 then says with numbers.
+
+**Cost.** 2,000,000 new engine evaluations; everything else is regression on existing data.
+
+### 3(2). The chooser's own clock, by speed
+
+**Sample and model.** The primary gradient sample and model with the clock controls of Table B.1 row 2, replacing the pooled log-seconds terms with categories of each player's last recorded remaining time as a share of the time-control base (below 10 percent; 10–25; 25–50; 50–100; above 100), with a missing category, each interacted with speed category (ultrabullet and bullet; blitz; rapid; classical).
+
+**Report.** The chooser-clock category coefficients by speed (reference: 50–100 percent), the opponent-clock coefficients by speed, and the three evaluation contrasts, in one table. Add a row with the chooser's clock entered linearly as log seconds by speed for a one-number summary.
+
+**Read.** Under reference dependence the chooser grants more as their own time falls, because their winning chances fall, and most in the fast speeds; under desert the chooser's own clock is irrelevant at a fixed board. The opponent's clock can matter under both.
+
+**Note.** The last recorded reading is at the chooser's last move, before the countdown; say so in the note.
+
+### 3(3). How the advantage was reached
+
+**Sample.** The replay sample of Appendix B.2: 20,000 chooser accounts, 260,863 opportunities, every position before the final one evaluated with the last exact score; the 72,573 evaluated competitive opportunities after ply ten and the 213,388 pooled competitive-and-clearly-worse rows.
+
+**Construction.** For each opportunity, per-ply evaluation changes from the rival's perspective, clipped at ±1,000 centipawns; mates as in B.2. On the rival's own moves the change is a non-positive loss; on the chooser's moves it is a non-negative gain for the rival. Define R = the rival's cumulative centipawn loss over its own moves and C = the chooser's cumulative loss over its own moves; the final evaluation A satisfies A ≈ C − R, so at a fixed endpoint the decomposition has one free dimension. Also define each player's average centipawn loss per move (ACPL = R or C divided by own moves), which is the platform's own accuracy measure and does not scale with game length.
+
+**Model.** The B.2 specification (chooser, stage-band, speed, and month fixed effects; eight final-evaluation categories in the competitive region, an unrestricted spline in the clearly-worse region), adding the rival's ACPL (primary) or R per 100 centipawns (secondary), one at a time; then the pooled asymmetry model with the rival term interacted with the competitive region. Do not enter C alongside R in the totals model; it is implied by A and R.
+
+**Report.** Rival-ACPL and R coefficients in each region, the interaction, the three planned contrasts with and without the term, and (as a bridge to the existing result) the last-move cost coefficient of Table B.2 re-estimated with the whole-game term present.
+
+**Read.** At a fixed final position, a larger R means the rival's advantage was reached in a sloppier game: the rival gave more back and the chooser gave more away. Desert predicts a negative coefficient in the competitive region, since an advantage reached cleanly is better earned, and nothing in the clearly-worse region. Reference dependence predicts zero in both, since the endpoint is held fixed. The last-move cost of −0.181 per 100 centipawns (Table B.2) is the one-move version of this test.
+
+**Lands (all three).** A new Section 4.6 "Winning chances and the opponent's play" of two paragraphs, three tables in Appendix B (B.4–B.6), and the 7.2 paragraph "Which account of the board" rewritten around the numbers. The TODO's claim "under reference dependence only (1) should matter; under desert, (3) should" becomes the paragraph's organising sentence, with (2) as the clock-side check.
+
+---
+
+## 4. Receipt effect by prior experience of the choice (TODO at 7.2, line 542)
+
+**Question.** Whether the receipt effect is a response to generosity received or learning that the option exists.
+
+**Sample.** The headline exposure rows, 2,682,330 (or the author-clean 2,682,329 used for the subgroup first stages in Table S3.7; state which).
+
+**Split.** Primary: whether the recipient had faced any chooser-side competitive-position grant-or-claim decision before the exposure in the full recorded active-decision chronology (the all-source chronology used for repayment capacity, Section S1.5), not only in the 90-day window. Secondary: the 90-day split already used in Table S3.7 (no competitive choice, 1,319,101; choices, none granted, 1,291,893; granted at least once, 71,335).
+
+**Model.** The Table 5 Panel A model within each group, and one pooled model with the group indicator, receipt × group instrumented by score × group, and the controls common across groups, to obtain the difference and its SE under the shared-account-or-date covariance.
+
+**Report.** Per group: exposures, receipt rate, first stage (SE), reduced form (SE), 2SLS (SE), Wald and AR intervals, first-stage F. Then the difference in 2SLS between never-faced and faced, with SE and AR-type interval, for both splits.
+
+**Read.** Concentrated among recipients who had never faced the choice, with the faced-group estimate near zero: learning. Similar across groups: not learning, and 7.2's "does not separate" sentence is replaced. A faced-group estimate that is larger would point to reinforcement of an existing disposition, which is a third reading to state if it appears.
+
+**Lands.** Two rows in Table 5 Panel B or a short Table D.8; one sentence in 6.2; the 7.2 paragraph "What the receipt estimate bundles" rewritten; the TODO deleted.
+
+---
+
+## 5. The author's accounts (TODO at A.1, line 579)
+
+**Claim to verify.** "No reported rate or estimate elsewhere moves at the displayed precision when they are removed" (__PRIVATE_VALUE_1__ and __PRIVATE_VALUE_2__; nine competitive-position opportunities and one grant; one exposure).
+
+**Two acceptable resolutions.**
+
+(a) Verify. Recompute without the two accounts: Table 1 (all counts and rates, including the competitive-minus-clearly-worse difference and ratio); Table B.1 row 1 (the three contrasts); Table 2 (the three correlations and the two second-year rates); Table 3 Panels A–C (rates and the joint model; also state whether either account is in the acquisition cohort at all); Table 4 row 1 (0.882); Table 5 Panel A. If every displayed value is unchanged, keep the sentence and cite this check in the replication notes. The arithmetic makes this the expected outcome: nine opportunities in 15,207,423 cannot move a rate at three decimals, and one account in 212,829 moves the Patron rate by at most 0.0005 points.
+
+(b) Apply one rule. Drop both accounts at sample construction, add a row to Table A.1 ("Excluded: the author's accounts", with the opportunity count), rerun the pipeline, and delete the sentence and the three table notes that currently mention the exclusion.
+
+(a) is an afternoon; (b) is a full rerun and removes the inconsistency rather than documenting it. Either is fine for submission; (b) is cleaner if the pipeline is being rerun for item 3 anyway.
+
+---
+
+## Order and cost
+
+| Item | New data | Compute | Blocks submission? |
+|---|---|---|---|
+| 2 (predicted-outcome row) | none | minutes | no, but cheapest and closes a sentence in 6.2 |
+| 4 (experience split) | none | hours | no |
+| 1 (flagged accounts) | none (fields already in the August query) | hours | no, but a platform-literate referee will ask |
+| 5 (author accounts) | none | (a) hours, (b) a rerun | no |
+| 3 (which account) | 2,000,000 engine evaluations for 3(1) | days | no; it is the paper's main open question and the referee report's first substantive point |
+
+Reproduce the quoted manuscript values from archived objects before any new fit, as in R7.

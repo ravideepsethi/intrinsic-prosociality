@@ -1,0 +1,78 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+shopt -s nullglob
+task_bundle="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+task_project="${CHOOSER_SUPPORT_PROJECT:-/Volumes/XT_Pro/lichess_kindness}"
+task_sample="${CHOOSER_SUPPORT_SAMPLE:-$task_project/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE}"
+task_transfer="${CHOOSER_SUPPORT_TRANSFER:-$HOME/Desktop/Lichess_Desktop}"
+fail() { printf 'STOP: %s\n' "$*" >&2; exit 1; }
+[[ -d "$task_project" ]] || fail "Project folder not found; connect XT_Pro: $task_project"
+[[ -f "$task_sample/_SUCCESS.json" && -d "$task_sample/panel" ]] || fail "Certified pool/nonadjacent panel not found: $task_sample"
+mkdir -p "$task_transfer"
+cd "$task_bundle"
+shasum -a 256 -c PACKAGE_MANIFEST.sha256 || fail "Package checksum verification failed."
+export PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 MPLBACKEND=Agg
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
+export VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1
+export PYTHONPATH="$task_bundle${PYTHONPATH:+:$PYTHONPATH}"
+task_python=""
+task_base_python=""
+if [[ -n "${CHOOSER_SUPPORT_PYTHON:-}" ]]; then
+  task_candidates=("$CHOOSER_SUPPORT_PYTHON")
+else
+  task_candidates=(
+    "$task_transfer"/chooser_support_python.*/bin/python
+    "$task_transfer"/rd_marker_python.*/bin/python
+    "$task_transfer"/pool_main_wave2b1_python.*/bin/python
+    "$task_transfer"/pool_main_wave2a_python.*/bin/python
+    "$task_transfer"/pool_main_wave1_python.*/bin/python
+    "$task_project/venv/bin/python" "$task_project/.venv/bin/python"
+    "${CONDA_PREFIX:-/nonexistent}/bin/python" "${VIRTUAL_ENV:-/nonexistent}/bin/python"
+    "$HOME/miniforge3/bin/python" "$HOME/miniconda3/bin/python" "$HOME/anaconda3/bin/python"
+    /opt/anaconda3/bin/python /opt/homebrew/bin/python3 /usr/local/bin/python3
+    "$(command -v python3 || true)" "$(command -v python || true)"
+  )
+fi
+for task_candidate in "${task_candidates[@]}"; do
+  [[ -n "$task_candidate" && -x "$task_candidate" ]] || continue
+  if "$task_candidate" -B - <<'PY' >/dev/null 2>&1
+import sys
+assert sys.version_info >= (3, 11)
+from runner.common import verify_runtime_dependencies
+verify_runtime_dependencies()
+PY
+  then
+    task_python="$task_candidate"
+    break
+  fi
+  if [[ -z "$task_base_python" ]] && "$task_candidate" -c 'import sys,venv; assert sys.version_info >= (3,11)' >/dev/null 2>&1; then
+    task_base_python="$task_candidate"
+  fi
+done
+if [[ -z "$task_python" ]]; then
+  [[ -n "$task_base_python" ]] || fail "No usable Python 3.11+ found. Set CHOOSER_SUPPORT_PYTHON to an absolute interpreter path."
+  task_environment="$(mktemp -d "$task_transfer/chooser_support_python.XXXXXX")"
+  "$task_base_python" -m venv "$task_environment"
+  task_python="$task_environment/bin/python"
+  "$task_python" -I -m pip --disable-pip-version-check --require-virtualenv install --only-binary=:all: --no-user -r "$task_bundle/requirements.lock.txt"
+fi
+printf 'Python: %s\n' "$task_python"
+"$task_python" -B -u -m runner.self_test
+printf '\nStarting chooser-support census on the authenticated pool/nonadjacent panel.\n'
+printf 'Expected runtime: approximately 2–5 minutes; first dependency installation or concurrent jobs can add time.\n'
+printf 'Sample: %s\n' "$task_sample"
+printf 'Results: %s\n' "$task_project/output/pool_chooser_support_v100"
+printf 'Rerun this launcher after interruption to resume verified census stages.\n'
+task_command=("$task_python" -B -u -m runner.audit
+  --project-root "$task_project" --sample-root "$task_sample" --transfer-root "$task_transfer"
+  --workers "${CHOOSER_SUPPORT_WORKERS:-2}" --hash-workers "${CHOOSER_SUPPORT_HASH_WORKERS:-8}"
+  --merge-threads "${CHOOSER_SUPPORT_MERGE_THREADS:-8}" --worker-memory "${CHOOSER_SUPPORT_WORKER_MEMORY:-2GB}"
+  --merge-memory "${CHOOSER_SUPPORT_MERGE_MEMORY:-4GB}" --min-free-gb "${CHOOSER_SUPPORT_MIN_FREE_GB:-5}"
+)
+task_command+=("$@")
+if command -v caffeinate >/dev/null 2>&1; then
+  caffeinate -dimsu "${task_command[@]}"
+else
+  "${task_command[@]}"
+fi

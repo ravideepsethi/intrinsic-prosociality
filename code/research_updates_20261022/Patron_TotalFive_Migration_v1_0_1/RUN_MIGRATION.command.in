@@ -1,0 +1,22 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1
+PATRON_PACKAGE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PATRON_PROJECT="/Volumes/XT_Pro/lichess_kindness"
+PATRON_DESKTOP="$HOME/Desktop/Lichess_Desktop"
+PATRON_PYTHON="$PATRON_PROJECT/venv/bin/python"
+mkdir -p "$PATRON_DESKTOP"
+PATRON_LOG="$PATRON_DESKTOP/PATRON_TOTALFIVE_RUN_$(date -u +%Y%m%dT%H%M%SZ).log"
+{
+  echo "Patron total-five migration 1.0.1 startup repair: offline; no new API requests."
+  echo "Primary checkpoint: provisional 10–30 minutes. Full run: provisional 1–6 hours."
+  echo "Full duration depends on newly needed first-reference histories and chronology; not benchmarked."
+  echo "Checkpoints 25/50/75/100%; verified stages resume. Log: $PATRON_LOG"
+  if [[ ! -x "$PATRON_PYTHON" ]]; then echo "Existing project Python absent: $PATRON_PYTHON"; exit 1; fi
+  cd "$PATRON_PACKAGE"
+  shasum -a 256 -c PACKAGE_MANIFEST.sha256
+  "$PATRON_PYTHON" -c 'import numpy, pandas, pyarrow, duckdb, scipy, chess; print("Analysis dependencies available; plotting packages are not required.")'
+  "$PATRON_PYTHON" -m unittest discover -s tests -v
+  "$PATRON_PYTHON" -u code/run_migration.py --project "$PATRON_PROJECT" --desktop "$PATRON_DESKTOP" --workers 10 --memory-gb 11 "$@"
+} 2>&1 | tee "$PATRON_LOG"

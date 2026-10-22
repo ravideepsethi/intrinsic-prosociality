@@ -1,0 +1,108 @@
+Run 2 — fixed 25% checkpoint analysis, version 1.2.2
+
+Use RUN_PHASE_25_ANALYSIS.command --workers 10. Leave the continuous downloader
+running. Wait for CHECKPOINT_025_SAVED, not just the terminal percentage passing
+25. The analysis reads the immutable phase_results/25 snapshot and never reads
+or changes the downloader's live SQLite journals or latest-phase pointer.
+
+Expected runtime: roughly 1–3 hours for the first 25% run, informed by the actual
+74-minute 10% run. This is not a 25% laptop benchmark. New games still require an
+all-history chronology scan; Parquet indexes and completed features are reused.
+Resume skips completed stages. Offline tests normally take 20–90 seconds.
+The terminal prints stage progress, elapsed times and approximate stage ETAs.
+
+What runs
+1. Original frozen ordinary-game placebo: later granting and reaching a choice.
+2. Original frozen entry equations: all five outcomes, with the designated
+   analysis_entry_90 outcome and within-cohort two-primary-test Holm correction.
+3. Cumulative new 25%, the new 10–25% increment, the original 10% hash band,
+   the old author-clean comparison, and their pooled sample. The increment
+   contains distinct games but can share accounts and later outcomes with 10%.
+4. Exact game/feature bridge to the completed 10% analysis, ignoring only
+   reassigned row IDs; numerical reproduction of its coefficients and SEs.
+5. SECONDARY ordinary-game checks using competitive-only historical scores
+   (disconnected player's cp >= -100; at least five past decisions), against
+   the pooled score on identical rows under X0 and XC controls. Both use the
+   same author-clean cross-fitted state reference, strict lag and pair removal.
+6. SECONDARY upper-tail sensitivity: drop scores above the 95th percentile
+   of raw competitive scores in supported new-phase25 ordinary rows. Apply
+   that cutoff to all cohorts, keep cutoff ties, and refit the controls. This
+   changes instrument support and does not establish instrument validity.
+
+The primary specifications, original fixed score SD, endings, calendar rules,
+prospective spacing stream, account identities, and shared-account OR date CR0
+covariance stay fixed. No new matching, outcome search, or new chronological
+scan is needed for the secondary scores. Main receipt IV estimates are not rerun.
+The competitive secondary uses the previous Oct 3 S1/XC SD = 0.09545502195393069
+as a declared unit only; that author-included reference unit does not make this
+an author-clean receipt re-estimation. The pooled unit remains 0.059411690344000595.
+
+Interim interpretation
+All 25% intervals and equivalence checks are nominal interim descriptions.
+Repeated phases are not independent replications. The 10–25% band was specified
+before viewing its outcomes, but this is a post-result diagnostic program.
+The nominal +/-0.015 pp TOST margin and original +0.020385913 pp/SD sensitivity
+benchmark remain separately reported. No abstract/title or causal-identification
+gate is automatically cleared, and download continuation never depends on results.
+
+Authors __PRIVATE_VALUE_1__ and __PRIVATE_VALUE_2__ are removed from focal analytical games, behavioral
+histories, state-reference fitting and later choices. Factual chronology and
+full exposure spacing streams are preserved. Two focal records are explicitly quarantined: the original April 2024 cache
+conflict and the June 2025 saved-response flag in the new 10–25% band. Their
+identities, phase membership and absence from retained pools are checked.
+The immutable c7362f8697b5 coverage and its exact counts bind this amendment.
+Record-level evidence stays on the Mac; the report contains field/error diagnostics.
+Any other unresolved metadata stops. No replacement or imputation is made.
+
+Performance
+Narrow Parquet projection, immutable exact-game feature blocks, reusable donor,
+recipient and future-choice indexes, early eligibility screening, bounded-sort
+chronology and up to 10 spawned workers. At an 11 GiB budget: six feature workers,
+one dense regression at a time. Each worker has one numerical/Arrow/DuckDB
+thread. This avoids oversubscribing RAM. No API requests, Stockfish or rating replay.
+Cache definitions for existing features are byte-for-byte compatible with v1.1.0.
+Only missing games are computed. The 25% sample never substitutes a cache-selected
+sample for the frozen full-SHA256 hash threshold.
+
+Paths
+Project: /Volumes/XT_Pro/lichess_kindness
+Desktop: ~/Desktop/Lichess_Desktop
+Python: /Volumes/XT_Pro/lichess_kindness/venv/bin/python
+Overrides: IV_PROJECT_ROOT, IV_DESKTOP, IV_PYTHON; CLI --workers/--memory-gb/--plan.
+Analysis: derived/replication/run2_phase25_analysis_v120_PRIVATE/<run>/
+Shared cache: derived/replication/run2_feature_cache_v1_PRIVATE/
+Report: RUN2_PHASE_025_ANALYSIS_REPORT_<run>.zip and .zip.sha256 on Desktop.
+Final status: PHASE_025_AVAILABLE_CASE_ANALYSIS_COMPLETE.
+A PHASE_025_PRIMARY_COMPLETE_SECONDARY_PENDING report already contains primary fits.
+Return the small aggregate ZIP and checksum, not individual game/cache files.
+
+This package is validated with synthetic inputs here. The production Parquets
+remain on your Mac; no new 25% empirical result has been computed in ChatGPT.
+
+Packaging correction (v1.2.1)
+v1.2.0 omitted two nested PACKAGE_MANIFEST.sha256 files from its ZIP. This
+release includes both original, unchanged manifests, and adds a regression
+test that verifies nested-manifest closure from the extracted package.
+The launcher is tested from a fresh extraction of the final ZIP.
+Analysis specifications, data sources and feature-cache definitions are unchanged.
+
+Two-record continuation (v1.2.2)
+The reviewed 25% coverage has 14,814,253 fixed additional-frame rows;
+7,931,804 retained pool games and 5,160,774 ordinary games before chronology.
+There are two unresolved focal records, one each in April 2024 and June 2025.
+The old one-record runner intentionally stopped. This is an explicit interim
+available-case amendment made before seeing any 25% model estimates.
+Both records remain unresolved and in the fixed denominator. Private audit
+Parquets preserve their identities and source values. The June error codes
+and field comparisons are exported in metadata_quarantine.json.
+Original April identity is checked against the previous completed audit.
+June must be the flagged saved response in the exact 10–25% hash band.
+Counts are reported as one excluded focal record in each disjoint band, two
+in cumulative new_phase25/pooled, and zero in old_author_clean. Factual history
+and prospective spacing streams are unchanged. No influence bound is asserted.
+
+Completed v1.2.1 coverage Parquets are authenticated and reused by hard link
+(or copied across file systems), without rerunning the metadata joins.
+Expect roughly 2–5 minutes for authentication and the two-record audit, then
+roughly 1–3 hours for the full first analysis; these are laptop estimates.
+The source inputs and feature-cache definitions remain compatible with v1.1.0.

@@ -1,0 +1,147 @@
+{
+  "package": "Pool_Rating_Milestones_v1_0_0",
+  "archive_name": "Pool_Rating_Milestones_v1_0_0.zip",
+  "archive_sha256": "e4a12b1e3907704aa38f3fa7858651db4fca6f87c8122641407685ced8cf8985",
+  "archive_size": 137361,
+  "archive_root": "Pool_Rating_Milestones_v1_0_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "METHODS.md",
+      "published_path": "METHODS.md",
+      "sha256": "9a45c8bafcd9b4a114bbddc559baf5f79091c41f20391a51da564a5a3d88894a",
+      "published_sha256": "9a45c8bafcd9b4a114bbddc559baf5f79091c41f20391a51da564a5a3d88894a",
+      "size": 11468
+    },
+    {
+      "path": "README.md",
+      "published_path": "README.md",
+      "sha256": "391980451aeecbc774daddaf9c7ab24cf9bd52cafde7cd975440d6bf523fca1f",
+      "published_sha256": "391980451aeecbc774daddaf9c7ab24cf9bd52cafde7cd975440d6bf523fca1f",
+      "size": 2948
+    },
+    {
+      "path": "RUN_MILESTONES.command",
+      "published_path": "RUN_MILESTONES.command.in",
+      "sha256": "51ca9d06ae23001e80ee765807b737c17cae9969a7da6d3cfab5d3cb736aabe7",
+      "published_sha256": "51ca9d06ae23001e80ee765807b737c17cae9969a7da6d3cfab5d3cb736aabe7",
+      "size": 2664
+    },
+    {
+      "path": "VALIDATION.md",
+      "published_path": "VALIDATION.md",
+      "sha256": "84f56ab77d75b2b4f0d7c01af05c8da991dc7c161ade312e598802f2d164714e",
+      "published_sha256": "84f56ab77d75b2b4f0d7c01af05c8da991dc7c161ade312e598802f2d164714e",
+      "size": 2086
+    },
+    {
+      "path": "estimator.py",
+      "published_path": "estimator.py",
+      "sha256": "9685970385a69147196d24add80edde3804db8a75fb6e5aae74dfd77ba57150c",
+      "published_sha256": "9685970385a69147196d24add80edde3804db8a75fb6e5aae74dfd77ba57150c",
+      "size": 8905
+    },
+    {
+      "path": "fe_core.py",
+      "published_path": "fe_core.py",
+      "sha256": "b29af8489387c7cae0ea6123949eec9f99dd7bdb66040a8c679da0a79a69c9ab",
+      "published_sha256": "b29af8489387c7cae0ea6123949eec9f99dd7bdb66040a8c679da0a79a69c9ab",
+      "size": 3308
+    },
+    {
+      "path": "milestone_model.py",
+      "published_path": "milestone_model.py",
+      "sha256": "9060a676856b6948b8e8e6edc9e8ba0a3b7d02960307fd61abb4bf657e9dae88",
+      "published_sha256": "9060a676856b6948b8e8e6edc9e8ba0a3b7d02960307fd61abb4bf657e9dae88",
+      "size": 6811
+    },
+    {
+      "path": "pooled_utils.py",
+      "published_path": "pooled_utils.py",
+      "sha256": "bf1b00defcbf75d1b1acc8d6d166167787ace3b69bce2c8d667ac27a5f3d1c9e",
+      "published_sha256": "bf1b00defcbf75d1b1acc8d6d166167787ace3b69bce2c8d667ac27a5f3d1c9e",
+      "size": 2000
+    },
+    {
+      "path": "prepare.py",
+      "published_path": "prepare.py",
+      "sha256": "97a38e781c1e8a3f3efc33ca42807162f11e096e3d075d1e676abb8b11681556",
+      "published_sha256": "97a38e781c1e8a3f3efc33ca42807162f11e096e3d075d1e676abb8b11681556",
+      "size": 9115
+    },
+    {
+      "path": "render.py",
+      "published_path": "render.py",
+      "sha256": "a32cac33e0dfc444e4976d3b4e86f29b2fe92723c6e5f6eed5bd7f1df24af3ef",
+      "published_sha256": "a32cac33e0dfc444e4976d3b4e86f29b2fe92723c6e5f6eed5bd7f1df24af3ef",
+      "size": 3700
+    },
+    {
+      "path": "requirements.txt",
+      "published_path": "requirements.txt",
+      "sha256": "8025e1e46c573b3b7e3c31717171cd8df0f40cb8cdda4889cf286ccf97d8be6f",
+      "published_sha256": "8025e1e46c573b3b7e3c31717171cd8df0f40cb8cdda4889cf286ccf97d8be6f",
+      "size": 79
+    },
+    {
+      "path": "run_milestones.py",
+      "published_path": "run_milestones.py",
+      "sha256": "e5105de1cd76ccfe645ee146b995738c978a619ccb9d08e0a7aedf778b7f5a93",
+      "published_sha256": "e5105de1cd76ccfe645ee146b995738c978a619ccb9d08e0a7aedf778b7f5a93",
+      "size": 14695
+    },
+    {
+      "path": "self_test.py",
+      "published_path": "self_test.py",
+      "sha256": "0cf9b144f22ba2af18d8c24e745cb481340b74e571be7e3277001c8a9421ba57",
+      "published_sha256": "0cf9b144f22ba2af18d8c24e745cb481340b74e571be7e3277001c8a9421ba57",
+      "size": 8979
+    },
+    {
+      "path": "source/__init__.py",
+      "published_path": "source/__init__.py",
+      "sha256": "52b1da5d4a8717236fccd7317e87a652c65eebe4de6a71d6d6981d413934b76d",
+      "published_sha256": "52b1da5d4a8717236fccd7317e87a652c65eebe4de6a71d6d6981d413934b76d",
+      "size": 50
+    },
+    {
+      "path": "source/pool_wave1_common.py",
+      "published_path": "source/pool_wave1_common.py",
+      "sha256": "f9c714c549c6cd68a7d2dbdb2c17d5abacfdfc12dc6526752f03ab2505bbff43",
+      "published_sha256": "f9c714c549c6cd68a7d2dbdb2c17d5abacfdfc12dc6526752f03ab2505bbff43",
+      "size": 21988
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "CODE_PROVENANCE.json",
+      "sha256": "4ededf0f1779c58e9bb50d8801425fc10f36e24280535b95fd1f04897cd6d267",
+      "size": 1596
+    },
+    {
+      "path": "PACKAGE_MANIFEST.sha256",
+      "sha256": "0c0eae764203b5ab25ca1f2b6ca3194c7a90365ae9145b34ae2265de74e79a61",
+      "size": 1712
+    },
+    {
+      "path": "RUN_TERMINAL.txt",
+      "sha256": "ec9b908a5049a8c53717d45dc69eaf51ff9a6000a523aa90bb47605b54d01224",
+      "size": 526
+    },
+    {
+      "path": "authority/SAMPLE_AUTHORITY.json",
+      "sha256": "81c34113e7a888629a834a17235a71dcf369a2d590755fd9412ee42151d9b2f3",
+      "size": 1234
+    },
+    {
+      "path": "evidence/Pool_Main_Sample_24M_Report.zip",
+      "sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+      "size": 96936
+    },
+    {
+      "path": "evidence/Pool_Main_Sample_24M_Report.zip.sha256",
+      "sha256": "d2e6c0953ff2de7cc7235b98d568c884e4fa8067b8aa81d22efe1ac3484d6f59",
+      "size": 128
+    }
+  ]
+}

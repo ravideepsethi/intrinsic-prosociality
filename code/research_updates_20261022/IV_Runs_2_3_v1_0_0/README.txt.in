@@ -1,0 +1,157 @@
+IV Runs 2 and 3 — v1.0.0 — 30 September 2026
+
+Purpose and scope
+
+Start the requested work from the existing Mac caches. This package does not
+contain your private data and cannot produce empirical results on this host.
+
+RUN3_LENIENCY.command runs the subgroup first stages and instrument-weighted
+complier descriptions on the verified spaced90.parquet sample. It refreshes the
+necessary score/reference/recipient histories under the author exclusion.
+The formal Frandsen–Lefgren–Leslie test remains UNRUN: the original packages do
+not provide a valid mapping from this dynamic pair-leave-all-out score to that
+test's assignment instruments and inference. No substitute test is mislabeled FLL.
+
+RUN2_RESUME.command continues the existing fixed comparison metadata download.
+It is NOT an expanded placebo estimator. The original download package produces
+metadata only; the expanded frame still needs identity/cache reconciliation and
+an analysis adapter. Its small return report makes that boundary explicit.
+Do not reuse the old 1/1024 estimate and call it the new Run 2 result.
+
+The immediate submission priority—first stage by speed, recipient rating bin,
+month, and recipient prior granting—is fully implemented. Run 3 does not gate
+submission. Run 2 continues to gate the abstract sentence and “Contagious”.
+
+Expected runtime
+
+* Run 3: roughly 1–3 hours initially on a fast laptop with an SSD. This is a
+  planning estimate, not a measured run on your data. The 47.6M-row narrow history
+  caches are reused; no raw PGNs, engine searches, or rating replay. Hash checks
+  and score reproduction may dominate. Completed stages are reusable.
+* Run 2 status: usually under 30 seconds.
+* Run 2 download: remaining IDs / observed throughput, plus retries and export.
+  At preparation there were 57,087,753 targets. At the verified 29.05 games/s,
+  that is 545.9 hours (22.75 days). The earlier “two days” handoff estimate is not
+  supported by the preparation report. The checkpoint may already remove much
+  of this work. The runner prints actual remaining work and a live ETA.
+* Synthetic tests: about 5–30 seconds on a laptop. No live API calls.
+
+Run on the Mac
+
+Place IV_Runs_2_3_v1_0_0.zip in ~/Desktop/Lichess_Desktop, verify the supplied
+SHA256, and extract it there with ditto. Then:
+
+  bash "$HOME/Desktop/Lichess_Desktop/IV_Runs_2_3_v1_0_0/RUN3_LENIENCY.command"
+
+In another terminal, after the current API collector has finished:
+
+  bash "$HOME/Desktop/Lichess_Desktop/IV_Runs_2_3_v1_0_0/RUN2_RESUME.command"
+
+Or inspect progress at any time:
+
+  bash "$HOME/Desktop/Lichess_Desktop/IV_Runs_2_3_v1_0_0/STATUS_RUN2.command"
+
+Recognizable existing collectors are detected and waited for automatically.
+If a separately launched collector uses an unknown script name, wait for it to
+finish before running Run 2, or set IV_WAIT_PID to its PID. No downloader can
+guarantee discovery of an arbitrary unrelated process. Run 3 is local and can
+run alongside an API collector.
+
+Defaults
+
+Project: /Volumes/XT_Pro/lichess_kindness
+Python: /Volumes/XT_Pro/lichess_kindness/venv/bin/python
+Desktop: ~/Desktop/Lichess_Desktop
+No SciPy, pandas, pip installation, or change to the existing environment.
+Uses NumPy, DuckDB and PyArrow already present in your environment.
+Up to 10 processes; CPU/RAM detection reduces workers when required. Each worker
+has one BLAS thread. The largest pooled fit runs separately to avoid overlapping
+full-cohort memory copies. DuckDB spills and Zstandard Parquet are used throughout.
+Optional overrides: IV_PROJECT_ROOT, IV_PYTHON, IV_DESKTOP, IV_WORKERS,
+IV_MEMORY_GB. RAM is an approximate working allowance, not an OS hard limit.
+
+Run 3 design
+
+Input: verified completed 24-month spaced90.parquet, 2,682,330 original rows.
+This is a diagnostic on the existing frozen cohort, not the 32-month extension.
+Original spacing stays fixed. Author-involving rows are excluded without topping
+up the cohort; rows losing score support are counted explicitly.
+
+The author identities __PRIVATE_VALUE_1__ and __PRIVATE_VALUE_2__ are resolved through the original
+verified dictionary and its selected numeric-ID field. Both roles are excluded
+from score histories and nuisance reference data. Recipient behavioral counts
+are adjusted on the identical lagged windows. Factual rating/activity history
+is retained. The original scores are reproduced before any clean score is used.
+This local refresh covers these diagnostics; it does not complete the separate
+project-wide author refresh for every manuscript analysis.
+
+Groups, frozen before new first-stage estimates:
+  Speed: ultrabullet, bullet, blitz, rapid, classical.
+  Recipient displayed rating: below 1200; 1200–1599; 1600–1999; 2000+.
+  Exposure month: all 24 source months (empty/ineligible months are explicit).
+  Recipient prior granting: no fair decision; fair decisions but no grants;
+    at least one grant in [exposure start − 97 days, exposure start − 7 days).
+  Overall: one pooled first stage, not a headline IV reestimate.
+
+Each group has raw and adjusted first stages. Adjusted controls and fixed effects
+are the existing main90 rich specification, refit within subgroup. Inference uses
+the existing shared-account OR exposure-date CR0 covariance and normal intervals.
+The historical reference SD is 0.059411690344000595 for every reported pp effect.
+N, receipts, distinct recipients/choosers, residual score SD, F, partial R² and
+negative/reversal flags accompany each result. Fewer than 2,000 rows or fewer than
+20 receipts/nonreceipts gives an explicit unsupported result. The one-sided
+negative-first-stage p-values receive a Holm correction across all 36 subgroups.
+Positive first stages do not establish individual monotonicity.
+
+Complier means use the ratio sum(z_residual * D * X) / sum(z_residual * D), with
+the same model residualization and clustered ratio variance. They describe the
+continuous instrument's weighted treatment margin under maintained conditional
+IV assumptions, not an observed discrete complier population. Negative weights
+and out-of-range means are reported without clipping. Scores are treated as fixed
+regressors, consistent with the prior analysis; this does not propagate all
+generated-score uncertainty or wider network dependence. Recipient outcome Y is
+not read by Run 3. Nonpositive covariance is reported without repair.
+
+Run 2 boundaries and manuscript use
+
+61,158,951 is the size of the fixed 1/32 frame itself. All endings are retained
+for the entry denominator. The narrow ordinary placebo uses mate/resign/stalemate;
+broader draws are a separate sensitivity. The fixed sample cannot be stopped or
+expanded based on an interim estimate.
+
+The new IV-recipient-restricted placebo is secondary because membership in the
+eventual IV cohort can condition on future behavior. It must not replace the
+prospective entry test. Identity, source, nonadjacency, history, timing and author
+exclusion must be harmonized before the expanded estimates are computed.
+
+The historical precision plan targets SE about 0.005 pp per reference SD, with
+±0.015 pp equivalence assessed by two one-sided 5% tests (90% CI). The handoff's
+±0.005 point-estimate rule is not an equivalence test. A narrow point estimate
+alone cannot validate exclusion. Report the estimate and interval beside the
+roughly 0.020386 pp/SD direct-effect sensitivity number.
+
+Until those estimates exist, retain the IV in the main text with the v2 wording:
+the placebo is centered near zero and its interval includes a value large enough
+to matter. Neither download completion nor Run 3 clears the abstract/title gate.
+
+Reports to return
+
+IV_RUN3_LENIENCY_REPORT_<hash>.zip contains aggregate first-stage and complier
+tables (CSV, JSON, Parquet), design, sample-flow, runtime and formal-test status.
+IV_RUN2_DOWNLOAD_STATUS_628dfb8f80a8.zip contains download accounting and the
+remaining analysis requirements. The private checkpoint database and individual
+game/account Parquets stay on the Mac. Logs are written in Lichess_Desktop.
+
+Sources
+
+Chooser_IV_Expanded_v1_0_0 and verified report f14a1105a9f7.
+Chooser_Comparison_Expansion_v1_0_0 and preparation report 628dfb8f80a8.
+Chooser_Leniency_IV_Pilot_v1_0_0; Chooser_Comparison_Tests_v1_1_0.
+Current project author-exclusion rule and September 29 handoff, A4b.
+FLL: Frandsen, Lefgren and Leslie (2023), Judging Judge Fixed Effects,
+American Economic Review 113(1), 253–277, DOI 10.1257/aer.20201860.
+Author software: https://sites.google.com/view/brighamfrandsen/software
+
+The original comparison downloader is included unchanged under comparison_original
+for provenance/testing. Use the new root launchers; its old launcher pins older
+dependencies and is not the intended entry point for your current environment.

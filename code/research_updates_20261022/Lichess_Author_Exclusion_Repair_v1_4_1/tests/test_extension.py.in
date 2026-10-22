@@ -1,0 +1,100 @@
+"""Tests of new data boundaries, cache invalidation and paired summaries."""
+import os,sys,tempfile,unittest
+from pathlib import Path
+from unittest.mock import patch
+from types import SimpleNamespace
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'code'))
+import engine as e
+import audit_current as audit
+from additional import activity
+from audit_current import audit_zero,pinned_report,unique
+from compare import compare_frames
+from runtime import estimate
+
+class ExtensionTests(unittest.TestCase):
+    def test_launch_hash_reuse_and_mutation(self):
+        with tempfile.TemporaryDirectory() as temp,patch.dict(os.environ,{'AUTHOR_EXCLUSION_SESSION':'test-launch'}):
+            root=Path(temp);p=root/'data';p.write_bytes(b'original')
+            auth=dict(month_records=[dict(month='2023-11',path=str(p),expected_sha256=e.sha(p),verified_signature=e.signature(p))],
+                      verification_session='test-launch',sample_root=str(root),panel_root=str(root),success_path=str(root/'receipt'))
+            e.write(root/'PRIVATE/inputs/excluded_AUTH.json',auth)
+            with patch.object(e,'sha',side_effect=AssertionError('Repeated byte scan in same launch')):
+                loaded=e.load_auth(root,'excluded');e.guard_auth(loaded)
+            # A different launch must actually invoke byte verification.
+            with patch.dict(os.environ,{'AUTHOR_EXCLUSION_SESSION':'next-launch'}),patch.object(e,'sha',wraps=e.sha) as hashed:
+                e.load_auth(root,'excluded');self.assertEqual(hashed.call_count,1)
+            p.write_bytes(b'mutated!')
+            with self.assertRaisesRegex(RuntimeError,'changed'):e.load_auth(root,'excluded')
+            with self.assertRaisesRegex(RuntimeError,'changed'):e.guard_auth(loaded)
+
+    def test_audit_fails_for_either_role_missing_id_and_changed_report(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);p=root/'rows.parquet';args=SimpleNamespace(memory_gb=4,workers=2)
+            for left,right in [([7,8],[8,7]),([99,8],[8,7]),([7,8],[8,99]),([None,8],[8,7])]:
+                e.pd.DataFrame(dict(left=left,right=right)).to_parquet(p,index=False)
+                if left==[7,8] and right==[8,7]:self.assertEqual(audit_zero([p],'left','right',[99],root,args),2)
+                else:
+                    with self.assertRaisesRegex(RuntimeError,'Author/missing'):audit_zero([p],'left','right',[99],root,args)
+            for d in ['expected','actual']:(root/d).mkdir();(root/d/'result.txt').write_text('accepted')
+            self.assertEqual(pinned_report(root/'expected',root/'actual'),1)
+            (root/'actual/result.txt').write_text('changed')
+            with self.assertRaisesRegex(RuntimeError,'changed'):pinned_report(root/'expected',root/'actual')
+            with self.assertRaisesRegex(RuntimeError,'found 2'):unique([1,2],'ambiguous cache')
+
+    def test_activity_rebuilds_both_state_membership_and_rates(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);rows=[]
+            # a loses its only worse opportunity; b loses an author-facing grant;
+            # c remains a genuine never-granter. Exact-name lookalike is retained.
+            for user,other,board,y in [('a','ok',0,1),('a','__PRIVATE_VALUE_1__',-300,0),('b','ok',0,0),('b','__PRIVATE_VALUE_2__',0,1),('b','ok',-300,1),('c','ok',0,0),('c','ok',-300,0),('__PRIVATE_VALUE_3___fan','ok',0,1),('__PRIVATE_VALUE_4___fan','ok',-300,0)]:
+                rows.append(dict(game_id=str(len(rows)),chooser_user_id=user,chooser_username_norm=user,disconnected_username_norm=other,engine_eval_cp_disconnected=board,outcome_kind_draw=y))
+            source=root/'source.parquet';e.pd.DataFrame(rows).to_parquet(source,index=False)
+            filtered=e.filter_month((dict(month='2023-11',path=str(source),expected_sha256=e.sha(source),rows=len(rows)),str(root/'filtered')))
+            results=[]
+            for tag,p in [('before',source),('after',Path(filtered['output']['path']))]:
+                out=root/tag;(out/'report').mkdir(parents=True)
+                activity(SimpleNamespace(variant='excluded',workers=2,memory_gb=4),dict(month_records=[dict(path=p)]),out)
+                results.append(e.pd.read_csv(out/'report/state_rates_and_ratios.csv'))
+            before,after=[d.query("scope=='all' and weighting=='equal_chooser'").iloc[0] for d in results]
+            self.assertEqual(before.choosers,4);self.assertEqual(after.choosers,3)
+            self.assertAlmostEqual(before.competitive_rate_pct,62.5)
+            self.assertAlmostEqual(after.competitive_rate_pct,100/3)
+            self.assertAlmostEqual(after.worse_rate_pct,100/3)
+            self.assertEqual(after.observed_nongranters_retained,1)
+            self.assertEqual(after.competitive_grants,1)
+
+    def test_activity_comparison_uses_corresponding_standard_error(self):
+        a=e.pd.DataFrame([dict(scope='all',weighting='equal_chooser',gap_pp=2.,gap_se_pp=.2,competitive_rate_pct=3.,competitive_rate_se_pct=.5,ratio_status='ok')])
+        b=a.copy();b['gap_pp']=2.1;b['ratio_status']='undefined'
+        rows,status=compare_frames(a,b,'activity','rates.csv')
+        self.assertEqual(status['matched_rows'],1)
+        gap=next(r for r in rows if r['metric']=='gap_pp')
+        self.assertAlmostEqual(gap['absolute_change_in_included_se_units'],.5)
+        self.assertTrue(any(r['status']=='IDENTIFICATION_OR_STATUS_CHANGED' for r in rows))
+
+    def test_eta_uses_finished_pair_and_skips_completed_work(self):
+        statuses={'included/core':dict(status='COMPLETE',seconds=600)}
+        r=estimate([('included','core'),('excluded','core')],statuses,inputs=False,audit=False)
+        self.assertAlmostEqual(r['low_minutes'],7);self.assertAlmostEqual(r['high_minutes'],16)
+        self.assertEqual(r['basis'],['paired measurement'])
+
+    def test_mechanism_reuse_requires_zero_hits_in_exact_eligible_inputs(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);old=root/'derived/replication/mechanism_separation_v100_PRIVATE'
+            evidence=root/'evidence/mechanism';report=root/'derived/replication/mechanism_rd_audit_resume_v101_PRIVATE/public_results'
+            (old/'analysis').mkdir(parents=True);(evidence/'report').mkdir(parents=True);report.mkdir(parents=True)
+            for p in [report/'fit.json',evidence/'report/fit.json']:e.write(p,{'estimate':.5})
+            e.write(old/'RUN_IDENTITY.json',{'package_sha256':'fixture'})
+            e.write(evidence/'reference.json',dict(source_package_sha256='fixture',states={s:dict(n=24,grants=24 if s=='equal' else 0,accounts=1) for s in ['equal','losing']}))
+            for month in e.MONTHS:
+                p=old/'analysis'/(month+'.parquet')
+                e.pd.DataFrame(dict(state=['equal','losing'],chooser=[1,2],opponent=[3,4],regular=[True,True],y=[1,0])).to_parquet(p,index=False)
+                e.write(p.with_suffix('.json'),{'output':dict(size=p.stat().st_size,sha256=e.sha(p))})
+            args=SimpleNamespace(project=root,memory_gb=4,workers=2)
+            with patch.object(audit,'ROOT',root),patch.object(audit,'author_ids',return_value={'__PRIVATE_VALUE_5__':99,'__PRIVATE_VALUE_6__':98}):
+                result=audit.mechanism(args,root/'test');self.assertEqual(result['status'],'EXACT_ELIGIBLE_INPUTS_UNCHANGED_BY_EXCLUSION')
+                p=old/'analysis'/(e.MONTHS[0]+'.parquet');d=e.pd.read_parquet(p);d.loc[0,'opponent']=99;d.to_parquet(p,index=False)
+                e.write(p.with_suffix('.json'),{'output':dict(size=p.stat().st_size,sha256=e.sha(p))})
+                result=audit.mechanism(args,root/'test');self.assertEqual(result['status'],'AUTHOR_ROWS_PRESENT_REFIT_REQUIRED');self.assertEqual(result['author_rows'],1)
+
+if __name__=='__main__':unittest.main(verbosity=2)

@@ -1,0 +1,173 @@
+import sys,argparse,unittest,tempfile,json,zipfile
+from pathlib import Path
+from unittest.mock import patch
+
+parser=argparse.ArgumentParser();parser.add_argument('--base-package',type=Path,required=True)
+args,remaining=parser.parse_known_args()
+ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'code'))
+import run_independent as new
+new.base.initialize(args.base_package)
+u=new.base.u;np=new.base.np;h=new.history_scope
+
+
+def scenario():
+    day=new.base.m.r.DAY;start=200*day;anchor=start+1000
+    q=u.pd.DataFrame(dict(row_id=np.arange(10),game_id=['f'+str(i) for i in range(10)],
+        recipient_id=np.arange(1,11),opponent_id=np.arange(1001,1011),
+        archive_start_ms=[start]*10,anchor_ms=[anchor]*10,
+        fair_90=[1,1,0,0,0,0,0,1,0,0],kind_90=[0]*10))
+    rows=[]
+    def event(g,j,i,t,cp=0,grant=False,claim=False,other='other'):
+        rows.append(dict(game_id=g,chooser_user_id=j,disconnected_user_id=i,
+            api_last_move_at_ms=t,engine_eval_cp_disconnected=cp,
+            chooser_username_norm='chooser'+str(j),disconnected_username_norm=other,
+            kind_draw=grant,timeout_chooser_win=claim))
+    for i in range(10):event('f'+str(i),1001+i,1+i,anchor,grant=True)
+    event('nonarm',1,51,start-20*day) # competitive timeout without a grant/claim
+    event('claim',2,52,start-20*day,claim=True)
+    event('oldgrant',3,53,start-120*day,grant=True)
+    event('tie',5,55,anchor,claim=True)
+    event('author',6,99,start-20*day,grant=True,other='__PRIVATE_VALUE_1__')
+    event('upper',7,57,start-7*day,claim=True)
+    event('lower',8,58,start-97*day,claim=True)
+    event('future',9,59,anchor+1,claim=True)
+    event('worse',10,60,start-20*day,cp=-300,claim=True)
+    src=u.pd.DataFrame(rows)
+    pv=u.pd.DataFrame(dict(j=src.chooser_user_id,i=src.disconnected_user_id,
+        t=src.api_last_move_at_ms,fair=src.engine_eval_cp_disconnected>=-100,
+        y=src.kind_draw,arm=src.kind_draw|src.timeout_chooser_win))
+    return q,src,pv
+
+
+def run_scenario(root,q,src,pv):
+    c=u.duckdb.connect();c.register('q',q);c.register('src',src);c.register('pv',pv)
+    try:return h.construct(c,root/'private',root/'report',[99,100],expected_rows=len(q))
+    finally:c.close()
+
+
+class HistoryScopeTests(unittest.TestCase):
+    def test_nonarm_recent_opportunity_is_valid_without_prior_grant_or_claim(self):
+        q,src,pv=scenario()
+        with tempfile.TemporaryDirectory() as td:
+            p,diag=run_scenario(Path(td),q,src,pv)
+            d=u.pd.read_parquet(p)
+            self.assertEqual(diag['status'],'CERTIFIED_DIFFERENT_EVENT_SCOPES')
+            self.assertEqual(diag['recent_opportunity_without_prior_grant_or_claim_rows'],1)
+            self.assertEqual(diag['scope_difference_explained_rows'],1)
+            self.assertEqual(diag['fair90_count_mismatch_rows'],0)
+            self.assertFalse(d.faced_recorded.iloc[0]);self.assertTrue(d.faced90.iloc[0])
+            self.assertFalse(diag['definitions_forced_to_agree'])
+            self.assertEqual(d.faced_recorded.tolist(),[False,True,True,False,False,False,True,True,False,False])
+            self.assertEqual(d.fair_90.tolist(),q.fair_90.tolist())
+
+    def test_exact_windows_ties_future_and_author_exclusion(self):
+        q,src,pv=scenario()
+        with tempfile.TemporaryDirectory() as td:
+            p,diag=run_scenario(Path(td),q,src,pv);d=u.pd.read_parquet(p)
+            self.assertEqual(d.strict_choice90.tolist(),[0,1,0,0,0,0,0,1,0,0])
+            self.assertFalse(d.faced_recorded.iloc[4]) # event at exposure is not prior
+            self.assertFalse(d.faced_recorded.iloc[5]) # author on other side
+            self.assertFalse(d.faced_recorded.iloc[8]) # future event
+            self.assertEqual(diag['recent_grant_or_claim_without_prior_grant_or_claim_rows'],0)
+
+    def test_independent_window_counts_against_explicit_event_enumeration(self):
+        rng=np.random.default_rng(6028);day=new.base.m.r.DAY;n=1500
+        events=dict(person=rng.integers(1,9,n),t=rng.integers(0,300*day,n),
+                    fair=rng.integers(1,5,n),kind=rng.integers(0,2,n),strict=rng.integers(0,2,n))
+        people=np.r_[np.arange(1,10),2,2];starts=np.r_[np.full(9,200*day),7*day,400*day]
+        got=h.window_counts(events,people,starts)
+        for k in got:
+            want=[np.sum(events[k][(events['person']==p)&(events['t']>=t-97*day)&(events['t']<t-7*day)])
+                  for p,t in zip(people,starts)]
+            np.testing.assert_array_equal(got[k],want)
+        empty={k:np.empty(0,np.int64) for k in events}
+        for v in h.window_counts(empty,people,starts).values():np.testing.assert_array_equal(v,0)
+
+    def test_changed_frozen_count_blocks_with_aggregate_numbers(self):
+        q,src,pv=scenario();q.loc[0,'fair_90']=2
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            with self.assertRaisesRegex(RuntimeError,'History source validation failed'):
+                run_scenario(root,q,src,pv)
+            diag=u.load(root/'report/history_scope_diagnostics.json')
+            self.assertEqual(diag['fair90_count_mismatch_rows'],1)
+            self.assertEqual(diag['status'],'BLOCKED_HISTORY_SOURCE_DISCREPANCY')
+            self.assertNotIn('recipient_id',json.dumps(diag));self.assertTrue((root/'private/FAILED_DIAGNOSTIC.json').exists())
+
+    def test_projection_time_disagreement_blocks_before_estimation(self):
+        q,src,pv=scenario();pv.loc[pv.j==2,'t']+=1
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            with self.assertRaisesRegex(RuntimeError,'strict_earliest_time_mismatch_rows'):
+                run_scenario(root,q,src,pv)
+            self.assertEqual(u.load(root/'report/history_scope_diagnostics.json')['strict_earliest_time_mismatch_rows'],1)
+
+    def test_focal_time_bridge_is_checked(self):
+        q,src,pv=scenario();q.loc[0,'anchor_ms']+=1
+        with tempfile.TemporaryDirectory() as td:
+            with self.assertRaisesRegex(RuntimeError,'identity or event-time bridge'):
+                run_scenario(Path(td),q,src,pv)
+
+    def test_prior_audit_reuse_is_read_only_and_binds_dependencies(self):
+        with tempfile.TemporaryDirectory() as td,patch.object(new.base,'runtime_config',return_value={'fixture':True}):
+            root=Path(td);config=dict(base=new.base.runtime_config(),manifest_SHA256=new.V103_MANIFEST_SHA,version='1.0.3')
+            oldkey=u.digest(config);old=root/'derived/replication/r8_receipt_independent_v103_PRIVATE'/oldkey[:12]
+            ar=old/'audit/report';ar.mkdir(parents=True);source=root/'source';source.write_text('frozen')
+            u.save(old/'CONFIG_PRIVATE.json',dict(config,key=oldkey));(old/'RUN.lock').write_text('')
+            u.save(ar/'A1_independent_diagnostics.json',dict(independent_matches_current_R7=True,tolerance_relaxed=False,
+                rows=2682329,row_set_sha256='47cf7dbfcadde463159bd8b6c3abeec465317e2e7f53d58e63eb4b5a899366ba'))
+            u.save(ar/'core_IV_reproduction.json',[dict(passed=True)])
+            u.certify(old/'audit',u.digest([oldkey,'audit']),[source])
+            before={str(p):u.sha(p) for p in old.rglob('*') if p.is_file()}
+            with patch.object(new,'audit_a1',side_effect=AssertionError('must not refit')):
+                self.assertTrue(new.reuse_v103_audit(root,root/'new_audit','new-key'))
+            self.assertTrue(u.verify_cached(root/'new_audit','new-key'))
+            self.assertEqual(before,{str(p):u.sha(p) for p in old.rglob('*') if p.is_file()})
+            source.write_text('changed')
+            with self.assertRaisesRegex(RuntimeError,'Checkpoint input changed'):
+                new.reuse_v103_audit(root,root/'another_audit','another-key')
+
+    def test_blocked_export_includes_scope_diagnostics_and_excludes_private_rows(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);run=root/'run';report=run/'report';report.mkdir(parents=True)
+            old=root/'old';old.mkdir();desktop=root/'desktop';desktop.mkdir()
+            u.save(report/'history_scope_diagnostics.json',dict(status='BLOCKED_HISTORY_SOURCE_DISCREPANCY',fair90_count_mismatch_rows=1))
+            (run/'discordant_PRIVATE.parquet').write_text('private accounts')
+            u.save(report/'experience_IV.json',[dict(estimate=.3)])
+            new.export(run,desktop,'a'*64,old,'b'*64,'ARCHIVE_OPEN','BLOCKED','fixture')
+            with zipfile.ZipFile(next(desktop.glob('*.zip'))) as z:
+                self.assertTrue(any(n.endswith('history_scope_diagnostics.json') for n in z.namelist()))
+                self.assertFalse(any('PRIVATE' in n or n.endswith('experience_IV.json') for n in z.namelist()))
+
+    def test_experience_nine_fits_resume_with_distinct_histories(self):
+        sys.path.insert(0,str(args.base_package/'tests'))
+        from test_receipt import fixture
+        from types import SimpleNamespace
+        d=fixture(4500);n=len(d['row_id']);group=np.arange(n)%3
+        # Deliberately include recent competitive opportunities in the primary never group.
+        faced=np.arange(n)%2==0
+        d['fair_90']=(group>0).astype(np.int64);d['kind_90']=(group==2).astype(np.int64)
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);work=root/'experience';report=work/'report';report.mkdir(parents=True)
+            source=root/'model_input';source.write_text('frozen synthetic fit input')
+            split=root/'split.parquet'
+            u.pd.DataFrame(dict(row_id=d['row_id'],faced_recorded=faced,
+                faced90=group>0,group90=group)).to_parquet(split,index=False)
+            coverage=dict(source_window='synthetic history scope',
+                recent_opportunity_without_prior_grant_or_claim_rows=int(((group>0)&~faced).sum()))
+            a=SimpleNamespace(project_root=root,memory_gb=11)
+            with patch.object(h,'prior_frame',return_value=(split,coverage)),\
+                 patch.object(new.base.m.r,'load_fit_columns',return_value=d):
+                new.experience(a,{'S0':source},{},work,'fit-key',report)
+                files={str(p):u.sha(p) for p in work.rglob('*') if p.is_file() and 'report' not in p.parts}
+                self.assertEqual(len(list(work.rglob('_DONE.json'))),9)
+                with patch.object(new.base.m,'group_iv',side_effect=AssertionError('must reuse group fit')),\
+                     patch.object(new.base.m,'pooled_interaction',side_effect=AssertionError('must reuse pooled fit')):
+                    new.experience(a,{'S0':source},{},work,'fit-key',report)
+                self.assertEqual(files,{str(p):u.sha(p) for p in work.rglob('*') if p.is_file() and 'report' not in p.parts})
+            rows=u.load(report/'experience_IV.json');self.assertEqual(len(rows),7)
+            self.assertTrue(all('history_definition' in row for row in rows))
+            self.assertTrue(u.load(report/'EXPERIENCE_COMPLETION.json')['history_scopes_validated'])
+            self.assertFalse(u.load(report/'experience_definitions.json')['nesting_assumed'])
+
+if __name__=='__main__':unittest.main(argv=[sys.argv[0]]+remaining,verbosity=2)

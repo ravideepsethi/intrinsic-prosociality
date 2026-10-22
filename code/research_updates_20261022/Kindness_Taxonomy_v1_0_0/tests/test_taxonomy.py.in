@@ -1,0 +1,190 @@
+import sys,unittest,tempfile,json,hashlib
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'code'))
+import numpy as np
+import pyarrow as pa
+import pyarrow.parquet as pq
+from common import *
+import data,diagnostics,mixture,covariate_mixture as cm,hazard,stream_ols,receipt,extensions,report
+
+def config():
+    return dict(read(ROOT/'config.json'),random_starts=3,bootstrap_reps=3,bootstrap_starts=2,K=[1,2],minimum_opportunities=[4],max_em_iterations=1000)
+
+def fixture(c,rows=6000):
+    rng=np.random.default_rng(36124);A=150;a=rng.integers(0,A,rows);year=rng.integers(1,3,rows);state=rng.integers(0,5,rows);cp=np.array([-600,-200,0,180,500])[state]
+    y=(rng.random(rows)<np.where(a%3==0,.02,.04+.05*state)).astype(int);start=START+(np.where(year==1,0,366)+rng.integers(0,360,rows))*DAY+np.arange(rows)*10000
+    speed=np.array(['bullet','blitz','rapid','classical'])[rng.integers(0,4,rows)]
+    import datetime as dt
+    month=np.array([dt.datetime.fromtimestamp(t/1000,dt.timezone.utc).strftime('%Y-%m') for t in start])
+    d=dict(game_id=np.array([f'g{i}' for i in range(rows)]),chooser=a.astype(np.int64),recipient=a+1000,username=np.array([f'u{x}' for x in a]),recipient_username=np.array([f'v{x}' for x in a]),
+      start_ms=start,end_ms=start+60000,y=y,claimed=y==0,cp=cp.astype(float),is_mate=np.zeros(rows,bool),state=state,cost=6+rng.random(rows)*8,
+      speed=speed,ply=rng.integers(2,160,rows),stage=rng.integers(0,8,rows),clock=rng.choice([5.,15.,45.,90.,300.],rows),rival_clock=np.full(rows,100.),
+      rating=1500+rng.normal(0,150,rows),rival_rating=1500+rng.normal(0,150,rows),rd=np.full(rows,50.),rival_rd=np.full(rows,50.),year=year,month=month)
+    c.register('fixture_panel',pa.table(d));c.execute('CREATE TEMP TABLE panel AS SELECT * FROM fixture_panel');c.unregister('fixture_panel')
+    c.execute("CREATE TEMP TABLE profiles AS SELECT DISTINCT username,1690000000000::BIGINT created_ms,(chooser%7=0)::INT patron FROM panel")
+    return d
+
+class TestNumerics(unittest.TestCase):
+    def test_binomial_k1_closed_form(self):
+        rng=np.random.default_rng(44);n=rng.integers(1,30,(180,5));g=rng.binomial(n,np.array([.05,.1,.2,.3,.4]));r=mixture.fit(n,g,1,42,config())
+        np.testing.assert_allclose(r['p'][0],g.sum(0)/n.sum(0),atol=1e-9);self.assertEqual(r['status'],'ESTIMATED')
+        self.assertAlmostEqual(r['BIC'],-2*r['log_likelihood']+5*np.log(len(n)))
+    def test_em_recovery_and_weighted_duplicates(self):
+        rng=np.random.default_rng(2);n=np.full((1200,5),30);truth=np.array([[.01,.01,.01,.01,.01],[.1,.2,.4,.6,.8]]);which=rng.random(len(n))>.65;g=rng.binomial(n,truth[which.astype(int)])
+        cfg=config();r=mixture.fit(n,g,2,2,cfg);self.assertEqual(r['status'],'ESTIMATED');np.testing.assert_allclose(r['p'],truth,atol=.035)
+        ix=rng.integers(0,len(n),len(n));w=np.bincount(ix,minlength=len(n));r1=mixture.fit(n,g,2,2,cfg,w,initial=r);r2=mixture.fit(n[ix],g[ix],2,2,cfg,initial=r)
+        np.testing.assert_allclose(r1['p'],r2['p'],atol=1e-9);self.assertAlmostEqual(r1['log_likelihood'],r2['log_likelihood'],places=7)
+    def test_b2_gradient(self):
+        rng=np.random.default_rng(61);A=25;N=300
+        d=dict(account=rng.integers(0,A,N),state=rng.integers(0,5,N),cost=rng.normal(size=N),y=rng.binomial(1,.2,N),cats=[rng.integers(-1,3,N)],common_names=['a','b','c'],n_accounts=A)
+        K=2;theta=rng.normal(0,.3,K-1+6*K+3);w=rng.integers(0,4,A);loss,g=cm.objective(theta,d,K,w);num=[]
+        for j in range(len(theta)):
+            e=np.zeros(len(theta));e[j]=1e-5;num.append((cm.objective(theta+e,d,K,w)[0]-cm.objective(theta-e,d,K,w)[0])/2e-5)
+        np.testing.assert_allclose(g,num,rtol=2e-6,atol=2e-7)
+    def test_b2_optimizer_k1_against_logit(self):
+        rng=np.random.default_rng(601);N=3000;A=200
+        d=dict(account=np.repeat(np.arange(A),N//A),state=rng.integers(0,5,N),cost=rng.normal(size=N),cats=[rng.integers(-1,2,N)],common_names=['a','b'],n_accounts=A)
+        alpha=np.array([-2.,-1.7,-1.3,-.9,-.6]);eta=alpha[d['state']]-.2*d['cost']+np.where(d['cats'][0]==0,.3,0);d['y']=rng.binomial(1,1/(1+np.exp(-eta)))
+        r=cm.fit_model(d,1,np.r_[np.full(5,-1.),0.,0.,0.],config(),5)
+        self.assertEqual(r['status'],'ESTIMATED');self.assertLess(r['gradient_max'],1e-4);self.assertLess(r['cost_slopes'][0],0)
+    def test_joint_ratio_contrast(self):
+        rows=[]
+        for i in range(40):
+            for j in range(4):rows.append((i,j,10.,float((i+j)%5)))
+        r=diagnostics.ratio_contrast(rows,[1,-1,-1,1]);self.assertEqual(r['status'],'ESTIMATED');self.assertAlmostEqual(r['estimate'],0)
+    def test_label_alignment(self):
+        p=np.array([[0,0,0,0,0],[.1,.2,.3,.4,.5],[.3]*5]);self.assertEqual(mixture.alignment(p,p[[2,0,1]]).tolist(),[1,2,0])
+    def test_checkpoint_corruption(self):
+        with tempfile.TemporaryDirectory() as td:
+            f=Path(td);(f/'x.txt').write_text('original');done(f,'key');self.assertTrue(checked(f,'key'));(f/'x.txt').write_text('changed')
+            with self.assertRaises(RuntimeError):checked(f,'key')
+    def test_projection_orientation_exclusion_and_boundaries(self):
+        with tempfile.TemporaryDirectory() as td:
+            c=conn(Path(td)/'spill',1,1)
+            try:
+                n=8;cp=np.array([-301.,-300.,-100.,100.,101.,300.,999.,0.]);base=dict(game_id=[f'g{i}' for i in range(n)],chooser_user_id=np.arange(n),disconnected_user_id=np.arange(n)+50,
+                  chooser_username_norm=['u0','u1','u2','u3','u4','u5','  __PRIVATE_VALUE_1__  ','u7'],disconnected_username_norm=['v']*7+['__PRIVATE_VALUE_2__'],
+                  api_created_at_ms=np.full(n,START+DAY),api_last_move_at_ms=np.full(n,START+DAY+100000),outcome_kind_draw=np.ones(n,int),timeout_chooser_win=np.zeros(n,bool),
+                  engine_eval_cp_disconnected=cp,engine_eval_is_mate=np.zeros(n,bool),chooser_win_premium_v2=np.full(n,6.),api_speed=['blitz']*n,ply_count=np.full(n,20),
+                  chooser_clock_last_obs_s=np.full(n,50.),disconnected_clock_last_obs_s=np.full(n,50.),chooser_elo=np.full(n,1500),disconnected_elo=np.full(n,1510),
+                  chooser_pre_rd_v2=np.full(n,45.),disconnected_pre_rd_v2=np.full(n,45.))
+                p=Path(td)/'source.parquet';pq.write_table(pa.table(base),p);r=c.execute(data.project_query(p)+' ORDER BY game_id').to_arrow_table().to_pylist()
+                self.assertEqual(len(r),6);self.assertEqual([a['state'] for a in r],[0,0,2,2,3,4]);self.assertEqual(r[-1]['cp'],300)
+            finally:c.close()
+    def test_joint_subgroup_iv_difference(self):
+        from vendor.rct.iv import fit_iv
+        from vendor.rct.numerics import absorb
+        rng=np.random.default_rng(363);N=10000;group=rng.integers(0,2,N);Z=rng.normal(size=N);D=.8*Z+rng.normal(size=N);m=np.column_stack([group==0,group==1]);endo=m*D[:,None];iv=m*Z[:,None]
+        y=(.3+.2*group)*D+rng.normal(size=N);x=rng.normal(size=(N,2));fe=[group];actors=np.column_stack([np.arange(N)%500,np.arange(N)%701+1000]);date=np.arange(N)%60
+        c=conn(Path(tempfile.gettempdir())/'taxonomy_iv_test',1,1)
+        try:
+            info,r=fit_iv(c,x,endo,iv,y[:,None],fe,actors,date,['x','v']);self.assertEqual(info['status'],'ESTIMATED')
+            a,_,_=absorb(np.column_stack([x,endo,iv,y]),fe);xr=a[:,:2];b=a[:,2:]-xr@np.linalg.solve(xr.T@xr,xr.T@a[:,2:]);direct=np.linalg.solve(b[:,2:4].T@b[:,:2],b[:,2:4].T@b[:,-1])
+            np.testing.assert_allclose(r['coefficients'][:,0],direct,atol=1e-10)
+            from vendor.rct.iv import date_covariance
+            inf=(b[:,2:4]@np.linalg.inv(b[:,2:4].T@b[:,:2]).T)*(b[:,-1]-b[:,:2]@direct)[:,None]
+            v=date_covariance(c,actors,date,inf);np.testing.assert_allclose(r['covariances'][0],v,atol=1e-10)
+            self.assertAlmostEqual(float(np.array([-1,1])@r['coefficients'][:,0]),direct[1]-direct[0])
+        finally:c.close()
+    def test_stream_fe_against_dummies(self):
+        rng=np.random.default_rng(20);a=np.repeat(np.arange(40),8);x=rng.normal(size=len(a));z=rng.normal(size=len(a));y=.4*x+.2*z+rng.normal(size=40)[a]+rng.normal(size=len(a))
+        c=conn(Path(tempfile.gettempdir())/'taxonomy_stream_test',1,1)
+        try:
+            c.register('ss',pa.table(dict(chooser=a,y=y,x=x,z=z)));meta,r=stream_ols.fit(c,'SELECT * FROM ss',['x','z'],['x','z'])
+            X=np.column_stack([x,z,np.eye(40)[a]]);inv=np.linalg.inv(X.T@X);b=inv@X.T@y;score=np.array([(X[a==i].T@(y[a==i]-X[a==i]@b)) for i in range(40)]);V=inv@score.T@score@inv*40/39*(len(a)-1)/(len(a)-42)
+            self.assertEqual(meta['status'],'ESTIMATED');np.testing.assert_allclose([r[0]['estimate'],r[1]['estimate']],100*b[:2],atol=1e-8);np.testing.assert_allclose(meta['target_covariance_pp2'],10000*V[:2,:2],atol=1e-8)
+        finally:c.close()
+    def test_history_strict_time_ties_and_roles(self):
+        with tempfile.TemporaryDirectory() as td:
+            c=conn(Path(td)/'spill',1,1)
+            try:
+                c.execute('''CREATE TABLE panel(game_id VARCHAR,chooser BIGINT,recipient BIGINT,start_ms BIGINT,end_ms BIGINT,y INT,state INT,cp DOUBLE,claimed BOOLEAN)''')
+                c.execute("INSERT INTO panel VALUES ('a',1,2,1000,2000,1,4,500,false),('b',2,3,2000,3000,0,4,200,true)")
+                cfg=dict(config(),history_guard_s=0);data.histories(c,td,'key',cfg)
+                c.execute('CREATE TEMP TABLE query(account BIGINT,t BIGINT)');c.execute('INSERT INTO query VALUES (2,2000),(2,2001),(3,3001)')
+                r=c.execute('SELECT q.account,q.t,h.screens_before,h.receipts_before,h.claimed_while_winning_before FROM query q ASOF LEFT JOIN histories h ON q.account=h.account AND q.t>h.available_ms ORDER BY q.t').fetchall()
+                self.assertIsNone(r[0][2]);self.assertEqual(r[1][3],1);self.assertEqual(r[2][4],1)
+            finally:c.close()
+    def test_b2_year1_only_data(self):
+        with tempfile.TemporaryDirectory() as td:
+            c=conn(Path(td)/'spill',1,1)
+            try:
+                fixture(c,1500);ids,d=cm.load(c,td,4);loss=cm.objective(np.zeros(1+12+len(d['common_names'])),d,2)[0]
+                c.execute('UPDATE panel SET y=1-y,cost=10000 WHERE year=2');ids2,d2=cm.load(c,td,4)
+                self.assertEqual(loss,cm.objective(np.zeros(1+12+len(d2['common_names'])),d2,2)[0]);self.assertEqual(d['scale'],d2['scale'])
+            finally:c.close()
+    def test_local_stage_integration_and_report_privacy(self):
+        with tempfile.TemporaryDirectory() as td:
+            w=Path(td);c=conn(w/'spill',1,1);cfg=config()
+            try:
+                fixture(c);(w/'00_aggregates').mkdir();copy(c,'SELECT chooser,year,state,count(*) n,sum(y) g FROM panel GROUP BY ALL',w/'00_aggregates/account_state_year.parquet')
+                for name in ['E','G','00_markers','B1','B3','C1']:(w/name).mkdir()
+                data.markers(c,w,w/'00_markers',dict(status='synthetic'))
+                diagnostics.early(c,w/'E',cfg);diagnostics.rule_change(c,w/'G',cfg)
+                data.histories(c,w,'key',cfg);hazard.run(c,w,w/'C1',cfg)
+                mixture.run_b1(c,w,w/'B1','key',cfg);mixture.validate(c,w,w/'B3',cfg,w/'B1')
+                p=w/'B1/M4_year1/K1/start_00.json';before=p.stat().st_mtime_ns
+                mixture.run_b1(c,w,w/'B1','key',cfg);self.assertEqual(before,p.stat().st_mtime_ns)
+                zipfile=report.assemble(w,w,'key','SYNTHETIC_TEST',dict(E=dict(status='COMPLETE')),plots=True)
+                import zipfile as zf
+                with zf.ZipFile(zipfile) as z:
+                    self.assertFalse(any('PRIVATE' in n or n.endswith('.parquet') for n in z.namelist()))
+                    m=json.loads(z.read('REPORT_MANIFEST.json'))
+                    for a in m:self.assertEqual(hashlib.sha256(z.read(a['path'])).hexdigest(),a['sha256'])
+            finally:c.close()
+
+    def test_b2_runner_bootstrap_and_restart(self):
+        with tempfile.TemporaryDirectory() as td:
+            w=Path(td);c=conn(w/'spill',1,1);cfg=dict(config(),K=[1],bootstrap_reps=2)
+            try:
+                fixture(c,3000);(w/'00_aggregates').mkdir();(w/'B1').mkdir();(w/'B2').mkdir()
+                copy(c,'SELECT chooser,year,state,count(*) n,sum(y) g FROM panel GROUP BY ALL',w/'00_aggregates/account_state_year.parquet')
+                mixture.run_b1(c,w,w/'B1','key',cfg);cm.run(c,w,w/'B2','key',cfg,w/'B1')
+                r=read(w/'B2/B2_fit_summary.json');self.assertEqual(r[0]['status'],'ESTIMATED')
+                self.assertEqual(len(csvrows(w/'B2/B2_bootstrap_draws.csv')),2)
+                p=w/'B2/M4/selected.json';mtime=p.stat().st_mtime_ns;cm.run(c,w,w/'B2','key',cfg,w/'B1');self.assertEqual(p.stat().st_mtime_ns,mtime)
+            finally:c.close()
+
+    def test_receipt_presentations_integration(self):
+        with tempfile.TemporaryDirectory() as td:
+            w=Path(td);c=conn(w/'spill',1,1);rng=np.random.default_rng(467);N=8000
+            try:
+                fixture(c,6000);z=rng.normal(0,.06,N);received=rng.binomial(1,1/(1+np.exp(1-z*20)))
+                start=START+rng.integers(0,630,N)*DAY+rng.integers(0,86400000,N)
+                d=dict(row_id=np.arange(N),recipient_id=rng.integers(0,150,N),opponent_id=rng.integers(1000,1150,N),
+                  archive_start_ms=start,received=received,y=rng.binomial(1,.08+.10*received),reached=np.ones(N),
+                  adjusted_7d=z,expected_7d=rng.random(N)*.05,n_7d=rng.integers(1,50,N),counterparts_7d=rng.integers(1,30,N),
+                  recipient_rating=rng.normal(1500,100,N),opponent_rating=rng.normal(1500,100,N),
+                  month_code=((start-START)//(30*DAY)).astype(int),tc_base_s=np.full(N,180),tc_inc_s=np.zeros(N),
+                  fair_history_present=rng.integers(0,2,N),log_fair90=rng.random(N)*4,prior_kind_rate=rng.choice([0.,.02,.05,.1],N),
+                  log_disconnect90=rng.random(N)*3,log_receipt90=rng.random(N)*2,log_pre_games=rng.random(N)*8,log_claim90=rng.random(N)*3,
+                  grants_before=rng.integers(0,2,N),screens_before=rng.integers(0,2,N))
+                receipt.conversion(c,d,w);self.assertEqual(read(w/'C2_prior_grants_fit.json')['status'],'ESTIMATED')
+                self.assertTrue(any(r['group']=='group1_minus_group0' for r in csvrows(w/'C2_prior_grants_estimates.csv')))
+                receipt.deciles(c,d,w);self.assertEqual(len(csvrows(w/'H_adjusted_score_deciles.csv')),20)
+                c.register('raw_test',pa.table(dict(row_id=d['row_id'],recipient_id=d['recipient_id'],opponent_id=d['opponent_id'],anchor_ms=start+60000)))
+                c.execute('CREATE TEMP VIEW raw AS SELECT * FROM raw_test');receipt.dynamics(c,d,w)
+                self.assertEqual(read(w/'H_dynamic_fit.json')['status'],'ESTIMATED');self.assertEqual(len(csvrows(w/'H_dynamic_counts.csv')),6)
+            finally:c.close()
+
+    def test_optional_models_and_identity_rejection(self):
+        with tempfile.TemporaryDirectory() as td:
+            w=Path(td);c=conn(w/'spill',1,1);cfg=config()
+            try:
+                fixture(c);(w/'F').mkdir();(w/'D1').mkdir();(w/'D2').mkdir()
+                p=w/'waiting.parquet'
+                copy(c,"SELECT game_id||'_wait' game_id,chooser,recipient,username chooser_username,recipient_username,start_ms,cp,speed,300. loser_clock_s,'outoftime' status,true rated FROM panel LIMIT 500",p)
+                inputs=dict(waiting_events=dict(paths=[str(p)],scope='pool_nonadjacent_24m',cp_orientation='loser',engine_nodes=100000))
+                extensions.waiting(c,w/'F',inputs,cfg);a=read(w/'F/F2_bounds.json')
+                lo=next(x['gap_pp'] for x in a if x['scenario']=='lower_gap_bound');hi=next(x['gap_pp'] for x in a if x['scenario']=='upper_gap_bound');self.assertLessEqual(lo,hi)
+                c.execute("CREATE TEMP TABLE bad_wait AS SELECT * REPLACE('__PRIVATE_VALUE_3__' AS chooser_username) FROM waiting_input LIMIT 1")
+                with self.assertRaises(RuntimeError):extensions.validate_event_identities(c,'bad_wait')
+                p=w/'cells.parquet';copy(c,"SELECT floor(-cp/50) cp_bin_chooser,floor((rating-rival_rating)/50) gap_bin_chooser,stage,speed,1000 games,300+abs(hash(stage,cp,floor((rating-rival_rating)/50))%400) wins,'synthetic' sample_source FROM panel GROUP BY ALL",p)
+                inputs['continuation_cells']=dict(paths=[str(p)],probability_orientation='chooser',ordinary_games_only=True,game_disjoint_from_opportunities=True,cp_bin_width=50,rating_gap_bin_width=50,stage_upper_bounds=cfg['stage_upper_bounds'])
+                extensions.desert(c,w/'D1',inputs,cfg);self.assertEqual(read(w/'D1/D1_equal_FE.json')['status'],'ESTIMATED')
+                p=w/'accuracy.parquet';copy(c,'SELECT game_id,10+abs(hash(game_id)%100) chooser_acpl,10+abs(hash(game_id,1)%100) recipient_acpl,20 chooser_moves,20 recipient_moves FROM panel',p)
+                inputs['game_accuracy']=dict(paths=[str(p)],scope='main_opportunity_games',complete_move_path=True,mate_convention='synthetic finite nonmate scores')
+                extensions.accuracy(c,w/'D2',inputs,cfg);self.assertEqual(len(csvrows(w/'D2/D2_estimates.csv')),2)
+            finally:c.close()
+
+if __name__=='__main__':unittest.main()

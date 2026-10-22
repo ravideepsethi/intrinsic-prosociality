@@ -1,0 +1,49 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+task_bundle="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+task_project="${AUTHOR_EXCLUSION_PROJECT:-/Volumes/XT_Pro/lichess_kindness}"
+task_transfer="${AUTHOR_EXCLUSION_TRANSFER:-$HOME/Desktop/Lichess_Desktop}"
+cd "$task_bundle"
+/usr/bin/shasum -a 256 -c PACKAGE_MANIFEST.sha256 >/dev/null
+mkdir -p "$task_transfer"
+task_python=""
+task_base=""
+for task_candidate in "${AUTHOR_EXCLUSION_PYTHON:-/nonexistent}" "$task_project/venv/bin/python" "$task_project/.venv/bin/python" "${VIRTUAL_ENV:-/nonexistent}/bin/python" "$task_transfer/author_exclusion_python/bin/python" "$task_transfer"/author_exclusion_python.*/bin/python /opt/homebrew/bin/python3 "$(command -v python3 || true)"; do
+  [[ -n "$task_candidate" && -x "$task_candidate" ]] || continue
+  if "$task_candidate" -c 'import sys,venv; assert sys.version_info >= (3,10)' >/dev/null 2>&1; then
+    [[ -n "$task_base" ]] || task_base="$task_candidate"
+  else
+    continue
+  fi
+  if PYTHONPATH="$task_bundle/vendor/wave1" "$task_candidate" -c 'from runner.common import verify_runtime_dependencies; verify_runtime_dependencies(); import scipy,zstandard,chess,numba,numpy,pandas; assert tuple(map(int,numpy.__version__.split(".")[:2]))==(2,3); assert int(pandas.__version__.split(".")[0])==2' >/dev/null 2>&1; then
+    task_python="$task_candidate"
+    break
+  fi
+done
+if [[ -z "$task_python" ]]; then
+  [[ -n "$task_base" ]] || { echo 'Python 3.10+ is required. Set AUTHOR_EXCLUSION_PYTHON to its path.' >&2; exit 1; }
+  task_environment="$(mktemp -d "$task_transfer/author_exclusion_python.XXXXXX")"
+  "$task_base" -m venv "$task_environment"
+  task_python="$task_environment/bin/python"
+  "$task_python" -I -m pip --disable-pip-version-check --require-virtualenv install --only-binary=numpy,pandas,pyarrow,scipy,matplotlib,duckdb,zstandard --no-user -r "$task_bundle/requirements.txt"
+fi
+export PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 MPLBACKEND=Agg
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1
+"$task_python" "$task_bundle/tests/test_policy.py"
+"$task_python" "$task_bundle/tests/test_extension.py"
+"$task_python" "$task_bundle/tests/test_continuation.py"
+"$task_python" "$task_bundle/tests/test_repair.py"
+"$task_python" "$task_bundle/tests/test_remaining.py"
+"$task_python" "$task_bundle/tests/test_remaining_covariance.py"
+"$task_python" "$task_bundle/tests/test_repair141.py"
+task_log="$task_transfer/AUTHOR_EXCLUSION_REPAIR141_RUN_$(date +%Y%m%dT%H%M%S).log"
+set +e
+"$task_python" "$task_bundle/code/remaining.py" --project "$task_project" --result-dir "$task_transfer" --workers 10 --memory-gb 11 "$@" 2>&1 | tee "$task_log"
+task_status=${PIPESTATUS[0]}
+set -e
+if [[ "$task_status" == 2 ]]; then
+  echo 'Return the AUTHOR_EXCLUSION_REPORT ZIP and SHA256 sidecar. Some stages need review; see EXECUTION_STATUS.json and manuscript_coverage.csv.'
+  exit 2
+fi
+exit "$task_status"

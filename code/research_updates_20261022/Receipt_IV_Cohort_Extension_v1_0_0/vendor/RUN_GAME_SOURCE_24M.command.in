@@ -1,0 +1,24 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+task_dir="$(cd "$(dirname "$0")" && pwd)"
+task_project="${GAME_SOURCE_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+task_python="${GAME_SOURCE_PYTHON:-$(command -v python3)}"
+(
+  cd "$task_dir"
+  /usr/bin/shasum -a 256 -c PACKAGE_MANIFEST.sha256
+)
+"$task_python" -c 'import sys,numpy,pyarrow,duckdb,zstandard;print("Python:",sys.executable);print("numpy/PyArrow/DuckDB/Zstandard:",numpy.__version__,pyarrow.__version__,duckdb.__version__,zstandard.__version__)'
+[[ -d "$task_project" ]] || { echo "Project volume is not mounted" >&2; exit 1; }
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1
+export VECLIB_MAXIMUM_THREADS=1 PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1
+task_logs="$task_project/output/game_source_24m_v100"
+mkdir -p "$task_logs"
+task_log="$task_logs/terminal_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+task_args=(--project-root "$task_project" --workers "${GAME_SOURCE_WORKERS:-8}" --threads "${GAME_SOURCE_THREADS:-8}" --memory "${GAME_SOURCE_MEMORY:-10GB}")
+if [[ -n "${GAME_SOURCE_RUN_DIR:-}" ]]; then task_args+=(--resume "$GAME_SOURCE_RUN_DIR"); fi
+echo "Log: $task_log"
+echo "Planning estimate: 2-4 hours; progress depends on archives and disk speed."
+echo "Eight parallel readers by default, then eight DuckDB threads; allow 40 GB free disk."
+echo "No API calls. Partial coverage returns exit code 2 after writing a report."
+"$task_python" -B -u "$task_dir/build_game_source.py" "${task_args[@]}" "$@" 2>&1 | tee "$task_log"

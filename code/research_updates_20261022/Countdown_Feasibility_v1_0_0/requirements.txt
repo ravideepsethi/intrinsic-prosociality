@@ -1,0 +1,3 @@
+# Informational only; the launcher reuses an existing environment and installs nothing.
+duckdb>=1.2
+pyarrow>=14

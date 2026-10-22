@@ -1,0 +1,81 @@
+# Mandatory author-exclusion requirements — 2026-09-28
+
+## Rule and present status
+
+Exclude `__PRIVATE_VALUE_1__` and `__PRIVATE_VALUE_2__` using exact `lower(trim(username))` matching. `__PRIVATE_VALUE_3__` is the active account. Drop a game if either player matches. Exclude both accounts from account-level analyses, cohorts, donor/instrument populations, normalization/reference samples, and behavioral history construction.
+
+This is an author-requested sample restriction added on September 28, 2026, after prior results had been viewed. Record that timing. It is not a claim of earlier preregistration or a blind robustness decision. Do not assert that existing numerical results already implement it.
+
+## Consume the new main sample
+
+Add this package's `code` directory to the Python import path in the next analysis package. Authenticate the new input manifest rather than bypassing an older producer's checksum checks:
+
+```python
+from consume import main_files
+from io_tools import scan
+
+paths = main_files('/Volumes/XT_Pro/lichess_kindness')
+# Use this source in the analysis's original selection/projection query.
+source_sql = scan(paths)
+```
+
+This returns the 24 full-width author-excluded main files after validating their policy, months, checksums, and row counts. It neither runs models nor redirects old programs. Use a new output namespace and record the exclusion policy hash, the new main manifest hash, and the final analytical row-set identity in every new result receipt.
+
+The main panel preserves retained row values, including any pre-existing fields. Row exclusion alone does not certify that any inherited sample-dependent aggregate is author-free. Rebuild such fields from filtered events.
+
+## Other sample types
+
+| Consumer | Required implementation |
+|---|---|
+| Opportunity/game rows with names | Filter both player names before any sample-dependent aggregation, fitting, or eligibility thresholds. |
+| Account/profile rows with names | Exclude either author account before joins and account-level fitting. Preserve raw profile snapshots. |
+| Numeric-ID-only rows | Use only verified global user-ID mappings; filter every relevant role. Missing mappings must stop the numeric-only consumer. |
+| Game-ID-only rows | Anti-join the audited excluded-game index within its recorded input scope. New or other game sources require their own username/ID exclusion. |
+| Receipt episodes and receipt histories | Remove games involving either account from receipt-event construction, exposure counts, giver/recipient histories, donor propensities, and instrument/reference populations. Rebuild affected risk sets and aggregates. |
+| Persistence, Patron, kindness scores | Remove author rows and recompute sample-dependent account summaries, weights, cutoffs, ranks, standardizations, and estimates. |
+| Mechanism and color models | Refresh fits and pre-policy baselines on the filtered sample; propagate changed coefficients into forecasts. Do not relabel old frozen fits as author-excluded. |
+| A2 responsibility/trajectory work | Keep finished engine features. Remove matching targets, apply account exclusion, rebuild any affected behavioral histories, and refit on the retained frozen-sample subset. Report attrition; no replacement sampling to top up the roster. |
+| Descriptive tables, figures, manuscript | Regenerate counts, denominators, coefficients, uncertainty, and displayed results after the affected analysis refresh. |
+
+Reusable exact filter:
+
+```python
+from exclusion import exact_keep_sql
+
+keep = exact_keep_sql(
+    name_columns=['chooser_username_norm', 'disconnected_username_norm'],
+    alias='s',
+)
+# SELECT ... FROM source s WHERE <keep>
+```
+
+For numeric rows, load `author_id_resolution.author_ids` from the new ready manifest and call `exact_keep_sql(numeric_columns=['chooser', 'opponent'], author_ids=...)`. Both accounts must be mapped, with distinct nonnegative IDs. Never infer an ID from username order, a username hash, or an unrelated ID namespace. Unresolved numeric mappings do not invalidate exact name filtering; they block consumers that have only numeric IDs. The runner resolves IDs from certified core/main observations and, when available, the existing `glicko2_replay/user_dictionary_v1` files.
+
+For compact game-only inputs:
+
+```python
+from consume import excluded_games
+from io_tools import scan
+
+index = excluded_games(project, family='main_24m', months=['2023-11'])
+# SELECT s.* FROM compact_source s
+# ANTI JOIN <scan(index)> e USING (game_id)
+```
+
+The index contains the union of author games in the audited opportunity panels. Core/main overlaps are deduplicated by game ID, with month consistency checked. It is not an all-game exclusion database. Do not use it alone to certify an unrelated source, a different month, all-game donor events, or account rows without matching opportunity games.
+
+## Preserve factual histories
+
+Keep original raw archives, factual all-game timestamps, rating state/replay inputs, observed source/adjacency evidence, and engine caches. Actual ratings, real previous-game identities, factual starts/activity, account tenure, and factual prior losses describe what happened. Do not simulate a counterfactual chronology with the author removed. Continue to derive adjacency from the true sequence of games.
+
+Separately, analytical kindness/receipt events and aggregates must implement the exclusion. When a feature combines factual all-game history with behavioral events, preserve the factual time axis and remove author-involving events from the behavioral numerator/reference population. A downstream audit must state which treatment each feature uses.
+
+## Required checks before reporting refreshed results
+
+1. Confirm zero author accounts in all account samples/reference populations and zero author-involving games in all analytical event samples.
+2. Report removed opportunities and grants by month and role, account attrition, and pre/post row-set identities. Core and main are overlapping populations; do not add their counts together.
+3. Recompute affected histories, donor/reference scores, thresholds, model fits, weights, uncertainty, forecasts, and paper outputs. A direct-game hit count of zero alone does not clear an analysis that depends on another affected population.
+4. Compare the refreshed estimates with the preserved prior results. Label both sample definitions and the date of this decision.
+5. Only after execution and review may the manuscript state: “Games involving either of the author's two accounts are excluded from all analytical samples.” Keep account names in the private replication policy unless their publication is separately intended.
+
+The current package completes the filtering/audit infrastructure. It leaves statistical re-estimation and paper updates explicitly pending. No unseen account count or removal count is assumed.

@@ -1,0 +1,61 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+pe_mode="${1:?Specify analyze or tests}"
+shift
+pe_package="$(cd "$(dirname "$0")" && pwd -P)"
+pe_project="${IV_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+pe_desktop="${IV_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+pe_python="${IV_PYTHON:-$pe_project/venv/bin/python}"
+if [[ ! -x "$pe_python" ]]; then
+  echo "Research Python unavailable: $pe_python. Connect XT_Pro or set IV_PYTHON."
+  exit 2
+fi
+mkdir -p "$pe_desktop"
+export PYTHONDONTWRITEBYTECODE=1
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1
+cd "$pe_package"
+"$pe_python" - <<'PY'
+import sys
+assert sys.version_info >= (3,10), 'Python 3.10 or later is required'
+try:
+    import numpy,pyarrow,duckdb,chess,pandas
+except ImportError as error:
+    raise SystemExit('Missing existing research dependency: '+str(error))
+sys.path.insert(0,'code')
+from pe_common import verify_package
+verify_package()
+print('IV_PLACEBO_ENTRY_PACKAGE_SHA256_OK',flush=True)
+PY
+pe_log="$pe_desktop/iv_placebo_entry_${pe_mode}_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+pe_awake=()
+if [[ -x /usr/bin/caffeinate ]]; then pe_awake=(/usr/bin/caffeinate -i); fi
+echo "Log: $pe_log"
+set +e
+{
+  if [[ "$pe_mode" == tests ]]; then
+    "$pe_python" -m unittest discover -s tests -p 'test_*.py' -v
+  elif [[ "$pe_mode" == analyze ]]; then
+    echo 'ETA: approximately 45–90 minutes on the research Mac, revised from measured stage throughput.'
+    echo 'Cached Parquet columns; one F50 donor pass shared by O50; memory-aware workers capped at 10 and 11 GiB.'
+    echo 'Reuses reviewed receipt IV and old R7 results; reconstructs receipt RF influences for covariance checks.'
+    echo 'Reports at 25%, 50%, 75%, and 100%; heartbeat and next-checkpoint/finish ETA every 30 seconds.'
+    pe_tests="${pe_log%.log}_selftests.log"
+    if "$pe_python" -m unittest discover -s tests -p 'test_*.py' -q > "$pe_tests" 2>&1; then
+      echo "OFFLINE_SELF_TESTS_OK: $pe_tests"
+    else
+      cat "$pe_tests"
+      exit 3
+    fi
+    "${pe_awake[@]}" "$pe_python" -u code/run_pe.py --project-root "$pe_project" --desktop "$pe_desktop" "$@"
+  else
+    echo 'Use RUN_PLACEBO_ENTRY.command or RUN_TESTS.command.'
+    exit 2
+  fi
+} 2>&1 | tee "$pe_log"
+pe_exit=${PIPESTATUS[0]}
+set -e
+if [[ "$pe_exit" -ne 0 ]]; then
+  echo "Stopped with exit $pe_exit. Completed checkpoints remain reusable. Return this log: $pe_log"
+fi
+exit "$pe_exit"

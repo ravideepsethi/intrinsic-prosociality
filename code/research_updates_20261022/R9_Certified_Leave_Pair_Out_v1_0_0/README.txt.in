@@ -1,0 +1,176 @@
+R9 CERTIFIED LEAVE-PAIR-OUT, VERSION 1.0.0
+
+Save this ZIP and its .zip.sha256 sidecar in ~/Desktop/Lichess_Desktop.
+The accompanying command verifies the ZIP, extracts to a new temporary directory,
+and runs RUN_R9.command. No copying from Downloads, installation, API request,
+Stockfish search, manuscript change, or change to run 2a4e617b40bc occurs.
+
+PROJECT AND EXECUTION
+Project: /Volumes/XT_Pro/lichess_kindness
+Python: /Volumes/XT_Pro/lichess_kindness/venv/bin/python
+Workers: at most 10. Memory budget: 11 GiB. Large fits run alone when necessary.
+BLAS threads: one per process. Caffeinate prevents idle sleep.
+Private root: derived/replication/r9_certified_v100_PRIVATE/<configuration>/
+Desktop pointer: R9_CERTIFIED_LATEST_PRIVATE.json
+Aggregate ZIPs and checksums: Desktop/Lichess_Desktop, at 25/50/75/100 percent.
+Log: r9_certified_<UTC timestamp>_<pid>.log in the same Desktop folder.
+Rerunning the same command resumes authenticated checkpoints and keeps the
+originally selected comparison phase. Changed inputs or failed hashes stop.
+
+Runtime planning estimate: 2–5 hours. Allow 4–8 hours if the added comparison
+rows require substantial missing ENV history scans. This is not a benchmark.
+Progress and ETA messages appear at least every 30 seconds during long stages.
+The 25/50/75/100 percentages mark stage completion, not equal fractions of time.
+Private caches and temporary numeric arrays can require tens of GB of free disk.
+The memory scheduler uses estimates rather than an OS-enforced memory limit.
+
+WHAT IS FROZEN
+The vendored IV_Leave_Pair_Out_v1_0_0 package remains byte-for-byte unchanged.
+The pinned baseline configuration is:
+2a4e617b40bcadacd25887d2035027e4f7777cbe4c2af51b7a7aa7dde592db14
+Its complete 14-model report, previously supplied by the user, is authenticated.
+Step 0 re-creates S0 and F50 scores from the original donor files, compares every
+saved score/count/expected-rate field, and re-estimates all 14 baseline models.
+Every available coefficient and standard error, including balance/indicator
+rows, is compared to the saved full-precision output. Saved fit tables are also
+checked against the authenticated aggregate report. Failure stops R9 estimation.
+Numeric tolerance: 2e-10 absolute + 2e-8 relative for coefficients/SEs;
+2e-10 absolute for score values. No comparison uses rounded published values.
+
+S0 full: 2,682,329; neutral: 2,452,682. Frozen material flags define neutrality.
+The timing-common cohort has the same row hash as the original timing models.
+The baseline is held under a shared, read-only lock for the duration of R9.
+
+COMPARISON FRAMES
+The default Phase 75 source is the completed analysis configuration
+9e46500403a4f3c1c011ec69b5677c295b2d094cca7bddd44f06e5c7ae6b7266:
+F75 = 11,057,763; O75 = 7,146,627.
+Completed Phase 100 analysis frames take priority on the first launch, even if
+that producer's subsequent regression jobs are still pending. Their
+configuration, report manifest, completed stage receipts, source/author lineage,
+and exact Phase 50 feature bridge must pass. Multiple candidate completed Phase
+100 configurations require an explicit --phase-root; the code does not guess.
+A downloader's Phase 100 metadata checkpoint without assembled analysis frames
+is not a Phase 100 analysis frame. The selected phase is frozen on resume and
+reported prominently. The Phase 75 report remains an available-case publication,
+with three unresolved selected metadata rows; R9 does not relabel it complete
+metadata coverage or manufacture those rows.
+
+Ordinary rows are verified as an exact entry subset. Old Phase 50 features are
+checked by game/role/time identity because phase-specific row IDs were rebound.
+The entry source intentionally lacks later y/reached columns; those are read
+from the certified ordinary frame. ENV definitions stay frozen. Existing
+pair/month ENV values are reused; only missing pair/month requests are computed
+from authenticated local chronology and existing active-event caches.
+
+SCORES AND CONTROLS
+There is one original donor-data scan across 24 monthly partitions, in 16 chooser
+shards. It produces the old-score replay and a private reusable event cache.
+R9 then reads this cache for A/B/C. O uses the F scores by checked identity.
+Ordinary games never become refusals. Author accounts __PRIVATE_VALUE_1__ and __PRIVATE_VALUE_2__ remain
+excluded from both focal roles, donor roles, and the frozen reference model.
+The donor chooser is j. All j-to-i decisions are removed at every recorded time;
+a reverse-role i-to-j decision cannot enter j-as-chooser history.
+
+A: every eligible recorded donor, before and after, including interval ties.
+B: donor event timestamp strictly before focal game START, no 24-hour buffer.
+C: donor event timestamp strictly after focal ANCHOR.
+B's full-S0 row is never restricted to C-supported rows. Timing comparisons use
+the common n_B>=5 and n_C>=5 rows. A's minimum is five throughout. If full-S0 B
+has any row below five, the count is exported and the run stops without dropping
+or imputing rows. Archived lagged-history support implies this should not occur.
+
+State prediction uses each donor event's own UTC calendar month, including
+events that cross a monthly partition boundary. The same two account folds
+are excluded as in the baseline. A missing monthly model uses the most recent
+usable model no later than that month for the SAME excluded folds. If none
+exists, p_hat=0: the donor is retained without a state adjustment. No future
+reference model is borrowed for early donors. Terminal-month overflow can use
+the final earlier reference. The report lists fallback models, source donor
+counts by fold, and affected donor-focal assignments for each frame/variant.
+These counts distinguish source donor rows from repeated focal-query uses.
+
+The three A donor-history controls replace their old-cutoff versions in every
+model, with the explicitly requested exception that B uses its OWN donor count,
+distinct counterpart count, and mean p_hat. C therefore uses A controls under
+the stated every-model rule. Its own donor counts/breadth remain available for
+diagnostics. This choice is recorded in each result's history_control_donor_set.
+The named log-count controls retain the exact
+baseline transformations log(1+n) and log(1+distinct counterparts); the change
+is their donor set, not a new functional form. Every other control, outcome,
+fixed effect and shared-account-OR-date CR0 definition remains fixed.
+
+UNITS AND OUTPUTS
+ENV-indicator is primary, with X0 alongside each block. One primary SD is the
+root mean squared residual of A in S0 full under ENV-indicator (the residual
+mean is absorbed by the fixed effects). All first stages, reduced forms, entry,
+placebo and RF contrasts use this SAME SD, plus the exact 0.0594 bridge. The
+original baseline's 0.059411690344000595 is used only to reproduce Step 0.
+2SLS and its contrasts remain percentage points per receipt. Balance slopes
+remain trait SD per the model's native residual-score SD.
+
+A_receipt: A full/neutral, first stage, y/reached reduced forms, 2SLS, Wald and
+robust AR 95% intervals, first-stage F and partial R-squared.
+B_before_full: B on the identical full S0 rows, with the same outputs.
+C_timing: A/B/C on the same supported rows; contrasts contains after-minus-before
+RF and 2SLS differences, their cross-equation covariance, SE, intervals and p.
+D_placebo: O75/O100 y and reached, 95% and 90% intervals. Contrasts also contains
+S0-minus-ordinary RF differences under shared covariance.
+E_entry: three frozen entry labels, their base rates and percent of base per SD.
+F_balance/F_joint_balance: frozen T30 is SEVEN 30-day traits, not thirty traits.
+Holm is within each seven-trait set; the joint test uses stacked trait equations.
+G_implied_bias: standardized fifteen traits jointly predict y and received with
+FE and X0-NH. Only the trait component forms Y_hat/D_hat. The outer regression
+uses the primary controls; X0 is supplied alongside. The full first-order SE
+includes fitted prediction-rule uncertainty. These are calibration rows, not
+identified causal bias estimates.
+H_figure5: twenty equal-count score bins, their mean residual score, mean residual
+receipt and conditional CR0 95% intervals, plus the linear first-stage slope.
+Ties use stable original row order. Bin membership/score estimation uncertainty
+is not propagated in these descriptive intervals.
+I_score_diagnostics: donor counts, cross-month and after-anchor shares, fallback
+counts, support, and correlations. S0/F50 compare to reproduced archived scores.
+For the expanded F frame, the old recipe is recomputed on those same rows; the
+added Phase 75/100 rows did not have scores saved by the baseline run.
+
+ADOPTION
+If abs(new primary 2SLS - 0.281) > new primary SE / 3, final status is
+COMPLETE_ADOPTION_REVIEW_REQUIRED. All tables still finish and export.
+The report decomposes the change into donor-month scoring and rebuilt controls,
+holding rows fixed. An additional old-score/new-controls fit exposes interactions
+and order dependence. This diagnoses numerical movement; it does not decide
+whether the revised identifying assumptions are credible. No automatic adoption
+or manuscript update occurs, even when the threshold is not exceeded.
+
+OPTIONAL LEARNING SPLITS (ENABLED IN THE SUPPLIED COMMAND)
+Two definitions, each with experienced/unexposed groups and both control sets:
+full recorded chronology (primary), and the frozen fair_90>0 flag. Full chronology
+means an author-clean competitive chooser decision strictly before game start;
+it is left-censored at November 2023. The existing 90-day flag retains its frozen
+seven-day-buffer window, start-97 days through start-7 days. Group contrasts stack
+the two equations under shared covariance. These conditional differences alone
+do not establish that kindness was causally 'passed on'.
+Use --learning-split none to omit these optional eight fits; the supplied command
+uses --learning-split both. With both, 28 R9 fits and 22 contrast rows are planned,
+in addition to the fourteen Step 0 model reproductions.
+
+RETURN
+R9_CERTIFIED_REPORT_<configuration>_100.zip
+R9_CERTIFIED_REPORT_<configuration>_100.zip.sha256
+r9_certified_<timestamp>_<pid>.log
+The ZIP contains only explicit aggregate tables, diagnostics and certificates.
+Scores, account/game identities, raw events and row-level influences stay private.
+If stopped, return the latest checkpoint ZIP, its checksum and the log.
+
+OPTIONS
+--workers 1..10 --memory-gb 11
+--baseline-root /absolute/path/to/2a4e617b40bc
+--phase-root /absolute/path/to/a/completed/phase/analysis/configuration
+--learning-split both|none
+Environment overrides: IV_PROJECT_ROOT, IV_DESKTOP, IV_PYTHON.
+
+VALIDATION LIMIT
+Synthetic tests exercise the numerical code, donor logic, data joins, resumed
+stages, covariance and export. The private production data are on the research
+Mac. Their empirical Step 0 certification and R9 results occur only when the
+user runs the package. No new empirical coefficient is claimed in this release.

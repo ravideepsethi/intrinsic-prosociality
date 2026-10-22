@@ -1,0 +1,54 @@
+#!/bin/bash
+set -euo pipefail
+task_package_dir="$(cd "$(dirname "$0")" && pwd)"
+cd "$task_package_dir"
+/usr/bin/shasum -a 256 -c PACKAGE_MANIFEST.sha256
+
+task_desktop="${MM_BS_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+task_root="${MM_BS_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+task_python="${MM_BS_PYTHON:-}"
+export OPENBLAS_NUM_THREADS=2
+export OMP_NUM_THREADS=2
+export MKL_NUM_THREADS=2
+export VECLIB_MAXIMUM_THREADS=2
+export NUMEXPR_NUM_THREADS=2
+export PYTHONDONTWRITEBYTECODE=1
+
+if [[ -z "$task_python" ]]; then
+  shopt -s nullglob
+  task_candidates=("$task_desktop"/pool_main_wave1_python.*/bin/python)
+  if command -v python3 >/dev/null 2>&1; then
+    task_candidates+=("$(command -v python3)")
+  fi
+  for task_candidate in "${task_candidates[@]}"; do
+    if [[ -x "$task_candidate" ]] && "$task_candidate" -B -c 'import duckdb,numpy' >/dev/null 2>&1; then
+      task_python="$task_candidate"
+      break
+    fi
+  done
+fi
+if [[ -z "$task_python" ]] || ! "$task_python" -B -c 'import duckdb,numpy' >/dev/null 2>&1; then
+  echo "No existing Python with DuckDB and NumPy found. Set MM_BS_PYTHON to the analysis interpreter."
+  exit 2
+fi
+if [[ ! -d "$task_desktop" || ! -d "$task_root" ]]; then
+  echo "The project drive/root or Desktop output directory is unavailable."
+  exit 2
+fi
+
+task_log="$task_desktop/pool_matchmaking_balance_selection_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+task_awake=()
+if [[ -x /usr/bin/caffeinate ]]; then task_awake=(/usr/bin/caffeinate -i); fi
+
+{
+  echo "Pool matchmaking: baseline balance and timeout-role selection, v1.0.0"
+  echo "Expected runtime: 5-15 minutes (planning estimate); allow longer while another heavy job is running."
+  echo "One process, at most two numerical threads; allow roughly 2-4 GB RAM. Offline."
+  echo "Input: the authenticated 174 MB comparison file. Each completed specification is checkpointed."
+  echo "Re-run this same command to resume. No Stockfish work or full-panel rebuild."
+  echo "Python: $task_python"
+  echo "Log: $task_log"
+  "$task_python" -B "$task_package_dir/self_test.py"
+  "${task_awake[@]}" "$task_python" -B -u "$task_package_dir/run_analysis.py" \
+    --project-root "$task_root" --desktop "$task_desktop"
+} 2>&1 | tee "$task_log"

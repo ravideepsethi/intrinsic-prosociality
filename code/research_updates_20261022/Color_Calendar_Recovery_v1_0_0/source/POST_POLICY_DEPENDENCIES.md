@@ -1,0 +1,14 @@
+# Inputs still needed for the matched policy comparison
+
+The completed color follow-up and this update are complementary. Do not rerun its replay or use its all-source established cohort as if it were the mechanism regular-player cohort. This package has no post-policy adapter and reads no post-policy outcomes.
+
+Before opening a new matched behavioral statistic, freeze an amended analysis with:
+
+1. A chooser × speed regularity roster determined using information before implementation, with no requirement to remain active afterward. Keep the original activity/history rule and distinguish the fixed roster from the rolling pre-policy selection used for this planning screen. Recover existing history fields; do not substitute account creation age for same-speed history.
+2. Certified pool membership and the agreed observed previous-game adjacency classification through the actual retained post window, with the required earlier boundary history. Do not demand chronology through April if the selected outcome window ends in January. Preserve source game keys and checksum receipts.
+3. The same board, ply, gap, RD, missing-clock and mating-material definitions for pre/post entry and grants. Decide in advance whether RD eligibility is frozen or contemporaneous; report selection caused by the alternative. The primary mechanical calibration requires both pregame RDs ≤110 and actual-stratum color/outcome/near-zero checks, with displayed ties separate.
+4. Implementation convention November 18, 2025 at 07:22 UTC, keeping 07:15–07:22 separate; announcement December 22, 2025 at 22:35 UTC. Source-ground the final censor or report named truncation scenarios. January 30–31 do not by themselves establish a sustained mechanics change or deployment date. Exclude calendar weeks crossing an event or cutoff.
+5. Exact predicted values for the selected weekly White-minus-Black post-minus-eight-complete-pre statistic, computed on the matched sample at fixed stored states. Recalibrate probabilities on pre-policy outcomes only. Retain both players' and both actions' changes. No outcome-driven window/statistic selection.
+6. Pre-only dependence diagnostics, prespecified placebos and a matched-cohort power calculation for each actual retained post-window length. Include constrained-fit prediction uncertainty or label inference explicitly conditional. Visibility/awareness remains unidentified unless independent source-backed bounds are established.
+
+Existing descriptive post-color series have already been viewed. This is an amended plan before the new matched target statistic, not a pristine preregistration or an untouched outcome holdout. A confidence interval incompatible with a fully aware fitted model would reject that conditional prediction, not all rating-based motives or an unidentified mixture of motives and awareness.

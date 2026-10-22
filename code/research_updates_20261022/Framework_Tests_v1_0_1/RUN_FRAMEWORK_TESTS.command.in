@@ -1,0 +1,32 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+fw_package="$(cd "$(dirname "$0")" && pwd -P)"
+fw_project="${IV_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+fw_desktop="${IV_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+fw_python="${FW_PYTHON:-$fw_project/venvs/framework_tests_v100/bin/python}"
+if [[ ! -x "$fw_python" ]]; then
+  fw_python="${IV_PYTHON:-$fw_project/venv/bin/python}"
+fi
+if [[ ! -x "$fw_python" ]]; then echo "Research Python missing: $fw_python"; exit 2; fi
+export PYTHONDONTWRITEBYTECODE=1
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 BLIS_NUM_THREADS=1
+export VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1
+mkdir -p "$fw_desktop"
+cd "$fw_package"
+fw_log="$fw_desktop/framework_tests_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+fw_awake=()
+if [[ -x /usr/bin/caffeinate ]]; then fw_awake=(/usr/bin/caffeinate -i -m); fi
+echo "Log: $fw_log"
+set +e
+{
+  "$fw_python" code/check_dependencies.py || exit $?
+  "$fw_python" tests/test_repairs.py || exit $?
+  "${fw_awake[@]}" "$fw_python" -u code/run_framework.py --project-root "$fw_project" --desktop "$fw_desktop" "$@"
+} 2>&1 | tee "$fw_log"
+fw_exit=${PIPESTATUS[0]}
+set -e
+if [[ "$fw_exit" -ne 0 ]]; then
+  echo "Stopped with code $fw_exit. Checkpoints are preserved. Return the log and newest FRAMEWORK_TESTS result ZIP."
+fi
+exit "$fw_exit"

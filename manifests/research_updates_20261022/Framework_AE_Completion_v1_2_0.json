@@ -1,0 +1,108 @@
+{
+  "package": "Framework_AE_Completion_v1_2_0",
+  "archive_name": "Framework_AE_Completion_v1_2_0.zip",
+  "archive_sha256": "ac08b536043812b9bb8afcffdb61d546e612f5bc6f6172d17421305bf660b1a5",
+  "archive_size": 47708,
+  "archive_root": "Framework_AE_Completion_v1_2_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "README.md",
+      "published_path": "README.md",
+      "sha256": "b35b11a55e0bacd4968915e989a078f2cc2fab3e73ad3cc29b74c10cf7930305",
+      "published_sha256": "b35b11a55e0bacd4968915e989a078f2cc2fab3e73ad3cc29b74c10cf7930305",
+      "size": 6187
+    },
+    {
+      "path": "RUN_A_E.command",
+      "published_path": "RUN_A_E.command.in",
+      "sha256": "f1572fa872000a25a5414c571e665bf2a775fb3c3b90887ba25decfc399153ac",
+      "published_sha256": "f1572fa872000a25a5414c571e665bf2a775fb3c3b90887ba25decfc399153ac",
+      "size": 6365
+    },
+    {
+      "path": "src/build_e_groups.py",
+      "published_path": "src/build_e_groups.py",
+      "sha256": "b603f8d2565e3cd17730f7c00ce92b513680ae0b063214e03baa6640a83fd919",
+      "published_sha256": "b603f8d2565e3cd17730f7c00ce92b513680ae0b063214e03baa6640a83fd919",
+      "size": 6191
+    },
+    {
+      "path": "src/estimate_a.py",
+      "published_path": "src/estimate_a.py",
+      "sha256": "924c7586d7f5b929c8ec03a67da581aa2e299b1f1bd818d9bc3a628fd903cd74",
+      "published_sha256": "924c7586d7f5b929c8ec03a67da581aa2e299b1f1bd818d9bc3a628fd903cd74",
+      "size": 10672
+    },
+    {
+      "path": "src/methods.py",
+      "published_path": "src/methods.py",
+      "sha256": "99cae2b7aa3c6633cb4b33fa5f3046b7454a31d401cb986e229d758c1ffd2113",
+      "published_sha256": "99cae2b7aa3c6633cb4b33fa5f3046b7454a31d401cb986e229d758c1ffd2113",
+      "size": 10817
+    },
+    {
+      "path": "src/prepare_a.py",
+      "published_path": "src/prepare_a.py",
+      "sha256": "68a86ff96ca25942465abf59f2e0abf88b3b251adb305c3cfc818a3179bf9326",
+      "published_sha256": "68a86ff96ca25942465abf59f2e0abf88b3b251adb305c3cfc818a3179bf9326",
+      "size": 11696
+    },
+    {
+      "path": "src/prepare_e.py",
+      "published_path": "src/prepare_e.py",
+      "sha256": "c54648f0e219a917b0ea2b56a4cc5b09a24c84d79cada2ceb5ea5b5aec22a261",
+      "published_sha256": "c54648f0e219a917b0ea2b56a4cc5b09a24c84d79cada2ceb5ea5b5aec22a261",
+      "size": 6801
+    },
+    {
+      "path": "src/report.py",
+      "published_path": "src/report.py",
+      "sha256": "8c03fcb996397ac65c71dc165b6efc44c5cd0a1413e3aa8f51d2d54d8f483117",
+      "published_sha256": "8c03fcb996397ac65c71dc165b6efc44c5cd0a1413e3aa8f51d2d54d8f483117",
+      "size": 1508
+    },
+    {
+      "path": "src/run_bc.py",
+      "published_path": "src/run_bc.py",
+      "sha256": "1aed55a661e824339b7da41de72967422b67339c200743f4cf3ffa56db556970",
+      "published_sha256": "1aed55a661e824339b7da41de72967422b67339c200743f4cf3ffa56db556970",
+      "size": 26122
+    },
+    {
+      "path": "src/run_e_estimates.py",
+      "published_path": "src/run_e_estimates.py",
+      "sha256": "63768252727acb583dcbd2d07f168a6b12390dc073fb59a769e42eb55d86bd3e",
+      "published_sha256": "63768252727acb583dcbd2d07f168a6b12390dc073fb59a769e42eb55d86bd3e",
+      "size": 18492
+    },
+    {
+      "path": "src/validate_a.py",
+      "published_path": "src/validate_a.py",
+      "sha256": "7c22dae6b9f2be1b76d17e6d196881f616474ea77b2092f489858cfe40ac1bb4",
+      "published_sha256": "7c22dae6b9f2be1b76d17e6d196881f616474ea77b2092f489858cfe40ac1bb4",
+      "size": 1671
+    },
+    {
+      "path": "tests/test_ae_synthetic.py",
+      "published_path": "tests/test_ae_synthetic.py",
+      "sha256": "0c22a8bd325eebc5f797549b2d13f07dd0cc09337e3169722841b2b7beeab6c9",
+      "published_sha256": "0c22a8bd325eebc5f797549b2d13f07dd0cc09337e3169722841b2b7beeab6c9",
+      "size": 3297
+    },
+    {
+      "path": "tests/test_contract.py",
+      "published_path": "tests/test_contract.py",
+      "sha256": "132be4660ee9202fdddbece7a5bdb75f0a4ec2b12679dcf61c51423b2d45d140",
+      "published_sha256": "132be4660ee9202fdddbece7a5bdb75f0a4ec2b12679dcf61c51423b2d45d140",
+      "size": 760
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "PACKAGE_FILES_SHA256.txt",
+      "sha256": "20d1ee7ad8ad46cced6be29ad5a9e6054a31bd20a1072eb8ea23268b556c7c6c",
+      "size": 1158
+    }
+  ]
+}

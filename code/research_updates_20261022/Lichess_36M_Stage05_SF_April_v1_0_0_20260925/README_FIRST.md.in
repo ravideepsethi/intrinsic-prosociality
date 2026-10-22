@@ -1,0 +1,72 @@
+# Lichess 36-month Stage 05 + Stockfish for April 2026
+
+This package processes **2026-04**, after its Stage-01 candidate extraction and
+sequential API enrichment have completed successfully.
+
+It performs four operations:
+
+1. Authenticates April's Stage-01 receipt, API plan, API success receipt, every
+   compact response Parquet, and every unit checkpoint.
+2. Freezes the exact `status == timeout` game IDs and uses the recovered
+   canonical Stage-05 producer to construct the true behavioral-opportunity
+   Parquet.
+3. Produces a compact, typed ZSTD Parquet input for Stockfish.
+4. Runs Stockfish 18 at 100,000 nodes per position with up to ten one-thread
+   worker processes in resumable 100,000-row parts.
+
+The April target-row count is derived from the authenticated receipts and
+independently checked against the Stage-01 and API Parquets. It is not assumed
+in advance. The package makes no API requests.
+
+## Isolation from the completed through-March run
+
+The certified September/January/March Stockfish outputs are read neither as
+inputs nor as mutable state. April engine outputs use the separate root:
+
+```text
+/Volumes/XT_Pro/lichess_kindness/derived/replication_36m/stockfish100k_extension_new_api_2026_04
+```
+
+April's Stage-05 and compact-input files are added under their established
+month-keyed roots without replacing earlier monthly files or checkpoints.
+
+## Important concurrency rule
+
+Do not run this while another Stockfish job is active on the same Mac. The
+runner checks for existing `stockfish` processes and exits before production
+work if it finds any. A sequential API job may continue concurrently.
+
+## Expected runtime
+
+Based on the completed through-March production rate:
+
+- API/lineage authentication and Stage-05/input construction: 10–30 minutes.
+- Stockfish pilot: about one minute.
+- Stockfish production: approximately 6–9 hours for a typical extension month.
+- Total expected wall time: approximately 6–10 hours from zero.
+- The pilot prints a row-count-specific ETA before production begins.
+
+Expected additional free space: approximately 5–10 GiB.
+
+## Restart behavior
+
+Rerun the same command after an interruption. Authenticated Stage-05 output,
+the prepared input Parquet, and completed 100,000-row Stockfish parts are
+reused. An incomplete current part may be recomputed.
+
+## Outputs
+
+Large ZSTD Parquet products remain on the external SSD under:
+
+```text
+/Volumes/XT_Pro/lichess_kindness/derived/replication_36m/
+```
+
+The runner creates a compact result ZIP and SHA-256 sidecar in:
+
+```text
+__PRIVATE_VALUE_1__/Desktop/Lichess_Desktop
+```
+
+Upload those two files when the run completes.
+

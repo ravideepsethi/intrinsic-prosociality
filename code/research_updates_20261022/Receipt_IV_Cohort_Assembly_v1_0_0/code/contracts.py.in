@@ -1,0 +1,115 @@
+"""Read the completed, author-inclusive input chain without modifying it."""
+import csv
+from common import *
+import inherited_inputs
+
+COHORT_CODE='49d42e6b6a901662c608b14edddd06ab94e0cc90cb975b41b62b36227ace0c09'
+API_CODE='7c1ef57c67e6985caf553860d6018179c2e6d5fdfdd17bcba39007c2e98491aa'
+AUDIT_CONF='4c63c67300eeecd9873fdf27b99e5821dbb2fffeddd32a8a8b86efce2f2ef156'
+ACCOUNT_POLICY=dict(status='DEFERRED_BY_USER_FOR_THIS_RUN',excluded_usernames=[],
+    retained_author_usernames=['__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__'],decision_date='2026-10-02',
+    instruction="Proceed, but don’t do my account exclusion yet",
+    scope='Retain original author-inclusive exposures, histories, scores and reference population; do not consume author-excluded Run 3 products.')
+
+def snap(p):
+    return dict(**receipt(p),fingerprint=stamp(p))
+
+def unique_entry(entries,name):
+    out=[e for e in entries if e.get('path',e.get('relative_path'))==name]
+    if len(out)!=1:raise RuntimeError('Expected one receipt entry: '+name)
+    return out[0]
+
+def bind_stage(root,expected,auth,snaps):
+    rp=root/'_DONE.json';snaps.append(checked(rp,expected,auth));d=load(rp)
+    for r in d['files']:
+        p=(root/r['path']).resolve()
+        if not p.is_relative_to(root.resolve()):raise RuntimeError('Receipt path escapes stage')
+        snaps.append(checked(p,r,auth))
+    return d
+
+def receipt_for_root(ready,root,project):
+    out=[r for r in ready['receipts'] if relocated(r['path'],project).resolve()==(root/'_DONE.json').resolve()]
+    if len(out)!=1:raise RuntimeError('READY does not uniquely bind stage '+str(root))
+    return out[0]
+
+def authenticate(project,work):
+    auth=work/'authentication';snaps=[]
+    base=project/'derived/replication_36m/receipt_iv_cohort_extension_v100_PRIVATE'
+    rp=base/'READY_FOR_IV_COHORT_ASSEMBLY_PRIVATE.json';ready=load(rp)
+    if ready.get('code_signature')!=COHORT_CODE or ready.get('status')!='MEMBERSHIP_AND_PAIR_EXCLUDED_SCORE_INPUTS_READY':
+        raise RuntimeError('Reviewed author-inclusive cohort extension is required')
+    snaps.append(snap(rp))
+    roots={k:relocated(ready[k+'_root'],project) for k in ('membership','support')}
+    md=bind_stage(roots['membership'],receipt_for_root(ready,roots['membership'],project),auth,snaps)
+    sd=bind_stage(roots['support'],receipt_for_root(ready,roots['support'],project),auth,snaps)
+    main=load(roots['membership']/'MAIN_INPUT_MANIFEST_PRIVATE.json')
+    if len(main['months'])!=32 or main['old_main_rows']!=41534331 or md['result']['known_main_rows']!=50265828:
+        raise RuntimeError('Original main choice spine changed')
+    choices={r['month']:str(roots['membership']/r['path']) for r in main['months']}
+    if set(choices)!=set(MONTHS):raise RuntimeError('Main month coverage differs')
+    hist=inherited_inputs.history(project,auth);snaps+=hist['snapshots']
+    # Bind each score producer to the already authenticated support receipt.
+    score_receipts=[r for r in sd['inputs'] if Path(r['path']).name=='_DONE.json'
+                    and relocated(r['path'],project).resolve()!=(roots['membership']/'_DONE.json').resolve()]
+    score_files={}
+    if len(score_receipts)!=16:raise RuntimeError('Expected 16 completed score shards')
+    for r in score_receipts:
+        root=relocated(r['path'],project).parent
+        d=bind_stage(root,r,auth,snaps)
+        for e in d['files']:
+            if e['path'].endswith('scores_PRIVATE.parquet'):score_files[str((root/e['path']).resolve())]=e
+    sm=load(roots['support']/'SCORE_INPUT_MANIFEST_PRIVATE.json')
+    scores=[str(relocated(p,project).resolve()) for p in sm['paths']]
+    if len(scores)!=512 or set(scores)!=set(score_files):raise RuntimeError('All-source score manifest differs')
+    # Authenticate the finished API overlay through its frozen target plan.
+    api=project/'derived/replication_36m/receipt_iv_source_api_v100_PRIVATE'
+    ap=api/'final/SOURCE_SUPPLEMENT_READY_PRIVATE.json';ar=load(ap);snaps.append(snap(ap))
+    plan=load(api/'plan/_DONE.json');snaps.append(snap(api/'plan/_DONE.json'))
+    cp=api/'plan/INPUT_CONTRACT_PRIVATE.json'
+    snaps.append(checked(cp,unique_entry(plan['files'],cp.name),auth));contract=load(cp)
+    if (contract['code_signature']!=API_CODE or contract['cohort_code']!=COHORT_CODE
+        or contract['cohort_ready_sha256']!=sha(rp) or ar['plan_binding']!=plan['binding']):
+        raise RuntimeError('API overlay is not bound to this original cohort')
+    if relocated(ar['original_cohort_ready'],project).resolve()!=rp.resolve():raise RuntimeError('Wrong API parent READY')
+    summary=ar['summary']
+    if (summary['status']!='SOURCE_PULL_COMPLETE' or summary['validated_source_rows']!=5891950
+        or summary['unresolved_source_rows']!=0 or summary['known_main_rows_after_supplement']!=55467033):
+        raise RuntimeError('The reviewed complete source pull is required')
+    for r in ar['files']:snaps.append(checked(api/'final'/r['path'],r,auth))
+    deltas={}
+    for p in ar['membership_deltas']:
+        p=relocated(p,project);m=p.name.removeprefix('membership-delta-').removesuffix('_PRIVATE.parquet');deltas[m]=str(p)
+    if set(deltas)!={'2025-11','2025-12','2026-02'}:raise RuntimeError('Wrong source overlay months')
+    memberships={m:str(roots['membership']/'membership'/('month='+m)/'membership_PRIVATE.parquet') for m in NEW_MONTHS}
+    # Keep the complete historical scope of the original first-pair audit.
+    fa=load(PACKAGE/'authority/first_pair_authority.json');mp=project/fa['chronology_manifest_relative']
+    snaps.append(checked(mp,{'sha256':fa['chronology_manifest_sha256']},auth))
+    with mp.open() as f:old=list(csv.DictReader(f,delimiter='\t'))
+    if len(old)!=852 or sum(int(r['rows']) for r in old)!=7763847245:raise RuntimeError('Historical chronology scope changed')
+    chron={}
+    for k,r in enumerate(old):
+        p=relocated(r['path'],project).resolve();pf=pq.ParquetFile(p)
+        if (int(r['file_index'])!=k or p.stat().st_size!=int(r['bytes']) or pf.metadata.num_rows!=int(r['rows'])
+            or pf.metadata.num_row_groups!=int(r['row_groups']) or not {'utc_ms','white_id','black_id'}<=columns(p)):
+            raise RuntimeError('Historical chronology metadata changed: '+str(p))
+        chron[str(p)]=dict(path=str(p),rows=int(r['rows']),fingerprint=stamp(p),old_index=k,volume=False)
+    current=inherited_inputs.chronology(project,auth)
+    if len(current)!=192 or sum(r['rows'] for r in current)!=2959866844:
+        raise RuntimeError('Reviewed 32-month all-speed chronology differs')
+    for r in current:
+        p=str(Path(r['path']).resolve())
+        if p not in chron:chron[p]=dict(path=p,rows=r['rows'],fingerprint=stamp(p),old_index=None,volume=True)
+        chron[p]['volume']=True
+    # Optional cache: if absent, the same three-column scan supplies the answer.
+    oldroot=project/'derived/replication/chooser_iv_repeated_audit_v100_PRIVATE/4c63c67300ee'
+    cache=None
+    if (oldroot/'config.json').is_file() and (oldroot/'prepared/_DONE.json').is_file():
+        if digest(load(oldroot/'config.json'))!=AUDIT_CONF:raise RuntimeError('Original pair cache configuration changed')
+        snaps.append(snap(oldroot/'config.json'));pd=load(oldroot/'prepared/_DONE.json');snaps.append(snap(oldroot/'prepared/_DONE.json'))
+        if pd.get('config_sha256')!=AUDIT_CONF:raise RuntimeError('Wrong original pair-key checkpoint')
+        kp=oldroot/'prepared/pair_keys.npy';snaps.append(checked(kp,unique_entry(pd['files'],kp.name),auth))
+        cache=dict(root=str(oldroot),keys=str(kp),config=AUDIT_CONF)
+    return dict(choices=choices,memberships=memberships,deltas=deltas,opportunities=hist['opportunities'],
+        scores=scores,history=hist['records'],chronology=list(chron.values()),old_cache=cache,snapshots=snaps,
+        account_policy=ACCOUNT_POLICY,source_summary=summary,
+        chronology_authority='Pinned historical manifest and current metadata inventory; full input bytes are not independently source-pinned. Original file signatures and fresh read fingerprints are enforced.')

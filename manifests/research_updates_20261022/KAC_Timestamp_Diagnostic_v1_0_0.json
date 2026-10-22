@@ -1,0 +1,62 @@
+{
+  "package": "KAC_Timestamp_Diagnostic_v1_0_0",
+  "archive_name": "KAC_Timestamp_Diagnostic_v1_0_0.zip",
+  "archive_sha256": "fcfa896ad6188c0594d8ab95c86eb81cf2b73f2f7c250cd7f6598b7623d1745a",
+  "archive_size": 15988,
+  "archive_root": "KAC_Timestamp_Diagnostic_v1_0_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "README.md",
+      "published_path": "README.md",
+      "sha256": "7afd9abf75b02de7af2f091965768415f25d97f03afd80be4a7657c0b743025b",
+      "published_sha256": "7afd9abf75b02de7af2f091965768415f25d97f03afd80be4a7657c0b743025b",
+      "size": 2543
+    },
+    {
+      "path": "RESULTS_REVIEW.md",
+      "published_path": "RESULTS_REVIEW.md",
+      "sha256": "a4a262cddb10c28c79f0129e4c27539f628148972cc6390bb71211954d25d81b",
+      "published_sha256": "a4a262cddb10c28c79f0129e4c27539f628148972cc6390bb71211954d25d81b",
+      "size": 7485
+    },
+    {
+      "path": "RUN_DIAGNOSTIC.command",
+      "published_path": "RUN_DIAGNOSTIC.command.in",
+      "sha256": "ae8929d0fbb27efb6c9d53782690e19041c24c62c1f6ffdf1b5eaca61aaafa04",
+      "published_sha256": "ae8929d0fbb27efb6c9d53782690e19041c24c62c1f6ffdf1b5eaca61aaafa04",
+      "size": 1051
+    },
+    {
+      "path": "audit.py",
+      "published_path": "audit.py",
+      "sha256": "f20ae34620bff876f2813009b053e09052d5aea41d87747b253e80eea8996a79",
+      "published_sha256": "f20ae34620bff876f2813009b053e09052d5aea41d87747b253e80eea8996a79",
+      "size": 17108
+    },
+    {
+      "path": "test_diagnostic.py",
+      "published_path": "test_diagnostic.py",
+      "sha256": "a29e8fd4ceaa3b1ee5695a8bfa9710e9639f5c52beb02bff893a7c0f3c5bb460",
+      "published_sha256": "a29e8fd4ceaa3b1ee5695a8bfa9710e9639f5c52beb02bff893a7c0f3c5bb460",
+      "size": 3731
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "AUTHORITY.json",
+      "sha256": "a3f5f3f1539204ed8b6d913c85d7d05b5b33cb47a512a2a0dfb778aca6282345",
+      "size": 962
+    },
+    {
+      "path": "PACKAGE_MANIFEST.json",
+      "sha256": "924e0dda785c6eb147bbce8fe246a7c2508f5ad99c31c8ec87c3d7c03971ce62",
+      "size": 1098
+    },
+    {
+      "path": "REVIEW_VERIFICATION.json",
+      "sha256": "03fc1c454445a18aa227a7a6435a25296af6fa24ea0eff82fb1513884dbdb64f",
+      "size": 430
+    }
+  ]
+}

@@ -1,0 +1,209 @@
+{
+  "package": "Pool_Main_C13_FamilyD_v1_0_0",
+  "archive_name": "Pool_Main_C13_FamilyD_v1_0_0.zip",
+  "archive_sha256": "baecb00899f178f1ecd9251c8656c62ebd4f330052b64635b31f18eb597722f4",
+  "archive_size": 404113,
+  "archive_root": "Pool_Main_C13_FamilyD_v1_0_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "ANALYSIS_SCOPE.md",
+      "published_path": "ANALYSIS_SCOPE.md",
+      "sha256": "233040f75d9eadb95fbea09b686ea86be58901a5a1a43b30eddaf479abadfe0c",
+      "published_sha256": "233040f75d9eadb95fbea09b686ea86be58901a5a1a43b30eddaf479abadfe0c",
+      "size": 8578
+    },
+    {
+      "path": "README_FIRST.md",
+      "published_path": "README_FIRST.md",
+      "sha256": "7aa4d457f6045eabb6bdeaf6b1cff8c26fd02e783c9a80df8f24d0bce6e568f7",
+      "published_sha256": "7aa4d457f6045eabb6bdeaf6b1cff8c26fd02e783c9a80df8f24d0bce6e568f7",
+      "size": 1788
+    },
+    {
+      "path": "RUN_C13_FAMILYD.command",
+      "published_path": "RUN_C13_FAMILYD.command.in",
+      "sha256": "3d5049f5fa17eb89f85f40642f2a0851c3816f1d2d986b52bc1e2fe9595015a0",
+      "published_sha256": "3d5049f5fa17eb89f85f40642f2a0851c3816f1d2d986b52bc1e2fe9595015a0",
+      "size": 2897
+    },
+    {
+      "path": "RUN_COMMAND.txt",
+      "published_path": "RUN_COMMAND.txt",
+      "sha256": "8cd4ed4a3d10fbe46edd5819cbb5ffb87d66fee59477a7ca8727d604e772ead8",
+      "published_sha256": "8cd4ed4a3d10fbe46edd5819cbb5ffb87d66fee59477a7ca8727d604e772ead8",
+      "size": 269
+    },
+    {
+      "path": "authority/dynamics_paper2_campaign1_analysis_plan_v1_0_0.md",
+      "published_path": "authority/dynamics_paper2_campaign1_analysis_plan_v1_0_0.md",
+      "sha256": "ded9965994b6c00ed613adc90eaff3f976b257e9eb6dafdda61819916dde49fe",
+      "published_sha256": "ded9965994b6c00ed613adc90eaff3f976b257e9eb6dafdda61819916dde49fe",
+      "size": 27527
+    },
+    {
+      "path": "authority/dynamics_paper2_campaign1_analysis_plan_v1_0_1_amendment.md",
+      "published_path": "authority/dynamics_paper2_campaign1_analysis_plan_v1_0_1_amendment.md",
+      "sha256": "01c0ed96bfca62b1659a98d978bedaaf9a4540fcdc5a30a075e2f032e35e05ee",
+      "published_sha256": "01c0ed96bfca62b1659a98d978bedaaf9a4540fcdc5a30a075e2f032e35e05ee",
+      "size": 16627
+    },
+    {
+      "path": "authority/dynamics_paper2_campaign1_analysis_plan_v1_0_2_amendment.md",
+      "published_path": "authority/dynamics_paper2_campaign1_analysis_plan_v1_0_2_amendment.md",
+      "sha256": "7eeca3ab8591620a196badbd1b9d3184236d67a031cf9eff06b76584995c0049",
+      "published_sha256": "7eeca3ab8591620a196badbd1b9d3184236d67a031cf9eff06b76584995c0049",
+      "size": 5197
+    },
+    {
+      "path": "authority/dynamics_paper2_campaign1_analysis_plan_v1_0_3_amendment.md",
+      "published_path": "authority/dynamics_paper2_campaign1_analysis_plan_v1_0_3_amendment.md",
+      "sha256": "96530f7ffd43b7d68ff84c794200f7db98b2b455ea2994efb5b73ce5cb370a07",
+      "published_sha256": "96530f7ffd43b7d68ff84c794200f7db98b2b455ea2994efb5b73ce5cb370a07",
+      "size": 2293
+    },
+    {
+      "path": "authority/dynamics_paper2_campaign1_v1_0_10_c13_numerator_authority_correction.md",
+      "published_path": "authority/dynamics_paper2_campaign1_v1_0_10_c13_numerator_authority_correction.md",
+      "sha256": "cede1fbf4508d8ac1497f539345519b1f685fab7e66768c7b538596de0ca8d7e",
+      "published_sha256": "cede1fbf4508d8ac1497f539345519b1f685fab7e66768c7b538596de0ca8d7e",
+      "size": 2620
+    },
+    {
+      "path": "authority/dynamics_paper2_campaign1_v1_0_6_nonprofile_implementation.md",
+      "published_path": "authority/dynamics_paper2_campaign1_v1_0_6_nonprofile_implementation.md",
+      "sha256": "21d8ab105b79cf86bdca80f5661444c0042d6ad8da89c7b003fc2b9a59ed384b",
+      "published_sha256": "21d8ab105b79cf86bdca80f5661444c0042d6ad8da89c7b003fc2b9a59ed384b",
+      "size": 8379
+    },
+    {
+      "path": "authority/dynamics_paper2_campaign1_v1_0_9_c13_denominator_reconciliation.md",
+      "published_path": "authority/dynamics_paper2_campaign1_v1_0_9_c13_denominator_reconciliation.md",
+      "sha256": "47a1410221ad15ef48de83f9577ec2b98a7fa6e509128e4d6aa6f807b3c9f550",
+      "published_sha256": "47a1410221ad15ef48de83f9577ec2b98a7fa6e509128e4d6aa6f807b3c9f550",
+      "size": 4223
+    },
+    {
+      "path": "runner/__init__.py",
+      "published_path": "runner/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "runner/bind.py",
+      "published_path": "runner/bind.py",
+      "sha256": "8279d00befdcf36c6744d2c656ce2d5235ab6bbc33977397577c4862bc440299",
+      "published_sha256": "8279d00befdcf36c6744d2c656ce2d5235ab6bbc33977397577c4862bc440299",
+      "size": 5844
+    },
+    {
+      "path": "runner/common.py",
+      "published_path": "runner/common.py",
+      "sha256": "6f15ecde7be2c89cc724622af0ae5798220c98f87ca4bcd1a5e8e957bce85c9c",
+      "published_sha256": "6f15ecde7be2c89cc724622af0ae5798220c98f87ca4bcd1a5e8e957bce85c9c",
+      "size": 24311
+    },
+    {
+      "path": "runner/family_d.py",
+      "published_path": "runner/family_d.py",
+      "sha256": "03f7225592c63f654e8ecec5d1eba534f7987d52831f3c61d167951b39cc69eb",
+      "published_sha256": "03f7225592c63f654e8ecec5d1eba534f7987d52831f3c61d167951b39cc69eb",
+      "size": 7049
+    },
+    {
+      "path": "runner/models.py",
+      "published_path": "runner/models.py",
+      "sha256": "c4c216fe02ba6f183c36978b92fed01a4589ea1f1d93eac41ca6110c35808fbf",
+      "published_sha256": "c4c216fe02ba6f183c36978b92fed01a4589ea1f1d93eac41ca6110c35808fbf",
+      "size": 4669
+    },
+    {
+      "path": "runner/pipeline.py",
+      "published_path": "runner/pipeline.py",
+      "sha256": "122bb9b64934e3dbfe9275125fe4a9f1ea0c51ac8facdd17f24e6ebba18869fb",
+      "published_sha256": "122bb9b64934e3dbfe9275125fe4a9f1ea0c51ac8facdd17f24e6ebba18869fb",
+      "size": 5939
+    },
+    {
+      "path": "runner/run.py",
+      "published_path": "runner/run.py",
+      "sha256": "910b71b63bd1560c1af3aa0b3efe9cad5a0a51809c865c71b549292b6590b12e",
+      "published_sha256": "910b71b63bd1560c1af3aa0b3efe9cad5a0a51809c865c71b549292b6590b12e",
+      "size": 10652
+    },
+    {
+      "path": "runner/test_package.py",
+      "published_path": "runner/test_package.py",
+      "sha256": "ff96aefd3068c64d347e433da17d5956e8e841ac9e1dec5188ab75800018ff3c",
+      "published_sha256": "ff96aefd3068c64d347e433da17d5956e8e841ac9e1dec5188ab75800018ff3c",
+      "size": 11995
+    },
+    {
+      "path": "source/campaign1_c13_v104.py",
+      "published_path": "source/campaign1_c13_v104.py",
+      "sha256": "2b8e19fe130c5387ea9097eb011332918ef4761ea67afd7df30f91e2f69c535d",
+      "published_sha256": "2b8e19fe130c5387ea9097eb011332918ef4761ea67afd7df30f91e2f69c535d",
+      "size": 53379
+    },
+    {
+      "path": "source/campaign1_nonprofile_common_v102.py",
+      "published_path": "source/campaign1_nonprofile_common_v102.py",
+      "sha256": "f629876216c797180265d1b848a4424f211fe9a43cffa4dabdb3de67acbc5f1c",
+      "published_sha256": "f629876216c797180265d1b848a4424f211fe9a43cffa4dabdb3de67acbc5f1c",
+      "size": 22701
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "PACKAGE_BUILD_VALIDATION.json",
+      "sha256": "ef98d00e0d36ccb26aed172139ed3dbe966d0258059a9398cf0326c0ab469e37",
+      "size": 2836
+    },
+    {
+      "path": "PACKAGE_MANIFEST.sha256",
+      "sha256": "3e987d0a33d19809c41ff98e594ccbcd0c956942893d6e0971f3f86fb7c9a5c5",
+      "size": 3113
+    },
+    {
+      "path": "authority/C13_RUNTIME_REFERENCE.json",
+      "sha256": "d3f3f334bd57caef1368a5b4e9df8ef3affbcde5c01eac5d23ba298c1ae0c7d6",
+      "size": 285
+    },
+    {
+      "path": "authority/SAMPLE_AUTHORITY.json",
+      "sha256": "81c34113e7a888629a834a17235a71dcf369a2d590755fd9412ee42151d9b2f3",
+      "size": 1234
+    },
+    {
+      "path": "authority/SOURCE_BINDINGS.json",
+      "sha256": "2192dfa760f470759ca0c3127cfb796f371ef136bff82580c012950dadb4061c",
+      "size": 325
+    },
+    {
+      "path": "authority/dynamics_campaign1_effective_plan_v1_0_3.json",
+      "sha256": "42b4ea0a9f6e1940dd78c09c752a0195f7d7055bad1bba5989c2a3003114854c",
+      "size": 1136
+    },
+    {
+      "path": "evidence/C6_COMPLETED_RESULTS.zip",
+      "sha256": "0f47dce9baa00f7dded5a59c58a2c3908ebce18b09d4d45d5d530620f1c2ff0c",
+      "size": 218877
+    },
+    {
+      "path": "evidence/C9_COMPLETED_RESULTS.zip",
+      "sha256": "bd0a6471e916f0a483c2309cb1fb916562ece39d72f515624c99d1fafab2f3ca",
+      "size": 18211
+    },
+    {
+      "path": "evidence/Pool_Main_Sample_24M_Report.zip",
+      "sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+      "size": 96936
+    },
+    {
+      "path": "evidence/Pool_Main_Sample_24M_Report.zip.sha256",
+      "sha256": "d2e6c0953ff2de7cc7235b98d568c884e4fa8067b8aa81d22efe1ac3484d6f59",
+      "size": 128
+    }
+  ]
+}

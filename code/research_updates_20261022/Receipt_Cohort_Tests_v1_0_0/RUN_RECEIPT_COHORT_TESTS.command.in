@@ -1,0 +1,38 @@
+#!/bin/bash
+set -euo pipefail
+RCT_PACKAGE="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+RCT_PROJECT="${RCT_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+RCT_DESKTOP="${RCT_DESKTOP_DIR:-$HOME/Desktop/Lichess_Desktop}"
+if [[ ! -d "$RCT_PROJECT" ]]; then
+  echo "Project directory not found: $RCT_PROJECT" >&2
+  exit 1
+fi
+mkdir -p "$RCT_DESKTOP"
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1
+RCT_PY=""
+shopt -s nullglob
+RCT_CANDIDATES=("${RCT_PYTHON:-}" "$RCT_PROJECT/venv/bin/python" "$RCT_PROJECT/.venv/bin/python" "$RCT_PACKAGE/.venv/bin/python" "$RCT_DESKTOP"/*/.venv/bin/python "$RCT_DESKTOP"/*/*/.venv/bin/python "$(command -v python3 || true)")
+for RCT_CANDIDATE in "${RCT_CANDIDATES[@]}"; do
+  if [[ -x "$RCT_CANDIDATE" ]] && "$RCT_CANDIDATE" -c 'import sys,numpy,pyarrow,duckdb; assert sys.version_info >= (3,10); assert (1,26)<=tuple(map(int,numpy.__version__.split(".")[:2]))<(3,0); assert 16<=int(pyarrow.__version__.split(".")[0])<26; assert tuple(map(int,duckdb.__version__.split(".")[:2]))==(1,5)' >/dev/null 2>&1; then
+    RCT_PY="$RCT_CANDIDATE"
+    break
+  fi
+done
+if [[ -z "$RCT_PY" ]]; then
+  python3 -c 'import sys; assert sys.version_info >= (3,10), "Use Python 3.10+ or set RCT_PYTHON to an existing compatible environment"'
+  echo "Creating an isolated Python environment for this package."
+  python3 -m venv "$RCT_PACKAGE/.venv"
+  "$RCT_PACKAGE/.venv/bin/python" -m pip install -r "$RCT_PACKAGE/requirements.txt"
+  RCT_PY="$RCT_PACKAGE/.venv/bin/python"
+fi
+"$RCT_PY" -c 'import sys; assert sys.version_info >= (3,10), "Python 3.10 or newer is required"'
+"$RCT_PY" -c 'import sys; sys.path.insert(0,sys.argv[1]); from common import verify_package; verify_package()' "$RCT_PACKAGE/code"
+"$RCT_PY" -m unittest discover -s "$RCT_PACKAGE/tests" -p 'test_*.py' -q
+RCT_LOG="$RCT_DESKTOP/RECEIPT_COHORT_TESTS_RUN_$(date -u +%Y%m%dT%H%M%SZ).log"
+echo "Log: $RCT_LOG"
+echo "Uses the completed receipt cache. No API or Stockfish. Model checkpoints resume automatically."
+if [[ -x /usr/bin/caffeinate ]]; then
+  /usr/bin/caffeinate -i "$RCT_PY" -u "$RCT_PACKAGE/code/run.py" --project-root "$RCT_PROJECT" --desktop "$RCT_DESKTOP" "$@" 2>&1 | tee "$RCT_LOG"
+else
+  "$RCT_PY" -u "$RCT_PACKAGE/code/run.py" --project-root "$RCT_PROJECT" --desktop "$RCT_DESKTOP" "$@" 2>&1 | tee "$RCT_LOG"
+fi

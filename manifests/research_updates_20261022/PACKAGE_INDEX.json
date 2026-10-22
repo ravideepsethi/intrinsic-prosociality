@@ -1,0 +1,1638 @@
+[
+  {
+    "package": "A1_Trajectory_Build_v1_0_2",
+    "archive_sha256": "1648a8a38ae05097e9431d6a27f488af95e493610bd2112a15d70df240c3e876",
+    "source_files": 12,
+    "python_files": 8,
+    "privacy_templates": 0,
+    "omitted_files": 6,
+    "entrypoints": [
+      "RUN_BUILD.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/A1_Trajectory_Build_v1_0_2.json"
+  },
+  {
+    "package": "AFE_Followups_v1_0_0",
+    "archive_sha256": "1085e61b9e8ed2fdb79caa54ed1889943c467830842c5c70015f422f5f0b5e81",
+    "source_files": 20,
+    "python_files": 16,
+    "privacy_templates": 0,
+    "omitted_files": 8,
+    "entrypoints": [
+      "RUN_AFE.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/AFE_Followups_v1_0_0.json"
+  },
+  {
+    "package": "AllTime_Entry_Placebo_v1_0_5",
+    "archive_sha256": "076f2c9119f651ca9ac4a0c2b6e6ad2e4a393b27bfa09f70c1e71a9b1b1ac93e",
+    "source_files": 376,
+    "python_files": 290,
+    "privacy_templates": 16,
+    "omitted_files": 422,
+    "entrypoints": [
+      "RUN_ALLTIME_ENTRY_PLACEBO.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/research_updates_20261022/AllTime_Entry_Placebo_v1_0_5.json"
+  },
+  {
+    "package": "AllTime_IV_Primary_v1_0_3",
+    "archive_sha256": "32db1296dd1393a0303d23fa8b7228431bc07df344ce34cebffdc622097f6cc1",
+    "source_files": 351,
+    "python_files": 269,
+    "privacy_templates": 16,
+    "omitted_files": 412,
+    "entrypoints": [
+      "RUN_ALLTIME_IV.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/research_updates_20261022/AllTime_IV_Primary_v1_0_3.json"
+  },
+  {
+    "package": "Arena_Next_Analyses_v1_0_1",
+    "archive_sha256": "0f098817dba1343861ea148955980375da0996db135b788df45e1fc1621bf6b8",
+    "source_files": 51,
+    "python_files": 40,
+    "privacy_templates": 0,
+    "omitted_files": 19,
+    "entrypoints": [
+      "RUN_ARENA_NEXT.command"
+    ],
+    "readmes": [
+      "README_FIRST.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Arena_Next_Analyses_v1_0_1.json"
+  },
+  {
+    "package": "Arena_Replication_v1_0_2",
+    "archive_sha256": "354ac42ed95b8733a89aad231ed94507fe20b5244d9cb42593b03ac71fb1e1b7",
+    "source_files": 28,
+    "python_files": 22,
+    "privacy_templates": 1,
+    "omitted_files": 16,
+    "entrypoints": [
+      "RUN_ARENA_REPLICATION.command"
+    ],
+    "readmes": [
+      "README_FIRST.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Arena_Replication_v1_0_2.json"
+  },
+  {
+    "package": "Chooser_Comparison_Expansion_v1_0_0",
+    "archive_sha256": "f0c052dfc1850f45e108d7e9ba87ae8b91e6e65fdaa2f3db5d5bfe0a7b8830ac",
+    "source_files": 17,
+    "python_files": 10,
+    "privacy_templates": 0,
+    "omitted_files": 16,
+    "entrypoints": [
+      "PACK_RETURN.command",
+      "PREPARE.command",
+      "RUN_DOWNLOAD.command",
+      "STATUS.command",
+      "launch.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Chooser_Comparison_Expansion_v1_0_0.json"
+  },
+  {
+    "package": "Color_Change_FirstPass_v1_0_2",
+    "archive_sha256": "94b0c8efc8815efc3b86f516a7de1ffce6d75968ea4c5dea306357f71217beba",
+    "source_files": 17,
+    "python_files": 13,
+    "privacy_templates": 0,
+    "omitted_files": 5,
+    "entrypoints": [
+      "RUN_COLOR_FIRSTPASS.command"
+    ],
+    "readmes": [
+      "README_FIRST.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Color_Change_FirstPass_v1_0_2.json"
+  },
+  {
+    "package": "Color_Matched_Cohort_v1_0_0",
+    "archive_sha256": "f9c946116d94a6e172a3b9535fcd8a9bff5b2f3bbe9c16ea0617cc2106462926",
+    "source_files": 36,
+    "python_files": 26,
+    "privacy_templates": 0,
+    "omitted_files": 39,
+    "entrypoints": [
+      "RUN_MATCHED_COHORT.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Color_Matched_Cohort_v1_0_0.json"
+  },
+  {
+    "package": "Color_RD110_Predictions_v1_0_0",
+    "archive_sha256": "b06fbab1750668db1f613e8dbc8c93c1b1789f6e199f3a25d74f009c86bfbafb",
+    "source_files": 15,
+    "python_files": 9,
+    "privacy_templates": 0,
+    "omitted_files": 19,
+    "entrypoints": [
+      "RUN_COLOR_PREDICTIONS.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Color_RD110_Predictions_v1_0_0.json"
+  },
+  {
+    "package": "Comparison_TotalFive_Recovery_v1_0_0",
+    "archive_sha256": "34c0808c1e00aaac23b88f21e4e88549787adf9bc5e03bd3dd0f01e63540fd66",
+    "source_files": 738,
+    "python_files": 556,
+    "privacy_templates": 36,
+    "omitted_files": 1007,
+    "entrypoints": [
+      "RUN_RECOVERY.sh",
+      "RUN_TESTS.sh"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/research_updates_20261022/Comparison_TotalFive_Recovery_v1_0_0.json"
+  },
+  {
+    "package": "Countdown_Estimation_v1_0_0",
+    "archive_sha256": "edfe402e5cceff684f97e5bf778472300d042d6a1cb166176d4a923d6d1abbda",
+    "source_files": 14,
+    "python_files": 9,
+    "privacy_templates": 2,
+    "omitted_files": 4,
+    "entrypoints": [
+      "RUN_COUNTDOWN_ESTIMATION.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/research_updates_20261022/Countdown_Estimation_v1_0_0.json"
+  },
+  {
+    "package": "Countdown_Feasibility_v1_0_0",
+    "archive_sha256": "f9245da13f695e382cd3d46f10c536be356d88b9dd37654c8c73f15a231ff919",
+    "source_files": 9,
+    "python_files": 5,
+    "privacy_templates": 3,
+    "omitted_files": 3,
+    "entrypoints": [
+      "RUN_COUNTDOWN_FEASIBILITY.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/research_updates_20261022/Countdown_Feasibility_v1_0_0.json"
+  },
+  {
+    "package": "Country_Profile_First_Pass_v1_0_0",
+    "archive_sha256": "4a0df62953fa9d98ac1436af4936f2b427ea36327ee23ba4b076fdb835af5609",
+    "source_files": 11,
+    "python_files": 7,
+    "privacy_templates": 0,
+    "omitted_files": 8,
+    "entrypoints": [
+      "RUN_FIRST_PASS.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Country_Profile_First_Pass_v1_0_0.json"
+  },
+  {
+    "package": "Country_Profile_Followup_v1_0_0",
+    "archive_sha256": "1a5068751d6dd02b555096507ae1510eceb51e9864b58fd08a41f1c773ed9d8a",
+    "source_files": 11,
+    "python_files": 5,
+    "privacy_templates": 1,
+    "omitted_files": 60,
+    "entrypoints": [
+      "RUN_FOLLOWUP.command"
+    ],
+    "readmes": [
+      "README.md.in"
+    ],
+    "manifest": "manifests/research_updates_20261022/Country_Profile_Followup_v1_0_0.json"
+  },
+  {
+    "package": "Disruption_Scan_v1_0_2",
+    "archive_sha256": "58ef1f77f81aca0c50b59000b95e3ec885d5fd42828192b3381ea4dd8be56c5c",
+    "source_files": 12,
+    "python_files": 6,
+    "privacy_templates": 0,
+    "omitted_files": 10,
+    "entrypoints": [
+      "RUN_DISRUPTION.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Disruption_Scan_v1_0_2.json"
+  },
+  {
+    "package": "Framework_Tests_v1_0_1",
+    "archive_sha256": "40394c27440a76009d86926c09fbc5f55bfbc9e1db1bb1ff84616a279862e680",
+    "source_files": 280,
+    "python_files": 216,
+    "privacy_templates": 17,
+    "omitted_files": 291,
+    "entrypoints": [
+      "RUN_FRAMEWORK_TESTS.command",
+      "SETUP_AND_RUN.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Framework_Tests_v1_0_1.json"
+  },
+  {
+    "package": "IV_Competitive_Only_v1_0_0",
+    "archive_sha256": "c92fc8455181d41e1fb981a8322b24f60eba16f0909aa19f70d6cee7a4bdc046",
+    "source_files": 22,
+    "python_files": 17,
+    "privacy_templates": 0,
+    "omitted_files": 11,
+    "entrypoints": [
+      "RUN_COMPETITIVE_IV.command",
+      "RUN_TESTS.command",
+      "launch.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/research_updates_20261022/IV_Competitive_Only_v1_0_0.json"
+  },
+  {
+    "package": "IV_Cutoff_Material_v1_0_0",
+    "archive_sha256": "3cc8e1b78c5449bff83006cee863997b6c52ce0c6afca2f5dd6d775bfc43173e",
+    "source_files": 200,
+    "python_files": 149,
+    "privacy_templates": 13,
+    "omitted_files": 252,
+    "entrypoints": [
+      "RUN_IV_CUTOFF_MATERIAL.command",
+      "RUN_TESTS.command",
+      "launch.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/IV_Cutoff_Material_v1_0_0.json"
+  },
+  {
+    "package": "Color_Calendar_Recovery_v1_0_0",
+    "archive_sha256": "178322b96fd7e1fdb092fc8ec119b52d8cd4de86ea4974eaddc32379ff04b304",
+    "source_files": 7,
+    "python_files": 3,
+    "privacy_templates": 0,
+    "omitted_files": 42,
+    "entrypoints": [
+      "RUN_REPRODUCE.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Color_Calendar_Recovery_v1_0_0.json"
+  },
+  {
+    "package": "Color_Change_Followup_v1_0_0",
+    "archive_sha256": "df680d5a5cace20e108efce74d03364d4e8ce1b5fde8b1a52bbe6b45c82fac3d",
+    "source_files": 9,
+    "python_files": 6,
+    "privacy_templates": 0,
+    "omitted_files": 3,
+    "entrypoints": [
+      "RUN_FOLLOWUP.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Color_Change_Followup_v1_0_0.json"
+  },
+  {
+    "package": "Color_Model_Discrimination_v1_0_2",
+    "archive_sha256": "e6be23fe944571b0b10b182f3c92cafb16afb2ccbc1460ba8e6ec2eb474f273e",
+    "source_files": 15,
+    "python_files": 10,
+    "privacy_templates": 0,
+    "omitted_files": 31,
+    "entrypoints": [
+      "RUN_COLOR_MODEL.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Color_Model_Discrimination_v1_0_2.json"
+  },
+  {
+    "package": "Framework_AE_Completion_v1_2_0",
+    "archive_sha256": "ac08b536043812b9bb8afcffdb61d546e612f5bc6f6172d17421305bf660b1a5",
+    "source_files": 13,
+    "python_files": 11,
+    "privacy_templates": 0,
+    "omitted_files": 1,
+    "entrypoints": [
+      "RUN_A_E.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Framework_AE_Completion_v1_2_0.json"
+  },
+  {
+    "package": "Framework_E_Repair_v1_2_1",
+    "archive_sha256": "7bf28df5dadb906ec47650674b412160e8d2632b45bfd2f8506e3ab0f37d4a8b",
+    "source_files": 7,
+    "python_files": 5,
+    "privacy_templates": 0,
+    "omitted_files": 1,
+    "entrypoints": [
+      "RUN_E_REPAIR.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Framework_E_Repair_v1_2_1.json"
+  },
+  {
+    "package": "Framework_Tests_v1_0_2",
+    "archive_sha256": "7347c2183a61b9e2888f8c8c749115359671e337298c2ec21dac42a1516a0c49",
+    "source_files": 16,
+    "python_files": 8,
+    "privacy_templates": 0,
+    "omitted_files": 1,
+    "entrypoints": [
+      "RUN_A1.command",
+      "RUN_BC.command",
+      "RUN_E_GROUPS.command",
+      "RUN_F.command"
+    ],
+    "readmes": [
+      "README.md",
+      "README_F.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Framework_Tests_v1_0_2.json"
+  },
+  {
+    "package": "IV_Runs_2_3_v1_0_0",
+    "archive_sha256": "e54bbe199568dc696a87447027ba1a2f6c571ae01fbf4c3544a8d57a7fedb2c2",
+    "source_files": 39,
+    "python_files": 26,
+    "privacy_templates": 3,
+    "omitted_files": 22,
+    "entrypoints": [
+      "RUN2_RESUME.command",
+      "RUN3_LENIENCY.command",
+      "RUN_TESTS.command",
+      "STATUS_RUN2.command",
+      "launch.command"
+    ],
+    "readmes": [
+      "README.txt.in"
+    ],
+    "manifest": "manifests/research_updates_20261022/IV_Runs_2_3_v1_0_0.json"
+  },
+  {
+    "package": "IV_Slide_Gaps_v1_0_0",
+    "archive_sha256": "7ba400f4451652d198e0dadb0fa8c83b170d0d988a368c4fad77076e6956c070",
+    "source_files": 20,
+    "python_files": 15,
+    "privacy_templates": 0,
+    "omitted_files": 5,
+    "entrypoints": [
+      "RUN_SLIDE_GAPS.command",
+      "RUN_TESTS.command",
+      "launch.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/research_updates_20261022/IV_Slide_Gaps_v1_0_0.json"
+  },
+  {
+    "package": "KAC_A2_Score_Repair_v1_0_1",
+    "archive_sha256": "a29a10efb40c33bba909e8106145ca33963f875a9aa34e444dfa833796eba8d8",
+    "source_files": 40,
+    "python_files": 27,
+    "privacy_templates": 0,
+    "omitted_files": 14,
+    "entrypoints": [
+      "RUN_A2_SCORE_REPAIR.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/KAC_A2_Score_Repair_v1_0_1.json"
+  },
+  {
+    "package": "KAC_A3_Local_Sources_v1_0_1",
+    "archive_sha256": "cd799f08cbdf3a01bd9638184c9336f0075eec02221bf4b37d6bf8e8d6f0f371",
+    "source_files": 5,
+    "python_files": 3,
+    "privacy_templates": 1,
+    "omitted_files": 8,
+    "entrypoints": [
+      "RUN_A3_LOCAL_SOURCES.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/KAC_A3_Local_Sources_v1_0_1.json"
+  },
+  {
+    "package": "KAC_Companion_Recovery_v1_0_2",
+    "archive_sha256": "1f9421fb0ac4516abf7bc678958d08fa3b7ee962f23d3de1845730f2b612a0f0",
+    "source_files": 42,
+    "python_files": 37,
+    "privacy_templates": 1,
+    "omitted_files": 27,
+    "entrypoints": [
+      "RUN_RECOVERY.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/KAC_Companion_Recovery_v1_0_2.json"
+  },
+  {
+    "package": "KAC_Continuous_Merit_v1_0_0",
+    "archive_sha256": "791cfc64f8ae7a08f6a71de65c38f54935896aba915ef008ea5703b18ba4e81e",
+    "source_files": 12,
+    "python_files": 9,
+    "privacy_templates": 1,
+    "omitted_files": 4,
+    "entrypoints": [
+      "RUN_CONTINUOUS_MERIT.command"
+    ],
+    "readmes": [
+      "README.md.in"
+    ],
+    "manifest": "manifests/research_updates_20261022/KAC_Continuous_Merit_v1_0_0.json"
+  },
+  {
+    "package": "KAC_History_Identity_Diagnostic_v1_0_0",
+    "archive_sha256": "eddc887a2b379b8aaeb31d21ad49fc771e2e314c8b425f2e69b2fec2d3e9c9a8",
+    "source_files": 8,
+    "python_files": 5,
+    "privacy_templates": 0,
+    "omitted_files": 11,
+    "entrypoints": [
+      "RUN_DIAGNOSTIC.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/KAC_History_Identity_Diagnostic_v1_0_0.json"
+  },
+  {
+    "package": "KAC_Next_Analyses_v1_0_0",
+    "archive_sha256": "4be45010777f3d194ec271f802dfa8e758e642f5ad0959e689cc5bde0e511d65",
+    "source_files": 39,
+    "python_files": 24,
+    "privacy_templates": 1,
+    "omitted_files": 36,
+    "entrypoints": [
+      "RUN_NEXT_ANALYSES.command"
+    ],
+    "readmes": [
+      "README.md.in"
+    ],
+    "manifest": "manifests/research_updates_20261022/KAC_Next_Analyses_v1_0_0.json"
+  },
+  {
+    "package": "KAC_Repetition_Sensitivity_v1_0_2",
+    "archive_sha256": "afc92031ff71678ff7711412451eff2d6a67ab763eaf7851675af05efc371a2b",
+    "source_files": 52,
+    "python_files": 42,
+    "privacy_templates": 1,
+    "omitted_files": 75,
+    "entrypoints": [
+      "RUN_REPETITION.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/KAC_Repetition_Sensitivity_v1_0_2.json"
+  },
+  {
+    "package": "KAC_Timestamp_Diagnostic_v1_0_0",
+    "archive_sha256": "fcfa896ad6188c0594d8ab95c86eb81cf2b73f2f7c250cd7f6598b7623d1745a",
+    "source_files": 5,
+    "python_files": 2,
+    "privacy_templates": 0,
+    "omitted_files": 3,
+    "entrypoints": [
+      "RUN_DIAGNOSTIC.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/KAC_Timestamp_Diagnostic_v1_0_0.json"
+  },
+  {
+    "package": "Kindness_Taxonomy_v1_0_0",
+    "archive_sha256": "3b8e7074ab5c8a52fc97b925822d225f0b4ffd49e995ade0c3820ce9deee02a3",
+    "source_files": 24,
+    "python_files": 19,
+    "privacy_templates": 8,
+    "omitted_files": 17,
+    "entrypoints": [
+      "RUN_TAXONOMY.command"
+    ],
+    "readmes": [
+      "README.txt.in"
+    ],
+    "manifest": "manifests/research_updates_20261022/Kindness_Taxonomy_v1_0_0.json"
+  },
+  {
+    "package": "Lichess_Author_Exclusion_Persistence_v1_4_2",
+    "archive_sha256": "4006af530f4e53b2a55c9df919e24022afe46b43c619e5b4ee82a47dcfcb6d00",
+    "source_files": 27,
+    "python_files": 16,
+    "privacy_templates": 4,
+    "omitted_files": 40,
+    "entrypoints": [
+      "RUN_PERSISTENCE.command"
+    ],
+    "readmes": [
+      "README.md.in"
+    ],
+    "manifest": "manifests/research_updates_20261022/Lichess_Author_Exclusion_Persistence_v1_4_2.json"
+  },
+  {
+    "package": "Lichess_Author_Exclusion_Prose_Checks_v1_4_3",
+    "archive_sha256": "113303a8659cb18ebff295b87de06c97a3b13f3ed745cd9b875ac4eeb87723aa",
+    "source_files": 33,
+    "python_files": 25,
+    "privacy_templates": 2,
+    "omitted_files": 68,
+    "entrypoints": [
+      "RUN_PROSE_CHECKS.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Lichess_Author_Exclusion_Prose_Checks_v1_4_3.json"
+  },
+  {
+    "package": "Lichess_Author_Exclusion_Repair_v1_4_1",
+    "archive_sha256": "349c4f0cf7728743fb8c7e21ef1a4cb18e9eeef4fbde96d9e535c36d46fe660c",
+    "source_files": 1459,
+    "python_files": 1111,
+    "privacy_templates": 73,
+    "omitted_files": 2432,
+    "entrypoints": [
+      "RUN_REMAINING.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Lichess_Author_Exclusion_Repair_v1_4_1.json"
+  },
+  {
+    "package": "Pool_Desert_Payoff_Surfaces_v1_0_0",
+    "archive_sha256": "537116641580de5773d76b721a2d298b8b93d849d70a2f05787d3a2ccd94ecfd",
+    "source_files": 9,
+    "python_files": 6,
+    "privacy_templates": 0,
+    "omitted_files": 6,
+    "entrypoints": [
+      "RUN_SURFACES.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Desert_Payoff_Surfaces_v1_0_0.json"
+  },
+  {
+    "package": "Pool_Rating_Validation_v1_0_0",
+    "archive_sha256": "20f3a232a439e43a59f45bcfd569ce548e0c4f1483c0d354c0c85b568eb725c9",
+    "source_files": 7,
+    "python_files": 4,
+    "privacy_templates": 0,
+    "omitted_files": 6,
+    "entrypoints": [
+      "RUN_VALIDATION.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Rating_Validation_v1_0_0.json"
+  },
+  {
+    "package": "R10_Two_Questions_v1_0_2",
+    "archive_sha256": "c8e7c21d6613350c7430090dee39594f359657b7fce5db65250d0daf8ec81aa6",
+    "source_files": 12,
+    "python_files": 8,
+    "privacy_templates": 0,
+    "omitted_files": 1,
+    "entrypoints": [
+      "RUN_ALL_GAME_MEDIAN_PROBE.command",
+      "RUN_R10.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/R10_Two_Questions_v1_0_2.json"
+  },
+  {
+    "package": "Rating_Motives_v1_0_0",
+    "archive_sha256": "4c77fe2518835e5edc6fa15eeedcbfb389b449f33d90c766cfdff8b98c9e6bc6",
+    "source_files": 17,
+    "python_files": 10,
+    "privacy_templates": 4,
+    "omitted_files": 8,
+    "entrypoints": [
+      "RUN_ANALYSIS.command"
+    ],
+    "readmes": [
+      "README.md.in"
+    ],
+    "manifest": "manifests/research_updates_20261022/Rating_Motives_v1_0_0.json"
+  },
+  {
+    "package": "Receipt_Cohort_Tests_v1_0_0",
+    "archive_sha256": "276ffb863f34d7588d56cf155b138658364b9b4958ecc0ebc416e6622c216beb",
+    "source_files": 13,
+    "python_files": 9,
+    "privacy_templates": 2,
+    "omitted_files": 16,
+    "entrypoints": [
+      "RUN_RECEIPT_COHORT_TESTS.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/research_updates_20261022/Receipt_Cohort_Tests_v1_0_0.json"
+  },
+  {
+    "package": "Receipt_IV_Model5_Submission_v1_0_0",
+    "archive_sha256": "1435d452a5ad7c5c8ee5f89b76966b6a4716aefd22e74b2a25ce86beb29dae20",
+    "source_files": 406,
+    "python_files": 312,
+    "privacy_templates": 18,
+    "omitted_files": 433,
+    "entrypoints": [
+      "RUN_SUBMISSION.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/research_updates_20261022/Receipt_IV_Model5_Submission_v1_0_0.json"
+  },
+  {
+    "package": "Receipt_IV_Uniform90_FastResume_v1_0_5",
+    "archive_sha256": "c1c3c278e7537efbb88413b358598514ab116696e161b0b52eab453754dcd61a",
+    "source_files": 411,
+    "python_files": 318,
+    "privacy_templates": 18,
+    "omitted_files": 438,
+    "entrypoints": [
+      "RUN_FAST_RESUME.command"
+    ],
+    "readmes": [
+      "README.txt",
+      "README_REPAIR_v104.txt"
+    ],
+    "manifest": "manifests/research_updates_20261022/Receipt_IV_Uniform90_FastResume_v1_0_5.json"
+  },
+  {
+    "package": "Receipt_Mechanisms_v1_0_1",
+    "archive_sha256": "d0f4517bb5c1ab079d02539c0e8a7f50fc3aed974f5b64563ffb04734bff8842",
+    "source_files": 13,
+    "python_files": 10,
+    "privacy_templates": 3,
+    "omitted_files": 7,
+    "entrypoints": [
+      "RUN_MECHANISMS.command"
+    ],
+    "readmes": [
+      "README.txt.in"
+    ],
+    "manifest": "manifests/research_updates_20261022/Receipt_Mechanisms_v1_0_1.json"
+  },
+  {
+    "package": "Tenure_Responsibility_v1_0_0",
+    "archive_sha256": "6dc29df91fa56c0f086daddadcd63b7b96e84c2701b3dc42b0388d27619babf5",
+    "source_files": 13,
+    "python_files": 9,
+    "privacy_templates": 0,
+    "omitted_files": 6,
+    "entrypoints": [
+      "RUN_ALL.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Tenure_Responsibility_v1_0_0.json"
+  },
+  {
+    "package": "Win_Premium_Stakes_v1_0_0",
+    "archive_sha256": "86ade17e4c80b0e6c8b4f5c1b55d159d1c74ba6d06b0543e68563dc37f3b08e9",
+    "source_files": 13,
+    "python_files": 8,
+    "privacy_templates": 3,
+    "omitted_files": 4,
+    "entrypoints": [
+      "RUN_STAKES.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/research_updates_20261022/Win_Premium_Stakes_v1_0_0.json"
+  },
+  {
+    "package": "Lichess_36M_Stage05_SF_April_v1_0_0_20260925",
+    "archive_sha256": "164a19b92af3d1e48ad1f733b3da63e091fa2048edaa2d97a45a9dacf8db9354",
+    "source_files": 8,
+    "python_files": 5,
+    "privacy_templates": 3,
+    "omitted_files": 1,
+    "entrypoints": [
+      "RUN_36M_STAGE05_SF_APRIL.command"
+    ],
+    "readmes": [
+      "README_FIRST.md.in"
+    ],
+    "manifest": "manifests/research_updates_20261022/Lichess_36M_Stage05_SF_April_v1_0_0_20260925.json"
+  },
+  {
+    "package": "Lichess_36M_Stage05_SF_Through_March_v1_0_0_20260921",
+    "archive_sha256": "e05cb84a1c81a3f3b15b7cec8e338faa11dd89d13a65edb9aac77866fedaee35",
+    "source_files": 8,
+    "python_files": 5,
+    "privacy_templates": 3,
+    "omitted_files": 1,
+    "entrypoints": [
+      "RUN_36M_STAGE05_SF_THROUGH_MARCH.command"
+    ],
+    "readmes": [
+      "README_FIRST.md.in"
+    ],
+    "manifest": "manifests/research_updates_20261022/Lichess_36M_Stage05_SF_Through_March_v1_0_0_20260921.json"
+  },
+  {
+    "package": "Lichess_Author_Exclusion_v1_0_0",
+    "archive_sha256": "25d249c62f291abb7fc3daa630a6f8ad02a559973df2531391bc1df24abd844b",
+    "source_files": 11,
+    "python_files": 5,
+    "privacy_templates": 4,
+    "omitted_files": 2,
+    "entrypoints": [
+      "RUN_AUTHOR_EXCLUSION.command"
+    ],
+    "readmes": [
+      "README.md.in"
+    ],
+    "manifest": "manifests/research_updates_20261022/Lichess_Author_Exclusion_v1_0_0.json"
+  },
+  {
+    "package": "Lichess_Desert_Ply_CP_41M_v1_0_0",
+    "archive_sha256": "44ed089294712ebf2c046a7250b3dbe61d1ad468a8b98c5e4ac1039eb2238972",
+    "source_files": 4,
+    "python_files": 1,
+    "privacy_templates": 0,
+    "omitted_files": 13,
+    "entrypoints": [
+      "RUN_DESERT_PLY.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Lichess_Desert_Ply_CP_41M_v1_0_0.json"
+  },
+  {
+    "package": "Lichess_Desert_Ply_Counts_CP_41M_v1_0_0",
+    "archive_sha256": "2ac9db5c285766278ae07dabea1885c1c05c74c6d36d80e56c2a5d1614bf878a",
+    "source_files": 4,
+    "python_files": 1,
+    "privacy_templates": 0,
+    "omitted_files": 13,
+    "entrypoints": [
+      "RUN_DESERT_PLY.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Lichess_Desert_Ply_Counts_CP_41M_v1_0_0.json"
+  },
+  {
+    "package": "Lichess_Figures_2_3_4_v1_0_1",
+    "archive_sha256": "83318d7288bda16621be9aedccb4463582f6f44afaddcb477b4307c3994b2501",
+    "source_files": 7,
+    "python_files": 3,
+    "privacy_templates": 0,
+    "omitted_files": 44,
+    "entrypoints": [
+      "RUN_FIGURES_234.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Lichess_Figures_2_3_4_v1_0_1.json"
+  },
+  {
+    "package": "Lichess_Paper_Figures_v1_1_0",
+    "archive_sha256": "c2174400fcbee4d2344bae15207a26c645052b5a8f270ca4874b6113edc38796",
+    "source_files": 12,
+    "python_files": 5,
+    "privacy_templates": 0,
+    "omitted_files": 68,
+    "entrypoints": [
+      "RUN_FIGURES.command"
+    ],
+    "readmes": [
+      "README_MAC.txt"
+    ],
+    "manifest": "manifests/research_updates_20261022/Lichess_Paper_Figures_v1_1_0.json"
+  },
+  {
+    "package": "Lichess_Reputation_v1_0_0",
+    "archive_sha256": "d230b60ebb74da32114ce80ca7199dfa027e30a7f4c46a9249421277c1be8e75",
+    "source_files": 10,
+    "python_files": 7,
+    "privacy_templates": 3,
+    "omitted_files": 4,
+    "entrypoints": [
+      "RUN_REPUTATION.command"
+    ],
+    "readmes": [
+      "README.txt.in"
+    ],
+    "manifest": "manifests/research_updates_20261022/Lichess_Reputation_v1_0_0.json"
+  },
+  {
+    "package": "Lichess_Social_Contact_v1_0_0",
+    "archive_sha256": "e2beac04018a3757a45d681cb6016b41b413caa8d274f8544e6776a58aec8b98",
+    "source_files": 9,
+    "python_files": 6,
+    "privacy_templates": 2,
+    "omitted_files": 5,
+    "entrypoints": [
+      "RUN_SOCIAL_CONTACT.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/research_updates_20261022/Lichess_Social_Contact_v1_0_0.json"
+  },
+  {
+    "package": "Mechanism_RD_Audit_Resume_v1_0_1",
+    "archive_sha256": "cf6c9e2cc4a823ff57bdc6b5929bf246a9320f3dfe31202746f14fab34ef0401",
+    "source_files": 14,
+    "python_files": 9,
+    "privacy_templates": 0,
+    "omitted_files": 12,
+    "entrypoints": [
+      "RUN_RD_AUDIT_RESUME.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Mechanism_RD_Audit_Resume_v1_0_1.json"
+  },
+  {
+    "package": "Mechanism_RD_Audit_v1_0_0",
+    "archive_sha256": "0e7f9e2fa7c10dd720a4f40b7d49bd3076c582850f42c564ad0907d5ea2140fa",
+    "source_files": 16,
+    "python_files": 11,
+    "privacy_templates": 0,
+    "omitted_files": 13,
+    "entrypoints": [
+      "RUN_RD_AUDIT.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Mechanism_RD_Audit_v1_0_0.json"
+  },
+  {
+    "package": "Mechanism_Separation_v1_0_0",
+    "archive_sha256": "5a9d030a5847eda7d1b2d8d32f26de952766b84a4b5d5d440ec872722af5e2a0",
+    "source_files": 22,
+    "python_files": 16,
+    "privacy_templates": 0,
+    "omitted_files": 4,
+    "entrypoints": [
+      "RUN_MECHANISMS.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Mechanism_Separation_v1_0_0.json"
+  },
+  {
+    "package": "Patron_Audience_Cache_Audit_v1_0_0",
+    "archive_sha256": "6d5a9a1a703be1c536ba44d36194850ceb60578eea99ba050086dc4057aab566",
+    "source_files": 3,
+    "python_files": 1,
+    "privacy_templates": 0,
+    "omitted_files": 3,
+    "entrypoints": [
+      "RUN_CACHE_AUDIT.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Patron_Audience_Cache_Audit_v1_0_0.json"
+  },
+  {
+    "package": "Patron_IV_Coverage_Audit_v1_0_1",
+    "archive_sha256": "5c364bce9af0dae9e5c7144869064b28f26973caa73480b02aa21ac1babdc508",
+    "source_files": 5,
+    "python_files": 3,
+    "privacy_templates": 2,
+    "omitted_files": 3,
+    "entrypoints": [
+      "RUN_AUDIT.sh"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/research_updates_20261022/Patron_IV_Coverage_Audit_v1_0_1.json"
+  },
+  {
+    "package": "Patron_TotalFive_Migration_v1_0_1",
+    "archive_sha256": "ed747e6bcbe0892443f2a3b20700e13431c1771e3455b54dbb53e69dce86051f",
+    "source_files": 745,
+    "python_files": 565,
+    "privacy_templates": 38,
+    "omitted_files": 1007,
+    "entrypoints": [
+      "RUN_MIGRATION.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/research_updates_20261022/Patron_TotalFive_Migration_v1_0_1.json"
+  },
+  {
+    "package": "Pool_Activity_Rating_Adjustment_v1_0_0",
+    "archive_sha256": "ef9f4c3d6b53961fb3bd74aac01ab0365d108e2f032a97397877970003bdd139",
+    "source_files": 15,
+    "python_files": 10,
+    "privacy_templates": 0,
+    "omitted_files": 21,
+    "entrypoints": [
+      "RUN_ACTIVITY_RATING_ADJUSTMENT.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Activity_Rating_Adjustment_v1_0_0.json"
+  },
+  {
+    "package": "Pool_Activity_State_Rates_v1_0_0",
+    "archive_sha256": "35d2b2da47ab4f932ff82dcc92407ea774281ed3097dd3d92803a252e53b5c58",
+    "source_files": 11,
+    "python_files": 7,
+    "privacy_templates": 0,
+    "omitted_files": 14,
+    "entrypoints": [
+      "RUN_ACTIVITY_STATE_RATES.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Activity_State_Rates_v1_0_0.json"
+  },
+  {
+    "package": "Pool_Audience_Expanded_v1_0_0",
+    "archive_sha256": "2b369cd16bda7bff108ddf1175ca3e3c64fdfe3b3c658226102b2fe8012ebbd3",
+    "source_files": 12,
+    "python_files": 9,
+    "privacy_templates": 0,
+    "omitted_files": 6,
+    "entrypoints": [
+      "RUN_EXPANDED_AUDIENCE.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Audience_Expanded_v1_0_0.json"
+  },
+  {
+    "package": "Pool_Audience_Robustness_v1_0_0",
+    "archive_sha256": "054a1d0b8a08724bd4bfee661b9e2e0eb59c3fcbd0bc7d191671cd7ffd68fa5f",
+    "source_files": 8,
+    "python_files": 5,
+    "privacy_templates": 0,
+    "omitted_files": 6,
+    "entrypoints": [
+      "RUN_AUDIENCE.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Audience_Robustness_v1_0_0.json"
+  },
+  {
+    "package": "Pool_Chooser_Benchmark_v1_0_0",
+    "archive_sha256": "f857135c46f3f68d55139a750d9316dfff01fbe0a7f2101856829f18fbf0fe5f",
+    "source_files": 14,
+    "python_files": 9,
+    "privacy_templates": 0,
+    "omitted_files": 6,
+    "entrypoints": [
+      "RUN_BENCHMARK.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Chooser_Benchmark_v1_0_0.json"
+  },
+  {
+    "package": "Pool_Chooser_Bound_Sensitivity_v1_0_0",
+    "archive_sha256": "aa9d44ed509870b1d16b67a83531a29e25a3ee902f8a31927e68be6fd692922e",
+    "source_files": 36,
+    "python_files": 22,
+    "privacy_templates": 0,
+    "omitted_files": 12,
+    "entrypoints": [
+      "RUN_BOUNDS.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Chooser_Bound_Sensitivity_v1_0_0.json"
+  },
+  {
+    "package": "Pool_Chooser_Followup_v1_1_1",
+    "archive_sha256": "82e48edce1392926c4c7527a34aec6e71bc074b0389dc7a85c0ed9e3e7567316",
+    "source_files": 27,
+    "python_files": 17,
+    "privacy_templates": 0,
+    "omitted_files": 9,
+    "entrypoints": [
+      "RUN_FOLLOWUP.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Chooser_Followup_v1_1_1.json"
+  },
+  {
+    "package": "Pool_Chooser_Recovery_v1_0_0",
+    "archive_sha256": "e85c2ca00b96d0279c4fed4ebf5769734a2d13ef69f777765299f5a10971493d",
+    "source_files": 46,
+    "python_files": 25,
+    "privacy_templates": 0,
+    "omitted_files": 16,
+    "entrypoints": [
+      "RUN_RECOVERY.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Chooser_Recovery_v1_0_0.json"
+  },
+  {
+    "package": "Pool_Chooser_Support_Audit_v1_0_0",
+    "archive_sha256": "8f970e52d0b50bc0880895b74a7dac2795df4e63f77008e59f18c6afe3743102",
+    "source_files": 7,
+    "python_files": 4,
+    "privacy_templates": 0,
+    "omitted_files": 10,
+    "entrypoints": [
+      "RUN_CHOOSER_SUPPORT.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Chooser_Support_Audit_v1_0_0.json"
+  },
+  {
+    "package": "Pool_Chooser_Wide_Bootstrap_v1_0_0",
+    "archive_sha256": "2c470217eebeb47e99364247edca12eacc8a23427efda1fcffeebbac0ba4e623",
+    "source_files": 41,
+    "python_files": 23,
+    "privacy_templates": 0,
+    "omitted_files": 14,
+    "entrypoints": [
+      "RUN_WIDE_BOOTSTRAP.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Chooser_Wide_Bootstrap_v1_0_0.json"
+  },
+  {
+    "package": "Pool_Construal_Followup_v1_1_0",
+    "archive_sha256": "8995de5d0daf1f3c592348272f0add0230a8adef87db08357b911c5874460479",
+    "source_files": 32,
+    "python_files": 27,
+    "privacy_templates": 0,
+    "omitted_files": 11,
+    "entrypoints": [
+      "RUN_FOLLOWUP.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Construal_Followup_v1_1_0.json"
+  },
+  {
+    "package": "Pool_Construal_Tests_v1_0_0",
+    "archive_sha256": "f488937e34e488091bbbd9e2fc16222181dd50e90f36e431b6fc13414c89b4af",
+    "source_files": 26,
+    "python_files": 21,
+    "privacy_templates": 0,
+    "omitted_files": 8,
+    "entrypoints": [
+      "RUN_CONSTRUAL.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Construal_Tests_v1_0_0.json"
+  },
+  {
+    "package": "Pool_Equal_Chooser_Desert_v1_0_0",
+    "archive_sha256": "5b396341edd9a7b499e5fe85273ebfa08063e0275e2f1eb89229bcd63438234a",
+    "source_files": 9,
+    "python_files": 6,
+    "privacy_templates": 0,
+    "omitted_files": 14,
+    "entrypoints": [
+      "RUN_EQUAL_CHOOSER.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Equal_Chooser_Desert_v1_0_0.json"
+  },
+  {
+    "package": "Pool_Joint_State_Ply_v1_0_0",
+    "archive_sha256": "e40a9c99083dfbd0270b8bf7723df0ad3b5664cdebbe8221f92d60ef670e4e59",
+    "source_files": 6,
+    "python_files": 3,
+    "privacy_templates": 0,
+    "omitted_files": 6,
+    "entrypoints": [
+      "RUN_POOL_JOINT_STATE_PLY.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Joint_State_Ply_v1_0_0.json"
+  },
+  {
+    "package": "Pool_Main_C13_FamilyD_v1_0_0",
+    "archive_sha256": "baecb00899f178f1ecd9251c8656c62ebd4f330052b64635b31f18eb597722f4",
+    "source_files": 21,
+    "python_files": 10,
+    "privacy_templates": 0,
+    "omitted_files": 10,
+    "entrypoints": [
+      "RUN_C13_FAMILYD.command"
+    ],
+    "readmes": [
+      "README_FIRST.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Main_C13_FamilyD_v1_0_0.json"
+  },
+  {
+    "package": "Pool_Matchmaking_Audit_v1_0_0",
+    "archive_sha256": "29e3c9ffbc95bac8628d280da15fe3b232c7c8b466163613e19fb51bb56d7e4f",
+    "source_files": 6,
+    "python_files": 1,
+    "privacy_templates": 0,
+    "omitted_files": 18,
+    "entrypoints": [
+      "RUN_PROBE.command"
+    ],
+    "readmes": [
+      "README_FIRST.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Matchmaking_Audit_v1_0_0.json"
+  },
+  {
+    "package": "Pool_Matchmaking_Balance_Selection_v1_0_0",
+    "archive_sha256": "765474bfe6e03ade32c76a2cdd789f6de92acc4a3ba5c5ce7d408a0764c85ece",
+    "source_files": 10,
+    "python_files": 6,
+    "privacy_templates": 0,
+    "omitted_files": 7,
+    "entrypoints": [
+      "RUN_ANALYSIS.command"
+    ],
+    "readmes": [
+      "README_FIRST.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Matchmaking_Balance_Selection_v1_0_0.json"
+  },
+  {
+    "package": "Pool_Pooled_Competitive_K_v1_0_0",
+    "archive_sha256": "21c6bc2cfef7412b69a02ce123b1748281e6cc3b7ea7c53e4e64cab8769e71a2",
+    "source_files": 15,
+    "python_files": 10,
+    "privacy_templates": 0,
+    "omitted_files": 6,
+    "entrypoints": [
+      "RUN_POOLED.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Pooled_Competitive_K_v1_0_0.json"
+  },
+  {
+    "package": "Pool_Rating_Milestones_v1_0_0",
+    "archive_sha256": "e4a12b1e3907704aa38f3fa7858651db4fca6f87c8122641407685ced8cf8985",
+    "source_files": 15,
+    "python_files": 10,
+    "privacy_templates": 0,
+    "omitted_files": 6,
+    "entrypoints": [
+      "RUN_MILESTONES.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Rating_Milestones_v1_0_0.json"
+  },
+  {
+    "package": "Pool_Selectivity_Challenge_v1_1_0",
+    "archive_sha256": "9ac014a0c6e2225115946e3f428370691b43d73a8ace0df9b631d98d2cd843bc",
+    "source_files": 9,
+    "python_files": 5,
+    "privacy_templates": 0,
+    "omitted_files": 3,
+    "entrypoints": [
+      "RUN_CHALLENGE.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Selectivity_Challenge_v1_1_0.json"
+  },
+  {
+    "package": "Pool_Selectivity_Pilot_v1_0_0",
+    "archive_sha256": "a3437a3e1fa249f0d175217f241e23577e2ad495d3e151c2e622a42d19d464c3",
+    "source_files": 12,
+    "python_files": 7,
+    "privacy_templates": 0,
+    "omitted_files": 6,
+    "entrypoints": [
+      "RUN_SELECTIVITY.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Selectivity_Pilot_v1_0_0.json"
+  },
+  {
+    "package": "Pool_Split_Zero_Curves_v1_0_0",
+    "archive_sha256": "2cffc376b623cd6ab1217c8e4e117f2351bbc4dda778a927f1657e7e94cd2364",
+    "source_files": 17,
+    "python_files": 12,
+    "privacy_templates": 0,
+    "omitted_files": 10,
+    "entrypoints": [
+      "RUN_SPLIT_ZERO.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Split_Zero_Curves_v1_0_0.json"
+  },
+  {
+    "package": "Pool_Split_Zero_RD75_v1_0_0",
+    "archive_sha256": "f6bb9353df86f01bfbdbda133118edc35939029357e4c97433bb6bd41437b0a7",
+    "source_files": 20,
+    "python_files": 15,
+    "privacy_templates": 0,
+    "omitted_files": 20,
+    "entrypoints": [
+      "RUN_SPLIT_RD75.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Split_Zero_RD75_v1_0_0.json"
+  },
+  {
+    "package": "Pool_Stable_Rating_Curves_v1_0_0",
+    "archive_sha256": "e856e00e64dac94869405a9baad3a5a43d93ea24f22c83f499c853d7d95256af",
+    "source_files": 20,
+    "python_files": 14,
+    "privacy_templates": 0,
+    "omitted_files": 6,
+    "entrypoints": [
+      "RUN_STABLE.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Stable_Rating_Curves_v1_0_0.json"
+  },
+  {
+    "package": "Pool_Stable_Zero_Followups_v1_0_1",
+    "archive_sha256": "9e497694eac23e62b296d5ff65c7ffeb9f226e5932acf63eb834e8451208cdc2",
+    "source_files": 20,
+    "python_files": 15,
+    "privacy_templates": 0,
+    "omitted_files": 11,
+    "entrypoints": [
+      "RUN_FOLLOWUPS.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Stable_Zero_Followups_v1_0_1.json"
+  },
+  {
+    "package": "Pool_Within_Chooser_K_Comparison_v1_0_0",
+    "archive_sha256": "21a3a4f1568c34bf42fa9ba952ffe54110daa3a3d4468acafeea77185db7e226",
+    "source_files": 11,
+    "python_files": 7,
+    "privacy_templates": 0,
+    "omitted_files": 7,
+    "entrypoints": [
+      "RUN_COMPARISON.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Within_Chooser_K_Comparison_v1_0_0.json"
+  },
+  {
+    "package": "Pool_Within_Chooser_Suite_v1_0_3",
+    "archive_sha256": "3c736d8165ed983e180a7826b953655ac08864324c9c22b89a10b714a1f45098",
+    "source_files": 15,
+    "python_files": 9,
+    "privacy_templates": 0,
+    "omitted_files": 45,
+    "entrypoints": [
+      "RUN_WITHIN_CHOOSER_SUITE.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Pool_Within_Chooser_Suite_v1_0_3.json"
+  },
+  {
+    "package": "R11_Region_Gap_v1_0_0",
+    "archive_sha256": "c036e5c0109e07dae308e533e9d6a84c5c37db67431725c8f8a667d6ad4fb8b3",
+    "source_files": 15,
+    "python_files": 11,
+    "privacy_templates": 0,
+    "omitted_files": 11,
+    "entrypoints": [
+      "RUN_R11.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/R11_Region_Gap_v1_0_0.json"
+  },
+  {
+    "package": "R12_R13_Local_Runner_v1_0_3",
+    "archive_sha256": "bde6bbff9d7582e2f40c69cbd6874320d41567125efbfbcf3838a9cba8c0dade",
+    "source_files": 336,
+    "python_files": 257,
+    "privacy_templates": 16,
+    "omitted_files": 392,
+    "entrypoints": [
+      "RUN_LOCAL.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/research_updates_20261022/R12_R13_Local_Runner_v1_0_3.json"
+  },
+  {
+    "package": "R7_Analysis_v1_0_3",
+    "archive_sha256": "8466cc3cafdb98797547c41448fb84d8cade04ee52535893781c0cb9d2ecd096",
+    "source_files": 146,
+    "python_files": 112,
+    "privacy_templates": 7,
+    "omitted_files": 168,
+    "entrypoints": [
+      "RUN_R7_ANALYSES.command",
+      "RUN_TESTS.command",
+      "launch.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/research_updates_20261022/R7_Analysis_v1_0_3.json"
+  },
+  {
+    "package": "R8_Receipt_Independent_v1_0_4",
+    "archive_sha256": "fce01a85cde639c0a6282692deec6c8985c9835cfc2d8adfa63f947f0ca904ee",
+    "source_files": 9,
+    "python_files": 7,
+    "privacy_templates": 1,
+    "omitted_files": 4,
+    "entrypoints": [
+      "RUN_RECEIPT_INDEPENDENT.command"
+    ],
+    "readmes": [
+      "README.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/R8_Receipt_Independent_v1_0_4.json"
+  },
+  {
+    "package": "R9_Certified_Leave_Pair_Out_v1_0_0",
+    "archive_sha256": "e3c6efa6e61ea990b5b27158cc9a0570ada3ac1622f32252d08ceb4ed4dd46fe",
+    "source_files": 234,
+    "python_files": 173,
+    "privacy_templates": 14,
+    "omitted_files": 336,
+    "entrypoints": [
+      "RUN_R9.command"
+    ],
+    "readmes": [
+      "README.txt.in"
+    ],
+    "manifest": "manifests/research_updates_20261022/R9_Certified_Leave_Pair_Out_v1_0_0.json"
+  },
+  {
+    "package": "R9_ENV_Memory_Resume_v1_0_1",
+    "archive_sha256": "a49e1f858f8a2684abd31bb2041dd022fc553e146bb2197d71f1809f46b55839",
+    "source_files": 241,
+    "python_files": 174,
+    "privacy_templates": 13,
+    "omitted_files": 343,
+    "entrypoints": [
+      "RESUME_R9.command",
+      "RUN_TESTS.command",
+      "launch.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/research_updates_20261022/R9_ENV_Memory_Resume_v1_0_1.json"
+  },
+  {
+    "package": "R9b_Remaining_Diagnostics_v1_0_0",
+    "archive_sha256": "a18e3b4b727156b6673404a21d2e9fe8f3a9d1c5963c5c4011fba9289794169f",
+    "source_files": 243,
+    "python_files": 178,
+    "privacy_templates": 13,
+    "omitted_files": 349,
+    "entrypoints": [
+      "RUN_R9B.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/research_updates_20261022/R9b_Remaining_Diagnostics_v1_0_0.json"
+  },
+  {
+    "package": "Receipt_IV_Cohort_Assembly_v1_0_0",
+    "archive_sha256": "f75c77d0df702c920085e7cf96a1744c4847c0f51695b11d417ecd98581480e7",
+    "source_files": 15,
+    "python_files": 13,
+    "privacy_templates": 4,
+    "omitted_files": 14,
+    "entrypoints": [
+      "RUN_ASSEMBLY.command"
+    ],
+    "readmes": [
+      "README.md.in"
+    ],
+    "manifest": "manifests/research_updates_20261022/Receipt_IV_Cohort_Assembly_v1_0_0.json"
+  },
+  {
+    "package": "Receipt_IV_Cohort_Extension_v1_0_0",
+    "archive_sha256": "226906ee03b0cec00234b4b86f74197ac2b2ced377999c13ab16ed0d6080308c",
+    "source_files": 19,
+    "python_files": 15,
+    "privacy_templates": 0,
+    "omitted_files": 12,
+    "entrypoints": [
+      "RUN_COHORT_EXTENSION.command"
+    ],
+    "readmes": [
+      "README_FIRST.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Receipt_IV_Cohort_Extension_v1_0_0.json"
+  },
+  {
+    "package": "Receipt_IV_Expanded_Estimation_v1_1_0",
+    "archive_sha256": "1ea068d2731bb504c7a3370ad8279a38d9302c6631bd592e4fcebc957edc7798",
+    "source_files": 21,
+    "python_files": 18,
+    "privacy_templates": 2,
+    "omitted_files": 13,
+    "entrypoints": [
+      "RUN_RECEIPT_IV_EXPANDED_ESTIMATION.command"
+    ],
+    "readmes": [
+      "README_FIRST.txt.in"
+    ],
+    "manifest": "manifests/research_updates_20261022/Receipt_IV_Expanded_Estimation_v1_1_0.json"
+  },
+  {
+    "package": "Receipt_IV_History_Extension_v1_0_0",
+    "archive_sha256": "13ddf44066b2d8301cead6d5f457654834f81138c48742b91380b68e61b1a23b",
+    "source_files": 14,
+    "python_files": 11,
+    "privacy_templates": 0,
+    "omitted_files": 14,
+    "entrypoints": [
+      "RUN_HISTORY_EXTENSION.command"
+    ],
+    "readmes": [
+      "README_FIRST.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Receipt_IV_History_Extension_v1_0_0.json"
+  },
+  {
+    "package": "Receipt_IV_Source_API_Pull_v1_0_0",
+    "archive_sha256": "33ab11fb74d921db37f60bbe1c0e5a1f38d1c660c38bc6d64b75fecba113c71e",
+    "source_files": 14,
+    "python_files": 8,
+    "privacy_templates": 0,
+    "omitted_files": 3,
+    "entrypoints": [
+      "RUN_SOURCE_API_PULL.command"
+    ],
+    "readmes": [
+      "README_FIRST.md"
+    ],
+    "manifest": "manifests/research_updates_20261022/Receipt_IV_Source_API_Pull_v1_0_0.json"
+  },
+  {
+    "package": "Receipt_IV_State_Diagnostics_v1_0_1",
+    "archive_sha256": "14d2f45dfb00db5dc7f0b62fe19055d83d58962232eccebe4c6529382a6f7b79",
+    "source_files": 9,
+    "python_files": 7,
+    "privacy_templates": 2,
+    "omitted_files": 15,
+    "entrypoints": [
+      "RUN_RECEIPT_IV_STATE_DIAGNOSTICS.command"
+    ],
+    "readmes": [
+      "README_FIRST.txt.in"
+    ],
+    "manifest": "manifests/research_updates_20261022/Receipt_IV_State_Diagnostics_v1_0_1.json"
+  },
+  {
+    "package": "Run2_Continuous_Download_v1_0_0",
+    "archive_sha256": "3172ed88911e0bbc51db7ba5efcf22a2b74f17e40711922ab2436f6bbf233a28",
+    "source_files": 64,
+    "python_files": 37,
+    "privacy_templates": 1,
+    "omitted_files": 29,
+    "entrypoints": [
+      "RUN_TESTS.command",
+      "RUN_TO_100.command",
+      "STATUS.command",
+      "launch.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/research_updates_20261022/Run2_Continuous_Download_v1_0_0.json"
+  },
+  {
+    "package": "Run2_Phase100_Final_v1_0_0",
+    "archive_sha256": "2f62b685a61f1b709189d8b901a366e92915efcf5bc7be1f3906f3ede2d2d4ea",
+    "source_files": 378,
+    "python_files": 282,
+    "privacy_templates": 20,
+    "omitted_files": 591,
+    "entrypoints": [
+      "RUN_FINAL_100.command",
+      "RUN_TESTS.command",
+      "launch.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/research_updates_20261022/Run2_Phase100_Final_v1_0_0.json"
+  },
+  {
+    "package": "Test_G_v2_1_1",
+    "archive_sha256": "486cfa8e0b040167552bd75a946f5aceb817765302629e3fa1c34c4222527606",
+    "source_files": 21,
+    "python_files": 18,
+    "privacy_templates": 3,
+    "omitted_files": 13,
+    "entrypoints": [
+      "RUN_TEST_G.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/research_updates_20261022/Test_G_v2_1_1.json"
+  }
+]

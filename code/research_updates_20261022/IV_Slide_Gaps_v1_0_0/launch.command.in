@@ -1,0 +1,86 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+slide_mode="${1:?Use audit or tests}"
+shift
+slide_package="$(cd "$(dirname "$0")" && pwd -P)"
+slide_project="${IV_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+slide_desktop="${IV_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+export PYTHONDONTWRITEBYTECODE=1
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1
+slide_candidates=()
+if [[ -n "${IV_PYTHON:-}" ]]; then
+  slide_candidates=("$IV_PYTHON")
+else
+  slide_candidates+=("$slide_project/venv/bin/python")
+  if [[ -n "${CONDA_PREFIX:-}" ]]; then slide_candidates+=("$CONDA_PREFIX/bin/python"); fi
+  slide_candidates+=("$HOME/miniforge3/bin/python" "$HOME/miniconda3/bin/python" "$HOME/anaconda3/bin/python" "/opt/anaconda3/bin/python" "/opt/homebrew/Caskroom/miniforge/base/bin/python")
+  while IFS= read -r slide_candidate; do
+    if [[ -n "$slide_candidate" ]]; then slide_candidates+=("$slide_candidate"); fi
+  done < <(command -v python3 python 2>/dev/null || true)
+fi
+slide_python=""
+slide_fallback=""
+for slide_candidate in "${slide_candidates[@]}"; do
+  if [[ ! -x "$slide_candidate" ]]; then continue; fi
+  if "$slide_candidate" -c 'import sys,numpy,pyarrow,duckdb; assert sys.version_info >= (3,10)' >/dev/null 2>&1; then
+    if [[ -z "$slide_fallback" ]]; then slide_fallback="$slide_candidate"; fi
+    if "$slide_candidate" -c 'import matplotlib' >/dev/null 2>&1; then
+      slide_python="$slide_candidate"
+      break
+    fi
+  fi
+done
+if [[ -z "$slide_python" ]]; then slide_python="$slide_fallback"; fi
+if [[ -z "$slide_python" ]]; then
+  echo 'No existing Python 3.10+ with NumPy, PyArrow and DuckDB was found.'
+  echo 'Activate the existing research Conda environment or set IV_PYTHON to its Python executable, then rerun.'
+  exit 2
+fi
+if [[ "$slide_mode" != audit && "$slide_mode" != tests ]]; then
+  echo 'Use RUN_SLIDE_GAPS.command or RUN_TESTS.command.'
+  exit 2
+fi
+mkdir -p "$slide_desktop"
+cd "$slide_package"
+"$slide_python" - <<'PY'
+import sys,numpy,pyarrow,duckdb
+sys.path.insert(0,'code')
+from common import verify_release
+verify_release()
+print('PACKAGE_SHA256_OK; Python:',sys.executable,flush=True)
+print('NumPy',numpy.__version__,'PyArrow',pyarrow.__version__,'DuckDB',duckdb.__version__,flush=True)
+try:
+    import matplotlib
+    print('Matplotlib',matplotlib.__version__,flush=True)
+except ImportError:
+    print('Matplotlib unavailable: tables will be complete; plots will be marked unavailable.',flush=True)
+PY
+slide_log="$slide_desktop/iv_slide_gaps_${slide_mode}_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+echo "Log: $slide_log"
+slide_awake=()
+if [[ -x /usr/bin/caffeinate ]]; then slide_awake=(/usr/bin/caffeinate -i); fi
+set +e
+(
+  set -e
+  if [[ "$slide_mode" == tests ]]; then
+    "$slide_python" -m unittest discover -s tests -p 'test_*.py' -v
+  else
+    slide_tests="${slide_log%.log}_selftests.log"
+    echo "Offline checks: $slide_tests"
+    if "$slide_python" -m unittest discover -s tests -p 'test_*.py' -q >"$slide_tests" 2>&1; then
+      echo 'OFFLINE_SELF_TESTS_OK. Starting the local slide audit.'
+    else
+      slide_test_exit=$?
+      cat "$slide_tests"
+      exit "$slide_test_exit"
+    fi
+    "${slide_awake[@]}" "$slide_python" -u code/run_slide_gaps.py --project-root "$slide_project" --desktop "$slide_desktop" "$@"
+  fi
+) 2>&1 | tee "$slide_log"
+slide_exit=${PIPESTATUS[0]}
+set -e
+if [[ "$slide_exit" -ne 0 ]]; then
+  echo "Stopped with exit $slide_exit. Completed checkpoints are retained. Return this log: $slide_log"
+fi
+exit "$slide_exit"

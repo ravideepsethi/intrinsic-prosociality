@@ -1,0 +1,396 @@
+{
+  "package": "Country_Profile_Followup_v1_0_0",
+  "archive_name": "Country_Profile_Followup_v1_0_0.zip",
+  "archive_sha256": "1a5068751d6dd02b555096507ae1510eceb51e9864b58fd08a41f1c773ed9d8a",
+  "archive_size": 562621,
+  "archive_root": "Country_Profile_Followup_v1_0_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "METHODS.md",
+      "published_path": "METHODS.md",
+      "sha256": "e56c009a4af00d28670abc70d967e6644c6d70e77db248d0a604165b9e0b4d50",
+      "published_sha256": "e56c009a4af00d28670abc70d967e6644c6d70e77db248d0a604165b9e0b4d50",
+      "size": 10286
+    },
+    {
+      "path": "README.md",
+      "published_path": "README.md.in",
+      "sha256": "874d0159f33bfd911e22431d17999e9a7df8dd21f9bc7a7564f6e45a84740923",
+      "published_sha256": "8474e1d7f69027ed859b12412886cdc0d4b42de8eea35852206906295ffa3b2e",
+      "size": 5180,
+      "redactions": [
+        {
+          "start": 312,
+          "end": 327,
+          "token": "__PRIVATE_VALUE_1__"
+        }
+      ]
+    },
+    {
+      "path": "RUN_FOLLOWUP.command",
+      "published_path": "RUN_FOLLOWUP.command.in",
+      "sha256": "77136426fd7f075bcd68f02aa6210147325e80fb3d8920531384da4727f4372b",
+      "published_sha256": "77136426fd7f075bcd68f02aa6210147325e80fb3d8920531384da4727f4372b",
+      "size": 967
+    },
+    {
+      "path": "build_ready_results.py",
+      "published_path": "build_ready_results.py",
+      "sha256": "d1994eab9ef4a7b5ff473380306944cf7041bf64b14b05d68625633ce7f8275c",
+      "published_sha256": "d1994eab9ef4a7b5ff473380306944cf7041bf64b14b05d68625633ce7f8275c",
+      "size": 9249
+    },
+    {
+      "path": "common.py",
+      "published_path": "common.py",
+      "sha256": "6cc89a0cc173c0763f1a73f68db29090302c5a3629e509cdff8a0834c52e57e5",
+      "published_sha256": "6cc89a0cc173c0763f1a73f68db29090302c5a3629e509cdff8a0834c52e57e5",
+      "size": 3752
+    },
+    {
+      "path": "estimator.py",
+      "published_path": "estimator.py",
+      "sha256": "5e3da18b6abe50f5ba86827df59ed6e168eb2afdb1f0279f13cc261c7ca68705",
+      "published_sha256": "5e3da18b6abe50f5ba86827df59ed6e168eb2afdb1f0279f13cc261c7ca68705",
+      "size": 8129
+    },
+    {
+      "path": "first_pass_report/METHODS.md",
+      "published_path": "first_pass_report/METHODS.md",
+      "sha256": "b2c419d0e9d26bd6262df524462a304db934b8b7f6d5095c23d9201381430471",
+      "published_sha256": "b2c419d0e9d26bd6262df524462a304db934b8b7f6d5095c23d9201381430471",
+      "size": 9939
+    },
+    {
+      "path": "ready_results/selection_and_tv_tables.md",
+      "published_path": "ready_results/selection_and_tv_tables.md",
+      "sha256": "48e460fb9de1d7c69440901989b12c9a582b0dbf8801ca328c4e92f14c59bbfc",
+      "published_sha256": "48e460fb9de1d7c69440901989b12c9a582b0dbf8801ca328c4e92f14c59bbfc",
+      "size": 2252
+    },
+    {
+      "path": "requirements.txt",
+      "published_path": "requirements.txt",
+      "sha256": "cd70f9e9fcd4abf26a99ca57b207b86621e779b3e4f59b2c54207da1318d4190",
+      "published_sha256": "cd70f9e9fcd4abf26a99ca57b207b86621e779b3e4f59b2c54207da1318d4190",
+      "size": 59
+    },
+    {
+      "path": "run_followup.py",
+      "published_path": "run_followup.py",
+      "sha256": "239056a5c9d2ff6ff7c51d94741651eae7643a06600ae1b3e960dc339740f955",
+      "published_sha256": "239056a5c9d2ff6ff7c51d94741651eae7643a06600ae1b3e960dc339740f955",
+      "size": 14578
+    },
+    {
+      "path": "test_followup.py",
+      "published_path": "test_followup.py",
+      "sha256": "45b584e7481c54dcc9b561f4ab75c39b79d4b67bea45f8c3d2c78389ea41bfc6",
+      "published_sha256": "45b584e7481c54dcc9b561f4ab75c39b79d4b67bea45f8c3d2c78389ea41bfc6",
+      "size": 9287
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "PACKAGE_HASHES.json",
+      "sha256": "ffb122ad868151b4f0a391ccdc234da7cd8747ea74a17fde5445857a4e904ce7",
+      "size": 8152
+    },
+    {
+      "path": "TEST_REPORT.json",
+      "sha256": "56925af44795590b6ad543f1ee5b90fea43f7bf8a46abc9287d819934b166ec1",
+      "size": 1019
+    },
+    {
+      "path": "authority/first_pass_package_hashes.json",
+      "sha256": "4819e38cf11c1fd15341f8e2a31746955b9841d917b5d6e2bce5b5617c6cf4f8",
+      "size": 1693
+    },
+    {
+      "path": "first_pass_report/00_conflicting_code_pairs.csv",
+      "sha256": "d19ff8dac5d9a25f410beafe1a2daf27467fe385113020ef54a499cae12b77a4",
+      "size": 66
+    },
+    {
+      "path": "first_pass_report/00_flag_field_disagreements.csv",
+      "sha256": "ee64c648c4f7c46b2139dd3e60a530c1e64626b72ff98e0be6374835d193cbf3",
+      "size": 683
+    },
+    {
+      "path": "first_pass_report/00_profile_structure_check.csv",
+      "sha256": "30567f2ca13a1cb1307e5489e2c12c3f5841ea83ace8c83ba83f7a9d691c4aae",
+      "size": 211
+    },
+    {
+      "path": "first_pass_report/01_flag_coverage_by_source_role.csv",
+      "sha256": "3d6821e67b02f13658219dea25e58ec672d51cd51abc772252f1f7bc237939f8",
+      "size": 307
+    },
+    {
+      "path": "first_pass_report/01_return_status_by_source_role.csv",
+      "sha256": "f3cb7aba388a941b15ccb2cde89718cb5d9e7f2a155889ecc9779c3b872e37e0",
+      "size": 268
+    },
+    {
+      "path": "first_pass_report/02_current_chooser_flag_selection.csv",
+      "sha256": "faba14d0820468937556cf63fc426ac741a41aed7f20f0013a53680e674c51bf",
+      "size": 1057
+    },
+    {
+      "path": "first_pass_report/02_flag_board_gradient.csv",
+      "sha256": "e855b1467282c1056472e6d3dbfea6c193f551190d6b5b2fe8135f6273440025",
+      "size": 723
+    },
+    {
+      "path": "first_pass_report/02_flag_state_rates.csv",
+      "sha256": "84504ee46ae4f9eac1a8344b4e7d9b15592da851d76b87e822fca245065d611a",
+      "size": 1248
+    },
+    {
+      "path": "first_pass_report/02_match_cell_flag_selection.csv",
+      "sha256": "a3c89db4e0475422261f20263c20255cf57d35919c0d796888f850eb8833dfae",
+      "size": 5377
+    },
+    {
+      "path": "first_pass_report/03_country_state_rates_selected_sample.csv",
+      "sha256": "ce3119608ca85b4ca418e78e3d5535fa100ad1a26b9321d90815c49d2f021cbd",
+      "size": 43042
+    },
+    {
+      "path": "first_pass_report/03_flag_codes_and_cleaning.csv",
+      "sha256": "c7ff2486229565d349f422f2a1e13da9bd52d6f4bd1141303b24ce0937d23227",
+      "size": 34470
+    },
+    {
+      "path": "first_pass_report/04_account_union_inventory.json",
+      "sha256": "5c57bf805671a6384e58cc46483c595bfae9f6f9623bf2350d9cc9ac05c32c63",
+      "size": 645
+    },
+    {
+      "path": "first_pass_report/04_both_player_coverage.csv",
+      "sha256": "99f65b9a658c410704112f23db55b438c91d8ad60347e548f5da4a6ebb61301a",
+      "size": 4647
+    },
+    {
+      "path": "first_pass_report/04_country_pair_support.csv",
+      "sha256": "7dc5c74c93e157ae7003ee962bbf7c704604fd9a3afd354f8961501576dd3a53",
+      "size": 1264319
+    },
+    {
+      "path": "first_pass_report/04_exact_pair_support_rates.csv",
+      "sha256": "d22596cd561219653c9e699e0b75a90bbb19d933c8d055f9a8fb5e45383c92b0",
+      "size": 905
+    },
+    {
+      "path": "first_pass_report/04_iso_pair_support_rates.csv",
+      "sha256": "ac3a9e9fe8deadd744092987d45d2db67682e7afb4870cf539b21ddd7dfd44c8",
+      "size": 832
+    },
+    {
+      "path": "first_pass_report/04_parent_pair_support_rates.csv",
+      "sha256": "50866de8fbdfe07c0d8fbacc88b8bfabc82106dbcfbe9a835987e0886a24fa76",
+      "size": 912
+    },
+    {
+      "path": "first_pass_report/04_within_chooser_same_different_support.csv",
+      "sha256": "6645043f34a8e6a6d2acadd95f674858fc8dab9792ae389cab2da8fe4d2feba2",
+      "size": 203
+    },
+    {
+      "path": "first_pass_report/05_recipient_moderation_descriptive.csv",
+      "sha256": "354eee81b70984e9434fe0174f0bb57e2f932a30739e33d58e6afd0ba0cd9bf7",
+      "size": 877
+    },
+    {
+      "path": "first_pass_report/05_tv_board_gradient_by_rating.csv",
+      "sha256": "75ccabd75d9bec2f26e70ac675b605845d0054fa4cbd855479d6a319e245624e",
+      "size": 1822
+    },
+    {
+      "path": "first_pass_report/05_tv_by_rating_and_state.csv",
+      "sha256": "9f3d11ec8497330488825b02cc7e6f388bf22d93591e8edb382ed977e9716e27",
+      "size": 3576
+    },
+    {
+      "path": "first_pass_report/05_tv_rating_volume_sensitivity.csv",
+      "sha256": "056e426b9a4914533dd6f89bee5842ad17b824850299fd2b8fbecac727b4b6c4",
+      "size": 14050
+    },
+    {
+      "path": "first_pass_report/06_activity_band_board_gradient.csv",
+      "sha256": "78b78a9778d67f7ea29d39849f22feeb3975ddc4d0e0617b0163f643a4369bf7",
+      "size": 5454
+    },
+    {
+      "path": "first_pass_report/06_activity_band_state_rates.csv",
+      "sha256": "3efc6511ff37891a1839390cd5f8303b4cdb3d2507821c63fe6e15211d67d344",
+      "size": 11422
+    },
+    {
+      "path": "first_pass_report/06_activity_proxy_coverage.csv",
+      "sha256": "b18f6195057d238397738eb5163680113fe06d41b13f01d703eaee93e2871536",
+      "size": 4753
+    },
+    {
+      "path": "first_pass_report/06_evening18_band_board_gradient.csv",
+      "sha256": "f0c9f75bdd5a762efa7060be590dd00e3b4cc4c64b237c22a6f31336b8ffc060",
+      "size": 5420
+    },
+    {
+      "path": "first_pass_report/06_evening18_band_state_rates.csv",
+      "sha256": "cc2f47f3ca13c08a7a1faf9add63a356f3a723d84d32fc668fe4b04b553f10ab",
+      "size": 11375
+    },
+    {
+      "path": "first_pass_report/06_evening22_band_board_gradient.csv",
+      "sha256": "b8d170f1b0c6405906d88d580786fd86c19e453bc5189d0362c87940bb088f58",
+      "size": 5477
+    },
+    {
+      "path": "first_pass_report/06_evening22_band_state_rates.csv",
+      "sha256": "daa0b2687c60dbbea813535b291ec1c138313994becab06bfcaebcfe6052812a",
+      "size": 11442
+    },
+    {
+      "path": "first_pass_report/06_flag_country_activity_crosscheck.csv",
+      "sha256": "3def158e8c779367956f28e3256f4b2f00904cbe6a53f31779dd689a6d224209",
+      "size": 75232
+    },
+    {
+      "path": "first_pass_report/06_stable_band_board_gradient.csv",
+      "sha256": "a7581fd208dd6e734a42f7e6925d4f058596648206eb80d1e5d14b94e0b2017f",
+      "size": 5363
+    },
+    {
+      "path": "first_pass_report/06_stable_band_state_rates.csv",
+      "sha256": "1da8c4cb4a1a1951ab8436916023f07876efd3ce52d0644e76860994d90ea004",
+      "size": 11173
+    },
+    {
+      "path": "first_pass_report/06_year1_proxy_year2_gradient.csv",
+      "sha256": "2df456ed3d42ee38d2ff3495a3a1feafad526058b29dc65ce3082f20e8e5f41d",
+      "size": 5215
+    },
+    {
+      "path": "first_pass_report/06_year1_proxy_year2_rates.csv",
+      "sha256": "e28b1e31442f1534448794e0450738439b6fdb10f57cfd5a44a0c89ac23cc9ad",
+      "size": 10981
+    },
+    {
+      "path": "first_pass_report/ACTIVITY_METHOD.json",
+      "sha256": "1fd13995ae80b4bcd1b137383d20aee1da438a914609f0ed1d04ed8f0e804b99",
+      "size": 791
+    },
+    {
+      "path": "first_pass_report/ACTIVITY_SUCCESS.json",
+      "sha256": "fc99d0a3ddb317e0737d3860c32ec3c8a6aa823321e5161645fa39356e8ea368",
+      "size": 128
+    },
+    {
+      "path": "first_pass_report/CHRONOLOGY_SCOPE.json",
+      "sha256": "40acd919d4a1fc513df161f041c30c1e1e53e3fa2d0e31f46be81c2ddb1e5004",
+      "size": 382
+    },
+    {
+      "path": "first_pass_report/CORE_SUCCESS.json",
+      "sha256": "57021471df85c3492547bbba924662caa1ee63bdb708a73c9a06282d7b84f36d",
+      "size": 124
+    },
+    {
+      "path": "first_pass_report/CURRENT_PANEL_COUNTS.json",
+      "sha256": "6fc62547e3da4b03d1a2d5ba0813418fd85fe6483ac505e79ee27692d28e7bef",
+      "size": 140
+    },
+    {
+      "path": "first_pass_report/MODEL_SUMMARY.json",
+      "sha256": "1d952fd05e997e8790e61c712ba33f3d5567ec92e7d1d034d9f4906e1e04527e",
+      "size": 13228
+    },
+    {
+      "path": "first_pass_report/REPORT_HASHES.json",
+      "sha256": "6540db42b908ae1f70c995c777eba466fbc53c8823611a1ccc6b62ab2184bef7",
+      "size": 4962
+    },
+    {
+      "path": "first_pass_report/RUN_SCOPE.json",
+      "sha256": "e47f9353109d1f83403950979603f1b0908f712d11b20154b3065638b372ed7e",
+      "size": 740
+    },
+    {
+      "path": "first_pass_report/SAMPLE_LINEAGE.json",
+      "sha256": "66a52b867222aa4f020d26553518e17dee84f3017e3badf80fea01693dbb36c9",
+      "size": 776
+    },
+    {
+      "path": "first_pass_report/WEIGHTING_STATUS.json",
+      "sha256": "e0e5d8fb7ed9411fba3d63b13a2867cf64eb5bff9e9440d93fb9dc1499df819d",
+      "size": 707
+    },
+    {
+      "path": "first_pass_report/model_flag_clearly_worse.json",
+      "sha256": "90d62c8f935f4fead1c93a23687af46cdebdac8a7abdfb73eb9f3d50d3ad1d04",
+      "size": 3386
+    },
+    {
+      "path": "first_pass_report/model_flag_competitive.json",
+      "sha256": "6bff903508744d6b4ff73a1387ed458c3c85d534b3c61684f913c48fd15b8cdb",
+      "size": 3326
+    },
+    {
+      "path": "first_pass_report/model_flag_ever_competitive.json",
+      "sha256": "c92b2b1407545825714af5839b866ed33d64203dd5131bddcc046f7c42b37e32",
+      "size": 1948
+    },
+    {
+      "path": "first_pass_report/model_tv_competitive.json",
+      "sha256": "06a3a942be923c14c93213cf265daa64a9129ea29863f42f8f4ce3cfd71747a2",
+      "size": 3354
+    },
+    {
+      "path": "ready_results/activity_phase_robustness.pdf",
+      "sha256": "b757c337154f0cf653695e5c019494d050c9d76c763a4534a8651728b2491cba",
+      "size": 20156
+    },
+    {
+      "path": "ready_results/activity_phase_robustness.png",
+      "sha256": "691117c0ce2fbe8ed07e7d4d3451849af64797f61310251bf5cb3f47127cf8ee",
+      "size": 177295
+    },
+    {
+      "path": "ready_results/all_chooser_activity_phase_point_estimates.csv",
+      "sha256": "e89dc51e1193f4cc7a1c43c293ca5fe0e6cd860947a91ad95083fee62e1fd609",
+      "size": 2975
+    },
+    {
+      "path": "ready_results/flag_coverage.csv",
+      "sha256": "bafdcc793792a8428ec7748c3f8856f5a4ecbb8f898ba08317c601e2b4189a81",
+      "size": 232
+    },
+    {
+      "path": "ready_results/full_window_activity_phase_gradients.csv",
+      "sha256": "82844e925c474bdb977867ffe494a06220867758eed9bcf39c7e66b7cbdb982e",
+      "size": 6685
+    },
+    {
+      "path": "ready_results/selection_and_tv_models.csv",
+      "sha256": "7d06aea5678fa8304fd09c361e7281dd83f30408b2e5de173c0da974e03a33a3",
+      "size": 896
+    },
+    {
+      "path": "ready_results/selection_and_tv_table.tex",
+      "sha256": "2f23d7c1dcd20e19097cad62cfd39f4419b4187e7d7fc7fbf2d081af852e9a4d",
+      "size": 1089
+    },
+    {
+      "path": "ready_results/stable_years_activity_phase_gradients.csv",
+      "sha256": "aa9a59a03bb187632fd7a6d7bd91d9e10a39b60a1148f97ae6dcdf7e9dc6416d",
+      "size": 6641
+    },
+    {
+      "path": "ready_results/year1_timing_year2_outcomes_activity_phase_gradients.csv",
+      "sha256": "cfc72eb619081c9e5b06b8862c811cd01e1831d6ad22339b842bc0a5af5c8239",
+      "size": 7169
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+#!/bin/bash
+set -euo pipefail
+MECH_PACKAGE="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+MECH_PROJECT="${MECHANISM_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+MECH_DESKTOP="${MECHANISM_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+if [[ ! -d "$MECH_PROJECT" ]]; then
+  echo "XT_Pro project directory not found: $MECH_PROJECT" >&2
+  exit 1
+fi
+mkdir -p "$MECH_DESKTOP"
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMBA_NUM_THREADS=1
+MECH_PY=""
+shopt -s nullglob
+MECH_CANDIDATES=("${MECHANISM_PYTHON:-}" "$MECH_PROJECT/venv/bin/python" "$MECH_PACKAGE/.venv/bin/python" "$MECH_DESKTOP"/*/.venv/bin/python)
+for MECH_CANDIDATE in "${MECH_CANDIDATES[@]}"; do
+  if [[ -x "$MECH_CANDIDATE" ]] && "$MECH_CANDIDATE" -c 'import sys,numpy,pandas,scipy,numba,duckdb,pyarrow,matplotlib; assert sys.version_info >= (3,10); assert tuple(map(int,duckdb.__version__.split(".")[:2])) == (1,5)' >/dev/null 2>&1; then
+    MECH_PY="$MECH_CANDIDATE"
+    break
+  fi
+done
+if [[ -z "$MECH_PY" ]]; then
+  echo "No compatible existing environment found. Creating an isolated environment inside this package."
+  python3 -m venv "$MECH_PACKAGE/.venv"
+  "$MECH_PACKAGE/.venv/bin/python" -m pip install -r "$MECH_PACKAGE/requirements.txt"
+  MECH_PY="$MECH_PACKAGE/.venv/bin/python"
+fi
+"$MECH_PY" - "$MECH_PACKAGE" <<'PY'
+import hashlib,sys,pathlib
+p=pathlib.Path(sys.argv[1])
+for line in (p/'PACKAGE_MANIFEST.sha256').read_text().splitlines():
+    h,n=line.split('  ',1)
+    if hashlib.sha256((p/n).read_bytes()).hexdigest()!=h:
+        raise SystemExit('Package checksum mismatch: '+n)
+print('PACKAGE_SHA256_OK')
+PY
+"$MECH_PY" -m unittest discover -s "$MECH_PACKAGE/tests" -p 'test_*.py' -q
+MECH_LOG="$MECH_DESKTOP/MECHANISM_RUN_$(date -u +%Y%m%dT%H%M%SZ).log"
+echo "Python: $MECH_PY"
+echo "Log: $MECH_LOG"
+echo "Default: all stages; up to 10 preprocessing workers, at most 2 full-design simulation workers."
+if [[ -x /usr/bin/caffeinate ]]; then
+  /usr/bin/caffeinate -i "$MECH_PY" -u "$MECH_PACKAGE/code/run.py" --project-root "$MECH_PROJECT" --desktop "$MECH_DESKTOP" "$@" 2>&1 | tee "$MECH_LOG"
+else
+  "$MECH_PY" -u "$MECH_PACKAGE/code/run.py" --project-root "$MECH_PROJECT" --desktop "$MECH_DESKTOP" "$@" 2>&1 | tee "$MECH_LOG"
+fi

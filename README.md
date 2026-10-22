@@ -3,11 +3,23 @@
 Replication code, aggregate results and documentation for **The Structure of
 Intrinsic Prosociality: Field Evidence from Online Chess**.
 
-## Current main sample
+## October 22 source update
+
+The [October source index](docs/research_updates_20261022/README.md) now covers
+107 recovered packages, including author exclusion, the Uniform90 receipt-IV
+resume and Model5 supplement, all-time-five and placebo construction, R7–R13,
+countdown estimation, Patron migration, robustness analyses and figure code.
+
+This is a **code-only publication**. It preserves original algorithms and hashes,
+uses privacy templates where necessary, and documents the required local assets.
+It does not certify the latest full-data runs or replace old numerical results.
+Start with the index for current code, preparation instructions and limitations.
+
+## September 11 sample and results (historical baseline)
 
 **41,534,331 pool/observed-nonadjacent opportunities**, November 1, 2023 through
-October 31, 2025 UTC. The sample contains **570,091 kind draws**; the competitive
-subset contains **15,207,423 opportunities and 419,463 grants**. The previous
+October 31, 2025 UTC. This historical sample contains **570,091 kind draws**;
+the competitive subset contains **15,207,423 opportunities and 419,463 grants**. The previous
 47,587,020-opportunity sample is historical comparison only.
 
 Selection: `source = 'pool' AND previous_classification_status =
@@ -23,7 +35,7 @@ The governing [sample report](results/pool_main_reanalysis_v100/sample/MAIN_SAMP
 and [sample decision](manifests/pool_main_reanalysis_v100/SAMPLE_DECISION.json) provide
 the exact authority.
 
-## Reanalysis status
+## September 11 reanalysis status (historical)
 
 The repository now includes the new-sample core results, crossing/equality
 diagnostics, rebuilt dynamics, C7R covariance-based contrasts, C6/C10/C12, fresh
@@ -31,18 +43,25 @@ C9 randomization and ply checks, the chooser IV and selection addendum, and the
 completed Patron analysis sequence. The C7X parent support gate fails, so there is
 no adjusted main-sample targeted-memory estimate.
 
-**Still open:** C13 has prepared code but no returned main-sample estimate; exact
-full Campaign family-D reconciliation lacks new C1/C2/C5 inputs. Conservative
-five-slot C6/C9 decisions are available. The integrated manuscript, its final
-figures/tables, and compilation are still being updated. Old estimates must not
-fill missing main-sample cells. Existing old-sample results remain preserved as
-historical authorities.
+The later C13 report has now been recovered (16 estimated attempts, three
+retained model failures); the October source index records this correction.
+Exact full Campaign family-D reconciliation remains incomplete in that report
+because C1/C2/C5 inputs are missing. Conservative five-slot C6/C9 decisions are
+available. These September result trees retain their original sample identities;
+they are not automatically author-excluded or updated to the later IV design.
+The October publication does not certify an integrated manuscript or final
+figure/table reproduction. Old estimates must not fill missing current cells.
 
 The Patron analyses use a fixed current-profile snapshot and estimate conditional
 associations; they do not identify Patron adoption effects. Failed or unsupported
 models remain documented in their own report ledgers.
 
 ## Repository structure
+
+- `code/research_updates_20261022/`: October source snapshots and privacy templates.
+- `docs/research_updates_20261022/`: current source index and release boundaries.
+- `manifests/research_updates_20261022/`: archive/source hashes and omitted assets.
+- `operations/research_updates_20261022/`: source verifier and original-package preparation.
 
 - `code/`: original numbered replication stages and versioned extensions;
   `code/pool_main_reanalysis_v100/` adds the 16 pool-main/IV source packages.
@@ -72,11 +91,12 @@ raw-data reconstruction. Source acquisition starts with the existing numbered
 replication stages. The paper-facing board evaluation is Stockfish 18 at 100,000
 nodes. Other exploratory extensions retain their own status and prerequisites.
 
-From the repository root, verify the new release without running analyses:
+Verify the current source publication from the repository root:
 
 ```bash
-python3 operations/pool_main_reanalysis_v100/verify_public_release.py
+python3 operations/research_updates_20261022/verify_release.py
 ```
 
-Expected time: **5–30 seconds**. See the release README for the distinction
-between original complete-report manifests and this public subset's manifest.
+Expected time: **10–60 seconds**. The historical September verifier binds the
+September README and should be run in a checkout of commit `bf3b2bf`, not against
+the updated root README. Its result and provenance files remain unchanged.

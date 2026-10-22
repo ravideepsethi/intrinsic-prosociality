@@ -1,0 +1,138 @@
+Receipt IV expanded estimation, version 1.1.0
+Revised October 3 UTC / October 2 Toronto, 2026
+
+The full calendar-complete cohort is now the primary receipt-IV sample. The
+November 2025 color reform no longer imposes the primary censor. The pre-color
+estimate and January 30 source-day guard remain sensitivity fits. This replaces
+the primary-design recommendation in version 1.0.0.
+
+Sample                                      Exposures
+Primary: follow-up ends before May 1, 2026    3,917,764
+Pre-color guard: before Nov 18, 07:15 UTC     3,080,218
+Mechanics guard: before Jan 30, 00:00 UTC     3,449,729
+Common >=10 prior opponent decisions         3,253,387
+
+Each endpoint is exclusive: anchor_ms + 90 days < endpoint. The primary retains
+2,233,890 reached cases and 1,683,874 complete-window nonreachers. Nonreachers
+keep Y=0. Both __PRIVATE_VALUE_1__ and __PRIVATE_VALUE_2__ remain included.
+
+The primary is a pooled estimate across policy regimes. May 1 marks calendar
+coverage, not policy stability. January 30 is a source-informed conservative
+guard, not an established deployment date. Changes in receipt, opportunity
+composition or response can affect interpretation and instrument weighting.
+
+Run
+
+Save Receipt_IV_Expanded_Estimation_v1_1_0.zip in ~/Desktop/Lichess_Desktop.
+Extract it there, then run in Terminal:
+
+  bash "$HOME/Desktop/Lichess_Desktop/Receipt_IV_Expanded_Estimation_v1_1_0/RUN_RECEIPT_IV_EXPANDED_ESTIMATION.command"
+
+Use this package in place of the pre-color v1.0.0 launcher. It reads the saved
+enriched private Parquets and historical cohort on XT_Pro. It makes no API
+requests and does not redo source recovery, rating replay, cohort assembly,
+scores, state attachment or Stockfish.
+
+The launcher uses /Volumes/XT_Pro/lichess_kindness/venv/bin/python, prevents Mac
+sleep, and allows up to ten DuckDB threads. Fits run sequentially to limit
+memory. There are no scheduled pauses or prompts. Heartbeats continue every
+30 seconds. Private-sample runtime has not been benchmarked.
+
+Requirements: the existing NumPy, PyArrow and DuckDB environment, mounted XT_Pro,
+and at least 8 GiB free working disk space. Nothing is installed or upgraded.
+The 8 GiB memory flag is a DuckDB/planning budget, not an OS-enforced NumPy limit.
+
+What changed
+
+The primary adds exposure month x assigned index chooser color fixed effects
+to the original assignment-cell, exposure-date and hour-of-week fixed effects
+and predetermined controls. calendar90_legacy_controls uses the identical full
+rows with the original controls, isolating that addition.
+
+Realized later-choice color, timing, policy period and reach are neither
+controls nor selection rules. Their metadata are audited and summarized.
+All ten later choices in the seven-minute implementation bracket remain.
+No later-choice color is invented for nonreachers.
+
+Color-window diagnostics use only the index anchor and fixed 90-day horizon:
+before = the horizon ends before Nov 18, 07:15 UTC; after = the anchor is on/after
+Nov 18, 07:22 UTC; spanning = every remaining primary window. Counts are
+3,080,218 / 379,110 / 458,436, respectively. Contrasts are calendar diagnostics,
+not causal reform effects or independent tests. Month x index-color adjustment
+does not remove all later-choice policy effects or certify exclusion.
+
+Fifteen specifications are frozen in DESIGN_FREEZE.json:
+
+  1. Exact historical reproduction using original controls.
+  2. Full calendar primary with month x assigned index-color adjustment.
+  3. Identical full rows with original controls.
+  4. Common >=10-history subset.
+  5-6. Lag-7 and lag-30 instruments on identical lag-common rows.
+  7. Identical primary rows without recipient-history controls.
+  8-9. Repeat-recipient pooled and recipient-FE diagnostic on common rows.
+  10. Pre-color guard.
+  11. January 30 mechanics guard.
+  12-13. Color-spanning and post-color calendar windows.
+  14-15. Old-calendar/new-history and later-calendar extension.
+
+Five and ten are eligibility floors for the same saved all-history score.
+Both common-sample labels reference one fit; no last-five/last-ten instrument
+is invented. Lag comparisons change the instrument and corresponding opponent
+history controls on common rows; recipient-history windows stay fixed.
+Sensitivity subsets follow the saved spacing, without re-spacing.
+
+Verification and interpretation
+
+The program authenticates the state-diagnostics receipt chain and historical
+cohort SHA. Before any new coefficient is fitted, it must reproduce the
+historical IV coefficient, SE, RF and first stage. Rounded benchmarks and
+production counts are fixed; there is no CLI bypass.
+
+Historical/new overlap uses game and recipient keys, not row numbers. Common
+outcomes and predetermined fields must agree. The full N is 46.06% larger than
+historical N=2,682,330: a net size comparison, not an append-only claim or a
+precision gain. The bridge reports common/new-only/old-only membership and
+changes in historical scores explicitly.
+
+Original covariance and null-restricted AR routines are byte-identical vendored
+source. Inference uses shared-account OR exposure-date CR0 dependence, treating
+historical scores as fixed. Read first stage, RF, 2SLS, AR sets, balance and
+exclusion sensitivity together. Date counts and unsupported fits remain
+visible; covariance matrices are not repaired.
+
+Direct-effect sensitivity projects AR acceptance over fixed gamma ranges
+analytically, retaining first-stage uncertainty. Tipping values are recomputed.
+Gamma and instrument effects use reference SD 0.059411690344000595. JSON retains
+unbounded/disconnected sets. The ordinary-game placebo is not subtracted.
+MDE80 is a descriptive normal approximation from fitted SEs, not prospective
+power or a behavioral GO decision.
+
+Expanded prospective-entry and ordinary-game placebo estimates and mechanics
+deployment timing remain unresolved. Current-event selection and exclusion
+remain assumptions. Rating-payoff calibration and fractional-display visibility
+belong to the separate color-incentive study; they are not prerequisites for
+fitting this historical-opponent-leniency receipt IV.
+
+Outputs and restart
+
+- Log, aggregate result ZIP and SHA sidecar: ~/Desktop/Lichess_Desktop.
+- Private root: /Volumes/XT_Pro/lichess_kindness/derived/replication_36m/receipt_iv_expanded_estimation_v110_PRIVATE
+- Public aggregates: /Volumes/XT_Pro/lichess_kindness/output/receipt_iv_expanded_estimation_v110
+- Primary: ESTIMATES.json, calendar90_primary, estimator 2SLS.
+- Compare calendar90_legacy_controls, guard_precolor90 and guard_mechanics90.
+- CALENDAR_REGIME_COUNTS reports fixed-window counts by assigned color.
+- LATER_CHOICE_POLICY_DESCRIPTIVE describes realized choices only.
+
+Return the result ZIP, .sha256 sidecar and log for review. Raw game/account rows
+stay private; a positive allowlist controls exports. After interruption, run the
+same command. It verifies inputs and reuses completed stages, retaining partial
+directories. A lock prevents concurrent copies of this version. Earlier v1.0.0
+artifacts remain untouched; do not run both versions concurrently.
+
+All 15 synthetic tests passed, including the full fifteen-specification path,
+cached restart, complete nonreachers, policy boundaries, original-estimator
+identity, independent dense-regression verification of the added fixed effects,
+dependence covariance, and bounded-gamma AR inference. Thin synthetic subsamples
+are explicitly marked unsupported. These tests do not replace the production
+reproduction gate or execution on the Mac. No new production coefficient is
+claimed here.

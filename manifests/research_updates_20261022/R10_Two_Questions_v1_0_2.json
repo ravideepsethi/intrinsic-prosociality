@@ -1,0 +1,101 @@
+{
+  "package": "R10_Two_Questions_v1_0_2",
+  "archive_name": "R10_Two_Questions_v1_0_2.zip",
+  "archive_sha256": "c8e7c21d6613350c7430090dee39594f359657b7fce5db65250d0daf8ec81aa6",
+  "archive_size": 40318,
+  "archive_root": "R10_Two_Questions_v1_0_2",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "FROZEN_R10_SPEC.md",
+      "published_path": "FROZEN_R10_SPEC.md",
+      "sha256": "50f71a232639909f77106df804a6c54c8368a1feea7664539ada857f5c8e8c48",
+      "published_sha256": "50f71a232639909f77106df804a6c54c8368a1feea7664539ada857f5c8e8c48",
+      "size": 4080
+    },
+    {
+      "path": "README.md",
+      "published_path": "README.md",
+      "sha256": "4dd1946520f52d1f81d65c3626045a284a86a6e611594a2036aa12c2eac64f5b",
+      "published_sha256": "4dd1946520f52d1f81d65c3626045a284a86a6e611594a2036aa12c2eac64f5b",
+      "size": 4938
+    },
+    {
+      "path": "RUN_ALL_GAME_MEDIAN_PROBE.command",
+      "published_path": "RUN_ALL_GAME_MEDIAN_PROBE.command.in",
+      "sha256": "c3fb88358ea742f5f72013642c7e90034feaa207728c3944b5d3f04371a441a3",
+      "published_sha256": "c3fb88358ea742f5f72013642c7e90034feaa207728c3944b5d3f04371a441a3",
+      "size": 211
+    },
+    {
+      "path": "RUN_R10.command",
+      "published_path": "RUN_R10.command.in",
+      "sha256": "9fd9924f338f32b0cd1285358f4286e3070da12586d75e70e2f11a7f9b8457d2",
+      "published_sha256": "9fd9924f338f32b0cd1285358f4286e3070da12586d75e70e2f11a7f9b8457d2",
+      "size": 1751
+    },
+    {
+      "path": "src/all_game_medians.py",
+      "published_path": "src/all_game_medians.py",
+      "sha256": "026ab0d385041e92a7a70fc0b40879c9141f2dfd1318c5b318a7ea0dc44533e2",
+      "published_sha256": "026ab0d385041e92a7a70fc0b40879c9141f2dfd1318c5b318a7ea0dc44533e2",
+      "size": 7427
+    },
+    {
+      "path": "src/r10.py",
+      "published_path": "src/r10.py",
+      "sha256": "10e6e78b8f5113be1cd9529f99fa188e9b7e714bfc93b5a374e9765d4816fdc4",
+      "published_sha256": "10e6e78b8f5113be1cd9529f99fa188e9b7e714bfc93b5a374e9765d4816fdc4",
+      "size": 49257
+    },
+    {
+      "path": "src/r10_math.py",
+      "published_path": "src/r10_math.py",
+      "sha256": "5f48abb179140f7b78f293385bdb769194c139255eaf759dbd2416d8a4154c79",
+      "published_sha256": "5f48abb179140f7b78f293385bdb769194c139255eaf759dbd2416d8a4154c79",
+      "size": 11202
+    },
+    {
+      "path": "tests/test_account_moments.py",
+      "published_path": "tests/test_account_moments.py",
+      "sha256": "6ed26bcc3a7c3298fd03eaffc4b46aea27b0ff08faa39765a7870d27ccc8fb0f",
+      "published_sha256": "6ed26bcc3a7c3298fd03eaffc4b46aea27b0ff08faa39765a7870d27ccc8fb0f",
+      "size": 2752
+    },
+    {
+      "path": "tests/test_duckdb_preflight.py",
+      "published_path": "tests/test_duckdb_preflight.py",
+      "sha256": "86d285fa8fccd8981eb0b6412ef0088f9980339fd007796954de971f14830e65",
+      "published_sha256": "86d285fa8fccd8981eb0b6412ef0088f9980339fd007796954de971f14830e65",
+      "size": 4518
+    },
+    {
+      "path": "tests/test_reporting.py",
+      "published_path": "tests/test_reporting.py",
+      "sha256": "44999c06b062929e7c2048d4f2945a4766056fe1f03d7e19c39aeb60c08a6396",
+      "published_sha256": "44999c06b062929e7c2048d4f2945a4766056fe1f03d7e19c39aeb60c08a6396",
+      "size": 3227
+    },
+    {
+      "path": "tests/test_synthetic.py",
+      "published_path": "tests/test_synthetic.py",
+      "sha256": "803c632e64e99b7459349de57f5d6876cfb033b506a1e42d83f993244909c47b",
+      "published_sha256": "803c632e64e99b7459349de57f5d6876cfb033b506a1e42d83f993244909c47b",
+      "size": 4956
+    },
+    {
+      "path": "tests/test_unidentified_classical.py",
+      "published_path": "tests/test_unidentified_classical.py",
+      "sha256": "5d3289ca74137ae7af80c9b9614f288488d8879662280402605b40571ed4349f",
+      "published_sha256": "5d3289ca74137ae7af80c9b9614f288488d8879662280402605b40571ed4349f",
+      "size": 4377
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "PACKAGE_FILES_SHA256.txt",
+      "sha256": "568d43c8ffa69c095f3d74a0203f31aa02dc07bb2dd169e9eb3dc87989519c5c",
+      "size": 1068
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+"""Small-data tests of exclusion, covariance, cohort and cache boundaries."""
+import sys,unittest,tempfile,ast,json,re
+from pathlib import Path
+from types import SimpleNamespace
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'code'))
+from remaining_common import *
+from c6_remaining import align_cache
+from state_persistence import hc1,run_stage as state_run
+from temporal_remaining import set_cardinality
+from compare import compare_frames
+from remaining import coverage,eta,NEW
+from remaining_audits import CheckedStages
+
+class RemainingTests(unittest.TestCase):
+    def setUp(self):self.tmp=tempfile.TemporaryDirectory();self.root=Path(self.tmp.name)
+    def tearDown(self):self.tmp.cleanup()
+    def test_removed_games_both_roles_and_frozen_subset(self):
+        d=pd.DataFrame({'game_id':[f'g{i}' for i in range(44)],'chooser_username_norm':['__PRIVATE_VALUE_1__']*21+['ok']*23,'disconnected_username_norm':['other']*21+[' __PRIVATE_VALUE_2__ ']*21+['__PRIVATE_VALUE_3__0','ok']})
+        p=self.root/'main.parquet';d.to_parquet(p,index=False)
+        c=db(self.root/'spill',1,1)
+        try:
+            self.assertEqual(removed_games({'included':{'month_records':[{'path':str(p)}]}},c),42)
+            out=self.root/'retained.parquet';r=game_filter(c,p,out,'excluded')
+            self.assertEqual(r['removed'],42);self.assertEqual(pd.read_parquet(out).game_id.tolist(),['g42','g43'])
+            with self.assertRaises(RuntimeError):removed_games({'included':{'month_records':[{'path':str(out)}]}},c)
+        finally:c.close()
+    def test_c6_sparse_identity_alignment(self):
+        p=self.root/'events.parquet';pd.DataFrame({'cohort_row_id':[9,2],'events':[3,7]}).to_parquet(p,index=False)
+        got=align_cache(p,np.array([0,2,5,9]),['events'])
+        np.testing.assert_array_equal(got['events'],[0,7,0,3]);np.testing.assert_array_equal(got['present'],[False,True,False,True])
+        with self.assertRaises(RuntimeError):align_cache(p,np.array([0,2,5]),['events'])
+    def test_hc1_retains_cross_outcome_covariance(self):
+        rng=np.random.default_rng(4);X=np.column_stack([np.ones(600),rng.normal(size=(600,3))]);e=rng.normal(size=600)
+        Y=np.column_stack([X@np.array([1,.2,-.4,.5])+e,X@np.array([2,-.1,.3,.4])+.7*e+rng.normal(size=600)*.4])
+        b,V=hc1(X,Y);bread=np.linalg.inv(X.T@X);res=Y-X@b
+        expected=bread@(X.T@((res[:,0]*res[:,1])[:,None]*X))@bread*600/596
+        np.testing.assert_allclose(V[:4,4:],expected,rtol=1e-12,atol=1e-14)
+        self.assertGreater(np.linalg.norm(V[:4,4:]),0)
+    def test_state_cohorts_and_transitions(self):
+        rng=np.random.default_rng(74);rows=[]
+        for account in range(100):
+            for year,month in [(1,'2023-11'),(2,'2024-11')]:
+                for state in ['C','L']:
+                    for j in range(12):
+                        rows.append(dict(chooser_username_norm=f'u{account}',month=month,fair_competitive=state=='C',clearly_worse=state=='L',kind_draw=bool(rng.random()<(.12 if state=='C' else .04)),ply_count=15 if j>=3 else 6,api_speed=rng.choice(['ultrabullet','bullet','blitz','rapid','classical'])))
+        p=self.root/'main.parquet';pd.DataFrame(rows).to_parquet(p,index=False)
+        out=self.root/'out';result=state_run(SimpleNamespace(memory_gb=4,workers=2,variant='excluded'),{'month_records':[{'path':str(p)}]},out)
+        self.assertEqual(result['accounts'],100)
+        t=pd.read_csv(out/'report/transitions.csv')
+        self.assertTrue((t.groupby('sample').accounts.sum()==100).all())
+        np.testing.assert_allclose(t.groupby(['sample','first_group']).row_pct.sum().to_numpy(),100)
+    def test_temporal_rebinding_preserves_code_and_rng(self):
+        source=ROOT/'vendor/c9ply/source/b2_reference.py';target=self.root/'b2.py'
+        set_cardinality(source,target,dict(EXPECTED_ROWS=32,EXPECTED_CHOOSERS=4,EXPECTED_KIND_DRAWS=8))
+        m=module('fixture_b2_bound',target)
+        self.assertEqual(m.RANDOMIZATIONS,4999);self.assertEqual(m.B2_SEED,2026082201);self.assertEqual(m.EXPECTED_ROWS,32)
+        # Frozen chooser indices may have holes after eligibility is rebuilt.
+        p=self.root/'sample.parquet';pr=self.root/'prop.parquet'
+        data=dict(b1_row_id=np.arange(32),chooser_index=np.repeat([0,3,5,9],8),sequence_index=np.tile(np.arange(8),4),utc_ms=np.arange(32)*3600000+1700000000000,kind_draw=np.tile([False,True,False,False,True,False,False,False],4),current_draw_payoff=np.tile([-2,-1,0,1,2,3,4,5],4))
+        pd.DataFrame(data).to_parquet(p,index=False);pd.DataFrame({'b1_row_id':np.arange(32),'static_propensity':np.full(32,.25)}).to_parquet(pr,index=False)
+        loaded,prob=m.load_inputs(p,pr);self.assertEqual(len(loaded['chooser_index']),32)
+        totals=m.observed_totals(loaded);self.assertIsInstance(totals,dict)
+    def test_estimate_dimensions_are_keys(self):
+        a=pd.DataFrame({'scope':['all','fair','all','fair'],'meeting':['first','first','repeat','repeat'],'rows':[10,5,4,2]})
+        _,r=compare_frames(a,a,'first_repeat','pair_rates.csv');self.assertEqual(r['status'],'COMPARED')
+        a=pd.DataFrame({'source':['arena','pool'],'rate_pct':[.8,1.2]});_,r=compare_frames(a,a,'arena','sample_rates.csv');self.assertEqual(r['status'],'COMPARED')
+    def test_manuscript_coverage_and_claim_gate(self):
+        mapping=read(ROOT/'MANUSCRIPT_MAP.json')
+        for path in (ROOT/'manuscript').glob('*.tex'):
+            self.assertFalse(set(re.findall(r'\\label\{((?:tab|fig):[^}]+)\}',path.read_text()))-set(mapping))
+        stages={v+'/'+s:dict(status='COMPLETE') for v in ('included','excluded') for s in NEW+['core','r11','merit','rating_gap','nonparametric','controlled_reference','patron','receipt','activity','session','mechanism']}
+        audits={k:dict(status='EXISTING_AUTHOR_EXCLUDED_RESULT_VERIFIED') for k in ['framework','reputation','stakes','framework_recipient','iv_remaining','entry']}
+        coverage(self.root,stages,audits);self.assertTrue(read(self.root/'report/CLAIM_STATUS.json')['all_analyses_excluded'])
+        stages['included/state_persistence']['status']='FAILED';coverage(self.root,stages,audits)
+        self.assertFalse(read(self.root/'report/CLAIM_STATUS.json')['all_analyses_excluded']);self.assertFalse(read(self.root/'report/CLAIM_STATUS.json')['no_substantive_difference_established'])
+    def test_next_checkpoint_eta_uses_stage_timing(self):
+        jobs=[(v,s) for s in NEW for v in ('included','excluded')]
+        eta(self.root,jobs,{})
+        r=read(self.root/'report/RUNTIME_ESTIMATE.json');self.assertEqual(r['next_checkpoint_percent'],25)
+        self.assertLess(r['next_checkpoint_minutes'][1],r['remaining_minutes'][1])
+        eta(self.root,[],{},completed=16,total=16)
+        r=read(self.root/'report/RUNTIME_ESTIMATE.json');self.assertEqual(r['next_checkpoint_percent'],100);self.assertEqual(r['remaining_minutes'],[5,15])
+    def test_model_receipt_binds_external_dependencies(self):
+        dep=self.root/'input.parquet';dep.write_bytes(b'original');folder=self.root/'model';folder.mkdir()
+        write(folder/'result.json',{'coefficient':1});write(folder/'dependencies_PRIVATE.json',[{'path':str(dep),'sha256':sha(dep)}])
+        files=[{'path':p.name,'sha256':sha(p),'bytes':p.stat().st_size} for p in folder.iterdir()]
+        write(folder/'_DONE.json',{'config_sha256':'fixture','files':files})
+        c=CheckedStages();c.stage(folder,'fixture')
+        dep.write_bytes(b'changed')
+        with self.assertRaises(RuntimeError):c.stage(folder,'fixture')
+
+if __name__=='__main__':unittest.main(verbosity=2)

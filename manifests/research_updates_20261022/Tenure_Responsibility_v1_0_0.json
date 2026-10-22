@@ -1,0 +1,133 @@
+{
+  "package": "Tenure_Responsibility_v1_0_0",
+  "archive_name": "Tenure_Responsibility_v1_0_0.zip",
+  "archive_sha256": "6dc29df91fa56c0f086daddadcd63b7b96e84c2701b3dc42b0388d27619babf5",
+  "archive_size": 139787,
+  "archive_root": "Tenure_Responsibility_v1_0_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "METHODS.md",
+      "published_path": "METHODS.md",
+      "sha256": "6fde1a896a06b0d64b8b802f595693451eefe7fd71ca82b7cdf3e87238673f2a",
+      "published_sha256": "6fde1a896a06b0d64b8b802f595693451eefe7fd71ca82b7cdf3e87238673f2a",
+      "size": 10268
+    },
+    {
+      "path": "README.md",
+      "published_path": "README.md",
+      "sha256": "df9030367eef91d68a63104799c780d1ca8e66e857c4c2f9e2c851061928eb0c",
+      "published_sha256": "df9030367eef91d68a63104799c780d1ca8e66e857c4c2f9e2c851061928eb0c",
+      "size": 4870
+    },
+    {
+      "path": "RUN_ALL.command",
+      "published_path": "RUN_ALL.command.in",
+      "sha256": "c08368a945790939d46421c829d87fdff516d2071b30742a861d9383332ce58b",
+      "published_sha256": "c08368a945790939d46421c829d87fdff516d2071b30742a861d9383332ce58b",
+      "size": 583
+    },
+    {
+      "path": "common.py",
+      "published_path": "common.py",
+      "sha256": "df453760125f5d63454acdb50b241ee8425597fef4cb2929154b3e4368f10b6a",
+      "published_sha256": "df453760125f5d63454acdb50b241ee8425597fef4cb2929154b3e4368f10b6a",
+      "size": 5869
+    },
+    {
+      "path": "estimate.py",
+      "published_path": "estimate.py",
+      "sha256": "a06817bf769ae6f217cb8962cce41581cbc32ddefa4264cca9cf17cf50e7028d",
+      "published_sha256": "a06817bf769ae6f217cb8962cce41581cbc32ddefa4264cca9cf17cf50e7028d",
+      "size": 4171
+    },
+    {
+      "path": "network.py",
+      "published_path": "network.py",
+      "sha256": "995456751b113055d4e52fc61e1ba7a848d50370062e367fb32472a5253476f8",
+      "published_sha256": "995456751b113055d4e52fc61e1ba7a848d50370062e367fb32472a5253476f8",
+      "size": 5081
+    },
+    {
+      "path": "prepare.py",
+      "published_path": "prepare.py",
+      "sha256": "41a4001e631686a4615d10cd90be9f166998a5c72d9188b4c1071fc1ac08a73c",
+      "published_sha256": "41a4001e631686a4615d10cd90be9f166998a5c72d9188b4c1071fc1ac08a73c",
+      "size": 10648
+    },
+    {
+      "path": "requirements.txt",
+      "published_path": "requirements.txt",
+      "sha256": "7f55ec151afc5147a9cb35cb3fe6881b21dccc23d37423ee0513f244599c658c",
+      "published_sha256": "7f55ec151afc5147a9cb35cb3fe6881b21dccc23d37423ee0513f244599c658c",
+      "size": 83
+    },
+    {
+      "path": "run.py",
+      "published_path": "run.py",
+      "sha256": "a3dc41affd5dfb5c2160845bac4141053c81fd2d7bc2a72c65e14810e4386210",
+      "published_sha256": "a3dc41affd5dfb5c2160845bac4141053c81fd2d7bc2a72c65e14810e4386210",
+      "size": 4642
+    },
+    {
+      "path": "self_test.py",
+      "published_path": "self_test.py",
+      "sha256": "45a411178847eefefa41271caf5256625bbfb8654795cdf2f728f7c18a638255",
+      "published_sha256": "45a411178847eefefa41271caf5256625bbfb8654795cdf2f728f7c18a638255",
+      "size": 8969
+    },
+    {
+      "path": "source/pool_wave1_common.py",
+      "published_path": "source/pool_wave1_common.py",
+      "sha256": "f9c714c549c6cd68a7d2dbdb2c17d5abacfdfc12dc6526752f03ab2505bbff43",
+      "published_sha256": "f9c714c549c6cd68a7d2dbdb2c17d5abacfdfc12dc6526752f03ab2505bbff43",
+      "size": 21988
+    },
+    {
+      "path": "tenure.py",
+      "published_path": "tenure.py",
+      "sha256": "a7b1768abd60a5051d7081a2f3a37ed54490c09c5f79a0bb7c99f0d65c26b654",
+      "published_sha256": "a7b1768abd60a5051d7081a2f3a37ed54490c09c5f79a0bb7c99f0d65c26b654",
+      "size": 12617
+    },
+    {
+      "path": "trajectory.py",
+      "published_path": "trajectory.py",
+      "sha256": "a8838bb129f6ab8358820b4e3188028cecf7fd0c1899efb356e2239f8dd471b5",
+      "published_sha256": "a8838bb129f6ab8358820b4e3188028cecf7fd0c1899efb356e2239f8dd471b5",
+      "size": 16585
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "CODE_PROVENANCE.json",
+      "sha256": "fc9d30ee24d6edc528a190f100a49a8400170ac4a8a36e70c1aa013d8c25eccf",
+      "size": 670
+    },
+    {
+      "path": "PACKAGE_HASHES.json",
+      "sha256": "e7e5c474e001e22425315612966d5cf6dd3c3b8fc608800f06d8f527a6ce882b",
+      "size": 1644
+    },
+    {
+      "path": "VALIDATION.txt",
+      "sha256": "a832f49e0111df2d573240dd526ce9d640654e04566bc56b4f1735dc912d9f43",
+      "size": 865
+    },
+    {
+      "path": "authority/SAMPLE_AUTHORITY.json",
+      "sha256": "81c34113e7a888629a834a17235a71dcf369a2d590755fd9412ee42151d9b2f3",
+      "size": 1234
+    },
+    {
+      "path": "evidence/Pool_Main_Sample_24M_Report.zip",
+      "sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+      "size": 96936
+    },
+    {
+      "path": "evidence/Pool_Main_Sample_24M_Report.zip.sha256",
+      "sha256": "d2e6c0953ff2de7cc7235b98d568c884e4fa8067b8aa81d22efe1ac3484d6f59",
+      "size": 128
+    }
+  ]
+}

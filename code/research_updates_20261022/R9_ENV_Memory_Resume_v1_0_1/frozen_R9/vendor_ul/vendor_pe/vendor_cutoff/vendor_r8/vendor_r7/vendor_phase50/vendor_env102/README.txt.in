@@ -1,0 +1,153 @@
+Run 2 — Disconnection environment diagnostics v1.0.2
+
+Place the ZIP in ~/Desktop/Lichess_Desktop, extract it, and run:
+  bash RUN_ENVIRONMENT_DIAGNOSTICS.command --workers 10
+
+Defaults:
+  Project: /Volumes/XT_Pro/lichess_kindness
+  Python:  /Volumes/XT_Pro/lichess_kindness/venv/bin/python
+  Reports/logs: ~/Desktop/Lichess_Desktop
+  Python 3.10+, NumPy, PyArrow and DuckDB. SciPy is not required.
+
+Expected runtime (unbenchmarked laptop estimates):
+  Synthetic launcher tests: 20–120 seconds.
+  Status-coverage report: 1–3 minutes.
+  First role/bin report: approximately 5–20 minutes.
+  Full first run: roughly 1–3 hours, including the local rate-count scan.
+  Reused reruns are faster. SSD contention can add time.
+
+The default continues through the entire analysis without asking questions.
+--quick-only saves the first report and stops before the history-count scan.
+Rerun without --quick-only to continue from exactly the same checkpoints.
+--workers is a ceiling: RAM caps scan workers, and large FE models are scheduled
+one at a time when required. Do not force more workers than memory permits.
+--memory-gb controls the total job budget, not RAM per worker.
+The downloader can keep running; both jobs share the SSD bandwidth.
+
+What this answers
+1. Which recorded timeouts correspond to the recipient disconnecting, the
+   opponent disconnecting, or an unclassified role?
+2. Is the entry association spread across the score distribution or concentrated
+   above the already frozen ordinary-game 95th-percentile cutoff? The report
+   separates row shares, score variation and exact slope contributions.
+3. How do entry, seven recipient balance measures, first stage, reduced form,
+   2SLS and the ordinary-game comparison change after opponent-history controls?
+4. Does the score also predict recorded outoftime endings? Status is never
+   invented for legacy rows without that field.
+
+Controls, in a fixed ladder on identical rows:
+  XC                    Previous rich + competitive-history controls
+  XC_volume             XC + log opponent games in the past window
+  XC_volume_own         XC_volume + opponent's observed disconnect rate
+  XC_volume_chooser     XC_volume + opponent's observed chooser rate
+  XC_both_rates         XC_volume + both rates
+Both instrument definitions are evaluated separately on those same rows.
+A separate full-support baseline shows what restricting rate support changed.
+The primary environment-entry comparison uses the current 25% sample; its
+first-10% and added-10–25% bands are reported separately, sharing accounts.
+
+Exact history definition
+The window covers game starts in the 90 days ending seven days before the focal
+month begins. Count an active resolution only when it also finished strictly
+before the cutoff. Use the authenticated canonical rated-game chronology with
+valid two-player IDs. Exclude games involving either author and subtract the
+current pair from numerator AND denominator. Do not alter the chronology itself.
+
+The numerator comes from the certified main opportunity panel, across states.
+These are observed qualifying active resolutions per rated game played. They
+are NOT rates of all physical connection drops. The code checks that every
+relevant numerator event is found in the canonical game universe with matching
+IDs and start time. Incomplete history windows and zero other-opponent game
+counts are explicitly unsupported, not zero rates. The full and common-support
+sample counts are in accounting.csv and rate_coverage.json.
+
+Receipt cohort and authors
+This uses the original frozen 2,682,330-row receipt cohort. It reuses the complete
+score/history/future-choice indexes, reproduces original score/history/outcome
+features, then removes __PRIVATE_VALUE_1__ and __PRIVATE_VALUE_2__ from focal games, behavioral histories,
+the cross-fit reference and later choices. Original spacing and factual activity
+stay fixed. This package does not extend the receipt exposure cohort. Its
+before/after IV fits therefore compare the same reconstructed clean cohort.
+
+Required completed local parents
+  Entry config: af3f7f1e1f6f72291a4b0a4dc709d5702629b1e87ce171376fef157c5cae4621
+  25% config: 79bd3599a9956aab2314a9216926dd7d585decd30f51720f5038d79648136461
+The exact reviewed summaries, producer hashes, files and schemas are checked.
+The original two focal metadata quarantines are preserved. No new exclusions
+for metadata errors or replacement sampling are performed.
+
+Performance
+- Project only required Parquet columns; prune chronology files and row groups
+  outside the complete rate windows, and retain only required accounts.
+- Count games and matched active resolutions in the same local scan. No
+  all-history chronology sorting, first-pair reconstruction or Stockfish.
+- Save immutable per-file count checkpoints, prepared model tables, and models.
+- Reuse existing phase-independent score and future-choice feature caches.
+- Spawn memory-capped scan workers; cap BLAS threads to avoid oversubscription.
+- Show measured stage durations and approximate scan-stage ETAs. A whole-job
+  ETA is not claimed before its heterogeneous stages have been benchmarked.
+- No API calls. Do not pause or modify the continuous downloader.
+
+Reading the results
+The report ZIP is rewritten after each completed fit and each major stage. Read
+READ_RESULTS.txt, estimates.csv, bins.csv, balance.csv, support.csv and
+accounting.csv. All shared report files are aggregates; private row tables stay
+on the research drive. Return the final RUN2_ENVIRONMENT_DIAGNOSTICS_REPORT_*.zip.
+
+A smaller entry/balance association with stable first stage and reduced form
+would support the observed-environment explanation. It cannot prove exclusion.
+Check effect sizes and intervals, not just whether a p-value crosses .05. A
+stable 2SLS ratio can conceal changes in both the first stage and reduced form.
+Included opponent controls are not independent balance tests. The seven
+recipient traits remain separate outcomes. Country is not estimated: this
+package has no authenticated historical profile source and does not call APIs.
+
+Inference keeps the original shared-account OR exposure-date CR0 covariance,
+fixed score units and AR intervals. Nonpositive covariance is flagged without
+repair. These are exploratory nominal intervals after prior results; they are
+not sequentially valid tests or an automatic abstract/title approval rule.
+
+Fix in v1.0.1
+A legacy all-null status field can be read as floating NaN after DuckDB converts
+the Parquet null type to nullable integer. Version 1.0.0 checked only for Python
+None and wrongly treated NaN as a recorded non-timeout status. Version 1.0.1
+recognizes both missing representations, retains the verified active_timeout
+labels and every entry row, and runs optional ending regressions only on cohorts
+with fully recorded endings. It also checks known statuses in mixed cohorts;
+genuine disagreements and missing expansion metadata still stop estimation.
+
+Before fitting models, status_coverage.json reports missingness and any conflicts
+for every cohort. The exact completed v1.0.0/v1.0.1 prepared Parquets are authenticated
+and adopted into the new run. Old files/receipts are untouched. Diagnostic models
+are refitted under the corrected validation; compatible upstream feature caches
+remain reusable. No source data, entry labels, author rules or specifications
+are altered by this repair.
+
+Fix in v1.0.2
+The v1.0.1 production log shows finite input becoming nonfinite during fixed-
+effect absorption, before the small continuous-control regression. The exact
+trigger on the private Mac data has not been reproduced here. A focused test
+does reproduce the old solver's error-handling defect: NaN group means can
+produce a false convergence decision and then reach the eigenvalue routine.
+
+The environment models now use a separate checked implementation of the same
+alternating fixed-effect projection: contiguous columns, sorted group sums,
+exact power-of-two scaling, finite checks, non-increasing sums of squares, and
+a final check of every group's residual mean. It retains the original tolerance
+and iteration limit. No ridge, row deletion or covariance repair is added.
+The authenticated vendored packages are unchanged. The same certified entry
+coefficients, standard errors, sample counts and row digests must reproduce.
+
+Numerics are checked against direct dummy-variable least squares and the older
+independent group accumulator, plus a large synthetic stress run. The optional
+tests/stress_numerics.py documents its runtime and memory estimate; it is not
+part of the normal quick launcher tests. evidence/numerical_stress_local.json
+records the actual local stress result, not a Mac production benchmark.
+
+Prepared Parquets are adopted byte-for-byte from the exact v1.0.1 or v1.0.0
+configuration. Because the numerical engine changed, all diagnostic models are
+refitted. Old successful model receipts remain untouched. Reports now include
+numerics.json and numerical_progress.json, and refresh after each committed fit.
+If one fit fails, already running fits finish, no further fits launch, and the
+aggregate report preserves completed estimates and the failure diagnostic.
+The remaining full analysis still needs to run against your private Mac data.

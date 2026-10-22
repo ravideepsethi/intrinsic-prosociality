@@ -1,0 +1,159 @@
+"""Read-only authenticated inputs and atomic, private checkpoints."""
+from __future__ import annotations
+import contextlib, datetime as dt, hashlib, json, math, os, threading, time, uuid
+from pathlib import Path
+import duckdb
+import pyarrow.parquet as pq
+
+ROOT = Path(__file__).resolve().parents[1]
+VERSION = '1.0.0'
+AUTHORS = ('__PRIVATE_VALUE_1__', '__PRIVATE_VALUE_2__')
+MONTHS = [f'{y}-{m:02}' for y in (2023, 2024, 2025) for m in range(1, 13)
+          if '2023-11' <= f'{y}-{m:02}' <= '2025-10']
+PIECES = [('pawns', 'p', 1), ('knights', 'n', 3), ('bishops', 'b', 3),
+          ('rooks', 'r', 5), ('queens', 'q', 9)]
+ORIGINAL_REPORT = '917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57'
+
+def require(ok, message):
+    if not ok: raise RuntimeError(message)
+
+def log(message):
+    print(dt.datetime.now(dt.timezone.utc).strftime('[%Y-%m-%d %H:%M:%SZ] ') + str(message), flush=True)
+
+def read(path): return json.loads(Path(path).read_text())
+
+def clean(x):
+    if isinstance(x, dict): return {str(k): clean(v) for k, v in x.items()}
+    if isinstance(x, (tuple, list)): return [clean(v) for v in x]
+    if isinstance(x, Path): return str(x)
+    if isinstance(x, float) and not math.isfinite(x): return None
+    return x
+
+def write(path, data):
+    p = Path(path); p.parent.mkdir(parents=True, exist_ok=True)
+    t = p.with_name(p.name + '.partial_' + uuid.uuid4().hex)
+    t.write_text(json.dumps(clean(data), sort_keys=True, indent=2, allow_nan=False) + '\n')
+    os.replace(t, p)
+
+def digest(x): return hashlib.sha256(json.dumps(clean(x), sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+
+def stamp(path):
+    p = Path(path).resolve(); s = p.stat()
+    return [str(p), s.st_dev, s.st_ino, s.st_size, s.st_mtime_ns, s.st_ctime_ns]
+
+def sha(path):
+    before = stamp(path); h = hashlib.sha256()
+    with Path(path).open('rb') as f:
+        for b in iter(lambda: f.read(8 * 1024**2), b''): h.update(b)
+    require(stamp(path) == before, 'File changed while hashing: ' + Path(path).name)
+    return h.hexdigest()
+
+def record(path):
+    return dict(path=str(Path(path).resolve()), bytes=Path(path).stat().st_size, sha256=sha(path))
+
+def verify(r):
+    p = Path(r['path'])
+    require(p.is_file() and p.stat().st_size == r['bytes'] and sha(p) == r['sha256'],
+            'Changed checkpoint: ' + p.name)
+    return p
+
+def q(x): return "'" + str(x).replace("'", "''") + "'"
+def ident(x): return '"' + str(x).replace('"', '""') + '"'
+def scan(paths):
+    if isinstance(paths, (str, Path)): paths = [paths]
+    require(bool(paths), 'Empty Parquet source')
+    return 'read_parquet([' + ','.join(q(p) for p in paths) + '], hive_partitioning=false)'
+
+def db(temp, memory, threads=1):
+    Path(temp).mkdir(parents=True, exist_ok=True)
+    c = duckdb.connect(config={'threads': str(threads), 'memory_limit': f'{memory:.3f}GB',
+                              'temp_directory': str(temp)})
+    c.execute('SET preserve_insertion_order=false')
+    c.execute("SET TimeZone='UTC'")
+    return c
+
+def copy(c, query, path):
+    p = Path(path); p.parent.mkdir(parents=True, exist_ok=True)
+    t = p.with_name(p.name + '.partial')
+    n = c.execute('COPY (' + query + ') TO ' + q(t) +
+                  ' (FORMAT PARQUET, COMPRESSION ZSTD, ROW_GROUP_SIZE 65536)').fetchone()[0]
+    os.replace(t, p); return int(n)
+
+def csv_query(c, query, path):
+    p = Path(path); t = p.with_name(p.name + '.partial')
+    c.execute('COPY (' + query + ') TO ' + q(t) + ' (FORMAT CSV, HEADER true)')
+    os.replace(t, p)
+
+@contextlib.contextmanager
+def heartbeat(label):
+    stop = threading.Event(); start = time.monotonic()
+    def pulse():
+        while not stop.wait(30): log(f'{label}; elapsed {(time.monotonic()-start)/60:.1f} min')
+    thread = threading.Thread(target=pulse, daemon=True); thread.start()
+    try: yield
+    finally: stop.set(); thread.join()
+
+def validate_manifest(path):
+    p = Path(path).resolve(); m = read(p)
+    if m.get('contract') == 'AUTHOR_EXCLUDED_MAIN_24M_V1':
+        policy = ROOT / 'authority/AUTHOR_EXCLUSION.json'
+        require(m.get('policy') == read(policy) and m.get('policy_sha256') == sha(policy), 'Author policy differs')
+        require(m.get('input_main_report_sha256') == ORIGINAL_REPORT, 'Wrong main-sample lineage')
+        rows = [dict(month=r['month'], path=r['path'], rows=r['rows'],
+                     expected_sha256=r['sha256'], size_bytes=r['bytes']) for r in m['datasets']['main_24m']]
+    else:
+        require(m.get('variant') == 'excluded' and m.get('status') == 'AUTHOR_POLICY_INPUTS_VERIFIED', 'Input is not a completed excluded main authority')
+        require(m['author_policy']['accounts'] == list(AUTHORS), 'Wrong author accounts')
+        require(m['authority']['sample_name'] == 'pool_nonadjacent_excluded', 'Wrong sample definition')
+        require(m['authority'].get('original_report_sha256') == ORIGINAL_REPORT, 'Wrong original report authority')
+        receipt = Path(m['success_path'])
+        require(sha(receipt) == m['success_sha256'], 'Author input receipt changed')
+        rr = read(receipt)
+        require(rr['variant'] == 'excluded' and rr['policy'] == m['author_policy'], 'Receipt policy differs')
+        rows = m['month_records']
+        for a, b in zip(sorted(rows, key=lambda z:z['month']), sorted(rr['monthly'], key=lambda z:z['month'])):
+            require(all(a[k] == b[k] for k in ('month','rows','expected_sha256')), 'Receipt/file manifest differs')
+            require(Path(a['path']).resolve() == Path(b['path']).resolve(), 'Receipt source differs')
+        require(len(rows) == len(rr['monthly']), 'Receipt length differs')
+    rows = sorted(rows, key=lambda x:x['month'])
+    require([r['month'] for r in rows] == MONTHS, 'Expected exactly the 24 months November 2023–October 2025')
+    require(len({str(Path(r['path']).resolve()) for r in rows}) == 24, 'Repeated monthly source')
+    for r in rows:
+        require(isinstance(r['rows'], int) and r['rows'] >= 0 and len(r['expected_sha256']) == 64, 'Invalid monthly record')
+        require(Path(r['path']).is_file(), 'Missing monthly source: ' + r['month'])
+    identity = digest([[r['month'], r['rows'], r['expected_sha256']] for r in rows])
+    return dict(manifest=str(p), manifest_sha256=sha(p), rows=rows, identity=identity)
+
+def discover(project, explicit=None):
+    if explicit: return validate_manifest(explicit), []
+    base = Path(project) / 'derived/replication'
+    # Bounded, known producer layout. Never search the whole drive or infer membership from schemas.
+    candidates = sorted(base.glob('author_exclusion*_PRIVATE/*/PRIVATE/inputs/excluded_AUTH.json'))
+    old = base / 'author_exclusion_v100_PRIVATE/AUTHOR_EXCLUDED_MAIN_READY_PRIVATE.json'
+    if not candidates and old.is_file(): candidates = [old]
+    valid, errors = [], []
+    for p in candidates:
+        try: valid.append(validate_manifest(p))
+        except Exception as e: errors.append(dict(file=p.name, parent=p.parent.parent.parent.name, reason=str(e)))
+    require(valid, 'No usable author-excluded main authority. Pass --input-manifest to its ready JSON; see inventory report.')
+    identities = {a['identity'] for a in valid}
+    require(len(identities) == 1, 'Multiple different author-excluded main datasets; select one using --input-manifest')
+    # Equivalent file sets can have several continuation receipts. Choose the newest receipt, never mix rows.
+    chosen = max(valid, key=lambda a:Path(a['manifest']).stat().st_mtime_ns)
+    return chosen, errors
+
+def cached_inventory(project, limit=150):
+    result = []; inspected = 0
+    roots = ['analysis_panel_24m_sf100k','analysis_panel_pool_nonadjacent_24m_v100_PRIVATE',
+             'pgn_timeforfeit_candidates','api_timeout_enrichment']
+    for name in roots:
+        root = Path(project) / 'derived/replication' / name
+        for p in root.glob('**/*.parquet') if root.exists() else []:
+            if len(result) >= limit or inspected >= 500: return result
+            inspected += 1
+            try:
+                names = pq.ParquetFile(p).schema_arrow.names
+                features = [n for n in names if any(t in n.lower() for t in ('fen','material','pawns','moves','pgn'))]
+                if features: result.append(dict(root=name, file=p.name, columns=features))
+            except Exception: pass
+    return result

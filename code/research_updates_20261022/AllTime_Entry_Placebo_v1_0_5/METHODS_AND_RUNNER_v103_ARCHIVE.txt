@@ -1,0 +1,123 @@
+All-time-five entry and ordinary-game placebo rebuild, version 1.0.3
+
+METADATA MEMORY REPAIR
+Your v1.0.2 chronology finished 128/128 classification partitions. Its next step,
+a global metadata aggregation, exhausted the 8.3 GiB DuckDB allowance. This
+release replaces both the metadata audit and post-download reconciliation with
+bounded, resumable groups. It does not repeat the completed chronology.
+
+Existing metadata and eligible queries are streamed into 128 game-ID buckets.
+All copies of each game go to the same bucket, even if dates disagree. Each
+partition writer uses bounded 64 MiB Arrow buffers plus one input batch and
+encoder workspaces. It writes at most one file per bucket for each input source.
+Groups above 250,000 eligible rows or cached metadata rows split further. Audit
+allocation failures also split and retry; completed groups are retained. The
+original field-by-field conflict checks, pool/readiness rules and three-record
+quarantine remain unchanged. Full-population output assembly streams Parquet;
+row ordering uses disk-spilling sorts rather than a global metadata GROUP BY.
+
+CHECKPOINT REUSE
+Keep every earlier project directory. The default chronology parent is:
+  derived/replication/alltime_entry_placebo_v102_PRIVATE/25d22fd1d9e9
+The candidate/score parent remains:
+  derived/replication/alltime_entry_placebo_v100_PRIVATE/56739829cf4a
+Both parents must match the reviewed configurations, source bindings and output
+checksums. Completed chronology/features.parquet and locally_eligible/queries.parquet
+are imported into new certified stages with explicit source provenance. Parent
+receipts are never relabeled. A missing or changed checkpoint stops before any
+fallback scan or chronology recomputation. The old runner must be stopped; the
+launcher checks locks. New results use alltime_entry_placebo_v103_PRIVATE.
+
+PROGRESS AND TIMING
+Chronology and metadata audit now have separate stage names. The 35% checkpoint
+confirms imported chronology; the 40% checkpoint reports the exact missing game
+count, initial request count and a clearly labeled 25-games/second scenario.
+Metadata downloads then continue automatically unless --audit-only is supplied.
+API calls remain serial, up to 300 game IDs per request, with saved responses,
+retries and shared cooldown/lock handling from the existing downloader. Download
+ETA uses measured new-batch timing. Audit bucket and reconciliation progress are
+printed throughout. Stage percentages are not fractions of elapsed runtime.
+
+The exact additional metadata count is not known before the audit. No full-run
+ETA is claimed from synthetic tests. See METADATA_BENCHMARK.json and VALIDATION.txt
+for local evidence and its limits. Models and source-feature expansion still
+require the user's production files and may take hours after metadata retrieval.
+
+PURPOSE
+Rebuild both comparison populations from the original Phase 100 additional-game
+frame (one-in-32 selection excluding the older one-in-1024 pilot), including rows
+excluded before the old metadata download. Five means eligible opponent grant-or-claim decisions across the
+observed Nov 2023–Oct 2025 donor panel, after removing every focal-pair decision
+and both author accounts. No pre-exposure opponent support screen remains.
+The three donor-history controls use this same Score A donor set.
+
+SELECTION
+The receipt stream is rebuilt BEFORE observation-window cuts and must reproduce
+4,226,388 selected anchors before those cuts and 3,103,280 primary rows afterward.
+Only receipt anchors strictly earlier than a comparison game start enter its
+waiting period. Require start > preceding anchor + 90 days. Preserve the original
+anchor-tie and overlapping-start conventions, first observed pair, observed
+nonadjacent predecessor, deterministic focal orientation, pool, real-time and
+game-status rules. The fixed comparison hash frame covers the original 21
+candidate months; donor support uses all 24 months.
+
+Entry requires 97-day recipient-history coverage and start+90 days < panel end.
+Ordinary additionally requires mate/resign/stalemate and anchor+90 days < panel
+end. Entry models do not use later-choice outcomes. Incomplete follow-up is never
+coded as a zero outcome in an ordinary regression. Histories retain the seven-day
+buffer. Selection and analysis-entry labels are joined to the REBUILT receipt
+stream, not the old selected stream or the old spaced90 flags.
+
+METADATA AND REUSE
+Local eligibility, all-time score support, receipt waiting periods and first-pair
+checks precede metadata requests. Existing authenticated metadata, chronology
+blocks, recipient histories, outcomes and ENV rates are reused. New requests are
+metadata-only exports, up to 300 IDs per request, one request at a time, with TLS
+verification, saved raw-response checksums, SQLite checkpoints and server/error
+cooldowns. No Stockfish work is requested. The existing three-record metadata
+quarantine is retained and counted. Any additional unresolved records block
+estimation; they are not silently dropped or coded as nonpool games.
+
+ESTIMATION
+X0_ENV_indicator is primary, X0 beside it. Preserve the assignment-cell, exposure
+date and hour-of-week fixed effects and shared-account-OR-date CR0 covariance.
+Scores are treated as fixed. Report normal Wald intervals and the original
+ordinary-game equivalence margin rescaled to the common score SD
+0.04979005187533171. This remains an instrument diagnostic; the rebuild alone does
+not prove the exclusion restriction or create random assignment.
+
+Models use disk-backed FWL and exact SQL aggregation of accounts minus pairs plus
+dates minus account/date plus pair/date. Synthetic tests compare against the
+frozen R9 estimator and direct pairwise covariance. On the Mac the old F100/O100
+models must reproduce before final certification. The corrected primary IV must
+also reproduce. The new receipt-minus-new ordinary contrast uses actual shared
+accounts and dates and retains cross-sample covariance.
+
+RUN AND RESUME
+Run RUN_ALLTIME_ENTRY_PLACEBO.command with --project, --workers 10,
+--memory-gb 11 and --result-dir. It verifies its manifest and runs self-tests first.
+Completed stages and request batches resume with the same command. The --audit-only
+option stops after local work and the missing-metadata count; remove it to finish.
+The metadata audit and reconciliation each run in one worker with a 4 decimal GB
+DuckDB limit; other large stages use at most two local workers, and models run
+one at a time. The worker
+setting is a ceiling, not a request to allocate ten large models. Plan several
+hours for local work. Download time depends on the audited missing-ID count;
+the runner reports observed rate and ETA. At least 60 GiB free is checked, but
+larger frames or DuckDB spills may need more. Interrupted work is preserved.
+
+OUTPUTS
+25/35/40/50/75/100 progress ZIPs plus authentication checkpoints; SHA256
+sidecars; aggregate flow, overlap, metadata and numerical audit tables; entry,
+ordinary, balance and joint-balance estimates; reasons for added/removed rows;
+common-game Score A/control checks; new-minus-old contrasts; new
+receipt-minus-new ordinary contrasts; ordinary equivalence diagnostics.
+Rows, accounts, responses and influence vectors stay on the external project
+drive. Original completed analyses remain read-only. This package does not rerun
+Patron, matched comparisons, Section 4 or new engine analyses.
+
+STATUS AND MANUSCRIPT
+Prepared/tested code is not a completed Mac rebuild. Remove the legacy-eligibility
+sentence in Table 6/Appendix D only after STATUS is COMPLETE and the new report
+has been checked. Replace sample counts, entry labels, estimates, standard errors,
+contrasts and balance diagnostics together. Keep the historical results labeled.

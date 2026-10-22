@@ -1,0 +1,18 @@
+#!/bin/bash
+set -euo pipefail
+iv_code_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+iv_project="/Volumes/XT_Pro/lichess_kindness"
+iv_desktop="$HOME/Desktop/Lichess_Desktop"
+iv_python="$iv_project/venv/bin/python"
+if [[ ! -x "$iv_python" || ! -d "$iv_desktop" ]]; then
+  printf '%s\n' 'Mount XT_Pro and check the existing project Python and Lichess_Desktop folder.' >&2
+  exit 1
+fi
+iv_log="$iv_desktop/RECEIPT_IV_STATE_DIAGNOSTICS_$(date -u +%Y%m%dT%H%M%SZ).log"
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1
+export PYTHONDONTWRITEBYTECODE=1
+printf '%s\n' 'Starting saved-state attachment and cutoff diagnostics. Estimated 20–60 minutes; resumable.'
+printf 'Log: %s\n' "$iv_log"
+/usr/bin/caffeinate -i -m -s "$iv_python" -u "$iv_code_dir/code/run.py" \
+  --project-root "$iv_project" --desktop "$iv_desktop" --workers 10 --memory-gb 8 \
+  2>&1 | /usr/bin/tee "$iv_log"

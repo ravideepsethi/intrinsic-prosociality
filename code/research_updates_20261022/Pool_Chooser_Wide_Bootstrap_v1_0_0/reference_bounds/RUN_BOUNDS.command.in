@@ -1,0 +1,19 @@
+#!/bin/bash
+set -euo pipefail
+task_package="$(cd "$(dirname "$0")" && pwd)"
+task_desktop="${LICHESS_TRANSFER_ROOT:-$HOME/Desktop/Lichess_Desktop}"
+mkdir -p "$task_desktop"
+(cd "$task_package" && /usr/bin/shasum -a 256 -c PACKAGE_MANIFEST.sha256)
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
+export VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1 NUMBA_NUM_THREADS=1 PYTHONUNBUFFERED=1
+task_python="${LICHESS_CHOOSER_PYTHON:-}"
+if [ -z "$task_python" ]; then
+  task_env="$task_desktop/chooser_benchmark_python_v100"
+  if [ -x "$task_env/bin/python" ]; then
+    task_python="$task_env/bin/python"
+  else
+    task_python="$(command -v python3)"
+  fi
+fi
+cd "$task_package"
+"$task_python" run_bounds.py --desktop "$task_desktop" "$@"

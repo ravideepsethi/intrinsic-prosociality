@@ -1,0 +1,50 @@
+#!/bin/bash
+set -euo pipefail
+
+task_code="$(cd "$(dirname "$0")" && pwd)"
+task_desktop="$HOME/Desktop/Lichess_Desktop"
+task_project="${LICHESS_AUDIENCE_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+task_threads="${LICHESS_AUDIENCE_THREADS:-10}"
+task_memory="${LICHESS_AUDIENCE_MEMORY_GB:-6}"
+task_python="${LICHESS_AUDIENCE_PYTHON:-python3}"
+task_env="$task_desktop/audience_robustness_v100_env"
+mkdir -p "$task_desktop"
+
+if [[ ! -d "$task_project/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel" ]]; then
+  echo "Current main panel not found under $task_project. Mount XT_Pro before rerunning."
+  exit 1
+fi
+
+"$task_python" -c 'import sys; assert sys.version_info >= (3,11), "Python 3.11 or newer is required"'
+if [[ ! -x "$task_env/bin/python" ]]; then
+  "$task_python" -m venv "$task_env"
+fi
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
+export VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1 PYTHONUNBUFFERED=1
+"$task_env/bin/python" -m pip install --disable-pip-version-check -r "$task_code/requirements.txt"
+"$task_env/bin/python" "$task_code/self_test.py"
+
+task_stamp="$(date -u +%Y%m%dT%H%M%SZ)_$$"
+task_out="$task_project/output/POOL_AUDIENCE_RESULTS_v100_$task_stamp"
+task_log="$task_desktop/POOL_AUDIENCE_v100_$task_stamp.log"
+task_args=(--project-root "$task_project" --out "$task_out" --threads "$task_threads" --memory-gb "$task_memory")
+if [[ -f "$task_desktop/known_streamers_extra.csv" ]]; then
+  task_args+=(--extra-streamers "$task_desktop/known_streamers_extra.csv")
+fi
+if [[ -n "${LICHESS_AUDIENCE_PROFILE_FILE:-}" ]]; then
+  task_args+=(--profile-file "$LICHESS_AUDIENCE_PROFILE_FILE")
+fi
+
+echo "Log: $task_log"
+"$task_env/bin/python" -u "$task_code/run_audience.py" "${task_args[@]}" 2>&1 | tee "$task_log"
+
+task_zip="$task_out.zip"
+task_sha="$task_zip.sha256"
+test -f "$task_out/_SUCCESS.json"
+cp "$task_zip" "$task_desktop/"
+cp "$task_sha" "$task_desktop/"
+cd "$task_desktop"
+/usr/bin/shasum -a 256 -c "$(basename "$task_sha")"
+echo "Upload these two files:"
+echo "$task_desktop/$(basename "$task_zip")"
+echo "$task_desktop/$(basename "$task_sha")"

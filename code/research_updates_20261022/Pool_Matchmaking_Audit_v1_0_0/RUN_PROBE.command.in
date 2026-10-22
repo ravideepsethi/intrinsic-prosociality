@@ -1,0 +1,31 @@
+#!/bin/bash
+set -euo pipefail
+task_package_dir="$(cd "$(dirname "$0")" && pwd)"
+cd "$task_package_dir"
+/usr/bin/shasum -a 256 -c PACKAGE_MANIFEST.sha256
+task_python="${MM_AUDIT_PYTHON:-}"
+if [[ -z "$task_python" ]]; then
+  shopt -s nullglob
+  task_candidates=(
+    "$HOME"/Desktop/Lichess_Desktop/pool_main_wave1_python.*/bin/python
+    "$HOME"/Desktop/Lichess_Desktop/A1_Session_Trajectory_Prepare_v1_0_0/.venv/bin/python
+  )
+  if command -v python3 >/dev/null 2>&1; then
+    task_candidates+=("$(command -v python3)")
+  fi
+  for task_candidate in "${task_candidates[@]}"; do
+    if [[ -x "$task_candidate" ]] && "$task_candidate" -c 'import duckdb' >/dev/null 2>&1; then
+      task_python="$task_candidate"
+      break
+    fi
+  done
+fi
+if [[ -z "$task_python" ]]; then
+  echo "No existing Python with DuckDB found. Set MM_AUDIT_PYTHON to the analysis interpreter."
+  exit 2
+fi
+echo "Pool matchmaking metadata probe: normally 5-30 seconds; allow 1-2 minutes on a busy disk."
+echo "Offline, one thread, Parquet footers only. Existing analysis jobs continue unchanged."
+"$task_python" -B "$task_package_dir/probe_inputs.py" \
+  --project-root "${MM_AUDIT_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}" \
+  --desktop "${MM_AUDIT_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"

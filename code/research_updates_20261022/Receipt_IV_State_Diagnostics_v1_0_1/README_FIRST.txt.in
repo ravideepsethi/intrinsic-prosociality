@@ -1,0 +1,125 @@
+Receipt IV state and cutoff diagnostics — v1.0.1
+Prepared October 2, 2026
+
+Repair release: fixes the DuckDB MONTH alias syntax error in state preparation.
+The diagnostic specification, cohort selection and account policy are unchanged.
+It keeps the same private work root so completed input-authentication checks
+are reused when the source-file fingerprints match. See REPAIR_NOTES.txt.
+
+This package consumes the completed October 2 cohort assembly and the retained
+November–January color replay. Run it once on the Mac with XT_Pro mounted. Both
+__PRIVATE_VALUE_1__ and __PRIVATE_VALUE_2__ remain included, exactly as instructed.
+
+WHAT THIS RUN COMPLETES
+
+1. Authenticate the 16 completed analysis shards through their local READY and
+   receipt chain. Require the reviewed producer, account policy and counts.
+2. Authenticate all 15 retained November–January target-state Parquets against
+   their exact hashes from the reviewed color result. Authenticate the five
+   October 2023 checkpoints used for the fixed established-history labels.
+3. Attach pregame RD to BOTH exposure participants. Check game ID, both numeric
+   player IDs, speed, archive start, archive ordinal and both displayed ratings.
+   Require all 468,029 missing primary recipient RD values to be restored, with
+   no remaining missing RD for either side in the calendar-primary sample.
+4. Preserve all 18,754,435 first-pair rows, the 3,917,764 calendar-primary rows,
+   the 3,253,387 common-five/ten rows, all original scores and selection flags,
+   and the 1,683,874 primary nonreachers. The same command resumes completed
+   stages after an interruption; it never reruns upstream cohort assembly.
+5. Produce calibration tables on the actual calendar-primary IV exposures for
+   both player roles. Show all primary, fixed established and strict returning
+   strata separately. Compare post cells to matched November pre-change cells.
+   Preserve unmatched cells, color-specific signed errors, both near-zero draw
+   gap sides and displayed-rating ties. No integer rounding rule is fitted.
+6. Produce month-specific sample counts for a fixed grid of possible exclusive
+   endpoints. Enforce anchor + 90 days < endpoint, preserving the original
+   greedy spacing before applying any censor. Show the five/ten common sample,
+   independently spaced ten-decision stream and properly supported lag-30 rows.
+7. Verify the later-choice color interaction at the recipient's later choice.
+   Nonreachers, unidentified choices and the implementation bracket remain NULL.
+8. Save the exact mechanics commit/merge evidence and refresh the bounded,
+   previously identified February source locations. Detailed paths and schemas
+   remain private on XT_Pro. Presence alone is not denominator certification.
+
+RUNNING IT
+
+Save Receipt_IV_State_Diagnostics_v1_0_1.zip in ~/Desktop/Lichess_Desktop.
+Use the accompanying RUN_RECEIPT_IV_STATE_DIAGNOSTICS_v1_0_1.txt command. It verifies
+the ZIP, extracts into a new directory, uses your existing project Python and
+runs under caffeinate. No package installation or network access is needed.
+
+Estimated runtime: 20–60 minutes on XT_Pro, not yet benchmarked on your Mac.
+Allow at least 16 GiB of free drive space. Disk speed and spilling can change
+the runtime. There is a 10-thread/worker ceiling and an 8 GiB configured budget;
+two shard jobs run concurrently with five DuckDB threads each. This is a budget
+for the configured databases, not a strict operating-system RSS limit.
+
+There are no scheduled sleeps, prompts, artificial throttles or batch pauses.
+Workers refill immediately. A heartbeat appears about every 30 seconds, with
+an attachment ETA after shards finish. Reuse the same command to resume.
+
+The run stops if authenticated inputs change or the required identity/count
+checks fail. Such a stop produces an aggregate diagnostic ZIP when possible;
+private tracebacks remain under the new work directory. Do not edit upstream
+data to bypass a failed check.
+
+WHERE IT WRITES
+
+Private enriched rows and checkpoints:
+/Volumes/XT_Pro/lichess_kindness/derived/replication_36m/receipt_iv_state_diagnostics_v100_PRIVATE
+
+Private handoff:
+READY_FOR_IV_SPECIFICATION_PRIVATE.json
+This points to the enriched manifest and each authenticated analysis shard.
+
+Aggregate output:
+/Volumes/XT_Pro/lichess_kindness/output/receipt_iv_state_diagnostics_v100
+
+Return bundle and SHA-256 sidecar:
+~/Desktop/Lichess_Desktop/RECEIPT_IV_STATE_DIAGNOSTICS_<UTC timestamp>.zip
+~/Desktop/Lichess_Desktop/RECEIPT_IV_STATE_DIAGNOSTICS_<UTC timestamp>.zip.sha256
+
+Upload those two files after the run. Individual game/account rows, full
+analysis shards and private source paths are excluded from the return ZIP.
+
+WHAT THE RESULT MEANS
+
+A successful result closes the missing-RD attachment dependency and supplies
+the targeted calibration and endpoint counts. It is not a new IV estimate.
+The mechanics deployment date, causal censor, announcement timing and final
+later-choice control specification remain explicitly unfrozen.
+
+The verified source change was authored/committed January 30 at 10:04:23 UTC
+and merged February 1 at 10:31:02 UTC. Neither timestamp is a deployment record.
+The January 30 midnight guard, source timestamp, merge timestamp and May 1
+calendar endpoint are labeled sensitivity boundaries. No boundary is adopted
+because it retains more observations or fits the behavior better.
+
+The fixed-established label means >=100 same-speed rated updates through
+October 2023. Returning means that label plus side-specific RD >=200 and at
+least 90 days since that side's last same-speed rated update. These labels
+affect calibration tables only, not inclusion in the original IV cohort.
+Earlier returning-stratum history is not newly reconstructed in this package.
+
+The three calibration strata overlap; do not sum them. Counts are player-side
+updates when calibration is reported, and exposure rows when support is
+reported. New/old payoff shifts are mechanical convention-based quantities.
+They are not visibility estimates or grant-propensity instruments.
+
+For the unconditional prospective IV outcome, nonreachers remain zero in the
+inherited outcome definition. A missing later choice has no factual color.
+Adding reached, later era, or later color as ordinary controls may condition on
+post-receipt events; a missing-value indicator does not remove that selection
+problem. NEXT_ESTIMATION_SPEC.txt lays out the remaining design decision.
+
+No API pull, historical rating replay, chronology scan, score recomputation,
+engine search, behavioral coefficient, first-stage F, IV confidence interval,
+dependence-aware MDE or exclusion-sensitivity estimate occurs here.
+
+VALIDATION
+
+See VALIDATION.json and tests/test_diagnostics.py. Synthetic tests cover role
+orientation, ID/rating mismatches, duplicate/missing target rows, preservation
+of outcomes and selection flags, resumption, calibration matching, ties,
+returning strata, cutoff boundaries, lag-30 support floors, nonreacher handling,
+input mutation and author inclusion. The full Mac data are not mounted in the
+development workspace, so no live sample or calibration result is claimed.

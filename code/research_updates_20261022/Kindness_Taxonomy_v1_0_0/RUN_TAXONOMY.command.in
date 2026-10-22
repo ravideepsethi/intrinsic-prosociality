@@ -1,0 +1,32 @@
+#!/bin/bash
+set -euo pipefail
+KTX_PACKAGE="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+KTX_PROJECT="${KTX_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+KTX_DESKTOP="${KTX_DESKTOP_DIR:-$HOME/Desktop/Lichess_Desktop}"
+mkdir -p "$KTX_DESKTOP"
+export OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 VECLIB_MAXIMUM_THREADS=2
+KTX_PY=""
+KTX_CANDIDATES=("${KTX_PYTHON:-}" "$KTX_PROJECT/.venv/bin/python" "$KTX_PACKAGE/.venv/bin/python" "$KTX_DESKTOP"/*/.venv/bin/python "$KTX_DESKTOP"/*/*/.venv/bin/python "$(command -v python3 || true)")
+for KTX_CANDIDATE in "${KTX_CANDIDATES[@]}"; do
+  if [[ -x "$KTX_CANDIDATE" ]] && "$KTX_CANDIDATE" -c 'import sys,numpy,pyarrow,duckdb,scipy,matplotlib; assert sys.version_info>=(3,10); assert (1,26)<=tuple(map(int,numpy.__version__.split(".")[:2]))<(3,0); assert 16<=int(pyarrow.__version__.split(".")[0])<26; assert tuple(map(int,duckdb.__version__.split(".")[:2]))==(1,5)' >/dev/null 2>&1; then
+    KTX_PY="$KTX_CANDIDATE"
+    break
+  fi
+done
+if [[ -z "$KTX_PY" ]]; then
+  python3 -c 'import sys; assert sys.version_info >= (3,10), "Python 3.10+ is required"'
+  echo "Preparing an isolated Python environment for this package."
+  python3 -m venv "$KTX_PACKAGE/.venv"
+  "$KTX_PACKAGE/.venv/bin/python" -m pip install -r "$KTX_PACKAGE/requirements.txt"
+  KTX_PY="$KTX_PACKAGE/.venv/bin/python"
+fi
+"$KTX_PY" -c 'import sys; sys.path.insert(0,sys.argv[1]); from common import manifest_check; manifest_check()' "$KTX_PACKAGE/code"
+"$KTX_PY" -m unittest discover -s "$KTX_PACKAGE/tests" -p 'test_*.py' -q
+KTX_LOG="$KTX_DESKTOP/KINDNESS_TAXONOMY_RUN_$(date -u +%Y%m%dT%H%M%SZ).log"
+echo "Log: $KTX_LOG"
+echo "Existing local data; checkpoints resume automatically. No Lichess API or Stockfish requests."
+if [[ -x /usr/bin/caffeinate ]]; then
+  /usr/bin/caffeinate -i "$KTX_PY" -u "$KTX_PACKAGE/code/run.py" --project-root "$KTX_PROJECT" --desktop "$KTX_DESKTOP" "$@" 2>&1 | tee "$KTX_LOG"
+else
+  "$KTX_PY" -u "$KTX_PACKAGE/code/run.py" --project-root "$KTX_PROJECT" --desktop "$KTX_DESKTOP" "$@" 2>&1 | tee "$KTX_LOG"
+fi

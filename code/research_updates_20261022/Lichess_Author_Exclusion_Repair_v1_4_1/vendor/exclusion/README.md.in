@@ -1,0 +1,52 @@
+# Lichess author exclusion v1.0.0
+
+Exclude **__PRIVATE_VALUE_1__** (active) and **__PRIVATE_VALUE_2__** from analytical samples, with exact case-insensitive matching after trimming whitespace. Exclude a game when either player is one of these accounts. Both accounts also leave account-level samples and reference populations.
+
+This package creates an author-excluded version of the 24-month pool/nonadjacent main sample, audits the certified core and available completed extension opportunity panels, and provides guarded views and a reusable exclusion module. It does not estimate models. Existing estimates remain pre-exclusion results until refreshed and checked.
+
+## Run on the Mac
+
+Put the ZIP and its `.sha256` file in `~/Desktop/Lichess_Desktop`, then run:
+
+```bash
+cd "$HOME/Desktop/Lichess_Desktop" &&
+shasum -a 256 -c Lichess_Author_Exclusion_v1_0_0.zip.sha256 &&
+task_unpack="$(mktemp -d "$HOME/Desktop/Lichess_Desktop/author_exclusion_v100.XXXXXX")" &&
+ditto -x -k Lichess_Author_Exclusion_v1_0_0.zip "$task_unpack" &&
+bash "$task_unpack/Lichess_Author_Exclusion_v1_0_0/RUN_AUTHOR_EXCLUSION.command"
+```
+
+The launcher uses `/Volumes/XT_Pro/lichess_kindness/venv/bin/python`, keeps the Mac awake, writes a log, and runs at most four independent file workers with one DuckDB thread and a 768 MB DuckDB memory limit each. The worker limit is reduced to avoid competing excessively with existing jobs. Total process memory can exceed those DuckDB limits. No dependency installation or upgrade runs automatically.
+
+**Planning allowance: 15–60 minutes on a local SSD; this is not a production benchmark.** Authentication reads the existing panels, and any main-sample month containing author games is rewritten once. The 24 reviewed main files total about 12.5 GB; allow around 20 GB of free space for filtered files and temporary work, with more needed if concurrent jobs use the drive. Completed file outputs are checked and reused on a rerun. No new API requests, Stockfish searches, or rating replays are involved.
+
+Return the two files printed at the end:
+
+- `AUTHOR_EXCLUSION_RESULT_<timestamp>.zip`
+- `AUTHOR_EXCLUSION_RESULT_<timestamp>.zip.sha256`
+
+The result contains aggregate removal counts, grant counts, role counts for the two author accounts, directly affected compact analysis targets, environment information, and status. Individual games, numeric account IDs, filtered data, and identity evidence remain in the project directory. Distinct other-account counts are provided per input file and must not be summed to obtain a global distinct count. Core and main counts overlap and must not be added together.
+
+## What success means
+
+`AUTHOR_EXCLUDED_MAIN_READY_ESTIMATES_PENDING` means the filtered main inputs and audit are ready. It **does not** mean every existing model, history measure, reference population, table, or manuscript number has been recomputed. Earlier programs still use their original input paths unless explicitly adapted. `DOWNSTREAM_REQUIREMENTS.md` specifies the adaptation.
+
+The new private work root is:
+
+`/Volumes/XT_Pro/lichess_kindness/derived/replication/author_exclusion_v100_PRIVATE`
+
+Its main entry point is `AUTHOR_EXCLUDED_MAIN_READY_PRIVATE.json`. It lists all 24 main files, checksums, row counts, the audited exclusion index, and numeric identity resolution. Main files without any author games are reused directly. Other months get separate full-width filtered files. Old certified source files are preserved byte-for-byte.
+
+`author_free_views.duckdb` contains filtered `main_24m`, `core_24m`, and, when available, `extension` views plus the excluded-game index. These are views over local files, not self-contained copies. Keep the input and private output files in place. Extension coverage is explicitly listed; a missing extension month is not certified as author-free.
+
+## Scope and preservation
+
+The immutable core and main inputs cover November 2023–October 2025. The runner also checks completed extension SF100k parts for September–October 2023 and November 2025–April 2026, using the exact roots of the existing extension producer. A checksum, identity, or completion-receipt mismatch stops the run for review. Missing extension months are reported.
+
+Do not interrupt an active A2 score-repair or source-recovery job to apply this exclusion. Their game-level engine/API outputs remain reusable. Filter before the subsequent analysis fit, with a new sample identity. The filtered A2 sample is a documented subset of the frozen roster; do not top it up with replacement accounts merely to restore 20,000.
+
+Retain true all-game chronology, rating replay, adjacency evidence, and engine caches. Deleting games from those histories would alter the recorded evolution of other players' ratings and game order. Rebuild sample-based kindness/receipt/reference aggregates after the exclusion. See the requirements file for the distinction.
+
+## Validation
+
+Synthetic tests exercise both roles, mixed-case and whitespace matching, near-matching usernames, count conservation, unchanged retained values, immutable sources, resumability, checksum rejection, identity resolution, mixed extension schemas, and an end-to-end run with spawned workers and all 24 main months. See `VALIDATION.md`. Production counts are deliberately not claimed before the Mac run.

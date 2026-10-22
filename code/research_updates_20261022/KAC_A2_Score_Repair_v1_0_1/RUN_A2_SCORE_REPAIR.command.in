@@ -1,0 +1,5 @@
+#!/bin/bash
+set -euo pipefail
+KAC_ROOT="$(cd "$(dirname "$0")" && pwd)"
+cd "$KAC_ROOT"
+exec python3 "$KAC_ROOT/bootstrap.py" "$@"

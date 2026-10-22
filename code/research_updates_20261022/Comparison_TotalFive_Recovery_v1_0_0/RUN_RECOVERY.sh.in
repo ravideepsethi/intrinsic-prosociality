@@ -1,0 +1,18 @@
+#!/bin/bash
+set -euo pipefail
+package_dir="$(cd "$(dirname "$0")" && pwd)"
+project_root="${LICHESS_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+research_python="${LICHESS_PYTHON:-$project_root/venv/bin/python}"
+desktop_dir="$HOME/Desktop/Lichess_Desktop"
+mkdir -p "$desktop_dir"
+if [ ! -x "$research_python" ]; then
+  echo "Research Python is unavailable: $research_python" >&2
+  exit 2
+fi
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1
+"$research_python" -c 'import numpy,pandas,pyarrow,duckdb,scipy,chess; print("Research dependencies OK; matplotlib is not required.")'
+log_path="$desktop_dir/COMPARISON_TOTALFIVE_RECOVERY_RUN_$(date -u +%Y%m%dT%H%M%SZ).log"
+echo "Comparison total-five metadata recovery 1.0.0. Resumes verified stages and requests."
+echo "Chronology can take hours; API ETA follows the measured request rate."
+echo "Log: $log_path"
+"$research_python" -u "$package_dir/code/run_recovery.py" --project "$project_root" --desktop "$desktop_dir" "$@" 2>&1 | tee -a "$log_path"

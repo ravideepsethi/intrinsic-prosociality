@@ -1,0 +1,42 @@
+"""Exercise real adapter projections, gates, partitions and estimation on fixtures.
+These tests do not authenticate or certify production data.
+"""
+import sys,tempfile,argparse
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'code'))
+from engine import *
+import adapters
+
+def main():
+    family=sys.argv[1];sys.path.insert(0,str(ROOT/'vendor'/family))
+    import self_test,design
+    d=self_test.fixture(80,35) if family=='merit' else self_test.synthetic()
+    raw=pd.DataFrame(dict(game_id=['g'+str(i) for i in range(len(d))],chooser_user_id=d.chooser,outcome_kind_draw=d.y.astype(bool),engine_eval_cp_disconnected=d.board.astype(int),ply_count=d.ply,month='2023-11',api_speed=[design.SPEEDS[i] for i in d.speed_code]))
+    raw['chooser_username_norm']=['__PRIVATE_VALUE_1__' if c==0 else 'user'+str(c) for c in d.chooser];raw['disconnected_username_norm']='other'
+    raw.loc[raw.index%79==0,'disconnected_username_norm']='__PRIVATE_VALUE_2__'
+    raw['disconnected_user_id']=99999;raw['chooser_elo']=1500.;raw['disconnected_elo']=1500.+d.gap.fillna(0).round()
+    raw['sf100k_nodes_requested']=100000;raw['sf100k_fen_turn_matches_disconnected_color']=True
+    for col in ['disconnected_color','sf100k_disconnected_color_for_perspective','side_to_move_after_last']:raw[col]='white'
+    raw['api_status']='timeout';raw['five_second_rule_passed']=True;raw['api_rated']=True;raw['api_variant']='standard'
+    for col,source in [('chooser_clock_last_obs_s','clock_c'),('disconnected_clock_last_obs_s','clock_d'),('chooser_win_premium_v2','premium'),('chooser_pre_rd_v2','rd_c'),('disconnected_pre_rd_v2','rd_d')]:raw[col]=d[source]
+    if family=='merit':
+        raw['engine_eval_cp_disconnected_raw']=raw.engine_eval_cp_disconnected;raw['engine_eval_is_mate']=d.mate
+        raw['chooser_elo']=d.rating;raw['disconnected_elo']=d.rating+d.gap.round()
+        for role in ['chooser','disconnected']:
+            for piece in ['pawns','knights','bishops','rooks','queens']:raw[role+'_'+piece]=0
+        raw['chooser_pawns']=np.maximum(-d.material,0);raw['disconnected_pawns']=np.maximum(d.material,0)
+        raw.loc[:100,['chooser_pawns','disconnected_pawns']]=0
+        raw['disconnected_minus_chooser_material']=raw.disconnected_pawns-raw.chooser_pawns
+        raw['fen_after_last_move']='4k3/8/8/8/8/8/8/4K3 w - - 0 1'
+    with tempfile.TemporaryDirectory() as t:
+        root=Path(t);p=root/'source.parquet';raw.to_parquet(p,index=False)
+        r=dict(month='2023-11',path=str(p),rows=len(raw),expected_sha256=sha(p))
+        z=filter_month((r,str(root/'filtered')));p=Path(z['output']['path'])
+        auth={'fingerprint':'synthetic-author-excluded','month_records':[dict(month='2023-11',path=p,rows=z['kept_rows'],expected_sha256=sha(p))],'census':census([p],root,2,2)}
+        args=argparse.Namespace(stage=family,shards=32,workers=2,memory_gb=3,variant='excluded')
+        out=root/'out';(out/'report').mkdir(parents=True);(out/'PRIVATE').mkdir()
+        result=getattr(adapters,family)(args,auth,out)
+        assert list((out/'report').glob('*.csv'))
+        print('ADAPTER_SMOKE_OK',family,result)
+
+if __name__=='__main__':main()

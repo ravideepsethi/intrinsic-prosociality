@@ -1,0 +1,47 @@
+#!/bin/bash
+set -euo pipefail
+AFE_PACKAGE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+AFE_DESKTOP="${AFE_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+AFE_PROJECT="${AFE_PROJECT:-/Volumes/XT_Pro/lichess_kindness}"
+AFE_WORKERS="${AFE_WORKERS:-4}"
+AFE_MEMORY="${AFE_MEMORY:-6GB}"
+mkdir -p "$AFE_DESKTOP/logs"
+AFE_BOOTSTRAP=""
+for AFE_CANDIDATE in "${AFE_PYTHON:-}" /opt/homebrew/bin/python3 /opt/anaconda3/bin/python3 "$HOME/miniconda3/bin/python3" "$HOME/anaconda3/bin/python3" "$(command -v python3 || true)"; do
+  if [[ -n "$AFE_CANDIDATE" && -x "$AFE_CANDIDATE" ]] && "$AFE_CANDIDATE" -c 'import sys; assert (3,11)<=sys.version_info[:2]<(3,15)' >/dev/null 2>&1; then
+    AFE_BOOTSTRAP="$AFE_CANDIDATE"
+    break
+  fi
+done
+if [[ -z "$AFE_BOOTSTRAP" ]]; then
+  echo 'Python 3.11–3.14 was not found. Set AFE_PYTHON to your existing Python executable.' >&2
+  exit 2
+fi
+AFE_ENV="$AFE_DESKTOP/.venv_afe_followups_v100"
+if [[ ! -x "$AFE_ENV/bin/python" ]]; then "$AFE_BOOTSTRAP" -m venv "$AFE_ENV"; fi
+AFE_PY="$AFE_ENV/bin/python"
+if ! "$AFE_PY" - "$AFE_PACKAGE_DIR/requirements.txt" <<'PY'
+import importlib.metadata,sys
+for line in open(sys.argv[1]):
+    name,version=line.strip().split('==')
+    assert importlib.metadata.version(name)==version
+PY
+then
+  "$AFE_PY" -m pip install --disable-pip-version-check -r "$AFE_PACKAGE_DIR/requirements.txt"
+fi
+export OPENBLAS_NUM_THREADS="$AFE_WORKERS"
+export OMP_NUM_THREADS="$AFE_WORKERS"
+export MKL_NUM_THREADS="$AFE_WORKERS"
+export NUMEXPR_NUM_THREADS="$AFE_WORKERS"
+export VECLIB_MAXIMUM_THREADS="$AFE_WORKERS"
+export MPLCONFIGDIR="$AFE_DESKTOP/.afe_matplotlib"
+export PYTHONUNBUFFERED=1
+"$AFE_PY" "$AFE_PACKAGE_DIR/test_afe.py"
+AFE_LOG="$AFE_DESKTOP/logs/afe_followups_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+echo "Log: $AFE_LOG"
+echo "Using $AFE_WORKERS threads. Existing Stockfish jobs will share the same CPU."
+if [[ -x /usr/bin/caffeinate ]]; then
+  /usr/bin/caffeinate -dimsu "$AFE_PY" "$AFE_PACKAGE_DIR/run_afe.py" --project "$AFE_PROJECT" --desktop "$AFE_DESKTOP" --workers "$AFE_WORKERS" --memory "$AFE_MEMORY" "$@" 2>&1 | tee "$AFE_LOG"
+else
+  "$AFE_PY" "$AFE_PACKAGE_DIR/run_afe.py" --project "$AFE_PROJECT" --desktop "$AFE_DESKTOP" --workers "$AFE_WORKERS" --memory "$AFE_MEMORY" "$@" 2>&1 | tee "$AFE_LOG"
+fi

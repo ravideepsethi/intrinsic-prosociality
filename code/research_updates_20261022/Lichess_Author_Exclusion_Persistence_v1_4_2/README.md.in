@@ -1,0 +1,44 @@
+# Author exclusion: original persistence producer, v1.4.2
+
+Expected Mac runtime: **15–45 minutes**, provisionally, at 10 workers and 11 GiB. Allow 3–15 minutes for fresh verification of the existing Parquets, about 3–12 minutes per persistence variant, and 1–5 minutes for comparisons/reporting. Progress reports are written at 0/25/50/75/100%. No API requests, engine searches, rated-game replay, IV estimation, or temporal randomization is scheduled.
+
+## What the returned v141 report established
+
+The v141 run took 102.06 minutes. Its ZIP checksum and all 783 report-manifest entries were verified. Nineteen analysis families completed in both variants. Four table-comparison issues were repaired locally: duplicated original first/repeat aggregates, omitted five-bin opportunity-threshold keys, and omitted profile-return/disabled keys. Exact duplicate aggregates retain a separately compared multiplicity count; contradictory duplicates fail. Percentage-point coefficients are now paired with percentage-point standard errors.
+
+The reviewed comparison covers **298 tables, 283,065 numeric metrics and 33,472 recognized point estimates**. It found no unmatched aggregate rows, changed model statuses, coefficient sign changes or changes in the approximate 95% zero-boundary classification. The largest change, among estimates with a corresponding standard error, was **0.020969778 included standard errors**, in an unrestricted mechanism coefficient. These are descriptive paired changes, not an equivalence test or 33,472 independent hypotheses. Duplicate displays of estimates can contribute multiple comparison entries.
+
+The main sample falls from 41,534,331 to 41,534,289 opportunities: 42 games and one grant removed. Choosers fall from 3,224,173 to 3,224,171. The accounts are `__PRIVATE_VALUE_1__` and `__PRIVATE_VALUE_2__`; a game is excluded if either participant is an author account.
+
+The persistence candidate in v141 did not reproduce the manuscript and is not certified. Its small exclusion changes do not resolve that mismatch. The nineteen other families are retained here without refitting.
+
+## What was recovered
+
+The successful original report is `FRAMEWORK_F_REPORT_20261012T031026Z.zip`; its original producer is `Framework_Tests_v1_0_2.zip`, SHA256 `7347c2183a61b9e2888f8c8c749115359671e337298c2ec21dac42a1516a0c49`. The exact original source is bundled unchanged under `vendor/original_f_v102`. The original report's 18 files were verified against its receipt. `SOURCE_RECOVERY.json` records provenance.
+
+The original regressions use outcome-specific opportunity weights and controls for log opportunity counts in both years and states, plus second-year state-specific ratings, rating gaps, capped evaluations, plies and speed shares. The original account-robust covariance correction is n/(n−1), with joint covariance across outcomes. The earlier reconstruction omitted controls because the manuscript note listed only speed shares. `SUPPLEMENT_METHODS_PATCH.diff` corrects that omission.
+
+The original after-ply-10 transition table also deliberately keeps the full 266,399-account cohort and classifies late grant counts. Rate correlations require positive late exposure in both states and both years and therefore use 265,901 accounts. The runner preserves these distinct original cohorts; it does not invent a zero rate for unexposed accounts.
+
+## Run
+
+Keep the completed v141 project directory in place. Put this ZIP on the Desktop transfer folder, verify the supplied SHA256, extract into a fresh directory, then run `RUN_PERSISTENCE.command --workers 10 --memory-gb 11` with caffeinate. The launcher finds the existing Python environment used by v141 and does not install or upgrade packages. Its environment can be selected explicitly with `AUTHOR_EXCLUSION_PYTHON`.
+
+Project default: `/Volumes/XT_Pro/lichess_kindness`.
+Reports default: `$HOME/Desktop/Lichess_Desktop`.
+Output parent: `derived/replication/author_exclusion_persistence_v142_PRIVATE/`.
+Minimum free project space: 12 GiB for this focused job; this is not the earlier full-analysis 40-GiB requirement.
+
+Ten DuckDB workers process the existing authenticated Parquets. Input hashing uses at most four I/O workers; the two variants run sequentially, with BLAS limited to one thread. Annual and wide account aggregates and comparison tables use Parquet/ZSTD. The full before/after comparison is Parquet rather than a large duplicate CSV. Private account tables remain on the Mac. The original producer's small public CSV tables are also retained for exact baseline reconciliation.
+
+Each completed stage has a verified receipt and resumes without refitting. All 38 successful v141 variant-stage outputs and existing audits are authenticated and reused. New outputs are isolated from v141. The included persistence run must reproduce all 17 original CSV tables (95 column checks) before the excluded run proceeds. Counts and logical/text outputs must agree exactly; displayed numeric outputs have a narrow rounding/numerical tolerance. Near-zero redundant-column residuals are checked against the original pruning threshold.
+
+Progress percentages printed by the original F producer describe its internal stage; ZIP checkpoints describe the overall job. The original competitive-only benchmark may print a count warning in the excluded variant because its reference is the original included manuscript cohort. That diagnostic is retained; the strict original-output reproduction gate applies to the included variant.
+
+## Return and publication status
+
+Return the new `_100.zip` and its `.sha256`. If a guard stops the run, return its checkpoint ZIP and log. Do not rerun the full v141 analysis package.
+
+After a successful return, the remaining work is final review and manuscript reconciliation: update author-excluded counts, estimates and figures where needed, remove obsolete inclusion exceptions, and apply one consistent exclusion note. The source manuscript snapshots in this package include the recovered persistence-methods correction; they are **not yet final author-excluded manuscripts**. No blanket “all analyses” or “makes no difference” conclusion is certified by this package before reviewing the production result. Already-excluded audited analyses, including IV, do not have a newly estimated author-included counterfactual.
+
+`reviewed_v141/review` contains the corrected local comparison and its provenance. `evidence/original_f_report` contains the recovered original aggregate baseline. `tests/test_persistence142.py` covers original controls and covariance, nuisance collinearity, mutation detection, comparison dimensions/units, late-cohort membership, both-role exclusion and retention of the nineteen completed families without fitting.

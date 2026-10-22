@@ -1,0 +1,37 @@
+#!/bin/bash
+set -euo pipefail
+package_root="$(cd "$(dirname "$0")" && pwd)"
+project_root="${1:-/Volumes/XT_Pro/lichess_kindness}"
+desktop_root="${2:-$HOME/Desktop/Lichess_Desktop}"
+workers="${LICHESS_36M_WORKERS:-10}"
+python_bin="$project_root/venv/bin/python"
+if [[ ! -x "$python_bin" ]]; then
+  echo "Project Python not found: $python_bin" >&2
+  exit 2
+fi
+if [[ ! "$workers" =~ ^[0-9]+$ ]] || (( workers < 1 || workers > 10 )); then
+  echo "LICHESS_36M_WORKERS must be 1-10" >&2
+  exit 2
+fi
+mkdir -p "$desktop_root"
+(
+  cd "$package_root"
+  /usr/bin/shasum -a 256 -c MANIFEST.sha256
+)
+export PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
+export VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1
+export ARROW_NUM_THREADS=1
+"$python_bin" -B - <<'PY'
+import duckdb,numpy,pandas,pyarrow
+print('Existing project dependencies imported; no environment changes made.')
+PY
+run_stamp="$(date -u +%Y%m%dT%H%M%SZ)"
+log_path="$desktop_root/COLOR_FIRSTPASS_$run_stamp.log"
+echo "Expected runtime: 2-6 hours initially; 30-120 minutes with existing verified Numba acceleration and fast I/O."
+echo "Worker budget: $workers. Replay uses five independent speed pools."
+echo "Package v1.0.2: corrected checkpoint data-hash verification; all completed preparation is reused."
+echo "Log: $log_path"
+/usr/bin/caffeinate -dimsu "$python_bin" -u -B "$package_root/code/run.py" \
+  --project-root "$project_root" --desktop "$desktop_root" --workers "$workers" \
+  2>&1 | /usr/bin/tee "$log_path"

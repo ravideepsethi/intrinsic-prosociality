@@ -1,0 +1,61 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+entry_mode="${1:?Specify analyze or tests}"
+shift
+entry_package="$(cd "$(dirname "$0")" && pwd -P)"
+entry_project="${IV_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+entry_desktop="${IV_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+entry_python="${IV_PYTHON:-$entry_project/venv/bin/python}"
+if [[ ! -x "$entry_python" ]]; then
+  echo "Research Python not found: $entry_python. Connect XT_Pro or set IV_PYTHON."
+  exit 2
+fi
+if [[ "$entry_mode" != analyze && "$entry_mode" != tests ]]; then
+  echo 'Use RUN_ENTRY_DIAGNOSTICS.command or RUN_TESTS.command.'
+  exit 2
+fi
+mkdir -p "$entry_desktop"
+export PYTHONDONTWRITEBYTECODE=1
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1
+cd "$entry_package"
+"$entry_python" - <<'PY'
+import sys,numpy,pyarrow,duckdb
+assert sys.version_info >= (3,10), 'Python 3.10 or later required'
+sys.path.insert(0,'code')
+from entry_common import verify_package
+verify_package()
+print('PACKAGE_SHA256_OK; Python',sys.version.split()[0],'; NumPy',numpy.__version__,'; PyArrow',pyarrow.__version__,'; DuckDB',duckdb.__version__,'; SciPy not required',flush=True)
+PY
+entry_log="$entry_desktop/run2_entry_diagnostics_${entry_mode}_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+echo "Log: $entry_log"
+entry_awake=()
+if [[ -x /usr/bin/caffeinate ]]; then entry_awake=(/usr/bin/caffeinate -i); fi
+set +e
+{
+  if [[ "$entry_mode" == tests ]]; then
+    echo 'Expected runtime: approximately 20–90 seconds; synthetic data only, zero API requests.'
+    "$entry_python" -m unittest discover -s tests -p 'test_*.py' -v
+  else
+    echo 'Expected runtime: approximately 15–40 minutes for the first run, an unbenchmarked estimate based on the completed 25% timings. Reused reruns should be faster.'
+    echo 'Reuses completed entry Parquets and competitive-score caches. No all-history chronology scan, API requests, or Stockfish.'
+    echo 'Up to 10 workers for scoring; memory-weighted regression scheduling prevents parallel fits from exhausting RAM. Leave the downloader running.'
+    entry_tests="${entry_log%.log}_selftests.log"
+    echo "Offline self-tests: $entry_tests"
+    if "$entry_python" -m unittest discover -s tests -p 'test_*.py' -q > "$entry_tests" 2>&1; then
+      echo 'OFFLINE_SELF_TESTS_OK. Starting the entry diagnostics.'
+    else
+      entry_test_exit=$?
+      cat "$entry_tests"
+      echo 'Self-tests failed; production analysis did not start.'
+      exit "$entry_test_exit"
+    fi
+    "${entry_awake[@]}" "$entry_python" -u code/run_entry.py --project-root "$entry_project" --desktop "$entry_desktop" "$@"
+  fi
+} 2>&1 | tee "$entry_log"
+entry_exit=${PIPESTATUS[0]}
+set -e
+if [[ "$entry_exit" -ne 0 ]]; then
+  echo "Stopped with exit $entry_exit. Completed Parquet checkpoints remain reusable. Return this log: $entry_log"
+fi
+exit "$entry_exit"

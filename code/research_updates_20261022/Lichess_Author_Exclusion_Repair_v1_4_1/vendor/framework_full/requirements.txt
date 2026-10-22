@@ -1,0 +1,7 @@
+numpy>=1.26,<3
+pandas>=2.2,<4
+scipy>=1.15,<1.18
+pyarrow>=17,<26
+duckdb>=1.5.2,<2
+matplotlib>=3.9,<4
+python-chess>=1.999

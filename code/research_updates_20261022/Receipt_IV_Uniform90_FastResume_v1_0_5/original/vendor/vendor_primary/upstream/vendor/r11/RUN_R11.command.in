@@ -1,0 +1,20 @@
+#!/bin/bash
+set -euo pipefail
+r11_code_dir="$(cd "$(dirname "$0")" && pwd)"
+cd "$r11_code_dir"
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1 BLIS_NUM_THREADS=1
+r11_python="${LICHESS_PYTHON:-python3}"
+"$r11_python" -c 'import sys; assert sys.version_info >= (3,10), "Python 3.10+ required. Set LICHESS_PYTHON to an installed interpreter."'
+if ! "$r11_python" -c 'import numpy,pandas,pyarrow,duckdb,scipy,zstandard' >/dev/null 2>&1; then
+  r11_env_dir="${LICHESS_R11_ENV:-$HOME/Desktop/Lichess_Desktop/r11_python_env}"
+  if [ ! -x "$r11_env_dir/bin/python" ]; then "$r11_python" -m venv "$r11_env_dir"; fi
+  "$r11_env_dir/bin/python" -m pip install -r "$r11_code_dir/requirements.txt"
+  r11_python="$r11_env_dir/bin/python"
+fi
+"$r11_python" verify_package.py
+"$r11_python" self_test.py
+if command -v caffeinate >/dev/null 2>&1; then
+  exec caffeinate -i "$r11_python" -u run.py "$@"
+else
+  exec "$r11_python" -u run.py "$@"
+fi

@@ -1,0 +1,79 @@
+"""Reuse the completed reputation run; never rescan the historical archives."""
+from core import *
+
+def parent_run(project, work):
+    design=load(PACKAGE/'authority/parent_design.json')
+    key=digest({k:v for k,v in design.items() if k not in ('workers','memory_mb')})
+    root=Path(project)/'derived/replication/reputation_v100_PRIVATE'/key[:16]
+    for rec in load(PACKAGE/'authority/parent_report_manifest.json'):
+        if rec['file'] in ('DESIGN.json','FEATURE_QA.json','HISTORY_QA.json','SAMPLE.json','ACCOUNT_EXCLUSION.json','INPUT_SCOPE.json'):
+            verify(root/'report'/rec['file'],rec['sha256'],Path(work)/'authentication')
+    if load(root/'report/SUMMARY.json')['status']!='REPUTATION_ANALYSIS_COMPLETE':
+        raise RuntimeError('The expected completed reputation run is not available')
+    features=list(root.glob('features/*/analysis.parquet'))
+    histories=list(root.glob('merged_history/*/events.parquet'))
+    if len(features)!=1 or len(histories)!=1:
+        raise RuntimeError('Expected one completed feature/history branch in the authenticated parent')
+    # Parent checkpoints are read-only; verify their output receipts once per new run.
+    for folder in (features[0].parent,histories[0].parent):
+        done=load(folder/'_DONE.json')
+        for rec in done['files']:
+            verify(folder/rec['path'],rec['sha256'],Path(work)/'authentication')
+    inp=load(root/'INPUTS_PRIVATE.json')
+    return dict(root=str(root),features=str(features[0]),events=str(histories[0]),panels=inp['panels'])
+
+def matched_targets(features, folder, max_sets, threads=4, memory=4096):
+    folder=Path(folder);old=cached(folder)
+    if old:return old
+    folder.mkdir(parents=True,exist_ok=True);c=conn(folder/'spill',threads,memory)
+    try:
+        c.execute('CREATE VIEW allq AS SELECT * FROM '+scan(features))
+        # First recorded rated meeting, before looking at either later games or their type.
+        c.execute(f'''CREATE TEMP TABLE eligible AS SELECT *,
+          year(epoch_ms(start))*4+quarter(epoch_ms(start)) cal_quarter,
+          CASE WHEN cp<=-300 THEN 0 WHEN cp< -100 THEN 1 WHEN cp<100 THEN 2 WHEN cp<300 THEN 3 ELSE 4 END merit_bin
+          FROM allq WHERE NOT repeat AND same_start_other_games=0 AND anchor+{180*DAY}<{END}
+          QUALIFY row_number() OVER(PARTITION BY pair_key ORDER BY start,gid)=1''')
+        c.execute('''CREATE TEMP TABLE cells AS SELECT j,cal_quarter,speed,merit_bin,
+          count(*) n,sum(y::INT) grants,
+          md5(concat_ws(':',j,cal_quarter,speed,merit_bin,'social-sets-v1')) match_id
+          FROM eligible GROUP BY j,cal_quarter,speed,merit_bin HAVING min(y::INT)=0 AND max(y::INT)=1''')
+        c.execute(f'CREATE TEMP TABLE picked AS SELECT * FROM cells ORDER BY match_id LIMIT {int(max_sets)}')
+        copy(c,'''SELECT e.*,p.match_id FROM eligible e JOIN picked p USING(j,cal_quarter,speed,merit_bin)
+          QUALIFY row_number() OVER(PARTITION BY p.match_id,e.y ORDER BY md5(e.gid||':social-choice-v1'))=1
+          ORDER BY match_id,y DESC''',folder/'selected.parquet')
+        n=c.execute('SELECT count(*) FROM '+scan(folder/'selected.parquet')).fetchone()[0]
+        if n<2:raise RuntimeError('No matched grant/claim sets in the declared overlap population')
+        counts=c.execute('SELECT count(*),sum(y::INT) FROM eligible').fetchone()
+        cells=c.execute('SELECT count(*),sum(grants) FROM cells').fetchone()
+        result=dict(eligible_events=counts[0],eligible_grants=counts[1],overlap_cells=cells[0],grants_in_overlap_cells=cells[1],
+          selected_sets=n//2,selected_events=n,requested_max_sets=max_sets,
+          match='Same chooser, calendar quarter, speed, five pre-specified evaluation bands; one grant and one claim per cell',
+          population='First recorded rated meeting, pool/nonadjacent focal opportunity, complete 180-day window; fixed parent 1-in-5 pair sample')
+        dump(folder/'selection.json',result);finish(folder,result);return result
+    finally:c.close()
+
+def add_names_and_expected(parent, selected, folder, project, threads=4, memory=4096):
+    folder=Path(folder);old=cached(folder)
+    if old:return old
+    folder.mkdir(parents=True,exist_ok=True);c=conn(folder/'spill',threads,memory)
+    try:
+        c.execute('CREATE VIEW q AS SELECT * FROM '+scan(selected))
+        paths=[]
+        for rec in parent['panels']:
+            p=relocate(rec['path'],project)
+            if stamp(p)[1:]!=rec['fingerprint'][1:]:raise RuntimeError('Pinned main panel changed since parent run')
+            paths.append(p)
+        c.execute('CREATE VIEW p AS SELECT game_id,chooser_user_id,disconnected_user_id,chooser_username_norm,disconnected_username_norm FROM '+scan(paths))
+        copy(c,'''SELECT q.*,lower(trim(p.chooser_username_norm)) giver_name,
+          lower(trim(p.disconnected_username_norm)) recipient_name FROM q JOIN p ON p.game_id=q.gid
+          AND p.chooser_user_id=q.j AND p.disconnected_user_id=q.i ORDER BY match_id,y DESC''',folder/'targets.parquet')
+        n=c.execute('SELECT count(*) FROM q').fetchone()[0]
+        c.execute('CREATE VIEW t AS SELECT * FROM '+scan(folder/'targets.parquet'))
+        actual,bad=c.execute("SELECT count(*),count(*) FILTER(WHERE giver_name IS NULL OR recipient_name IS NULL OR giver_name IN ('__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__') OR recipient_name IN ('__PRIVATE_VALUE_3__','__PRIVATE_VALUE_4__') OR NOT regexp_full_match(giver_name,'[a-z0-9_-]{1,40}') OR NOT regexp_full_match(recipient_name,'[a-z0-9_-]{1,40}')) FROM t").fetchone()
+        if actual!=n or bad:raise RuntimeError('Username/identity resolution did not match the fixed target roster')
+        copy(c,f'''SELECT q.gid focal_gid,e.gid,e.t FROM q JOIN {scan(parent['events'])} e USING(pair_key)
+          WHERE e.t>=q.start-{90*DAY} AND e.t<=q.anchor+{180*DAY} ORDER BY focal_gid,t,gid''',folder/'expected_rated.parquet')
+        result=dict(target_rows=n,expected_rated_rows=pq.ParquetFile(folder/'expected_rated.parquet').metadata.num_rows)
+        finish(folder,result);return result
+    finally:c.close()

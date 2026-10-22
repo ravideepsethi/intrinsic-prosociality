@@ -1,0 +1,48 @@
+{
+  "package": "Patron_Audience_Cache_Audit_v1_0_0",
+  "archive_name": "Patron_Audience_Cache_Audit_v1_0_0.zip",
+  "archive_sha256": "6d5a9a1a703be1c536ba44d36194850ceb60578eea99ba050086dc4057aab566",
+  "archive_size": 8887,
+  "archive_root": "Patron_Audience_Cache_Audit_v1_0_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "README.md",
+      "published_path": "README.md",
+      "sha256": "76ae91294589b42b9ffda13e6b0083221fd2a74195c3d0f33df626bf0c33971c",
+      "published_sha256": "76ae91294589b42b9ffda13e6b0083221fd2a74195c3d0f33df626bf0c33971c",
+      "size": 3439
+    },
+    {
+      "path": "RUN_CACHE_AUDIT.command",
+      "published_path": "RUN_CACHE_AUDIT.command.in",
+      "sha256": "43dc67ea411ab481cee3bcf472f155ddecdee75c79e3746265f9f9f6d038f938",
+      "published_sha256": "43dc67ea411ab481cee3bcf472f155ddecdee75c79e3746265f9f9f6d038f938",
+      "size": 918
+    },
+    {
+      "path": "audit_patron_audience.py",
+      "published_path": "audit_patron_audience.py",
+      "sha256": "8b108baf97aa5146df1bd2e956c16d201e151b6a76af9bb6ade258e2c43b157c",
+      "published_sha256": "8b108baf97aa5146df1bd2e956c16d201e151b6a76af9bb6ade258e2c43b157c",
+      "size": 13757
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "RUN_TERMINAL.txt",
+      "sha256": "b1bf193a5e7649a808e0c19b7b565c57f4a7bc5fa3c590eebc77527ab4d11de3",
+      "size": 443
+    },
+    {
+      "path": "SHA256SUMS.txt",
+      "sha256": "4241da5641e72db1131fc9bc272b58d4b151b23599b12ac17b792462daf84196",
+      "size": 422
+    },
+    {
+      "path": "VALIDATION.json",
+      "sha256": "0e96f0f6ba22253643342a6ff04e57f42591b7dbe8fc305fe1e1c60c3f9be0b0",
+      "size": 641
+    }
+  ]
+}

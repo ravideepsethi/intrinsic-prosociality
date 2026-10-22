@@ -1,0 +1,174 @@
+{
+  "package": "Receipt_Mechanisms_v1_0_1",
+  "archive_name": "Receipt_Mechanisms_v1_0_1.zip",
+  "archive_sha256": "d0f4517bb5c1ab079d02539c0e8a7f50fc3aed974f5b64563ffb04734bff8842",
+  "archive_size": 47832,
+  "archive_root": "Receipt_Mechanisms_v1_0_1",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "README.txt",
+      "published_path": "README.txt.in",
+      "sha256": "e170f9a7e49afbfb8a19e49163a0d492f3e1210d7c46686488367bf10d4fcf53",
+      "published_sha256": "a9a531bf6419026d6cbfd05fce86c292ae70f1a52da916b2a5b8307d30c5ad53",
+      "size": 5969,
+      "redactions": [
+        {
+          "start": 5280,
+          "end": 5287,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 5288,
+          "end": 5296,
+          "token": "__PRIVATE_VALUE_2__"
+        }
+      ]
+    },
+    {
+      "path": "RUN_MECHANISMS.command",
+      "published_path": "RUN_MECHANISMS.command.in",
+      "sha256": "62ef6c05b75e17b928b437dcfaef253e928cac8b98b3f54a93576a510e2d4153",
+      "published_sha256": "62ef6c05b75e17b928b437dcfaef253e928cac8b98b3f54a93576a510e2d4153",
+      "size": 2426
+    },
+    {
+      "path": "code/bind.py",
+      "published_path": "code/bind.py",
+      "sha256": "76122e506221da66d76e5e3447695a69043283261a26d157ed0fcd59fb4b323e",
+      "published_sha256": "76122e506221da66d76e5e3447695a69043283261a26d157ed0fcd59fb4b323e",
+      "size": 4881
+    },
+    {
+      "path": "code/common.py",
+      "published_path": "code/common.py.in",
+      "sha256": "49f14c0bed2b4cd29c9d9417af095bf1eb4c113f3020196c1260cf6d84950e04",
+      "published_sha256": "8264834065c898d52cb635b29d6dc7013f680432c317c2e16625f8aec8b7a772",
+      "size": 6476,
+      "redactions": [
+        {
+          "start": 488,
+          "end": 495,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 498,
+          "end": 506,
+          "token": "__PRIVATE_VALUE_2__"
+        }
+      ]
+    },
+    {
+      "path": "code/dose.py",
+      "published_path": "code/dose.py",
+      "sha256": "7912b70b8cc4b38286ce4a2fe06a3fc30d9022f6e967d38074db62fda0c839a7",
+      "published_sha256": "7912b70b8cc4b38286ce4a2fe06a3fc30d9022f6e967d38074db62fda0c839a7",
+      "size": 8401
+    },
+    {
+      "path": "code/models.py",
+      "published_path": "code/models.py",
+      "sha256": "2f4d02fdbbec53c3e9ed4a09547bc6be1766fc5bc3612dfae7414fda39e88982",
+      "published_sha256": "2f4d02fdbbec53c3e9ed4a09547bc6be1766fc5bc3612dfae7414fda39e88982",
+      "size": 12980
+    },
+    {
+      "path": "code/prepare.py",
+      "published_path": "code/prepare.py",
+      "sha256": "3dff2d8aba672055bc3e372b299cb2e46fdb6c4dc9093eaebeefeb3034ddfd2f",
+      "published_sha256": "3dff2d8aba672055bc3e372b299cb2e46fdb6c4dc9093eaebeefeb3034ddfd2f",
+      "size": 16325
+    },
+    {
+      "path": "code/receipt_check.py",
+      "published_path": "code/receipt_check.py",
+      "sha256": "77f8b4aea344506d16d7badd2cdb4c13f9a13a03c37095364cad3c0837ed751d",
+      "published_sha256": "77f8b4aea344506d16d7badd2cdb4c13f9a13a03c37095364cad3c0837ed751d",
+      "size": 3350
+    },
+    {
+      "path": "code/report.py",
+      "published_path": "code/report.py",
+      "sha256": "f54225ded39f0ed77f8855993776e19c673d0f3f860b1fe8437386f9025a872c",
+      "published_sha256": "f54225ded39f0ed77f8855993776e19c673d0f3f860b1fe8437386f9025a872c",
+      "size": 8676
+    },
+    {
+      "path": "code/restart.py",
+      "published_path": "code/restart.py",
+      "sha256": "dad61dad11517d2e4692a71717cca4174013af54c749dfed0623a4d28a356182",
+      "published_sha256": "dad61dad11517d2e4692a71717cca4174013af54c749dfed0623a4d28a356182",
+      "size": 2428
+    },
+    {
+      "path": "code/run.py",
+      "published_path": "code/run.py",
+      "sha256": "5542d01741eeac6a3c90a801ffa428151df3a1fcd677cb6dbd76d2ffeea9bed3",
+      "published_sha256": "5542d01741eeac6a3c90a801ffa428151df3a1fcd677cb6dbd76d2ffeea9bed3",
+      "size": 3377
+    },
+    {
+      "path": "requirements.txt",
+      "published_path": "requirements.txt",
+      "sha256": "044fdf43b3f561030b1400e8f583c414881ba0c9eafa6f1743e059f321bceff2",
+      "published_sha256": "044fdf43b3f561030b1400e8f583c414881ba0c9eafa6f1743e059f321bceff2",
+      "size": 48
+    },
+    {
+      "path": "tests/test_mechanisms.py",
+      "published_path": "tests/test_mechanisms.py.in",
+      "sha256": "c90b5c8fa1b7b9ed07dadd9441f9f7944430fbf51758273776398dbdef524a39",
+      "published_sha256": "5bd87f0130bc3a0efb6f0c00d883a821c6143e4bbc472df9e92ad3c812d6e460",
+      "size": 18328,
+      "redactions": [
+        {
+          "start": 6810,
+          "end": 6817,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 6824,
+          "end": 6832,
+          "token": "__PRIVATE_VALUE_2__"
+        }
+      ]
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "ANALYSIS_PLAN.txt",
+      "sha256": "e895cc7cd86b0bd76973aa97f43b689ebd942381bd25926833f6034786496194",
+      "size": 9633
+    },
+    {
+      "path": "PACKAGE_MANIFEST.sha256",
+      "sha256": "95cc61b6b2bf2f557b79e28ac1becdedee189dd37b63b6555fe3077b534afc02",
+      "size": 1613
+    },
+    {
+      "path": "VALIDATION.txt",
+      "sha256": "aa42521129277c113421bcdf17f26f2c5c3bbed764da35bf7206691e78621b79",
+      "size": 2988
+    },
+    {
+      "path": "authority/parents.json",
+      "sha256": "d832913b855b02ec69f5a1c720a6a7207e7bf08a36af98b80136cb214f5d37bf",
+      "size": 574
+    },
+    {
+      "path": "authority/pool_main.json",
+      "sha256": "06e3a0067c24026973fa1dce9c85b05ceee6a158232a36807263c4beb969666f",
+      "size": 6626
+    },
+    {
+      "path": "authority/recorded_receipt_definition.txt",
+      "sha256": "92ad3806cf1ec406f8b9677901c278728bbaac4610275175941affce4b832611",
+      "size": 1473
+    },
+    {
+      "path": "authority/restart.json",
+      "sha256": "b766ce8bc3bece9cc676341c4389dfd72d987b0dc260eeac3a656659e21223b5",
+      "size": 215
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+rep_pkg="$(cd "$(dirname "$0")" && pwd -P)"
+rep_project="${SOCIAL_CONTACT_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+rep_desktop="${SOCIAL_CONTACT_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+export PYTHONDONTWRITEBYTECODE=1
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1
+rep_candidates=()
+if [[ -n "${SOCIAL_CONTACT_PYTHON:-}" ]]; then
+  rep_candidates+=("$SOCIAL_CONTACT_PYTHON")
+else
+  rep_candidates+=("$rep_project/venv/bin/python")
+  if [[ -n "${CONDA_PREFIX:-}" ]]; then rep_candidates+=("$CONDA_PREFIX/bin/python"); fi
+  rep_candidates+=("$HOME/miniforge3/bin/python" "$HOME/miniconda3/bin/python" "$HOME/anaconda3/bin/python" "/opt/anaconda3/bin/python" "/opt/homebrew/Caskroom/miniforge/base/bin/python")
+  while IFS= read -r rep_candidate; do [[ -z "$rep_candidate" ]] || rep_candidates+=("$rep_candidate"); done < <(command -v python3 python 2>/dev/null || true)
+fi
+rep_python=""
+for rep_candidate in "${rep_candidates[@]}"; do
+  if [[ -x "$rep_candidate" ]] && "$rep_candidate" -c 'import sys,numpy,pyarrow,duckdb; assert sys.version_info >= (3,10)' >/dev/null 2>&1; then rep_python="$rep_candidate"; break; fi
+done
+if [[ -z "$rep_python" ]]; then
+  echo 'No existing Python 3.10+ with NumPy, PyArrow and DuckDB was found. Activate your research environment or set SOCIAL_CONTACT_PYTHON, then rerun.'
+  exit 2
+fi
+mkdir -p "$rep_desktop"
+rep_log="$rep_desktop/LICHESS_SOCIAL_CONTACT_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+rep_awake=()
+if [[ -x /usr/bin/caffeinate ]]; then rep_awake=(/usr/bin/caffeinate -i); fi
+cd "$rep_pkg"
+set +e
+(
+  set -e
+  echo "Python: $rep_python"
+  echo "Log: $rep_log"
+  "$rep_python" -u -m unittest discover -s tests -p 'test_*.py' -q
+  echo 'OFFLINE_TESTS_OK'
+  "${rep_awake[@]}" "$rep_python" -u code/run_social.py --project-root "$rep_project" --desktop "$rep_desktop" "$@"
+) 2>&1 | tee "$rep_log"
+rep_status=${PIPESTATUS[0]}
+set -e
+if [[ "$rep_status" -ne 0 ]]; then echo "Stopped; completed checkpoints remain reusable. Return this log and any printed report ZIP: $rep_log"; fi
+exit "$rep_status"

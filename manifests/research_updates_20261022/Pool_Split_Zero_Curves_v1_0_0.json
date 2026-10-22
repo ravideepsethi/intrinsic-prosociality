@@ -1,0 +1,181 @@
+{
+  "package": "Pool_Split_Zero_Curves_v1_0_0",
+  "archive_name": "Pool_Split_Zero_Curves_v1_0_0.zip",
+  "archive_sha256": "2cffc376b623cd6ab1217c8e4e117f2351bbc4dda778a927f1657e7e94cd2364",
+  "archive_size": 244619,
+  "archive_root": "Pool_Split_Zero_Curves_v1_0_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "METHODS.md",
+      "published_path": "METHODS.md",
+      "sha256": "3ea8c7fdfb7c2082071fbca90e3ed5c8ee849422e2953a269398d7f309e09bc4",
+      "published_sha256": "3ea8c7fdfb7c2082071fbca90e3ed5c8ee849422e2953a269398d7f309e09bc4",
+      "size": 5982
+    },
+    {
+      "path": "README.md",
+      "published_path": "README.md",
+      "sha256": "bfc73a3efe627018eeb4684e047a129b35a3b16873decfe9757ad2830a36ac07",
+      "published_sha256": "bfc73a3efe627018eeb4684e047a129b35a3b16873decfe9757ad2830a36ac07",
+      "size": 2574
+    },
+    {
+      "path": "RUN_SPLIT_ZERO.command",
+      "published_path": "RUN_SPLIT_ZERO.command.in",
+      "sha256": "a54498e8a394a92cf0469401451494aeb61c9896fa45dbaaff76744a83be7111",
+      "published_sha256": "a54498e8a394a92cf0469401451494aeb61c9896fa45dbaaff76744a83be7111",
+      "size": 2729
+    },
+    {
+      "path": "VALIDATION.md",
+      "published_path": "VALIDATION.md",
+      "sha256": "d2c12d94e7a732688627911d1ce09c92e1e8e7c43795f184be025b729c2f8a56",
+      "published_sha256": "d2c12d94e7a732688627911d1ce09c92e1e8e7c43795f184be025b729c2f8a56",
+      "size": 2015
+    },
+    {
+      "path": "data_io.py",
+      "published_path": "data_io.py",
+      "sha256": "73347dcd015f2be396c5f0341c165814b0747829a930c8a811d7df2196ec6ebf",
+      "published_sha256": "73347dcd015f2be396c5f0341c165814b0747829a930c8a811d7df2196ec6ebf",
+      "size": 5140
+    },
+    {
+      "path": "fe_engine.py",
+      "published_path": "fe_engine.py",
+      "sha256": "c58084691439c3c4a788400a4f8e1b81847609e8b20e660947f5ad85d172da2e",
+      "published_sha256": "c58084691439c3c4a788400a4f8e1b81847609e8b20e660947f5ad85d172da2e",
+      "size": 18741
+    },
+    {
+      "path": "integration_test.py",
+      "published_path": "integration_test.py",
+      "sha256": "7794a761aaffe826071363ed878fbaab264f0435c71b2de9ebd9ffb75da0ceb6",
+      "published_sha256": "7794a761aaffe826071363ed878fbaab264f0435c71b2de9ebd9ffb75da0ceb6",
+      "size": 1930
+    },
+    {
+      "path": "pooled_engine.py",
+      "published_path": "pooled_engine.py",
+      "sha256": "8f7d74bd85d742da2d5dba02e0ec601bb3b2547e52b4c9786374ea3bc7c94aa6",
+      "published_sha256": "8f7d74bd85d742da2d5dba02e0ec601bb3b2547e52b4c9786374ea3bc7c94aa6",
+      "size": 18306
+    },
+    {
+      "path": "pooled_utils.py",
+      "published_path": "pooled_utils.py",
+      "sha256": "bf1b00defcbf75d1b1acc8d6d166167787ace3b69bce2c8d667ac27a5f3d1c9e",
+      "published_sha256": "bf1b00defcbf75d1b1acc8d6d166167787ace3b69bce2c8d667ac27a5f3d1c9e",
+      "size": 2000
+    },
+    {
+      "path": "requirements.txt",
+      "published_path": "requirements.txt",
+      "sha256": "8025e1e46c573b3b7e3c31717171cd8df0f40cb8cdda4889cf286ccf97d8be6f",
+      "published_sha256": "8025e1e46c573b3b7e3c31717171cd8df0f40cb8cdda4889cf286ccf97d8be6f",
+      "size": 79
+    },
+    {
+      "path": "run_split.py",
+      "published_path": "run_split.py",
+      "sha256": "37b5c7f72ea0ddc689188d012f60358de2788d761f540609e31e82657b120608",
+      "published_sha256": "37b5c7f72ea0ddc689188d012f60358de2788d761f540609e31e82657b120608",
+      "size": 15259
+    },
+    {
+      "path": "self_test.py",
+      "published_path": "self_test.py",
+      "sha256": "a8a4fd77e669bfc8929fe6915f39f3d6175973ea010c429d1e931d4ecd7ff24e",
+      "published_sha256": "a8a4fd77e669bfc8929fe6915f39f3d6175973ea010c429d1e931d4ecd7ff24e",
+      "size": 7399
+    },
+    {
+      "path": "source/__init__.py",
+      "published_path": "source/__init__.py",
+      "sha256": "52b1da5d4a8717236fccd7317e87a652c65eebe4de6a71d6d6981d413934b76d",
+      "published_sha256": "52b1da5d4a8717236fccd7317e87a652c65eebe4de6a71d6d6981d413934b76d",
+      "size": 50
+    },
+    {
+      "path": "source/pool_wave1_common.py",
+      "published_path": "source/pool_wave1_common.py",
+      "sha256": "f9c714c549c6cd68a7d2dbdb2c17d5abacfdfc12dc6526752f03ab2505bbff43",
+      "published_sha256": "f9c714c549c6cd68a7d2dbdb2c17d5abacfdfc12dc6526752f03ab2505bbff43",
+      "size": 21988
+    },
+    {
+      "path": "split_report.py",
+      "published_path": "split_report.py",
+      "sha256": "48860f1ebc2bf2c2702806fae25a0387af9919ebfa0cd6e9d1180270bef279ef",
+      "published_sha256": "48860f1ebc2bf2c2702806fae25a0387af9919ebfa0cd6e9d1180270bef279ef",
+      "size": 8780
+    },
+    {
+      "path": "stage_base.py",
+      "published_path": "stage_base.py",
+      "sha256": "56a38eafd01f326d33d12b43a20e0cdadf5ada1c2e39647077b6a3ff5b3cba7b",
+      "published_sha256": "56a38eafd01f326d33d12b43a20e0cdadf5ada1c2e39647077b6a3ff5b3cba7b",
+      "size": 6074
+    },
+    {
+      "path": "surface_model.py",
+      "published_path": "surface_model.py",
+      "sha256": "7c46937dac678766122b56a72ec69b0ca6b41878fc8c8e0873f1bc03a318310e",
+      "published_sha256": "7c46937dac678766122b56a72ec69b0ca6b41878fc8c8e0873f1bc03a318310e",
+      "size": 13483
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "PACKAGE_MANIFEST.sha256",
+      "sha256": "2408d64bc1213b68492953e524cd57d56eca8c4ed7abb154797267167112f2a5",
+      "size": 2319
+    },
+    {
+      "path": "RUN_TERMINAL.txt",
+      "sha256": "b9510f544f6ba5c98b03b4959a34befee3c3f336d3531f43f95af118c2bd2199",
+      "size": 544
+    },
+    {
+      "path": "authority/SAMPLE_AUTHORITY.json",
+      "sha256": "81c34113e7a888629a834a17235a71dcf369a2d590755fd9412ee42151d9b2f3",
+      "size": 1234
+    },
+    {
+      "path": "evidence/PREVIOUS_COMPETITIVE_COUNTS.json",
+      "sha256": "bedd421cf398c4dff70d20fd560d44fb549b66d779937517d554c761b7972665",
+      "size": 1368
+    },
+    {
+      "path": "evidence/PRIOR_STABLE_CURVES.csv",
+      "sha256": "615a181510fcff44088743d6369da7447f1c728dff4251df52ba21901dcde8aa",
+      "size": 366452
+    },
+    {
+      "path": "evidence/PRIOR_STABLE_SAMPLE_COUNTS.json",
+      "sha256": "8ec5c3304034bbf07f702f9d1e4e593ed7be618be7f4872c4df54c79e27f893b",
+      "size": 5042
+    },
+    {
+      "path": "evidence/PRIOR_STABLE_SAMPLE_LINEAGE.json",
+      "sha256": "66a52b867222aa4f020d26553518e17dee84f3017e3badf80fea01693dbb36c9",
+      "size": 776
+    },
+    {
+      "path": "evidence/PRIOR_STABLE_SUCCESS.json",
+      "sha256": "23bf108f0fc948e1129d0b6741b6f32ccd21dd4b7d2e68dd4b62a8795e6079e8",
+      "size": 5725
+    },
+    {
+      "path": "evidence/Pool_Main_Sample_24M_Report.zip",
+      "sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+      "size": 96936
+    },
+    {
+      "path": "evidence/Pool_Main_Sample_24M_Report.zip.sha256",
+      "sha256": "d2e6c0953ff2de7cc7235b98d568c884e4fa8067b8aa81d22efe1ac3484d6f59",
+      "size": 128
+    }
+  ]
+}

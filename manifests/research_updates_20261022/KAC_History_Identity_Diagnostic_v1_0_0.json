@@ -1,0 +1,123 @@
+{
+  "package": "KAC_History_Identity_Diagnostic_v1_0_0",
+  "archive_name": "KAC_History_Identity_Diagnostic_v1_0_0.zip",
+  "archive_sha256": "eddc887a2b379b8aaeb31d21ad49fc771e2e314c8b425f2e69b2fec2d3e9c9a8",
+  "archive_size": 188721,
+  "archive_root": "KAC_History_Identity_Diagnostic_v1_0_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "README.md",
+      "published_path": "README.md",
+      "sha256": "df5b09030a7afa64d0c0277846ef13d4409288aded9d3eb0a423f013642381dd",
+      "published_sha256": "df5b09030a7afa64d0c0277846ef13d4409288aded9d3eb0a423f013642381dd",
+      "size": 4042
+    },
+    {
+      "path": "RUN_DIAGNOSTIC.command",
+      "published_path": "RUN_DIAGNOSTIC.command.in",
+      "sha256": "32df10bab0b1cd63498f09e8af52c71607bbb0641fc6bd612e405709cc8a4daa",
+      "published_sha256": "32df10bab0b1cd63498f09e8af52c71607bbb0641fc6bd612e405709cc8a4daa",
+      "size": 1059
+    },
+    {
+      "path": "VALIDATION.md",
+      "published_path": "VALIDATION.md",
+      "sha256": "18b8d158e6980d54857ac4293b330fefef727ea25e6f4f5d1280290d73987f97",
+      "published_sha256": "18b8d158e6980d54857ac4293b330fefef727ea25e6f4f5d1280290d73987f97",
+      "size": 1354
+    },
+    {
+      "path": "identity.py",
+      "published_path": "identity.py",
+      "sha256": "179c56e647714994303a32f35d329280528826da519006e6b96d3a348b119ea8",
+      "published_sha256": "179c56e647714994303a32f35d329280528826da519006e6b96d3a348b119ea8",
+      "size": 12221
+    },
+    {
+      "path": "run.py",
+      "published_path": "run.py",
+      "sha256": "c212e3cad258a77851d741dd7e467d985c9e431d74a220295826d8d811bbdee4",
+      "published_sha256": "c212e3cad258a77851d741dd7e467d985c9e431d74a220295826d8d811bbdee4",
+      "size": 16813
+    },
+    {
+      "path": "test_identity.py",
+      "published_path": "test_identity.py",
+      "sha256": "e5ac2009f2f8bbb1ef1af79728b88d5e5a4286b3d044672104ef15f3e8455c53",
+      "published_sha256": "e5ac2009f2f8bbb1ef1af79728b88d5e5a4286b3d044672104ef15f3e8455c53",
+      "size": 8806
+    },
+    {
+      "path": "util.py",
+      "published_path": "util.py",
+      "sha256": "cef03563c2098b61a02f1d2ec64950ba76717756100eb29aa65825f85251a86f",
+      "published_sha256": "cef03563c2098b61a02f1d2ec64950ba76717756100eb29aa65825f85251a86f",
+      "size": 6104
+    },
+    {
+      "path": "vendor/merit/source/pool_wave1_common.py",
+      "published_path": "vendor/merit/source/pool_wave1_common.py",
+      "sha256": "f9c714c549c6cd68a7d2dbdb2c17d5abacfdfc12dc6526752f03ab2505bbff43",
+      "published_sha256": "f9c714c549c6cd68a7d2dbdb2c17d5abacfdfc12dc6526752f03ab2505bbff43",
+      "size": 21988
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "AUTHORITY.json",
+      "sha256": "984a73438367d1294b5ab7a402062f9e546041f9aff48c4ea4e913544d9aa6ca",
+      "size": 838
+    },
+    {
+      "path": "PACKAGE_MANIFEST.json",
+      "sha256": "10aac8b35c4caac8a1639041ed8d08b6da9d248064ef5503942e1eada650ec49",
+      "size": 2964
+    },
+    {
+      "path": "authority/CONFIG.json",
+      "sha256": "d10b704520140e75266fadb959f11ad63282920fa7a7f38fdddfc03b00efeaea",
+      "size": 308
+    },
+    {
+      "path": "authority/HISTORY_INPUTS.json",
+      "sha256": "b828047aebd818d944f62844af81b4c74aa3609e1f4609b62e45808b653f0a40",
+      "size": 267
+    },
+    {
+      "path": "authority/PARENT_PACKAGE_MANIFEST.json",
+      "sha256": "3bca6ebaf5da916cdd4f88c154441c0d2080efbbd969c2a9d4df720d9dce9076",
+      "size": 11684
+    },
+    {
+      "path": "authority/REPORT_MANIFEST.json",
+      "sha256": "4e096b3a7cd73209ba5bbd2090021d44cfe6e73b1902bb1ecaa28d8dab090a06",
+      "size": 921
+    },
+    {
+      "path": "authority/STATUS.json",
+      "sha256": "eda5ef2604a8e591e9e1e109bb4793555ec79ce81b946ae473449836945a64ab",
+      "size": 517
+    },
+    {
+      "path": "authority/chronology.tsv",
+      "sha256": "c169bf9e346defde62047a3c2048758c296b1f0598fee70d2cc1e660121536d8",
+      "size": 247478
+    },
+    {
+      "path": "vendor/merit/authority/SAMPLE_AUTHORITY.json",
+      "sha256": "81c34113e7a888629a834a17235a71dcf369a2d590755fd9412ee42151d9b2f3",
+      "size": 1234
+    },
+    {
+      "path": "vendor/merit/evidence/Pool_Main_Sample_24M_Report.zip",
+      "sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+      "size": 96936
+    },
+    {
+      "path": "vendor/merit/evidence/Pool_Main_Sample_24M_Report.zip.sha256",
+      "sha256": "d2e6c0953ff2de7cc7235b98d568c884e4fa8067b8aa81d22efe1ac3484d6f59",
+      "size": 128
+    }
+  ]
+}

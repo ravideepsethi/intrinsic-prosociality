@@ -1,0 +1,26 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+fw_package="$(cd "$(dirname "$0")" && pwd -P)"
+fw_project="${IV_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+fw_base="${IV_PYTHON:-$fw_project/venv/bin/python}"
+fw_environment="$fw_project/venvs/framework_tests_v100"
+if [[ -n "${FW_PYTHON:-}" ]]; then exec bash "$fw_package/RUN_FRAMEWORK_TESTS.command" "$@"; fi
+if [[ ! -x "$fw_base" ]]; then echo "Existing research Python missing: $fw_base. Mount XT_Pro or set IV_PYTHON."; exit 2; fi
+if [[ ! -d "$fw_environment" ]]; then
+  echo "Creating separate framework Python environment; the existing research environment is retained."
+  "$fw_base" -m venv --system-site-packages "$fw_environment"
+fi
+fw_python="$fw_environment/bin/python"
+if [[ ! -x "$fw_python" ]]; then echo "Incomplete framework environment: $fw_environment"; exit 2; fi
+fw_dep_work="$(mktemp -d "${TMPDIR:-/tmp}/framework-deps.XXXXXX")"
+trap 'rm -rf "$fw_dep_work"' EXIT
+"$fw_python" "$fw_package/code/check_dependencies.py" --prepare "$fw_dep_work"
+if [[ -s "$fw_dep_work/requirements.txt" ]]; then
+  echo "Installing only missing or incompatible dependencies into the separate environment, keeping working scientific package versions pinned."
+  "$fw_python" -m pip install --prefer-binary --only-binary=numpy,scipy,pandas,pyarrow,matplotlib,duckdb \
+    --constraint "$fw_dep_work/constraints.txt" --requirement "$fw_dep_work/requirements.txt"
+fi
+"$fw_python" "$fw_package/code/check_dependencies.py"
+export FW_PYTHON="$fw_python"
+bash "$fw_package/RUN_FRAMEWORK_TESTS.command" "$@"

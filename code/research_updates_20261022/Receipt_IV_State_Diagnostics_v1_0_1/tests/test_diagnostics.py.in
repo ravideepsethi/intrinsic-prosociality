@@ -1,0 +1,196 @@
+import sys,unittest,tempfile,math,json
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'code'))
+from common import *
+import states,diagnostics as d,contracts,evidence
+import run,zipfile
+from unittest import mock
+
+def prediction(r,opp,rd,ord_,color,score,post):
+    g=1/math.sqrt(1+3*(ord_/173.7178)**2/math.pi**2)
+    e=1/(1+math.exp(-g*(r-opp+color*(11.782457 if post else 0))/173.7178))
+    k=173.7178*g/(1/(rd/173.7178)**2+g*g*e*(1-e))
+    return k*(score-e)
+
+def fixture(root):
+    aa=[];tt=[];ee=[]
+    cases=[('2025-11-10T12:00:00Z','white',5,45,False),
+           ('2025-11-10T12:01:00Z','black',5,45,False),
+           ('2025-11-24T12:00:00Z','white',5,45,True),
+           ('2025-11-24T12:01:00Z','black',5,45,True),
+           ('2026-01-20T12:00:00Z','white',0,250,True)]
+    for k,(date,color,gap,rd,post) in enumerate(cases):
+        t=d.ms(date);gid='game'+str(k);op=10+2*k;rec=op+1;wr=1500;br=1500+gap
+        w=op if color=='white' else rec;b=rec if color=='white' else op
+        trow=dict(game_id=gid,utc_ms=t,archive_ordinal=k,white_id=w,black_id=b,white_elo=wr,black_elo=br,
+            white_pre_rd=rd,black_pre_rd=rd,white_prior_games=120,black_prior_games=130,
+            white_last_ms=t-100*DAY,black_last_ms=t-100*DAY,result_code=1,
+            white_rating_diff=0.,black_rating_diff=0.,white_pred=prediction(wr,br,rd,rd,1,.5,post),
+            black_pred=prediction(br,wr,rd,rd,-1,.5,post),month=date[:7],speed='blitz')
+        tt.append(trow)
+        reached=k%2==0;ot=t+DAY
+        lc='white' if reached else ''
+        period=('post' if ot>=d.POLICY_HI else 'pre') if reached else 'no_observed_later_choice'
+        aa.append(dict(game_id=gid,month=date[:7],recipient_id=rec,opponent_id=op,archive_start_ms=t,
+            archive_ordinal=k,anchor_ms=t+1000,index_chooser_color=color,speed='blitz',
+            recipient_rating=br if color=='white' else wr,opponent_rating=wr if color=='white' else br,
+            recipient_rd=None,opponent_rd=None,authenticated_rating_states_attached=False,
+            calendar_primary_7d_floor5=True,calendar_common5_10=k!=1,calendar_independently_spaced_floor10=k!=1,
+            support_30d_floor5=k!=0,support_30d_floor10=k!=0,adjusted_30d=.02,
+            reached=reached,later_choice_is_identified=reached,outcome_color=lc,outcome_t=ot if reached else -1,
+            later_choice_policy_period=period,later_white_x_post=d.later_interaction(reached,reached,lc,ot),
+            index_policy_period='post' if post else 'pre',y_calendar=bool(k%2),received=False))
+        ee += [dict(user_id=op,speed='blitz',games_seen=100),dict(user_id=rec,speed='blitz',games_seen=100)]
+    for name,rows in [('analysis.parquet',aa),('targets_PRIVATE.parquet',tt),('established_PRIVATE.parquet',ee)]:
+        pq.write_table(pa.Table.from_pylist(rows),root/name)
+    return aa,tt,ee
+
+class DiagnosticTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp=tempfile.TemporaryDirectory();self.p=Path(self.tmp.name);self.a,self.t,self.e=fixture(self.p)
+        self.c=connection(self.p/'spill',2,512)
+    def tearDown(self):self.c.close();self.tmp.cleanup()
+    def join(self):
+        self.c.execute('CREATE OR REPLACE VIEW j AS '+states.oriented_query(self.p/'analysis.parquet',self.p/'targets_PRIVATE.parquet',self.p/'established_PRIVATE.parquet'))
+    def enriched(self):
+        write_json(self.p/'_DONE.json',{'fixture':True})
+        job=dict(code='test',inputs=[contracts.snap(self.p/'analysis.parquet'),contracts.snap(self.p/'_DONE.json')],
+            path=str(self.p/'analysis.parquet'),prepared=str(self.p),index=0,threads=2,memory_mb=512,
+            work=str(self.p/'work'),auth=str(self.p/'auth'))
+        r=states.enrich_job(job);return r,job
+    def test_recipient_opponent_orientation_and_identity(self):
+        self.join();states.validate_join(self.c,5)
+        n=self.c.execute('SELECT count(*) FROM j WHERE state_recipient_id=recipient_id AND state_opponent_id=opponent_id').fetchone()[0]
+        self.assertEqual(n,5)
+    def test_identity_mismatch_fails_closed(self):
+        self.t[0]['white_id']=98765;pq.write_table(pa.Table.from_pylist(self.t),self.p/'targets_PRIVATE.parquet')
+        self.join()
+        with self.assertRaisesRegex(RuntimeError,'identity'):states.validate_join(self.c,5)
+    def test_rating_anchor_mismatch_fails_closed(self):
+        self.t[0]['white_elo']+=1;pq.write_table(pa.Table.from_pylist(self.t),self.p/'targets_PRIVATE.parquet')
+        self.join()
+        with self.assertRaisesRegex(RuntimeError,'identity'):states.validate_join(self.c,5)
+    def test_duplicate_target_fails_closed(self):
+        pq.write_table(pa.Table.from_pylist(self.t+[self.t[0]]),self.p/'targets_PRIVATE.parquet');self.join()
+        with self.assertRaisesRegex(RuntimeError,'row count'):states.validate_join(self.c,5)
+    def test_missing_target_fails_closed(self):
+        pq.write_table(pa.Table.from_pylist(self.t[1:]),self.p/'targets_PRIVATE.parquet');self.join()
+        with self.assertRaisesRegex(RuntimeError,'lacks'):states.validate_join(self.c,5)
+    def test_primary_rows_outcome_flags_and_nonreachers_unchanged(self):
+        r,job=self.enriched();p=Path(r['path']);t=pq.read_table(p).to_pylist()
+        original={x['game_id']:x for x in self.a}
+        for row in t:
+            for k,v in original[row['game_id']].items():
+                if k not in ('recipient_rd','opponent_rd','authenticated_rating_states_attached'):self.assertEqual(row[k],v)
+            self.assertIsNotNone(row['recipient_rd']);self.assertIsNotNone(row['opponent_rd'])
+        h=sha(p);r2=states.enrich_job(job);self.assertEqual(h,sha(r2['path']))
+    def test_matched_calibration_ties_and_returning_strata(self):
+        r,_=self.enriched();self.c.execute('CREATE VIEW a AS SELECT * FROM '+scan(r['path']))
+        out=self.p/'out';out.mkdir();info=d.calibration_tables(self.c,out)
+        self.assertLess(info['max_fixed_state_formula_difference'],1e-10)
+        dist=pq.read_table(out/'NEAR_ZERO_DRAW_DISTRIBUTIONS.parquet').to_pylist()
+        self.assertTrue(any(x['gap_bin']=='displayed_tie' and not x['sign_flip_band'] for x in dist))
+        self.assertTrue(any(x['stratum']=='returning_strict' for x in dist))
+        matched=pq.read_table(out/'CALIBRATION_MATCHED_CELLS.parquet').to_pylist()
+        self.assertTrue(any(x['baseline_matched'] for x in matched));self.assertTrue(any(not x['baseline_matched'] for x in matched))
+    def test_cutoff_inequality_is_strict(self):
+        end=d.ms('2026-01-30T00:00:00Z');a=end-90*DAY
+        self.assertEqual(d.complete_window([a-1,a,a+1],end).tolist(),[True,False,False])
+    def test_later_color_nonreacher_ambiguous_bracket_and_boundaries(self):
+        self.assertIsNone(d.later_interaction(False,False,'',-1))
+        self.assertIsNone(d.later_interaction(True,False,'white',d.POLICY_HI))
+        self.assertIsNone(d.later_interaction(True,True,'white',d.POLICY_LO))
+        self.assertEqual(d.later_interaction(True,True,'white',d.POLICY_LO-1),0)
+        self.assertEqual(d.later_interaction(True,True,'white',d.POLICY_HI),1)
+        self.assertEqual(d.later_interaction(True,True,'black',d.POLICY_HI),0)
+    def test_cutoff_counts_and_lag30_support_floor(self):
+        r,_=self.enriched();self.c.execute('CREATE VIEW a AS SELECT * FROM '+scan(r['path']))
+        out=self.p/'out';out.mkdir();d.cutoff_tables(self.c,out)
+        self.c.execute('CREATE VIEW cuts AS SELECT * FROM '+scan(out/'CUTOFF_SAMPLE_COUNTS.parquet'))
+        vals=self.c.execute("SELECT sum(primary_rows),sum(lag30_floor5_on_primary_rows) FROM cuts WHERE endpoint='calendar_only'").fetchone()
+        self.assertEqual(vals,(5,4))
+        self.assertEqual(self.c.execute("SELECT coalesce(sum(index_post_color_rows),0) FROM cuts WHERE endpoint='source_day_guard'").fetchone()[0],0)
+    def test_artificial_nonreacher_color_is_rejected(self):
+        r,_=self.enriched();self.c.execute('CREATE VIEW a AS SELECT * REPLACE(0 AS later_white_x_post) FROM '+scan(r['path']))
+        out=self.p/'out';out.mkdir()
+        with self.assertRaisesRegex(RuntimeError,'missingness'):d.cutoff_tables(self.c,out)
+    def test_authenticated_file_mutation_is_rejected(self):
+        f=self.p/'input.txt';f.write_text('a');rec=receipt(f);checked(f,rec,self.p/'auth')
+        f.write_text('b')
+        with self.assertRaisesRegex(RuntimeError,'checksum'):checked(f,rec,self.p/'auth')
+    def test_author_policy_and_deployment_separation(self):
+        self.assertEqual(contracts.ACCOUNT_POLICY['excluded_usernames'],[])
+        self.assertEqual(set(contracts.ACCOUNT_POLICY['retained_author_usernames']),{'__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__'})
+        ev=evidence.source_evidence();self.assertNotEqual(ev['author_timestamp'],ev['merge_timestamp'])
+        self.assertIsNone(ev['deployment_timestamp']);self.assertIsNone(ev['mechanics_censor'])
+
+    def preparation_input(self):
+        targets=[];snapshots=[]
+        for month in sorted({r['month'] for r in self.t}):
+            f=self.p/('source_'+month+'.parquet')
+            # Real replay targets omit partition month/speed columns. Exercise
+            # the exact UNION query which failed in the original release.
+            pq.write_table(pa.Table.from_pylist([{k:v for k,v in r.items() if k not in ('month','speed')}
+                for r in self.t if r['month']==month]),f)
+            targets.append(dict(path=str(f),month=month,speed='blitz'));snapshots.append(contracts.snap(f))
+        cp=self.p/'source_checkpoint.parquet'
+        pq.write_table(pa.Table.from_pylist(self.e+[dict(user_id=900,speed='blitz',games_seen=99)]),cp)
+        snapshots.append(contracts.snap(cp))
+        return dict(snapshots=snapshots,targets=targets,checkpoints=[dict(path=str(cp),speed='blitz')])
+
+    def test_real_prepare_query_partition_labels_history_floor_and_resume(self):
+        inp=self.preparation_input();root=self.p/'prepared_root'
+        p=states.prepare(inp,root,'test',2,512,self.p/'auth')
+        rows=pq.ParquetFile(p/'targets_PRIVATE.parquet').read().to_pylist()
+        self.assertEqual({r['month'] for r in rows},{'2025-11','2026-01'})
+        self.assertEqual({r['speed'] for r in rows},{'blitz'})
+        self.assertEqual(len(rows),5)
+        erows=pq.ParquetFile(p/'established_PRIVATE.parquet').read().to_pylist()
+        self.assertNotIn(900,{r['user_id'] for r in erows})
+        h=sha(p/'targets_PRIVATE.parquet')
+        p2=states.prepare(inp,root,'test',2,512,self.p/'auth')
+        self.assertEqual(p,p2);self.assertEqual(h,sha(p2/'targets_PRIVATE.parquet'))
+
+    def test_prepare_rejects_invalid_state_before_enrichment(self):
+        self.t[0]['white_pre_rd']=501
+        inp=self.preparation_input()
+        with self.assertRaisesRegex(RuntimeError,'Invalid replay target state'):
+            states.prepare(inp,self.p/'bad_prepare','test',2,512,self.p/'auth')
+
+    def test_full_runner_preparation_workers_reports_ready_and_resume(self):
+        # Substitute only remote/full-data authentication and fixed population
+        # counts. Execute the real preparation, process pool, SQL diagnostics,
+        # lineage inventory, READY writer and public ZIP exporter twice.
+        inp=self.preparation_input();project=self.p/'project';desktop=self.p/'desktop'
+        project.mkdir();desktop.mkdir();paths=[];snaps=[]
+        for k,rows in enumerate((self.a[:2],self.a[2:])):
+            f=self.p/('analysis_'+str(k)+'.parquet');pq.write_table(pa.Table.from_pylist(rows),f)
+            paths.append(str(f));snaps.append(contracts.snap(f))
+        manifest=self.p/'parent_manifest.json';write_json(manifest,{'fixture':True});snaps.append(contracts.snap(manifest))
+        assembly=dict(paths=paths,manifest=str(manifest),snapshots=snaps)
+        before={r['path']:sha(r['path']) for r in snaps+inp['snapshots']}
+        with mock.patch.object(contracts,'verify_package'),mock.patch.object(contracts,'authenticate_assembly',return_value=assembly),\
+             mock.patch.object(contracts,'authenticate_states',return_value=inp),mock.patch.object(d,'EXPECTED_COUNTS',(5,5,5,4,5,0,2)):
+            args=['--project-root',str(project),'--desktop',str(desktop),'--workers','2','--memory-gb','4']
+            self.assertEqual(run.main(args),0)
+            self.assertEqual(run.main(args),0)
+        ready=load(project/'derived/replication_36m/receipt_iv_state_diagnostics_v100_PRIVATE/READY_FOR_IV_SPECIFICATION_PRIVATE.json')
+        self.assertEqual(ready['status'],'STATES_ATTACHED_AND_CUTOFF_DIAGNOSTICS_COMPLETE')
+        self.assertEqual(ready['account_policy']['excluded_usernames'],[])
+        self.assertIsNone(ready['mechanics_censor'])
+        self.assertEqual(len(list(desktop.glob('*.zip'))),2)
+        for zpath in desktop.glob('*.zip'):
+            self.assertEqual(sha(zpath),zpath.with_suffix('.zip.sha256').read_text().split()[0])
+            with zipfile.ZipFile(zpath) as z:
+                self.assertIsNone(z.testzip());names=z.namelist()
+                self.assertFalse(any('PRIVATE' in n for n in names))
+                sm=json.loads(z.read(next(n for n in names if n.endswith('/SUMMARY.json'))))
+                self.assertEqual(sm['primary_missing_RD_rows'],0);self.assertEqual(sm['errors'],[])
+                self.assertEqual(sm['primary_nonreachers_retained'],2)
+                mf=json.loads(z.read(next(n for n in names if n.endswith('/RESULT_MANIFEST.json'))))
+                for rec in mf['files']:
+                    data=z.read(next(n for n in names if n.endswith('/'+rec['path'])))
+                    self.assertEqual(hashlib.sha256(data).hexdigest(),rec['sha256']);self.assertEqual(len(data),rec['bytes'])
+        self.assertEqual(before,{r['path']:sha(r['path']) for r in snaps+inp['snapshots']})
+
+if __name__=='__main__':unittest.main()

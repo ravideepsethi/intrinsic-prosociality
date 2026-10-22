@@ -1,0 +1,86 @@
+{
+  "package": "Patron_IV_Coverage_Audit_v1_0_1",
+  "archive_name": "Patron_IV_Coverage_Audit_v1_0_1.zip",
+  "archive_sha256": "5c364bce9af0dae9e5c7144869064b28f26973caa73480b02aa21ac1babdc508",
+  "archive_size": 30599,
+  "archive_root": "Patron_IV_Coverage_Audit_v1_0_1",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "README.txt",
+      "published_path": "README.txt",
+      "sha256": "f2a124a9acf14395e1d0355bc40351ec6bc34685b3274d1a196bed4a2ae7787a",
+      "published_sha256": "f2a124a9acf14395e1d0355bc40351ec6bc34685b3274d1a196bed4a2ae7787a",
+      "size": 6682
+    },
+    {
+      "path": "RUN_AUDIT.sh",
+      "published_path": "RUN_AUDIT.sh.in",
+      "sha256": "9f010f61222d72197bc4d24bf12dca7422ae7fd0e0b280048f83b0e7446e1b2c",
+      "published_sha256": "9f010f61222d72197bc4d24bf12dca7422ae7fd0e0b280048f83b0e7446e1b2c",
+      "size": 1120
+    },
+    {
+      "path": "code/audit_core.py",
+      "published_path": "code/audit_core.py.in",
+      "sha256": "cdc26bda51ad632c814077dc93905b783b1eec8c7d3cee848d477157f6646c3f",
+      "published_sha256": "62393ef6abddd992f827e1da83d464a08197eb3dcfb822aec89a46d03d651db1",
+      "size": 26614,
+      "redactions": [
+        {
+          "start": 191,
+          "end": 198,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 202,
+          "end": 210,
+          "token": "__PRIVATE_VALUE_2__"
+        }
+      ]
+    },
+    {
+      "path": "code/run_audit.py",
+      "published_path": "code/run_audit.py",
+      "sha256": "ae8a4a685398e8f1b9c4d586b36920a96996e0eb30ef36b9f3f511fec20d607d",
+      "published_sha256": "ae8a4a685398e8f1b9c4d586b36920a96996e0eb30ef36b9f3f511fec20d607d",
+      "size": 17013
+    },
+    {
+      "path": "tests/test_audit.py",
+      "published_path": "tests/test_audit.py.in",
+      "sha256": "f3e4bac7bb9e32a99d90ca3cbb642503d68ceb4419b2355d7d7b8c453de4983d",
+      "published_sha256": "46349d45faa011ccc783f00ed1c297cda2e2f375e3319fe033992beea76d9361",
+      "size": 10045,
+      "redactions": [
+        {
+          "start": 1190,
+          "end": 1197,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 1228,
+          "end": 1236,
+          "token": "__PRIVATE_VALUE_2__"
+        }
+      ]
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "PACKAGE_MANIFEST.sha256",
+      "sha256": "dfc7d21b6d9c9ca73012339cae6734fb27d90938294244082f28252ad68bebea",
+      "size": 582
+    },
+    {
+      "path": "VALIDATION.txt",
+      "sha256": "861de97a8f91346c70f57582c3de6f1d38f79f2a0b380a784d4758717be0951c",
+      "size": 1467
+    },
+    {
+      "path": "evidence/authority.json",
+      "sha256": "c12098688219636ff41341850a89fa8b879e573644ded1ed847224b5d3b8e10b",
+      "size": 20312
+    }
+  ]
+}

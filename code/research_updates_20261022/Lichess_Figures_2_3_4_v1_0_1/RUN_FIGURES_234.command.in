@@ -1,0 +1,31 @@
+#!/bin/bash
+# Compatible with the Bash 3.2 supplied by macOS. No global Python changes.
+set -euo pipefail
+task_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+task_python=""
+for task_candidate in python3.12 python3.13 python3.11 python3; do
+    if command -v "$task_candidate" >/dev/null 2>&1 && \
+       "$task_candidate" -c 'import sys; sys.exit(0 if (3,11) <= sys.version_info[:2] <= (3,13) else 1)' 2>/dev/null; then
+        task_python="$(command -v "$task_candidate")"
+        break
+    fi
+done
+if [ -z "$task_python" ]; then
+    printf '%s\n' 'Python 3.11, 3.12, or 3.13 is required. Install one, then rerun this command.' >&2
+    exit 1
+fi
+"$task_python" "$task_dir/code/verify_package.py" --sources-only
+task_env="$task_dir/.venv"
+if [ ! -e "$task_env" ]; then
+    "$task_python" -m venv "$task_env"
+elif [ ! -x "$task_env/bin/python" ]; then
+    printf '%s\n' "The existing environment at $task_env is incomplete; it has not been changed." >&2
+    exit 1
+fi
+if ! "$task_env/bin/python" -c 'import sys; sys.exit(0 if (3,11) <= sys.version_info[:2] <= (3,13) else 1)'; then
+    printf '%s\n' 'The existing environment has an unsupported Python version; use a fresh extraction.' >&2
+    exit 1
+fi
+"$task_env/bin/python" -m pip --disable-pip-version-check install -r "$task_dir/requirements.txt"
+"$task_env/bin/python" "$task_dir/code/make_figures.py"
+printf '\n%s\n%s\n' 'Ready-to-use PDFs:' "$task_dir/figures"

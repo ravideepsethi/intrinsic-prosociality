@@ -1,0 +1,222 @@
+{
+  "package": "Pool_Activity_Rating_Adjustment_v1_0_0",
+  "archive_name": "Pool_Activity_Rating_Adjustment_v1_0_0.zip",
+  "archive_sha256": "ef9f4c3d6b53961fb3bd74aac01ab0365d108e2f032a97397877970003bdd139",
+  "archive_size": 160132,
+  "archive_root": "Pool_Activity_Rating_Adjustment_v1_0_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "README.md",
+      "published_path": "README.md",
+      "sha256": "264fe6e2437966daf3561d9fa9f4a10d6b4fd77276cacda87b3063301aa11cfd",
+      "published_sha256": "264fe6e2437966daf3561d9fa9f4a10d6b4fd77276cacda87b3063301aa11cfd",
+      "size": 4976
+    },
+    {
+      "path": "RUN_ACTIVITY_RATING_ADJUSTMENT.command",
+      "published_path": "RUN_ACTIVITY_RATING_ADJUSTMENT.command.in",
+      "sha256": "c3e14c8617a8ceffe827ddf94dcef7379a4fe07790187d7108240e1e6e6ee1ce",
+      "published_sha256": "c3e14c8617a8ceffe827ddf94dcef7379a4fe07790187d7108240e1e6e6ee1ce",
+      "size": 4114
+    },
+    {
+      "path": "RUN_COMMAND.txt",
+      "published_path": "RUN_COMMAND.txt",
+      "sha256": "ea51b6c7b4e2e1103ee8c27e8c0fa5b7909f0beab2bec7787d26ec6041db337f",
+      "published_sha256": "ea51b6c7b4e2e1103ee8c27e8c0fa5b7909f0beab2bec7787d26ec6041db337f",
+      "size": 605
+    },
+    {
+      "path": "docs/INTERPRETATION.md",
+      "published_path": "docs/INTERPRETATION.md",
+      "sha256": "a3c21c258301d0d270628781255c8c62ab0690de6d8226e824dd85e1faa01269",
+      "published_sha256": "a3c21c258301d0d270628781255c8c62ab0690de6d8226e824dd85e1faa01269",
+      "size": 2496
+    },
+    {
+      "path": "docs/METHODS.md",
+      "published_path": "docs/METHODS.md",
+      "sha256": "31270cef911890077fd73a37cabb5c213d343eac326e7bd6871d94d5bc63898b",
+      "published_sha256": "31270cef911890077fd73a37cabb5c213d343eac326e7bd6871d94d5bc63898b",
+      "size": 8772
+    },
+    {
+      "path": "runner/__init__.py",
+      "published_path": "runner/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "runner/adjustment.py",
+      "published_path": "runner/adjustment.py",
+      "sha256": "9206403e544bb7925f3b3315c225af26a62bfd343bf51c555a3cba3230de32e1",
+      "published_sha256": "9206403e544bb7925f3b3315c225af26a62bfd343bf51c555a3cba3230de32e1",
+      "size": 14031
+    },
+    {
+      "path": "runner/common.py",
+      "published_path": "runner/common.py",
+      "sha256": "39aaa640a787c910dc188a66834c8166d7c68fd581f7ef57e2462f92cfcd62ad",
+      "published_sha256": "39aaa640a787c910dc188a66834c8166d7c68fd581f7ef57e2462f92cfcd62ad",
+      "size": 24292
+    },
+    {
+      "path": "runner/features.py",
+      "published_path": "runner/features.py",
+      "sha256": "5139365af2e564f96a41111d9f1580c68d481a572fb48cc51674ad50f4f63df4",
+      "published_sha256": "5139365af2e564f96a41111d9f1580c68d481a572fb48cc51674ad50f4f63df4",
+      "size": 11174
+    },
+    {
+      "path": "runner/rates.py",
+      "published_path": "runner/rates.py",
+      "sha256": "111f44aa74b9d7f05a7c3fd99811654e36bee34ad576cb8bd171d9142e3d94df",
+      "published_sha256": "111f44aa74b9d7f05a7c3fd99811654e36bee34ad576cb8bd171d9142e3d94df",
+      "size": 7454
+    },
+    {
+      "path": "runner/report.py",
+      "published_path": "runner/report.py",
+      "sha256": "ec7e8807cc5da357c28a87bed8c098d4566c65f916bd3abde91e1728f5e34c18",
+      "published_sha256": "ec7e8807cc5da357c28a87bed8c098d4566c65f916bd3abde91e1728f5e34c18",
+      "size": 8956
+    },
+    {
+      "path": "runner/run.py",
+      "published_path": "runner/run.py",
+      "sha256": "e9e95686ce4b2e7a5857bfb879ed64173eab1c5786f1681a979b65f974526ed9",
+      "published_sha256": "e9e95686ce4b2e7a5857bfb879ed64173eab1c5786f1681a979b65f974526ed9",
+      "size": 8900
+    },
+    {
+      "path": "runner/self_test.py",
+      "published_path": "runner/self_test.py",
+      "sha256": "717eb61b0a8f882ecdeaa50db1ea52969014a4d852ac604ca3c6dbeff881e878",
+      "published_sha256": "717eb61b0a8f882ecdeaa50db1ea52969014a4d852ac604ca3c6dbeff881e878",
+      "size": 12755
+    },
+    {
+      "path": "runner/source.py",
+      "published_path": "runner/source.py",
+      "sha256": "98ff50da82713cb100dcbf48f6ff8e3e0e08e86b84f0ff1dd4dfd0df133dca6b",
+      "published_sha256": "98ff50da82713cb100dcbf48f6ff8e3e0e08e86b84f0ff1dd4dfd0df133dca6b",
+      "size": 5134
+    },
+    {
+      "path": "runner/statistics.py",
+      "published_path": "runner/statistics.py",
+      "sha256": "2b904d6da0c58b9b2bc812d52e1f57af0d8fd241835f5cd2aac6333eac59fa18",
+      "published_sha256": "2b904d6da0c58b9b2bc812d52e1f57af0d8fd241835f5cd2aac6333eac59fa18",
+      "size": 6941
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "PACKAGE_BUILD_VALIDATION.json",
+      "sha256": "2c71a7424cb24987856c0b32a76689d2c754122177a2437e125d1a79a8bd0dad",
+      "size": 1323
+    },
+    {
+      "path": "PACKAGE_MANIFEST.sha256",
+      "sha256": "5303715ca4aba6297b47ecff89a0fd8216184e4909c3972d52da0e31e08b42b6",
+      "size": 3393
+    },
+    {
+      "path": "authority/REFERENCE.json",
+      "sha256": "c27e4ab17b87ebde48fff37950e0ef61da69e687ca989de583bf3d398a1541e9",
+      "size": 4594
+    },
+    {
+      "path": "authority/SAMPLE_AUTHORITY.json",
+      "sha256": "81c34113e7a888629a834a17235a71dcf369a2d590755fd9412ee42151d9b2f3",
+      "size": 1234
+    },
+    {
+      "path": "evidence/Pool_Main_Sample_24M_Report.zip",
+      "sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+      "size": 96936
+    },
+    {
+      "path": "evidence/Pool_Main_Sample_24M_Report.zip.sha256",
+      "sha256": "d2e6c0953ff2de7cc7235b98d568c884e4fa8067b8aa81d22efe1ac3484d6f59",
+      "size": 128
+    },
+    {
+      "path": "evidence/STATE_RATES_CONTRACT.json",
+      "sha256": "7a8fa828be3c0139532641757ea919a3ddb525ca28015fd1287b9305e2aeda68",
+      "size": 586
+    },
+    {
+      "path": "evidence/STATE_RATES_RUN_STATUS.json",
+      "sha256": "ecac2c16f563476f70f12c470b9ab4720f87e15b9aabd93fd0274804bec2a95a",
+      "size": 646
+    },
+    {
+      "path": "evidence/STATE_RATES_SOURCE_LINEAGE.json",
+      "sha256": "ec04a5bead63911928ca127e64750d6eb107c98ecd2fd8f54164cfa9d865cee1",
+      "size": 687
+    },
+    {
+      "path": "evidence/STATE_RATES_activity_ratio_comparisons.csv",
+      "sha256": "032eab0184cbef83820e7ec42bab872547e0c83075f332dbefbe0fc8051c2808",
+      "size": 3334
+    },
+    {
+      "path": "evidence/STATE_RATES_state_rate_covariance_pct2.csv",
+      "sha256": "dbf2bf70f87a51530f6b0dc987f249d9ba4eef14556181f1e2bbb512fa642f11",
+      "size": 4892
+    },
+    {
+      "path": "evidence/STATE_RATES_state_rates_and_ratios.csv",
+      "sha256": "b79c3b65f263b35e12ddfccdcda9a43060f01db9f399ba42198530a87159403f",
+      "size": 11731
+    },
+    {
+      "path": "evidence/UPSTREAM_ACTIVITY_TERCILE_DEFINITION.json",
+      "sha256": "3fd90c853d37eaf1c56ec2059e6181aabdaab63ee15968b7fed79eca4298302f",
+      "size": 326
+    },
+    {
+      "path": "evidence/UPSTREAM_CONTRACT.json",
+      "sha256": "caa5330619a88085b968f4aa642f39959a30dd2319cfd89aae838c54570fb416",
+      "size": 826
+    },
+    {
+      "path": "evidence/UPSTREAM_POOL_rating_tier_contrasts.csv",
+      "sha256": "cea30b7b6413c609a1f39a7e75e8f1176361c1e0b0642c5a726d111515a0f4ec",
+      "size": 1291
+    },
+    {
+      "path": "evidence/UPSTREAM_SOURCE_LINEAGE.json",
+      "sha256": "ec04a5bead63911928ca127e64750d6eb107c98ecd2fd8f54164cfa9d865cee1",
+      "size": 687
+    },
+    {
+      "path": "evidence/UPSTREAM_activity_tercile_estimates.csv",
+      "sha256": "3e634ac6682686df98964360d4b58e97c234d0f64a187c0d66b01bd9493d1aba",
+      "size": 1226
+    },
+    {
+      "path": "evidence/UPSTREAM_activity_tercile_support.csv",
+      "sha256": "8dd65985eae415c5b6d8dba28c82e9401a0cf3d38c6543e97b42df2eb7bc59a3",
+      "size": 156
+    },
+    {
+      "path": "evidence/UPSTREAM_estimates.csv",
+      "sha256": "18fe5760bf9f70f5631156cb75d393bce5c03dbb2b11ba2dd236646fd268c4cc",
+      "size": 535
+    },
+    {
+      "path": "evidence/UPSTREAM_granting_rates.csv",
+      "sha256": "43df881f43d405d6a0b54ad2f4c5c729272fbd3d190c454e66f51298930b17dc",
+      "size": 728
+    },
+    {
+      "path": "requirements.lock.txt",
+      "sha256": "76848df36c9601b5f3ee65148297ea8604ceedc85deec73aa25f0dcd6dc47665",
+      "size": 91
+    }
+  ]
+}

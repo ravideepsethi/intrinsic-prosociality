@@ -1,0 +1,134 @@
+{
+  "package": "Lichess_Social_Contact_v1_0_0",
+  "archive_name": "Lichess_Social_Contact_v1_0_0.zip",
+  "archive_sha256": "e2beac04018a3757a45d681cb6016b41b413caa8d274f8544e6776a58aec8b98",
+  "archive_size": 32674,
+  "archive_root": "Lichess_Social_Contact_v1_0_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "METHODS.txt",
+      "published_path": "METHODS.txt",
+      "sha256": "1481fd1571cf09b49f9cf2bc540839cd7dc60ed8226a91d8c1b1aad1363f8cec",
+      "published_sha256": "1481fd1571cf09b49f9cf2bc540839cd7dc60ed8226a91d8c1b1aad1363f8cec",
+      "size": 7330
+    },
+    {
+      "path": "README.txt",
+      "published_path": "README.txt",
+      "sha256": "c2a79565c77b6cfe2fe2d64b2f68b512e6b1e94bd52786788c91108e6351e306",
+      "published_sha256": "c2a79565c77b6cfe2fe2d64b2f68b512e6b1e94bd52786788c91108e6351e306",
+      "size": 5758
+    },
+    {
+      "path": "RUN_SOCIAL_CONTACT.command",
+      "published_path": "RUN_SOCIAL_CONTACT.command.in",
+      "sha256": "bd32e1824263204c4c237c69d79c37885715e83ed1c2a6d55c8f2e9523d4378a",
+      "published_sha256": "bd32e1824263204c4c237c69d79c37885715e83ed1c2a6d55c8f2e9523d4378a",
+      "size": 2146
+    },
+    {
+      "path": "code/acquire.py",
+      "published_path": "code/acquire.py",
+      "sha256": "56cad5c56d8378c045649e6307d6708d6e6bd7479489e60ae1f67a7c8adaa6d6",
+      "published_sha256": "56cad5c56d8378c045649e6307d6708d6e6bd7479489e60ae1f67a7c8adaa6d6",
+      "size": 6574
+    },
+    {
+      "path": "code/contact.py",
+      "published_path": "code/contact.py",
+      "sha256": "432b6cc9f827f503eb48e30fc9c4a34f3a37b8bc4e44a49f3da836fd027e57c3",
+      "published_sha256": "432b6cc9f827f503eb48e30fc9c4a34f3a37b8bc4e44a49f3da836fd027e57c3",
+      "size": 10306
+    },
+    {
+      "path": "code/core.py",
+      "published_path": "code/core.py.in",
+      "sha256": "bb4a6d223825197ca5d048c061c4b3d7eccff8ea145f98d6ebc94b7d6e2f91f3",
+      "published_sha256": "0382099274a7fa1f38d7f175b6fdd88ed6ca3abf72991e36aba5c58e039222a3",
+      "size": 5813,
+      "redactions": [
+        {
+          "start": 462,
+          "end": 469,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 472,
+          "end": 480,
+          "token": "__PRIVATE_VALUE_2__"
+        }
+      ]
+    },
+    {
+      "path": "code/prepare.py",
+      "published_path": "code/prepare.py.in",
+      "sha256": "f1ecdd3ab96a60a05f6952d875c3fd0b7e7575a9bd8beb24c5132134bd93b94a",
+      "published_sha256": "ba15467af6aad3f57c9710788d71eee3746443f66d6fea873e165819aeffb002",
+      "size": 6023,
+      "redactions": [
+        {
+          "start": 5283,
+          "end": 5290,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 5293,
+          "end": 5301,
+          "token": "__PRIVATE_VALUE_2__"
+        },
+        {
+          "start": 5327,
+          "end": 5334,
+          "token": "__PRIVATE_VALUE_3__"
+        },
+        {
+          "start": 5337,
+          "end": 5345,
+          "token": "__PRIVATE_VALUE_4__"
+        }
+      ]
+    },
+    {
+      "path": "code/run_social.py",
+      "published_path": "code/run_social.py",
+      "sha256": "e6ab57eac3077c787d44436ec8ba6bd39dd271b97741d78e2305c8e7e22b907e",
+      "published_sha256": "e6ab57eac3077c787d44436ec8ba6bd39dd271b97741d78e2305c8e7e22b907e",
+      "size": 10494
+    },
+    {
+      "path": "tests/test_social.py",
+      "published_path": "tests/test_social.py",
+      "sha256": "a51364a4b552e38e7c2b3d97806d4b8d008265f94b8a3d0146f4337fbb4b4d45",
+      "published_sha256": "a51364a4b552e38e7c2b3d97806d4b8d008265f94b8a3d0146f4337fbb4b4d45",
+      "size": 10024
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "PACKAGE_MANIFEST.sha256",
+      "sha256": "7b9779cb5ea8c99b08661f7c13fcb7b5ab5b60802313725da624f83ed5a6bcb8",
+      "size": 1111
+    },
+    {
+      "path": "VALIDATION.json",
+      "sha256": "418792e7880bc4cba010214893864e0b24983309344dc7da2a235472fa1d773f",
+      "size": 1342
+    },
+    {
+      "path": "VALIDATION_LOG.txt",
+      "sha256": "84edb404a0ff6ceb989c34893cc972eebab4db4f4fd24b7995e0acfd432b2196",
+      "size": 1428
+    },
+    {
+      "path": "authority/parent_design.json",
+      "sha256": "2f09eb46a8d018058ef29e0a6c29f7ae566240f2b187a7d692d22b77cf3efc17",
+      "size": 805
+    },
+    {
+      "path": "authority/parent_report_manifest.json",
+      "sha256": "1aa9c77c961f44469d057f827289f31112bb9ad00cb43ee370d91b3948adc255",
+      "size": 3467
+    }
+  ]
+}

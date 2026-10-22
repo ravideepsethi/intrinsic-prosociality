@@ -1,0 +1,71 @@
+"""Shared local contracts. No network and no SciPy in Run 3."""
+from __future__ import annotations
+import os
+for _key in ('OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','VECLIB_MAXIMUM_THREADS','NUMEXPR_NUM_THREADS'):
+    os.environ[_key] = '1'
+import csv, hashlib, json, sys, zipfile
+from pathlib import Path
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT/'code/legacy'))
+import numpy as np
+import pyarrow as pa
+import pyarrow.parquet as pq
+import local_io as io
+from preliminary_core import DAY, MONTHS, STARTS, SPEEDS
+
+BASE = Path('/Volumes/XT_Pro/lichess_kindness')
+AUTHORS = ('__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__')
+EXPANDED_REL = 'derived/replication/chooser_iv_expanded_v100_PRIVATE/f14a1105a9f7'
+SPACED_SHA = '3bc55d83f113cd7c5942348b16ae9ff5e940ae8aad13f9db3d99a6a526ef250c'
+EXPANDED_CONF = 'f14a1105a9f70782dffad6ecd98b651f5e6d57f1ce4d39ee0f0248e9e1d3bc0f'
+REFERENCE_SD = .059411690344000595
+PROJECTION_COLS = ['j','i','t','y','arm','fair','cell']
+COUNT_COLS = [f'{c}_{d}' for d in (90,30) for c in ('fair','kind','disconnect','receipt','claim')]
+SCORE_COLS = ['n_7d','adjusted_7d','expected_7d','counterparts_7d']
+QUERY_COLS = ['row_id','recipient_id','opponent_id','archive_start_ms','month_code'] + SCORE_COLS
+MODEL_COLS = ['row_id','recipient_id','opponent_id','received','speed','recipient_rating','opponent_rating',
+              'archive_start_ms','month_code','tc_base_s','tc_inc_s','n_7d','adjusted_7d',
+              'expected_7d','counterparts_7d','pre_games_30d'] + COUNT_COLS
+
+def arrays(table): return {n:io.arr(table,n) for n in table.column_names}
+def relocate(project, path):
+    p=Path(path)
+    if p.is_absolute():
+        try: p=p.relative_to(BASE)
+        except ValueError: raise RuntimeError('Recorded source is outside the project: '+str(p))
+    return io.child(project,p)
+def csvout(path, rows):
+    path=Path(path); rows=io.clean(rows)
+    names=list(dict.fromkeys(k for r in rows for k in r))
+    with path.open('w',newline='') as f:
+        w=csv.DictWriter(f,fieldnames=names);w.writeheader()
+        for r in rows:
+            w.writerow({k:json.dumps(v,sort_keys=True) if isinstance(v,(list,dict)) else v for k,v in r.items()})
+def write_rows(root, name, rows):
+    io.js(root/(name+'.json'), rows);csvout(root/(name+'.csv'), rows)
+    # JSON is authoritative for nested design metadata; tabular Parquet is also available.
+    flat=[{k:json.dumps(v,sort_keys=True) if isinstance(v,(list,dict)) else v for k,v in r.items()} for r in io.clean(rows)]
+    if flat: io.table(root/(name+'.parquet'),pa.Table.from_pylist(flat))
+def verify_package():
+    p=ROOT/'PACKAGE_MANIFEST.sha256'
+    for line in p.read_text().splitlines():
+        digest,name=line.split('  ',1);io.checked(io.child(ROOT,name),digest)
+    return io.sha(p)
+def memory_gb():
+    try: return os.sysconf('SC_PAGE_SIZE')*os.sysconf('SC_PHYS_PAGES')/1024**3
+    except (ValueError,OSError):
+        import subprocess
+        return int(subprocess.check_output(['sysctl','-n','hw.memsize'],text=True))/1024**3
+def defaults():
+    memory=max(4,min(48,int(memory_gb()*.65)))
+    workers=max(1,min(10,(os.cpu_count() or 2)-2,int((memory-2)//1.25)))
+    return workers,memory
+def pack_report(report, desktop, stem):
+    desktop.mkdir(parents=True,exist_ok=True);dest=desktop/(stem+'.zip')
+    tmp=dest.with_suffix('.zip.partial')
+    with zipfile.ZipFile(tmp,'w',zipfile.ZIP_DEFLATED) as z:
+        for p in sorted(report.iterdir()):
+            if p.is_file():z.write(p,p.name)
+    os.replace(tmp,dest);digest=io.sha(dest)
+    Path(str(dest)+'.sha256').write_text(digest+'  '+dest.name+'\n')
+    return str(dest)

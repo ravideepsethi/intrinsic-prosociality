@@ -1,0 +1,90 @@
+{
+  "package": "Color_Change_Followup_v1_0_0",
+  "archive_name": "Color_Change_Followup_v1_0_0.zip",
+  "archive_sha256": "df680d5a5cace20e108efce74d03364d4e8ce1b5fde8b1a52bbe6b45c82fac3d",
+  "archive_size": 38582,
+  "archive_root": "Color_Change_Followup_v1_0_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "README.md",
+      "published_path": "README.md",
+      "sha256": "a56bd9a543c0e899c5b6a945403f75cc332444a59e66c907614ca81e8d9e8c72",
+      "published_sha256": "a56bd9a543c0e899c5b6a945403f75cc332444a59e66c907614ca81e8d9e8c72",
+      "size": 6814
+    },
+    {
+      "path": "RUN_FOLLOWUP.command",
+      "published_path": "RUN_FOLLOWUP.command.in",
+      "sha256": "8843c6fc626ac7b0fd9bc1b510b29176a2b35e2c0cffb57401949f5234132d0e",
+      "published_sha256": "8843c6fc626ac7b0fd9bc1b510b29176a2b35e2c0cffb57401949f5234132d0e",
+      "size": 1161
+    },
+    {
+      "path": "VALIDATION.md",
+      "published_path": "VALIDATION.md",
+      "sha256": "ca61e598a69fb7af41cd4be33122af6d351ef55fd142c097f97999169f12941a",
+      "published_sha256": "ca61e598a69fb7af41cd4be33122af6d351ef55fd142c097f97999169f12941a",
+      "size": 1617
+    },
+    {
+      "path": "code/grace.py",
+      "published_path": "code/grace.py",
+      "sha256": "8683c24344252f750c145f2e2e8f11eacc335673fb8b2d093a25463101ddb051",
+      "published_sha256": "8683c24344252f750c145f2e2e8f11eacc335673fb8b2d093a25463101ddb051",
+      "size": 16774
+    },
+    {
+      "path": "code/io_tools.py",
+      "published_path": "code/io_tools.py",
+      "sha256": "59a78159fd89b72dcd271b5d9680887ec3e5e327db6124a7725f25ee58d47df6",
+      "published_sha256": "59a78159fd89b72dcd271b5d9680887ec3e5e327db6124a7725f25ee58d47df6",
+      "size": 5443
+    },
+    {
+      "path": "code/power.py",
+      "published_path": "code/power.py",
+      "sha256": "06778a47fa7d3541f6a34ae0d0366ee8d7b79b70da966e5ee885b4f198940a9e",
+      "published_sha256": "06778a47fa7d3541f6a34ae0d0366ee8d7b79b70da966e5ee885b4f198940a9e",
+      "size": 12174
+    },
+    {
+      "path": "code/prepare.py",
+      "published_path": "code/prepare.py",
+      "sha256": "4279d50b348a782dfbc9bfa105cb28ce163a45e58b24e1b2b4fff3bc31f7d9bc",
+      "published_sha256": "4279d50b348a782dfbc9bfa105cb28ce163a45e58b24e1b2b4fff3bc31f7d9bc",
+      "size": 12205
+    },
+    {
+      "path": "code/run.py",
+      "published_path": "code/run.py",
+      "sha256": "675fb9c0866d26fcefc9077fd4abeb6df8232a4299ccee439c567aac80409f17",
+      "published_sha256": "675fb9c0866d26fcefc9077fd4abeb6df8232a4299ccee439c567aac80409f17",
+      "size": 12500
+    },
+    {
+      "path": "tests/test_followup.py",
+      "published_path": "tests/test_followup.py",
+      "sha256": "71313ff7ffabf2d6da898c2e3b761659917ed36cd5556d1a5159a63c7645a518",
+      "published_sha256": "71313ff7ffabf2d6da898c2e3b761659917ed36cd5556d1a5159a63c7645a518",
+      "size": 14577
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "PACKAGE_MANIFEST.sha256",
+      "sha256": "d6474adfda42d3321a2fd753d1ac20d71d25080f1a198cf6e266af4e16b071af",
+      "size": 926
+    },
+    {
+      "path": "authority/historical_sources.json",
+      "sha256": "dfc9e297b237ca644fb114a63f3fd882b972a91673c0ccc09fc7b3ce59629348",
+      "size": 7041
+    },
+    {
+      "path": "authority/pool_main.json",
+      "sha256": "06e3a0067c24026973fa1dce9c85b05ceee6a158232a36807263c4beb969666f",
+      "size": 6626
+    }
+  ]
+}

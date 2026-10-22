@@ -1,0 +1,115 @@
+"""Local, immutable, resumable reputation analysis. No network operations."""
+from __future__ import annotations
+import contextlib, datetime as dt, hashlib, json, os, time, threading
+from pathlib import Path
+import numpy as np
+import pyarrow as pa
+import pyarrow.parquet as pq
+import duckdb
+
+DAY=86400000
+START=1698796800000  # 2023-11-01 UTC
+END=1761955200000    # 2025-11-01 UTC, exclusive
+SPEEDS=['ultrabullet','bullet','blitz','rapid','classical']
+AUTHORS=['__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__']
+PACKAGE=Path(__file__).resolve().parents[1]
+
+def clean(x):
+    if isinstance(x,dict):return {str(k):clean(v) for k,v in x.items()}
+    if isinstance(x,(list,tuple)):return [clean(v) for v in x]
+    if isinstance(x,np.ndarray):return clean(x.tolist())
+    if isinstance(x,np.generic):return clean(x.item())
+    if isinstance(x,float) and not np.isfinite(x):return None
+    if isinstance(x,Path):return str(x)
+    return x
+def dump(p,x):
+    p=Path(p);p.parent.mkdir(parents=True,exist_ok=True)
+    q=p.with_suffix(p.suffix+'.partial');q.write_text(json.dumps(clean(x),indent=2,sort_keys=True)+'\n');q.replace(p)
+def load(p):return json.loads(Path(p).read_text())
+def digest(x):return hashlib.sha256(json.dumps(clean(x),sort_keys=True,separators=(',',':')).encode()).hexdigest()
+def sha(p):
+    h=hashlib.sha256()
+    with open(p,'rb') as f:
+        for b in iter(lambda:f.read(8<<20),b''):h.update(b)
+    return h.hexdigest()
+def stamp(p):
+    p=Path(p);s=p.stat();return [str(p.resolve()),s.st_size,s.st_mtime_ns]
+def log(s):print('['+dt.datetime.now(dt.timezone.utc).strftime('%Y-%m-%d %H:%M:%SZ')+'] '+str(s),flush=True)
+@contextlib.contextmanager
+def heartbeat(label):
+    done=threading.Event();start=time.monotonic()
+    def beat():
+        while not done.wait(45):log(f'{label}: working; elapsed {(time.monotonic()-start)/60:.1f} min')
+    th=threading.Thread(target=beat,daemon=True);th.start()
+    try:yield
+    finally:done.set();th.join()
+def verify(p,expected,cache):
+    p=Path(p);cache=Path(cache);key=cache/(digest(str(p.resolve()))+'.json')
+    now=stamp(p)
+    if key.exists() and load(key)==dict(fingerprint=now,sha256=expected):return
+    if sha(p)!=expected:raise RuntimeError('Input SHA256 differs: '+str(p))
+    if stamp(p)!=now:raise RuntimeError('Input changed while reading: '+str(p))
+    dump(key,dict(fingerprint=now,sha256=expected))
+def finish(folder,result):
+    folder=Path(folder)
+    fs=[dict(path=str(p.relative_to(folder)),size=p.stat().st_size,sha256=sha(p))
+        for p in sorted(folder.rglob('*')) if p.is_file() and p.name!='_DONE.json' and not p.name.endswith('.partial') and 'spill' not in p.relative_to(folder).parts]
+    dump(folder/'_DONE.json',dict(result=result,files=fs))
+def cached(folder):
+    folder=Path(folder);p=folder/'_DONE.json'
+    if not p.exists():return None
+    d=load(p)
+    for e in d['files']:
+        q=folder/e['path']
+        if not q.is_file() or q.stat().st_size!=e['size'] or sha(q)!=e['sha256']:
+            raise RuntimeError('Completed checkpoint changed: '+str(q))
+    return d['result']
+def lit(s):return "'"+str(s).replace("'","''")+"'"
+def scan(paths):
+    if isinstance(paths,(str,Path)):paths=[paths]
+    if not paths:raise RuntimeError('Empty Parquet input list')
+    return 'read_parquet(['+','.join(lit(p) for p in paths)+'], union_by_name=true, hive_partitioning=false)'
+def conn(work,threads=1,memory=1024):
+    w=Path(work);w.mkdir(parents=True,exist_ok=True)
+    c=duckdb.connect();c.execute(f'SET threads={int(threads)}');c.execute("SET memory_limit="+lit(str(int(memory))+'MB'))
+    c.execute('SET temp_directory='+lit(w));c.execute('SET preserve_insertion_order=false');return c
+def copy(c,sql,p):
+    p=Path(p);p.parent.mkdir(parents=True,exist_ok=True)
+    c.execute('COPY ('+sql+') TO '+lit(p)+' (FORMAT PARQUET,COMPRESSION ZSTD)')
+def array(t,n,dtype=None):return np.asarray(t[n].combine_chunks().to_numpy(zero_copy_only=False),dtype=dtype)
+def pairs(a,b):
+    a=np.asarray(a,np.int64);b=np.asarray(b,np.int64)
+    if np.any((a<0)|(b<0)|(a>=2**32)|(b>=2**32)|(a==b)):raise ValueError('Invalid account IDs')
+    return (np.minimum(a,b).astype(np.uint64)<<np.uint64(32))|np.maximum(a,b).astype(np.uint64)
+def mix(x):
+    x=np.asarray(x,np.uint64).copy()
+    with np.errstate(over='ignore'):
+        x+=np.uint64(0x9e3779b97f4a7c15)
+        x=(x^(x>>np.uint64(30)))*np.uint64(0xbf58476d1ce4e5b9)
+        x=(x^(x>>np.uint64(27)))*np.uint64(0x94d049bb133111eb)
+    return x^(x>>np.uint64(31))
+def lookup(keys,q):
+    if not len(keys):return np.full(len(q),-1,np.int64)
+    k=np.searchsorted(keys,q);ok=k<len(keys);safe=np.minimum(k,len(keys)-1)
+    return np.where(ok&(keys[safe]==q),k,-1)
+def moments(ids,t):
+    a=np.empty(len(ids),dtype=[('person','<i8'),('time','<i8')]);a['person']=ids;a['time']=t;return a
+def volume_increment(ids,t,keys,delta):
+    lo=np.searchsorted(keys,moments(ids,t),'right')
+    hi=np.searchsorted(keys,moments(ids,t+30*DAY),'right')
+    ok=lo<hi;np.add.at(delta,lo[ok],1);np.add.at(delta,hi[ok],-1)
+def volume_finish(delta,order):
+    out=np.empty(len(order),np.int64);out[order]=np.cumsum(delta[:-1])
+    if delta.sum()!=0 or np.any(out<0):raise RuntimeError('Invalid volume differences')
+    return out
+def columns(p):return set(pq.ParquetFile(p).schema_arrow.names)
+def relocate(p,project):
+    prefix='/Volumes/XT_Pro/lichess_kindness/'
+    p=str(p);return Path(project)/p[len(prefix):] if p.startswith(prefix) else Path(p)
+def table_csv(rows,p):
+    import csv
+    p=Path(p);p.parent.mkdir(parents=True,exist_ok=True)
+    fields=list(dict.fromkeys(k for r in rows for k in r))
+    with p.open('w',newline='') as f:
+        w=csv.DictWriter(f,fieldnames=fields);w.writeheader()
+        for r in rows:w.writerow({k:json.dumps(clean(v)) if isinstance(v,(dict,list,tuple)) else clean(v) for k,v in r.items()})

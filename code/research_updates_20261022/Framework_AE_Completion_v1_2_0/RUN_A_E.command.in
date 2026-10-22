@@ -1,0 +1,100 @@
+#!/bin/bash
+# A/E only, no rerun B/C/D/F, no API, no Stockfish or new rating replay.
+set -Eeuo pipefail
+HERE="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+MAIN="$HOME/Desktop/Lichess_Desktop/FRAMEWORK_F_INPUT_20261012T030343Z"
+MODE=all
+WORKERS="${WORKERS:-10}"
+MEMORY_GB="${MEMORY_GB:-11}"
+ROOT="${LICHESS_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+DESKTOP="$HOME/Desktop/Lichess_Desktop"
+while [[ $# -gt 0 ]]; do
+ case "$1" in
+  --mode) MODE="$2";shift 2;;
+  --main) MAIN="$2";shift 2;;
+  --workers) WORKERS="$2";shift 2;;
+  --memory-gb) MEMORY_GB="$2";shift 2;;
+  *) echo "Unknown argument: $1" >&2;exit 2;;
+ esac
+done
+[[ "$MODE" == all || "$MODE" == a || "$MODE" == e ]] || { echo 'Use --mode all|a|e' >&2;exit 2; }
+[[ -d "$ROOT/derived/replication" ]] || { echo "XT_Pro project unavailable: $ROOT" >&2;exit 1; }
+[[ -d "$MAIN" ]] || { echo "Missing verified linked main panel: $MAIN" >&2;exit 1; }
+export OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 OMP_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 PYTHONUNBUFFERED=1
+python3 - <<'PY'
+import duckdb,numpy,pandas,pyarrow
+print('Dependencies checked:',dict(duckdb=duckdb.__version__,numpy=numpy.__version__,pandas=pandas.__version__,pyarrow=pyarrow.__version__),flush=True)
+PY
+STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
+OUT="$ROOT/output/framework_AE_v120/$STAMP"
+mkdir -p "$OUT" "$DESKTOP"
+LOG="$DESKTOP/framework_AE_${STAMP}.log"
+SNAP="$ROOT/derived/replication/patron_profile_snapshot_24m_v100_FINAL_CERTIFIED/profile_snapshot_24m_private_lossless.parquet"
+FEATURES="$ROOT/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave3b1_patron/9a64f1f9b8f8/design/chooser_design_features_private.parquet"
+IV="$ROOT/derived/replication/chooser_iv_expanded_v100_PRIVATE/f14a1105a9f7/analysis/spaced90.parquet"
+export MAIN OUT SNAP FEATURES IV HERE STAMP DESKTOP ROOT WORKERS MEMORY_GB
+main_run() {
+  local a_ok=0 e_ok=0
+  if [[ "$MODE" == all || "$MODE" == a ]]; then
+    echo "[25%] A: original August profile and matched cohort preflight"
+    if (
+      set -Eeuo pipefail
+      python3 -u "$HERE/src/prepare_a.py" --features "$FEATURES" --snapshot "$SNAP" --out "$OUT/A_prepared" --workers "$WORKERS" --memory-gb "$MEMORY_GB" || exit 1
+      echo '[50%] A: adjusted Patron coefficients, excluded-flag groups'
+      CONTROLS="$(python3 -c 'import json,sys; print(",".join(json.load(open(sys.argv[1]))["controls"]))' "$OUT/A_prepared/public/A_model_controls.json")" || exit 1
+      python3 -u "$HERE/src/estimate_a.py" \
+          --panel-a "$OUT/A_prepared/private/panel_A_source_compatible.parquet" \
+          --panel-b "$OUT/A_prepared/private/panel_B_source_compatible.parquet" \
+          --profiles "$SNAP" --account-col username_norm --profile-account-col username_norm \
+          --disabled-col disabled --tos-col tos_violation --cell-col match_cell \
+          --competitive-col ever_competitive_grant --lost-col ever_lost_grant \
+          --focal-col focal_competitive_granter --matched-group-col matched_group_id \
+          --controls "$CONTROLS" --out "$OUT/A_results" \
+          --workers "$WORKERS" --memory-gb "$MEMORY_GB" || exit 1
+      python3 -u "$HERE/src/validate_a.py" --table "$OUT/A_results/public/tabA2_patron_excluding_flags.csv" --out "$OUT/A_results/public/A_baseline_calibration.json" || exit 1
+    ); then a_ok=1;echo '[75%] A: completed flag sensitivity';else echo '[A] Failed closed; see A preflight/results private/FAILED.txt' >&2;fi
+    python3 "$HERE/src/report.py" --out "$OUT/A_prepared" --desktop "$DESKTOP" --tag A_PREFLIGHT --status "$([[ "$a_ok" == 1 ]] && echo COMPLETE || echo INCOMPLETE)" --timestamp "$STAMP"
+    python3 "$HERE/src/report.py" --out "$OUT/A_results" --desktop "$DESKTOP" --tag A --status "$([[ "$a_ok" == 1 ]] && echo COMPLETE || echo INCOMPLETE)" --timestamp "$STAMP"
+    echo '[100%] A: aggregate report/checksums saved on Desktop'
+  fi
+  if [[ "$MODE" == all || "$MODE" == e ]];then
+    echo '[25%] E: classify prior PG/PC/NC experience from full 41.5m opportunity history'
+    if (
+      set -Eeuo pipefail
+      python3 -u "$HERE/src/build_e_groups.py" --main "$MAIN" --exposures "$IV" \
+        --chooser-col chooser_user_id --decision-ms-col api_last_move_at_ms \
+        --grant-col outcome_kind_draw --evaluation-col engine_eval_cp_disconnected \
+        --recipient-col recipient_id --start-ms-col archive_start_ms --exposure-id-col game_id \
+        --expect-main 41534331 --expect-exposures 2682330 \
+        --out "$OUT/E_groups" --workers "$WORKERS" --memory-gb "$MEMORY_GB" || exit 1
+      echo '[50%] E: create exact IV cells, pre-exposure controls and score'
+      python3 -u "$HERE/src/prepare_e.py" \
+        --grouped "$OUT/E_groups/private/E_exposures_with_PG_PC_NC_PRIVATE.parquet" \
+        --out "$OUT/E_prepared" --workers "$WORKERS" --memory-gb "$MEMORY_GB" || exit 1
+      echo '[75%] E: original pooled IV calibration before PG/PC/NC heterogeneous 2SLS'
+      CONTROLS="$(python3 -c 'import json,sys; print(",".join(json.load(open(sys.argv[1]))["controls"]))' "$OUT/E_prepared/public/E_iv_preflight.json")" || exit 1
+      python3 -u "$HERE/src/run_e_estimates.py" \
+        --mode iv --grouped-exposures "$OUT/E_prepared/private/IV_E_MODEL_PRIVATE.parquet" \
+        --out "$OUT/E_results" --controls "$CONTROLS" \
+        --receipt-col received --zero-outcome-col y --cell-col assignment_cell \
+        --score-col score_ref --date-col exposure_date_utc --hour-col exposure_hour_of_week \
+        --opponent-col opponent_id --recipient-col recipient_id --expected 2682330 || exit 1
+    ); then e_ok=1;echo '[100%] E: calibrated heterogeneity complete';else echo '[E] Failed closed; review E subgroup and pooled-calibration JSON before interpreting' >&2;fi
+    for sub in E_groups E_prepared E_results;do
+      python3 "$HERE/src/report.py" --out "$OUT/$sub" --desktop "$DESKTOP" --tag "$sub" \
+        --status "$([[ "$e_ok" == 1 ]] && echo COMPLETE || echo INCOMPLETE)" --timestamp "$STAMP"
+    done
+  fi
+  echo "All local output: $OUT"
+  echo "Log: $LOG"
+  if [[ "$MODE" == all ]];then
+     [[ "$a_ok" == 1 && "$e_ok" == 1 ]] || return 1
+  elif [[ "$MODE" == a ]];then [[ "$a_ok" == 1 ]] || return 1
+  else [[ "$e_ok" == 1 ]] || return 1;fi
+}
+if command -v caffeinate >/dev/null 2>&1;then
+  caffeinate -dimsu -w $$ >/dev/null 2>&1 &
+  CAFF_PID=$!
+  trap 'kill "$CAFF_PID" 2>/dev/null || true' EXIT
+fi
+main_run 2>&1 | tee "$LOG"

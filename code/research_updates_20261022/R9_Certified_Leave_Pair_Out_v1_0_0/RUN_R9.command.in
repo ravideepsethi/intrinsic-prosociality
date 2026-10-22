@@ -1,0 +1,47 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+r9_package="$(cd "$(dirname "$0")" && pwd -P)"
+r9_project="${IV_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+r9_desktop="${IV_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+r9_python="${IV_PYTHON:-$r9_project/venv/bin/python}"
+if [[ ! -x "$r9_python" ]]; then
+  echo "Research Python unavailable: $r9_python. Connect XT_Pro or set IV_PYTHON."
+  exit 2
+fi
+mkdir -p "$r9_desktop"
+export PYTHONDONTWRITEBYTECODE=1
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 BLIS_NUM_THREADS=1
+cd "$r9_package"
+r9_log="$r9_desktop/r9_certified_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+r9_awake=()
+if [[ -x /usr/bin/caffeinate ]]; then r9_awake=(/usr/bin/caffeinate -i); fi
+echo "Log: $r9_log"
+set +e
+(
+  set -e
+  "$r9_python" - <<'PY'
+import sys
+assert sys.version_info >= (3,10), 'Python 3.10 or later required'
+sys.path.insert(0,'code')
+from r9_common import verify_package
+verify_package()
+print('R9_PACKAGE_SHA256_OK',flush=True)
+PY
+  r9_tests="${r9_log%.log}_selftests.log"
+  if "$r9_python" -m unittest discover -s tests -p 'test_*.py' -q > "$r9_tests" 2>&1; then
+    echo "OFFLINE_SELF_TESTS_OK: $r9_tests"
+  else
+    cat "$r9_tests"
+    exit 3
+  fi
+  echo 'Planning estimate: 2–5 hours; allow 4–8 hours if many added-frame ENV histories need scanning.'
+  echo 'Baseline is read-only. Checkpoints at 25/50/75/100%; rerun this command to resume.'
+  "${r9_awake[@]}" "$r9_python" -u code/run_r9.py --project-root "$r9_project" --desktop "$r9_desktop" "$@"
+) 2>&1 | tee "$r9_log"
+r9_exit=${PIPESTATUS[0]}
+set -e
+if [[ "$r9_exit" -ne 0 ]]; then
+  echo "Stopped with exit $r9_exit. Return the latest R9 report and this log: $r9_log"
+fi
+exit "$r9_exit"

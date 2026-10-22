@@ -1,0 +1,175 @@
+#!/bin/bash
+set -euo pipefail
+
+package_root="$(cd "$(dirname "$0")" && pwd)"
+project_root="${1:-/Volumes/XT_Pro/lichess_kindness}"
+desktop_root="${2:-__PRIVATE_VALUE_1__/Desktop/Lichess_Desktop}"
+workers="${LICHESS_36M_WORKERS:-10}"
+months="2026-04"
+
+if [[ ! "$workers" =~ ^[0-9]+$ ]] || (( workers < 1 || workers > 10 )); then
+    echo "ERROR: LICHESS_36M_WORKERS must be an integer from 1 through 10." >&2
+    exit 2
+fi
+
+python_bin="$project_root/venv/bin/python"
+[[ -x "$python_bin" ]] || {
+    echo "ERROR: project Python is missing or not executable: $python_bin" >&2
+    exit 2
+}
+[[ -d "$desktop_root" ]] || {
+    echo "ERROR: Desktop working root does not exist: $desktop_root" >&2
+    exit 2
+}
+
+if [[ -f "$package_root/MANIFEST.sha256" ]]; then
+    (
+        cd "$package_root"
+        /usr/bin/shasum -a 256 -c MANIFEST.sha256
+    )
+fi
+
+"$python_bin" - <<'PY'
+import duckdb, numpy, pandas, pyarrow
+print("Python dependencies: OK")
+PY
+
+stockfish_bin=""
+for candidate in /opt/homebrew/bin/stockfish /usr/local/bin/stockfish; do
+    if [[ -x "$candidate" ]]; then
+        stockfish_bin="$candidate"
+        break
+    fi
+done
+if [[ -z "$stockfish_bin" ]]; then
+    stockfish_bin="$(command -v stockfish || true)"
+fi
+[[ -n "$stockfish_bin" && -x "$stockfish_bin" ]] || {
+    echo "ERROR: Stockfish executable not found." >&2
+    exit 2
+}
+
+if /usr/bin/pgrep -x stockfish >/dev/null 2>&1; then
+    echo
+    echo "BLOCKED: another Stockfish job is already running on this Mac."
+    echo "Do not run two 10-worker Stockfish jobs simultaneously."
+    echo "Existing processes:"
+    /usr/bin/pgrep -fl stockfish || true
+    echo
+    echo "Wait for the existing job to finish, then rerun this same command."
+    exit 3
+fi
+
+stamp="$(/bin/date -u +%Y%m%dT%H%M%SZ)"
+result_root="$desktop_root/LICHESS_36M_STAGE05_SF_APRIL_RESULT_$stamp"
+log_path="$desktop_root/LICHESS_36M_STAGE05_SF_APRIL_$stamp.log"
+/bin/mkdir -p "$result_root"
+
+exec > >(/usr/bin/tee -a "$log_path") 2>&1
+
+echo
+echo "Starting April 2026 Stage-05 construction and Stockfish-100k extension."
+echo "Project:    $project_root"
+echo "Months:     $months"
+echo "Workers:    $workers Stockfish processes, one engine thread each"
+echo "Storage:    typed ZSTD Parquet"
+echo "Result:     $result_root"
+echo "Log:        $log_path"
+echo "Stockfish:  $stockfish_bin"
+echo "Expected runtime: approximately 6-10 hours from zero."
+echo "Expected Stage-05/input preparation: 10-30 minutes."
+echo "Expected Stockfish runtime: approximately 6-9 hours, refined after the pilot."
+echo "Expected additional free space: approximately 5-10 GiB."
+echo "The existing sequential API job may continue in parallel."
+echo
+
+export PYTHONDONTWRITEBYTECODE=1
+export OMP_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export NUMEXPR_NUM_THREADS=1
+export VECLIB_MAXIMUM_THREADS=1
+
+stage05_script="$package_root/code/build_stage05_extension.py"
+prepare_script="$package_root/code/prepare_stockfish_inputs.py"
+sf_script="$package_root/vendor/080_stockfish100k_resumable.py"
+finalize_script="$package_root/code/finalize_result.py"
+
+"$python_bin" -B "$stage05_script" \
+    --project-root "$project_root" \
+    --months "$months" \
+    --threads "$workers"
+
+"$python_bin" -B "$stage05_script" \
+    --project-root "$project_root" \
+    --self-test
+
+"$python_bin" -B "$stage05_script" \
+    --project-root "$project_root" \
+    --months "$months" \
+    --threads "$workers" \
+    --memory-limit 8GB \
+    --execute
+
+"$python_bin" -B "$prepare_script" \
+    --project-root "$project_root" \
+    --months "$months" \
+    --workers "$workers"
+
+input_root="$project_root/derived/replication_36m/stockfish100k_extension_inputs"
+input_paths="$input_root/sf100k_input_paths_2026-04.txt"
+sf_output="$project_root/derived/replication_36m/stockfish100k_extension_new_api_2026_04"
+
+"$python_bin" - "$input_root/CHECKPOINT_2026-04_SUCCESS.json" <<'PY'
+import json, sys
+path = sys.argv[1]
+data = json.load(open(path, encoding="utf-8"))
+rows = int(data["rows"])
+hours = rows / 90.7 / 3600
+print(f"Stockfish positions: {rows:,}")
+print(f"Recent-throughput ETA: {hours:.1f} hours at 90.7 positions/second.")
+PY
+
+sf_common=(
+    --input-paths-file "$input_paths"
+    --months "$months"
+    --output-root "$sf_output"
+    --stockfish-bin "$stockfish_bin"
+    --nodes 100000
+    --workers "$workers"
+    --threads-per-engine 1
+    --hash-mb 64
+    --part-rows 100000
+)
+
+"$python_bin" -B "$sf_script" "${sf_common[@]}" --mode plan
+"$python_bin" -B "$sf_script" "${sf_common[@]}" --pilot-rows 2000 --mode pilot
+
+"$python_bin" - "$sf_output/pilot/pilot_summary.json" <<'PY'
+import json, sys
+data = json.load(open(sys.argv[1], encoding="utf-8"))
+if int(data.get("error_rows", -1)) != 0 or int(data.get("ok_rows", -1)) != int(data.get("pilot_rows", -2)):
+    raise SystemExit("ERROR: Stockfish pilot did not certify every row")
+print("STOCKFISH PILOT OK")
+print(f"Observed throughput: {float(data['rows_per_second']):.2f} positions/second")
+print(f"Production ETA from pilot: {float(data['estimated_production_hours']):.1f} hours")
+PY
+
+"$python_bin" -B "$sf_script" "${sf_common[@]}" --mode production
+"$python_bin" -B "$sf_script" "${sf_common[@]}" --mode summarize
+
+"$python_bin" -B "$finalize_script" \
+    --project-root "$project_root" \
+    --result-root "$result_root"
+
+/bin/cp "$log_path" "$result_root/"
+
+result_zip="$result_root.zip"
+/usr/bin/ditto -c -k --keepParent "$result_root" "$result_zip"
+/usr/bin/shasum -a 256 "$result_zip" > "$result_zip.sha256"
+
+echo
+echo "LICHESS_36M_STAGE05_SF_APRIL_COMPLETE"
+echo "Upload these two files:"
+echo "  $result_zip"
+echo "  $result_zip.sha256"

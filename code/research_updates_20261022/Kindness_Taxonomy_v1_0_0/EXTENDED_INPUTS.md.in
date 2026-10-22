@@ -1,0 +1,132 @@
+# Inputs still needed for the full research plan
+
+This package runs the existing-data analyses now and inventories likely local
+sources. It does not silently replace ordinary-game denominators with timeout
+choices, extrapolate game accuracy from a terminal score, or launch millions
+of engine evaluations. Read `00_inventory/optional_source_inventory.json` in
+the return ZIP to bind a subsequent builder to the actual schemas and archives.
+
+## 0.1 All-game account markers
+
+A separate account-game scan must retain both players' usernames/IDs, start
+and end times, rated flag, speed/rating pool, pregame rating, provisional flag,
+termination status, winner, disconnected role where identifiable, and engine
+evaluation at the final recorded position with orientation/mate metadata.
+
+For each account-year, excluding both author accounts in both roles:
+
+- Count all eligible games, rated and casual counts, and all timeout games in
+  which the account was the disconnected party. Own-disconnect rate has an
+  all-game denominator; the chosen scope and coverage must be explicit.
+- Among own rated losses whose own final evaluation <= -500 cp, report
+  resignation, outoftime, mate and timeout/abandonment counts and shares.
+  Missing evaluations are unknown losses, not non-resignations. Report engine
+  coverage by status, speed and year before interpreting the share.
+- Compute rating level and within-year SD within a rating pool. Never mix
+  bullet and classical ratings into the requested all-game volatility measure.
+  Record provisional status at a defined time and account age from creation.
+- Use no granting/receiving behavior in construction of these external markers.
+  The later selected Patron snapshot is its own measurement/sampling frame.
+
+The current runner supplies explicitly named opportunity-based rating proxies,
+not these all-game variables. Its `ANALYSIS_COVERAGE.csv` keeps this gap visible.
+An account-year external-marker merger is not part of this version.
+
+## 0.3 Ordinary-game trajectories and engine calibration
+
+For each ordinary, non-disconnection game retain the complete move trajectory,
+ratings, speed, result and engine settings. A game that reaches a cell should
+contribute once to that cell per oriented player, not once for every repeated
+position in that cell. Choose first entry before calculating frequencies.
+Wins/games estimate P(chooser wins); draws count as nonwins for this probability,
+not as half a win. Rating gap is chooser minus opponent and cp is chooser POV.
+Use floor(cp/50) and floor(gap/50), the fixed ply bands, and speed. Game IDs in
+calibration must be disjoint from focal disconnection choices.
+
+Separate results based on analysis-requested evaluated games from the random
+sample; do not relabel the former representative. The planned independent
+sample is 1,000,000 ordinary-game IDs chosen by deterministic seed/hash before
+outcomes are used, with a sampling manifest and sampling probabilities. Low
+budget is fixed at 2,000 nodes per sampled position, plus a deterministic 1%
+validation subset at 100,000 nodes. Record Stockfish binary SHA, version,
+UCI parameters, FEN/ply, score POV, depth/nodes and mate convention. Processing
+all reached positions of 1M games can mean tens of millions of engine searches.
+The engine workload therefore needs its own resumable, tested builder after
+confirming the actual local PGN and evaluation formats.
+
+Cells need >=100 distinct games. Report missing/unsupported cells, reliability
+against the deeper validation subset, and coverage by focal state/stage/speed.
+Keep selected-evaluation and random-evaluation calibrations in separate runs.
+Do not stack duplicate cells from both samples into one lookup. Final
+inference should resample calibration games and focal chooser accounts jointly;
+the provided D1 conditional SE is a diagnostic, not that final uncertainty.
+
+## F: probable waiting frame
+
+Need every eligible rated pool/nonadjacent outoftime loss, with final
+loser-oriented engine evaluation comparable to the main 100k-node evaluation,
+last recorded loser clock, identities and time. This frame is not the current
+active-timeout panel. Apply the same game/source/nonadjacency scope upstream;
+retain a provenance audit of retained and rejected games, missing clocks and
+missing evaluations. New chooser IDs must use the main panel's ID namespace.
+Outoftime does not establish disconnection or deliberate waiting.
+
+## D2: complete-game accuracy
+
+Need pre/post-move engine scores for every decision by both players, with
+consistent player POV and engine budget. Compute ACPL using a declared
+nonnegative-loss and mate-score convention; export counted/evaluated moves
+and missingness. The adapter requires complete paths. Hashes alone do not
+prove completeness. Last-position and last-four-ply caches cannot substitute.
+
+## Optional adapter contract
+
+Place a separately audited manifest at:
+`derived/replication/taxonomy_extended_inputs/EXTENDED_INPUTS.json`.
+This file is included in the run key. Supplying it creates a distinct run;
+it does not mutate a completed analysis. Do not set verified=true until a
+builder's game counts, exclusions, engine provenance and coverage are checked.
+
+Top-level object:
+
+```json
+{
+  "contract": "LICHESS_TAXONOMY_EXTENDED_INPUTS_V1",
+  "author_exclusion": ["__PRIVATE_VALUE_1__", "__PRIVATE_VALUE_2__"],
+  "datasets": {}
+}
+```
+
+Each dataset record contains `verified: true`, a `files` list of objects with
+`path`, `sha256`, and optional `bytes`, plus the properties below. Paths can
+be relative to the project or absolute within it. Files must be Parquet.
+Builders must retain their own source/sampling/audit manifests locally.
+
+| Dataset key | Required record properties | Required Parquet columns |
+|---|---|---|
+| waiting_events | scope=pool_nonadjacent_24m, cp_orientation=loser, engine_nodes=100000 | game_id, chooser, recipient, chooser_username, recipient_username, start_ms, cp, speed, loser_clock_s, status, rated |
+| continuation_cells | probability_orientation=chooser, ordinary_games_only=true, game_disjoint_from_opportunities=true, cp_bin_width=50, rating_gap_bin_width=50, stage_upper_bounds=[2,4,6,10,20,40,80] | cp_bin_chooser, gap_bin_chooser, stage, speed, games, wins, sample_source |
+| game_accuracy | scope=main_opportunity_games, complete_move_path=true, mate_convention=(explicit string) | game_id, chooser_acpl, recipient_acpl, chooser_moves, recipient_moves |
+
+`chooser`/`recipient` are signed 64-bit IDs in the certified main namespace.
+For waiting events recipient means the loser and chooser means the winner.
+`start_ms` is UTC Unix milliseconds. `cp` is the final loser score, including
+the same finite mate conversion as the main sample. Names are normalized and
+checked against main identities and author exclusions. Waiting game IDs must
+be unique and disjoint from active timeout choices. Missing loser clocks are
+not selected as probable waiting. `status` must be outoftime, `rated` true.
+
+Continuation cells must be unique across all supplied files. `stage` is a
+0-based integer; upper-bound bands are inclusive. `games` and `wins` count
+distinct games reaching each oriented cell. The program checks arithmetic
+and uniqueness, but cannot establish random sampling from a claim in JSON.
+`sample_source` must identify random versus analysis-requested calibration.
+
+Accuracy IDs join to the certified main sample, ensuring author exclusion.
+Both ACPLs are nonnegative finite values, with >=1 evaluated move per player.
+The full-path claim and mate convention must be backed by builder audits.
+
+If an adapter is missing, its stage is marked BLOCKED_INPUT and the remaining
+local stages continue. A malformed or contradictory supplied input fails the
+run rather than being silently treated as missing. Return the partial report
+and log so the contract issue can be corrected at its source.

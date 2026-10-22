@@ -1,0 +1,121 @@
+IV SLIDE GAPS v1.0.0 — definitions and provenance
+
+INPUTS
+The original headline cohort is exactly 2,682,330 rows at:
+derived/replication/chooser_iv_expanded_v100_PRIVATE/f14a1105a9f7/analysis/spaced90.parquet
+SHA256: 3bc55d83f113cd7c5942348b16ae9ff5e940ae8aad13f9db3d99a6a526ef250c
+Bytes: 295180899.
+The optional companion is the already-completed Run 3 clean_sample/sample.parquet
+under iv_run3_leniency_v100_PRIVATE/c729efbf3215. Its design, receipt, hash and
+2,682,329-row count are checked. No author-history reconstruction occurs.
+The companion does not contain Y; its role is score and first-stage diagnostics.
+The headline coefficients are not recomputed or relabeled with the Run 3 N.
+
+OUTCOME LEVELS
+For all exposures, D=0 claim recipients, and D=1 grant recipients, export N,
+sum(Y), sum(R), sum(Y)/N, sum(R)/N and sum(Y)/sum(R), plus percent versions.
+Y is already zero-coded outside R=1 in the authenticated frozen cohort.
+No matched weights, model adjustment, sample expansion or new outcome query.
+The original overall counts must reproduce Y=43600, R=1537636 and D=0=2617641.
+
+SCORE
+Z = mean(g - p_hat) over the earlier eligible pair-excluded scoring history.
+The upstream score is already stored. This audit does not reconstruct it.
+Raw historical grant rate = adjusted_7d + expected_7d.
+Historical grant count = n_7d * raw rate, required within 1e-6 of an integer.
+Zero-grant history means this count is exactly zero, not zero adjusted Z.
+It does not mean lifetime never-granted, and does not describe a latent type.
+The fixed reference SD is 0.059411690344000595, inherited from the earlier
+first-exposure fit. It is not the SD of unique opponents' raw grant rates.
+
+POPULATIONS
+All populations refer to supported opponents appearing in the chosen cohort.
+They do not cover every opponent with a supported score anywhere on Lichess.
+1. exposure_weighted: each exposure has unit weight.
+2. equal_opponent_weight_across_exposures: weight=1/count(exposures of opponent).
+   Each opponent has total weight one, spread over their observed histories.
+3. one_snapshot_per_opponent: one observation for each opponent, chosen at their
+   earliest eligible exposure. A timestamp tie breaks by the frozen row_id.
+Scores can differ by month, excluded recipient and cross-fitting reference.
+Quantiles use the inverse weighted empirical CDF, without interpolation.
+Histograms use 60 equal-width bins over full observed Z support and [0,1] for
+the raw rate. No tail observations are discarded. CSVs include all three
+populations; the plots display exposure weights and the first opponent snapshot.
+
+SCORE-BAND FIRST STAGE
+Default: ten exposure-quantile bands of raw historical Z. Identical scores are
+not split; empty bins are dropped and the actual number of bins is reported.
+Use --bands 5 for quintiles. No data-driven choice of band count is performed.
+
+The original first stage is D = beta*Z + X*gamma + additive FEs + error.
+X and the FEs come from the unchanged, vendored expanded_stats.controls(d,True).
+The 15 continuous controls are recipient rating; rating gap, squared gap and
+absolute gap; log(1+opponent prior decisions); log(1+prior counterparts);
+expected historical rate; recipient fair-history indicator, log fair count,
+ever-kind indicator, kind rate, log disconnect count, log receipt count,
+log prior 30-day activity and log prior 90-day claim count.
+FEs are assignment cell (month, base seconds, increment seconds, floor(mean
+pair rating/100)), exposure date and hour of week. All transformations and
+missing-value rules are inherited from the original source.
+
+Before new results are accepted, the linear first stage, its clustered SE and
+the residual-score SD must reproduce the saved cohort fit within 2e-8 in
+native units. Original slope 1.1633383003440598; SE .00666888594691755;
+native residual-score SD .057367422080685834. Run 3 uses its saved fit.
+
+Raw curve: mean D in each Z band.
+Adjusted curve: replace continuous Z with K-1 band indicators, retaining X/FEs.
+If b is that fitted vector, Bbar its full-cohort mean and e_k the band's dummy
+vector (all zeros for band 1), adjusted mean_k = Dbar + (e_k - Bbar)'b.
+These standardize every band to the same empirical X/FE distribution.
+They are not raw probabilities and may lie outside [0,1]; no clipping occurs.
+Linear comparison: Dbar + beta*(mean Z in band - overall mean Z).
+
+Uncertainty: the upstream shared-account OR exposure-date CR0 estimator, with
+pointwise normal 95% intervals. The band-model centered intercept and band
+coefficients are propagated jointly. Historical scores, covariates and bin
+cutpoints are treated as fixed; generated-score uncertainty is not propagated.
+Nonpositive or non-PSD covariance is explicitly unavailable, never repaired.
+
+Nested linearity diagnostic: add all K-1 band indicators to continuous Z and
+X/FEs, then test their coefficients jointly equal to zero with the same robust
+covariance and asymptotic chi-square reference. This detects step departures;
+it is not a comprehensive test of every nonlinear alternative. Failure to reject
+does not establish exact linearity. Report plot, departure magnitudes and p-value.
+Neither this test nor positive average band associations establishes individual
+monotonicity or the IV exclusion restriction. This is not an FLL test.
+
+PROFILE CACHE
+Bounded discovery: up to 45 seconds / 15,000 directories / depth eight; inspect
+at most 250 candidate files. Inspect Parquet schemas and at most 256 records,
+CSV/TSV headers and records, and bounded JSON/JSONL samples. No network requests.
+The result distinguishes nonempty values found, schema only, and not found in
+this bounded search. A negative result does not prove the field was never saved.
+Use --profile-path PATH to inspect a specific file or folder if discovery misses it.
+Only field names and aggregate availability are exported. Private input paths
+stay in the local audit directory. No account IDs or profile values are exported.
+Field availability alone does not validate the identity join or temporal status.
+A current self-reported profile field is not automatically a pre-exposure balance
+covariate. No country-balance regression is silently constructed here.
+
+RUN 2
+Capture a read-only snapshot of matching local summary/status receipts and
+recognized Run 2 Python processes on this machine (PID, elapsed time, CPU usage
+and script basename only). A process's existence does not establish progress.
+A phase completion is not full-frame completion. No downloader or analysis is
+started, stopped or changed. Process health/ETA is not inferred from a receipt.
+
+OTHER OPEN QUESTIONS
+Meeting length and whether Decio read the revised draft require a human answer.
+Disconnect-start and claim-button event timestamps are absent from the reviewed
+game exports. Recorded clocks do not identify voluntary post-disconnection wait.
+Conditional independence, exclusion and individual monotonicity remain maintained
+identifying assumptions; no descriptive audit can certify them.
+
+VALIDATION
+Offline tests compare the band regression and its covariance with explicit
+full-dummy OLS, compare shared-account/date covariance with an explicit adjacency
+matrix, check denominators and history recovery, preserve tied scores, reject
+corrupted input hashes, inspect nested profile fields without exporting values,
+and exercise aggregate report creation and checkpoint reuse with synthetic data.
+Real results are produced only after the package runs on the verified local data.

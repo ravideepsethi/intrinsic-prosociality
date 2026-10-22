@@ -1,0 +1,49 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+r8_independent_package="$(cd "$(dirname "$0")" && pwd -P)"
+r8_independent_project="${IV_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+r8_independent_desktop="${IV_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+r8_independent_python="${IV_PYTHON:-$r8_independent_project/venv/bin/python}"
+export PYTHONDONTWRITEBYTECODE=1
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1 BLIS_NUM_THREADS=1
+mkdir -p "$r8_independent_desktop"
+r8_independent_log="$r8_independent_desktop/r8_receipt_independent_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+echo "Log: $r8_independent_log"
+r8_independent_awake=()
+if [[ -x /usr/bin/caffeinate ]]; then r8_independent_awake=(/usr/bin/caffeinate -i); fi
+set +e
+(
+  set -euo pipefail
+  cd "$r8_independent_package"
+  "$r8_independent_python" - "$r8_independent_desktop/R8_Current_Data_v1_0_0.zip" <<'PY'
+from pathlib import Path
+import hashlib,sys,platform
+import numpy,pandas,scipy,pyarrow,duckdb,chess
+p=Path(sys.argv[1])
+assert p.is_file(), 'Keep the original R8_Current_Data_v1_0_0.zip in Lichess_Desktop'
+assert hashlib.sha256(p.read_bytes()).hexdigest()=='cd68036045754eb35278c3f707207b379ffce3bd98ec09804c24203b5609d1ed', 'Original R8 ZIP SHA differs'
+print('ORIGINAL_R8_ZIP_SHA256_OK',flush=True)
+print('TRACE_RUNTIME Python',sys.version.split()[0],platform.machine(),'NumPy',numpy.__version__,'pandas',pandas.__version__,
+      'SciPy',scipy.__version__,'PyArrow',pyarrow.__version__,'DuckDB',duckdb.__version__,'chess',chess.__version__,flush=True)
+PY
+  r8_independent_stage="$(mktemp -d "$r8_independent_desktop/r8_independent_base.XXXXXX")"
+  ditto -x -k "$r8_independent_desktop/R8_Current_Data_v1_0_0.zip" "$r8_independent_stage"
+  r8_independent_base="$r8_independent_stage/R8_Current_Data_v1_0_0"
+  "$r8_independent_python" - "$r8_independent_base" <<'PY'
+import sys
+sys.path.insert(0,'code')
+import run_independent
+run_independent.base.initialize(sys.argv[1])
+print('RECEIPT_INDEPENDENT_PACKAGE_SHA256_OK',flush=True)
+PY
+  "$r8_independent_python" -u tests/test_resume.py --base-package "$r8_independent_base"
+  "$r8_independent_python" -u tests/test_independent.py --base-package "$r8_independent_base"
+  "$r8_independent_python" -u tests/test_history_scope.py --base-package "$r8_independent_base"
+  "${r8_independent_awake[@]}" "$r8_independent_python" -u code/run_independent.py \
+    --base-package "$r8_independent_base" --project-root "$r8_independent_project" --desktop "$r8_independent_desktop" "$@"
+) 2>&1 | tee "$r8_independent_log"
+r8_independent_exit=${PIPESTATUS[0]}
+set -e
+if [[ "$r8_independent_exit" -ne 0 ]]; then echo "Stopped with exit $r8_independent_exit; return the report ZIP, sidecar and this log."; fi
+exit "$r8_independent_exit"

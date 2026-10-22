@@ -1,0 +1,59 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+r9_mode="${1:?Specify resume or tests}"
+shift
+r9_package="$(cd "$(dirname "$0")" && pwd -P)"
+r9_project="${IV_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+r9_desktop="${IV_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+r9_python="${IV_PYTHON:-$r9_project/venv/bin/python}"
+if [[ ! -x "$r9_python" ]]; then
+  echo "Research Python unavailable: $r9_python. Connect XT_Pro or set IV_PYTHON."
+  exit 2
+fi
+mkdir -p "$r9_desktop"
+export PYTHONDONTWRITEBYTECODE=1
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 BLIS_NUM_THREADS=1
+cd "$r9_package"
+r9_log="$r9_desktop/R9_ENV_RESUME_${r9_mode}_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+r9_awake=()
+if [[ -x /usr/bin/caffeinate ]]; then r9_awake=(/usr/bin/caffeinate -i); fi
+echo "Log: $r9_log"
+set +e
+(
+  set -euo pipefail
+  "$r9_python" - <<'PY'
+import sys
+assert sys.version_info >= (3,10), 'Python 3.10 or later is required'
+sys.path.insert(0,'code')
+from r9_env_resume import verify_package
+verify_package()
+print('R9_REPAIR_AND_FROZEN_PACKAGE_SHA256_OK', flush=True)
+PY
+  r9_tests="${r9_log%.log}_selftests.log"
+  if (
+    "$r9_python" -m unittest discover -s frozen_R9/tests -p 'test_*.py' -v &&
+    "$r9_python" -m unittest discover -s tests -p 'test_*.py' -v
+  ) > "$r9_tests" 2>&1; then
+    echo "R9_ORIGINAL_AND_REPAIR_SELF_TESTS_OK: $r9_tests"
+  else
+    cat "$r9_tests"
+    exit 3
+  fi
+  if [[ "$r9_mode" == resume ]]; then
+    echo 'ETA: roughly 1.5–3 hours, longer if many serial retries or drive contention occur.'
+    echo 'Original configuration 4028bf3e1857; existing baseline, donor and ENV checkpoints are verified and reused.'
+    echo 'ENV: two workers at 3 GB DuckDB each, 4.5 GiB reserved per worker; OOM parts retry alone at 8 GB.'
+    echo 'Other stages retain up to 10 workers within the existing 11 GiB planning budget.'
+    "${r9_awake[@]}" "$r9_python" -u code/r9_env_resume.py --project-root "$r9_project" --desktop "$r9_desktop" "$@"
+  elif [[ "$r9_mode" != tests ]]; then
+    echo 'Use RESUME_R9.command or RUN_TESTS.command.'
+    exit 2
+  fi
+) 2>&1 | tee "$r9_log"
+r9_exit=${PIPESTATUS[0]}
+set -e
+if [[ "$r9_exit" -ne 0 ]]; then
+  echo "Stopped with exit $r9_exit. Completed checkpoints remain reusable. Return this log: $r9_log"
+fi
+exit "$r9_exit"

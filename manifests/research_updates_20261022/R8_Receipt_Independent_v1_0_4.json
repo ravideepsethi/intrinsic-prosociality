@@ -1,0 +1,102 @@
+{
+  "package": "R8_Receipt_Independent_v1_0_4",
+  "archive_name": "R8_Receipt_Independent_v1_0_4.zip",
+  "archive_sha256": "fce01a85cde639c0a6282692deec6c8985c9835cfc2d8adfa63f947f0ca904ee",
+  "archive_size": 42308,
+  "archive_root": "R8_Receipt_Independent_v1_0_4",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "README.md",
+      "published_path": "README.md",
+      "sha256": "2cc7d58a9832abb7efaf571e6cebd07513093c8384fb4de52f46637f4a5fbc59",
+      "published_sha256": "2cc7d58a9832abb7efaf571e6cebd07513093c8384fb4de52f46637f4a5fbc59",
+      "size": 4695
+    },
+    {
+      "path": "RUN_RECEIPT_INDEPENDENT.command",
+      "published_path": "RUN_RECEIPT_INDEPENDENT.command.in",
+      "sha256": "5ef608e065a1c381f5ca4c144946b23f197e491ee7ad83b5b9fa7b59e88fe9b0",
+      "published_sha256": "5ef608e065a1c381f5ca4c144946b23f197e491ee7ad83b5b9fa7b59e88fe9b0",
+      "size": 2789
+    },
+    {
+      "path": "code/history_scope.py",
+      "published_path": "code/history_scope.py",
+      "sha256": "1b9322ccc1bc3465b4902518477cf0b57970963ba6795cea5d69b5313619e297",
+      "published_sha256": "1b9322ccc1bc3465b4902518477cf0b57970963ba6795cea5d69b5313619e297",
+      "size": 14175
+    },
+    {
+      "path": "code/independent_ols.py",
+      "published_path": "code/independent_ols.py",
+      "sha256": "7e44466d8eb5ee98a3df736a396de3dee3d445a8d5391d78d21848930fdd59ad",
+      "published_sha256": "7e44466d8eb5ee98a3df736a396de3dee3d445a8d5391d78d21848930fdd59ad",
+      "size": 4324
+    },
+    {
+      "path": "code/receipt_resume.py",
+      "published_path": "code/receipt_resume.py",
+      "sha256": "5a3b734f31347fc6024d8a7dc71b20728878dabe9202b00481420e4e57ead9f8",
+      "published_sha256": "5a3b734f31347fc6024d8a7dc71b20728878dabe9202b00481420e4e57ead9f8",
+      "size": 15365
+    },
+    {
+      "path": "code/run_independent.py",
+      "published_path": "code/run_independent.py",
+      "sha256": "d5c497569ca447528511a6e2e199454a738785b390eb3578cd98e3da0d9e1664",
+      "published_sha256": "d5c497569ca447528511a6e2e199454a738785b390eb3578cd98e3da0d9e1664",
+      "size": 22071
+    },
+    {
+      "path": "tests/test_history_scope.py",
+      "published_path": "tests/test_history_scope.py.in",
+      "sha256": "14ddda49ea870e1424aaa89e83db2daa27c041e0e5a2ca6cd04d8b25bb306ada",
+      "published_sha256": "727eb1cc0fc1cf858babda5d0510c9d311a126dc07f717b108f52ee9296f26d1",
+      "size": 11085,
+      "redactions": [
+        {
+          "start": 1497,
+          "end": 1504,
+          "token": "__PRIVATE_VALUE_1__"
+        }
+      ]
+    },
+    {
+      "path": "tests/test_independent.py",
+      "published_path": "tests/test_independent.py",
+      "sha256": "b3a55dabe6464c8532b688af32219f7e14350f6e90e2b6c5f0d4bda7254c391a",
+      "published_sha256": "b3a55dabe6464c8532b688af32219f7e14350f6e90e2b6c5f0d4bda7254c391a",
+      "size": 8038
+    },
+    {
+      "path": "tests/test_resume.py",
+      "published_path": "tests/test_resume.py",
+      "sha256": "07fe4634d3f88b1147a49918edc4479d876040b0f10c5f26635dd9894713a453",
+      "published_sha256": "07fe4634d3f88b1147a49918edc4479d876040b0f10c5f26635dd9894713a453",
+      "size": 8557
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "PACKAGE_MANIFEST.sha256",
+      "sha256": "bf0c88ce4342a4fe1f9b64a64ed527753ebdd558046ab9b050761c74fc6e9b92",
+      "size": 1091
+    },
+    {
+      "path": "VALIDATION.json",
+      "sha256": "4cdde36a7773fa0e13b3f23a81ee942f6acc77a433e78d17faa761ba0682faa2",
+      "size": 3217
+    },
+    {
+      "path": "evidence/S0_TRACE_REFERENCE.json",
+      "sha256": "0b215ab5cd895cfcc167ff086b89be4bb15151a85eefb2ad9e825f6356c2a087",
+      "size": 38114
+    },
+    {
+      "path": "evidence/V103_RETURNED_AUDIT_PROOF.json",
+      "sha256": "d580db1e4fcbc01a41a6250028ed31b3ea0fa80cba2ba7fa1c174e539952491a",
+      "size": 694
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+# Enriched history handoff
+
+This optional input activates the specified T1–T4 analyses. It is not required to run the available-data diagnostic package. The supplied legacy chronology is insufficient on its own. This package does not invent the missing fields or launch a new acquisition/replay.
+
+The source producer must establish an all-source, standard-rated, same-speed history of completed rating events, with the same numeric account-ID namespace as the certified opportunity panel. Pool-only histories, disconnection-only histories, current RD, start-only ordering and `lastMoveAt` used as termination are unacceptable substitutes.
+
+Supply a JSON manifest following `HISTORY_INPUT_MANIFEST.example.json`. Paths may be absolute or relative to the manifest's directory. Every listed Parquet and the producer receipt need their actual SHA-256. The producer receipt must explain the historical RD reconstruction, result/status coding, source coverage, completion timestamps and account-ID mapping. Its hash is recorded; it is kept private rather than blindly included in the shareable report. Hashes establish the bytes supplied, not the scientific validity of an unsupported producer assertion.
+
+The coverage interval is the observed history interval, not a claim of lifetime completeness. Its start must precede every target opportunity start; its end must cover every target opportunity start. For complete predictive-validation follow-up, include ordinary completed games through at least 30 days after the final eligible October 2025 anchor. Partial follow-up is recorded. Counts before the declared coverage interval remain unknown, not reconstructed.
+
+The current adapter accepts complete account coverage within the declared source interval. It does **not** accept an arbitrary subset of accounts or months as global coverage. If your source is account-targeted, it needs a separate audited coverage adapter before use. Preserve its existing receipt rather than relabeling it as complete.
+
+Required canonical game-wide columns:
+
+| Column | Required meaning |
+|---|---|
+| `game_id` | Unique game identifier across all files |
+| `speed` | `ultraBullet`, `bullet`, `blitz`, `rapid`, `classical`, or `correspondence`; original speed-specific rating category |
+| `start_ms` | UTC Unix milliseconds at game start |
+| `end_ms` | UTC Unix milliseconds at actual game completion, with an authenticated producer definition |
+| `white_id`, `black_id` | Integer account IDs in the certified panel's namespace |
+| `white_rating`, `black_rating` | Observed displayed pre-game ratings |
+| `white_rd`, `black_rd` | Historical pre-game RDs in rating points, not Glicko internal phi units |
+| `white_rating_diff`, `black_rating_diff` | Observed integer rating changes; null when genuinely unavailable |
+| `white_score` | 0, 0.5 or 1 from White's perspective, with documented source-result mapping |
+| `status` | Canonical authenticated completion status; ordinary only for `mate`, `resign`, `draw`, `stalemate` |
+
+Missing scores/RDs/statuses are not filled. Counts require the authenticated rating-event scope and completion times. A performance lookback is invalid if an ordinary game has missing score/opponent state, or any historical chooser RD is missing or above 110. Normal games are not inferred from the score. Unknown, timeout and out-of-time statuses do not contribute to the performance likelihood.
+
+The loader checks file hashes, row counts, game uniqueness, identities, times, result range and integer observed updates. It reconciles overlapping game IDs with the certified opportunity panel's account IDs, ratings, speeds and start times (up to one second for original timestamp precision). A producer using a different namespace or regime must supply a verified conversion before this code is used.
+
+The builder counts games completed strictly before each target's start. All games at exactly the target start are excluded. Repeated completion timestamps invalidate performance windows if they create an unresolved ordering or a tied lookback boundary. Counts and maxima are order invariant and can retain games with tied completion times that are all strictly prior. First observed completion, observed history duration and missing post-game updates are retained privately.
+
+Creation before the source's coverage start implies possible left truncation. The report labels all counts as observed and all peaks as observed stable-rating peaks. A zero observed count is not a claim that the account has never played.
+
+To invoke a ready source:
+
+```bash
+caffeinate -i bash "__PRIVATE_VALUE_1__/Desktop/Lichess_Desktop/Rating_Motives_v1_0_0/RUN_ANALYSIS.command" \
+  --phase all \
+  --threads 8 \
+  --workers 4 \
+  --history-manifest "/absolute/path/to/producer_backed_history_manifest.json"
+```
+
+The unrelated 2013 Rating Redesign history-closure materials are not authority for this 2023–2025 kindness outcome panel and must not be used to satisfy this contract.

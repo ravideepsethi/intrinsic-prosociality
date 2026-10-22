@@ -1,0 +1,94 @@
+"""Offline, private, versioned analysis with atomic reusable checkpoints."""
+from __future__ import annotations
+import os
+for _v in ('OPENBLAS_NUM_THREADS','OMP_NUM_THREADS','MKL_NUM_THREADS','VECLIB_MAXIMUM_THREADS','NUMEXPR_NUM_THREADS','BLIS_NUM_THREADS'):
+    os.environ[_v]='1'
+import sys,time,json,hashlib,math,contextlib,threading,socket,concurrent.futures,multiprocessing
+from pathlib import Path
+import numpy as np
+import pandas as pd
+import pyarrow as pa
+import pyarrow.parquet as pq
+import duckdb
+ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT/'vendor_r8/code'))
+import r8_util as u
+VERSION='1.0.1'
+MONTHS=[f'{2023+(10+i)//12:04d}-{(10+i)%12+1:02d}' for i in range(24)]
+AUTHORS=('__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__')
+SEED=20261012
+log=u.log; require=u.require; load=u.load; save=u.save; sha=u.sha; digest=u.digest; stamp=u.stamp
+qs=u.qs; parq=u.parq; conn=u.conn; heartbeat=u.heartbeat; no_network=u.no_network
+pa.set_cpu_count(1);pa.set_io_thread_count(1)
+
+def frame(p,columns=None):return pq.ParquetFile(p).read(columns=columns,use_threads=False).to_pandas(use_threads=False)
+def parquet(p,d):
+    p=Path(p);p.parent.mkdir(parents=True,exist_ok=True);tmp=p.with_name(p.name+'.partial')
+    pq.write_table(pa.Table.from_pandas(d,preserve_index=False) if isinstance(d,pd.DataFrame) else d,tmp,compression='zstd')
+    os.replace(tmp,p)
+def table(folder,name,rows):
+    d=rows.copy() if isinstance(rows,pd.DataFrame) else pd.DataFrame([u.clean(r) for r in rows])
+    for n in d.select_dtypes(include=['object']).columns:
+        values=d[n].dropna()
+        if any(isinstance(v,str) for v in values) and any(not isinstance(v,(str,dict,list,tuple,np.ndarray)) for v in values):
+            d[n]=d[n].map(lambda v:str(v) if pd.notna(v) else None)
+    u.table(folder,name,d)
+def completed(folder,key):
+    if not u.verify_cached(folder,key):return False
+    extra=Path(folder)/'_EXTERNAL_OUTPUTS.json'
+    if extra.exists():
+        for x in load(extra):require(Path(x['path']).is_file() and sha(x['path'])==x['sha256'],'Report output changed: '+x['path'])
+    return True
+def certify(folder,key,inputs=(),summary=None,outputs=()):
+    if outputs:save(Path(folder)/'_EXTERNAL_OUTPUTS.json',[dict(path=str(Path(p).resolve()),sha256=sha(p)) for p in outputs])
+    u.certify(folder,key,inputs,summary)
+
+def module(name,path):
+    import importlib.util
+    spec=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(spec)
+    sys.modules[name]=m;spec.loader.exec_module(m);return m
+def run_pool(fn,jobs,workers,label):
+    if not jobs:return []
+    t=time.monotonic();out=[None]*len(jobs);done=0
+    with concurrent.futures.ProcessPoolExecutor(max_workers=workers,mp_context=multiprocessing.get_context('spawn')) as pool:
+        futures={pool.submit(fn,j):i for i,j in enumerate(jobs)}
+        with heartbeat(label):
+            for future in concurrent.futures.as_completed(futures):
+                out[futures[future]]=future.result();done+=1;left=(time.monotonic()-t)/done*(len(jobs)-done)
+                log(f'{label}: {done}/{len(jobs)}; ETA stage {left/60:.1f} min')
+    return out
+
+def fold_ids(ids,n=5):
+    # SplitMix64: fixed numeric-ID namespaces are authenticated by the source panel.
+    z=np.asarray(ids,dtype=np.uint64)+np.uint64(0x9e3779b97f4a7c15)
+    z=(z^(z>>np.uint64(30)))*np.uint64(0xbf58476d1ce4e5b9)
+    z=(z^(z>>np.uint64(27)))*np.uint64(0x94d049bb133111eb)
+    z=z^(z>>np.uint64(31));return (z%np.uint64(n)).astype(np.int16)
+
+def starts_counts(ids):
+    if not len(ids):return np.array([],int),np.array([],int)
+    s=np.r_[0,np.flatnonzero(np.asarray(ids)[1:]!=np.asarray(ids)[:-1])+1]
+    return s,np.diff(np.r_[s,len(ids)])
+
+def demean(X,ids):
+    s,n=starts_counts(ids)
+    return X-np.repeat(np.add.reduceat(X,s,axis=0)/n.reshape((-1,)+(1,)*(X.ndim-1)),n,axis=0)
+
+def solve(xx,xy):
+    scale=np.sqrt(np.maximum(np.diag(xx),0));scale=np.where(scale>1e-12,scale,1.)
+    a=xx/scale[:,None]/scale[None,:];val,vec=np.linalg.eigh((a+a.T)/2)
+    good=val>max(1e-10,float(np.max(val,initial=0))*1e-10)
+    inv=((vec[:,good]/val[good])@vec[:,good].T)/scale[:,None]/scale[None,:]
+    return dict(beta=inv@xy,inverse=inv,scale=scale,null=vec[:,~good],rank=int(good.sum()))
+
+def estimable(fit,q):
+    q=np.asarray(q)/fit['scale']
+    return not fit['null'].shape[1] or np.linalg.norm(q@fit['null'])<=1e-7*max(np.linalg.norm(q),1e-12)
+
+def infer(value,var):
+    if not np.isfinite(value) or not np.isfinite(var) or var< -1e-10:
+        return dict(estimate=None,se=None,ci_low=None,ci_high=None,p=None,status='NOT_ESTIMABLE')
+    from scipy.special import ndtr
+    se=math.sqrt(max(0,float(var)))
+    p=float(2*ndtr(-abs(value/se))) if se else (1. if value==0 else 0.)
+    return dict(estimate=float(value),se=se,ci_low=float(value-1.959964*se),ci_high=float(value+1.959964*se),p=p,status='ESTIMATED')

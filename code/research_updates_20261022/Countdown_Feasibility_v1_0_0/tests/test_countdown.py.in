@@ -1,0 +1,144 @@
+"""Scientific orientation, authenticated handoff, support tables and resume checks."""
+import contextlib, io, json, os, sys, tempfile, unittest, zipfile
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'code'))
+from common import *
+from project import project_month
+import pyarrow as pa
+import run
+
+def fixture(month, repeat=2):
+    rows=[]
+    for i in range(9*repeat):
+        d=i%9
+        black_pawns='p'*d+(str(8-d) if d<8 else '')
+        fen=f'3qk3/{black_pawns}/8/8/8/8/8/3QK3 w - - 0 1'
+        row=dict(game_id=month.replace('-','')+f'{i:06}',month=month,chooser_user_id=i%4,
+          chooser_username_norm='user'+str(i%4),disconnected_username_norm='other',
+          outcome_kind_draw=i%7==0, engine_eval_cp_disconnected=-250,engine_eval_cp_disconnected_raw=-250,
+          engine_eval_is_mate=False,ply_count=30,api_speed='blitz',
+          api_last_move_at_ms=int(dt.datetime.fromisoformat(month+'-15T12:00:00+00:00').timestamp()*1000),
+          disconnected_color='white',side_to_move_after_last='white',chooser_clock_last_obs_s=100.,
+          disconnected_clock_last_obs_s=180.,chooser_elo=1700.,disconnected_elo=1750.,
+          api_status='timeout',api_rated=True,api_variant='standard',five_second_rule_passed=True,
+          sf100k_nodes_requested=100000,sf100k_fen_turn_matches_disconnected_color=True,
+          sf100k_disconnected_color_for_perspective='white',fen_after_last_move=fen,
+          disconnected_minus_chooser_material=-d)
+        for role in ('chooser','disconnected'):
+            for piece,_,_ in PIECES:row[role+'_'+piece]=1 if piece=='queens' else (d if piece=='pawns' and role=='chooser' else 0)
+        rows.append(row)
+    return rows
+
+def source(root, rows, month='2023-11', label='one'):
+    p=root/(label+'.parquet');pq.write_table(pa.Table.from_pylist(rows),p)
+    rec=dict(month=month,path=str(p),rows=len(rows),expected_sha256=sha(p),size_bytes=p.stat().st_size)
+    return dict(record=rec,out=str(root/(label+'_out')),config='test',memory_gb=.5)
+
+def authority(project):
+    records=[]
+    for m in MONTHS:
+        t=source(project,fixture(m),m,m);r=t['record']
+        records.append(dict(month=m,path=r['path'],rows=r['rows'],sha256=r['expected_sha256'],bytes=r['size_bytes']))
+    p=project/'derived/replication/author_exclusion_v100_PRIVATE/AUTHOR_EXCLUDED_MAIN_READY_PRIVATE.json'
+    policy=ROOT/'authority/AUTHOR_EXCLUSION.json'
+    write(p,dict(contract='AUTHOR_EXCLUDED_MAIN_24M_V1',policy=read(policy),policy_sha256=sha(policy),
+                 input_main_report_sha256=ORIGINAL_REPORT,datasets={'main_24m':records}))
+    return p
+
+class CountdownTests(unittest.TestCase):
+    def test_orientation_thresholds_mates_and_clock_boundaries(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td).resolve(); rows=fixture('2023-11')
+            rows[0].update(engine_eval_cp_disconnected=-100,engine_eval_cp_disconnected_raw=-100,disconnected_clock_last_obs_s=60.)
+            rows[1].update(engine_eval_cp_disconnected=-101,engine_eval_cp_disconnected_raw=-101)
+            rows[2].update(engine_eval_cp_disconnected=-10000,engine_eval_cp_disconnected_raw=None,engine_eval_is_mate=True)
+            r=project_month(source(root,rows))
+            c=duckdb.connect();data=c.execute('SELECT deficit,region,eval10,clock_d>long_clock_cut FROM '+scan(r['output']['path'])+' ORDER BY game_id').fetchall();c.close()
+            self.assertEqual(data[0],(0,'finite_competitive',-100,False))
+            self.assertEqual(data[1][1:3],('finite_lost',-110))
+            self.assertEqual(data[2][1:3],('mate_losing',None))
+            self.assertEqual([x[0] for x in data[:9]],list(range(9)))
+            self.assertEqual(r['counts']['fen_verified'],18)
+
+    def test_black_orientation_promoted_queens(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td).resolve(); row=fixture('2023-11')[0]
+            row.update(fen_after_last_move='3qk3/8/8/8/8/8/8/2QQK3 b - - 0 1',disconnected_color='black',
+                       side_to_move_after_last='black',sf100k_disconnected_color_for_perspective='black',
+                       chooser_queens=2,disconnected_queens=1,disconnected_minus_chooser_material=-9)
+            r=project_month(source(root,[row]));self.assertEqual(pq.read_table(r['output']['path']).column('deficit')[0].as_py(),9)
+
+    def test_cached_counts_when_fen_missing_and_partial_material(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td).resolve();rows=fixture('2023-11');rows[0]['fen_after_last_move']=None
+            r=project_month(source(root,rows));self.assertEqual(r['counts']['piece_counts_only'],1)
+            rows=fixture('2023-11')
+            for row in rows:
+                row['fen_after_last_move']=None
+                for role in ('chooser','disconnected'):
+                    for p,_,_ in PIECES:row[role+'_'+p]=None
+            r=project_month(source(root,rows,label='missing'));self.assertEqual(r['counts']['missing_material'],18)
+
+    def test_semantic_corruption_stops(self):
+        for changed in [dict(disconnected_color='black'),dict(chooser_pawns=4),
+                        dict(api_status='outoftime'),dict(chooser_username_norm=' __PRIVATE_VALUE_1__ '),
+                        dict(fen_after_last_move='3qk3/8/8/8/8/8/8/3QK4 w - - 0 1')]:
+            with self.subTest(changed=changed), tempfile.TemporaryDirectory() as td:
+                root=Path(td).resolve();rows=fixture('2023-11');rows[0].update(changed)
+                with self.assertRaises(RuntimeError):project_month(source(root,rows))
+
+    def test_hash_change_stops_and_resume_preserves_outputs(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td).resolve();t=source(root,fixture('2023-11'));r=project_month(t)
+            p=Path(r['output']['path']);before=p.stat().st_mtime_ns
+            self.assertTrue(project_month(t)['reused']);self.assertEqual(before,p.stat().st_mtime_ns)
+            with p.open('ab') as f:f.write(b'tamper')
+            with self.assertRaises(RuntimeError):project_month(t)
+            src=Path(t['record']['path'])
+            with src.open('ab') as f:f.write(b'tamper')
+            with self.assertRaises(RuntimeError):project_month(t)
+
+    def test_new_authority_and_ambiguous_sources(self):
+        with tempfile.TemporaryDirectory() as td:
+            project=Path(td).resolve();old=authority(project);bound=validate_manifest(old)
+            folder=project/'derived/replication/author_exclusion_test_PRIVATE/run/PRIVATE/inputs'
+            folder.mkdir(parents=True)
+            rows=bound['rows'];policy={'accounts':list(AUTHORS)}
+            receipt=folder/'INPUT_RECEIPT.json';write(receipt,dict(variant='excluded',policy=policy,monthly=rows))
+            auth=folder/'excluded_AUTH.json';payload=dict(status='AUTHOR_POLICY_INPUTS_VERIFIED',variant='excluded',
+                author_policy=policy,authority=dict(sample_name='pool_nonadjacent_excluded',original_report_sha256=ORIGINAL_REPORT),
+                success_path=str(receipt),success_sha256=sha(receipt),month_records=rows)
+            write(auth,payload);self.assertEqual(discover(project)[0]['identity'],bound['identity'])
+            payload['variant']='included';write(auth,payload)
+            with self.assertRaises(RuntimeError):validate_manifest(auth)
+
+    def test_end_to_end_real_aggregates_export_and_resume(self):
+        with tempfile.TemporaryDirectory() as td:
+            project=Path(td).resolve();authority(project)
+            args=['--project',str(project),'--result-dir',str(project/'returns'),'--workers','2','--memory-gb','4']
+            captured=io.StringIO()
+            with contextlib.redirect_stdout(captured):status=run.main(args)
+            self.assertEqual(status,0,captured.getvalue())
+            roots=list((project/'derived/replication/countdown_feasibility_v100_PRIVATE').glob('*/PRIVATE/FINAL.json'))
+            self.assertEqual(len(roots),1);rr=roots[0].parents[1]
+            files=list((rr/'PRIVATE/months').glob('*/features.parquet'));stamps={str(p):p.stat().st_mtime_ns for p in files}
+            with contextlib.redirect_stdout(io.StringIO()):self.assertEqual(run.main(args),0)
+            self.assertEqual(stamps,{str(p):p.stat().st_mtime_ns for p in files})
+            zpath=next((project/'returns').glob('*_100.zip'))
+            with zipfile.ZipFile(zpath) as z:
+                self.assertEqual(read(rr/'report/STATUS.json')['status'],'COMPLETE')
+                self.assertTrue(all(n.startswith('report/') for n in z.namelist()))
+                for item in json.loads(z.read('report/REPORT_MANIFEST.json')):
+                    self.assertEqual(hashlib.sha256(z.read('report/'+item['path'])).hexdigest(),item['sha256'])
+                profile=z.read('report/profile_by_period_clock.csv').decode()
+                self.assertIn('above_twice_long_proxy',profile)
+                self.assertIn('finite_lost',profile)
+                for n in z.namelist():
+                    self.assertNotIn('features.parquet',n)
+            c=duckdb.connect()
+            r=c.execute('SELECT sum(n) FROM read_csv_auto('+q(rr/'report/profile_by_month.csv')+')').fetchone()[0]
+            self.assertEqual(r,24*18)
+            cells=c.execute('SELECT sum(rows_in_shared_3_4_cells) FROM read_csv_auto('+q(rr/'report/overlap_summary.csv')+") WHERE clock_sample='unrestricted'").fetchone()[0]
+            self.assertEqual(cells,24*4);c.close()
+
+if __name__=='__main__':unittest.main()

@@ -1,0 +1,33 @@
+#!/bin/bash
+set -euo pipefail
+package_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+cd "$package_dir"
+bootstrap_python="${RATING_MOTIVES_PYTHON:-python3}"
+"$bootstrap_python" - <<'PY'
+import sys,json,hashlib
+from pathlib import Path
+if sys.version_info < (3,11):
+    raise SystemExit('Python 3.11 or newer is required. Set RATING_MOTIVES_PYTHON to an installed Python 3.11+ executable.')
+p=Path('.')
+for name,expected in json.loads((p/'PACKAGE_MANIFEST.json').read_text())['sha256'].items():
+    h=hashlib.sha256()
+    with (p/name).open('rb') as f:
+        for block in iter(lambda:f.read(1024*1024),b''):h.update(block)
+    if h.hexdigest()!=expected:raise SystemExit('Package integrity mismatch: '+name)
+PY
+venv_dir="$package_dir/.venv"
+if [ ! -x "$venv_dir/bin/python" ]; then
+  "$bootstrap_python" -m venv "$venv_dir"
+fi
+requirements_sha="$(shasum -a 256 requirements.txt | awk '{print $1}')"
+if [ ! -f "$venv_dir/requirements.sha256" ] || [ "$(cat "$venv_dir/requirements.sha256")" != "$requirements_sha" ]; then
+  "$venv_dir/bin/python" -m pip install --disable-pip-version-check -r requirements.txt
+  printf '%s\n' "$requirements_sha" > "$venv_dir/requirements.sha256"
+fi
+export OPENBLAS_NUM_THREADS=1
+export OMP_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export VECLIB_MAXIMUM_THREADS=1
+export NUMEXPR_NUM_THREADS=1
+export PYTHONUNBUFFERED=1
+exec "$venv_dir/bin/python" "$package_dir/run_analysis.py" "$@"

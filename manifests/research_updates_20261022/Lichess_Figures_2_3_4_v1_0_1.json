@@ -1,0 +1,281 @@
+{
+  "package": "Lichess_Figures_2_3_4_v1_0_1",
+  "archive_name": "Lichess_Figures_2_3_4_v1_0_1.zip",
+  "archive_sha256": "83318d7288bda16621be9aedccb4463582f6f44afaddcb477b4307c3994b2501",
+  "archive_size": 2542044,
+  "archive_root": "Lichess_Figures_2_3_4_v1_0_1",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "FIGURE_SPECIFICATION.md",
+      "published_path": "FIGURE_SPECIFICATION.md",
+      "sha256": "d904c77258f275b7a77136e14abd31dee2c25559ffe458ca116a1528f3c91902",
+      "published_sha256": "d904c77258f275b7a77136e14abd31dee2c25559ffe458ca116a1528f3c91902",
+      "size": 13309
+    },
+    {
+      "path": "README.md",
+      "published_path": "README.md",
+      "sha256": "29e63409271025d53213c7d1b85c728b2f4b41dc58bbe18cc0fff12c4a640820",
+      "published_sha256": "29e63409271025d53213c7d1b85c728b2f4b41dc58bbe18cc0fff12c4a640820",
+      "size": 5907
+    },
+    {
+      "path": "RUN_FIGURES_234.command",
+      "published_path": "RUN_FIGURES_234.command.in",
+      "sha256": "47bbbebc80471c6da419436f548b5b7ece60ff939b330979dff25da201485cb0",
+      "published_sha256": "47bbbebc80471c6da419436f548b5b7ece60ff939b330979dff25da201485cb0",
+      "size": 1429
+    },
+    {
+      "path": "code/convert_fonts.py",
+      "published_path": "code/convert_fonts.py",
+      "sha256": "c4d9217d13b10adb8da4c1b2c7eec284098cb747f7b08e550cb8725f10c1a267",
+      "published_sha256": "c4d9217d13b10adb8da4c1b2c7eec284098cb747f7b08e550cb8725f10c1a267",
+      "size": 2738
+    },
+    {
+      "path": "code/make_figures.py",
+      "published_path": "code/make_figures.py",
+      "sha256": "c7c18e585e6d0bf1add9bce096d899df7ea55a319fbd54c18319b4d56c5845e9",
+      "published_sha256": "c7c18e585e6d0bf1add9bce096d899df7ea55a319fbd54c18319b4d56c5845e9",
+      "size": 21242
+    },
+    {
+      "path": "code/verify_package.py",
+      "published_path": "code/verify_package.py",
+      "sha256": "73770239474248cc8131563f9074eb7dea709e86a4ab4e043bec2f1c4106f576",
+      "published_sha256": "73770239474248cc8131563f9074eb7dea709e86a4ab4e043bec2f1c4106f576",
+      "size": 1345
+    },
+    {
+      "path": "requirements.txt",
+      "published_path": "requirements.txt",
+      "sha256": "8e24cf67edb98cebb8bc90009a0b6cf8206a6a9850c804fbba6801334bab53cb",
+      "published_sha256": "8e24cf67edb98cebb8bc90009a0b6cf8206a6a9850c804fbba6801334bab53cb",
+      "size": 64
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "FIGURE_PROVENANCE.json",
+      "sha256": "62c59a8d7bf1045a22356c1ee257ba3e549fc6d7772f12a280d1c771bbd303d0",
+      "size": 3665
+    },
+    {
+      "path": "Figures_2_3_4_Preview.pdf",
+      "sha256": "c9ee0f9c3b1e0613491e798544a43528ce37c78ba703256b1176c4931d3af6f5",
+      "size": 54253
+    },
+    {
+      "path": "MANIFEST.sha256",
+      "sha256": "2ba109e6e82f8ef7191622c12517b1debf151b2b6d62045d6e418f9926426d19",
+      "size": 4857
+    },
+    {
+      "path": "SAMPLE_AUTHORITY.json",
+      "sha256": "173901ef75f46b1da7681e27c8068dd8491039c88a3d923bf71a4fc6e0ccc4f2",
+      "size": 632
+    },
+    {
+      "path": "SOURCE_MANIFEST.json",
+      "sha256": "a560397fdeb5fe743574a3b90556e4b87c3d326e7ccb6ebb962c8aad4e47d1b2",
+      "size": 1600
+    },
+    {
+      "path": "figures/fig2_merit_stage_equality.pdf",
+      "sha256": "5f2bce96eaf5cd41485b8c8fe36a293974cdc09858b4df2d1f0b4b5e0f632889",
+      "size": 17568
+    },
+    {
+      "path": "figures/fig2_merit_stage_equality.png",
+      "sha256": "758e62766bb7c9f196f6881632829d5e1c0280dd9bf20172eecaeb3394bb18a3",
+      "size": 201461
+    },
+    {
+      "path": "figures/fig2_merit_stage_equality.svg",
+      "sha256": "83dd847509a704cb5e01198c73ba97351207fa1cd2fd0fbac74f49db09128328",
+      "size": 122480
+    },
+    {
+      "path": "figures/fig3_relative_strength.pdf",
+      "sha256": "93fc9d73f451715c15cb8dd9ab31e98ac698ed7cae9014fd15899bba514fc38e",
+      "size": 20571
+    },
+    {
+      "path": "figures/fig3_relative_strength.png",
+      "sha256": "feab2c8014a27ac2573d3259674ffa6dee1e462d4d486c9505b439858e948d0a",
+      "size": 284505
+    },
+    {
+      "path": "figures/fig3_relative_strength.svg",
+      "sha256": "bdcc9574c3ec235eb2bde0302d130a1e9ae34054b88b8c7a6db4c93d589e034c",
+      "size": 148029
+    },
+    {
+      "path": "figures/fig4_time_profile.pdf",
+      "sha256": "e780e8bec889c1dc8523bd56db42b10bf6d7a27b2997016c5e889b603b5ed029",
+      "size": 17315
+    },
+    {
+      "path": "figures/fig4_time_profile.png",
+      "sha256": "311585cceb2ba83be2729d669d6a55ba5e5cceb41e5dbfefb0009a5bef368a71",
+      "size": 128995
+    },
+    {
+      "path": "figures/fig4_time_profile.svg",
+      "sha256": "f2156eb52744f5d4117582bf24ff3776601120789b7c4e8e196294277bfbc5c1",
+      "size": 98793
+    },
+    {
+      "path": "fonts/P052-Bold.afm",
+      "sha256": "8c87c2e0e7e40286d2ce00a74ac8cda7a344f51119d1d45776e1637c6ec58280",
+      "size": 114349
+    },
+    {
+      "path": "fonts/P052-Bold.otf",
+      "sha256": "ba6503baaf0f9e4e40a69cc4c0e57049fbde313fe183aba8fe823208337a94af",
+      "size": 110980
+    },
+    {
+      "path": "fonts/P052-Bold.t1",
+      "sha256": "8e56ad1e6b08c6c931d4ff93fa4388abc6ea5be8c6a0ab23d0fdf9a504c1cdba",
+      "size": 162196
+    },
+    {
+      "path": "fonts/P052-COPYRIGHT.txt",
+      "sha256": "1315a62758a603a3e6e87a79b8389563789c59c1740b9db8bc2b20e2e2145458",
+      "size": 52517
+    },
+    {
+      "path": "fonts/P052-Roman.afm",
+      "sha256": "572d6c20bb9a08b65b327a04c7fdf1eaaa738e553b178ae353a1382c88c575d0",
+      "size": 117126
+    },
+    {
+      "path": "fonts/P052-Roman.otf",
+      "sha256": "f054a7389d8d0e9f4c5f7b4c21feb7e2b14bec8004a1e92778a78d149524eea9",
+      "size": 110236
+    },
+    {
+      "path": "fonts/P052-Roman.t1",
+      "sha256": "99a8259f8eaec4604ad8794dc63e67b0d4fe189bdf6acbd1a7047dbe1ef9c86f",
+      "size": 159843
+    },
+    {
+      "path": "fonts/P052Figures-Bold.ttf",
+      "sha256": "a97e5bcc4bdfdd509af539d91459a006965fa2bf33355ed1cd6ede4e3d734596",
+      "size": 203804
+    },
+    {
+      "path": "fonts/P052Figures-Regular.ttf",
+      "sha256": "e62450ec95df4b9f96357156597c3b8107a6a03ce100e35265f72bf57ac13dd9",
+      "size": 207964
+    },
+    {
+      "path": "manuscript/fig2_merit_stage_equality_approved_environment.tex",
+      "sha256": "4b1852b66084874f7ba936ae8a92dc35e8d9995a12fb41c3bef90e6a0ca98add",
+      "size": 2374
+    },
+    {
+      "path": "manuscript/fig3_relative_strength_approved_environment.tex",
+      "sha256": "d2df3082b4f3cb22179cf668844921ffabb728f581d5bad0c6b6a53e26d00e92",
+      "size": 3072
+    },
+    {
+      "path": "manuscript/fig4_time_profile_approved_environment.tex",
+      "sha256": "4de3c1dfe3747970a5590da07b9ce400aee85eb307e8038086895b6fc80979fe",
+      "size": 4549
+    },
+    {
+      "path": "plotdata/fig2_A_board_merit.csv",
+      "sha256": "e94e0d36bdd1c23ac899f704ffaa7fb458bd4ebc390eb8b0ce4700b3e369791a",
+      "size": 277
+    },
+    {
+      "path": "plotdata/fig2_B_stage.csv",
+      "sha256": "74997d357db3e3580918eb0bde6e47661ce194233b3a0719127fd7b55894a689",
+      "size": 131
+    },
+    {
+      "path": "plotdata/fig2_C_equality_ladder.csv",
+      "sha256": "19d4c6545c5f80ed26d089e8808211f6005ceee6b65d9bee1c7650ec6e7d7474",
+      "size": 353
+    },
+    {
+      "path": "plotdata/fig3_A_full_rating_gap_series.csv",
+      "sha256": "fefdb8857589f72312965a70c757f04a96f13c4dad12bda033125a6762dfb566",
+      "size": 1143
+    },
+    {
+      "path": "plotdata/fig3_B_same_chooser.csv",
+      "sha256": "383a4ebb0aa8c3864b00cb4f9fa4ac4281478a4f0c1a070e31af1b9346c56b60",
+      "size": 527
+    },
+    {
+      "path": "plotdata/fig3_C1_adjacent_levels.csv",
+      "sha256": "40e9ba050f9b4209b17df307a3152e0d219ba3b0aa3f8f96fb777743898f92fa",
+      "size": 167
+    },
+    {
+      "path": "plotdata/fig3_C2_local_slopes.csv",
+      "sha256": "52af169c778b23efa1d680770c807c57ea69793fc1386e2cea41ef28b134b795",
+      "size": 175
+    },
+    {
+      "path": "plotdata/fig4_A_receipt_intervals.csv",
+      "sha256": "fd70cb823a83691c70cbb00b9aa4ab1f02ff2145573382c9d4ace1c6a3ccbbca",
+      "size": 315
+    },
+    {
+      "path": "plotdata/fig4_B_post_anchor_horizons.csv",
+      "sha256": "0470a02afbf2917aedc496aa27070e3698e340a5b13b3b266013313c31e893d0",
+      "size": 233
+    },
+    {
+      "path": "plotdata/fig4_C_session_partition.csv",
+      "sha256": "1dd51d65b1c593cd1f9c10cc1794009fa6f6c3dd8057aa74ad68fbe28b5e240e",
+      "size": 175
+    },
+    {
+      "path": "verification/QA_REPORT.json",
+      "sha256": "cdc64057d5e11bc4fb64697a21ef4f2a6c9c2d0dd06474fd680f36d0dccd923e",
+      "size": 3235
+    },
+    {
+      "path": "verification/VALIDATION.json",
+      "sha256": "9e1eb1af43d49730d2dd5fe37fc4bb8598268baa76b740b0168b1bdc7688331d",
+      "size": 8229
+    },
+    {
+      "path": "verification/figure2_grayscale.png",
+      "sha256": "1a274199f8b6e3b536000c1a84cfdb8ade77588a7a5120715d503d4d1837282b",
+      "size": 71828
+    },
+    {
+      "path": "verification/figure2_in_manuscript.png",
+      "sha256": "cb3978b5a44ebc204651bad4332efa1f8b27270a7286713639b80c7a60e6c02f",
+      "size": 233321
+    },
+    {
+      "path": "verification/figure3_grayscale.png",
+      "sha256": "e58ae1e23016a0166f91c9f0cb97274b34df61dc3d7354712abd2256720ce93f",
+      "size": 95109
+    },
+    {
+      "path": "verification/figure3_in_manuscript.png",
+      "sha256": "de77c80f47378d3f0fe5dc6ed925ff4868e0bddec37c5c30a332691c17c1d75a",
+      "size": 307013
+    },
+    {
+      "path": "verification/figure4_grayscale.png",
+      "sha256": "a805e68aceb62ba8e8a2cab36e41a8ac218dea4edf8feda7d35972c17395128a",
+      "size": 45558
+    },
+    {
+      "path": "verification/figure4_in_manuscript.png",
+      "sha256": "3f724d753c1176aa0d76e653266509156dc6f348d12b5ba6b0caea0c45c64ef1",
+      "size": 346266
+    }
+  ]
+}

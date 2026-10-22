@@ -1,0 +1,208 @@
+"""Audited, immutable inputs and isolated outputs for author-exclusion reruns."""
+from __future__ import annotations
+import os
+for name in ('OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','VECLIB_MAXIMUM_THREADS','NUMEXPR_NUM_THREADS'):
+    os.environ[name]='1'
+import contextlib, csv, hashlib, importlib.util, json, math, shutil, sys, threading, time
+from pathlib import Path
+import duckdb
+import numpy as np
+import pandas as pd
+import pyarrow as pa
+import pyarrow.parquet as pq
+
+ROOT=Path(__file__).resolve().parents[1]
+AUTHORS=('__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__')
+MONTHS=[str(m) for m in pd.period_range('2023-11','2025-10',freq='M')]
+POLICY={'accounts':list(AUTHORS),'match':'lower(trim(username)), exact equality',
+ 'analytical_games':'exclude either participant','account_samples':'exclude both accounts',
+ 'behavioral_aggregates':'rebuild from eligible events before fitting',
+ 'factual_histories':'preserve actual ratings, timestamps, adjacency, activity and session positions',
+ 'frozen_samples':'no replacement accounts; no replacement first exposures',
+ 'decision_date':'2026-09-28','reaffirmed_date':'2026-10-20',
+ 'result_claim':'no automatic claim of invariance; compare included and excluded estimates'}
+
+def log(s):print(time.strftime('[%Y-%m-%d %H:%M:%S] ')+s,flush=True)
+def require(ok,s):
+    if not ok:raise RuntimeError(s)
+_HASH_CACHE={}
+def signature(p):
+    p=Path(p).resolve();s=p.stat()
+    return [str(p),s.st_dev,s.st_ino,s.st_size,s.st_mtime_ns,s.st_ctime_ns]
+def sha(p):
+    before=signature(p);cache_key=tuple(before)
+    if cache_key in _HASH_CACHE:return _HASH_CACHE[cache_key]
+    h=hashlib.sha256()
+    with Path(p).open('rb') as f:
+        for b in iter(lambda:f.read(8*1024**2),b''):h.update(b)
+    require(signature(p)==before,'File changed during checksum: '+str(p))
+    value=h.hexdigest();_HASH_CACHE[cache_key]=value;return value
+def clean(x):
+    if isinstance(x,dict):return {str(k):clean(v) for k,v in x.items()}
+    if isinstance(x,(list,tuple,np.ndarray)):return [clean(v) for v in x]
+    if isinstance(x,np.generic):return clean(x.item())
+    if isinstance(x,Path):return str(x)
+    if isinstance(x,float) and not math.isfinite(x):return None
+    return x
+def digest(x):return hashlib.sha256(json.dumps(clean(x),sort_keys=True,separators=(',',':')).encode()).hexdigest()
+def read(p):return json.loads(Path(p).read_text())
+def write(p,x):
+    p=Path(p);p.parent.mkdir(parents=True,exist_ok=True);t=p.with_name(p.name+'.partial')
+    t.write_text(json.dumps(clean(x),indent=2,sort_keys=True,allow_nan=False)+'\n');os.replace(t,p)
+def q(x):return "'"+str(x).replace("'","''")+"'"
+def ident(x):return '"'+str(x).replace('"','""')+'"'
+def scan(paths):
+    if isinstance(paths,(str,Path)):paths=[paths]
+    require(bool(paths),'Empty input file list')
+    return 'read_parquet(['+','.join(map(q,paths))+'],hive_partitioning=false)'
+def db(temp,memory=2,threads=1):
+    Path(temp).mkdir(parents=True,exist_ok=True)
+    c=duckdb.connect(config={'threads':str(threads),'memory_limit':str(memory)+'GB','temp_directory':str(temp)})
+    c.execute('SET preserve_insertion_order=false');return c
+def copy(c,sql,p):
+    p=Path(p);p.parent.mkdir(parents=True,exist_ok=True);t=p.with_name(p.name+'.partial')
+    n=c.execute('COPY ('+sql+') TO '+q(t)+' (FORMAT PARQUET,COMPRESSION ZSTD,ROW_GROUP_SIZE 122880)').fetchone()[0]
+    os.replace(t,p);return int(n)
+def record(p):
+    sig=signature(p);h=sha(p);require(signature(p)==sig,'File changed while recording checksum')
+    return {'path':str(Path(p).resolve()),'sha256':h,'bytes':Path(p).stat().st_size,'verified_signature':sig}
+def verify(r):
+    p=Path(r['path']);require(p.is_file() and p.stat().st_size==r['bytes'] and sha(p)==r['sha256'],'Changed input/checkpoint: '+str(p));return p
+def module(name,path):
+    s=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(s);sys.modules[name]=m;s.loader.exec_module(m);return m
+@contextlib.contextmanager
+def heartbeat(label):
+    stop=threading.Event()
+    def beat():
+        while not stop.wait(40):log(label+' — working')
+    t=threading.Thread(target=beat,daemon=True);t.start()
+    try:yield
+    finally:stop.set();t.join()
+def table(path,rows):
+    p=Path(path);p.parent.mkdir(parents=True,exist_ok=True)
+    d=rows if isinstance(rows,pd.DataFrame) else pd.DataFrame(rows)
+    d.to_csv(p.with_suffix('.csv'),index=False)
+    d.to_parquet(p.with_suffix('.parquet'),index=False,compression='zstd')
+def names_pair(path):
+    types={f.name:f.type for f in pq.ParquetFile(path).schema_arrow}
+    for pair in [('chooser_username_norm','disconnected_username_norm'),('chooser_username','disconnected_username'),('white_username','black_username')]:
+        if all(x in types and (pa.types.is_string(types[x]) or pa.types.is_large_string(types[x])) for x in pair):return pair
+    raise RuntimeError('No verified username pair in '+str(path))
+def author_sql(columns,alias='s'):
+    return '('+' OR '.join('lower(trim('+alias+'.'+ident(n)+')) IN ('+','.join(map(q,AUTHORS))+')' for n in columns)+')'
+
+def filter_month(task):
+    r,folder=task;folder=Path(folder);src=Path(r['path']);out=folder/r['month'];receipt=out/'DONE.json'
+    key=digest([r['month'],r['expected_sha256'],POLICY,sha(__file__)])
+    if receipt.exists():
+        z=read(receipt);require(z['key']==key,'Monthly policy changed')
+        verify(z['input']);verify(z['output']);verify(z['removed']);return z
+    input_record=record(src);require(input_record['sha256']==r['expected_sha256'],'Original monthly checksum differs')
+    pair=names_pair(src);hit=author_sql(pair)
+    c=db(out/'spill',.75)
+    try:
+        c.execute('CREATE VIEW s AS SELECT * FROM '+scan(src))
+        missing=c.execute('SELECT count(*) FROM s WHERE '+' OR '.join('coalesce(trim('+ident(n)+"),'')=''" for n in pair)).fetchone()[0]
+        require(missing==0,'Missing participant identity')
+        n,y,drop,gy=c.execute(f'SELECT count(*),sum(outcome_kind_draw)::BIGINT,count(*) FILTER(WHERE {hit}),coalesce(sum(outcome_kind_draw) FILTER(WHERE {hit}),0)::BIGINT FROM s').fetchone()
+        require(n==r['rows'],'Original monthly count mismatch')
+        excluded=out/'excluded_games_PRIVATE.parquet'
+        copy(c,f'SELECT game_id,{q(r["month"])} AS "month" FROM s WHERE {hit}',excluded)
+        if drop:
+            kept=out/'analysis_panel.parquet';copy(c,f'SELECT * FROM s WHERE NOT {hit}',kept)
+        else:kept=src
+        require(pq.ParquetFile(kept).metadata.num_rows==n-drop,'Filtered count mismatch')
+        require(c.execute('SELECT count(*) FROM '+scan(kept)+' s WHERE '+hit).fetchone()[0]==0,'Author survived exclusion')
+        ids=[]
+        for i,col in enumerate(('chooser_user_id','disconnected_user_id')):
+            if col in pq.ParquetFile(src).schema_arrow.names and pa.types.is_integer(pq.ParquetFile(src).schema_arrow.field(col).type):
+                ids += [{'username':a,'user_id':int(b)} for a,b in c.execute('SELECT DISTINCT lower(trim('+ident(pair[i])+')),'+ident(col)+' FROM s WHERE lower(trim('+ident(pair[i])+')) IN ('+','.join(map(q,AUTHORS))+') AND '+ident(col)+' IS NOT NULL').fetchall()]
+        z={'key':key,'month':r['month'],'input':input_record,'output':record(kept),'removed':record(excluded),
+           'input_rows':n,'input_grants':y,'removed_rows':drop,'removed_grants':gy,'kept_rows':n-drop,'ids':ids}
+        write(receipt,z);log(r['month']+f': {drop} games removed ({gy} grants)');return z
+    finally:c.close()
+
+def census(paths,folder,threads,memory):
+    c=db(Path(folder)/'spill_census',memory,threads)
+    try:
+        c.execute('CREATE VIEW p AS SELECT * FROM '+scan(paths))
+        counts=c.execute('''SELECT count(*) opportunities,sum(outcome_kind_draw)::BIGINT grants,
+          count(DISTINCT chooser_user_id) choosers,
+          count(DISTINCT chooser_user_id) FILTER(WHERE outcome_kind_draw=1) ever_granters,
+          count(*) FILTER(WHERE engine_eval_cp_disconnected>=-100) competitive,
+          count(DISTINCT chooser_user_id) FILTER(WHERE engine_eval_cp_disconnected>=-100) fair_choosers,
+          count(DISTINCT chooser_user_id) FILTER(WHERE engine_eval_cp_disconnected>=-100 AND outcome_kind_draw=1) fair_kind_choosers,
+          sum(outcome_kind_draw) FILTER(WHERE engine_eval_cp_disconnected>=-100)::BIGINT competitive_grants,
+          count(*) FILTER(WHERE engine_eval_cp_disconnected>=-100 AND ply_count>10) competitive_late,
+          count(*) FILTER(WHERE engine_eval_cp_disconnected<=-300) clearly_worse,
+          sum(outcome_kind_draw) FILTER(WHERE engine_eval_cp_disconnected<=-300)::BIGINT clearly_worse_grants FROM p''').fetchdf().iloc[0].to_dict()
+        return {k:int(v) for k,v in counts.items()}
+    finally:c.close()
+
+def build_inputs(args,run):
+    common=module('original_pool_authority',ROOT/'vendor/wave1/runner/common.py')
+    original=common.authenticate_sample(args.project/'derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE',verify_hashes=False,hash_workers=min(4,args.workers))
+    require([r['month'] for r in original['month_records']]==MONTHS,'Unexpected months/order')
+    folder=run/'PRIVATE/inputs';folder.mkdir(parents=True,exist_ok=True)
+    import concurrent.futures as cf,multiprocessing as mp
+    with heartbeat('Authenticate and filter the 24 original panels'),cf.ProcessPoolExecutor(max_workers=min(args.io_workers,args.workers),mp_context=mp.get_context('spawn')) as pool:
+        records=list(pool.map(filter_month,[(r,folder/'monthly') for r in original['month_records']]))
+    for r in records:
+        for k in ('input','output'):require(signature(r[k]['path'])==r[k]['verified_signature'],'Input changed after monthly verification')
+    original_counts=census([r['input']['path'] for r in records],folder/'included',args.workers,args.memory_gb)
+    require(original_counts['opportunities']==41534331 and original_counts['grants']==570091 and original_counts['competitive']==15207423,'Wrong original main sample')
+    excluded_counts=census([r['output']['path'] for r in records],folder/'excluded',args.workers,args.memory_gb)
+    for r in records:
+        for k in ('input','output'):require(signature(r[k]['path'])==r[k]['verified_signature'],'Input changed during census')
+    require(original_counts['opportunities']-excluded_counts['opportunities']==sum(r['removed_rows'] for r in records),'Count conservation failed')
+    require(original_counts['grants']-excluded_counts['grants']==sum(r['removed_grants'] for r in records),'Grant conservation failed')
+    ids={a:set() for a in AUTHORS}
+    for r in records:
+        for x in r['ids']:ids[x['username']].add(x['user_id'])
+    # Numeric namespace is resolved only from these actual analytical panels.
+    require(all(len(x)<=1 for x in ids.values()),'Conflicting numeric identity mappings')
+    c=db(folder/'spill_index',args.memory_gb,args.workers)
+    try:copy(c,'SELECT DISTINCT * FROM '+scan([r['removed']['path'] for r in records]),folder/'excluded_games_PRIVATE.parquet')
+    finally:c.close()
+    auths={}
+    for variant,counts in [('included',original_counts),('excluded',excluded_counts)]:
+        auth=json.loads(json.dumps(clean(original)));pathroot=folder/variant/'panel';pathroot.mkdir(parents=True,exist_ok=True)
+        month_records=[]
+        for old,r in zip(original['month_records'],records):
+            src=Path(r['input' if variant=='included' else 'output']['path']);dest=pathroot/f'month={r["month"]}'/'analysis_panel.parquet';dest.parent.mkdir(parents=True,exist_ok=True)
+            if dest.is_symlink():require(dest.resolve()==src.resolve(),'Input symlink points elsewhere')
+            elif dest.exists():raise RuntimeError('Refusing to replace input '+str(dest))
+            else:dest.symlink_to(src)
+            rr=clean(old);rr.update(path=str(dest),rows=r['input_rows'] if variant=='included' else r['kept_rows'],size_bytes=src.stat().st_size,expected_sha256=r['input' if variant=='included' else 'output']['sha256'],verified_signature=signature(src));rr.pop('actual_sha256',None);month_records.append(rr)
+        authority=auth['authority'];authority.update(rows=counts['opportunities'],kind_draws=counts['grants'],fair_rows=counts['competitive'],fair_kind_draws=counts['competitive_grants'],choosers=counts['choosers'],fair_choosers=counts['fair_choosers'],fair_kind_choosers=counts['fair_kind_choosers'],sample_name='pool_nonadjacent_'+variant,status='AUTHOR_POLICY_'+variant.upper()+'_INPUTS_VERIFIED')
+        auth.update(status='AUTHOR_POLICY_INPUTS_VERIFIED',sample_root=str(pathroot.parent),panel_root=str(pathroot),month_records=month_records,
+                    fingerprint=digest([variant,POLICY,[{k:v for k,v in r.items() if k!='verified_signature'} for r in month_records]]),original_fingerprint=original['fingerprint'],author_policy=POLICY,variant=variant,census=counts,verification_session=os.environ.get('AUTHOR_EXCLUSION_SESSION'))
+        receipt=folder/variant/'INPUT_RECEIPT.json';write(receipt,{'variant':variant,'policy':POLICY,'monthly':month_records,'counts':counts,'original_fingerprint':original['fingerprint']})
+        auth.update(success_path=str(receipt),success_sha256=sha(receipt))
+        auth['original_success']=auth.pop('success')
+        auth['success']=read(receipt)
+        auth['authority']['original_report_sha256']=auth['authority']['report_sha256']
+        auth['authority']['report_sha256']=sha(receipt)
+        write(folder/(variant+'_AUTH.json'),auth);auths[variant]=auth
+    write(folder/'IDENTITIES_PRIVATE.json',{'accounts':{a:list(v) for a,v in ids.items()},'scope':'numeric IDs in certified main-panel namespace only'})
+    table(run/'report/removals_by_month',[{k:r[k] for k in ['month','input_rows','input_grants','removed_rows','removed_grants','kept_rows']} for r in records])
+    table(run/'report/main_counts',[{'variant':v,**a['census']} for v,a in auths.items()])
+    write(run/'report/INPUT_STATUS.json',{'status':'MAIN_INPUTS_READY_ESTIMATES_PENDING','excluded_rows':sum(r['removed_rows'] for r in records),'excluded_grants':sum(r['removed_grants'] for r in records),'api_requests':0,'engine_evaluations':0,'factual_histories_preserved':True})
+    return auths
+
+def load_auth(run,variant):
+    auth=read(Path(run)/'PRIVATE/inputs'/f'{variant}_AUTH.json')
+    for r in auth['month_records']:
+        p=Path(r['path'])
+        same_session=bool(os.environ.get('AUTHOR_EXCLUSION_SESSION')) and auth.get('verification_session')==os.environ['AUTHOR_EXCLUSION_SESSION']
+        if same_session:
+            require(signature(p)==r['verified_signature'],'Analysis input changed after this launch verified its SHA256: '+r['month'])
+            _HASH_CACHE[tuple(signature(p))]=r['expected_sha256']
+        else:require(p.is_file() and sha(p)==r['expected_sha256'],'Analysis input changed: '+r['month'])
+        r['path']=p
+    for k in ['sample_root','panel_root','success_path']:auth[k]=Path(auth[k])
+    return auth
+
+def guard_auth(auth):
+    for r in auth['month_records']:
+        require(signature(r['path'])==r['verified_signature'],'Analysis input changed during stage: '+r['month'])

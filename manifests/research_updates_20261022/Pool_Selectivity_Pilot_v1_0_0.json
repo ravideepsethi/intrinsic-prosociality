@@ -1,0 +1,126 @@
+{
+  "package": "Pool_Selectivity_Pilot_v1_0_0",
+  "archive_name": "Pool_Selectivity_Pilot_v1_0_0.zip",
+  "archive_sha256": "a3437a3e1fa249f0d175217f241e23577e2ad495d3e151c2e622a42d19d464c3",
+  "archive_size": 131620,
+  "archive_root": "Pool_Selectivity_Pilot_v1_0_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "METHODS.md",
+      "published_path": "METHODS.md",
+      "sha256": "7ce41eae8f01782692e76f7e1283c7fdb8366f1b1300563f4c3af79ac9e96ef5",
+      "published_sha256": "7ce41eae8f01782692e76f7e1283c7fdb8366f1b1300563f4c3af79ac9e96ef5",
+      "size": 6408
+    },
+    {
+      "path": "README.md",
+      "published_path": "README.md",
+      "sha256": "24dd196a8ed9cbbba379d1c028a67a4814b8da220b76815598cb8d422f623716",
+      "published_sha256": "24dd196a8ed9cbbba379d1c028a67a4814b8da220b76815598cb8d422f623716",
+      "size": 7047
+    },
+    {
+      "path": "RUN_SELECTIVITY.command",
+      "published_path": "RUN_SELECTIVITY.command.in",
+      "sha256": "746bd8915f61a52b4a1d40c47f6636409f4f0f26a1b268ae3d49b3974d99b271",
+      "published_sha256": "746bd8915f61a52b4a1d40c47f6636409f4f0f26a1b268ae3d49b3974d99b271",
+      "size": 2293
+    },
+    {
+      "path": "VALIDATION.md",
+      "published_path": "VALIDATION.md",
+      "sha256": "36807c9f47430e17476f852b2ff2ea94be46a9e9a2c20a65fc6e4cd62b2c969c",
+      "published_sha256": "36807c9f47430e17476f852b2ff2ea94be46a9e9a2c20a65fc6e4cd62b2c969c",
+      "size": 2756
+    },
+    {
+      "path": "model.py",
+      "published_path": "model.py",
+      "sha256": "8f591dc7a39d28075ba3aff4f5ace38342b139821db00a00fb4fe72a5fc268d4",
+      "published_sha256": "8f591dc7a39d28075ba3aff4f5ace38342b139821db00a00fb4fe72a5fc268d4",
+      "size": 12071
+    },
+    {
+      "path": "prepare.py",
+      "published_path": "prepare.py",
+      "sha256": "5e5c81eab23780e25426315c852d5b12a2c4f12e17d62cb9e735f2a1d9ad0e8a",
+      "published_sha256": "5e5c81eab23780e25426315c852d5b12a2c4f12e17d62cb9e735f2a1d9ad0e8a",
+      "size": 9323
+    },
+    {
+      "path": "requirements.txt",
+      "published_path": "requirements.txt",
+      "sha256": "acd777c226d733447778d3d0d3299c029828fbd011410baa4adf56ba896b7053",
+      "published_sha256": "acd777c226d733447778d3d0d3299c029828fbd011410baa4adf56ba896b7053",
+      "size": 75
+    },
+    {
+      "path": "run_pilot.py",
+      "published_path": "run_pilot.py",
+      "sha256": "49e63067821ddd6cc8efd42d13082a2cb4a3d44e05f1b3b11c9943ec492400ce",
+      "published_sha256": "49e63067821ddd6cc8efd42d13082a2cb4a3d44e05f1b3b11c9943ec492400ce",
+      "size": 14867
+    },
+    {
+      "path": "self_test.py",
+      "published_path": "self_test.py",
+      "sha256": "1c32405927380d52c40182d13baa1a4ad2b4c7eddfc857eff307240c9d371a00",
+      "published_sha256": "1c32405927380d52c40182d13baa1a4ad2b4c7eddfc857eff307240c9d371a00",
+      "size": 3679
+    },
+    {
+      "path": "source/pool_wave1_common.py",
+      "published_path": "source/pool_wave1_common.py",
+      "sha256": "f9c714c549c6cd68a7d2dbdb2c17d5abacfdfc12dc6526752f03ab2505bbff43",
+      "published_sha256": "f9c714c549c6cd68a7d2dbdb2c17d5abacfdfc12dc6526752f03ab2505bbff43",
+      "size": 21988
+    },
+    {
+      "path": "util.py",
+      "published_path": "util.py",
+      "sha256": "e115758d021eff861b13b74d6a334f91d378887b484cc61c6ddd75c8bbccd521",
+      "published_sha256": "e115758d021eff861b13b74d6a334f91d378887b484cc61c6ddd75c8bbccd521",
+      "size": 1941
+    },
+    {
+      "path": "validation_fixture.py",
+      "published_path": "validation_fixture.py",
+      "sha256": "45b541bae86ef1e882a1e86ea5955dcf1701b626727a0ad2b0b3150574a01340",
+      "published_sha256": "45b541bae86ef1e882a1e86ea5955dcf1701b626727a0ad2b0b3150574a01340",
+      "size": 3145
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "CODE_PROVENANCE.json",
+      "sha256": "c1c236639ab4c86e64463afbd4806c3f7be7c3e1f9fe9033bc614a61e60526e3",
+      "size": 615
+    },
+    {
+      "path": "PACKAGE_MANIFEST.sha256",
+      "sha256": "54962267a2c5f48382fa8645a9f53785b5ce419c1bd75c3071ce5370198f0723",
+      "size": 1461
+    },
+    {
+      "path": "RUN_TERMINAL.txt",
+      "sha256": "ebf4868981d2c3da318730c9dba19a1a6f0d630c85419ec319d406254d601266",
+      "size": 836
+    },
+    {
+      "path": "authority/SAMPLE_AUTHORITY.json",
+      "sha256": "81c34113e7a888629a834a17235a71dcf369a2d590755fd9412ee42151d9b2f3",
+      "size": 1234
+    },
+    {
+      "path": "evidence/Pool_Main_Sample_24M_Report.zip",
+      "sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+      "size": 96936
+    },
+    {
+      "path": "evidence/Pool_Main_Sample_24M_Report.zip.sha256",
+      "sha256": "d2e6c0953ff2de7cc7235b98d568c884e4fa8067b8aa81d22efe1ac3484d6f59",
+      "size": 128
+    }
+  ]
+}

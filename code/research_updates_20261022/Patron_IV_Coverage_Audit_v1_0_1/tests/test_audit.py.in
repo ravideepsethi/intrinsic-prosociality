@@ -1,0 +1,143 @@
+"""Scientific contracts tested on small, fully known synthetic datasets."""
+import csv, hashlib, json, tempfile, unittest, zipfile, sys
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'code'))
+import pyarrow as pa
+import pyarrow.parquet as pq
+import audit_core as a
+import run_audit as r
+
+def write(path,rows):
+    pq.write_table(pa.Table.from_pylist(rows),path)
+
+def fixture(root):
+    root.mkdir(exist_ok=True)
+    inputs={};expected={}
+    controls=sorted(['c1','c2','c3','c4'],key=lambda name:hashlib.sha256(('testseed|control|'+name).encode()).hexdigest())
+    names=['kind']+controls+['zero','outside']
+    universe=[dict(chooser_id=n,match_cell='A' if i<5 else 'B',ever_kind_any_state=i==0) for i,n in enumerate(names[:6])]
+    acquisition=[dict(username_norm=n,match_cell='A',acquisition_role='kind' if i==0 else 'control') for i,n in enumerate(names[:4])]
+    snapshot=[dict(**rec,returned=i!=3,patron=(i==0) if i!=3 else None,queried_at_utc='2026-08-20T12:00:00+00:00',disabled=i==1,tos_violation=False) for i,rec in enumerate(acquisition)]
+    dictionary=[dict(uid=i+1,username_norm=n) for i,n in enumerate(names)]+[dict(uid=101,username_norm='__PRIVATE_VALUE_1__'),dict(uid=102,username_norm='__PRIVATE_VALUE_2__')]
+    for key,records in [('chooser',universe),('acquisition',acquisition),('snapshot',snapshot),('dictionary',dictionary)]:
+        inputs[key]=root/(key+'.parquet');write(inputs[key],records)
+    inputs['dictionary']=[inputs['dictionary']];inputs['dictionary_column']='uid'
+    inputs['cell_diagnostics']=root/'cells.tsv'
+    inputs['cell_diagnostics'].write_text('match_cell\tn_kind\tn_control_reservoir\tn_control_selected\nA\t1\t4\t3\nB\t0\t1\t0\n')
+    inputs['plan_summary']=root/'plan.json';a.save(inputs['plan_summary'],{'design_seed':'testseed'})
+    ids=[1,1,2,3,4,5,6,7,8,2];source=[]
+    for row,recipient in enumerate(ids,1):
+        source.append(dict(row_id=row,game_id='game'+str(row),recipient_id=recipient,opponent_id=90+row,
+            archive_start_ms=1700000000000+row*1000,month_code=3,received=row%2,reached=row%2,y=0,
+            spaced90=row in [1,3,4,5,6,7,8,9],first_recipient=row in [1,3,8],
+            recipient_rating=1500,tc_base_s=[15,179.999,180,479.999,480,1499.999,1500,300,60,300][row-1],
+            tc_inc_s=[0,0,0,0,0,0,0,30,3,0][row-1],complete90=True,support7=True,history_window_complete=True))
+    def scores(src):
+        return [dict(row_id=x['row_id'],n_A=10,counterparts_A=8,expected_A=.2,adjusted_A=x['row_id']/1000) for x in src]
+    s0=[x for x in source if x['spaced90']]
+    F=[dict(source[i],row_id=i+101,game_id='Fgame'+str(i),recipient_id=who,opponent_id=200+i) for i,who in enumerate([1,4,6,7,8])]
+    O=F[:3]
+    for key,src in [('expanded',source),('S0',s0),('F',F),('O',O)]:
+        inputs[key]=root/(key+'.parquet');write(inputs[key],src)
+        inputs[key+'_scores']=root/(key+'_scores.parquet');write(inputs[key+'_scores'],scores(src))
+    expected.update(expanded=len(source),S0=len(s0),first_reference=3,F=len(F),O=len(O),chooser_users=6,kind_users=1,profile_planned=4,profile_returned=3,patrons=1)
+    return inputs,expected
+
+class AuditTest(unittest.TestCase):
+    def setUp(self):
+        self.temp=tempfile.TemporaryDirectory();self.root=Path(self.temp.name)
+        self.inputs,self.expected=fixture(self.root/'input')
+    def tearDown(self):self.temp.cleanup()
+    def connection(self):return a.connect(self.root/'scratch',2,3)
+    def project(self):
+        c=self.connection()
+        try:a.project_frames(c,self.inputs,self.root/'frames',self.expected)
+        finally:c.close()
+    def accounts(self):
+        c=self.connection()
+        try:a.build_accounts(c,self.inputs,self.root/'frames',self.root/'accounts',self.expected)
+        finally:c.close()
+    def test_complete_coverage_contracts(self):
+        self.project();self.accounts();c=self.connection()
+        try:
+            a.tabulate(c,self.root/'frames',self.root/'accounts',self.root/'tables')
+            d=c.execute('SELECT recipient_id,coverage_status,sampling_fraction,patron,disabled FROM '+a.parq(self.root/'accounts/recipient_profiles_PRIVATE.parquet')+' ORDER BY recipient_id').fetchall()
+        finally:c.close()
+        self.assertEqual([x[1] for x in d],['observed','observed','observed','selected_profile_nonreturn','eligible_not_selected','zero_sampling_fraction','outside_original_chooser_universe','unresolved_identity'])
+        self.assertEqual([x[2] for x in d],[1,.75,.75,.75,.75,0,0,None])
+        self.assertEqual(d[1][3],False);self.assertTrue(d[1][4]) # Flagged returned nonpatron remains observed.
+        self.assertIsNone(d[3][3]) # Nonreturn cannot become patron=False.
+        summary={x['frame']:x for x in a.load(self.root/'tables/coverage_summary.json')}
+        self.assertEqual(summary['S0']['exposures'],8);self.assertEqual(summary['S0']['observed_recipients'],3)
+        self.assertEqual(summary['S0']['zero_support_exposures'],2);self.assertEqual(summary['S0']['unresolved_exposures'],1)
+        self.assertEqual(summary['first_reference']['exposures'],3) # Do not replace frozen flag by deduplication.
+        self.assertEqual(summary['unspaced']['patron_exposure_rows'],2)
+        self.assertEqual(summary['unspaced']['patron_recipients'],1)
+        weights={(x['frame'],x['unit']):x for x in a.load(self.root/'tables/weight_diagnostics.json')}
+        self.assertAlmostEqual(weights['S0','recipient']['sum_weights'],1+8/3)
+        self.assertEqual(weights['unspaced','recipient']['observed_units'],3)
+        self.assertEqual(weights['unspaced','exposure']['observed_units'],5)
+        self.assertFalse(a.load(self.root/'tables/readiness.json')['frames']['S0']['all_recipients_have_positive_sampling_support'])
+    def test_s0_score_mismatch_blocks(self):
+        p=self.inputs['S0_scores'];data=pq.read_table(p).to_pylist();data[0]['adjusted_A']+=.01;write(p,data)
+        with self.assertRaisesRegex(RuntimeError,'Score A mismatch'):self.project()
+    def test_no_speed_column_matches_frozen_r9b_thresholds(self):
+        # Regression for the production schema: base + increment, never stored speed.
+        for key in ['expanded','S0','F','O']:
+            self.assertNotIn('speed',a.columns(self.inputs[key]))
+        self.project();c=self.connection()
+        try:
+            import numpy as np
+            for key in ['expanded','F','O']:
+                data=pq.read_table(self.inputs[key]).to_pylist()
+                base=np.array([x['tc_base_s'] for x in data]);inc=np.array([x['tc_inc_s'] for x in data])
+                # Verbatim operation in certified r9b_models.speed, independently of SQL.
+                expected=np.searchsorted([180,480,1500],base+40*inc,side='right').tolist()
+                actual=[x[0] for x in c.execute('SELECT speed FROM '+a.parq(self.root/'frames'/(key+'.parquet'))+' ORDER BY row_id').fetchall()]
+                self.assertEqual(actual,expected)
+            self.assertEqual([x[0] for x in c.execute('SELECT speed FROM '+a.parq(self.root/'frames/expanded.parquet')+' ORDER BY row_id').fetchall()],
+                             [0,0,1,1,2,2,3,3,1,1])
+        finally:c.close()
+    def test_missing_time_control_is_not_classical(self):
+        p=self.inputs['expanded'];data=pq.read_table(p).to_pylist();data[0]['tc_inc_s']=None;write(p,data)
+        with self.assertRaisesRegex(RuntimeError,'invalid time controls'):self.project()
+    def test_s0_identity_mismatch_blocks(self):
+        p=self.inputs['S0'];data=pq.read_table(p).to_pylist();data[0]['game_id']='other';write(p,data)
+        with self.assertRaisesRegex(RuntimeError,'identity/outcome bridge'):self.project()
+    def test_duplicate_dictionary_blocks(self):
+        self.project();p=self.inputs['dictionary'][0];d=pq.read_table(p).to_pylist();d.append(dict(uid=1,username_norm='different'));write(p,d)
+        with self.assertRaisesRegex(RuntimeError,'one-to-one'):self.accounts()
+    def test_nonreturn_false_is_rejected(self):
+        self.project();p=self.inputs['snapshot'];d=pq.read_table(p).to_pylist();d[3]['patron']=False;write(p,d)
+        with self.assertRaisesRegex(RuntimeError,'Snapshot status'):self.accounts()
+    def test_wrong_hash_selected_controls_rejected(self):
+        self.project();name=pq.read_table(self.inputs['chooser']).to_pylist()[4]['chooser_id']
+        for key in ['acquisition','snapshot']:
+            p=self.inputs[key];d=pq.read_table(p).to_pylist();d[3]['username_norm']=name;write(p,d)
+        with self.assertRaisesRegex(RuntimeError,'control ranking'):self.accounts()
+    def test_stage_resume_integrity_and_export_whitelist(self):
+        audit=self.root/'run';audit.mkdir();calls=[]
+        def build(tmp):
+            calls.append(1);a.save(tmp/'frame_checks.json',{'rows':8});(tmp/'identities_PRIVATE.parquet').write_bytes(b'SECRET_IDENTITY')
+            return {'ok':True}
+        r.stage(audit,'frames','test',build);r.stage(audit,'frames','test',build)
+        self.assertEqual(len(calls),1)
+        desktop=self.root/'desktop';desktop.mkdir();z=r.export(audit,desktop,'test',50,'TEST',{})
+        with zipfile.ZipFile(z) as f:
+            self.assertNotIn('identities_PRIVATE.parquet',f.namelist())
+            self.assertFalse(any(b'SECRET_IDENTITY' in f.read(n) for n in f.namelist()))
+        (audit/'frames/frame_checks.json').write_text('{}')
+        with self.assertRaisesRegex(RuntimeError,'changed'):r.stage(audit,'frames','test',build)
+    def test_receipt_hash_tampering_blocks(self):
+        p=self.root/'data';p.write_text('original');digest=a.sha(p);p.write_text('tampered')
+        with self.assertRaisesRegex(RuntimeError,'changed'):r.checked(p,digest)
+    def test_row_digest_matches_report_algorithm(self):
+        c=self.connection()
+        try:
+            result=r.row_digest(c,self.inputs['S0'])
+            import struct
+            want=hashlib.sha256(b''.join(struct.pack('<q',i) for i in [1,3,4,5,6,7,8,9])).hexdigest()
+            self.assertEqual(result,want)
+        finally:c.close()
+
+if __name__=='__main__':unittest.main(verbosity=2)

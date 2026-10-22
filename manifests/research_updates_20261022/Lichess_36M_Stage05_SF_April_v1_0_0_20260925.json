@@ -1,0 +1,99 @@
+{
+  "package": "Lichess_36M_Stage05_SF_April_v1_0_0_20260925",
+  "archive_name": "Lichess_36M_Stage05_SF_April_v1_0_0_20260925.zip",
+  "archive_sha256": "164a19b92af3d1e48ad1f733b3da63e091fa2048edaa2d97a45a9dacf8db9354",
+  "archive_size": 52064,
+  "archive_root": "Lichess_36M_Stage05_SF_April_v1_0_0_20260925",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "EXECUTION_CONTRACT.md",
+      "published_path": "EXECUTION_CONTRACT.md",
+      "sha256": "1ad8ab2676f27cf90638b30969092661a2315a4ac882d5c7a3637cf3425e444d",
+      "published_sha256": "1ad8ab2676f27cf90638b30969092661a2315a4ac882d5c7a3637cf3425e444d",
+      "size": 2043
+    },
+    {
+      "path": "README_FIRST.md",
+      "published_path": "README_FIRST.md.in",
+      "sha256": "62e8f104525429715d66f6ee60f72087b85ee9055583edf6d738d86b7a7e581e",
+      "published_sha256": "2857b1a5506dc79b010551c0a05ca1c3d1360752fc9f9d20a49ced751a91cb9f",
+      "size": 2636,
+      "redactions": [
+        {
+          "start": 2535,
+          "end": 2550,
+          "token": "__PRIVATE_VALUE_1__"
+        }
+      ]
+    },
+    {
+      "path": "RUN_36M_STAGE05_SF_APRIL.command",
+      "published_path": "RUN_36M_STAGE05_SF_APRIL.command.in",
+      "sha256": "f0f239c8f61af9d245b87967ecf11257f2bdaf96d60e516e3e837a27072ebac4",
+      "published_sha256": "ebd8c582425b3b04ae5e582871aab4d48f4a2e2235031b5e5efcf6fb73e562c8",
+      "size": 5617,
+      "redactions": [
+        {
+          "start": 150,
+          "end": 165,
+          "token": "__PRIVATE_VALUE_1__"
+        }
+      ]
+    },
+    {
+      "path": "code/build_stage05_extension.py",
+      "published_path": "code/build_stage05_extension.py",
+      "sha256": "de464823f225eab160a961172413267d16886e486019e88b0656e759d393eac4",
+      "published_sha256": "de464823f225eab160a961172413267d16886e486019e88b0656e759d393eac4",
+      "size": 24382
+    },
+    {
+      "path": "code/finalize_result.py",
+      "published_path": "code/finalize_result.py",
+      "sha256": "6760f96a49f6c4fa3ea4c7501805944fdf15f4258eff07ed0b4704d1e42ff730",
+      "published_sha256": "6760f96a49f6c4fa3ea4c7501805944fdf15f4258eff07ed0b4704d1e42ff730",
+      "size": 8081
+    },
+    {
+      "path": "code/prepare_stockfish_inputs.py",
+      "published_path": "code/prepare_stockfish_inputs.py",
+      "sha256": "69e47bf2e4029237904ecb4b0a4a2bcc2fa5bb1b560229774948532a865e962c",
+      "published_sha256": "69e47bf2e4029237904ecb4b0a4a2bcc2fa5bb1b560229774948532a865e962c",
+      "size": 11341
+    },
+    {
+      "path": "vendor/05_build_timeout_opportunity_panel.py",
+      "published_path": "vendor/05_build_timeout_opportunity_panel.py.in",
+      "sha256": "eb8f7e7629c323ee8d5a9f7d4a96b5f9982980189cf27500289582457f0dfe80",
+      "published_sha256": "73e389ade60bfd7d573e2d1981014f41f3c1b029a9bf267ec8ab61acfee42a98",
+      "size": 101978,
+      "redactions": [
+        {
+          "start": 5373,
+          "end": 5388,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 87286,
+          "end": 87301,
+          "token": "__PRIVATE_VALUE_2__"
+        }
+      ]
+    },
+    {
+      "path": "vendor/080_stockfish100k_resumable.py",
+      "published_path": "vendor/080_stockfish100k_resumable.py",
+      "sha256": "79cd0b6a3165710beff52f8775cf138558daf58063d0047a406a0d614939f4ab",
+      "published_sha256": "79cd0b6a3165710beff52f8775cf138558daf58063d0047a406a0d614939f4ab",
+      "size": 31001
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "MANIFEST.sha256",
+      "sha256": "4688e9f8173f929115ac32a1018798ff7f655a8792328ea740b526fbefa6cd34",
+      "size": 787
+    }
+  ]
+}

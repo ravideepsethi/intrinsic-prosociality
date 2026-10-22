@@ -1,0 +1,92 @@
+#!/bin/bash
+# Test E numerical repair only: reuse the previously certified 2,682,330-row
+# prepared IV file. Never recompute the 41.5-million-game history or Test A.
+set -Eeuo pipefail
+HERE="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+ROOT="${LICHESS_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+DESKTOP="$HOME/Desktop/Lichess_Desktop"
+PREPARED="$ROOT/output/framework_AE_v120/20261012T043832Z/E_prepared/private/IV_E_MODEL_PRIVATE.parquet"
+PREFLIGHT="$ROOT/output/framework_AE_v120/20261012T043832Z/E_prepared/public/E_iv_preflight.json"
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --prepared) PREPARED="$2";shift 2;;
+    --preflight) PREFLIGHT="$2";shift 2;;
+    *) echo "Unknown argument: $1" >&2;exit 2;;
+  esac
+done
+[[ -f "$PREPARED" && -f "$PREFLIGHT" ]] || { echo "Missing original E prepared input or preflight metadata" >&2;exit 1; }
+[[ -d "$ROOT/derived/replication" ]] || { echo "XT_Pro not mounted: $ROOT" >&2;exit 1; }
+mkdir -p "$DESKTOP"
+export OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 OMP_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1 PYTHONUNBUFFERED=1
+STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
+OUT="$ROOT/output/framework_E_repair_v121/$STAMP"
+LOG="$DESKTOP/framework_E_repair_${STAMP}.log"
+mkdir -p "$OUT/public" "$OUT/private"
+export PREPARED PREFLIGHT OUT HERE
+if command -v caffeinate >/dev/null 2>&1; then
+  caffeinate -dimsu -w $$ >/dev/null 2>&1 &
+  CAFF_PID=$!
+  trap 'kill "$CAFF_PID" 2>/dev/null || true' EXIT
+fi
+run() {
+  echo "Output: $OUT"
+  echo "Log: $LOG"
+  python3 - <<'PY'
+import hashlib,json,os,sys
+from pathlib import Path
+p=Path(os.environ['PREPARED']);pf=Path(os.environ['PREFLIGHT']);out=Path(os.environ['OUT'])
+a=json.loads(pf.read_text())
+expected={'n':2682330,'assignment_cells':4324,'recipients':1625389,'receipts':64689}
+for k,v in expected.items():
+ if a.get(k)!=v:raise ValueError(f'Frozen E preflight {k}: observed={a.get(k)} expected={v}')
+if a.get('missing_score') or a.get('invalid_binary') or a.get('invalid_time'):
+ raise ValueError('Previous E preflight detected invalid score/outcome/time')
+ctrl=a.get('controls')
+if not isinstance(ctrl,list) or len(ctrl)!=15:raise ValueError('Expected exactly fifteen named IV controls')
+sha=hashlib.sha256()
+with p.open('rb') as f:
+ for part in iter(lambda:f.read(4*1024*1024),b''):sha.update(part)
+manifest={'prepared_parquet_sha256':sha.hexdigest(),'prepared_parquet_bytes':p.stat().st_size,
+ 'preflight_sha256':hashlib.sha256(pf.read_bytes()).hexdigest(),
+ 'n_expected':a['n'],'assignment_cells_expected':a['assignment_cells'],
+ 'preparation_run':'framework_AE_v120/20261012T043832Z',
+ 'rerun_scope':'Test E IV only; reuse existing grouped and preprocessed cohorts',
+ 'model_controls':ctrl}
+(out/'public'/'E_repair_provenance.json').write_text(json.dumps(manifest,indent=2)+'\n')
+print('[E repair] preflight matched original frozen cohort; prepared file SHA-256='+sha.hexdigest(),flush=True)
+print('[E repair] Python '+sys.version.split()[0],flush=True)
+PY
+  echo '[25%] Previously prepared exposure file authenticated; verifying synthetic algebra'
+  PYTHONPATH="$HERE/src" python3 -u "$HERE/tests/test_e_repair.py"
+  echo '[50%] Running CG-HDFE projector and pooled 2SLS calibration from cached exposure file'
+  local controls
+  controls="$(python3 -c 'import json,sys;print(",".join(json.load(open(sys.argv[1]))["controls"]))' "$PREFLIGHT")"
+  local good=0
+  if python3 -u "$HERE/src/run_e_estimates.py" \
+    --mode iv \
+    --grouped-exposures "$PREPARED" \
+    --out "$OUT/results" \
+    --controls "$controls" \
+    --receipt-col received --zero-outcome-col y \
+    --cell-col assignment_cell --score-col score_ref \
+    --date-col exposure_date_utc --hour-col exposure_hour_of_week \
+    --opponent-col opponent_id --recipient-col recipient_id --expected 2682330; then
+     good=1
+     echo '[100%] E pooled calibration and subgroup IV analyses completed'
+  else
+     echo '[E] Failed closed. If pooled calibration fails, no subgroup results are accepted.' >&2
+  fi
+  # Include separately created public provenance in the report.
+  if [[ -f "$OUT/results/public/tabE_primary_calibration.json" ]];then
+    cp "$OUT/public/E_repair_provenance.json" "$OUT/results/public/E_repair_provenance.json"
+  fi
+  if [[ -d "$OUT/results" ]];then
+    python3 "$HERE/src/report.py" --out "$OUT/results" \
+      --desktop "$DESKTOP" --tag E_REPAIRED --timestamp "$STAMP" \
+      --status "$([[ "$good" == 1 ]] && echo COMPLETE || echo INCOMPLETE)"
+  fi
+  echo "New results root: $OUT"
+  echo "Log: $LOG"
+  [[ "$good" == 1 ]]
+}
+run 2>&1 | tee "$LOG"

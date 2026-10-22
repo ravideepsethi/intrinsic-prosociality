@@ -1,0 +1,62 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+ul_mode="${1:?Specify analyze or tests}"
+shift
+ul_package="$(cd "$(dirname "$0")" && pwd -P)"
+ul_project="${IV_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+ul_desktop="${IV_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+ul_python="${IV_PYTHON:-$ul_project/venv/bin/python}"
+if [[ ! -x "$ul_python" ]]; then
+  echo "Research Python unavailable: $ul_python. Connect XT_Pro or set IV_PYTHON."
+  exit 2
+fi
+mkdir -p "$ul_desktop"
+export PYTHONDONTWRITEBYTECODE=1
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 BLIS_NUM_THREADS=1
+cd "$ul_package"
+"$ul_python" - <<'PY'
+import sys
+assert sys.version_info >= (3,10), 'Python 3.10 or later is required'
+try:
+    import numpy,pyarrow,duckdb,chess,pandas
+except ImportError as error:
+    raise SystemExit('Missing existing research dependency: '+str(error))
+sys.path.insert(0,'code')
+from ul_common import verify_package
+verify_package()
+print('IV_LEAVE_PAIR_OUT_PACKAGE_SHA256_OK',flush=True)
+PY
+ul_log="$ul_desktop/iv_leave_pair_out_${ul_mode}_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+ul_awake=()
+if [[ -x /usr/bin/caffeinate ]]; then ul_awake=(/usr/bin/caffeinate -i); fi
+echo "Log: $ul_log"
+set +e
+{
+  if [[ "$ul_mode" == tests ]]; then
+    "$ul_python" -m unittest discover -s tests -p 'test_*.py' -v
+  elif [[ "$ul_mode" == analyze ]]; then
+    echo 'ETA: approximately 35–75 minutes on the research Mac; updated using actual stage throughput.'
+    echo 'Full donor period, before AND after, with every decision involving the focal pair excluded.'
+    echo 'One shared donor scan; projected Parquets; memory-aware workers capped at 10 and 11 GiB.'
+    echo 'Reuses original cohorts, state adjustment, controls, material flags, and completed benchmark results.'
+    echo 'Reports at 25/50/75/100%; next-checkpoint and finish ETA every 30 seconds.'
+    ul_tests="${ul_log%.log}_selftests.log"
+    if "$ul_python" -m unittest discover -s tests -p 'test_*.py' -q > "$ul_tests" 2>&1; then
+      echo "OFFLINE_SELF_TESTS_OK: $ul_tests"
+    else
+      cat "$ul_tests"
+      exit 3
+    fi
+    "${ul_awake[@]}" "$ul_python" -u code/run_ul.py --project-root "$ul_project" --desktop "$ul_desktop" "$@"
+  else
+    echo 'Use RUN_LEAVE_PAIR_OUT.command or RUN_TESTS.command.'
+    exit 2
+  fi
+} 2>&1 | tee "$ul_log"
+ul_exit=${PIPESTATUS[0]}
+set -e
+if [[ "$ul_exit" -ne 0 ]]; then
+  echo "Stopped with exit $ul_exit. Completed checkpoints remain reusable. Return this log: $ul_log"
+fi
+exit "$ul_exit"

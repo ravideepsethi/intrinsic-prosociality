@@ -1,0 +1,35 @@
+#!/bin/bash
+set -Eeuo pipefail
+ROOT="${LICHESS_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+THIS_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+PYTHON_BIN="${PYTHON_BIN:-python3}"
+WORKERS="${WORKERS:-10}"
+MEMORY_GB="${MEMORY_GB:-11}"
+export OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 OMP_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 PYTHONUNBUFFERED=1
+mkdir -p "$HOME/Desktop/Lichess_Desktop"
+if [[ " ${*:-} " == *" --discover "* ]]; then
+  exec "$PYTHON_BIN" -u "$THIS_DIR/src/run_f.py" --root "$ROOT" --discover
+fi
+STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
+OUT="$ROOT/output/framework_F_v102/$STAMP"
+LOG="$HOME/Desktop/Lichess_Desktop/framework_F_${STAMP}.log"
+REPORT="$HOME/Desktop/Lichess_Desktop/FRAMEWORK_F_REPORT_${STAMP}.zip"
+echo "Output: $OUT"
+echo "Log: $LOG"
+echo "Public report: $REPORT"
+if command -v caffeinate >/dev/null 2>&1; then
+  caffeinate -dimsu "$PYTHON_BIN" -u "$THIS_DIR/src/run_f.py" --root "$ROOT" --out "$OUT" --workers "$WORKERS" --memory-gb "$MEMORY_GB" "$@" 2>&1 | tee "$LOG"
+else
+  "$PYTHON_BIN" -u "$THIS_DIR/src/run_f.py" --root "$ROOT" --out "$OUT" --workers "$WORKERS" --memory-gb "$MEMORY_GB" "$@" 2>&1 | tee "$LOG"
+fi
+cp "$LOG" "$OUT/private/run.log"
+(
+  cd "$OUT/public"
+  /usr/bin/zip -q -r "$REPORT" .
+)
+(
+  cd "$(dirname "$REPORT")"
+  shasum -a 256 "$(basename "$REPORT")" > "$(basename "$REPORT").sha256"
+  shasum -a 256 -c "$(basename "$REPORT").sha256"
+)
+echo "[100%] Report and checksum: $REPORT"

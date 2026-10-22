@@ -1,0 +1,16 @@
+#!/bin/bash
+set -euo pipefail
+task_package="$(cd "$(dirname "$0")" && pwd)"
+task_python="${POOL_JOINT_PYTHON:-python3}"
+export OPENBLAS_NUM_THREADS="${POOL_JOINT_THREADS:-10}"
+export OMP_NUM_THREADS="${POOL_JOINT_THREADS:-10}"
+export VECLIB_MAXIMUM_THREADS="${POOL_JOINT_THREADS:-10}"
+export MKL_NUM_THREADS="${POOL_JOINT_THREADS:-10}"
+export NUMEXPR_NUM_THREADS="${POOL_JOINT_THREADS:-10}"
+export PYTHONUNBUFFERED=1
+"$task_python" "$task_package/joint_state_ply.py" --self-test
+"$task_python" "$task_package/joint_state_ply.py" \
+  --project-root "${POOL_JOINT_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}" \
+  --transfer-root "${POOL_JOINT_TRANSFER_ROOT:-$HOME/Desktop/Lichess_Desktop}" \
+  --threads "${POOL_JOINT_THREADS:-10}" \
+  --memory-limit "${POOL_JOINT_MEMORY:-6GB}" "$@"

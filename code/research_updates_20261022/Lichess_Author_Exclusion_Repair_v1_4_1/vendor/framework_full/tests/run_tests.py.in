@@ -1,0 +1,164 @@
+#!/usr/bin/env python3
+import os
+for k in ('OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','VECLIB_MAXIMUM_THREADS'):os.environ[k]='1'
+import sys,unittest,tempfile,itertools,json,math
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'code'))
+from fw_common import *
+from scipy.special import logsumexp
+from scipy.stats import spearmanr,nbinom
+from scipy.optimize._numdiff import approx_derivative
+import fw_f,fw_design,fw_b,fw_b_extra,fw_c,fw_e,fw_inputs,fw_adjust
+
+def synthetic_panel(N=96):
+    rng=np.random.default_rng(137);rows=[]
+    for i in range(1,N+1):
+      group=i%4
+      for year in (1,2):
+       for state in ('C','N'):
+        c_values=np.array([-100,-50,0,50,100,200,299,300,450,500,599,700]*2);rng.shuffle(c_values)
+        for j in range(24):
+          cp=c_values[j] if state=='C' else ([-800,-600,-500,-300,-299,-200]*4)[j]
+          if year==1:y=int((state=='C' and group in (0,1) and j==0) or (state=='N' and group in (1,2) and j==0))
+          else:y=int(rng.random()<(.02+.05*(group==1)+.03*(state=='C')+.02*(cp>=300)))
+          gap=float(rng.integers(-500,501));premium=float(rng.uniform(3,10))
+          rows.append(dict(chooser=i,opponent=100000+i+j,chooser_name='person'+str(i),game_id=f'g{i}_{year}_{state}_{j}',archive_ordinal=len(rows),
+            event_ms=1700000000000+year*40000000000+j*3600000,y=y,cp=float(cp),board=float(cp),mate=False,ply=12+j*3,
+            rG=gap/400*premium,premium=premium,rating=float(1200+i),gap=gap,rd_c=float(rng.uniform(30,150)),rd_d=float(rng.uniform(30,150)),
+            clock_c=float(rng.uniform(1,100)),clock_d=float(rng.uniform(1,100)),month_code=(year-1)*12+j%12,year=year,speed_code=j%5,
+            stage=2 if 12+j*3<=20 else 3 if 12+j*3<=40 else 4 if 12+j*3<=80 else 5))
+    return pd.DataFrame(rows)
+
+class StatisticalTests(unittest.TestCase):
+    def test_projection_authenticates_source_and_excludes_both_authors(self):
+        d=pd.DataFrame(dict(chooser_user_id=[1,2,3],disconnected_user_id=[11,12,13],
+          chooser_username_norm=['good','__PRIVATE_VALUE_1__','good'],disconnected_username_norm=['other','other',' __PRIVATE_VALUE_2__ '],
+          game_id=['a','b','c'],archive_ordinal=[1,2,3],api_last_move_at_ms=[1700000000000]*3,
+          outcome_kind_draw=[0,1,0],engine_eval_cp_disconnected=[-100.,-300.,0.],engine_eval_cp_disconnected_raw=[-100.,-300.,0.],
+          engine_eval_is_mate=[False]*3,ply_count=[20]*3,chooser_draw_payoff_v2=[1.]*3,chooser_win_premium_v2=[5.]*3,
+          chooser_elo=[1600.]*3,disconnected_elo=[1700.]*3,chooser_pre_rd_v2=[40.]*3,disconnected_pre_rd_v2=[50.]*3,
+          chooser_clock_last_obs_s=[30.]*3,disconnected_clock_last_obs_s=[20.]*3,month=['2023-11']*3,
+          api_status=['timeout']*3,five_second_rule_passed=[True]*3,api_rated=[True]*3,api_variant=['standard']*3,
+          sf100k_nodes_requested=[100000]*3,sf100k_fen_turn_matches_disconnected_color=[True]*3,
+          disconnected_color=['white']*3,sf100k_disconnected_color_for_perspective=['white']*3,side_to_move_after_last=['white']*3,api_speed=['blitz']*3))
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);src=root/'source.parquet';parquet(src,d)
+            j=dict(path=str(src),out=str(root/'projected'),key='test',expected_sha256=sha(src),rows=3,month='2023-11',memory=.25)
+            result=fw_inputs.project_month(j);self.assertEqual(result['rows'],1);self.assertEqual(result['removed'],2)
+            clean=frame(result['path']);self.assertEqual(clean.year.tolist(),[1]);self.assertEqual(clean.chooser.tolist(),[1])
+            self.assertEqual(fw_inputs.project_month(j),result)
+    def test_state_boundaries_and_no_opportunity(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);d=synthetic_panel(4);d=d.loc[~((d.chooser==1)&(d.year==2)&(d.board< -100))]
+            p=root/'p.parquet';parquet(p,d);a=fw_inputs.aggregate_accounts([p],root/'a','k',4)
+            w=fw_f.wide_panel(a,None,root/'w','q','N',False,4);v=frame(w).set_index('chooser')
+            self.assertEqual(v.loc[1,'n3'],0);self.assertTrue(np.isnan(v.loc[1,'a3']))
+            self.assertTrue((v['n0']==24).all());self.assertTrue((v['n1']==24).all())
+            L=fw_f.wide_panel(a,None,root/'l','l','L',False,4);z=frame(L)
+            self.assertTrue((z.n1==16).all())
+            eligible=(v[[f'n{k}' for k in range(4)]]>=4).all(axis=1)
+            self.assertFalse(eligible.loc[1]);self.assertTrue((v.loc[eligible,'y0']==0).any())
+    def test_bootstrap_spearman_is_literal_resampling(self):
+        x=np.array([0,0,1,2,2,3.]);y=np.array([3,2,2,0,0,1.]);w=np.array([1,2,0,3,1,1])
+        rx=fw_f.weighted_ranks(np.unique(x,return_inverse=True)[1],w);ry=fw_f.weighted_ranks(np.unique(y,return_inverse=True)[1],w)
+        self.assertAlmostEqual(fw_f.corr(rx,ry,w),spearmanr(np.repeat(x,w),np.repeat(y,w)).statistic,12)
+    def test_persistence_joint_matrix_and_zero_variance(self):
+        rng=np.random.default_rng(123);n=400;q=rng.normal(size=(n,4));q[:,2]=q[:,0]+rng.normal(0,.3,n);q[:,3]=q[:,1]+rng.normal(0,.3,n)
+        a=fw_f.boot_matrix(q,np.full((n,4),12),99,22)
+        b=fw_f.boot_matrix(q,np.full((n,4),12),99,22)
+        self.assertEqual(json.dumps(u.clean(a)),json.dumps(u.clean(b)))
+        self.assertGreater(a[0]['ci_low'],.9);self.assertGreater(a[3]['ci_low'],.9)
+        self.assertAlmostEqual(a[-2]['estimate'],a[0]['estimate']-a[3]['estimate'],12)
+        z=fw_f.boot_matrix(np.zeros((20,4)),np.ones((20,4))*4,29,1)
+        self.assertTrue(all(r['status']!='ESTIMATED' for r in z))
+    def test_holdout_classification_ignores_P2_outcomes(self):
+        d=synthetic_panel(12);_,h=fw_b.sample(d,{});changed=d.copy();changed.loc[changed.year==2,'y']=1-changed.loc[changed.year==2,'y']
+        _,h2=fw_b.sample(changed,{});pd.testing.assert_frame_equal(h,h2)
+        self.assertEqual(dict(zip(h.chooser,h.group_code)),{i:i%4 for i in range(1,13)})
+    def test_group_stage_effects_have_no_redundant_common_stage(self):
+        d,_=fw_b.sample(synthetic_panel(12),{});X,names,_=fw_design.b_design(d,dict(stage_interactions=True))
+        self.assertFalse(any(n.startswith('stage_') for n in names))
+        self.assertTrue(all(f'g{g}:stage4' in names for g in range(4)))
+    def test_within_estimator_matches_explicit_dummies(self):
+        rng=np.random.default_rng(1);ids=np.repeat(np.arange(20),12);X=rng.normal(size=(240,3));Y=X@np.array([.2,-.8,1.5])+np.repeat(rng.normal(size=20),12)+rng.normal(size=240)
+        W=demean(X,ids);v=demean(Y,ids);f=solve(W.T@W,W.T@v)
+        full=np.column_stack([X,np.eye(20)[ids]]);coef=np.linalg.lstsq(full,Y,rcond=None)[0][:3]
+        np.testing.assert_allclose(f['beta'],coef,atol=1e-12)
+        self.assertTrue(estimable(f,np.array([1,0,0])))
+    def test_conditional_logit_exact_likelihood_gradient_hessian(self):
+        rng=np.random.default_rng(34);X=rng.normal(size=(7,3));b=np.array([.2,-.3,.1])
+        for m in (1,2,5,6):
+            y=np.r_[np.ones(m),np.zeros(7-m)];subs=np.array([X[list(c)].sum(axis=0) for c in itertools.combinations(range(7),m)])
+            value,gradient,H=fw_b_extra.conditional_group(X,y,b,True)
+            self.assertAlmostEqual(value,logsumexp(subs@b)-(X.T@y)@b,12)
+            numeric=approx_derivative(lambda z:np.array([fw_b_extra.conditional_group(X,y,z)[0]]),b).ravel()
+            numericH=approx_derivative(lambda z:fw_b_extra.conditional_group(X,y,z)[1],b)
+            np.testing.assert_allclose(gradient,numeric,atol=2e-9);np.testing.assert_allclose(H,numericH,atol=2e-9)
+    def test_natural_spline_reference_and_tail(self):
+        d=pd.DataFrame(dict(cp=[0.,100.,300.,500.,700.,np.nan],board=[0.,100.,300.,500.,700.,10000.],mate=[False]*5+[True]))
+        F=fw_design.eval_basis(d);np.testing.assert_array_equal(F[0],0);np.testing.assert_array_equal(F[4],np.array([0,0,0,0,1,0]));np.testing.assert_array_equal(F[5],np.array([0,0,0,0,0,1]))
+    def test_gamma_poisson_and_posterior(self):
+        y=np.array([0,1,4,8.]);E=np.array([1,2,3,8.]);k=.8
+        np.testing.assert_allclose(fw_c.lognb(y,E,k),nbinom.logpmf(y,k,k/(k+E)),atol=1e-12)
+        f=dict(k=k,gamma=1.);np.testing.assert_allclose(fw_c.posterior_mean_zero(E,f),k/(k+E))
+        cal=dict(k=k,gamma=.4,mean_calibrated=True);p=.4*(1+E/(k*.4))**(-k);active=p/(.6+p)
+        np.testing.assert_allclose(fw_c.posterior_mean_zero(E,cal),active*k/(k*.4+E))
+        rng=np.random.default_rng(89);e=rng.uniform(1,12,1500);yy=rng.poisson(rng.gamma(1.2,1/1.2,1500)*e)
+        result=fw_c.fit(yy,e);self.assertLess(abs(result['k']-1.2),.3)
+        for cal in (False,True):
+            z=np.array([.2,.65]);_,g=fw_c.objective_gradient(z,y,E,cal)
+            numeric=approx_derivative(lambda z:np.array([fw_c.likelihood(z[0],z[1],y,E,cal)/len(y)]),z).ravel()
+            np.testing.assert_allclose(g,numeric,atol=1e-8)
+        boundary=fw_c.fit(np.arange(100)%2,np.full(100,.5),True)
+        self.assertEqual(boundary['gamma'],1);self.assertEqual(boundary['LR'],0)
+    def test_forward_retention_does_not_drop_nonreturners(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);v=pd.DataFrame({'chooser':[1,2,3], 'any_p2_n':[0,8,8]})
+            for k in range(4):v['n'+str(k)]=[4,4,4] if k<2 else [0,4,4];v['y'+str(k)]=[1,1,1] if k==0 else [0,0,0]
+            p=root/'wide.parquet';parquet(p,v);coverage,_=fw_f.coverage_forward(p,'N',False)
+            r=next(x for x in coverage if x.get('P1_group')=='C_only')
+            self.assertEqual(r['P1_eligible'],3);self.assertEqual(r['any_P2'],2);self.assertEqual(r['P2_both_min4'],2)
+    def test_conditional_logit_optimizer_recovery(self):
+        rng=np.random.default_rng(100);groups=[]
+        for i in range(240):
+            X=rng.normal(size=(10,2));p=np.exp(X@np.array([.6,-.4]));p/=p.sum();y=np.zeros(10);y[rng.choice(10,p=p)]=1
+            groups.append((X-X.mean(axis=0),y))
+        b,V,base,info=fw_b_extra.conditional_fit(groups,['x1','x2'])
+        np.testing.assert_allclose(b,[.6,-.4],atol=.16);self.assertTrue((np.diag(V)>0).all())
+    def test_history_groups_are_strict_and_mutually_exclusive(self):
+        out=fw_e.history_group(np.array([9,10,11,np.nan,8]),np.array([8,9,np.nan,10,np.nan]),np.full(5,10))
+        np.testing.assert_array_equal(out,[0,1,2,2,0])
+    def test_joint_iv_matches_direct_2sls(self):
+        rng=np.random.default_rng(59);Z=rng.normal(size=(1000,3));D=Z@np.array([[.5,.1,0],[0,.6,.2],[.1,0,.4]])+rng.normal(size=(1000,3));Y=D@np.array([1.2,-.7,.3])+rng.normal(size=1000)
+        beta,V=fw_e.iv_system(Y,D,Z,lambda s:s.T@s)
+        fitted=Z@np.linalg.lstsq(Z,D,rcond=None)[0];expected=np.linalg.solve(fitted.T@D,fitted.T@Y)
+        np.testing.assert_allclose(beta,expected,atol=1e-11)
+        bread=np.linalg.inv(fitted.T@fitted);e=Y-D@beta;vc=bread@(fitted.T@(e[:,None]**2*fitted))@bread
+        np.testing.assert_allclose(V,vc,atol=1e-11)
+    def test_weighted_receipt_FE_matches_explicit_WLS(self):
+        rng=np.random.default_rng(65);N=400;g=np.arange(N)%3;t=rng.integers(0,2,N).astype(float);x=rng.normal(size=(N,2));w=rng.uniform(.2,2,N);fe=[np.arange(N)%7,np.arange(N)%5];cluster=np.arange(N)//4
+        Y=rng.normal(size=N)+.2*t*(g==0)+.1*t*(g==1)+.04*t*(g==2)
+        with tempfile.TemporaryDirectory() as td:
+            rows,info=fw_e.receipt_fit(Y,t,g,x,w,fe,cluster,Path(td),'test')
+        X=np.column_stack([t[:,None]*np.eye(3)[g],np.eye(3)[g,:2],x,np.eye(7)[fe[0]],np.eye(5)[fe[1]]])
+        b=np.linalg.lstsq(X*np.sqrt(w)[:,None],100*Y*np.sqrt(w),rcond=None)[0]
+        np.testing.assert_allclose([r['estimate'] for r in rows[:3]],b[:3],atol=2e-8)
+        self.assertAlmostEqual(rows[3]['estimate'],b[0]-b[2],8)
+    def test_checkpoint_detects_changed_input_and_report(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);src=root/'input';src.write_text('original');out=root/'report';out.write_text('report');work=root/'cache';work.mkdir();(work/'result').write_text('done')
+            certify(work,'k',[src],outputs=[out]);self.assertTrue(completed(work,'k'))
+            out.write_text('tampered')
+            with self.assertRaises(RuntimeError):completed(work,'k')
+            out.write_text('report');src.write_text('changed')
+            with self.assertRaises(RuntimeError):completed(work,'k')
+    def test_author_exclusion_both_roles_and_matching(self):
+        import fw_a
+        d=pd.DataFrame(dict(is_kind_role=[1,0,1,0,0],matched_kind_chooser_id=['a','a','b','b','old_unavailable'],tos_violation=[True,False,False,True,False],disabled=[False]*5))
+        z=fw_a.drop_flags(d,'tos');self.assertEqual(z.index.tolist(),[2,4])
+        with tempfile.TemporaryDirectory() as td:
+            c=conn(Path(td)/'spill',.2,1)
+            d=pd.DataFrame(dict(chooser_username_norm=['good','__PRIVATE_VALUE_3__','good','__PRIVATE_VALUE_4__'],disconnected_username_norm=['good','good',' __PRIVATE_VALUE_5__ ','good']))
+            c.register('d',d);self.assertEqual(c.execute('SELECT count(*) FROM d WHERE '+u.author_predicate()).fetchone()[0],1);c.close()
+
+if __name__=='__main__':unittest.main(verbosity=2)

@@ -1,0 +1,44 @@
+#!/bin/bash
+set -euo pipefail
+
+task_package="$(cd "$(dirname "$0")" && pwd)"
+task_desktop="${LICHESS_TRANSFER_ROOT:-$HOME/Desktop/Lichess_Desktop}"
+task_project="${LICHESS_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+task_workers="${LICHESS_VALIDATION_WORKERS:-10}"
+mkdir -p "$task_desktop"
+
+task_base_python="${LICHESS_VALIDATION_PYTHON:-$(command -v python3 || true)}"
+if [ -z "$task_base_python" ]; then
+  echo "Python 3.10 or newer is required. Run this from your usual conda Terminal."
+  exit 1
+fi
+"$task_base_python" -c 'import sys; assert sys.version_info >= (3,10), "Python 3.10+ is required"'
+
+# Verify all delivered code and frozen authority before running analysis code.
+(cd "$task_package" && /usr/bin/shasum -a 256 -c PACKAGE_MANIFEST.sha256)
+
+if "$task_base_python" -c 'import numpy, pyarrow; assert (1,26) <= tuple(map(int,numpy.__version__.split(".")[:2])) < (3,0); assert 17 <= int(pyarrow.__version__.split(".")[0]) < 26' >/dev/null 2>&1; then
+  task_python="$task_base_python"
+else
+  task_env="$task_desktop/rating_validation_python_v100"
+  if [ ! -x "$task_env/bin/python" ]; then
+    "$task_base_python" -m venv "$task_env"
+  fi
+  "$task_env/bin/python" -m pip install -r "$task_package/requirements.txt"
+  task_python="$task_env/bin/python"
+fi
+
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
+export VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1 PYTHONUNBUFFERED=1
+
+task_log="$task_desktop/pool_rating_validation_v100_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+echo "Log: $task_log"
+echo "Validating the existing 41,534,331-row pool sample with $task_workers month workers."
+"$task_python" "$task_package/test_validation.py" 2>&1 | tee "$task_log"
+"$task_python" "$task_package/validate_ratings.py" \
+  --project-root "$task_project" \
+  --transfer-root "$task_desktop" \
+  --workers "$task_workers" \
+  --hash-workers "${LICHESS_VALIDATION_HASH_WORKERS:-2}" \
+  --batch-rows "${LICHESS_VALIDATION_BATCH_ROWS:-65536}" \
+  "$@" 2>&1 | tee -a "$task_log"

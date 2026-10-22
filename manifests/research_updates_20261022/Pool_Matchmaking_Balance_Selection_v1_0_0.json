@@ -1,0 +1,117 @@
+{
+  "package": "Pool_Matchmaking_Balance_Selection_v1_0_0",
+  "archive_name": "Pool_Matchmaking_Balance_Selection_v1_0_0.zip",
+  "archive_sha256": "765474bfe6e03ade32c76a2cdd789f6de92acc4a3ba5c5ce7d408a0764c85ece",
+  "archive_size": 88966,
+  "archive_root": "Pool_Matchmaking_Balance_Selection_v1_0_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "ANALYSIS_DESIGN.md",
+      "published_path": "ANALYSIS_DESIGN.md",
+      "sha256": "835e121ba4edde8f5f122fadd753f4d46b89d1bd458c9521290f97bb9baa763f",
+      "published_sha256": "835e121ba4edde8f5f122fadd753f4d46b89d1bd458c9521290f97bb9baa763f",
+      "size": 12769
+    },
+    {
+      "path": "README_FIRST.md",
+      "published_path": "README_FIRST.md",
+      "sha256": "6f462d106d054c8e9f927fbba75b260eaa27fa95e5d958221e210250d34eb996",
+      "published_sha256": "6f462d106d054c8e9f927fbba75b260eaa27fa95e5d958221e210250d34eb996",
+      "size": 5309
+    },
+    {
+      "path": "RUN_ANALYSIS.command",
+      "published_path": "RUN_ANALYSIS.command.in",
+      "sha256": "c8ec8f4550fe49dbc60038d15d6c8ffd8f82bcf1a91259f5a76e9532f82c1b17",
+      "published_sha256": "c8ec8f4550fe49dbc60038d15d6c8ffd8f82bcf1a91259f5a76e9532f82c1b17",
+      "size": 2221
+    },
+    {
+      "path": "RUN_COMMAND.txt",
+      "published_path": "RUN_COMMAND.txt",
+      "sha256": "58ed603915d3795d398c43960be0e4e9baf3e82e0d6ec838b5fb848a4ea4f858",
+      "published_sha256": "58ed603915d3795d398c43960be0e4e9baf3e82e0d6ec838b5fb848a4ea4f858",
+      "size": 305
+    },
+    {
+      "path": "analysis.py",
+      "published_path": "analysis.py",
+      "sha256": "c534f825f897fb0a40712bffcb52861f3b26c234b96237133e16545c1469a63f",
+      "published_sha256": "c534f825f897fb0a40712bffcb52861f3b26c234b96237133e16545c1469a63f",
+      "size": 16741
+    },
+    {
+      "path": "run_analysis.py",
+      "published_path": "run_analysis.py",
+      "sha256": "ee5419c60149e53331c45c1b0b6757c50af4374b53d4575e06156f69ae07b409",
+      "published_sha256": "ee5419c60149e53331c45c1b0b6757c50af4374b53d4575e06156f69ae07b409",
+      "size": 18862
+    },
+    {
+      "path": "self_test.py",
+      "published_path": "self_test.py",
+      "sha256": "a23242d42c020e5eb4818613fab476ac23f747a19b24bf0b9cd4115650f86858",
+      "published_sha256": "a23242d42c020e5eb4818613fab476ac23f747a19b24bf0b9cd4115650f86858",
+      "size": 11807
+    },
+    {
+      "path": "source/comparison_core.py",
+      "published_path": "source/comparison_core.py",
+      "sha256": "9dd031642e3f2106a154ee4fb8173fbc9f5813c3627cc598ba6cacfab4ea1fa9",
+      "published_sha256": "9dd031642e3f2106a154ee4fb8173fbc9f5813c3627cc598ba6cacfab4ea1fa9",
+      "size": 11364
+    },
+    {
+      "path": "source/iv_numerics.py",
+      "published_path": "source/iv_numerics.py",
+      "sha256": "ef709b4ff6b37e410ecb4ad549f5bfdc0b798a4627dcfdd6cc4a757f982d2066",
+      "published_sha256": "ef709b4ff6b37e410ecb4ad549f5bfdc0b798a4627dcfdd6cc4a757f982d2066",
+      "size": 12442
+    },
+    {
+      "path": "source/preliminary_core.py",
+      "published_path": "source/preliminary_core.py",
+      "sha256": "468d1b1f603aee97799f90a187bdd81552f5fbf6752b196115f41357a39a911b",
+      "published_sha256": "468d1b1f603aee97799f90a187bdd81552f5fbf6752b196115f41357a39a911b",
+      "size": 14866
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "PACKAGE_BUILD_VALIDATION.json",
+      "sha256": "788d59a660215946d47790eb432db67eee0952b42c072868bdc2b829c9df2a5b",
+      "size": 2107
+    },
+    {
+      "path": "PACKAGE_MANIFEST.sha256",
+      "sha256": "9b55f05fc882652fae00486a0ed58d0a0b3c8c072cf9ae4b41b7986aebc18a22",
+      "size": 1421
+    },
+    {
+      "path": "evidence/INPUT_PROBE.zip",
+      "sha256": "adfa749d47512036835c984525846fb480bbc5c2266f6fd09b6c54a870663fed",
+      "size": 51040
+    },
+    {
+      "path": "evidence/ORIGINAL_PACKAGE_MANIFEST.sha256",
+      "sha256": "28c5e9581fa1571cbe127c34a9fea8b5dce194ff889689684a6cbf12b835d062",
+      "size": 1272
+    },
+    {
+      "path": "evidence/SOURCE_BINDINGS.json",
+      "sha256": "2e404eb764c9d28f3071f287b690061d73bf891743d904b7e209b47d57c5d03c",
+      "size": 780
+    },
+    {
+      "path": "evidence/rebuild_logic.py",
+      "sha256": "8c5c2ccbbdf71badd642931c275f8bbb0da1346b897af362e4cec5013f93f405",
+      "size": 7276
+    },
+    {
+      "path": "evidence/run_rebuild.py",
+      "sha256": "4595560de5020f36d7dc8e25e4080313bf7f528b781ac63f093d17a4302cc53c",
+      "size": 40641
+    }
+  ]
+}

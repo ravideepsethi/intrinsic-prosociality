@@ -1,0 +1,147 @@
+{
+  "package": "Pool_Pooled_Competitive_K_v1_0_0",
+  "archive_name": "Pool_Pooled_Competitive_K_v1_0_0.zip",
+  "archive_sha256": "21c6bc2cfef7412b69a02ce123b1748281e6cc3b7ea7c53e4e64cab8769e71a2",
+  "archive_size": 146756,
+  "archive_root": "Pool_Pooled_Competitive_K_v1_0_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "METHODS.md",
+      "published_path": "METHODS.md",
+      "sha256": "e90653d5ac4573f760c03d6a77381da5001db96c033b8f724886c7287c7fefb4",
+      "published_sha256": "e90653d5ac4573f760c03d6a77381da5001db96c033b8f724886c7287c7fefb4",
+      "size": 10318
+    },
+    {
+      "path": "README.md",
+      "published_path": "README.md",
+      "sha256": "43aaf7c7bf7cfd3b3ebf794375c4e03a2732c33f2ea0222c5bc46152cd318fde",
+      "published_sha256": "43aaf7c7bf7cfd3b3ebf794375c4e03a2732c33f2ea0222c5bc46152cd318fde",
+      "size": 4526
+    },
+    {
+      "path": "RUN_POOLED.command",
+      "published_path": "RUN_POOLED.command.in",
+      "sha256": "dd31b8f3a6282ecce159b92a26ccc6e88c2eb0b5a78faaaa3b2a4c7551554b6f",
+      "published_sha256": "dd31b8f3a6282ecce159b92a26ccc6e88c2eb0b5a78faaaa3b2a4c7551554b6f",
+      "size": 2452
+    },
+    {
+      "path": "VALIDATION.md",
+      "published_path": "VALIDATION.md",
+      "sha256": "bbb344632e0cce2596659d2470286c24f66c51263a711907209cd195f83e8527",
+      "published_sha256": "bbb344632e0cce2596659d2470286c24f66c51263a711907209cd195f83e8527",
+      "size": 3510
+    },
+    {
+      "path": "fe_engine.py",
+      "published_path": "fe_engine.py",
+      "sha256": "14e9e8e933f049a6bfa3e4f2bd4f5320afb830cb8b20506a071cf69a65a19ad1",
+      "published_sha256": "14e9e8e933f049a6bfa3e4f2bd4f5320afb830cb8b20506a071cf69a65a19ad1",
+      "size": 18363
+    },
+    {
+      "path": "pooled_engine.py",
+      "published_path": "pooled_engine.py",
+      "sha256": "1441f5a13119c419ccc880e6ad8237dab57d8853439efa2fc5affa10c68c8ee9",
+      "published_sha256": "1441f5a13119c419ccc880e6ad8237dab57d8853439efa2fc5affa10c68c8ee9",
+      "size": 17192
+    },
+    {
+      "path": "pooled_utils.py",
+      "published_path": "pooled_utils.py",
+      "sha256": "bf1b00defcbf75d1b1acc8d6d166167787ace3b69bce2c8d667ac27a5f3d1c9e",
+      "published_sha256": "bf1b00defcbf75d1b1acc8d6d166167787ace3b69bce2c8d667ac27a5f3d1c9e",
+      "size": 2000
+    },
+    {
+      "path": "render_pooled.py",
+      "published_path": "render_pooled.py",
+      "sha256": "fd9a6cc7113b4ad0a9a1ad831ac411184e295717e24e3bdb69958088790995e6",
+      "published_sha256": "fd9a6cc7113b4ad0a9a1ad831ac411184e295717e24e3bdb69958088790995e6",
+      "size": 6716
+    },
+    {
+      "path": "requirements.txt",
+      "published_path": "requirements.txt",
+      "sha256": "8025e1e46c573b3b7e3c31717171cd8df0f40cb8cdda4889cf286ccf97d8be6f",
+      "published_sha256": "8025e1e46c573b3b7e3c31717171cd8df0f40cb8cdda4889cf286ccf97d8be6f",
+      "size": 79
+    },
+    {
+      "path": "run_pooled.py",
+      "published_path": "run_pooled.py",
+      "sha256": "db6899043169f0694e9557d148b4180d18a5afd6d9eb4a58493f1966030f205b",
+      "published_sha256": "db6899043169f0694e9557d148b4180d18a5afd6d9eb4a58493f1966030f205b",
+      "size": 16555
+    },
+    {
+      "path": "self_test.py",
+      "published_path": "self_test.py",
+      "sha256": "ec10eede82fcf4650899cdfc4aee73ba6d688c90db9c54ffd7204e4378cfa22e",
+      "published_sha256": "ec10eede82fcf4650899cdfc4aee73ba6d688c90db9c54ffd7204e4378cfa22e",
+      "size": 7027
+    },
+    {
+      "path": "source/__init__.py",
+      "published_path": "source/__init__.py",
+      "sha256": "52b1da5d4a8717236fccd7317e87a652c65eebe4de6a71d6d6981d413934b76d",
+      "published_sha256": "52b1da5d4a8717236fccd7317e87a652c65eebe4de6a71d6d6981d413934b76d",
+      "size": 50
+    },
+    {
+      "path": "source/pool_wave1_common.py",
+      "published_path": "source/pool_wave1_common.py",
+      "sha256": "f9c714c549c6cd68a7d2dbdb2c17d5abacfdfc12dc6526752f03ab2505bbff43",
+      "published_sha256": "f9c714c549c6cd68a7d2dbdb2c17d5abacfdfc12dc6526752f03ab2505bbff43",
+      "size": 21988
+    },
+    {
+      "path": "stage_base.py",
+      "published_path": "stage_base.py",
+      "sha256": "56a38eafd01f326d33d12b43a20e0cdadf5ada1c2e39647077b6a3ff5b3cba7b",
+      "published_sha256": "56a38eafd01f326d33d12b43a20e0cdadf5ada1c2e39647077b6a3ff5b3cba7b",
+      "size": 6074
+    },
+    {
+      "path": "surface_model.py",
+      "published_path": "surface_model.py",
+      "sha256": "7c46937dac678766122b56a72ec69b0ca6b41878fc8c8e0873f1bc03a318310e",
+      "published_sha256": "7c46937dac678766122b56a72ec69b0ca6b41878fc8c8e0873f1bc03a318310e",
+      "size": 13483
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "PACKAGE_MANIFEST.sha256",
+      "sha256": "fd41bb94c504961610d5c2bcd8514309ffbcbe597a138802a0a98676787b34c6",
+      "size": 1739
+    },
+    {
+      "path": "RUN_TERMINAL.txt",
+      "sha256": "dc0a5e53b0ff49fc99e979229370788b29e2b3231d8590d59fc8bf206c4e1056",
+      "size": 519
+    },
+    {
+      "path": "authority/SAMPLE_AUTHORITY.json",
+      "sha256": "81c34113e7a888629a834a17235a71dcf369a2d590755fd9412ee42151d9b2f3",
+      "size": 1234
+    },
+    {
+      "path": "evidence/PREVIOUS_COMPETITIVE_COUNTS.json",
+      "sha256": "bedd421cf398c4dff70d20fd560d44fb549b66d779937517d554c761b7972665",
+      "size": 1368
+    },
+    {
+      "path": "evidence/Pool_Main_Sample_24M_Report.zip",
+      "sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+      "size": 96936
+    },
+    {
+      "path": "evidence/Pool_Main_Sample_24M_Report.zip.sha256",
+      "sha256": "d2e6c0953ff2de7cc7235b98d568c884e4fa8067b8aa81d22efe1ac3484d6f59",
+      "size": 128
+    }
+  ]
+}

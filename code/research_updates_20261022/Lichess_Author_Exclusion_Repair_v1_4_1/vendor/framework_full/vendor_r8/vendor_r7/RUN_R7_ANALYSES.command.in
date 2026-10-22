@@ -1,0 +1,4 @@
+#!/bin/bash
+set -euo pipefail
+r7_package="$(cd "$(dirname "$0")" && pwd -P)"
+exec /bin/bash "$r7_package/launch.command" analyze "$@"

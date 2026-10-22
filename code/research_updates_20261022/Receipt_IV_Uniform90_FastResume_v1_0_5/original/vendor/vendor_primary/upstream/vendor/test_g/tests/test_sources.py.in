@@ -1,0 +1,106 @@
+"""Source adapters and guarded network behavior; no real network access."""
+import sys,tempfile,unittest,sqlite3,json,io
+from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import patch
+sys.path[:0]=[str(Path(__file__).resolve().parents[1]/'code'),str(Path(__file__).resolve().parent)]
+from g_common import *
+import g_inputs
+from g_data import cache_objects,normalize_cache_object,pgn_text,DigestReader,pgn_records,pgn_summary,make_lookup,StatusLookup
+
+class SourceTests(unittest.TestCase):
+    def test_certified_pool_membership_guard(self):
+        pinned,report=authority().verify_report_package()
+        auth=dict(status='POOL_MAIN_SAMPLE_AUTHENTICATED_OK',authority=pinned,report=report)
+        self.assertEqual(g_inputs.certified_pool_source(auth),'pool')
+        auth['report']=dict(report,main_predicate="source = 'arena'")
+        with self.assertRaises(GateError) as caught:g_inputs.certified_pool_source(auth)
+        self.assertEqual(caught.exception.code,'SOURCE_MEMBERSHIP_NOT_CERTIFIED')
+    def test_all_certified_month_schemas(self):
+        _,report=authority().verify_report_package()
+        for rec in report['panel_outputs']:
+            schema=pa.schema([(f['name'],pa.type_for_alias(f['type'])) for f in rec['schema']])
+            self.assertNotIn('api_source',schema.names)
+            checked=g_inputs.check_source_schema(schema,rec['month'])
+            self.assertEqual(checked['columns'],157)
+            incomplete=schema.remove(schema.get_field_index('chooser_clock_last_obs_s'))
+            with self.assertRaises(GateError) as caught:g_inputs.check_source_schema(incomplete,rec['month'])
+            self.assertEqual(caught.exception.code,'SOURCE_SCHEMA_MISMATCH')
+    def test_safe_error_location(self):
+        try:raise RuntimeError('Private game AbCd1234 and private account must not be exported')
+        except RuntimeError as exc:summary=safe_error_location(exc)
+        self.assertNotIn('AbCd1234',json.dumps(summary));self.assertNotIn('Private game',json.dumps(summary))
+        self.assertEqual(summary['exception_type'],'RuntimeError');self.assertEqual(summary['package_frames'][-1]['file'],'tests/test_sources.py')
+    def test_streaming_pgn_blocks(self):
+        import contextlib
+        games=[]
+        for gid in ['AbCd1234','EfGh5678','IjKl9012']:
+            games.append('[Event "Rated Blitz game"]\n[Site "https://lichess.org/'+gid+'"]\n[TimeControl "180+0"]\n[Result "1-0"]\n\n1. e4 { [%clk 0:03:00] } e5 { [%clk 0:02:58] } 1-0\n')
+        class ShortReads(io.StringIO):
+            def read(self,n=-1):return super().read(min(n,17) if n>=0 else n)
+        @contextlib.contextmanager
+        def source(_):yield ShortReads('\ufeff'+'\n'.join(games))
+        with patch('g_data.pgn_text',source):rows=list(pgn_records('synthetic'))
+        self.assertEqual(len(rows),3)
+        self.assertEqual([pgn_summary(h,m)['game_id'] for h,m in rows],['AbCd1234','EfGh5678','IjKl9012'])
+        self.assertEqual([pgn_summary(h,m)['ply'] for h,m in rows],[2,2,2])
+        self.assertEqual(pgn_summary(*rows[-1])['clock_black'],178.)
+    def test_compact_status_lookup(self):
+        with tempfile.TemporaryDirectory() as td:
+            c=duckdb.connect()
+            c.execute('CREATE TABLE status(game_id VARCHAR,status VARCHAR,source VARCHAR,conflict BOOLEAN,timeout_seen BOOLEAN)')
+            c.execute("INSERT INTO status VALUES ('Zzzz9999','outoftime','pool',false,false),('AbCd1234',NULL,NULL,true,true)")
+            c.execute('CREATE TABLE excluded(game_id VARCHAR)');c.execute("INSERT INTO excluded VALUES ('AbCd1234')")
+            c.execute('CREATE TABLE flags(name VARCHAR,known BOOLEAN,flagged BOOLEAN)');c.execute("INSERT INTO flags VALUES ('zebra',true,false),('alice',true,true)")
+            make_lookup(c,Path(td));c.close();lookup=StatusLookup(td)
+            records=[dict(game_id=k,white='alice' if i==1 else 'unknown',black='zebra') for i,k in enumerate(['Zzzz9999','AbCd1234','Missing1'])]
+            rows=lookup.annotate(records)
+            self.assertEqual(rows[0]['status'],'outoftime');self.assertFalse(rows[0]['analysis_excluded'])
+            self.assertTrue(rows[1]['analysis_excluded']);self.assertTrue(rows[1]['timeout_seen']);self.assertTrue(rows[1]['flagged'])
+            self.assertIsNone(rows[2]['status']);self.assertFalse(rows[2]['white_known']);self.assertTrue(rows[2]['black_known'])
+            self.assertFalse(rows[2]['conflict']);self.assertFalse(rows[2]['flagged'])
+    def test_cache_adapters(self):
+        with tempfile.TemporaryDirectory() as td:
+            p=Path(td)/'cache.jsonl';p.write_text(json.dumps(dict(id='AbCd1234',status='outoftime',source='pool'))+'\n')
+            r=normalize_cache_object(next(cache_objects(p)));self.assertEqual(r['status'],'outoftime');self.assertFalse(r['bad'])
+            p=Path(td)/'cache.sqlite';c=sqlite3.connect(p);c.execute('CREATE TABLE games(game_id TEXT,api_status TEXT,api_source TEXT,invalid INTEGER)');c.execute("INSERT INTO games VALUES('AbCd1234','timeout','pool',1)");c.commit();c.close()
+            r=normalize_cache_object(next(cache_objects(p)));self.assertTrue(r['bad']);self.assertEqual(r['status'],'timeout')
+    def test_remote_allowlist(self):
+        with patch('urllib.request.urlopen',side_effect=AssertionError('No network allowed')):
+            with self.assertRaises(GateError):
+                with pgn_text('https://example.com/arbitrary.pgn.zst') as f:f.read()
+        reader=DigestReader(io.BytesIO(b'abcd'));self.assertEqual(reader.read(),b'abcd');self.assertEqual(reader.digest.hexdigest(),hashlib.sha256(b'abcd').hexdigest())
+    def test_source_projection_and_partitions(self):
+        import chess
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);run=root/'run';run.mkdir();(run/'report').mkdir();board=chess.Board();board.push_san('e4')
+            rows=[]
+            for i in range(12):
+                rows.append(dict(game_id=f'A{i:07d}',month='2023-11',chooser_user_id=i%3+1,disconnected_user_id=20+i,
+                    chooser_username_norm='__PRIVATE_VALUE_1__' if i==0 else 'person'+str(i%3),disconnected_username_norm='__PRIVATE_VALUE_2__' if i==1 else 'other'+str(i),
+                    outcome_kind_draw=bool(i%4==0),api_status='timeout',five_second_rule_passed=True,api_rated=True,api_variant='standard',
+                    sf100k_fen_turn_matches_disconnected_color=True,disconnected_color='black',side_to_move_after_last='black',sf100k_disconnected_color_for_perspective='black',
+                    api_last_move_at_ms=10000+i,archive_ordinal=i,ply_count=20+i,engine_eval_cp_disconnected=-50.,engine_eval_cp_disconnected_raw=-50.,
+                    engine_eval_is_mate=False,engine_eval_mate_ply_disconnected=0,chooser_elo=1500.,disconnected_elo=1600.,chooser_clock_last_obs_s=150.,disconnected_clock_last_obs_s=160.,
+                    chooser_win_premium_v2=8.,chooser_pre_rd_v2=80.,disconnected_pre_rd_v2=70.,api_speed='blitz',time_control='180+0',fen_after_last_move=board.fen(),
+                    sf100k_stockfish_name='Synthetic only',sf100k_stockfish_sha256='0'*64,sf100k_nodes_requested=100000,sf100k_threads=1,sf100k_hash_mb=16,sf100k_eval_method='uci_go_nodes'))
+            # Use the signed report's exact 157-column schema, not a hand-invented schema.
+            pinned,report=authority().verify_report_package()
+            schema=pa.schema([(f['name'],pa.type_for_alias(f['type'])) for f in report['panel_outputs'][0]['schema']])
+            self.assertNotIn('api_source',schema.names)
+            source=root/'source.parquet';atomic_parquet(pa.Table.from_pylist(rows,schema=schema),source)
+            auth=SimpleNamespace(authenticate_sample=lambda *args,**kwargs:dict(status='POOL_MAIN_SAMPLE_AUTHENTICATED_OK',authority=pinned,report=report,
+                month_records=[dict(month='2023-11',path=source,expected_sha256=sha(source),rows=12)]))
+            args=SimpleNamespace(project_root=root,memory_gb=4,workers=1,shards=128)
+            with patch.object(g_inputs,'authority',return_value=auth):paths=g_inputs.prepare(args,run,'synthetic')
+            d=pd.read_parquet(paths[0]);self.assertEqual(len(d),10);self.assertTrue((d.vf==50).all());self.assertTrue((d.stm==0).all());self.assertTrue((d.dr==100).all())
+            exclusions=pd.read_parquet(run/'input/2023-11/analysis_ids.parquet')
+            self.assertEqual(len(exclusions),12);self.assertTrue((exclusions.source=='pool').all());self.assertTrue((exclusions.status=='timeout').all())
+            binding=load(run/'report/SOURCE_BINDING.json');self.assertFalse(binding['per_row_api_source_required'])
+            snapshot=root/g_inputs.SNAPSHOT_REL;snapshot.parent.mkdir(parents=True)
+            pd.DataFrame(dict(username_norm=['person0','person1','person2'],returned=[True]*3,tos_violation=[False]*3,disabled=[False]*3)).to_parquet(snapshot,index=False)
+            with patch.object(g_inputs,'SNAPSHOT_SHA',sha(snapshot)):parts=g_inputs.account_partitions(args,run,paths,'synthetic')
+            combined=pd.concat([pd.read_parquet(p) for p in parts]);self.assertEqual(len(combined),10)
+            audit=load(run/'accounts/PARTITION_AUDIT.json');self.assertEqual(audit['reference'],audit['observed'])
+
+if __name__=='__main__':unittest.main(verbosity=2)

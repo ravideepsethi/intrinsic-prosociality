@@ -1,0 +1,82 @@
+import sys,tempfile,unittest
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'code'))
+from engine import *
+from compare import compare_frames
+from adapters import receipt_sql,prepare_patron_roster
+
+class PolicyTests(unittest.TestCase):
+    def test_roles_exact_matching_preservation_and_resume(self):
+        with tempfile.TemporaryDirectory() as t:
+            root=Path(t);p=root/'main.parquet'
+            d=pd.DataFrame(dict(game_id=['a','b','c','d','e'],chooser_username_norm=[' __PRIVATE_VALUE_1__ ','ok','__PRIVATE_VALUE_2___fan','other','ok'],disconnected_username_norm=['ok','__PRIVATE_VALUE_3__','other','ok','other'],chooser_user_id=[10,20,30,40,20],disconnected_user_id=[20,11,40,20,40],outcome_kind_draw=[1,0,1,0,0],session_position=[1,2,3,4,5],pre_rating=[1200.,1300.,1400.,1500.,1600.]))
+            d.to_parquet(p,index=False);before=sha(p);r={'month':'2023-11','path':str(p),'expected_sha256':before,'rows':len(d)}
+            z=filter_month((r,str(root/'out')));self.assertEqual(z['removed_rows'],2);self.assertEqual(z['removed_grants'],1)
+            actual=pd.read_parquet(z['output']['path']).sort_values('game_id').reset_index(drop=True)
+            pd.testing.assert_frame_equal(actual,d.iloc[2:].sort_values('game_id').reset_index(drop=True));self.assertEqual(sha(p),before)
+            self.assertEqual(filter_month((r,str(root/'out'))),z)
+            with open(z['output']['path'],'ab') as f:f.write(b'broken')
+            with self.assertRaisesRegex(RuntimeError,'Changed input'):filter_month((r,str(root/'out')))
+
+    def test_missing_identity_stops(self):
+        with tempfile.TemporaryDirectory() as t:
+            p=Path(t)/'p.parquet';pd.DataFrame(dict(game_id=['x'],chooser_username_norm=[None],disconnected_username_norm=['ok'],outcome_kind_draw=[0])).to_parquet(p)
+            with self.assertRaises(RuntimeError):filter_month((dict(month='2023-11',path=str(p),expected_sha256=sha(p),rows=1),str(Path(t)/'o')))
+
+    def test_keyed_comparison(self):
+        a=pd.DataFrame(dict(model=['a','b'],term=['x','x'],estimate=[1.,2.],se=[.2,.3],rows=[10,12]))
+        b=pd.DataFrame(dict(model=['b','a'],term=['x','x'],estimate=[2.1,1.],se=[.3,.2],rows=[11,10]))
+        rows,status=compare_frames(a,b,'family','test.csv');self.assertEqual(status['status'],'COMPARED')
+        effects=[x for x in rows if x['metric']=='estimate'];self.assertEqual(sorted(round(x['change'],5) for x in effects),[0,.1])
+        _,status=compare_frames(pd.concat([a,a]),b,'f','t');self.assertEqual(status['status'],'DUPLICATE_COMPARISON_KEYS')
+        _,status=compare_frames(a.drop(columns=['model','term']),b.drop(columns=['model','term']),'f','t');self.assertEqual(status['status'],'NO_UNIQUE_COMPARISON_KEY')
+
+    def test_patron_drops_invalid_groups_without_replacements(self):
+        with tempfile.TemporaryDirectory() as t:
+            root=Path(t);c=db(root/'spill',1)
+            old=pd.DataFrame(dict(username_norm=['f1','c1','c2','f2','c3','f3','c4','c5'],matched_kind_chooser_id=['f1','f1','f1','f2','f2','f3','f3','f3'],acquisition_role=['kind','control','control','kind','control','kind','control','control'],control_slot=[0,1,2,0,1,0,1,2],query_index=list(range(8)),selected_controls=[2,2,2,1,1,2,2,2],nested_1to1_available=True,exact_1to3_group=False,total_opps=10,total_kind_count=[1,0,0,1,0,1,0,0],ever_kind_any_state=[True,False,False,True,False,True,False,False],match_cell='old'))
+            original=root/'old.parquet';old.to_parquet(original,index=False)
+            new=old[['username_norm','total_opps','total_kind_count','ever_kind_any_state','match_cell']].rename(columns={'username_norm':'chooser_id'}).copy()
+            new.loc[new.chooser_id=='f1','total_opps']=9
+            new=new[new.chooser_id!='c1'] # author control removed; preserve slot 2
+            new.loc[new.chooser_id=='f2',['total_kind_count','ever_kind_any_state']]=[0,False] # focal loses last grant
+            new.loc[new.chooser_id=='c4','match_cell']='different' # no longer exact match
+            c.register('summary_frame',new);c.execute('CREATE TABLE chooser_summary AS SELECT * FROM summary_frame')
+            p=root/'new.parquet';before,n=prepare_patron_roster(c,original,p);z=pd.read_parquet(p)
+            self.assertEqual(before,8);self.assertEqual(n,4);self.assertEqual(set(z.username_norm),{'f1','c2','f3','c5'})
+            self.assertEqual(set(z[z.acquisition_role=='control'].control_slot),{2})
+            self.assertTrue((z.selected_controls==1).all());self.assertFalse(z.nested_1to1_available.any())
+            self.assertEqual(int(z[z.username_norm=='f1'].total_opps.iloc[0]),9);c.close()
+
+    def test_receipt_rebuild_freezes_index_and_refreshes_behaviors(self):
+        core=module('receipt_fixture_core',ROOT/'vendor/companion/vendor/core/receipt_core.py')
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);base=1700000000000
+            events=[('prior','alice','__PRIVATE_VALUE_4__',500,1),('e_r','alice','recipient_r',1000,1),('e_q','__PRIVATE_VALUE_5__','recipient_q',1100,0),('second_q','other','recipient_q',1200,0),('first_r','recipient_r','__PRIVATE_VALUE_6__',3000,0),('next_r','recipient_r','other',4000,1)]
+            ids={a:i for i,a in enumerate(sorted({a for _,a,b,_,_ in events}|{b for _,a,b,_,_ in events}))}
+            rows=[]
+            for i,(g,a,b,tt,y) in enumerate(events):
+                rows.append(dict(game_id=g,chooser_username_norm=a,disconnected_username_norm=b,chooser_user_id=ids[a],disconnected_user_id=ids[b],api_last_move_at_ms=base+tt,utc_ms=base+tt-1,archive_ordinal=i,kind_draw=bool(y),outcome_kind_draw=bool(y),timeout_chooser_win=not y,timeout_draw_no_mating_material=False,timeout_chooser_loss=False,fair_competitive=True,tournament_like_event=False,engine_eval_cp_disconnected=0,chooser_draw_payoff_v2=0.,chooser_win_premium_v2=4.,chooser_elo=1500.,disconnected_elo=1500.,chooser_pre_rd_v2=60.,disconnected_pre_rd_v2=60.,chooser_clock_last_obs_s=20.,disconnected_clock_last_obs_s=10.,ply_count=20,material_advantage_chooser=0.,tc_base_s=180.,tc_inc_s=0.,api_speed='blitz',month='2023-11'))
+            raw=pd.DataFrame(rows);original=root/'panel.parquet';raw.to_parquet(original,index=False)
+            c=db(root/'spill',1)
+            cohort=c.execute('''WITH r AS (SELECT *,row_number() OVER(PARTITION BY disconnected_username_norm ORDER BY utc_ms,archive_ordinal,game_id) rk FROM '''+scan(original)+''') SELECT row_number() OVER(ORDER BY disconnected_username_norm)-1 cohort_row_id,disconnected_user_id,game_id exposure_game_id,api_last_move_at_ms exposure_anchor_utc_ms FROM r WHERE rk=1 ORDER BY cohort_row_id''').fetchdf()
+            cohort['games_within_7d']=17;cohort['games_within_30d']=29;cohort['first_next_game_utc_ms']=cohort.exposure_anchor_utc_ms+100;cohort['any_game_within_7d']=True;cohort['any_game_within_30d']=True
+            a3=root/'a3.parquet';cohort.to_parquet(a3,index=False)
+            old=root/'old_receipt.parquet'
+            query=core.recipient_panel_sql([original],a3,1761955200000)
+            copy(c,'SELECT *,88::INTEGER pre_games_30d,0::BIGINT first_pair_utc_ms,true first_ever_pair FROM ('+query+')',old)
+            excluded=root/'excluded.parquet';copy(c,'SELECT * FROM '+scan(original)+' s WHERE NOT '+author_sql(('chooser_username_norm','disconnected_username_norm')),excluded)
+            c.execute('CREATE VIEW frozen_receipt AS SELECT * FROM '+scan(old));c.execute('CREATE VIEW a3_facts AS SELECT *,recipient_user_id disconnected_user_id FROM frozen_receipt')
+            names=pq.ParquetFile(old).schema_arrow.names;cols=names[:names.index('a1_90d_followup_eligible')+1]
+            actual=c.execute(receipt_sql(core,[excluded],old,cols)).fetchdf()
+            self.assertNotIn('recipient_q',actual.disconnected_username_norm.tolist())
+            row=actual[actual.disconnected_username_norm=='recipient_r'].iloc[0]
+            self.assertEqual(row.exposure_game_id,'e_r');self.assertEqual(row.first_subsequent_kind_draw,True)
+            self.assertEqual(row.encouragement_prior_pair_excluded_n,0)
+            self.assertEqual(row.games_within_30d,29)
+            oldrow=pd.read_parquet(old).query("disconnected_username_norm=='recipient_r'").iloc[0]
+            self.assertEqual(oldrow.first_subsequent_kind_draw,False);self.assertEqual(oldrow.encouragement_prior_pair_excluded_n,1)
+            self.assertEqual(row.cohort_row_id,oldrow.cohort_row_id)
+            c.close()
+
+if __name__=='__main__':unittest.main(verbosity=2)

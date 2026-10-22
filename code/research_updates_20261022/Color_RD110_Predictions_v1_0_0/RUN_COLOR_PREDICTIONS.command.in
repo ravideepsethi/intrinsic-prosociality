@@ -1,0 +1,45 @@
+#!/bin/bash
+set -euo pipefail
+COLOR_PRED_PACKAGE="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+COLOR_PRED_PROJECT="${MECHANISM_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+COLOR_PRED_DESKTOP="${MECHANISM_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+if [[ ! -d "$COLOR_PRED_PROJECT" ]]; then
+  echo "XT_Pro project directory not found: $COLOR_PRED_PROJECT" >&2
+  exit 1
+fi
+mkdir -p "$COLOR_PRED_DESKTOP"
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1
+COLOR_PRED_PY=""
+shopt -s nullglob
+COLOR_PRED_CANDIDATES=("${MECHANISM_PYTHON:-}" "$COLOR_PRED_PROJECT/venv/bin/python" "$COLOR_PRED_PACKAGE/.venv/bin/python" "$COLOR_PRED_DESKTOP"/*/.venv/bin/python)
+for COLOR_PRED_CANDIDATE in "${COLOR_PRED_CANDIDATES[@]}"; do
+  if [[ -x "$COLOR_PRED_CANDIDATE" ]] && "$COLOR_PRED_CANDIDATE" -c 'import sys,numpy,pandas,scipy,duckdb,pyarrow,matplotlib; assert sys.version_info >= (3,10); assert tuple(map(int,duckdb.__version__.split(".")[:2])) == (1,5)' >/dev/null 2>&1; then
+    COLOR_PRED_PY="$COLOR_PRED_CANDIDATE"
+    break
+  fi
+done
+if [[ -z "$COLOR_PRED_PY" ]]; then
+  echo "No compatible existing environment found. Creating an isolated environment inside this package."
+  python3 -m venv "$COLOR_PRED_PACKAGE/.venv"
+  "$COLOR_PRED_PACKAGE/.venv/bin/python" -m pip install -r "$COLOR_PRED_PACKAGE/requirements.txt"
+  COLOR_PRED_PY="$COLOR_PRED_PACKAGE/.venv/bin/python"
+fi
+"$COLOR_PRED_PY" - "$COLOR_PRED_PACKAGE" <<'PY'
+import hashlib,sys,pathlib
+p=pathlib.Path(sys.argv[1])
+for line in (p/'PACKAGE_MANIFEST.sha256').read_text().splitlines():
+    expected,name=line.split('  ',1)
+    if hashlib.sha256((p/name).read_bytes()).hexdigest()!=expected:
+        raise SystemExit('Package checksum mismatch: '+name)
+print('PACKAGE_SHA256_OK')
+PY
+"$COLOR_PRED_PY" -m unittest discover -s "$COLOR_PRED_PACKAGE/tests" -p 'test_numerics.py' -q
+COLOR_PRED_LOG="$COLOR_PRED_DESKTOP/COLOR_RD110_PREDICTIONS_RUN_$(date -u +%Y%m%dT%H%M%SZ).log"
+echo "Python: $COLOR_PRED_PY"
+echo "Log: $COLOR_PRED_LOG"
+echo "Fixed reviewed fits; authenticated pre-policy rows; conditional planning power."
+if [[ -x /usr/bin/caffeinate ]]; then
+  /usr/bin/caffeinate -i "$COLOR_PRED_PY" -u "$COLOR_PRED_PACKAGE/code/run.py" --project-root "$COLOR_PRED_PROJECT" --desktop "$COLOR_PRED_DESKTOP" "$@" 2>&1 | tee "$COLOR_PRED_LOG"
+else
+  "$COLOR_PRED_PY" -u "$COLOR_PRED_PACKAGE/code/run.py" --project-root "$COLOR_PRED_PROJECT" --desktop "$COLOR_PRED_DESKTOP" "$@" 2>&1 | tee "$COLOR_PRED_LOG"
+fi

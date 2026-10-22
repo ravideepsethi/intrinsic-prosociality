@@ -1,0 +1,182 @@
+{
+  "package": "Pool_Stable_Rating_Curves_v1_0_0",
+  "archive_name": "Pool_Stable_Rating_Curves_v1_0_0.zip",
+  "archive_sha256": "e856e00e64dac94869405a9baad3a5a43d93ea24f22c83f499c853d7d95256af",
+  "archive_size": 160966,
+  "archive_root": "Pool_Stable_Rating_Curves_v1_0_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "METHODS.md",
+      "published_path": "METHODS.md",
+      "sha256": "01b457a85c1cf2cd33351ed4fdbb1b5ed6665e539b778c26a93914a9c83b4cc3",
+      "published_sha256": "01b457a85c1cf2cd33351ed4fdbb1b5ed6665e539b778c26a93914a9c83b4cc3",
+      "size": 13240
+    },
+    {
+      "path": "README.md",
+      "published_path": "README.md",
+      "sha256": "fa90a41ab5f1fe9557b0a65fab5ecdfcfae8b89d0475a400fa0ea32998a8d61f",
+      "published_sha256": "fa90a41ab5f1fe9557b0a65fab5ecdfcfae8b89d0475a400fa0ea32998a8d61f",
+      "size": 3625
+    },
+    {
+      "path": "REFERENCE_MODEL.md",
+      "published_path": "REFERENCE_MODEL.md",
+      "sha256": "8d04ae0a8e7db73861e93dc8326e4547af9bddab96a88a5397101227a84b5559",
+      "published_sha256": "8d04ae0a8e7db73861e93dc8326e4547af9bddab96a88a5397101227a84b5559",
+      "size": 5289
+    },
+    {
+      "path": "RUN_STABLE.command",
+      "published_path": "RUN_STABLE.command.in",
+      "sha256": "7e15b208c1bfcaee415286c8507bfd8db929efb0cd3dc9814cdb54bcf4252bc8",
+      "published_sha256": "7e15b208c1bfcaee415286c8507bfd8db929efb0cd3dc9814cdb54bcf4252bc8",
+      "size": 2497
+    },
+    {
+      "path": "VALIDATION.md",
+      "published_path": "VALIDATION.md",
+      "sha256": "63d31223b7cdc8a076a2c5c3cc09dabc59db789c9002e692f3eca81f513f7877",
+      "published_sha256": "63d31223b7cdc8a076a2c5c3cc09dabc59db789c9002e692f3eca81f513f7877",
+      "size": 2617
+    },
+    {
+      "path": "data_io.py",
+      "published_path": "data_io.py",
+      "sha256": "73347dcd015f2be396c5f0341c165814b0747829a930c8a811d7df2196ec6ebf",
+      "published_sha256": "73347dcd015f2be396c5f0341c165814b0747829a930c8a811d7df2196ec6ebf",
+      "size": 5140
+    },
+    {
+      "path": "fe_engine.py",
+      "published_path": "fe_engine.py",
+      "sha256": "4ecdcb8daccd76ce2a01a3629e5a55a17284da1a420cab10363b694005ea072d",
+      "published_sha256": "4ecdcb8daccd76ce2a01a3629e5a55a17284da1a420cab10363b694005ea072d",
+      "size": 18466
+    },
+    {
+      "path": "integration_test.py",
+      "published_path": "integration_test.py",
+      "sha256": "78f4972ebdf5ab78bae554546479d1112ac0bcd9b0b63693898afbc2df0e80a7",
+      "published_sha256": "78f4972ebdf5ab78bae554546479d1112ac0bcd9b0b63693898afbc2df0e80a7",
+      "size": 2427
+    },
+    {
+      "path": "pooled_engine.py",
+      "published_path": "pooled_engine.py",
+      "sha256": "8f7d74bd85d742da2d5dba02e0ec601bb3b2547e52b4c9786374ea3bc7c94aa6",
+      "published_sha256": "8f7d74bd85d742da2d5dba02e0ec601bb3b2547e52b4c9786374ea3bc7c94aa6",
+      "size": 18306
+    },
+    {
+      "path": "pooled_utils.py",
+      "published_path": "pooled_utils.py",
+      "sha256": "bf1b00defcbf75d1b1acc8d6d166167787ace3b69bce2c8d667ac27a5f3d1c9e",
+      "published_sha256": "bf1b00defcbf75d1b1acc8d6d166167787ace3b69bce2c8d667ac27a5f3d1c9e",
+      "size": 2000
+    },
+    {
+      "path": "requirements.txt",
+      "published_path": "requirements.txt",
+      "sha256": "8025e1e46c573b3b7e3c31717171cd8df0f40cb8cdda4889cf286ccf97d8be6f",
+      "published_sha256": "8025e1e46c573b3b7e3c31717171cd8df0f40cb8cdda4889cf286ccf97d8be6f",
+      "size": 79
+    },
+    {
+      "path": "run_stable.py",
+      "published_path": "run_stable.py",
+      "sha256": "7bf233718861b6a64b9423d15ef53d214ed0015e24aa555ab9eeaaff6362c4af",
+      "published_sha256": "7bf233718861b6a64b9423d15ef53d214ed0015e24aa555ab9eeaaff6362c4af",
+      "size": 15985
+    },
+    {
+      "path": "self_test.py",
+      "published_path": "self_test.py",
+      "sha256": "9999e15d4f2c779778ab924f07070ee464c13cd125d9f9298d7ada50fdea582a",
+      "published_sha256": "9999e15d4f2c779778ab924f07070ee464c13cd125d9f9298d7ada50fdea582a",
+      "size": 11345
+    },
+    {
+      "path": "source/__init__.py",
+      "published_path": "source/__init__.py",
+      "sha256": "52b1da5d4a8717236fccd7317e87a652c65eebe4de6a71d6d6981d413934b76d",
+      "published_sha256": "52b1da5d4a8717236fccd7317e87a652c65eebe4de6a71d6d6981d413934b76d",
+      "size": 50
+    },
+    {
+      "path": "source/pool_wave1_common.py",
+      "published_path": "source/pool_wave1_common.py",
+      "sha256": "f9c714c549c6cd68a7d2dbdb2c17d5abacfdfc12dc6526752f03ab2505bbff43",
+      "published_sha256": "f9c714c549c6cd68a7d2dbdb2c17d5abacfdfc12dc6526752f03ab2505bbff43",
+      "size": 21988
+    },
+    {
+      "path": "stable_report.py",
+      "published_path": "stable_report.py",
+      "sha256": "9238f9effc5fa87fef2d58f03aa7e41e9a462356aabfa9f045931416c6bcc2f5",
+      "published_sha256": "9238f9effc5fa87fef2d58f03aa7e41e9a462356aabfa9f045931416c6bcc2f5",
+      "size": 13906
+    },
+    {
+      "path": "stable_specs.py",
+      "published_path": "stable_specs.py",
+      "sha256": "797c86ba39db5c44c1d0727c331bea677093ec6df67305ed0069773c0e59b3b3",
+      "published_sha256": "797c86ba39db5c44c1d0727c331bea677093ec6df67305ed0069773c0e59b3b3",
+      "size": 1368
+    },
+    {
+      "path": "stage_base.py",
+      "published_path": "stage_base.py",
+      "sha256": "56a38eafd01f326d33d12b43a20e0cdadf5ada1c2e39647077b6a3ff5b3cba7b",
+      "published_sha256": "56a38eafd01f326d33d12b43a20e0cdadf5ada1c2e39647077b6a3ff5b3cba7b",
+      "size": 6074
+    },
+    {
+      "path": "surface_model.py",
+      "published_path": "surface_model.py",
+      "sha256": "7c46937dac678766122b56a72ec69b0ca6b41878fc8c8e0873f1bc03a318310e",
+      "published_sha256": "7c46937dac678766122b56a72ec69b0ca6b41878fc8c8e0873f1bc03a318310e",
+      "size": 13483
+    },
+    {
+      "path": "zero_engine.py",
+      "published_path": "zero_engine.py",
+      "sha256": "0bf35f67f7a9bdff6f7f8c1e70a5353aaf7c20a698818a1b92525f58087ef51a",
+      "published_sha256": "0bf35f67f7a9bdff6f7f8c1e70a5353aaf7c20a698818a1b92525f58087ef51a",
+      "size": 6584
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "PACKAGE_MANIFEST.sha256",
+      "sha256": "88bc1de87528d19227da7c59a80f27ce4c91241a6a6af878407918a523370abd",
+      "size": 2150
+    },
+    {
+      "path": "RUN_TERMINAL.txt",
+      "sha256": "571271aebad0a59a494567063cf1c2e0188e030b5cc3a9bc2a4e7dc685b3f3b9",
+      "size": 422
+    },
+    {
+      "path": "authority/SAMPLE_AUTHORITY.json",
+      "sha256": "81c34113e7a888629a834a17235a71dcf369a2d590755fd9412ee42151d9b2f3",
+      "size": 1234
+    },
+    {
+      "path": "evidence/PREVIOUS_COMPETITIVE_COUNTS.json",
+      "sha256": "bedd421cf398c4dff70d20fd560d44fb549b66d779937517d554c761b7972665",
+      "size": 1368
+    },
+    {
+      "path": "evidence/Pool_Main_Sample_24M_Report.zip",
+      "sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+      "size": 96936
+    },
+    {
+      "path": "evidence/Pool_Main_Sample_24M_Report.zip.sha256",
+      "sha256": "d2e6c0953ff2de7cc7235b98d568c884e4fa8067b8aa81d22efe1ac3484d6f59",
+      "size": 128
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+#!/bin/bash
+set -euo pipefail
+figure_package="$(cd "$(dirname "$0")" && pwd)"
+"${FIGURES_PYTHON:-python3}" "$figure_package/verify_package.py"
+exec bash "$figure_package/code/paper_figures/RUN_FIGURES.command" "$@"

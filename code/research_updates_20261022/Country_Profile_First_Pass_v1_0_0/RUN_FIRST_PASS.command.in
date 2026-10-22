@@ -1,0 +1,17 @@
+#!/bin/bash
+set -euo pipefail
+PACKAGE_DIR="$(cd "$(dirname "$0")" && pwd)"
+cd "$PACKAGE_DIR"
+if [ ! -x "$PACKAGE_DIR/.venv/bin/python" ]; then
+  python3 -m venv "$PACKAGE_DIR/.venv"
+fi
+if [ ! -f "$PACKAGE_DIR/.venv/DEPENDENCIES_OK" ]; then
+  "$PACKAGE_DIR/.venv/bin/python" -m pip install -r "$PACKAGE_DIR/requirements.txt"
+  "$PACKAGE_DIR/.venv/bin/python" -c 'import duckdb, pyarrow, numpy, scipy; print("DEPENDENCIES_OK", duckdb.__version__, pyarrow.__version__)'
+  touch "$PACKAGE_DIR/.venv/DEPENDENCIES_OK"
+fi
+if command -v caffeinate >/dev/null 2>&1; then
+  exec caffeinate -i "$PACKAGE_DIR/.venv/bin/python" "$PACKAGE_DIR/run_first_pass.py" "$@"
+else
+  exec "$PACKAGE_DIR/.venv/bin/python" "$PACKAGE_DIR/run_first_pass.py" "$@"
+fi

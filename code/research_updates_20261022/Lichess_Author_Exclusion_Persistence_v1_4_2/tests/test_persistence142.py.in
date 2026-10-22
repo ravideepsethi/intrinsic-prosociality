@@ -1,0 +1,126 @@
+"""Focused checks for original-spec recovery, exclusion and comparison safety."""
+import sys,tempfile,unittest,json,shutil,hashlib,contextlib,io
+from unittest.mock import patch
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT/'code'))
+from engine import *
+import persistence as p
+import compare
+from run_persistence import authenticate_parent,adopt,coverage
+sys.path.insert(0,str(ROOT/'vendor/original_f_v102/tests'))
+import test_f_synthetic as original
+
+
+class RecoveryTests(unittest.TestCase):
+    def test_original_coefficients_covariance_and_controls(self):
+        original.test_groups();original.test_wcor();original.test_correlations();original.test_regression()
+        d=original.make_df();X,y,w,names=p.producer.design(d,'c')
+        for prefix in ('ln_nC1','ln_nL2','P2_mean_chooser_rating','P2_mean_opponent_rating_gap','P2_mean_capped_engine_eval','P2_mean_plies'):
+            self.assertIn(prefix+'_standardized',names)
+        # Distinct outcome states must use their own compositional controls.
+        other=p.producer.design(d,'l')[0]
+        self.assertFalse(np.allclose(X[:,names.index('P2_mean_chooser_rating_standardized')],other[:,names.index('P2_mean_chooser_rating_standardized')]))
+
+    def test_original_speed_collinearity_preserves_focal_terms(self):
+        d=original.make_df()
+        for state in ('c','l'):
+            cols=['share_'+s+'_'+state+'2' for s in ('bullet','blitz','rapid','classical')]
+            d[cols]=d[cols].div(d[cols].sum(axis=1),axis=0)
+            X,y,w,names,drops=p.producer.design(d,state,return_drops=True)
+            self.assertEqual([r['dropped_covariate'] for r in drops],['P2_classical_share_standardized'])
+            self.assertEqual(names[:4],['intercept','P1_ever_C','P1_ever_L','P1_both_interaction'])
+            p.producer.weighted_wls(X,y,w)
+
+    def test_all_original_tables_reproduce_and_detect_mutation(self):
+        baseline=ROOT/'evidence/original_f_report'
+        checks=p.reproduction(baseline,baseline)
+        self.assertEqual(len(checks),95);self.assertTrue(all(x['status']=='REPRODUCED' for x in checks))
+        with tempfile.TemporaryDirectory() as td:
+            actual=Path(td);shutil.copytree(baseline,actual,dirs_exist_ok=True)
+            f=actual/'tabF5_cross_prediction.csv';d=pd.read_csv(f);d.loc[1,'estimate']+=.01;d.to_csv(f,index=False)
+            self.assertTrue(any(x['status']=='MISMATCH' for x in p.reproduction(actual,baseline)))
+
+    def test_comparison_keys_duplicate_conflicts_and_units(self):
+        a=pd.DataFrame(dict(scope=['clearly_worse']*2,meeting=['first']*2,rows=[3,3],kind_draws=[1,1],kind_rate_pct=[33.,33.]))
+        rows,c=compare.compare_frames(a,a,'first_repeat','report/pair_rates.csv')
+        self.assertEqual(c['status'],'COMPARED');self.assertEqual(c['matched_rows'],1)
+        self.assertEqual(next(x['included'] for x in rows if x['metric']=='_producer_row_multiplicity'),2)
+        b=a.copy();b.loc[1,'rows']=4
+        with self.assertRaises(RuntimeError):compare.compare_frames(a,b,'first_repeat','report/pair_rates.csv')
+        a=pd.DataFrame(dict(estimand=['x'],coefficient=[.01],standard_error=[.002],coefficient_percentage_points=[1.],standard_error_percentage_points=[.2]))
+        b=a.copy();b['coefficient_percentage_points']=1.01;b['coefficient']=.0101
+        rows,_=compare.compare_frames(a,b,'receipt','report/a3_models.csv')
+        units=[x['absolute_change_in_included_se_units'] for x in rows if x['metric'] in ('coefficient','coefficient_percentage_points')]
+        np.testing.assert_allclose(units,[.05,.05])
+        for f in (ROOT/'evidence/original_f_report').glob('*.csv'):
+            d=pd.read_csv(f);_,audit=compare.compare_frames(d,d,'state_persistence','report/'+f.name)
+            self.assertEqual(audit['status'],'COMPARED',f.name)
+
+    def test_original_late_transition_and_correlation_cohorts(self):
+        d=original.make_df();d.loc[0,'n_late_c1']=0;d.loc[0,'y_late_c1']=0
+        # A zero-exposure account stays in the original transition census,
+        # classified from grant counts, but cannot enter a rate correlation.
+        t=pd.DataFrame(p.producer.transition_rows(d,'test',stage='after ply 10'))
+        self.assertEqual(t.accounts.sum(),len(d))
+        mask=(d[['n_late_c1','n_late_l1','n_late_c2','n_late_l2']]>0).all(axis=1)
+        c=p.producer.pair_correlations(d[mask],4,'test',late=True)
+        self.assertTrue(all(x['accounts']==len(d)-1 for x in c))
+
+    def test_excluded_original_aggregation_and_identity_audit(self):
+        # Exercise original SQL/Parquet aggregation through the adapter. Build
+        # enough support for all first-year groups and every compositional term.
+        rng=np.random.default_rng(21);n=80000
+        d=pd.DataFrame({'chooser_user_id':rng.integers(0,400,n),
+            'disconnected_user_id':rng.integers(500,900,n),
+            'engine_eval_cp_disconnected':rng.choice([-450,-200,100],n),
+            'month':rng.choice(['2023-11','2024-01','2024-11','2025-10'],n),
+            'outcome_kind_draw':rng.binomial(1,.025,n),
+            'ply_count':rng.integers(4,100,n),
+            'chooser_elo':rng.integers(800,2400,n),
+            'disconnected_elo':rng.integers(800,2400,n),
+            'api_speed':rng.choice(['bullet','blitz','rapid','classical'],n)})
+        d['chooser_username_norm']='account_'+d.chooser_user_id.astype(str)
+        d['disconnected_username_norm']='opponent_'+d.disconnected_user_id.astype(str)
+        counts={'opportunities':n,'grants':int(d.outcome_kind_draw.sum()),
+            'competitive':int((d.engine_eval_cp_disconnected>=-100).sum()),
+            'competitive_grants':int(d.loc[d.engine_eval_cp_disconnected>=-100,'outcome_kind_draw'].sum()),
+            'clearly_worse':int((d.engine_eval_cp_disconnected<=-300).sum()),
+            'clearly_worse_grants':int(d.loc[d.engine_eval_cp_disconnected<=-300,'outcome_kind_draw'].sum())}
+        with tempfile.TemporaryDirectory() as td:
+            td=Path(td);f=td/'input.parquet';d.to_parquet(f,index=False)
+            auth={'census':counts,'month_records':[{'path':str(f)}]}
+            with contextlib.redirect_stdout(io.StringIO()):
+                result=p.run_stage(auth,'excluded',td/'fit',2,4)
+            self.assertEqual(result['identity']['author_games'],0)
+            self.assertEqual(result['preflight']['rows'],n)
+            self.assertTrue((td/'fit/PRIVATE/account_year_state_private.parquet').is_file())
+            self.assertEqual(len(list((td/'fit/report').glob('*.csv'))),17)
+            d.loc[0,'disconnected_username_norm']=' __PRIVATE_VALUE_1__ ';d.to_parquet(f,index=False)
+            with self.assertRaisesRegex(RuntimeError,'author-game inventory'):
+                p.run_stage(auth,'excluded',td/'bad',2,4)
+
+    def test_completed_families_adopt_without_fitting_and_reject_corruption(self):
+        with tempfile.TemporaryDirectory() as td:
+            td=Path(td);parent=td/'parent';run=td/'new';families=['family'+str(i) for i in range(19)];statuses={}
+            for folder in ['current_audits','audit_tables']:(parent/'report'/folder).mkdir(parents=True)
+            for name in ['main_counts.csv','main_counts.parquet','removals_by_month.csv','removals_by_month.parquet','POLICY.json']:
+                (parent/'report'/name).write_text('fixture')
+            write(parent/'report/CLAIM_STATUS.json',{'all_retained_manuscript_items_have_verified_excluded_outputs':True})
+            write(parent/'report/EXECUTION_STATUS.json',{'paired_families':families})
+            for f in families:
+                for v in ['included','excluded']:
+                    receipt=parent/'PRIVATE/receipts'/v/(f+'.json');write(receipt,{'family':f,'variant':v})
+                    tablepath=parent/'report/tables'/v/f/'report/table.csv';tablepath.parent.mkdir(parents=True)
+                    tablepath.write_text('estimate\n1\n')
+                    statuses[v+'/'+f]=dict(status='COMPLETE',receipt=record(receipt),aggregate_files=[record(tablepath)])
+            write(parent/'PRIVATE/STAGES.json',statuses)
+            with patch.object(p,'run_stage',side_effect=AssertionError('A retained fit was rerun')):
+                out,names=adopt(parent,run)
+            self.assertEqual(len(out),38);self.assertEqual(names,families)
+            tablepath.write_text('estimate\n2\n')
+            with self.assertRaisesRegex(RuntimeError,'Changed input/checkpoint'):
+                adopt(parent,td/'corrupt')
+
+
+if __name__=='__main__':unittest.main(verbosity=2)

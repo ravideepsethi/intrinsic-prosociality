@@ -1,0 +1,73 @@
+COUNTDOWN THRESHOLD ESTIMATION — INTERPRETATION
+
+These are adjusted descriptive contrasts among observed active resolutions.
+They do not isolate waiting selection from changed choices or reconnections.
+No API requests, new engine searches, or receipt-IV refits are performed.
+
+The specification was frozen after inspecting feasibility counts and raw rates,
+before this package produced adjusted estimates. It is not a preregistration.
+
+Primary: finite non-mate evaluation below -100 cp, material deficits 0 through 8,
+unrestricted observed clocks, pre before 2025-07-19 and post from 2025-08-11.
+The intervening dates are excluded. These are calendar windows; deployment time
+is not verified. Two additional calendar windows are reported in full.
+
+Main contrast: mu4 - the equal-weight linear extrapolation of mu0,mu1,mu2,mu3
+to deficit 4. Its weights on deficits 0..4 are (0.5,0,-0.5,-1,1).
+Checks include a quadratic extrapolation, the symmetric contrast over 2..5,
+the local 2,3-to-4 extrapolation, all neighboring steps, and placebo local
+contrasts at 2,3,6,7,8. Each placebo's three points are entirely on one side of
+the actual cutoff. Placebos are diagnostics, not randomized counterfactuals.
+
+Controls: evaluation 10cp-bin x stage x period fixed effects, month fixed
+effects, chooser fixed effects, log1p of both last-observed clocks, rating gap
+and chooser rating in hundreds of points. All effects are speed-specific;
+numeric control slopes are also period-specific. Stage bands: <=10,11-20,
+21-40,41-80,81+. No finite score is replaced by a capped mate value. Mate cases
+are excluded from these finite-lost models and were counted in feasibility.
+Iterative FE-singleton removal preserves estimable OLS slopes but changes the
+population used for standardized levels; input/retained counts are reported.
+
+Adjusted profiles average over the retained sample's other characteristics
+within each speed and period. Thus levels across periods use different observed
+populations. The threshold contrasts cancel the within-period level anchors.
+No fitted level is truncated to [0,100]. Raw rates shown beside them refer to
+the retained estimation sample, not the full feasibility population.
+
+Primary inference: chooser-clustered CR0 covariance and normal 95% intervals.
+Joint covariance matches the same chooser IDs across speeds and periods.
+Profile-level uncertainty also includes sampling variation in the sample mean
+and material shares used for standardization. Date-only and chooser-plus-date
+CR0 checks are supplied for the main/symmetric contrasts and their changes.
+The two-way formula is Vchooser+Vdate-Vchooser/date. Invalid/negative estimated
+variances are flagged, not silently repaired. The date is the UTC final-move
+date. Opponent IDs are absent from this feature cache, so opponent clustering
+is not implemented. No inference treats deficit values as independent clusters.
+
+Curvature table: assume the untreated adjusted profile has absolute discrete
+second differences <= M percentage points per deficit squared on 0..4.
+For the primary contrast the worst-case bias is 2.5*M. The table expands the
+ordinary normal interval by this bound, using M=0,.01,.025,.05,.10. Bounds add
+for pre/post and cross-speed differences. This is a conservative smoothness
+sensitivity, not an implementation of optimized Kolesar-Rothe honest intervals.
+Its validity requires the stated bound and the sampling approximation. It does
+not bound confounding, selection, or bias elsewhere in the paper.
+
+Clock sensitivities use the same last-observed-clock cuts in both periods:
+bullet/ultraBullet 40s, blitz 60s, rapid 120s, classical 300s, then twice those.
+These are proxies; they do not reconstruct the clock at disconnection or prove
+equal time available to choose. The material counts describe the final position,
+not necessarily the position at the initial disconnection.
+
+Monthly models are fitted separately within month and speed, with chooser and
+eval10-by-stage effects and the same numeric controls. Their chooser effects
+therefore need not be constant over time. The pre-July equality Wald test is a
+diagnostic for stable monthly contrasts, not a proof of parallel changes.
+
+All variants and unsupported cells are reported. There is no outcome-driven
+selection of knots, bins, cutoffs, or reported speeds. No multiple-testing
+adjustment is applied; secondary p-values are descriptive.
+
+Not included: broader timeout/outoftime denominator construction, exact-match
+estimates, deeper engine searches, final-capture reconstruction, opponent
+clustering, or a causal correction to the paper's evaluation gradient.

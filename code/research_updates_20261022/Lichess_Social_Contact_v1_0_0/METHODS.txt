@@ -1,0 +1,116 @@
+Specified follow-up on October 5, 2026, after examining the reputation report.
+Not a preregistration before the original research or earlier results.
+
+WHY THIS EXTENSION
+The previous index sample was pool/nonadjacent, but its later-meeting search
+used all-source rated chronology. It therefore included later rated challenges
+and rematches in total meeting counts. It omitted casual games, did not split
+later games by source, and did not measure follow-link formation. Its rating
+repayment accounting also omitted the possible benefit of a social connection.
+
+SELECTION AND COMPARISON
+Use the authenticated parent's 8,300,865 opportunities. Restrict to first
+recorded rated meetings and anchors with full 180 days before November 2025.
+The parent chronology starts in January 2013; first recorded meeting does not
+mean first personal contact. A pair can have casual or off-platform history.
+One earliest eligible row per unordered pair is retained, irrespective of
+granting and future contact. Author accounts are already excluded.
+
+Cells are chooser ID x calendar quarter x speed x evaluation band, from the
+disconnected player's viewpoint: <=-300, (-300,-100), [-100,100), [100,300),
+and >=300 centipawns. A cell needs at least one grant and one claim. Within
+each cell, the lowest MD5 of game ID plus a fixed salt selects each arm.
+Another salted MD5 ranks cells. Increasing --max-sets adds cells to the same
+ranking; per-query API caches remain reusable across runs. One observation
+per arm per cell avoids weighting large cells more heavily. This is a
+restricted overlap population, and may overrepresent more active choosers.
+The grant selection and comparison are not a random assignment of kindness.
+
+TIMING AND COVERAGE
+Pregame window: [start-90 days,start). Postgame windows: (lastMoveAt,lastMoveAt+H].
+lastMoveAt is a proxy for the decision endpoint. Sensitivities begin one hour
+or seven days after it. Windows use UTC elapsed time. Distinct dates are UTC
+dates and not a count of sessions. Seven-day span needs at least two contacts
+separated by at least seven elapsed days.
+
+The API query has a one-day buffer at both ends. Actual inclusion uses each
+game's createdAt. Parent PGN-derived starts have one-second precision, so
+validation compares floor(createdAt/1000) to floor(parent start/1000).
+Focal lastMoveAt must agree exactly. Duplicate identical game IDs are removed;
+conflicting duplicates make that history unavailable. Every expected rated
+game ID must be retrieved with matching time and rated flag. A focal-only
+response is accepted only when no other rated games are expected. Unknown
+casual games cannot be used for an independent completeness test.
+
+Missing/closed/restricted histories, malformed responses, failed identity
+checks, or missing expected rated games remain unavailable. A systemic failure
+of the first twenty histories stops the network pass and exports diagnostics.
+There are at most six retries for transient transport failures, with rate-
+limit backoff. Successful complete requests are cached and never refetched
+by a normal rerun. No max-games cap or pagination truncation is used.
+
+GAME SOURCE
+All source types enter total and casual/rated outcomes except imported/relay
+records. Non-pool means a returned, nonempty source label unequal to pool.
+Missing source labels give unknown category membership, not a non-pool zero.
+Source-specific outcomes include friend, lobby, organized (tournament/swiss/
+simul), and pool. The friend label is not a friendship edge. Unrecognized but
+nonempty source labels count as non-pool and are visible in GAME_SOURCE_COUNTS.
+Repeated non-pool play is a proxy for an ongoing connection, not proof of one.
+Unsuccessful or declined challenges are not observed in completed-game exports.
+
+MISSING-DATA BOUNDS
+For binary outcomes, each event has a lower and upper indicator. An unavailable
+history is [0,1]. Unknown-source games widen source-specific indicators when
+they could change membership. One known qualifying game fixes the any-contact
+indicator at 1 even if other source labels are absent.
+Arm-level rates average these bounds across the entire selected roster.
+The full-roster difference bounds are mean(grant lower - claim upper) and
+mean(grant upper - claim lower). These are identification bounds for observed
+missingness, not confidence intervals. They do not bound invisible API games.
+Matched fits require both outcomes to be known; their usable N is explicit.
+The secondary no-pre90-contact cohort requires both successfully exported
+histories to show no joint completed games in the preceding 90 days. This is
+a pre-event restriction, not a restriction on realized future contact.
+
+ESTIMATORS
+Each matched set provides a grant-minus-claim difference in later contact.
+Raw comparisons are the mean of these differences. Adjusted comparisons are
+the intercept from a regression of differences on differences in covariates,
+equivalent to a linear outcome regression with matched-set fixed effects.
+Covariates: evaluation clipped to +/-2000 cp, both ratings and RDs, win premium,
+draw payoff, calendar day, ply, both prior-30-day playing volumes, time-control
+base/increment, and log clocks plus missing-clock indicators. Post-event fits
+also control for the pre-90-day any-contact and casual-contact indicators.
+These controls are descriptive; selection on unmeasured recipient or game
+attributes can remain. A higher contact rate would not establish whether
+future friendship was anticipated by the original giver.
+
+Standard errors cluster by chooser, allowing dependency among cells for the
+same chooser, with G/(G-1) correction and normal pointwise intervals. Residual
+dependence through shared recipients or calendar shocks is not additionally
+modeled. No unsupported zero-variance interval is presented as a precise null.
+Controls with no variance or redundant columns are removed without changing
+their span. Nonfinite required controls are excluded in adjusted fits.
+Holm adjustment covers three adjusted main outcomes in all matched sets:
+any non-pool contact in 90 days; any casual contact in 90 days; non-pool contact
+on at least two UTC dates in 90 days. Unsupported members retain their place
+in the family of three. Other windows, categories, and cohorts are diagnostics.
+
+INTERPRETATION
+An increase in deliberate or sustained contact would identify a plausible
+social return that rating-only accounting cannot address. An absent increase
+is useful only relative to confidence intervals, API coverage, and the overlap
+population. Neither result identifies anticipated reputational motives or
+eliminates immediate recipient approval, private messages, spectators, or
+unobserved social interaction. Formal follow-link formation remains unmeasured.
+
+PUBLIC INTERFACE REFERENCES (checked October 5, 2026)
+https://lichess.org/api
+https://github.com/lichess-org/berserk/blob/master/berserk/clients/games.py
+The official client exposes opponent, date, rated/casual, and optional maximum
+filters. The new program omits rated/perfType/max filters and verifies returned
+identities and the known rated chronology rather than trusting HTTP 200 alone.
+https://database.lichess.org/
+The public standard monthly database is a rated-game source, not a casual-game
+archive. Historical friendship-edge data are not supplied by that archive.

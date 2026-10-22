@@ -1,0 +1,22 @@
+#!/bin/bash
+set -euo pipefail
+task_package="$(cd "$(dirname "$0")" && pwd)"
+task_project="/Volumes/XT_Pro/lichess_kindness"
+task_python="$task_project/venv/bin/python"
+task_desktop="$HOME/Desktop/Lichess_Desktop"
+if [ ! -x "$task_python" ]; then
+  echo "Project Python is unavailable: $task_python" >&2
+  exit 2
+fi
+cd "$task_package"
+/usr/bin/shasum -a 256 -c PACKAGE_MANIFEST.sha256
+export PYTHONUNBUFFERED=1
+export PYTHONDONTWRITEBYTECODE=1
+export OPENBLAS_NUM_THREADS=1
+export OMP_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export VECLIB_MAXIMUM_THREADS=1
+task_log="$task_desktop/RECEIPT_IV_COHORT_EXTENSION_$(date -u +%Y%m%dT%H%M%SZ).log"
+/usr/bin/caffeinate -dimsu "$task_python" code/run.py \
+  --project-root "$task_project" --desktop "$task_desktop" \
+  --workers 10 --memory-gb 8 2>&1 | tee "$task_log"

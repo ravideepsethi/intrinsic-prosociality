@@ -1,0 +1,5 @@
+#!/bin/bash
+# Read-only schema probe; DOES NOT scan all games or calculate a median.
+set -Eeuo pipefail
+PKG="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+python3 -u "$PKG/src/all_game_medians.py" --probe "$@"

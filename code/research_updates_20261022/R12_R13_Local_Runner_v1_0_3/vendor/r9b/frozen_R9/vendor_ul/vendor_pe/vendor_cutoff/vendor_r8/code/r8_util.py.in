@@ -1,0 +1,158 @@
+"""Private checkpoints, explicit aggregate exports, and fixed input contracts."""
+from __future__ import annotations
+import os
+for _name in ('OPENBLAS_NUM_THREADS','OMP_NUM_THREADS','MKL_NUM_THREADS','VECLIB_MAXIMUM_THREADS','NUMEXPR_NUM_THREADS','BLIS_NUM_THREADS'):
+    os.environ[_name]='1'
+import contextlib, hashlib, json, math, platform, socket, threading, time
+from pathlib import Path
+import numpy as np
+import pandas as pd
+import pyarrow as pa
+import pyarrow.parquet as pq
+import duckdb
+pa.set_cpu_count(1)
+pa.set_io_thread_count(1)
+
+ROOT=Path(__file__).resolve().parents[1]
+AUTHORS=('__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__')
+R7_CONF='7ab926c925a48b25bb2fe8bfcc170059e4601d912f9fc3099b846c8f7310110d'
+R7_REL='derived/replication/r7_analysis_v103_PRIVATE/7ab926c925a4'
+MAIN_REL='derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE'
+VERSION='1.0.0'
+
+def log(msg):print(time.strftime('[%Y-%m-%d %H:%M:%SZ] ',time.gmtime())+str(msg),flush=True)
+def require(ok,msg):
+    if not ok:raise RuntimeError(msg)
+def load(p):return json.loads(Path(p).read_text())
+def clean(v):
+    if isinstance(v,dict):return {str(k):clean(x) for k,x in v.items()}
+    if isinstance(v,(list,tuple,np.ndarray)):return [clean(x) for x in v]
+    if isinstance(v,(float,np.floating)):return float(v) if math.isfinite(float(v)) else None
+    if isinstance(v,np.bool_):return bool(v)
+    if isinstance(v,np.integer):return int(v)
+    if isinstance(v,Path):return str(v)
+    return v
+def digest(v):return hashlib.sha256(json.dumps(clean(v),sort_keys=True,separators=(',',':')).encode()).hexdigest()
+def sha(p):
+    h=hashlib.sha256()
+    with Path(p).open('rb') as f:
+        for b in iter(lambda:f.read(8*1024**2),b''):h.update(b)
+    return h.hexdigest()
+def stamp(p):
+    p=Path(p);s=p.stat();return dict(path=str(p.resolve()),bytes=s.st_size,mtime_ns=s.st_mtime_ns,ctime_ns=s.st_ctime_ns)
+def save(p,v):
+    p=Path(p);p.parent.mkdir(parents=True,exist_ok=True);t=p.with_name(p.name+'.partial')
+    with t.open('w') as f:json.dump(clean(v),f,indent=2,sort_keys=True,allow_nan=False);f.write('\n');f.flush();os.fsync(f.fileno())
+    os.replace(t,p)
+def table(folder,name,rows):
+    folder=Path(folder);folder.mkdir(parents=True,exist_ok=True)
+    frame=rows if isinstance(rows,pd.DataFrame) else pd.DataFrame([clean(r) for r in rows])
+    save(folder/(name+'.json'),frame.to_dict('records'))
+    exported=frame.copy()
+    for n in exported.columns:
+        if any(isinstance(v,(dict,list,tuple,np.ndarray)) for v in exported[n]):
+            exported[n]=exported[n].map(lambda v:json.dumps(clean(v),sort_keys=True,allow_nan=False) if isinstance(v,(dict,list,tuple,np.ndarray)) else v)
+    exported.to_csv(folder/(name+'.csv'),index=False)
+    exported.to_parquet(folder/(name+'.parquet'),index=False,compression='zstd')
+def qs(s):return "'"+str(s).replace("'","''")+"'"
+def parq(paths):return 'read_parquet(['+','.join(qs(p) for p in paths)+'],union_by_name=false,hive_partitioning=false)'
+def conn(spill,memory=3,threads=1):
+    Path(spill).mkdir(parents=True,exist_ok=True)
+    c=duckdb.connect(config=dict(threads=str(threads),memory_limit=f'{memory:g}GB',temp_directory=str(spill)))
+    c.execute('SET preserve_insertion_order=false');return c
+def no_network():
+    def block(*args,**kw):raise RuntimeError('R8_CURRENT_DATA_OFFLINE: network disabled')
+    socket.create_connection=block;socket.socket.connect=block
+def relocate(path,project):
+    p=Path(path);canonical=Path('/Volumes/XT_Pro/lichess_kindness')
+    if not p.is_absolute():return Path(project)/p
+    try:return Path(project)/p.relative_to(canonical)
+    except ValueError:return p
+@contextlib.contextmanager
+def heartbeat(label):
+    done=threading.Event()
+    def run():
+        while not done.wait(35):log(label+' — working; checkpoints retained')
+    t=threading.Thread(target=run,daemon=True);t.start()
+    try:yield
+    finally:done.set();t.join()
+def verify_cached(folder,key):
+    p=Path(folder)/'_DONE.json'
+    if not p.exists():return False
+    r=load(p);require(r['key']==key,'Checkpoint belongs to a different configuration')
+    for f in r['files']:require(sha(Path(folder)/f['path'])==f['sha256'],'Checkpoint output changed: '+f['path'])
+    for x in r.get('inputs',[]):require(stamp(x['path'])==x,'Checkpoint input changed: '+x['path'])
+    for p in sorted(Path(folder).rglob('_DONE.json')):
+        if p.parent!=Path(folder):
+            # Parent hashes bind the child receipts. Check their external dependencies too.
+            child=load(p)
+            for x in child.get('inputs',[]):require(stamp(x['path'])==x,'Checkpoint input changed: '+x['path'])
+    return True
+def certify(folder,key,inputs=(),summary=None):
+    folder=Path(folder);files=[]
+    for p in sorted(folder.rglob('*')):
+        if p.is_file() and p!=folder/'_DONE.json' and not p.name.endswith('.partial') and 'spill' not in p.parts:
+            files.append(dict(path=str(p.relative_to(folder)),sha256=sha(p),bytes=p.stat().st_size))
+    save(folder/'_DONE.json',dict(key=key,inputs=[stamp(p) for p in inputs],files=files,summary=summary or {}))
+def recursive_records(v):
+    if isinstance(v,dict):
+        if ('path' in v or 'relative_path' in v) and 'sha256' in v:yield v
+        for x in v.values():yield from recursive_records(x)
+    elif isinstance(v,list):
+        for x in v:yield from recursive_records(x)
+def author_predicate(alias=''):
+    a=(alias+'.') if alias else ''
+    return ' AND '.join(f"lower(trim({a}{role}_username_norm)) NOT IN ('__PRIVATE_VALUE_3__','__PRIVATE_VALUE_4__')" for role in ('chooser','disconnected'))
+def bind_r7(project,explicit=None):
+    root=Path(explicit) if explicit else Path(project)/R7_REL
+    require(root.is_dir(),'Completed R7 v1.0.3 run is unavailable: '+str(root))
+    expected=load(ROOT/'evidence/r7/summary.json');actual=load(root/'report/summary.json')
+    require(actual==expected,'R7 report summary does not match the reviewed completed run')
+    # The original producers own canonical config serialization. Use their implementation.
+    import sys
+    sys.path.insert(0,str(ROOT/'vendor_r7/code'))
+    import r7_common as r
+    require(r.io.cfgsha(r.io.load(root/'config.json'))==R7_CONF,'R7 config hash differs')
+    require(actual['completed_models']==34 and actual['error'] is None,'R7 is not complete')
+    for record in load(ROOT/'evidence/r7/REPORT_MANIFEST.json'):
+        p=root/'report'/record['path']
+        require(p.stat().st_size==record['bytes'] and sha(p)==record['sha256'],'R7 aggregate hash differs: '+record['path'])
+    checks=load(root/'report/reproduction.json')
+    require(len(checks)==9 and all(x['passed'] is True for x in checks),'R7 production gate incomplete')
+    b=load(root/'INPUTS_PRIVATE.json');paths=load(root/'PREPARED_INPUTS_PRIVATE.json')
+    paths={k:str(relocate(p,project)) for k,p in paths.items()}
+    for k,n in [('S0_original',2682330),('S0',2682329),('F50',7371688),('O50',4764089)]:
+        require(pq.ParquetFile(paths[k]).metadata.num_rows==n,'R7 frozen count differs: '+k)
+    env_conf=b['environment']['conf']
+    for k in ('S0_original','S0'):
+        r.env_common.checked_stage_files(Path(paths[k]).parent,env_conf,[Path(paths[k]).name])
+    r.env_common.checked_stage_files(Path(paths['F50']).parent,R7_CONF,[Path(paths['F50']).name])
+    require(len(b['author_ids'])==2,'R7 author identity bridge is incomplete')
+    return root,paths,b
+def full_source_panels(project):
+    report=load(ROOT/'evidence/main_sample_report.json')
+    record=next(x for x in report['files'] if x['relative_path']=='INPUT_FILES.json')
+    p=Path(project)/MAIN_REL/'INPUT_FILES.json'
+    require(sha(p)==record['sha256'],'All-source parent manifest changed')
+    files={}
+    for x in recursive_records(load(p)):
+        q=relocate(x.get('path',x.get('relative_path')),project)
+        if q.suffix=='.parquet' and 'analysis_panel_24m_sf100k' in q.parts:
+            files[str(q)]=dict(path=str(q),sha256=x['sha256'])
+    require(len(files)==24,'Cannot bind the complete all-source 24-month active-decision chronology from the pinned main manifest')
+    out=sorted(files.values(),key=lambda x:x['path'])
+    require(sum(pq.ParquetFile(x['path']).metadata.num_rows for x in out)==47587020,'All-source chronology count differs')
+    for x in out:
+        with heartbeat('Authenticate all-source '+Path(x['path']).parent.name):require(sha(x['path'])==x['sha256'],'All-source source bytes changed')
+    return out,p
+
+def interval_difference(left,right):
+    """Minkowski difference of interval unions; inputs in the same units."""
+    def val(x):return float(x)
+    pairs=sorted((val(a)-val(d),val(b)-val(c)) for a,b in left for c,d in right)
+    merged=[]
+    for a,b in pairs:
+        if merged and a<=merged[-1][1]:merged[-1][1]=max(b,merged[-1][1])
+        else:merged.append([a,b])
+    return [[('-inf' if math.isinf(a) and a<0 else a),('+inf' if math.isinf(b) and b>0 else b)] for a,b in merged]
+

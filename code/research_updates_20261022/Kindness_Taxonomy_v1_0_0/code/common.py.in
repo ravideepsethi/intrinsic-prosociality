@@ -1,0 +1,61 @@
+"""Offline task IO, source-bound checkpoints, and bounded execution."""
+from pathlib import Path
+import sys, os, time, json, csv, math, hashlib, contextlib, threading, socket
+ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT))
+from vendor.rct.common import clean,read,digest,sha,write,csvwrite,q,scan,conn,records,copy,arrays,require_columns,signature,authenticate,relocate,heartbeat,log
+import numpy as np
+import pyarrow as pa
+import pyarrow.parquet as pq
+import duckdb
+DAY=86400000
+START=1698796800000
+SPLIT=1730419200000
+END=1761955200000
+AUTHORS=('__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__')
+MONTHS=tuple(f'{2023+(10+i)//12}-{(10+i)%12+1:02}' for i in range(24))
+STATES=['recipient_clearly_lost','recipient_behind','roughly_equal','recipient_ahead','recipient_well_ahead']
+class Unavailable(RuntimeError): pass
+def checked(folder,key):
+    f=Path(folder)/'_DONE.json'
+    if not f.exists():return False
+    r=read(f)
+    if r['key']!=key:raise RuntimeError('Checkpoint configuration differs: '+str(f))
+    for a in r['files']:
+        p=f.parent/a['path']
+        if not p.is_file() or sha(p)!=a['sha256']:raise RuntimeError('Checkpoint damaged: '+str(p))
+    return True
+def done(folder,key):
+    folder=Path(folder)
+    files=[dict(path=str(p.relative_to(folder)),sha256=sha(p)) for p in sorted(folder.rglob('*'))
+      if p.is_file() and p.name!='_DONE.json' and not p.name.endswith('.tmp')]
+    write(folder/'_DONE.json',dict(key=key,files=files))
+def export(c,path,sql):
+    p=Path(path);p.parent.mkdir(parents=True,exist_ok=True);t=p.with_suffix(p.suffix+'.tmp')
+    c.execute(f'COPY ({sql}) TO {q(t)} (FORMAT CSV,HEADER)');os.replace(t,p)
+def csvrows(p):
+    with Path(p).open() as f:return list(csv.DictReader(f))
+def stage(work,name,key,fn):
+    folder=Path(work)/name;folder.mkdir(parents=True,exist_ok=True)
+    if checked(folder,key):log('Reuse '+name);return read(folder/'status.json')
+    start=time.monotonic()
+    try:
+        with heartbeat(name):result=fn(folder) or {}
+        status=dict(status='COMPLETE',**result)
+    except Unavailable as e:status=dict(status='BLOCKED_INPUT',reason=str(e))
+    status['elapsed_seconds']=time.monotonic()-start
+    write(folder/'status.json',status);done(folder,key);return status
+def offline():
+    def blocked(*a,**k):raise RuntimeError('This local analysis does not make network requests')
+    socket.create_connection=blocked;socket.socket.connect=blocked;socket.socket.connect_ex=blocked
+def manifest_check():
+    for line in (ROOT/'PACKAGE_MANIFEST.sha256').read_text().splitlines():
+        h,n=line.split('  ',1);p=(ROOT/n).resolve()
+        if not p.is_relative_to(ROOT) or sha(p)!=h:raise RuntimeError('Package checksum mismatch: '+n)
+def interval(est,se):
+    if not np.isfinite(se) or se<=0:return dict(estimate=float(est),se=None,low=None,high=None,p=None)
+    return dict(estimate=float(est),se=float(se),low=float(est-1.95996398454*se),high=float(est+1.95996398454*se),p=math.erfc(abs(est/se)/math.sqrt(2)))
+def cluster_meat(score,group):
+    _,g=np.unique(group,return_inverse=True);a=np.zeros((g.max()+1,score.shape[1]))
+    for j in range(score.shape[1]):a[:,j]=np.bincount(g,weights=score[:,j])
+    return a.T@a

@@ -1,0 +1,39 @@
+#!/bin/bash
+set -euo pipefail
+task_package="$(cd "$(dirname "$0")" && pwd -P)"
+export A1_TRAJ_PROJECT_ROOT="${A1_TRAJ_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+export A1_TRAJ_DESKTOP="${A1_TRAJ_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+export A1_TRAJ_WORKERS="${A1_TRAJ_WORKERS:-10}"
+export TMPDIR="$(cd "${TMPDIR:-/tmp}" && pwd -P)"
+export OPENBLAS_NUM_THREADS=1
+export OMP_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export NUMEXPR_NUM_THREADS=1
+export VECLIB_MAXIMUM_THREADS=1
+export PYTHONDONTWRITEBYTECODE=1
+task_python="${A1_TRAJ_PYTHON:-$(command -v python3 || command -v python || true)}"
+[[ -n "$task_python" ]] || { echo 'Use the Python environment that ran A1 preparation.'; exit 2; }
+cd "$task_package"
+/usr/bin/shasum -a 256 -c FILES.sha256
+"$task_python" -c 'import sys; assert sys.version_info >= (3,10); import numpy, duckdb, pyarrow, chess, chess.engine; print("Python:",sys.version.split()[0],sys.executable)'
+[[ -d "$A1_TRAJ_DESKTOP" && -d "$A1_TRAJ_PROJECT_ROOT" ]] || { echo 'Connect XT_Pro and check project/Desktop paths.'; exit 2; }
+task_log="$A1_TRAJ_DESKTOP/a1_trajectory_build_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+echo "Log: $task_log"
+echo 'This job includes Lichess API downloads. Run it after other Lichess API download jobs finish.'
+set +e
+{
+  echo 'Offline tests use synthetic exports and a fake engine; no API requests.'
+  "$task_python" -u "$task_package/run_tests.py" &&
+  if [[ -x /usr/bin/caffeinate ]]; then
+    /usr/bin/caffeinate -i "$task_python" -u "$task_package/run_build.py" "$@"
+  else
+    "$task_python" -u "$task_package/run_build.py" "$@"
+  fi
+} 2>&1 | tee "$task_log"
+task_exit=${PIPESTATUS[0]}
+set -e
+if [[ "$task_exit" -ne 0 ]]; then
+  echo "Stopped with exit $task_exit. Keep this log: $task_log"
+  exit "$task_exit"
+fi
+echo "Finished. Log: $task_log"

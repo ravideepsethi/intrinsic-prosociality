@@ -1,0 +1,17 @@
+{
+  "validation_date": "2026-10-22",
+  "original_archives_authenticated": 107,
+  "public_source_files_verified_against_originals": 8144,
+  "original_python_syntax_files": 6044,
+  "original_python_syntax_errors": 0,
+  "preparation_helper_regression_tests": 8,
+  "preparation_helper_tests_status": "PASS",
+  "privacy_and_file_type_check": "PASS",
+  "full_data_analyses_executed": false,
+  "source_transformations": "Private literal spans replaced by templates; shell launchers renamed .in. No statistical logic changes.",
+  "unique_python_source_bodies": 1067,
+  "shell_syntax_files": 1040,
+  "unique_shell_source_bodies": 159,
+  "shell_syntax_status": "PASS",
+  "readme_links": "PASS"
+}

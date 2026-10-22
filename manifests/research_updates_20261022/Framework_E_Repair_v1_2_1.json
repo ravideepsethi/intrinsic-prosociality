@@ -1,0 +1,66 @@
+{
+  "package": "Framework_E_Repair_v1_2_1",
+  "archive_name": "Framework_E_Repair_v1_2_1.zip",
+  "archive_sha256": "7bf28df5dadb906ec47650674b412160e8d2632b45bfd2f8506e3ab0f37d4a8b",
+  "archive_size": 31477,
+  "archive_root": "Framework_E_Repair_v1_2_1",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "README.md",
+      "published_path": "README.md",
+      "sha256": "9b1797a176f82362c564db9818a26ed3fb6197e605eedeb7412c0855244a3efa",
+      "published_sha256": "9b1797a176f82362c564db9818a26ed3fb6197e605eedeb7412c0855244a3efa",
+      "size": 3453
+    },
+    {
+      "path": "RUN_E_REPAIR.command",
+      "published_path": "RUN_E_REPAIR.command.in",
+      "sha256": "32429c5b0b1d4cabb06674dbcf4d63d60115a1edd1067bc6d69102bd31504c8f",
+      "published_sha256": "32429c5b0b1d4cabb06674dbcf4d63d60115a1edd1067bc6d69102bd31504c8f",
+      "size": 4547
+    },
+    {
+      "path": "src/methods.py",
+      "published_path": "src/methods.py",
+      "sha256": "99cae2b7aa3c6633cb4b33fa5f3046b7454a31d401cb986e229d758c1ffd2113",
+      "published_sha256": "99cae2b7aa3c6633cb4b33fa5f3046b7454a31d401cb986e229d758c1ffd2113",
+      "size": 10817
+    },
+    {
+      "path": "src/report.py",
+      "published_path": "src/report.py",
+      "sha256": "b93cc1de3afea086d14d693b8012cf9f580a03f448b9bed5028c3d0472cd30f5",
+      "published_sha256": "b93cc1de3afea086d14d693b8012cf9f580a03f448b9bed5028c3d0472cd30f5",
+      "size": 1503
+    },
+    {
+      "path": "src/run_bc.py",
+      "published_path": "src/run_bc.py",
+      "sha256": "1aed55a661e824339b7da41de72967422b67339c200743f4cf3ffa56db556970",
+      "published_sha256": "1aed55a661e824339b7da41de72967422b67339c200743f4cf3ffa56db556970",
+      "size": 26122
+    },
+    {
+      "path": "src/run_e_estimates.py",
+      "published_path": "src/run_e_estimates.py",
+      "sha256": "92013e863ca75ae8e4e064d8af6d6971673a721656839676153b27c117a4d23f",
+      "published_sha256": "92013e863ca75ae8e4e064d8af6d6971673a721656839676153b27c117a4d23f",
+      "size": 24116
+    },
+    {
+      "path": "tests/test_e_repair.py",
+      "published_path": "tests/test_e_repair.py",
+      "sha256": "a58573464fbca1e4b78eddc28900d9290cc839dc47b83da9bb2798ecc896b70d",
+      "published_sha256": "a58573464fbca1e4b78eddc28900d9290cc839dc47b83da9bb2798ecc896b70d",
+      "size": 3779
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "PACKAGE_FILES_SHA256.txt",
+      "sha256": "bac24b272f24aa917192bdabf32af8a884ae2193ababe492b691238b966864d6",
+      "size": 582
+    }
+  ]
+}

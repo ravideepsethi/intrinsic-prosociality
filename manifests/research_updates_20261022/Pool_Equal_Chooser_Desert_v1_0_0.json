@@ -1,0 +1,145 @@
+{
+  "package": "Pool_Equal_Chooser_Desert_v1_0_0",
+  "archive_name": "Pool_Equal_Chooser_Desert_v1_0_0.zip",
+  "archive_sha256": "5b396341edd9a7b499e5fe85273ebfa08063e0275e2f1eb89229bcd63438234a",
+  "archive_size": 131795,
+  "archive_root": "Pool_Equal_Chooser_Desert_v1_0_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "README.md",
+      "published_path": "README.md",
+      "sha256": "641aa0e73ecdacf5358df0d5d477f9cdbff05755baf1e322463d1f16ac24237c",
+      "published_sha256": "641aa0e73ecdacf5358df0d5d477f9cdbff05755baf1e322463d1f16ac24237c",
+      "size": 5632
+    },
+    {
+      "path": "RUN_EQUAL_CHOOSER.command",
+      "published_path": "RUN_EQUAL_CHOOSER.command.in",
+      "sha256": "8d162b0e295c2596f6a0cdd7baa248ee5fc822ecf7ecc8d846c00bbe56bffa9e",
+      "published_sha256": "8d162b0e295c2596f6a0cdd7baa248ee5fc822ecf7ecc8d846c00bbe56bffa9e",
+      "size": 3631
+    },
+    {
+      "path": "docs/METHODS.md",
+      "published_path": "docs/METHODS.md",
+      "sha256": "a612dc3e9b88dfa1e25470f06cdb2628bc3892f63e367606305f48a980d140a0",
+      "published_sha256": "a612dc3e9b88dfa1e25470f06cdb2628bc3892f63e367606305f48a980d140a0",
+      "size": 7275
+    },
+    {
+      "path": "runner/__init__.py",
+      "published_path": "runner/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "runner/common.py",
+      "published_path": "runner/common.py",
+      "sha256": "4198dde068097367a7a05d09abbfca123e756419a609fbe31270a4573571bbec",
+      "published_sha256": "4198dde068097367a7a05d09abbfca123e756419a609fbe31270a4573571bbec",
+      "size": 24293
+    },
+    {
+      "path": "runner/run.py",
+      "published_path": "runner/run.py",
+      "sha256": "95c82496107e335b2186dacc82c7af8e635e59a65cf50a157a1012586e20bc86",
+      "published_sha256": "95c82496107e335b2186dacc82c7af8e635e59a65cf50a157a1012586e20bc86",
+      "size": 14627
+    },
+    {
+      "path": "runner/self_test.py",
+      "published_path": "runner/self_test.py",
+      "sha256": "c84d02967f8e67d93abd906d7a747ceeddc3eb05226a540f3cf00ac122a08de8",
+      "published_sha256": "c84d02967f8e67d93abd906d7a747ceeddc3eb05226a540f3cf00ac122a08de8",
+      "size": 10042
+    },
+    {
+      "path": "runner/source.py",
+      "published_path": "runner/source.py",
+      "sha256": "98ff50da82713cb100dcbf48f6ff8e3e0e08e86b84f0ff1dd4dfd0df133dca6b",
+      "published_sha256": "98ff50da82713cb100dcbf48f6ff8e3e0e08e86b84f0ff1dd4dfd0df133dca6b",
+      "size": 5134
+    },
+    {
+      "path": "runner/statistics.py",
+      "published_path": "runner/statistics.py",
+      "sha256": "2b904d6da0c58b9b2bc812d52e1f57af0d8fd241835f5cd2aac6333eac59fa18",
+      "published_sha256": "2b904d6da0c58b9b2bc812d52e1f57af0d8fd241835f5cd2aac6333eac59fa18",
+      "size": 6941
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "PACKAGE_MANIFEST.sha256",
+      "sha256": "4ef802f4591ad93539461a752c444ea2ac49f93aa755544556adc9c147496d16",
+      "size": 2086
+    },
+    {
+      "path": "authority/REFERENCE.json",
+      "sha256": "87e349da4204258c1912919cc9f353f7027394e34bd7c650172ac0d4445ff1a0",
+      "size": 2896
+    },
+    {
+      "path": "authority/SAMPLE_AUTHORITY.json",
+      "sha256": "81c34113e7a888629a834a17235a71dcf369a2d590755fd9412ee42151d9b2f3",
+      "size": 1234
+    },
+    {
+      "path": "evidence/Pool_Main_Sample_24M_Report.zip",
+      "sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+      "size": 96936
+    },
+    {
+      "path": "evidence/Pool_Main_Sample_24M_Report.zip.sha256",
+      "sha256": "d2e6c0953ff2de7cc7235b98d568c884e4fa8067b8aa81d22efe1ac3484d6f59",
+      "size": 128
+    },
+    {
+      "path": "evidence/UPSTREAM_CONTRACT.json",
+      "sha256": "4866c82895300a25259a19e04cf00198614a2d6ad64dc136be34e8841f1596c4",
+      "size": 447
+    },
+    {
+      "path": "evidence/UPSTREAM_DESERT_SUPPORT.json",
+      "sha256": "93bee99c53ad6380389454bdff2fe2f161add704880d95b8d258d80d72ad1b8b",
+      "size": 1120
+    },
+    {
+      "path": "evidence/UPSTREAM_REFERENCE_REPRODUCTION.json",
+      "sha256": "903b200e7eb88cad49dd7b69806a0868719bb662fa0baddb62903f224614a334",
+      "size": 190
+    },
+    {
+      "path": "evidence/UPSTREAM_RUN_STATUS.json",
+      "sha256": "83ce4bbe6f7b592bfa2348f11e1dd21b06ff4349eab670a6ebb98c0cdbb06e74",
+      "size": 468
+    },
+    {
+      "path": "evidence/UPSTREAM_SAMPLE_LINEAGE.json",
+      "sha256": "66a52b867222aa4f020d26553518e17dee84f3017e3badf80fea01693dbb36c9",
+      "size": 776
+    },
+    {
+      "path": "evidence/UPSTREAM_chooser_opportunity_summary.csv",
+      "sha256": "85461072244b0c7864a5885d4b7ce7264af360cb8be77d9e3d0fc73a1efd206b",
+      "size": 594
+    },
+    {
+      "path": "evidence/UPSTREAM_singleton_invariance.csv",
+      "sha256": "b2cb8abdb61fec010e8d65b1cd9dcd08e39a0d5612c6f1faf0c272de7e2ba758",
+      "size": 1547
+    },
+    {
+      "path": "evidence/VALIDATION.json",
+      "sha256": "cdbc90ba0ee2f4667808e53d447aa74d92fef55fd74f8e53e6a9ede053f8ebae",
+      "size": 2119
+    },
+    {
+      "path": "requirements.lock.txt",
+      "sha256": "76848df36c9601b5f3ee65148297ea8604ceedc85deec73aa25f0dcd6dc47665",
+      "size": 91
+    }
+  ]
+}

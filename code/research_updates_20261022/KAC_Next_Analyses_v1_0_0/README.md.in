@@ -1,0 +1,70 @@
+# Kindness Among Competitors: next executable analysis
+
+Run A2 from the existing frozen responsibility checkpoints. This package also contains finished A1 figure/table files and recovered tenure/Patron/color-prediction tables. The remaining handoff is tracked in `EXECUTION_LEDGER.md`; it is not represented as completed code.
+
+## Terminal command
+
+Download `KAC_Next_Analyses_v1_0_0.zip` to Downloads, then paste:
+
+```bash
+mkdir -p "$HOME/Desktop/Lichess_Desktop"
+unzip -q -n "$HOME/Downloads/KAC_Next_Analyses_v1_0_0.zip" -d "$HOME/Desktop/Lichess_Desktop"
+bash "$HOME/Desktop/Lichess_Desktop/KAC_Next_Analyses_v1_0_0/RUN_NEXT_ANALYSES.command"
+```
+
+Expected runtime: roughly **5–20 minutes if the engine scores are already cached**. If the entire 1.29-million-position evaluation remains, allow several hours; **8–12 hours is a conservative planning allowance, not a benchmark of your machine**. The engine prints an empirical ETA as batches finish. Missing-game API requests and rate limits add variable time. The startup readiness ZIP is usually available within 1–3 minutes. An existing working Python environment is reused; otherwise isolated dependency setup normally takes 1–3 minutes with internet access.
+
+The Mac paths are `__PRIVATE_VALUE_1__/Desktop/Lichess_Desktop` (expressed as `$HOME/Desktop/Lichess_Desktop` in commands) and `/Volumes/XT_Pro/lichess_kindness`. The external drive must be mounted. No calendar schedule is imposed.
+
+## What runs
+
+1. Verify package checksums and the existing 20,000-account responsibility target; inventory candidate next-step sources using file names/Parquet footers. Write `KAC_A2_READINESS_<key>.zip` to the desktop staging folder.
+2. Reuse completed original move/engine batches. If needed, fetch missing games serially and evaluate missing batches with up to ten SF18 workers. The original source/run locks prevent a duplicate responsibility job. No new profile queries, chooser recovery, sample rebuild or A1 rerun occurs.
+3. Project raw scores/FENs into narrow Parquets; place complete chooser histories into 256 buckets; fit the new two-pass fixed-effects models with up to ten workers and one BLAS thread per worker. Preserve the original engine cache and write new follow-up checkpoints separately.
+4. Write aggregate report `KAC_A2_RESULT_<key>.zip` plus SHA-256 sidecar into `Lichess_Desktop`. Upload that ZIP for result review. A failure produces a `PARTIAL` ZIP and retains completed checkpoints. Repeating the same command resumes them.
+
+The default implements **53 models** covering trajectory, clock and material proxies, direct region interactions, continuous-profile adjustment and rating-gap/blunder checks. Prior-disconnection history and the strict no-prior-disconnection subset remain explicitly pending unless a verified history feature manifest is supplied. Default completion status says `A2_TRAJECTORY_CLOCK_MATERIAL_COMPLETE_HISTORY_PENDING`; it does not mean the entire A2 handoff is done.
+
+The script cannot access the external Mac drive from the preparation environment; only the code and synthetic checks have run here. The actual new empirical estimates are produced by the Terminal command on the Mac.
+
+## Useful options
+
+Readiness only, without downloading games or running Stockfish (usually 1–3 minutes):
+
+```bash
+bash "$HOME/Desktop/Lichess_Desktop/KAC_Next_Analyses_v1_0_0/RUN_NEXT_ANALYSES.command" --check-only
+```
+
+Specify the already pinned engine if discovery cannot find it (same runtime as the main command):
+
+```bash
+bash "$HOME/Desktop/Lichess_Desktop/KAC_Next_Analyses_v1_0_0/RUN_NEXT_ANALYSES.command" --stockfish /absolute/path/to/stockfish
+```
+
+`--workers 6` reduces concurrency. `--cache-only` disables missing-game network requests, while permitting engine work on available moves; missing moves stop the run rather than being frozen as complete. If another responsibility run is active, let it finish and rerun this command. The package does not terminate other processes.
+
+Once an independently audited history producer exists, add `--history-manifest /absolute/path/to/manifest.json`; see `HISTORY_INPUT.md`. This changes the follow-up analysis identity but reuses the original engine checkpoints. Do not construct a history file from the restricted pool opportunity panel.
+
+## Finished exhibits and manuscript corrections
+
+- `completed/fig_continuous_and_material.pdf` and `.png`: A1 continuous evaluation and material profiles side by side; extreme finite evaluations and positive mates visibly separate.
+- `completed/A1_appendix_tables.tex`, `.md`, and `completed_appendix_tables.pdf`: all 23 model summaries and early/late/rating-tier detail. Complete planned contrast estimates, SEs, intervals and Holm p-values are also supplied as CSV/Parquet.
+- `completed/A1_section_and_figure.tex`: a ready insertion for the current draft, with no invented A2 findings.
+- `completed/B6_recovered_tenure_table.*` and `B6_B7_table_notes.md`: the verified five-band range is 1.76–2.01 pp, not 1.93–2.01.
+- `completed/B7_recovered_patron_tenure_sensitivity.*`: opportunity-age restrictions and the actual reduced-control/cell-clustered design, kept distinct from the main full-control/HC1 comparison.
+- `completed/B4_completed_color_predictions.*` and `B4_status.md`: the corrected prediction run is already complete. The matched post-policy behavioral test remains open; the 0.27-point planning MDE is scenario-specific.
+
+All completed exhibits can be rebuilt from the included authenticated aggregate result ZIPs, without private data or regression reruns:
+
+```bash
+cd "$HOME/Desktop/Lichess_Desktop/KAC_Next_Analyses_v1_0_0"
+python3 build_completed_exhibits.py
+```
+
+Expected runtime: 5–20 seconds using a Python with NumPy, pandas, PyArrow and Matplotlib. If system `python3` lacks them, use the Python path printed by the launcher's `PYTHON` line. This optional rebuild rewrites completed presentation files; the supplied files are already built.
+
+## Verification and disclosure
+
+`VALIDATION.md` records the executed offline checks and their scope. The lightweight move/mate/material/fixed-effect/clustering checks run automatically before launch. Code and results have separate checksum manifests. The source evidence archives contain aggregate outputs, not account-level histories.
+
+Read `DESIGN.md` before interpreting A2. Null proxy coefficients cannot establish zero blame, and the selected low-loss/ample-clock sample cannot identify accidental departures. The package reports those distinctions explicitly.

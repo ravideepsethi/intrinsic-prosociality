@@ -1,0 +1,248 @@
+# Handoff: tests the Section 3 framework leans on
+
+Six analyses. A, B, C are required before the framework text is finalized; D runs only if B is uninformative; E can run in parallel with B. F separates year-to-year persistence by state and is required before claiming which kinds of granting persist; it can reuse B's account counts. Everything uses the analysis sample of Section 2.3 (41,534,331 opportunities, pool games, observed-adjacency screen) unless stated. Freeze this document before running anything; the paper discloses specification timing and these are specified after the main results and before estimation. Test F was added at the author's request on 12 October 2026 UTC (11 October in Toronto), before estimating it; record any earlier execution of A–E separately rather than treating this revision as preceding those runs.
+
+Conventions throughout:
+- `v` = final-position engine evaluation from the disconnected player's side (cp). Competitive: `v >= -100`. Clearly worse: `v <= -300`.
+- `ply` = recorded plies before the final position. "After ply 10" = `ply > 10`.
+- `rG` = reconstructed draw payoff (rating points, signed; Section 2.5). `kappa` = forgone premium = K/2. `K` = rating-update scale.
+- P1 = Nov 2023–Oct 2024. P2 = Nov 2024–Oct 2025.
+- Outcome in all regressions: `100 * grant` (pp), LPM, SEs clustered by chooser account with G/(G-1), unless stated.
+- "Baseline controls" = stage-band FE (11–20, 21–40, 41–80, 81+ when after ply 10; add 1–2, 3–10 when all stages), speed FE, month FE, log(1+kappa) and its square, chooser log RD and square, opponent log RD and square, log(1+seconds) on each clock with a missing indicator.
+- Evaluation spline `f(v)` = natural cubic spline in raw cp, boundaries −100 and +600, interior knots 0, +100, +300, plus separate indicators for finite `v >= 600` and forced mate for the opponent (Appendix B.1).
+
+---
+
+## Test A — Flagged accounts and the Patron sign reversal
+
+**Why.** Section 3.3 reads the negative Patron association for lost-position granters as "accounts that place no value on rating points." If those accounts are disproportionately closed or TOS-flagged, the negative sign is partly mechanical (no badge on a closed account) and the reading has to be weakened. This test can change the framework, so it runs first.
+
+**Data.** The August 2026 profile snapshot used for Table 3. Fields: `disabled` (closed account), `tosViolation`. Treat absent fields as false. Also record profile availability (404 or missing) from the acquisition cohort, since unavailable accounts were dropped without replacement.
+
+**Samples.**
+1. The 599,045-account state-specific sample (Table 3 Panel B/C) with its four granting-history groups: CO (competitive-only), BOTH, LO (lost-only), NEI (neither).
+2. The 851,131-account main comparison (Panel A): competitive-position granters vs never-granter controls.
+3. The full acquisition cohort (1,105,634 with available August profiles, plus the unavailable ones) for the availability rates.
+
+**Outputs.**
+- `tabA1_flags_by_group.csv`: for each group in sample 1 and each arm in sample 2: N, share `disabled`, share `tosViolation`, share either, share profile-unavailable (from sample 3, by the same grouping), Patron rate among all, Patron rate among unflagged, Patron rate among flagged.
+- `tabA2_patron_excluding_flags.csv`: re-estimate Table 3 Panel A (adjusted association, HC1 and cell-clustered SEs), Panel B (both indicators in one model), and Panel C (raw rates), each three ways: excluding `tosViolation`, excluding `disabled`, excluding either. Same cells, same controls, matching groups re-formed after exclusion (drop a matched group if its focal account is excluded).
+- `tabA3_recipient_patron_excluding_flags.csv`: the Appendix E recipient-side estimate (0.319 competitive, −0.001 lost) excluding flagged opponents.
+
+**Decision rule.**
+- Panel B clearly-worse coefficient after excluding "either" remains negative with |t| ≥ 2 and at least half its original magnitude (≤ −0.10 pp): keep Section 3.3 and Proposition 1(i) as written.
+- Coefficient shrinks below half or loses significance: the reversal is at least partly mechanical. Rewrite Section 3.3's reading of lost-position grants to "accounts that leave or are removed from the platform," drop the sentence in Section 5.2 that treats the negative sign as a test, and footnote the flag shares.
+- Report the flag shares regardless; a referee who knows the platform will ask.
+
+---
+
+## Test B — Rating-gap slope by granting history (price vs merit)
+
+**Why.** The framework now puts the rating gap into the price, not into merit. Under the price reading the gap slope within competitive positions is proportional to `lambda_i`; under the merit reading it is proportional to `b_i`. Accounts that grant in both states are, by the model, `lambda ≈ 0` with high `b`; competitive-only accounts are `lambda > 0` with high `b`. So the price reading predicts a steep gap slope for competitive-only accounts and a flat one for both-state accounts, with both groups responding to the position. The merit reading predicts both groups respond to the gap.
+
+**Design: holdout classification.** Classify accounts on P1 outcomes, estimate slopes on P2 opportunities. This avoids conditioning the estimation sample on its own outcome.
+
+**Step B1 — classification (P1 only).** For each chooser account, count in P1: competitive opportunities (all stages), clearly-worse opportunities, competitive grants, clearly-worse grants. Keep accounts with ≥ 4 competitive and ≥ 4 clearly-worse opportunities in P1. Assign:
+- CO: competitive grants ≥ 1, clearly-worse grants = 0
+- BOTH: ≥ 1 and ≥ 1
+- LO: 0 and ≥ 1
+- NEI: 0 and 0
+Modestly-worse grants do not affect classification. Save `accounts_B_groups.parquet` with counts and group. Report group sizes and P1 opportunity counts by group.
+
+**Step B2 — estimation sample (P2).** All P2 competitive opportunities (`v >= -100`) after ply 10 whose chooser is in a B1 group. Report N opportunities, N accounts, and raw grant rate by group.
+
+**Step B3 — primary model.**
+```
+100*grant_io = alpha_i
+             + sum_g 1{g(i)=g} * [ beta_g * rG_o + f_g(v_o) ]
+             + baseline controls (stage bands 11–20, 21–40, 41–80, 81+)
+             + e_io
+```
+Chooser FE `alpha_i` absorb group main effects. `rG` centered at zero. `f_g` is the spline with group-specific coefficients. Cluster by chooser. Note that log(1+kappa) is in the controls, so `rG`'s identifying variation is the rating gap at a given update scale.
+
+**Step B4 — estimands, by group g ∈ {CO, BOTH, LO, NEI}.**
+- `beta_g`: pp per rating point of draw payoff.
+- `D_g = f_g(500) − f_g(300)`; also `f_g(300) − f_g(100)` and `f_g(100) − f_g(0)`.
+- `m_g`: adjusted group grant rate, standardized to the group's own P2 composition.
+- Proportional slopes `beta_g / m_g` and `D_g / m_g`, delta-method SEs.
+- Differences BOTH − CO for both proportional slopes, with SEs from the joint covariance.
+- Stage check: the coefficient on the 41–80 band relative to 11–20, by group; both CO and BOTH should show a decline.
+
+**Step B5 — figure.** `figB1_gap_by_group.pdf`: adjusted grant rate against 50-point bins of the displayed rating gap (as Figure 4 Panel A, reference bin [−25, 25)), one line per group, roughly-equal positions only (`-100 <= v < 100`), after ply 10, chooser FE and baseline controls. Second panel: the same for the evaluation profile (eight bins of Appendix B.1 Panel B), one line per group.
+
+**Step B6 — robustness, same rows unless stated.**
+1. Replace `rG` with the displayed gap (opponent minus chooser rating).
+2. Replace `rG` with `rG / kappa` (draw payoff in units of the premium).
+3. Conditional logit with chooser FE on a uniform 20% sample of accounts; report log-odds slopes by group (proportional effects directly) and the BOTH − CO difference.
+4. Roughly-equal positions only (`-100 <= v < 100`): `beta_g` from a model without the spline.
+5. Exclude accounts flagged in Test A.
+6. Full-panel classification with chooser FE (classify on all 24 months, estimate on all 24 months). Report as secondary only; it conditions the sample on its outcome and is here for comparison with Table 3's groups.
+
+**Decision rule (pre-specified).** Let `rho_gap = (beta_BOTH/m_BOTH) / (beta_CO/m_CO)` and `rho_pos = (D_BOTH/m_BOTH) / (D_CO/m_CO)`.
+- **Price**: `D_BOTH/m_BOTH` has a 95% CI excluding zero and `rho_pos >= 0.5`; AND `rho_gap <= 0.5` with the BOTH − CO difference in proportional gap slope significant at 5%. Keep the current framework file; apply its edit notes to Sections 4.5 and 7.2.
+- **Merit**: `D_BOTH/m_BOTH` CI excludes zero and `rho_pos >= 0.5`; AND `rho_gap >= 0.5` with the 95% CI of the BOTH − CO difference including zero. Revert the framework to the version with the gap inside `mu` and `kappa` as the price; keep Section 4.5's existing text.
+- **Uninformative**: `D_BOTH/m_BOTH` CI includes zero (BOTH accounts do not respond to the position; they are whim-granters). Run Test D.
+- Anything else: report all four numbers with CIs and write the framework's price paragraph as a conjecture with the test described.
+
+**Power note.** With roughly 10k BOTH accounts and ~15–25 P2 competitive opportunities each at an 8–10% grant rate, the SE on `beta_BOTH` is on the order of 0.05 pp per rating point; the pooled-sample slope is about 0.2 pp per point at a 2% base, i.e. roughly 0.1 proportional, so a merit-sized `beta_BOTH` (~0.8–1.0 pp/point) and zero are easily separated. Survivorship: BOTH accounts classified in P1 that stop playing before P2 drop out; report the P2 retention rate by group.
+
+---
+
+## Test C — Zero inflation among heavy players (the construal gate)
+
+**Why.** Section 3.2 says most accounts never see a choice. A mixture with mass at zero predicts that, among accounts with many competitive opportunities, the share with zero grants flattens at a floor instead of falling toward zero as a smooth propensity distribution would predict.
+
+**Sample.** All chooser accounts, full panel, competitive opportunities at all stages (the Section 5.1 definition).
+
+**Step C1 — exposure.** For each competitive opportunity, compute `p_hat_o` = population grant rate in its cell, using the 500-cell grid of Appendix D.2 (five evaluation bands × four ply bands × five speeds × five gap bands), estimated on the full sample without cross-fitting. For each account: `n_i` (opportunities), `y_i` (grants), `E_i = sum_o p_hat_o` (expected grants at the population rate).
+
+**Step C2 — descriptive figure.** `figC1_zero_share.pdf`: observed share of accounts with `y_i = 0` by bins of `E_i`: [0.25, 0.5), [0.5, 1), [1, 2), [2, 4), [4, 8), [8, 16), [16, 32), 32+. Overlay the zero share implied by a gamma–Poisson fit (Step C3a). Report N accounts per bin. Prediction under the gate: the observed curve flattens to a positive floor and sits above the fitted curve in the high-`E` bins.
+
+**Step C3 — formal fits, on accounts with `E_i >= 0.25`.**
+- (a) Gamma–Poisson: `y_i ~ Poisson(theta_i E_i)`, `theta_i ~ Gamma(k, k)`. ML for `k`. Implied zero share by bin: `(1 + E_i/k)^(-k)` averaged within bin.
+- (b) Zero-inflated gamma–Poisson: with probability `1 − gamma` the account has `theta_i = 0`; otherwise as (a). ML for `(gamma, k)`.
+- Report: `gamma` with 95% CI; LR test of (a) nested in (b) (boundary: use the 50:50 mixture of chi-square(0) and chi-square(1)); predicted vs observed zero share by bin under each.
+- Also fit both on P1 alone and predict the P2 grant rate of accounts with `y_i = 0` and `E_i >= 8` in P1; compare with the observed P2 rate for those accounts (Section 5.1 reports 0.94% for a related group).
+
+**Outputs.** `tabC1_zero_inflation.csv` (fits, tests, by-bin predictions), `figC1_zero_share.pdf`.
+
+**Decision rule.**
+- `gamma` CI excludes 1 and the high-`E` bins show a floor above the gamma–Poisson prediction: the gate is evidenced. Add a paragraph to Section 5.1 and cite it from Section 3.2.
+- No floor and `gamma` CI includes 1: drop the construal gate as a mechanism. Section 3.2 keeps "most accounts never grant" as a description; Section 3.4 loses the gate-opening channel and the receipt effect is framed as a shift in `b_i`, i.e. the paper returns to the upstream-reciprocity framing of Section 1.1.
+
+---
+
+## Test D — Second proxy for not valuing rating points (only if B is uninformative)
+
+**Why.** If BOTH accounts turn out to be whim-granters, a different proxy for low `lambda` is needed to test whether the gap slope is flatter where rating matters less.
+
+**Proxy 1 — casual-game share.** The monthly database dumps include casual games (Event tag "Casual ... game"). For each chooser opportunity, compute the chooser's share of casual games among standard games in the 90 days ending the day before the opportunity; require ≥ 20 games in the window. Split into terciles of casual share (or ≥ 0.5 vs < 0.1 for a sharper contrast). Run the Test B primary model on the full competitive after-ply-10 sample with the tercile indicators in place of the granting-history groups; chooser FE stay in (casual share varies little within account, so group main effects are mostly absorbed; the interactions with `rG` and `f(v)` are identified from within-account variation in the game).
+
+**Proxy 2 — provisional rating.** Chooser RD > 110 at the opportunity (the platform's provisional threshold). Same model with a provisional indicator interacted with `rG` and `f(v)`. Caveat to state in the output: provisional accounts are new accounts with large `K`, so `kappa` and `rG` are both larger in rating points; use the `rG / kappa` version of the regressor for this proxy.
+
+**Prediction under price.** `beta` flatter in the high-casual or provisional group; `D` similar across groups. **Under merit.** No difference in `beta` across groups. Same decision thresholds as Test B with the proxy groups in place of BOTH and CO.
+
+---
+
+## Test E — Receipt: gate-opening vs a transient shift in `b_i`
+
+**Why.** Section 3.4 carries two channels. A pure gate opens only for accounts that had not construed the choice; a transient `b_i` shift operates on everyone, including accounts that already grant.
+
+**Groups of recipients at exposure.**
+- PG: at least one grant as chooser, in any state, before the exposure date (full panel history, not the 90-day window). Construal known.
+- PC: at least one competitive chooser-side choice before the exposure, all claims.
+- NC: no competitive chooser-side choice before the exposure.
+
+**Primary.** The Section 6.1 receipt design (exposure cells, weights, exposure-month FE, thirteen exposure-game controls, SEs clustered by exposure-opponent account), with the receipt indicator interacted with the three groups. Outcomes: grant at first later competitive choice (conditional) and the zero-coded version. Report the three effects, their SEs, and PG − NC with SE.
+
+**Secondary.** The Table 4 IV model with receipt × group instrumented by score × group; report first stages by group and the three 2SLS estimates. Group PG is small (a few percent of exposures); report its SE and treat a CI that includes both zero and the pooled effect as uninformative.
+
+**Also.** The interval profile of Section 6.1 (first choice within six hours; 30–90 days) by group, descriptively.
+
+**Decision rule.**
+- PG effect's CI excludes the pooled effect (0.4 OLS / 0.3 IV) and includes zero, and NC effect is positive: gate-opening dominates. Section 3.4 can lead with the gate and describe the `b_i` shift as not detected.
+- PG effect positive with CI excluding zero: the `b_i` shift is present; keep both channels, and Section 1.1's upstream-reciprocity framing stands.
+- PG uninformative: keep Section 3.4 as written.
+
+---
+
+## Test F — What persists across years: competitive granting, noncompetitive granting, or both?
+
+**Why.** The persistence subsection in the attached `SIP_Sept3(1).tex` explicitly calculates its split-half correlations using competitive-position opportunities. Those estimates establish competitive-position persistence; they do not answer whether noncompetitive granting also persists. Estimate persistence within each state, prediction across states, and persistence of the difference between a person's granting rates in the two states. This distinguishes stable selective granting from a general tendency to grant draws, without identifying a preference primitive.
+
+**Periods and states.** Use the same fixed years throughout: P1 = November 2023–October 2024; P2 = November 2024–October 2025. Do not replace these with account-specific chronological halves.
+- C (competitive): `v >= -100`.
+- N (all noncompetitive): `v < -100`.
+- L (clearly worse): `v <= -300`.
+- The intermediate region `-300 < v < -100` belongs to N but not L. Report C versus N as the direct answer to the author's question, and repeat the analysis with C versus L for the framework's sharper contrast. Do not call L all noncompetitive states.
+
+Use the existing signed-mate mapping from the disconnected player's perspective. Retain mate outcomes in their appropriate state and distinguish them in adjustment; missing or invalid evaluations are unclassified, not noncompetitive. Primary analysis includes all stages, matching the existing persistence description; repeat after `ply > 10`. Apply the mandatory author-account exclusions in the current-state file to both participants before aggregation, using verified identifiers: `__PRIVATE_VALUE_1__` and `__PRIVATE_VALUE_2__`. Refresh counts; the historical sample size above is not a certified post-exclusion count.
+
+**Step F1 — account-by-year-by-state panel and eligibility.** For each account i, state s, and year t, save opportunities `n_ist`, grants `y_ist`, and the rate `q_ist = 100*y_ist/n_ist`. Keep zero-grant accounts. If `n_ist = 0`, the rate is missing, not zero.
+
+For the main C/N comparison, require at least four opportunities in each of C/P1, N/P1, C/P2, and N/P2. Calculate all four correlations below on this same account sample, so differences do not reflect different populations. Repeat on a common C/L sample requiring four in each corresponding cell. Also report each correlation on its larger pair-specific sample (four opportunities in each of the two cells involved), as a secondary coverage check. Report account counts, opportunity counts, grants, nonzero-grant accounts, and exposure distributions by state and year. From the P1-eligible cohort, report separately the shares with any P2 opportunity and with sufficient opportunities in each P2 state. These estimates describe observed returning accounts; absent P2 opportunities are not claims or grants.
+
+**Step F2 — the four persistence estimates.** Primary estimand: unweighted Pearson correlation across accounts of the indicated P1 and P2 rates.
+
+| P1 granting rate | P2 competitive rate | P2 noncompetitive rate |
+|---|---|---|
+| Competitive | `corr(q_C1, q_C2)`: does competitive granting persist? | `corr(q_C1, q_N2)`: does it predict later noncompetitive granting? |
+| Noncompetitive | `corr(q_N1, q_C2)`: does it predict later competitive granting? | `corr(q_N1, q_N2)`: does noncompetitive granting persist? |
+
+Repeat with L replacing N. Report every estimate with a 95% CI and its denominator. On each common sample, also report the difference between the two within-state correlations, with a CI obtained jointly, rather than inferring a difference from one being significant and the other not. Use 999 account-bootstrap replicates, fixed seed `20261012`, resampling the full account record so the four rates and all contrasts remain linked. Spearman correlations and correlations weighted by `2*n_1*n_2/(n_1+n_2)` are secondary; the latter weights refer to the two cells involved. Compare matrix entries formally using the common-sample, unweighted estimates, not differently weighted populations. Reproduce the draft's competitive statistic only if its sample, split, and weighting can be verified; do not label the new fixed-year estimate a reproduction otherwise.
+
+**Step F3 — remove observable opportunity composition.** Repeat F2 using each account's mean residual grant rate in each state/year:
+
+```
+a_ist = mean over that account/state/year of 100*(grant_o - p_hat_o)
+```
+
+Construct `p_hat` using five deterministic chooser-account folds, with the same fold assignment in both years. Fit separate LPMs by year and by C/N on other-fold accounts only, without chooser FE or granting-history predictors. Use the baseline controls (including all-stage bands for the primary analysis), evaluation-bin indicators, and displayed-gap-bin indicators. Freeze these additional bins before running:
+- Finite C evaluations: `[-100,0)`, `[0,100)`, `[100,300)`, `[300,600)`, `[600,infinity)`.
+- Finite N evaluations: `(-infinity,-600)`, `[-600,-300]`, `(-300,-100)`.
+- Forced-mate indicators are separate from finite evaluation bins, by sign where present.
+- Displayed gap, opponent minus chooser: `(-infinity,-200)`, `[-200,-50)`, `[-50,50)`, `[50,200)`, `[200,infinity)`.
+
+For the C/L comparison, aggregate the same out-of-fold residuals on L opportunities. Do not carry the competitive-only spline into negative evaluations outside its domain. Report raw and adjusted results side by side: this adjustment addresses measured opportunity composition, not every stable environmental difference. Account-bootstrap intervals for adjusted results hold nuisance fits fixed and must be labeled conditional on those fits. Chooser FE must not enter the nuisance model because persistent account differences are the object being measured.
+
+**Step F4 — does selectivity itself persist?** On the common samples, calculate
+
+```
+Delta_it = q_i,C,t - q_i,N,t
+```
+
+and report `corr(Delta_i1, Delta_i2)` with a 95% CI; repeat for C minus L and with `a` replacing `q`. A positive result means that accounts which grant relatively more often in competitive positions in P1 tend to retain that contrast in P2. It is a separate result from persistence of either rate alone. The covariance identity
+
+```
+cov(Delta_1, Delta_2)
+  = cov(C1,C2) + cov(N1,N2) - cov(C1,N2) - cov(N1,C2)
+```
+
+links this result to the four matrix entries; use covariances, not correlations, for the identity. It is descriptive persistence of state selectivity, not evidence by itself of a particular fairness motive.
+
+**Step F5 — an interpretable forward-prediction table.** Classify accounts using only P1: C-only (at least one C grant, zero N grants), N-only, BOTH, and NEITHER. On the same common sample, show each group's P2 competitive and noncompetitive grant rates, with CIs, account counts, and opportunity counts. Report both the mean account rate and the pooled opportunity rate, labeled separately. Repeat for C/L, reusing B1's P1 groups where definitions match. Include P2 retention and eligibility by P1 group from F1. These are observed granting-history groups, not established latent types: a zero can reflect limited opportunities. Do not classify on P2 grants, and do not fit chooser FE to absorb away the between-account comparison.
+
+**Robustness and interpretation.** Repeat the raw matrix and selectivity calculation with minimum exposure thresholds of 10 and 20 per state/year, and repeat the main analysis after ply 10. Noncompetitive grants, especially clearly-worse grants, are rare; noisier account rates can attenuate correlations. Report exposure and event counts alongside the sensitivity results. A lower raw correlation is not automatically weaker underlying persistence.
+- Positive C-to-C and N-to-N estimates with CIs excluding zero support persistence of both behaviors. Report cross-state entries and selectivity separately; both behaviors can persist while selectivity also persists.
+- Positive within-state persistence with weaker cross-state prediction suggests state-specific stability, subject to rate measurement error and observed composition.
+- If competitive persistence is clear but the noncompetitive CI is wide or includes zero, report "competitive persistence established; noncompetitive persistence unresolved," not "only competitive behavior persists." Apply the same logic in reverse.
+- Differences between C/N and C/L results show why the intermediate region matters; do not pool away that distinction.
+- None of these estimates establishes that past granting causes future granting, or that the persistent component is necessarily altruism, indifference to ratings, or a fixed habit.
+
+**Outputs.** `accounts_F_state_year.parquet`; `tabF1_coverage_and_retention.csv`; `tabF2_persistence_matrix.csv` (C/N and C/L, raw and adjusted, estimates, CIs, common versus pair-specific samples, and within-state differences); `tabF3_selectivity_persistence.csv`; `tabF4_forward_rates_by_P1_group.csv`; `tabF5_sensitivity.csv`. Label all outputs with exact periods, cutoffs, exclusions, weighting, and opportunity thresholds.
+
+**Paper changes.** Extend the persistence subsection to state explicitly what persists. Use state-specific evidence to qualify the framework's interpretation of CO, BOTH, and LO histories, but do not use the matrix alone to infer `b_i`, `lambda_i`, or a construal gate. Until F is estimated, the attached draft supports a persistence claim about competitive granting only.
+
+---
+
+## Output checklist
+
+| File | Test |
+|---|---|
+| `tabA1_flags_by_group.csv`, `tabA2_patron_excluding_flags.csv`, `tabA3_recipient_patron_excluding_flags.csv` | A |
+| `accounts_B_groups.parquet`, `tabB1_group_sizes.csv`, `tabB2_slopes_by_group.csv` (beta_g, D_g, m_g, proportional slopes, BOTH−CO differences, stage check), `tabB3_robustness.csv`, `figB1_gap_by_group.pdf` | B |
+| `tabC1_zero_inflation.csv`, `figC1_zero_share.pdf` | C |
+| `tabD1_proxy_slopes.csv` | D (conditional) |
+| `tabE1_receipt_by_prior.csv` | E |
+| `accounts_F_state_year.parquet`, `tabF1_coverage_and_retention.csv`, `tabF2_persistence_matrix.csv`, `tabF3_selectivity_persistence.csv`, `tabF4_forward_rates_by_P1_group.csv`, `tabF5_sensitivity.csv` | F |
+
+Each table carries N opportunities, N accounts, and the exact sample definition in a header row. Log the run date and the commit hash of the code.
+
+## What each outcome changes in the paper
+
+| Outcome | Framework | Elsewhere |
+|---|---|---|
+| A: reversal survives exclusion | Keep 3.3, Prop 1(i) | Footnote flag shares in 5.2 |
+| A: reversal collapses | 3.3 reads lost grants as "accounts that leave or are removed" | Rewrite 5.2's test paragraph; 7.1 second finding softened |
+| B: price | Keep current file | 4.5: delete "does not fit" sentence, add the group-slope result; 7.2 "The cost" rewritten; Pope–Schweitzer to footnote |
+| B: merit | Revert to gap-in-mu, kappa as price | 4.5 unchanged; 7.2 "The cost" unchanged |
+| B: uninformative | Run D; price paragraph written as conjecture | — |
+| C: floor found | Gate evidenced; cite from 3.2 | New paragraph in 5.1 |
+| C: no floor | Gate dropped; receipt = b-shift only | 1.1 reciprocity framing stays; 3.4 shortened |
+| E: PG ≈ 0, NC > 0 | Gate leads 3.4 | 7.2 "bundles" paragraph resolved toward learning |
+| E: PG > 0 | Both channels kept | 1.1 unchanged |
+| F: persistence established within both states | Allow persistent heterogeneity in both behaviors; assess selective versus general granting using cross-state and selectivity results | Expand persistence subsection with C/N and C/L estimates |
+| F: only one state's persistence established, other imprecise | Limit claims to the supported state; leave the other unresolved | State which opportunities underlie the persistence claim |
+| F: competitive-minus-noncompetitive contrast persists | Stable state selectivity is supported descriptively, without identifying a preference primitive | Report the year-to-year selectivity correlation |
+
+Compute: A and C are cheap (account-level). B is one regression on roughly 1–2M rows with chooser FE plus the robustness set. D requires extracting casual games from the dumps, the only new data pull. E reuses the Section 6 pipelines. F uses existing opportunity data: one aggregation pass, cross-fitted composition adjustment, and account-level summaries/bootstraps. It requires no new API requests or Stockfish evaluations. Save the account-state-year panel so the raw and forward-prediction results need not wait for the adjustment fits.

@@ -1,0 +1,19 @@
+#!/bin/bash
+# Expected runtime: under 30 seconds. Already computed in the delivered results.
+set -euo pipefail
+RECOVERY_PACKAGE="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+RECOVERY_PY="${COLOR_PYTHON:-/Volumes/XT_Pro/lichess_kindness/venv/bin/python}"
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1
+"$RECOVERY_PY" - "$RECOVERY_PACKAGE" <<'PY'
+import pathlib,hashlib,sys
+p=pathlib.Path(sys.argv[1])
+for line in (p/'PACKAGE_MANIFEST.sha256').read_text().splitlines():
+    h,n=line.split('  ',1)
+    if hashlib.sha256((p/n).read_bytes()).hexdigest()!=h:raise SystemExit('Package hash mismatch: '+n)
+print('PACKAGE_SHA256_OK')
+PY
+if [[ -x /usr/bin/caffeinate ]]; then
+  /usr/bin/caffeinate -i "$RECOVERY_PY" -u "$RECOVERY_PACKAGE/code/recompute_calendar.py" --workers 6 "$@"
+else
+  "$RECOVERY_PY" -u "$RECOVERY_PACKAGE/code/recompute_calendar.py" --workers 6 "$@"
+fi

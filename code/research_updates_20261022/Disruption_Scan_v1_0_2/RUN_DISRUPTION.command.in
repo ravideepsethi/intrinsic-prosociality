@@ -1,0 +1,47 @@
+#!/bin/bash
+set -euo pipefail
+DISRUPTION_PACKAGE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DISRUPTION_DESKTOP="${DISRUPTION_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+DISRUPTION_PROJECT="${DISRUPTION_PROJECT:-/Volumes/XT_Pro/lichess_kindness}"
+DISRUPTION_WORKERS="${DISRUPTION_WORKERS:-4}"
+DISRUPTION_MEMORY="${DISRUPTION_MEMORY:-6GB}"
+mkdir -p "$DISRUPTION_DESKTOP/logs"
+DISRUPTION_BOOTSTRAP=""
+for DISRUPTION_CANDIDATE in "${DISRUPTION_PYTHON:-}" /opt/homebrew/bin/python3 /opt/anaconda3/bin/python3 "$HOME/miniconda3/bin/python3" "$HOME/anaconda3/bin/python3" "$(command -v python3 || true)"; do
+  if [[ -n "$DISRUPTION_CANDIDATE" && -x "$DISRUPTION_CANDIDATE" ]] && "$DISRUPTION_CANDIDATE" -c 'import sys; assert (3,11)<=sys.version_info[:2]<(3,15)' >/dev/null 2>&1; then
+    DISRUPTION_BOOTSTRAP="$DISRUPTION_CANDIDATE"
+    break
+  fi
+done
+if [[ -z "$DISRUPTION_BOOTSTRAP" ]]; then
+  echo 'Python 3.11–3.14 was not found. Set DISRUPTION_PYTHON to your existing Python executable.' >&2
+  exit 2
+fi
+DISRUPTION_ENV="$DISRUPTION_DESKTOP/.venv_afe_followups_v100"
+if [[ ! -x "$DISRUPTION_ENV/bin/python" ]]; then "$DISRUPTION_BOOTSTRAP" -m venv "$DISRUPTION_ENV"; fi
+DISRUPTION_PY="$DISRUPTION_ENV/bin/python"
+if ! "$DISRUPTION_PY" - "$DISRUPTION_PACKAGE_DIR/requirements.txt" <<'PY'
+import importlib.metadata,sys
+for line in open(sys.argv[1]):
+    name,version=line.strip().split('==')
+    assert importlib.metadata.version(name)==version
+PY
+then
+  "$DISRUPTION_PY" -m pip install --disable-pip-version-check -r "$DISRUPTION_PACKAGE_DIR/requirements.txt"
+fi
+export OPENBLAS_NUM_THREADS="$DISRUPTION_WORKERS"
+export OMP_NUM_THREADS="$DISRUPTION_WORKERS"
+export MKL_NUM_THREADS="$DISRUPTION_WORKERS"
+export NUMEXPR_NUM_THREADS="$DISRUPTION_WORKERS"
+export VECLIB_MAXIMUM_THREADS="$DISRUPTION_WORKERS"
+export MPLCONFIGDIR="$DISRUPTION_DESKTOP/.disruption_matplotlib"
+export PYTHONUNBUFFERED=1
+"$DISRUPTION_PY" "$DISRUPTION_PACKAGE_DIR/test_scan.py"
+DISRUPTION_LOG="$DISRUPTION_DESKTOP/logs/disruption_scan_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+echo "Log: $DISRUPTION_LOG"
+echo "Using $DISRUPTION_WORKERS threads. Existing Stockfish jobs will share the same CPU."
+if [[ -x /usr/bin/caffeinate ]]; then
+  /usr/bin/caffeinate -dimsu "$DISRUPTION_PY" "$DISRUPTION_PACKAGE_DIR/run_scan.py" --project "$DISRUPTION_PROJECT" --desktop "$DISRUPTION_DESKTOP" --workers "$DISRUPTION_WORKERS" --memory "$DISRUPTION_MEMORY" "$@" 2>&1 | tee "$DISRUPTION_LOG"
+else
+  "$DISRUPTION_PY" "$DISRUPTION_PACKAGE_DIR/run_scan.py" --project "$DISRUPTION_PROJECT" --desktop "$DISRUPTION_DESKTOP" --workers "$DISRUPTION_WORKERS" --memory "$DISRUPTION_MEMORY" "$@" 2>&1 | tee "$DISRUPTION_LOG"
+fi

@@ -1,0 +1,24 @@
+#!/bin/bash
+set -euo pipefail
+PACKAGE_DIR="$(cd "$(dirname "$0")" && pwd)"
+cd "$PACKAGE_DIR"
+
+PREVIOUS_PYTHON="$HOME/Desktop/Lichess_Desktop/Country_Profile_First_Pass_v1_0_0/.venv/bin/python"
+if [ -x "$PREVIOUS_PYTHON" ] && "$PREVIOUS_PYTHON" -c 'import duckdb, pyarrow, numpy, scipy; assert duckdb.__version__ == "1.5.5" and pyarrow.__version__ == "25.0.1"' >/dev/null 2>&1; then
+  RUN_PYTHON="$PREVIOUS_PYTHON"
+else
+  RUN_PYTHON="$PACKAGE_DIR/.venv/bin/python"
+  if [ ! -x "$RUN_PYTHON" ]; then
+    python3 -m venv "$PACKAGE_DIR/.venv"
+  fi
+  if [ ! -f "$PACKAGE_DIR/.venv/DEPENDENCIES_OK" ]; then
+    "$RUN_PYTHON" -m pip install -r "$PACKAGE_DIR/requirements.txt"
+    "$RUN_PYTHON" -c 'import duckdb, pyarrow, numpy, scipy'
+    touch "$PACKAGE_DIR/.venv/DEPENDENCIES_OK"
+  fi
+fi
+if command -v caffeinate >/dev/null 2>&1; then
+  exec caffeinate -i "$RUN_PYTHON" "$PACKAGE_DIR/run_followup.py" "$@"
+else
+  exec "$RUN_PYTHON" "$PACKAGE_DIR/run_followup.py" "$@"
+fi

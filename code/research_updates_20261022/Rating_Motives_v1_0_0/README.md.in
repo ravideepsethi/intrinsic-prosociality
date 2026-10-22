@@ -1,0 +1,82 @@
+# Rating Motives v1.0.0
+
+Released 23 September 2026. Implements the revised **v1.1 analysis specification** included as `ANALYSIS_SPECIFICATION.md`. This is executable analysis code, not a results package. The release was validated with synthetic data; no private Lichess panel estimates have been run in this environment.
+
+## Run on your Mac
+
+Place **both** `Rating_Motives_v1_0_0.zip` and `Rating_Motives_v1_0_0.zip.sha256` directly in:
+
+`__PRIVATE_VALUE_1__/Desktop/Lichess_Desktop`
+
+Paste this complete block into Terminal:
+
+```bash
+(
+  set -e
+  cd "__PRIVATE_VALUE_2__/Desktop/Lichess_Desktop"
+  shasum -a 256 -c Rating_Motives_v1_0_0.zip.sha256
+  ditto -x -k Rating_Motives_v1_0_0.zip .
+  caffeinate -i bash "__PRIVATE_VALUE_3__/Desktop/Lichess_Desktop/Rating_Motives_v1_0_0/RUN_ANALYSIS.command" \
+    --phase all \
+    --project-root "/Volumes/XT_Pro/lichess_kindness" \
+    --desktop-folder "__PRIVATE_VALUE_4__/Desktop/Lichess_Desktop" \
+    --threads 8 \
+    --workers 4
+)
+```
+
+The first invocation creates a private Python environment inside the package and installs the pinned dependencies. It requires Python 3.11 or newer and internet access for dependency installation. If your `python3` is older, set `RATING_MOTIVES_PYTHON` to the path of an installed Python 3.11+ executable before running the same command. No API credentials are needed.
+
+The external project volume must be mounted. Sources are opened read only. New intermediate files and checkpoints go under:
+
+`/Volumes/XT_Pro/lichess_kindness/derived/replication/rating_motives_v100_PRIVATE/<run-id>/`
+
+The terminal prints `UPLOAD THIS REPORT:` followed by the aggregate result ZIP. It is also written directly into your `Lichess_Desktop` folder as `Rating_Motives_RESULTS_<run-id>.zip`, with its checksum alongside it. Upload that results ZIP for interpretation. Individual game/account records and cluster-score files remain on your external drive.
+
+## What runs with the currently documented files
+
+| Output | Current input readiness |
+|---|---|
+| Certified counts, age linkage, payoff identities, missingness, exact-zero support | Available from the certified panel and lossless profile snapshot |
+| T5 threshold, all fixed sensitivities, losing-state estimate, direct state difference, E profiles | Available if the payoff/expected-score checks pass |
+| T1 recipient-stake and T2 log-K diagnostics **without recipient prior count** | Available, explicitly secondary; never substituted into the primary family |
+| T1 and T2 specified primary estimates | Need authenticated counts of prior completed same-speed games |
+| T3 performance, T4 peak, their fixed sensitivities and predictive validation | Need the enriched completed-game history contract below |
+| T6 recipient Patron | Existing executed estimates copied as prior evidence, with original sample and inference |
+| T6 responsibility; T7 casual games | Remain under their separate plan / deferred acquisition |
+
+The documented broad chronology has starts, ratings and results, but does not supply historical RDs, authenticated normal-completion status and game-completion timestamps. A last-move timestamp is not a completion timestamp. The program reports these gaps and continues with available analyses. It does not silently treat missing histories as zero prior games, build a peak from disconnection opportunities, or infer completion order from starts.
+
+The full history-dependent code is included. If an appropriate enriched source already exists, supply its producer-backed manifest with `--history-manifest /absolute/path/manifest.json`. The automatically checked location is:
+
+`/Volumes/XT_Pro/lichess_kindness/derived/replication/rating_motives_history_inputs_v100.json`
+
+See `HISTORY_INPUT_CONTRACT.md`. The example manifest is a schema example, not an assertion that these enriched inputs exist. Do not fill in unsupported semantic declarations simply to get the program past its checks.
+
+## Resuming and practical operation
+
+- Keep the package folder after extraction. To resume, rerun the `caffeinate ... RUN_ANALYSIS.command` portion with the same options. Completed, checksum-valid shards are reused. Input hashes are checked again.
+- The run identity binds code, the certified sample, profile hashes, history manifest, software versions and processing layout. A different enriched history or changed code creates a different run directory. Earlier results are retained.
+- `--memory-limit 8GB` is the default DuckDB cap. Worker count controls separate estimation processes; BLAS threads are fixed at one per worker. `--batch-rows 32768` is the default complete-chooser streaming target; an unusually large chooser can make one block larger.
+- The program emits a heartbeat every 30 seconds during long operations. Full source hashing and disk sorting may be substantial; no unsupported runtime promise is made.
+- A lock prevents simultaneous runs from competing in the same project output tree. A failed run normally produces a failure report ZIP. Interrupted runs retain completed checkpoints; incomplete files are rebuilt.
+- An audit-only run is available with `--phase audit`. It authenticates inputs and reports history readiness without fitting models. It has a separate run identity from the full analysis.
+- Run the synthetic validation suite using `bash RUN_ANALYSIS.command --self-test`. This needs no private project files.
+
+## Reading the report
+
+Start with `SUMMARY.md`, then `primary_family.csv`, `state_differences.csv`, and `support_diagnostics.csv`. `T1_estimates.csv` through `T5_estimates.csv` contain the primary fits, fixed sensitivities and losing-state fits. Other files include:
+
+- `all_estimates.csv`: every estimated or unsupported coefficient, with explicit status and covariance label.
+- `predictions_vs_results.csv`: qualified predictions and observed signs with intervals, without automated motive classification.
+- `sample_flow.csv`, `creation_date_coverage.csv`, `history_feature_coverage.csv` when available: exclusions, acquisition roles and history support.
+- `E_raw_profile.csv`, `T4_distance_raw_profile.csv` when available, and `E_profiles.png/pdf`: descriptive support and profiles.
+- `performance_validation.json`: the separate predictive measurement check, or its unavailable-input status.
+- `authenticated_input_hashes.csv`, `run_identity.json`, `model_registry.json`, `design_diagnostics.json`, `joint_fit_reproduction.csv`: provenance and numerical diagnostics.
+- `executed_code/`: the code, frozen specification and implementation notes used for the run.
+
+All concession coefficients and intervals are reported in **percentage points**. Reporting contrasts are per 10 recipient rating points (T1), per natural-log unit of K and separately per doubling (T2), per 100 performance-gap points (T3), win-only crossing versus no crossing (T4), and the jump above versus below E = 0.75 (T5). The E-profile coefficients are adjusted differences from [0.70, 0.75), not adjusted absolute grant rates. The performance-validation outcome is an ordinary-game score residual, not a concession.
+
+Five competitive primary tests form the discovery Holm family. Missing/unidentified tests enter the arithmetic as p=1 and remain labeled unsupported. Equivalence and direct state differences have separate five-test families. Sensitivities do not enter the primary family.
+
+The age-known sample remains selected through the original profile acquisition. These results do not estimate causal motives or a representative population effect. See `IMPLEMENTATION_NOTES.md` for exact computational conventions and limitations.

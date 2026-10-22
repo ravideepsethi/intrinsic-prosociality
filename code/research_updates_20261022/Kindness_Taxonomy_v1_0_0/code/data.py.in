@@ -1,0 +1,182 @@
+"""Certified opportunity projection and strictly prior observed-panel histories."""
+from common import *
+from concurrent.futures import ThreadPoolExecutor
+SNAPSHOT='derived/replication/patron_profile_snapshot_24m_v100_FINAL_CERTIFIED/profile_snapshot_24m_private_lossless.parquet'
+SNAPSHOT_SHA='f42f28a6540a65c0a83f0da488663b4adddf60d1001daeed556f1ffbb961e238'
+
+def bind(project,work,workers):
+    auth=read(ROOT/'authority/pool_main.json');base=Path(project)/'derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE'
+    live=read(base/'_SUCCESS.json')
+    for k in ('status','main_predicate','contract_sha256','code_sha256','observed_screen_certified','literal_immediate_rematches_certified'):
+        if live.get(k)!=auth[k]:raise RuntimeError('Certified main authority differs: '+k)
+    if live.get('report_zip_sha256')!=auth['report_sha256']:raise RuntimeError('Main authority report differs')
+    by={r['month']:r for r in live['panel_outputs']};inputs=[]
+    for r in auth['panel_outputs']:
+        if any(by[r['month']][k]!=r[k] for k in ('rows','sha256','size_bytes','relative_path')):raise RuntimeError('Changed monthly authority')
+        inputs.append(dict(r,path=str(base/r['relative_path'])))
+    if [r['month'] for r in inputs]!=list(MONTHS):raise RuntimeError('Main month set differs')
+    def check(r):
+        authenticate(r['path'],work,r['sha256'],r['size_bytes'])
+        if pq.ParquetFile(r['path']).metadata.num_rows!=r['rows']:raise RuntimeError('Parquet row count mismatch')
+    with ThreadPoolExecutor(max_workers=min(4,workers)) as pool:list(pool.map(check,inputs))
+    ans=dict(panels=inputs,main_authority_sha256=sha(ROOT/'authority/pool_main.json'),authors=list(AUTHORS))
+    write(Path(work)/'MAIN_BINDING_PRIVATE.json',ans);return ans
+
+def field(cols,*options,required=True):
+    for f in options:
+        if f in cols:return '"'+f+'"'
+    if required:raise RuntimeError('Missing known field: '+str(options))
+    return None
+
+def project_query(path):
+    cols=set(pq.ParquetFile(path).schema_arrow.names)
+    a=field(cols,'chooser_username_norm','chooser_username');b=field(cols,'disconnected_username_norm','disconnected_username')
+    timefield=field(cols,'api_created_at_ms','utc_ms')
+    y=field(cols,'outcome_kind_draw','kind_draw');claim=field(cols,'timeout_chooser_win')
+    mate=field(cols,'engine_eval_is_mate',required=False) or 'FALSE'
+    speed=field(cols,'api_speed')
+    stage="CASE WHEN ply_count<=2 THEN 0 WHEN ply_count<=4 THEN 1 WHEN ply_count<=6 THEN 2 WHEN ply_count<=10 THEN 3 WHEN ply_count<=20 THEN 4 WHEN ply_count<=40 THEN 5 WHEN ply_count<=80 THEN 6 ELSE 7 END"
+    return f'''SELECT game_id::VARCHAR game_id,chooser_user_id::BIGINT chooser,disconnected_user_id::BIGINT recipient,
+      lower(trim({a})) username,lower(trim({b})) recipient_username,{timefield}::BIGINT start_ms,
+      api_last_move_at_ms::BIGINT end_ms,{y}::INT y,{claim}::BOOLEAN claimed,
+      engine_eval_cp_disconnected::DOUBLE cp,{mate}::BOOLEAN is_mate,
+      CASE WHEN engine_eval_cp_disconnected<=-300 THEN 0 WHEN engine_eval_cp_disconnected<-100 THEN 1
+        WHEN engine_eval_cp_disconnected<=100 THEN 2 WHEN engine_eval_cp_disconnected<300 THEN 3 ELSE 4 END::TINYINT state,
+      chooser_win_premium_v2::DOUBLE AS "cost",lower({speed})::VARCHAR speed,ply_count::INTEGER ply,{stage}::TINYINT stage,
+      chooser_clock_last_obs_s::DOUBLE clock,disconnected_clock_last_obs_s::DOUBLE rival_clock,
+      chooser_elo::DOUBLE rating,disconnected_elo::DOUBLE rival_rating,chooser_pre_rd_v2::DOUBLE rd,
+      disconnected_pre_rd_v2::DOUBLE rival_rd,
+      CASE WHEN {timefield}<{SPLIT} THEN 1 ELSE 2 END::TINYINT AS "year",
+      strftime(to_timestamp({timefield}/1000.),'%Y-%m') AS "month"
+      FROM {scan(path)} WHERE lower(trim({a})) NOT IN ('__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__')
+      AND lower(trim({b})) NOT IN ('__PRIVATE_VALUE_3__','__PRIVATE_VALUE_4__')'''
+
+def build(c,binding,work,key,cfg):
+    paths=[];audit=[]
+    for i,r in enumerate(binding['panels']):
+        folder=Path(work)/'00_panel'/r['month'];folder.mkdir(parents=True,exist_ok=True);p=folder/'panel.parquet'
+        if not checked(folder,key):
+            log('Project month '+r['month'])
+            query=project_query(r['path']);copy(c,query,p)
+            c.execute('CREATE OR REPLACE TEMP VIEW check_month AS SELECT * FROM '+scan(p))
+            row=records(c,f'''SELECT count(*) AS "rows",count(DISTINCT game_id) unique_games,sum(y) grants,
+                count(*) FILTER(WHERE chooser IS NULL OR recipient IS NULL OR chooser=recipient OR chooser<0 OR recipient<0
+                 OR username IS NULL OR recipient_username IS NULL OR username='' OR recipient_username=''
+                 OR start_ms IS NULL OR start_ms<{START} OR start_ms>={END} OR end_ms IS NULL OR end_ms<start_ms
+                 OR y IS NULL OR y NOT IN(0,1) OR cp IS NULL OR NOT isfinite(cp)
+                 OR cost IS NULL OR NOT isfinite(cost) OR cost<=0 OR rating IS NULL OR rival_rating IS NULL
+                 OR speed IS NULL OR ply IS NULL OR ply<0 OR month<>{q(r['month'])}) invalid_rows,
+                count(*) FILTER(WHERE NOT coalesce(y=1 OR claimed,false)) other_resolution_rows,
+                count(*) FILTER(WHERE is_mate) mate_rows FROM check_month''')[0]
+            if row['invalid_rows'] or row['unique_games']!=row['rows']:raise RuntimeError('Invalid main projection: '+str(row))
+            row.update(month=r['month'],source_rows=r['rows'],author_games_removed=r['rows']-row['rows'])
+            write(folder/'audit.json',row);done(folder,key)
+        audit.append(read(folder/'audit.json'));paths.append(str(p))
+        if (i+1) in (6,12,18,24):log(f'Panel {(i+1)*100//24}% checkpoint; continuing')
+    attach_panel(c,paths)
+    if c.execute('SELECT count(*)-count(DISTINCT game_id) FROM panel').fetchone()[0]:raise RuntimeError('Duplicate games across main months')
+    c.execute('''CREATE OR REPLACE TEMP TABLE identities AS SELECT chooser id,username FROM panel GROUP BY ALL
+      UNION SELECT recipient id,recipient_username username FROM panel GROUP BY ALL''')
+    if c.execute('SELECT count(*) FROM (SELECT id FROM identities GROUP BY id HAVING count(*)>1)').fetchone()[0]:raise RuntimeError('ID maps to multiple usernames')
+    if c.execute('SELECT count(*) FROM (SELECT username FROM identities GROUP BY username HAVING count(*)>1)').fetchone()[0]:raise RuntimeError('Username maps to multiple IDs')
+    folder=Path(work)/'00_aggregates';folder.mkdir(parents=True,exist_ok=True)
+    if not checked(folder,key):
+        copy(c,'''SELECT chooser,year,state,count(*)::BIGINT n,sum(y)::BIGINT g FROM panel GROUP BY ALL''',folder/'account_state_year.parquet')
+        copy(c,'''SELECT chooser,any_value(username) username,min(start_ms) first_start,max(start_ms) last_start,
+          count(*) opportunities,sum(y) grants FROM panel GROUP BY chooser''',folder/'accounts.parquet')
+        copy(c,'SELECT * FROM identities',folder/'identities.parquet')
+        csvwrite(folder/'input_audit.csv',audit);done(folder,key)
+    return paths
+
+def attach_panel(c,paths):c.execute('CREATE OR REPLACE TEMP VIEW panel AS SELECT * FROM '+scan(paths))
+
+def profiles(c,project,work,key):
+    folder=Path(work)/'00_profiles';folder.mkdir(parents=True,exist_ok=True)
+    p=Path(project)/SNAPSHOT
+    if not p.is_file():
+        c.execute('CREATE OR REPLACE TEMP TABLE profiles(username VARCHAR,created_ms BIGINT,patron INTEGER)')
+        return dict(status='MISSING',reason='Historical profile snapshot unavailable')
+    authenticate(p,work,SNAPSHOT_SHA);require_columns(p,['username_norm','returned','raw_user_json'])
+    if not checked(folder,key):
+        created='try_cast(created_at_ms AS BIGINT)' if 'created_at_ms' in pq.ParquetFile(p).schema_arrow.names else 'NULL::BIGINT'
+        c.execute(f'''CREATE OR REPLACE TEMP VIEW profile_input AS SELECT lower(trim(username_norm)) username,returned,
+            {created} normalized_created,try_cast(raw_user_json AS JSON) j,
+            try_cast(json_extract_string(try_cast(raw_user_json AS JSON),'$.createdAt') AS BIGINT) raw_created FROM {scan(p)}''')
+        bad=c.execute("""SELECT count(*) FROM profile_input WHERE username IS NULL OR username='' OR returned IS NULL
+          OR (returned AND coalesce(json_type(j)<>'OBJECT',true))
+          OR (normalized_created IS NOT NULL AND raw_created IS NOT NULL AND normalized_created<>raw_created)""").fetchone()[0]
+        if bad:raise RuntimeError('Historical profile JSON or creation fields failed validation')
+        copy(c,'''SELECT username,
+            CASE WHEN coalesce(raw_created,normalized_created) BETWEEN 946684800000 AND epoch_ms(current_timestamp)
+              THEN coalesce(raw_created,normalized_created) END created_ms,
+            CASE WHEN returned AND NOT coalesce(try_cast(json_extract_string(j,'$.disabled') AS BOOLEAN),false)
+              THEN coalesce(try_cast(json_extract_string(j,'$.patron') AS BOOLEAN),false)::INT END patron
+            FROM profile_input WHERE returned AND username NOT IN ('__PRIVATE_VALUE_5__','__PRIVATE_VALUE_6__')''',folder/'profiles.parquet')
+        done(folder,key)
+    c.execute('CREATE OR REPLACE TEMP VIEW profiles AS SELECT * FROM '+scan(folder/'profiles.parquet'))
+    if c.execute('SELECT count(*)-count(DISTINCT username) FROM profiles').fetchone()[0]:raise RuntimeError('Duplicate historical profiles')
+    return dict(status='AVAILABLE_SELECTED_SNAPSHOT',source_sha256=SNAPSHOT_SHA,
+      warning='Profile acquisition was selected; Patron rates conditional on snapshot coverage, not population type shares')
+
+def histories(c,work,key,cfg):
+    folder=Path(work)/'00_histories';folder.mkdir(parents=True,exist_ok=True)
+    if not checked(folder,key):
+        guard=int(cfg['history_guard_s']*1000)
+        # Aggregate exact ties first. A later ASOF with >, not >=, excludes same-time events.
+        copy(c,f'''WITH e AS (
+          SELECT chooser account,end_ms+{guard} available_ms,1 screen,y grant_count,(y*(state>=2)::INT) competitive_grant,
+            0 receipt,0 claimed_winning FROM panel
+          UNION ALL SELECT recipient,end_ms+{guard},0,0,0,y,((cp>={cfg['claimed_while_winning_cp']}) AND claimed)::INT FROM panel),
+          t AS (SELECT account,available_ms,sum(screen) screen,sum(grant_count) grant_count,sum(competitive_grant) competitive_grant,
+            sum(receipt) receipt,sum(claimed_winning) claimed_winning FROM e GROUP BY ALL)
+          SELECT account,available_ms,
+            sum(screen) OVER w screens_before,sum(grant_count) OVER w grants_before,sum(competitive_grant) OVER w competitive_grants_before,
+            sum(receipt) OVER w receipts_before,sum(claimed_winning) OVER w claimed_while_winning_before,
+            max(CASE WHEN screen>0 THEN available_ms-{guard} END) OVER w last_screen_ms,
+            max(CASE WHEN receipt>0 THEN available_ms-{guard} END) OVER w last_receipt_ms,
+            max(CASE WHEN claimed_winning>0 THEN available_ms-{guard} END) OVER w last_claimed_winning_ms
+          FROM t WINDOW w AS(PARTITION BY account ORDER BY available_ms ROWS UNBOUNDED PRECEDING)''',folder/'events.parquet')
+        copy(c,'''SELECT game_id,min(start_ms) OVER(PARTITION BY chooser) first_opportunity_ms,
+          max(end_ms) OVER(PARTITION BY chooser ORDER BY start_ms,game_id ROWS BETWEEN UNBOUNDED PRECEDING AND 1 PRECEDING) previous_max_end,
+          count(*) OVER(PARTITION BY chooser,start_ms) simultaneous_starts FROM panel''',folder/'order.parquet')
+        done(folder,key)
+    c.execute('CREATE OR REPLACE TEMP VIEW histories AS SELECT * FROM '+scan(folder/'events.parquet'))
+    c.execute('CREATE OR REPLACE TEMP VIEW opportunity_order AS SELECT * FROM '+scan(folder/'order.parquet'))
+    return dict(scope='Strictly prior observed certified pool/nonadjacent opportunities, not lifetime or actual UI views',
+      boundary='2023-11-01',availability_guard_seconds=cfg['history_guard_s'])
+
+def markers(c,work,folder,profile_status):
+    c.execute('''CREATE OR REPLACE TEMP TABLE marker_speed AS SELECT chooser,year,speed FROM
+      (SELECT chooser,year,speed,count(*) n FROM panel GROUP BY ALL)
+      QUALIFY row_number() OVER(PARTITION BY chooser,year ORDER BY n DESC,speed)=1''')
+    copy(c,f'''SELECT p.chooser,p.year,any_value(p.username) username,
+       avg(p.rating) rating_level_main_opportunities,stddev_samp(p.rating) rating_sd_main_opportunities,
+       ms.speed marker_primary_speed,
+       avg(p.rating) FILTER(WHERE p.speed=ms.speed) rating_level_primary_speed_opportunities,
+       stddev_samp(p.rating) FILTER(WHERE p.speed=ms.speed) rating_sd_primary_speed_opportunities,
+       count(*) FILTER(WHERE p.speed=ms.speed) primary_speed_opportunities,
+       min(p.start_ms) first_observed_opportunity_ms,count(*) marker_opportunities,
+       CASE WHEN pr.created_ms<=min(p.start_ms) THEN (min(p.start_ms)-pr.created_ms)/{DAY}. END tenure_days,
+       pr.patron,pr.created_ms FROM panel p LEFT JOIN profiles pr USING(username)
+       JOIN marker_speed ms ON p.chooser=ms.chooser AND p.year=ms.year
+       GROUP BY p.chooser,p.year,pr.created_ms,pr.patron,ms.speed''',folder/'account_markers_PRIVATE.parquet')
+    write(folder/'coverage.json',dict(profile=profile_status,
+      available=['rating_level_main_opportunities','rating_sd_main_opportunities','rating_level_primary_speed_opportunities','rating_sd_primary_speed_opportunities','tenure_days_where_profile_known','patron_selected_snapshot'],
+      unavailable=['resign_share','own_disconnect_rate_per_all_games','casual_share','games_total','provisional_flag','rating_sd_all_games'],
+      distinction='Marker construction uses no grant decisions. Rating proxies use the opportunity-selected frame, not all games. Missing markers are not imputed as zero.'))
+
+def optional_inventory(project,folder):
+    # Read only schemas/metadata. Do not scan billion-row chronology or invent adapters.
+    roots=['raw/lichess_pgn_standard','derived/replication/analysis_panel_24m_sf100k',
+      'derived/replication/patron_profile_snapshot_24m_v100_FINAL_CERTIFIED',
+      'derived/glicko2_replay/rating_events_replay_sorted_v2_time/events_replay_sorted_time',
+      'derived/replication/dynamic_second_wave_history_v100_PRIVATE',
+      'derived/replication/api_timeout_enrichment',
+      'derived/replication/taxonomy_extended_inputs']
+    rows=[]
+    for rel in roots:
+        p=Path(project)/rel;files=sorted(p.rglob('*.parquet')) if p.is_dir() and 'events_replay_sorted_time' not in rel else []
+        if 'events_replay_sorted_time' in rel and p.exists():files=sorted(p.glob('speed=*/month=*/part-*.parquet'))
+        rawfiles=[dict(relative_path=str(f.relative_to(project)),bytes=f.stat().st_size) for f in sorted(p.glob('*.pgn*')) if f.is_file()] if rel.startswith('raw/') else []
+        rows.append(dict(relative_root=rel,exists=p.exists(),raw_archives=rawfiles,parquet_files=len(files),schemas=[dict(relative_path=str(f.relative_to(project)),rows=pq.ParquetFile(f).metadata.num_rows,columns=pq.ParquetFile(f).schema_arrow.names) for f in files[:3]]))
+    write(folder/'optional_source_inventory.json',rows)

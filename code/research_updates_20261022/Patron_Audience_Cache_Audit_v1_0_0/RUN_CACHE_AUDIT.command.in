@@ -1,0 +1,22 @@
+#!/bin/bash
+set -euo pipefail
+task_code="$(cd "$(dirname "$0")" && pwd)"
+task_desktop="$HOME/Desktop/Lichess_Desktop"
+task_project="${LICHESS_AUDIENCE_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+mkdir -p "$task_desktop"
+task_env="$task_desktop/audience_robustness_v100_env"
+task_python="$task_env/bin/python"
+if [[ ! -x "$task_python" ]]; then
+  task_env="$task_desktop/patron_audience_cache_audit_v100_env"
+  if [[ ! -x "$task_env/bin/python" ]]; then
+    python3 -m venv "$task_env"
+  fi
+  task_python="$task_env/bin/python"
+  "$task_python" -m pip install --disable-pip-version-check 'duckdb==1.5.5'
+fi
+"$task_python" -c 'import duckdb'
+task_stamp="$(date -u +%Y%m%dT%H%M%SZ)_$$"
+task_log="$task_desktop/PATRON_AUDIENCE_CACHE_AUDIT_v100_$task_stamp.log"
+"$task_python" -u "$task_code/audit_patron_audience.py" \
+  --project-root "$task_project" --desktop "$task_desktop" --threads 4 \
+  2>&1 | tee "$task_log"

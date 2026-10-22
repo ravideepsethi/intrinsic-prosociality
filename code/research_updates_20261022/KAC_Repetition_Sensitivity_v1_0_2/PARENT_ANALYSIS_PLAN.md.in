@@ -1,0 +1,57 @@
+# Companion analyses, frozen before new coefficients
+
+This package addresses the user's request to progress the other analyses while the A2 Stockfish repair runs. It does not rerun or alter A2. Its run status deliberately distinguishes completed estimates, recovered results, and unresolved data requirements.
+
+## Arena gradient (§3.5)
+
+Recover the authenticated arena v1.0.2 `arena_by_board_merit` interaction. Both formats use observed nonadjacency and all game stages. The estimate is an additive within-chooser difference in competitive-minus-clearly-worse gradients. It is not a causal competition effect. Late-arena timing and tournament-price extensions are not included.
+
+## Repetition (§4.2; B3 in the handoff)
+
+Use every opportunity in the certified pool/nonadjacent sample. Do not rederive the grant indicator, rerun engines, drop never-granters, or select accounts by outcomes. Use existing all-rated real-time standard chronology beginning in 2013 to count prior observed starts in the same speed and reconstruct start-to-start playing sessions across speeds. A historical count is not certified lifetime experience.
+
+Only starts strictly before the focal start count as prior. Exclude focal tied starts. Sessions break at gaps of at least 30 minutes; predeclared 15/60-minute sensitivities. An October 2023 buffer and explicit previous-month carry preserve sessions across boundaries. Sessions crossing the left history buffer are marked censored until an observed break. Session position bins are 1 (reference), 2–3, 4–7, 8–15, 16+. The experience regressor is log(1 + prior same-speed starts).
+
+Primary: competitive positions after ply 10, chooser FE, month, speed, stage, and the handoff's evaluation bins. Positive mates get an additional indicator. Primary pooled interaction model: competitive and clearly-worse opportunities after ply 10, excluding the middle region, with both repetition measures interacted with competitive status. Additional losing-tail/mate controls enter that model. All-stage, 15/60-minute, and rating/clock specifications are declared sensitivities, not searches for a preferred sign. Game-stage bands and evaluation boundaries follow the existing continuous-merit package.
+
+Outcome units are percentage points. Estimation uses whole-chooser partitions, exact within-chooser transformations, and a second pass for chooser cluster scores. Rank deficiencies are recorded; a contrast outside the estimable span is not reported as zero. Covariance uses G/(G−1). Four primary tests comprise the competitive session joint test, competitive experience coefficient, pooled session interaction joint test, and pooled experience interaction coefficient; Holm correction is over these four, with unsupported tests retained in the family denominator. Other intervals are descriptive sensitivity intervals.
+
+Describe session-position exposure and full observed session lengths by account competitive grant-rate groups. Accounts are grouped descriptively using panel behavior, not prospectively. The length table weights sessions, the opportunity table weights opportunities. Completed-length summaries exclude the left-censored history and sessions whose final observed start is in the panel's final hour. These comparisons do not identify an effect of playing more, and chooser/month effects do not remove individual trends or changing circumstances.
+
+## Receipt and IV common-hour checks (§5)
+
+Reuse the original receipt panel and expanded primary IV panel by SHA256 and row identity. Reproduce the original baseline coefficient and SE before accepting additional estimates. In the matched design, preserve the original index selection, support cells and weights formed before follow-up, controls, zero coding, and exposure-chooser clustered correction.
+
+For receipt, estimate baseline, exposure start hour FE, and exposure last-move hour FE for (i) first subsequent competitive choice conditional on reach, (ii) reach within 90 days, and (iii) first-choice granting with no later choice coded zero. Add both exposure and subsequent last-move hour effects only as a separate post-exposure sensitivity for (i). Last-move timestamps proxy decision time; they are not claim-click times. The code also reports a CR0 chooser-or-exposure-hour variance sensitivity, with a negative variance flagged rather than repaired.
+
+For IV, preserve primary 90-day spacing, outcomes, pre-exposure controls, different-opponent rule, unconditional zero coding and shared-account-or-exposure-date covariance. Add exposure start hour or exposure last-move hour effects separately. Never condition the unconditional primary IV on reaching an outcome hour. Report first stage, reduced form, reach, 2SLS/AR, and same-row OLS. Historical scores remain fixed measured regressors. A changed coefficient does not establish or refute exclusion.
+
+These comparisons absorb additive common conditions within a clock hour. They are additional common-shock sensitivities. They do not replace the promised leave-one-out platform timeout-share control/top-percentile exclusion, and they do not refit the first-grant concentration benchmark. Those items remain explicitly open. With a fixed-effects comparison, heterogeneous incident responses and within-hour conditions can remain.
+
+## Ordinary previous loss (§5.2; A5)
+
+The current canonical chronology has starts and eventual results, not ending types or verified completion times. Do not infer an ordinary ending from absence in the five-second-screened timeout sample. Do not treat a start-ordered eventual loss as known before the focal game. The shared reconstruction retains private immediate-predecessor keys, results and tie flags for a subsequent authenticated metadata join. It never skips a disconnection to find an older ordinary game. No ordinary-loss coefficient is estimated in this package without the missing source contract. An ordinary-loss association would not identify the fraction of the receipt association attributable to losing.
+
+## Resources and outputs
+
+Maximum 10 total reserved workers across detected Lichess Python jobs; caffeinate wrappers and Stockfish children are not counted twice. Check capacity before heavy stages. At most three concurrent history-file scans by default; DuckDB monthly work uses at most four threads; numerical libraries use one thread per worker. Reuse certified monthly Parquets. Read history prefix columns narrowly and retain only counts; reconstruct recent history one month at a time and retain focal links plus carry summaries. No network/API/profile request or engine search. New output tree only. Atomic files and content-bound checkpoint receipts; interruption preserves completed work. Export aggregate reports/code manifests only, never row-level game/account identifiers.
+
+
+## Implementation amendment: v1.0.2 recovery
+
+The statistical designs above remain frozen. The no-network statement for the
+original runner is superseded only for recovery of the single reviewed invalid
+June 2023 bullet timestamp involving an analysis chooser. One public game export
+is allowed, with identity, rating, class, result and month validation; repeated
+runs reuse its authenticated response. A private overlay changes no source file
+or sample membership. Unverified timestamps continue to block history.
+
+Rectangular LSMR replaces the unsuccessful singular-normal-system solver while
+retaining the original orthogonality tolerances, model span and observations.
+Completed per-column projections are checkpointed. Independent failed models do
+not stop other models. Algebraic failure diagnostics omit original identifiers
+and timestamp labels. This is not a new statistical specification.
+
+This recovery does not implement the separate panel-wide request to exclude
+the author's accounts, __PRIVATE_VALUE_1__ and __PRIVATE_VALUE_2__. Results retain the original frozen
+sample and must be described accordingly until that revision is completed.

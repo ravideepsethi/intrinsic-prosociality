@@ -1,0 +1,126 @@
+{
+  "package": "A1_Trajectory_Build_v1_0_2",
+  "archive_name": "A1_Trajectory_Build_v1_0_2.zip",
+  "archive_sha256": "1648a8a38ae05097e9431d6a27f488af95e493610bd2112a15d70df240c3e876",
+  "archive_size": 77066,
+  "archive_root": "A1_Trajectory_Build_v1_0_2",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "CHANGES.md",
+      "published_path": "CHANGES.md",
+      "sha256": "b7e5df772b12ff697c8efb10d2bc45db105c9397a3808c1a16292233d2f4c5cc",
+      "published_sha256": "b7e5df772b12ff697c8efb10d2bc45db105c9397a3808c1a16292233d2f4c5cc",
+      "size": 3564
+    },
+    {
+      "path": "DESIGN.md",
+      "published_path": "DESIGN.md",
+      "sha256": "06b84394e9d40fbc5fd79473cbfd1e4bb475369b67428ab9d9e5d6080a9aa730",
+      "published_sha256": "06b84394e9d40fbc5fd79473cbfd1e4bb475369b67428ab9d9e5d6080a9aa730",
+      "size": 5581
+    },
+    {
+      "path": "README.md",
+      "published_path": "README.md",
+      "sha256": "2761bc107a9d9495fa89db96658804ddf7e4ffbd3cd22ae2f052ab8683d73712",
+      "published_sha256": "2761bc107a9d9495fa89db96658804ddf7e4ffbd3cd22ae2f052ab8683d73712",
+      "size": 5432
+    },
+    {
+      "path": "RUN_BUILD.command",
+      "published_path": "RUN_BUILD.command.in",
+      "sha256": "afd51b1728cdaead3993b01283cde297c338142c5d53d1875d96d0fe4d26464f",
+      "published_sha256": "afd51b1728cdaead3993b01283cde297c338142c5d53d1875d96d0fe4d26464f",
+      "size": 1804
+    },
+    {
+      "path": "compact_plan.py",
+      "published_path": "compact_plan.py",
+      "sha256": "e23c08311162409d7112567425521116bdbf814708b905b7be156583cbfe2ce9",
+      "published_sha256": "e23c08311162409d7112567425521116bdbf814708b905b7be156583cbfe2ce9",
+      "size": 3057
+    },
+    {
+      "path": "engine_jobs.py",
+      "published_path": "engine_jobs.py",
+      "sha256": "8b741642a254495636fec828d1e9283db25888602f89d9c0cc44cd3ce406a592",
+      "published_sha256": "8b741642a254495636fec828d1e9283db25888602f89d9c0cc44cd3ce406a592",
+      "size": 8715
+    },
+    {
+      "path": "fetch_moves.py",
+      "published_path": "fetch_moves.py",
+      "sha256": "486c59e28b65df97326590a273eb5964d897928753a1d5c91fbe4ea7d4c01683",
+      "published_sha256": "486c59e28b65df97326590a273eb5964d897928753a1d5c91fbe4ea7d4c01683",
+      "size": 5872
+    },
+    {
+      "path": "local_io.py",
+      "published_path": "local_io.py",
+      "sha256": "2d850530ab8490bd8fc133020e7283684d6690fc8c5776129246b63f777cfa2b",
+      "published_sha256": "2d850530ab8490bd8fc133020e7283684d6690fc8c5776129246b63f777cfa2b",
+      "size": 5370
+    },
+    {
+      "path": "recover_logic.py",
+      "published_path": "recover_logic.py",
+      "sha256": "e2b726f168193c5ac514d37cde4d286320a435928261e62badc98b79aeda966e",
+      "published_sha256": "e2b726f168193c5ac514d37cde4d286320a435928261e62badc98b79aeda966e",
+      "size": 6733
+    },
+    {
+      "path": "run_build.py",
+      "published_path": "run_build.py",
+      "sha256": "2066c8cc6466f7289b18a5cf9e0a8608eeb2361a06edaf81002f5b4f7a3ed261",
+      "published_sha256": "2066c8cc6466f7289b18a5cf9e0a8608eeb2361a06edaf81002f5b4f7a3ed261",
+      "size": 19529
+    },
+    {
+      "path": "run_tests.py",
+      "published_path": "run_tests.py",
+      "sha256": "53ae07881fe68c48f834b9cf4a9157cd700f9a79f1f24c85cec9c05eb161b863",
+      "published_sha256": "53ae07881fe68c48f834b9cf4a9157cd700f9a79f1f24c85cec9c05eb161b863",
+      "size": 1522
+    },
+    {
+      "path": "test_build.py",
+      "published_path": "test_build.py",
+      "sha256": "e800841f21682c86cbd0ce91deac84a947ade3dca973a21853b41d56795cad7c",
+      "published_sha256": "e800841f21682c86cbd0ce91deac84a947ade3dca973a21853b41d56795cad7c",
+      "size": 26612
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "FILES.sha256",
+      "sha256": "c4cea8807bf99009b1ab95eb08e6b14a6dd545bec172a32ab4cc67399fef3825",
+      "size": 1437
+    },
+    {
+      "path": "VALIDATION.json",
+      "sha256": "9bdb8d1cb8d506f9632e8def2276c45c674d0ee2e2b6ffc44ec93ac1dc73aa55",
+      "size": 3240
+    },
+    {
+      "path": "evidence/SUMMARY.json",
+      "sha256": "f9d7905f1ef3cd10912a0c69e7cf523861d5eda7af982d30c7226ffe4bb44b08",
+      "size": 2074
+    },
+    {
+      "path": "evidence/engine_benchmark_summary.json",
+      "sha256": "46fe3cded982f69c548cbeb7254f1bf6849baa867ff27872df0c7157039cfce5",
+      "size": 998
+    },
+    {
+      "path": "evidence/main_sample_report.json",
+      "sha256": "0ef50e424e004c5698c0c3dbc9815748627e5f23e6504fdaedfd526225ee184e",
+      "size": 510451
+    },
+    {
+      "path": "evidence/trajectory_targets_summary.json",
+      "sha256": "d38ae1180171c48f0835944dacd69fa8d8ee9592b6ba55e450c6e9d20b66355e",
+      "size": 11673
+    }
+  ]
+}

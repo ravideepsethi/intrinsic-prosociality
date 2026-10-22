@@ -1,0 +1,14 @@
+#!/bin/bash
+set -euo pipefail
+A3_LOCAL_DIR="$(cd "$(dirname "$0")" && pwd)"
+A3_LOCAL_PROJECT="${LICHESS_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+A3_LOCAL_PYTHON="${LICHESS_PYTHON:-$A3_LOCAL_PROJECT/venv/bin/python}"
+if [ ! -x "$A3_LOCAL_PYTHON" ]; then
+  printf 'Project Python not found: %s\n' "$A3_LOCAL_PYTHON"
+  exit 2
+fi
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1
+export PYTHONDONTWRITEBYTECODE=1
+"$A3_LOCAL_PYTHON" -c 'import duckdb,pyarrow; print("DuckDB",duckdb.__version__,"PyArrow",pyarrow.__version__,"; SciPy not required")'
+"$A3_LOCAL_PYTHON" "$A3_LOCAL_DIR/tests/test_continue.py"
+"$A3_LOCAL_PYTHON" "$A3_LOCAL_DIR/code/continue_a3.py" --project "$A3_LOCAL_PROJECT" --workers "${LICHESS_WORKERS:-10}" --report-dir "$HOME/Desktop/Lichess_Desktop" "$@"

@@ -1,0 +1,159 @@
+{
+  "package": "Pool_Activity_State_Rates_v1_0_0",
+  "archive_name": "Pool_Activity_State_Rates_v1_0_0.zip",
+  "archive_sha256": "35d2b2da47ab4f932ff82dcc92407ea774281ed3097dd3d92803a252e53b5c58",
+  "archive_size": 133857,
+  "archive_root": "Pool_Activity_State_Rates_v1_0_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "README.md",
+      "published_path": "README.md",
+      "sha256": "793ba5402433e1a9be1b7fb2008b248be9c8a6af87c6e0b998dbffa353dfa5f4",
+      "published_sha256": "793ba5402433e1a9be1b7fb2008b248be9c8a6af87c6e0b998dbffa353dfa5f4",
+      "size": 4723
+    },
+    {
+      "path": "RUN_ACTIVITY_STATE_RATES.command",
+      "published_path": "RUN_ACTIVITY_STATE_RATES.command.in",
+      "sha256": "a594c32e22e68140c8987e19ecfa994c42834f96d687747be6561bcbd9859e7b",
+      "published_sha256": "a594c32e22e68140c8987e19ecfa994c42834f96d687747be6561bcbd9859e7b",
+      "size": 3676
+    },
+    {
+      "path": "docs/INTERPRETATION.md",
+      "published_path": "docs/INTERPRETATION.md",
+      "sha256": "c247fed5b1d736c25ca14aca7374a2a69ba3c7a7808dbdae1d475d54fb1ed3f4",
+      "published_sha256": "c247fed5b1d736c25ca14aca7374a2a69ba3c7a7808dbdae1d475d54fb1ed3f4",
+      "size": 5064
+    },
+    {
+      "path": "docs/METHODS.md",
+      "published_path": "docs/METHODS.md",
+      "sha256": "1e6e9e5d5f2474acf0247300cb2fa65144edce0dd3ae1fc4227552ff9be53714",
+      "published_sha256": "1e6e9e5d5f2474acf0247300cb2fa65144edce0dd3ae1fc4227552ff9be53714",
+      "size": 4554
+    },
+    {
+      "path": "runner/__init__.py",
+      "published_path": "runner/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "runner/common.py",
+      "published_path": "runner/common.py",
+      "sha256": "4198dde068097367a7a05d09abbfca123e756419a609fbe31270a4573571bbec",
+      "published_sha256": "4198dde068097367a7a05d09abbfca123e756419a609fbe31270a4573571bbec",
+      "size": 24293
+    },
+    {
+      "path": "runner/rates.py",
+      "published_path": "runner/rates.py",
+      "sha256": "111f44aa74b9d7f05a7c3fd99811654e36bee34ad576cb8bd171d9142e3d94df",
+      "published_sha256": "111f44aa74b9d7f05a7c3fd99811654e36bee34ad576cb8bd171d9142e3d94df",
+      "size": 7454
+    },
+    {
+      "path": "runner/run.py",
+      "published_path": "runner/run.py",
+      "sha256": "1a4d73764d04bbd3c3969e602c7eb46a0d2d15e673c82ea0c5ac2acffeced494",
+      "published_sha256": "1a4d73764d04bbd3c3969e602c7eb46a0d2d15e673c82ea0c5ac2acffeced494",
+      "size": 12383
+    },
+    {
+      "path": "runner/self_test.py",
+      "published_path": "runner/self_test.py",
+      "sha256": "b5135b04758862e7d4334827578f59957056bf5d6365c6e3f2b0b578784e33f4",
+      "published_sha256": "b5135b04758862e7d4334827578f59957056bf5d6365c6e3f2b0b578784e33f4",
+      "size": 6111
+    },
+    {
+      "path": "runner/source.py",
+      "published_path": "runner/source.py",
+      "sha256": "98ff50da82713cb100dcbf48f6ff8e3e0e08e86b84f0ff1dd4dfd0df133dca6b",
+      "published_sha256": "98ff50da82713cb100dcbf48f6ff8e3e0e08e86b84f0ff1dd4dfd0df133dca6b",
+      "size": 5134
+    },
+    {
+      "path": "runner/statistics.py",
+      "published_path": "runner/statistics.py",
+      "sha256": "2b904d6da0c58b9b2bc812d52e1f57af0d8fd241835f5cd2aac6333eac59fa18",
+      "published_sha256": "2b904d6da0c58b9b2bc812d52e1f57af0d8fd241835f5cd2aac6333eac59fa18",
+      "size": 6941
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "PACKAGE_MANIFEST.sha256",
+      "sha256": "47b95350350e0d1e86d3c1b747111d2d2af71b9680a5ebc511e09f7ddc9e18b1",
+      "size": 2269
+    },
+    {
+      "path": "authority/REFERENCE.json",
+      "sha256": "69228d16c64f90441927253f124521ead31f0f66b33a628af827ca82b9af0c58",
+      "size": 3624
+    },
+    {
+      "path": "authority/SAMPLE_AUTHORITY.json",
+      "sha256": "81c34113e7a888629a834a17235a71dcf369a2d590755fd9412ee42151d9b2f3",
+      "size": 1234
+    },
+    {
+      "path": "evidence/Pool_Main_Sample_24M_Report.zip",
+      "sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+      "size": 96936
+    },
+    {
+      "path": "evidence/Pool_Main_Sample_24M_Report.zip.sha256",
+      "sha256": "d2e6c0953ff2de7cc7235b98d568c884e4fa8067b8aa81d22efe1ac3484d6f59",
+      "size": 128
+    },
+    {
+      "path": "evidence/UPSTREAM_ACTIVITY_TERCILE_DEFINITION.json",
+      "sha256": "3fd90c853d37eaf1c56ec2059e6181aabdaab63ee15968b7fed79eca4298302f",
+      "size": 326
+    },
+    {
+      "path": "evidence/UPSTREAM_CONTRACT.json",
+      "sha256": "caa5330619a88085b968f4aa642f39959a30dd2319cfd89aae838c54570fb416",
+      "size": 826
+    },
+    {
+      "path": "evidence/UPSTREAM_SOURCE_LINEAGE.json",
+      "sha256": "ec04a5bead63911928ca127e64750d6eb107c98ecd2fd8f54164cfa9d865cee1",
+      "size": 687
+    },
+    {
+      "path": "evidence/UPSTREAM_activity_tercile_estimates.csv",
+      "sha256": "3e634ac6682686df98964360d4b58e97c234d0f64a187c0d66b01bd9493d1aba",
+      "size": 1226
+    },
+    {
+      "path": "evidence/UPSTREAM_activity_tercile_support.csv",
+      "sha256": "8dd65985eae415c5b6d8dba28c82e9401a0cf3d38c6543e97b42df2eb7bc59a3",
+      "size": 156
+    },
+    {
+      "path": "evidence/UPSTREAM_estimates.csv",
+      "sha256": "18fe5760bf9f70f5631156cb75d393bce5c03dbb2b11ba2dd236646fd268c4cc",
+      "size": 535
+    },
+    {
+      "path": "evidence/UPSTREAM_granting_rates.csv",
+      "sha256": "43df881f43d405d6a0b54ad2f4c5c729272fbd3d190c454e66f51298930b17dc",
+      "size": 728
+    },
+    {
+      "path": "evidence/VALIDATION.json",
+      "sha256": "4611fffd57ec409cfc34040f41d6c30e1b8d11d0798262990ba42d11a003320e",
+      "size": 1690
+    },
+    {
+      "path": "requirements.lock.txt",
+      "sha256": "76848df36c9601b5f3ee65148297ea8604ceedc85deec73aa25f0dcd6dc47665",
+      "size": 91
+    }
+  ]
+}

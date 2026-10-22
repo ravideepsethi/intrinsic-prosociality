@@ -1,0 +1,15 @@
+#!/bin/bash
+set -euo pipefail
+task_package="$(cd "$(dirname "$0")" && pwd)"
+task_python="${POOL_WITHIN_PYTHON:-python3}"
+export OPENBLAS_NUM_THREADS=1
+export OMP_NUM_THREADS=1
+export VECLIB_MAXIMUM_THREADS=1
+export MKL_NUM_THREADS=1
+export NUMEXPR_NUM_THREADS=1
+export PYTHONUNBUFFERED=1
+"$task_python" "$task_package/test_recovery.py"
+"$task_python" "$task_package/recover_v102.py" \
+  --project-root "${POOL_WITHIN_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}" \
+  --transfer-root "${POOL_WITHIN_TRANSFER_ROOT:-$HOME/Desktop/Lichess_Desktop}" \
+  --workers "${POOL_WITHIN_WORKERS:-10}" "$@"

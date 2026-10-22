@@ -1,0 +1,78 @@
+import sys,unittest,tempfile,itertools
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'code'))
+import r8_patron as m
+from r8_util import *
+from source import synthetic_fixture_v101 as fixture
+
+class PatronTests(unittest.TestCase):
+    def test_joint_binary_bounds_against_exhaustive_dummy_OLS(self):
+        rng=np.random.default_rng(19);n=24
+        d=pd.DataFrame(dict(ever_kind_fair_state=np.tile([0,1,0,1],6),
+            ever_kind_clearly_worse_state=np.tile([0,0,1,1],6),x=rng.normal(size=n),
+            patron=rng.integers(0,2,n),match_cell=np.repeat(['a','b','c'],8)))
+        unknown=np.zeros(n,bool);unknown[[0,5,13,21]]=True
+        terms=[m.FAIR,m.LOST,'x'];got=m.coefficient_bounds(d,terms,unknown,'test',['x'])
+        D=np.column_stack([np.ones(n),(d.match_cell=='b').astype(int),(d.match_cell=='c').astype(int),d[terms]])
+        allvalues=[]
+        for values in itertools.product([0,100],repeat=4):
+            y=d.patron.to_numpy(float)*100;y[unknown]=values;b=np.linalg.lstsq(D,y,rcond=None)[0][-3:]
+            allvalues.append([b[0],b[1],b[0]-b[1]])
+        allvalues=np.asarray(allvalues)
+        for j,r in enumerate(got):np.testing.assert_allclose([r['lower_pp'],r['upper_pp']],[allvalues[:,j].min(),allvalues[:,j].max()],atol=1e-8)
+
+    def test_returned_unflagged_nonreturn_and_not_queried_remain_distinct(self):
+        d=pd.DataFrame({m.FAIR:[1,1,1,1],m.LOST:[0,0,0,0],
+            'returned':[True,True,False,False],'tos_violation':[True,False,None,None],
+            'disabled':[False,True,None,None],'august_planned':[True,True,True,False]})
+        r=next(r for r in m.flag_table(d,'test') if r['group']=='fair_only')
+        self.assertEqual((r['returned'],r['flagged_either'],r['queried_nonreturn'],r['not_planned_in_august']),(2,2,1,1))
+
+    def test_incremental_author_rebuild_matches_full_original_producer(self):
+        panel,users=fixture.build_panel(groups=24)
+        rename={'fixture_kind_0000':'__PRIVATE_VALUE_1__','fixture_control_0001_3':'__PRIVATE_VALUE_2__'}
+        panel['chooser_username_norm']=panel.chooser_username_norm.replace(rename)
+        for u in users:
+            u['username']=rename.get(u['username'],u['username']);u['matched_kind']=rename.get(u['matched_kind'],u['matched_kind'])
+        panel['disconnected_username_norm']='unrelated'
+        # Delete a third party's fair grant and another third party's losing grant.
+        for name,cp,author in [('fixture_kind_0002',0,'__PRIVATE_VALUE_3__'),('fixture_kind_0005',-400,'__PRIVATE_VALUE_4__')]:
+            hit=np.flatnonzero((panel.chooser_username_norm==name)&panel.kind_draw&(panel.engine_eval_cp_disconnected==cp))[0]
+            panel.loc[hit,'disconnected_username_norm']=author
+        panel['utc_ms']=1700000000000+np.arange(len(panel))*1000
+        panel['game_id']=['fixture_'+str(i) for i in range(len(panel))]
+        panel['outcome_kind_draw']=panel.kind_draw
+        snapshot=fixture.build_snapshot(panel,users)
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);raw=root/'raw.parquet';panel.to_parquet(raw,index=False);sp=root/'snapshot.parquet';snapshot.to_parquet(sp,index=False)
+            c=duckdb.connect();c.register('p',panel);c.execute('CREATE VIEW stage07 AS SELECT * FROM p')
+            m.core.prior.planner.build_chooser_summary(c);m.core.prior.planner.build_matching(c)
+            ap=root/'acq.parquet';c.execute(f'COPY acquisition_users TO {qs(ap)} (FORMAT PARQUET)')
+            profilecols=','.join('s.'+n for n in m.core.PROFILE_FEATURES);bridge=root/'bridge.parquet'
+            c.execute(f'COPY (SELECT a.*,{profilecols} FROM acquisition_users a LEFT JOIN {parq([sp])} s USING(username_norm)) TO {qs(bridge)} (FORMAT PARQUET)')
+            original=root/'original.parquet';m.core.builder.build_cache(c,{'snapshot':bridge,'stage07_glob':raw},original)
+            got,census=m.rebuild_authors(c,[raw],ap,sp,original,root/'incremental')
+            self.assertGreater(census['author_game_rows'],0);self.assertGreater(census['affected_profile_target_accounts'],0)
+            # Independently rebuild ALL chooser histories, preserving exactly the same matching metadata.
+            clean=panel.loc[~panel.chooser_username_norm.isin(AUTHORS)&~panel.disconnected_username_norm.isin(AUTHORS)].copy()
+            rp=root/'all_clean.parquet';clean.to_parquet(rp,index=False);c.register('pc',clean)
+            c.execute('CREATE OR REPLACE VIEW stage07 AS SELECT * FROM pc');m.core.prior.planner.build_chooser_summary(c)
+            a=pd.read_parquet(ap);s=c.execute('SELECT * FROM chooser_summary').fetchdf().set_index('chooser_id')
+            ac=a.loc[~a.username_norm.isin(AUTHORS)].copy();focals=set(ac.loc[ac.acquisition_role=='kind','matched_kind_chooser_id'])
+            ac=ac.loc[ac.matched_kind_chooser_id.isin(focals)].copy()
+            for col in ac.columns:
+                if col in s.columns and col not in ('fair_opp_bin','total_opp_bin','match_cell'):ac[col]=ac.username_norm.map(s[col])
+            ac=ac.merge(snapshot[['username_norm']+m.core.PROFILE_FEATURES],on='username_norm',how='left')
+            cp=root/'all_bridge.parquet';ac.to_parquet(cp,index=False);expected=root/'all_design.parquet'
+            m.core.builder.build_cache(c,{'snapshot':cp,'stage07_glob':rp},expected)
+            d=pd.read_parquet(expected);g=pd.read_parquet(got)
+            cols=sorted(d.columns)
+            pd.testing.assert_frame_equal(d.set_index('username_norm').sort_index()[[x for x in cols if x!='username_norm']],
+                g.set_index('username_norm').sort_index()[[x for x in cols if x!='username_norm']],check_dtype=False,rtol=1e-12,atol=1e-12)
+            self.assertFalse(g.username_norm.isin(AUTHORS).any())
+            # Histories actually change for retained third-party accounts.
+            old=pd.read_parquet(original).set_index('username_norm');new=g.set_index('username_norm')
+            self.assertLess(new.loc['fixture_kind_0002','total_opps'],old.loc['fixture_kind_0002','total_opps'])
+            c.close()
+
+if __name__=='__main__':unittest.main(verbosity=2)

@@ -1,0 +1,13 @@
+{
+  "contract": "LICHESS_AUTHOR_EXCLUSION_V1",
+  "version": "1.0.0",
+  "requested_on": "2026-09-28",
+  "excluded_usernames": ["__PRIVATE_VALUE_1__", "__PRIVATE_VALUE_2__"],
+  "active_username": "__PRIVATE_VALUE_3__",
+  "matching": "exact lower(trim(username)); no substring matching",
+  "game_rule": "Exclude a game from every analytical sample when either player is an excluded account.",
+  "account_rule": "Exclude either account from account-level samples and donor/instrument/reference populations.",
+  "history_rule": "Rebuild sample-based kindness, receipt, persistence, Patron and IV aggregates after exclusion. Retain real all-game chronology and rating-state history.",
+  "raw_data_rule": "Retain original archives, game chronology, rating replay, source recovery and engine caches; never rewrite certified inputs.",
+  "estimation_status": "Existing estimates are not yet recomputed under this exclusion."
+}

@@ -1,0 +1,63 @@
+import os,sys,tempfile,unittest
+from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import patch
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'code'))
+import engine as e
+import session_bounded as s
+import nonparametric_fixed as nf
+from compare import compare_frames
+
+class RepairTests(unittest.TestCase):
+    def test_framework_parser_aliases(self):
+        c=e.duckdb.connect()
+        with self.assertRaises(e.duckdb.ParserException):c.execute("SELECT lower(trim('__PRIVATE_VALUE_1__')) name,1 id")
+        q="SELECT lower(trim('__PRIVATE_VALUE_2__')) AS author_name,1 AS author_id UNION SELECT lower(trim('__PRIVATE_VALUE_3__')) AS author_name,2 AS author_id"
+        self.assertEqual(set(c.execute(q).fetchall()),{('__PRIVATE_VALUE_4__',1),('__PRIVATE_VALUE_5__',2)});c.close()
+
+    def test_histogram_quantiles_equal_expanded_values(self):
+        rng=e.np.random.default_rng(432)
+        for n in (1,2,3,10,103):
+            x=rng.integers(1,90,n);v,w=e.np.unique(x,return_counts=True)
+            for p in (0,.5,.9,1):self.assertAlmostEqual(s.quantile_hist(v,w,p),float(e.np.quantile(x,p)))
+
+    def test_bounded_lengths_equal_original_sql_cross_month_sessions(self):
+        with tempfile.TemporaryDirectory() as tmp,patch.object(s,'MONTHS',['2023-11']):
+            root=Path(tmp);start=int(e.pd.Timestamp('2023-11-01',tz='UTC').timestamp()*1000)
+            # Cross-month duplicate session, left censoring, right cutoff,
+            # ineligible chooser, and more than one account in a category.
+            columns=['chooser','start30','observed_session_length','left_censored','last_t']
+            old=[[1,start,2,False,start+1000],[2,start,9,True,start+1000],[5,start,20,False,start+1000]]
+            new=[[1,start,8,False,start+2000],[1,start+5000,16,False,start+6000],[2,start,10,True,start+2000],[2,start+7000,5,False,start+8000],[3,start,6,False,start+2000],[4,start,30,False,int(e.pd.Timestamp('2025-11-01',tz='UTC').timestamp()*1000)]]
+            paths=[]
+            for month,rows in [('2023-10',old),('2023-11',new)]:
+                p=root/'PRIVATE/history'/month/'sessions30.parquet';p.parent.mkdir(parents=True);e.pd.DataFrame(rows,columns=columns).to_parquet(p,index=False);paths.append(p)
+            focal=root/'focal.parquet';e.pd.DataFrame({'chooser':[1,1,2,2,3,4],'board':[0]*6,'y':[0,0,1,0,0,0]}).to_parquet(focal,index=False)
+            s.bounded_lengths([focal],root,2,5)
+            actual=e.pd.read_csv(root/'report/repetition/session_length_by_account_grant_rate.csv').sort_values('account_grant_percent').reset_index(drop=True)
+            c=e.duckdb.connect();c.execute('CREATE TABLE f AS SELECT * FROM '+e.scan(focal));c.execute('CREATE TABLE rates AS SELECT chooser,100.*avg(y) grant_rate FROM f GROUP BY chooser')
+            c.execute('CREATE TABLE lengths AS SELECT chooser,start30,max(observed_session_length) length,bool_or(left_censored) left_censored,max(last_t) last_t FROM '+e.scan(paths)+' GROUP BY chooser,start30')
+            cutoff=int(e.pd.Timestamp('2025-11-01',tz='UTC').timestamp()*1000)-3600000
+            expected=c.execute(f"SELECT CASE WHEN grant_rate=0 THEN '0' WHEN grant_rate<=1 THEN '(0,1]' WHEN grant_rate<=5 THEN '(1,5]' WHEN grant_rate<=20 THEN '(5,20]' ELSE '>20' END account_grant_percent,count(*) sessions,count(DISTINCT chooser) accounts,avg(length) mean_length,median(length) median_length,quantile_cont(length,.9) p90_length,avg((length>=16)::INTEGER) share_16plus FROM lengths JOIN rates USING(chooser) WHERE NOT left_censored AND last_t<{cutoff} AND start30>={start} GROUP BY ALL ORDER BY ALL").fetchdf();c.close()
+            e.pd.testing.assert_frame_equal(actual,expected,check_dtype=False,rtol=1e-12,atol=1e-12)
+            # Restart reads the same bucket receipts and returns identical results.
+            s.bounded_lengths([focal],root,2,5)
+            e.pd.testing.assert_frame_equal(actual,e.pd.read_csv(root/'report/repetition/session_length_by_account_grant_rate.csv').sort_values('account_grant_percent').reset_index(drop=True))
+
+    def test_exact_author_free_reference(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);parent=root/'parent';path=parent/'PRIVATE/results/excluded/rating_gap/private_cache/rating_gap_krd_derived_private.parquet';path.parent.mkdir(parents=True)
+            x=e.np.arange(101,dtype=float);e.pd.DataFrame({'k_scale':x}).to_parquet(path,index=False)
+            args=SimpleNamespace(run=root/'run',workers=2,memory_gb=4)
+            p=nf.cuts(args,parent);r=e.read(p)
+            self.assertAlmostEqual(r['values']['0.95'],95);self.assertAlmostEqual(r['values']['0.02'],2)
+            self.assertEqual(nf.cuts(args,parent),p)
+            e.pd.DataFrame({'k_scale':[1,2]}).to_parquet(path,index=False)
+            with self.assertRaisesRegex(RuntimeError,'changed'):nf.cuts(args,parent)
+
+    def test_mechanism_profile_alignment_includes_numeric_gap(self):
+        a=e.pd.DataFrame({'state':['equal']*3,'model':['strength']*3,'training':['rd110']*3,'gap':[-100,0,100],'index_difference':[-.5,0,.5]})
+        b=a.iloc[::-1].copy();rows,audit=compare_frames(a,b,'mechanism','common_index_profiles.csv')
+        self.assertEqual(audit['matched_rows'],3);self.assertTrue(all(r['change']==0 for r in rows))
+
+if __name__=='__main__':unittest.main(verbosity=2)

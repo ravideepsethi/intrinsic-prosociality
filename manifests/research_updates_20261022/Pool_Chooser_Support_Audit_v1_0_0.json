@@ -1,0 +1,111 @@
+{
+  "package": "Pool_Chooser_Support_Audit_v1_0_0",
+  "archive_name": "Pool_Chooser_Support_Audit_v1_0_0.zip",
+  "archive_sha256": "8f970e52d0b50bc0880895b74a7dac2795df4e63f77008e59f18c6afe3743102",
+  "archive_size": 126389,
+  "archive_root": "Pool_Chooser_Support_Audit_v1_0_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "README.md",
+      "published_path": "README.md",
+      "sha256": "88f695326c245c83538b0de7e592271fbf497652b482fcfa401ce0da4af5b954",
+      "published_sha256": "88f695326c245c83538b0de7e592271fbf497652b482fcfa401ce0da4af5b954",
+      "size": 4458
+    },
+    {
+      "path": "RUN_CHOOSER_SUPPORT.command",
+      "published_path": "RUN_CHOOSER_SUPPORT.command.in",
+      "sha256": "2ae9fdf9f4c0fb97f2216857b2ede297bb1490e9a854d0fdccaed806986ff914",
+      "published_sha256": "2ae9fdf9f4c0fb97f2216857b2ede297bb1490e9a854d0fdccaed806986ff914",
+      "size": 4006
+    },
+    {
+      "path": "docs/DESIGN_I_REVISION_NOTE.md",
+      "published_path": "docs/DESIGN_I_REVISION_NOTE.md",
+      "sha256": "ce2f672169b5edecec1e31f44856531f8878679be0202c9d8f4f94059192a288",
+      "published_sha256": "ce2f672169b5edecec1e31f44856531f8878679be0202c9d8f4f94059192a288",
+      "size": 8646
+    },
+    {
+      "path": "runner/__init__.py",
+      "published_path": "runner/__init__.py",
+      "sha256": "8b79cd51c28141a44d0bb28484281caf0b4a9f1e2c99ad63aa3bd76afee8dd31",
+      "published_sha256": "8b79cd51c28141a44d0bb28484281caf0b4a9f1e2c99ad63aa3bd76afee8dd31",
+      "size": 78
+    },
+    {
+      "path": "runner/audit.py",
+      "published_path": "runner/audit.py",
+      "sha256": "6b99f6315a0ad110c8053e43031e29234181e2a73c4ee577c95d63da23b5065e",
+      "published_sha256": "6b99f6315a0ad110c8053e43031e29234181e2a73c4ee577c95d63da23b5065e",
+      "size": 24308
+    },
+    {
+      "path": "runner/common.py",
+      "published_path": "runner/common.py",
+      "sha256": "4198dde068097367a7a05d09abbfca123e756419a609fbe31270a4573571bbec",
+      "published_sha256": "4198dde068097367a7a05d09abbfca123e756419a609fbe31270a4573571bbec",
+      "size": 24293
+    },
+    {
+      "path": "runner/self_test.py",
+      "published_path": "runner/self_test.py",
+      "sha256": "eb45840e7a3865f95659537350887e48f2b48bc6a9805e6740e9ba5fb1369287",
+      "published_sha256": "eb45840e7a3865f95659537350887e48f2b48bc6a9805e6740e9ba5fb1369287",
+      "size": 9201
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "PACKAGE_MANIFEST.sha256",
+      "sha256": "2252dcee0da19d3664f81cb6fa88514e6ac872a4e97f3380747ff4a3ba410cc1",
+      "size": 1521
+    },
+    {
+      "path": "authority/REFERENCE.json",
+      "sha256": "ab0d1cfcf0b78f9088cfb8f5f78e2029a3c91b5ae545b05df362ca01f88d18dd",
+      "size": 1538
+    },
+    {
+      "path": "authority/SAMPLE_AUTHORITY.json",
+      "sha256": "81c34113e7a888629a834a17235a71dcf369a2d590755fd9412ee42151d9b2f3",
+      "size": 1234
+    },
+    {
+      "path": "evidence/Pool_Main_Sample_24M_Report.zip",
+      "sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+      "size": 96936
+    },
+    {
+      "path": "evidence/Pool_Main_Sample_24M_Report.zip.sha256",
+      "sha256": "d2e6c0953ff2de7cc7235b98d568c884e4fa8067b8aa81d22efe1ac3484d6f59",
+      "size": 128
+    },
+    {
+      "path": "evidence/VALIDATION.json",
+      "sha256": "437ee36c59c6b1eb25a5a777d245fb4d4e760ac95425523b30fbf7d9b7609c54",
+      "size": 1648
+    },
+    {
+      "path": "evidence/minimal_chooser_fe_desert.csv",
+      "sha256": "9290ccdaebfeb14089dad47e957a830e77e7cabffe279bd582442f9b2964c739",
+      "size": 582
+    },
+    {
+      "path": "evidence/table08_prior_kindness_levels.csv",
+      "sha256": "e71ff0386e1b2ff75b1e120035d590311031b39579ff1078d3320f10a34d9141",
+      "size": 175
+    },
+    {
+      "path": "evidence/tableA01_split_half_full_statistics.csv",
+      "sha256": "b5d6f1d5ae0b40e8530b92a27e10890c4d54695f0b8d76fb5528ae03a6659a53",
+      "size": 1148
+    },
+    {
+      "path": "requirements.lock.txt",
+      "sha256": "76848df36c9601b5f3ee65148297ea8604ceedc85deec73aa25f0dcd6dc47665",
+      "size": 91
+    }
+  ]
+}

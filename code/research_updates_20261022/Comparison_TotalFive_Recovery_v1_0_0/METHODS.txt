@@ -1,0 +1,76 @@
+RECOVERY SCOPE AND SCIENTIFIC CONTRACT
+
+Input authority: completed Patron total-five migration configuration
+144d4ae19d09f2da2e63255077efe0a9385d623697b57115dbee22c88aa7f1a2;
+reviewed 100% report archive SHA256
+389d924bf7c36656c307ce54786485258e31e962b9d434bfe68c2d6b96a57e56.
+The report files, 21 monthly audit stages, and indexed audit input hashes are
+verified. The completed R12 source is independently authenticated by the
+unchanged primary-input producer. Full receipt-stream and selection receipts
+are checked against their expected keys. Upstream vendors are copied intact.
+
+Denominator: original fixed 1/32 acquisition frame, 61,158,951 games,
+November 2023 through July 2025. No resampling, reorientation or selection
+using badge status or later behavior. This recovery works on its 9,654,945
+newly count-supported games (prior clean count <5; all-time pair-excluded
+count >=5; original 97-day history coverage; neither author in either role).
+The full audit remains available for rebuilding the complete old+new sample.
+
+Score A: all eligible opponent grant/claim decisions in the observed
+24-month panel, excluding every opponent-to-focal-recipient decision and
+both author accounts in both roles. Donor-own-month held-out-fold state
+reference and frozen fallback rules. Require finite adjusted and expected
+scores. Query counts must exactly match the prior full-denominator audit.
+Before any API access, new scoring must reproduce 4,096 R12 validation rows
+to 2e-10 and pass direct donor-mask oracle checks. Scores are not instruments
+for contemporaneous badge adoption: eventual models retain all IV caveats.
+
+Cooldown: computed from all 4,226,388 accepted receipt anchors BEFORE
+complete-history/calendar cuts. The target start must be strictly later
+than the most recent strictly earlier selected anchor +90 days. Anchor
+ties and earlier-started/not-yet-anchored games retain the frozen logic and
+are recorded. Start+90d must be strictly before panel end. The later
+anchor-based complete-follow-up check still belongs to final assembly.
+
+Metadata: original, local-first, completed phase100, and authenticated
+1,912,023-row reconciled legacy master. Legacy membership does not bypass
+readiness. Field-wise nonnull agreement can fill gaps; conflicting values
+or prior flags remain unresolved even if a new API response looks clean.
+Known nonpool games need no further request. The exact previously certified
+three-record quarantine is retained separately; no new exclusions are
+silently added. Unsupported legacy schemas are reported and remain gaps.
+
+Chronology: unchanged factual canonical all-game producer, including author
+games. Compute earliest observed pair, prior-game adjacency/tie classification
+and prior 30-day volume. Every recovery candidate, including original-frame
+members, is classified afresh. Only finite-score, cooldown/calendar-supported,
+first-pair, observed-nonadjacent candidates with unresolved metadata enter
+the request list. The historical comparison row-ID system is not reused:
+new recovery IDs are local; game_id is the explicit later cross-frame key.
+
+API evidence: immutable target hash, global cooperating-request lock,
+serial public game exports, SQLite WAL with synchronous FULL, raw gzipped
+response and request hashes committed before interpretation. Up to three
+passes request only IDs not yet returned. Malformed/duplicate/unrequested
+IDs are rejected. TLS verification remains enabled. Retry-After and at
+least 60 seconds for 429 apply. No token or row identifier is exported.
+Missing returns stay unknown, never become nonpool, ordinary, or badge=0.
+Public API rate-limit reference checked 2026-10-16:
+https://raw.githubusercontent.com/lichess-org/api/master/doc/specs/lichess-api.yaml
+The game-export protocol is inherited from the completed project downloader.
+
+Remaining full rebuild: recompute total-five support/cooldown for the old
+supported frame too; verify global identities; rebuild recipient histories,
+ordinary follow-ups, selected_entry90 and analysis_entry90 using the new
+selection universe. Preserve first-observed reference rather than first
+supported reference. Future contrast inference requires joint shared-account
+OR date covariance and the fixed score SD 0.04979005187533171. Merely
+subtracting independently estimated coefficients/SEs is insufficient.
+
+Patron interpretation: original August snapshot and any new current wave are
+separate outcomes. Neither is an adoption history. A positive reduced form
+does not by itself establish that receipt causes patronage; a receipt effect
+requires the instrument's assignment/exclusion assumptions, valid observation
+and sampling assumptions, and the appropriate local-effect interpretation.
+A null does not prove stable traits or zero transient effects, and a badge
+is not necessarily a payment personally made by the account holder.

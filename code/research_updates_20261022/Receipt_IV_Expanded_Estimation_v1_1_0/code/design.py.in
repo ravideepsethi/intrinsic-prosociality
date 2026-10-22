@@ -1,0 +1,93 @@
+"""Expanded receipt design: color reform is not a primary censor."""
+from common import *
+
+def utc_ms(value): return int(dt.datetime.fromisoformat(value).timestamp()*1000)
+
+ENDPOINT_UTC='2026-05-01T00:00:00+00:00'
+ENDPOINT=utc_ms(ENDPOINT_UTC)
+COLOR_LO=utc_ms('2025-11-18T07:15:00+00:00')
+COLOR_HI=utc_ms('2025-11-18T07:22:00+00:00')
+MECHANICS_GUARD=utc_ms('2026-01-30T00:00:00+00:00')
+OLD_ENDPOINT=utc_ms('2025-11-01T00:00:00+00:00')
+REFERENCE_SD=0.059411690344000595
+GAMMA_BOUNDS_PP=(0.,.005,.010,.015,.020,.030)
+EXPECTED=dict(first_pair=18754435,calendar_primary=3917764,primary=3917764,
+    common10=3253387,lag30_common5=3632142,lag30_common10=3004030,
+    reached=2233890,nonreached=1683874,historical=2682330,
+    precolor=3080218,mechanics_guard=3449729,color_post=379110,color_spanning=458436,
+    later_post=283375,later_bracket=10)
+
+def specifications():
+    # n, sample, lag, recipient histories, recipient FE, balance, month x color FE
+    items=[
+        ('historical_original_exact','historical',7,True,False,False,False),
+        ('calendar90_primary','primary',7,True,False,True,True),
+        ('calendar90_legacy_controls','primary',7,True,False,False,False),
+        ('calendar90_common10','common10',7,True,False,False,True),
+        ('calendar90_lag_common_7d','lag_common',7,True,False,False,True),
+        ('calendar90_lag_common_30d','lag_common',30,True,False,False,True),
+        ('calendar90_without_recipient_history','primary',7,False,False,True,True),
+        ('calendar90_repeat_pooled','repeat',7,True,False,False,True),
+        ('calendar90_repeat_FE_diagnostic','repeat',7,True,True,True,True),
+        ('guard_precolor90','precolor',7,True,False,True,True),
+        ('guard_mechanics90','mechanics_guard',7,True,False,True,True),
+        ('regime_color_spanning90','color_spanning',7,True,False,False,True),
+        ('regime_color_post90','color_post',7,True,False,False,True),
+        ('calendar90_old_calendar_new_history','old_calendar',7,True,False,False,True),
+        ('calendar90_later_calendar_extension','later_calendar',7,True,False,False,True),
+    ]
+    return [dict(name=n,sample=s,lag=lag,rich=rich,fe=fe,balance=bal,color_month_fe=color,
+        repeat=s=='repeat',family='iv') for n,s,lag,rich,fe,bal,color in items]
+
+def freeze():
+    return dict(version=VERSION,prepared_utc='2026-10-03',prepared_toronto_date='2026-10-02',
+        status='REVISED_BEFORE_NEW_COEFFICIENTS_AFTER_USER_CORRECTION_AND_REVIEWED_COUNTS',
+        supersedes='Precolor v1.0.0 primary-design recommendation; earlier outputs remain historical artifacts.',
+        primary='calendar90_primary',endpoint_utc=ENDPOINT_UTC,endpoint_ms=ENDPOINT,
+        endpoint_role='Exclusive end of authenticated calendar coverage. This is not a mechanics deployment date or certification of a stable-regime causal sample.',
+        window_rule='anchor_ms + 90*86400000 < endpoint_ms',
+        primary_interpretation='Pooled receipt IV in the observed eligible calendar cohort across policy regimes, conditional on the declared identification assumptions. Policy heterogeneity can change the instrument-weighted estimand.',
+        selection='Use saved lag-7 floor-5 greedy 90-day stream; all history and administrative cuts follow spacing. Never re-space any sensitivity.',
+        outcome='Inherited first qualifying future competitive main choice against another opponent within 90 days. Complete nonreachers have Y=0.',
+        nonreachers='Retain. No later-choice color is invented. No reached restriction, later-choice timing, policy period, or realized color enters regression controls.',
+        calendar_adjustment='Original month x exact time control x 100-point mean-rating cells, UTC exposure date and hour-of-week FEs; add month x index chooser assigned color FE. Index color is known before receipt.',
+        control_comparison='calendar90_legacy_controls uses the identical full rows with the original controls to isolate the added color-month adjustment.',
+        color_reform='No primary exclusion. Index incentives, first-stage relevance, and response heterogeneity may change without automatically invalidating the leniency IV.',
+        color_window_regimes=dict(before=f'anchor+90 days < {COLOR_LO}',
+            after=f'anchor >= {COLOR_HI}',spanning='All remaining primary windows, including the implementation bracket.'),
+        regime_comparison='Use anchor and fixed 90-day horizon, never the realized first later-choice time. These are calendar diagnostics; contrasts are not causal effects of the reform or independent-replication tests.',
+        mechanics_sensitivity=dict(endpoint_utc='2026-01-30T00:00:00Z',
+            role='Separately reported source-informed conservative analysis guard; deployment remains unpinned and this guard is not a proven stable-mechanics interval.'),
+        source_author_and_merge='Dates are retained as evidence, not adopted as deployment.',
+        expected_counts=EXPECTED,specifications=specifications(),
+        author_exclusion_applied=False,excluded_usernames=[],retained_author_usernames=['__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__'],
+        instrument='Saved lagged state-adjusted all-history grant propensity, leave all focal-pair decisions out; original cross-fitting.',
+        common5_10='Thresholds on the same all-history score. Both common-sample labels reference one fit.',
+        lag_comparison='Lag 7/30 on identical floor-5 support rows from the original lag-7 stream, with corresponding opponent-history controls. Recipient history windows remain fixed.',
+        prohibited_controls=['final board state','plies','terminal clocks','realized later-choice color','later-choice policy period','reach indicator'],
+        inference='Original shared-account OR exposure-date CR0 and null-restricted AR inversion. Historical scores fixed; no PSD repair.',
+        reference_score_sd=REFERENCE_SD,gamma_bounds_pp_per_reference_sd=GAMMA_BOUNDS_PP,
+        sensitivity='Analytic projection of null-restricted score/AR acceptance over fixed direct-effect ranges; joint first-stage/reduced-form uncertainty retained.',
+        historical_bridge='Exact old cohort SHA and reproduction checks, followed by game/recipient-key membership and field comparisons. Row IDs are not cross-generation identities.',
+        precision='Descriptive MDE80=(1.959963984540054+0.8416212335729143)*fitted SE; not prospective power or a GO decision.',
+        diagnostics_not_newly_supplied=['expanded all-ending prospective entry denominator','expanded ordinary-game placebo','mechanics deployment timestamp'],
+        color_payoff_calibration='Separate study; neither fractional rating visibility nor returning-player payoff calibration is required to fit this receipt IV.',
+        unresolved='Current-event selection and exclusion remain assumptions. Cross-mechanics outcome measurement and composition need review alongside the January guard. Month/color adjustment does not certify these assumptions.',
+        causal_identification_certified=False)
+
+MODEL_COLUMNS=['row_id','game_id','recipient_id','opponent_id','archive_start_ms','anchor_ms',
+    'archive_ordinal','received','y','reached','outcome_gid','outcome_t','outcome_start','outcome_opponent',
+    'complete90','recipient_rating','opponent_rating','tc_base_s','tc_inc_s','month_code','pre_games_30d']
+MODEL_COLUMNS += [f'{v}_{days}' for days in (90,30) for v in ('fair','kind','disconnect','receipt','claim')]
+MODEL_COLUMNS += [f'{v}_{lag}d' for lag in (7,30) for v in ('n','adjusted','expected','counterparts')]
+
+def sample_where(name):
+    return dict(primary='TRUE',common10='n_7d>=10',lag_common='support_30d_floor5',
+        repeat='recipient_selected_count>=2',precolor=f'anchor_ms+{90*DAY}<{COLOR_LO}',
+        mechanics_guard=f'anchor_ms+{90*DAY}<{MECHANICS_GUARD}',
+        color_post=f'anchor_ms>={COLOR_HI}',
+        color_spanning=f'anchor_ms+{90*DAY}>={COLOR_LO} AND anchor_ms<{COLOR_HI}',
+        old_calendar=f'anchor_ms+{90*DAY}<{OLD_ENDPOINT}',later_calendar=f'anchor_ms+{90*DAY}>={OLD_ENDPOINT}')[name]
+
+def color_window_sql():
+    return f"CASE WHEN anchor_ms+{90*DAY}<{COLOR_LO} THEN 'before' WHEN anchor_ms>={COLOR_HI} THEN 'after' ELSE 'spanning' END"

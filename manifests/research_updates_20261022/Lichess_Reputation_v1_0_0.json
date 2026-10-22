@@ -1,0 +1,138 @@
+{
+  "package": "Lichess_Reputation_v1_0_0",
+  "archive_name": "Lichess_Reputation_v1_0_0.zip",
+  "archive_sha256": "d230b60ebb74da32114ce80ca7199dfa027e30a7f4c46a9249421277c1be8e75",
+  "archive_size": 70838,
+  "archive_root": "Lichess_Reputation_v1_0_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "METHODS.txt",
+      "published_path": "METHODS.txt",
+      "sha256": "1e2d320b26530cffc6cdbda16f77e86bcd751b5930d978f36ca6dfd191ce1fb0",
+      "published_sha256": "1e2d320b26530cffc6cdbda16f77e86bcd751b5930d978f36ca6dfd191ce1fb0",
+      "size": 6768
+    },
+    {
+      "path": "README.txt",
+      "published_path": "README.txt.in",
+      "sha256": "5419accb0ae1520061f2fa3d5d9d221d83612e5ae8cda7e94d54b2c687fe6628",
+      "published_sha256": "48e9415d786fe280e14f84bae8a5756efc8f578d62126e68dc89b5333e091728",
+      "size": 6307,
+      "redactions": [
+        {
+          "start": 3997,
+          "end": 4004,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 4009,
+          "end": 4017,
+          "token": "__PRIVATE_VALUE_2__"
+        }
+      ]
+    },
+    {
+      "path": "RUN_REPUTATION.command",
+      "published_path": "RUN_REPUTATION.command.in",
+      "sha256": "d65e5296aaad84b5c49c25d08cbf9fc366fc2faac1a58e3ac0354ecef58714a5",
+      "published_sha256": "d65e5296aaad84b5c49c25d08cbf9fc366fc2faac1a58e3ac0354ecef58714a5",
+      "size": 2115
+    },
+    {
+      "path": "code/analysis.py",
+      "published_path": "code/analysis.py",
+      "sha256": "f533ebf274c652da8f17ed43a0949b568354b0b0e70419506a59ba9385c34773",
+      "published_sha256": "f533ebf274c652da8f17ed43a0949b568354b0b0e70419506a59ba9385c34773",
+      "size": 14101
+    },
+    {
+      "path": "code/core.py",
+      "published_path": "code/core.py.in",
+      "sha256": "bb4a6d223825197ca5d048c061c4b3d7eccff8ea145f98d6ebc94b7d6e2f91f3",
+      "published_sha256": "0382099274a7fa1f38d7f175b6fdd88ed6ca3abf72991e36aba5c58e039222a3",
+      "size": 5813,
+      "redactions": [
+        {
+          "start": 462,
+          "end": 469,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 472,
+          "end": 480,
+          "token": "__PRIVATE_VALUE_2__"
+        }
+      ]
+    },
+    {
+      "path": "code/history.py",
+      "published_path": "code/history.py",
+      "sha256": "e4384ecae61290bb61e690268943815b693c4f3be26bd007792043f03b5cf5e5",
+      "published_sha256": "e4384ecae61290bb61e690268943815b693c4f3be26bd007792043f03b5cf5e5",
+      "size": 9585
+    },
+    {
+      "path": "code/inputs.py",
+      "published_path": "code/inputs.py",
+      "sha256": "a691ea20b0407974836535abd1bd62b7694abce528bded5d2ec9a8a307f8a41d",
+      "published_sha256": "a691ea20b0407974836535abd1bd62b7694abce528bded5d2ec9a8a307f8a41d",
+      "size": 12396
+    },
+    {
+      "path": "code/rep_stats.py",
+      "published_path": "code/rep_stats.py",
+      "sha256": "a52cc6dfaf2b7b6e0914b4ea7a25579556b78058926eca0c8c3347c624cc2d18",
+      "published_sha256": "a52cc6dfaf2b7b6e0914b4ea7a25579556b78058926eca0c8c3347c624cc2d18",
+      "size": 4824
+    },
+    {
+      "path": "code/run.py",
+      "published_path": "code/run.py",
+      "sha256": "ec7621685d96573b902ef69dc3764b1f651a1ae2a0c82a18fdde1f5ab3e596a1",
+      "published_sha256": "ec7621685d96573b902ef69dc3764b1f651a1ae2a0c82a18fdde1f5ab3e596a1",
+      "size": 10944
+    },
+    {
+      "path": "tests/test_reputation.py",
+      "published_path": "tests/test_reputation.py.in",
+      "sha256": "896728d64e0ca8da980f612d4fd846319613a996accbec9fc65bfe006b7e0547",
+      "published_sha256": "e08a9bfc8d5a4e82020340067b72d443ebab1a4288ac5c005a865c212016ec91",
+      "size": 11421,
+      "redactions": [
+        {
+          "start": 1127,
+          "end": 1134,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 11101,
+          "end": 11109,
+          "token": "__PRIVATE_VALUE_2__"
+        }
+      ]
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "PACKAGE_MANIFEST.sha256",
+      "sha256": "a27e18354a49d50d12c17df0fc34811afe5ad6e3bb66ccb81f93a76c7e21fa71",
+      "size": 1106
+    },
+    {
+      "path": "VALIDATION.json",
+      "sha256": "eb2755887e70de1b8d761db78175aa19914e5111349425036f05c7f470fd7757",
+      "size": 1632
+    },
+    {
+      "path": "authority/first_pair_authority.json",
+      "sha256": "58d28f583d994fc1d4142aa8ef5e17dd0a1f3e76e9c2ca6d9f6ff23d2631ede2",
+      "size": 1036
+    },
+    {
+      "path": "authority/main_sample_report.json",
+      "sha256": "0ef50e424e004c5698c0c3dbc9815748627e5f23e6504fdaedfd526225ee184e",
+      "size": 510451
+    }
+  ]
+}

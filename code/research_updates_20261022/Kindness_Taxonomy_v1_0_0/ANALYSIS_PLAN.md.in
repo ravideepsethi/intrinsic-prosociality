@@ -1,0 +1,232 @@
+# Frozen exploratory implementation
+
+Version 1.0.0, 7 October 2026. The numerical choices below are fixed in the
+package before this run. Related results have already been viewed, including
+prior construal splits and receipt cost interactions. This is an exploratory
+extension, not a preregistration. The model is allowed to fail or produce
+unclassified profiles; it never assigns a psychological label automatically.
+
+## Population, orientation and dates
+
+The input is the certified pool/nonadjacent 24-month main choice panel,
+41,534,331 rows before this run's author exclusion. Its authority, every
+monthly hash and row count are pinned. The main predicate is `source='pool'`
+and `previous_classification_status='not_mutually_adjacent_observed'`.
+Both roles of `__PRIVATE_VALUE_1__` and `__PRIVATE_VALUE_2__` are excluded before histories, markers
+and estimates. No additional analytical row deletions are silently allowed.
+
+All five states describe the **disconnected recipient**, not the chooser.
+A competitive opportunity means recipient evaluation >= -100 cp. Mate scores
+retain the certified finite score convention; mate indicators are retained.
+
+| State | Recipient evaluation |
+|---|---|
+| Clearly lost (0) | cp <= -300 |
+| Behind (1) | -300 < cp < -100 |
+| Roughly equal (2) | -100 <= cp <= 100 |
+| Ahead (3) | 100 < cp < 300 |
+| Well ahead (4) | cp >= 300, including the corresponding winning-mate scores |
+
+Year 1: [2023-11-01, 2024-11-01). Year 2: [2024-11-01, 2025-11-01).
+UTC throughout. Stage upper bounds in plies: 2, 4, 6, 10, 20, 40, 80; last
+band >80. Clock bands: <10, [10,30), [30,60), [60,120), >=120 seconds;
+missing/negative clocks remain a separate descriptive category.
+
+## Build and histories
+
+One slim monthly projection feeds all available analyses. Account/state/year
+counts feed B1 without expanding accounts into repeated observations.
+Prior screens, all-state grants, competitive grants, receipts and claimed
+losses while ahead are accumulated jointly over both roles. Claimed while
+winning uses recipient cp >= +100. An event is usable only when its recorded
+end plus 300 seconds is strictly before the next focal game's start. Exact
+end-time ties are aggregated before cumulative sums. Last event times are
+retained for elapsed-day controls. C1 additionally drops ambiguous overlapping
+opportunities; its sample flow reports those exclusions.
+
+These are histories of eligible opportunities in the observed main panel,
+not UI telemetry, all-source histories, or account-lifetime histories. The
+first observed opportunity is not necessarily an account's first opportunity
+on Lichess. The account can have grants before November 2023 or outside the
+pool/nonadjacent frame. This limits conversion/learning interpretations.
+
+Available account markers are constructed without using grant decisions:
+ratings at main opportunities, annual SDs, primary-speed versions of those
+rating proxies, account age if known, and Patron status from the authenticated
+later profile snapshot. The primary speed uses opportunity counts, with
+alphabetical tie-breaking. A mixed-speed SD can mix distinct rating pools;
+use the primary-speed proxy in preference to it. Neither equals an all-game
+annual SD. Patron coverage is selected and later-dated, so its missingness
+and coverage are reported by type. Missing all-game markers are not zeros.
+
+## E: lost-position diagnostics
+
+E1 compares raw Year-1/Year-2 grant-rate correlations on >=1 eligible
+opportunity in each year and >=4 total, separately for lost and competitive
+positions. It also reports harmonic-exposure-weighted correlations, >=5/20
+per-year sensitivities, and 200 account-bootstrap intervals for the raw
+correlation. Few opportunities and rare grants attenuate raw correlations;
+a precise value near zero does not itself prove noise.
+
+E2 reports lost-position grant rates by speed, clock band and year, with
+chooser-cluster delta-method SEs. Clock is at the final recorded move, not
+at the actual click. These are clues about inattention, not observed misclicks.
+
+E3 selects accounts with >=2 lost-position grants **in Year 1 only** and
+reports their profiles across all states in both years. Year 2 is the useful
+held-out shape; selection on Year-1 outcomes makes its in-sample profile
+mechanically selected.
+
+E4/G2 use PR 17866's July 24, 2025 merge as a date proxy, +/-56 days, weekly
+event time, reference week -1, and cutoff shifts -7/0/+7 days. Blitz, rapid
+and classical contrasts are relative to bullet/ultrabullet; the joint
+chooser-cluster covariance includes all four cells of each difference.
+All speed groups changed. There is no untreated group. The source diff
+changes only RoundSocket.scala, not button layout. Grace periods change
+from 40 to 30 seconds for bullet, 40 to 60 blitz, 80 to 120 rapid and 120 to
+300 classical. Live deployment is not independently verified. Composition
+tables report state, stage, ratings, cost and clocks among observed events;
+they cannot count prevented disconnections or reconnections.
+
+Source: https://github.com/lichess-org/lila/pull/17866 . The downloaded PR
+metadata and file diff are bundled in authority/. Merge UTC is
+2025-07-24T06:24:50Z, SHA 14ce8cd641d49151c3db67ff8711ddce9d67d3d4.
+
+## B: account mixtures and validation
+
+Year-1 thresholds: M=20 main, M=50 and M=4 sensitivities. Count all five
+states toward M. B1 fits unrestricted account-level binomial mixtures by
+log-sum-exp EM for K=1..6, 20 dispersed starts each, up to 1,000 iterations,
+relative likelihood tolerance 1e-8 and probability floor 1e-10. An initially
+near-zero component is allowed but is not constrained to remain zero.
+Probabilities are never constrained to increase, flatten or peak at equality.
+The common binomial combinatorial term is omitted consistently across K.
+
+BIC uses the number of accounts, with 6K-1 parameters. ICL = BIC + twice
+posterior entropy. Normalized entropy is entropy/(N log K), defined as zero
+for K=1. Confidence is the share of accounts with max posterior >0.9. Select
+minimum BIC among converged fits whose every share >=0.001; lower K wins an
+exact tie. The full convergence/BIC/ICL/entropy path remains in the report.
+Small or unsupported components are visible, not silently psychological types.
+
+B2 uses B1's selected K for each M. It maximizes the exact marginal account
+likelihood by analytic-gradient L-BFGS-B, with type-specific state intercepts
+and standardized-kappa slopes, common stage/speed/month coefficients, and 20
+starts. Kappa mean and SD come only from the eligible Year-1 sample. Numerical
+bounds +/-25, convergence diagnostics, bound hits and component shares are
+reported. This is a mixture logit, not a second ordinary pooled regression.
+Profiles standardize nuisance covariates to a deterministic outcome-free
+sample of at most 100,000 eligible Year-1 rows, at mean Year-1 cost.
+
+For the main M=20 Year-1 fit, B1 and B2 each have 200 account bootstrap
+replications, 3 starts per replication (fitted/warm start plus dispersed
+alternatives), selected K held fixed. Match components to the full-data
+profiles by minimum squared profile distance. Intervals are conditional on K;
+they do not include model-selection uncertainty. At least 90% valid refits
+are required for an AVAILABLE inference label. M=50/4 do not get separate
+200-replication bootstraps. Original full-data fits always use 20 starts.
+
+B3 assigns Year-1 modal types and reports Year-2 rates by state, account
+retention, marker means/SEs with observed counts, and type counts by primary
+Year-1 speed. Re-estimate B1 independently in Year 2 for all three M values.
+Comparison/alignment of Year-2 profiles never updates Year-1 assignments.
+Rate SEs cluster by account conditional on assignments; marker-mean SEs treat
+the fitted labels as fixed. Assignment uncertainty is not included in these
+particular descriptive SEs. Locally export both posteriors and merged
+account/type/marker Parquet files, omitted from the return ZIP.
+
+A rising profile with a negative cost slope is compatible with selective
+accommodation; a flat profile is compatible with several mechanisms. A
+near-zero type is not an identified structural never-granter. Label after
+examining coverage, uncertainty and validation, and retain numeric labels
+where the data do not discriminate.
+
+## C and H: hazard and receipt
+
+C1 is a logit hazard at competitive choices until the first observed
+competitive grant. It includes log(1+prior screens), prior receipt indicator
+and log(1+days since), prior claimed-while-winning indicator and recency,
+state, kappa, stage, speed, current month, log(1+tenure), tenure missingness,
+rating/100, and first-observed-opportunity-month effects. SEs cluster by
+chooser. Exposure-decile plots show raw at-risk event rates with cluster SEs;
+ties are preserved. The specification is across the observed panel, not
+within session. Controls do not eliminate dynamic selection into survival,
+activity or unobserved lifetime history. Exposure associations are not causal
+estimates of learning or construal.
+
+C2/C3 authenticate the completed receipt-mechanisms cache 08b0e91f184f and
+original IV source, retain its 2,682,329-row cohort, and verify game, role,
+treatment, position and end-time identity against the main panel. No source
+cohort is reconstructed from game outcomes. The treatment is received draw;
+the instrument is the existing adjusted_7d pooled prior-leniency score,
+scaled by its fixed reference SD 0.059411690344000595. Include the original
+15 rich controls and fixed effects; do not include the excluded score as a
+control. Interact all included controls and FEs with the subgroup and
+instrument both subgroup treatment interactions. The two coefficients and
+their difference use one joint account-or-exposure-date CR0 covariance.
+
+C2 splits zero versus positive **prior observed all-state grants**. C3 splits
+zero versus positive prior observed opportunities. Outcome Y is a kind act
+at the next different-opponent competitive choice within 90 days; nonreachers
+are zero. The reached-opportunity outcome is reported alongside it. A split
+needs >=2,000 rows, >=10 receipts and >=10 kind events in each group; otherwise
+it is withheld with its counts. Report point estimates/CIs in pp and events
+per 1,000 receipts, covariance of the contrast, first stages and conditional
+F diagnostics. These conventional intervals are not weak-IV robust. Conditional
+exclusion is an assumption, not certified by the subgroup design. Positive
+Y effects can reflect opportunity reach as well as choice propensity.
+
+H plots raw and adjusted score-decile first stages and reduced forms, keeping
+score ties together; adjusted contrasts use the lowest bin as reference and
+the same rich controls/FE and covariance rule. Dynamic IV outcomes count
+kind acts and competitive opportunities against different opponents in
+(0,7], (7,30], (30,90] days. All focal rows have complete 90-day follow-up.
+Report counts per 1,000 receipts and per day because the windows differ in
+length. These are not conditional grant rates; separate CIs do not test a
+cross-window difference.
+
+H's environment-controls table is copied from the hash-verified earlier
+report cea0b052e5f2 for XC and XC_both_rates, keeping original cohorts,
+instruments, support, diagnostics and intervals. It is explicitly archived,
+not a newly fitted environment-controls version of C2. G1 adds a joint
+receipt-Year split and year-by-year main descriptive results. Other paper
+headlines are not claimed to be rerun by this package.
+
+## D and F: estimators conditional on new inputs
+
+D1 requires ordinary-game continuation cells: chooser cp and rating gap bins
+of 50, the same stage bands, speed, and at least 100 distinct games per cell.
+Exclude mate-scored main opportunities from this finite-cp calibration. It
+runs an all-state and an equal-position chooser-FE LPM using 1-p(win), stage,
+state when applicable, 2-point kappa bins (last bin >=18), speed and month.
+Reference categories are the lowest observed category within the retained
+sample. Report coverage before estimates and equal-position p(win) profiles.
+SEs condition on the estimated calibration. A final mechanism claim would
+need calibration uncertainty propagated by game/account resampling.
+Empirical p(win) is not a measurement of subjective expectations. A conditional
+stage effect alone does not constitute a test that rejects all KR accounts.
+
+D2 requires complete-game ACPL for each player, not the last four plies. It
+absorbs chooser and rounded-integer-eval x exact-ply fixed effects and
+estimates both players' ACPL terms. Negative recipient ACPL slope means
+more granting to better measured play. It remains an observational association.
+
+F uses outoftime losers with last recorded clock >=30 seconds blitz,
+60 rapid or 120 classical, and no bullet threshold. Combine these proxy
+waiters with active timeout choices of matching scope. Estimate state rates
+and a chooser-FE LPM. A probable abandoner is not evidence that the chooser
+actually saw a button or deliberately waited. F2 reports both all-waiter
+0%/100% scenarios and the logically wider lower/upper gap bounds obtained by
+opposite assignments in competitive and lost states. Bounds apply to this
+augmented proxy frame, not every possible disconnection.
+
+## Decision language
+
+Use convergent patterns to motivate behavioral descriptions, not a mechanical
+accept/reject tree over mental states. A null effect needs a narrow confidence
+interval around a substantively small range; failure to reject is not
+similarity. A zero-history receipt effect is a response among accounts with
+no previously observed grant, not proof that non-construers were converted.
+A prior-granter effect is consistent with intensification but does not alone
+identify a fixed type. Keep the neutral receipt wording until mechanism
+comparisons support something stronger.

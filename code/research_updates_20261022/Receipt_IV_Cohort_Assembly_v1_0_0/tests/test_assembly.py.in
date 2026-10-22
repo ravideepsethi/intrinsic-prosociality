@@ -1,0 +1,199 @@
+"""Synthetic contract, algorithm-equivalence and restart tests; no live data."""
+import os
+os.environ['OPENBLAS_NUM_THREADS']='1';os.environ['OMP_NUM_THREADS']='1'
+import json,sys,tempfile,unittest
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'code'))
+from common import *
+import logic,spine,chronology,followup,contracts,report,run
+
+def write(p,rows):
+    p.parent.mkdir(parents=True,exist_ok=True);pq.write_table(pa.Table.from_pylist(rows),p);return str(p)
+
+def query(person,start,anchor=None,opponent=None):
+    n=len(person);return dict(row_id=np.arange(n),game_id=np.array([f'Q{i:07}' for i in range(n)]),
+        recipient_id=np.array(person),opponent_id=np.array(opponent if opponent is not None else [99]*n),
+        archive_start_ms=np.array(start),anchor_ms=np.array(start if anchor is None else anchor),
+        archive_ordinal=np.arange(n),n_7d=np.full(n,10),n_30d=np.full(n,10),
+        adjusted_7d=np.zeros(n),adjusted_30d=np.zeros(n),expected_7d=np.zeros(n),expected_30d=np.zeros(n))
+
+def histories(rows):
+    names=('gid','j','i','t','start','ord','y','color','known')
+    return {k:np.array([r[k] for r in rows],dtype='U8' if k=='gid' else 'U5' if k=='color' else bool if k in ('y','known') else np.int64) for k in names}
+
+class Rules(unittest.TestCase):
+    def test_old_first_choice_equivalence(self):
+        rng=np.random.default_rng(426);n=300
+        q=query(rng.integers(1,12,n),rng.integers(10000,50000,n),opponent=rng.integers(12,20,n))
+        rows=[dict(gid=f'H{k:07}',j=int(rng.integers(1,12)),i=int(rng.integers(12,20)),
+            t=60000+k%100,start=55000+k%80,ord=k,y=bool(k%3),color='white' if k%2 else 'black',known=True) for k in range(700)]
+        h=histories(rows);old=logic.inherited.later_outcomes(h,q);new=logic.outcomes(h,q)
+        for key in ('row_id','observed_y','reached','outcome_gid','outcome_t','outcome_start','outcome_opponent'):
+            np.testing.assert_array_equal(old[key],new[key])
+
+    def test_unknown_precedence_ties_and_nonreach(self):
+        a=logic.POLICY_HI;q=query([1,2,3,4,5],[a-100]*5)
+        rows=[]
+        for person in (1,2,3,4):
+            rows.append(dict(gid=f'K{person:07}',j=person,i=22,t=a+100,start=a,ord=5,y=True,color='white',known=True))
+        # Same anchor but earlier ordinal may displace person 1's known outcome.
+        for person,t,ordinal in [(1,a+100,4),(2,a+101,1),(3,a+99,9),(5,a+5,1)]:
+            rows.append(dict(gid=f'U{person:07}',j=person,i=23,t=t,start=a,ord=ordinal,y=False,color='black',known=False))
+        r=logic.outcomes(histories(rows),q)
+        self.assertEqual(r['outcome_membership_ambiguous'].tolist(),[True,False,True,False,True])
+        self.assertEqual(r['later_choice_is_identified'].tolist(),[False,True,False,True,False])
+        self.assertEqual(r['later_choice_policy_period'][-1],'no_observed_later_choice')
+
+    def test_first_claim_and_same_opponent_skipped(self):
+        a=logic.POLICY_HI;q=query([1],[a])
+        rows=[dict(gid='SELF0001',j=1,i=99,t=a+1,start=a+1,ord=1,y=True,color='white',known=True),
+            dict(gid='CLAIM001',j=1,i=22,t=a+2,start=a+2,ord=2,y=False,color='black',known=True),
+            dict(gid='GRANT001',j=1,i=23,t=a+3,start=a+3,ord=3,y=True,color='white',known=True)]
+        r=logic.outcomes(histories(rows),q)
+        self.assertEqual(r['outcome_gid'][0],'CLAIM001');self.assertFalse(r['observed_y'][0])
+
+    def test_spacing_before_cuts_and_common_floor(self):
+        start=logic.PANEL_START+DAY
+        q=query([1]*4,[start,start+90*DAY,start+90*DAY+1,start+181*DAY])
+        q['n_7d']=np.array([5,10,10,10])
+        f=logic.selection(q)
+        self.assertEqual(f['spaced90_7d_floor5'].tolist(),[True,False,True,True])
+        self.assertEqual(f['common5_10_on_primary_stream'].tolist(),[False,False,True,True])
+        self.assertEqual(f['spaced90_7d_floor10'].tolist(),[False,True,False,True])
+        self.assertLess(q['archive_start_ms'][0]-97*DAY,logic.PANEL_START)
+
+    def test_strict_outcome_and_calendar_boundaries(self):
+        a=logic.PANEL_END-90*DAY
+        q=query([1,2],[a,a-1]);r=logic.outcomes(histories([]),q)
+        self.assertEqual(r['complete90_data'].tolist(),[False,True])
+        q=query([1],[logic.POLICY_LO-10])
+        rows=[dict(gid='BRACKET1',j=1,i=22,t=logic.POLICY_LO,start=logic.POLICY_LO-1,ord=1,y=False,color='white',known=True)]
+        self.assertEqual(logic.outcomes(histories(rows),q)['later_choice_policy_period'][0],'implementation_bracket')
+        rows[0]['t']=logic.POLICY_HI
+        self.assertEqual(logic.outcomes(histories(rows),q)['later_choice_policy_period'][0],'post')
+
+    def test_count_boundaries_and_identity(self):
+        s=logic.PANEL_START+110*DAY;t=np.array([s-97*DAY,s-7*DAY,s-37*DAY,s-7*DAY-1,s-100*DAY])
+        e=dict(person=np.array([1,1,1,1,2]),t=t,**{k:np.ones(5,np.int64) for k in logic.COUNTS})
+        r=logic.window_counts(e,np.array([1,2,3]),np.array([s,s,s]))
+        self.assertEqual(r['fair_90'].tolist(),[3,0,0]);self.assertEqual(r['fair_30'].tolist(),[2,0,0])
+
+    def test_volume_matches_bruteforce(self):
+        rng=np.random.default_rng(99);p=rng.integers(1,8,120);s=logic.PANEL_START+rng.integers(32,90,120)*DAY
+        t=logic.PANEL_START+rng.integers(0,100,1000)*DAY;w=rng.integers(1,8,1000);b=rng.integers(8,16,1000)
+        keys,order,people=logic.volume_plan(p,s);delta=np.zeros(len(p)+1,np.int64)
+        logic.accumulate_volume(t,w,b,keys,people,delta);got=logic.finish_volume(delta,order)
+        expected=np.array([np.sum((t>=ss-30*DAY)&(t<ss)&((w==pp)|(b==pp))) for pp,ss in zip(p,s)])
+        np.testing.assert_array_equal(got,expected)
+
+    def test_account_policy_is_deferred(self):
+        self.assertEqual(contracts.ACCOUNT_POLICY['excluded_usernames'],[])
+        self.assertEqual(contracts.ACCOUNT_POLICY['retained_author_usernames'],['__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__'])
+
+class Pipeline(unittest.TestCase):
+    def setUp(self):
+        self.temp=tempfile.TemporaryDirectory();self.root=Path(self.temp.name)
+        self.common=dict(work=str(self.root/'work'),auth=str(self.root/'auth'),code='fixture',threads=1,memory_mb=512)
+    def tearDown(self):self.temp.cleanup()
+
+    def test_overlay_preserves_existing_feb_and_unknown(self):
+        m='2026-02';a=logic.POLICY_HI
+        o=[dict(game_id=f'G{k:07}',month=m,chooser_user_id=k+1,disconnected_user_id=k+100,utc_ms=a,anchor_ms=a+100,
+            archive_ordinal=k,color='white',speed='blitz',rating=1500,opp_rating=1500,cp=0,ply=40,grant=bool(k%2),timeout_chooser_win=True,
+            tournament_like_event=False,tc_base_s=180,tc_inc_s=0) for k in range(4)]
+        op=write(self.root/'o.parquet',o)
+        def member(k,status,source,elig):return dict(game_id=o[k]['game_id'],month=m,source=source,source_status=status,source_provenance='fixture',
+            previous_classification_status='not_mutually_adjacent_observed' if k!=3 else 'unknown',mutual_previous_same_pair=False,pool_nonadjacent_eligible=elig,final_iv_eligible=None)
+        mem=write(self.root/'m.parquet',[member(0,'recovered','pool',True)]+[member(k,'missing',None,None) for k in (1,2,3)])
+        delta=write(self.root/'d.parquet',[member(1,'recovered','pool',True),member(2,'recovered','lobby',False),member(3,'recovered','pool',None)])
+        c=connection(self.root/'temp',1,512);copy(c,'SELECT '+spine.NORMALIZED+' FROM '+scan(op)+' o WHERE game_id='+lit(o[0]['game_id']),self.root/'b.parquet');c.close()
+        paths=[op,mem,delta,self.root/'b.parquet']
+        job=dict(**self.common,month=m,opportunity=op,membership=mem,delta=delta,choice=str(self.root/'b.parquet'),inputs=[contracts.snap(p) for p in paths])
+        r=spine.month_job(job);r2=spine.month_job(job);self.assertEqual(r,r2)
+        self.assertEqual(r['result']['main_rows'],2);self.assertEqual(r['result']['unknown_rows'],1)
+        ids=pq.ParquetFile(Path(r['root'])/'choices_PRIVATE.parquet').read()['game_id'].to_pylist()
+        self.assertEqual(set(ids),{'G0000000','G0000001'})
+        self.assertEqual([sha(p) for p in paths],[x['sha256'] for x in job['inputs']])
+
+    def test_synthetic_assembly_and_historical_pair_cache(self):
+        # Two exposures for one person plus one for another. An earlier game
+        # outside the 32-month window must remove the second person's pair.
+        a=logic.POLICY_HI-10*DAY;m='2025-11'
+        base=[dict(game_id='EXPOSE01',month=m,chooser_user_id=99,disconnected_user_id=17,utc_ms=a,anchor_ms=a+100,
+            archive_ordinal=1,color='white',speed='blitz',chooser_rating=1500.,recipient_rating=1490.,cp=0,ply=30,kind_draw=True,
+            arm_eligible=True,fair_competitive=True,tournament_like_event=False,tc_base_s=180,tc_inc_s=0,
+            chooser_rd=45.,recipient_rd=46.,authenticated_rating_states_attached=True),
+            dict(game_id='EXPOSE02',month=m,chooser_user_id=100,disconnected_user_id=18,utc_ms=a,anchor_ms=a+100,
+            archive_ordinal=2,color='black',speed='blitz',chooser_rating=1500.,recipient_rating=1490.,cp=0,ply=30,kind_draw=False,
+            arm_eligible=True,fair_competitive=True,tournament_like_event=False,tc_base_s=180,tc_inc_s=0,
+            chooser_rd=45.,recipient_rd=46.,authenticated_rating_states_attached=True)]
+        choice=write(self.root/'choices.parquet',base)
+        product=spine.month_job(dict(**self.common,month=m,choice=choice,membership=None,inputs=[contracts.snap(choice)]))
+        scores=[]
+        for r in base:
+            x=dict(game_id=r['game_id'],month=m,chooser_user_id=r['chooser_user_id'],recipient_id=r['disconnected_user_id'],
+                archive_start_ms=r['utc_ms'],anchor_ms=r['anchor_ms'],archive_ordinal=r['archive_ordinal'])
+            for lag in (7,30):x.update({f'{k}_{lag}d':v for k,v in dict(n=12,raw=.1,adjusted=.01,expected=.09,counterparts=12,pair_removed=0).items()})
+            x['adjusted_30d']=float('nan');x['expected_30d']=float('nan')
+            scores.append(x)
+        sp=write(self.root/'scores.parquet',scores)
+        oldroot=self.root/'old';(oldroot/'prepared').mkdir(parents=True)
+        pairkeys=logic.pairs([17,18],[99,100]);np.save(oldroot/'prepared/pair_keys.npy',pairkeys[:1])
+        cache=dict(root=str(oldroot),keys=str(oldroot/'prepared/pair_keys.npy'),config='oldfixture')
+        inp=dict(scores=[sp],snapshots=[contracts.snap(sp)],account_policy=contracts.ACCOUNT_POLICY,old_cache=cache)
+        prepared=spine.prepare(inp,[product],self.root/'run','fixture',1,512,self.root/'auth',expected_main_rows=2)
+        # Current chronology plus a pre-window observation for pair (18,100).
+        current=write(self.root/'current.parquet',[dict(utc_ms=a,white_id=17,black_id=99),dict(utc_ms=a,white_id=18,black_id=100),
+            dict(utc_ms=a-DAY,white_id=17,black_id=88)])
+        older=write(self.root/'older.parquet',[dict(utc_ms=logic.PANEL_START-500*DAY,white_id=18,black_id=100)])
+        cachepath=oldroot/'pairs/file_0000';cachepath.mkdir(parents=True)
+        write(cachepath/'pairs.parquet',[dict(pair_key=np.uint64(pairkeys[0]),first_pair_start=a)])
+        rec=receipt(cachepath/'pairs.parquet');rec['path']='pairs.parquet'
+        write_json(cachepath/'_DONE.json',dict(config_sha256='oldfixture',files=[rec],input_signature=[Path(current).stat().st_size,Path(current).stat().st_mtime_ns]))
+        scans=[]
+        for k,p in enumerate((current,older)):
+            record=dict(path=p,rows=pq.ParquetFile(p).metadata.num_rows,fingerprint=stamp(p),old_index=k,volume=k==0)
+            job=dict(**self.common,record=record,queries=str(prepared),query_receipt=contracts.snap(prepared/'_DONE.json'),old_cache=cache)
+            scans.append(chronology.file_job(job))
+            if k==0:self.assertTrue(chronology.file_job(job)['reused'])
+        fp=chronology.merge(scans,prepared,self.root/'run','fixture',1,512,self.root/'auth')
+        t=pq.ParquetFile(fp/'first_pair_PRIVATE.parquet').read()
+        self.assertEqual(t['game_id'].to_pylist(),['EXPOSE01']);self.assertEqual(t['pre_games_30d_observed'].to_pylist(),[1])
+        # Minimal all-source history with both focal author-like numeric IDs retained.
+        hp=write(self.root/'history.parquet',[dict(gid='HIST0001',j=17,i=19,t=a-8*DAY,y=True,fair=True,arm=True),
+            dict(gid='HIST0002',j=19,i=17,t=a-20*DAY,y=False,fair=True,arm=True)])
+        history=followup.history_month_job(dict(**self.common,month=m,paths=[hp],inputs=[contracts.snap(hp)]))
+        outpath=write(self.root/'outcome.parquet',[dict(gid='FOLLOW01',j=17,i=25,t=a+DAY,start=a+DAY-100,ord=55,y=False,color='black',known=True)])
+        paths=[str(p) for p in (fp/'queries/bucket=1').glob('*.parquet')]
+        events=[str(p) for p in (Path(history['root'])/'events/bucket=1').glob('*.parquet')]
+        job=dict(**self.common,bucket=1,queries=paths,events=events,outcomes=[outpath],inputs=[contracts.snap(fp/'_DONE.json'),contracts.snap(outpath),contracts.snap(Path(history['root'])/'_DONE.json')])
+        result=followup.bucket_job(job);r=pq.ParquetFile(Path(result['root'])/'analysis_PRIVATE.parquet').read().to_pylist()[0]
+        self.assertEqual(r['fair_90'],1);self.assertEqual(r['claim_90'],1);self.assertTrue(r['reached'])
+        self.assertFalse(r['y_calendar']);self.assertTrue(r['calendar_primary_7d_floor5']);self.assertIsNone(r['final_iv_eligible'])
+        self.assertEqual(r['outcome_color'],'black');self.assertEqual(r['later_white_x_post'],0)
+        self.assertEqual(followup.bucket_job(job),result)
+        assembled,done=report.assemble([result],[product],fp,prepared,self.root/'run','fixture',1,512,self.root/'auth')
+        self.assertEqual(done['result']['first_pair_rows'],1)
+        self.assertEqual(done['result']['calendar_primary_rows_before_mechanics'],1)
+        self.assertIsNone(done['result']['final_iv_eligible_n'])
+        self.assertTrue((assembled/'COHORT_COUNTS.parquet').is_file())
+        support=pq.ParquetFile(assembled/'SCORE_SUPPORT.parquet').read().to_pylist()
+        self.assertTrue(all(r['finite_score_rows']==0 and r['raw_score_sd'] is None for r in support if r['lag_days']==30))
+        # Exercise spawn-based worker scheduling and receipt reuse as on macOS.
+        self.assertEqual(run.jobs_run([job,dict(job,bucket=2,queries=[])],followup.bucket_job,2,'fixture')[0],result)
+
+    def test_receipt_rejects_changed_output(self):
+        root=self.root/'stage';key='fixture'
+        def produce(tmp):
+            (tmp/'file.txt').write_text('original');return {}
+        stage(root,key,[],produce,self.root/'auth');(root/'file.txt').write_text('changed!')
+        with self.assertRaises(RuntimeError):stage(root,key,[],produce,self.root/'auth')
+
+    def test_changed_chronology_fingerprint_rejected(self):
+        p=write(self.root/'chron.parquet',[dict(utc_ms=1,white_id=1,black_id=2)])
+        record=dict(path=p,rows=1,fingerprint=stamp(p),old_index=None,volume=False)
+        Path(p).write_bytes(Path(p).read_bytes()+b'changed')
+        with self.assertRaisesRegex(RuntimeError,'changed before'):
+            chronology.file_job(dict(**self.common,record=record,queries=str(self.root),query_receipt={},old_cache=None))
+
+if __name__=='__main__':unittest.main(verbosity=2)

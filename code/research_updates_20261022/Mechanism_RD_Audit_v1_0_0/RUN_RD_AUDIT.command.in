@@ -1,0 +1,45 @@
+#!/bin/bash
+set -euo pipefail
+RD_AUDIT_PACKAGE="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+RD_AUDIT_PROJECT="${MECHANISM_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+RD_AUDIT_DESKTOP="${MECHANISM_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+if [[ ! -d "$RD_AUDIT_PROJECT" ]]; then
+  echo "XT_Pro project directory not found: $RD_AUDIT_PROJECT" >&2
+  exit 1
+fi
+mkdir -p "$RD_AUDIT_DESKTOP"
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMBA_NUM_THREADS=1
+RD_AUDIT_PY=""
+shopt -s nullglob
+RD_AUDIT_CANDIDATES=("${MECHANISM_PYTHON:-}" "$RD_AUDIT_PROJECT/venv/bin/python" "$RD_AUDIT_PACKAGE/.venv/bin/python" "$RD_AUDIT_DESKTOP"/*/.venv/bin/python)
+for RD_AUDIT_CANDIDATE in "${RD_AUDIT_CANDIDATES[@]}"; do
+  if [[ -x "$RD_AUDIT_CANDIDATE" ]] && "$RD_AUDIT_CANDIDATE" -c 'import sys,numpy,pandas,scipy,numba,duckdb,pyarrow,matplotlib; assert sys.version_info >= (3,10); assert tuple(map(int,duckdb.__version__.split(".")[:2])) == (1,5)' >/dev/null 2>&1; then
+    RD_AUDIT_PY="$RD_AUDIT_CANDIDATE"
+    break
+  fi
+done
+if [[ -z "$RD_AUDIT_PY" ]]; then
+  echo "No compatible existing environment found. Creating an isolated environment inside this package."
+  python3 -m venv "$RD_AUDIT_PACKAGE/.venv"
+  "$RD_AUDIT_PACKAGE/.venv/bin/python" -m pip install -r "$RD_AUDIT_PACKAGE/requirements.txt"
+  RD_AUDIT_PY="$RD_AUDIT_PACKAGE/.venv/bin/python"
+fi
+"$RD_AUDIT_PY" - "$RD_AUDIT_PACKAGE" <<'PY'
+import hashlib,sys,pathlib
+p=pathlib.Path(sys.argv[1])
+for line in (p/'PACKAGE_MANIFEST.sha256').read_text().splitlines():
+    h,n=line.split('  ',1)
+    if hashlib.sha256((p/n).read_bytes()).hexdigest()!=h:
+        raise SystemExit('Package checksum mismatch: '+n)
+print('PACKAGE_SHA256_OK')
+PY
+"$RD_AUDIT_PY" -m unittest discover -s "$RD_AUDIT_PACKAGE/tests" -p 'test_*.py' -q
+RD_AUDIT_LOG="$RD_AUDIT_DESKTOP/MECHANISM_RD_AUDIT_RUN_$(date -u +%Y%m%dT%H%M%SZ).log"
+echo "Python: $RD_AUDIT_PY"
+echo "Log: $RD_AUDIT_LOG"
+echo "Cached-data RD audit: up to 8 preparation threads, 2 model fits; no history or simulation rerun."
+if [[ -x /usr/bin/caffeinate ]]; then
+  /usr/bin/caffeinate -i "$RD_AUDIT_PY" -u "$RD_AUDIT_PACKAGE/code/run.py" --project-root "$RD_AUDIT_PROJECT" --desktop "$RD_AUDIT_DESKTOP" "$@" 2>&1 | tee "$RD_AUDIT_LOG"
+else
+  "$RD_AUDIT_PY" -u "$RD_AUDIT_PACKAGE/code/run.py" --project-root "$RD_AUDIT_PROJECT" --desktop "$RD_AUDIT_DESKTOP" "$@" 2>&1 | tee "$RD_AUDIT_LOG"
+fi

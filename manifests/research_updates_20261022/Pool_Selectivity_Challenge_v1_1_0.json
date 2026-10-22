@@ -1,0 +1,90 @@
+{
+  "package": "Pool_Selectivity_Challenge_v1_1_0",
+  "archive_name": "Pool_Selectivity_Challenge_v1_1_0.zip",
+  "archive_sha256": "9ac014a0c6e2225115946e3f428370691b43d73a8ace0df9b631d98d2cd843bc",
+  "archive_size": 27741,
+  "archive_root": "Pool_Selectivity_Challenge_v1_1_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "README.md",
+      "published_path": "README.md",
+      "sha256": "6c92a0d0d3f106cca0845024b8649658eb59aa81e4369e7a518fc7f2230674a9",
+      "published_sha256": "6c92a0d0d3f106cca0845024b8649658eb59aa81e4369e7a518fc7f2230674a9",
+      "size": 6211
+    },
+    {
+      "path": "RUN_CHALLENGE.command",
+      "published_path": "RUN_CHALLENGE.command.in",
+      "sha256": "be0807f6afacfbe304670586c71f1544d7ca86c30735baa96b066fbe9fda2311",
+      "published_sha256": "be0807f6afacfbe304670586c71f1544d7ca86c30735baa96b066fbe9fda2311",
+      "size": 2090
+    },
+    {
+      "path": "VALIDATION.md",
+      "published_path": "VALIDATION.md",
+      "sha256": "6aac963e353e74e7657086f041bfc2316814e39979c757a2585a2a0ec1880be9",
+      "published_sha256": "6aac963e353e74e7657086f041bfc2316814e39979c757a2585a2a0ec1880be9",
+      "size": 1560
+    },
+    {
+      "path": "challenge.py",
+      "published_path": "challenge.py",
+      "sha256": "70fda98d2b33a7b822425618d7a322ce638ac50daa1136db3d98da208119ef20",
+      "published_sha256": "70fda98d2b33a7b822425618d7a322ce638ac50daa1136db3d98da208119ef20",
+      "size": 19569
+    },
+    {
+      "path": "model.py",
+      "published_path": "model.py",
+      "sha256": "8f591dc7a39d28075ba3aff4f5ace38342b139821db00a00fb4fe72a5fc268d4",
+      "published_sha256": "8f591dc7a39d28075ba3aff4f5ace38342b139821db00a00fb4fe72a5fc268d4",
+      "size": 12071
+    },
+    {
+      "path": "requirements.txt",
+      "published_path": "requirements.txt",
+      "sha256": "acd777c226d733447778d3d0d3299c029828fbd011410baa4adf56ba896b7053",
+      "published_sha256": "acd777c226d733447778d3d0d3299c029828fbd011410baa4adf56ba896b7053",
+      "size": 75
+    },
+    {
+      "path": "self_test.py",
+      "published_path": "self_test.py",
+      "sha256": "be92c88718c2feaeedc00c31f14de12ba0e7e0667a31a7ad1a28a25324bee2ba",
+      "published_sha256": "be92c88718c2feaeedc00c31f14de12ba0e7e0667a31a7ad1a28a25324bee2ba",
+      "size": 1882
+    },
+    {
+      "path": "source/pool_wave1_common.py",
+      "published_path": "source/pool_wave1_common.py",
+      "sha256": "f9c714c549c6cd68a7d2dbdb2c17d5abacfdfc12dc6526752f03ab2505bbff43",
+      "published_sha256": "f9c714c549c6cd68a7d2dbdb2c17d5abacfdfc12dc6526752f03ab2505bbff43",
+      "size": 21988
+    },
+    {
+      "path": "util.py",
+      "published_path": "util.py",
+      "sha256": "e115758d021eff861b13b74d6a334f91d378887b484cc61c6ddd75c8bbccd521",
+      "published_sha256": "e115758d021eff861b13b74d6a334f91d378887b484cc61c6ddd75c8bbccd521",
+      "size": 1941
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "PACKAGE_MANIFEST.sha256",
+      "sha256": "08a88160101c29e894ab4786a2c82eb30dcbaa25002ac0cebde58dbb8db4141b",
+      "size": 899
+    },
+    {
+      "path": "PARENT_AUTHORITY.json",
+      "sha256": "30a560fc8b23444c45d1a0acd5f598de81c8a44f0546ab96dcc5c3129a3b9d52",
+      "size": 272
+    },
+    {
+      "path": "RUN_TERMINAL.txt",
+      "sha256": "d8aa364f4c2e1fb795fa5e84d1fbae537ab72cc71ff47b49698520138e6d6dae",
+      "size": 533
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "package": "Countdown_Feasibility_v1_0_0",
+  "archive_name": "Countdown_Feasibility_v1_0_0.zip",
+  "archive_sha256": "f9245da13f695e382cd3d46f10c536be356d88b9dd37654c8c73f15a231ff919",
+  "archive_size": 29008,
+  "archive_root": "Countdown_Feasibility_v1_0_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "README.txt",
+      "published_path": "README.txt",
+      "sha256": "e81c8381fe6706d35985c308391d608eaa9462b79e361e0ecb4c71c0f6f01c92",
+      "published_sha256": "e81c8381fe6706d35985c308391d608eaa9462b79e361e0ecb4c71c0f6f01c92",
+      "size": 8203
+    },
+    {
+      "path": "RUN_COUNTDOWN_FEASIBILITY.command",
+      "published_path": "RUN_COUNTDOWN_FEASIBILITY.command.in",
+      "sha256": "cdd61052d913fed96f847f317dbe6bbb2435600cd3c0d8032121c45295416877",
+      "published_sha256": "cdd61052d913fed96f847f317dbe6bbb2435600cd3c0d8032121c45295416877",
+      "size": 2124
+    },
+    {
+      "path": "authority/AUTHOR_EXCLUSION.json",
+      "published_path": "authority/AUTHOR_EXCLUSION.json.in",
+      "sha256": "0267b55c9536ae0f9302a08c338b01f5f7cd2e2f2d6a8d54a7d4621a58cb77a7",
+      "published_sha256": "ee477da62838399f042c52ccbb05e3f4a524af7db01ec0e3aea27f1bfa1a4732",
+      "size": 882,
+      "redactions": [
+        {
+          "start": 127,
+          "end": 134,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 138,
+          "end": 146,
+          "token": "__PRIVATE_VALUE_2__"
+        },
+        {
+          "start": 172,
+          "end": 179,
+          "token": "__PRIVATE_VALUE_3__"
+        }
+      ]
+    },
+    {
+      "path": "code/common.py",
+      "published_path": "code/common.py.in",
+      "sha256": "b8a3d0a16476ac7943e5373589512c0640532d7964a574c366eac63ee71daa2f",
+      "published_sha256": "dedc9b9317375bc4880a5c62b9f4e472ccdb6251e9226140e15f877aa9e2e83e",
+      "size": 8301,
+      "redactions": [
+        {
+          "start": 329,
+          "end": 336,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 340,
+          "end": 348,
+          "token": "__PRIVATE_VALUE_2__"
+        }
+      ]
+    },
+    {
+      "path": "code/project.py",
+      "published_path": "code/project.py",
+      "sha256": "46e1908d6504ecdb571da258c3c7d91c3df91e80146521d993df5a7b93b1f160",
+      "published_sha256": "46e1908d6504ecdb571da258c3c7d91c3df91e80146521d993df5a7b93b1f160",
+      "size": 11344
+    },
+    {
+      "path": "code/reports.py",
+      "published_path": "code/reports.py",
+      "sha256": "69e40e0db862079c13bfbf8110eddd43bce662388cf1c66c9000f1072716770e",
+      "published_sha256": "69e40e0db862079c13bfbf8110eddd43bce662388cf1c66c9000f1072716770e",
+      "size": 7512
+    },
+    {
+      "path": "code/run.py",
+      "published_path": "code/run.py",
+      "sha256": "741a9df43bcd95eb25a0a6f4dce66ce9dc64854c355ffbb78c2659fe03b9a3e1",
+      "published_sha256": "741a9df43bcd95eb25a0a6f4dce66ce9dc64854c355ffbb78c2659fe03b9a3e1",
+      "size": 13264
+    },
+    {
+      "path": "requirements.txt",
+      "published_path": "requirements.txt",
+      "sha256": "207860ba6cf025eb8f168abd985d4d8a198c48442aa26dd4bfe5e3d2aaa9a68c",
+      "published_sha256": "207860ba6cf025eb8f168abd985d4d8a198c48442aa26dd4bfe5e3d2aaa9a68c",
+      "size": 112
+    },
+    {
+      "path": "tests/test_countdown.py",
+      "published_path": "tests/test_countdown.py.in",
+      "sha256": "76555ffea4b10d52e15ab3de1ace6be032e3b68f63e4ba41e32353077986431d",
+      "published_sha256": "8f317f7549d6b4b4975bba2163ed7be2b55a9d959b33fe8e7ee09a6cb49784fb",
+      "size": 9518,
+      "redactions": [
+        {
+          "start": 5250,
+          "end": 5257,
+          "token": "__PRIVATE_VALUE_1__"
+        }
+      ]
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "PACKAGE_MANIFEST.json",
+      "sha256": "95fa6bd133eb34a14881432d521448fb1cd0b8a8067cf29c3e7b2ba1b9db4c8c",
+      "size": 1375
+    },
+    {
+      "path": "VALIDATION.txt",
+      "sha256": "8759877873cdd6602c123d7366279ba8135ea299586b0776221cb7944fa4d330",
+      "size": 1820
+    },
+    {
+      "path": "authority/pool_main.json",
+      "sha256": "06e3a0067c24026973fa1dce9c85b05ceee6a158232a36807263c4beb969666f",
+      "size": 6626
+    }
+  ]
+}

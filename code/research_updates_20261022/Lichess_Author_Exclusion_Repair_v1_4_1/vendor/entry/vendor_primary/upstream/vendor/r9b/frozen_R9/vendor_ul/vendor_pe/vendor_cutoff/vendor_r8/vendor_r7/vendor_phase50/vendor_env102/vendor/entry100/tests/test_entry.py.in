@@ -1,0 +1,196 @@
+import sys,tempfile,unittest,contextlib,math
+from pathlib import Path
+from types import SimpleNamespace
+from unittest import mock
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'code'))
+from entry_common import *
+import entry_models as models
+import entry_report as report
+import run_entry as runner
+sys.path.insert(0,str(UPSTREAM/'tests'))
+import test_cached as fixtures
+import test_checkpoint25 as legacy_tests
+
+
+def data(n=5000,seed=932):
+    d=fixtures.fake_model(n);rng=np.random.default_rng(seed)
+    d['comp_adjusted_7d']=d['adjusted_7d']+rng.normal(0,.025,n)
+    d['comp_expected_7d']=rng.uniform(.01,.05,n)
+    d['comp_n_7d']=np.maximum(1,d['n_7d']-rng.integers(1,5,n))
+    d['comp_counterparts_7d']=np.minimum(d['comp_n_7d'],d['counterparts_7d'])
+    d['active_timeout']=rng.random(n)<np.clip(.5-2*d['comp_adjusted_7d'],.1,.9)
+    prev=d['active_timeout']
+    for k in ENTRY_COLUMNS[1:]:
+        prev=prev&(rng.random(n)<.8);d[k]=prev
+    return d
+
+
+def expected(d,cohort):
+    r=stats.estimate({k:v for k,v in d.items() if not k.startswith('comp_')},SPECS['entry'])
+    return [dict(x,cohort=cohort) for x in r['estimates']]
+
+
+class ScientificTests(unittest.TestCase):
+    def test_frozen_all_row_estimates_and_no_later_outcomes_required(self):
+        d=data();want=expected(d,'new_phase25')
+        for k in ['y','reached','outcome_gid','outcome_t','outcome_start','outcome_opponent']:d.pop(k,None)
+        result=models.estimate(d,'new_phase25','all_entry')
+        self.assertEqual(len(models.reproduce(result['estimates'],'new_phase25',want)),5)
+        row=next(r for r in result['estimates'] if r['outcome']=='analysis_entry_90')
+        self.assertLess(row['coefficient_pp'],0)
+
+    def test_matched_rows_units_control_ladder_and_decomposition(self):
+        d=data();use=models.support_mask(d);d={k:v[use] for k,v in d.items()}
+        result=models.estimate(d,'new_phase25','competitive_supported',.1350184374983984)
+        main=[r for r in result['estimates'] if r['control_level']=='X0' and r['instrument']=='pooled' and r['outcome'] in ENTRY_COLUMNS]
+        self.assertEqual(len(models.reproduce(main,'new_phase25',expected(d,'new_phase25'))),5)
+        for level in models.LEVELS:
+            rows=[r for r in result['estimates'] if r['control_level']==level]
+            self.assertEqual(len(set(r['row_set_sha256'] for r in rows)),1)
+            for outcome in {r['outcome'] for r in rows}:
+                pair=[r for r in rows if r['outcome']==outcome]
+                self.assertEqual(len(pair),2);self.assertEqual(pair[0]['controls'],pair[1]['controls'])
+        for row in result['estimates']:
+            if row.get('supported'):self.assertAlmostEqual(row['coefficient_pp']/row['reference_score_SD']*.1,row['coefficient_pp_per_raw_0_10'])
+        self.assertEqual(len(result['contrasts']),10)
+        # Independent call to frozen FWL with XC, using the exact additional controls.
+        xs,names,_,_,groups,_=stats.controls(d,True)
+        for v in (d['comp_expected_7d'],np.log1p(d['comp_n_7d']),np.log1p(d['comp_counterparts_7d'])):xs.append((v-v.mean())/max(v.std(),1e-12))
+        residual,_=num.partial_out(np.column_stack(xs+[d['comp_adjusted_7d'],d['analysis_entry_90']]),groups,len(xs))
+        codes=stats.cmp.covariance_codes(d['recipient_id'],d['opponent_id'],groups[1])
+        target=stats.stats.ols(residual[:,1],residual[:,0],lambda x:stats.stats.shared_meat(x,codes))
+        got=next(r for r in result['estimates'] if r['control_level']=='XC' and r['instrument']=='competitive' and r['outcome']=='analysis_entry_90')
+        self.assertAlmostEqual(got['coefficient'],target['coefficient'],10);self.assertAlmostEqual(got['standard_error'],target['standard_error'],10)
+
+    def test_contrast_joint_covariance_and_rescaling(self):
+        rng=np.random.default_rng(13);n=4000
+        z1=rng.normal(size=n);z2=.6*z1+rng.normal(size=n);y=.3*z1+.9*z2+rng.normal(size=n)
+        codes=stats.cmp.covariance_codes(np.arange(n),np.arange(n)+n,np.arange(n)%100)
+        got=models.contrast(z1,z2,y,codes)
+        b1=z1@y/(z1@z1);b2=z2@y/(z2@z2)
+        score=np.column_stack([z1*(y-b1*z1)/(z1@z1),z2*(y-b2*z2)/(z2@z2)])
+        v=stats.stats.shared_meat(score,codes);want=math.sqrt(v[0,0]+v[1,1]-2*v[0,1])*10
+        self.assertAlmostEqual(got['coefficient_pp'],10*(b2-b1),11)
+        self.assertAlmostEqual(got['standard_error_pp'],want,11)
+        self.assertFalse(models.contrast(z1,z1,y,codes)['supported'])
+
+    def test_nesting_missing_and_duplicate_rows_rejected(self):
+        d=data();d['analysis_entry_90'][0]=True;d['selected_entry_90'][0]=False
+        with self.assertRaisesRegex(RuntimeError,'not nested'):models.estimate(d,'x','all_entry')
+        d=data();d['row_id'][1]=d['row_id'][0]
+        with self.assertRaisesRegex(ValueError,'Duplicate'):models.estimate(d,'x','all_entry')
+        d=data();d['recipient_rating'][0]=np.nan
+        with self.assertRaisesRegex(RuntimeError,'ratings missing'):models.estimate(d,'x','all_entry')
+
+    def test_zero_rare_events_are_flagged_without_fabricated_uncertainty(self):
+        d=data();d['selected_entry_90']=d['recipient_fair_arm_main'].copy();d['analysis_entry_90']=d['selected_entry_90'].copy()
+        out=models.estimate(d,'x','all_entry')['estimates']
+        for name in ['competitive_arm_not_selected','selected_not_analysis']:
+            row=next(r for r in out if r['outcome']==name)
+            self.assertFalse(row['supported']);self.assertEqual(row['coefficient'],0)
+            self.assertNotIn('standard_error_pp',row)
+
+    def test_competitive_score_exact_cutoff_pair_and_author_exclusion(self):
+        # Independent event-level oracle in the frozen upstream suite checks the
+        # actual indexed competitive scorer, strict lag boundary, pair and author removal.
+        legacy_tests.Checkpoint25Tests('test_secondary_X0_matches_frozen_OLS_and_XC_common_controls').test_secondary_X0_matches_frozen_OLS_and_XC_common_controls()
+        method='test_competitive_history_matches_original_author_clean_oracle'
+        getattr(legacy_tests.Checkpoint25Tests(method),method)()
+
+
+class OperationalTests(unittest.TestCase):
+    def test_stage_hashes_and_missing_index_fail_closed(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)
+            io.stage(root/'stage','c',lambda p:io.table(p/'a.parquet',pa.table({'x':[1]})))
+            checked_stage_files(root/'stage','c',['a.parquet'])
+            with self.assertRaisesRegex(RuntimeError,'Wrong completed'):checked_stage_files(root/'stage','bad',['a.parquet'])
+            (root/'stage/a.parquet').write_bytes(b'corrupt')
+            with self.assertRaisesRegex(RuntimeError,'size changed'):checked_stage_files(root/'stage','c',['a.parquet'])
+            with self.assertRaisesRegex(RuntimeError,'index is incomplete'):
+                score_job(dict(index=str(root/'absent'),index_conf='x'))
+            self.assertFalse((root/'absent').exists())
+
+    def test_parent_authority_rejects_wrong_configuration(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);io.js(root/'config.json',dict(bad=True))
+            with self.assertRaisesRegex(RuntimeError,'reviewed completed'):authenticate(root,root)
+
+    def test_completed_parent_cache_bindings_and_author_guard(self):
+        with tempfile.TemporaryDirectory() as td:
+            project=Path(td);parent=project/'parent';shared=project/CACHE_REL
+            auth=io.load(HERE/'evidence/authority.json')
+            config=dict(code_sha256=auth['upstream_package_manifest_sha256'],fixture=True)
+            conf=io.cfgsha(config);io.js(parent/'config.json',config)
+            io.js(parent/'report/summary.json',dict(status='PHASE_025_AVAILABLE_CASE_ANALYSIS_COMPLETE',metadata_quarantine=dict(quarantined_rows=2)))
+            auth=dict(auth,config_sha256=conf,summary_sha256=io.sha(parent/'report/summary.json'))
+            def produce(tmp):
+                for cohort in COHORTS:io.table(tmp/('entry_'+cohort+'.parquet'),pa.table({'row_id':[1]}))
+            io.stage(parent/'split',conf,produce)
+            ids=[999991,999992];io.js(parent/'INPUTS_PRIVATE.json',dict(author_ids=dict(zip(AUTHORS,ids))))
+            definition=feature_cache.definition('lag7_pair_excluded_scores_v1',dict(index='idx',reference='ref',authors=ids),
+                [UPSTREAM/'code/performance_histories.py',UPSTREAM/'code/performance_cache.py',Path(num.__file__)])
+            code=io.cfgsha(definition);io.js(shared/'scores'/code/'0/definition.json',definition)
+            io.js(parent/'scores/00/_DONE.json',dict(cache_definition_sha256=code))
+            io.stage(shared/'reference/ref/models','ref',lambda p:np.save(p/'clean.npy',np.zeros(1)))
+            original=io.load
+            def read(path):return auth if Path(path)==HERE/'evidence/authority.json' else original(path)
+            with mock.patch.object(io,'load',side_effect=read):
+                binding=authenticate(project,parent)
+                self.assertEqual(binding['author_ids'],ids);self.assertEqual(binding['index_conf'],'idx')
+                io.js(parent/'INPUTS_PRIVATE.json',dict(author_ids={'__PRIVATE_VALUE_1__':1,'__PRIVATE_VALUE_2__':2}))
+                with self.assertRaisesRegex(RuntimeError,'author-clean score cache'):authenticate(project,parent)
+
+    def test_real_spawned_model_checkpoint_resume_and_tamper(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);d=data(3000);src=root/'sample.parquet';io.table(src,pa.table(d))
+            target=root/'expected.json';io.js(target,expected(d,'new_phase25'))
+            job=dict(input=str(src),expected=str(target),cohort='new_phase25',sample='all_entry',conf='test',
+                     memory_estimate_gb=2.,output=str(root/'model'))
+            runtime=Runtime(root);runner.model_map([job],runtime,2,5,'test spawned regression')
+            saved=io.sha(root/'model/result.json')
+            with mock.patch.object(models,'estimate',side_effect=AssertionError('must reuse')):models.model_job(job)
+            self.assertEqual(saved,io.sha(root/'model/result.json'))
+            (root/'model/result.json').write_text('{}')
+            with self.assertRaisesRegex(RuntimeError,'changed'):models.model_job(job)
+
+    def test_memory_budget_no_model_started(self):
+        with tempfile.TemporaryDirectory() as td:
+            with self.assertRaisesRegex(RuntimeError,'estimated'):
+                runner.model_map([dict(memory_estimate_gb=9)],Runtime(Path(td)),10,5,'test')
+
+    def test_entry_preparation_report_and_resume(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);split=root/'split';d=data(2400)
+            for cohort in COHORTS:io.table(split/('entry_'+cohort+'.parquet'),pa.table({k:v for k,v in d.items() if not k.startswith('comp_')}))
+            qs,_=prepare_queries(split,root/'queries','test',[999991,999992])
+            self.assertEqual(sum(pq.ParquetFile(qs/f'{s:02}.parquet').metadata.num_rows for s in range(16)),2400)
+            scores=root/'scores.parquet';io.table(scores,pa.table({k:d[k] for k in ['row_id']+COMP_COLUMNS}))
+            prepared,_=assemble(split,[str(scores)],root/'prepared','test',.5,2)
+            expected_path=root/'expected.json';io.js(expected_path,expected(d,'new_phase25'))
+            for sample in ['all_entry','competitive_supported']:
+                models.model_job(dict(input=str(prepared/'new_phase25.parquet'),cohort='new_phase25',sample=sample,
+                    expected=str(expected_path),conf='test',output=str(root/'models'/sample),tail_cutoff=.135))
+            binding=dict(parent_config_sha256='test',quarantine=dict(quarantined_rows=2))
+            summary=report.export(root,root/'desktop','test','ENTRY_DIAGNOSTICS_COMPLETE',time.monotonic(),binding)
+            self.assertEqual(summary['reproduced_original_entry_estimates'],5)
+            self.assertEqual(summary['chronology_scans'],0)
+            self.assertIn('p_Holm_10_stage_instrument_tests',pq.ParquetFile(root/'report/entry_comparison.parquet').schema_arrow.names)
+            self.assertTrue((root/'desktop/RUN2_ENTRY_DIAGNOSTICS_REPORT_test.zip').exists())
+            import zipfile
+            with zipfile.ZipFile(root/'desktop/RUN2_ENTRY_DIAGNOSTICS_REPORT_test.zip') as z:
+                self.assertTrue(all('PRIVATE' not in n for n in z.namelist()))
+                for row in json.loads(z.read('REPORT_MANIFEST.json')):
+                    self.assertEqual(hashlib.sha256(z.read(row['path'])).hexdigest(),row['sha256'])
+            # Missing a score row is a hard failure, never a silent case deletion.
+            io.table(root/'missing.parquet',io.read(scores).slice(1))
+            with self.assertRaisesRegex(RuntimeError,'Missing score rows'):
+                assemble(split,[str(root/'missing.parquet')],root/'bad','test',.5,1)
+
+    def test_release_closure(self):
+        verify_package()
+        manifests=list((HERE/'vendor').rglob('PACKAGE_MANIFEST.sha256'))
+        self.assertEqual(len(manifests),3)
+        self.assertTrue((UPSTREAM/'vendor/local_first/comparison_original/validation').is_dir())
+
+if __name__=='__main__':unittest.main()

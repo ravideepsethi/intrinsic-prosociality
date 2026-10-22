@@ -1,0 +1,416 @@
+# Rating motives in disconnection concessions
+
+**Revised prospective analysis specification — version 1.1, 23 September 2026**
+
+**Status:** specification completed before estimating the new models defined here. No new empirical estimates have been produced for this specification. This is a prospective extension informed by earlier results, not an independently registered plan or a claim that all related evidence was previously unseen.
+
+## Executive decisions
+
+- Separate preservation of the current rating, correction toward perceived strength, concern for the recipient, avoidance of undeserved gains, and a personal-record bonus. They can coexist.
+- Retain five new primary coefficients, T1–T5. The responsibility analysis retains its own frozen plan; the completed recipient-Patron association is prior evidence. Neither is silently converted into a new primary test here.
+- Remove the claim that rating accuracy predicts a positive personal-peak coefficient. Treat the 0.75 threshold as a restriction of the minimum-movement model.
+- Remove K bins and the forgone premium from the primary log-K regression. Use test-specific controls.
+- Use all-source histories within the relevant speed rating. Keep the outcome panel restricted to its certified automated-pool, observed-nonadjacent population.
+- Keep clearly-losing estimates as state comparisons. Compare state coefficients directly rather than treating one insignificant coefficient as a placebo success.
+- Replace automatic motive classification and retitling with bounded, model-specific interpretations. Non-rejection is not evidence of a zero effect.
+
+## 1. Research question and estimand
+
+Do concessions respond to the chooser's own rating consequences, to a recent-performance discrepancy, to a personal rating record, or to the recipient's rating stake, after conditioning on chooser identity and observed opportunity characteristics?
+
+The primary estimands are opportunity-weighted, within-chooser conditional associations in the eligible linked sample. They are not causal effects, equal-account averages, estimates of the population distribution of motives, or revealed welfare costs of rating points. Fixed effects remove stable chooser differences; they do not remove time-varying motivation, selection into playing, selection into disconnection opportunities, or outcome-based profile acquisition.
+
+The five tests discipline specific versions of the competing explanations. No combination of their signs uniquely identifies a psychological motive.
+
+## 2. Explicit choice models
+
+### 2.1 Notation
+
+For chooser i and opportunity g, let Y = 1 denote granting a draw and Y = 0 claiming a win. Let R be the chooser's pre-game displayed rating; r_G and r_C are the reconstructed rating changes under granting and claiming. Let kappa_i = r_C - r_G > 0 be the chooser's forgone premium. The common-scale representation used in the project is:
+
+\[
+r_G=K(1/2-E),\qquad r_C=K(1-E),\qquad \kappa_i=K/2.
+\]
+
+The algebra below uses this representation. Production construction must verify its identities against the certified fields. If a replay implementation produces action-specific scales or a regulator breaks the representation, use the two certified counterfactual payoffs directly and report the discrepancy; do not impose the identities on incompatible fields.
+
+Let theta be the chooser's perceived current strength and d = R - theta. Let kappa_j be the disconnected recipient's rating improvement under a draw rather than a loss. Let P be the prior, observed stable-rating peak defined below.
+
+### 2.2 M: preserve the current rating
+
+A deterministic chooser minimizing absolute movement chooses a draw if |r_G| < |r_C|. For K > 0 and 0 < E < 1:
+
+\[
+|r_C|-|r_G|=
+\begin{cases}
+K/2,& E\le 1/2,\\
+K(3/2-2E),& E>1/2.
+\end{cases}
+\]
+
+Thus granting is preferred for E < 0.75, claiming for E > 0.75, with indifference at 0.75. K changes the magnitude of the movement difference but not the deterministic action. There is no role for a personal record or a recent-performance discrepancy when the target is the current rating itself.
+
+With squared movement loss the advantage of granting is K^2(0.75-E). A positive K association at E = 0.5 follows if this cardinal advantage competes with choice noise or a fixed cost whose distribution is held constant as K changes. It does not follow from ordinal movement minimization alone. Selection or heterogeneity correlated with K can produce other associations.
+
+### 2.3 A: correct the rating toward perceived strength
+
+Under squared error relative to theta, the advantage of granting is:
+
+\[
+A=(R+r_C-\theta)^2-(R+r_G-\theta)^2
+=K d+K^2(0.75-E).
+\]
+
+Holding K and E fixed, the advantage rises with overrating d. The deterministic indifference condition is:
+
+\[
+E=0.75+d/K.
+\]
+
+The cutoff can lie outside (0,1). A larger d shifts behavior toward granting, but the sign of the K response is not universal: the derivative of A with respect to K is d + 2K(0.75-E). A personal best has no additional effect conditional on d and the rating consequences. Heterogeneous d or smooth choice noise need not produce a population discontinuity at E = 0.75.
+
+For any posterior distribution over true strength with finite variance, expected squared loss gives the same comparison with theta equal to the posterior mean; the common posterior variance cancels. An empirical recent-performance score remains an imperfect proxy for that mean.
+
+### 2.4 O: recipient benefit and earned claims
+
+A narrow rating-point altruism benchmark adds eta_i kappa_j - gamma_i kappa_i to the utility advantage of granting, with eta_i >= 0 and gamma_i >= 0. It predicts a positive response to the recipient's benefit and a negative response to the chooser's forgone premium when the corresponding coefficients are strictly positive and other terms are held fixed.
+
+A broader norm or desert term n_i(s,h,j) can depend on board state s, game history h and recipient characteristics j without depending on the numerical rating stakes. Such a motive does not require T1 > 0 or T2 < 0. Avoidance of an unearned win can also affect the chooser's interpretation of the game's informativeness. These explanations overlap with state-dependent rating-accuracy accounts.
+
+### 2.5 R: a personal-record bonus
+
+Let a chooser receive a bonus b_i >= 0 for exceeding P. Define:
+
+\[
+W=\mathbf 1\{R+r_C>P\}-\mathbf 1\{R+r_G>P\}.
+\]
+
+Because r_C > r_G, W is one exactly when a claimed win exceeds the previous peak and a draw does not. The record bonus contributes -b_i W to the advantage of granting. This predicts lower granting for win-only record crossings, conditional on smooth payoff and distance effects.
+
+This is a specific reference-related mechanism. General reference-dependent utility need not reduce to a discrete record bonus, and a null here does not reject every form of reference dependence. Neither the record-bonus model nor ordinary rating accuracy implies a universal monotone slope in distance below the peak.
+
+### 2.6 A model allowing coexistence
+
+One transparent comparison is:
+
+\[
+U_G-U_C=a_i A+n_i(s,h,j)+\eta_i\kappa_j-\gamma_i\kappa_i-b_i W-c_i+\varepsilon_{ig}.
+\]
+
+Here c_i is a baseline action cost or preference for claiming, and A can represent either current-rating preservation or correction toward perceived strength. This equation motivates the tests; its parameters and mixture shares are not estimated by the proposed linear regressions. Broad norm terms cannot be assigned to a residual coefficient and declared identified.
+
+## 3. Corrected predictions
+
+“No direct effect” below means conditional on the model's own state variables and information assumptions. It is not a promise of a zero observational regression coefficient.
+
+| Test | Minimum movement M | Correction toward perceived strength A | Recipient benefit / norm O | Record bonus R |
+|---|---|---|---|---|
+| T1: recipient rating benefit | No direct effect at fixed own consequences | No direct effect at fixed perceived misrating and own consequences | Positive for rating-point altruism; unrestricted for broad norms | No direct effect at fixed record opportunity |
+| T2: log K at zero draw payoff | No ordinal action effect; positive under the stated cardinal/noisy version | Depends on d and the choice model | Negative for positive own-rating opportunity cost; unrestricted for broad norms | No generic zero restriction: K can change record crossings |
+| T3: displayed minus recent performance | No direct effect | Positive if the proxy tracks d and nuisance factors are held fixed | No general sign restriction | No direct effect once the relevant reference opportunity is held fixed |
+| T4: win-only peak crossing | No additional effect | No additional effect conditional on d and consequences | No general sign restriction | Negative for a positive record bonus |
+| T5: jump at E = 0.75 | Downward jump in the sharp deterministic version | No universal fixed cutoff or discontinuity | No model-implied special threshold | No model-implied special threshold |
+| T6: responsibility / recipient Patron | No direct identity role in the restricted model | Responsibility may change informativeness or perceived strength | Potentially relevant, without a universal sign | No generic identity prediction |
+| T7: casual games | Rating-movement motive becomes indifferent | Rating-update correction becomes indifferent | Rating-point benefit also disappears; other norms may remain | Rating-record bonus disappears |
+
+Outcome rarity, a small set of accuracy-motivated choosers, and heterogeneity in perceived targets can all matter. Do not interpret the pure deterministic model as a description of every account.
+
+## 4. Outcome population and linked samples
+
+### 4.1 Frozen outcome frame
+
+- Window: 1 November 2023 through 31 October 2025 UTC.
+- Certified frame: 41,534,331 automated-pool, observed-nonadjacent opportunities; 570,091 grants; 3,224,173 choosers.
+- Competitive frame: 15,207,423 opportunities and 419,463 grants.
+- Retain the established API status, mating-material and disconnected-clock eligibility rules. Do not substitute the older 47,587,020-row panel as the outcome population.
+- Competitive: disconnected player's evaluation >= -100 cp. Clearly losing: evaluation <= -300 cp. Intermediate positions are descriptive only in this module.
+- “Observed nonadjacent” is the certified classification, not proof that every literal immediate rematch has been removed.
+
+The certified sample fingerprint is `a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30`.
+
+### 4.2 Primary age restriction
+
+Require a known, valid account-creation timestamp and age at game start of at least 365 elapsed days. Game start is a conservative pre-decision anchor and avoids pretending to observe the claim-click time. Age is calculated from timestamps, not calendar-year subtraction. Missing creation dates are not coded as established accounts.
+
+Use all eligible rows in the certified frame for which this linkage exists. A 100,000-account screen, if used for engineering or descriptive inspection, is labeled as a sampled screen and does not replace the primary fit. Do not choose the screen based on observed grant outcomes or reuse a screen's estimates as census results.
+
+Report creation-date coverage and exclusions by acquisition role and board state. The August profile acquisition is outcome based, so this age-known sample need not represent all established choosers. Chooser effects do not correct that selection. No population reweighting is claimed without verified inclusion probabilities and common support.
+
+### 4.3 History eligibility
+
+Histories are all-source standard rated games affecting the same speed-specific rating as the current opportunity. Automated-pool source is an outcome restriction, not a restriction on which games count toward a rating history.
+
+Only games completed strictly before the current game's start can enter score histories, counts or peaks. Do not order overlapping games solely by their start times. Exclude unresolved timestamp ties; do not use lexical game-ID ordering to invent a temporal order. If only coarse timestamps are available, record the conservative exclusion rule and losses before estimation.
+
+T3 and T4 require at least 30 observed prior completed rated games in that speed, the T3 lookback eligibility below, and valid prior peak information for the joint reference controls. These are observed-history qualifications, not proof of lifetime completeness or of 30 games ever played by the person.
+
+No user is dropped because they never grant. Singleton choosers are removed separately within each fitted sample because they cannot identify a within-chooser coefficient.
+
+## 5. Variable construction
+
+### 5.1 Own payoffs and expected score
+
+Use the certified fields `chooser_draw_payoff_v2`, `chooser_win_payoff_v2` and `chooser_win_premium_v2`. Check their consistency on every eligible row. Require positive finite premium and finite payoffs.
+
+When the common-scale identity is supported, define K = 2 kappa_i and E = 1/2 - r_G/K. Check r_C = K(1-E) and E in (0,1), allowing numerical tolerance 1e-9. A derived E is an effective expected score under the certified payoff representation; where the actual replay expected score is available, compare them and disclose discrepancies. Do not use an inconsistent effective E to claim a precise theoretical threshold test.
+
+Reconstruction MAE against observed updates does not validate the unchosen outcome separately or guarantee exact classification at a zero or record boundary. Preserve continuous payoffs and separately report rounding sensitivities. Do not round a small nonzero draw payoff into the primary zero-payoff sample.
+
+### 5.2 Recipient rating stake
+
+Construct kappa_j as the recipient's reconstructed draw update minus their reconstructed loss update from the same pre-game rating state and historical rating regime. Under a verified common-scale representation this equals K_j/2.
+
+Do not substitute the chooser's premium, the observed rating change, or an RD-to-stake shortcut. Reconstruct the recipient side using its own rating state; differing RDs mean one must not assume the recipient's expected score is exactly 1-E_i. Use the historical platform regime, not a later color adjustment.
+
+Primary scaling: z1 = kappa_j/10, so the coefficient is the probability change per 10 recipient rating points. Report recipient RD as a separately labeled proxy sensitivity, not as the same treatment in different units.
+
+### 5.3 Prior volume and inactivity
+
+For each player, count all observed prior completed standard rated games in the relevant speed. Use log(1 + count) for volume controls. Keep a left-truncation flag and the first observable history date. “No observed prior game” is distinct from a proven first game.
+
+For T1 the primary count control is the recipient's count. T2 also includes it, as proposed in the original note. Secondary specifications add log(1 + days since the chooser's last completed same-speed rated game), with an explicit no-observed-prior-game indicator. These controls address account state imperfectly; one year of account tenure does not imply low RD or uninterrupted activity.
+
+### 5.4 Recent-performance gap for T3
+
+Primary window: the previous 30 completed all-source rated games in the same speed, ordered by completion. Require at least 30 such prior games, known finite pre-game chooser RDs <= 110 throughout that window, and at least 15 ordinary completed games after removing disconnection/clock-expiration/aborted/unknown-status games. RD <= 110 is a specified stability screen; it is not relabeled as the platform's exact historical provisional-flag definition.
+
+An ordinary completed game has an authenticated normal completion status: mate, resignation, ordinary draw or stalemate. Do not admit `timeout` or `outoftime`. Exact status-field mappings must be recorded in the construction receipt. Unknown status is missing eligibility, not a presumed ordinary game.
+
+The retained historical games supply score s_h in {0, 1/2, 1}, opponent pre-game rating R_jh and opponent pre-game RD. Result coding must be reconciled with the current chronology receipt before it is used.
+
+Define a single constant-strength recent-performance proxy theta_hat as the maximizer of the regularized fractional-score likelihood:
+
+\[
+\ell(\theta)=\sum_h\{s_h\log p_h(\theta)+(1-s_h)\log[1-p_h(\theta)]\}
+-\frac{(\theta-R)^2}{2(400)^2},
+\]
+
+\[
+p_h(\theta)=\operatorname{logit}^{-1}\!\left[
+\frac{g(RD_{jh}/173.7178)}{173.7178}(\theta-R_{jh})\right],
+\qquad g(\phi)=(1+3\phi^2/\pi^2)^{-1/2}.
+\]
+
+The fixed 400-point regularization scale ensures a finite unique optimum for all-win or all-loss histories. This is a precisely defined performance index, not a claim to reproduce the full Glicko volatility update or identify current true strength. The current displayed rating anchors the regularization; this construction and its resulting shrinkage must be disclosed.
+
+Set D_perf = R - theta_hat and z3 = D_perf/100. Positive means the recent-performance estimate is below the displayed rating. This fixes the sign ambiguity in a raw score-minus-expectation sum. Solve using a bracketed monotone score equation to a tolerance of 1e-6 rating points; failed/nonfinite solves remain explicit construction failures. Do not trim extreme gaps based on the concession outcome.
+
+Sensitivities: previous 15 games with all 15 ordinary and stable; previous 60 games with all 60 stable and at least 30 ordinary; regularization scales 200 and 800. Recompute from the history under each rule and report the resulting sample, with common-sample comparisons alongside. These are secondary, not candidates from which to choose the preferred primary estimate.
+
+**Predictive validation:** before interpreting D_perf as misrating, test whether it adds information beyond the current rating about later ordinary-game scores. Use a deterministic outcome-blind 10% account sample: hash the UTF-8 string `rating-motives-v1.1-validation|` followed by the canonical normalized account ID with SHA-256, interpret the first 16 hexadecimal digits as an integer, and include the account when that integer modulo 10 is zero. In each speed and calendar month, select the first eligible ordinary-game start, calculate D_perf using only earlier completed games, and evaluate the next eligible ordinary game beginning within 30 days after the anchor game completes. The forecast calculation uses the next game's available pre-game ratings/RDs, including the chooser's updated rating, as the baseline. Regress its score residual from that baseline on D_perf/100 with month and speed effects; cluster by chooser. Overrating predicts a negative validation coefficient. Never use the forecast outcome to construct the anchor predictor or select its tuning constants. Report interval and coverage even if the coefficient is weak or oppositely signed; do not suppress T3 or tune the index in response. This validates incremental prediction, not a person's subjective belief or a permanent latent type. The validation is a secondary measurement check, outside the five primary concession tests.
+
+### 5.5 Prior peak for T4
+
+Within the same speed, construct P as the largest authenticated observed displayed pre- or post-game rating in the available all-source history completed strictly before the current game's start. A historical game qualifies when the chooser's pre-game RD <= 110; both its observed pre-game and post-game ratings can then contribute. This fixes which side of the update supplies the RD screen. A post-game rating can be obtained from a verified observed pre-game rating plus its observed integer rating change; an unobserved change is not filled with an invented realized result.
+
+Use the maximum available pre-outcome history, including pre-panel history when available. Do not compute a peak from disconnection opportunities alone, use future games, or describe a peak as lifetime unless coverage establishes that claim. The primary label is **observed stable-rating peak**. Report the earliest observed history date, amount of prior history, missing post-game updates and peak qualification rule. A secondary peak restricted to the preceding 365 days is explicitly a recent peak, not a substitute for a missing primary peak.
+
+Define D_peak = P - R. Primary T4 uses 0 < D_peak <= 20. Equality is at the peak; negative distance is above the observed qualified peak. Neither is included in the primary fit. Use the strictly exceeding definition W = 1{R+r_C>P} - 1{R+r_G>P}; reaching the old record exactly does not set a new one.
+
+The two post-action quantities start from the displayed rating and are reconstructed continuous values. W is therefore a **reconstructed crossing**, not a recovered historical screen indicator. Sensitivities use nearest-integer post-action approximations, a matching-or-exceeding target, and a one-rating-point exclusion buffer around both action boundaries. The buffer is a robustness check, not a guaranteed reconstruction-error bound.
+
+Secondary distance profile: (0,5], (5,10], (10,20], (20,40], and >40, with at/above peak separately. No monotonic directional prediction is imposed. Removing at/above-peak rows is not listed as a sensitivity of the primary fit because those rows are already excluded.
+
+### 5.6 Exact zero payoff and threshold variables
+
+- T2 primary: |r_G| <= 1e-9 and equal displayed pre-game ratings. Report E and the maximum residual draw payoff. This is an arithmetic-zero convention, not integer-rounded zero. If it yields no identified sample, report that outcome without widening the definition after seeing estimates.
+- T2 secondary: equal displayed ratings without the arithmetic-zero requirement; separately label any discrepancy from the primary definition.
+- T5: t = E - 0.75 and H = 1{E > 0.75}. Exclude exact E = 0.75 rows within 1e-12 from the primary discontinuity fit, and report their support descriptively. Use unbinned E for estimation.
+
+## 6. Regression specifications
+
+### 6.1 Common base controls B
+
+Primary models use chooser fixed effects and the following predetermined controls, with invariant/aliased nuisance columns removed by the documented rank procedure:
+
+- Separate month and speed effects.
+- Board bins within the fitted state, following the certified boundaries; no invented losing-state sub-bins.
+- Game-stage bins: 0–4, 5–10, 11–20, 21–40, 41–80 and 81+ plies.
+- Chooser rating tier: <1600, 1600–1999, 2000–2399 and 2400+; also continuous chooser rating/400 and its square.
+- Recipient-minus-chooser displayed rating-gap bins: <-400, [-400,-200), [-200,-50), [-50,50], (50,200], (200,400], >400. T5 omits these gap bins as specified below.
+- log(1 + each last observed clock in seconds), with the canonical missingness indicator for each; invalid clocks follow the certified missingness rule.
+- log(account age in days), measured at game start. This nonlinear control avoids relying solely on a linear age term that can be absorbed by account and calendar effects.
+
+Only documented missingness indicators permit imputation. Missing target, age, payoff or history fields are not converted to zeros. Report every restriction and invariant control.
+
+Let Q(x,y) contain all monomials x^p y^q with 1 <= p+q <= 3. It contains nine terms and no intercept. For T1 and T3 the own-consequence basis is Q(log K, E-0.5). This is a nuisance approximation, not exogenous variation in K or E.
+
+### 6.2 T1 — recipient rating benefit
+
+\[
+Y=\alpha_i+B'\gamma+Q(\log K,E-0.5)'\lambda
++\omega\log(1+n_j)+\beta_1\,\kappa_j/10+u.
+\]
+
+Competitive, age >=365, known authenticated recipient benefit and prior count. Primary coefficient beta_1 is per 10 recipient rating points. No recipient RD control is included alongside the primary stake: it is a main source of the stake variation. The count control is required, not silently optional.
+
+Sensitivities replace the stake by recipient RD/100, add own inactivity, add the performance gap on its eligible sample, and eventually add the externally constructed responsibility measure. The latter remains a secondary update under the responsibility plan's timing; it cannot redefine the initial T1 primary sample. Positive coefficients remain observational: opponent uncertainty and newness may convey information or correlate with exit behavior.
+
+### 6.3 T2 — K when a draw changes the rating by zero
+
+\[
+Y=\alpha_i+B'\gamma+\omega\log(1+n_j)+\beta_2\log K+u.
+\]
+
+Use the exact-zero sample. **Do not include K bins, the forgone premium, draw payoff, own RD, or additional functions of K in the primary regression.** Invariant rating-gap controls disappear naturally in the exact-tie sample. beta_2 is per one natural-log unit of K; also report the implied contrast for a doubling, beta_2 log 2, with its rescaled interval.
+
+Sensitivities: RD <=110 on both sides; own inactivity; chooser-by-speed rather than chooser effects; and a flexible cubic log-K curve, reported as predicted contrasts with the full covariance rather than interpreting one polynomial term as a K response. On the T3/T4-eligible sample add D_perf and W as a separate sensitivity. None provides causal identification of a K effect.
+
+### 6.4 T3 — recent-performance discrepancy
+
+\[
+Y=\alpha_i+B'\gamma+Q(\log K,E-0.5)'\lambda
++F(D_{peak},W)'\rho+\beta_3 D_{perf}/100+u.
+\]
+
+F contains the distance categories in Section 5.5 and the reconstructed win-only crossing indicator W. This fit uses all eligible distances, not only the T4 near-peak band. beta_3 is per 100 points of displayed-minus-performance discrepancy. A secondary specification adds D_perf-by-log-K interaction and reports average contrasts; the isolated main coefficient is not reinterpreted as the whole accuracy response.
+
+The prescribed lookback and regularization sensitivities are all shown, together with the predictive validation. A positive T3 association is consistent with correction only to the extent the proxy and conditioning assumptions are credible. Mood, confidence, learning and time-varying engagement remain alternatives.
+
+### 6.5 T4 — win-only personal-record crossing
+
+\[
+Y=\alpha_i+B'\gamma+
+\sum_{1\le p+q+r\le3}\lambda_{pqr}
+(D_{peak}/10)^p(r_G/10)^q(\kappa_i/10)^r
++\omega D_{perf}/100+\beta_4 W+u.
+\]
+
+The sum includes all 19 nonconstant monomials of total degree <=3. It supplies smooth distance and action-payoff controls without placing a nuisance step at the record boundary. Primary sample: 0 < D_peak <=20 and joint T3/peak eligibility. The coefficient is a conditional association between win-only crossing and granting, not a regression-discontinuity causal effect.
+
+Sensitivities: distance bandwidths 10 and 40; a quadratic instead of cubic nuisance basis; both-player RD <=110; at least 365 days of observed same-speed history; a preceding-365-day peak; and the rounding/target/buffer definitions in Section 5.5. Report support changes and the secondary distance profile. Adding the performance gap mitigates but does not eliminate peak selection or measurement error. Restricting to below peak does not eliminate dynamic participation selection.
+
+### 6.6 T5 — the sharp minimum-movement threshold
+
+\[
+Y=\alpha_i+B_{-gap}'\gamma+
+\sum_{m=1}^3\lambda_m(\log K)^m
++\eta_L t+\eta_D tH+\beta_5 H+u.
+\]
+
+Primary bandwidth: |E-0.75| <=0.10, excluding exact-threshold rows. Thus the fit has separate linear slopes on each side and a level shift beta_5. B_{-gap} omits displayed-gap bins. It contains no E bins, E polynomial beyond the stated local slopes, or draw-payoff/premium controls that silently redefine the threshold shape.
+
+Sensitivities: bandwidths 0.05 and 0.15; separate quadratic slopes; both-player RD <=110; and a 0.005-wide donut exclusion around the threshold. Fit comparison breaks at 0.65, 0.70, 0.80 and 0.85 using the same 0.10 bandwidth and local specification. Report all comparisons; those at 0.70 and 0.80 have windows containing the proposed true threshold, so they are specification diagnostics rather than guaranteed inert placebos.
+
+Show raw and adjusted profiles in 0.05 E bins over [0.50,0.95], with the number of opportunities, grants and choosers in each. Show the lower-E region descriptively as well. The chart is not the estimator. A downward discontinuity supports the sharp benchmark's shape; smoothness challenges that shape, not rating accuracy in general. This is not an RD design assigning an exogenous treatment at 0.75.
+
+## 7. State comparisons and inference
+
+### 7.1 Primary family and uncertainty
+
+The five primary competitive coefficients beta_1 through beta_5 form one family. Report two-sided unadjusted and Holm-adjusted p-values. Keep family size five if a model is unsupported; enter p=1 for that model in the adjustment arithmetic and retain an explicit unsupported status, not a fabricated estimate.
+
+Primary covariance: CR1 clustered by chooser, with all months pooled before cluster scores are formed. Use G/(G-1) times (N-1)/(N-k_full), where k_full includes the rank of absorbed chooser effects. Use t with G-1 degrees of freedom. Report rank, residual degrees of freedom and the finite-sample correction. Rank-deficient nuisance terms may be removed reproducibly; an unidentified target coefficient is withheld.
+
+Sensitivity covariance: two-way chooser/recipient clustering with the documented full-rank convention, clearly distinguished from more general shared-account or network dependence. Do not choose the headline covariance from whichever p-value is smallest. History indices are treated as constructed covariates; these intervals do not propagate uncertainty about true strength or prove that the performance proxy is error free.
+
+### 7.2 Practical equivalence
+
+For each primary coefficient, the prespecified practical margin is +/-0.10 percentage points for its reporting contrast: 10 recipient rating points (T1), one natural-log unit of K (T2), 100 performance-gap points (T3), crossing versus no crossing (T4), and the threshold jump (T5). This means one grant per 1,000 opportunities for the named contrast; it is a reporting threshold, not a structural welfare parameter or a claim that these contrasts have equal substantive importance.
+
+Report 95% intervals and descriptive containment in the margin. Formal equivalence uses two one-sided t tests at the two margin boundaries, with p_equiv = max(p_lower, p_upper), followed by Holm adjustment over the five equivalence tests. Discovery and equivalence are two explicitly separate inference families; no joint 5% error guarantee across both is claimed. Unsupported models enter each family with p=1. Do not infer equivalence from an insignificant two-sided test.
+
+### 7.3 Clearly-losing estimates and coefficient differences
+
+Repeat the same construction and test-specific restrictions in clearly-losing positions. They are **state comparisons**, not automatic placebo tests. An accuracy explanation has zero effects there only if an additional informativeness gate is imposed; that gate is not assumed true by naming the state.
+
+For each test, estimate beta_competitive - beta_losing in a joint fit with chooser-by-state effects and state-specific nuisance coefficients. This specification must reproduce the two separate point estimates within numerical tolerance; cluster by chooser across both states so the difference uses their covariance. Remove chooser-state singletons consistently. Report all five differences, with Holm adjustment as a separate secondary family. A comparison of the two individual p-values is not the interaction test.
+
+### 7.4 Support and diagnostics
+
+For every fit report: input and retained opportunities; grants; choosers; recipients; singleton losses; finite/missing covariate counts; focal-variable range and quantiles; within-chooser variation; outcome variation; and joint treatment/outcome variation. For binary targets report exposed/unexposed counts and grants; for continuous targets report within-chooser variance and the accounts contributing it. Report the residual variance of the focal regressor after the full nuisance projection as an identification diagnostic.
+
+The simple within-chooser never-granter weight share uses:
+
+\[
+w_i=\sum_g(z_{ig}-\bar z_i)^2.
+\]
+
+For a binary z this is n1_i n0_i/n_i. “Never-granter” here means no grants in that model's estimation sample, not necessarily none over the person's lifetime or elsewhere in the panel. The share is a chooser-only diagnostic, not a decomposition of fully adjusted identifying weight. Keep never-granters in all primary models.
+
+No support-dependent sign search is allowed. A numerically identified but weakly supported fit is reported with its interval and warnings; an unidentified one is reported as unsupported. Do not change the bandwidth, history length, rounding convention or model to manufacture a supported preferred result.
+
+## 8. Existing evidence and separately planned work
+
+### 8.1 Evidence already inspected
+
+The plan is informed by the previously positive own-log-K associations, the earlier opponent-RD decomposition, and the round-number milestone analyses. These are not new findings from T1–T5. The existing milestone report explicitly did not estimate personal peaks because those require the all-game chronology.
+
+The completed recipient-Patron follow-up reports a chooser-FE competitive association of +0.31872 pp, SE 0.11201, 95% CI [0.09918, 0.53826], p=0.00444; the clearly-losing coefficient is approximately -0.00062 pp, SE 0.05539. These are **previously observed results**, quoted from their executed report. The original fit uses current selected profile coverage, both state groups, and shared-account-or-date CR0 inference. It is not the age>=365 sample specified here, does not establish historical Patron status, and is not a causal badge effect. Retain its original sample and inference when displaying it; do not claim a significant state difference without the original covariance.
+
+### 8.2 T6 responsibility
+
+The responsibility engine run and its primary coefficient remain governed by that separately frozen plan. This note does not change its engine budget, sampling, intent proxy, controls, multiplicity or timing. When the result is available, attach its exact plan/result identifiers and show it as external evidence. Do not invent a new responsibility regressor or choose among its outputs after seeing results.
+
+A responsibility association can be consistent with an earned-claim norm, beliefs about abandonment, or beliefs about informativeness. It does not uniquely identify recipient welfare concern. The completed recipient-Patron association is displayed alongside it as a distinct prior analysis.
+
+### 8.3 Deferred and excluded work
+
+T7 casual-game acquisition remains deferred. Neither “approximately zero under accuracy” nor “at least as much as rated under other-regarding preferences” is assumed. Before any future comparison, specify an unrated-game outcome definition and address different matchmaking, relationships, incentives and users.
+
+This module does not launch API pulls, the recipient flag acquisition, outage matching, incident-adjusted dynamics or a new responsibility engine job. It does not replace the main paper's descriptive results or determine a title from a sign pattern.
+
+## 9. Execution order and readiness
+
+The private production panel and all-game histories remain on the Mac/external drive. The available report and source files establish the design and prior evidence; they do not contain the individual rows needed to estimate T1–T5 here.
+
+| Stage | Work | Required inputs | Current disposition |
+|---|---|---|---|
+| A | Authenticate population, timestamps, payoff identities and creation-date join; report eligibility | Certified 24 monthly panel files and current creation-date linkage | Existing infrastructure; run against private files before new estimates |
+| B | T5, plus descriptive payoff/movement support | A and compatible reconstructed E | Does not require performance or peak construction |
+| C | T2 | A and recipient pre-game game counts | Own payoffs exist; do not omit the promised count control if history counts are unavailable |
+| D | T1 | A, recipient counterfactual payoff construction and recipient prior counts | Verify recipient-side payoff availability; do not assume it from chooser fields |
+| E | T3 and T4, their predictive validation and joint reference controls | All-source, same-speed chronology with authenticated results, RDs, ratings, timestamps and history coverage | Build histories once and reuse them |
+| F | State contrasts and complete inference tables | Available primary and losing fits | Retain five-test family size throughout |
+| G | Attach responsibility and prior Patron evidence | Separately governed artifacts | Preserve their original definitions and inference |
+
+At Stage A bind the latest successful history-closure and result-coding receipts. The September 1 index records historical provenance questions; it is not authority to declare a later repaired pipeline broken. Conversely, a later statement of completion does not supply a missing field mapping for this module.
+
+Use `__PRIVATE_VALUE_1__/Desktop/Lichess_Desktop` for user-managed packages and `/Volumes/XT_Pro/lichess_kindness` for the project root. New results must have a separate versioned output directory and must not overwrite the certified panel or earlier reports.
+
+## 10. Output contract and interpretation rules
+
+Produce:
+
+1. One table for each T1–T5 with its primary, all fixed sensitivities, losing-state fit and direct state difference. Include reporting units and sample descriptions in every table.
+2. One predictions-versus-results summary preserving the qualifications in Section 3. Use “estimated sign with interval,” “bounded within the named margin,” “imprecise,” or “unsupported”; do not fill unknown estimates with zero.
+3. T3 predictive-validation results and T4/T5 profiles with support counts.
+4. Acquisition/age/history coverage, construction exclusions and within-chooser support diagnostics.
+5. A methods record containing this note's hash, code/environment identifiers, outcome-panel hashes, chronology hashes/receipts, profile-source hashes, time/result/RD mappings and every executed specification.
+6. A status ledger distinguishing completed, unavailable-input, construction-failed and unidentified outputs. No preferred sign is a success criterion.
+
+Interpretation is conditional and cumulative:
+
+- A robust positive recipient-stake association is consistent with numerical recipient-benefit concern; it is not proof of altruism and a null does not exclude norms.
+- Positive T2 is consistent with a cardinal movement-aversion account under its maintained assumptions; it is not a necessary consequence of all rating-accuracy preferences.
+- Positive T3 plus successful incremental performance prediction is consistent with correction toward perceived strength; neither demonstrates the chooser's subjective target.
+- Negative T4 supports sensitivity to a reconstructed personal record, subject to history, selection and payoff controls. It need not conflict with weak round-number effects.
+- A downward T5 jump supports a particular minimum-movement shape. Smoothness narrows that sharp model; it does not eliminate noisy or heterogeneous accuracy explanations.
+- Responsibility and recipient-Patron associations add context under their own limitations.
+
+No automatic conclusion of “accuracy,” “other-regarding,” “reference dependence,” or “mixture shares” follows. Revise the manuscript's interpretation only after assessing the model restrictions, support, uncertainty and prior evidence together.
+
+## 11. Source record
+
+The three attached September 1/3 sources were consulted for rating definitions and pipeline history. The later certified sample authority and executed reports govern the population and quoted later results. Their hashes identify the exact reference copies read for this revision; they do not substitute for hashing the private production inputs at execution.
+
+| Reference | SHA-256 |
+|---|---|
+| LICHESS_KINDNESS_PIPELINE_AND_SCRIPT_INDEX.md | `dbd071bfcb249f5d69f2d9f25dd35ea8dcf81c028a6d60096cc65769f8ba3cc1` |
+| LICHESS_KINDNESS_CURRENT_STATE.md | `220f778afb1e7a33f20eb8c1543a3b0059afd54f34286caaffbd2296633b9c0a` |
+| SIP_Sept3(1).tex | `b8f67285b25870a80196b3e1c941ff2e5c9e262972d7a24ec2c7ef4c1c75e823` |
+| Certified pool SAMPLE_AUTHORITY.json | `81c34113e7a888629a834a17235a71dcf369a2d590755fd9412ee42151d9b2f3` |
+| Country follow-up METHODS.md | `e56c009a4af00d28670abc70d967e6644c6d70e77db248d0a604165b9e0b4d50` |
+| AFE follow-up ANALYSIS_PLAN.md | `81bd635a9c6695deac7b3a51954b5d8ca85b2aa5caf3e5a6caf72cc06682eb90` |
+| AFE recipient_patron_estimates.csv | `229642738d1167f68c7a2dd96425e906183ef09f7afb4b083d029abee8506c21` |
+| Round-rating milestone RESULTS.md | `be9d1d655dec540adb0ca1d43adb1c4825a7dca5347d7257805a869a9a7d194b` |
+
+The expected-score function follows Mark Glickman's [Glicko-2 specification](https://glicko.net/glicko/glicko2.pdf). The recent-performance likelihood and its regularization are choices made in this note; they are not represented as the official Glicko-2 estimator.
+
+## 12. Changes from the submitted note
+
+The main changes are the explicit M/A/O/R distinctions; removal of unsupported peak and casual-game signs; a precise performance estimator; strictly pre-game all-source histories within speed; reconstructed rather than purportedly observed record crossings; test-specific nuisance controls; five new primary tests with separate equivalence inference; formal state contrasts; and explicit preservation of prior/frozen external evidence. The original six-test family is not carried forward because T6 is governed by separate work and includes already observed contextual evidence.
+
+This version fixes substantive specifications before the new coefficients are inspected. Any later substantive change must receive a dated amendment explaining what evidence was already known. Resolving physical column mappings or verified file locations without changing the logical definitions is recorded in the construction receipt.
+
+**Specification validation:** the payoff identity, squared-error comparison, 0.75 ordinal threshold and crossing-indicator equivalence were checked numerically over 100,000 synthetic cases with seed 20260923. The prescribed performance estimator gave finite unique solutions in synthetic all-win, all-loss and all-draw histories. The nine-term and 19-term nuisance bases and document cross-references were checked. These checks validate algebra and specification consistency; they are not empirical estimates or production-code validation.

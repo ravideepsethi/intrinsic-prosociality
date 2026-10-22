@@ -1,0 +1,9 @@
+#!/bin/bash
+set -Eeuo pipefail
+ROOT="${LICHESS_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+HERE="$(cd "$(dirname "$0")" && pwd)"
+STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
+OUT="$ROOT/output/framework_E_groups_v100/$STAMP"
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 PYTHONUNBUFFERED=1
+# Runs only when exact pre-existing receipt exposure Parquet source is supplied.
+python3 -u "$HERE/src/build_e_groups.py" --out "$OUT" --workers 10 --memory-gb 11 "$@"

@@ -1,0 +1,59 @@
+"""Synthetic data only, independently constructed for integration checks."""
+from pathlib import Path
+import sys,datetime,csv,json
+import numpy as np
+import pyarrow as pa
+import pyarrow.parquet as pq
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'code'))
+from common import MONTHS,write,sha,digest,finish
+
+def fixture(project,n=4800):
+    project=Path(project);rng=np.random.default_rng(20261006);people=n//2;i=np.arange(n);j=i%people
+    month=3+(j%12)+6*(i//people)
+    starts=np.array([int(datetime.datetime.fromisoformat(m+'-01').replace(tzinfo=datetime.timezone.utc).timestamp()*1000) for m in MONTHS])
+    start=starts[month]+(j%14)*86400000+(j%24)*3600000;anchor=start+600000
+    received=rng.random(n)<np.clip(.35+.22*rng.normal(size=n),.02,.9)
+    z=rng.normal(size=n);received=rng.random(n)<np.clip(.35+.22*z,.02,.9)
+    giver_rd=rng.uniform(45,135,n);recipient_rd=rng.uniform(45,135,n)
+    giver=4+giver_rd**2/500;benefit=4+recipient_rd**2/500;band=rng.integers(0,4,n)
+    reached=rng.random(n)<.8;pr=.09+received*(.055+.035*(band==3)+.001*(giver-giver.mean()))
+    y=(rng.random(n)<pr)&reached;fair=rng.integers(0,25,n);kind=rng.binomial(fair,.10)
+    n7=rng.integers(5,100,n);r=j+1;o=rng.integers(10001,16001,n);future=rng.integers(20001,26001,n)
+    d=dict(row_id=i,game_id=np.array([f'g{x:07d}' for x in i]),recipient_id=r,opponent_id=o,
+      outcome_opponent=np.where(reached,future,-1),received=received,y=y,reached=reached,
+      month_code=month,archive_start_ms=start,anchor_ms=anchor,complete90=np.ones(n,bool),
+      tc_base_s=rng.choice([60,180,600],n),tc_inc_s=rng.choice([0,2],n),
+      recipient_rating=rng.normal(1500,180,n),opponent_rating=rng.normal(1500,180,n),
+      pre_games_30d=rng.integers(1,300,n),n_7d=n7,expected_7d=rng.uniform(.01,.1,n),adjusted_7d=.059411690344000595*z,
+      giver_cost=giver,recipient_benefit=benefit,giver_rd=giver_rd,recipient_rd=recipient_rd,
+      chooser_color=rng.choice(['white','black'],n),board_cp=np.array([-60,40,180,500])[band]+rng.uniform(-20,20,n),
+      ply=rng.integers(2,90,n),giver_clock=rng.uniform(5,200,n),recipient_clock=rng.uniform(5,200,n),
+      fair_90=fair,kind_90=kind,disconnect_90=rng.integers(0,20,n),receipt_90=rng.integers(0,4,n),claim_90=rng.integers(0,18,n),
+      panel_recipient=r,panel_chooser=o,panel_kind=received,panel_claim=~received,panel_fair=np.ones(n,bool),
+      panel_anchor=anchor,panel_start=start,outcome_t=np.where(reached,anchor+86400000,-1),
+      outcome_start=np.where(reached,anchor+86000000,-1))
+    package_sha='0'*64;cfg=dict(package_sha256=package_sha,synthetic_fixture=True);key=digest(cfg)
+    rel='derived/replication/synthetic_parent/'+key[:12];root=project/rel;root.mkdir(parents=True)
+    write(root/'config.json',cfg);ids=dict(__PRIVATE_VALUE_1__=90000001,__PRIVATE_VALUE_2__=90000002)
+    original=project/'synthetic_original_receipt.parquet';pq.write_table(pa.table(dict(d,counterparts_7d=n7-2)),original)
+    write(root/'binding_PRIVATE.json',dict(author_ids=ids,receipt=str(original),receipt_sha256=sha(original)))
+    counts=[]
+    for k,m in enumerate(MONTHS):
+        folder=root/'months'/m;folder.mkdir(parents=True);use=month==k
+        pq.write_table(pa.table({v:a[use] for v,a in d.items()}),folder/'dose.parquet')
+        write(folder/'secondary_status.json',dict(status='VERIFIED',rows_removed=0))
+        write(folder/'receipt_audit.json',dict(status='VERIFIED',distinct_invalid_rows=0))
+        write(folder/'payoff_audit.json',{});finish(folder,key)
+        counts.append(dict(month=m,rows=int(use.sum())))
+    rep=root/'report';rep.mkdir()
+    with (rep/'receipt_cohort_audit.csv').open('w') as f:
+        w=csv.DictWriter(f,fieldnames=['month','rows']);w.writeheader();w.writerows(counts)
+    (rep/'secondary_dose_estimates.csv').write_text('model,estimate\n')
+    write(rep/'secondary_dose_summaries.json',[])
+    write(rep/'summary.json',dict(status='COMPLETE',run_key=key,secondary_blocked_months=[]))
+    write(rep/'REPORT_MANIFEST.json',[dict(path=p.name,sha256=sha(p),bytes=p.stat().st_size) for p in sorted(rep.iterdir())])
+    stable=(giver_rd<=110)&(recipient_rd<=110)
+    a=dict(parent_key=key,parent_relative_root=rel,parent_report_manifest_sha256=sha(rep/'REPORT_MANIFEST.json'),
+      parent_package_manifest_sha256=package_sha,expected_rows=n,expected_recipients=people,expected_grants=int(received.sum()),
+      expected_rd110_rows=int(stable.sum()),expected_rd110_grants=int(received[stable].sum()))
+    return a,d,root

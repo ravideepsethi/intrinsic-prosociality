@@ -1,0 +1,107 @@
+Analysis design fixed October 5, 2026 after reviewing earlier project results.
+This is a specified follow-up, not a preregistration before research began.
+
+POPULATION
+Index events are the established pool/nonadjacent 24-month opportunities,
+November 2023 through October 2025, excluding both author accounts.
+The hash sample selects unordered numeric account pairs before outcomes or
+future meetings are used. No realized-future-singleton restriction is used.
+Histories include all sources in the five rated real-time speed categories.
+They cannot establish whether participants knew one another off-platform,
+in casual games, under other accounts, or in unrecorded contact.
+
+TIME
+utc_ms is the canonical recorded start; api_last_move_at_ms is lastMoveAt.
+The latter is an anchor proxy, not a measured button-click timestamp.
+A later encounter starts strictly after that anchor; the upper endpoint is
+included. A window is eligible only if anchor + H days is strictly before
+2025-11-01 00:00 UTC. Incomplete windows are not coded as no future encounter.
+Later repayment opportunities must also have their own anchor within the
+window. A one-hour-after-anchor encounter sensitivity is provided.
+Prior counts use [start-H,start), with exact time ties excluded. A historical
+first-pair minimum strictly before start marks repeat status. Ambiguous
+first-meeting ties are reported and excluded from first/repeat regressions.
+All projected focal games must match chronology game, pair, start and speed;
+conflicts stop the run. Timestamps and account identifiers are not imputed.
+
+REPAYMENT
+For an original chooser A facing B, a return opportunity has B as chooser
+and A as disconnected recipient. A later meeting alone is not repayment.
+The preferred return universe is the all-source Stage07 panel, allowing
+challenge and rematch opportunities. Active decisions only are observed;
+waiting, casual play, chat and other favors are not measured.
+The fallback universe is the main pool/nonadjacent panel and is labeled in
+every repayment summary. It cannot bound omitted return opportunities.
+
+The return benefit uses A's stored rating-state premium when A is the later
+recipient, not B's cost of granting. Under the maintained fixed-state v2
+formula this equals A's draw-minus-loss benefit. This is not a newly fitted
+rating model and is not a statement that users perceive the exact quantity.
+Summing this benefit over all observed reverse-role opportunities describes
+the available rating repayment on the observed path if each were granted.
+Missing values are counted; affected index rows are excluded only from
+monetary summaries, remaining in event counts and rates. Sums are compared
+with the initial cost among value-complete rows, separately for initial
+grants, claims and the full index sample. Observed return counts may depend
+on the initial action, and repeated index events can share later events.
+This accounting is neither a causal upper bound nor a lifetime bound nor
+an estimate of players' subjective expected returns.
+
+PREDICTION
+The label is any subsequent same-pair rated real-time game in 90 days.
+Inputs available before the focal decision: both pregame ratings, rating
+gap, prior-pair counts, earlier-meeting indicator, both participants' actual
+30-day playing volume, fractions of that volume in the current UTC four-hour
+slot, speed, time control, UTC slot, and prior-hour platform game volume in
+the same speed. The latter is a density proxy, not an observed matching queue.
+Current giving, board position, terminal clocks, and future outcomes are
+not predictor features. Historical first meetings are measured in the
+available archive and are not asserted to be first personal contact.
+
+A ridge-regularized logistic model (penalty 1e-5 excluding intercept) is
+trained on index games before May 2024 with labels mature before August 2024,
+in pair folds 0/1. Features are standardized on training observations only.
+The calibration set is August-October 2024, pair fold 2. Evaluation starts
+November 2024, pair folds 3/4. All require complete 90-day coverage.
+Pair folds use an independent salted stable hash; a pair never spans sets.
+The low-risk cutoff is the twentieth percentile of calibration predictions.
+It is fixed without inspecting grant outcomes or calibration outcome labels.
+Calibration outcome labels are reported diagnostically; they are not used
+to fit a calibration correction or select the cutoff. Thus some of those
+diagnostic follow-up windows overlap evaluation dates without leaking their
+labels into the fitted prediction or threshold.
+Absolute prediction bands and observed evaluation meeting frequencies must
+be examined before describing the lowest group as having negligible risk.
+This predicts observed encounters under existing behavior, not encounters
+under an intervention or subjective beliefs about being recognized.
+
+REGRESSIONS
+Linear probability models describe giving. Fixed effects: chooser, month,
+speed, hour of week, and ply band. Controls: both ratings and rating deviations,
+draw payoff, win premium, log remaining clocks and missing-clock indicators.
+The first/repeat gradient model includes competitive, repeat, and their
+interaction, on competitive or clearly-worse observations. The competitive
+repeat-premium model adds evaluation-bin effects. Low-risk comparisons use
+competitive versus clearly-worse positions in the held-out evaluation set,
+and separately its first-recorded-meeting subset. These are associations.
+The controls are not a claim of random pairing or exogenous meeting risk.
+Nonfinite required numeric controls are counted and excluded per fit.
+
+Chooser-clustered covariance uses the G/(G-1) group correction (labeled CR1),
+without an additional absorbed-degree-of-freedom correction. It is reported
+alongside a shared-account-or-date CR0
+sensitivity: account-role aggregate meat minus unordered-pair meat, plus
+date meat, minus account-date meat plus pair-date meat. Nonpositive or
+non-PSD covariance is reported unsupported, not repaired. Prediction
+uncertainty is not propagated; intervals condition on the trained rule.
+Holm p-values cover three specified chooser-clustered tests: first-meeting
+merit gradient, competitive repeat premium, and low-risk merit gradient.
+Unavailable members remain in the family size. Other contrasts and
+covariances are diagnostic; displayed 95% intervals are pointwise.
+
+CLAIM LIMIT
+Small re-encounter/repayment frequencies and persistence of granting at low
+predicted risk can weaken particular strategic-return explanations. They
+cannot eliminate recipient approval, spectators, chat, reputational beliefs,
+off-platform benefits, or all external motives. No audience variable is
+invented and missing audience information is never treated as zero.

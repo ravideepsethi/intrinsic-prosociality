@@ -1,0 +1,64 @@
+# Country Profile Follow-up v1.0.0
+
+This package runs the controlled same-country comparisons using the completed country first pass. It also contains the finished flag-selection and TV tables and a figure with corrected UTC activity-phase labels, all built from the uploaded first-pass report.
+
+Put the ZIP in `__PRIVATE_VALUE_1__/Desktop/Lichess_Desktop`, extract it there, and run:
+
+```bash
+bash "$HOME/Desktop/Lichess_Desktop/Country_Profile_Followup_v1_0_0/RUN_FOLLOWUP.command" --threads 8
+```
+
+Keep XT_Pro mounted. The default project is `/Volumes/XT_Pro/lichess_kindness`.
+
+The launcher uses the previous country package's isolated Python environment if its installed dependencies match. Otherwise it creates an isolated environment inside this package. It does not change the shared Conda environment. Caffeinate keeps the Mac awake during the run. Python 3.10 or later is required.
+
+## Inputs and outputs
+
+Input first pass:
+
+`/Volumes/XT_Pro/lichess_kindness/output/country_profile_first_pass_v100/run`
+
+Separate follow-up output:
+
+`/Volumes/XT_Pro/lichess_kindness/output/country_profile_followup_v100/run`
+
+The program verifies the first-pass identity, completed public report, and SHA-256 receipts for its saved profile file and 24 monthly panel projections. It then checks the reconstructed both-player sample against the reviewed ISO, exact-flag and original parent-code support tables. A changed or incomplete input stops the run.
+
+No Lichess requests or new chronology/Stockfish scans are made. The program projects the saved monthly panel files into a much smaller both-player sample. It does not modify the first-pass code, source files or checkpoints. The first-pass run lock must be free.
+
+The final output is:
+
+`COUNTRY_PROFILE_FOLLOWUP_REPORT_v100.zip`
+
+and its `.sha256` sidecar in the follow-up output directory. Upload these after the terminal prints `COUNTRY_PROFILE_FOLLOWUP_OK`. The ZIP contains aggregate results and methods; it excludes the PRIVATE directory.
+
+## What will be estimated
+
+The primary estimate is `iso_primary`: same-country granting in competitive positions, with chooser fixed effects, recipient-country effects and the established opportunity controls. The report contains nine specifications, including simpler comparisons, a switcher-only sample, exclusion of Russian flags, country-code sensitivities, exclusion of recipients with a public engine-or-boost mark, and clearly losing positions.
+
+Primary uncertainty clusters on chooser. Recipient and two-way chooser/recipient clustering are also reported. The code reports sample sizes, singleton exclusions, within-chooser matching variation, outcome variation and identification failures rather than producing an unsupported coefficient.
+
+These remain unweighted associations among acquired flag setters. No acquisition weights or country-population interpretation is introduced. See METHODS.md for the equation, definitions and inference conventions.
+
+## Already completed presentation material
+
+Open `ready_results/selection_and_tv_tables.md` for the four first-pass estimates. CSV and LaTeX versions are included.
+
+`ready_results/activity_phase_robustness.pdf` and `.png` show the full-window and year-1-timing/year-2-outcome robustness checks. Their horizontal axis is UTC activity phase, not inferred time zone. The relabeled full-window, stable-year and held-out CSVs retain unclassified accounts. A separate full-panel pooled CSV supplies point estimates only.
+
+These are completed results, whereas the new within-chooser same-country models have only been tested on synthetic data in this package. The private production models run on your Mac.
+
+## Runtime, memory and resume
+
+The work should be substantially smaller than the first pass because the model samples have hundreds of thousands of rows and the ordinary-game chronology is not scanned again. Production runtime has not been benchmarked; disk hashing and scanning the saved 24-month panel may dominate. The terminal prints progress by month and model, with a heartbeat every 30 seconds.
+
+DuckDB defaults to 4 GB and 8 threads. Sparse regression arrays use additional memory outside that limit, and models run sequentially. Allow several GB of free output/spill space. If other analyses are running, use `--threads 4 --memory 2GB`.
+
+Re-run the same command to reuse verified completed monthly projections and models. A model interrupted mid-estimation starts that model again. Do not delete or change first-pass checksums to force a restart.
+
+For different paths, use `--project`, `--first-pass-root`, or `--output`. Changing the package or authenticated inputs requires a new follow-up output directory. The code will explain an identity mismatch rather than mix different runs.
+
+## Validation
+
+`TEST_REPORT.json` records synthetic checks of coefficients, model rank and clustered variances against explicit chooser-dummy regressions; the analytical chooser-only estimator; treatment nonidentification; singleton handling; both-player joins; code-classification exclusions; source-support reconciliation; resumability; and corruption rejection. No production same-country estimate is claimed before the Mac run.
+

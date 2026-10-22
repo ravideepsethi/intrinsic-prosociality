@@ -1,0 +1,36 @@
+#!/bin/bash
+set -euo pipefail
+PKG_DIR="$(cd "$(dirname "$0")" && pwd)"
+MODE="${1:-run}"
+shift || true
+DEST="${IV_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+mkdir -p "$DEST"
+PY="${IV_PYTHON:-}"
+if [[ -z "$PY" ]]; then
+  for CANDIDATE in /Volumes/XT_Pro/lichess_kindness/venv/bin/python python3 python; do
+    if "$CANDIDATE" -c 'import numpy, pyarrow, duckdb' >/dev/null 2>&1; then PY="$CANDIDATE"; break; fi
+  done
+fi
+if [[ -z "$PY" ]]; then
+  echo 'Python with NumPy, PyArrow and DuckDB is required. Set IV_PYTHON to the existing project Python.' >&2
+  exit 2
+fi
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1
+LOG="$DEST/iv_competitive_only_${MODE}_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+exec > >(tee -a "$LOG") 2>&1
+echo "Log: $LOG"
+echo 'Expected runtime: 20–60 minutes for the first full local run (unbenchmarked); offline tests approximately 5–30 seconds.'
+echo 'Zero API calls. No new Stockfish or chronology scan. Parquet checkpoints resume; up to 10 workers, with separate memory caps for dense models.'
+"$PY" - "$PKG_DIR" <<'PY'
+import sys
+sys.path.insert(0,sys.argv[1]+'/code')
+from common import verify_package
+import numpy,pyarrow,duckdb
+verify_package()
+print('PACKAGE_SHA256_OK; NumPy',numpy.__version__,'PyArrow',pyarrow.__version__,'DuckDB',duckdb.__version__,'; SciPy and matplotlib not required')
+PY
+if command -v caffeinate >/dev/null 2>&1; then caffeinate -i -w $$ & fi
+"$PY" -m unittest discover -s "$PKG_DIR/tests" -p 'test_*.py' -v
+echo 'OFFLINE_SELF_TESTS_OK'
+if [[ "$MODE" == tests ]]; then exit 0; fi
+"$PY" "$PKG_DIR/code/run_competitive.py" "$@"

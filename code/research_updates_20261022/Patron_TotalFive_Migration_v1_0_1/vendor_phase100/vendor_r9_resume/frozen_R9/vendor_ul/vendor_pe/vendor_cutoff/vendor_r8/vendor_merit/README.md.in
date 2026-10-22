@@ -1,0 +1,149 @@
+# Continuous merit and material — A1 follow-up
+
+Prepared for Ravideep Sethi, 27 September 2026 (Toronto). Version 1.0.0.
+
+This is the executable **continuous board-evaluation analysis** discussed in the September 27 handoff. It is distinct from the earlier A1 move-trajectory project. It uses existing final-position Stockfish results; it does not run Stockfish, call Lichess, reconstruct the pool sample, or restart chooser recovery.
+
+## Run
+
+Put `KAC_Continuous_Merit_v1_0_0.zip` in:
+
+    __PRIVATE_VALUE_1__/Desktop/Lichess_Desktop
+
+Use the checksum-verifying Terminal command supplied with the ZIP. After extraction, the underlying command is:
+
+```bash
+bash KAC_Continuous_Merit_v1_0_0/RUN_CONTINUOUS_MERIT.command --workers 10
+```
+
+The launcher verifies package files, runs the numerical self-tests, prevents sleep with `caffeinate`, and writes an unbuffered log. It uses the current `python3` (or `LICHESS_PYTHON`) when the required libraries are available; otherwise it installs the declared dependencies into this package's `.venv`, without altering your base environment. Python 3.10+ is required.
+
+**Expected first-run runtime: approximately 20–60 minutes**, with the external SSD mounted and up to ten CPU slots available. Allow another 2–5 minutes if dependencies need installation. This is a planning range, not a Mac benchmark: development timed all 23 designs' two numerical passes on a synthetic 320,000-row partition at 4.82 seconds in one process, excluding disk I/O. Real account distributions, external-drive speed, memory bandwidth, and process overhead differ. The program updates its remaining-time estimate from completed real partitions, and prints a heartbeat every 45 seconds while a longer stage is working. At low memory or with other engine work active, it can take longer.
+
+The default memory budget is half physical RAM, capped at 12 GiB. The program reduces the number of processes when its conservative partition-memory estimate requires it. Ten is the CPU limit, not ten threads inside each of ten processes. Identifiable running Stockfish processes are subtracted from those ten CPU slots. Other simultaneous Python analysis jobs are not automatically identifiable; use a lower `--workers` value if sharing CPU with one.
+
+Optional explicit settings, normally unnecessary:
+
+```bash
+bash RUN_CONTINUOUS_MERIT.command --workers 6 --memory-gb 8
+```
+
+At least 12 GiB free space is checked before production. The compact projections, chooser partitions, temporary spill, and private diagnostics stay on the external drive. The result ZIP is copied automatically into `~/Desktop/Lichess_Desktop`.
+
+## Existing input, authenticated rather than rediscovered
+
+The exact default input is:
+
+    /Volumes/XT_Pro/lichess_kindness/derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE
+
+Its layout is `_SUCCESS.json` plus `panel/month=YYYY-MM/analysis_panel.parquet`. The bundled authority and report bind all 24 monthly Parquet hashes and schemas. The reader is reused byte-for-byte from `Tenure_Responsibility_v1_0_0`.
+
+Required census:
+
+| Quantity | Count |
+| --- | ---: |
+| Opportunities | 41,534,331 |
+| Granted draws | 570,091 |
+| Chooser accounts | 3,224,173 |
+| Competitive opportunities | 15,207,423 |
+| Competitive grants | 419,463 |
+| Competitive opportunities after ply 10 | 11,590,459 |
+
+The 47,587,020-row `analysis_panel_24m_sf100k` directory is an older all-source input and is **not** used. There is no fallback that substitutes it. `--sample-root` permits a relocated copy of the exact same certified sample, not a different sample.
+
+On the first run, each monthly file is SHA-256 verified. Narrow projections are then saved and checksummed. On resume, source size/modification/change-time, certified hash identity, and projection checksum must agree; if a source file's metadata changed, it is rehashed. No filename-based search or “latest directory” selection occurs.
+
+## Model
+
+Primary: competitive positions (canonical rival evaluation >= -100), after ply 10.
+
+    100 × grant = chooser FE + natural cubic spline(raw rival cp)
+                  + ply-band FE + speed FE + month FE + error
+
+The late-game stage bands are 11–20, 21–40, 41–80, and 81+. Early companions distinguish ply 2, plies 3–4, 5–6, 7–8, and 9–10 (with a separate 0–1 category if present). Outcome, chooser membership, and material-screen conventions are preserved from the certified panel.
+
+The spline is unconstrained, with boundaries -100 and +600 and interior knots 0, +100, +300. It is estimated from ordinary finite scores in [-100,600). Finite scores >=600 and positive forced mates have separate indicators. The full-range companion uses boundaries -600,+600 and interior knots -300,-100,0,100,300, with separate finite lower/upper tails and negative/positive mates. The alternative competitive spline has interior knots -50,100,250,450, with the same boundaries. Knots are fixed in code before examining this run's outcomes. This is a specified follow-up to previously seen results, not an independently preregistered discovery.
+
+Scores come from `engine_eval_cp_disconnected_raw` for non-mates. Competitive membership uses the existing canonical `engine_eval_cp_disconnected`; the code requires the two to agree on every non-mate row and requires canonical mates to have magnitude 10,000. Mates are never fitted as giant centipawn values. The capped-600 column is not substituted for the raw score.
+
+Material is reconstructed from the existing piece census, rival minus chooser: pawn=1, knight=3, bishop=3, rook=5, queen=9. Every row is checked against the existing material-balance field; small FEN checks independently verify orientation. Categories are <=-2, -1, 0, 1, 2, 3, 4, >=5. No engine call is needed.
+
+## All 23 specifications
+
+| Models | Purpose |
+| --- | --- |
+| Primary competitive late | Main continuous merit profile |
+| Competitive all stages | Early-game companion |
+| Competitive plies 11–80 | Endgame-tail sensitivity |
+| Alternative knots | Functional-form sensitivity |
+| Competitive late + clocks | Same-row clock adjustment |
+| Competitive late + rating controls | Same-row rating-environment adjustment |
+| Continuous evaluation × early/late | Shape difference by stage |
+| Full-range late | Descriptive profile beyond the competitive region |
+| Eight bins, late and all stages | Original diagnostic shape checks |
+| Linear competitive late | Single-slope summary with separate upper/mate categories |
+| Material, competitive late × three control sets | Material profile |
+| Material, full-range late × three control sets | Full-range material profile |
+| Evaluation × chooser rating tier | Tier-specific evaluation contrasts |
+| Material × tier, competitive and full range | Tier-specific material contrasts |
+| Joint evaluation + material × three control sets | Conditional association of the two board measures |
+
+Tier cutpoints are 1600, 2000, 2400, based on the chooser's rating at that opportunity. Clock controls are log(1+seconds) on both sides with indicators for missing/nonfinite/negative values. Rating controls add a continuous piecewise-linear displayed gap, capped at +/-600 with tail indicators; log premium and its square; and log RD and its square for each player, with explicit missingness indicators. The update scale K and its identical rescaling 2κ are not entered redundantly. Missing controls are filled only inside their transformation and flagged; the same model samples are retained across the control ladder.
+
+The eight diagnostic bins are [-100,-50), [-50,0), [0,50), [50,100], (100,200], (200,300), [300,600), and >=600 including positive mates. Their last bin intentionally differs from the continuous model's separate tails.
+
+## Parallel estimation and inference
+
+1. Read only needed columns into 24 narrow ZSTD Parquets. At most four independent monthly I/O jobs avoid excessive external-drive contention.
+2. Repartition once into 256 deterministic numeric-chooser buckets. A chooser's complete 24-month sequence belongs to one bucket; monthly regression coefficients are never averaged. These smaller blocks let a 16 GiB machine use more workers within the default memory budget.
+3. First parallel pass computes all models' within-chooser cross-products on each bucket, then sums them and solves once per model.
+4. Second parallel pass computes chooser score vectors over the full sequence, then their outer products. Scores are never squared month by month.
+
+Each process has one BLAS/NumPy/Arrow thread. The driver is memory aware and does not construct a full 41-million-row dense design. Intermediates are Parquet and small NPZ moment files. A file lock prevents duplicate copies of this exact run.
+
+Coefficient standard errors use a chooser-cluster sandwich with G/(G-1) correction. Normal 1.96 intervals are pointwise, not simultaneous. There is no unreported observation/FE degrees-of-freedom correction. Rank is assessed on column-scaled within cross-products. Unidentified directions are recorded; nonestimable contrasts are left blank. Singletons and accounts that never grant remain; singletons supply no within-account slope variation.
+
+Adjusted levels are opportunity-weighted predictions standardized to the same population over the curve, separately for each model sample. They equal the mean outcome plus the average counterfactual design change times the within-estimated slope. Their uncertainty jointly includes the baseline outcome mean, empirical standardization composition, and slopes under sampling of whole chooser clusters. The target is restandardized when clusters are resampled; these are not conditional fixed-account level bands. This level calculation is independently tested using finite differences of whole-cluster weighted refits. The same joint inference is used for population-average contrasts in interaction models. Group-specific slope contrasts use the common coefficient covariance.
+
+Three primary contrasts are f(100)-f(0), f(300)-f(100), f(500)-f(300), with their joint covariance and Holm adjustment as one three-test family. Adjacent-bin and adjacent-material contrasts have separate seven-test families; interaction groups have explicitly labeled families. Other models are sensitivity/descriptive follow-ups, not a pooled confirmatory family. Group-equality Wald tests use the common covariance. Positive selected contrasts do not prove global monotonicity, and insignificant contrasts do not establish flatness.
+
+## Outputs and resume
+
+Private work root:
+
+    /Volumes/XT_Pro/lichess_kindness/derived/replication/kac_merit_continuous_v100_PRIVATE/<fingerprint>
+
+The fingerprint covers the sample identity, Python code, specifications, partition count, and numerical-library versions. Interrupted monthly projections and moment stages resume from validated checkpoints. An interrupted repartition stage restarts just that repartition from already saved projections; its previous partial directory is preserved for diagnosis. Completed moments are not repeated. Identical completed runs return the prior result archive.
+
+Final outputs:
+
+- `KAC_CONTINUOUS_MERIT_RESULT_<UTC timestamp>.zip` and `.zip.sha256` in your Desktop staging folder.
+- `SUMMARY.md`: primary estimates and interpretation limits.
+- `merit_continuous.pdf/png`: adjusted rates and support, with separate tail categories.
+- `material_profile.pdf/png`: material profiles.
+- `planned_contrasts`, `adjusted_profiles`, `coefficients`, `model_samples`, `interaction_tests`: both Parquet and CSV.
+- `model_covariances.npz`, coefficient order, frozen definitions, census/support tables, environment and timing receipts.
+- `primary_contrasts.tex`: compact table fragment.
+
+Success marker: `KAC_CONTINUOUS_MERIT_OK`. The result ZIP contains aggregate outputs and executed code, not identifiers or row-level data. If a semantic, checksum, sample-count, or primary estimability gate fails, the program stops and preserves completed work and a private diagnostic. A statistical sign is never a success gate. Upload the result ZIP and its checksum after completion.
+
+## Validation performed before delivery
+
+- Reauthenticated the bundled 24-month authority/report and its 157-column schema.
+- Compared within FE coefficients and clustered contrast variance with a separate explicit chooser-dummy least-squares calculation.
+- Checked baseline uncertainty against numerical perturbations of whole-chooser weights, including target-composition changes.
+- Compared pooled and chooser-partitioned moments/covariances across all 23 designs.
+- Tested singleton, never-grant, empty-support, knot, bin-boundary, and FEN/material orientation cases.
+- Executed synthetic Parquet projection, semantic checks, partitioning, both parallel passes, tables, and plots.
+- Tested projection corruption detection and recomputation; repeated the full integration run and verified all model checkpoints were reused unchanged.
+- Inspected the generated figures visually. Those were synthetic QA figures and are not included as research results.
+
+The real Mac data are not accessible in this execution workspace. No new empirical results have been produced here.
+
+## Technical references
+
+Natural boundary construction: [SciPy CubicSpline documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.CubicSpline.html). The code constructs a regression basis from natural cardinal splines; it does not interpolate observed grant rates.
+
+Partitioned Parquet writes: [DuckDB documentation](https://duckdb.org/docs/current/data/partitioning/partitioned_writes).
+
+Scientific design: the September 27 `Kindness_Analyses_Execution_Review_2026-09-27.md` companion, especially its A1 section. This package does not execute the handoff's other analysis modules.

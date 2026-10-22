@@ -1,0 +1,232 @@
+import contextlib,io,json,sys,tempfile,unittest
+from pathlib import Path
+from unittest.mock import patch
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'code'))
+from common import *
+import bind as binding_code
+from prepare import classification_sql,validate_common,prepare
+from models import uncertainty,cem_fit,comparisons,one_pair,DERIVED
+from dose import linear_fit,dose_models
+from report import assemble_report
+from receipt_check import receipt_audit
+import restart
+
+def fixture(root,include_forced_in_receipt=False,claim_without_material=False):
+    """Independent miniature upstream project with genuine SHA-bound receipts."""
+    rng=np.random.default_rng(812);root=Path(root);project=root/'project';authority=root/'package/authority';authority.mkdir(parents=True)
+    panelroot=project/'derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE'
+    features=[];ivs=[];metadata=[];panel_records=[];history=['fair','kind','disconnect','receipt','claim']
+    groups=['grant','claim','forced','stalemate','draw','loss','win','chooser']
+    rowid=0
+    for mi,month in enumerate(MONTHS):
+        panel=[]
+        for gi,g in enumerate(groups):
+            for j in range(20):
+                rowid+=1;gid=f'{rowid:08d}';start=int(__import__('datetime').datetime.fromisoformat(month+'-05').replace(tzinfo=__import__('datetime').timezone.utc).timestamp()*1000)
+                start+=j*600000;anchor=start+120000;complete=anchor+90*DAY<PANEL_END
+                recipient=100+(j+(gi+mi)%8*20);opponent=10000+rowid;opcolor='black';fcolor='white'
+                y=int(rng.random()<(.20 if g=='grant' else .10));reached=max(y,int(rng.random()<.65))
+                f=dict(row_id=rowid,game_id=gid,recipient_id=recipient,opponent_id=opponent,
+                  recipient_rating=1600.+j,opponent_rating=1600.+j%3,month_code=mi,archive_start_ms=start,anchor_ms=anchor,
+                  tc_base_s=300,tc_inc_s=0,pre_games_30d=30+j,n_7d=8+j,expected_7d=.10+rng.normal(0,.01),
+                  adjusted_7d=.025+rng.normal(0,.01),y=y if complete else None,reached=reached if complete else None,
+                  outcome_opponent=30000+rowid if reached else -1,outcome_gid='o'+gid if reached else '',
+                  outcome_t=anchor+100000 if reached else -1,outcome_start=anchor+1000 if reached else -1,
+                  entry_eligible=True,complete90=complete,previous_frame=False,recipient_username=f'p{recipient}',
+                  opponent_username=f'p{opponent}',matched_main=g in ('grant','claim','forced','chooser'),
+                  recipient_disconnect_main=g in ('grant','claim','forced'),recipient_fair_arm_main=g in ('grant','claim'),author_game=False)
+                for w in (30,90):
+                    for h,v in zip(history,[10,2,5,1,4]):f[f'{h}_{w}']=v
+                status={'stalemate':'stalemate','draw':'draw','loss':'resign','win':'mate'}.get(g,'timeout')
+                winner='black' if g in ('claim','loss') else 'white' if g in ('win','chooser') else None
+                f['status']=status;features.append(f)
+                metadata.append(dict(game_id=gid,status=status,winner=winner,white_username=f['recipient_username'],black_username=f['opponent_username'],anchor_ms=anchor))
+                if f['matched_main']:
+                    swap=g=='chooser';cost=4+float(rng.random())*8;ben=3+float(rng.random())*10
+                    rec_color='black' if swap else 'white';ch_color='white' if swap else 'black'
+                    p=dict(game_id=gid,chooser_user_id=recipient if swap else opponent,disconnected_user_id=opponent if swap else recipient,
+                       api_last_move_at_ms=anchor,utc_ms=start,chooser_color=ch_color,disconnected_color=rec_color,
+                       kind_draw=g=='grant',timeout_chooser_win=g in ('claim','chooser'),fair_competitive=True,
+                       chooser_has_mating_material=g!='forced' and not (claim_without_material and g=='claim' and j==0),timeout_draw_no_mating_material=g=='forced',
+                       chooser_win_premium_v2=cost,chooser_draw_payoff_v2=-2.,chooser_win_payoff_v2=cost-2,
+                       chooser_pre_rd_v2=50+float(rng.random())*100,disconnected_pre_rd_v2=50+float(rng.random())*100,
+                       white_win_premium_v2=cost if swap else ben,black_win_premium_v2=ben if swap else cost,
+                       white_draw_ratingdiff_v2=-2.,black_draw_ratingdiff_v2=-2.,
+                       white_win_ratingdiff_v2=(cost if swap else ben)-2,black_win_ratingdiff_v2=(ben if swap else cost)-2,
+                       engine_eval_cp_disconnected=float(rng.random())*80,ply_count=20+j,
+                       chooser_clock_last_obs_s=100+float(rng.random())*70,disconnected_clock_last_obs_s=90+float(rng.random())*70)
+                    panel.append(p)
+                if (g in ('grant','claim') or (g=='forced' and include_forced_in_receipt)) and complete:ivs.append(dict({k:f[k] for k in BASE},received=g=='grant'))
+        pp=panelroot/'panel'/('month='+month)/'analysis_panel.parquet';pp.parent.mkdir(parents=True,exist_ok=True);pq.write_table(pa.Table.from_pylist(panel),pp)
+        panel_records.append(dict(month=month,relative_path=str(pp.relative_to(panelroot)),rows=len(panel),size_bytes=pp.stat().st_size,sha256=sha(pp)))
+    main=dict(status='OK',main_predicate='test',contract_sha256='test',code_sha256='test',observed_screen_certified=True,literal_immediate_rematches_certified=True,report_sha256='test',panel_outputs=panel_records)
+    write(authority/'pool_main.json',main);write(panelroot/'_SUCCESS.json',dict(main,report_zip_sha256='test'))
+    phroot=project/'derived/metadata_fixture';mp=phroot/'phase_results/25/merged';mp.mkdir(parents=True)
+    m=mp/'metadata.parquet';pq.write_table(pa.Table.from_pylist(metadata),m)
+    write(mp/'_DONE.json',dict(config_sha256='unused',files=[dict(path=m.name,sha256=sha(m),bytes=m.stat().st_size)]))
+    write(mp.parent/'ANALYSIS_INPUTS_PRIVATE.json',dict(test=True))
+    cfg=dict(code_sha256='test',phase=dict(root=str(phroot),metadata=str(m),manifest_sha256=sha(mp.parent/'ANALYSIS_INPUTS_PRIVATE.json'),receipts={str((mp/'_DONE.json').relative_to(phroot)):sha(mp/'_DONE.json')}))
+    conf=digest(cfg);phase=project/'derived/replication/run2_phase25_analysis_v120_PRIVATE'/conf[:12]
+    write(phase/'config.json',cfg);write(phase/'report/summary.json',dict(status='PHASE_025_AVAILABLE_CASE_ANALYSIS_COMPLETE'))
+    def stage(folder,name,rows,key):
+        folder.mkdir(parents=True,exist_ok=True);p=folder/name;pq.write_table(pa.Table.from_pylist(rows),p)
+        write(folder/'_DONE.json',dict(config_sha256=key,files=[dict(path=name,sha256=sha(p),bytes=p.stat().st_size)]))
+    stage(phase/'assembled','features.parquet',features,conf)
+    write(phase/'INPUTS_PRIVATE.json',dict(author_ids=dict(__PRIVATE_VALUE_1__=90000,__PRIVATE_VALUE_2__=90001),
+      panels=[dict(path=str(panelroot/r['relative_path']),sha256=r['sha256']) for r in panel_records]))
+    ecfg=dict(test='environment');ec=digest(ecfg);env=project/'derived/replication/run2_environment_diagnostics_v100_PRIVATE'/ec[:12]
+    write(env/'config.json',ecfg);write(env/'report/summary.json',dict(status='ENVIRONMENT_DIAGNOSTICS_COMPLETE'));stage(env/'iv_assembled','receipt_iv.parquet',ivs,ec)
+    write(authority/'parents.json',dict(config_sha256=conf,summary_sha256=sha(phase/'report/summary.json'),upstream_package_manifest_sha256='test',
+        environment_config_sha256=ec,environment_summary_sha256=sha(env/'report/summary.json')))
+    return project,authority.parent
+
+class NumericalTests(unittest.TestCase):
+    def test_shared_account_sandwich_matches_bruteforce(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            c=conn(tmp);actors=np.array([[1,2,3],[2,1,4],[7,8,-1],[3,2,1],[1,1,-1]])
+            u=np.array([.2,-.1,.6,.5,-.3]);got=uncertainty(c,actors,u,1);expected=0.
+            for i in range(len(u)):
+                for j in range(len(u)):
+                    if set(actors[i][actors[i]>=0])&set(actors[j][actors[j]>=0]):expected+=u[i]*u[j]
+            self.assertAlmostEqual(got['shared_account_variance'],expected,12);c.close()
+
+    def test_cem_point_estimate_is_overlap_weighted_cell_difference(self):
+        d=dict(arm=np.array([1,1,0,1,0,0,0]),y=np.array([1,0,0,1,1,0,0]),
+               stratum=np.array([0,0,0,1,1,1,1]),weight=np.array([1/3,1/3,2/3,3/4,1/4,1/4,1/4]),
+               recipient_id=np.arange(7),opponent_id=np.arange(7)+10,outcome_opponent=np.arange(7)+20,reached=np.ones(7))
+        with tempfile.TemporaryDirectory() as tmp:
+            c=conn(tmp);r=cem_fit(d,'y',c);c.close()
+        expected=((2/3)*.5+(3/4)*(1-1/3))/(2/3+3/4)*100
+        self.assertAlmostEqual(r['estimate'],expected,12)
+
+    def test_absorbed_regression_matches_explicit_dummy_ols(self):
+        rng=np.random.default_rng(912);n=600;s=np.arange(n)%4;x=rng.normal(size=(n,3));y=x@np.array([.2,-.4,.6])+s*.3+rng.normal(size=n)
+        full=np.column_stack([x,np.eye(4)[s]]);expected=np.linalg.lstsq(full,y,rcond=None)[0]
+        with tempfile.TemporaryDirectory() as tmp:
+            c=conn(tmp);info,r=linear_fit(c,x,y,s,np.column_stack([np.arange(n),np.arange(n)+n,np.full(n,-1)]),['a','b','c'],['a','b','c'],100,100);c.close()
+        self.assertEqual(info['status'],'ESTIMATED')
+        np.testing.assert_allclose([v['estimate']/100 for v in r],expected[:3],rtol=1e-10)
+
+    def test_rank_failure_is_reported(self):
+        x=np.column_stack([np.arange(100),np.arange(100)*2]);s=np.zeros(100,dtype=int)
+        with tempfile.TemporaryDirectory() as tmp:
+            c=conn(tmp);info,r=linear_fit(c,x,np.arange(100),s,np.zeros((100,3),dtype=int),['a','b'],['a'],50,50);c.close()
+        self.assertEqual(info['status'],'COLLINEAR_NOT_ESTIMATED');self.assertFalse(r)
+
+class PipelineTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.tmp=tempfile.TemporaryDirectory();cls.root=Path(cls.tmp.name);cls.project,cls.package=fixture(cls.root)
+        cls.work=cls.root/'work';cls.key='fixture'
+        with patch.object(binding_code,'PACKAGE',cls.package),contextlib.redirect_stdout(io.StringIO()):
+            cls.binding=binding_code.bind(cls.project,cls.work)
+            cls.paths=prepare(cls.binding,cls.work,cls.key,2,4)
+    @classmethod
+    def tearDownClass(cls):cls.tmp.cleanup()
+
+    def test_orientation_and_forced_classification(self):
+        c=conn(self.root/'sql');groups=dict(c.execute('SELECT exposure_group,count(*) FROM '+scan([Path(p)/'comparisons.parquet' for p in self.paths])+' GROUP BY 1').fetchall());c.close()
+        self.assertEqual(groups['granted_draw'],480);self.assertEqual(groups['claimed_loss'],480)
+        self.assertEqual(groups['no_material_draw'],480);self.assertEqual(groups['timeout_chooser_role'],480)
+        self.assertEqual(groups['ordinary_loss'],480);self.assertEqual(groups['ordinary_win'],480)
+
+    def test_censoring_and_author_checks(self):
+        c=conn(self.root/'sql_censor');c.execute('CREATE TEMP TABLE v AS SELECT * FROM '+scan(Path(self.paths[-1])/'comparisons.parquet'))
+        self.assertGreater(c.execute('SELECT count(*) FROM v WHERE NOT complete90 AND y IS NULL').fetchone()[0],0)
+        c.execute('UPDATE v SET y=0 WHERE NOT complete90')
+        with self.assertRaisesRegex(RuntimeError,'censoring'):validate_common(c,'v',[90000,90001])
+        c.execute('CREATE OR REPLACE TEMP TABLE v AS SELECT * FROM '+scan(Path(self.paths[0])/'comparisons.parquet'))
+        c.execute('UPDATE v SET opponent_id=90000 WHERE row_id=(SELECT min(row_id) FROM v)')
+        with self.assertRaisesRegex(RuntimeError,'author'):validate_common(c,'v',[90000,90001])
+        c.close()
+
+    def test_end_to_end_models_and_report(self):
+        with contextlib.redirect_stdout(io.StringIO()):
+            outputs=comparisons(self.paths,self.work,self.key,2,4)
+            ds=dose_models(self.paths,self.work,self.key,2,4)
+            report=assemble_report(self.work,self.root/'desktop',self.key)
+        self.assertEqual(len(outputs),26);self.assertEqual(len(ds),4);self.assertTrue(report.exists())
+        r=read(self.work/'report/summary.json');self.assertEqual(r['status'],'COMPLETE');self.assertGreater(r['eligible_no_material_draws'],0)
+        self.assertTrue((self.work/'report/comparison_estimates.csv').stat().st_size>100)
+        for folder in ds:self.assertEqual(read(folder/'summary.json')['y']['status'],'ESTIMATED')
+        import zipfile
+        with zipfile.ZipFile(report) as z:self.assertFalse(any('PRIVATE' in name for name in z.namelist()))
+
+    def test_resume_does_not_rewrite_monthly_outputs(self):
+        p=Path(self.paths[0])/'comparisons.parquet';before=signature(p)
+        with contextlib.redirect_stdout(io.StringIO()):prepare(self.binding,self.work,self.key,2,4)
+        self.assertEqual(before,signature(p))
+
+    def test_changed_source_is_rejected(self):
+        p=Path(self.binding['panels'][0]['path']);original=p.read_bytes()
+        try:
+            p.write_bytes(original+b'changed')
+            with self.assertRaisesRegex(RuntimeError,'size|Checksum'):
+                authenticate(p,self.work,self.binding['panels'][0]['sha256'],self.binding['panels'][0]['size_bytes'])
+            with self.assertRaisesRegex(RuntimeError,'size|Checksum'),contextlib.redirect_stdout(io.StringIO()):
+                prepare(self.binding,self.work,self.key,2,4)
+        finally:p.write_bytes(original)
+
+    def test_missing_material_flags_do_not_create_forced_draw_controls(self):
+        c=conn(self.root/'sql_missing');c.execute('CREATE TEMP TABLE data AS SELECT * FROM '+scan(Path(self.paths[0])/'comparisons.parquet'))
+        c.execute("UPDATE data SET panel_no_material=NULL WHERE exposure_group='no_material_draw'")
+        c.execute('UPDATE data SET exposure_group='+classification_sql())
+        self.assertEqual(c.execute("SELECT count(*) FROM data WHERE exposure_group='no_material_draw'").fetchone()[0],0)
+        c.execute('CREATE TEMP TABLE base AS SELECT *, '+DERIVED+' FROM data')
+        out=one_pair(c,self.root/'missing','test','missing_forced',['granted_draw'],['no_material_draw'])
+        self.assertEqual(read(out/'summary.json')['status'],'NO_OBSERVATIONS_IN_ONE_ARM');c.close()
+
+    def test_verified_focal_and_hash_cache_migrate_without_source_change(self):
+        cfg=dict(version='1.0.0',package_sha256='fixture-manifest');oldkey=digest(cfg)
+        old=self.project/'derived/replication/receipt_mechanisms_v100_PRIVATE'/oldkey[:12]
+        write(old/'config.json',cfg);write(old/'binding_PRIVATE.json',self.binding)
+        import shutil
+        shutil.copytree(self.work/'focal',old/'focal',dirs_exist_ok=True);finish(old/'focal',oldkey)
+        shutil.copytree(self.work/'authenticated',old/'authenticated',dirs_exist_ok=True)
+        write(self.package/'authority/restart.json',dict(old_run_key=oldkey,old_package_manifest_sha256='fixture-manifest',old_version='1.0.0'))
+        target=self.root/'restart-work'
+        with patch.object(restart,'PACKAGE',self.package),contextlib.redirect_stdout(io.StringIO()):
+            restart.seed_hash_cache(self.project,target)
+            restart.reuse_focal(self.project,target,self.binding,'new-key')
+        self.assertTrue(checkpoint_ok(target/'focal','new-key'))
+        self.assertEqual(sha(target/'focal/focal.parquet'),sha(old/'focal/focal.parquet'))
+        self.assertGreater(len(list((target/'authenticated').glob('*.json'))),0)
+
+class RepairTests(unittest.TestCase):
+    def test_recorded_claim_does_not_need_extra_material_predicate(self):
+        with tempfile.TemporaryDirectory() as tmp,contextlib.redirect_stdout(io.StringIO()):
+            root=Path(tmp);project,package=fixture(root,claim_without_material=True);work=root/'work'
+            with patch.object(binding_code,'PACKAGE',package):b=binding_code.bind(project,work)
+            paths=prepare(b,work,'repair',2,4)
+            r=read(Path(paths[0])/'receipt_audit.json')
+            self.assertEqual(r['status'],'VERIFIED');self.assertEqual(r['claims_without_material_flag'],1)
+            self.assertEqual(r['rows_removed'],0)
+
+    def test_forced_nonreceipt_is_audited_without_blocking_primary(self):
+        with tempfile.TemporaryDirectory() as tmp,contextlib.redirect_stdout(io.StringIO()):
+            root=Path(tmp);project,package=fixture(root,include_forced_in_receipt=True);work=root/'work'
+            with patch.object(binding_code,'PACKAGE',package):b=binding_code.bind(project,work)
+            paths=prepare(b,work,'repair',2,4)
+            r=read(Path(paths[0])/'receipt_audit.json')
+            self.assertEqual(r['status'],'BLOCKED');self.assertEqual(r['recorded_arm_missing'],20)
+            self.assertEqual(r['explicit_no_material_rows'],20);self.assertEqual(r['distinct_invalid_rows'],20)
+            outputs=comparisons(paths,work,'repair',2,4);self.assertEqual(len(outputs),26)
+            with self.assertRaisesRegex(RuntimeError,'partial-cohort'):dose_models(paths,work,'repair',2,4)
+            z=assemble_report(work,root/'desktop','repair','PRIMARY_COMPLETE_SECONDARY_BLOCKED')
+            s=read(work/'report/summary.json');self.assertEqual(s['completed_months'],24)
+            self.assertEqual(s['completed_comparisons'],26);self.assertEqual(s['completed_dose_models'],0)
+            self.assertGreater(len(s['secondary_blocked_months']),0)
+            self.assertTrue((work/'report/receipt_cohort_audit.csv').exists())
+
+    def test_mismatch_diagnostics_identify_the_exact_field(self):
+        row=dict(game_id='g',recipient_id=1,opponent_id=2,received=False,anchor_ms=100,archive_start_ms=50)
+        panel=dict(panel_gid='g',panel_recipient=1,panel_chooser=2,panel_fair=True,panel_kind=False,
+            panel_claim=True,panel_material=True,panel_no_material=False,panel_anchor=101,panel_start=50)
+        with tempfile.TemporaryDirectory() as tmp:
+            c=conn(tmp);c.register('iv',pa.Table.from_pylist([row]));c.register('panel',pa.Table.from_pylist([panel]))
+            r,patterns,_=receipt_audit(c,'test');c.close()
+        self.assertEqual(r['status'],'BLOCKED');self.assertEqual(r['anchor_mismatch'],1)
+        self.assertEqual(r['distinct_invalid_rows'],1);self.assertEqual(r['min_anchor_difference_ms'],-1)
+        self.assertEqual(r['recipient_id_mismatch'],0);self.assertEqual(r['recorded_arm_missing'],0)
+
+if __name__=='__main__':unittest.main()

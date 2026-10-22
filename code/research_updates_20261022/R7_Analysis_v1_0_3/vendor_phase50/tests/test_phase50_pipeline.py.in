@@ -1,0 +1,118 @@
+"""Exercise the actual optimized orchestration with small coherent source files.
+
+Only production authentication and the published large-N numerical authority
+are replaced. Index construction, spawned workers, eligibility, chronology,
+feature reproduction, assembly, regressions, reports and reuse execute normally.
+"""
+import sys,tempfile,unittest,contextlib
+from pathlib import Path
+from unittest import mock
+from types import SimpleNamespace
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'code'))
+from phase50_common import *
+sys.path.insert(0,str(UPSTREAM/'tests'))
+from cached_common import *
+import run_phase50 as runner
+import phase50_models as models
+import phase50_inputs as cp
+import phase_features as pf
+import test_phase_analysis as original_fixture
+
+class CheckpointRunnerTests(unittest.TestCase):
+    def test_complete_25_pipeline_and_secondary_resume(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);fixture=root/'fixture';fixture.mkdir()
+            # The unchanged original integration fixture provides coherent parent
+            # outcomes, author effects, histories, entry labels and original fits.
+            with mock.patch('test_phase_analysis.tempfile.TemporaryDirectory',return_value=contextlib.nullcontext(str(fixture))):
+                original_fixture.PhaseTests('test_mixed_ending_pipeline_author_cleaning_and_entry_labels').test_mixed_ending_pipeline_author_cleaning_and_entry_labels()
+            h=io.read(fixture/'history.parquet');a=arrays(h);parts=[];sdir=root/'sources';sdir.mkdir()
+            for month in MONTHS:
+                for shard in range(16):
+                    use=(num.user_hash(a['j'])%np.uint64(16)==shard)&(month==MONTHS[6])
+                    path=sdir/f'{month}_{shard:02}.parquet';io.table(path,h.filter(pa.array(use)))
+                    parts.append(dict(path=str(path),month=month,shard=shard,sha256=io.sha(path),rows=int(use.sum())))
+            main=io.read(fixture/'main.parquet');panels=[]
+            for k,m in enumerate(MONTHS):
+                path=sdir/f'main_{m}.parquet';io.table(path,main if k==6 else main.slice(0,0))
+                panels.append(dict(path=str(path),sha256=io.sha(path),rows=pq.ParquetFile(path).metadata.num_rows))
+            chron=fixture/'chron.parquet'
+            source=dict(parts=parts,panels=panels,author_ids=dict(__PRIVATE_VALUE_1__=99,__PRIVATE_VALUE_2__=100),deltas=[],
+                legacy_outcome_parent=dict(path=str(fixture/'parent.parquet')),comparison=str(fixture/'baseline.parquet'),
+                stream=str(fixture/'stream.parquet'),entry_universe=str(fixture/'audit.parquet'),
+                chron=[dict(path=str(chron),rows=pq.ParquetFile(chron).metadata.num_rows,signature=io.sig(chron),file_index=0,minimum=original_fixture.T-2*DAY)])
+            qnew=io.read(fixture/'new.parquet');sources=[]
+            for month in ex.MONTHS:
+                folder=root/'coverage_source'/month;table=qnew if month==MONTHS[6] else qnew.slice(0,0)
+                info=dict(month=month,selected_frame_rows=len(table),pool_rows=len(table),ordinary_rows=int(sum(s in core.NARROW for s in table['status'].to_pylist())),
+                    unresolved_rows=0,dispositions=dict(CACHED_POOL_METADATA=len(table)),ending_counts=[])
+                def build(tmp,table=table,info=info):
+                    io.table(tmp/'pool.parquet',table);io.js(tmp/'coverage.json',info);return info
+                io.stage(folder,runner.recovery.PRIOR_CONF,build)
+                sources.append(runner.recovery.validated_source(dict(source=str(folder),month=month)))
+                membership=pa.table(dict(game_id=table['game_id'],retrieval_rank=pa.array([bytes(32)]*len(table),type=pa.binary())))
+                io.table(folder/'membership_PRIVATE.parquet',membership)
+            local=dict(input_receipts=[],ledgers=[r['source'] for r in sources]);phase=dict(summary=dict(additional_frame_rows=2),metadata=str(root/'unused/metadata.parquet'))
+            baseline=arrays(io.read(fixture/'baseline.parquet'))
+            def reference(inputs,removed,root,conf):
+                def build(tmp):
+                    np.save(tmp/'original.npy',np.full((2,24,4,4,500),.25))
+                    np.save(tmp/'clean.npy',np.full((2,24,4,4,500),.2))
+                    return dict(synthetic_reference=True)
+                return io.stage(root,conf,build)
+            def coverage_job(job):
+                source=Path(job['ledger']);info=io.load(source/'coverage.json')
+                def build(tmp):
+                    for name in ('pool.parquet','coverage.json','membership_PRIVATE.parquet'):
+                        import shutil
+                        shutil.copy2(source/name,tmp/name)
+                    return info
+                return stable_stage(job['output'],job['conf'],build,[source/'pool.parquet'])[1]
+            def mapped_local(self,fn,jobs,workers,label):
+                # Production uses spawn; this orchestration test runs the real
+                # functions sequentially so authentication fixture patches apply.
+                # The inherited suite separately tests real spawned execution.
+                return [fn(j) for j in jobs]
+            args=SimpleNamespace(project_root=root/'project',desktop=root/'desktop',workers=2,memory_gb=5,plan=None)
+            args.project_root.mkdir()
+            with contextlib.ExitStack() as patches:
+                original_load=io.load
+                def fixture_load(path):
+                    if Path(path)==models.ENV/'evidence/entry_estimates.json':
+                        return [dict(cohort=c,sample='competitive_supported',instrument=None,control_level=None,outcome=None,n=pq.ParquetFile(next(args.project_root.glob(runner.ANALYSIS_REL+'/*/entry_comp_prepared/'+c+'.parquet'))).metadata.num_rows,supported=False) for c in ('new_phase25','old_author_clean')]
+                    return original_load(path)
+                patches.enter_context(mock.patch.object(io,'load',side_effect=fixture_load))
+                patches.enter_context(mock.patch.object(runner,'fit_map',side_effect=lambda fn,jobs,runtime,workers,memory,label,report: [fn(j) for j in jobs]))
+                patches.enter_context(mock.patch.object(models,'fit_map',side_effect=lambda fn,jobs,runtime,workers,memory,label,report: [fn(j) for j in jobs]))
+                for target,values in [
+                    ('run_phase50.verify_package',{}),('run_phase50.amendment.bind_previous',dict(return_value=None)),('run_phase50.no_network',{}),
+                    ('run_phase50.authenticate',dict(return_value=local)),
+                    ('run_phase50.checkpoint.authenticate_checkpoint',dict(return_value=phase)),
+                    ('run_phase50.checkpoint.coverage_job',dict(side_effect=coverage_job)),
+                                        ('run_phase50.audit_quarantine',{}),
+                    ('run_phase50.checkpoint.prior_analysis',dict(return_value=None)),
+                    ('performance_runtime.Runtime.mapped',dict(new=mapped_local)),
+                    ('run_phase50.inputs_code.research_inputs',dict(return_value=source)),
+                    ('run_phase50.prior_inputs.identity_check',dict(return_value=(None,dict(synthetic_identity=True)))),
+                    ('phase_features.verify_original',dict(return_value=(baseline,{}))),
+                    ('run_phase50.authors.prepare_reference',dict(side_effect=reference))]:
+                    patches.enter_context(mock.patch(target,**values))
+                runner.execute(args)
+                result=next(args.project_root.glob(runner.ANALYSIS_REL+'/*'))
+                for name in ['ordinary_new_phase25','ordinary_old_author_clean','entry_new_phase25','entry_old_author_clean','ordinary_pooled','entry_pooled']:
+                    old=arrays(io.read(fixture/'assembled'/(name.replace('new_phase25','new_phase10')+'.parquet')));new=arrays(io.read(result/'split'/(name+'.parquet')))
+                    self.assertEqual(set(old)-set(new),set())
+                    for k in old:
+                        if old[k].dtype.kind in 'fi':np.testing.assert_allclose(old[k],new[k],rtol=1e-10,atol=2e-11,equal_nan=True,err_msg=name+'/'+k)
+                        else:np.testing.assert_array_equal(old[k],new[k],err_msg=name+'/'+k)
+                report=io.load(result/'report/summary.json')
+                self.assertEqual(report['status'],'PHASE_050_AVAILABLE_CASE_ANALYSIS_COMPLETE')
+                self.assertIn('performance',report);self.assertIn('early_eligibility',report)
+                self.assertEqual(report['phase_percent'],50)
+                self.assertTrue((result/'secondary_prepared/scale.json').is_file())
+                self.assertEqual(len(list((result/'secondary_models').glob('*/result.json'))),20)
+                # A second execution reuses completed expensive calculations.
+                with mock.patch.object(runner.fast.ScoreIndex,'score',side_effect=AssertionError('must reuse')),mock.patch('performance_chronology.chronology_job',side_effect=AssertionError('must reuse')):
+                    runner.execute(args)
+
+if __name__=='__main__':unittest.main()

@@ -1,0 +1,70 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+r7_mode="${1:?Specify analyze or tests}"
+shift
+r7_package="$(cd "$(dirname "$0")" && pwd -P)"
+r7_project="${IV_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+r7_desktop="${IV_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+r7_python="${IV_PYTHON:-$r7_project/venv/bin/python}"
+if [[ ! -x "$r7_python" ]]; then
+  echo "Research Python not found: $r7_python. Connect XT_Pro or set IV_PYTHON."
+  exit 2
+fi
+if [[ "$r7_mode" != analyze && "$r7_mode" != tests ]]; then
+  echo 'Use RUN_R7_ANALYSES.command or RUN_TESTS.command.'
+  exit 2
+fi
+mkdir -p "$r7_desktop"
+export PYTHONDONTWRITEBYTECODE=1
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1
+cd "$r7_package"
+"$r7_python" - <<'PY'
+import sys,platform
+assert sys.version_info >= (3,10), 'Python 3.10 or later required'
+try:
+    import numpy,pyarrow,duckdb,chess
+except ImportError as e:
+    raise SystemExit('Missing existing research dependency: '+str(e)+'. No packages were downloaded.')
+sys.path.insert(0,'code')
+from r7_common import verify_package
+verify_package()
+print('R7 PACKAGE_SHA256_OK; Python',sys.version.split()[0],';',platform.platform(),
+      '; NumPy',numpy.__version__,'; PyArrow',pyarrow.__version__,'; DuckDB',duckdb.__version__,
+      '; chess',chess.__version__,flush=True)
+PY
+r7_log="$r7_desktop/r7_${r7_mode}_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+echo "Log: $r7_log"
+r7_awake=()
+if [[ -x /usr/bin/caffeinate ]]; then r7_awake=(/usr/bin/caffeinate -i); fi
+set +e
+{
+  if [[ "$r7_mode" == tests ]]; then
+    "$r7_python" -m unittest discover -s tests -p 'test_*.py' -v
+  else
+    echo 'R7: A joint balance/calibration; B same-row environment models; C exit composition.'
+    echo 'Reproduction gate targets the original 2,682,330 rows; all new diagnostics use the archived 2,682,329 author-clean rows.'
+    echo 'Whole-run Mac duration is unbenchmarked. This resume reuses completed ENV; SSD speed, CPU, and move coverage matter.'
+    echo 'Checkpointed stages and models resume. Progress every 30–45 seconds; measured ETAs where available.'
+    echo 'Up to 10 workers, limited by RAM; one numerical-library thread per worker. Zero API/network requests; no Stockfish.'
+    echo 'v1.0.3: restores cached F50 later outcomes and checks all model schemas before fitting.'
+    echo 'Use --reuse-r7-root for the completed v1.0.0 ENV extension; its chronology tasks are not repeated.'
+    echo 'Use --reuse-reproduction-root to retain the passed v1.0.2 production gate. Without it the gate is rerun.'
+    r7_tests="${r7_log%.log}_selftests.log"
+    if "$r7_python" -m unittest discover -s tests -p 'test_*.py' -q > "$r7_tests" 2>&1; then
+      echo "OFFLINE_SELF_TESTS_OK: $r7_tests"
+    else
+      r7_test_exit=$?
+      cat "$r7_tests"
+      echo 'Self-tests failed; production analysis did not start.'
+      exit "$r7_test_exit"
+    fi
+    "${r7_awake[@]}" "$r7_python" -u code/run_r7.py --project-root "$r7_project" --desktop "$r7_desktop" "$@"
+  fi
+} 2>&1 | tee "$r7_log"
+r7_exit=${PIPESTATUS[0]}
+set -e
+if [[ "$r7_exit" -ne 0 ]]; then
+  echo "Stopped with exit $r7_exit. Completed checkpoints remain reusable. Return this log: $r7_log"
+fi
+exit "$r7_exit"

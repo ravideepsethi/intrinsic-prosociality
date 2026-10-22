@@ -1,0 +1,144 @@
+import contextlib,io,json,sys,tempfile,unittest
+from pathlib import Path
+from unittest.mock import patch
+
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'code'))
+import run
+from exclusion import *
+from io_tools import *
+from consume import main_files,excluded_games
+
+def fixture(path,prefix='x',no_author=False,pair=('chooser_username_norm','disconnected_username_norm')):
+    path=Path(path);path.parent.mkdir(parents=True,exist_ok=True)
+    left=[' __PRIVATE_VALUE_1__ ','bob','__PRIVATE_VALUE_2__','__PRIVATE_VALUE_3__0','carol']
+    right=['alice','__PRIVATE_VALUE_4__','__PRIVATE_VALUE_5__','__PRIVATE_VALUE_6__0','dave']
+    if no_author:left=['x','bob','x','__PRIVATE_VALUE_7__0','carol'];right=['alice','z','z','__PRIVATE_VALUE_8__0','dave']
+    d=pd.DataFrame(dict(game_id=[prefix+str(i) for i in range(5)],
+        chooser_user_id=[10,30,10,40,50],disconnected_user_id=[20,11,11,41,51],
+        outcome_kind_draw=[1,0,1,1,0],rating=[1800.1]*5,cp=[None,50.,-350.,120.,-10.],
+        engine_cache_marker=['keep_engine']*5,month=['2023-11']*5))
+    d[pair[0]]=left;d[pair[1]]=right
+    d.to_parquet(path,index=False)
+    return dict(family='main_24m',month='2023-11',path=str(path),sha256=sha(path),rows=len(d))
+
+class ExclusionTests(unittest.TestCase):
+    def setUp(self):self.tmp=tempfile.TemporaryDirectory();self.root=Path(self.tmp.name);self.work=self.root/'work'
+    def tearDown(self):self.tmp.cleanup()
+    def audit(self,item):return run.audit_file((item,self.work,'synthetic_test_code'))
+
+    def test_both_roles_case_exact_matching_and_preserved_values(self):
+        item=fixture(self.root/'source.parquet');before=Path(item['path']).read_bytes()
+        r=self.audit(item);s=r['summary']
+        self.assertEqual((s['removed_rows'],s['removed_grants'],s['author_both_rows'],s['kept_rows']),(3,2,1,2))
+        self.assertEqual(s['distinct_other_accounts_in_file'],2)
+        actual=pd.read_parquet(r['main_output']['path']).sort_values('game_id').reset_index(drop=True)
+        expected=pd.read_parquet(item['path']).iloc[[3,4]].reset_index(drop=True)
+        pd.testing.assert_frame_equal(actual,expected)
+        self.assertEqual(before,Path(item['path']).read_bytes())
+        self.assertEqual(self.audit(item),r)
+
+    def test_no_hit_reuses_original_and_empty_index(self):
+        item=fixture(self.root/'source.parquet',no_author=True);r=self.audit(item)
+        self.assertEqual(r['main_output']['path'],str(Path(item['path']).resolve()))
+        self.assertEqual(pq.ParquetFile(r['excluded_games']).metadata.num_rows,0)
+        self.assertEqual(r['summary']['removed_rows'],0)
+
+    def test_changed_cached_output_rejected(self):
+        item=fixture(self.root/'source.parquet');r=self.audit(item)
+        with Path(r['main_output']['path']).open('ab') as f:f.write(b'changed')
+        with self.assertRaisesRegex(RuntimeError,'Completed output changed'):self.audit(item)
+
+    def test_changed_input_rejected(self):
+        item=fixture(self.root/'source.parquet')
+        d=pd.read_parquet(item['path']);d.loc[0,'rating']=2200;d.to_parquet(item['path'],index=False)
+        with self.assertRaisesRegex(RuntimeError,'Input checksum differs'):self.audit(item)
+
+    def test_missing_identity_rejected(self):
+        item=fixture(self.root/'source.parquet');d=pd.read_parquet(item['path']);d.loc[0,'chooser_username_norm']=None
+        d.to_parquet(item['path'],index=False);item['sha256']=sha(item['path'])
+        with self.assertRaisesRegex(RuntimeError,'identity is missing'):self.audit(item)
+        pq.write_table(pa.table({'game_id':['a'],'chooser':[10],'opponent':[11]}),self.root/'numeric.parquet')
+        with self.assertRaisesRegex(RuntimeError,'username fields'):username_pair(self.root/'numeric.parquet')
+
+    def test_numeric_filter_requires_both_resolved_unique_ids(self):
+        for ids in (None,{},dict(__PRIVATE_VALUE_9__=10),dict(__PRIVATE_VALUE_10__=10,__PRIVATE_VALUE_11__=10)):
+            with self.assertRaises(RuntimeError):exact_keep_sql(numeric_columns=['chooser','opponent'],author_ids=ids)
+        c=duckdb.connect()
+        try:
+            q=exact_keep_sql(numeric_columns=['chooser','opponent'],author_ids=dict(__PRIVATE_VALUE_12__=10,__PRIVATE_VALUE_13__=11))
+            n=c.execute('SELECT count(*) FROM (VALUES (10,20),(20,11),(30,40)) s(chooser,opponent) WHERE '+q).fetchone()[0]
+            self.assertEqual(n,1)
+        finally:c.close()
+
+    def test_id_resolution_does_not_invent_or_use_extension_namespace(self):
+        r=dict(summary=dict(family='core_24m'),id_observations=[dict(username='__PRIVATE_VALUE_14__',user_id=10)])
+        ext=dict(summary=dict(family='extension'),id_observations=[dict(username='__PRIVATE_VALUE_15__',user_id=999)])
+        ids=run.resolve_ids(self.root,[r,ext],self.work)
+        self.assertEqual(ids['author_ids'],dict(__PRIVATE_VALUE_16__=10));self.assertEqual(ids['unresolved_usernames'],['__PRIVATE_VALUE_17__'])
+        dp=self.root/'derived/glicko2_replay/user_dictionary_v1/users.parquet';dp.parent.mkdir(parents=True)
+        pq.write_table(pa.table({'username':['__PRIVATE_VALUE_18__','__PRIVATE_VALUE_19__'],'user_id':[10,11]}),dp)
+        ids=run.resolve_ids(self.root,[r],self.work);self.assertEqual(ids['author_ids'],dict(__PRIVATE_VALUE_20__=10,__PRIVATE_VALUE_21__=11))
+        r['id_observations'].append(dict(username='__PRIVATE_VALUE_22__',user_id=12))
+        with self.assertRaisesRegex(RuntimeError,'multiple numeric IDs'):run.resolve_ids(self.root,[r],self.work)
+
+    def test_views_filter_core_and_mixed_extension_schemas(self):
+        results=[]
+        for family,pair in [('core_24m',NAME_PAIRS[0]),('main_24m',NAME_PAIRS[0]),('extension',NAME_PAIRS[2]),('extension',NAME_PAIRS[3])]:
+            item=fixture(self.root/(str(len(results))+'.parquet'),prefix=str(len(results)),pair=pair);item['family']=family
+            results.append(self.audit(item))
+        c=connect(self.work/'temp');index=self.work/'index.parquet'
+        try:copy(c,'SELECT DISTINCT game_id,month FROM '+scan([r['excluded_games'] for r in results]),index)
+        finally:c.close()
+        views=run.create_views(results,index,self.work);c=duckdb.connect(str(views),read_only=True)
+        try:
+            self.assertEqual(c.execute('SELECT count(*) FROM main_24m').fetchone()[0],2)
+            self.assertEqual(c.execute('SELECT count(*) FROM core_24m').fetchone()[0],2)
+            self.assertEqual(c.execute('SELECT count(*) FROM extension').fetchone()[0],4)
+        finally:c.close()
+
+    def test_real_inventory_and_end_to_end_parallel_run(self):
+        # Synthetic authority differs deliberately from the production pins.
+        # Only pin locations/hash are overridden; the production inventory,
+        # spawned worker logic, manifest, report, and consumer all run normally.
+        fake_package=self.root/'package';(fake_package/'authority').mkdir(parents=True)
+        core=[];main=[];originals={}
+        for period in pd.period_range('2023-11','2025-10',freq='M'):
+            month=str(period)
+            cp=self.root/run.CORE/f'month={month}'/'analysis_panel.parquet'
+            mp=self.root/run.MAIN/f'panel/month={month}'/'analysis_panel.parquet'
+            fixture(cp,prefix=month+'_');fixture(mp,prefix=month+'_')
+            core.append(dict(month=month,output_sha256=sha(cp),rows=5))
+            main.append(dict(month=month,relative_path=str(mp.relative_to(self.root/run.MAIN)),rows=5,size_bytes=mp.stat().st_size,sha256=sha(mp)))
+            originals[str(cp)]=sha(cp);originals[str(mp)]=sha(mp)
+        cr=self.root/run.CORE/'_SUCCESS.json';write(cr,dict(monthly_outputs=core))
+        authority=dict(status='SYNTHETIC',main_predicate='SYNTHETIC',contract_sha256='SYNTHETIC',code_sha256={},
+            observed_screen_certified=True,literal_immediate_rematches_certified=False,report_sha256='SYNTHETIC',panel_outputs=main)
+        write(fake_package/'authority/pool_main.json',authority)
+        write(self.root/run.MAIN/'_SUCCESS.json',dict(authority,report_zip_sha256='SYNTHETIC'))
+        for filename in ('AUTHOR_EXCLUSION.json','DOWNSTREAM_REQUIREMENTS.md'):
+            (fake_package/filename).write_bytes((PACKAGE/filename).read_bytes())
+        ep=self.root/'derived/replication_36m/stockfish100k_historical_reuse/month=2025-11/part_000.parquet'
+        fixture(ep,prefix='extension_',pair=NAME_PAIRS[2]);write(ep.with_suffix('.done.json'),dict(error_rows=0,rows=5,part_sha256=sha(ep)))
+        color=self.root/'derived/replication_36m/color_matched_cohort_v100_PRIVATE/matched_all_states.parquet'
+        color.parent.mkdir(parents=True);pd.DataFrame({'game_id':['2023-11_0','2023-11_4']}).to_parquet(color,index=False)
+        desktop=self.root/'desktop';desktop.mkdir()
+        with patch.object(run,'PACKAGE',fake_package),patch.object(run,'CORE_RECEIPT',sha(cr)),patch.object(run,'verify_package',return_value='synthetic_code'):
+            items,missing=run.inventory(self.root);self.assertEqual(len(items),49);self.assertEqual(len(missing),7)
+            self.assertEqual(run.main(['--project',str(self.root),'--desktop',str(desktop),'--workers','2']),0)
+        reports=list((self.root/'output/author_exclusion_v100').glob('AUTHOR_EXCLUSION_RESULT_*'))
+        s=read(reports[0]/'SUMMARY.json')
+        self.assertEqual((s['main_input_rows'],s['main_removed_rows'],s['main_kept_rows']),(120,72,48))
+        self.assertTrue(s['numeric_mapping_complete']);self.assertFalse(s['analytical_results_reestimated'])
+        self.assertEqual(pd.read_csv(reports[0]/'analysis_impact.csv').direct_author_games.tolist(),[1])
+        self.assertEqual(len(main_files(self.root)),24)
+        path=excluded_games(self.root,family='main_24m',months=['2023-11'])
+        self.assertEqual(pq.ParquetFile(path).metadata.num_rows,75)
+        with self.assertRaisesRegex(RuntimeError,'not covered'):excluded_games(self.root,family='extension',months=['2026-01'])
+        for p,h in originals.items():self.assertEqual(sha(p),h)
+        self.assertEqual(len(list(desktop.glob('*.zip'))),1);self.assertEqual(len(list(desktop.glob('*.zip.sha256'))),1)
+        # Tampering with a main receipt is rejected before any filtering.
+        authority['panel_outputs'][0]['rows']=6;write(fake_package/'authority/pool_main.json',authority)
+        with patch.object(run,'PACKAGE',fake_package),patch.object(run,'CORE_RECEIPT',sha(cr)):
+            with self.assertRaisesRegex(RuntimeError,'Monthly main-sample authority differs'):run.inventory(self.root)
+
+if __name__=='__main__':unittest.main(verbosity=2)

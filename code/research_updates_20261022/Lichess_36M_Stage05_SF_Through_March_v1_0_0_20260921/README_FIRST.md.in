@@ -1,0 +1,59 @@
+# Lichess 36-month Stage 05 + Stockfish through March
+
+This package processes the three extension months whose API enrichment is now
+complete:
+
+- 2023-09
+- 2026-01
+- 2026-03
+
+It performs four operations:
+
+1. Authenticates the completed API month receipts, every compact response
+   Parquet, every unit checkpoint, and the corresponding Stage-01 candidate
+   Parquet.
+2. Freezes the exact `status == timeout` game IDs and uses the recovered
+   canonical Stage-05 producer to construct the true behavioral opportunity
+   Parquets.
+3. Produces compact, typed ZSTD Parquet inputs for Stockfish.
+4. Runs Stockfish 18 at 100,000 nodes per position with up to ten one-thread
+   worker processes, in resumable 100,000-row parts.
+
+The package makes no API requests. The existing sequential API collection may
+continue while this package runs.
+
+## Important concurrency rule
+
+Do not run this while another Stockfish job is active on the same Mac. The
+runner checks for existing `stockfish` processes and exits without writing
+production evaluations if it finds any. The API job by itself is not a
+conflict.
+
+## Expected runtime
+
+- Stage-05 authentication and construction: 30–90 minutes.
+- Stockfish pilot: about one minute.
+- Stockfish production: approximately 22–28 hours, depending on the number of
+  timeout opportunities and sustained engine throughput.
+- Total expected wall time: approximately 23–30 hours from zero.
+- Restart after checkpoints exist: completed Stage-05 months, prepared input
+  Parquets, and 100,000-row Stockfish parts are authenticated and skipped.
+
+Expected additional free space: approximately 15–30 GiB.
+
+## Outputs
+
+Large Parquet products remain on the external SSD under:
+
+```text
+/Volumes/XT_Pro/lichess_kindness/derived/replication_36m/
+```
+
+The runner creates a compact result ZIP and SHA-256 sidecar in:
+
+```text
+__PRIVATE_VALUE_1__/Desktop/Lichess_Desktop
+```
+
+Upload those two files when the run completes.
+

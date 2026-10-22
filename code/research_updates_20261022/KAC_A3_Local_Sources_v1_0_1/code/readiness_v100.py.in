@@ -1,0 +1,428 @@
+#!/usr/bin/env python3
+"""Read-only A3 input audit. No behavioral estimates, API calls, or scoring guesses."""
+from __future__ import annotations
+
+import argparse
+from concurrent.futures import ProcessPoolExecutor, as_completed
+from datetime import datetime, timezone
+import fcntl
+import hashlib
+import json
+import multiprocessing as mp
+import os
+from pathlib import Path
+import platform
+import re
+import sys
+import time
+import traceback
+import zipfile
+
+import duckdb
+import pyarrow as pa
+import pyarrow.parquet as pq
+
+PACKAGE = Path(__file__).resolve().parents[1]
+VERSION = '1.0.0'
+ORIGINAL_PROJECT = Path('/Volumes/XT_Pro/lichess_kindness')
+ARENA_REL = Path('output/arena_replication_v102/20260913T202346Z_96523')
+EXPECTED_CONTRACT = '45c0403f0ece80e9d89b5f5627aca5b1e23a898e2e3f9fb7b26bcdf9c4dba905'
+EXPECTED_ROWS = 1892835
+EXCLUDED = ('__PRIVATE_VALUE_1__', '__PRIVATE_VALUE_2__')
+MONTHS = [f'{y}-{m:02}' for y in (2023, 2024, 2025) for m in range(1, 13)
+          if '2023-11' <= f'{y}-{m:02}' <= '2025-10']
+POLICY = {'accounts': list(EXCLUDED), 'match': 'exact lower(trim(name))',
+          'drop': 'analytical games involving either account',
+          'factual_history': 'preserve actual histories, ratings and adjacency'}
+TOUR_RE = r'https?://(?:www\.)?lichess\.org/tournament/([A-Za-z0-9]{8})(?:[^A-Za-z0-9]|$)'
+REQUIRED = ['game_id', 'month', 'chooser_user_id', 'disconnected_user_id',
+            'chooser_username_norm', 'disconnected_username_norm', 'event', 'site',
+            'utc_ms', 'api_last_move_at_ms', 'engine_eval_cp_disconnected',
+            'ply_count', 'api_speed']
+
+
+def sha(path):
+    h = hashlib.sha256()
+    with Path(path).open('rb') as f:
+        for b in iter(lambda: f.read(8 * 1024 * 1024), b''):
+            h.update(b)
+    return h.hexdigest()
+
+
+def signature(path):
+    s = Path(path).stat()
+    return [s.st_size, s.st_mtime_ns, s.st_ino]
+
+
+def digest(value):
+    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+
+
+def write_json(path, value):
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temp = path.with_name(path.name + f'.tmp.{os.getpid()}')
+    temp.write_text(json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + '\n')
+    os.replace(temp, path)
+
+
+def require(ok, message):
+    if not ok:
+        raise RuntimeError(message)
+
+
+def q(x):
+    return "'" + str(x).replace("'", "''") + "'"
+
+
+def ident(x):
+    return '"' + x.replace('"', '""') + '"'
+
+
+def scan(paths):
+    return 'read_parquet([' + ','.join(q(p) for p in paths) + '],hive_partitioning=false)'
+
+
+def log(message):
+    print(datetime.now(timezone.utc).strftime('[%H:%M:%S UTC]'), message, flush=True)
+
+
+def package_identity():
+    path = PACKAGE / 'PACKAGE_MANIFEST.sha256'
+    for line in path.read_text().splitlines():
+        h, name = line.split('  ', 1)
+        f = (PACKAGE / name).resolve()
+        require(f.is_relative_to(PACKAGE), 'Unsafe package manifest entry')
+        require(sha(f) == h, 'Package checksum mismatch: ' + name)
+    return sha(path)
+
+
+def map_path(value, project):
+    p = Path(value)
+    if p.is_relative_to(ORIGINAL_PROJECT):
+        p = project / p.relative_to(ORIGINAL_PROJECT)
+    require(p.resolve().is_relative_to(project.resolve()), 'Input is outside project root')
+    return p
+
+
+def plan_inputs(project, arena):
+    path = arena / 'private/BUILD.json'
+    b = json.loads(path.read_text())
+    require(b.get('status') == 'ARENA_INPUTS_BUILT_AND_CHECKED', 'Arena build is not complete')
+    require(b.get('contract') == EXPECTED_CONTRACT, 'Arena build differs from reviewed contract; do not bypass this check')
+    require(sorted(b.get('months', [])) == MONTHS, 'Arena build does not cover the reviewed 24 months')
+    require(b['totals']['arena_nonadjacent'][0] == EXPECTED_ROWS, 'Original arena row count differs')
+    paths = [map_path(p, project) for p in b['panel_paths']]
+    require(len(paths) == 24 and len(set(paths)) == 24, 'Arena monthly paths are incomplete or duplicated')
+    result = []
+    for m, p in zip(MONTHS, paths):
+        require(p.parent.name == 'month=' + m and p.name == 'analysis_panel.parquet', 'Arena file/month mismatch')
+        require(p.resolve().is_relative_to(arena.resolve()), 'Arena path is not inside the reviewed run')
+        receipt_path = p.parent / '_DONE.json'
+        r = json.loads(receipt_path.read_text())
+        require(r.get('status') == 'ARENA_STAGE_COMPLETE' and r.get('contract') == b['contract'], 'Monthly arena receipt differs')
+        records = [v for v in r['files'] if v['path'] == 'analysis_panel.parquet']
+        require(len(records) == 1, 'Missing unique authenticated arena Parquet record')
+        f = records[0]
+        require(p.stat().st_size == f['bytes'], 'Arena Parquet size differs')
+        require(re.fullmatch('[0-9a-f]{64}', f['sha256']) is not None, 'Invalid arena Parquet hash')
+        result.append({'month': m, 'path': str(p), 'sha256': f['sha256'], 'bytes': f['bytes'],
+                       'receipt_sha256': sha(receipt_path)})
+    return result, {'arena_build_sha256': sha(path), 'arena_contract': b['contract']}
+
+
+def keep_names_sql():
+    names = ','.join(q(n) for n in EXCLUDED)
+    return ' AND '.join(f'lower(trim({ident(c)})) NOT IN ({names})'
+                        for c in ['chooser_username_norm', 'disconnected_username_norm'])
+
+
+def id_sql(field):
+    # A Site game URL and a generic "tournament" label are deliberately not IDs.
+    return f"nullif(regexp_extract(coalesce({ident(field)},''),{q(TOUR_RE)},1),'')"
+
+
+def rows(con, sql):
+    cur = con.execute(sql)
+    return [dict(zip([x[0] for x in cur.description], r)) for r in cur.fetchall()]
+
+
+def conn():
+    c = duckdb.connect(':memory:')
+    c.execute("SET TimeZone='UTC'")
+    c.execute('SET threads=1')
+    c.execute("SET memory_limit='512MB'")
+    c.execute('SET preserve_insertion_order=false')
+    return c
+
+
+def month_job(task):
+    record, cache, key = task
+    p = Path(record['path'])
+    before = signature(p)
+    require(sha(p) == record['sha256'], 'Arena input hash mismatch: ' + record['month'])
+    cache = Path(cache)
+    cache.mkdir(parents=True, exist_ok=True)
+    receipt = cache / 'DONE.json'
+    projection = cache / 'target_keys_PRIVATE.parquet'
+    if receipt.is_file():
+        old = json.loads(receipt.read_text())
+        if old.get('key') == key and projection.is_file() and sha(projection) == old['projection_sha256']:
+            require(signature(p) == before, 'Input changed while reading cached result')
+            return {**old['summary'], 'reused': True, 'projection': str(projection)}
+    schema = pq.read_schema(p)
+    names = schema.names
+    require(set(REQUIRED) <= set(names), 'Missing required fields: ' + str(sorted(set(REQUIRED) - set(names))))
+    c = conn()
+    try:
+        c.execute('CREATE VIEW s AS SELECT * FROM ' + scan([p]))
+        total, unique, wrong_month, unknown_names = c.execute(f'''SELECT count(*), count(DISTINCT game_id),
+          count(*) FILTER(WHERE month IS DISTINCT FROM {q(record['month'])}),
+          count(*) FILTER(WHERE chooser_username_norm IS NULL OR trim(chooser_username_norm)=''
+            OR disconnected_username_norm IS NULL OR trim(disconnected_username_norm)='') FROM s''').fetchone()
+        require(total == unique and wrong_month == 0, 'Game ID or month check failed')
+        require(unknown_names == 0, 'Unresolved names prevent exact author exclusion')
+        c.execute('CREATE VIEW kept AS SELECT * FROM s WHERE ' + keep_names_sql())
+        # Parse only explicit tournament URLs. Contradictory headers stay unresolved.
+        c.execute(f'''CREATE VIEW parsed AS SELECT *, {id_sql('event')} AS event_id,
+          {id_sql('site')} AS site_id FROM kept''')
+        sql = '''SELECT game_id, month, chooser_user_id AS chooser, disconnected_user_id AS opponent,
+          utc_ms AS start_ms, api_last_move_at_ms AS last_move_ms,
+          api_speed AS speed, ply_count AS ply, engine_eval_cp_disconnected AS eval_cp,
+          event_id, site_id,
+          CASE WHEN event_id IS NOT NULL AND site_id IS NOT NULL AND event_id<>site_id
+            THEN NULL ELSE coalesce(event_id,site_id) END AS tournament_id,
+          (event_id IS NOT NULL AND site_id IS NOT NULL AND event_id<>site_id) AS id_conflict
+          FROM parsed'''
+        temp = projection.with_suffix('.pending.parquet')
+        c.execute(f'COPY ({sql}) TO {q(temp)} (FORMAT PARQUET, COMPRESSION ZSTD)')
+        os.replace(temp, projection)
+        c.execute('CREATE VIEW target AS SELECT * FROM ' + scan([projection]))
+        summary = rows(c, '''SELECT count(*) AS kept_rows,
+          count(*) FILTER(WHERE tournament_id IS NOT NULL) AS rows_with_explicit_tournament_id,
+          count(*) FILTER(WHERE id_conflict) AS conflicting_header_rows,
+          count(*) FILTER(WHERE event_id IS NOT NULL) AS event_id_rows,
+          count(*) FILTER(WHERE site_id IS NOT NULL) AS site_id_rows,
+          count(DISTINCT tournament_id) AS distinct_tournaments_in_month,
+          count(*) FILTER(WHERE eval_cp>=-100 AND ply>10) AS late_competitive_rows,
+          count(*) FILTER(WHERE eval_cp<=-300 AND ply>10) AS late_losing_rows,
+          count(*) FILTER(WHERE start_ms IS NULL) AS missing_starts,
+          count(*) FILTER(WHERE last_move_ms IS NULL) AS missing_last_move_proxy FROM target''')[0]
+        candidates = {group: [n for n in names if pattern.search(n)] for group, pattern in {
+            'title': re.compile(r'title', re.I),
+            'berserk': re.compile(r'berserk', re.I),
+            'tournament': re.compile(r'tournament|arena', re.I),
+            'completion': re.compile(r'finish|ended|completion|last_move', re.I),
+            'score_or_streak': re.compile(r'streak|score|standing', re.I)}.items()}
+        summary.update({'month': record['month'], 'input_rows': total,
+                        'excluded_author_game_rows': total - summary['kept_rows'],
+                        'input_sha256': record['sha256'], 'schema': str(schema),
+                        'candidate_columns': candidates,
+                        'column_presence_certifies_semantics': False})
+        require(signature(p) == before, 'Arena input changed during audit')
+        write_json(receipt, {'key': key, 'summary': summary, 'projection_sha256': sha(projection)})
+        return {**summary, 'projection': str(projection), 'reused': False}
+    finally:
+        c.close()
+
+
+def inventory_assets(project, arena, max_files=40000):
+    """Bounded filename/footer inventory; discovers candidates, never adopts them."""
+    answer, seen, examined, stopped = [], set(), 0, False
+    pattern = re.compile(r'arena|tournament|berserk|scoresheet|scoring_history|author_exclusion', re.I)
+    skip = {'raw', '.git', 'venv', '__pycache__', 'node_modules', 'work', 'tmp', 'responses'}
+    for base in (project/'derived', project/'output'):
+        if not base.exists():
+            continue
+        for root, dirs, files in os.walk(base):
+            dirs[:] = sorted(d for d in dirs if d not in skip and not d.endswith('.pending'))
+            if Path(root).is_relative_to(arena) or 'kac_a3_readiness' in root.lower():
+                dirs[:] = []
+                continue
+            for name in sorted(files):
+                examined += 1
+                if examined > max_files:
+                    stopped = True
+                    break
+                f = Path(root)/name
+                if f.suffix.lower() not in ('.parquet', '.json', '.jsonl', '.ndjson'):
+                    continue
+                rel = str(f.relative_to(project))
+                if not pattern.search(rel) or rel in seen:
+                    continue
+                seen.add(rel)
+                item = {'relative_path': rel, 'bytes': f.stat().st_size, 'kind': f.suffix,
+                        'rows': None, 'columns_json': None, 'footer_error': None}
+                if f.suffix == '.parquet':
+                    try:
+                        pf = pq.ParquetFile(f)
+                        item.update(rows=pf.metadata.num_rows, columns_json=json.dumps(pf.schema_arrow.names))
+                    except Exception as e:
+                        item['footer_error'] = type(e).__name__
+                answer.append(item)
+            if stopped:
+                break
+        if stopped:
+            break
+    return answer, {'files_examined': examined, 'limit_reached': stopped,
+                    'scope': 'bounded filename/footer scan of derived and output, excluding response shards and workdirs',
+                    'exhaustive_absence_claim': False}
+
+
+def export_table(con, sql, base):
+    for ext, options in [('parquet', 'FORMAT PARQUET, COMPRESSION ZSTD'), ('csv', 'HEADER')]:
+        con.execute(f'COPY ({sql}) TO {q(str(base)+"."+ext)} ({options})')
+
+
+def aggregate(monthly, report, private):
+    c = conn()
+    try:
+        c.execute('CREATE VIEW t AS SELECT * FROM ' + scan([v['projection'] for v in monthly]))
+        n, unique = c.execute('SELECT count(*),count(DISTINCT game_id) FROM t').fetchone()
+        require(n == unique, 'Duplicate game IDs across months')
+        export_table(c, '''SELECT month,speed,
+          CASE WHEN eval_cp>=-100 THEN 'competitive' WHEN eval_cp<=-300 THEN 'clearly_losing'
+            ELSE 'intermediate_or_missing' END AS state,
+          CASE WHEN ply>10 THEN 'after_ply_10' ELSE 'early_or_missing' END AS stage,
+          count(*) AS opportunities, count(*) FILTER(WHERE tournament_id IS NOT NULL) AS with_tournament_id,
+          count(*) FILTER(WHERE id_conflict) AS header_conflicts FROM t GROUP BY ALL ORDER BY ALL''', report/'coverage')
+        export_table(c, '''WITH cells AS (SELECT chooser,tournament_id,count(*) AS n FROM t
+          WHERE tournament_id IS NOT NULL GROUP BY 1,2)
+          SELECT count(*) AS chooser_tournament_cells,
+          count(*) FILTER(WHERE n>=2) AS cells_with_multiple_observed_opportunities,
+          coalesce(sum(n) FILTER(WHERE n>=2),0) AS opportunities_in_multiple_opportunity_cells
+          FROM cells''', report/'cell_support_before_price')
+        c.execute(f'''COPY (SELECT tournament_id,count(*) AS opportunity_rows, min(start_ms) AS first_observed_start_ms,
+          max(start_ms) AS last_observed_start_ms FROM t WHERE tournament_id IS NOT NULL
+          GROUP BY 1 ORDER BY 1) TO {q(private/'tournament_targets_PRIVATE.parquet')}
+          (FORMAT PARQUET, COMPRESSION ZSTD)''')
+        total = rows(c, '''SELECT count(*) AS opportunities,
+          count(*) FILTER(WHERE tournament_id IS NOT NULL) AS with_tournament_id,
+          count(DISTINCT tournament_id) AS distinct_tournaments FROM t''')[0]
+        return total
+    finally:
+        c.close()
+
+
+def make_report_zip(report, report_dir):
+    entries = [{'path': str(p.relative_to(report)), 'sha256': sha(p)}
+               for p in sorted(report.rglob('*')) if p.is_file() and p.name != 'MANIFEST.json']
+    write_json(report/'MANIFEST.json', {'files': entries})
+    report_dir.mkdir(parents=True, exist_ok=True)
+    z = report_dir/(report.name+'.zip')
+    with zipfile.ZipFile(z, 'w', zipfile.ZIP_DEFLATED) as f:
+        for p in sorted(report.rglob('*')):
+            if p.is_file():
+                f.write(p, Path(report.name)/p.relative_to(report))
+    z.with_suffix('.zip.sha256').write_text(sha(z)+'  '+z.name+'\n')
+    log('Result: '+str(z))
+    return z
+
+
+def run(args):
+    start = time.monotonic()
+    project = Path(args.project).expanduser().resolve()
+    require(project.is_dir(), 'Project volume is not mounted: '+str(project))
+    arena = project/ARENA_REL
+    work = project/'derived/replication/kac_a3_readiness_v100_PRIVATE'
+    work.mkdir(parents=True, exist_ok=True)
+    lock = (work/'run.lock').open('a+')
+    fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
+    report = project/'output/kac_a3_readiness_v100'/('KAC_A3_READINESS_RESULT_'+stamp)
+    report.mkdir(parents=True)
+    status = {'version': VERSION, 'status': 'RUNNING', 'behavioral_estimate_produced': False,
+              'tournament_cost_measured': False, 'API_requests': 0, 'engine_evaluations': 0,
+              'author_policy_sha256': digest(POLICY), 'author_exclusion_applied_to_both_roles': False,
+              'existing_estimates_refreshed': False,
+              'python': sys.version, 'platform': platform.platform(),
+              'duckdb': duckdb.__version__, 'pyarrow': pa.__version__}
+    failures = []
+    try:
+        package_hash = package_identity()
+        records, lineage = plan_inputs(project, arena)
+        status.update(lineage)
+        status['package_manifest_sha256'] = package_hash
+        workers = min(max(1, args.workers), 10, os.cpu_count() or 1, len(records))
+        status['workers'] = workers
+        contract = digest({'package': package_hash, 'inputs': records, 'policy': POLICY})
+        private = work/contract[:20]
+        private.mkdir(exist_ok=True)
+        write_json(private/'INPUTS.json', {'records': records, 'contract': contract, 'author_policy': POLICY, **lineage})
+        tasks = [(r, str(private/('month='+r['month'])), digest({'record': r, 'contract': contract})) for r in records]
+        monthly = []
+        log(f'Auditing 24 existing arena Parquets with {workers} workers; expected 2–10 minutes on SSD')
+        with ProcessPoolExecutor(max_workers=workers, mp_context=mp.get_context('spawn')) as ex:
+            future = {ex.submit(month_job, t): t[0]['month'] for t in tasks}
+            for f in as_completed(future):
+                m = future[f]
+                try:
+                    result = f.result()
+                    monthly.append(result)
+                    log(f'{m}: {result["kept_rows"]:,} retained; {result["rows_with_explicit_tournament_id"]:,} with explicit tournament URL'+(' (reused)' if result['reused'] else ''))
+                except Exception as e:
+                    failures.append({'month': m, 'error': str(e)})
+                    log(m+': audit blocked; other completed months retained')
+        monthly.sort(key=lambda r: r['month'])
+        public_months = [{k:v for k,v in r.items() if k != 'projection'} for r in monthly]
+        write_json(report/'monthly_audit.json', public_months)
+        if monthly:
+            pa_rows = [{k:v for k,v in r.items() if not isinstance(v,(dict,list)) and k != 'schema'} for r in public_months]
+            pq.write_table(pa.Table.from_pylist(pa_rows), report/'monthly_audit.parquet', compression='zstd')
+        require(not failures, 'Some monthly audits failed; see month_failures.json')
+        require(sum(x['input_rows'] for x in monthly) == EXPECTED_ROWS, 'Authenticated original arena count differs')
+        status['coverage'] = aggregate(monthly, report, private)
+        status['author_exclusion_applied_to_both_roles'] = True
+        status['excluded_author_game_rows'] = sum(x['excluded_author_game_rows'] for x in monthly)
+        assets, scope = inventory_assets(project, arena)
+        write_json(report/'candidate_asset_inventory.json', {'scope': scope, 'files': assets})
+        asset_schema = pa.schema([('relative_path',pa.string()),('bytes',pa.int64()),('kind',pa.string()),
+                                 ('rows',pa.int64()),('columns_json',pa.string()),('footer_error',pa.string())])
+        pq.write_table(pa.Table.from_pylist(assets,schema=asset_schema),report/'candidate_assets.parquet',compression='zstd')
+        ready_path = project/'derived/replication/author_exclusion_v100_PRIVATE/AUTHOR_EXCLUDED_MAIN_READY_PRIVATE.json'
+        status['separate_author_exclusion_manifest_present'] = ready_path.is_file()
+        status['separate_author_exclusion_manifest_authenticated_by_this_audit'] = False
+        status['status'] = 'READINESS_AUDIT_COMPLETE_PRICE_ESTIMATION_NOT_RUN'
+        status['remaining_requirements'] = [
+            'Reconcile missing/conflicting tournament IDs before choosing an acquisition frame.',
+            'Authenticate complete per-player tournament game sequences, including ordinary endings.',
+            'Authenticate per-game berserk flags and tournament options, including streak and berserk enablement.',
+            'Pin 2023–2025 scoring rules, move-count thresholds, and historical claim availability.',
+            'Establish tournament deadlines and scoring eligibility at the decision; lastMoveAt is not a completion time.',
+            'Validate replayed tournament scores against score sheets before constructing claim/draw point differences.',
+            'Count within-chooser-by-tournament price variation and freeze inference/power before outcome models.',
+            'Keep the existing observed-nonadjacent sample as the primary reuse sample; broader arenas are a separately declared sensitivity.'
+        ]
+    except Exception as e:
+        status['status'] = 'READINESS_AUDIT_BLOCKED_COMPLETED_MONTHS_PRESERVED'
+        status['error'] = str(e)
+        (report/'ERROR.txt').write_text(traceback.format_exc())
+        log('Stopped: '+str(e))
+    finally:
+        write_json(report/'month_failures.json', failures)
+        status['elapsed_seconds'] = time.monotonic()-start
+        write_json(report/'SUMMARY.json', status)
+        (report/'READ_ME_FIRST.txt').write_text(
+            'This is an A3 input-readiness audit, not an estimated price effect.\n'
+            'Read SUMMARY.json first. A completed audit does not certify scoring histories.\n'
+            'Coverage and cell-support tables contain no grant outcomes. Multiple observations in a cell do not establish price variation.\n'
+            'Header IDs require explicit tournament URLs; source=arena and Site game IDs are insufficient.\n'
+            'Candidate assets/columns are leads only, not approved semantic mappings or a complete disk inventory.\n'
+            'Private game/account keys and tournament targets remain on the Mac, outside this ZIP.\n'
+            'Do not rerun upstream engine, rating or API jobs in response to an absent field alone.\n')
+        make_report_zip(report, Path(args.report_dir).expanduser())
+        fcntl.flock(lock, fcntl.LOCK_UN)
+        lock.close()
+    return 0 if status['status'].startswith('READINESS_AUDIT_COMPLETE') else 2
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--project', default=str(ORIGINAL_PROJECT))
+    parser.add_argument('--report-dir', default=str(Path.home()/'Desktop/Lichess_Desktop'))
+    parser.add_argument('--workers', type=int, default=10)
+    return run(parser.parse_args())
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

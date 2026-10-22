@@ -1,0 +1,36 @@
+#!/bin/bash
+set -euo pipefail
+task_package="$(cd "$(dirname "$0")" && pwd)"
+task_desktop="$HOME/Desktop/Lichess_Desktop"
+mkdir -p "$task_desktop"
+cd "$task_package"
+/usr/bin/shasum -a 256 -c PACKAGE_MANIFEST.sha256
+task_python="${ARENA_PYTHON:-python3}"
+if ! "$task_python" - <<'PY' >/dev/null 2>&1
+import sys, importlib.metadata
+assert sys.version_info >= (3,10)
+for name, minimum in [('numpy',(1,24)),('pandas',(2,0)),('scipy',(1,10)),
+                      ('duckdb',(1,4)),('pyarrow',(14,0)),('matplotlib',(3,7))]:
+    version=tuple(int(x) for x in importlib.metadata.version(name).split('.')[:2])
+    assert version >= minimum
+    if name=='duckdb':assert version < (2,0)
+import numpy,pandas,scipy,duckdb,pyarrow,matplotlib
+PY
+then
+    task_venv="$task_desktop/arena_replication_venv_v102"
+    if [ ! -x "$task_venv/bin/python" ]; then
+        python3 -m venv "$task_venv"
+    fi
+    task_python="$task_venv/bin/python"
+    "$task_python" -m pip install --disable-pip-version-check -r "$task_package/requirements.txt"
+fi
+"$task_python" -c 'import sys; sys.exit("Python 3.10 or newer is required") if sys.version_info < (3,10) else None'
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1
+export PYTHONUNBUFFERED=1 MPLBACKEND=Agg
+"$task_python" "$task_package/run.py" --self-test
+"$task_python" "$task_package/run.py" \
+    --project "${ARENA_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}" \
+    --report-dir "$task_desktop" \
+    --workers "${ARENA_WORKERS:-10}" \
+    --threads "${ARENA_THREADS:-10}" \
+    --memory "${ARENA_DUCKDB_MEMORY:-6GB}" "$@"

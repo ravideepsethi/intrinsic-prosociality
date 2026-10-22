@@ -1,0 +1,35 @@
+#!/bin/bash
+set -euo pipefail
+STAKES_PACKAGE="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+STAKES_PROJECT="${STAKES_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+STAKES_DESKTOP="${STAKES_DESKTOP_DIR:-$HOME/Desktop/Lichess_Desktop}"
+if [[ ! -d "$STAKES_PROJECT" ]]; then
+  echo "Project directory not found: $STAKES_PROJECT" >&2
+  exit 1
+fi
+mkdir -p "$STAKES_DESKTOP"
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1
+STAKES_PY=""
+shopt -s nullglob
+STAKES_CANDIDATES=("${STAKES_PYTHON:-}" "$STAKES_PROJECT/venv/bin/python" "$STAKES_PACKAGE/.venv/bin/python" "$STAKES_DESKTOP"/*/.venv/bin/python)
+for STAKES_CANDIDATE in "${STAKES_CANDIDATES[@]}"; do
+  if [[ -x "$STAKES_CANDIDATE" ]] && "$STAKES_CANDIDATE" -c 'import sys,numpy,pandas,pyarrow,duckdb,matplotlib; assert sys.version_info >= (3,10); assert tuple(map(int,duckdb.__version__.split(".")[:2])) == (1,5)' >/dev/null 2>&1; then
+    STAKES_PY="$STAKES_CANDIDATE"
+    break
+  fi
+done
+if [[ -z "$STAKES_PY" ]]; then
+  echo "Creating an isolated environment inside this package."
+  python3 -m venv "$STAKES_PACKAGE/.venv"
+  "$STAKES_PACKAGE/.venv/bin/python" -m pip install -r "$STAKES_PACKAGE/requirements.txt"
+  STAKES_PY="$STAKES_PACKAGE/.venv/bin/python"
+fi
+"$STAKES_PY" -m unittest discover -s "$STAKES_PACKAGE/tests" -p 'test_*.py' -q
+STAKES_LOG="$STAKES_DESKTOP/STAKES_RUN_$(date -u +%Y%m%dT%H%M%SZ).log"
+echo "Log: $STAKES_LOG"
+echo "Uses existing local files; expect hours, with restart checkpoints."
+if [[ -x /usr/bin/caffeinate ]]; then
+  /usr/bin/caffeinate -i "$STAKES_PY" -u "$STAKES_PACKAGE/code/run.py" --project-root "$STAKES_PROJECT" --desktop "$STAKES_DESKTOP" "$@" 2>&1 | tee "$STAKES_LOG"
+else
+  "$STAKES_PY" -u "$STAKES_PACKAGE/code/run.py" --project-root "$STAKES_PROJECT" --desktop "$STAKES_DESKTOP" "$@" 2>&1 | tee "$STAKES_LOG"
+fi

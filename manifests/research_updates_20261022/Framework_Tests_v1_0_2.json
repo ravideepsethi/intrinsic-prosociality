@@ -1,0 +1,129 @@
+{
+  "package": "Framework_Tests_v1_0_2",
+  "archive_name": "Framework_Tests_v1_0_2.zip",
+  "archive_sha256": "7347c2183a61b9e2888f8c8c749115359671e337298c2ec21dac42a1516a0c49",
+  "archive_size": 60189,
+  "archive_root": "Framework_Tests_v1_0_2",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "METHODS_CORRECTIONS.md",
+      "published_path": "METHODS_CORRECTIONS.md",
+      "sha256": "8a62932745f4b340dbde66a25a5d2155b240d84d535adf2c2a86b7334321e745",
+      "published_sha256": "8a62932745f4b340dbde66a25a5d2155b240d84d535adf2c2a86b7334321e745",
+      "size": 8411
+    },
+    {
+      "path": "README.md",
+      "published_path": "README.md",
+      "sha256": "cf890a1bb1362bbee4d47e299d13ebaa913ac3c0bfc77ab6da9378ebadea09fc",
+      "published_sha256": "cf890a1bb1362bbee4d47e299d13ebaa913ac3c0bfc77ab6da9378ebadea09fc",
+      "size": 9402
+    },
+    {
+      "path": "README_F.md",
+      "published_path": "README_F.md",
+      "sha256": "29b8d5262bc17f9ff8993c7fa8c89f89cdf8785a506bfb253ee8caa52a2ee222",
+      "published_sha256": "29b8d5262bc17f9ff8993c7fa8c89f89cdf8785a506bfb253ee8caa52a2ee222",
+      "size": 7539
+    },
+    {
+      "path": "RUN_A1.command",
+      "published_path": "RUN_A1.command.in",
+      "sha256": "0914b71dc84fc2a80362421290e52c475638065dad30dca25116ab9387aa9cc7",
+      "published_sha256": "0914b71dc84fc2a80362421290e52c475638065dad30dca25116ab9387aa9cc7",
+      "size": 392
+    },
+    {
+      "path": "RUN_BC.command",
+      "published_path": "RUN_BC.command.in",
+      "sha256": "b74505e8e8760ad4ba6f96290d0cb8d418d05102923433482e896cee6503b638",
+      "published_sha256": "b74505e8e8760ad4ba6f96290d0cb8d418d05102923433482e896cee6503b638",
+      "size": 1478
+    },
+    {
+      "path": "RUN_E_GROUPS.command",
+      "published_path": "RUN_E_GROUPS.command.in",
+      "sha256": "f5d69a89c99a52adcce9802ac5aff66af5d3108f3439576228fe39d4d7f80a68",
+      "published_sha256": "f5d69a89c99a52adcce9802ac5aff66af5d3108f3439576228fe39d4d7f80a68",
+      "size": 471
+    },
+    {
+      "path": "RUN_F.command",
+      "published_path": "RUN_F.command.in",
+      "sha256": "9206f1423a8ca4e32a7605f63ef3dfd5ff21f509251cbc2c7e288d0f2f9ea91b",
+      "published_sha256": "9206f1423a8ca4e32a7605f63ef3dfd5ff21f509251cbc2c7e288d0f2f9ea91b",
+      "size": 1435
+    },
+    {
+      "path": "handoff_framework_tests_v2.md",
+      "published_path": "handoff_framework_tests_v2.md",
+      "sha256": "e5a139f0f78f95aac32866833cbfe796f2751863be3f5a721860e1a424668416",
+      "published_sha256": "e5a139f0f78f95aac32866833cbfe796f2751863be3f5a721860e1a424668416",
+      "size": 25500
+    },
+    {
+      "path": "src/build_a_flag_inventory.py",
+      "published_path": "src/build_a_flag_inventory.py",
+      "sha256": "0c708734fa8990110ca6b229c9fca40eb4cd44eb6be5f788cb0f49caeb12851a",
+      "published_sha256": "0c708734fa8990110ca6b229c9fca40eb4cd44eb6be5f788cb0f49caeb12851a",
+      "size": 5910
+    },
+    {
+      "path": "src/build_e_groups.py",
+      "published_path": "src/build_e_groups.py",
+      "sha256": "d334c4dbe949a6983b356f640bcbfcd86f28955eef3f660975b1b28d6f477ee0",
+      "published_sha256": "d334c4dbe949a6983b356f640bcbfcd86f28955eef3f660975b1b28d6f477ee0",
+      "size": 6165
+    },
+    {
+      "path": "src/methods.py",
+      "published_path": "src/methods.py",
+      "sha256": "aff1964fb73c1c2864866d5ce3744577d0dd50d34fa0a111c3467317c53976fa",
+      "published_sha256": "aff1964fb73c1c2864866d5ce3744577d0dd50d34fa0a111c3467317c53976fa",
+      "size": 9202
+    },
+    {
+      "path": "src/run_bc.py",
+      "published_path": "src/run_bc.py",
+      "sha256": "b169e03b4ed5f32fae854cbe55b47406e7c198b17222203e50e16aa124318981",
+      "published_sha256": "b169e03b4ed5f32fae854cbe55b47406e7c198b17222203e50e16aa124318981",
+      "size": 25758
+    },
+    {
+      "path": "src/run_f.py",
+      "published_path": "src/run_f.py",
+      "sha256": "7a29d8516e31b75807076452172b2312d52cb31f33ef8bb9b28920d5a7787701",
+      "published_sha256": "7a29d8516e31b75807076452172b2312d52cb31f33ef8bb9b28920d5a7787701",
+      "size": 33241
+    },
+    {
+      "path": "tests/test_f_collinearity.py",
+      "published_path": "tests/test_f_collinearity.py",
+      "sha256": "ea269e855ee3d6c544792b5da38c7a9a226d5803b79de78234bd80c8bd12b886",
+      "published_sha256": "ea269e855ee3d6c544792b5da38c7a9a226d5803b79de78234bd80c8bd12b886",
+      "size": 2887
+    },
+    {
+      "path": "tests/test_f_synthetic.py",
+      "published_path": "tests/test_f_synthetic.py",
+      "sha256": "db97a1af33dd247925df3c6c9437322cfd2933fb9d0cc2e616860101dc7c8ce8",
+      "published_sha256": "db97a1af33dd247925df3c6c9437322cfd2933fb9d0cc2e616860101dc7c8ce8",
+      "size": 3708
+    },
+    {
+      "path": "tests/test_synthetic.py",
+      "published_path": "tests/test_synthetic.py",
+      "sha256": "2a3108db6febc58391c3a2d37501e06e0202b45786e14fb0a2ce5ab80edacd80",
+      "published_sha256": "2a3108db6febc58391c3a2d37501e06e0202b45786e14fb0a2ce5ab80edacd80",
+      "size": 2405
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "PACKAGE_FILES_SHA256.txt",
+      "sha256": "14ed734fc07f8071346cc9937872120ee9f0e4f75ade7ea4c4d5f5fea341dc0d",
+      "size": 1369
+    }
+  ]
+}

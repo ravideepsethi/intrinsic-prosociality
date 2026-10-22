@@ -1,0 +1,76 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+shopt -s nullglob
+task_bundle="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+task_project="${EQUAL_CHOOSER_PROJECT:-/Volumes/XT_Pro/lichess_kindness}"
+task_source="${EQUAL_CHOOSER_SOURCE:-$task_project/derived/replication/pool_chooser_support_v100_PRIVATE}"
+task_transfer="${EQUAL_CHOOSER_TRANSFER:-$HOME/Desktop/Lichess_Desktop}"
+fail() { printf 'STOP: %s\n' "$*" >&2; exit 1; }
+[[ -d "$task_project" ]] || fail "Project folder not found; connect XT_Pro: $task_project"
+[[ -f "$task_source/chooser_counts_private.parquet" ]] || fail "Verified chooser census not found: $task_source"
+mkdir -p "$task_transfer"
+cd "$task_bundle"
+shasum -a 256 -c PACKAGE_MANIFEST.sha256 || fail "Package checksum verification failed."
+export PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 MPLBACKEND=Agg
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
+export VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1
+export PYTHONPATH="$task_bundle${PYTHONPATH:+:$PYTHONPATH}"
+task_python=""
+task_base_python=""
+if [[ -n "${EQUAL_CHOOSER_PYTHON:-}" ]]; then
+  task_candidates=("$EQUAL_CHOOSER_PYTHON")
+else
+  task_candidates=(
+    "$task_transfer"/equal_chooser_python.*/bin/python
+    "$task_transfer"/chooser_support_python.*/bin/python
+    "$task_transfer"/pool_main_wave1_python.*/bin/python
+    "$task_transfer"/pool_main_wave2b1_python.*/bin/python
+    "$task_transfer"/pool_main_wave2a_python.*/bin/python
+    "$task_transfer"/rd_marker_python.*/bin/python
+    "$task_project/venv/bin/python" "$task_project/.venv/bin/python"
+    "${CONDA_PREFIX:-/nonexistent}/bin/python" "${VIRTUAL_ENV:-/nonexistent}/bin/python"
+    "$HOME/miniforge3/bin/python" "$HOME/miniconda3/bin/python" "$HOME/anaconda3/bin/python"
+    /opt/anaconda3/bin/python /opt/homebrew/bin/python3 /usr/local/bin/python3
+    "$(command -v python3 || true)" "$(command -v python || true)"
+  )
+fi
+for task_candidate in "${task_candidates[@]}"; do
+  [[ -n "$task_candidate" && -x "$task_candidate" ]] || continue
+  if "$task_candidate" -B - <<'PY' >/dev/null 2>&1
+import sys
+assert sys.version_info >= (3, 11)
+from runner.common import verify_runtime_dependencies
+verify_runtime_dependencies()
+PY
+  then
+    task_python="$task_candidate"
+    break
+  fi
+  if [[ -z "$task_base_python" ]] && "$task_candidate" -c 'import sys,venv; assert sys.version_info >= (3,11)' >/dev/null 2>&1; then
+    task_base_python="$task_candidate"
+  fi
+done
+if [[ -z "$task_python" ]]; then
+  [[ -n "$task_base_python" ]] || fail "No usable Python 3.11+ found. Set EQUAL_CHOOSER_PYTHON to an absolute interpreter path."
+  task_environment="$(mktemp -d "$task_transfer/equal_chooser_python.XXXXXX")"
+  "$task_base_python" -m venv "$task_environment"
+  task_python="$task_environment/bin/python"
+  "$task_python" -I -m pip --disable-pip-version-check --require-virtualenv install --only-binary=:all: --no-user -r "$task_bundle/requirements.lock.txt"
+fi
+printf 'Python: %s\n' "$task_python"
+"$task_python" -B -u -m runner.self_test
+printf '\nStarting equal-chooser and inverse-count FE comparison.\n'
+printf 'Expected runtime: approximately 15–45 seconds with the existing census and environment.\n'
+printf 'Source census: %s\n' "$task_source"
+printf 'Results root: %s\n' "$task_project/output/pool_equal_chooser_desert_v100"
+task_command=("$task_python" -B -u -m runner.run
+  --project-root "$task_project" --source-root "$task_source" --transfer-root "$task_transfer"
+  --threads "${EQUAL_CHOOSER_THREADS:-8}"
+)
+task_command+=("$@")
+if command -v caffeinate >/dev/null 2>&1; then
+  caffeinate -dimsu "${task_command[@]}"
+else
+  "${task_command[@]}"
+fi

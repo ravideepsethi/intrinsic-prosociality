@@ -1,0 +1,254 @@
+"""R8-1: fixed August outcomes, author-clean histories, explicit flag selection."""
+from r8_util import *
+import sys,gc
+sys.path.insert(0,str(ROOT/'vendor_patron'))
+sys.path.insert(0,str(ROOT/'vendor_patron/source'))
+from runner import run as core
+
+CORE_CONF='9a64f1f9b8f87d62f10a5584937c44909a7a262601c2d6c7ec1751c7b67205bb'
+FAIR='ever_kind_fair_state';LOST='ever_kind_clearly_worse_state'
+
+def four_groups(d):
+    return np.select([d[FAIR].astype(bool)&~d[LOST].astype(bool),
+        ~d[FAIR].astype(bool)&d[LOST].astype(bool),d[FAIR].astype(bool)&d[LOST].astype(bool)],
+        ['fair_only','clearly_worse_only','both'],default='neither')
+
+def flags(d):
+    return d['tos_violation'].eq(True).fillna(False).astype(bool)|d['disabled'].eq(True).fillna(False).astype(bool)
+
+def features(frame):
+    known=frame.loc[frame['returned'].astype(bool)].copy()
+    require(known['patron'].notna().all(),'A returned profile has unknown Patron outcome')
+    require(known['patron'].isin([True,False,0,1]).all(),'Patron indicator is nonbinary')
+    return core.models.prepare_features(known)
+
+def samples(d):
+    return (d.loc[d['group_ever_kind_fair'].astype(bool)&d['group_kind_returned'].astype(bool)],
+        d.loc[(d['fair_opps']>=4)&(d['clearly_worse_opps']>=4)])
+
+def compact(d,groups):
+    names=list(dict.fromkeys(groups['all']+[FAIR,LOST,'log_fair_opps','log_clearly_worse_opps',
+        'patron','patron_pp','is_kind_role','match_cell','fair_opps','clearly_worse_opps',
+        'group_ever_kind_fair','group_kind_returned','tos_violation','disabled']))
+    return d[names].copy()
+
+def controls(groups):
+    cs=list(dict.fromkeys(['log_fair_opps','log_clearly_worse_opps']+groups['all']))
+    std=[c for c in cs if c in groups['standardize']+['log_clearly_worse_opps']]
+    return cs,std
+
+def models(d,groups,prefix,collector):
+    main,state=samples(d);cs,std=controls(groups)
+    for cov in ('HC1','CR1'):
+        collector.run(main,name=prefix+'_PanelA_FE_'+cov,regressors=['is_kind_role'],standardize=[],covariance=cov)
+        collector.run(main,name=prefix+'_PanelA_full_'+cov,regressors=['is_kind_role']+groups['all'],
+            standardize=groups['standardize'],covariance=cov)
+        collector.run(state,name=prefix+'_PanelB_full_'+cov,regressors=[FAIR,LOST]+cs,
+            standardize=std,covariance=cov,differences=[(FAIR,LOST,'fair_minus_clearly_worse')])
+    return main,state
+
+def baseline(frame,folder,key):
+    if verify_cached(folder,key):return
+    folder.mkdir(parents=True,exist_ok=True)
+    d,groups,_=features(frame);d=compact(d,groups);gc.collect()
+    collector=core.models.ModelCollector();main,state=models(d,groups,'baseline',collector)
+    require((len(main),main['match_cell'].nunique(),len(state),state['match_cell'].nunique())==(851131,36,599045,24),
+        'Archived August-only Panel A/B sample or cell count did not reproduce')
+    want=load(ROOT/'evidence/patron_authority.json');coef=pd.concat(collector.coefficients,ignore_index=True)
+    checks=[]
+    for label,model,term in [('primary_adjusted_clustered','baseline_PanelA_full_CR1','is_kind_role'),
+        ('state_fair_clustered','baseline_PanelB_full_CR1',FAIR),('state_clearly_worse_clustered','baseline_PanelB_full_CR1',LOST)]:
+        r=coef.loc[(coef.model==model)&(coef.variable==term)].iloc[0]
+        for field in ('coefficient_pp','se_pp'):
+            passed=bool(np.isclose(r[field],float(want[label][field]),rtol=3e-6,atol=2e-8))
+            checks.append(dict(model=model,term=term,field=field,observed=r[field],expected=float(want[label][field]),passed=passed))
+    contrast=next(r for r in collector.contrasts if r['model']=='baseline_PanelB_full_CR1')
+    for field in ('difference_pp','se_pp'):
+        expected=float(want['state_contrast_clustered'][field]);observed=contrast[field]
+        checks.append(dict(model=contrast['model'],term='fair_minus_clearly_worse',field=field,
+            observed=observed,expected=expected,passed=bool(np.isclose(observed,expected,rtol=3e-6,atol=2e-8))))
+    raw=core.models.raw_row(main,'baseline','is_kind_role','baseline_reproduction_only')
+    for field in ('treated_n','control_n','treated_successes','control_successes'):
+        expected=int(want['primary_raw'][field]);require(int(raw[field])==expected,'Archived Panel C raw count differs: '+field)
+    table(folder,'reproduction',checks);require(all(r['passed'] for r in checks),'Patron baseline reproduction failed; no R8 fits authorized by this gate')
+    table(folder,'baseline_coefficients',coef);table(folder,'baseline_contrasts',collector.contrasts)
+    save(folder/'summary.json',dict(passed=True,panelA_n=len(main),panelB_n=len(state),role='Archived unfiltered baseline only; not an author-clean R8 estimate'))
+    certify(folder,key);del d,main,state;gc.collect()
+
+def rebuild_authors(c,sourcepaths,acquisition,snapshot,original,folder):
+    """Rebuild only changed histories using the original producers; never rematch."""
+    folder.mkdir(parents=True,exist_ok=True)
+    c.execute('CREATE OR REPLACE VIEW full_panel AS SELECT * FROM '+parq(sourcepaths))
+    invalid=c.execute('SELECT count(*) FROM full_panel WHERE chooser_username_norm IS NULL OR disconnected_username_norm IS NULL').fetchone()[0]
+    require(invalid==0,'Main panel lacks author name bridge')
+    c.execute('CREATE OR REPLACE VIEW old_acq AS SELECT * FROM '+parq([acquisition]))
+    c.execute('CREATE OR REPLACE VIEW old_design AS SELECT * FROM '+parq([original]))
+    with heartbeat('Identify histories touched by games involving either author'):
+        c.execute(f'''CREATE OR REPLACE TABLE affected AS SELECT DISTINCT lower(trim(chooser_username_norm)) username_norm
+          FROM full_panel WHERE NOT ({author_predicate()}) AND lower(trim(chooser_username_norm)) NOT IN ('__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__')''')
+        census=c.execute(f'''SELECT count(*) AS "rows",count(*) FILTER(WHERE NOT ({author_predicate()})) author_game_rows,
+          sum(outcome_kind_draw)::BIGINT grants,sum(outcome_kind_draw) FILTER(WHERE NOT ({author_predicate()}))::BIGINT author_game_grants,
+          count(*) FILTER(WHERE engine_eval_cp_disconnected>=-100) competitive,
+          sum(outcome_kind_draw) FILTER(WHERE engine_eval_cp_disconnected>=-100)::BIGINT competitive_grants
+          FROM full_panel''').fetchdf().to_dict('records')[0]
+    c.execute('CREATE OR REPLACE TABLE touched_acq AS SELECT a.* FROM old_acq a JOIN affected t USING(username_norm)')
+    affected_n=c.execute('SELECT count(*) FROM touched_acq').fetchone()[0]
+    partial=folder/'affected_design.parquet';panel=folder/'affected_games.parquet';bridge=folder/'affected_bridge.parquet'
+    zero_histories=[]
+    if affected_n:
+        with heartbeat('Rebuild nonauthor chooser histories affected by author games'):
+            c.execute(f'''COPY (SELECT p.* FROM full_panel p SEMI JOIN touched_acq a
+              ON lower(trim(p.chooser_username_norm))=a.username_norm WHERE {author_predicate('p')})
+              TO {qs(panel)} (FORMAT PARQUET,COMPRESSION ZSTD)''')
+            c.execute('CREATE OR REPLACE VIEW stage07 AS SELECT * FROM '+parq([panel]))
+            core.prior.planner.build_chooser_summary(c)
+            zero_histories=[r[0] for r in c.execute('SELECT username_norm FROM touched_acq ANTI JOIN chooser_summary ON username_norm=chooser_id').fetchall()]
+            summarycols={r[0] for r in c.execute('DESCRIBE chooser_summary').fetchall()}
+            acqcols=pq.ParquetFile(acquisition).schema_arrow.names
+            # Frozen matching strata and selected control slots retain their identity.
+            replace=[n for n in acqcols if n in summarycols and n not in ('fair_opp_bin','total_opp_bin','match_cell')]
+            ar=', '.join('c.'+n+' AS '+n if n in replace else 'a.'+n for n in acqcols)
+            profiles=', '.join('s.'+n for n in core.PROFILE_FEATURES)
+            c.execute(f'''COPY (SELECT {ar},{profiles} FROM touched_acq a
+              JOIN chooser_summary c ON a.username_norm=c.chooser_id LEFT JOIN {parq([snapshot])} s USING(username_norm)
+              ORDER BY a.query_index) TO {qs(bridge)} (FORMAT PARQUET,COMPRESSION ZSTD)''')
+            core.builder.build_cache(c,{'snapshot':bridge,'stage07_glob':panel},partial)
+            core.verify_new_cache(c,partial,affected_n-len(zero_histories))
+        require(pq.ParquetFile(partial).schema_arrow.names==pq.ParquetFile(original).schema_arrow.names,
+            'Author-clean partial cache schema differs from the original producer')
+        union=f'''SELECT * FROM old_design WHERE username_norm NOT IN (SELECT username_norm FROM affected)
+          UNION ALL SELECT * FROM {parq([partial])}'''
+    else:union='SELECT * FROM old_design'
+    c.execute('CREATE OR REPLACE VIEW merged AS '+union)
+    # If the deleted account was a focal chooser, its selected comparison group has no retained focal.
+    c.execute('''CREATE OR REPLACE TABLE valid_focals AS SELECT matched_kind_chooser_id FROM merged
+      WHERE is_kind_role=1 AND lower(trim(username_norm)) NOT IN ('__PRIVATE_VALUE_3__','__PRIVATE_VALUE_4__')''')
+    result=folder/'author_clean_design.parquet'
+    c.execute(f'''COPY (SELECT m.* EXCLUDE(group_ever_kind_fair,group_ever_kind_clearly_worse),
+      max(CASE WHEN is_kind_role=1 THEN ever_kind_fair_state::INTEGER ELSE 0 END)
+        OVER(PARTITION BY matched_kind_chooser_id)::BOOLEAN group_ever_kind_fair,
+      max(CASE WHEN is_kind_role=1 THEN ever_kind_clearly_worse_state::INTEGER ELSE 0 END)
+        OVER(PARTITION BY matched_kind_chooser_id)::BOOLEAN group_ever_kind_clearly_worse
+      FROM merged m SEMI JOIN valid_focals USING(matched_kind_chooser_id)
+      WHERE lower(trim(username_norm)) NOT IN ('__PRIVATE_VALUE_5__','__PRIVATE_VALUE_6__') ORDER BY query_index)
+      TO {qs(result)} (FORMAT PARQUET,COMPRESSION ZSTD)''')
+    rows=pq.ParquetFile(result).metadata.num_rows
+    qa=core.verify_new_cache(c,result,rows)
+    census.update(affected_chooser_accounts=int(c.execute('SELECT count(*) FROM affected').fetchone()[0]),
+        affected_profile_target_accounts=affected_n,deleted_author_target_accounts=int(c.execute("SELECT count(*) FROM old_design WHERE lower(trim(username_norm)) IN ('__PRIVATE_VALUE_7__','__PRIVATE_VALUE_8__')").fetchone()[0]),
+        target_accounts_before=pq.ParquetFile(original).metadata.num_rows,target_accounts_after=rows,
+        no_surviving_history_target_accounts=len(zero_histories),cache_validation=qa,
+        policy='Exclude every main-panel game with either author on either side; rebuild affected histories and all group labels; remove author accounts and groups without a retained focal; preserve stored matches and control slots; no replacement matching.')
+    save(folder/'author_exclusion.json',census)
+    return result,census
+
+def flag_table(frame,scope):
+    rows=[];group=four_groups(frame)
+    for name in ('fair_only','clearly_worse_only','both','neither'):
+        d=frame.loc[group==name];ret=d['returned'].astype(bool);fl=flags(d)&ret
+        n=len(d);nr=int(ret.sum());planned=d['august_planned'].astype(bool)
+        rows.append(dict(scope=scope,group=name,n=n,returned=nr,
+            tos_violation=int((d['tos_violation'].eq(True).fillna(False).astype(bool)&ret).sum()),
+            disabled=int((d['disabled'].eq(True).fillna(False).astype(bool)&ret).sum()),flagged_either=int(fl.sum()),
+            flagged_pct_returned=100*float(fl.sum())/nr if nr else None,
+            queried_nonreturn=int((planned&~ret).sum()),queried_nonreturn_pct_target=100*float((planned&~ret).sum())/n if n else None,
+            not_planned_in_august=int((~planned).sum()),not_planned_pct_target=100*float((~planned).sum())/n if n else None))
+    return rows
+
+def coefficient_bounds(frame,regressors,unknown,scope,standardize=()):
+    """Sharp bounds for a fixed joint OLS design, optimizing signed coefficient weights."""
+    X=frame[regressors].to_numpy(float);codes,levels=pd.factorize(frame.match_cell,sort=True)
+    require(np.isfinite(X).all(),'Missing covariates prevent bounds for '+scope)
+    for j,name in enumerate(regressors):
+        if name in standardize:
+            sd=X[:,j].std();X[:,j]=(X[:,j]-X[:,j].mean())/sd if sd>0 else 0
+    Xw=np.column_stack([core.common._demean_by_codes(X[:,j],codes,len(levels)) for j in range(X.shape[1])]);G=Xw.T@Xw
+    keep,dropped=core.common._deterministic_rank_keep(G,regressors)
+    require(0 in keep and 1 in keep,'Joint fair/clearly-worse treatment bounds are not identified')
+    W=Xw[:,keep]@np.linalg.pinv(G[np.ix_(keep,keep)],rcond=1e-12)
+    y=pd.to_numeric(frame.patron,errors='coerce').to_numpy(float,na_value=np.nan)*100
+    unknown=np.asarray(unknown,bool);require(np.isfinite(y[~unknown]).all(),'Unflagged observed outcomes missing')
+    rows=[]
+    weights=[W[:,keep.index(0)],W[:,keep.index(1)],W[:,keep.index(0)]-W[:,keep.index(1)]]
+    for term,w in zip([FAIR,LOST,'fair_minus_clearly_worse'],weights):
+        observed=float(w[~unknown]@y[~unknown]);lo=observed+100*float(np.minimum(w[unknown],0).sum());hi=observed+100*float(np.maximum(w[unknown],0).sum())
+        rows.append(dict(scope=scope,term=term,lower_pp=lo,upper_pp=hi,n=len(frame),unknown_outcomes=int(unknown.sum()),
+            fixed_regressors=regressors,nonestimable_controls=dropped,sharp_binary_identification_bounds=True,confidence_interval=False,
+            note='Each reported functional is optimized separately over binary unknown outcomes; endpoints need not share one common outcome completion.'))
+    return rows
+
+def run(a,work,key):
+    no_network();report=work/'report';report.mkdir(parents=True,exist_ok=True)
+    project=a.project_root;root=project/'derived/replication/pool_main_reanalysis_v100_PRIVATE/wave3b1_patron'/CORE_CONF[:12]
+    require(hashlib.sha256(core.auth.canonical_json(load(root/'CONFIGURATION.json')).encode()).hexdigest()==CORE_CONF,'Patron core config differs')
+    with heartbeat('Authenticate original Patron design checkpoint'):core.prior.read_checkpoint(root/'design',CORE_CONF)
+    original=root/'design/chooser_design_features_private.parquet'
+    snapshot=core.prior.authenticate_snapshot(project)
+    previous,status=core.authenticate_wave3a(project)
+    acquisition=previous/'matching/acquisition_users_private.parquet';require(acquisition.exists(),'Frozen Patron acquisition target missing')
+    c=conn(work/'spill',max(2,a.memory_gb-3),1)
+    try:
+        core.models.outcome_qa(c,snapshot,fixture=False)
+        frame=core.load_frames(c,original,snapshot)
+        log('R8-1 reproduce original August-only Panel A/B/C before exclusions')
+        baseline(frame,work/'baseline',digest([key,'baseline']));del frame;gc.collect()
+        authfolder=work/'author_clean';ak=digest([key,'author_clean'])
+        if verify_cached(authfolder,ak):
+            design=authfolder/'author_clean_design.parquet';census=load(authfolder/'author_exclusion.json')
+        else:
+            with heartbeat('Authenticate 24 main-panel source files'):
+                sample=core.auth.authenticate_sample(project/MAIN_REL,hash_workers=1)
+            sources=[x['path'] for x in sample['month_records']]
+            design,census=rebuild_authors(c,sources,acquisition,snapshot,original,authfolder)
+            certify(authfolder,ak,[original,acquisition,snapshot]+sources,census)
+        frame=core.load_frames(c,design,snapshot)
+    finally:c.close()
+    require(not frame.username_norm.str.lower().isin(AUTHORS).any(),'Author profile account survived exclusion')
+    save(report/'author_exclusion.json',census)
+    ft=flag_table(frame.loc[(frame.fair_opps>=4)&(frame.clearly_worse_opps>=4)],'author_clean_state_target_min4')
+    ft+=flag_table(frame.loc[frame.group_ever_kind_fair.astype(bool)],'author_clean_primary_target')
+    table(report,'profile_flags_by_group',ft)
+    d,groups,imputation=features(frame);d=compact(d,groups)
+    frame=frame[[FAIR,LOST,'fair_opps','clearly_worse_opps','match_cell','patron','returned',
+        'group_ever_kind_fair','is_kind_role','outcome_status','tos_violation','disabled']].copy()
+    gc.collect();collector=core.models.ModelCollector()
+    main,state=models(d,groups,'author_clean_all_returned',collector)
+    unflagged=d.loc[~flags(d)].copy();main_u,state_u=models(unflagged,groups,'author_clean_unflagged',collector)
+    raw=[]
+    for label,data in [('all_returned',main),('unflagged',main_u)]:
+        raw.append(core.models.raw_row(data,label,'is_kind_role','R8_PanelC_author_clean'))
+    table(report,'PanelC_raw_rates',raw)
+    state_rates=[]
+    for label,data in [('all_returned',state),('unflagged',state_u)]:
+        fg=four_groups(data)
+        for name in ('fair_only','clearly_worse_only','both','neither'):
+            z=data.loc[fg==name];state_rates.append(dict(sample=label,group=name,n=len(z),patrons=int(z.patron.sum()),
+                Patron_rate_pct=100*float(z.patron.mean()) if len(z) else None))
+    table(report,'state_raw_rates',state_rates)
+    table(report,'Patron_models',collector.models);table(report,'Patron_coefficients',pd.concat(collector.coefficients,ignore_index=True))
+    table(report,'Patron_contrasts',collector.contrasts)
+    cs,std=controls(groups)
+    bounds=coefficient_bounds(state,[FAIR,LOST]+cs,flags(state),'PanelB_full_design_flagged_returned_outcomes_unknown',std)
+    target=frame.loc[(frame.fair_opps>=4)&(frame.clearly_worse_opps>=4)].copy()
+    target['log_fair_opps']=np.log1p(target.fair_opps);target['log_clearly_worse_opps']=np.log1p(target.clearly_worse_opps)
+    bounds+=coefficient_bounds(target,[FAIR,LOST,'log_fair_opps','log_clearly_worse_opps'],
+        ~target.returned.astype(bool)|flags(target),'PanelB_FE_and_exposure_design_flagged_and_unavailable_outcomes_unknown')
+    table(report,'PanelB_binary_bounds',bounds)
+    # Retain unavailable outcomes as unknown for the primary raw and cell-FE bounds.
+    primary=frame.copy();primary['returned']=primary.returned.astype(bool)&~flags(primary)
+    primary.loc[~primary.returned,'patron']=None
+    save(report/'PanelA_binary_bounds.json',core.missing_outcome_bounds(primary))
+    save(report/'COMPLETION.json',dict(status='R8_PATRON_CURRENT_DATA_COMPLETE',August_profile_snapshot_SHA256=core.prior.SNAPSHOT_SHA,
+        Patron_flags='stored August tos_violation OR disabled; null optional flags treated as absent by the original snapshot semantics',
+        covariance='HC1 and match-cell CR1 with normal-reference approximation; clustered SEs have only 24/36 baseline cells',
+        date_covariates='Original baseline tenure/recency construction retained for exact reproduction; corrected-date sensitivity remains in the prior report.',
+        imputation='Original within-cell profile imputation recomputed on author-clean returned profiles before flag exclusion, then held fixed for unflagged fits.',
+        full_profile_design_bounds_include_nonreturns=False,author_clean=True,all_paper_author_invariance_verified=False,
+        network_requests=0,stockfish_searches=0))
+    certify(work,key,[original,snapshot,acquisition,design])
+
+if __name__=='__main__':
+    import argparse
+    p=argparse.ArgumentParser();p.add_argument('--project-root',type=Path,required=True);p.add_argument('--work',type=Path,required=True)
+    p.add_argument('--key',required=True);p.add_argument('--memory-gb',type=float,default=11)
+    a=p.parse_args();run(a,a.work,a.key)

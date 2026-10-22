@@ -1,0 +1,40 @@
+#!/bin/bash
+set -euo pipefail
+runner_dir="$(cd "$(dirname "$0")" && pwd)"
+project_dir="/Volumes/XT_Pro/lichess_kindness"
+args=("$@")
+for ((i=0;i<${#args[@]};i++)); do
+  if [[ "${args[$i]}" == "--project" ]]; then
+    project_dir="${args[$((i+1))]}"
+  fi
+done
+cd "$runner_dir"
+/usr/bin/shasum -a 256 -c PACKAGE_MANIFEST.sha256 > /dev/null
+printf '%s\n' 'PACKAGE_SHA256_OK'
+python_bin=""
+candidates=()
+if [[ -n "${IV_PYTHON:-}" ]]; then candidates+=("$IV_PYTHON"); fi
+candidates+=("$project_dir/venv/bin/python" "$project_dir/.venv/bin/python" "$runner_dir/.venv/bin/python")
+for candidate in "$HOME"/Desktop/Lichess_Desktop/r12_r13*/*/.venv/bin/python; do candidates+=("$candidate"); done
+for candidate in "$HOME"/Desktop/Lichess_Desktop/alltime_iv_v10*.*/*/.venv/bin/python; do candidates+=("$candidate"); done
+for candidate in "$HOME"/Desktop/Lichess_Desktop/entry_placebo_v10*.*/*/.venv/bin/python; do candidates+=("$candidate"); done
+for candidate in "${candidates[@]}"; do
+  if [[ -x "$candidate" ]] && "$candidate" -c 'import sys; assert sys.version_info >= (3,10); import numpy,pandas,pyarrow,duckdb,scipy,chess,matplotlib' >/dev/null 2>&1; then
+    python_bin="$candidate"; break
+  fi
+done
+if [[ -z "$python_bin" ]]; then
+  base_python="${IV_PYTHON:-}"
+  if [[ -z "$base_python" || ! -x "$base_python" ]]; then base_python="$(command -v python3)"; fi
+  "$base_python" -c 'import sys; assert sys.version_info >= (3,10), "Python 3.10 or newer is required"'
+  "$base_python" -m venv "$runner_dir/.venv"
+  python_bin="$runner_dir/.venv/bin/python"
+  "$python_bin" -m pip install -r "$runner_dir/requirements.txt"
+fi
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1
+"$python_bin" "$runner_dir/run_finish.py" --self-test
+if [[ -x /usr/bin/caffeinate ]]; then
+  exec /usr/bin/caffeinate -dims "$python_bin" "$runner_dir/run_finish.py" "$@"
+else
+  exec "$python_bin" "$runner_dir/run_finish.py" "$@"
+fi

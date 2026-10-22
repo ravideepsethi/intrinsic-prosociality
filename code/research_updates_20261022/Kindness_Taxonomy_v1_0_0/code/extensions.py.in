@@ -1,0 +1,152 @@
+"""Explicitly authenticated optional inputs; no semantic guessing from names."""
+from common import *
+from stream_ols import fit as fe_lpm
+
+CONTRACT='LICHESS_TAXONOMY_EXTENDED_INPUTS_V1'
+
+def validate_event_identities(c,table):
+    c.execute('''CREATE OR REPLACE TEMP VIEW main_identities AS
+      SELECT chooser id,username FROM panel GROUP BY ALL
+      UNION SELECT recipient id,recipient_username username FROM panel GROUP BY ALL''')
+    c.execute(f'''CREATE OR REPLACE TEMP VIEW extra_identities AS
+      SELECT chooser id,lower(trim(chooser_username)) username FROM {table} GROUP BY ALL
+      UNION SELECT recipient id,lower(trim(recipient_username)) username FROM {table} GROUP BY ALL''')
+    bad=c.execute('''SELECT count(*) FROM extra_identities WHERE id IS NULL OR id<0 OR username IS NULL
+      OR username='' OR username IN('__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__')''').fetchone()[0]
+    bad+=c.execute('''SELECT count(*) FROM extra_identities e JOIN main_identities m
+      ON e.id=m.id OR e.username=m.username WHERE e.id<>m.id OR e.username<>m.username''').fetchone()[0]
+    bad+=c.execute('SELECT count(*) FROM (SELECT id FROM extra_identities GROUP BY id HAVING count(*)>1)').fetchone()[0]
+    bad+=c.execute('SELECT count(*) FROM (SELECT username FROM extra_identities GROUP BY username HAVING count(*)>1)').fetchone()[0]
+    bad+=c.execute(f'SELECT count(*) FROM {table} WHERE chooser=recipient OR game_id IS NULL OR start_ms IS NULL').fetchone()[0]
+    if bad:raise RuntimeError('Optional event identities, author exclusions or main-ID namespace do not validate')
+
+def load(project,work):
+    p=Path(project)/'derived/replication/taxonomy_extended_inputs/EXTENDED_INPUTS.json'
+    if not p.is_file():return {},dict(status='NEEDS_INPUT_BUILD',manifest_path=str(p))
+    m=read(p)
+    if m.get('contract')!=CONTRACT:raise RuntimeError('Unrecognized extended input contract')
+    if m.get('author_exclusion')!=list(AUTHORS):raise RuntimeError('Extended inputs author policy differs')
+    result={}
+    for name,r in m.get('datasets',{}).items():
+        paths=[]
+        if r.get('verified') is not True:continue
+        for f in r['files']:
+            path=Path(f['path']);path=path if path.is_absolute() else Path(project)/path
+            path=relocate(project,path);authenticate(path,work,f['sha256'],f.get('bytes'));paths.append(str(path))
+        result[name]=dict(r,paths=paths)
+    return result,m
+
+def waiting(c,folder,inputs,cfg):
+    r=inputs.get('waiting_events')
+    if not r:raise Unavailable('F needs a pool/nonadjacent outoftime-loss frame with oriented final engine evaluations and loser clocks; the timeout-only choice panel cannot supply its denominator.')
+    if r.get('scope')!='pool_nonadjacent_24m' or r.get('cp_orientation')!='loser' or r.get('engine_nodes')!=100000:
+        raise RuntimeError('Waiting frame scope/orientation/engine mismatch')
+    for p in r['paths']:require_columns(p,['game_id','chooser','recipient','chooser_username','recipient_username','start_ms','cp','speed','loser_clock_s','status','rated'])
+    c.execute('CREATE OR REPLACE TEMP VIEW waiting_input AS SELECT * FROM '+scan(r['paths']))
+    validate_event_identities(c,'waiting_input')
+    if c.execute("SELECT count(*) FROM waiting_input WHERE status IS DISTINCT FROM 'outoftime' OR rated IS DISTINCT FROM TRUE OR cp IS NULL OR NOT isfinite(cp)").fetchone()[0]:raise RuntimeError('Invalid waiting event')
+    if c.execute('SELECT count(*)-count(DISTINCT game_id) FROM waiting_input').fetchone()[0]:raise RuntimeError('Duplicate waiting input games')
+    if c.execute('SELECT count(*) FROM waiting_input JOIN panel USING(game_id)').fetchone()[0]:raise RuntimeError('Waiting and active event frames overlap')
+    ts=cfg['abandonment_threshold_s'];threshold='CASE '+''.join(f'WHEN speed={q(s)} THEN {v} ' for s,v in ts.items())+'ELSE NULL END'
+    c.execute(f'''CREATE OR REPLACE TEMP VIEW waiting AS SELECT game_id,chooser,recipient,start_ms,cp,speed,1 y
+      FROM waiting_input WHERE start_ms>={START} AND start_ms<{END} AND loser_clock_s>={threshold}
+      UNION ALL SELECT game_id,chooser,recipient,start_ms,cp,speed,0 y FROM panel WHERE speed IN('blitz','rapid','classical')''')
+    st='CASE WHEN cp<=-300 THEN 0 WHEN cp<-100 THEN 1 WHEN cp<=100 THEN 2 WHEN cp<300 THEN 3 ELSE 4 END'
+    c.execute('CREATE OR REPLACE TEMP VIEW waiting_state AS SELECT *, '+st+' state FROM waiting')
+    from diagnostics import rate_table
+    rate_table(c,folder/'F1_probable_waiting_rates.csv','state,speed',source='waiting_state')
+    query='SELECT chooser,y,'+','.join(f'(state={s})::INT state{s}' for s in range(1,5))+' FROM waiting_state'
+    meta,rows=fe_lpm(c,query,[f'state{s}' for s in range(1,5)],[f'state{s}' for s in range(1,5)])
+    write(folder/'F1_chooser_FE.json',meta);csvwrite(folder/'F1_chooser_FE_estimates.csv',rows)
+    counts=records(c,'''SELECT CASE WHEN state>=2 THEN 'competitive' ELSE 'lost' END region,
+      count(*) total,count(*) FILTER(WHERE y=1) probable_waiters FROM waiting_state WHERE state>=2 OR state=0 GROUP BY 1''')
+    grants={r['region']:r['grants'] for r in records(c,"SELECT CASE WHEN state>=2 THEN 'competitive' ELSE 'lost' END region,sum(y) grants FROM panel WHERE (state>=2 OR state=0) AND speed IN('blitz','rapid','classical') GROUP BY 1")}
+    a={r['region']:dict(r,grants=grants.get(r['region'],0)) for r in counts};out=[]
+    if set(a)!=set(['competitive','lost']):raise Unavailable('No support in one F2 contrast arm')
+    for label,pc,pl in [('all_waiters_zero',0,0),('all_waiters_one',1,1),('lower_gap_bound',0,1),('upper_gap_bound',1,0)]:
+        rates={s:(a[s]['grants']+v*a[s]['probable_waiters'])/a[s]['total'] for s,v in [('competitive',pc),('lost',pl)]}
+        out.append(dict(scenario=label,gap_pp=100*(rates['competitive']-rates['lost']),**a))
+    write(folder/'F2_bounds.json',out)
+    write(folder/'F_limits.json',dict(interpretation='Probable abandonment proxy, not observed waiting or an available claim button; all results conditional on proxy validity',
+      bounds='Logical outcome bounds within the proxy-augmented frame; not bounds on all possible disconnections'))
+
+def desert(c,folder,inputs,cfg):
+    r=inputs.get('continuation_cells')
+    if not r:raise Unavailable('D1 needs held-out empirical continuation cells from ordinary-game trajectories, with game-level sampling/coverage and engine provenance; current timeout evaluations do not identify continuation frequencies.')
+    if r.get('probability_orientation')!='chooser' or not r.get('ordinary_games_only') or not r.get('game_disjoint_from_opportunities'):
+        raise RuntimeError('Continuation probabilities require chooser orientation, ordinary games and game-disjoint estimation')
+    if r.get('cp_bin_width')!=cfg['continuation_cp_width'] or r.get('rating_gap_bin_width')!=cfg['continuation_rating_gap_width'] or r.get('stage_upper_bounds')!=cfg['stage_upper_bounds']:
+        raise RuntimeError('Continuation bins differ from frozen specification')
+    for p in r['paths']:require_columns(p,['cp_bin_chooser','gap_bin_chooser','stage','speed','games','wins','sample_source'])
+    c.execute('CREATE OR REPLACE TEMP VIEW continuation AS SELECT *,wins::DOUBLE/games p_win FROM '+scan(r['paths']))
+    if c.execute('''SELECT count(*) FROM continuation WHERE games IS NULL OR wins IS NULL OR games<=0 OR wins<0 OR wins>games
+      OR cp_bin_chooser IS NULL OR gap_bin_chooser IS NULL OR stage IS NULL OR speed IS NULL OR sample_source IS NULL''').fetchone()[0]:raise RuntimeError('Invalid continuation frequencies')
+    if c.execute('SELECT count(*) FROM (SELECT cp_bin_chooser,gap_bin_chooser,stage,speed FROM continuation GROUP BY ALL HAVING count(*)>1)').fetchone()[0]:raise RuntimeError('Ambiguous continuation cells')
+    c.execute(f'''CREATE OR REPLACE TEMP VIEW d1 AS SELECT p.*,z.p_win,1-z.p_win p_not_win,z.games cell_games,z.sample_source,
+      CASE WHEN z.games>={cfg['continuation_min_cell_games']} THEN TRUE ELSE FALSE END support
+      FROM panel p LEFT JOIN continuation z ON floor(-p.cp/{cfg['continuation_cp_width']})=z.cp_bin_chooser
+      AND floor((p.rating-p.rival_rating)/{cfg['continuation_rating_gap_width']})=z.gap_bin_chooser
+      AND p.stage=z.stage AND p.speed=z.speed WHERE NOT p.is_mate''')
+    export(c,folder/'D1_coverage.csv','SELECT state,support,sample_source,count(*) AS "rows" FROM d1 GROUP BY ALL')
+    c.execute('''CREATE OR REPLACE TEMP VIEW d1_controls AS SELECT *,
+      CASE speed WHEN 'ultrabullet' THEN 0 WHEN 'bullet' THEN 1 WHEN 'blitz' THEN 2 WHEN 'rapid' THEN 3 ELSE 4 END speed_id,
+      (cast(substr(month,1,4) AS INT)-2023)*12+cast(substr(month,6,2) AS INT)-11 month_id,
+      least(9,floor(cost/2))::INT cost_bin FROM d1''')
+    for label,where in [('equal','support AND state=2'),('all_states','support')]:
+        columns=['p_not_win'];expr=['p_not_win'];targets=['p_not_win'];references={}
+        specs=[('stage','stage'),('cost_bin','costbin'),('speed_id','speed'),('month_id','month')]
+        if label=='all_states':specs.append(('state','state'))
+        for field,prefix in specs:
+            levels=[v[0] for v in c.execute(f'SELECT DISTINCT {field} FROM d1_controls WHERE {where} ORDER BY 1').fetchall()]
+            if not levels:raise Unavailable('No supported ordinary-game continuation cells for '+label)
+            references[field]=levels[0]
+            for level in levels[1:]:
+                name=f'{prefix}{level}';columns.append(name);expr.append(f'({field}={level})::INT {name}')
+                if field in ('stage','state'):targets.append(name)
+        meta,rows=fe_lpm(c,'SELECT chooser,y,'+','.join(expr)+' FROM d1_controls WHERE '+where,columns,targets)
+        meta['reference_categories']=references
+        write(folder/f'D1_{label}_FE.json',meta);csvwrite(folder/f'D1_{label}_FE_estimates.csv',rows)
+    c.execute('CREATE OR REPLACE TEMP VIEW d1plot AS SELECT *,floor(p_win*20)/20. probability_bin FROM d1_controls WHERE support AND state=2')
+    from diagnostics import rate_table
+    rate_table(c,folder/'D1_equal_profiles.csv','stage,probability_bin',source='d1plot')
+    write(folder/'D1_limits.json',dict(expectations='Empirical continuation frequencies are not observed subjective expectations',
+      identification='Stage effects conditional on a generated lookup do not, by themselves, reject expectations-based reference dependence',
+      uncertainty='Chooser-cluster inference conditional on first-stage calibration. Calibration sampling uncertainty needs joint resampling before substantive inference.',
+      D2='Requires full move-by-move accuracy, including a specified mate convention; last-position scores and last-four-ply caches do not supply average game accuracy'))
+
+def accuracy(c,folder,inputs,cfg):
+    r=inputs.get('game_accuracy')
+    if not r:raise Unavailable('D2 needs full move-by-move chooser and rival average centipawn losses; the final-position engine cache cannot supply these.')
+    if r.get('scope')!='main_opportunity_games' or not r.get('complete_move_path') or not r.get('mate_convention'):
+        raise RuntimeError('Accuracy provenance must certify full paths, main game IDs and mate convention')
+    for p in r['paths']:require_columns(p,['game_id','chooser_acpl','recipient_acpl','chooser_moves','recipient_moves'])
+    c.execute('CREATE OR REPLACE TEMP VIEW game_accuracy AS SELECT * FROM '+scan(r['paths']))
+    if c.execute('SELECT count(*)-count(DISTINCT game_id) FROM game_accuracy').fetchone()[0]:raise RuntimeError('Duplicate accuracy games')
+    if c.execute('''SELECT count(*) FROM game_accuracy WHERE chooser_acpl IS NULL OR recipient_acpl IS NULL
+      OR NOT isfinite(chooser_acpl) OR NOT isfinite(recipient_acpl) OR chooser_acpl<0 OR recipient_acpl<0
+      OR chooser_moves<1 OR recipient_moves<1''').fetchone()[0]:raise RuntimeError('Invalid accuracy data')
+    export(c,folder/'D2_coverage.csv','''SELECT year,state,count(*) opportunities,count(a.game_id) evaluated
+      FROM panel p LEFT JOIN game_accuracy a USING(game_id) GROUP BY ALL''')
+    # Exact (rounded integer centipawn eval, ply) cells hold the final position level
+    # and game length fixed nonparametrically. All target variation must survive.
+    c.execute('''CREATE OR REPLACE TEMP VIEW d2 AS SELECT p.*,a.chooser_acpl/100. chooser_acpl_100,
+      a.recipient_acpl/100. recipient_acpl_100 FROM panel p JOIN game_accuracy a USING(game_id) WHERE NOT p.is_mate''')
+    c.execute('''CREATE OR REPLACE TEMP TABLE d2cells AS SELECT cast(round(cp) AS INT) cp_cell,ply,
+      avg(y) my,avg(chooser_acpl_100) mx,avg(recipient_acpl_100) mr,count(*) n
+      FROM d2 GROUP BY ALL HAVING count(*)>=2''')
+    # Two-way chooser and position-length absorption uses existing verified solver.
+    from vendor.rct.numerics import absorb,codes
+    a=arrays(c.execute('''SELECT p.chooser,p.y,p.chooser_acpl_100,p.recipient_acpl_100,
+      cast(round(p.cp) AS INT) cp_cell,p.ply FROM d2 p JOIN d2cells z
+      ON cast(round(p.cp) AS INT)=z.cp_cell AND p.ply=z.ply''').to_arrow_table())
+    n=len(a['y'])
+    if n<100:raise Unavailable('Insufficient repeated exact eval/ply cells for D2')
+    cells=np.unique(np.column_stack([a['cp_cell'],a['ply']]),axis=0,return_inverse=True)[1]
+    v,iterations,_=absorb(np.column_stack([a['chooser_acpl_100'],a['recipient_acpl_100'],a['y']]),[codes(a['chooser']),cells],compute_rank=False)
+    x=v[:,:2];y=v[:,2];gram=x.T@x
+    if np.linalg.cond(gram)>1e10:raise Unavailable('D2 accuracy terms lack independent within-cell variation')
+    inv=np.linalg.inv(gram);b=inv@x.T@y;score=x*(y-x@b)[:,None];meat=cluster_meat(score,a['chooser']);V=inv@meat@inv
+    csvwrite(folder/'D2_estimates.csv',[dict(term=s,units='pp per 100cp larger ACPL',**interval(100*b[j],100*np.sqrt(V[j,j]))) for j,s in enumerate(['chooser_acpl','recipient_acpl'])])
+    write(folder/'D2_method.json',dict(rows=n,absorb_iterations=iterations,fixed_effects=['chooser','rounded_integer_eval_x_exact_ply'],
+      covariance='chooser-cluster CR0',interpretation='Negative rival-ACPL coefficient means greater granting to better play, conditional on measured controls. This association does not exclude correlated expectations or selection.',
+      limits='ACPL depends on engine budget and mate convention; optional-input provenance must accompany interpretation.'))

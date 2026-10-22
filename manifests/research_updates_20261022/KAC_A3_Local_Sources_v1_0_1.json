@@ -1,0 +1,99 @@
+{
+  "package": "KAC_A3_Local_Sources_v1_0_1",
+  "archive_name": "KAC_A3_Local_Sources_v1_0_1.zip",
+  "archive_sha256": "cd799f08cbdf3a01bd9638184c9336f0075eec02221bf4b37d6bf8e8d6f0f371",
+  "archive_size": 36107,
+  "archive_root": "KAC_A3_Local_Sources_v1_0_1",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "README.md",
+      "published_path": "README.md",
+      "sha256": "a89da3d93dd02da1f3f14e3c5fa1f21915ab67619025906c90b7e356275e6a7b",
+      "published_sha256": "a89da3d93dd02da1f3f14e3c5fa1f21915ab67619025906c90b7e356275e6a7b",
+      "size": 10303
+    },
+    {
+      "path": "RUN_A3_LOCAL_SOURCES.command",
+      "published_path": "RUN_A3_LOCAL_SOURCES.command.in",
+      "sha256": "791074d6d9ace9a01780b0167507d10920bad9c00601f69ba72a88a72693c4f6",
+      "published_sha256": "791074d6d9ace9a01780b0167507d10920bad9c00601f69ba72a88a72693c4f6",
+      "size": 818
+    },
+    {
+      "path": "code/continue_a3.py",
+      "published_path": "code/continue_a3.py",
+      "sha256": "96585a8e21956655a0001d55a674fa099384af871878461d8f10130e50de4d1f",
+      "published_sha256": "96585a8e21956655a0001d55a674fa099384af871878461d8f10130e50de4d1f",
+      "size": 19189
+    },
+    {
+      "path": "code/readiness_v100.py",
+      "published_path": "code/readiness_v100.py.in",
+      "sha256": "a3a29a0163500021722a3aa31daf1260d39c95488b1d9c10fdf62c58e3433c31",
+      "published_sha256": "725685cfa566869c8f4e22286f627c4f2c42256cba0bbd44e01a806a3f5f1825",
+      "size": 22548,
+      "redactions": [
+        {
+          "start": 840,
+          "end": 847,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 851,
+          "end": 859,
+          "token": "__PRIVATE_VALUE_2__"
+        }
+      ]
+    },
+    {
+      "path": "tests/test_continue.py",
+      "published_path": "tests/test_continue.py",
+      "sha256": "c8cdb598bfb25b2bc4a144e53bbcb015b99755e248b9bbfbc5439fb7665228f6",
+      "published_sha256": "c8cdb598bfb25b2bc4a144e53bbcb015b99755e248b9bbfbc5439fb7665228f6",
+      "size": 6965
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "PACKAGE_MANIFEST.sha256",
+      "sha256": "8e4304c08df847272690a063ee8652cbafd0242daa843e6abb3d18fdcb622421",
+      "size": 1084
+    },
+    {
+      "path": "VALIDATION.json",
+      "sha256": "08e29c24ee6b250bf9f8bfb82687b0b4024f07bc8020ebbff360e404a03c345f",
+      "size": 1881
+    },
+    {
+      "path": "evidence/AUTHENTICATION.json",
+      "sha256": "2332433ffab503d90e039037539198fd6d38c967d9d40f8d6c1fcd7c3580bdf8",
+      "size": 376
+    },
+    {
+      "path": "evidence/MANIFEST.json",
+      "sha256": "38b925687262d0aaf3248c61df4a567aecb7b01cf37a45907c040cb6b5a53c19",
+      "size": 1505
+    },
+    {
+      "path": "evidence/SUMMARY.json",
+      "sha256": "6609b58d00eca9a6f0fb525180618dac9524abedd787283158708ee2a4343e5a",
+      "size": 2117
+    },
+    {
+      "path": "evidence/cell_support_before_price.parquet",
+      "sha256": "853d3059956d05f9a6d0a00aa2e9738ab2922548facb9f2b17aa247ea678ba2c",
+      "size": 636
+    },
+    {
+      "path": "evidence/coverage.parquet",
+      "sha256": "4acfb2dc3530933b2bb66114b909f3ef70a464aaca310a775223ff1e1e960420",
+      "size": 4727
+    },
+    {
+      "path": "evidence/monthly_audit.json",
+      "sha256": "cb09994b3340a4e819441c97a4e6f890d1598519a085a72822e16f32a00e9a97",
+      "size": 131331
+    }
+  ]
+}

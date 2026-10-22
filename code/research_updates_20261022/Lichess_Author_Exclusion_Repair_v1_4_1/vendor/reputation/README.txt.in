@@ -1,0 +1,104 @@
+Lichess Reputation v1.0.0 -- October 5, 2026
+
+PURPOSE
+Quantify observed future encounters and opportunities to return a kind draw;
+estimate granting and the merit gradient when future encounters are unlikely;
+and sharpen the first-versus-repeat comparison. These are descriptive tests
+of particular strategic channels, not identification of a primitive motive.
+
+RUN
+Save the supplied ZIP in ~/Desktop/Lichess_Desktop and use the provided
+checksum-verifying Terminal command. The launcher is RUN_REPUTATION.command.
+It automatically selects an existing Python 3.10+ with NumPy, PyArrow and
+DuckDB, runs the offline tests, logs the run and uses caffeinate on the Mac.
+It installs no packages and makes no network/API requests.
+
+Defaults: 4 workers, 4096 MB DuckDB memory limit, a fixed 1-in-5 unordered-pair
+sample for history and regressions. The pair sample is outcome-independent;
+both directions and all opportunities of a selected pair are retained.
+Full-panel author-excluded counts and grant rates are computed separately.
+This sampling rate is ten times the existing 1-in-50 first/repeat regression.
+It does not imply a tenfold increase in independent information.
+
+FIRST-RUN PLANNING ESTIMATE
+About 4-10 hours on the Mac plus XT_Pro; UNBENCHMARKED for this new program.
+The earlier cohort assembly took about two hours for its historical pair/
+volume pass, but this program asks different queries and collects later
+encounters. Drive throughput and other running analyses can change runtime.
+Allow roughly 8-12 GiB total RAM for the largest serial numerical stages and
+40 GiB free working space as a planning allowance, not a measured footprint.
+The DuckDB memory setting is not a cap on NumPy or total machine memory.
+
+Progress includes 45-second heartbeats during long serial stages, file/job
+counts, reused checkpoints, stage ETA, and 25/50/75/100% stage milestones.
+Milestones do not pause the run. ETA is for the current stage; heterogeneous
+files and later model fits prevent a credible exact finish ETA at startup.
+The program does not start or stop any other analysis or wait for its workers.
+
+INPUTS AND REUSE
+1. The pinned 24-month pool/nonadjacent main panel, 41,534,331 original rows:
+   /Volumes/XT_Pro/lichess_kindness/derived/replication/
+   analysis_panel_pool_nonadjacent_24m_v100_PRIVATE/panel/month=*/analysis_panel.parquet
+2. The pinned original chronology manifest (852 files, original all-speed
+   manifest count 7,763,847,245). This analysis uses its five live-rated speed
+   categories; correspondence is excluded and the earliest observed month
+   is reported. It checks the original file sizes, row counts and schemas,
+   and binds every read to its current size/mtime fingerprint. It does not
+   claim a fresh independent full-byte digest for billions of history rows.
+3. Existing per-file first-pair caches from the repeated-exposure audit are
+   reused where their query domain, configuration, source signature and
+   output SHA agree. They supply minima only. New questions about later
+   encounters and activity require a new projected pass of recent history.
+4. INPUT_FILES.json of the pinned main-sample producer is used to resolve a
+   byte-authenticated all-source Stage07 repayment panel when available.
+   If this adapter cannot establish the full 47,587,020-row source, the run
+   still produces explicitly labeled main-panel-only repayment results.
+   Main-panel-only results are not an upper bound on all opportunities to
+   reciprocate. INPUT_SCOPE.json records which branch ran.
+
+No Stockfish searches, raw-PGN downloads, rating replays, IV score rebuilding,
+or cohort reassembly occurs. Existing inputs/caches are read-only. New
+products are in derived/replication/reputation_v100_PRIVATE. Checkpoints bind
+inputs and code. Rerunning the same release and sample reuses completed work;
+changing worker count or DuckDB memory preserves the scientific run identity.
+Only incomplete outputs of this new run are rewritten on restart.
+
+AUTHOR EXCLUSION
+__PRIVATE_VALUE_1__ and __PRIVATE_VALUE_2__ are removed from focal and repayment opportunities using
+trimmed, case-insensitive exact names, regardless of role. Their direct rows
+are counted. Factual all-game chronology is preserved for meeting history
+and actual playing volume. No synthetic replacement accounts are sampled.
+
+OVERRIDES
+  REPUTATION_PYTHON=/absolute/path/python /bin/bash RUN_REPUTATION.command
+  REPUTATION_PROJECT_ROOT=/path/to/lichess_kindness /bin/bash RUN_REPUTATION.command
+  /bin/bash RUN_REPUTATION.command --workers 4 --memory-mb 4096
+  /bin/bash RUN_REPUTATION.command --pair-sample 5
+The default Terminal command already sets the first resource options.
+A denominator of 1 selects all pairs and can require substantially more RAM;
+it is not the default and is not needed for this initial run.
+
+WHAT TO RETURN
+The printed LICHESS_REPUTATION_REPORT_<id>_<UTC>.zip and matching .sha256.
+If it stops, also return the Desktop .log. A stopped run exports its reason
+and preserves completed checkpoints. Reports contain aggregate tables and
+design/QA information, not row-level histories or private account records.
+
+READ THE OUTPUTS
+full_panel_census.csv: full main-panel counts and rates after author exclusion.
+reencounters_and_repayment.csv: fixed 30/90/180-day complete-window counts,
+  meeting rates, reversed-role opportunities, observed reciprocation and
+  rating-value accounting, by initial action, merit and prior relationship.
+prediction_calibration.csv: predicted versus observed future meeting rates
+  in distinct calibration/evaluation periods; includes absolute risk bins.
+low_risk_grant_rates.csv: granting and merit contrasts in held-out low-risk
+  observations, including first recorded meetings.
+estimates.csv/json: adjusted first/repeat and low-risk merit regressions,
+  with chooser CR1 and shared-account-or-date CR0 covariance variants.
+timestamp_sensitivity.csv: encounter rates requiring a one-hour buffer after
+  lastMoveAt as well as the unbuffered specification; tied starts are counted.
+module_status.json: any unsupported prediction module remains explicit.
+
+No empirical result is supplied in this code release. Validation uses
+synthetic data and independent numerical checks, not your Mac's private rows.
+See METHODS.txt for exact timing, prediction, inference and claim limits.

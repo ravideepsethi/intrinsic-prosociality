@@ -1,0 +1,17 @@
+{
+  "source_archive": "POOL_MAIN_C13_FAMILYD_RESULTS_20260911T221006Z_961a842ecd42.zip",
+  "source_archive_sha256": "8a0bc7a0e1e811a1bc81e7b7c4be0b7b710dad614eb360145e37763c945a9a8f",
+  "status": "C13_COMPLETE_FAMILY_D_RECONCILED_WITH_MISSING_AUTHORITIES",
+  "estimated_attempts": 16,
+  "retained_model_failures": 3,
+  "missing_family_D_authorities": [
+    "C1",
+    "C2",
+    "C5"
+  ],
+  "files": {
+    "_SUCCESS.json": "9245eeb0f8a8eb42b346a19d324824e3cfde39becdf346744925603d017b4b8a",
+    "summary.json": "a62cadcb2de64b0bee56d78fe91f52c2c76b431b5a86fb65651a61efd534d2a4",
+    "FAMILY_D_RECONCILIATION.json": "1528f050c67d93d26926183b3b31183f1351227058322bb2565321b8b45efdc8"
+  }
+}

@@ -1,0 +1,64 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+continuation_mode="${1:?Specify a mode}"
+shift
+continuation_package="$(cd "$(dirname "$0")" && pwd -P)"
+continuation_project="${IV_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+continuation_desktop="${IV_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+continuation_python="${IV_PYTHON:-$continuation_project/venv/bin/python}"
+if [[ ! -x "$continuation_python" ]]; then
+  echo "Research Python not found: $continuation_python. Connect XT_Pro or set IV_PYTHON."
+  exit 2
+fi
+mkdir -p "$continuation_desktop"
+export PYTHONDONTWRITEBYTECODE=1
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1
+cd "$continuation_package"
+"$continuation_python" - <<'PY'
+import sys,numpy,pyarrow,duckdb
+assert sys.version_info >= (3,10), 'Python 3.10 or later required'
+sys.path.insert(0,'code')
+from continuous_common import verify_release
+verify_release()
+print('PACKAGE_SHA256_OK; Python',sys.version.split()[0],'; NumPy',numpy.__version__,'; PyArrow',pyarrow.__version__,'; DuckDB',duckdb.__version__,'; SciPy not required',flush=True)
+PY
+continuation_log="$continuation_desktop/run2_continuous_${continuation_mode}_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+continuation_awake=()
+if [[ -x /usr/bin/caffeinate ]]; then continuation_awake=(/usr/bin/caffeinate -i); fi
+echo "Log: $continuation_log"
+set +e
+{
+  if [[ "$continuation_mode" == tests ]]; then
+    echo 'Expected runtime: approximately 10–90 seconds. Synthetic data and fake HTTP only.'
+    "$continuation_python" -m unittest discover -s tests -p 'test_*.py' -v || exit "$?"
+    "$continuation_python" -m unittest discover -s vendor/phased_v100/tests -p 'test_*.py' -q || exit "$?"
+    "$continuation_python" -m unittest discover -s vendor/phased_v100/vendor/local_first/tests -p 'test_*.py' -q || exit "$?"
+    "$continuation_python" vendor/phased_v100/vendor/local_first/comparison_original/run_tests.py
+  else
+    if [[ "$continuation_mode" == download ]]; then
+      echo 'Expected runtime from completed 10%: about 282 download hours (11.7 days) at the previous 29.05 IDs/s, plus retries and local exports/reports. Initial local setup: approximately 5–20 minutes, unbenchmarked.'
+      echo 'Runs continuously through 100%; saves reports at 25%, 50%, 75%, and 100%, then continues automatically. ETAs to next checkpoint and 100% update every 30 seconds.'
+      echo 'Reuses the existing 10% and any further saved responses. Parquet checkpoints; up to 10 local workers within the memory budget; one API request at a time.'
+      continuation_test_log="${continuation_log%.log}_selftests.log"
+      echo "Offline self-tests (no API): $continuation_test_log"
+      if "$continuation_python" -m unittest discover -s tests -p 'test_*.py' -q > "$continuation_test_log" 2>&1; then
+        echo 'OFFLINE_SELF_TESTS_OK'
+      else
+        continuation_test_exit=$?
+        cat "$continuation_test_log"
+        echo 'Self-tests failed. No production download started.'
+        exit "$continuation_test_exit"
+      fi
+    else
+      echo 'Expected runtime: approximately 1–5 minutes for checkpoint verification and status; zero API requests.'
+    fi
+    "${continuation_awake[@]}" "$continuation_python" -u code/run_continuous.py "$continuation_mode" --project-root "$continuation_project" --desktop "$continuation_desktop" "$@"
+  fi
+} 2>&1 | tee "$continuation_log"
+continuation_exit=${PIPESTATUS[0]}
+set -e
+if [[ "$continuation_exit" -ne 0 ]]; then
+  echo "Stopped with exit $continuation_exit. Saved responses, Parquets and reports remain reusable. Rerun RUN_TO_100.command to resume. Log: $continuation_log"
+fi
+exit "$continuation_exit"

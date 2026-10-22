@@ -1,0 +1,144 @@
+{
+  "package": "Pool_Matchmaking_Audit_v1_0_0",
+  "archive_name": "Pool_Matchmaking_Audit_v1_0_0.zip",
+  "archive_sha256": "29e3c9ffbc95bac8628d280da15fe3b232c7c8b466163613e19fb51bb56d7e4f",
+  "archive_size": 61502,
+  "archive_root": "Pool_Matchmaking_Audit_v1_0_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "DESIGN_NOTE.md",
+      "published_path": "DESIGN_NOTE.md",
+      "sha256": "e401e9964a10ccfb1e1748e8362033735530e103662bddb6722a6b866ee04142",
+      "published_sha256": "e401e9964a10ccfb1e1748e8362033735530e103662bddb6722a6b866ee04142",
+      "size": 22940
+    },
+    {
+      "path": "README_FIRST.md",
+      "published_path": "README_FIRST.md",
+      "sha256": "6d2099a8035bf3486db45b514de259416f265ec76f370c4c223ca2f3e29b3290",
+      "published_sha256": "6d2099a8035bf3486db45b514de259416f265ec76f370c4c223ca2f3e29b3290",
+      "size": 1612
+    },
+    {
+      "path": "RUN_COMMAND.txt",
+      "published_path": "RUN_COMMAND.txt",
+      "sha256": "389c70c3e2c9cf7f49e6871a3cc04dfadcf213d2c59630f8a499ca07a3a07c6f",
+      "published_sha256": "389c70c3e2c9cf7f49e6871a3cc04dfadcf213d2c59630f8a499ca07a3a07c6f",
+      "size": 266
+    },
+    {
+      "path": "RUN_PROBE.command",
+      "published_path": "RUN_PROBE.command.in",
+      "sha256": "c2acd27fc31ad3502b6da6f80438fa2d878783ee31522f28f94fbbfa9a83586a",
+      "published_sha256": "c2acd27fc31ad3502b6da6f80438fa2d878783ee31522f28f94fbbfa9a83586a",
+      "size": 1270
+    },
+    {
+      "path": "probe_inputs.py",
+      "published_path": "probe_inputs.py",
+      "sha256": "cf6286396ceb03e2753d0646f18b6c387c1c72d8eaab204a9343ebe3e91c088b",
+      "published_sha256": "cf6286396ceb03e2753d0646f18b6c387c1c72d8eaab204a9343ebe3e91c088b",
+      "size": 9299
+    },
+    {
+      "path": "sources/lila/COPYING.md",
+      "published_path": "sources/lila/COPYING.md",
+      "sha256": "706fa7cda7966e327c4352ffffa8138c41a28622e889368be5676dd7cc567e91",
+      "published_sha256": "706fa7cda7966e327c4352ffffa8138c41a28622e889368be5676dd7cc567e91",
+      "size": 9380
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "PACKAGE_BUILD_VALIDATION.json",
+      "sha256": "1789cd5876c031da1e6d0d90ecf7030473614bd4449fabb3b4bed9a7f89ec780",
+      "size": 741
+    },
+    {
+      "path": "PACKAGE_MANIFEST.sha256",
+      "sha256": "30b494a28281efd31dbcd5dfb98eec1898e9040ec3d217a816b5dba86fb48b37",
+      "size": 2898
+    },
+    {
+      "path": "SOURCE_INDEX.json",
+      "sha256": "774fd5a9ca220053b300aadca3b0b366d4ba2ddb0786e7f9cdd12c39d06b9d19",
+      "size": 27633
+    },
+    {
+      "path": "sources/lila/35beaea23b15e98d83a1ed43720c68ec3264b3f6/modules/lobby/src/main/LobbySocket.scala",
+      "sha256": "89a7e110b9fcf3f1aa549faa481532b3449e4fa847842fe5d59be30827e21677",
+      "size": 11472
+    },
+    {
+      "path": "sources/lila/35beaea23b15e98d83a1ed43720c68ec3264b3f6/modules/pool/src/main/MatchMaking.scala",
+      "sha256": "1b7b09cff85dd8317c4521a8909545d7a084312b933f0f98bb6fca0b80464048",
+      "size": 3672
+    },
+    {
+      "path": "sources/lila/35beaea23b15e98d83a1ed43720c68ec3264b3f6/modules/pool/src/main/PoolList.scala",
+      "sha256": "ac20c851423106da78e3c63da873ba7b901d50f1d3f7c5723c5acb10fd593a10",
+      "size": 1212
+    },
+    {
+      "path": "sources/lila/35beaea23b15e98d83a1ed43720c68ec3264b3f6/modules/pool/src/main/PoolMember.scala",
+      "sha256": "104db5ae226911b9343ea830188b8c99dacd63bcd0deb9be208b816c7d7361f6",
+      "size": 458
+    },
+    {
+      "path": "sources/lila/LICENSE",
+      "sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0",
+      "size": 34523
+    },
+    {
+      "path": "sources/lila/b97c085329f525271887c3bb44ae4a1c8c772ea0/modules/playban/src/main/PlaybanApi.scala",
+      "sha256": "31d9b2b849eb2834633abc43c627f28acdfe0820a2bea9a198d5ed9c12ae91d2",
+      "size": 9578
+    },
+    {
+      "path": "sources/lila/b97c085329f525271887c3bb44ae4a1c8c772ea0/modules/playban/src/main/RageSit.scala",
+      "sha256": "c8e2c15e09c5ae31f2b3caca2804613fbf5f7cb10855c89b9dc4784405368409",
+      "size": 1573
+    },
+    {
+      "path": "sources/lila/b97c085329f525271887c3bb44ae4a1c8c772ea0/modules/pool/src/main/GameStarter.scala",
+      "sha256": "c49af94f0c061e890d29b5fa68f3cb0082968d4d442ba3796151775b4025d50e",
+      "size": 2401
+    },
+    {
+      "path": "sources/lila/b97c085329f525271887c3bb44ae4a1c8c772ea0/modules/pool/src/main/HookThieve.scala",
+      "sha256": "d708482fd8802e165a3e0720c4aace9404a7929f0dcc55ac85f1ec15bae5b15c",
+      "size": 871
+    },
+    {
+      "path": "sources/lila/b97c085329f525271887c3bb44ae4a1c8c772ea0/modules/pool/src/main/MatchMaking.scala",
+      "sha256": "a695e017993da1f4376ed172ec09695834f84e3e9b80762bd80ab3eeaa24f077",
+      "size": 3393
+    },
+    {
+      "path": "sources/lila/b97c085329f525271887c3bb44ae4a1c8c772ea0/modules/pool/src/main/PoolActor.scala",
+      "sha256": "d226f82f4bdaa7a9f91bcca3cbee7b3ee441aa589a0c784a317435b9b9fc454d",
+      "size": 2910
+    },
+    {
+      "path": "sources/lila/b97c085329f525271887c3bb44ae4a1c8c772ea0/modules/pool/src/main/PoolApi.scala",
+      "sha256": "cc82ab521287008d8ea3bbd927a58918ed82e7f41f1f71028f31552456af0e44",
+      "size": 1866
+    },
+    {
+      "path": "sources/lila/b97c085329f525271887c3bb44ae4a1c8c772ea0/modules/pool/src/main/PoolMember.scala",
+      "sha256": "a3b4ab27184fcbdb7248778a02bbc388a88f0dddbab18bc4588441ba021761d0",
+      "size": 1016
+    },
+    {
+      "path": "sources/lila/commit_changes/jan_diff.json",
+      "sha256": "99e496b5464d1c380866b0892fd993f7cc16d4a58dd969a05602b81b0eb5bf65",
+      "size": 2786
+    },
+    {
+      "path": "sources/lila/commit_changes/trust_change.json",
+      "sha256": "487665239be2a5f7803a3dcc51c4615ae3c72924fa10166c2311b3d483bd2d98",
+      "size": 7076
+    }
+  ]
+}

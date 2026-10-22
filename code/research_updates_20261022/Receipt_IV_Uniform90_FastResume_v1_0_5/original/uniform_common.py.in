@@ -1,0 +1,86 @@
+"""Uniform90 implementation; all inherited producers remain byte unchanged."""
+from pathlib import Path
+import os, sys, json, time, gc, shutil
+ROOT = Path(__file__).resolve().parent
+sys.path.insert(0, str(ROOT/'vendor'))
+from rebuild_common import *
+ROOT = Path(__file__).resolve().parent
+VERSION = '1.0.0'
+COUNTS90 = [x+'_90' for x in ('fair','kind','disconnect','receipt','claim')]
+OUTCOME_COLS = ['y','reached','outcome_gid','outcome_t','outcome_start','outcome_opponent']
+TRAITS90 = [x.replace('_30','_90') for x in frozen.r.T30] + ['log_volume_90']
+RULE90 = dict(version=VERSION,history_days=90,history_gap_days=0,spacing_days=0,
+    history_interval='[exposure game start minus 90 days, exposure game start)',
+    behavioral_event_time='Inherited decision timestamp t; author-clean history counts',
+    volume='All-game starts in the same 90-day interval; factual chronology, not completed-game counts',
+    support=DEFINITION['support'],score=DEFINITION['score'],score_scale=SD,
+    outcome='First qualifying competitive chooser decision with decision time > anchor and <= anchor+90 days; game start > anchor; different opponent; no choice is zero',
+    followup='Existing complete90 rule retained; anchor+90 days strictly before panel end',
+    observation='All eligible exposure rows; no recipient spacing or one-row cap; exposure weighted',
+    covariance=DEFINITION['covariance'],primary_controls='X0_ENV_indicator with log_volume_90',
+    balance='Eight 90-day history/volume traits under NH+ENV, omitting recipient-history controls; controlled traits are not independent balance evidence',
+    comparison='Same fixed Phase100 additional-game hash frame; same support and first-pair/predecessor rules; remove receipt cooldown, use history90',
+    author_accounts=['__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__'],legacy_files_read_only=True,
+    no_stockfish=True,progress='25/50/75/100 are stage milestones, not fractions of elapsed runtime')
+
+def conn(root, memory=4.):
+    return db(Path(root)/'spill', memory)
+
+def view(c, name, paths):
+    if isinstance(paths,(str,Path)): paths=[paths]
+    c.execute('CREATE OR REPLACE VIEW '+name+' AS SELECT * FROM '+parq(paths))
+
+def columns(path): return pq.ParquetFile(path).schema_arrow.names
+
+def except_fields(alias, path, remove):
+    drop=[x for x in remove if x in columns(path)]
+    return alias+'.*'+(' EXCLUDE('+','.join(drop)+')' if drop else '')
+
+def assert_coverage(c, left, right):
+    ensure_unique(c,left);ensure_unique(c,right)
+    ensure(c,'SELECT count(*) FROM '+left+' FULL JOIN '+right+' USING(row_id) WHERE '+left+'.row_id IS NULL OR '+right+'.row_id IS NULL','Incomplete row coverage')
+
+def mark_legacy_reports(run):
+    for name in ('cohort_rule.json','cohort_bridge.json','cache_authentication.json','input_authentication.json',
+                 'reuse_authentication.json','completed_chronology_reuse.json','exposure_selection_counts.csv'):
+        p=run/'report'/name
+        if p.exists():p.replace(p.with_name('legacy_'+name))
+
+def receipt_selection(a,run,conf,b):
+    old=primary.build_selection(a,run,conf,b)
+    mark_legacy_reports(run)
+    def build(tmp):
+        c=conn(tmp,a.memory_gb-2)
+        try:
+            view(c,'raw',b['raw']);view(c,'old',old);view(c,'legacy',b['primary'])
+            ids=','.join(map(str,b['bound']['binding']['author_ids']))
+            start=int(phase_inputs.core.STARTS[0]);end=int(phase_inputs.core.PANEL_END)
+            ensure(c,f'SELECT count(*) FROM raw WHERE complete90 IS DISTINCT FROM (anchor_ms+{90*DAY}<{end})','Followup coverage convention changed')
+            copy_query(c,f'''SELECT old.*,
+                raw.archive_start_ms-{90*DAY}>={start} AS history90_complete,
+                raw.recipient_id NOT IN ({ids}) AND raw.opponent_id NOT IN ({ids}) AS author_clean,
+                old.keep AS legacy_windows_unspaced,
+                old.supported AND raw.complete90 AND raw.archive_start_ms-{90*DAY}>={start}
+                  AND raw.recipient_id NOT IN ({ids}) AND raw.opponent_id NOT IN ({ids}) AS uniform_keep,
+                legacy.row_id IS NOT NULL AS legacy_primary
+                FROM old JOIN raw USING(row_id) LEFT JOIN legacy USING(row_id)''',tmp/'flags.parquet')
+            view(c,'f',tmp/'flags.parquet')
+            ensure(c,'SELECT count(*) FROM f WHERE legacy_primary AND NOT uniform_keep','New frame loses old primary observations')
+            ensure(c,'SELECT count(*) FROM f WHERE legacy_primary IS DISTINCT FROM (spaced90 AND observation_complete)','Old spaced membership not reproduced')
+            rows=[]
+            cuts=[('legacy_spaced_old_windows','legacy_primary'),
+                  ('uniform90_same_legacy_rows','legacy_primary'),
+                  ('uniform90_spaced_extended_calendar','f.spaced90 AND uniform_keep'),
+                  ('uniform90_unspaced_legacy_calendar','uniform_keep AND observation_complete'),
+                  ('uniform90_unspaced_full_calendar','uniform_keep'),
+                  ('calendar_only_added_unspaced','uniform_keep AND NOT observation_complete')]
+            for label,where in cuts:
+                n,people=c.execute('SELECT count(*),count(DISTINCT raw.recipient_id) FROM f JOIN raw USING(row_id) WHERE '+where).fetchone()
+                rows.append(dict(sample=label,exposures=n,recipients=people))
+            copy_query(c,'SELECT raw.* EXCLUDE(spaced30,spaced90,first_recipient),f.spaced30,f.spaced90,f.first_recipient,f.legacy_primary,f.observation_complete AS legacy_windows,f.history90_complete FROM raw JOIN f USING(row_id) WHERE f.uniform_keep ORDER BY row_id',tmp/'source.parquet')
+            save(tmp/'counts.json',rows)
+            return dict(rows=pq.ParquetFile(tmp/'source.parquet').metadata.num_rows)
+        finally:c.close()
+    out,_=stage(run/'PRIVATE/selection90',conf,build,[old,b['raw'],b['primary']])
+    csv_out(run/'report/sample_counts.csv',load(out/'counts.json'))
+    return out/'source.parquet'

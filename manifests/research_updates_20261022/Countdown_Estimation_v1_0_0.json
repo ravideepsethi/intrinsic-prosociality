@@ -1,0 +1,159 @@
+{
+  "package": "Countdown_Estimation_v1_0_0",
+  "archive_name": "Countdown_Estimation_v1_0_0.zip",
+  "archive_sha256": "edfe402e5cceff684f97e5bf778472300d042d6a1cb166176d4a923d6d1abbda",
+  "archive_size": 37600,
+  "archive_root": "Countdown_Estimation_v1_0_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "INTERPRETATION.txt",
+      "published_path": "INTERPRETATION.txt",
+      "sha256": "ab45a55d688788365c510aa3c7f54935e676006a7ead49c9cc58d039aea4c66c",
+      "published_sha256": "ab45a55d688788365c510aa3c7f54935e676006a7ead49c9cc58d039aea4c66c",
+      "size": 4620
+    },
+    {
+      "path": "README.txt",
+      "published_path": "README.txt",
+      "sha256": "4d3f83b16e88647b7c59632706c1205d2d56e3e0e7fe01e59231f5edaab194fa",
+      "published_sha256": "4d3f83b16e88647b7c59632706c1205d2d56e3e0e7fe01e59231f5edaab194fa",
+      "size": 8931
+    },
+    {
+      "path": "RUN_COUNTDOWN_ESTIMATION.command",
+      "published_path": "RUN_COUNTDOWN_ESTIMATION.command.in",
+      "sha256": "cbefeaa4ff390289cae4ab5ff78ebdc18e7edabbe1d7bbfc1c36a9defc4a1ab5",
+      "published_sha256": "cbefeaa4ff390289cae4ab5ff78ebdc18e7edabbe1d7bbfc1c36a9defc4a1ab5",
+      "size": 2482
+    },
+    {
+      "path": "authority/AUTHOR_EXCLUSION.json",
+      "published_path": "authority/AUTHOR_EXCLUSION.json.in",
+      "sha256": "0267b55c9536ae0f9302a08c338b01f5f7cd2e2f2d6a8d54a7d4621a58cb77a7",
+      "published_sha256": "ee477da62838399f042c52ccbb05e3f4a524af7db01ec0e3aea27f1bfa1a4732",
+      "size": 882,
+      "redactions": [
+        {
+          "start": 127,
+          "end": 134,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 138,
+          "end": 146,
+          "token": "__PRIVATE_VALUE_2__"
+        },
+        {
+          "start": 172,
+          "end": 179,
+          "token": "__PRIVATE_VALUE_3__"
+        }
+      ]
+    },
+    {
+      "path": "code/base.py",
+      "published_path": "code/base.py.in",
+      "sha256": "3b6a06459d97c2dd90aec098770a10486fbc5b48ee07fa1bdc8462eb858607e0",
+      "published_sha256": "8b16d98c598c1cd5de03dc499ea9ff4a301cfdf4410184cdd4fc501b5ca90cd9",
+      "size": 3834,
+      "redactions": [
+        {
+          "start": 329,
+          "end": 336,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 340,
+          "end": 348,
+          "token": "__PRIVATE_VALUE_2__"
+        }
+      ]
+    },
+    {
+      "path": "code/common.py",
+      "published_path": "code/common.py",
+      "sha256": "0b03e2aa079b995c3ccc9ae7781d28a7e933c4397e832b81601a3a92dd149249",
+      "published_sha256": "0b03e2aa079b995c3ccc9ae7781d28a7e933c4397e832b81601a3a92dd149249",
+      "size": 1427
+    },
+    {
+      "path": "code/design.py",
+      "published_path": "code/design.py",
+      "sha256": "6c104bb67a9ce4c7261f99d850be07f5205bbbb94a3146d1c2f298882312c60b",
+      "published_sha256": "6c104bb67a9ce4c7261f99d850be07f5205bbbb94a3146d1c2f298882312c60b",
+      "size": 3662
+    },
+    {
+      "path": "code/estimate.py",
+      "published_path": "code/estimate.py",
+      "sha256": "4e2601085da43b62ed06319a318eb0861cde3f3daeef98e4f4d0b1c4d7b600f5",
+      "published_sha256": "4e2601085da43b62ed06319a318eb0861cde3f3daeef98e4f4d0b1c4d7b600f5",
+      "size": 10169
+    },
+    {
+      "path": "code/inputs.py",
+      "published_path": "code/inputs.py",
+      "sha256": "4c87e7c147e57b1d201f0f225c43e756399ac209161ca31e438e6ceacc702de8",
+      "published_sha256": "4c87e7c147e57b1d201f0f225c43e756399ac209161ca31e438e6ceacc702de8",
+      "size": 4721
+    },
+    {
+      "path": "code/numerics.py",
+      "published_path": "code/numerics.py",
+      "sha256": "409f29fa27270070943f31a64af20e5bf9781ae11e316138ec89f214d0d03966",
+      "published_sha256": "409f29fa27270070943f31a64af20e5bf9781ae11e316138ec89f214d0d03966",
+      "size": 3796
+    },
+    {
+      "path": "code/report.py",
+      "published_path": "code/report.py",
+      "sha256": "d338500b352f9e304ace28f3e09205cefc7860514d5c1068bed0c430e5bd2366",
+      "published_sha256": "d338500b352f9e304ace28f3e09205cefc7860514d5c1068bed0c430e5bd2366",
+      "size": 11227
+    },
+    {
+      "path": "code/run.py",
+      "published_path": "code/run.py",
+      "sha256": "0cd052d96338bb915976e895d4ec2459b4a7e4f35d2ea9a261391ed9a600411c",
+      "published_sha256": "0cd052d96338bb915976e895d4ec2459b4a7e4f35d2ea9a261391ed9a600411c",
+      "size": 11631
+    },
+    {
+      "path": "requirements.txt",
+      "published_path": "requirements.txt",
+      "sha256": "0e2b51147c780082795dfff6a6c4727b23ede194ef5ca7877016c333f350970d",
+      "published_sha256": "0e2b51147c780082795dfff6a6c4727b23ede194ef5ca7877016c333f350970d",
+      "size": 139
+    },
+    {
+      "path": "tests/test_estimation.py",
+      "published_path": "tests/test_estimation.py",
+      "sha256": "21bb12f3c7b4d7d840e89987b750bc8d569130a5f1e8c4479fdbf5050abca026",
+      "published_sha256": "21bb12f3c7b4d7d840e89987b750bc8d569130a5f1e8c4479fdbf5050abca026",
+      "size": 10476
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "PACKAGE_MANIFEST.json",
+      "sha256": "b006dc03f5ad874065566626e3914185de22ef5dc7bde2e853fa531038e10551",
+      "size": 2126
+    },
+    {
+      "path": "VALIDATION.txt",
+      "sha256": "de7777443d3aa1358993c41b493a111fba3d286927c426d80973408766faa791",
+      "size": 2344
+    },
+    {
+      "path": "authority/FEASIBILITY_INPUT.json",
+      "sha256": "4d0052509eaef2c8aee60eb97adda2d1d1aa9036eb31e08f456fd5a6d8c20133",
+      "size": 707
+    },
+    {
+      "path": "authority/FEASIBILITY_STATUS.json",
+      "sha256": "d0f4249ee1211cc82734853d68df51434d8ba3e32e2c97cf4b69028440c5e110",
+      "size": 598
+    }
+  ]
+}

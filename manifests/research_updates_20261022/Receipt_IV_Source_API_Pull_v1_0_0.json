@@ -1,0 +1,125 @@
+{
+  "package": "Receipt_IV_Source_API_Pull_v1_0_0",
+  "archive_name": "Receipt_IV_Source_API_Pull_v1_0_0.zip",
+  "archive_sha256": "33ab11fb74d921db37f60bbe1c0e5a1f38d1c660c38bc6d64b75fecba113c71e",
+  "archive_size": 39710,
+  "archive_root": "Receipt_IV_Source_API_Pull_v1_0_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "README_FIRST.md",
+      "published_path": "README_FIRST.md",
+      "sha256": "3a3c63596f3a73b6312da4f3ec338b9c170a620e8864fd52c3c463ee6317f33f",
+      "published_sha256": "3a3c63596f3a73b6312da4f3ec338b9c170a620e8864fd52c3c463ee6317f33f",
+      "size": 8354
+    },
+    {
+      "path": "RUN_SOURCE_API_PULL.command",
+      "published_path": "RUN_SOURCE_API_PULL.command.in",
+      "sha256": "04ddd99c1136313866cf46f8ff3b6171731ea1269fff3cb6eee26355b209b411",
+      "published_sha256": "04ddd99c1136313866cf46f8ff3b6171731ea1269fff3cb6eee26355b209b411",
+      "size": 797
+    },
+    {
+      "path": "authority/GameJson.yaml",
+      "published_path": "authority/GameJson.yaml",
+      "sha256": "415f8703976d4025dfbc9ec6f76bd362028e600ebf68c1f16919765b4398c174",
+      "published_sha256": "415f8703976d4025dfbc9ec6f76bd362028e600ebf68c1f16919765b4398c174",
+      "size": 1587
+    },
+    {
+      "path": "authority/GameSource.yaml",
+      "published_path": "authority/GameSource.yaml",
+      "sha256": "b45604cebd165db7e5b417409f4d78ee5d2d6c466c7f5fdc49cc60f40f0201b0",
+      "published_sha256": "b45604cebd165db7e5b417409f4d78ee5d2d6c466c7f5fdc49cc60f40f0201b0",
+      "size": 158
+    },
+    {
+      "path": "authority/api-games-export-_ids.yaml",
+      "published_path": "authority/api-games-export-_ids.yaml",
+      "sha256": "a3962d7f4844e777698ff8ed12cf6be0c2021807b5ca6975fcd17e235ce90e07",
+      "published_sha256": "a3962d7f4844e777698ff8ed12cf6be0c2021807b5ca6975fcd17e235ce90e07",
+      "size": 3583
+    },
+    {
+      "path": "authority/lichess-api.yaml",
+      "published_path": "authority/lichess-api.yaml",
+      "sha256": "65e8e256e78f04a3989b5717a7163fb7e701c40136b06967f03651b5aa742c09",
+      "published_sha256": "65e8e256e78f04a3989b5717a7163fb7e701c40136b06967f03651b5aa742c09",
+      "size": 33085
+    },
+    {
+      "path": "code/api_client.py",
+      "published_path": "code/api_client.py",
+      "sha256": "14a58e5dd12bcb596f62e57303ea9fcfd7c31215f93f546ccbf5fb270ced04c4",
+      "published_sha256": "14a58e5dd12bcb596f62e57303ea9fcfd7c31215f93f546ccbf5fb270ced04c4",
+      "size": 6235
+    },
+    {
+      "path": "code/collect.py",
+      "published_path": "code/collect.py",
+      "sha256": "6f28536cd6c7c856a840b7e56444e73653f245fdaa2403f42be1f2a650ecac41",
+      "published_sha256": "6f28536cd6c7c856a840b7e56444e73653f245fdaa2403f42be1f2a650ecac41",
+      "size": 5236
+    },
+    {
+      "path": "code/common.py",
+      "published_path": "code/common.py",
+      "sha256": "aa73315405381fe3848db550190814fee38e9b7e3df17ea34252c10909aa9204",
+      "published_sha256": "aa73315405381fe3848db550190814fee38e9b7e3df17ea34252c10909aa9204",
+      "size": 4138
+    },
+    {
+      "path": "code/finalize.py",
+      "published_path": "code/finalize.py",
+      "sha256": "0c3f8636ed5f089fef4b2b6867840d6bf252d1d9e13e76a954ad5d3b26ddbbda",
+      "published_sha256": "0c3f8636ed5f089fef4b2b6867840d6bf252d1d9e13e76a954ad5d3b26ddbbda",
+      "size": 7816
+    },
+    {
+      "path": "code/prepare.py",
+      "published_path": "code/prepare.py",
+      "sha256": "4fcb7cfba3c75a657f7878ab05edd3123b112b18401f1e3206abbf7de94f5ac5",
+      "published_sha256": "4fcb7cfba3c75a657f7878ab05edd3123b112b18401f1e3206abbf7de94f5ac5",
+      "size": 5813
+    },
+    {
+      "path": "code/records.py",
+      "published_path": "code/records.py",
+      "sha256": "d1d5ad6bcfce10933dffcb1cafb140a217e9fd8a4e6dd65757879f5aae149b42",
+      "published_sha256": "d1d5ad6bcfce10933dffcb1cafb140a217e9fd8a4e6dd65757879f5aae149b42",
+      "size": 5354
+    },
+    {
+      "path": "code/run.py",
+      "published_path": "code/run.py",
+      "sha256": "1d3baef64f0ce1242074101d9b8b12d0374016beb94d9ca3b4aa0ba872885109",
+      "published_sha256": "1d3baef64f0ce1242074101d9b8b12d0374016beb94d9ca3b4aa0ba872885109",
+      "size": 9138
+    },
+    {
+      "path": "tests/test_pull.py",
+      "published_path": "tests/test_pull.py",
+      "sha256": "3a5c2bdd78747593fd48a7a1b8f9e83a5f82c18e2c9e62ca36f8fd31321b4b22",
+      "published_sha256": "3a5c2bdd78747593fd48a7a1b8f9e83a5f82c18e2c9e62ca36f8fd31321b4b22",
+      "size": 13171
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "PACKAGE_MANIFEST.sha256",
+      "sha256": "f099bf24aa512822f359f2f79af36d22993d9ea3146a84fe72e17a9bb196c67f",
+      "size": 1390
+    },
+    {
+      "path": "TEST_RESULTS.txt",
+      "sha256": "2563b17cc779cb443cc34e5dd6f24dd0a27b80fb7d9623265c9795afa15966d0",
+      "size": 2048
+    },
+    {
+      "path": "authority/API_REFERENCE.json",
+      "sha256": "9e351e10616a4e6f17a4c945fc8f3478656b2251a41965de5135d9613c6a8b9f",
+      "size": 1225
+    }
+  ]
+}

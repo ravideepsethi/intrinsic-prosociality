@@ -1,0 +1,79 @@
+KINDNESS TAXONOMY v1.0.0 — 7 October 2026
+
+Run from ~/Desktop/Lichess_Desktop after verifying the delivered ZIP SHA256.
+
+Full local run:
+  ./RUN_TAXONOMY.command --workers 10 --memory-gb 10
+
+Cheap diagnostics first, then stop:
+  ./RUN_TAXONOMY.command --workers 10 --memory-gb 10 --stop-after-diagnostics
+
+To continue, run the full command. The same configuration reuses completed
+stages. There are no percentage-checkpoint approval prompts. An interrupted
+mixture reuses completed starts and bootstrap replications. The currently
+unfinished fit is repeated. Avoid running two copies of the same job.
+
+Defaults:
+  Project: /Volumes/XT_Pro/lichess_kindness
+  Reports: ~/Desktop/Lichess_Desktop
+  Cache: derived/replication/kindness_taxonomy_v100_PRIVATE/<run key>
+
+Override paths with --project-root and --desktop. Environment variables
+KTX_PROJECT_ROOT, KTX_DESKTOP_DIR and KTX_PYTHON can select launcher defaults.
+The data drive must be mounted. Keep the Terminal open; caffeinate prevents
+idle sleep while the process runs. Closing the Mac lid can still suspend it.
+
+What this run does
+- Authenticates the existing certified 24-month pool/nonadjacent choice panel.
+- Excludes __PRIVATE_VALUE_1__ and __PRIVATE_VALUE_2__ in both roles, including panel histories.
+- Runs E diagnostics and relative July event-study tables first.
+- Runs first-observed-grant hazard and authenticated receipt-IV history splits.
+- Fits B1 account mixtures K=1..6, M=20/50/4, with 20 starts, independent
+  Year-2 fits, held-out validation, and 200 main-model account bootstraps.
+- Fits B2 type-specific state/cost logits at B1-selected K, with common
+  stage/speed/month controls and 200 main-model account bootstraps.
+- Produces account-type/posterior/marker Parquet files locally, aggregate
+  tables, figures, and source/schema inventory in the return ZIP.
+- Runs the D1/D2/F estimators if separately authenticated extended inputs exist.
+
+What requires the next data build
+All-game resignation/disconnection/casual/activity/rating markers; ordinary
+continuation-game trajectories and random-sample engine calibration; full-game
+accuracy; and evaluated outoftime events for probable waiting. The current
+choice panel does not contain their denominators. EXTENDED_INPUTS.md explains
+the contracts. Missing inputs receive BLOCKED_INPUT/NEEDS_INPUT_BUILD statuses.
+COMPLETE_LOCAL does not mean every item in the research plan is complete.
+
+Runtime and memory
+The diagnostics are substantially cheaper than the mixture/bootstrap jobs.
+There is no production-calibrated ETA: allow hours, potentially longer, for
+the full fits and 200-replication bootstraps. The 10-GB argument is a resource
+budget, not a hard process-RSS cap; DuckDB is given at most 3.5 GB at the
+10-GB setting, leaving room for numerical arrays. NumPy/optimizer memory and
+macOS overhead are separate. Starts run sequentially to avoid 10 simultaneous
+copies of the opportunity arrays. DuckDB uses up to 10 workers and BLAS 2.
+Disk must accommodate a projected panel, prior-event histories, risk rows,
+private type assignments, and spill files. The certified source panel is
+never overwritten. The run prints 30-second heartbeats for long stages.
+
+Outputs
+KINDNESS_TAXONOMY_REPORT_<key>.zip and .zip.sha256 are refreshed after every
+finished stage. A failure also produces a partial return ZIP when possible.
+Start with READ_RESULTS.txt, ANALYSIS_COVERAGE.csv and summary.json. Upload
+that report ZIP for interpretation or a schema-specific extension. Individual
+player rows, usernames, raw game IDs and posteriors stay in PRIVATE files on
+your drive; they are omitted from the return ZIP.
+
+Integrity and reproducibility
+Source checks are intentionally strict. Do not delete a failed check or relax
+a sample predicate to get a run through. Return the report ZIP/log instead.
+The package checksum fixes thresholds before this run. This is exploratory
+work: earlier related construal and receipt results have already been seen.
+It is not a retrospective preregistration. Year 2 never enters Year-1 type
+assignment, but previously inspected Year-2 material is not a virgin holdout.
+
+The launcher reuses compatible installed Python packages or creates an
+isolated environment. Package installation may use the internet once; the
+analysis itself blocks network calls and makes no API or Stockfish requests.
+Sixteen synthetic numerical/integration tests run automatically before data
+access. Validation details are in VALIDATION.txt.

@@ -1,0 +1,271 @@
+{
+  "package": "Color_Calendar_Recovery_v1_0_0",
+  "archive_name": "Color_Calendar_Recovery_v1_0_0.zip",
+  "archive_sha256": "178322b96fd7e1fdb092fc8ec119b52d8cd4de86ea4974eaddc32379ff04b304",
+  "archive_size": 1322622,
+  "archive_root": "Color_Calendar_Recovery_v1_0_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "README.md",
+      "published_path": "README.md",
+      "sha256": "0ae11183f22ba1badec4017f025bb06fa406b2f40acfb684e16f124abfeeb819",
+      "published_sha256": "0ae11183f22ba1badec4017f025bb06fa406b2f40acfb684e16f124abfeeb819",
+      "size": 9923
+    },
+    {
+      "path": "RUN_REPRODUCE.command",
+      "published_path": "RUN_REPRODUCE.command.in",
+      "sha256": "705e76dbef19668d59b2c13112c412b337facac396be458db7621b9be84e883c",
+      "published_sha256": "705e76dbef19668d59b2c13112c412b337facac396be458db7621b9be84e883c",
+      "size": 943
+    },
+    {
+      "path": "code/inference.py",
+      "published_path": "code/inference.py",
+      "sha256": "560027bb1f4b1332c7d659fb109d4ac4b3ec5447c1bed0ebf6072d1b04233278",
+      "published_sha256": "560027bb1f4b1332c7d659fb109d4ac4b3ec5447c1bed0ebf6072d1b04233278",
+      "size": 10844
+    },
+    {
+      "path": "code/io_utils.py",
+      "published_path": "code/io_utils.py",
+      "sha256": "d6e5147e6111b3182bd94447e00df5602e7dff4da496dcc38a3fef277bb83161",
+      "published_sha256": "d6e5147e6111b3182bd94447e00df5602e7dff4da496dcc38a3fef277bb83161",
+      "size": 5728
+    },
+    {
+      "path": "code/recompute_calendar.py",
+      "published_path": "code/recompute_calendar.py",
+      "sha256": "5b200f4a0da812f501368826abf59bb0384c843aa92985e46e5e8d034973933b",
+      "published_sha256": "5b200f4a0da812f501368826abf59bb0384c843aa92985e46e5e8d034973933b",
+      "size": 8954
+    },
+    {
+      "path": "source/METHODS.md",
+      "published_path": "source/METHODS.md",
+      "sha256": "fc90f9e575bc5910822716141233d2b106ee05fb2d62ef868277460161f9bd5e",
+      "published_sha256": "fc90f9e575bc5910822716141233d2b106ee05fb2d62ef868277460161f9bd5e",
+      "size": 8284
+    },
+    {
+      "path": "source/POST_POLICY_DEPENDENCIES.md",
+      "published_path": "source/POST_POLICY_DEPENDENCIES.md",
+      "sha256": "12ea62ebaa7641cf2ac0e0651143962b6b965fccbf1e98176d953d8c6aab18e6",
+      "published_sha256": "12ea62ebaa7641cf2ac0e0651143962b6b965fccbf1e98176d953d8c6aab18e6",
+      "size": 2849
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "PACKAGE_MANIFEST.sha256",
+      "sha256": "58e81b203f80cb4ef38342bb63ff20d2ff1691d0b3c53751781f938522dc2fbf",
+      "size": 4801
+    },
+    {
+      "path": "SOURCE_LINEAGE.json",
+      "sha256": "bd05891b6414b4a9e4ba5cad03c4a9ce5c8c1e3e08dce44e5177630ed3cce34a",
+      "size": 2417
+    },
+    {
+      "path": "VALIDATION.json",
+      "sha256": "3a91f3d092e59b914db7c0efc00335dabaf73eded8d34db9a02f7d4d7b9041ad",
+      "size": 810
+    },
+    {
+      "path": "results/SUMMARY.json",
+      "sha256": "dc31315d9af4df8c90dc4c160c8bd3982352f3707d64849c7724eb8725e582f7",
+      "size": 1118
+    },
+    {
+      "path": "results/calendar_MDE.csv",
+      "sha256": "cf0ccd1c36c76094d2b8230d71024aea907ec2dc770fb22eb9f3f7c4d775bf3e",
+      "size": 1146
+    },
+    {
+      "path": "results/calendar_MDE.parquet",
+      "sha256": "c9171825c170eee5c5ee815af2dc9dbc90fb995d6ae8a5406c9210fd376d186c",
+      "size": 8191
+    },
+    {
+      "path": "results/calendar_pairwise_power.csv",
+      "sha256": "ee838f9e9605f31dddb422c88e8a9c80ab599ef23dcedaf811c8913f9135aa5b",
+      "size": 136112
+    },
+    {
+      "path": "results/calendar_pairwise_power.parquet",
+      "sha256": "62ac068865d3b6f413d0ce64c67163c534cc0ea35fa08b421d8cd875e357e4ea",
+      "size": 12713
+    },
+    {
+      "path": "results/calendar_single_model_power.csv",
+      "sha256": "56c2b092d496c70a456e175b28e6a58af6a6a0917f4efdaedb56ed624ab9e89b",
+      "size": 26885
+    },
+    {
+      "path": "results/calendar_single_model_power.parquet",
+      "sha256": "f7b6a9e248b0ee74db487c5fe69e11878219b26a87add40b995026294f946c1b",
+      "size": 6752
+    },
+    {
+      "path": "results/calendar_windows.csv",
+      "sha256": "5f7bc0d8b0647adc91ff6b76e5be96e2baad553a6effa76fa9d51901e81bde30",
+      "size": 2347
+    },
+    {
+      "path": "results/calendar_windows.parquet",
+      "sha256": "5ccbd71f144f736d157b0f2248e8d49c5d5b3861cc62212a623634835c861ba7",
+      "size": 3194
+    },
+    {
+      "path": "results/null_announced_block4.csv",
+      "sha256": "54b5c1630a6d10992722d5a63bb3d0ad81e9e66124bcdd424b7e97dc1d31d622",
+      "size": 206397
+    },
+    {
+      "path": "results/null_announced_block4.parquet",
+      "sha256": "3174fbae1834835f24aad435faa766b98d9b6909db569a023a6ffa9d6bea1d66",
+      "size": 94748
+    },
+    {
+      "path": "results/null_announced_block8.csv",
+      "sha256": "07d7fd06b7daf180f6f5d6d02da206bbac17a5f2956152ddbc8c4cd276c2f98f",
+      "size": 206616
+    },
+    {
+      "path": "results/null_announced_block8.parquet",
+      "sha256": "ec121c205c215cf428efcc86569a9c2846ae9df5b3d5d2a479ed9496ed1a08e6",
+      "size": 94478
+    },
+    {
+      "path": "results/null_pooled_secondary_block4.csv",
+      "sha256": "fbb7fa17dd6e846c0b7d860b731a3a9e14f03a32678ad374ec39580753b0d2ac",
+      "size": 207563
+    },
+    {
+      "path": "results/null_pooled_secondary_block4.parquet",
+      "sha256": "4639c39f2ec272502ed020cc7aab9f2e898b0c2e385637dfa3c1b42f352220d0",
+      "size": 94595
+    },
+    {
+      "path": "results/null_pooled_secondary_block8.csv",
+      "sha256": "9f1451b068dd2749dabfd1cb87b24de318545afe835457da05d0a816d792eaa3",
+      "size": 208377
+    },
+    {
+      "path": "results/null_pooled_secondary_block8.parquet",
+      "sha256": "086f2ee4ed03af02a91cc42b889c004ea60411e6891ae09605610ce4ac3d0b5a",
+      "size": 94842
+    },
+    {
+      "path": "results/null_unannounced_block4.csv",
+      "sha256": "1d2d5d6dfc068f08cfc5f61d02972d267762f24e198489f55b3bfb95db036b09",
+      "size": 206342
+    },
+    {
+      "path": "results/null_unannounced_block4.parquet",
+      "sha256": "d5d387a2777cfe19d11beea39f1680345aae4104fe1298a617ed61dab4569b53",
+      "size": 94626
+    },
+    {
+      "path": "results/null_unannounced_block8.csv",
+      "sha256": "73a30b86f9ab790b046dd21b2f0beff4d9fd05ccae66d77ce21866265bf5f3e6",
+      "size": 206627
+    },
+    {
+      "path": "results/null_unannounced_block8.parquet",
+      "sha256": "2a5df83f58badea5c3a9135a59025a0b3c49a5c7b9afc4b5e47e5134f93499ec",
+      "size": 63870
+    },
+    {
+      "path": "results/observed_pre_weekly.csv",
+      "sha256": "0cb5a79857fc00fee3295a3886b383e36ebecb939d8fdfeb1aee376d9621f5c0",
+      "size": 12120
+    },
+    {
+      "path": "results/observed_pre_weekly.parquet",
+      "sha256": "7f3d0abb1f192a63701bbcb7e4d76357715776f417a781d2590e8c046a74ad9c",
+      "size": 10759
+    },
+    {
+      "path": "results/pre_diagnostics/pre_placebo_statistics.csv",
+      "sha256": "f9303c6e5efaa36b1ac6a7f526dd90ed05bb9013dd480d723549f4cb6c5d8c13",
+      "size": 4369
+    },
+    {
+      "path": "results/pre_diagnostics/pre_placebo_statistics.parquet",
+      "sha256": "d9eaac62e067fe8a5a003da6fac6490048666a4cd4408bc3aaa746d28bd7d8b2",
+      "size": 4299
+    },
+    {
+      "path": "results/pre_diagnostics/pre_temporal_diagnostics.json",
+      "sha256": "889d3e971e31156a5ea45048f929bac5be0d8ca7144e796ed25ca7f94c636d5c",
+      "size": 540
+    },
+    {
+      "path": "results/reused_primary_predictions.csv",
+      "sha256": "71a8462ccf768d9cbc878850f9c750fe176552577119e059106039942e70a282",
+      "size": 5167
+    },
+    {
+      "path": "results/reused_primary_predictions.parquet",
+      "sha256": "5949d1fd435457dc9328ba5d1c5e0a0af6f2d0bbc728c4c5727c0fa0f1cb6b0c",
+      "size": 12974
+    },
+    {
+      "path": "source/FAILED_COLOR_MODEL_SUMMARY.json",
+      "sha256": "b17330b060847e6ee8ab11705b7fee42a3f11c014303ae6f20179d6bba9ead3b",
+      "size": 2765
+    },
+    {
+      "path": "source/PRIMARY_READOUT.parquet",
+      "sha256": "5949d1fd435457dc9328ba5d1c5e0a0af6f2d0bbc728c4c5727c0fa0f1cb6b0c",
+      "size": 12974
+    },
+    {
+      "path": "source/REPAIRED_MODEL_COMPATIBILITY.json",
+      "sha256": "491298fd88d4578f31fca715129961c0a0c2f3c2acf7da6aa2c41b5b5035846d",
+      "size": 2534
+    },
+    {
+      "path": "source/SUMMARY.json",
+      "sha256": "52f1363325f8a03cd332761bfc66ee3f5209a134ee666ceb51ffb5f3a9ad2282",
+      "size": 4578
+    },
+    {
+      "path": "source/baseline_calibration.parquet",
+      "sha256": "ecbc0c7c969f48c2f784cca2fb144d577b7bd31ad37c0278b6c81859d4d7f8ab",
+      "size": 10990
+    },
+    {
+      "path": "source/coefficients_used.parquet",
+      "sha256": "9c0f096cac7f4c566583b54476f708ca9968f0a33551b19a1367c0073dcc5c27",
+      "size": 11730
+    },
+    {
+      "path": "source/failed_branch_monthly_counts.parquet",
+      "sha256": "54641e5fa9d3ce19e79a060405c014da30c93e357f034ccc1d61ab3cc9ac1112",
+      "size": 2609
+    },
+    {
+      "path": "source/input_checksums.parquet",
+      "sha256": "a5d99ae54f63c008b8798717babe52b0c65d91a009f77db7d56b63b95ba8aa32",
+      "size": 5452
+    },
+    {
+      "path": "source/model_predictions.parquet",
+      "sha256": "f4694e750aaf577f020af92ce1ccc76abb8d181eb4b49d2bf4a101cd9385dafe",
+      "size": 15039
+    },
+    {
+      "path": "source/pre_policy_weekly.parquet",
+      "sha256": "eb9c50835791d9141a9d61799dd5a14b4945c1377252dae9ef921655a5dc58b0",
+      "size": 9741
+    },
+    {
+      "path": "source/prediction_by_week.parquet",
+      "sha256": "55e7d223284b8aaf0efe7abac242ae6cc0484a794cf8c47d961d679803af9da4",
+      "size": 143918
+    }
+  ]
+}

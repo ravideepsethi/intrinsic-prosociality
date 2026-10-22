@@ -1,0 +1,42 @@
+#!/bin/bash
+# R10 v1.0.2: rank-aware model 4; reuse verified v1.0.1 cached first pass if specified.
+set -Eeuo pipefail
+if [[ $# -lt 1 ]]; then
+  echo "Usage: bash RUN_R10.command /path/to/VERIFIED_24m_input [--run-root /previous/output/root]" >&2
+  exit 2
+fi
+INPUT="$1"; shift
+PKG="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DESKTOP="$HOME/Desktop/Lichess_Desktop"
+mkdir -p "$DESKTOP"
+STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
+LOG="$DESKTOP/r10_two_questions_${STAMP}.log"
+export PYTHONUNBUFFERED=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 OMP_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1
+
+# On Mac the computation uses ~6 independent bounded-memory NumPy workers;
+# DuckDB preflight/sorting uses 10 query threads. No Lichess API is touched.
+(
+  python3 - <<'PY'
+import importlib,sys
+for name in ('duckdb','pyarrow','pandas','numpy'):
+    mod=importlib.import_module(name)
+    print(f'{name}: {mod.__version__}',flush=True)
+print(f'Python: {sys.version.split()[0]}',flush=True)
+PY
+  python3 "$PKG/tests/test_synthetic.py"
+  python3 "$PKG/tests/test_account_moments.py"
+  python3 "$PKG/tests/test_reporting.py"
+  python3 "$PKG/tests/test_unidentified_classical.py"
+  # Fail fast on real DuckDB SQL/Parquet syntax and bucket semantics.
+  python3 "$PKG/tests/test_duckdb_preflight.py"
+  if command -v caffeinate >/dev/null 2>&1; then
+    caffeinate -dimsu python3 -u "$PKG/src/r10.py" \
+      --input "$INPUT" --sql-workers "${SQL_WORKERS:-10}" \
+      --compute-workers "${COMPUTE_WORKERS:-6}" --memory-gb "${MEMORY_GB:-11}" "$@"
+  else
+    python3 -u "$PKG/src/r10.py" \
+      --input "$INPUT" --sql-workers "${SQL_WORKERS:-10}" \
+      --compute-workers "${COMPUTE_WORKERS:-6}" --memory-gb "${MEMORY_GB:-11}" "$@"
+  fi
+) 2>&1 | tee "$LOG"
+echo "R10 log: $LOG"

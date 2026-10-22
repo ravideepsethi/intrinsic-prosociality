@@ -1,0 +1,107 @@
+#!/usr/bin/env python3
+"""Run on the data-owning Mac. No API calls, profile pulls, or engine evaluations."""
+import argparse, contextlib, fcntl, json, os, shutil, sys, threading, traceback, uuid
+from pathlib import Path
+from common import *
+from source.pool_wave1_common import authenticate_sample,compact_sample_lineage
+from prepare import prepare
+from history import inspect_history,make_features,join_features
+from models import registry
+from estimate import run_models
+from report import descriptions,predictive_validation,figures,summary,package_report
+
+@contextlib.contextmanager
+def heartbeat(label):
+    stop=threading.Event()
+    def beat():
+        while not stop.wait(30):log(label+' — still running')
+    t=threading.Thread(target=beat,daemon=True);t.start()
+    try:yield
+    finally:stop.set();t.join()
+
+def main():
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--project-root',default='/Volumes/XT_Pro/lichess_kindness')
+    p.add_argument('--desktop-folder',default='__PRIVATE_VALUE_1__/Desktop/Lichess_Desktop')
+    p.add_argument('--sample-root');p.add_argument('--profile-snapshot');p.add_argument('--history-manifest')
+    p.add_argument('--threads',type=int,default=8);p.add_argument('--workers',type=int,default=4)
+    p.add_argument('--memory-limit',default='8GB');p.add_argument('--batch-rows',type=int,default=32768)
+    p.add_argument('--phase',choices=['all','audit'],default='all')
+    p.add_argument('--self-test',action='store_true')
+    a=p.parse_args()
+    if a.self_test:
+        from self_test import run;run();return
+    if not 1<=a.threads<=10 or not 1<=a.workers<=10:raise ValueError('threads/workers must be between 1 and 10')
+    if a.batch_rows<1000:raise ValueError('--batch-rows must be at least 1000')
+    project=Path(a.project_root)
+    if not project.is_dir():raise FileNotFoundError('Data volume is unavailable: '+str(project))
+    codehash=code_manifest();env=environment()
+    root=project/'derived/replication/rating_motives_v100_PRIVATE';root.mkdir(parents=True,exist_ok=True)
+    with (root/'RUN.lock').open('a') as lock:
+        try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        except BlockingIOError:raise RuntimeError('Another rating-motives run holds RUN.lock; wait for it to finish')
+        audit=root/'preflight'/uuid.uuid4().hex[:12];audit.mkdir(parents=True)
+        sample_root=Path(a.sample_root) if a.sample_root else project/'derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE'
+        try:
+            with heartbeat('Authenticating immutable sources'):
+                auth=authenticate_sample(sample_root,verify_hashes=True,hash_workers=min(a.workers,4))
+                profiles=stable_profile_source(project,a.profile_snapshot)
+                history=inspect_history(project,a.history_manifest,audit)
+        except Exception as exc:
+            save_json(audit/'RUN_FAILURE.json',dict(stage='input_authentication',error_type=type(exc).__name__,message=str(exc)))
+            atomic_text(audit/'SUMMARY.md','Input authentication stopped before any estimates were run. See RUN_FAILURE.json. No source data were modified.\n')
+            failed=package_report(audit,a.desktop_folder,'PREFLIGHT_'+audit.name)
+            log('FAILURE REPORT: '+str(failed));raise
+        binding=dict(code=codehash,sample=auth['fingerprint'],profile_sources=[s['sha256'] for s in profiles],
+            history=history['manifest_sha256'] if history else None,environment=env,buckets=16,batch_rows=a.batch_rows,phase=a.phase)
+        identity=digest(binding);work=root/identity[:12];work.mkdir(exist_ok=True);rep=work/'report';rep.mkdir(exist_ok=True)
+        save_json(work/'RUN_BINDING_PRIVATE.json',dict(binding=binding,profile_sources=profiles,args=vars(a)))
+        save_json(rep/'run_identity.json',dict(identity=identity,binding=binding))
+        lineage=compact_sample_lineage(auth);lineage.pop('panel_root_machine_specific',None);save_json(rep/'sample_lineage.json',lineage)
+        write_csv(rep/'authenticated_input_hashes.csv',
+            [dict(source='certified_panel',partition=r['month'],rows=r['rows'],sha256=r['actual_sha256']) for r in auth['month_records']]+
+            [dict(source='profile',partition=str(i),sha256=s['sha256']) for i,s in enumerate(profiles)]+
+            ([dict(source='enriched_history',partition=str(i),rows=f['rows'],sha256=f['sha256']) for i,f in enumerate(history['files'])]+
+             [dict(source='history_producer_receipt',partition='receipt',sha256=history['producer_receipt']['sha256'])] if history else []))
+        shutil.copy2(audit/'history_readiness.json',rep/'history_readiness.json')
+        for n in ['prior_recipient_patron_estimates.csv','prior_INTERPRETATION.md']:shutil.copy2(ROOT/'evidence'/n,rep/n)
+        log('Run output: '+str(work))
+        if a.phase=='audit':
+            atomic_text(rep/'SUMMARY.md','Audit only: no new empirical estimates. See history_readiness.json and sample_lineage.json.\n')
+            output=package_report(rep,a.desktop_folder,identity);log('UPLOAD THIS REPORT: '+str(output));return
+        con=connect(work,a.threads,a.memory_limit)
+        try:
+            with heartbeat('Preparing age-linked certified panel'):
+                base=prepare(con,auth,profiles,work,rep,identity)
+            feature=validation=None
+            if history:
+                with heartbeat('Constructing past-only history features'):
+                    feature,validation=make_features(con,base,history,work,rep,identity)
+            with heartbeat('Joining history eligibility'):
+                paths=join_features(con,base,feature,work,identity)
+            prep=json.loads((rep/'preparation_summary.json').read_text())
+            models,pending=registry(history is not None,prep['threshold_expected_score_validated'])
+            save_json(rep/'model_registry.json',dict(models=models,unsupported=pending))
+            log(f'Fitting {len(models)} registered state/specification models')
+            with heartbeat('Estimating registered models'):
+                estimates,primary,differences=run_models(con,paths,models,pending,work/'estimation',rep,identity,a.workers,a.batch_rows)
+            with heartbeat('Building aggregate report'):
+                raw=descriptions(con,paths,rep);predictive_validation(con,validation,work,rep)
+                figures(rep,estimates,raw);summary(rep,primary,differences,identity,history is not None)
+                (rep/'RUN_FAILURE.json').unlink(missing_ok=True)
+                output=package_report(rep,a.desktop_folder,identity)
+            save_json(work/'_SUCCESS.json',dict(status='COMPLETED_AVAILABLE_ANALYSES',identity=identity,report=str(output),history_supplied=history is not None,
+               primary_statuses={r['test']:r['status'] for r in primary}))
+            log('UPLOAD THIS REPORT: '+str(output))
+            log('All available analyses completed. Read SUMMARY.md for pending inputs and model support.')
+        except Exception as exc:
+            # Error summary contains the exception, never row-level data or a copy of the prepared panel.
+            save_json(rep/'RUN_FAILURE.json',dict(error_type=type(exc).__name__,message=str(exc),identity=identity))
+            atomic_text(rep/'SUMMARY.md','Run stopped before completion. Read RUN_FAILURE.json; completed audit tables are included. Do not treat any incomplete result as a null.\n')
+            output=package_report(rep,a.desktop_folder,identity);log('FAILURE REPORT: '+str(output));raise
+        finally:con.close()
+
+if __name__=='__main__':
+    try:main()
+    except KeyboardInterrupt:log('Interrupted. Rerun the same command to resume completed checkpoints.');sys.exit(130)
+    except Exception as e:log(type(e).__name__+': '+str(e));sys.exit(1)

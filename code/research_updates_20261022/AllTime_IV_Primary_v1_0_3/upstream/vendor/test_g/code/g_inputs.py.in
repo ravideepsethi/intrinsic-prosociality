@@ -1,0 +1,156 @@
+"""Existing-sample binding and whole-account partitioning. No network writes or API calls."""
+from __future__ import annotations
+import re
+from g_common import *
+from g_design import assign_split,ply_band
+
+ENGINE_FIELDS=['sf100k_stockfish_name','sf100k_stockfish_sha256','sf100k_nodes_requested','sf100k_threads','sf100k_hash_mb','sf100k_eval_method']
+MAIN_PREDICATE="source = 'pool' AND previous_classification_status = 'not_mutually_adjacent_observed'"
+SOURCE_REQUIRED={
+ 'game_id','chooser_user_id','disconnected_user_id','chooser_username_norm','disconnected_username_norm',
+ 'api_status','five_second_rule_passed','api_rated','api_variant','sf100k_fen_turn_matches_disconnected_color',
+ 'disconnected_color','side_to_move_after_last','sf100k_disconnected_color_for_perspective',
+ 'outcome_kind_draw','api_last_move_at_ms','archive_ordinal','ply_count','engine_eval_cp_disconnected',
+ 'engine_eval_cp_disconnected_raw','engine_eval_is_mate','engine_eval_mate_ply_disconnected',
+ 'chooser_elo','disconnected_elo','chooser_clock_last_obs_s','disconnected_clock_last_obs_s','time_control',
+ 'chooser_win_premium_v2','chooser_pre_rd_v2','disconnected_pre_rd_v2','api_speed','fen_after_last_move',*ENGINE_FIELDS}
+
+def certified_pool_source(auth):
+    """The immutable sample receipt proves pool membership; the panel has no api_source column."""
+    authority=auth.get('authority',{});report=auth.get('report',{})
+    require(auth.get('status')=='POOL_MAIN_SAMPLE_AUTHENTICATED_OK'
+        and authority.get('status')=='POOL_MAIN_SAMPLE_24M_CERTIFIED_OK'
+        and authority.get('main_predicate')==report.get('main_predicate')==MAIN_PREDICATE,
+        'Pool membership must be established by the authenticated main-sample authority and receipt.',
+        'SOURCE_MEMBERSHIP_NOT_CERTIFIED')
+    return 'pool'
+
+def check_source_schema(schema,month):
+    names=set(schema.names)
+    require(SOURCE_REQUIRED<=names,month+': missing source columns: '+','.join(sorted(SOURCE_REQUIRED-names)),
+        'SOURCE_SCHEMA_MISMATCH')
+    return dict(month=month,columns=len(schema),required_columns={n:str(schema.field(n).type) for n in sorted(SOURCE_REQUIRED)})
+
+def prepare(a,run,key):
+    out=run/'input';out.mkdir(parents=True,exist_ok=True)
+    with heartbeat('Authenticate the reviewed main sample'):
+        auth=authority().authenticate_sample(a.project_root/MAIN_REL,verify_hashes=False,hash_workers=1)
+    save(out/'SOURCE_PRIVATE.json',auth);records=auth['month_records'];paths=[];engines=[];counts=[]
+    source=certified_pool_source(auth)
+    schemas=[check_source_schema(pq.ParquetFile(rec['path']).schema_arrow,rec['month']) for rec in records]
+    save(run/'report/SOURCE_BINDING.json',dict(source=source,basis='Authenticated main-sample authority and matching success receipt',
+        main_predicate=MAIN_PREDICATE,per_row_api_source_required=False,monthly_schema_checks=schemas))
+    log(f'Certified pool membership; required columns checked for {len(records)} monthly inputs.')
+    for rec in records:
+        dest=out/rec['month'];dest.mkdir(exist_ok=True);target=dest/'opportunities.parquet';paths.append(target)
+        k=digest([key,rec['month'],rec['expected_sha256']])
+        if done(dest,k):
+            engines+=load(dest/'engine.json');counts.append(load(dest/'counts.json'));continue
+        src=Path(rec['path']);before=stamp(src)
+        with heartbeat('Verify input '+rec['month']):require(sha(src)==rec['expected_sha256'],'Main-panel SHA256 mismatch')
+        c=db(dest/'spill',max(1,a.memory_gb-2))
+        try:
+            c.execute('CREATE VIEW s AS SELECT * FROM '+parq([src]))
+            n,unique=c.execute('SELECT count(*),count(DISTINCT game_id) FROM s').fetchone()
+            require(n==unique==rec['rows'],'Source count/identity failure')
+            # Separate explicit three-valued predicate: null provenance is never accepted.
+            invalid=c.execute('''SELECT count(*) FROM s WHERE NOT coalesce(api_status='timeout' AND five_second_rule_passed
+              AND api_rated AND api_variant='standard' AND sf100k_nodes_requested=100000
+              AND sf100k_fen_turn_matches_disconnected_color AND disconnected_color=side_to_move_after_last
+              AND disconnected_color=sf100k_disconnected_color_for_perspective,false)''').fetchone()[0]
+            require(invalid==0,'Source semantics or engine perspective changed')
+            require(c.execute('SELECT count(*) FROM s WHERE outcome_kind_draw IS NULL OR outcome_kind_draw NOT IN (0,1) OR chooser_user_id IS NULL OR disconnected_user_id IS NULL OR api_last_move_at_ms IS NULL').fetchone()[0]==0,'Missing response, account, or chronology')
+            require(c.execute('SELECT count(*) FROM s WHERE chooser_username_norm IS NULL OR disconnected_username_norm IS NULL OR engine_eval_is_mate IS NULL OR engine_eval_cp_disconnected IS NULL').fetchone()[0]==0,'Missing author identity or evaluation provenance')
+            author="lower(trim(chooser_username_norm)) NOT IN ('__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__') AND lower(trim(disconnected_username_norm)) NOT IN ('__PRIVATE_VALUE_3__','__PRIVATE_VALUE_4__')"
+            m=MONTHS.index(rec['month'])
+            q=f'''SELECT game_id,chooser_user_id::BIGINT chooser,disconnected_user_id::BIGINT opponent,
+              lower(trim(chooser_username_norm)) chooser_name,lower(trim(disconnected_username_norm)) opponent_name,
+              api_last_move_at_ms::BIGINT event_ms,archive_ordinal::BIGINT archive_ordinal,ply_count::INTEGER ply,
+              outcome_kind_draw::DOUBLE y,engine_eval_cp_disconnected::DOUBLE board,
+              -engine_eval_cp_disconnected_raw::DOUBLE vf,
+              CASE WHEN engine_eval_is_mate AND engine_eval_mate_ply_disconnected=0 THEN CASE WHEN engine_eval_cp_disconnected>0 THEN -0.5 ELSE 0.5 END
+                WHEN engine_eval_is_mate THEN -engine_eval_mate_ply_disconnected ELSE 0 END::DOUBLE mate,
+              (disconnected_elo-chooser_elo)::DOUBLE dr,(disconnected_elo+chooser_elo)/2.0 mean_r,
+              chooser_clock_last_obs_s::DOUBLE clock_f,disconnected_clock_last_obs_s::DOUBLE clock_g,
+              try_cast(split_part(time_control,'+',1) AS DOUBLE) base,try_cast(split_part(time_control,'+',2) AS DOUBLE) inc,
+              chooser_win_premium_v2::DOUBLE premium,chooser_pre_rd_v2::DOUBLE rd_c,disconnected_pre_rd_v2::DOUBLE rd_d,
+              0::TINYINT stm,{m}::TINYINT month_code,{1 if m<12 else 2}::TINYINT AS year,
+              CASE lower(api_speed) WHEN 'ultrabullet' THEN 0 WHEN 'bullet' THEN 1 WHEN 'blitz' THEN 2 WHEN 'rapid' THEN 3 WHEN 'classical' THEN 4 END::TINYINT speed
+              FROM s WHERE {author}'''
+            tmp=target.with_suffix('.partial.parquet');c.execute(f'COPY ({q}) TO {qs(tmp)} (FORMAT PARQUET,COMPRESSION ZSTD)');os.replace(tmp,target)
+            eg=c.execute('SELECT DISTINCT '+','.join(ENGINE_FIELDS)+' FROM s').fetchdf().to_dict('records');engines+=eg;save(dest/'engine.json',eg)
+            nclean,nlate=c.execute('SELECT count(*),count(*) FILTER(WHERE ply>10) FROM '+parq([target])).fetchone()
+            ct=dict(month=rec['month'],source_rows=n,author_excluded=n-nclean,retained=nclean,after_ply10=nlate);counts.append(ct);save(dest/'counts.json',ct)
+            # All original IDs (including author rows) are exclusions for G1.
+            # Pool provenance is certified at sample level, not stored as a panel column.
+            ex=dest/'analysis_ids.parquet';c.execute(f'COPY (SELECT game_id,api_status AS status,{qs(source)} AS source FROM s) TO {qs(ex)} (FORMAT PARQUET,COMPRESSION ZSTD)')
+            # Uniform random-priority sample; merge the monthly reservoirs before choosing 10,000.
+            sample=dest/'alignment_pool.parquet'
+            c.execute(f'''COPY (SELECT game_id,fen_after_last_move,engine_eval_cp_disconnected_raw old_cp,
+                 engine_eval_is_mate old_is_mate,engine_eval_mate_ply_disconnected old_mate,disconnected_color,
+                 {','.join(ENGINE_FIELDS)} FROM s WHERE {author} ORDER BY md5(game_id || 'G0-20261012') LIMIT 10000)
+                 TO {qs(sample)} (FORMAT PARQUET,COMPRESSION ZSTD)''')
+            require(stamp(src)==before,'Source changed during input preparation')
+            checkpoint(dest,k,[src],[target,ex,sample,dest/'engine.json',dest/'counts.json'])
+        finally:c.close()
+        log('Authenticated '+rec['month'])
+    engines=list({digest(e):e for e in engines}.values());save(out/'ENGINE_CONFIGURATIONS.json',engines)
+    table(run/'report','tabG_source_counts',counts,{'N':sum(r['source_rows'] for r in counts),'sample':'Authenticated 24-month main sample','source_months':MONTHS,'ending_status_coverage':'verified timeout'})
+    return paths
+
+def account_partitions(a,run,paths,key):
+    work=run/'accounts';work.mkdir(exist_ok=True);k=digest([key,'whole-account',a.shards])
+    if done(work,k):return sorted(work.glob('bucket_*.parquet'))
+    snap=a.project_root/SNAPSHOT_REL
+    require(snap.is_file(),'The fixed Test A account snapshot is missing','MISSING_FLAG_SNAPSHOT')
+    with heartbeat('Authenticate fixed account flags'):require(sha(snap)==SNAPSHOT_SHA,'Test A snapshot checksum mismatch')
+    c=db(work/'spill',max(1,a.memory_gb-2),min(a.workers,4))
+    try:
+        c.execute('CREATE VIEW p AS SELECT * FROM '+parq(paths))
+        c.execute('CREATE VIEW flags AS SELECT lower(trim(username_norm)) AS "name",returned,coalesce(tos_violation,false) OR coalesce(disabled,false) flagged FROM '+parq([snap]))
+        c.execute('''CREATE TEMP TABLE groups AS SELECT chooser,
+          count(*) FILTER(WHERE year=1 AND board>=-100) nc,count(*) FILTER(WHERE year=1 AND board<=-300) nl,
+          sum(y) FILTER(WHERE year=1 AND board>=-100) yc,sum(y) FILTER(WHERE year=1 AND board<=-300) yl FROM p GROUP BY chooser''')
+        c.execute('''CREATE VIEW grouped AS SELECT p.*,
+          CASE WHEN nc<4 OR nl<4 THEN -1 WHEN yc>0 AND yl=0 THEN 0 WHEN yc>0 AND yl>0 THEN 1 WHEN yc=0 AND yl>0 THEN 2 ELSE 3 END::TINYINT "group",
+          coalesce(f.returned,false) AND coalesce(fo.returned,false) flag_known,
+          coalesce(f.returned AND f.flagged,false) OR coalesce(fo.returned AND fo.flagged,false) flagged
+          FROM p JOIN groups USING(chooser) LEFT JOIN flags f ON chooser_name=f.name LEFT JOIN flags fo ON opponent_name=fo.name WHERE ply>10''')
+        invalid=c.execute('''SELECT count(*) FROM grouped WHERE NOT coalesce(isfinite(dr) AND isfinite(mean_r)
+          AND isfinite(clock_f) AND isfinite(clock_g) AND clock_f>=0 AND clock_g>=0 AND base>0 AND inc>=0
+          AND speed BETWEEN 0 AND 4 AND isfinite(mate) AND (isfinite(vf) OR mate<>0),false)''').fetchone()[0]
+        require(invalid==0,f'{invalid} opportunities lack required clocks, rating, speed, or mate distance; no silent sample change.','MISSING_REQUIRED_FEATURES')
+        # Hash + row-count invariant includes the row identity, chronology and response.
+        auditq="count(*),sum(hash(game_id,chooser,event_ms,y)::HUGEINT)"
+        reference=c.execute('SELECT '+auditq+' FROM grouped').fetchone();observed=[0,0]
+        fragments=work/'fragments'
+        if fragments.exists(): shutil.rmtree(fragments)
+        c.execute(f'COPY (SELECT *,((chooser%{a.shards}+{a.shards})%{a.shards})::INTEGER bucket FROM grouped) TO {qs(fragments)} (FORMAT PARQUET,COMPRESSION ZSTD,PARTITION_BY(bucket))')
+        outputs=[]
+        for i in range(a.shards):
+            fs=sorted((fragments/f'bucket={i}').glob('*.parquet'))
+            if not fs:continue
+            p=work/f'bucket_{i:03d}.parquet';q=parq(fs)
+            v=c.execute(f'SELECT {auditq} FROM {q}').fetchone();observed=[observed[j]+int(v[j] or 0) for j in range(2)]
+            require(c.execute(f'SELECT count(*) FROM {q} WHERE ((chooser%{a.shards}+{a.shards})%{a.shards})<>{i}').fetchone()[0]==0,'Chooser bucket ownership failed')
+            c.execute(f'COPY (SELECT * FROM {q} ORDER BY chooser,event_ms,archive_ordinal,game_id) TO {qs(p)} (FORMAT PARQUET,COMPRESSION ZSTD)');outputs.append(p)
+        require(tuple(observed)==reference,'Whole-account row count/hash check failed')
+        save(work/'PARTITION_AUDIT.json',dict(reference=list(reference),observed=observed,one_physical_file_per_bucket=True,complete_histories=True,order=['chooser','event_ms','archive_ordinal','game_id']))
+        checkpoint(work,k,paths+[snap],outputs+[work/'PARTITION_AUDIT.json'])
+        shutil.rmtree(fragments)
+    finally:c.close()
+    return outputs
+
+def quota_counts(paths):
+    c=db(Path(paths[0]).parent/'quota_spill',2)
+    try:return c.execute('''SELECT speed,least((ply-11)//10,19)::INTEGER ply_bin,count(*) n FROM '''+parq(paths)+' WHERE ply>10 GROUP BY ALL ORDER BY speed,ply_bin').fetchdf()
+    finally:c.close()
+
+def load_bucket(path,random=False,subset='all'):
+    d=pd.read_parquet(path);d.loc[d.mate!=0,'vf']=0
+    if subset=='competitive':d=d.loc[d.board>=-100].copy()
+    elif subset=='unflagged':d=d.loc[~(d.rd_c>110)&~d.flagged].copy()
+    elif subset=='roughly_equal':d=d.loc[(d.board>=-100)&(d.board<100)].copy()
+    elif subset=='year2_groups':d=d.loc[(d.year==2)&(d.board>=-100)&(d.group>=0)].copy()
+    d=d.reset_index(drop=True);d['train']=assign_split(d,random=random)
+    return d

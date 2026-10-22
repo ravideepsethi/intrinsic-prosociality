@@ -1,0 +1,23 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1
+AUDIT_PACKAGE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+AUDIT_PROJECT="/Volumes/XT_Pro/lichess_kindness"
+AUDIT_DESKTOP="$HOME/Desktop/Lichess_Desktop"
+AUDIT_PYTHON="$AUDIT_PROJECT/venv/bin/python"
+mkdir -p "$AUDIT_DESKTOP"
+AUDIT_LOG="$AUDIT_DESKTOP/PATRON_IV_COVERAGE_RUN_$(date -u +%Y%m%dT%H%M%SZ).log"
+{
+  echo "Patron IV coverage audit 1.0.1: offline; provisional runtime 5–20 minutes."
+  echo "Existing verified stages will resume; checkpoint reports at 25/50/75/100%."
+  echo "Log: $AUDIT_LOG"
+  if [[ ! -x "$AUDIT_PYTHON" ]]; then
+    echo "Required existing Python is absent: $AUDIT_PYTHON"
+    exit 1
+  fi
+  cd "$AUDIT_PACKAGE_DIR"
+  shasum -a 256 -c PACKAGE_MANIFEST.sha256
+  "$AUDIT_PYTHON" -c 'import duckdb, pyarrow; print("DuckDB", duckdb.__version__, "PyArrow", pyarrow.__version__)'
+  "$AUDIT_PYTHON" -u code/run_audit.py --project-root "$AUDIT_PROJECT" --desktop "$AUDIT_DESKTOP" --workers 10 --memory-gb 11 "$@"
+} 2>&1 | tee "$AUDIT_LOG"

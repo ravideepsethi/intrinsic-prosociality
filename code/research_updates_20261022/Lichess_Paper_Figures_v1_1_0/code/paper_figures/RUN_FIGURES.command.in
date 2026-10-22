@@ -1,0 +1,37 @@
+#!/bin/bash
+set -euo pipefail
+figure_dir="$(cd "$(dirname "$0")" && pwd)"
+figure_python="${FIGURES_PYTHON:-python3}"
+figure_venv_python="$figure_dir/.venv/bin/python"
+"$figure_python" -c 'import sys; assert (3,11) <= sys.version_info[:2] < (3,15), "Use Python 3.11-3.14; set FIGURES_PYTHON to select it."'
+if [ ! -x "$figure_venv_python" ]; then
+  "$figure_python" -m venv "$figure_dir/.venv"
+fi
+if ! "$figure_venv_python" - "$figure_dir/requirements.txt" <<'PY'
+import importlib.metadata as metadata
+from pathlib import Path
+import sys
+for line in Path(sys.argv[1]).read_text().splitlines():
+    if line.strip() and not line.lstrip().startswith('#'):
+        name, expected = line.split('==')
+        try:
+            actual = metadata.version(name)
+        except metadata.PackageNotFoundError:
+            raise SystemExit(1)
+        if actual != expected:
+            raise SystemExit(1)
+PY
+then
+  "$figure_venv_python" -m pip install --only-binary=:all: -r "$figure_dir/requirements.txt"
+fi
+export OMP_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export PYTHONHASHSEED=0
+mkdir -p "$figure_dir/logs"
+figure_stamp="$(date -u +%Y%m%dT%H%M%SZ)_$$"
+if command -v caffeinate >/dev/null 2>&1; then
+  caffeinate -i "$figure_venv_python" -u "$figure_dir/build.py" "$@" 2>&1 | tee "$figure_dir/logs/figures_${figure_stamp}.log"
+else
+  "$figure_venv_python" -u "$figure_dir/build.py" "$@" 2>&1 | tee "$figure_dir/logs/figures_${figure_stamp}.log"
+fi

@@ -1,0 +1,122 @@
+"""Small offline IO layer; immutable inputs, atomic checkpoints, bounded DuckDB."""
+from pathlib import Path
+import contextlib, csv, hashlib, json, os, socket, threading, time
+import numpy as np
+import pyarrow as pa
+import pyarrow.parquet as pq
+import duckdb
+
+PACKAGE=Path(__file__).resolve().parents[1]
+VERSION='1.0.0'
+DAY=86400000
+PANEL_END=1761955200000  # 2025-11-01 00:00 UTC, frozen upstream boundary
+MONTHS=tuple(f'{2023+(10+i)//12}-{(10+i)%12+1:02}' for i in range(24))
+AUTHORS=('__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__')
+COUNTS=[f'{x}_{w}' for w in (30,90) for x in ('fair','kind','disconnect','receipt','claim')]
+PRINT_LOCK=threading.Lock()
+BASE=['row_id','game_id','recipient_id','opponent_id','recipient_rating','opponent_rating',
+      'month_code','archive_start_ms','anchor_ms','tc_base_s','tc_inc_s','pre_games_30d',
+      'n_7d','expected_7d','adjusted_7d','y','reached','outcome_opponent','outcome_gid',
+      'outcome_t','outcome_start']+COUNTS
+
+def clean(x):
+    if isinstance(x,dict): return {str(k):clean(v) for k,v in x.items()}
+    if isinstance(x,(list,tuple)): return [clean(v) for v in x]
+    if isinstance(x,np.ndarray): return clean(x.tolist())
+    if isinstance(x,np.generic): return clean(x.item())
+    if isinstance(x,Path): return str(x)
+    if isinstance(x,float) and not np.isfinite(x): return None
+    return x
+
+def read(p): return json.loads(Path(p).read_text())
+def digest(x): return hashlib.sha256(json.dumps(clean(x),sort_keys=True,separators=(',',':')).encode()).hexdigest()
+def sha(p):
+    h=hashlib.sha256()
+    with Path(p).open('rb') as f:
+        for b in iter(lambda:f.read(8*1024*1024),b''): h.update(b)
+    return h.hexdigest()
+def log(s):
+    with PRINT_LOCK:print(time.strftime('%H:%M:%S')+'  '+s,flush=True)
+def write(p,x):
+    p=Path(p);p.parent.mkdir(parents=True,exist_ok=True);tmp=p.with_name(p.name+'.tmp')
+    tmp.write_text(json.dumps(clean(x),indent=2,sort_keys=True,allow_nan=False)+'\n');os.replace(tmp,p)
+def csvwrite(p,rows):
+    p=Path(p);p.parent.mkdir(parents=True,exist_ok=True);rows=clean(rows)
+    fields=list(dict.fromkeys(k for r in rows for k in r))
+    with p.with_suffix(p.suffix+'.tmp').open('w',newline='') as f:
+        w=csv.DictWriter(f,fieldnames=fields);w.writeheader();w.writerows(rows)
+    os.replace(p.with_suffix(p.suffix+'.tmp'),p)
+def q(x): return "'"+str(x).replace("'","''")+"'"
+def scan(p):
+    paths=[p] if isinstance(p,(str,Path)) else p
+    return 'read_parquet(['+','.join(q(x) for x in paths)+'],hive_partitioning=false,union_by_name=true)'
+def conn(tmp,threads=1,memory=4):
+    Path(tmp).mkdir(parents=True,exist_ok=True);c=duckdb.connect()
+    c.execute(f'SET threads={int(threads)}');c.execute('SET memory_limit='+q(str(memory)+'GB'))
+    c.execute('SET temp_directory='+q(tmp));c.execute('SET preserve_insertion_order=false')
+    return c
+def records(c,sql):
+    cur=c.execute(sql);names=[d[0] for d in cur.description]
+    return [dict(zip(names,row)) for row in cur.fetchall()]
+def copy(c,sql,p):
+    p=Path(p);p.parent.mkdir(parents=True,exist_ok=True);t=p.with_name(p.name+'.tmp')
+    c.execute(f'COPY ({sql}) TO {q(t)} (FORMAT PARQUET,COMPRESSION ZSTD)');os.replace(t,p)
+    return pq.ParquetFile(p).metadata.num_rows
+def arrays(t): return {k:t[k].combine_chunks().to_numpy(zero_copy_only=False) for k in t.column_names}
+def require_columns(p,names):
+    missing=set(names)-set(pq.ParquetFile(p).schema_arrow.names)
+    if missing: raise RuntimeError(f'{p} lacks required columns: {sorted(missing)}')
+def signature(p):
+    p=Path(p);s=p.stat()
+    return dict(path=str(p.resolve()),bytes=s.st_size,mtime_ns=s.st_mtime_ns)
+def authenticate(p,work,expected=None,size=None):
+    p=Path(p);sig=signature(p)
+    if size is not None and sig['bytes']!=int(size): raise RuntimeError('Wrong size: '+str(p))
+    dest=Path(work)/'authenticated'/(digest(sig)+'.json')
+    old=read(dest) if dest.is_file() else None
+    if old and old.get('signature')==sig: h=old['sha256']
+    else:
+        with heartbeat('Hashing '+p.parent.name+'/'+p.name): h=sha(p)
+        if signature(p)!=sig: raise RuntimeError('Input changed while hashing: '+str(p))
+    if expected and h!=expected: raise RuntimeError('Checksum mismatch: '+str(p))
+    rec=dict(signature=sig,sha256=h);write(dest,rec);return rec
+def relocate(project,p):
+    p=Path(p);old=Path('/Volumes/XT_Pro/lichess_kindness')
+    try: p=Path(project)/p.relative_to(old)
+    except ValueError: pass
+    if Path(project).resolve() not in p.resolve().parents: raise RuntimeError('Input is outside project: '+str(p))
+    return p
+def stage_input(folder,name,conf,work):
+    folder=Path(folder);r=read(folder/'_DONE.json')
+    if r.get('config_sha256')!=conf: raise RuntimeError('Wrong upstream stage configuration: '+str(folder))
+    rows=[x for x in r.get('files',[]) if x['path']==name]
+    if len(rows)!=1: raise RuntimeError('Missing upstream file receipt: '+str(folder/name))
+    v=rows[0];authenticate(folder/name,work,v['sha256'],v['bytes']);return folder/name
+def checkpoint_ok(folder,key):
+    p=Path(folder)/'_DONE.json'
+    if not p.exists():return False
+    r=read(p)
+    if r.get('key')!=key:return False
+    return all((Path(folder)/x['path']).is_file() and signature(Path(folder)/x['path'])==x['signature']
+               and sha(Path(folder)/x['path'])==x['sha256'] for x in r['files'])
+def finish(folder,key,extra=None):
+    folder=Path(folder);files=[]
+    for p in sorted(folder.glob('*')):
+        if p.is_file() and p.name!='_DONE.json' and not p.name.endswith('.tmp'):
+            files.append(dict(path=p.name,sha256=sha(p),signature=signature(p)))
+    write(folder/'_DONE.json',dict(key=key,files=files,extra=extra or {}))
+def verify_package():
+    for line in (PACKAGE/'PACKAGE_MANIFEST.sha256').read_text().splitlines():
+        h,name=line.split('  ',1);p=(PACKAGE/name).resolve()
+        if PACKAGE not in p.parents or sha(p)!=h: raise RuntimeError('Package integrity failure: '+name)
+def no_network():
+    def blocked(*a,**k): raise RuntimeError('This analysis does not permit network requests')
+    socket.create_connection=blocked;socket.socket.connect=blocked;socket.socket.connect_ex=blocked
+@contextlib.contextmanager
+def heartbeat(message):
+    start=time.monotonic();stop=threading.Event();log(message)
+    def run():
+        while not stop.wait(30):log(f'{message}: still working ({(time.monotonic()-start)/60:.1f} min)')
+    t=threading.Thread(target=run,daemon=True);t.start()
+    try:yield
+    finally:stop.set();t.join()

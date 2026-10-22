@@ -1,0 +1,23 @@
+#!/bin/bash
+set -euo pipefail
+task_package="$(cd "$(dirname "$0")" && pwd)"
+task_project="${LICHESS_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+task_desktop="${LICHESS_TRANSFER_ROOT:-$HOME/Desktop/Lichess_Desktop}"
+task_python="${LICHESS_COLOR_PYTHON:-$task_project/venv/bin/python}"
+task_workers="${LICHESS_COLOR_WORKERS:-10}"
+task_memory="${LICHESS_COLOR_MEMORY_GB:-8}"
+if [ ! -x "$task_python" ]; then
+  echo "Project Python not found: $task_python. Mount XT_Pro or set LICHESS_COLOR_PYTHON. No installation attempted."
+  exit 2
+fi
+mkdir -p "$task_desktop"
+cd "$task_package"
+shasum -a 256 -c PACKAGE_MANIFEST.sha256
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1
+task_log="$task_desktop/COLOR_FOLLOWUP_$(date -u +%Y%m%dT%H%M%SZ).log"
+echo "Expected runtime: 30-90 minutes; completed restart: 5-15 minutes."
+echo "Using $task_workers workers; monthly Parquet caches are resumable."
+caffeinate -dims "$task_python" -u "$task_package/code/run.py" \
+  --project-root "$task_project" --desktop "$task_desktop" \
+  --workers "$task_workers" --memory-gb "$task_memory" 2>&1 | tee "$task_log"
+

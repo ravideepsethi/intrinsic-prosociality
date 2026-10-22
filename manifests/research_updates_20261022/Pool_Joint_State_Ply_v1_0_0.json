@@ -1,0 +1,84 @@
+{
+  "package": "Pool_Joint_State_Ply_v1_0_0",
+  "archive_name": "Pool_Joint_State_Ply_v1_0_0.zip",
+  "archive_sha256": "e40a9c99083dfbd0270b8bf7723df0ad3b5664cdebbe8221f92d60ef670e4e59",
+  "archive_size": 121132,
+  "archive_root": "Pool_Joint_State_Ply_v1_0_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "README.md",
+      "published_path": "README.md",
+      "sha256": "cc6f4d521d9eef660af28cb4d0718c82fe602dc9c5df8b748e04aab1cfaf39f4",
+      "published_sha256": "cc6f4d521d9eef660af28cb4d0718c82fe602dc9c5df8b748e04aab1cfaf39f4",
+      "size": 8160
+    },
+    {
+      "path": "RUN_POOL_JOINT_STATE_PLY.command",
+      "published_path": "RUN_POOL_JOINT_STATE_PLY.command.in",
+      "sha256": "8cf807cddaab023a8cf62262024693db6fb8326187bf557b905bb7fb5c319c00",
+      "published_sha256": "8cf807cddaab023a8cf62262024693db6fb8326187bf557b905bb7fb5c319c00",
+      "size": 786
+    },
+    {
+      "path": "joint_state_ply.py",
+      "published_path": "joint_state_ply.py",
+      "sha256": "6be811017d29942e28902ec084767394b191d228a158f029a88c6ed0e8d7a1cd",
+      "published_sha256": "6be811017d29942e28902ec084767394b191d228a158f029a88c6ed0e8d7a1cd",
+      "size": 27251
+    },
+    {
+      "path": "requirements.txt",
+      "published_path": "requirements.txt",
+      "sha256": "40a4a71af0d7d59b05fe2c2ffca61ee337bd16fccce819e8989ba06cd9de68b2",
+      "published_sha256": "40a4a71af0d7d59b05fe2c2ffca61ee337bd16fccce819e8989ba06cd9de68b2",
+      "size": 78
+    },
+    {
+      "path": "test_joint_state_ply.py",
+      "published_path": "test_joint_state_ply.py",
+      "sha256": "0db76b5a0352a57622375c5358867346e9ee6b8de64e8074b04307bc9f92f74b",
+      "published_sha256": "0db76b5a0352a57622375c5358867346e9ee6b8de64e8074b04307bc9f92f74b",
+      "size": 8325
+    },
+    {
+      "path": "vendor/wave1_common.py",
+      "published_path": "vendor/wave1_common.py",
+      "sha256": "f9c714c549c6cd68a7d2dbdb2c17d5abacfdfc12dc6526752f03ab2505bbff43",
+      "published_sha256": "f9c714c549c6cd68a7d2dbdb2c17d5abacfdfc12dc6526752f03ab2505bbff43",
+      "size": 21988
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "LAUNCH_MAC.txt",
+      "sha256": "6cfa86600b4312f7a552d32becab7a4e9ac43110d76fe1e55a74c9a37b24c859",
+      "size": 1086
+    },
+    {
+      "path": "SHA256SUMS.txt",
+      "sha256": "754ea3a2e2ef1ffc2295fb361a21c707819de42d5d847f4db9079e8da2164c54",
+      "size": 1004
+    },
+    {
+      "path": "VALIDATION.json",
+      "sha256": "42e4a7073befa8003f76cae673439694176f767c279c6113cfd180454a112507",
+      "size": 600
+    },
+    {
+      "path": "authority/SAMPLE_AUTHORITY.json",
+      "sha256": "81c34113e7a888629a834a17235a71dcf369a2d590755fd9412ee42151d9b2f3",
+      "size": 1234
+    },
+    {
+      "path": "evidence/Pool_Main_Sample_24M_Report.zip",
+      "sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+      "size": 96936
+    },
+    {
+      "path": "evidence/Pool_Main_Sample_24M_Report.zip.sha256",
+      "sha256": "d2e6c0953ff2de7cc7235b98d568c884e4fa8067b8aa81d22efe1ac3484d6f59",
+      "size": 128
+    }
+  ]
+}

@@ -1,0 +1,205 @@
+import os, sys, tempfile, unittest
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'code'))
+from common import *
+import author_history as ah
+import leniency_stats as ls
+import iv_numerics as num
+import audit_logic as audit
+import comparison_core as cmp
+import followup_stats as stats
+import run_comparison as rc
+from unittest import mock
+from types import SimpleNamespace
+import contextlib, io as streams
+
+def synthetic(n=2400,seed=82):
+    r=np.random.default_rng(seed)
+    month=r.integers(3,9,n);start=np.asarray(STARTS)[month]+r.integers(0,10,n)*DAY+r.integers(0,168,n)*3600000
+    rating=r.normal(1500,260,n);z=r.normal(0,.07,n);D=r.random(n)<np.clip(.15+1.3*z,.005,.99)
+    fair=r.integers(0,25,n);kind=r.binomial(fair,.15)
+    d=dict(row_id=np.arange(n),recipient_id=r.integers(0,700,n),opponent_id=r.integers(1000,1700,n),
+           received=D,speed=np.asarray(list(SPEEDS))[r.integers(0,5,n)],recipient_rating=rating,
+           opponent_rating=rating+r.normal(0,180,n),archive_start_ms=start,month_code=month,
+           tc_base_s=np.full(n,180),tc_inc_s=np.zeros(n,np.int64),n_7d=r.integers(5,80,n),
+           counterparts_7d=r.integers(5,40,n),expected_7d=np.full(n,.025),adjusted_7d=z,
+           pre_games_30d=r.integers(1,200,n))
+    for days in (90,30):
+        d.update({f'fair_{days}':fair.copy(),f'kind_{days}':kind.copy(),
+                  f'disconnect_{days}':r.integers(0,35,n),f'receipt_{days}':r.integers(0,5,n),
+                  f'claim_{days}':r.integers(0,20,n)})
+    return d
+
+class PriorityTests(unittest.TestCase):
+    def test_shared_account_or_date_covariance_against_pairwise(self):
+        i=np.array([1,1,2,3,4,8,9]);j=np.array([2,3,1,7,8,9,7]);day=np.array([1,2,1,4,3,2,1])
+        s=np.array([[1.,2],[2,1],[-1,3],[.5,-1],[3,2],[-2,4],[1,-3]])
+        want=np.zeros((2,2))
+        for a in range(len(i)):
+            for b in range(len(i)):
+                if day[a]==day[b] or {i[a],j[a]} & {i[b],j[b]}:want+=np.outer(s[a],s[b])
+        np.testing.assert_allclose(stats.shared_meat(s,cmp.covariance_codes(i,j,day),True),want)
+
+    def test_absorption_matches_explicit_dummy_ols(self):
+        rng=np.random.default_rng(19);n=300
+        g1=rng.integers(0,6,n);g2=rng.integers(0,8,n)
+        x=rng.normal(size=n);z=.3*x+rng.normal(size=n);y=2*z+x+g1*.1-g2*.2+rng.normal(size=n)
+        residual,_=num.partial_out(np.column_stack([x,z,y]),[g1,g2],1)
+        got=residual[:,0]@residual[:,1]/(residual[:,0]@residual[:,0])
+        X=np.column_stack([z,x,np.eye(6)[g1],np.eye(8)[g2]])
+        want=np.linalg.lstsq(X,y,rcond=1e-11)[0][0]
+        self.assertAlmostEqual(got,want,places=9)
+
+    def test_first_stage_and_subgroup_partitions(self):
+        d=synthetic();rows=ls.first_stage(d,dict(dimension='overall',label='all'))
+        self.assertTrue(rows[1]['supported']);self.assertGreater(rows[1]['coefficient_pp'],0)
+        for dim in ('speed','month','rating','prior_granting'):
+            masks=[ls.subgroup_mask(d,s).astype(int) for s in ls.subgroup_specs() if s['dimension']==dim]
+            np.testing.assert_array_equal(np.sum(masks,axis=0),np.ones(len(d['received'])))
+        # The Y outcome is neither needed nor read by any first-stage routine.
+        self.assertNotIn('y',d)
+
+    def test_complier_ratio_and_unclipped_weights(self):
+        rng=np.random.default_rng(23);n=40000
+        z=rng.integers(0,2,n).astype(float);z-=z.mean()
+        complier=rng.random(n)<.4;always=(rng.random(n)<.3)&~complier
+        D=always|(complier&(z>0));X=np.where(complier,2.,7.)+rng.normal(0,.2,n)
+        # With a random binary encouragement, the ratio recovers the complier mean.
+        rd=D-D.mean();dx=D*X;dx-=dx.mean()
+        result=ls.complier_ratio(z,rd,dx,lambda s:np.atleast_2d(np.asarray(s)@np.asarray(s)))
+        self.assertTrue(result['supported']);self.assertAlmostEqual(result['mean'],2.,delta=.15)
+        d=synthetic();out,info=ls.complier_means(d)
+        self.assertFalse(info['weights_clipped']);self.assertEqual(len(out),12)
+        for row in out:self.assertIn('population_mean',row)
+
+    def test_author_roles_and_strict_history_boundaries(self):
+        qstart=int(STARTS[8]);end=qstart-7*DAY
+        h=dict(j=np.array([20,30,20,20]),i=np.array([99,99,40,99]),
+               t=np.array([end-90*DAY,end-1,end,end-90*DAY-1]),
+               y=np.array([1,0,1,1],bool),fair=np.ones(4,bool),arm=np.ones(4,bool),cell=np.zeros(4,int))
+        np.testing.assert_array_equal(ah.author_mask(h['j'],h['i'],[20,99]),np.ones(4,bool))
+        counts=audit.window_counts(ah.removed_events(h),np.array([20,99]),np.array([qstart,qstart]))
+        np.testing.assert_array_equal(counts['fair_90'],[1,0]);np.testing.assert_array_equal(counts['receipt_90'],[0,1])
+        np.testing.assert_array_equal(counts['claim_90'],[0,1])
+        self.assertEqual(counts['fair_30'][0],0)
+
+    def test_reference_removal_and_cutoff_tie(self):
+        cutoff=int(STARTS[8])-7*DAY
+        h=dict(j=np.array([5,5,7]),i=np.array([9,8,5]),t=np.array([cutoff-1,cutoff,cutoff-2]),
+               y=np.array([1,0,1]),arm=np.array([1,1,0],bool),cell=np.array([0,1,2]))
+        n,s=ah.reference_removal(h,(2,25,4,4,500))
+        self.assertEqual(n[0,8].sum(),1);self.assertEqual(n[0,9].sum(),1)
+        self.assertEqual(n.sum(),4);self.assertEqual(s.sum(),2)
+        score=num.score_month(h['j'][:2],h['i'][:2],h['t'][:2],h['y'][:2],h['cell'][:2],
+                              np.array([5]),np.array([123]),cutoff,np.full((4,4,500),.25))
+        self.assertEqual(score['n'][0],1);self.assertAlmostEqual(score['adjusted'][0],.75)
+
+    def test_checkpoint_reuse_and_tampering(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)/'step';calls=[]
+            def build(out):calls.append(1);(out/'a.txt').write_text('ok')
+            io.stage(root,'conf',build);io.stage(root,'conf',build);self.assertEqual(len(calls),1)
+            (root/'a.txt').write_text('changed')
+            with self.assertRaisesRegex(RuntimeError,'changed'):io.stage(root,'conf',build)
+
+    def test_api_detection_and_live_remaining_count(self):
+        lines=['99 python /Users/a/Lichess_Desktop/Source_Metadata/collect.py --token secret',
+               '98 python /Users/a/Receipt_IV_Cohort_Extension/code/run.py',
+               '97 python /Users/a/IV_Runs_2_3/code/run_comparison.py download',
+               '96 python /Users/a/IV_Runs_2_3/code/run_leniency.py']
+        self.assertEqual(rc.active_collectors(lines,self_pid=97),[(99,'collect.py')])
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);db=rc.download.connect(root/'checkpoint.sqlite3',rc.CONF,'abc')
+            with db:db.execute('INSERT INTO batches VALUES (?,?,?,?,?)',(0,'hash',300,298,1))
+            db.close();r=rc.counts(root)
+            self.assertEqual(r['accounted_ids'],300);self.assertEqual(r['returned_ids'],298)
+
+    def test_priority_downloader_resumes_without_original_zip(self):
+        import test_expansion as old_tests
+        import prepare_expansion as prep
+        with tempfile.TemporaryDirectory() as tmp:
+            p=Path(tmp);source=p/'source';source.mkdir();rows=old_tests.frame(40000).to_pylist()[:401]
+            io.table(source/'requests/targets.parquet',pa.Table.from_pylist([
+                {n:r[n] for n in ('game_id','utc_ms','speed_partition')} for r in rows]))
+            io.js(source/'DESIGN_FREEZE.json',dict(config_sha256=rc.CONF))
+            archive=prep.portable(source,rc.CONF,p)
+            root,_,_=rc.download.unpack_input(archive,p)
+            target=root/'inputs/targets.parquet';db=rc.download.connect(root/'checkpoint.sqlite3',rc.CONF,io.sha(target))
+            rc.download.process_batch(db,0,rows[:300],old_tests.FakeClient(rows));db.close();archive.unlink()
+            class FakeClient(old_tests.FakeClient):
+                @property
+                def requests(self):return len(self.calls)
+            client=FakeClient(rows);a=SimpleNamespace(mode='download',desktop=p,project_root=p,input=None)
+            with mock.patch.object(rc,'TARGETS_AT_PREPARATION',len(rows)),mock.patch.object(rc,'verify_package'), \
+                 mock.patch.object(rc,'wait_for_other_collectors'),mock.patch.object(rc.download,'check_other_api_jobs'), \
+                 mock.patch.object(rc.http,'Client',return_value=client),mock.patch.object(rc.expansion,'require_disk'), \
+                 mock.patch.object(Path,'home',return_value=p/'home'),contextlib.redirect_stdout(streams.StringIO()):
+                rc.execute(a);self.assertEqual(client.requests,1);rc.execute(a);self.assertEqual(client.requests,1)
+            summary=io.load(root/'finished/SUMMARY.json');self.assertEqual(summary['returned'],401)
+            report=io.load(root/'priority_report/summary.json');self.assertFalse(report['comparison_effects_estimated'])
+            self.assertFalse(report['abstract_gate_cleared'])
+
+    def test_author_clean_score_shard_and_cached_resume(self):
+        rng=np.random.default_rng(17)
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);ref=root/'reference';ref.mkdir();qpath=root/'q.parquet'
+            ids=np.arange(1,150);shard=3;jids=ids[num.user_hash(ids)%np.uint64(16)==shard]
+            n=1200;j=rng.choice(jids,n);i=rng.integers(200,350,n);author=int(i[0])
+            h=dict(j=j,i=i,t=np.full(n,int(STARTS[5])-10*DAY)+rng.integers(0,DAY,n),
+                   y=rng.random(n)<.15,arm=np.ones(n,bool),fair=np.ones(n,bool),cell=rng.integers(0,500,n))
+            hp=root/'h.parquet';io.table(hp,pa.table(h))
+            original=np.full((2,24,4,4,500),.12);clean=np.full_like(original,.11)
+            np.save(ref/'original.npy',original);np.save(ref/'clean.npy',clean)
+            qj=np.repeat(jids,2);qi=rng.integers(200,350,len(qj))
+            old=num.score_month(h['j'],h['i'],h['t'],h['y'],h['cell'],qj,qi,int(STARTS[5])-7*DAY,original[0,5])
+            q=dict(row_id=np.arange(len(qj)),recipient_id=qi,opponent_id=qj,archive_start_ms=np.full(len(qj),int(STARTS[5])),month_code=np.full(len(qj),5))
+            for col in SCORE_COLS:q[col]=old[col[:-3]]
+            io.table(qpath,pa.table(q))
+            job=dict(parts=[str(hp)],query=str(qpath),reference=str(ref),ids=[author],shard=shard,output=str(root/'out'),conf='synthetic')
+            ah.score_shard(job);first=io.sha(root/'out/scores.parquet');ah.score_shard(job)
+            self.assertEqual(io.sha(root/'out/scores.parquet'),first)
+            keep=~ah.author_mask(j,i,[author])
+            want=num.score_month(j[keep],i[keep],h['t'][keep],h['y'][keep],h['cell'][keep],qj,qi,int(STARTS[5])-7*DAY,clean[0,5])
+            got=arrays(io.read(root/'out/scores.parquet'))
+            np.testing.assert_allclose(got['adjusted_7d'],want['adjusted'])
+
+    def test_subgroup_worker_parquet_and_empty_group(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);d=synthetic();io.table(root/'sample.parquet',pa.table(d))
+            job=dict(sample=str(root/'sample.parquet'),spec=dict(dimension='month',label='2023-11',month_code=0),output=str(root/'fit'),conf='test')
+            result=ls.subgroup_job(job)
+            self.assertEqual(result[0]['n'],0);self.assertFalse(result[0]['supported'])
+
+    def test_complete_author_refresh_two_workers(self):
+        rng=np.random.default_rng(926);n=1600
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);nq=80
+            month=rng.integers(0,6,n)
+            h=dict(j=rng.integers(1,25,n),i=rng.integers(40,70,n),
+                   t=np.asarray(STARTS)[month]+10*DAY,y=rng.random(n)<.2,
+                   arm=np.ones(n,bool),fair=np.ones(n,bool),cell=rng.integers(0,500,n))
+            shards=num.user_hash(h['j'])%np.uint64(16);parts=[]
+            for m,label in enumerate(MONTHS):
+                for s in range(16):
+                    take=(month==m)&(shards==s);p=root/f'h_{m}_{s}.parquet'
+                    io.table(p,pa.table({k:v[take] for k,v in h.items()}));parts.append(dict(path=str(p),month=label,shard=s))
+            dn,ds=ah.reference_removal(h,(2,25,4,4,500));np.savez_compressed(root/'deltas.npz',n=dn,s=ds)
+            reference=num.expanding_reference(dn[:,:24],ds[:,:24])
+            qj=rng.integers(1,25,nq);qi=rng.integers(40,70,nq);m=6
+            sc=num.score_month(h['j'],h['i'],h['t'],h['y'],h['cell'],qj,qi,int(STARTS[m])-7*DAY,reference[0,m])
+            d=synthetic(nq);d.update(opponent_id=qj,recipient_id=qi,month_code=np.full(nq,m),archive_start_ms=np.full(nq,int(STARTS[m])))
+            for col in SCORE_COLS:d[col]=sc[col[:-3]]
+            counts=audit.window_counts(ah.removed_events(h),qi,d['archive_start_ms'])
+            for col in COUNT_COLS:d[col]=counts[col]
+            io.table(root/'spaced.parquet',pa.table(d))
+            inputs=dict(spaced=str(root/'spaced.parquet'),parts=parts,deltas=[str(root/'deltas.npz')],author_ids={'__PRIVATE_VALUE_1__':1,'__PRIVATE_VALUE_2__':40})
+            output,receipt=ah.build_clean_sample(inputs,root/'run','synthetic',2)
+            got=arrays(io.read(output/'sample.parquet'))
+            self.assertFalse(ah.author_mask(got['opponent_id'],got['recipient_id'],[1,40]).any())
+            mask=~ah.author_mask(h['j'],h['i'],[1,40]);clean={k:v[mask] for k,v in h.items()}
+            wanted=audit.window_counts(ah.removed_events(clean),got['recipient_id'],got['archive_start_ms'])
+            for col in COUNT_COLS:np.testing.assert_array_equal(got[col],wanted[col])
+            self.assertEqual(receipt['original_rows'],nq);self.assertFalse(receipt['future_outcomes_loaded'])
+            self.assertGreater(receipt['author_history_games_removed'],0)
+
+if __name__=='__main__':unittest.main(verbosity=2)

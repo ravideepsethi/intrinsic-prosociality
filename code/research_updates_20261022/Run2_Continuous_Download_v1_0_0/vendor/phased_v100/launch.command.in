@@ -1,0 +1,62 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+phase_mode="${1:?Specify a mode}"
+shift
+phase_package="$(cd "$(dirname "$0")" && pwd -P)"
+phase_project="${IV_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+phase_desktop="${IV_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+phase_python="${IV_PYTHON:-$phase_project/venv/bin/python}"
+if [[ ! -x "$phase_python" ]]; then
+  echo "Research Python not found: $phase_python. Connect XT_Pro or set IV_PYTHON."
+  exit 2
+fi
+mkdir -p "$phase_desktop"
+export PYTHONDONTWRITEBYTECODE=1
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1
+cd "$phase_package"
+"$phase_python" - <<'PY'
+import sys,numpy,pyarrow,duckdb
+assert sys.version_info >= (3,10), 'Python 3.10 or later required'
+sys.path.insert(0,'code')
+from phase_common import verify_release
+verify_release()
+print('PACKAGE_SHA256_OK; Python',sys.version.split()[0],'; NumPy',numpy.__version__,'; PyArrow',pyarrow.__version__,'; DuckDB',duckdb.__version__,'; SciPy not required',flush=True)
+PY
+phase_log="$phase_desktop/run2_phased_${phase_mode}_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+phase_awake=()
+if [[ -x /usr/bin/caffeinate ]]; then phase_awake=(/usr/bin/caffeinate -i); fi
+echo "Log: $phase_log"
+set +e
+{
+  if [[ "$phase_mode" == tests ]]; then
+    echo 'Expected runtime: approximately 5–45 seconds. Synthetic data and fake HTTP only.'
+    "$phase_python" -m unittest discover -s tests -p 'test_*.py' -v || exit "$?"
+    "$phase_python" -m unittest discover -s vendor/local_first/tests -p 'test_*.py' -q || exit "$?"
+    "$phase_python" vendor/local_first/comparison_original/run_tests.py
+  else
+    if [[ "$phase_mode" != status ]]; then
+      echo 'Expected runtime: 5–30 minutes of local setup (unbenchmarked; large SQLite caches can take longer), then about 31 hours of downloading for the first 10% phase at the previous rate, before retries/export.'
+      echo 'Existing Parquet work is reused. Up to 10 local workers, limited by the memory budget. One API request at a time. The requested phase stops automatically.'
+      phase_test_log="${phase_log%.log}_selftests.log"
+      echo "Offline self-tests (no API): $phase_test_log"
+      if "$phase_python" -m unittest discover -s tests -p 'test_*.py' -q > "$phase_test_log" 2>&1; then
+        echo 'OFFLINE_SELF_TESTS_OK'
+      else
+        phase_test_exit=$?
+        cat "$phase_test_log"
+        echo 'Self-tests failed. No production preparation or download started.'
+        exit "$phase_test_exit"
+      fi
+    else
+      echo 'Expected runtime: approximately 1–5 minutes for input verification and checkpoint status; zero API requests.'
+    fi
+    "${phase_awake[@]}" "$phase_python" -u code/run_phases.py "$phase_mode" --project-root "$phase_project" --desktop "$phase_desktop" "$@"
+  fi
+} 2>&1 | tee "$phase_log"
+phase_exit=${PIPESTATUS[0]}
+set -e
+if [[ "$phase_exit" -ne 0 ]]; then
+  echo "Stopped with exit $phase_exit. Saved responses and completed Parquets remain reusable. Log: $phase_log"
+fi
+exit "$phase_exit"

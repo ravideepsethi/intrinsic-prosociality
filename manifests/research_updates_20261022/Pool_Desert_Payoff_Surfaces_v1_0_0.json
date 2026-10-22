@@ -1,0 +1,105 @@
+{
+  "package": "Pool_Desert_Payoff_Surfaces_v1_0_0",
+  "archive_name": "Pool_Desert_Payoff_Surfaces_v1_0_0.zip",
+  "archive_sha256": "537116641580de5773d76b721a2d298b8b93d849d70a2f05787d3a2ccd94ecfd",
+  "archive_size": 126901,
+  "archive_root": "Pool_Desert_Payoff_Surfaces_v1_0_0",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "README.md",
+      "published_path": "README.md",
+      "sha256": "40ab0dc7216b759e4b91d7d204ae93aafb4eef77e1246e41bcbe0edd85f7e3e9",
+      "published_sha256": "40ab0dc7216b759e4b91d7d204ae93aafb4eef77e1246e41bcbe0edd85f7e3e9",
+      "size": 7812
+    },
+    {
+      "path": "RUN_SURFACES.command",
+      "published_path": "RUN_SURFACES.command.in",
+      "sha256": "68d45210b3ddae3a63eb4cbb2a098a51f82aca2cdcc63eac105565a0f096dc89",
+      "published_sha256": "68d45210b3ddae3a63eb4cbb2a098a51f82aca2cdcc63eac105565a0f096dc89",
+      "size": 1974
+    },
+    {
+      "path": "render_surfaces.py",
+      "published_path": "render_surfaces.py",
+      "sha256": "80a0737c1d84537aeffe6a6535fbf1fcec400f5335dd88d603248756ab6879d6",
+      "published_sha256": "80a0737c1d84537aeffe6a6535fbf1fcec400f5335dd88d603248756ab6879d6",
+      "size": 8742
+    },
+    {
+      "path": "requirements.txt",
+      "published_path": "requirements.txt",
+      "sha256": "2ec2bd3f5ad9bde95fc48837c8021e8046d7a45838e1d7e950c0dc40fa26dc95",
+      "published_sha256": "2ec2bd3f5ad9bde95fc48837c8021e8046d7a45838e1d7e950c0dc40fa26dc95",
+      "size": 50
+    },
+    {
+      "path": "run_surfaces.py",
+      "published_path": "run_surfaces.py",
+      "sha256": "ffa50d988e3e12cd6dac6f762d43076cadfd5a49238c98107af49802cde533bf",
+      "published_sha256": "ffa50d988e3e12cd6dac6f762d43076cadfd5a49238c98107af49802cde533bf",
+      "size": 17295
+    },
+    {
+      "path": "source/__init__.py",
+      "published_path": "source/__init__.py",
+      "sha256": "52b1da5d4a8717236fccd7317e87a652c65eebe4de6a71d6d6981d413934b76d",
+      "published_sha256": "52b1da5d4a8717236fccd7317e87a652c65eebe4de6a71d6d6981d413934b76d",
+      "size": 50
+    },
+    {
+      "path": "source/pool_wave1_common.py",
+      "published_path": "source/pool_wave1_common.py",
+      "sha256": "f9c714c549c6cd68a7d2dbdb2c17d5abacfdfc12dc6526752f03ab2505bbff43",
+      "published_sha256": "f9c714c549c6cd68a7d2dbdb2c17d5abacfdfc12dc6526752f03ab2505bbff43",
+      "size": 21988
+    },
+    {
+      "path": "surface_model.py",
+      "published_path": "surface_model.py",
+      "sha256": "7c46937dac678766122b56a72ec69b0ca6b41878fc8c8e0873f1bc03a318310e",
+      "published_sha256": "7c46937dac678766122b56a72ec69b0ca6b41878fc8c8e0873f1bc03a318310e",
+      "size": 13483
+    },
+    {
+      "path": "test_surfaces.py",
+      "published_path": "test_surfaces.py",
+      "sha256": "0b2194d536e86c695962a9d1884c12d19913c418e65ebea8e49ad1cb8fbd4656",
+      "published_sha256": "0b2194d536e86c695962a9d1884c12d19913c418e65ebea8e49ad1cb8fbd4656",
+      "size": 6895
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "DELIVERY_CHECKS.json",
+      "sha256": "defee9e31661e2204226265a46c65c8be189dc873cf77e09dea9374054f85e94",
+      "size": 1160
+    },
+    {
+      "path": "PACKAGE_MANIFEST.sha256",
+      "sha256": "537e2ee70b7c9649cc989e883ad1ec69ed6f25c2c9d6d2d9d0b1692d902a3b53",
+      "size": 1253
+    },
+    {
+      "path": "SOURCE_PROVENANCE.json",
+      "sha256": "ee3cc9bd4f8c0900bf5a131747d8bddd56e7114d6c5434125b9b8134365a579c",
+      "size": 1039
+    },
+    {
+      "path": "authority/SAMPLE_AUTHORITY.json",
+      "sha256": "81c34113e7a888629a834a17235a71dcf369a2d590755fd9412ee42151d9b2f3",
+      "size": 1234
+    },
+    {
+      "path": "evidence/Pool_Main_Sample_24M_Report.zip",
+      "sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+      "size": 96936
+    },
+    {
+      "path": "evidence/Pool_Main_Sample_24M_Report.zip.sha256",
+      "sha256": "d2e6c0953ff2de7cc7235b98d568c884e4fa8067b8aa81d22efe1ac3484d6f59",
+      "size": 128
+    }
+  ]
+}

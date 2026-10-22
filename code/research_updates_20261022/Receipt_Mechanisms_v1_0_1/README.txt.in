@@ -1,0 +1,102 @@
+RECEIPT MECHANISMS 1.0.1
+
+Repair of the 61aea606e126 run
+Version 1.0.0 stopped before any model fit at a combined secondary receipt
+check. Its public error did not identify which predicate failed. Version 1.0.1
+fixes an extra material restriction absent from the recorded claimed-win arm,
+exports field-by-field receipt audits, and separates primary comparisons from
+secondary dose validation. This is a code/contract repair; the supplied failed
+report cannot establish which predicate triggered on the actual rows.
+
+The exact old frozen receipt cohort is preserved. No mismatched row is deleted
+or relabelled. Any remaining receipt, timing, identity or payoff problem blocks
+ALL secondary dose fits, while valid primary comparisons finish automatically.
+The final status then reads PRIMARY_COMPLETE_SECONDARY_BLOCKED, with exact
+counts in receipt_cohort_audit.csv and receipt_arm_patterns.csv.
+
+The original recorded exposure definition is copied with its source checksum
+in authority/recorded_receipt_definition.txt. The primary comparisons' group
+definitions and statistical specifications remain unchanged.
+
+Purpose
+Examine whether later generosity differs after discretionary draws, claimed
+disconnection losses, ordinary draws/losses, and explicitly flagged no-material
+draws. This is an observational mechanism diagnostic alongside the existing IV.
+
+Required existing Mac project
+  /Volumes/XT_Pro/lichess_kindness
+Required reviewed runs
+  derived/replication/run2_phase25_analysis_v120_PRIVATE/79bd3599a995
+  derived/replication/run2_environment_diagnostics_v100_PRIVATE/cea0b052e5f2
+Also uses their immutable metadata snapshot and certified 24-month main panels.
+Hashes/configuration receipts are checked; no newest-run discovery or fallback
+to a different sample. No raw archive replay, Stockfish work, or Lichess request.
+Installing Python dependencies, if necessary, is the only online setup step.
+
+Run
+Save the ZIP in ~/Desktop/Lichess_Desktop, verify its supplied SHA256, and extract
+to a new folder. Run RUN_MECHANISMS.command --workers 10 --memory-gb 10.
+The reply accompanying the ZIP supplies the complete paste-ready command.
+An existing compatible project/package virtualenv is reused when available.
+The runner checks package integrity and runs its synthetic tests before reading
+the production project. caffeinate prevents idle sleep on macOS.
+
+Restart
+Rerun the same command after interruption. Verified monthly projections and
+finished comparison/model fits resume. Source changes reject stale bindings.
+There is a single-run lock. Original data and original IV files are never edited.
+The corrected package automatically recognizes the pinned 61aea606e126 run,
+reuses valid input hash records and the verified focal metadata projection,
+and checks monthly joins again. Unsealed partial monthly files are not reused.
+There is no need to delete the old run, package, or cache.
+
+Resources
+At most 4 concurrent month/metadata readers; DuckDB uses up to --workers threads.
+Parquet projection, spill space and sequential model fits limit memory. During
+models, 40% of --memory-gb is assigned to DuckDB to leave space for NumPy arrays.
+NumPy allocations and OS cache mean this is a working budget, not a process
+memory hard cap. A 10 GB budget is intended for a machine with at least 16 GB RAM.
+Hashes are cached by path, size and modification time. Local IO may dominate.
+Progress and 30-second heartbeats are printed; month stages give an ETA.
+
+Outputs
+  ~/Desktop/Lichess_Desktop/RECEIPT_MECHANISMS_REPORT_<run>.zip
+  ~/Desktop/Lichess_Desktop/RECEIPT_MECHANISMS_RUN_<timestamp>.log
+  ~/Desktop/Lichess_Desktop/RECEIPT_MECHANISMS_LATEST_PRIVATE.json
+Working/checkpoint files remain under the project's derived/replication/
+receipt_mechanisms_v100_PRIVATE/<run>/ directory.
+
+Upload the REPORT zip for interpretation. It includes:
+  READ_RESULTS.txt                 Interpretation and limitations
+  comparison_estimates.csv        Primary contrasts and sensitivities
+  overlap.csv, balance.csv        Retention, effective sizes, prior behavior
+  feature_flow.csv, coverage.csv  Sample and ending classifications
+  material_inventory.csv         Whether forced-draw data exist in this source
+  secondary_dose_estimates.csv    Separate giver-cost / recipient-benefit models
+  secondary_dose_summaries.json   RD correlations, numerical diagnostics
+  payoff_audit.csv               Potential-payoff arithmetic checks
+  receipt_cohort_audit.csv       Exact counts for each receipt-join discrepancy
+  receipt_arm_patterns.csv      Counts by observed arm/material/timing flags
+  secondary_status.json         Verified or blocked secondary scope by month
+  summary.json                   COMPLETE, partial, or BLOCKED status
+
+The report ZIP contains aggregates, not individual account or game records.
+Private Parquet audit rows stay in the project. A partial report is exported if
+a required contract fails. Do not interpret BLOCKED as a completed result.
+
+Scope limits
+Ordinary and timeout rows come from one existing new-phase-25 frame. The larger
+original receipt cohort is used separately for secondary stake models. These
+populations are not silently combined. Eligibility, histories, quarantine and
+cooldown rules come from the reviewed parents. Author accounts __PRIVATE_VALUE_1__/__PRIVATE_VALUE_2__
+are excluded from target roles, historical behavior and later outcomes through
+those author-clean caches; factual chronology is preserved.
+
+No-material comparisons run only when explicit flags are available in the
+certified source. Their absence is reported rather than inferred from an
+unclassified timeout. Ordinary games lack a comparable pre-disconnection board
+evaluation. The package cannot identify gratitude, perceived discretion, or
+a pure gift component of the IV effect from these observational comparisons.
+
+Read ANALYSIS_PLAN.txt for the exact estimators and interpretation rules.
+Read VALIDATION.txt for what was tested and what requires the production run.

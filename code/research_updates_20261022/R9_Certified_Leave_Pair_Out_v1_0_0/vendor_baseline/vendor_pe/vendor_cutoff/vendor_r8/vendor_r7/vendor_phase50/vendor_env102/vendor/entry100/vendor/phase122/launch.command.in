@@ -1,0 +1,63 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+phase_mode="${1:?Specify analyze or tests}"
+shift
+phase_package="$(cd "$(dirname "$0")" && pwd -P)"
+phase_project="${IV_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+phase_desktop="${IV_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+phase_python="${IV_PYTHON:-$phase_project/venv/bin/python}"
+if [[ ! -x "$phase_python" ]]; then
+  echo "Research Python not found: $phase_python. Connect XT_Pro or set IV_PYTHON."
+  exit 2
+fi
+if [[ "$phase_mode" != analyze && "$phase_mode" != tests ]]; then
+  echo 'Use RUN_PHASE_25_ANALYSIS.command or RUN_TESTS.command.'
+  exit 2
+fi
+mkdir -p "$phase_desktop"
+export PYTHONDONTWRITEBYTECODE=1
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1
+cd "$phase_package"
+"$phase_python" - <<'PY'
+import sys,numpy,pyarrow,duckdb
+assert sys.version_info >= (3,10), 'Python 3.10 or later required'
+sys.path.insert(0,'code')
+from cache_auth import verify_release
+verify_release()
+print('PACKAGE_SHA256_OK; Python',sys.version.split()[0],'; NumPy',numpy.__version__,'; PyArrow',pyarrow.__version__,'; DuckDB',duckdb.__version__,'; SciPy not required',flush=True)
+PY
+phase_log="$phase_desktop/run2_phase25_analysis_${phase_mode}_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+echo "Log: $phase_log"
+phase_awake=()
+if [[ -x /usr/bin/caffeinate ]]; then phase_awake=(/usr/bin/caffeinate -i); fi
+set +e
+{
+  if [[ "$phase_mode" == tests ]]; then
+    echo 'Expected runtime: approximately 20–90 seconds; synthetic data only, zero API requests.'
+    "$phase_python" -m unittest discover -s tests -p 'test_*.py' -v
+  else
+    echo 'Expected runtime: roughly 1–3 hours for the first 25% run, based on the 74-minute 10% run; NOT a measured 25% benchmark. Coverage/authentication and concurrent SSD work can add time. Reused reruns are faster.'
+    echo 'Expected initial authentication and two-record audit: roughly 2–5 minutes. Completed 25% coverage Parquets are reused.'
+    echo 'Optimized: early eligibility, monthly score summaries, reusable Parquet history indexes, bounded chronology sorting and immutable game-feature caches. Stage timings and approximate stage ETAs are reported.'
+    echo 'Uses only CHECKPOINT_025_SAVED metadata. Reuses reviewed 25% coverage and completed 10% features. Audits two unresolved records; excludes them explicitly from interim fits. Leave the downloader running.'
+    echo 'Zero API requests. Up to 10 local workers within the memory budget. Parquet checkpoints resume after interruption. The phased downloader can keep running in its own terminal.'
+    phase_tests="${phase_log%.log}_selftests.log"
+    echo "Offline self-tests: $phase_tests"
+    if "$phase_python" -m unittest discover -s tests -p 'test_*.py' -q > "$phase_tests" 2>&1; then
+      echo 'OFFLINE_SELF_TESTS_OK. Starting the fixed 25% analysis.'
+    else
+      phase_test_exit=$?
+      cat "$phase_tests"
+      echo 'Self-tests failed; production analysis did not start.'
+      exit "$phase_test_exit"
+    fi
+    "${phase_awake[@]}" "$phase_python" -u code/run_checkpoint.py --project-root "$phase_project" --desktop "$phase_desktop" "$@"
+  fi
+} 2>&1 | tee "$phase_log"
+phase_exit=${PIPESTATUS[0]}
+set -e
+if [[ "$phase_exit" -ne 0 ]]; then
+  echo "Stopped with exit $phase_exit. Completed Parquet checkpoints remain reusable. Return this log: $phase_log"
+fi
+exit "$phase_exit"

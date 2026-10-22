@@ -1,0 +1,8 @@
+#!/bin/bash
+set -euo pipefail
+package_dir="$(cd "$(dirname "$0")" && pwd)"
+research_python="${LICHESS_PYTHON:-/Volumes/XT_Pro/lichess_kindness/venv/bin/python}"
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1
+# Separate processes avoid collisions between the two frozen vendor stacks.
+"$research_python" "$package_dir/tests/test_scores.py" -v
+"$research_python" "$package_dir/tests/test_recovery.py" -v

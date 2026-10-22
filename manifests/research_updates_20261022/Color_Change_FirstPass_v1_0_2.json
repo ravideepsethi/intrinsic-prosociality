@@ -1,0 +1,156 @@
+{
+  "package": "Color_Change_FirstPass_v1_0_2",
+  "archive_name": "Color_Change_FirstPass_v1_0_2.zip",
+  "archive_sha256": "94b0c8efc8815efc3b86f516a7de1ffce6d75968ea4c5dea306357f71217beba",
+  "archive_size": 85778,
+  "archive_root": "Color_Change_FirstPass_v1_0_2",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "PROVENANCE.md",
+      "published_path": "PROVENANCE.md",
+      "sha256": "12bb25aa4c823c4ca72bf8e615c3979c8bcd9b4d9ff5a2c0d6ad69aa20a048ef",
+      "published_sha256": "12bb25aa4c823c4ca72bf8e615c3979c8bcd9b4d9ff5a2c0d6ad69aa20a048ef",
+      "size": 6148
+    },
+    {
+      "path": "README_FIRST.md",
+      "published_path": "README_FIRST.md",
+      "sha256": "0322f1241ad775c07ea65e6b2237fcd42d31226ed1b43be9d32e90dda25300ae",
+      "published_sha256": "0322f1241ad775c07ea65e6b2237fcd42d31226ed1b43be9d32e90dda25300ae",
+      "size": 12038
+    },
+    {
+      "path": "RUN_COLOR_FIRSTPASS.command",
+      "published_path": "RUN_COLOR_FIRSTPASS.command.in",
+      "sha256": "54372c139080734a62c052d4064dea37780cb96124fd0fc21271b52043260633",
+      "published_sha256": "54372c139080734a62c052d4064dea37780cb96124fd0fc21271b52043260633",
+      "size": 1534
+    },
+    {
+      "path": "VALIDATION.md",
+      "published_path": "VALIDATION.md",
+      "sha256": "8a8d4aba93f319d4b6f21873d9d37f4959de1ec61a1c1ed88ef0a67968cddea7",
+      "published_sha256": "8a8d4aba93f319d4b6f21873d9d37f4959de1ec61a1c1ed88ef0a67968cddea7",
+      "size": 3871
+    },
+    {
+      "path": "code/analysis.py",
+      "published_path": "code/analysis.py",
+      "sha256": "4c17d8a870ac6dadffb2298bac8b5b377adbe409623565e3b89e16af17ffd19f",
+      "published_sha256": "4c17d8a870ac6dadffb2298bac8b5b377adbe409623565e3b89e16af17ffd19f",
+      "size": 12716
+    },
+    {
+      "path": "code/checkpoints.py",
+      "published_path": "code/checkpoints.py",
+      "sha256": "fce483d2e0b3371dfa04fa468e8939b4c707579cdb607e1b2790540fa0db9ba9",
+      "published_sha256": "fce483d2e0b3371dfa04fa468e8939b4c707579cdb607e1b2790540fa0db9ba9",
+      "size": 6388
+    },
+    {
+      "path": "code/common.py",
+      "published_path": "code/common.py",
+      "sha256": "713b434307e65020a5c7405da12a415f1ab59e4b3b9c29186041d24391bc5d14",
+      "published_sha256": "713b434307e65020a5c7405da12a415f1ab59e4b3b9c29186041d24391bc5d14",
+      "size": 4951
+    },
+    {
+      "path": "code/engine.py",
+      "published_path": "code/engine.py",
+      "sha256": "20d0f385d7245fc66c52aeb066035342e915c9d8aad6f22e4bcca5f9dc91bcdd",
+      "published_sha256": "20d0f385d7245fc66c52aeb066035342e915c9d8aad6f22e4bcca5f9dc91bcdd",
+      "size": 3653
+    },
+    {
+      "path": "code/grace.py",
+      "published_path": "code/grace.py",
+      "sha256": "5428e8bdba57127788704c4bb5a8b18626fdf528e656244395450283fb3420d8",
+      "published_sha256": "5428e8bdba57127788704c4bb5a8b18626fdf528e656244395450283fb3420d8",
+      "size": 8269
+    },
+    {
+      "path": "code/panel.py",
+      "published_path": "code/panel.py",
+      "sha256": "e436006f913e1b38d5faf84d71a0133ee58cb9945fda512018b6a1d69e103492",
+      "published_sha256": "e436006f913e1b38d5faf84d71a0133ee58cb9945fda512018b6a1d69e103492",
+      "size": 10572
+    },
+    {
+      "path": "code/replay.py",
+      "published_path": "code/replay.py",
+      "sha256": "c36891cf4444f591b7bdc3945d3656044d2ec6e16d2f39753b552b40d7c761d5",
+      "published_sha256": "c36891cf4444f591b7bdc3945d3656044d2ec6e16d2f39753b552b40d7c761d5",
+      "size": 10070
+    },
+    {
+      "path": "code/run.py",
+      "published_path": "code/run.py",
+      "sha256": "2f9133f11239d7513798e8f1349e3cb8094373f4c5f21f01593e532f2c428e94",
+      "published_sha256": "2f9133f11239d7513798e8f1349e3cb8094373f4c5f21f01593e532f2c428e94",
+      "size": 18354
+    },
+    {
+      "path": "code/timestamps.py",
+      "published_path": "code/timestamps.py",
+      "sha256": "6897b26ab69cb91590765f0d059bbf3a6fcc7b9d3de525f00d6edc77d17c637a",
+      "published_sha256": "6897b26ab69cb91590765f0d059bbf3a6fcc7b9d3de525f00d6edc77d17c637a",
+      "size": 6181
+    },
+    {
+      "path": "tests/test_checkpoint_repair.py",
+      "published_path": "tests/test_checkpoint_repair.py",
+      "sha256": "9e0556ded6c42999af52b3a1bbfc6a24c8d25b22d544359dd0fcd373bf5bc40f",
+      "published_sha256": "9e0556ded6c42999af52b3a1bbfc6a24c8d25b22d544359dd0fcd373bf5bc40f",
+      "size": 8708
+    },
+    {
+      "path": "tests/test_firstpass.py",
+      "published_path": "tests/test_firstpass.py",
+      "sha256": "54cbee5a04aba7c61f45a5d9d1e4eb17885681ccc2559ef4ce4bd58e736b03d2",
+      "published_sha256": "54cbee5a04aba7c61f45a5d9d1e4eb17885681ccc2559ef4ce4bd58e736b03d2",
+      "size": 14892
+    },
+    {
+      "path": "tests/test_timestamp_repair.py",
+      "published_path": "tests/test_timestamp_repair.py",
+      "sha256": "c1738fb07e788bf93c82d40239ff11a5b5008d93cfb6c9cfbdac74558cded7cf",
+      "published_sha256": "c1738fb07e788bf93c82d40239ff11a5b5008d93cfb6c9cfbdac74558cded7cf",
+      "size": 9541
+    },
+    {
+      "path": "vendor/stage06_reference_19ad.py",
+      "published_path": "vendor/stage06_reference_19ad.py",
+      "sha256": "19ad528abb0f9d68bb0d5dcf39d1be529471cad149b064c0f63108a8a330cc1f",
+      "published_sha256": "19ad528abb0f9d68bb0d5dcf39d1be529471cad149b064c0f63108a8a330cc1f",
+      "size": 98960
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "MANIFEST.sha256",
+      "sha256": "c3c9c56f75d80f58e885dea629d0d842a3a0b526ead08a7b73fe80df86c458d3",
+      "size": 1861
+    },
+    {
+      "path": "vendor/checkpoint_authority.json",
+      "sha256": "3d345e56829e02f13c72a4de933f72fb2703c5b121cf764464efcc0021122bc3",
+      "size": 4602
+    },
+    {
+      "path": "vendor/foundation_inventory_source.txt",
+      "sha256": "f6c5c44a48bcbd82b413a632b270497dfbb59440b96c4ea67e280ef154c286f6",
+      "size": 2144
+    },
+    {
+      "path": "vendor/frozen_plan_v100.json",
+      "sha256": "060311809b7b7a3a045e3b9585c63675ae6ab6847db82882209a4cb3a2272fdd",
+      "size": 4489
+    },
+    {
+      "path": "vendor/historical_timestamp_sources.json",
+      "sha256": "dfc9e297b237ca644fb114a63f3fd882b972a91673c0ccc09fc7b3ce59629348",
+      "size": 7041
+    }
+  ]
+}

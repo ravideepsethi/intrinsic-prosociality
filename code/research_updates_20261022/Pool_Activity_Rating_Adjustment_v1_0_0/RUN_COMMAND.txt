@@ -1,0 +1,12 @@
+/bin/bash <<'BASH'
+set -euo pipefail
+task_root="$HOME/Desktop/Lichess_Desktop"
+cd "$task_root"
+/usr/bin/shasum -a 256 -c Pool_Activity_Rating_Adjustment_v1_0_0.zip.sha256
+task_stage="$(/usr/bin/mktemp -d "$task_root/activity_rating_adjustment.XXXXXX")"
+/usr/bin/ditto -x -k Pool_Activity_Rating_Adjustment_v1_0_0.zip "$task_stage"
+task_log="$task_root/activity_rating_adjustment_$(/bin/date -u +%Y%m%dT%H%M%SZ).log"
+RATING_ADJ_WORKERS=4 RATING_ADJ_THREADS=8 \
+  /bin/bash "$task_stage/Pool_Activity_Rating_Adjustment_v1_0_0/RUN_ACTIVITY_RATING_ADJUSTMENT.command" \
+  2>&1 | /usr/bin/tee "$task_log"
+BASH

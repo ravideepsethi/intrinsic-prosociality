@@ -1,0 +1,161 @@
+# Receipt IV cohort assembly v1.0.0
+
+Prepared October 2, 2026. This package advances the completed source pull into
+an extended exposure, history and follow-up data set. **Both `__PRIVATE_VALUE_1__` and
+`__PRIVATE_VALUE_2__` remain included**, following the user's current instruction. This is
+a run-specific deferral of the later exclusion instruction, not a change to
+the project's standing documentation. The original author-inclusive inputs
+are required; author-excluded Run 3 analysis files are not substituted.
+
+## Run
+
+Save the ZIP and its SHA-256 sidecar in `~/Desktop/Lichess_Desktop`. Use the
+separately supplied `RUN_RECEIPT_IV_COHORT_ASSEMBLY.txt` command, or extract the
+ZIP and run `bash /path/to/Receipt_IV_Cohort_Assembly_v1_0_0/RUN_ASSEMBLY.command`.
+
+The launcher uses `/Volumes/XT_Pro/lichess_kindness/venv/bin/python`, keeps the
+Mac awake, writes a Desktop log, and allows up to 10 workers. It installs
+nothing. Default memory budget: 8 GiB, with explicit array reservations and
+fewer simultaneous processes for large query arrays. This is a planning
+budget, not an operating-system memory cap. At least 32 GiB of free working
+space is required. Larger input or spill footprints can require more.
+
+**Runtime planning allowance: 4–12 hours for the first full run.** This is not
+a measured runtime for this package. Drive throughput and the number of pairs
+outside the older cache matter. A live ETA follows completed chronology files;
+it covers that pass only. Startup authentication, joins and reporting are
+additional. Re-running the same command reuses validated checkpoints. It has
+no artificial cooldowns or fixed pauses between jobs; freed worker slots are
+refilled immediately. Dependency or evidence failures stop with a report.
+
+## Completed work reused
+
+* The completed source pull: 5,891,950 validated IDs for November, December and
+  February, with 5,201,205 newly known-main opportunities.
+* The existing 50,265,828-row choice spine, yielding 55,467,033 distinct
+  known-main opportunities after the overlay. February's 987 previously known
+  rows are retained once. The older 473 locally recovered IDs are already in
+  this lineage and are never added as a separate source.
+* The 63,525,555 all-source opportunity histories, the 512 precomputed
+  pair-excluded instrument files, and the original 24-month membership.
+* The existing canonical chronology and valid first-pair query checkpoints.
+
+This package makes no API requests, PGN parses, rating replays, Stockfish
+searches or instrument-score recomputations. It does not rewrite the existing
+chronology or other upstream products. It creates its own query projections.
+
+## What the run does
+
+1. Authenticate the completed cohort READY, source-overlay plan and receipts,
+   history bridges, score shards, and chronology inventories. Pin the local
+   input fingerprints in the new private run. The historical chronology has
+   a pinned manifest and metadata checks, not independently pinned full-byte
+   producer hashes; the report preserves that distinction.
+2. Merge source membership deltas only into formerly unresolved source rows.
+   Require 55,467,033 distinct known-main rows and 195,582 unresolved new-month
+   membership rows. Keep unresolved rows available for follow-up diagnostics.
+3. Rank first recipients across fair, nontournament known-main events before
+   arm and real-time cuts. Join precomputed scores by game and verify both
+   account roles, archive start, ordinal, anchor and month.
+4. Retain the original first-observed-pair scope: its 852-file,
+   7,763,847,245-row chronology manifest, plus any additional current files.
+   Reuse old pair minima for covered pairs when the old file fingerprint and
+   output checksum still agree. Query new pairs against the existing files.
+   An older pair outside September 2023–April 2026 can still disqualify a new
+   exposure. Same-start pair ties retain the inherited time-equality rule.
+5. During that same three-column pass, count prior-30-day canonical playing
+   volume from the unique current 192-file, 2,959,866,844-game chronology.
+   Volume windows extending before September 2023 are explicitly incomplete.
+   This includes the correspondence partition, matching the all-speed scope.
+6. Assemble all-source predetermined histories and known-main later choices.
+   Apply greedy spacing before history/completeness cuts. Save the full
+   selected streams for subsequent prospective-risk calculations.
+7. Write private analysis Parquets, aggregate counts and a new READY manifest.
+   Stop with an explicitly provisional calendar cohort, ready for the censor
+   and estimation specifications.
+
+The necessary new-pair query is a read of existing three-column Parquets.
+It does not rebuild historical games, recompute adjacency, or rerun replay.
+Per-file checkpoints avoid repeating that work after interruption. A
+metadata-valid file whose mtime has changed cannot use its older pair cache;
+the runner obtains its answer directly from that file instead.
+
+## Frozen assembly definitions
+
+| Item | Definition used here |
+|---|---|
+| Main exposure frame | Known pool/nonadjacent main, fair competitive, nontournament; grant-or-claim arm; five real-time speeds and positive base time. |
+| Treatment | The existing `kind_draw` label at the index exposure. |
+| First pair | Earliest observed canonical pair start equals the index start. This is observed history, not proof of lifetime strangers. |
+| Instrument | Existing all-source, focal-pair-excluded score, strictly before exposure-month start minus 7 or 30 days; no re-estimation here. |
+| Five versus ten | Minimum prior-decision floors using the same all-history score. Not last-five versus last-ten instruments. |
+| Common sample | The >=10 subset of the floor-five 90-day-spaced stream; independently spaced floor-ten rows are saved separately. |
+| Spacing | Recipient/start/ordinal/game order; next start strictly exceeds the previous selected anchor plus 30 or 90 days. Unsupported rows do not start a window. |
+| Histories | `[start−97d,start−7d)` and `[start−37d,start−7d)`; chooser fair/kind counts and recipient disconnect/receipt/claim counts across all sources. |
+| Follow-up | First later fair known-main choice, ordered by anchor/ordinal/game, against a different counterpart, game start strictly after the exposure anchor, and anchor within 90 days inclusive. No new tournament or arm cut is applied to the later-choice layer. |
+| Calendar completeness | Index anchor + 90 days is strictly before May 1, 2026 00:00 UTC. |
+| Unknown membership | If an unresolved fair later choice could precede the first known qualifying choice, flag the window and leave `y_calendar` NULL. |
+| Known nonreachers | `reached=false`; `y_calendar=0` only for calendar-complete, unambiguous windows. Later-choice color and policy interaction remain unassigned. |
+| Color policy | Pre before Nov 18 07:15 UTC; bracket 07:15–07:22; post at/after 07:22. Attach color from the recipient's later chooser role. The inherited lastMoveAt anchor remains a proxy for the choice time. |
+
+The later-choice metadata and `later_white_x_post` are available for a
+subsequent frozen specification. Their availability does not justify
+conditioning on reaching a later choice. No missing-color imputation or
+nonreacher control rule is adopted here. No December announcement timestamp
+is invented.
+
+## Outputs and interpretation
+
+New private root:
+
+```
+/Volumes/XT_Pro/lichess_kindness/derived/replication_36m/receipt_iv_cohort_assembly_v100_PRIVATE
+```
+
+`READY_FOR_CENSOR_AND_IV_SPECIFICATION_PRIVATE.json` points to the immutable
+assembly manifest, analysis shards and selected 30/90-day streams. The manifest
+records account retention, receipts and open decisions. `y_calendar` and
+`calendar_primary_7d_floor5` are calendar-supported candidate fields.
+`final_iv_eligible`, `mechanics_censor_ms`, and the reported final IV N stay NULL.
+
+The Desktop receives `RECEIPT_IV_COHORT_ASSEMBLY_<UTC>.zip` and `.zip.sha256`.
+Return **both files**. The ZIP contains aggregate membership/cohort counts,
+score support, policy-field availability, runtime, gates and errors. Private
+game and account rows remain on XT_Pro. A partial run also produces a small
+return bundle; its detailed traceback stays under the private `errors` folder.
+
+## Next actions after this run
+
+1. Review identity/count bridges, unresolved-membership effects, 7/30-day
+   scores, common support and missing RD by period. Attach/calibrate retained
+   new-month rating states where required; do not substitute account age.
+2. Pin mechanics source/deployment evidence and a censor convention. Enforce
+   complete 90-day outcome windows strictly before that boundary. January 30
+   remains a candidate date, not an assumed deployment timestamp. The completed
+   targeted API pull does not supply a platform-wide incident denominator.
+3. Freeze the later-choice color/nonreacher specification, announcement timing,
+   inference, placebo schedule and each statistic's predicted response/MDE.
+   Preserve the earlier all-game prospective entry/placebo designs; this
+   assembly package does not regenerate those comparison populations.
+4. Re-estimate the first stage, reduced form, 2SLS, dependence-aware uncertainty
+   and exclusion sensitivity on the final eligible rows. Use five and ten on
+   common support. Do not present the historical reduced-form benchmark as a
+   new result. Clearly losing positions remain a specificity comparison.
+
+The color-change behavioral GO/IV decisions remain unresolved. This run
+does not turn the existing evidence into a behavioral null, power-based NO-GO,
+or a new causal estimate. The original replay and diagnostics remain intact.
+
+## Validation
+
+`VALIDATION.json` records the local synthetic test environment. Tests include
+agreement with the inherited first-choice algorithm, strict spacing and
+90-day boundaries, history and volume counts, unknown-choice precedence,
+preservation of pre-existing February rows, historical pairs before the
+32-month window, cache reuse, changed-output rejection, spawned workers,
+and aggregate report construction. These tests do not certify live Mac input
+availability, wall time or statistical identification.
+
+The production runner offers no bypass of input authentication or expected
+row counts. A small internal count argument exists only for the synthetic
+fixture and is not exposed on its command line.

@@ -1,0 +1,99 @@
+{
+  "package": "Lichess_36M_Stage05_SF_Through_March_v1_0_0_20260921",
+  "archive_name": "Lichess_36M_Stage05_SF_Through_March_v1_0_0_20260921.zip",
+  "archive_sha256": "e05cb84a1c81a3f3b15b7cec8e338faa11dd89d13a65edb9aac77866fedaee35",
+  "archive_size": 52132,
+  "archive_root": "Lichess_36M_Stage05_SF_Through_March_v1_0_0_20260921",
+  "scope": "Source snapshot; original non-source assets are not distributed here.",
+  "files": [
+    {
+      "path": "EXECUTION_CONTRACT.md",
+      "published_path": "EXECUTION_CONTRACT.md",
+      "sha256": "ea94d247a3f9b44d4333c83e4ccdbbaedc8da110b7073118a8c9b05d43ad591e",
+      "published_sha256": "ea94d247a3f9b44d4333c83e4ccdbbaedc8da110b7073118a8c9b05d43ad591e",
+      "size": 1687
+    },
+    {
+      "path": "README_FIRST.md",
+      "published_path": "README_FIRST.md.in",
+      "sha256": "b4a02859554588b2d52b78d1476fa652f2c680d6d7fd17f988d3e7c018f85235",
+      "published_sha256": "7b66efa050c28a0bd723f0ae7f5294c1ae34a71cdfd0beddeb77b9ce84caba12",
+      "size": 1941,
+      "redactions": [
+        {
+          "start": 1840,
+          "end": 1855,
+          "token": "__PRIVATE_VALUE_1__"
+        }
+      ]
+    },
+    {
+      "path": "RUN_36M_STAGE05_SF_THROUGH_MARCH.command",
+      "published_path": "RUN_36M_STAGE05_SF_THROUGH_MARCH.command.in",
+      "sha256": "f85156a513c0678069eaa7bc7cec698631c66ad5e4e84387919fa67ad7a1e198",
+      "published_sha256": "19ac40bdda6f0a4d277d7b51ea616a2918770759927e3731cee64d8bceb72999",
+      "size": 5647,
+      "redactions": [
+        {
+          "start": 150,
+          "end": 165,
+          "token": "__PRIVATE_VALUE_1__"
+        }
+      ]
+    },
+    {
+      "path": "code/build_stage05_extension.py",
+      "published_path": "code/build_stage05_extension.py",
+      "sha256": "b363fc0128fb69e35e2ad07a8408e347d31741eb79fa0d2dfb192051c42017d4",
+      "published_sha256": "b363fc0128fb69e35e2ad07a8408e347d31741eb79fa0d2dfb192051c42017d4",
+      "size": 24502
+    },
+    {
+      "path": "code/finalize_result.py",
+      "published_path": "code/finalize_result.py",
+      "sha256": "785d32940655604eb6d09040c5b0f5c8751cb4731f2590d355fa367ddeda0d27",
+      "published_sha256": "785d32940655604eb6d09040c5b0f5c8751cb4731f2590d355fa367ddeda0d27",
+      "size": 5739
+    },
+    {
+      "path": "code/prepare_stockfish_inputs.py",
+      "published_path": "code/prepare_stockfish_inputs.py",
+      "sha256": "e29fdd9a7a994ffe0bcb38d27504c1b0386578bfebbe8aed7b2c8641faa8ea83",
+      "published_sha256": "e29fdd9a7a994ffe0bcb38d27504c1b0386578bfebbe8aed7b2c8641faa8ea83",
+      "size": 11368
+    },
+    {
+      "path": "vendor/05_build_timeout_opportunity_panel.py",
+      "published_path": "vendor/05_build_timeout_opportunity_panel.py.in",
+      "sha256": "eb8f7e7629c323ee8d5a9f7d4a96b5f9982980189cf27500289582457f0dfe80",
+      "published_sha256": "73e389ade60bfd7d573e2d1981014f41f3c1b029a9bf267ec8ab61acfee42a98",
+      "size": 101978,
+      "redactions": [
+        {
+          "start": 5373,
+          "end": 5388,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 87286,
+          "end": 87301,
+          "token": "__PRIVATE_VALUE_2__"
+        }
+      ]
+    },
+    {
+      "path": "vendor/080_stockfish100k_resumable.py",
+      "published_path": "vendor/080_stockfish100k_resumable.py",
+      "sha256": "79cd0b6a3165710beff52f8775cf138558daf58063d0047a406a0d614939f4ab",
+      "published_sha256": "79cd0b6a3165710beff52f8775cf138558daf58063d0047a406a0d614939f4ab",
+      "size": 31001
+    }
+  ],
+  "omitted_files": [
+    {
+      "path": "MANIFEST.sha256",
+      "sha256": "369df5bce840f3bc8d2b91fba3f6cf52ebf48b461a51bbc916a3f7e850d01ba6",
+      "size": 795
+    }
+  ]
+}

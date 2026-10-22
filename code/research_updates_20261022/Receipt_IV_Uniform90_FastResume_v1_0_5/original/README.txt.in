@@ -1,0 +1,154 @@
+Receipt IV — uniform 90-day histories, all eligible exposure rows
+Release 1.0.0 | 20 October 2026
+
+RUN
+
+Download Receipt_IV_Uniform90_v1_0_0.zip to ~/Desktop/Lichess_Desktop.
+Extract it, then run:
+
+bash "$HOME/Desktop/Lichess_Desktop/Receipt_IV_Uniform90_v1_0_0/RUN_UNIFORM90.command" --project "/Volumes/XT_Pro/lichess_kindness" --workers 10 --memory-gb 11
+
+The launcher checks package hashes and runs the included tests. It reuses a
+compatible existing Python environment, or creates a separate environment and
+installs requirements.txt. Python 3.10+ is required. On macOS it uses caffeinate.
+Do not run other research pipelines concurrently. The runner checks their locks.
+Allow at least 100 GiB free on the project drive; temporary disk demand depends
+on the newly eligible comparison frame and DuckDB spill.
+
+The primary receipt analysis uses authenticated local caches. The expanded
+entry/placebo frame may need previously uncached game metadata. It first reuses
+authenticated metadata, including the completed v1.0.3 rebuild, then fetches
+only unresolved eligible game IDs with the existing serial downloader. It does
+not run Stockfish. To prohibit metadata requests, append --offline. If records
+are missing, the runner retains the receipt results and exports a needs report;
+rerun without --offline to continue. It never silently drops unresolved games.
+
+Append --preflight-only to authenticate the main existing inputs and stop.
+Rerun the same command after interruption or failure. Completed files are
+checked and reused; an input or checksum mismatch is an error, not an excuse
+to substitute a different sample. Keep the extracted package directory and
+project checkpoints while the run is in progress.
+
+WHAT CHANGES
+
+* Keep every eligible competitive receipt exposure; no spacing and no cap of
+  one row per recipient. Repeated recipients and shared future choices remain.
+* Recipient behavioral counts use [exposure game start - 90 days, game start).
+  There is no seven-day gap. The lower endpoint is included; the upper endpoint
+  is excluded. History coverage therefore requires 90 days rather than 97.
+* Prior playing volume uses game starts in that same 90-day interval, replacing
+  the prior 30-day count. This preserves the original factual chronology
+  convention. It is NOT a count of completed games: the minimal all-game
+  chronology contains start timestamps, not decision/end timestamps. Behavioral
+  histories continue to use the inherited decision timestamp and clean counts.
+* Seven recent behavioral balance traits also use 90 days. Volume is an eighth
+  trait. They are tested jointly under NH+ENV with recipient-history controls
+  omitted. A trait controlled for in the primary model is not treated as
+  independent evidence of balance.
+
+WHAT IS RETAINED
+
+All-time pooled state-adjusted Score A; donor-own-month held-out-pair-fold state
+reference; removal of all focal-pair donor decisions; at least five donor
+decisions; expected donor rate and donor size/breadth controls; existing other
+controls, fixed effects, ENV definitions, and fixed score scale 0.04979005187533171.
+Author accounts __PRIVATE_VALUE_1__ and __PRIVATE_VALUE_2__ remain excluded from exposures, donors,
+state references and behavioral histories. Factual all-game chronology remains
+unchanged. Existing source files and prior analysis outputs are read only.
+
+The outcome is the first later qualifying competitive chooser decision, in
+inherited deterministic order (decision time, archive ordinal, game ID). Its
+game must start strictly after the exposure's last-move timestamp, involve a
+different opponent and be decided no later than anchor + 90 days. A missing
+qualifying later choice is zero, not missing. The inherited complete-followup
+cut anchor + 90 days < panel end remains. The prior outcome is reproduced
+exactly on all 3,103,280 legacy primary rows before results can proceed.
+
+Uncertainty uses the same shared-account-OR-exposure-date CR0 formula. The
+implementation groups complete cluster keys in bounded disk partitions and
+retains cross-sample covariance in contrasts. Nonpositive/indefinite covariance
+is reported as unsupported, not clipped. Generated scores are treated as fixed.
+More rows are not asserted to be the same number of independent observations.
+
+COMPARISONS AND DIAGNOSTICS
+
+The receipt report estimates six explicitly named models:
+1. Legacy spaced rows with their legacy features; coefficients AND standard
+   errors must reproduce the verified R12 total-five reference.
+2. Exactly the same rows with immediate 90-day histories and 90-day volume.
+3. Uniform90 on the legacy spacing rule, with the seven earlier days admitted.
+4. Uniform90 without spacing, restricted to the legacy calendar eligibility.
+5. Uniform90 without spacing over the complete newly eligible calendar.
+6. Model 5's balance specification with recipient histories omitted as controls.
+
+The legacy spacing algorithm is used only for comparisons. It applies the
+strict start > previous accepted anchor + 90d rule after donor support but
+before observation-window cuts, as in the accepted prior run.
+
+Contrasts separately estimate the history change on identical rows, spacing
+change at a fixed calendar range, and calendar gain. sample_counts.csv reports
+actual row and recipient counts; the early gain is NOT assumed to be exactly
+seven rows per recipient. It depends on eligible observed exposure events.
+
+overlap_audit.json reports repeated recipients, overlapping followup windows,
+shared future choices, and later retained exposures before the assigned
+outcome. These are exposure-weighted estimates. Spacing never established that
+no unsupported or otherwise unretained receipt occurred between anchors.
+
+Entry and ordinary placebo are rebuilt on the same full Phase100 additional-
+game hash frame, preserving deterministic focal orientation, prior-pilot
+exclusion, author rules, first observed pair and predecessor eligibility.
+The receipt cooldown is removed, coverage becomes 90 days, and support remains
+all-time-five. Old selected comparison rows are not used as the new frame.
+Newly eligible rows use cached local chronology scans where possible; missing
+chronology is recomputed from local files with a bounded merge. Metadata is
+resolved before estimating. Both frames receive the same new histories and
+volume. Entry labels refer to the unspaced supported receipt cohort. The
+ordinary placebo retains its original status and followup criteria. Both
+receive fresh balance estimates; receipt-minus-ordinary covariance is retained.
+The original placebo equivalence margin is converted to the same fixed score
+scale. Existing diagnostic numbers are never relabeled as new results.
+
+OUTPUTS AND RESUMPTION
+
+New local research files:
+derived/replication/receipt_iv_uniform90_v100_PRIVATE/<configuration prefix>/
+
+Desktop reports:
+UNIFORM90_IV_<configuration prefix>_025.zip — selection and sample counts
+UNIFORM90_IV_<configuration prefix>_050.zip — rebuilt receipt features
+UNIFORM90_IV_<configuration prefix>_075.zip — receipt estimates and contrasts
+UNIFORM90_IV_<configuration prefix>_100.zip — expanded diagnostics complete
+
+Each report has a .sha256 sidecar. Reports contain aggregate results and logs;
+observation-level data and influences stay in PRIVATE. A failed later stage
+exports an updated status at the last milestone. Inspect STATUS.json: a 075
+file is not a completed entry/placebo run. Return the 100 ZIP and its sidecar
+for review; if stopped, return the latest report ZIP instead.
+
+The 25/50/75/100 labels are stage milestones, not percentages of elapsed time.
+The code logs heartbeats and measured task/partition ETAs where available.
+Total runtime for this new expanded frame has not been benchmarked. At most
+two large local jobs run together; statistical models and metadata requests
+run serially. --workers 10 is a ceiling, not a promise of ten concurrent jobs.
+The allocation policy targets the 11 GiB budget; it is not an OS-level RSS cap.
+
+VALIDATION AND LIMITS
+
+Twelve synthetic/integration tests cover the history and followup boundaries,
+author exclusion, repeated/shared outcomes, all-game volume versus a brute
+force oracle, signature checking, resumed outputs, the separate calendar and
+spacing gains, expanded candidate selection, chronology scan/merge, comparison
+labels and ordinary selection, exact legacy model transforms and estimates,
+and CR0 versus a direct pairwise OR calculation including duplicated rows.
+All passed in the build environment. TEST_RESULTS.txt records the checks.
+
+The 798 vendored source/evidence files are byte identical to the retrieved
+AllTime_Entry_Placebo_v1_0_5 package. All new behavior lives in the top-level
+uniform_*.py files and run_uniform90.py. SOURCE_PROVENANCE.json records hashes.
+The original package's reviewed R12/R9/cache contracts remain enforced.
+
+The actual external-drive research data are not present in the build
+environment. Full-data execution, actual added-row counts, runtime, and new
+estimates await your Mac run. The legacy reproduction gate and exact outcome
+bridge protect the full-data handoff; they are not replaced by synthetic tests.
