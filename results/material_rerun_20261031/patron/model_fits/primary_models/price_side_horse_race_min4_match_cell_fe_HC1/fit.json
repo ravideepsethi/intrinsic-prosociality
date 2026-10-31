@@ -1,0 +1,175 @@
+{
+  "coefficients": [
+    {
+      "ci95_high_pp": 0.3732951426545289,
+      "ci95_low_pp": 0.1688498615716959,
+      "clusters": null,
+      "coefficient_pp": 0.2710725021131124,
+      "covariance": "HC1",
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "price_side_horse_race_min4_match_cell_fe_HC1",
+      "n": 329605,
+      "p_two_sided_approx": 2.0209105203575361e-07,
+      "rank": 5,
+      "se_pp": 0.052155366806602384,
+      "statistic": 5.197403809243216,
+      "status": "estimated",
+      "variable": "ever_kind_fair_costly"
+    },
+    {
+      "ci95_high_pp": 0.5238904044071064,
+      "ci95_low_pp": 0.3251018059528861,
+      "clusters": null,
+      "coefficient_pp": 0.4244961051799963,
+      "covariance": "HC1",
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "price_side_horse_race_min4_match_cell_fe_HC1",
+      "n": 329605,
+      "p_two_sided_approx": 5.729057077916546e-17,
+      "rank": 5,
+      "se_pp": 0.050712309007267344,
+      "statistic": 8.370672002317303,
+      "status": "estimated",
+      "variable": "ever_kind_fair_nonnegative"
+    },
+    {
+      "ci95_high_pp": 0.12145047072511309,
+      "ci95_low_pp": 0.010965738819896119,
+      "clusters": null,
+      "coefficient_pp": 0.0662081047725046,
+      "covariance": "HC1",
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "price_side_horse_race_min4_match_cell_fe_HC1",
+      "n": 329605,
+      "p_two_sided_approx": 0.018822824016783812,
+      "rank": 5,
+      "se_pp": 0.02818539850137718,
+      "statistic": 2.3490214186352407,
+      "status": "estimated",
+      "variable": "log_fair_costly_opps"
+    },
+    {
+      "ci95_high_pp": 0.0023646276635657937,
+      "ci95_low_pp": -0.10912250622194371,
+      "clusters": null,
+      "coefficient_pp": -0.05337893927918896,
+      "covariance": "HC1",
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "price_side_horse_race_min4_match_cell_fe_HC1",
+      "n": 329605,
+      "p_two_sided_approx": 0.0605423816879709,
+      "rank": 5,
+      "se_pp": 0.028441117991173766,
+      "statistic": -1.8768228202475807,
+      "status": "estimated",
+      "variable": "log_fair_nonnegative_opps"
+    },
+    {
+      "ci95_high_pp": 0.1019835703074477,
+      "ci95_low_pp": -0.008061601153806074,
+      "clusters": null,
+      "coefficient_pp": 0.04696098457682081,
+      "covariance": "HC1",
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "price_side_horse_race_min4_match_cell_fe_HC1",
+      "n": 329605,
+      "p_two_sided_approx": 0.09436647074256503,
+      "rank": 5,
+      "se_pp": 0.02807326367455628,
+      "statistic": 1.6728010366455217,
+      "status": "estimated",
+      "variable": "log_total_opps"
+    }
+  ],
+  "covariance": [
+    [
+      0.0027201822867312414,
+      -0.0009245108057461093,
+      -5.6749172270000865e-05,
+      -1.8399173889976485e-05,
+      3.964761616530017e-05
+    ],
+    [
+      -0.0009245108057461057,
+      0.0025717382848485684,
+      3.3803687620323726e-05,
+      -0.0001344215948450548,
+      0.00010414456849436306
+    ],
+    [
+      -5.674917227001384e-05,
+      3.380368762030904e-05,
+      0.0007944166886814351,
+      0.00016567362081278594,
+      -0.0003599897767970588
+    ],
+    [
+      -1.8399173889990184e-05,
+      -0.000134421594845071,
+      0.0001656736208127856,
+      0.000808897192587868,
+      -0.00038252607624991844
+    ],
+    [
+      3.964761616531626e-05,
+      0.00010414456849438176,
+      -0.0003599897767970583,
+      -0.0003825260762499182,
+      0.0007881081333411612
+    ]
+  ],
+  "kept_names": [
+    "ever_kind_fair_costly",
+    "ever_kind_fair_nonnegative",
+    "log_fair_costly_opps",
+    "log_fair_nonnegative_opps",
+    "log_total_opps"
+  ],
+  "model": {
+    "cluster": null,
+    "clusters": null,
+    "covariance": "HC1",
+    "dropped_regressors": {},
+    "estimand_class": "secondary",
+    "fixed_effect_levels": 20,
+    "fixed_effects": "match_cell",
+    "kept_regressors": [
+      "ever_kind_fair_costly",
+      "ever_kind_fair_nonnegative",
+      "log_fair_costly_opps",
+      "log_fair_nonnegative_opps",
+      "log_total_opps"
+    ],
+    "model": "price_side_horse_race_min4_match_cell_fe_HC1",
+    "n": 329605,
+    "outcome": "patron_pp",
+    "rank": 5,
+    "requested_regressors": [
+      "ever_kind_fair_costly",
+      "ever_kind_fair_nonnegative",
+      "log_fair_costly_opps",
+      "log_fair_nonnegative_opps",
+      "log_total_opps"
+    ],
+    "standardization": {
+      "log_fair_costly_opps": {
+        "mean": 2.316877493828572,
+        "sd_population": 0.5262633888114061
+      },
+      "log_fair_nonnegative_opps": {
+        "mean": 2.3280749307845987,
+        "sd_population": 0.5300645904510827
+      },
+      "log_total_opps": {
+        "mean": 3.872903818990624,
+        "sd_population": 0.5750169912204505
+      }
+    },
+    "status": "estimated"
+  }
+}

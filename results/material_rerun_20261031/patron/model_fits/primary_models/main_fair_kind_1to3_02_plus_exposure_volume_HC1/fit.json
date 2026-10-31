@@ -1,0 +1,111 @@
+{
+  "coefficients": [
+    {
+      "ci95_high_pp": 0.3513341557889658,
+      "ci95_low_pp": 0.2775340174635263,
+      "clusters": null,
+      "coefficient_pp": 0.31443408662624606,
+      "covariance": "HC1",
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "main_fair_kind_1to3_02_plus_exposure_volume_HC1",
+      "n": 847680,
+      "p_two_sided_approx": 1.2821904364459419e-62,
+      "rank": 3,
+      "se_pp": 0.018826911848270064,
+      "statistic": 16.70130976127868,
+      "status": "estimated",
+      "variable": "is_kind_role"
+    },
+    {
+      "ci95_high_pp": 0.11205717788164789,
+      "ci95_low_pp": -0.08928811295691443,
+      "clusters": null,
+      "coefficient_pp": 0.011384532462366731,
+      "covariance": "HC1",
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "main_fair_kind_1to3_02_plus_exposure_volume_HC1",
+      "n": 847680,
+      "p_two_sided_approx": 0.8245926838020896,
+      "rank": 3,
+      "se_pp": 0.05136453843712137,
+      "statistic": 0.2216418721702964,
+      "status": "estimated",
+      "variable": "log_fair_opps"
+    },
+    {
+      "ci95_high_pp": 0.19157404452590704,
+      "ci95_low_pp": 0.1167267730864902,
+      "clusters": null,
+      "coefficient_pp": 0.15415040880619862,
+      "covariance": "HC1",
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "main_fair_kind_1to3_02_plus_exposure_volume_HC1",
+      "n": 847680,
+      "p_two_sided_approx": 6.84680020780393e-16,
+      "rank": 3,
+      "se_pp": 0.0190940425512414,
+      "statistic": 8.073220136202982,
+      "status": "estimated",
+      "variable": "log_total_opps"
+    }
+  ],
+  "covariance": [
+    [
+      0.0003544526097425317,
+      -4.0351584015190924e-05,
+      4.205734847329876e-05
+    ],
+    [
+      -4.0351584015191e-05,
+      0.0026383158088585184,
+      -0.00031276501151205385
+    ],
+    [
+      4.2057348473298754e-05,
+      -0.0003127650115120539,
+      0.0003645824609486172
+    ]
+  ],
+  "kept_names": [
+    "is_kind_role",
+    "log_fair_opps",
+    "log_total_opps"
+  ],
+  "model": {
+    "cluster": null,
+    "clusters": null,
+    "covariance": "HC1",
+    "dropped_regressors": {},
+    "estimand_class": "secondary",
+    "fixed_effect_levels": 36,
+    "fixed_effects": "match_cell",
+    "kept_regressors": [
+      "is_kind_role",
+      "log_fair_opps",
+      "log_total_opps"
+    ],
+    "model": "main_fair_kind_1to3_02_plus_exposure_volume_HC1",
+    "n": 847680,
+    "outcome": "patron_pp",
+    "rank": 3,
+    "requested_regressors": [
+      "is_kind_role",
+      "log_fair_opps",
+      "log_total_opps"
+    ],
+    "standardization": {
+      "log_fair_opps": {
+        "mean": 1.8968904705194714,
+        "sd_population": 0.8985344736865168
+      },
+      "log_total_opps": {
+        "mean": 2.646239678698937,
+        "sd_population": 1.1070088979971893
+      }
+    },
+    "status": "estimated"
+  }
+}

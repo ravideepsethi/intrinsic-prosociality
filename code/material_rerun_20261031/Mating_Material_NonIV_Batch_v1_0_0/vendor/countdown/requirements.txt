@@ -1,0 +1,6 @@
+# The launcher uses an existing environment; it does not install packages.
+numpy>=1.24
+scipy>=1.10
+duckdb>=1.2
+pyarrow>=14
+matplotlib>=3.6

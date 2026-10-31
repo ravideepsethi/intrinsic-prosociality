@@ -1,0 +1,4 @@
+#!/bin/bash
+set -euo pipefail
+iv_here="$(cd "$(dirname "$0")" && pwd -P)"
+exec bash "$iv_here/launch.command" analyze "$@"

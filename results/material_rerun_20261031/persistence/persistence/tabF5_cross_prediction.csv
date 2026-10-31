@@ -1,0 +1,17 @@
+model,P2_outcome,estimand,estimate,se,ci95_low,ci95_high,p_value,second_year_mean_pp,accounts,second_year_opportunities,scale,holm_p_two_comparisons
+binary_year_one_grant_history,c,intercept,0.560764986,0.00671887898,0.547595983,0.573933989,0,1.93905125,266207,3280986,pp of P2 grant rate per P1 indicator,
+binary_year_one_grant_history,c,P1_ever_C,10.9628103,0.134419723,10.6993476,11.2262729,0,1.93905125,266207,3280986,pp of P2 grant rate per P1 indicator,
+binary_year_one_grant_history,c,P1_ever_L,0.920300705,0.0670296856,0.788922522,1.05167889,6.73672305e-43,1.93905125,266207,3280986,pp of P2 grant rate per P1 indicator,
+binary_year_one_grant_history,c,P1_both_interaction,12.3437323,0.634856791,11.099413,13.5880516,3.31883782e-84,1.93905125,266207,3280986,pp of P2 grant rate per P1 indicator,
+binary_year_one_grant_history,l,intercept,0.164202497,0.00243712246,0.159425737,0.168979257,0,0.292824087,266207,4614716,pp of P2 grant rate per P1 indicator,
+binary_year_one_grant_history,l,P1_ever_C,0.349935883,0.0150322018,0.320472768,0.379398999,7.22219935e-120,0.292824087,266207,4614716,pp of P2 grant rate per P1 indicator,
+binary_year_one_grant_history,l,P1_ever_L,0.507370836,0.0407150656,0.427569307,0.587172364,1.21070014e-35,0.292824087,266207,4614716,pp of P2 grant rate per P1 indicator,
+binary_year_one_grant_history,l,P1_both_interaction,4.55017689,0.345554557,3.87288996,5.22746382,1.34543396e-39,0.292824087,266207,4614716,pp of P2 grant rate per P1 indicator,
+binary_year_one_grant_history,outcome_normalized_comparison,C1_predicts_C2_more_than_L2,4.45866016,0.0773158688,4.30712106,4.61019926,0,,266207,7895702,difference in P2 effects divided by own P2 outcome mean,0
+binary_year_one_grant_history,outcome_normalized_comparison,L1_predicts_L2_more_than_C2,1.25806744,0.131757276,0.999823178,1.5163117,1.31750758e-21,,266207,7895702,difference in P2 effects divided by own P2 outcome mean,1.31750758e-21
+continuous_first_year_rates,c,intercept,0.407797187,0.00957106753,0.389037894,0.426556479,0,1.93905125,266207,3280986,pp P2 per pp P1,
+continuous_first_year_rates,c,P1_competitive_rate_pp,0.702201778,0.00558893355,0.691247468,0.713156088,0,1.93905125,266207,3280986,pp P2 per pp P1,
+continuous_first_year_rates,c,P1_lost_rate_pp,0.136613643,0.0206120723,0.0962139814,0.177013305,3.40620303e-11,1.93905125,266207,3280986,pp P2 per pp P1,
+continuous_first_year_rates,l,intercept,0.0883259694,0.00658889628,0.0754117327,0.101240206,5.63138278e-41,0.292824087,266207,4614716,pp P2 per pp P1,
+continuous_first_year_rates,l,P1_competitive_rate_pp,0.0240500827,0.001724169,0.0206707114,0.0274294539,3.19958497e-44,0.292824087,266207,4614716,pp P2 per pp P1,
+continuous_first_year_rates,l,P1_lost_rate_pp,0.484576961,0.0284660967,0.428783412,0.540370511,5.55018097e-65,0.292824087,266207,4614716,pp P2 per pp P1,

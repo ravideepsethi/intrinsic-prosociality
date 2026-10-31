@@ -1,0 +1,19 @@
+{
+  "package": "Mating_Material_Persistence_v1_0_0",
+  "version": "1.0.0",
+  "date_utc": "2026-10-29",
+  "git_commit": "32f76634fce3282b00acdb2fb5dd8ce1ee9217fa",
+  "parent_material_run_id": "aa7e95f275c18f43d9ad95af523b9b0d769704ddebf4aea4d3655a2e1b07ef5d",
+  "reviewed_core_model_run_id": "4823c3c8c0eb800d3090fbd5c4ae7ababb6a9d7046ff62f0cb5636b6f821691b",
+  "reviewed_core_report_sha256": "7578cc090914851f5ad415fb05f288aaea59e2754bf88083edf0e107d8f8a010",
+  "tests": "20 passed; includes production CLI on synthetic 24-month files with 1999 resamples, completed resume and corruption rejection",
+  "default_workers": 10,
+  "default_memory_gb": 11,
+  "default_bootstrap_replications": 1999,
+  "expected_runtime_minutes": [
+    15,
+    40
+  ],
+  "empirical_stage_executed_here": false,
+  "whole_paper_rerun_complete": false
+}

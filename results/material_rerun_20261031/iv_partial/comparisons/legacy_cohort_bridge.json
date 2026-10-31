@@ -1,0 +1,9 @@
+{
+  "rebuilt_cutoff5": 3103280,
+  "overlap_with_certified_R9": 2187076,
+  "certified_R9": 2682329,
+  "same_cohort": false,
+  "reason": "Certified S0 used historical lag-seven minimum-five support BEFORE spacing. New rows use the requested all-time Score A cutoff before spacing. Rebuilt cutoff five is therefore not silently labelled the certified S0 cohort.",
+  "order": "pre-support first-pair exposure universe; remove author exposures; rebuild Score A excluding both author roles and every focal pair decision; apply cutoff; greedy 90-day spacing in recipient/start/row_id order; complete 90-day follow-up and 97-day history coverage; clean histories and outcomes",
+  "donor_set": "All-time Score A donor set is unchanged by an exposure eligibility threshold; the score and all three history controls are recomputed from that same set."
+}

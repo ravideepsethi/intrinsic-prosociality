@@ -1,0 +1,11 @@
+{
+  "patron_report_sha256": "cf6eacdfa071ce40e547935c1026423e3743fbfd8667de9a2ebbd39e5ebb6c32",
+  "patron_run_id": "63bdeb25597c5ae3ffa991e7c480ef989235998bc254e2542002cdf8b4e383bc",
+  "checks": {
+    "zip_sha256": true,
+    "crc_and_internal_manifest": true,
+    "source_matches_delivered_package": true,
+    "covariance_matrices_verified": 40
+  },
+  "runtime_seconds": 380.732645
+}

@@ -1,0 +1,74 @@
+[
+  {
+    "ci95_high_pp": 2.3094184385072483,
+    "ci95_low_pp": 1.6393826090461667,
+    "coefficient_pp": 1.9744005237767075,
+    "contrast": "competitive_minus_clearly_worse",
+    "controls": [
+      "rating",
+      "opp_rating",
+      "rd",
+      "opp_rd",
+      "cost",
+      "draw_payoff",
+      "log_clock",
+      "clock_missing",
+      "log_opp_clock",
+      "opp_clock_missing"
+    ],
+    "covariance": "chooser_CR1",
+    "covariance_psd": true,
+    "design": {
+      "absorb_iterations": 564,
+      "causal": false,
+      "chooser_accounts": 202231,
+      "control_columns": 10,
+      "grants": 4070,
+      "n": 230853,
+      "supported": true
+    },
+    "excluded_nonfinite": 0,
+    "n": 230853,
+    "p": 7.306278453110505e-31,
+    "se_pp": 0.1709306470580791,
+    "specification": "low_risk_gradient",
+    "standard_errors_condition_on_prediction": true,
+    "supported": true
+  },
+  {
+    "ci95_high_pp": 2.2963732423669168,
+    "ci95_low_pp": 1.6524278051864985,
+    "coefficient_pp": 1.9744005237767075,
+    "contrast": "competitive_minus_clearly_worse",
+    "controls": [
+      "rating",
+      "opp_rating",
+      "rd",
+      "opp_rd",
+      "cost",
+      "draw_payoff",
+      "log_clock",
+      "clock_missing",
+      "log_opp_clock",
+      "opp_clock_missing"
+    ],
+    "covariance": "shared_account_OR_date_CR0",
+    "covariance_psd": true,
+    "design": {
+      "absorb_iterations": 564,
+      "causal": false,
+      "chooser_accounts": 202231,
+      "control_columns": 10,
+      "grants": 4070,
+      "n": 230853,
+      "supported": true
+    },
+    "excluded_nonfinite": 0,
+    "n": 230853,
+    "p": 2.8275194000927544e-33,
+    "se_pp": 0.16427481249156056,
+    "specification": "low_risk_gradient",
+    "standard_errors_condition_on_prediction": true,
+    "supported": true
+  }
+]

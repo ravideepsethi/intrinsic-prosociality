@@ -1,0 +1,13 @@
+model,opportunities,collapsed_rows,chooser_clusters,rank,ply_rule
+patron_by_five_bin_desert_gradient__ply_gt4,25342002,24227282,1090664,52,"ply_band NOT IN ('missing','00_04')"
+patron_by_favorable_price_in_fair_states__ply_gt4,8998686,8814218,1017954,46,"ply_band NOT IN ('missing','00_04')"
+patron_by_fair_state_by_favorable_price__ply_gt4,23043949,21964528,1083689,50,"ply_band NOT IN ('missing','00_04')"
+patron_by_five_bin_desert_gradient__ply_gt10,23723670,22637168,1075870,52,"ply_band NOT IN ('missing','00_04','05_10')"
+patron_by_favorable_price_in_fair_states__ply_gt10,7672499,7514160,979901,46,"ply_band NOT IN ('missing','00_04','05_10')"
+patron_by_fair_state_by_favorable_price__ply_gt10,21559028,20507232,1068324,50,"ply_band NOT IN ('missing','00_04','05_10')"
+patron_by_five_bin_desert_gradient__ply_gt20,20193392,19188033,1045626,52,"ply_band NOT IN ('missing','00_04','05_10','11_20')"
+patron_by_favorable_price_in_fair_states__ply_gt20,5574854,5464310,900895,46,"ply_band NOT IN ('missing','00_04','05_10','11_20')"
+patron_by_fair_state_by_favorable_price__ply_gt20,18519971,17543223,1038324,50,"ply_band NOT IN ('missing','00_04','05_10','11_20')"
+patron_by_five_bin_desert_gradient__ply_band_controls,26379337,25246320,1101025,57,TRUE
+patron_by_favorable_price_in_fair_states__ply_band_controls,10018462,9815718,1043048,51,TRUE
+patron_by_fair_state_by_favorable_price__ply_band_controls,24067468,22969770,1094832,55,TRUE

@@ -1,0 +1,87 @@
+[
+  {
+    "packaged_path": "source/pool_sample_common_v100.py",
+    "source_path": "build/Pool_Main_Patron_Rebuild_Wave3A_v1_0_0/source/pool_sample_common_v100.py",
+    "sha256": "b0953daa5090d901372f44191f503911eef34913926f2905d3693ece0a01831f",
+    "unmodified": true
+  },
+  {
+    "packaged_path": "source/acquisition_planner_v100.py",
+    "source_path": "build/Pool_Main_Patron_Rebuild_Wave3A_v1_0_0/source/acquisition_planner_v100.py",
+    "sha256": "aaaa70e119456258c2fd351dca5b59e52cfe6924421fe6103211e6e812f730de",
+    "unmodified": true
+  },
+  {
+    "packaged_path": "source/wave3a_design.py",
+    "source_path": "build/Pool_Main_Patron_Rebuild_Wave3A_v1_0_0/runner/run.py",
+    "sha256": "9a3534c64d646e1b91c848f9996987a2ed413318c344d7c339707021ce9513e0",
+    "unmodified": true
+  },
+  {
+    "packaged_path": "source/patron_stage10_common.py",
+    "source_path": "repo/code/patron_stage10/primary_v1_0_1/code/patron_stage10_common.py",
+    "sha256": "b9dafa18bb616199db63d39a617fd1eff7168bf54123ee9f7d0e34778e32e7c0",
+    "unmodified": true
+  },
+  {
+    "packaged_path": "source/cache_builder_v101.py",
+    "source_path": "repo/code/patron_stage10/primary_v1_0_1/code/00_build_patron_chooser_cache.py",
+    "sha256": "77bd8970e98e5f79e311e3758ac84d173fcfd94612f9b15dbd0849bbd8c8e353",
+    "unmodified": true
+  },
+  {
+    "packaged_path": "source/chooser_models_v101.py",
+    "source_path": "repo/code/patron_stage10/primary_v1_0_1/code/01_estimate_patron_chooser_models.py",
+    "sha256": "b9cfb4502bb529c0668746e279b09cdc7c45111baedb407c03e0c96a07d1bacd",
+    "unmodified": true
+  },
+  {
+    "packaged_path": "source/synthetic_fixture_v101.py",
+    "source_path": "repo/code/patron_stage10/primary_v1_0_1/code/04_make_synthetic_fixture.py",
+    "sha256": "3d308d5ccd7dd80f1918616b2034f5ae4aa76d41f917dada176f317e1910ad7c",
+    "unmodified": true
+  },
+  {
+    "packaged_path": "authority/SAMPLE_AUTHORITY.json",
+    "source_path": "build/Pool_Main_Patron_Rebuild_Wave3A_v1_0_0/authority/SAMPLE_AUTHORITY.json",
+    "sha256": "81c34113e7a888629a834a17235a71dcf369a2d590755fd9412ee42151d9b2f3",
+    "unmodified": true
+  },
+  {
+    "packaged_path": "authority/PATRON_STAGE10_IMPLEMENTATION_CONTRACT_v1.0.0.md",
+    "source_path": "build/Pool_Main_Patron_Rebuild_Wave3A_v1_0_0/authority/PATRON_STAGE10_IMPLEMENTATION_CONTRACT_v1.0.0.md",
+    "sha256": "786409406e0ff12bcd98e0c13f260b85ed920aca90fa183efad1cc3c874160a3",
+    "unmodified": true
+  },
+  {
+    "packaged_path": "evidence/Pool_Main_Sample_24M_Report.zip",
+    "source_path": "build/Pool_Main_Patron_Rebuild_Wave3A_v1_0_0/evidence/Pool_Main_Sample_24M_Report.zip",
+    "sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "unmodified": true
+  },
+  {
+    "packaged_path": "evidence/Pool_Main_Sample_24M_Report.zip.sha256",
+    "source_path": "build/Pool_Main_Patron_Rebuild_Wave3A_v1_0_0/evidence/Pool_Main_Sample_24M_Report.zip.sha256",
+    "sha256": "d2e6c0953ff2de7cc7235b98d568c884e4fa8067b8aa81d22efe1ac3484d6f59",
+    "unmodified": true
+  },
+  {
+    "packaged_path": "evidence/WAVE3A_RESULTS.zip",
+    "source_path": "upload/POOL_MAIN_PATRON_WAVE3A_RESULTS_20260911T134803Z_f9dfa2718056.zip",
+    "sha256": "f56407f3de5bdd02366df28858e689da5f10a05c657f6c5e2feb71a7e227a592",
+    "unmodified": true
+  },
+  {
+    "packaged_path": "source/postcertification_date_authority_v100.py",
+    "source_path": "repo/code/patron_stage10/postcertification_addendum_v1_0_0/code/00_run_postcertification_addendum.py",
+    "sha256": "6a6d7b612161ff52635b8fba9ac266f69bd550ab35f9dcd0acfd97d953a6f702",
+    "unmodified": true,
+    "usage": "Source for the missing-date CASE construction; wrapper estimates date sensitivities separately."
+  },
+  {
+    "packaged_path": "evidence/GAP_FILL_RESULTS.zip",
+    "source_path": "upload/POOL_MAIN_PATRON_GAP_FILL_RESULTS_20260911T153303Z_2c3aaceee64b.zip",
+    "sha256": "99938ce0e0ebc2306e449148f76b50d87771677805ea4c35afc45066889b8737",
+    "unmodified": true
+  }
+]

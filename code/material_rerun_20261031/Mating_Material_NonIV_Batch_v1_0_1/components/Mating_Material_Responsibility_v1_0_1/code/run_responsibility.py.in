@@ -1,0 +1,132 @@
+from util import *
+from inputs import authenticate,census,guard
+from responsibility import execute
+from cache_inputs import authenticate_cache,guard_cache
+import argparse,fcntl,subprocess,sys,shutil,traceback,zipfile,platform,time
+
+VERSIONS={'numpy':'2.3.5','pandas':'2.3.3','pyarrow':'20.0.0','duckdb':'1.3.2','scipy':'1.16.3'}
+EXPECTED_RUNTIME='Expected 5–15 minutes on the 12-core Mac/XT_Pro; allow 25 on a busy drive. The previous reference fit took about 40 seconds; a complete corrected run is not yet measured. Reproduces the archived models, then fits the corrected frame. Up to 10 workers, 11 GB budget, one BLAS thread per worker; reuses the installed model environment and existing engine features. New v1.0.1 run directory; short regression fits are repeated. No new engine searches, APIs, profiles or rating replay.'
+
+def verify_package():
+    for line in (ROOT/'SHA256SUMS.txt').read_text().splitlines():
+        checksum,name=line.split('  ',1);p=(ROOT/name).resolve()
+        require(p.is_relative_to(ROOT) and p.is_file() and sha(p)==checksum,'Package checksum mismatch: '+name)
+
+def coverage(run):
+    import pandas as pd
+    frame=pd.read_csv(ROOT/'evidence/structure_review/DOWNSTREAM_STATUS.csv')
+    frame.loc[frame.output=='tab_app_responsibility','status']='COMPLETE_53_ORIGINAL_REPAIRED_MODELS_ON_FROZEN_ROSTER_WITH_MATERIAL_FRAME_AND_NEW_GRANT_LABELS'
+    frame.loc[frame.output=='tab_app_responsibility','producer']='Authenticated repaired A2 14eda066d25b14f4; original design/estimator/report'
+    table(run/'report/DOWNSTREAM_STATUS.csv',frame)
+
+def bundle(run,destination,ready):
+    destination=Path(destination);destination.mkdir(parents=True,exist_ok=True)
+    suffix='RESPONSIBILITY_READY' if ready else 'FAILED'
+    target=destination/f'MATERIAL_RESPONSIBILITY_{run.name}_{suffix}.zip'
+    temporary=target.with_suffix('.zip.partial');manifest=[]
+    with zipfile.ZipFile(temporary,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
+        def add(path,name):
+            require('PRIVATE' not in Path(name).parts and not Path(name).name.endswith('_PRIVATE.parquet'),'Private data in return report')
+            z.write(path,name);manifest.append(dict(path=name,bytes=path.stat().st_size,sha256=sha(path)))
+        for f in sorted((run/'report').rglob('*')):
+            if f.is_file():
+                require(f.suffix in ('.csv','.json','.tex','.txt','.npz','.png'),'Unexpected report file type')
+                if f.suffix=='.csv':
+                    import csv
+                    with f.open() as stream:cols=next(csv.reader(stream),[])
+                    require(not {'chooser','game_id','chooser_user_id','disconnected_user_id','username','user_id','username_norm','matched_kind_chooser_id'}.intersection(cols),'Private identifiers in an aggregate report')
+                add(f,'report/'+str(f.relative_to(run/'report')))
+        for folder in ('code','vendor','tests','authority','evidence'):
+            for f in sorted((ROOT/folder).rglob('*')):
+                if f.is_file() and '__pycache__' not in f.parts and f.suffix in ('.py','.json','.csv','.tsv','.npz'):
+                    add(f,'code/'+str(f.relative_to(ROOT)))
+        for name in ('README.txt','BUILD_INFO.json','SHA256SUMS.txt','requirements.txt','TEST_RESULTS.txt','RESOURCE_BENCHMARK.json','run.py','setup_and_run.py','RUN_RESPONSIBILITY.command'):
+            if (ROOT/name).is_file():add(ROOT/name,name)
+        if (run/'run.log').is_file():add(run/'run.log','run.log')
+        status_bytes=(json.dumps(dict(status='RESPONSIBILITY_READY' if ready else 'STOPPED',
+            successful_return=bool(ready),whole_paper_rerun_complete=False),indent=2)+'\n').encode()
+        z.writestr('RETURN_STATUS.json',status_bytes)
+        manifest.append(dict(path='RETURN_STATUS.json',bytes=len(status_bytes),sha256=hashlib.sha256(status_bytes).hexdigest()))
+        z.writestr('REPORT_MANIFEST.json',json.dumps(manifest,indent=2)+'\n')
+    os.replace(temporary,target);target.with_suffix('.zip.sha256').write_text(sha(target)+'  '+target.name+'\n')
+    log('Return report: '+str(target));return target
+
+class Tee:
+    def __init__(self,*streams):self.streams=streams
+    def write(self,text):
+        for s in self.streams:s.write(text)
+        return len(text)
+    def flush(self):
+        for s in self.streams:s.flush()
+
+def main(argv=None):
+    os.umask(0o077)
+    p=argparse.ArgumentParser(description='Rerun the 53 repaired responsibility specifications on the frozen roster and corrected material frame.')
+    p.add_argument('--project-root',type=Path,default=Path('__PRIVATE_VALUE_1__'))
+    p.add_argument('--results-dir',type=Path,default=Path.home()/'Desktop/Lichess_Desktop')
+    p.add_argument('--manifest',type=Path);p.add_argument('--workers',type=int,default=10)
+    p.add_argument('--shards',type=int,default=32);p.add_argument('--hash-workers',type=int,default=2);p.add_argument('--memory-gb',type=float,default=11)
+    p.add_argument('--self-test',action='store_true');p.add_argument('--preflight-only',action='store_true');p.add_argument('--estimate-only',action='store_true')
+    a=p.parse_args(argv)
+    if a.estimate_only:print(EXPECTED_RUNTIME);return 0
+    if a.self_test:return subprocess.call([sys.executable,str(ROOT/'tests/run_tests.py')])
+    verify_package()
+    require(1<=a.workers<=10 and 1<=a.hash_workers<=4 and 4<=a.memory_gb<=32 and 4<=a.shards<=1024,'Use 1–10 workers, 1–4 hash workers, 4–32 GB, 4–1024 shards')
+    from importlib.metadata import version
+    versions={name:version(name) for name in VERSIONS};require(versions==VERSIONS,'Run RUN_RESPONSIBILITY.command to use the tested environment')
+    a.project_root=a.project_root.expanduser().resolve();a.results_dir=a.results_dir.expanduser().resolve()
+    start=time.monotonic();log(EXPECTED_RUNTIME)
+    expected=read(ROOT/'authority/REVIEW.json')
+    manifest=a.manifest or a.project_root/'derived/replication/mating_material_first_run_v100_PRIVATE'/expected['run_id'][:16]/'MATERIAL_RESTRICTED_INPUTS_READY_PRIVATE.json'
+    auth=authenticate(manifest,expected,a.hash_workers)
+    cache=authenticate_cache(a.project_root,workers=min(a.workers,10))
+    config=dict(version='1.0.1',package_sha256=sha(ROOT/'SHA256SUMS.txt'),parent_run_id=auth['parent_run_id'],
+                manifest_sha256=auth['manifest_sha256'],sources=[{k:r[k] for k in ('month','sha256','rows','grants')} for r in auth['records']],
+                environment=versions,shards=a.shards,cache_identity=cache['key'],policy='original_53_repaired_a2_frozen_roster_material_membership_and_outcome')
+    key=digest(config);run=a.project_root/'derived/replication/mating_material_responsibility_v101_PRIVATE'/key[:16]
+    (run/'PRIVATE').mkdir(parents=True,exist_ok=True);(run/'report').mkdir(exist_ok=True)
+    workers=min(a.workers,max(1,(os.cpu_count() or 2)-2))
+    require(shutil.disk_usage(run).free>=(2 if (run/'_SUCCESS.json').exists() else 4)*2**30,'Need 4 GiB free for projections, moments and spill (2 GiB for a completed resume)')
+    lock=(run/'RUNNING.lock').open('a+')
+    try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+    except BlockingIOError:raise RuntimeError('This Responsibility run is already active')
+    with lock,(run/'run.log').open('a',buffering=1) as output:
+        old=sys.stdout;sys.stdout=Tee(old,output)
+        try:
+            success=run/'_SUCCESS.json'
+            if success.exists():
+                done=read(success);require(done['run_id']==key,'Completed run configuration mismatch')
+                for item in done['files']:verify(item,run)
+                guard(auth);guard_cache(cache);artifact=bundle(run,a.results_dir,True)
+                save(a.results_dir/'MATERIAL_RESPONSIBILITY_LATEST_PRIVATE.json',dict(root=str(run),run_id=key,status=done['status'],report=str(artifact)))
+                log('Completed Responsibility run verified; no models repeated.');return 0
+            with heartbeat('Checking material-panel counts'):
+                counts=census(auth,run,workers,max(2,a.memory_gb-2))
+            guard(auth);save(run/'PRIVATE/CONFIG.json',dict(config,auth=auth,cache=cache,workers=workers,memory_gb=a.memory_gb))
+            save(run/'report/INPUT_LINEAGE.json',dict(parent_run_id=auth['parent_run_id'],parent_manifest_sha256=auth['manifest_sha256'],census=counts,
+                 price_layer='original',author_exclusion=['__PRIVATE_VALUE_2__','__PRIVATE_VALUE_3__'],rule=expected['rule'],known_outcome_policy=expected['known_outcome_policy']))
+            save(run/'report/ENVIRONMENT.json',dict(versions=versions,python=platform.python_version(),workers=workers,memory_gb=a.memory_gb))
+            if a.preflight_only:log('Preflight passed; no responsibility models rebuilt.');return 0
+            summary,timing=execute(auth,cache,run,key,workers,max(2,a.memory_gb-2),a.shards,counts)
+            guard(auth);guard_cache(cache);coverage(run)
+            result=dict(status='RESPONSIBILITY_COMPLETE_MORE_FAMILIES_PENDING',whole_paper_rerun_complete=False,run_id=key,parent_run_id=auth['parent_run_id'],
+                seconds_this_launch_including_authentication=time.monotonic()-start,stage_seconds=timing,summary=summary,
+                api_requests=0,engine_evaluations=0,rating_replay_records=0)
+            save(run/'report/RESULTS.json',result)
+            # Bind private caches as well as aggregates for a verified completed resume.
+            paths=[f for f in (run/'report').rglob('*') if f.is_file()]
+            paths += [f for f in (run/'PRIVATE').rglob('*') if f.is_file() and f.name!='ERROR.json' and (f.suffix in ('.json','.parquet','.csv','.npz')) and not any('.partial_' in part for part in f.parts)]
+            artifact=bundle(run,a.results_dir,True)
+            save(success,dict(result,files=[record(f,run) for f in sorted(paths)],report=str(artifact),report_sha256=sha(artifact)))
+            save(a.results_dir/'MATERIAL_RESPONSIBILITY_LATEST_PRIVATE.json',dict(root=str(run),run_id=key,status=result['status'],report=str(artifact)))
+            log('Responsibility checks complete. Other families remain in DOWNSTREAM_STATUS.csv.');return 0
+        except BaseException as exc:
+            save(run/'PRIVATE/ERROR.json',dict(error=str(exc),traceback=traceback.format_exc()))
+            # Do not overwrite a completed responsibility report if its integrity check failed.
+            if not (run/'_SUCCESS.json').exists():
+                save(run/'report/RESULTS.json',dict(status='STOPPED',error_type=type(exc).__name__,whole_paper_rerun_complete=False))
+            log('STOPPED: '+str(exc));bundle(run,a.results_dir,False)
+            return 130 if isinstance(exc,KeyboardInterrupt) else 1
+        finally:sys.stdout=old
+
+if __name__=='__main__':raise SystemExit(main())

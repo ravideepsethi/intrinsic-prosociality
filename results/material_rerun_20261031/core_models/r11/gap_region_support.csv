@@ -1,0 +1,19 @@
+region,category_kind,gap_category,raw_rating_gap_rule,opportunities,tail_overlap
+noncompetitive,segment,below_-300,gap < -300,73103,
+noncompetitive,segment,-300_to_-100,gap >= -300 AND gap < -100,1540736,
+noncompetitive,segment,-100_to_0,gap >= -100 AND gap < 0,12232113,
+noncompetitive,segment,0_to_100,gap >= 0 AND gap < 100,11400208,
+noncompetitive,segment,100_to_300,gap >= 100 AND gap < 300,1045931,
+noncompetitive,segment,above_300,gap >= 300,34784,
+noncompetitive,tail,below_-600,gap < -600,31990,tails overlap outer segments
+noncompetitive,tail,above_600,gap > 600,9979,tails overlap outer segments
+noncompetitive,missing,missing,gap IS NULL OR NOT isfinite(gap),0,
+competitive,segment,below_-300,gap < -300,29746,
+competitive,segment,-300_to_-100,gap >= -300 AND gap < -100,670278,
+competitive,segment,-100_to_0,gap >= -100 AND gap < 0,6769542,
+competitive,segment,0_to_100,gap >= 0 AND gap < 100,7005700,
+competitive,segment,100_to_300,gap >= 100 AND gap < 300,683508,
+competitive,segment,above_300,gap >= 300,28070,
+competitive,tail,below_-600,gap < -600,12723,tails overlap outer segments
+competitive,tail,above_600,gap > 600,10881,tails overlap outer segments
+competitive,missing,missing,gap IS NULL OR NOT isfinite(gap),0,

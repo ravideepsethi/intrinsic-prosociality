@@ -1,0 +1,186 @@
+import sys,unittest,tempfile
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
+from position_common import *
+import position_frames as frames
+import position_stats as stats
+import position_lost as lost
+from unittest.mock import patch
+
+def dense_meat(S,i,j,date):
+    edge=(i[:,None]==i)|(i[:,None]==j)|(j[:,None]==i)|(j[:,None]==j)|(date[:,None]==date)
+    return S.T@edge.astype(float)@S
+
+class PositionTests(unittest.TestCase):
+    def test_timing_opponent_start_window_and_position(self):
+        anchor=100*DAY
+        events=[('00000001',anchor,anchor-10,1,7,True), # anchor equality excluded
+                ('00000002',anchor+1,anchor+1,3,7,True), # first all: middle
+                ('00000003',anchor+2,anchor,2,7,True), # start equality excluded
+                ('00000004',anchor+3,anchor+1,2,9,True), # exposure opponent excluded
+                ('00000005',anchor+4,anchor+1,2,7,False), # first lost/either, nongrant
+                ('00000006',anchor+5,anchor+1,1,7,True), # first competitive
+                ('00000007',anchor+90*DAY,anchor+10,1,7,True)]
+        h=dict(gid=np.array([v[0] for v in events]),j=np.ones(7,dtype=np.int64),i=np.array([v[4] for v in events]),
+               t=np.array([v[1] for v in events]),start=np.array([v[2] for v in events]),ord=np.arange(7),
+               y=np.array([v[5] for v in events]),position=np.array([v[3] for v in events]))
+        q=dict(row_id=np.arange(2),recipient_id=np.array([1,2]),opponent_id=np.array([9,9]),
+               anchor_ms=np.array([anchor,anchor]),game_id=np.array(['exposure','nochoice']))
+        r=frames.later(h,q)
+        self.assertEqual(r['comp_gid'][0],'00000006');self.assertEqual(r['lost_gid'][0],'00000005')
+        self.assertTrue(r['grant_comp'][0]);self.assertFalse(r['grant_lost'][0]);self.assertTrue(r['reach_lost'][0])
+        self.assertTrue(r['first_either_type_lost'][0]);self.assertTrue(r['first_all_type_middle'][0])
+        self.assertEqual(r['wait_lost_days'][1],90);self.assertFalse(r['reach_comp'][1])
+        edge={k:v[-1:] for k,v in h.items()};self.assertTrue(frames.later(edge,q)['reach_comp'][0])
+        edge['t']=edge['t']+1;self.assertFalse(frames.later(edge,q)['reach_comp'][0])
+
+    def test_joint_covariance_matches_pairwise_account_or_date_oracle(self):
+        rng=np.random.default_rng(51);n=90
+        i=rng.integers(0,12,n);j=(i+rng.integers(1,12,n))%12;date=rng.integers(0,15,n);S=rng.normal(size=(n,4))
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);path=root/'influence.parquet'
+            pq.write_table(pa.table(dict(recipient_id=i,opponent_id=j,date=date,**{f's{k}':S[:,k] for k in range(4)})),path)
+            actual=covariance(path,[f's{k}' for k in range(4)],root/'cov')
+            np.testing.assert_allclose(actual,dense_meat(S,i,j,date),atol=1e-10)
+            np.testing.assert_allclose(covariance(path,[f's{k}' for k in range(4)],root/'cov'),actual)
+
+    def test_baseline_ratio_delta_method_includes_shared_covariance(self):
+        names=['iv_grant_comp','iv_grant_lost','base_comp','base_lost'];p=np.array([.0032,.0004,.0172,.0047])
+        A=np.arange(1,17,dtype=float).reshape(4,4)/100000;V=A@A.T+np.eye(4)*1e-9
+        r=stats.paired_contrasts(dict(zip(names,p)),V,names)
+        row=next(v for v in r if v['contrast']=='lost_minus_comp_proportional')
+        f=lambda x:x[1]/x[3]-x[0]/x[2]
+        g=np.array([(f(p+np.eye(4)[k]*1e-8)-f(p-np.eye(4)[k]*1e-8))/2e-8 for k in range(4)])
+        self.assertAlmostEqual(row['coefficient'],f(p),places=12)
+        self.assertAlmostEqual(row['standard_error'],np.sqrt(g@V@g),places=9)
+
+    def test_cem_att_and_nonoverlap(self):
+        d=np.array([1,1,0,0,1,0,0,1.]);y=np.array([1,0,0,0,1,1,0,1.]);cells=np.array([1,1,1,1,2,2,2,3])
+        b,s,m=stats.cem_scores(d,y,cells)
+        self.assertAlmostEqual(b,.5);self.assertAlmostEqual(s.sum(),0);self.assertEqual(s[-1],0)
+        self.assertEqual(m['treated_overlap'],3);self.assertEqual(m['overlap_rows'],7)
+
+    def test_resume_and_tamper_fail_closed(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);dep=root/'input';dep.write_text('a');calls=[]
+            def build(tmp):calls.append(1);(tmp/'answer').write_text('x')
+            stage(root/'stage','key',build,[dep]);stage(root/'stage','key',build,[dep]);self.assertEqual(len(calls),1)
+            (root/'stage/answer').write_text('y')
+            with self.assertRaisesRegex(RuntimeError,'Checksum'):stage(root/'stage','key',build,[dep])
+            (root/'stage/answer').write_text('x');dep.write_text('b')
+            with self.assertRaisesRegex(RuntimeError,'inputs changed'):stage(root/'stage','key',build,[dep])
+
+    def test_combined_pair_volume_scan_against_brute_force(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);query=root/'query';query.mkdir()
+            person=np.array([1,1,2]);start=np.array([100,102,100],np.int64)*DAY
+            opponent=np.array([2,3,4]);keys=features.moments(person,start);order=np.argsort(keys,kind='stable')
+            pairkeys=np.unique(lost.pairs(person,opponent))
+            for name,v in [('keys',keys[order]),('order',order),('people',np.unique(person)),('pairs',pairkeys)]:np.save(query/(name+'.npy'),v)
+            save(query/'meta.json',dict(minimum=int(start.min()),maximum=int(start.max())))
+            packed=features.prepare_packed(query,'k')
+            t=np.array([9,10,99,100,102,103],np.int64)*DAY;w=np.array([1,1,2,1,1,2]);b=np.array([2,5,4,2,3,4])
+            source=root/'chron.parquet';pq.write_table(pa.table(dict(utc_ms=t,white_id=w,black_id=b)),source)
+            job=dict(record=dict(path=str(source),signature=c.frozen.r.io.sig(source),rows=6),query=str(query),packed=str(packed),out=str(root/'part.npz'),key='k')
+            lost.chronology_job(job)
+            with np.load(root/'part.npz') as part:
+                expected=np.array([np.sum(((w==i)|(b==i))&(t>=s-90*DAY)&(t<s)) for i,s in zip(person,start)])
+                np.testing.assert_array_equal(part['value'],expected)
+                expected_first=np.array([t[lost.pairs(w,b)==p].min() for p in pairkeys])
+                np.testing.assert_array_equal(part['earliest'],expected_first)
+            self.assertEqual(lost.chronology_job(job),str(root/'part.npz'))
+
+    def test_model_and_influence_dense_projection(self):
+        rng=np.random.default_rng(812);n=2400
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);run=root/'run';(run/'report').mkdir(parents=True)
+            recipient=rng.integers(1,75,n);opponent=(recipient+rng.integers(1,74,n)-1)%75+1
+            z=rng.normal(0,.06,n);d=(rng.random(n)<np.clip(.3+3*z,.05,.95)).astype(float)
+            source=dict(row_id=np.arange(n,dtype=np.int64),recipient_id=recipient,opponent_id=opponent,
+                received=d,archive_start_ms=(19500+rng.integers(0,12,n))*DAY+rng.integers(0,24,n)*3600000,
+                month_code=np.zeros(n,np.int64),tc_base_s=np.full(n,300),tc_inc_s=np.zeros(n,np.int64),
+                recipient_rating=rng.normal(1500,100,n),opponent_rating=rng.normal(1500,100,n),
+                fair_90=rng.integers(1,20,n),kind_90=rng.integers(0,2,n),disconnect_90=rng.integers(0,20,n),
+                receipt_90=rng.integers(0,2,n),claim_90=rng.integers(0,20,n),pre_games_90d=rng.integers(10,300,n),environment_supported=np.ones(n,bool),
+                eval_cp=rng.choice([0,200,400],n),draw_payoff=rng.choice([-1.,1.],n))
+            for name in c.frozen.r.ENV:source[name]=rng.random(n)
+            for name in OUTCOMES:source[name]=rng.uniform(0,90,n) if name.startswith('wait_') else (rng.random(n)<.1+.08*d).astype(float)
+            scores=dict(row_id=source['row_id'],adjusted_A=z,n_A=rng.integers(5,100,n),counterparts_A=rng.integers(2,5,n),expected_A=rng.uniform(.1,.3,n))
+            src=root/'source.parquet';sc=root/'scores.parquet';pq.write_table(pa.table(source),src);pq.write_table(pa.table(scores),sc)
+            a=SimpleNamespace(memory_gb=6.,workers=1)
+            out=stats.fit_projection(a,run,'toy',src,sc,'toy');info=load(out/'meta.json');width=info['width']
+            actual=np.memmap(out/'residual.dat',mode='r',dtype=float,shape=(n,width),order='F')
+            v,groups,actors,_,_,_=model.build_buffer(dict(input=str(src),scores=str(sc),name='toy',level='X0_ENV_indicator',outcomes=['received']),root)
+            raw=np.column_stack([v[:,:2]]+[source[k] for k in OUTCOMES]);X=np.column_stack([v[:,2:]]+[np.eye(int(g.max())+1)[g] for g in groups])
+            from scipy.linalg import lstsq
+            expected=raw-X@lstsq(X,raw,cond=1e-12,lapack_driver='gelsy')[0]
+            np.testing.assert_allclose(actual,expected,atol=3e-7,rtol=0)
+            rawy={k:source['grant_'+k] for k in ['comp','lost']}
+            p,den=stats.estimator_points(actual,d,rawy);expectedbeta=(expected[:,0]@expected[:,2])/(expected[:,0]@expected[:,1])
+            self.assertAlmostEqual(p['iv_grant_comp'],expectedbeta,places=9)
+            inf=stats.influence_block(actual,d,rawy,p,den)
+            for name,x in inf.items():self.assertAlmostEqual(float(x.sum()),0,places=7,msg=name)
+            # Exercise the complete fit and report path, including shared covariance and resume.
+            fitdir,infl=stats.fit(a,run,'toy',src,sc,'toy')
+            r=load(fitdir/'result.json');names=r['names'];S=np.column_stack([inf[k] for k in names])
+            np.testing.assert_allclose(r['covariance'],dense_meat(S,recipient,opponent,actors['date']),atol=2e-9,rtol=2e-7)
+            self.assertEqual(stats.fit(a,run,'toy',src,sc,'toy'),(fitdir,infl))
+            matched=stats.matched(a,run,'toy',src,'toy');self.assertEqual(len(load(matched/'result.json')),7)
+            stats.full_comparison(run,'toy',(fitdir,infl),(fitdir,infl))
+            cross=load(run/'report/two_by_two_covariance.json')['covariance'];ix=[names.index('iv_grant_comp'),names.index('iv_grant_lost')]
+            np.testing.assert_allclose(np.array(cross)[:2,2:],np.array(r['covariance'])[np.ix_(ix,ix)],atol=1e-10)
+
+    def test_negative_variance_is_flagged_without_repair(self):
+        self.assertFalse(inference(.1,-.01)['supported'])
+
+    def test_panel_index_frame_join_author_exclusion_and_lost_candidates(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);run=root/'run';(run/'report').mkdir(parents=True)
+            base=int(c.phase_inputs.core.STARTS[0])+100*DAY
+            gid=np.array(['expo0000','expo0001','next0000','next0001','next0002','author00','middle00'])
+            j=np.array([10,11,20,20,21,98,21]);i=np.array([20,21,30,31,32,20,33])
+            pos=np.array([1,1,2,1,1,1,3]);y=np.array([0,1,1,0,1,1,0],bool)
+            start=base+np.array([0,1,2,3,4,1,2])*DAY
+            panel=dict(game_id=gid,chooser_user_id=j,disconnected_user_id=i,utc_ms=start,api_last_move_at_ms=start+100,
+                archive_ordinal=np.arange(7),kind_draw=y,timeout_chooser_win=~y,tournament_like_event=np.zeros(7,bool),
+                fair_competitive=pos==1,clearly_worse=pos==2,engine_eval_cp_disconnected=np.where(pos==1,0,np.where(pos==2,-500,-200)),
+                chooser_draw_payoff_v2=np.ones(7),month=np.full(7,'2024-02'),api_speed=np.full(7,'blitz'),tc_base_s=np.full(7,300),tc_inc_s=np.zeros(7),
+                chooser_elo=np.full(7,1500),disconnected_elo=np.full(7,1500),chooser_pre_rd_v2=np.full(7,50),disconnected_pre_rd_v2=np.full(7,50),
+                chooser_username_norm=np.where(j==98,' __PRIVATE_VALUE_1__ ','player'),disconnected_username_norm=np.full(7,'player'))
+            path=root/'panel.parquet';pq.write_table(pa.table(panel),path)
+            rec=dict(path=str(path),sha256=sha(path),bytes=path.stat().st_size,rows=7)
+            bound=dict(bound=dict(binding=dict(source=dict(panels=[rec]),author_ids=[98,99])))
+            oldload=frames.load
+            def fake_load(p):
+                if str(p).endswith('evidence/main_panels.json'):return dict(panel_outputs=[dict(sha256=rec['sha256'],size_bytes=rec['bytes'],rows=7)])
+                return oldload(p)
+            a=SimpleNamespace(memory_gb=6.,workers=1)
+            with patch.object(frames,'load',side_effect=fake_load):index=frames.build_index(a,run,'fixture',bound)
+            self.assertEqual(pq.ParquetFile(index[0]/'events.parquet').metadata.num_rows,6)
+            src=root/'source.parquet';pq.write_table(pa.table(dict(row_id=np.array([41,42]),game_id=gid[:2],recipient_id=i[:2],opponent_id=j[:2],
+                archive_start_ms=start[:2],anchor_ms=start[:2]+100,received=y[:2],y=np.array([0,1],bool),reached=np.ones(2,bool))),src)
+            output=frames.attach_outcomes(a,run,'fixture',src,index,'competitive',primary=True)
+            np.testing.assert_array_equal(col(output,'grant_comp'),[False,True]);np.testing.assert_array_equal(col(output,'grant_lost'),[True,False])
+            details=frames.exposure_details(a,run,'fixture',output,index,'competitive');self.assertEqual(len(col(details,'eval_cp')),2)
+            candidate=lost.candidates(a,run,'fixture',index)
+            self.assertEqual(list(col(candidate,'game_id')),['next0000'])
+
+    def test_new_exposure_scores_exclude_pair_and_both_authors(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);run=root/'run';run.mkdir();source=root/'source.parquet'
+            pq.write_table(pa.table(dict(row_id=np.array([0]),recipient_id=np.array([30]),opponent_id=np.array([20]),month_code=np.array([0]))),source)
+            ref=root/'reference.npy';np.save(ref,np.full((1,24,4,4,500),.2))
+            h=dict(j=np.array([20]*9+[98]),i=np.array([31,32,33,34,35,30,98,99,36,31]),
+                t=np.arange(10,dtype=np.int64)+1700000000000,y=np.array([1,1,1,0,0,1,1,1,1,1],bool),
+                arm=np.array([1]*8+[0,1],bool),cell=np.full(10,250,np.int64))
+            parts=[];hashes=c.frozen.r.num.user_hash(h['j'])%np.uint64(16)
+            for shard in range(16):
+                path=root/f'donor_{shard}.parquet';pq.write_table(pa.table({k:v[hashes==shard] for k,v in h.items()}),path)
+                parts.append(dict(path=str(path),sha256=sha(path),bytes=path.stat().st_size,month=0,shard=shard))
+            bound=dict(bound=dict(reference=str(ref),parts=parts,binding=dict(author_ids=[98,99])))
+            a=SimpleNamespace(workers=1,memory_gb=6.)
+            with patch.object(c,'mapped',side_effect=lambda fn,jobs,*args:[fn(j) for j in jobs]):out=lost.score_candidates(a,run,'score_fixture',bound,source)
+            self.assertEqual(col(out/'scores.parquet','n_A')[0],5)
+            self.assertAlmostEqual(col(out/'scores.parquet','adjusted_A')[0],.4)
+
+if __name__=='__main__':unittest.main()

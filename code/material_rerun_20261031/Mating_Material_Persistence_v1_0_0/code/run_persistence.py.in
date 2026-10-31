@@ -1,0 +1,168 @@
+from util import *
+from inputs import authenticate,census,guard
+import argparse,fcntl,subprocess,sys,shutil,traceback,zipfile,platform,time
+
+VERSIONS={'numpy':'2.3.5','pandas':'2.3.3','pyarrow':'20.0.0','duckdb':'1.3.2','scipy':'1.16.3'}
+EXPECTED_RUNTIME='Expected 15–40 minutes on the 12-core Mac/XT_Pro: input checks 5–15, account aggregation and regressions 3–10, 1,999 resamples 5–15. Live bootstrap ETA follows. Existing model environment is reused; a fresh setup adds 1–3 minutes.'
+
+def verify_package():
+    for line in (ROOT/'SHA256SUMS.txt').read_text().splitlines():
+        checksum,name=line.split('  ',1);p=(ROOT/name).resolve()
+        require(p.is_relative_to(ROOT) and p.is_file() and sha(p)==checksum,'Package checksum mismatch: '+name)
+
+def coverage(run):
+    import pandas as pd
+    frame=pd.read_csv(ROOT/'evidence/core_model_review/DOWNSTREAM_STATUS.csv')
+    frame.loc[frame.output=='tab_persistence','status']='COMPLETE_TABLE3_AND_STATE_SENSITIVITIES; SPLIT_HALF_AND_CONDITION_ADJUSTED_CHECKS_PENDING'
+    frame.loc[frame.output=='tab_supp_state_regressions','status']='COMPLETE_ORIGINAL_F_V102_SPECIFICATION'
+    table(run/'report/DOWNSTREAM_STATUS.csv',frame)
+
+def compare_previous(run):
+    import pandas as pd
+    rows=[]
+    specs=[('bootstrap/table3_bootstrap.csv','table3_bootstrap.csv',['panel','statistic'],['estimate','bootstrap_se']),
+           ('persistence/tabF4_cross_year_correlations.csv','tabF4_cross_year_correlations.csv',['sample','min_opportunities_each_year_and_state','period1_state','period2_state'],['accounts','correlation_equal_account','correlation_harmonic_opportunities']),
+           ('persistence/tabF5_cross_prediction.csv','tabF5_cross_prediction.csv',['model','P2_outcome','estimand'],['estimate','se']),
+           ('persistence/tabF2_transition_4x4.csv','tabF2_transition_4x4.csv',['sample','p1_group','p2_group'],['accounts','p1_group_accounts','p2_share_percent'])]
+    for newname,oldname,keys,metrics in specs:
+        old=pd.read_csv(ROOT/'evidence/old_persistence'/oldname);new=pd.read_csv(run/'report'/newname)
+        combined=old.merge(new,on=keys,suffixes=('_old','_new'),how='outer',indicator=True,validate='one_to_one')
+        require((combined['_merge']=='both').all(),'Unmatched persistence comparison keys: '+oldname)
+        for item in combined.to_dict('records'):
+            for metric in metrics:
+                a=item[metric+'_old'];b=item[metric+'_new']
+                rows.append(dict(source=newname,key=json.dumps({k:item[k] for k in keys},sort_keys=True),metric=metric,
+                                 before=a,after=b,change=b-a))
+    table(run/'report/PERSISTENCE_BEFORE_AFTER.csv',rows)
+
+def bundle(run,destination,ready):
+    destination=Path(destination);destination.mkdir(parents=True,exist_ok=True)
+    suffix='PERSISTENCE_READY' if ready else 'FAILED'
+    target=destination/f'MATERIAL_PERSISTENCE_{run.name}_{suffix}.zip'
+    temporary=target.with_suffix('.zip.partial');manifest=[]
+    with zipfile.ZipFile(temporary,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
+        def add(path,name):
+            require('PRIVATE' not in Path(name).parts and not Path(name).name.endswith('_PRIVATE.parquet'),'Private data in return report')
+            z.write(path,name);manifest.append(dict(path=name,bytes=path.stat().st_size,sha256=sha(path)))
+        for f in sorted((run/'report').rglob('*')):
+            if f.is_file():
+                require(f.suffix in ('.csv','.json','.npz','.parquet','.tex','.txt'),'Unexpected report file type')
+                if f.suffix=='.csv':
+                    import csv
+                    with f.open() as stream:cols=next(csv.reader(stream),[])
+                    require(not {'chooser','game_id','chooser_user_id','disconnected_user_id','username','user_id'}.intersection(cols),'Private identifiers in an aggregate report')
+                if f.suffix=='.parquet':require(f.name in ('replicates_A.parquet','replicates_B_C.parquet'),'Unexpected Parquet in return report')
+                add(f,'report/'+str(f.relative_to(run/'report')))
+        for folder in ('code','vendor','tests','authority'):
+            for f in sorted((ROOT/folder).rglob('*')):
+                if f.is_file() and '__pycache__' not in f.parts and f.suffix in ('.py','.json','.csv'):
+                    add(f,'code/'+str(f.relative_to(ROOT)))
+        for name in ('README.txt','BUILD_INFO.json','SHA256SUMS.txt','requirements.txt','TEST_RESULTS.txt'):
+            if (ROOT/name).is_file():add(ROOT/name,name)
+        if (run/'run.log').is_file():add(run/'run.log','run.log')
+        status_bytes=(json.dumps(dict(status='PERSISTENCE_READY' if ready else 'STOPPED',
+            successful_return=bool(ready),whole_paper_rerun_complete=False),indent=2)+'\n').encode()
+        z.writestr('RETURN_STATUS.json',status_bytes)
+        manifest.append(dict(path='RETURN_STATUS.json',bytes=len(status_bytes),sha256=hashlib.sha256(status_bytes).hexdigest()))
+        z.writestr('REPORT_MANIFEST.json',json.dumps(manifest,indent=2)+'\n')
+    os.replace(temporary,target);target.with_suffix('.zip.sha256').write_text(sha(target)+'  '+target.name+'\n')
+    log('Return report: '+str(target));return target
+
+class Tee:
+    def __init__(self,*streams):self.streams=streams
+    def write(self,text):
+        for s in self.streams:s.write(text)
+        return len(text)
+    def flush(self):
+        for s in self.streams:s.flush()
+
+def execute(auth,run,key,counts,workers,memory,replications,seed):
+    from persistence import build_accounts,reports
+    from bootstrap import matrices,sample,publish
+    c=db(run/'PRIVATE/spill',max(2,memory-2),workers)
+    timing={}
+    try:
+        t=time.monotonic();build_accounts(c,auth,run,counts,key);guard(auth)
+        timing['aggregate_seconds']=time.monotonic()-t
+        t=time.monotonic();method=reports(c,run)
+        ma,mb,pa,pb,cohort=matrices(c,run);timing['points_and_matrices_seconds']=time.monotonic()-t
+    finally:c.close()
+    t=time.monotonic()
+    da,db_=sample(ma,mb,run/'PRIVATE/bootstrap',key,replications,seed,workers)
+    require(len(da)==len(db_)==replications,'Bootstrap incomplete')
+    publish(run,da,db_,pa,pb,cohort,seed);timing['bootstrap_seconds']=time.monotonic()-t
+    guard(auth);compare_previous(run);coverage(run)
+    return method,cohort,timing
+
+def main(argv=None):
+    p=argparse.ArgumentParser(description='Rebuild persistence and 1,999 account bootstrap resamples from reviewed material-restricted decisions.')
+    p.add_argument('--project-root',type=Path,default=Path('__PRIVATE_VALUE_1__'))
+    p.add_argument('--results-dir',type=Path,default=Path.home()/'Desktop/Lichess_Desktop')
+    p.add_argument('--manifest',type=Path);p.add_argument('--workers',type=int,default=10)
+    p.add_argument('--hash-workers',type=int,default=2);p.add_argument('--memory-gb',type=float,default=11)
+    p.add_argument('--replications',type=int,default=1999);p.add_argument('--seed',type=int,default=20261025)
+    p.add_argument('--self-test',action='store_true');p.add_argument('--preflight-only',action='store_true');p.add_argument('--estimate-only',action='store_true')
+    a=p.parse_args(argv)
+    if a.estimate_only:print(EXPECTED_RUNTIME);return 0
+    if a.self_test:return subprocess.call([sys.executable,str(ROOT/'tests/run_tests.py')])
+    verify_package()
+    require(1<=a.workers<=10 and 1<=a.hash_workers<=4 and 4<=a.memory_gb<=32 and a.replications>=1999 and a.seed>=0,'Use 1–10 workers, 1–4 hash workers, 4–32 GB and at least 1,999 resamples')
+    from importlib.metadata import version
+    versions={name:version(name) for name in VERSIONS};require(versions==VERSIONS,'Run RUN_PERSISTENCE.command to use the tested environment')
+    a.project_root=a.project_root.expanduser().resolve();a.results_dir=a.results_dir.expanduser().resolve()
+    start=time.monotonic();log(EXPECTED_RUNTIME)
+    expected=read(ROOT/'authority/REVIEW.json')
+    manifest=a.manifest or a.project_root/'derived/replication/mating_material_first_run_v100_PRIVATE'/expected['run_id'][:16]/'MATERIAL_RESTRICTED_INPUTS_READY_PRIVATE.json'
+    auth=authenticate(manifest,expected,a.hash_workers)
+    config=dict(version='1.0.0',package_sha256=sha(ROOT/'SHA256SUMS.txt'),parent_run_id=auth['parent_run_id'],
+                manifest_sha256=auth['manifest_sha256'],sources=[{k:r[k] for k in ('month','sha256','rows','grants')} for r in auth['records']],
+                environment=versions,replications=a.replications,seed=a.seed)
+    key=digest(config);run=a.project_root/'derived/replication/mating_material_persistence_v100_PRIVATE'/key[:16]
+    (run/'PRIVATE').mkdir(parents=True,exist_ok=True);(run/'report').mkdir(exist_ok=True)
+    workers=min(a.workers,max(1,(os.cpu_count() or 2)-2))
+    require(shutil.disk_usage(run).free>=(2 if (run/'_SUCCESS.json').exists() else 16)*2**30,'Need 16 GiB free for account caches/spill (2 GiB for a completed resume)')
+    lock=(run/'RUNNING.lock').open('a+')
+    try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+    except BlockingIOError:raise RuntimeError('This persistence run is already active')
+    with lock,(run/'run.log').open('a',buffering=1) as output:
+        old=sys.stdout;sys.stdout=Tee(old,output)
+        try:
+            success=run/'_SUCCESS.json'
+            if success.exists():
+                done=read(success);require(done['run_id']==key,'Completed run configuration mismatch')
+                for item in done['files']:verify(item,run)
+                guard(auth);artifact=bundle(run,a.results_dir,True)
+                save(a.results_dir/'MATERIAL_PERSISTENCE_LATEST_PRIVATE.json',dict(root=str(run),run_id=key,status=done['status'],report=str(artifact)))
+                log('Completed persistence run verified; no bootstrap resamples repeated.');return 0
+            with heartbeat('Checking material-panel counts'):
+                counts=census(auth,run,workers,max(2,a.memory_gb-2))
+            guard(auth);save(run/'PRIVATE/CONFIG.json',dict(config,auth=auth,workers=workers,memory_gb=a.memory_gb))
+            save(run/'report/INPUT_LINEAGE.json',dict(parent_run_id=auth['parent_run_id'],parent_manifest_sha256=auth['manifest_sha256'],census=counts,
+                 price_layer='original',author_exclusion=['__PRIVATE_VALUE_2__','__PRIVATE_VALUE_3__'],rule=expected['rule'],known_outcome_policy=expected['known_outcome_policy']))
+            save(run/'report/ENVIRONMENT.json',dict(versions=versions,python=platform.python_version(),workers=workers,memory_gb=a.memory_gb))
+            if a.preflight_only:log('Preflight passed; no account histories or models rebuilt.');return 0
+            method,cohort,timing=execute(auth,run,key,counts,workers,a.memory_gb,a.replications,a.seed)
+            result=dict(status='PERSISTENCE_COMPLETE_MORE_FAMILIES_PENDING',whole_paper_rerun_complete=False,run_id=key,parent_run_id=auth['parent_run_id'],
+                seconds_this_launch_including_authentication=time.monotonic()-start,stage_seconds=timing,cohorts=cohort,replications=a.replications,
+                api_requests=0,engine_evaluations=0,rating_replay_records=0)
+            save(run/'report/RESULTS.json',result)
+            # Bind private caches as well as aggregates for a verified completed resume.
+            paths=[f for f in (run/'report').rglob('*') if f.is_file()]
+            paths += [run/'PRIVATE/ACCOUNTS_READY.json',run/'PRIVATE/bootstrap/BOOTSTRAP_CHECKPOINT.json']
+            paths += [run/r['path'] for r in read(run/'PRIVATE/ACCOUNTS_READY.json')['files']]
+            bp=read(run/'PRIVATE/bootstrap/BOOTSTRAP_CHECKPOINT.json')['file']
+            paths.append(run/'PRIVATE/bootstrap'/bp['path'])
+            artifact=bundle(run,a.results_dir,True)
+            save(success,dict(result,files=[record(f,run) for f in sorted(paths)],report=str(artifact),report_sha256=sha(artifact)))
+            save(a.results_dir/'MATERIAL_PERSISTENCE_LATEST_PRIVATE.json',dict(root=str(run),run_id=key,status=result['status'],report=str(artifact)))
+            log('Persistence tables and bootstrap complete. Other families remain in DOWNSTREAM_STATUS.csv.');return 0
+        except BaseException as exc:
+            save(run/'PRIVATE/ERROR.json',dict(error=str(exc),traceback=traceback.format_exc()))
+            # Do not overwrite a completed receipt/report if its integrity check failed.
+            if not (run/'_SUCCESS.json').exists():
+                save(run/'report/RESULTS.json',dict(status='STOPPED',error_type=type(exc).__name__,whole_paper_rerun_complete=False))
+            log('STOPPED: '+str(exc));bundle(run,a.results_dir,False)
+            return 130 if isinstance(exc,KeyboardInterrupt) else 1
+        finally:sys.stdout=old
+
+if __name__=='__main__':raise SystemExit(main())

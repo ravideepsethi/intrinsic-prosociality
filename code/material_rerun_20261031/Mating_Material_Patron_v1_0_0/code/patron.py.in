@@ -1,0 +1,187 @@
+"""Fresh material histories; fixed acquisition identities, slots and August profiles."""
+from util import *
+import sys,shutil,argparse,gc,time
+sys.path.insert(0,str(ROOT/'vendor/patron'))
+from runner import run as producer
+from source import acquisition_planner_v100 as planner
+import pandas as pd
+import numpy as np
+
+AUTHORS=('__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__')
+q=sqlstr
+def scan(path):return parquet([path])
+def ident(s):return '"'+s.replace('"','""')+'"'
+
+def authenticate_profiles(project):
+    """Authenticate actual required files, without re-reading obsolete analysis caches."""
+    status,_=producer.get_wave3a_authority()
+    original=Path(project)/'derived/replication/pool_main_reanalysis_v100_PRIVATE/wave3a_patron'/producer.WAVE3A_CONFIG[:12]/'matching/acquisition_users_private.parquet'
+    expected=next(x for x in status['checkpoint_receipts']['matching']['files'] if x['name']==original.name)
+    before=signature(original);verify(dict(expected,path=str(original)))
+    require(signature(original)==before,'Original acquisition roster changed during authentication')
+    fixed_snapshot=Path(project)/'derived/replication/patron_profile_snapshot_24m_v100_FINAL_CERTIFIED/profile_snapshot_24m_private_lossless.parquet'
+    snapshot_before=signature(fixed_snapshot)
+    with heartbeat('Authenticating the fixed August profiles'):
+        snapshot=producer.prior.authenticate_snapshot(project)
+    require(signature(snapshot)==snapshot_before,'Fixed snapshot changed during authentication')
+    # The hash check was completed by the original snapshot authenticator.
+    return dict(roster=dict(path=str(original),bytes=expected['bytes'],sha256=expected['sha256'],signature=before),
+                snapshot=dict(path=str(snapshot),sha256=producer.prior.SNAPSHOT_SHA,signature=snapshot_before),
+                acquisition_config=producer.WAVE3A_CONFIG,acquisition_users=status['checkpoint_receipts']['matching']['summary']['target_users'])
+
+def guard_profiles(profiles):
+    for role in ('roster','snapshot'):
+        r=profiles[role];require(signature(r['path'])==r['signature'],'Fixed '+role+' changed during the run')
+
+def rosters(c,original,directory):
+    """Exact author-exclusion adapter selection, plus a separately labelled broad roster."""
+    directory=Path(directory);directory.mkdir(parents=True,exist_ok=True)
+    cols=[x[0] for x in c.execute('DESCRIBE chooser_summary').fetchall() if x[0]!='chooser_id']
+    c.execute('CREATE VIEW old AS SELECT * FROM '+scan(original))
+    oldcols=[x[0] for x in c.execute('DESCRIBE old').fetchall()]
+    require(all(x in oldcols for x in cols),'Acquisition summary schema changed')
+    qa=c.execute("SELECT count(*),count(DISTINCT username_norm),count(DISTINCT query_index),count(*) FILTER(WHERE acquisition_role NOT IN ('kind','control') OR username_norm IS NULL OR matched_kind_chooser_id IS NULL OR control_slot IS NULL OR (acquisition_role='kind' AND (control_slot<>0 OR username_norm<>matched_kind_chooser_id)) OR (acquisition_role='control' AND control_slot NOT BETWEEN 1 AND 3)) FROM old").fetchone()
+    require(qa[0]==qa[1]==qa[2] and qa[3]==0,'Malformed or duplicate frozen acquisition rows')
+    sselect=','.join(('s.' if x in cols else 'a.')+ident(x) for x in oldcols if x not in ('selected_controls','nested_1to1_available','exact_1to3_group'))
+    authors=','.join(map(q,AUTHORS))
+    c.execute('CREATE TABLE broad_base AS SELECT '+sselect+' FROM old a JOIN chooser_summary s ON s.chooser_id=a.username_norm WHERE lower(trim(a.username_norm)) NOT IN ('+authors+') AND lower(trim(a.matched_kind_chooser_id)) NOT IN ('+authors+')')
+    c.execute("CREATE TABLE eligible AS SELECT b.* FROM broad_base b JOIN chooser_summary k ON k.chooser_id=b.matched_kind_chooser_id WHERE k.ever_kind_any_state AND b.match_cell=k.match_cell AND ((b.acquisition_role='kind' AND b.ever_kind_any_state) OR (b.acquisition_role='control' AND NOT b.ever_kind_any_state))")
+    paths={}
+    for name,source,cut in [('retained','eligible','WHERE selected_controls>0'),('broad','broad_base','')]:
+        counted=f"SELECT *,count(*) FILTER(WHERE acquisition_role='control') OVER(PARTITION BY matched_kind_chooser_id)::BIGINT selected_controls,bool_or(acquisition_role='control' AND control_slot=1) OVER(PARTITION BY matched_kind_chooser_id) nested_1to1_available FROM {source}"
+        c.execute(f'CREATE TABLE {name} AS SELECT *,selected_controls=3 exact_1to3_group FROM ({counted}) {cut}')
+        path=directory/(name+'_acquisition_private.parquet');paths[name]=path
+        c.execute('COPY (SELECT * FROM '+name+' ORDER BY query_index) TO '+q(path)+' (FORMAT PARQUET,COMPRESSION ZSTD)')
+    # Mutually exclusive removal reasons, in stated precedence, frozen before outcomes.
+    c.execute('''CREATE TABLE selection_flow AS SELECT a.acquisition_role,
+      CASE WHEN lower(trim(a.username_norm)) IN ('''+authors+''') OR lower(trim(a.matched_kind_chooser_id)) IN ('''+authors+''') THEN '01_author_account_or_focal'
+      WHEN s.chooser_id IS NULL THEN '02_no_remaining_opportunity'
+      WHEN k.chooser_id IS NULL OR NOT k.ever_kind_any_state THEN '03_focal_no_remaining_grant'
+      WHEN a.acquisition_role='control' AND s.ever_kind_any_state THEN '04_frozen_control_now_grants'
+      WHEN s.match_cell<>k.match_cell THEN '05_fresh_matching_cell_mismatch'
+      WHEN r.username_norm IS NULL THEN '06_no_remaining_eligible_control'
+      ELSE '07_retained' END reason,count(*) accounts
+      FROM old a LEFT JOIN chooser_summary s ON s.chooser_id=a.username_norm
+      LEFT JOIN chooser_summary k ON k.chooser_id=a.matched_kind_chooser_id
+      LEFT JOIN retained r ON r.username_norm=a.username_norm GROUP BY ALL ORDER BY ALL''')
+    flow=c.execute('SELECT * FROM selection_flow').fetchdf();table(directory/'ACQUISITION_FLOW.csv',flow)
+    require(int(flow.accounts.sum())==qa[0],'Roster removal flow does not reconcile')
+    retained_n=c.execute('SELECT count(*) FROM retained').fetchone()[0]
+    require(retained_n==int(flow.loc[flow.reason=='07_retained','accounts'].sum()) and retained_n>0,'No valid retained matches or inconsistent flow')
+    # Fresh-account coverage beyond the frozen acquisition remains explicit.
+    coverage=c.execute('''SELECT s.ever_kind_any_state,s.ever_kind_fair_state,
+      a.username_norm IS NOT NULL originally_acquired,count(*) accounts
+      FROM chooser_summary s LEFT JOIN old a ON a.username_norm=s.chooser_id GROUP BY ALL ORDER BY ALL''').fetchdf()
+    table(directory/'FROZEN_ACQUISITION_COVERAGE.csv',coverage)
+    result=dict(original_accounts=qa[0],retained_accounts=retained_n,broad_accounts=c.execute('SELECT count(*) FROM broad').fetchone()[0],
+      replacement_matches=0,new_profiles_queried=0,
+      retained_policy='Original v1.4.1 adapter: fixed focal/role/slot; fresh any-grant focal, never-grant control, same fresh cell, >=1 eligible control. Authors removed in account and focal roles.',
+      broad_policy='Separate state-model sensitivity: every originally acquired non-author account with remaining decisions, regardless of current grant status, cell agreement or survival of its focal. Authors also excluded as focals.')
+    save(directory/'ACQUISITION_POLICY.json',result)
+    return result
+
+def build_rosters(directory,auth,profiles,workers,memory):
+    c=db(directory/'spill',memory,workers)
+    try:
+        planner.create_panel_view(c,[r['path'] for r in auth['records']])
+        invalid=c.execute("SELECT count(*) FROM stage07 WHERE kind_draw IS DISTINCT FROM (outcome_kind_draw=1) OR fair_competitive IS DISTINCT FROM (engine_eval_cp_disconnected>=-100) OR clearly_worse IS DISTINCT FROM (engine_eval_cp_disconnected<=-300) OR excluded_middle IS DISTINCT FROM (engine_eval_cp_disconnected>-300 AND engine_eval_cp_disconnected < -100) OR chooser_username_norm IS NULL OR chooser_username_norm<>lower(trim(chooser_username_norm)) OR lower(trim(chooser_username_norm)) IN ('__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__') OR lower(trim(disconnected_username_norm)) IN ('__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__')").fetchone()[0]
+        require(invalid==0,'Invalid material label aliases or author account in analytical decisions')
+        planner.build_chooser_summary(c)
+        observed=c.execute('SELECT count(*),sum(total_opps),sum(total_kind_count),sum(fair_opps),sum(fair_kind_count),sum(clearly_worse_opps),sum(clearly_worse_kind_count),count(*)-count(DISTINCT chooser_id) FROM chooser_summary').fetchone()
+        e=auth['expected_census']
+        require(observed==tuple(e['new_'+n] for n in ['choosers','opportunities','grants','competitive','competitive_grants','clearly_worse','clearly_worse_grants'])+(0,),'Fresh chooser summaries fail census')
+        result=rosters(c,profiles['roster']['path'],directory)
+    finally:c.close()
+    shutil.rmtree(directory/'spill',ignore_errors=True)
+    return result
+
+def build_design(directory,auth,profiles,roster_dir,roster_qa,workers,memory):
+    # One full-panel feature aggregation covers both account cohorts.
+    ns=argparse.Namespace(threads=workers,memory_limit=f'{memory}GB')
+    producer.build_design(directory,ns,{'month_records':auth['records']},roster_dir/'broad_acquisition_private.parquet',Path(profiles['snapshot']['path']),roster_qa['broad_accounts'])
+    broad=directory/'chooser_design_features_private.parquet'
+    retained=directory/'retained_design_private.parquet'
+    c=db(directory/'subset_spill',memory,workers)
+    try:
+        c.execute('COPY (SELECT d.* EXCLUDE(selected_controls,nested_1to1_available,exact_1to3_group),a.selected_controls,a.nested_1to1_available,a.exact_1to3_group FROM '+scan(broad)+' d JOIN '+scan(roster_dir/'retained_acquisition_private.parquet')+' a USING(username_norm) ORDER BY d.query_index) TO '+q(retained)+' (FORMAT PARQUET,COMPRESSION ZSTD)')
+        qa=producer.verify_new_cache(c,retained,roster_qa['retained_accounts'])
+        support=producer.builder.build_support_receipt(c,retained)
+        save(directory/'retained_support.json',producer.clean(support))
+        save(directory/'retained_cache_validation.json',producer.clean(qa))
+    finally:c.close()
+    shutil.rmtree(directory/'subset_spill',ignore_errors=True)
+    return dict(broad_accounts=roster_qa['broad_accounts'],retained_accounts=qa['rows'],full_panel_feature_scans=1)
+
+def broad_models(frame,state,key,public):
+    """Same min-four state specification on all acquired surviving accounts."""
+    returned=frame.loc[frame.returned.astype(bool)].copy()
+    returned,groups,imputation=producer.models.prepare_features(returned)
+    sample=returned.loc[(returned.fair_opps>=4)&(returned.clearly_worse_opps>=4)].copy()
+    sample['granting_history']=np.select([(sample.ever_kind_fair_state==1)&(sample.ever_kind_clearly_worse_state==0),
+      (sample.ever_kind_fair_state==0)&(sample.ever_kind_clearly_worse_state==1),(sample.ever_kind_fair_state==1)&(sample.ever_kind_clearly_worse_state==1)],['fair_only','losing_only','both'],default='neither')
+    raw=sample.groupby('granting_history',observed=True).agg(accounts=('patron','size'),patrons=('patron','sum')).reset_index()
+    raw['rate_percent']=100*raw.patrons/raw.accounts
+    table(public/'broad_acquired_state_raw.csv',raw)
+    controls=list(dict.fromkeys(['log_fair_opps','log_clearly_worse_opps']+groups['all']))
+    collector=producer.CheckpointCollector(state/'broad_acquired_models',key)
+    for covariance in ('HC1','CR1'):
+        collector.run(sample,name='broad_acquired_min4_full_'+covariance,
+          regressors=['ever_kind_fair_state','ever_kind_clearly_worse_state']+controls,
+          standardize=[x for x in controls if x in groups['standardize']+['log_clearly_worse_opps']],covariance=covariance,
+          estimand_class='all_originally_acquired_state_sensitivity',differences=[('ever_kind_fair_state','ever_kind_clearly_worse_state','fair_minus_clearly_worse')])
+    producer.save_collector(public,'broad_acquired',collector)
+    save(public/'broad_acquired_imputation.json',producer.clean(imputation))
+    return dict(models=len(collector.models),accounts=len(sample),patrons=int(sample.patron.sum()),match_cells=int(sample.match_cell.nunique()))
+
+def estimates(design,profiles,run,key,workers,memory):
+    public=run/'report';state=run/'PRIVATE/models'
+    c=db(run/'PRIVATE/spill_load',memory,workers)
+    try:
+        qa,_,_=producer.models.outcome_qa(c,Path(profiles['snapshot']['path']),fixture=False)
+        save(public/'SNAPSHOT_OUTCOME_QA.json',producer.clean(qa))
+        frame=producer.load_frames(c,design/'retained_design_private.parquet',profiles['snapshot']['path'])
+    finally:c.close()
+    require(len(frame)==frame.username_norm.nunique(),'Duplicate accounts after profile join')
+    for role in ('username_norm','matched_kind_chooser_id'):
+        require(not frame[role].str.lower().str.strip().isin(AUTHORS).any(),'Author survived Patron selection')
+    bounds=producer.missing_outcome_bounds(frame);save(public/'missing_outcome_bounds.json',producer.clean(bounds))
+    coverage=frame.groupby(['group_ever_kind_fair','acquisition_role','outcome_status'],observed=True).agg(accounts=('username_norm','size'),opportunities=('total_opps','sum'),grants=('total_kind_count','sum')).reset_index()
+    table(public/'outcome_coverage_flow.csv',coverage)
+    support=read(design/'retained_support.json')
+    main=producer.main_models(frame,state,key,public,support)
+    dates=producer.corrected_date_models(frame,state,key,public)
+    del frame;gc.collect()
+    c=db(run/'PRIVATE/spill_load',memory,workers)
+    try:frame=producer.load_frames(c,design/'chooser_design_features_private.parquet',profiles['snapshot']['path'])
+    finally:c.close()
+    broad=broad_models(frame,state,key,public)
+    del frame;gc.collect()
+    require(main['models']==34 and dates['models']==4 and broad['models']==2,'Unexpected model coverage')
+    return dict(main=main,corrected_dates=dates,broad_acquired=broad,models=40)
+
+def execute(auth,profiles,run,key,workers,memory):
+    state=run/'PRIVATE';timing={}
+    t=time.monotonic()
+    with heartbeat('Rebuilding chooser histories and auditing the frozen roster'):
+        roster,receipt=producer.prior.checkpoint(state,'rosters',key,lambda d:build_rosters(d,auth,profiles,workers,memory))
+    timing['histories_and_rosters_seconds']=time.monotonic()-t
+    for name in ('ACQUISITION_FLOW.csv','FROZEN_ACQUISITION_COVERAGE.csv','ACQUISITION_POLICY.json'):shutil.copy2(roster/name,run/'report'/name)
+    guard_profiles(profiles)
+    t=time.monotonic()
+    with heartbeat('Building profile covariates from the new decisions'):
+        design,_=producer.prior.checkpoint(state,'design',key,lambda d:build_design(d,auth,profiles,roster,receipt['summary'],workers,memory))
+    timing['design_seconds']=time.monotonic()-t
+    for name in ('retained_support.json','retained_cache_validation.json'):shutil.copy2(design/name,run/'report'/name)
+    guard_profiles(profiles)
+    t=time.monotonic()
+    with heartbeat('Estimating 40 Patron specifications sequentially to bound memory'):
+        summary=estimates(design,profiles,run,key,workers,memory)
+    timing['models_seconds']=time.monotonic()-t
+    guard_profiles(profiles)
+    # Store every covariance, coefficient and specification in the aggregate return.
+    for checkpoint in sorted((state/'models').rglob('CHECKPOINT.json')):
+        info=read(checkpoint);producer.prior.read_checkpoint(checkpoint.parent,info['config_sha256'])
+        relative=checkpoint.parent.relative_to(state/'models')
+        target=run/'report/model_fits'/relative;target.mkdir(parents=True,exist_ok=True)
+        shutil.copy2(checkpoint.parent/'fit.json',target/'fit.json')
+    return summary,timing

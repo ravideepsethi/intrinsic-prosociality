@@ -1,0 +1,124 @@
+from position_common import *
+
+def build_index(a,run,conf,b):
+    source=b['bound']['binding']['source'];authors=b['bound']['binding']['author_ids']
+    # The caller authenticates the reviewed material contract before supplying
+    # these records; every individual corrected file is checked below.
+    paths=[]
+    for month,rec in enumerate(source['panels']):
+        path=cert.checked_file(rec['path'],rec)
+        require(pq.ParquetFile(path).metadata.num_rows==rec['rows'],'Main panel row count changed')
+        def build(tmp,path=path):
+            con=sql(tmp);view(con,'p',path)
+            try:
+                names=c.columns(path)
+                for field in ['clearly_worse','fair_competitive','engine_eval_cp_disconnected','chooser_draw_payoff_v2']:
+                    require(field in names,'Missing certified position field: '+field)
+                ids=','.join(map(str,authors))
+                clean=f'chooser_user_id NOT IN ({ids}) AND disconnected_user_id NOT IN ({ids})'
+                # Exact normalized author names are checked in addition to numeric IDs.
+                for name in ['chooser_username_norm','disconnected_username_norm']:
+                    require(name in names,'Missing author name field: '+name)
+                    c.ensure(con,f"SELECT count(*) FROM p WHERE lower(trim({name})) IN ('__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__') AND {clean}",'Author ID/name mismatch')
+                c.ensure(con,'SELECT count(*) FROM p WHERE (fair_competitive AND clearly_worse) OR fair_competitive IS NULL OR clearly_worse IS NULL','Invalid position flags')
+                c.ensure(con,'SELECT count(*) FROM p WHERE clearly_worse IS DISTINCT FROM (engine_eval_cp_disconnected<=-300) OR fair_competitive IS DISTINCT FROM (engine_eval_cp_disconnected>=-100)','Certified position thresholds changed')
+                base=f'''SELECT game_id gid,chooser_user_id::BIGINT j,disconnected_user_id::BIGINT i,
+                    api_last_move_at_ms::BIGINT t,utc_ms::BIGINT AS "start",archive_ordinal::BIGINT ord,
+                    kind_draw::BOOLEAN y,CASE WHEN fair_competitive THEN 1 WHEN clearly_worse THEN 2 ELSE 3 END::TINYINT AS "position",
+                    month,api_speed speed,tc_base_s,tc_inc_s,chooser_elo::DOUBLE opponent_rating,
+                    disconnected_elo::DOUBLE recipient_rating,chooser_pre_rd_v2 opponent_rd,disconnected_pre_rd_v2 recipient_rd,
+                    (kind_draw OR timeout_chooser_win) arm_eligible,engine_eval_cp_disconnected::DOUBLE eval_cp,
+                    chooser_draw_payoff_v2::DOUBLE draw_payoff
+                    FROM p WHERE NOT tournament_like_event AND {clean}
+                    AND lower(trim(chooser_username_norm)) NOT IN ('__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__')
+                    AND lower(trim(disconnected_username_norm)) NOT IN ('__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__')'''
+                copy(con,base,tmp/'events.parquet');view(con,'e',tmp/'events.parquet')
+                c.ensure(con,'SELECT count(*) FROM e WHERE t IS NULL OR start IS NULL OR t<start OR y IS NULL OR j=i','Invalid event chronology/roles')
+                for s in range(16):copy(con,f'SELECT gid,j,i,t,"start",ord,y,"position" FROM e WHERE j%16={s} ORDER BY j,t,ord,gid',tmp/f'{s:02}.parquet')
+                save(tmp/'counts.json',[dict(position=int(p),opportunities=int(n),grants=int(y)) for p,n,y in con.execute('SELECT "position",count(*),sum(y::INTEGER) FROM e GROUP BY "position" ORDER BY "position"').fetchall()])
+            finally:con.close()
+        out=stage(run/'PRIVATE/index'/f'{month:02}',conf,build,[path]);paths.append(out)
+        log(f'Position index {month+1}/{len(source["panels"])} complete')
+    save(run/'report/opportunity_counts.json',[dict(month=k,counts=load(p/'counts.json')) for k,p in enumerate(paths)])
+    return paths
+
+def later(h,q):
+    result={}
+    for label,mask in [('comp',h['position']==1),('lost',h['position']==2),
+                       ('either',h['position']<=2),('all',np.ones(len(h['j']),bool))]:
+        hh={k:v[mask] for k,v in h.items()};out=c.fast.sorted_later_outcomes(hh,q)
+        if label in ('comp','lost'):
+            result['grant_'+label]=out['y'];result['reach_'+label]=out['reached']
+            result['wait_'+label+'_days']=np.where(out['reached'],(out['outcome_t']-q['anchor_ms'])/DAY,90.)
+            for name in ('gid','t','start','opponent'):result[label+'_'+name]=out['outcome_'+name]
+        else:
+            # Identify the actual selected row, preserving all frozen tie-breaking rules.
+            # gid is unique across the main panel; mapping by sorted gid is deterministic.
+            order=np.argsort(hh['gid']);gids=hh['gid'][order];code=np.zeros(len(q['row_id']),np.int8)
+            hit=np.flatnonzero(out['reached']);at=np.searchsorted(gids,out['outcome_gid'][hit])
+            require(np.array_equal(gids[at],out['outcome_gid'][hit]),'First-choice identity mismatch')
+            code[hit]=hh['position'][order[at]]
+            for label2,number in [('comp',1),('lost',2),('middle',3)]:
+                result['first_'+label+'_type_'+label2]=code==number
+                result['first_'+label+'_grant_'+label2]=out['y']&(code==number)
+            result['wait_'+label+'_days']=np.where(out['reached'],(out['outcome_t']-q['anchor_ms'])/DAY,90.)
+    return result
+
+def outcome_job(job):
+    source=job['source'];s=job['shard'];root=Path(job['root'])
+    def build(tmp):
+        con=sql(tmp)
+        try:
+            view(con,'q0',source)
+            con.execute(f'CREATE VIEW q AS SELECT row_id,game_id,recipient_id,opponent_id,anchor_ms,archive_start_ms FROM q0 WHERE recipient_id%16={s}')
+            q=con.execute('SELECT * FROM q ORDER BY row_id').fetchnumpy()
+            view(con,'events',job['events'])
+            h=con.execute('SELECT e.* FROM events e SEMI JOIN (SELECT DISTINCT recipient_id FROM q) q ON e.j=q.recipient_id ORDER BY j,t,ord,gid').fetchnumpy()
+            require(len(np.unique(h['gid']))==len(h['gid']),'Duplicate opportunity game IDs')
+            result=dict(row_id=q['row_id'],**later(h,q))
+            pq.write_table(pa.table(result),tmp/'outcomes.parquet',compression='zstd')
+            return dict(rows=len(q['row_id']))
+        finally:con.close()
+    return str(stage(root,job['conf'],build,[source]+job['events'])/'outcomes.parquet')
+
+def attach_outcomes(a,run,conf,source,index,label,primary=False):
+    jobs=[dict(source=str(source),shard=s,root=str(run/'PRIVATE/outcomes'/label/f'{s:02}'),
+               events=[str(p/f'{s:02}.parquet') for p in index],conf=conf) for s in range(16)]
+    paths=c.mapped(outcome_job,jobs,min(a.workers,max(1,int((a.memory_gb-2)//3.5))),'Paired outcomes '+label)
+    def build(tmp):
+        con=sql(tmp,a.memory_gb-2)
+        try:
+            view(con,'q',source);view(con,'o',paths);c.assert_coverage(con,'q','o')
+            if primary:
+                checks=['q.y IS DISTINCT FROM o.grant_comp','q.reached IS DISTINCT FROM o.reach_comp']
+                for name in ['gid','t','start','opponent']:
+                    field='outcome_'+name
+                    if field in c.columns(source):checks.append(f'q.{field} IS DISTINCT FROM o.comp_{name}')
+                c.ensure(con,'SELECT count(*) FROM q JOIN o USING(row_id) WHERE '+' OR '.join(checks),'CERTIFIED COMPETITIVE OUTCOME REPLAY FAILED')
+            copy(con,'SELECT q.*,o.* EXCLUDE(row_id) FROM q JOIN o USING(row_id) ORDER BY row_id',tmp/'frame.parquet')
+            view(con,'f',tmp/'frame.parquet')
+            rows=[]
+            for name in ('comp','lost'):
+                rows += [dict(position=name,received=int(d),exposures=int(n),reached=int(r),grants=int(y),
+                    zero_coded_rate=float(y/n),conditional_rate=float(y/r) if r else None,
+                    mean_wait_days_among_reached=float(w) if w is not None else None)
+                    for d,n,r,y,w in con.execute(f'SELECT received,count(*),sum(reach_{name}::INTEGER),sum(grant_{name}::INTEGER),avg(CASE WHEN reach_{name} THEN wait_{name}_days END) FROM f GROUP BY received ORDER BY received').fetchall()]
+            save(tmp/'descriptive.json',rows)
+            return dict(rows=pq.ParquetFile(source).metadata.num_rows,competitive_outcome_reproduced=primary)
+        finally:con.close()
+    out=stage(run/'PRIVATE/frames'/label,conf,build,[source]+paths)
+    table(run/'report'/f'{label}_descriptive.csv',load(out/'descriptive.json'))
+    return out/'frame.parquet'
+
+def exposure_details(a,run,conf,source,index,label):
+    paths=[p/'events.parquet' for p in index]
+    def build(tmp):
+        con=sql(tmp,a.memory_gb-2)
+        try:
+            view(con,'q',source);view(con,'e',paths)
+            n=pq.ParquetFile(source).metadata.num_rows
+            require(con.execute('SELECT count(*),count(DISTINCT row_id) FROM q JOIN e ON q.game_id=e.gid').fetchone()==(n,n),'Exposure-to-panel identity mismatch')
+            c.ensure(con,'SELECT count(*) FROM q JOIN e ON q.game_id=e.gid WHERE q.recipient_id<>e.i OR q.opponent_id<>e.j OR q.received IS DISTINCT FROM e.y OR q.anchor_ms<>e.t OR q.archive_start_ms<>e.start','Exposure feature bridge failed')
+            copy(con,'SELECT q.*,e.eval_cp,e.draw_payoff FROM q JOIN e ON q.game_id=e.gid ORDER BY row_id',tmp/'frame.parquet')
+        finally:con.close()
+    return stage(run/'PRIVATE/details'/label,conf,build,[source]+paths)/'frame.parquet'

@@ -1,0 +1,129 @@
+import sys,tempfile,unittest,io
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'code'))
+from core import *
+import inputs,history,analysis,run
+import rep_stats as stats
+
+def source_rows():
+    specs=[('a',1,2,START+DAY,False,0),('b',2,1,START+10*DAY,True,100),
+           ('c',1,3,START+20*DAY,True,-400),('d',3,1,START+40*DAY,False,300),
+           ('author',9,1,START+30*DAY,True,0)]
+    rows=[]
+    for gid,j,i,t,y,cp in specs:
+        r={k:0 for k in inputs.REQUIRED};r.update(game_id=gid,month='2023-11',chooser_user_id=j,disconnected_user_id=i,
+          utc_ms=t,api_last_move_at_ms=t+60000,chooser_color='white',kind_draw=y,fair_competitive=cp>=-100,
+          clearly_worse=cp<=-300,engine_eval_cp_disconnected=cp,chooser_elo=1500,disconnected_elo=1600,
+          chooser_pre_rd_v2=50.,disconnected_pre_rd_v2=80.,chooser_draw_payoff_v2=1.,chooser_win_premium_v2=4.,
+          white_win_premium_v2=4.,black_win_premium_v2=11.,chooser_clock_last_obs_s=100.,disconnected_clock_last_obs_s=100.,
+          ply_count=20,api_speed='blitz',tc_base_s=300.,tc_inc_s=0.,chooser_username_norm=' __PRIVATE_VALUE_1__ ' if j==9 else 'u'+str(j),
+          disconnected_username_norm='u'+str(i),timeout_chooser_win=not y,white_id=j,black_id=i)
+        rows.append(r)
+    return rows
+
+class CoreTests(unittest.TestCase):
+    def test_pair_hash_role_invariance(self):
+        a=np.array([1,3,2**32-2]);b=np.array([2,1,2**32-1]);np.testing.assert_array_equal(pairs(a,b),pairs(b,a));np.testing.assert_array_equal(mix(pairs(a,b)),mix(pairs(b,a)))
+        with self.assertRaises(ValueError):pairs([1],[1])
+    def test_volume_exact_boundary_and_people(self):
+        ids=np.array([1,1,2]);tt=np.array([31,32,31])*DAY;keys=moments(ids,tt);order=np.argsort(keys);keys=keys[order];delta=np.zeros(4,np.int64)
+        volume_increment(np.array([1,1,1,2]),np.array([1,31,32,2])*DAY,keys,delta)
+        np.testing.assert_array_equal(volume_finish(delta,order),[1,1,1])
+    def test_pair_windows_against_brute_force(self):
+        pk=pairs([1,1,1,3],[2,2,2,4]);tt=np.array([0,10,40,50])*DAY
+        qp=pairs([1,3],[2,4]);st=np.array([10,50])*DAY;an=st+DAY
+        got=analysis.pair_counts(pk,tt,qp,st,an)
+        for k in range(2):
+            for h in (30,90):self.assertEqual(got['prior'+str(h)][k],np.sum((pk==qp[k])&(tt>=st[k]-h*DAY)&(tt<st[k])))
+            for h in (30,90,180):self.assertEqual(got['meet'+str(h)][k],np.sum((pk==qp[k])&(tt>an[k])&(tt<=an[k]+h*DAY)))
+    def test_pair_signed_boundary(self):
+        pk=pairs([2**32-3,1],[2**32-2,2]);st=np.array([START,START]);out=analysis.pair_counts(pk,st,pk,st,st+1)
+        np.testing.assert_array_equal(out['prior90'],[0,0]);np.testing.assert_array_equal(out['same_start_other_games'],[0,0])
+    def test_cache_mutation_detected(self):
+        with tempfile.TemporaryDirectory() as d:
+            p=Path(d);(p/'x.txt').write_text('abc');finish(p,{'ok':True});self.assertTrue(cached(p)['ok']);(p/'x.txt').write_text('bad')
+            with self.assertRaises(RuntimeError):cached(p)
+    def test_logistic_intercept(self):
+        x=np.ones((1000,1));y=np.r_[np.ones(100),np.zeros(900)];b,it=stats.logistic_fit(x,y)
+        self.assertAlmostEqual(float(1/(1+np.exp(-b[0]))),.1,places=6)
+    def test_absorption_vs_dummy_projection(self):
+        rng=np.random.default_rng(11);n=300;g=rng.integers(0,15,n);h=rng.integers(0,6,n);a=rng.normal(size=(n,3))
+        D=np.column_stack([np.eye(15)[g],np.eye(6)[h]]);expected=a-D@np.linalg.lstsq(D,a,rcond=None)[0];got,it=stats.absorb(a,[g,h]);np.testing.assert_allclose(got,expected,atol=1e-7)
+    def test_fe_coefficient_matches_dense_model(self):
+        rng=np.random.default_rng(14);n=2400;j=rng.integers(0,30,n);i=rng.integers(100,180,n);date=rng.integers(0,25,n);z=rng.integers(0,2,n).astype(float);x=rng.normal(size=n);y=(rng.random(n)<(.06+.05*z)).astype(float)
+        meta,rows=stats.fit_fe(y,[z],[x],[j,date],j,i,date,['z']);D=np.column_stack([np.eye(30)[j],np.eye(25)[date],x,z]);b=np.linalg.lstsq(D,y,rcond=None)[0][-1]
+        self.assertTrue(meta['supported']);self.assertAlmostEqual(rows[0]['coefficient_pp'],100*b,places=6)
+    def test_future_outcome_not_a_prediction_feature(self):
+        n=4;d={k:np.ones(n) for k in ['rating','opp_rating','jvolume','ivolume','jslot','islot','prior30','prior90','repeat','previous_hour_pool_games','base','inc','speed','start']}
+        d['y']=np.zeros(n);x,names=stats.prediction_raw(d);d['y']=np.ones(n);d['meet90']=np.ones(n)*100;x2,_=stats.prediction_raw(d);np.testing.assert_array_equal(x,x2)
+
+class IntegrationTests(unittest.TestCase):
+    def test_spawn_workers_and_repeated_aggregate_export(self):
+        import zipfile
+        with tempfile.TemporaryDirectory() as td, contextlib.redirect_stdout(io.StringIO()):
+            root=Path(td);jobs=[]
+            for k,r in enumerate(source_rows()[:2]):
+                src=root/f'source{k}.parquet';pq.write_table(pa.Table.from_pylist([r]),src)
+                jobs.append(dict(source=dict(path=str(src),fingerprint=stamp(src)),folder=str(root/f'job{k}'),denominator=1,broad=False))
+            products=run.parallel(jobs,inputs.projection_job,2,'Synthetic spawn validation')
+            self.assertEqual(sum(p['sampled_rows'] for p in products),2)
+            report=root/'report';report.mkdir();dump(report/'summary.json',dict(aggregate_n=2))
+            (report/'private').mkdir();(report/'private/rows.parquet').write_bytes(b'private')
+            for _ in range(2):run.export(report,root/'exports','testkey','SYNTHETIC_EXPORT_OK')
+            for zp in (root/'exports').glob('*.zip'):
+                with zipfile.ZipFile(zp) as z:
+                    self.assertEqual(sorted(z.namelist()),['REPORT_MANIFEST.json','summary.json'])
+                    self.assertEqual([x['file'] for x in json.loads(z.read('REPORT_MANIFEST.json'))],['summary.json'])
+
+    def test_prediction_periods_and_full_analysis_outputs(self):
+        rng=np.random.default_rng(33);n=30000;j=rng.integers(1,301,n);i=rng.integers(1000,2000,n);pk=pairs(j,i)
+        start=np.repeat([START+30*DAY,1722470400000+20*DAY,1730419200000+20*DAY],n//3)+rng.integers(0,5*DAY,n)
+        d=dict(qid=np.arange(n),pair_key=pk,j=j,i=i,start=start,anchor=start+60000,
+            y=rng.random(n)<.05,cp=np.where(rng.random(n)<.5,100.,-400.),speed=rng.integers(0,5,n),month=np.repeat([1,9,12],n//3),
+            rating=rng.normal(1500,200,n),opp_rating=rng.normal(1500,200,n),rd=np.full(n,50.),opp_rd=np.full(n,70.),
+            cost=np.full(n,5.),draw_payoff=rng.normal(0,1,n),clock=np.full(n,200.),opp_clock=np.full(n,100.),ply=rng.integers(12,80,n),base=np.full(n,300.),inc=np.zeros(n),
+            jvolume=rng.integers(10,100,n),ivolume=rng.integers(10,100,n),jslot=np.ones(n)*5,islot=np.ones(n)*4,
+            prior30=np.zeros(n,dtype=int),prior90=np.zeros(n,dtype=int),repeat=rng.random(n)<.1,previous_hour_pool_games=np.full(n,4000),same_start_other_games=np.zeros(n,int),meet90_after1h=np.zeros(n,int))
+        d['fair']=d['cp']>=-100;d['lost']=d['cp']<=-300
+        for h in (30,90,180):
+            d['meet'+str(h)]=(rng.random(n)<(.01+.1*d['repeat'])).astype(int)
+            for pre in ('repay_opportunities','repayments','missing_value','potential_points','received_points'):d[pre+str(h)]=np.zeros(n)
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);pq.write_table(pa.table(d),root/'features.parquet');result=analysis.run_analyses(root/'features.parquet',root/'report','TEST')
+            self.assertEqual(result['module_status'][0]['status'],'COMPLETE');meta=load(root/'report/prediction_design.json')
+            self.assertFalse(meta['grant_outcome_used_in_prediction']);self.assertGreater(meta['training_rows'],2000)
+            prob=np.load(root/'report/prediction_private/predicted_probability.npy');self.assertTrue(np.isfinite(prob).all())
+            # Reusing completed prediction leaves coefficients and row assignments unchanged.
+            p2,_,_=analysis.prediction(d,root/'report/prediction_private');np.testing.assert_array_equal(prob,p2)
+            self.assertTrue((root/'report/estimates.csv').exists());self.assertTrue((root/'report/reencounters_and_repayment.csv').exists())
+
+    def test_projection_history_returns_and_resume(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);src=root/'panel.parquet';rows=source_rows();pq.write_table(pa.Table.from_pylist(rows),src)
+            job=dict(source=dict(path=str(src),fingerprint=stamp(src),month='2023-11'),folder=str(root/'projected'),denominator=1,broad=False,month_code=0)
+            p=inputs.projection_job(job);self.assertEqual(p['author_rows'],1);self.assertEqual(p['sampled_rows'],4);self.assertTrue(inputs.projection_job(job)['reused'])
+            qp=root/'queries';history.make_queries([root/'projected/panel.parquet'],qp,1,512)
+            # Add a prior meeting, an ordinary rematch, and extra activity for both roles.
+            events=[dict(game_id=r['game_id'],utc_ms=r['utc_ms'],white_id=r['white_id'],black_id=r['black_id']) for r in rows]
+            events.extend([dict(game_id='prior',utc_ms=START-DAY,white_id=1,black_id=2),dict(game_id='rematch',utc_ms=START+2*DAY,white_id=2,black_id=1),dict(game_id='activity',utc_ms=START-2*DAY,white_id=1,black_id=8)])
+            cs=root/'chron.parquet';pq.write_table(pa.Table.from_pylist(events),cs)
+            hj=dict(folder=str(root/'hist'),queries=str(qp),record=dict(path=str(cs),fingerprint=stamp(cs),month='2023-11',speed='blitz',index=0),old_cache=None)
+            product=history.chronology_job(hj);history.merge_history([product],qp,root/'merged',1,512)
+            tab=pq.ParquetFile(root/'merged/features.parquet').read();by={r['gid']:r for r in tab.to_pylist()}
+            self.assertTrue(by['a']['repeat']);self.assertEqual(by['a']['jvolume'],2);self.assertEqual(by['a']['ivolume'],1)
+            # All-source extra return occurs outside main panel. Its receiver gain is 11, not 4.
+            extra=dict(rows[1]);extra.update(game_id='extra_return',utc_ms=START+3*DAY,api_last_move_at_ms=START+3*DAY+60000)
+            broad=root/'broad.parquet';pq.write_table(pa.Table.from_pylist(rows+[extra]),broad)
+            bp=inputs.projection_job(dict(source=dict(path=str(broad),fingerprint=stamp(broad)),folder=str(root/'broadp'),denominator=1,broad=True))
+            analysis.make_features(root/'merged',[root/'broadp/panel.parquet'],root/'features',1,512,'ALL_SOURCE_TEST')
+            results=pq.ParquetFile(root/'features/analysis.parquet').read().to_pylist();a=next(r for r in results if r['gid']=='a')
+            self.assertEqual(a['meet30'],2);self.assertEqual(a['repay_opportunities30'],2);self.assertEqual(a['repayments30'],2);self.assertEqual(a['potential_points30'],22)
+            # Sample boundary does not count the initial game or same-time games as later.
+            self.assertEqual(a['same_start_other_games'],0)
+    def test_author_in_recipient_role_excluded(self):
+        with tempfile.TemporaryDirectory() as td:
+            p=Path(td);r=source_rows()[0];r['disconnected_username_norm']='__PRIVATE_VALUE_2__';pq.write_table(pa.Table.from_pylist([r]),p/'s.parquet')
+            out=inputs.projection_job(dict(source=dict(path=str(p/'s.parquet'),fingerprint=stamp(p/'s.parquet')),folder=str(p/'out'),denominator=1,broad=False))
+            self.assertEqual(out['sampled_rows'],0)
+
+if __name__=='__main__':unittest.main()

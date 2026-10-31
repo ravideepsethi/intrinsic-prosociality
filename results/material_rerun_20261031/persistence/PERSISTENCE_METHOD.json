@@ -1,0 +1,17 @@
+{
+  "manuscript_note": "The existing supplemental regression note mentions only speed shares. The recovered producer also contains the count and composition controls listed here; retain the producer and correct the note.",
+  "original_count_constants_replaced_by_authenticated_material_census": true,
+  "original_estimation_functions_unchanged": true,
+  "panel_A_accounts": 665720,
+  "panel_B_C_accounts": 266207,
+  "regression_controls": "Log opportunity counts in both years and states; outcome-state second-year mean rating, rating gap, capped evaluation, plies and speed shares. Standardized as in original_f_v102; redundant nuisance columns pruned.",
+  "regression_covariance": "Original account-robust joint sandwich, n/(n-1) correction",
+  "regression_weight": "Outcome-specific second-year opportunity count",
+  "scope": "Table 3, state transitions/retention, thresholds 1/4/10, after-ply-10 and all-noncompetitive sensitivities, state regressions. Split-half and condition-adjusted persistence checks are not rerun by this package.",
+  "sensitivities": {
+    "after10_positive_exposure_accounts": 265707,
+    "after10_primary_cohort": 266207,
+    "noncompetitive_balanced_accounts": 278557
+  },
+  "status": "PERSISTENCE_POINT_ESTIMATES_COMPLETE"
+}

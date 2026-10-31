@@ -1,0 +1,27 @@
+{
+  "must_rebuild": [
+    "all grant/claim donor histories and cross-fitted state references",
+    "scores, history controls and minimum-support flags",
+    "exposure selection and spacing from the full eligible candidate universe",
+    "first subsequent choices and reach",
+    "recipient and opponent behavioral histories",
+    "ordinary-ending later outcomes and entry labels",
+    "persistence cohorts and bootstrap",
+    "Patron behavior measures and comparisons",
+    "all regression fits/covariances and figures"
+  ],
+  "not_rerun": [
+    "five-second status audit",
+    "September audience analysis",
+    "engine jobs",
+    "profile acquisition"
+  ],
+  "prohibited_shortcut": "Do not just filter old regression frames or reuse a cached first-later-choice. Removing its first event changes the next event; new grants also change scores.",
+  "safe_to_reuse": [
+    "Engine evaluations for unchanged positions",
+    "original pregame rating states and kappa",
+    "all-game factual chronology and numeric-ID dictionary",
+    "profile snapshot and fixed Patron acquisition plan",
+    "cached factual API metadata, predecessor and first-pair facts"
+  ]
+}

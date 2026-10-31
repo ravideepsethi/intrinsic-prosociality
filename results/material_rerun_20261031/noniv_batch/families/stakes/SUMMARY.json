@@ -1,0 +1,14 @@
+{
+  "API_requests": 0,
+  "Stockfish_searches": 0,
+  "history": "Last 100 and 50 strictly earlier recorded same-speed starts, full window required; bounded warm-up",
+  "interpretation": "Rating-scale stakes, not subjective utility or a causal estimate of generosity",
+  "main_sample": "frozen pool nonadjacent 24 months, author excluded, engine_eval_cp_disconnected >= -100, five real-time speeds",
+  "opportunities": 15186844,
+  "percentile": "Previous calendar month active-account ECDF, one latest pregame observation per account, authors excluded",
+  "rating_replays": 0,
+  "source_validation": "Frozen main SHA256; chronology frozen rows/bytes and run-bound raw footer/fingerprint; every focal identity/rating/start reconciled",
+  "status": "STAKES_DESCRIPTIVES_COMPLETE",
+  "usual_win_gain_status": "NOT_ESTIMATED_NO_AUTHENTICATED_COMPLETION_TIMES",
+  "zero_denominator_rule": "Ratios unavailable; zero histories counted explicitly"
+}

@@ -1,0 +1,26 @@
+test_author_policy_rejected (contract_tests.Contracts.test_author_policy_rejected) ... ok
+test_changed_monthly_count_rejected (contract_tests.Contracts.test_changed_monthly_count_rejected) ... ok
+test_duplicate_path_rejected (contract_tests.Contracts.test_duplicate_path_rejected) ... ok
+test_incomplete_rejected (contract_tests.Contracts.test_incomplete_rejected) ... ok
+test_legacy_losses_not_reclassified (contract_tests.Contracts.test_legacy_losses_not_reclassified) ... ok
+test_manifest_hash_checked (contract_tests.Contracts.test_manifest_hash_checked) ... ok
+test_month_missing_rejected (contract_tests.Contracts.test_month_missing_rejected) ... ok
+test_no_chronology_rewrite (contract_tests.Contracts.test_no_chronology_rewrite) ... ok
+test_old_material_rule_rejected (contract_tests.Contracts.test_old_material_rule_rejected) ... ok
+test_price_change_rejected (contract_tests.Contracts.test_price_change_rejected) ... ok
+test_reviewed_contract (contract_tests.Contracts.test_reviewed_contract) ... ok
+test_source_changed_after_hash (contract_tests.Contracts.test_source_changed_after_hash) ... ok
+test_wrong_run_rejected (contract_tests.Contracts.test_wrong_run_rejected) ... ok
+test_censor_boundary_and_absent_opportunities (test_receipt.ReceiptTests.test_censor_boundary_and_absent_opportunities) ... ok
+test_covariance_matches_independent_dense_fixed_effects_and_original_estimator (test_receipt.ReceiptTests.test_covariance_matches_independent_dense_fixed_effects_and_original_estimator) ... ok
+test_full_cli_models_resume_privacy_and_failed_return (test_receipt.ReceiptTests.test_full_cli_models_resume_privacy_and_failed_return) ... ok
+test_material_alias_author_partition_and_pair_fact_conflicts_rejected (test_receipt.ReceiptTests.test_material_alias_author_partition_and_pair_fact_conflicts_rejected) ... ok
+test_pruned_sql_matches_original_complete_query_and_reselects_after_removal (test_receipt.ReceiptTests.test_pruned_sql_matches_original_complete_query_and_reselects_after_removal) ... ok
+test_scan_parity_first_pair_recovery_resume_and_corruption (test_receipt.ReceiptTests.test_scan_parity_first_pair_recovery_resume_and_corruption) ... ok
+test_vector_pair_scan_matches_dictionary_oracle_for_reversed_pairs_and_future_groups (test_receipt.ReceiptTests.test_vector_pair_scan_matches_dictionary_oracle_for_reversed_pairs_and_future_groups) ... ok
+test_vendored_sources_unchanged (test_receipt.ReceiptTests.test_vendored_sources_unchanged) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 4.813s
+
+OK

@@ -1,0 +1,7676 @@
+{
+  "chronology_validation": "Frozen manifest bytes/rows/row groups; current footer SHA and stat bound to each scan checkpoint. Historical full-file SHA is not computed.",
+  "files": [
+    {
+      "file_index": 0,
+      "future_rows_skipped": 0,
+      "input_rows": 46249,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 46249
+    },
+    {
+      "file_index": 1,
+      "future_rows_skipped": 0,
+      "input_rows": 50635,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 50635
+    },
+    {
+      "file_index": 2,
+      "future_rows_skipped": 0,
+      "input_rows": 60618,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 60618
+    },
+    {
+      "file_index": 3,
+      "future_rows_skipped": 0,
+      "input_rows": 57567,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 57567
+    },
+    {
+      "file_index": 4,
+      "future_rows_skipped": 0,
+      "input_rows": 69862,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 69862
+    },
+    {
+      "file_index": 5,
+      "future_rows_skipped": 0,
+      "input_rows": 89504,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 89504
+    },
+    {
+      "file_index": 6,
+      "future_rows_skipped": 0,
+      "input_rows": 118846,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 118846
+    },
+    {
+      "file_index": 7,
+      "future_rows_skipped": 0,
+      "input_rows": 131223,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 131223
+    },
+    {
+      "file_index": 8,
+      "future_rows_skipped": 0,
+      "input_rows": 126871,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 126871
+    },
+    {
+      "file_index": 9,
+      "future_rows_skipped": 0,
+      "input_rows": 157779,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 157779
+    },
+    {
+      "file_index": 10,
+      "future_rows_skipped": 0,
+      "input_rows": 185007,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 185007
+    },
+    {
+      "file_index": 11,
+      "future_rows_skipped": 0,
+      "input_rows": 218933,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 218933
+    },
+    {
+      "file_index": 12,
+      "future_rows_skipped": 0,
+      "input_rows": 266444,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 266444
+    },
+    {
+      "file_index": 13,
+      "future_rows_skipped": 0,
+      "input_rows": 258904,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 258904
+    },
+    {
+      "file_index": 14,
+      "future_rows_skipped": 0,
+      "input_rows": 290138,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 290138
+    },
+    {
+      "file_index": 15,
+      "future_rows_skipped": 0,
+      "input_rows": 305859,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 305859
+    },
+    {
+      "file_index": 16,
+      "future_rows_skipped": 0,
+      "input_rows": 349023,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 349023
+    },
+    {
+      "file_index": 17,
+      "future_rows_skipped": 0,
+      "input_rows": 367696,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 367696
+    },
+    {
+      "file_index": 18,
+      "future_rows_skipped": 0,
+      "input_rows": 422489,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 422489
+    },
+    {
+      "file_index": 19,
+      "future_rows_skipped": 0,
+      "input_rows": 446187,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 446187
+    },
+    {
+      "file_index": 20,
+      "future_rows_skipped": 0,
+      "input_rows": 427121,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 427121
+    },
+    {
+      "file_index": 21,
+      "future_rows_skipped": 0,
+      "input_rows": 470470,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 470470
+    },
+    {
+      "file_index": 22,
+      "future_rows_skipped": 0,
+      "input_rows": 518705,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 518705
+    },
+    {
+      "file_index": 23,
+      "future_rows_skipped": 0,
+      "input_rows": 582587,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 582587
+    },
+    {
+      "file_index": 24,
+      "future_rows_skipped": 0,
+      "input_rows": 648250,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 648250
+    },
+    {
+      "file_index": 25,
+      "future_rows_skipped": 0,
+      "input_rows": 657768,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 657768
+    },
+    {
+      "file_index": 26,
+      "future_rows_skipped": 0,
+      "input_rows": 780313,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 780313
+    },
+    {
+      "file_index": 27,
+      "future_rows_skipped": 0,
+      "input_rows": 798400,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 798400
+    },
+    {
+      "file_index": 28,
+      "future_rows_skipped": 0,
+      "input_rows": 893881,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 893881
+    },
+    {
+      "file_index": 29,
+      "future_rows_skipped": 0,
+      "input_rows": 941522,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 941522
+    },
+    {
+      "file_index": 30,
+      "future_rows_skipped": 0,
+      "input_rows": 998465,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 998465
+    },
+    {
+      "file_index": 31,
+      "future_rows_skipped": 0,
+      "input_rows": 1098164,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1098164
+    },
+    {
+      "file_index": 32,
+      "future_rows_skipped": 0,
+      "input_rows": 1143795,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1143795
+    },
+    {
+      "file_index": 33,
+      "future_rows_skipped": 0,
+      "input_rows": 1364999,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1364999
+    },
+    {
+      "file_index": 34,
+      "future_rows_skipped": 0,
+      "input_rows": 1390137,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1390137
+    },
+    {
+      "file_index": 35,
+      "future_rows_skipped": 0,
+      "input_rows": 1672017,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1672017
+    },
+    {
+      "file_index": 36,
+      "future_rows_skipped": 0,
+      "input_rows": 1896674,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1896674
+    },
+    {
+      "file_index": 37,
+      "future_rows_skipped": 0,
+      "input_rows": 1997107,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1997107
+    },
+    {
+      "file_index": 38,
+      "future_rows_skipped": 0,
+      "input_rows": 2367225,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2367225
+    },
+    {
+      "file_index": 39,
+      "future_rows_skipped": 0,
+      "input_rows": 2505002,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2505002
+    },
+    {
+      "file_index": 40,
+      "future_rows_skipped": 0,
+      "input_rows": 2691538,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2691538
+    },
+    {
+      "file_index": 41,
+      "future_rows_skipped": 0,
+      "input_rows": 2717126,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2717126
+    },
+    {
+      "file_index": 42,
+      "future_rows_skipped": 0,
+      "input_rows": 2820813,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2820813
+    },
+    {
+      "file_index": 43,
+      "future_rows_skipped": 0,
+      "input_rows": 2973495,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2973495
+    },
+    {
+      "file_index": 44,
+      "future_rows_skipped": 0,
+      "input_rows": 3099573,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 3099573
+    },
+    {
+      "file_index": 45,
+      "future_rows_skipped": 0,
+      "input_rows": 3463954,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 3463954
+    },
+    {
+      "file_index": 46,
+      "future_rows_skipped": 0,
+      "input_rows": 3679932,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 3679932
+    },
+    {
+      "file_index": 47,
+      "future_rows_skipped": 0,
+      "input_rows": 4308385,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 4308385
+    },
+    {
+      "file_index": 48,
+      "future_rows_skipped": 0,
+      "input_rows": 4924071,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 4924071
+    },
+    {
+      "file_index": 49,
+      "future_rows_skipped": 0,
+      "input_rows": 4713756,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 4713756
+    },
+    {
+      "file_index": 50,
+      "future_rows_skipped": 0,
+      "input_rows": 5316053,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 5316053
+    },
+    {
+      "file_index": 51,
+      "future_rows_skipped": 0,
+      "input_rows": 5286870,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 5286870
+    },
+    {
+      "file_index": 52,
+      "future_rows_skipped": 0,
+      "input_rows": 5524775,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 5524775
+    },
+    {
+      "file_index": 53,
+      "future_rows_skipped": 0,
+      "input_rows": 5460017,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 5460017
+    },
+    {
+      "file_index": 54,
+      "future_rows_skipped": 0,
+      "input_rows": 5762149,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 5762149
+    },
+    {
+      "file_index": 55,
+      "future_rows_skipped": 0,
+      "input_rows": 6070840,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 6070840
+    },
+    {
+      "file_index": 56,
+      "future_rows_skipped": 0,
+      "input_rows": 6128824,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 6128824
+    },
+    {
+      "file_index": 57,
+      "future_rows_skipped": 0,
+      "input_rows": 6773567,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 6773567
+    },
+    {
+      "file_index": 58,
+      "future_rows_skipped": 0,
+      "input_rows": 7008623,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 7008623
+    },
+    {
+      "file_index": 59,
+      "future_rows_skipped": 0,
+      "input_rows": 7918677,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 7918677
+    },
+    {
+      "file_index": 60,
+      "future_rows_skipped": 0,
+      "input_rows": 8621719,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 8621719
+    },
+    {
+      "file_index": 61,
+      "future_rows_skipped": 0,
+      "input_rows": 8363349,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 8363349
+    },
+    {
+      "file_index": 62,
+      "future_rows_skipped": 0,
+      "input_rows": 9660755,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 9660755
+    },
+    {
+      "file_index": 63,
+      "future_rows_skipped": 0,
+      "input_rows": 9468468,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 9468468
+    },
+    {
+      "file_index": 64,
+      "future_rows_skipped": 0,
+      "input_rows": 10076801,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 10076801
+    },
+    {
+      "file_index": 65,
+      "future_rows_skipped": 0,
+      "input_rows": 9536706,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 9536706
+    },
+    {
+      "file_index": 66,
+      "future_rows_skipped": 0,
+      "input_rows": 10165276,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 10165276
+    },
+    {
+      "file_index": 67,
+      "future_rows_skipped": 0,
+      "input_rows": 10822634,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 10822634
+    },
+    {
+      "file_index": 68,
+      "future_rows_skipped": 0,
+      "input_rows": 10998198,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 10998198
+    },
+    {
+      "file_index": 69,
+      "future_rows_skipped": 0,
+      "input_rows": 11990206,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 11990206
+    },
+    {
+      "file_index": 70,
+      "future_rows_skipped": 0,
+      "input_rows": 12543196,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 12543196
+    },
+    {
+      "file_index": 71,
+      "future_rows_skipped": 0,
+      "input_rows": 14812343,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 14812343
+    },
+    {
+      "file_index": 72,
+      "future_rows_skipped": 0,
+      "input_rows": 15860235,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 15860235
+    },
+    {
+      "file_index": 73,
+      "future_rows_skipped": 0,
+      "input_rows": 14459553,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 14459553
+    },
+    {
+      "file_index": 74,
+      "future_rows_skipped": 0,
+      "input_rows": 16438513,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 16438513
+    },
+    {
+      "file_index": 75,
+      "future_rows_skipped": 0,
+      "input_rows": 15785368,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 15785368
+    },
+    {
+      "file_index": 76,
+      "future_rows_skipped": 0,
+      "input_rows": 16654096,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 16654096
+    },
+    {
+      "file_index": 77,
+      "future_rows_skipped": 0,
+      "input_rows": 16048358,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 16048358
+    },
+    {
+      "file_index": 78,
+      "future_rows_skipped": 0,
+      "input_rows": 17090075,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 17090075
+    },
+    {
+      "file_index": 79,
+      "future_rows_skipped": 0,
+      "input_rows": 17463455,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 1,
+      "pairs_found": 1,
+      "scanned_rows": 17463455
+    },
+    {
+      "file_index": 80,
+      "future_rows_skipped": 0,
+      "input_rows": 17593800,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 17593800
+    },
+    {
+      "file_index": 81,
+      "future_rows_skipped": 0,
+      "input_rows": 19358648,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 19358648
+    },
+    {
+      "file_index": 82,
+      "future_rows_skipped": 0,
+      "input_rows": 19243065,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 19243065
+    },
+    {
+      "file_index": 83,
+      "future_rows_skipped": 0,
+      "input_rows": 21116483,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 21116483
+    },
+    {
+      "file_index": 84,
+      "future_rows_skipped": 0,
+      "input_rows": 22478502,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 1,
+      "pairs_found": 1,
+      "scanned_rows": 22478502
+    },
+    {
+      "file_index": 85,
+      "future_rows_skipped": 0,
+      "input_rows": 21246619,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 21246619
+    },
+    {
+      "file_index": 86,
+      "future_rows_skipped": 0,
+      "input_rows": 27571146,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 27571146
+    },
+    {
+      "file_index": 87,
+      "future_rows_skipped": 0,
+      "input_rows": 36946253,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 36946253
+    },
+    {
+      "file_index": 88,
+      "future_rows_skipped": 0,
+      "input_rows": 38307828,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 38307828
+    },
+    {
+      "file_index": 89,
+      "future_rows_skipped": 0,
+      "input_rows": 35456717,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 35456717
+    },
+    {
+      "file_index": 90,
+      "future_rows_skipped": 0,
+      "input_rows": 35533580,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 35533580
+    },
+    {
+      "file_index": 91,
+      "future_rows_skipped": 0,
+      "input_rows": 35744130,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 35744130
+    },
+    {
+      "file_index": 92,
+      "future_rows_skipped": 0,
+      "input_rows": 33931156,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 1,
+      "pairs_found": 1,
+      "scanned_rows": 33931156
+    },
+    {
+      "file_index": 93,
+      "future_rows_skipped": 0,
+      "input_rows": 35236329,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 35236329
+    },
+    {
+      "file_index": 94,
+      "future_rows_skipped": 0,
+      "input_rows": 38543039,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 38543039
+    },
+    {
+      "file_index": 95,
+      "future_rows_skipped": 0,
+      "input_rows": 43367569,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 43367569
+    },
+    {
+      "file_index": 96,
+      "future_rows_skipped": 0,
+      "input_rows": 46084581,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 46084581
+    },
+    {
+      "file_index": 97,
+      "future_rows_skipped": 0,
+      "input_rows": 43335934,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 43335934
+    },
+    {
+      "file_index": 98,
+      "future_rows_skipped": 0,
+      "input_rows": 47587426,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 47587426
+    },
+    {
+      "file_index": 99,
+      "future_rows_skipped": 0,
+      "input_rows": 46753465,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 46753465
+    },
+    {
+      "file_index": 100,
+      "future_rows_skipped": 0,
+      "input_rows": 47672852,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 1,
+      "pairs_found": 1,
+      "scanned_rows": 47672852
+    },
+    {
+      "file_index": 101,
+      "future_rows_skipped": 0,
+      "input_rows": 43664863,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 43664863
+    },
+    {
+      "file_index": 102,
+      "future_rows_skipped": 0,
+      "input_rows": 44137204,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 44137204
+    },
+    {
+      "file_index": 103,
+      "future_rows_skipped": 0,
+      "input_rows": 44851311,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 44851311
+    },
+    {
+      "file_index": 104,
+      "future_rows_skipped": 0,
+      "input_rows": 42202437,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 42202437
+    },
+    {
+      "file_index": 105,
+      "future_rows_skipped": 0,
+      "input_rows": 42377819,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 1,
+      "pairs_found": 1,
+      "scanned_rows": 42377819
+    },
+    {
+      "file_index": 106,
+      "future_rows_skipped": 0,
+      "input_rows": 41776798,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 41776798
+    },
+    {
+      "file_index": 107,
+      "future_rows_skipped": 0,
+      "input_rows": 45934742,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 45934742
+    },
+    {
+      "file_index": 108,
+      "future_rows_skipped": 0,
+      "input_rows": 48459439,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 48459439
+    },
+    {
+      "file_index": 109,
+      "future_rows_skipped": 0,
+      "input_rows": 41150180,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 1,
+      "pairs_found": 1,
+      "scanned_rows": 41150180
+    },
+    {
+      "file_index": 110,
+      "future_rows_skipped": 0,
+      "input_rows": 43584751,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 1,
+      "pairs_found": 1,
+      "scanned_rows": 43584751
+    },
+    {
+      "file_index": 111,
+      "future_rows_skipped": 0,
+      "input_rows": 41764813,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 41764813
+    },
+    {
+      "file_index": 112,
+      "future_rows_skipped": 0,
+      "input_rows": 42900493,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 1,
+      "pairs_found": 1,
+      "scanned_rows": 42900493
+    },
+    {
+      "file_index": 113,
+      "future_rows_skipped": 0,
+      "input_rows": 42137174,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 42137174
+    },
+    {
+      "file_index": 114,
+      "future_rows_skipped": 0,
+      "input_rows": 44317310,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 44317310
+    },
+    {
+      "file_index": 115,
+      "future_rows_skipped": 0,
+      "input_rows": 44436774,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 44436774
+    },
+    {
+      "file_index": 116,
+      "future_rows_skipped": 0,
+      "input_rows": 42984572,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 42984572
+    },
+    {
+      "file_index": 117,
+      "future_rows_skipped": 0,
+      "input_rows": 44695032,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 44695032
+    },
+    {
+      "file_index": 118,
+      "future_rows_skipped": 0,
+      "input_rows": 42959952,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 1,
+      "pairs_found": 1,
+      "scanned_rows": 42959952
+    },
+    {
+      "file_index": 119,
+      "future_rows_skipped": 0,
+      "input_rows": 44939751,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 44939751
+    },
+    {
+      "file_index": 120,
+      "future_rows_skipped": 0,
+      "input_rows": 49580050,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 1,
+      "pairs_found": 1,
+      "scanned_rows": 49580050
+    },
+    {
+      "file_index": 121,
+      "future_rows_skipped": 0,
+      "input_rows": 46846446,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 46846446
+    },
+    {
+      "file_index": 122,
+      "future_rows_skipped": 0,
+      "input_rows": 51319562,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 3,
+      "pairs_found": 3,
+      "scanned_rows": 51319562
+    },
+    {
+      "file_index": 123,
+      "future_rows_skipped": 0,
+      "input_rows": 48227905,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 1,
+      "pairs_found": 1,
+      "scanned_rows": 48227905
+    },
+    {
+      "file_index": 124,
+      "future_rows_skipped": 0,
+      "input_rows": 49443702,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 3,
+      "pairs_found": 3,
+      "scanned_rows": 49443702
+    },
+    {
+      "file_index": 125,
+      "future_rows_skipped": 0,
+      "input_rows": 45965148,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 45965148
+    },
+    {
+      "file_index": 126,
+      "future_rows_skipped": 0,
+      "input_rows": 45532615,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 45532615
+    },
+    {
+      "file_index": 127,
+      "future_rows_skipped": 0,
+      "input_rows": 45855393,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 45855393
+    },
+    {
+      "file_index": 128,
+      "future_rows_skipped": 0,
+      "input_rows": 44597871,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 3,
+      "pairs_found": 3,
+      "scanned_rows": 44597871
+    },
+    {
+      "file_index": 129,
+      "future_rows_skipped": 0,
+      "input_rows": 45382716,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 45382716
+    },
+    {
+      "file_index": 130,
+      "future_rows_skipped": 0,
+      "input_rows": 44182797,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 95,
+      "pairs_found": 91,
+      "scanned_rows": 44182797
+    },
+    {
+      "file_index": 131,
+      "future_rows_skipped": 0,
+      "input_rows": 46344204,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 88,
+      "pairs_found": 86,
+      "scanned_rows": 46344204
+    },
+    {
+      "file_index": 132,
+      "future_rows_skipped": 0,
+      "input_rows": 47163131,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 66,
+      "pairs_found": 64,
+      "scanned_rows": 47163131
+    },
+    {
+      "file_index": 133,
+      "future_rows_skipped": 0,
+      "input_rows": 43591473,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 46,
+      "pairs_found": 46,
+      "scanned_rows": 43591473
+    },
+    {
+      "file_index": 134,
+      "future_rows_skipped": 0,
+      "input_rows": 45752167,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 49,
+      "pairs_found": 49,
+      "scanned_rows": 45752167
+    },
+    {
+      "file_index": 135,
+      "future_rows_skipped": 0,
+      "input_rows": 43497126,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 53,
+      "pairs_found": 50,
+      "scanned_rows": 43497126
+    },
+    {
+      "file_index": 136,
+      "future_rows_skipped": 0,
+      "input_rows": 44952429,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 51,
+      "pairs_found": 51,
+      "scanned_rows": 44952429
+    },
+    {
+      "file_index": 137,
+      "future_rows_skipped": 0,
+      "input_rows": 42263259,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 47,
+      "pairs_found": 45,
+      "scanned_rows": 42263259
+    },
+    {
+      "file_index": 138,
+      "future_rows_skipped": 0,
+      "input_rows": 42717115,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 53,
+      "pairs_found": 50,
+      "scanned_rows": 42717115
+    },
+    {
+      "file_index": 139,
+      "future_rows_skipped": 0,
+      "input_rows": 43599157,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 42,
+      "pairs_found": 42,
+      "scanned_rows": 43599157
+    },
+    {
+      "file_index": 140,
+      "future_rows_skipped": 0,
+      "input_rows": 41552587,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 35,
+      "pairs_found": 33,
+      "scanned_rows": 41552587
+    },
+    {
+      "file_index": 141,
+      "future_rows_skipped": 0,
+      "input_rows": 44144371,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 47,
+      "pairs_found": 47,
+      "scanned_rows": 44144371
+    },
+    {
+      "file_index": 142,
+      "future_rows_skipped": 0,
+      "input_rows": 42462579,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 35,
+      "pairs_found": 34,
+      "scanned_rows": 42462579
+    },
+    {
+      "file_index": 143,
+      "future_rows_skipped": 0,
+      "input_rows": 45432387,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 35,
+      "pairs_found": 35,
+      "scanned_rows": 45432387
+    },
+    {
+      "file_index": 144,
+      "future_rows_skipped": 0,
+      "input_rows": 46963478,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 37,
+      "pairs_found": 37,
+      "scanned_rows": 46963478
+    },
+    {
+      "file_index": 145,
+      "future_rows_skipped": 0,
+      "input_rows": 41670220,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 43,
+      "pairs_found": 41,
+      "scanned_rows": 41670220
+    },
+    {
+      "file_index": 146,
+      "future_rows_skipped": 0,
+      "input_rows": 45535959,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 43,
+      "pairs_found": 41,
+      "scanned_rows": 45535959
+    },
+    {
+      "file_index": 147,
+      "future_rows_skipped": 0,
+      "input_rows": 42777452,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 42,
+      "pairs_found": 41,
+      "scanned_rows": 42777452
+    },
+    {
+      "file_index": 148,
+      "future_rows_skipped": 0,
+      "input_rows": 43803522,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 41,
+      "pairs_found": 36,
+      "scanned_rows": 43803522
+    },
+    {
+      "file_index": 149,
+      "future_rows_skipped": 0,
+      "input_rows": 42430994,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 25,
+      "pairs_found": 23,
+      "scanned_rows": 42430994
+    },
+    {
+      "file_index": 150,
+      "future_rows_skipped": 0,
+      "input_rows": 43462379,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 35,
+      "pairs_found": 35,
+      "scanned_rows": 43462379
+    },
+    {
+      "file_index": 151,
+      "future_rows_skipped": 0,
+      "input_rows": 43000785,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 25,
+      "pairs_found": 25,
+      "scanned_rows": 43000785
+    },
+    {
+      "file_index": 152,
+      "future_rows_skipped": 0,
+      "input_rows": 40735097,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 22,
+      "pairs_found": 22,
+      "scanned_rows": 40735097
+    },
+    {
+      "file_index": 153,
+      "future_rows_skipped": 0,
+      "input_rows": 42887275,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 20,
+      "pairs_found": 20,
+      "scanned_rows": 42887275
+    },
+    {
+      "file_index": 154,
+      "future_rows_skipped": 41954340,
+      "input_rows": 41954340,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 155,
+      "future_rows_skipped": 43912414,
+      "input_rows": 43912414,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 156,
+      "future_rows_skipped": 43601447,
+      "input_rows": 43601447,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 157,
+      "future_rows_skipped": 39320946,
+      "input_rows": 39320946,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 158,
+      "future_rows_skipped": 41469470,
+      "input_rows": 41469470,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 159,
+      "future_rows_skipped": 41348475,
+      "input_rows": 41348475,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 160,
+      "future_rows_skipped": 0,
+      "input_rows": 32982,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 32982
+    },
+    {
+      "file_index": 161,
+      "future_rows_skipped": 0,
+      "input_rows": 30987,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 30987
+    },
+    {
+      "file_index": 162,
+      "future_rows_skipped": 0,
+      "input_rows": 43545,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 43545
+    },
+    {
+      "file_index": 163,
+      "future_rows_skipped": 0,
+      "input_rows": 46226,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 46226
+    },
+    {
+      "file_index": 164,
+      "future_rows_skipped": 0,
+      "input_rows": 52415,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 52415
+    },
+    {
+      "file_index": 165,
+      "future_rows_skipped": 0,
+      "input_rows": 58464,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 58464
+    },
+    {
+      "file_index": 166,
+      "future_rows_skipped": 0,
+      "input_rows": 73153,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 73153
+    },
+    {
+      "file_index": 167,
+      "future_rows_skipped": 0,
+      "input_rows": 82649,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 82649
+    },
+    {
+      "file_index": 168,
+      "future_rows_skipped": 0,
+      "input_rows": 80182,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 80182
+    },
+    {
+      "file_index": 169,
+      "future_rows_skipped": 0,
+      "input_rows": 113783,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 113783
+    },
+    {
+      "file_index": 170,
+      "future_rows_skipped": 0,
+      "input_rows": 131533,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 131533
+    },
+    {
+      "file_index": 171,
+      "future_rows_skipped": 0,
+      "input_rows": 159539,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 159539
+    },
+    {
+      "file_index": 172,
+      "future_rows_skipped": 0,
+      "input_rows": 182354,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 182354
+    },
+    {
+      "file_index": 173,
+      "future_rows_skipped": 0,
+      "input_rows": 190191,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 190191
+    },
+    {
+      "file_index": 174,
+      "future_rows_skipped": 0,
+      "input_rows": 237912,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 237912
+    },
+    {
+      "file_index": 175,
+      "future_rows_skipped": 0,
+      "input_rows": 238315,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 238315
+    },
+    {
+      "file_index": 176,
+      "future_rows_skipped": 0,
+      "input_rows": 278637,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 278637
+    },
+    {
+      "file_index": 177,
+      "future_rows_skipped": 0,
+      "input_rows": 324684,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 324684
+    },
+    {
+      "file_index": 178,
+      "future_rows_skipped": 0,
+      "input_rows": 338499,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 338499
+    },
+    {
+      "file_index": 179,
+      "future_rows_skipped": 0,
+      "input_rows": 275587,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 275587
+    },
+    {
+      "file_index": 180,
+      "future_rows_skipped": 0,
+      "input_rows": 276753,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 276753
+    },
+    {
+      "file_index": 181,
+      "future_rows_skipped": 0,
+      "input_rows": 311234,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 311234
+    },
+    {
+      "file_index": 182,
+      "future_rows_skipped": 0,
+      "input_rows": 329670,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 329670
+    },
+    {
+      "file_index": 183,
+      "future_rows_skipped": 0,
+      "input_rows": 357574,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 357574
+    },
+    {
+      "file_index": 184,
+      "future_rows_skipped": 0,
+      "input_rows": 408693,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 408693
+    },
+    {
+      "file_index": 185,
+      "future_rows_skipped": 0,
+      "input_rows": 393910,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 393910
+    },
+    {
+      "file_index": 186,
+      "future_rows_skipped": 0,
+      "input_rows": 446914,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 446914
+    },
+    {
+      "file_index": 187,
+      "future_rows_skipped": 0,
+      "input_rows": 469833,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 469833
+    },
+    {
+      "file_index": 188,
+      "future_rows_skipped": 0,
+      "input_rows": 718198,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 718198
+    },
+    {
+      "file_index": 189,
+      "future_rows_skipped": 0,
+      "input_rows": 848508,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 848508
+    },
+    {
+      "file_index": 190,
+      "future_rows_skipped": 0,
+      "input_rows": 887618,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 887618
+    },
+    {
+      "file_index": 191,
+      "future_rows_skipped": 0,
+      "input_rows": 910230,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 910230
+    },
+    {
+      "file_index": 192,
+      "future_rows_skipped": 0,
+      "input_rows": 1034275,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1034275
+    },
+    {
+      "file_index": 193,
+      "future_rows_skipped": 0,
+      "input_rows": 1234398,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1234398
+    },
+    {
+      "file_index": 194,
+      "future_rows_skipped": 0,
+      "input_rows": 1344419,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1344419
+    },
+    {
+      "file_index": 195,
+      "future_rows_skipped": 0,
+      "input_rows": 1461868,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1461868
+    },
+    {
+      "file_index": 196,
+      "future_rows_skipped": 0,
+      "input_rows": 1622629,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1622629
+    },
+    {
+      "file_index": 197,
+      "future_rows_skipped": 0,
+      "input_rows": 1653234,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1653234
+    },
+    {
+      "file_index": 198,
+      "future_rows_skipped": 0,
+      "input_rows": 1850936,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1850936
+    },
+    {
+      "file_index": 199,
+      "future_rows_skipped": 0,
+      "input_rows": 1830851,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1830851
+    },
+    {
+      "file_index": 200,
+      "future_rows_skipped": 0,
+      "input_rows": 1840940,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1840940
+    },
+    {
+      "file_index": 201,
+      "future_rows_skipped": 0,
+      "input_rows": 1757411,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1757411
+    },
+    {
+      "file_index": 202,
+      "future_rows_skipped": 0,
+      "input_rows": 1749721,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1749721
+    },
+    {
+      "file_index": 203,
+      "future_rows_skipped": 0,
+      "input_rows": 1743697,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1743697
+    },
+    {
+      "file_index": 204,
+      "future_rows_skipped": 0,
+      "input_rows": 1864491,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1864491
+    },
+    {
+      "file_index": 205,
+      "future_rows_skipped": 0,
+      "input_rows": 2094133,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2094133
+    },
+    {
+      "file_index": 206,
+      "future_rows_skipped": 0,
+      "input_rows": 2098013,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2098013
+    },
+    {
+      "file_index": 207,
+      "future_rows_skipped": 0,
+      "input_rows": 2401273,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2401273
+    },
+    {
+      "file_index": 208,
+      "future_rows_skipped": 0,
+      "input_rows": 2768294,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2768294
+    },
+    {
+      "file_index": 209,
+      "future_rows_skipped": 0,
+      "input_rows": 2684093,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2684093
+    },
+    {
+      "file_index": 210,
+      "future_rows_skipped": 0,
+      "input_rows": 3024640,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 3024640
+    },
+    {
+      "file_index": 211,
+      "future_rows_skipped": 0,
+      "input_rows": 2843771,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2843771
+    },
+    {
+      "file_index": 212,
+      "future_rows_skipped": 0,
+      "input_rows": 3077900,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 3077900
+    },
+    {
+      "file_index": 213,
+      "future_rows_skipped": 0,
+      "input_rows": 3149479,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 3149479
+    },
+    {
+      "file_index": 214,
+      "future_rows_skipped": 0,
+      "input_rows": 3347963,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 3347963
+    },
+    {
+      "file_index": 215,
+      "future_rows_skipped": 0,
+      "input_rows": 3388914,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 3388914
+    },
+    {
+      "file_index": 216,
+      "future_rows_skipped": 0,
+      "input_rows": 3391975,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 3391975
+    },
+    {
+      "file_index": 217,
+      "future_rows_skipped": 0,
+      "input_rows": 3645379,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 3645379
+    },
+    {
+      "file_index": 218,
+      "future_rows_skipped": 0,
+      "input_rows": 3831054,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 3831054
+    },
+    {
+      "file_index": 219,
+      "future_rows_skipped": 0,
+      "input_rows": 4469418,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 4469418
+    },
+    {
+      "file_index": 220,
+      "future_rows_skipped": 0,
+      "input_rows": 5254570,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 5254570
+    },
+    {
+      "file_index": 221,
+      "future_rows_skipped": 0,
+      "input_rows": 5188183,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 5188183
+    },
+    {
+      "file_index": 222,
+      "future_rows_skipped": 0,
+      "input_rows": 6045332,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 6045332
+    },
+    {
+      "file_index": 223,
+      "future_rows_skipped": 0,
+      "input_rows": 6178722,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 6178722
+    },
+    {
+      "file_index": 224,
+      "future_rows_skipped": 0,
+      "input_rows": 7000571,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 7000571
+    },
+    {
+      "file_index": 225,
+      "future_rows_skipped": 0,
+      "input_rows": 6711124,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 6711124
+    },
+    {
+      "file_index": 226,
+      "future_rows_skipped": 0,
+      "input_rows": 6733483,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 6733483
+    },
+    {
+      "file_index": 227,
+      "future_rows_skipped": 0,
+      "input_rows": 7391151,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 7391151
+    },
+    {
+      "file_index": 228,
+      "future_rows_skipped": 0,
+      "input_rows": 7611183,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 7611183
+    },
+    {
+      "file_index": 229,
+      "future_rows_skipped": 0,
+      "input_rows": 8105906,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 8105906
+    },
+    {
+      "file_index": 230,
+      "future_rows_skipped": 0,
+      "input_rows": 8512401,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 8512401
+    },
+    {
+      "file_index": 231,
+      "future_rows_skipped": 0,
+      "input_rows": 10444869,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 10444869
+    },
+    {
+      "file_index": 232,
+      "future_rows_skipped": 0,
+      "input_rows": 11745949,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 11745949
+    },
+    {
+      "file_index": 233,
+      "future_rows_skipped": 0,
+      "input_rows": 10905115,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 10905115
+    },
+    {
+      "file_index": 234,
+      "future_rows_skipped": 0,
+      "input_rows": 12043247,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 12043247
+    },
+    {
+      "file_index": 235,
+      "future_rows_skipped": 0,
+      "input_rows": 11810282,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 11810282
+    },
+    {
+      "file_index": 236,
+      "future_rows_skipped": 0,
+      "input_rows": 12518147,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 12518147
+    },
+    {
+      "file_index": 237,
+      "future_rows_skipped": 0,
+      "input_rows": 12143131,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 12143131
+    },
+    {
+      "file_index": 238,
+      "future_rows_skipped": 0,
+      "input_rows": 12731179,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 12731179
+    },
+    {
+      "file_index": 239,
+      "future_rows_skipped": 0,
+      "input_rows": 13148874,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 13148874
+    },
+    {
+      "file_index": 240,
+      "future_rows_skipped": 0,
+      "input_rows": 13438652,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 13438652
+    },
+    {
+      "file_index": 241,
+      "future_rows_skipped": 0,
+      "input_rows": 14675724,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 14675724
+    },
+    {
+      "file_index": 242,
+      "future_rows_skipped": 0,
+      "input_rows": 14816491,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 14816491
+    },
+    {
+      "file_index": 243,
+      "future_rows_skipped": 0,
+      "input_rows": 16072112,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 16072112
+    },
+    {
+      "file_index": 244,
+      "future_rows_skipped": 0,
+      "input_rows": 17085997,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 17085997
+    },
+    {
+      "file_index": 245,
+      "future_rows_skipped": 0,
+      "input_rows": 15898629,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 15898629
+    },
+    {
+      "file_index": 246,
+      "future_rows_skipped": 0,
+      "input_rows": 18997323,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 18997323
+    },
+    {
+      "file_index": 247,
+      "future_rows_skipped": 0,
+      "input_rows": 23774122,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 23774122
+    },
+    {
+      "file_index": 248,
+      "future_rows_skipped": 0,
+      "input_rows": 24231122,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 24231122
+    },
+    {
+      "file_index": 249,
+      "future_rows_skipped": 0,
+      "input_rows": 22779900,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 22779900
+    },
+    {
+      "file_index": 250,
+      "future_rows_skipped": 0,
+      "input_rows": 23154850,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 23154850
+    },
+    {
+      "file_index": 251,
+      "future_rows_skipped": 0,
+      "input_rows": 23990400,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 23990400
+    },
+    {
+      "file_index": 252,
+      "future_rows_skipped": 0,
+      "input_rows": 23258265,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 23258265
+    },
+    {
+      "file_index": 253,
+      "future_rows_skipped": 0,
+      "input_rows": 23910142,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 23910142
+    },
+    {
+      "file_index": 254,
+      "future_rows_skipped": 0,
+      "input_rows": 25739558,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 25739558
+    },
+    {
+      "file_index": 255,
+      "future_rows_skipped": 0,
+      "input_rows": 29280343,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 29280343
+    },
+    {
+      "file_index": 256,
+      "future_rows_skipped": 0,
+      "input_rows": 30992076,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 30992076
+    },
+    {
+      "file_index": 257,
+      "future_rows_skipped": 0,
+      "input_rows": 29155838,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 29155838
+    },
+    {
+      "file_index": 258,
+      "future_rows_skipped": 0,
+      "input_rows": 33785174,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 33785174
+    },
+    {
+      "file_index": 259,
+      "future_rows_skipped": 0,
+      "input_rows": 34505991,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 34505991
+    },
+    {
+      "file_index": 260,
+      "future_rows_skipped": 0,
+      "input_rows": 35245785,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 35245785
+    },
+    {
+      "file_index": 261,
+      "future_rows_skipped": 0,
+      "input_rows": 32352457,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 32352457
+    },
+    {
+      "file_index": 262,
+      "future_rows_skipped": 0,
+      "input_rows": 31930872,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 31930872
+    },
+    {
+      "file_index": 263,
+      "future_rows_skipped": 0,
+      "input_rows": 32665967,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 32665967
+    },
+    {
+      "file_index": 264,
+      "future_rows_skipped": 0,
+      "input_rows": 30910509,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 30910509
+    },
+    {
+      "file_index": 265,
+      "future_rows_skipped": 0,
+      "input_rows": 30858297,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 30858297
+    },
+    {
+      "file_index": 266,
+      "future_rows_skipped": 0,
+      "input_rows": 30769011,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 30769011
+    },
+    {
+      "file_index": 267,
+      "future_rows_skipped": 0,
+      "input_rows": 33787034,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 33787034
+    },
+    {
+      "file_index": 268,
+      "future_rows_skipped": 0,
+      "input_rows": 36994174,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 36994174
+    },
+    {
+      "file_index": 269,
+      "future_rows_skipped": 0,
+      "input_rows": 30901155,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 30901155
+    },
+    {
+      "file_index": 270,
+      "future_rows_skipped": 0,
+      "input_rows": 32679918,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 32679918
+    },
+    {
+      "file_index": 271,
+      "future_rows_skipped": 0,
+      "input_rows": 31349387,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 31349387
+    },
+    {
+      "file_index": 272,
+      "future_rows_skipped": 0,
+      "input_rows": 32050427,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 32050427
+    },
+    {
+      "file_index": 273,
+      "future_rows_skipped": 0,
+      "input_rows": 31363926,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 31363926
+    },
+    {
+      "file_index": 274,
+      "future_rows_skipped": 0,
+      "input_rows": 32669654,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 32669654
+    },
+    {
+      "file_index": 275,
+      "future_rows_skipped": 0,
+      "input_rows": 33274488,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 33274488
+    },
+    {
+      "file_index": 276,
+      "future_rows_skipped": 0,
+      "input_rows": 31952928,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 31952928
+    },
+    {
+      "file_index": 277,
+      "future_rows_skipped": 0,
+      "input_rows": 33113132,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 33113132
+    },
+    {
+      "file_index": 278,
+      "future_rows_skipped": 0,
+      "input_rows": 32017444,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 32017444
+    },
+    {
+      "file_index": 279,
+      "future_rows_skipped": 0,
+      "input_rows": 33382191,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 33382191
+    },
+    {
+      "file_index": 280,
+      "future_rows_skipped": 0,
+      "input_rows": 36322488,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 36322488
+    },
+    {
+      "file_index": 281,
+      "future_rows_skipped": 0,
+      "input_rows": 34632619,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 34632619
+    },
+    {
+      "file_index": 282,
+      "future_rows_skipped": 0,
+      "input_rows": 38507698,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 38507698
+    },
+    {
+      "file_index": 283,
+      "future_rows_skipped": 0,
+      "input_rows": 36447152,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 36447152
+    },
+    {
+      "file_index": 284,
+      "future_rows_skipped": 0,
+      "input_rows": 37595903,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 37595903
+    },
+    {
+      "file_index": 285,
+      "future_rows_skipped": 0,
+      "input_rows": 34704245,
+      "invalid_time_rows_excluded": 322,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 34704245
+    },
+    {
+      "file_index": 286,
+      "future_rows_skipped": 0,
+      "input_rows": 34186733,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 34186733
+    },
+    {
+      "file_index": 287,
+      "future_rows_skipped": 0,
+      "input_rows": 34729299,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 34729299
+    },
+    {
+      "file_index": 288,
+      "future_rows_skipped": 0,
+      "input_rows": 33794693,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 33794693
+    },
+    {
+      "file_index": 289,
+      "future_rows_skipped": 0,
+      "input_rows": 34480522,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 34480522
+    },
+    {
+      "file_index": 290,
+      "future_rows_skipped": 0,
+      "input_rows": 33457199,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 4,
+      "pairs_found": 4,
+      "scanned_rows": 33457199
+    },
+    {
+      "file_index": 291,
+      "future_rows_skipped": 0,
+      "input_rows": 34848079,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 7,
+      "pairs_found": 7,
+      "scanned_rows": 34848079
+    },
+    {
+      "file_index": 292,
+      "future_rows_skipped": 0,
+      "input_rows": 35905248,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 6,
+      "pairs_found": 6,
+      "scanned_rows": 35905248
+    },
+    {
+      "file_index": 293,
+      "future_rows_skipped": 0,
+      "input_rows": 33284840,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 8,
+      "pairs_found": 8,
+      "scanned_rows": 33284840
+    },
+    {
+      "file_index": 294,
+      "future_rows_skipped": 0,
+      "input_rows": 34565085,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 5,
+      "pairs_found": 5,
+      "scanned_rows": 34565085
+    },
+    {
+      "file_index": 295,
+      "future_rows_skipped": 0,
+      "input_rows": 33344167,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 8,
+      "pairs_found": 8,
+      "scanned_rows": 33344167
+    },
+    {
+      "file_index": 296,
+      "future_rows_skipped": 0,
+      "input_rows": 34369002,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 7,
+      "pairs_found": 6,
+      "scanned_rows": 34369002
+    },
+    {
+      "file_index": 297,
+      "future_rows_skipped": 0,
+      "input_rows": 32774575,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 5,
+      "pairs_found": 5,
+      "scanned_rows": 32774575
+    },
+    {
+      "file_index": 298,
+      "future_rows_skipped": 0,
+      "input_rows": 32961862,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 5,
+      "pairs_found": 5,
+      "scanned_rows": 32961862
+    },
+    {
+      "file_index": 299,
+      "future_rows_skipped": 0,
+      "input_rows": 33854960,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 5,
+      "pairs_found": 4,
+      "scanned_rows": 33854960
+    },
+    {
+      "file_index": 300,
+      "future_rows_skipped": 0,
+      "input_rows": 32335970,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 2,
+      "pairs_found": 1,
+      "scanned_rows": 32335970
+    },
+    {
+      "file_index": 301,
+      "future_rows_skipped": 0,
+      "input_rows": 35073586,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 8,
+      "pairs_found": 8,
+      "scanned_rows": 35073586
+    },
+    {
+      "file_index": 302,
+      "future_rows_skipped": 0,
+      "input_rows": 33596506,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 3,
+      "pairs_found": 3,
+      "scanned_rows": 33596506
+    },
+    {
+      "file_index": 303,
+      "future_rows_skipped": 0,
+      "input_rows": 35289452,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 4,
+      "pairs_found": 4,
+      "scanned_rows": 35289452
+    },
+    {
+      "file_index": 304,
+      "future_rows_skipped": 0,
+      "input_rows": 36799550,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 3,
+      "pairs_found": 2,
+      "scanned_rows": 36799550
+    },
+    {
+      "file_index": 305,
+      "future_rows_skipped": 0,
+      "input_rows": 32783328,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 4,
+      "pairs_found": 4,
+      "scanned_rows": 32783328
+    },
+    {
+      "file_index": 306,
+      "future_rows_skipped": 0,
+      "input_rows": 35750432,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 3,
+      "pairs_found": 2,
+      "scanned_rows": 35750432
+    },
+    {
+      "file_index": 307,
+      "future_rows_skipped": 0,
+      "input_rows": 33651067,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 2,
+      "pairs_found": 2,
+      "scanned_rows": 33651067
+    },
+    {
+      "file_index": 308,
+      "future_rows_skipped": 0,
+      "input_rows": 34773038,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 7,
+      "pairs_found": 7,
+      "scanned_rows": 34773038
+    },
+    {
+      "file_index": 309,
+      "future_rows_skipped": 0,
+      "input_rows": 33555469,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 3,
+      "pairs_found": 3,
+      "scanned_rows": 33555469
+    },
+    {
+      "file_index": 310,
+      "future_rows_skipped": 0,
+      "input_rows": 34120686,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 4,
+      "pairs_found": 4,
+      "scanned_rows": 34120686
+    },
+    {
+      "file_index": 311,
+      "future_rows_skipped": 0,
+      "input_rows": 34170241,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 3,
+      "pairs_found": 3,
+      "scanned_rows": 34170241
+    },
+    {
+      "file_index": 312,
+      "future_rows_skipped": 0,
+      "input_rows": 31760103,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 31760103
+    },
+    {
+      "file_index": 313,
+      "future_rows_skipped": 5856,
+      "input_rows": 33054432,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 5,
+      "pairs_found": 5,
+      "scanned_rows": 33048576
+    },
+    {
+      "file_index": 314,
+      "future_rows_skipped": 32687358,
+      "input_rows": 32687358,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 315,
+      "future_rows_skipped": 33998735,
+      "input_rows": 33998735,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 316,
+      "future_rows_skipped": 33703097,
+      "input_rows": 33703097,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 317,
+      "future_rows_skipped": 30091587,
+      "input_rows": 30091587,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 318,
+      "future_rows_skipped": 31995605,
+      "input_rows": 31995605,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 319,
+      "future_rows_skipped": 31939834,
+      "input_rows": 31939834,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 320,
+      "future_rows_skipped": 0,
+      "input_rows": 41703,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 41703
+    },
+    {
+      "file_index": 321,
+      "future_rows_skipped": 0,
+      "input_rows": 41813,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 41813
+    },
+    {
+      "file_index": 322,
+      "future_rows_skipped": 0,
+      "input_rows": 54004,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 54004
+    },
+    {
+      "file_index": 323,
+      "future_rows_skipped": 0,
+      "input_rows": 53366,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 53366
+    },
+    {
+      "file_index": 324,
+      "future_rows_skipped": 0,
+      "input_rows": 56350,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 56350
+    },
+    {
+      "file_index": 325,
+      "future_rows_skipped": 0,
+      "input_rows": 75797,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 75797
+    },
+    {
+      "file_index": 326,
+      "future_rows_skipped": 0,
+      "input_rows": 100696,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 100696
+    },
+    {
+      "file_index": 327,
+      "future_rows_skipped": 0,
+      "input_rows": 110769,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 110769
+    },
+    {
+      "file_index": 328,
+      "future_rows_skipped": 0,
+      "input_rows": 117264,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 117264
+    },
+    {
+      "file_index": 329,
+      "future_rows_skipped": 0,
+      "input_rows": 138355,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 138355
+    },
+    {
+      "file_index": 330,
+      "future_rows_skipped": 0,
+      "input_rows": 168923,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 168923
+    },
+    {
+      "file_index": 331,
+      "future_rows_skipped": 0,
+      "input_rows": 197784,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 197784
+    },
+    {
+      "file_index": 332,
+      "future_rows_skipped": 0,
+      "input_rows": 246495,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 246495
+    },
+    {
+      "file_index": 333,
+      "future_rows_skipped": 0,
+      "input_rows": 241068,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 241068
+    },
+    {
+      "file_index": 334,
+      "future_rows_skipped": 0,
+      "input_rows": 264677,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 264677
+    },
+    {
+      "file_index": 335,
+      "future_rows_skipped": 0,
+      "input_rows": 263911,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 263911
+    },
+    {
+      "file_index": 336,
+      "future_rows_skipped": 0,
+      "input_rows": 274589,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 274589
+    },
+    {
+      "file_index": 337,
+      "future_rows_skipped": 0,
+      "input_rows": 266766,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 266766
+    },
+    {
+      "file_index": 338,
+      "future_rows_skipped": 0,
+      "input_rows": 284909,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 284909
+    },
+    {
+      "file_index": 339,
+      "future_rows_skipped": 0,
+      "input_rows": 288951,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 288951
+    },
+    {
+      "file_index": 340,
+      "future_rows_skipped": 0,
+      "input_rows": 293398,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 293398
+    },
+    {
+      "file_index": 341,
+      "future_rows_skipped": 0,
+      "input_rows": 326609,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 326609
+    },
+    {
+      "file_index": 342,
+      "future_rows_skipped": 0,
+      "input_rows": 357459,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 357459
+    },
+    {
+      "file_index": 343,
+      "future_rows_skipped": 0,
+      "input_rows": 403455,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 403455
+    },
+    {
+      "file_index": 344,
+      "future_rows_skipped": 0,
+      "input_rows": 434836,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 434836
+    },
+    {
+      "file_index": 345,
+      "future_rows_skipped": 0,
+      "input_rows": 437376,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 437376
+    },
+    {
+      "file_index": 346,
+      "future_rows_skipped": 0,
+      "input_rows": 31263,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 31263
+    },
+    {
+      "file_index": 347,
+      "future_rows_skipped": 0,
+      "input_rows": 508526,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 508526
+    },
+    {
+      "file_index": 348,
+      "future_rows_skipped": 0,
+      "input_rows": 516668,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 516668
+    },
+    {
+      "file_index": 349,
+      "future_rows_skipped": 0,
+      "input_rows": 525398,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 525398
+    },
+    {
+      "file_index": 350,
+      "future_rows_skipped": 0,
+      "input_rows": 561164,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 561164
+    },
+    {
+      "file_index": 351,
+      "future_rows_skipped": 0,
+      "input_rows": 605804,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 605804
+    },
+    {
+      "file_index": 352,
+      "future_rows_skipped": 0,
+      "input_rows": 657176,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 657176
+    },
+    {
+      "file_index": 353,
+      "future_rows_skipped": 0,
+      "input_rows": 788846,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 788846
+    },
+    {
+      "file_index": 354,
+      "future_rows_skipped": 0,
+      "input_rows": 847284,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 847284
+    },
+    {
+      "file_index": 355,
+      "future_rows_skipped": 0,
+      "input_rows": 1010257,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1010257
+    },
+    {
+      "file_index": 356,
+      "future_rows_skipped": 0,
+      "input_rows": 1230105,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1230105
+    },
+    {
+      "file_index": 357,
+      "future_rows_skipped": 0,
+      "input_rows": 1341810,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1341810
+    },
+    {
+      "file_index": 358,
+      "future_rows_skipped": 0,
+      "input_rows": 1556305,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1556305
+    },
+    {
+      "file_index": 359,
+      "future_rows_skipped": 0,
+      "input_rows": 1560135,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1560135
+    },
+    {
+      "file_index": 360,
+      "future_rows_skipped": 0,
+      "input_rows": 1666604,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1666604
+    },
+    {
+      "file_index": 361,
+      "future_rows_skipped": 0,
+      "input_rows": 1636702,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1636702
+    },
+    {
+      "file_index": 362,
+      "future_rows_skipped": 0,
+      "input_rows": 1680691,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1680691
+    },
+    {
+      "file_index": 363,
+      "future_rows_skipped": 0,
+      "input_rows": 1741087,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1741087
+    },
+    {
+      "file_index": 364,
+      "future_rows_skipped": 0,
+      "input_rows": 1822565,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1822565
+    },
+    {
+      "file_index": 365,
+      "future_rows_skipped": 0,
+      "input_rows": 2009983,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2009983
+    },
+    {
+      "file_index": 366,
+      "future_rows_skipped": 0,
+      "input_rows": 2204227,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2204227
+    },
+    {
+      "file_index": 367,
+      "future_rows_skipped": 0,
+      "input_rows": 2675842,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2675842
+    },
+    {
+      "file_index": 368,
+      "future_rows_skipped": 0,
+      "input_rows": 2935516,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2935516
+    },
+    {
+      "file_index": 369,
+      "future_rows_skipped": 0,
+      "input_rows": 2750518,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2750518
+    },
+    {
+      "file_index": 370,
+      "future_rows_skipped": 0,
+      "input_rows": 2957017,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2957017
+    },
+    {
+      "file_index": 371,
+      "future_rows_skipped": 0,
+      "input_rows": 2802937,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2802937
+    },
+    {
+      "file_index": 372,
+      "future_rows_skipped": 0,
+      "input_rows": 2805046,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2805046
+    },
+    {
+      "file_index": 373,
+      "future_rows_skipped": 0,
+      "input_rows": 2642058,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2642058
+    },
+    {
+      "file_index": 374,
+      "future_rows_skipped": 0,
+      "input_rows": 2674547,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2674547
+    },
+    {
+      "file_index": 375,
+      "future_rows_skipped": 0,
+      "input_rows": 2713989,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2713989
+    },
+    {
+      "file_index": 376,
+      "future_rows_skipped": 0,
+      "input_rows": 2735437,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2735437
+    },
+    {
+      "file_index": 377,
+      "future_rows_skipped": 0,
+      "input_rows": 2978723,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2978723
+    },
+    {
+      "file_index": 378,
+      "future_rows_skipped": 0,
+      "input_rows": 240428,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 240428
+    },
+    {
+      "file_index": 379,
+      "future_rows_skipped": 0,
+      "input_rows": 408646,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 408646
+    },
+    {
+      "file_index": 380,
+      "future_rows_skipped": 0,
+      "input_rows": 491179,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 491179
+    },
+    {
+      "file_index": 381,
+      "future_rows_skipped": 0,
+      "input_rows": 506719,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 506719
+    },
+    {
+      "file_index": 382,
+      "future_rows_skipped": 0,
+      "input_rows": 627056,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 627056
+    },
+    {
+      "file_index": 383,
+      "future_rows_skipped": 0,
+      "input_rows": 632658,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 632658
+    },
+    {
+      "file_index": 384,
+      "future_rows_skipped": 0,
+      "input_rows": 666248,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 666248
+    },
+    {
+      "file_index": 385,
+      "future_rows_skipped": 0,
+      "input_rows": 616869,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 616869
+    },
+    {
+      "file_index": 386,
+      "future_rows_skipped": 0,
+      "input_rows": 637566,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 637566
+    },
+    {
+      "file_index": 387,
+      "future_rows_skipped": 0,
+      "input_rows": 700599,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 700599
+    },
+    {
+      "file_index": 388,
+      "future_rows_skipped": 0,
+      "input_rows": 720188,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 720188
+    },
+    {
+      "file_index": 389,
+      "future_rows_skipped": 0,
+      "input_rows": 802402,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 802402
+    },
+    {
+      "file_index": 390,
+      "future_rows_skipped": 0,
+      "input_rows": 982579,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 982579
+    },
+    {
+      "file_index": 391,
+      "future_rows_skipped": 0,
+      "input_rows": 1264448,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1264448
+    },
+    {
+      "file_index": 392,
+      "future_rows_skipped": 0,
+      "input_rows": 1334797,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1334797
+    },
+    {
+      "file_index": 393,
+      "future_rows_skipped": 0,
+      "input_rows": 1215017,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1215017
+    },
+    {
+      "file_index": 394,
+      "future_rows_skipped": 0,
+      "input_rows": 1409145,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1409145
+    },
+    {
+      "file_index": 395,
+      "future_rows_skipped": 0,
+      "input_rows": 1300979,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1300979
+    },
+    {
+      "file_index": 396,
+      "future_rows_skipped": 0,
+      "input_rows": 1290049,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1290049
+    },
+    {
+      "file_index": 397,
+      "future_rows_skipped": 0,
+      "input_rows": 1186371,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1186371
+    },
+    {
+      "file_index": 398,
+      "future_rows_skipped": 0,
+      "input_rows": 1234252,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1234252
+    },
+    {
+      "file_index": 399,
+      "future_rows_skipped": 0,
+      "input_rows": 1295876,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1295876
+    },
+    {
+      "file_index": 400,
+      "future_rows_skipped": 0,
+      "input_rows": 1258911,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1258911
+    },
+    {
+      "file_index": 401,
+      "future_rows_skipped": 0,
+      "input_rows": 1347037,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1347037
+    },
+    {
+      "file_index": 402,
+      "future_rows_skipped": 0,
+      "input_rows": 1331834,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1331834
+    },
+    {
+      "file_index": 403,
+      "future_rows_skipped": 0,
+      "input_rows": 1433145,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1433145
+    },
+    {
+      "file_index": 404,
+      "future_rows_skipped": 0,
+      "input_rows": 1562678,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1562678
+    },
+    {
+      "file_index": 405,
+      "future_rows_skipped": 0,
+      "input_rows": 1506420,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1506420
+    },
+    {
+      "file_index": 406,
+      "future_rows_skipped": 0,
+      "input_rows": 1850257,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1850257
+    },
+    {
+      "file_index": 407,
+      "future_rows_skipped": 0,
+      "input_rows": 1094939,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1094939
+    },
+    {
+      "file_index": 408,
+      "future_rows_skipped": 0,
+      "input_rows": 902501,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 902501
+    },
+    {
+      "file_index": 409,
+      "future_rows_skipped": 0,
+      "input_rows": 759047,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 759047
+    },
+    {
+      "file_index": 410,
+      "future_rows_skipped": 0,
+      "input_rows": 698361,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 698361
+    },
+    {
+      "file_index": 411,
+      "future_rows_skipped": 0,
+      "input_rows": 652106,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 652106
+    },
+    {
+      "file_index": 412,
+      "future_rows_skipped": 0,
+      "input_rows": 589630,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 589630
+    },
+    {
+      "file_index": 413,
+      "future_rows_skipped": 0,
+      "input_rows": 634886,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 634886
+    },
+    {
+      "file_index": 414,
+      "future_rows_skipped": 0,
+      "input_rows": 897285,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 897285
+    },
+    {
+      "file_index": 415,
+      "future_rows_skipped": 0,
+      "input_rows": 1088086,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1088086
+    },
+    {
+      "file_index": 416,
+      "future_rows_skipped": 0,
+      "input_rows": 1200170,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1200170
+    },
+    {
+      "file_index": 417,
+      "future_rows_skipped": 0,
+      "input_rows": 1057140,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1057140
+    },
+    {
+      "file_index": 418,
+      "future_rows_skipped": 0,
+      "input_rows": 1032032,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1032032
+    },
+    {
+      "file_index": 419,
+      "future_rows_skipped": 0,
+      "input_rows": 955837,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 955837
+    },
+    {
+      "file_index": 420,
+      "future_rows_skipped": 0,
+      "input_rows": 926257,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 926257
+    },
+    {
+      "file_index": 421,
+      "future_rows_skipped": 0,
+      "input_rows": 790772,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 790772
+    },
+    {
+      "file_index": 422,
+      "future_rows_skipped": 0,
+      "input_rows": 796233,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 796233
+    },
+    {
+      "file_index": 423,
+      "future_rows_skipped": 0,
+      "input_rows": 783267,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 783267
+    },
+    {
+      "file_index": 424,
+      "future_rows_skipped": 0,
+      "input_rows": 699783,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 699783
+    },
+    {
+      "file_index": 425,
+      "future_rows_skipped": 0,
+      "input_rows": 692096,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 692096
+    },
+    {
+      "file_index": 426,
+      "future_rows_skipped": 0,
+      "input_rows": 680373,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 680373
+    },
+    {
+      "file_index": 427,
+      "future_rows_skipped": 0,
+      "input_rows": 768784,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 768784
+    },
+    {
+      "file_index": 428,
+      "future_rows_skipped": 0,
+      "input_rows": 779642,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 779642
+    },
+    {
+      "file_index": 429,
+      "future_rows_skipped": 0,
+      "input_rows": 657944,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 657944
+    },
+    {
+      "file_index": 430,
+      "future_rows_skipped": 0,
+      "input_rows": 650154,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 650154
+    },
+    {
+      "file_index": 431,
+      "future_rows_skipped": 0,
+      "input_rows": 613346,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 613346
+    },
+    {
+      "file_index": 432,
+      "future_rows_skipped": 0,
+      "input_rows": 610505,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 610505
+    },
+    {
+      "file_index": 433,
+      "future_rows_skipped": 0,
+      "input_rows": 612531,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 612531
+    },
+    {
+      "file_index": 434,
+      "future_rows_skipped": 0,
+      "input_rows": 671118,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 671118
+    },
+    {
+      "file_index": 435,
+      "future_rows_skipped": 0,
+      "input_rows": 641266,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 641266
+    },
+    {
+      "file_index": 436,
+      "future_rows_skipped": 0,
+      "input_rows": 593430,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 593430
+    },
+    {
+      "file_index": 437,
+      "future_rows_skipped": 0,
+      "input_rows": 609303,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 609303
+    },
+    {
+      "file_index": 438,
+      "future_rows_skipped": 0,
+      "input_rows": 612214,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 612214
+    },
+    {
+      "file_index": 439,
+      "future_rows_skipped": 0,
+      "input_rows": 638726,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 638726
+    },
+    {
+      "file_index": 440,
+      "future_rows_skipped": 0,
+      "input_rows": 742415,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 742415
+    },
+    {
+      "file_index": 441,
+      "future_rows_skipped": 0,
+      "input_rows": 725383,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 725383
+    },
+    {
+      "file_index": 442,
+      "future_rows_skipped": 0,
+      "input_rows": 767686,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 767686
+    },
+    {
+      "file_index": 443,
+      "future_rows_skipped": 0,
+      "input_rows": 697175,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 697175
+    },
+    {
+      "file_index": 444,
+      "future_rows_skipped": 0,
+      "input_rows": 688890,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 688890
+    },
+    {
+      "file_index": 445,
+      "future_rows_skipped": 0,
+      "input_rows": 622793,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 622793
+    },
+    {
+      "file_index": 446,
+      "future_rows_skipped": 0,
+      "input_rows": 594060,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 1,
+      "pairs_found": 1,
+      "scanned_rows": 594060
+    },
+    {
+      "file_index": 447,
+      "future_rows_skipped": 0,
+      "input_rows": 601953,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 601953
+    },
+    {
+      "file_index": 448,
+      "future_rows_skipped": 0,
+      "input_rows": 555497,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 555497
+    },
+    {
+      "file_index": 449,
+      "future_rows_skipped": 0,
+      "input_rows": 573074,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 573074
+    },
+    {
+      "file_index": 450,
+      "future_rows_skipped": 0,
+      "input_rows": 571255,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 9,
+      "pairs_found": 8,
+      "scanned_rows": 571255
+    },
+    {
+      "file_index": 451,
+      "future_rows_skipped": 0,
+      "input_rows": 605106,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 5,
+      "pairs_found": 4,
+      "scanned_rows": 605106
+    },
+    {
+      "file_index": 452,
+      "future_rows_skipped": 0,
+      "input_rows": 632968,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 7,
+      "pairs_found": 7,
+      "scanned_rows": 632968
+    },
+    {
+      "file_index": 453,
+      "future_rows_skipped": 0,
+      "input_rows": 565852,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 8,
+      "pairs_found": 8,
+      "scanned_rows": 565852
+    },
+    {
+      "file_index": 454,
+      "future_rows_skipped": 0,
+      "input_rows": 589134,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 3,
+      "pairs_found": 3,
+      "scanned_rows": 589134
+    },
+    {
+      "file_index": 455,
+      "future_rows_skipped": 0,
+      "input_rows": 538429,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 3,
+      "pairs_found": 2,
+      "scanned_rows": 538429
+    },
+    {
+      "file_index": 456,
+      "future_rows_skipped": 0,
+      "input_rows": 574802,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 3,
+      "pairs_found": 3,
+      "scanned_rows": 574802
+    },
+    {
+      "file_index": 457,
+      "future_rows_skipped": 0,
+      "input_rows": 534638,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 5,
+      "pairs_found": 3,
+      "scanned_rows": 534638
+    },
+    {
+      "file_index": 458,
+      "future_rows_skipped": 0,
+      "input_rows": 522150,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 6,
+      "pairs_found": 6,
+      "scanned_rows": 522150
+    },
+    {
+      "file_index": 459,
+      "future_rows_skipped": 0,
+      "input_rows": 536678,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 4,
+      "pairs_found": 4,
+      "scanned_rows": 536678
+    },
+    {
+      "file_index": 460,
+      "future_rows_skipped": 0,
+      "input_rows": 490331,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 5,
+      "pairs_found": 5,
+      "scanned_rows": 490331
+    },
+    {
+      "file_index": 461,
+      "future_rows_skipped": 0,
+      "input_rows": 532300,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 5,
+      "pairs_found": 5,
+      "scanned_rows": 532300
+    },
+    {
+      "file_index": 462,
+      "future_rows_skipped": 0,
+      "input_rows": 541826,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 541826
+    },
+    {
+      "file_index": 463,
+      "future_rows_skipped": 0,
+      "input_rows": 590478,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 1,
+      "pairs_found": 1,
+      "scanned_rows": 590478
+    },
+    {
+      "file_index": 464,
+      "future_rows_skipped": 0,
+      "input_rows": 616788,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 2,
+      "pairs_found": 2,
+      "scanned_rows": 616788
+    },
+    {
+      "file_index": 465,
+      "future_rows_skipped": 0,
+      "input_rows": 544049,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 4,
+      "pairs_found": 4,
+      "scanned_rows": 544049
+    },
+    {
+      "file_index": 466,
+      "future_rows_skipped": 0,
+      "input_rows": 574557,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 2,
+      "pairs_found": 2,
+      "scanned_rows": 574557
+    },
+    {
+      "file_index": 467,
+      "future_rows_skipped": 0,
+      "input_rows": 535046,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 5,
+      "pairs_found": 4,
+      "scanned_rows": 535046
+    },
+    {
+      "file_index": 468,
+      "future_rows_skipped": 0,
+      "input_rows": 569110,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 4,
+      "pairs_found": 4,
+      "scanned_rows": 569110
+    },
+    {
+      "file_index": 469,
+      "future_rows_skipped": 0,
+      "input_rows": 543573,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 1,
+      "pairs_found": 1,
+      "scanned_rows": 543573
+    },
+    {
+      "file_index": 470,
+      "future_rows_skipped": 0,
+      "input_rows": 541578,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 4,
+      "pairs_found": 4,
+      "scanned_rows": 541578
+    },
+    {
+      "file_index": 471,
+      "future_rows_skipped": 0,
+      "input_rows": 536148,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 2,
+      "pairs_found": 2,
+      "scanned_rows": 536148
+    },
+    {
+      "file_index": 472,
+      "future_rows_skipped": 0,
+      "input_rows": 481138,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 1,
+      "pairs_found": 1,
+      "scanned_rows": 481138
+    },
+    {
+      "file_index": 473,
+      "future_rows_skipped": 0,
+      "input_rows": 531461,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 531461
+    },
+    {
+      "file_index": 474,
+      "future_rows_skipped": 550236,
+      "input_rows": 550236,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 475,
+      "future_rows_skipped": 576513,
+      "input_rows": 576513,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 476,
+      "future_rows_skipped": 613191,
+      "input_rows": 613191,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 477,
+      "future_rows_skipped": 535233,
+      "input_rows": 535233,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 478,
+      "future_rows_skipped": 564047,
+      "input_rows": 564047,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 479,
+      "future_rows_skipped": 575703,
+      "input_rows": 575703,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 480,
+      "future_rows_skipped": 0,
+      "input_rows": 180,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 180
+    },
+    {
+      "file_index": 481,
+      "future_rows_skipped": 0,
+      "input_rows": 261,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 261
+    },
+    {
+      "file_index": 482,
+      "future_rows_skipped": 0,
+      "input_rows": 175,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 175
+    },
+    {
+      "file_index": 483,
+      "future_rows_skipped": 0,
+      "input_rows": 398,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 398
+    },
+    {
+      "file_index": 484,
+      "future_rows_skipped": 0,
+      "input_rows": 580,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 580
+    },
+    {
+      "file_index": 485,
+      "future_rows_skipped": 0,
+      "input_rows": 456,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 456
+    },
+    {
+      "file_index": 486,
+      "future_rows_skipped": 0,
+      "input_rows": 446,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 446
+    },
+    {
+      "file_index": 487,
+      "future_rows_skipped": 0,
+      "input_rows": 507,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 507
+    },
+    {
+      "file_index": 488,
+      "future_rows_skipped": 0,
+      "input_rows": 462,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 462
+    },
+    {
+      "file_index": 489,
+      "future_rows_skipped": 0,
+      "input_rows": 674,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 674
+    },
+    {
+      "file_index": 490,
+      "future_rows_skipped": 0,
+      "input_rows": 977,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 977
+    },
+    {
+      "file_index": 491,
+      "future_rows_skipped": 0,
+      "input_rows": 1252,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1252
+    },
+    {
+      "file_index": 492,
+      "future_rows_skipped": 0,
+      "input_rows": 2196,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2196
+    },
+    {
+      "file_index": 493,
+      "future_rows_skipped": 0,
+      "input_rows": 2129,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2129
+    },
+    {
+      "file_index": 494,
+      "future_rows_skipped": 0,
+      "input_rows": 2363,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2363
+    },
+    {
+      "file_index": 495,
+      "future_rows_skipped": 0,
+      "input_rows": 2267,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2267
+    },
+    {
+      "file_index": 496,
+      "future_rows_skipped": 0,
+      "input_rows": 3085,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 3085
+    },
+    {
+      "file_index": 497,
+      "future_rows_skipped": 0,
+      "input_rows": 2640,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2640
+    },
+    {
+      "file_index": 498,
+      "future_rows_skipped": 0,
+      "input_rows": 2497,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2497
+    },
+    {
+      "file_index": 499,
+      "future_rows_skipped": 0,
+      "input_rows": 2483,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2483
+    },
+    {
+      "file_index": 500,
+      "future_rows_skipped": 0,
+      "input_rows": 2744,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2744
+    },
+    {
+      "file_index": 501,
+      "future_rows_skipped": 0,
+      "input_rows": 2925,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2925
+    },
+    {
+      "file_index": 502,
+      "future_rows_skipped": 0,
+      "input_rows": 3272,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 3272
+    },
+    {
+      "file_index": 503,
+      "future_rows_skipped": 0,
+      "input_rows": 6560,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 6560
+    },
+    {
+      "file_index": 504,
+      "future_rows_skipped": 0,
+      "input_rows": 5458,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 5458
+    },
+    {
+      "file_index": 505,
+      "future_rows_skipped": 0,
+      "input_rows": 6498,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 6498
+    },
+    {
+      "file_index": 506,
+      "future_rows_skipped": 0,
+      "input_rows": 7589,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 7589
+    },
+    {
+      "file_index": 507,
+      "future_rows_skipped": 0,
+      "input_rows": 8659,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 8659
+    },
+    {
+      "file_index": 508,
+      "future_rows_skipped": 0,
+      "input_rows": 8810,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 8810
+    },
+    {
+      "file_index": 509,
+      "future_rows_skipped": 0,
+      "input_rows": 8675,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 8675
+    },
+    {
+      "file_index": 510,
+      "future_rows_skipped": 0,
+      "input_rows": 7880,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 7880
+    },
+    {
+      "file_index": 511,
+      "future_rows_skipped": 0,
+      "input_rows": 7650,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 7650
+    },
+    {
+      "file_index": 512,
+      "future_rows_skipped": 0,
+      "input_rows": 9421,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 9421
+    },
+    {
+      "file_index": 513,
+      "future_rows_skipped": 0,
+      "input_rows": 12151,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 12151
+    },
+    {
+      "file_index": 514,
+      "future_rows_skipped": 0,
+      "input_rows": 13913,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 13913
+    },
+    {
+      "file_index": 515,
+      "future_rows_skipped": 0,
+      "input_rows": 17010,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 17010
+    },
+    {
+      "file_index": 516,
+      "future_rows_skipped": 0,
+      "input_rows": 20912,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 20912
+    },
+    {
+      "file_index": 517,
+      "future_rows_skipped": 0,
+      "input_rows": 23191,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 23191
+    },
+    {
+      "file_index": 518,
+      "future_rows_skipped": 0,
+      "input_rows": 26524,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 26524
+    },
+    {
+      "file_index": 519,
+      "future_rows_skipped": 0,
+      "input_rows": 25207,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 25207
+    },
+    {
+      "file_index": 520,
+      "future_rows_skipped": 0,
+      "input_rows": 25211,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 25211
+    },
+    {
+      "file_index": 521,
+      "future_rows_skipped": 0,
+      "input_rows": 23723,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 23723
+    },
+    {
+      "file_index": 522,
+      "future_rows_skipped": 0,
+      "input_rows": 23365,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 23365
+    },
+    {
+      "file_index": 523,
+      "future_rows_skipped": 0,
+      "input_rows": 24570,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 24570
+    },
+    {
+      "file_index": 524,
+      "future_rows_skipped": 0,
+      "input_rows": 25349,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 25349
+    },
+    {
+      "file_index": 525,
+      "future_rows_skipped": 0,
+      "input_rows": 30333,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 30333
+    },
+    {
+      "file_index": 526,
+      "future_rows_skipped": 0,
+      "input_rows": 37271,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 37271
+    },
+    {
+      "file_index": 527,
+      "future_rows_skipped": 0,
+      "input_rows": 45705,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 45705
+    },
+    {
+      "file_index": 528,
+      "future_rows_skipped": 0,
+      "input_rows": 51269,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 51269
+    },
+    {
+      "file_index": 529,
+      "future_rows_skipped": 0,
+      "input_rows": 44970,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 44970
+    },
+    {
+      "file_index": 530,
+      "future_rows_skipped": 0,
+      "input_rows": 47377,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 47377
+    },
+    {
+      "file_index": 531,
+      "future_rows_skipped": 0,
+      "input_rows": 40619,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 40619
+    },
+    {
+      "file_index": 532,
+      "future_rows_skipped": 0,
+      "input_rows": 36565,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 36565
+    },
+    {
+      "file_index": 533,
+      "future_rows_skipped": 0,
+      "input_rows": 29133,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 29133
+    },
+    {
+      "file_index": 534,
+      "future_rows_skipped": 0,
+      "input_rows": 29517,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 29517
+    },
+    {
+      "file_index": 535,
+      "future_rows_skipped": 0,
+      "input_rows": 33437,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 33437
+    },
+    {
+      "file_index": 536,
+      "future_rows_skipped": 0,
+      "input_rows": 36195,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 36195
+    },
+    {
+      "file_index": 537,
+      "future_rows_skipped": 0,
+      "input_rows": 40536,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 40536
+    },
+    {
+      "file_index": 538,
+      "future_rows_skipped": 0,
+      "input_rows": 41436,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 41436
+    },
+    {
+      "file_index": 539,
+      "future_rows_skipped": 0,
+      "input_rows": 48028,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 48028
+    },
+    {
+      "file_index": 540,
+      "future_rows_skipped": 0,
+      "input_rows": 48542,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 48542
+    },
+    {
+      "file_index": 541,
+      "future_rows_skipped": 0,
+      "input_rows": 46247,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 46247
+    },
+    {
+      "file_index": 542,
+      "future_rows_skipped": 0,
+      "input_rows": 59599,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 59599
+    },
+    {
+      "file_index": 543,
+      "future_rows_skipped": 0,
+      "input_rows": 51422,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 51422
+    },
+    {
+      "file_index": 544,
+      "future_rows_skipped": 0,
+      "input_rows": 51189,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 51189
+    },
+    {
+      "file_index": 545,
+      "future_rows_skipped": 0,
+      "input_rows": 43008,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 43008
+    },
+    {
+      "file_index": 546,
+      "future_rows_skipped": 0,
+      "input_rows": 41607,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 41607
+    },
+    {
+      "file_index": 547,
+      "future_rows_skipped": 0,
+      "input_rows": 47565,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 47565
+    },
+    {
+      "file_index": 548,
+      "future_rows_skipped": 0,
+      "input_rows": 50326,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 50326
+    },
+    {
+      "file_index": 549,
+      "future_rows_skipped": 0,
+      "input_rows": 50689,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 50689
+    },
+    {
+      "file_index": 550,
+      "future_rows_skipped": 0,
+      "input_rows": 54985,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 54985
+    },
+    {
+      "file_index": 551,
+      "future_rows_skipped": 0,
+      "input_rows": 69442,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 69442
+    },
+    {
+      "file_index": 552,
+      "future_rows_skipped": 0,
+      "input_rows": 69304,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 69304
+    },
+    {
+      "file_index": 553,
+      "future_rows_skipped": 0,
+      "input_rows": 63076,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 63076
+    },
+    {
+      "file_index": 554,
+      "future_rows_skipped": 0,
+      "input_rows": 73689,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 73689
+    },
+    {
+      "file_index": 555,
+      "future_rows_skipped": 0,
+      "input_rows": 60962,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 60962
+    },
+    {
+      "file_index": 556,
+      "future_rows_skipped": 0,
+      "input_rows": 67013,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 67013
+    },
+    {
+      "file_index": 557,
+      "future_rows_skipped": 0,
+      "input_rows": 59343,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 59343
+    },
+    {
+      "file_index": 558,
+      "future_rows_skipped": 0,
+      "input_rows": 56031,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 56031
+    },
+    {
+      "file_index": 559,
+      "future_rows_skipped": 0,
+      "input_rows": 56843,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 56843
+    },
+    {
+      "file_index": 560,
+      "future_rows_skipped": 0,
+      "input_rows": 63513,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 63513
+    },
+    {
+      "file_index": 561,
+      "future_rows_skipped": 0,
+      "input_rows": 68250,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 68250
+    },
+    {
+      "file_index": 562,
+      "future_rows_skipped": 0,
+      "input_rows": 65287,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 65287
+    },
+    {
+      "file_index": 563,
+      "future_rows_skipped": 0,
+      "input_rows": 63541,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 63541
+    },
+    {
+      "file_index": 564,
+      "future_rows_skipped": 0,
+      "input_rows": 71919,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 71919
+    },
+    {
+      "file_index": 565,
+      "future_rows_skipped": 0,
+      "input_rows": 68510,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 68510
+    },
+    {
+      "file_index": 566,
+      "future_rows_skipped": 0,
+      "input_rows": 92008,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 92008
+    },
+    {
+      "file_index": 567,
+      "future_rows_skipped": 0,
+      "input_rows": 129363,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 129363
+    },
+    {
+      "file_index": 568,
+      "future_rows_skipped": 0,
+      "input_rows": 122401,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 122401
+    },
+    {
+      "file_index": 569,
+      "future_rows_skipped": 0,
+      "input_rows": 111489,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 111489
+    },
+    {
+      "file_index": 570,
+      "future_rows_skipped": 0,
+      "input_rows": 110578,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 110578
+    },
+    {
+      "file_index": 571,
+      "future_rows_skipped": 0,
+      "input_rows": 102767,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 102767
+    },
+    {
+      "file_index": 572,
+      "future_rows_skipped": 0,
+      "input_rows": 97562,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 97562
+    },
+    {
+      "file_index": 573,
+      "future_rows_skipped": 0,
+      "input_rows": 106824,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 106824
+    },
+    {
+      "file_index": 574,
+      "future_rows_skipped": 0,
+      "input_rows": 145857,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 145857
+    },
+    {
+      "file_index": 575,
+      "future_rows_skipped": 0,
+      "input_rows": 181594,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 181594
+    },
+    {
+      "file_index": 576,
+      "future_rows_skipped": 0,
+      "input_rows": 189994,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 189994
+    },
+    {
+      "file_index": 577,
+      "future_rows_skipped": 0,
+      "input_rows": 176391,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 176391
+    },
+    {
+      "file_index": 578,
+      "future_rows_skipped": 0,
+      "input_rows": 190305,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 190305
+    },
+    {
+      "file_index": 579,
+      "future_rows_skipped": 0,
+      "input_rows": 170919,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 170919
+    },
+    {
+      "file_index": 580,
+      "future_rows_skipped": 0,
+      "input_rows": 192815,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 192815
+    },
+    {
+      "file_index": 581,
+      "future_rows_skipped": 0,
+      "input_rows": 141544,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 141544
+    },
+    {
+      "file_index": 582,
+      "future_rows_skipped": 0,
+      "input_rows": 131497,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 131497
+    },
+    {
+      "file_index": 583,
+      "future_rows_skipped": 0,
+      "input_rows": 133534,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 133534
+    },
+    {
+      "file_index": 584,
+      "future_rows_skipped": 0,
+      "input_rows": 124017,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 124017
+    },
+    {
+      "file_index": 585,
+      "future_rows_skipped": 0,
+      "input_rows": 126148,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 126148
+    },
+    {
+      "file_index": 586,
+      "future_rows_skipped": 0,
+      "input_rows": 133318,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 133318
+    },
+    {
+      "file_index": 587,
+      "future_rows_skipped": 0,
+      "input_rows": 148627,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 148627
+    },
+    {
+      "file_index": 588,
+      "future_rows_skipped": 0,
+      "input_rows": 142340,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 142340
+    },
+    {
+      "file_index": 589,
+      "future_rows_skipped": 0,
+      "input_rows": 118089,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 118089
+    },
+    {
+      "file_index": 590,
+      "future_rows_skipped": 0,
+      "input_rows": 131507,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 131507
+    },
+    {
+      "file_index": 591,
+      "future_rows_skipped": 0,
+      "input_rows": 129836,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 129836
+    },
+    {
+      "file_index": 592,
+      "future_rows_skipped": 0,
+      "input_rows": 188195,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 188195
+    },
+    {
+      "file_index": 593,
+      "future_rows_skipped": 0,
+      "input_rows": 170065,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 170065
+    },
+    {
+      "file_index": 594,
+      "future_rows_skipped": 0,
+      "input_rows": 168449,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 168449
+    },
+    {
+      "file_index": 595,
+      "future_rows_skipped": 0,
+      "input_rows": 158091,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 158091
+    },
+    {
+      "file_index": 596,
+      "future_rows_skipped": 0,
+      "input_rows": 159832,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 159832
+    },
+    {
+      "file_index": 597,
+      "future_rows_skipped": 0,
+      "input_rows": 173269,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 173269
+    },
+    {
+      "file_index": 598,
+      "future_rows_skipped": 0,
+      "input_rows": 176822,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 176822
+    },
+    {
+      "file_index": 599,
+      "future_rows_skipped": 0,
+      "input_rows": 192676,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 192676
+    },
+    {
+      "file_index": 600,
+      "future_rows_skipped": 0,
+      "input_rows": 254038,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 254038
+    },
+    {
+      "file_index": 601,
+      "future_rows_skipped": 0,
+      "input_rows": 268698,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 268698
+    },
+    {
+      "file_index": 602,
+      "future_rows_skipped": 0,
+      "input_rows": 280911,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 280911
+    },
+    {
+      "file_index": 603,
+      "future_rows_skipped": 0,
+      "input_rows": 213876,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 213876
+    },
+    {
+      "file_index": 604,
+      "future_rows_skipped": 0,
+      "input_rows": 206412,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 206412
+    },
+    {
+      "file_index": 605,
+      "future_rows_skipped": 0,
+      "input_rows": 163322,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 163322
+    },
+    {
+      "file_index": 606,
+      "future_rows_skipped": 0,
+      "input_rows": 148756,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 148756
+    },
+    {
+      "file_index": 607,
+      "future_rows_skipped": 0,
+      "input_rows": 141004,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 141004
+    },
+    {
+      "file_index": 608,
+      "future_rows_skipped": 0,
+      "input_rows": 76201,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 76201
+    },
+    {
+      "file_index": 609,
+      "future_rows_skipped": 0,
+      "input_rows": 72153,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 72153
+    },
+    {
+      "file_index": 610,
+      "future_rows_skipped": 0,
+      "input_rows": 72420,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 72420
+    },
+    {
+      "file_index": 611,
+      "future_rows_skipped": 0,
+      "input_rows": 83844,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 83844
+    },
+    {
+      "file_index": 612,
+      "future_rows_skipped": 0,
+      "input_rows": 97249,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 97249
+    },
+    {
+      "file_index": 613,
+      "future_rows_skipped": 0,
+      "input_rows": 92320,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 92320
+    },
+    {
+      "file_index": 614,
+      "future_rows_skipped": 0,
+      "input_rows": 94115,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 94115
+    },
+    {
+      "file_index": 615,
+      "future_rows_skipped": 0,
+      "input_rows": 86817,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 86817
+    },
+    {
+      "file_index": 616,
+      "future_rows_skipped": 0,
+      "input_rows": 79825,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 79825
+    },
+    {
+      "file_index": 617,
+      "future_rows_skipped": 0,
+      "input_rows": 68403,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 68403
+    },
+    {
+      "file_index": 618,
+      "future_rows_skipped": 0,
+      "input_rows": 58029,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 58029
+    },
+    {
+      "file_index": 619,
+      "future_rows_skipped": 0,
+      "input_rows": 57911,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 57911
+    },
+    {
+      "file_index": 620,
+      "future_rows_skipped": 0,
+      "input_rows": 56576,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 56576
+    },
+    {
+      "file_index": 621,
+      "future_rows_skipped": 0,
+      "input_rows": 68702,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 68702
+    },
+    {
+      "file_index": 622,
+      "future_rows_skipped": 0,
+      "input_rows": 59099,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 59099
+    },
+    {
+      "file_index": 623,
+      "future_rows_skipped": 0,
+      "input_rows": 66726,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 66726
+    },
+    {
+      "file_index": 624,
+      "future_rows_skipped": 0,
+      "input_rows": 66314,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 66314
+    },
+    {
+      "file_index": 625,
+      "future_rows_skipped": 0,
+      "input_rows": 58025,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 58025
+    },
+    {
+      "file_index": 626,
+      "future_rows_skipped": 0,
+      "input_rows": 71689,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 71689
+    },
+    {
+      "file_index": 627,
+      "future_rows_skipped": 0,
+      "input_rows": 60226,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 60226
+    },
+    {
+      "file_index": 628,
+      "future_rows_skipped": 0,
+      "input_rows": 64864,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 64864
+    },
+    {
+      "file_index": 629,
+      "future_rows_skipped": 0,
+      "input_rows": 54211,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 54211
+    },
+    {
+      "file_index": 630,
+      "future_rows_skipped": 0,
+      "input_rows": 55741,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 55741
+    },
+    {
+      "file_index": 631,
+      "future_rows_skipped": 0,
+      "input_rows": 51178,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 51178
+    },
+    {
+      "file_index": 632,
+      "future_rows_skipped": 0,
+      "input_rows": 49752,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 49752
+    },
+    {
+      "file_index": 633,
+      "future_rows_skipped": 0,
+      "input_rows": 58252,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 58252
+    },
+    {
+      "file_index": 634,
+      "future_rows_skipped": 56211,
+      "input_rows": 56211,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 635,
+      "future_rows_skipped": 59186,
+      "input_rows": 59186,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 636,
+      "future_rows_skipped": 59091,
+      "input_rows": 59091,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 637,
+      "future_rows_skipped": 62366,
+      "input_rows": 62366,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 638,
+      "future_rows_skipped": 59286,
+      "input_rows": 59286,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 639,
+      "future_rows_skipped": 57363,
+      "input_rows": 57363,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 640,
+      "future_rows_skipped": 0,
+      "input_rows": 3321101,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 3321101
+    },
+    {
+      "file_index": 641,
+      "future_rows_skipped": 0,
+      "input_rows": 3250918,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 3250918
+    },
+    {
+      "file_index": 642,
+      "future_rows_skipped": 0,
+      "input_rows": 2996273,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2996273
+    },
+    {
+      "file_index": 643,
+      "future_rows_skipped": 0,
+      "input_rows": 3135688,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 3135688
+    },
+    {
+      "file_index": 644,
+      "future_rows_skipped": 0,
+      "input_rows": 3328900,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 3328900
+    },
+    {
+      "file_index": 645,
+      "future_rows_skipped": 0,
+      "input_rows": 3274185,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 3274185
+    },
+    {
+      "file_index": 646,
+      "future_rows_skipped": 0,
+      "input_rows": 3532876,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 3532876
+    },
+    {
+      "file_index": 647,
+      "future_rows_skipped": 0,
+      "input_rows": 3705102,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 3705102
+    },
+    {
+      "file_index": 648,
+      "future_rows_skipped": 0,
+      "input_rows": 4243087,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 4243087
+    },
+    {
+      "file_index": 649,
+      "future_rows_skipped": 0,
+      "input_rows": 4461506,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 4461506
+    },
+    {
+      "file_index": 650,
+      "future_rows_skipped": 0,
+      "input_rows": 4013391,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 4013391
+    },
+    {
+      "file_index": 651,
+      "future_rows_skipped": 0,
+      "input_rows": 4465394,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 4465394
+    },
+    {
+      "file_index": 652,
+      "future_rows_skipped": 0,
+      "input_rows": 4230443,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 4230443
+    },
+    {
+      "file_index": 653,
+      "future_rows_skipped": 0,
+      "input_rows": 4304774,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 4304774
+    },
+    {
+      "file_index": 654,
+      "future_rows_skipped": 0,
+      "input_rows": 4095154,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 4095154
+    },
+    {
+      "file_index": 655,
+      "future_rows_skipped": 0,
+      "input_rows": 4232778,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 4232778
+    },
+    {
+      "file_index": 656,
+      "future_rows_skipped": 0,
+      "input_rows": 4337357,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 4337357
+    },
+    {
+      "file_index": 657,
+      "future_rows_skipped": 0,
+      "input_rows": 4287721,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 4287721
+    },
+    {
+      "file_index": 658,
+      "future_rows_skipped": 0,
+      "input_rows": 4601245,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 4601245
+    },
+    {
+      "file_index": 659,
+      "future_rows_skipped": 0,
+      "input_rows": 4508719,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 4508719
+    },
+    {
+      "file_index": 660,
+      "future_rows_skipped": 0,
+      "input_rows": 4889575,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 4889575
+    },
+    {
+      "file_index": 661,
+      "future_rows_skipped": 0,
+      "input_rows": 5194671,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 5194671
+    },
+    {
+      "file_index": 662,
+      "future_rows_skipped": 0,
+      "input_rows": 4924576,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 4924576
+    },
+    {
+      "file_index": 663,
+      "future_rows_skipped": 0,
+      "input_rows": 6522430,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 6522430
+    },
+    {
+      "file_index": 664,
+      "future_rows_skipped": 0,
+      "input_rows": 10066159,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 10066159
+    },
+    {
+      "file_index": 665,
+      "future_rows_skipped": 0,
+      "input_rows": 10718727,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 10718727
+    },
+    {
+      "file_index": 666,
+      "future_rows_skipped": 0,
+      "input_rows": 9955275,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 9955275
+    },
+    {
+      "file_index": 667,
+      "future_rows_skipped": 0,
+      "input_rows": 9753618,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 9753618
+    },
+    {
+      "file_index": 668,
+      "future_rows_skipped": 0,
+      "input_rows": 9582776,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 9582776
+    },
+    {
+      "file_index": 669,
+      "future_rows_skipped": 0,
+      "input_rows": 8844315,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 1,
+      "pairs_found": 1,
+      "scanned_rows": 8844315
+    },
+    {
+      "file_index": 670,
+      "future_rows_skipped": 0,
+      "input_rows": 9358891,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 9358891
+    },
+    {
+      "file_index": 671,
+      "future_rows_skipped": 0,
+      "input_rows": 11539369,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 11539369
+    },
+    {
+      "file_index": 672,
+      "future_rows_skipped": 0,
+      "input_rows": 13916559,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 13916559
+    },
+    {
+      "file_index": 673,
+      "future_rows_skipped": 0,
+      "input_rows": 15435251,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 15435251
+    },
+    {
+      "file_index": 674,
+      "future_rows_skipped": 0,
+      "input_rows": 14461988,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 14461988
+    },
+    {
+      "file_index": 675,
+      "future_rows_skipped": 0,
+      "input_rows": 15682739,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 15682739
+    },
+    {
+      "file_index": 676,
+      "future_rows_skipped": 0,
+      "input_rows": 14932877,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 14932877
+    },
+    {
+      "file_index": 677,
+      "future_rows_skipped": 0,
+      "input_rows": 14962286,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 14962286
+    },
+    {
+      "file_index": 678,
+      "future_rows_skipped": 0,
+      "input_rows": 13506055,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 13506055
+    },
+    {
+      "file_index": 679,
+      "future_rows_skipped": 0,
+      "input_rows": 13597516,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 13597516
+    },
+    {
+      "file_index": 680,
+      "future_rows_skipped": 0,
+      "input_rows": 13751090,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 13751090
+    },
+    {
+      "file_index": 681,
+      "future_rows_skipped": 0,
+      "input_rows": 12719909,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 12719909
+    },
+    {
+      "file_index": 682,
+      "future_rows_skipped": 0,
+      "input_rows": 12689898,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 12689898
+    },
+    {
+      "file_index": 683,
+      "future_rows_skipped": 0,
+      "input_rows": 12449565,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 12449565
+    },
+    {
+      "file_index": 684,
+      "future_rows_skipped": 0,
+      "input_rows": 13636205,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 13636205
+    },
+    {
+      "file_index": 685,
+      "future_rows_skipped": 0,
+      "input_rows": 14184075,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 2,
+      "pairs_found": 1,
+      "scanned_rows": 14184075
+    },
+    {
+      "file_index": 686,
+      "future_rows_skipped": 0,
+      "input_rows": 12257222,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 12257222
+    },
+    {
+      "file_index": 687,
+      "future_rows_skipped": 0,
+      "input_rows": 12867530,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 12867530
+    },
+    {
+      "file_index": 688,
+      "future_rows_skipped": 0,
+      "input_rows": 12155809,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 12155809
+    },
+    {
+      "file_index": 689,
+      "future_rows_skipped": 0,
+      "input_rows": 12308043,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 12308043
+    },
+    {
+      "file_index": 690,
+      "future_rows_skipped": 0,
+      "input_rows": 12222537,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 12222537
+    },
+    {
+      "file_index": 691,
+      "future_rows_skipped": 0,
+      "input_rows": 12950607,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 12950607
+    },
+    {
+      "file_index": 692,
+      "future_rows_skipped": 0,
+      "input_rows": 12924780,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 1,
+      "pairs_found": 1,
+      "scanned_rows": 12924780
+    },
+    {
+      "file_index": 693,
+      "future_rows_skipped": 0,
+      "input_rows": 12443730,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 12443730
+    },
+    {
+      "file_index": 694,
+      "future_rows_skipped": 0,
+      "input_rows": 12893863,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 12893863
+    },
+    {
+      "file_index": 695,
+      "future_rows_skipped": 0,
+      "input_rows": 12543957,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 2,
+      "pairs_found": 1,
+      "scanned_rows": 12543957
+    },
+    {
+      "file_index": 696,
+      "future_rows_skipped": 0,
+      "input_rows": 13293123,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 1,
+      "pairs_found": 1,
+      "scanned_rows": 13293123
+    },
+    {
+      "file_index": 697,
+      "future_rows_skipped": 0,
+      "input_rows": 15132506,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 3,
+      "pairs_found": 3,
+      "scanned_rows": 15132506
+    },
+    {
+      "file_index": 698,
+      "future_rows_skipped": 0,
+      "input_rows": 14905352,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 1,
+      "pairs_found": 1,
+      "scanned_rows": 14905352
+    },
+    {
+      "file_index": 699,
+      "future_rows_skipped": 0,
+      "input_rows": 16090086,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 2,
+      "pairs_found": 2,
+      "scanned_rows": 16090086
+    },
+    {
+      "file_index": 700,
+      "future_rows_skipped": 0,
+      "input_rows": 14994172,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 1,
+      "pairs_found": 1,
+      "scanned_rows": 14994172
+    },
+    {
+      "file_index": 701,
+      "future_rows_skipped": 0,
+      "input_rows": 15146749,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 1,
+      "pairs_found": 1,
+      "scanned_rows": 15146749
+    },
+    {
+      "file_index": 702,
+      "future_rows_skipped": 0,
+      "input_rows": 13923326,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 1,
+      "pairs_found": 1,
+      "scanned_rows": 13923326
+    },
+    {
+      "file_index": 703,
+      "future_rows_skipped": 0,
+      "input_rows": 13637478,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 2,
+      "pairs_found": 2,
+      "scanned_rows": 13637478
+    },
+    {
+      "file_index": 704,
+      "future_rows_skipped": 0,
+      "input_rows": 13804348,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 2,
+      "pairs_found": 2,
+      "scanned_rows": 13804348
+    },
+    {
+      "file_index": 705,
+      "future_rows_skipped": 0,
+      "input_rows": 13275643,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 1,
+      "pairs_found": 1,
+      "scanned_rows": 13275643
+    },
+    {
+      "file_index": 706,
+      "future_rows_skipped": 0,
+      "input_rows": 13513783,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 1,
+      "pairs_found": 1,
+      "scanned_rows": 13513783
+    },
+    {
+      "file_index": 707,
+      "future_rows_skipped": 0,
+      "input_rows": 13253826,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 86,
+      "pairs_found": 82,
+      "scanned_rows": 13253826
+    },
+    {
+      "file_index": 708,
+      "future_rows_skipped": 0,
+      "input_rows": 14084712,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 81,
+      "pairs_found": 78,
+      "scanned_rows": 14084712
+    },
+    {
+      "file_index": 709,
+      "future_rows_skipped": 0,
+      "input_rows": 14262291,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 69,
+      "pairs_found": 66,
+      "scanned_rows": 14262291
+    },
+    {
+      "file_index": 710,
+      "future_rows_skipped": 0,
+      "input_rows": 13221018,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 49,
+      "pairs_found": 49,
+      "scanned_rows": 13221018
+    },
+    {
+      "file_index": 711,
+      "future_rows_skipped": 0,
+      "input_rows": 13924525,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 58,
+      "pairs_found": 58,
+      "scanned_rows": 13924525
+    },
+    {
+      "file_index": 712,
+      "future_rows_skipped": 0,
+      "input_rows": 13132484,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 48,
+      "pairs_found": 45,
+      "scanned_rows": 13132484
+    },
+    {
+      "file_index": 713,
+      "future_rows_skipped": 0,
+      "input_rows": 13588048,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 59,
+      "pairs_found": 56,
+      "scanned_rows": 13588048
+    },
+    {
+      "file_index": 714,
+      "future_rows_skipped": 0,
+      "input_rows": 12878418,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 52,
+      "pairs_found": 51,
+      "scanned_rows": 12878418
+    },
+    {
+      "file_index": 715,
+      "future_rows_skipped": 0,
+      "input_rows": 12876078,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 45,
+      "pairs_found": 43,
+      "scanned_rows": 12876078
+    },
+    {
+      "file_index": 716,
+      "future_rows_skipped": 0,
+      "input_rows": 13144810,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 43,
+      "pairs_found": 42,
+      "scanned_rows": 13144810
+    },
+    {
+      "file_index": 717,
+      "future_rows_skipped": 0,
+      "input_rows": 12463856,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 29,
+      "pairs_found": 29,
+      "scanned_rows": 12463856
+    },
+    {
+      "file_index": 718,
+      "future_rows_skipped": 0,
+      "input_rows": 13565303,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 41,
+      "pairs_found": 41,
+      "scanned_rows": 13565303
+    },
+    {
+      "file_index": 719,
+      "future_rows_skipped": 0,
+      "input_rows": 13225493,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 42,
+      "pairs_found": 41,
+      "scanned_rows": 13225493
+    },
+    {
+      "file_index": 720,
+      "future_rows_skipped": 0,
+      "input_rows": 14272031,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 40,
+      "pairs_found": 39,
+      "scanned_rows": 14272031
+    },
+    {
+      "file_index": 721,
+      "future_rows_skipped": 0,
+      "input_rows": 14794506,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 47,
+      "pairs_found": 46,
+      "scanned_rows": 14794506
+    },
+    {
+      "file_index": 722,
+      "future_rows_skipped": 0,
+      "input_rows": 13353368,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 42,
+      "pairs_found": 41,
+      "scanned_rows": 13353368
+    },
+    {
+      "file_index": 723,
+      "future_rows_skipped": 0,
+      "input_rows": 14548242,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 40,
+      "pairs_found": 40,
+      "scanned_rows": 14548242
+    },
+    {
+      "file_index": 724,
+      "future_rows_skipped": 0,
+      "input_rows": 13602149,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 45,
+      "pairs_found": 44,
+      "scanned_rows": 13602149
+    },
+    {
+      "file_index": 725,
+      "future_rows_skipped": 0,
+      "input_rows": 13860753,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 28,
+      "pairs_found": 28,
+      "scanned_rows": 13860753
+    },
+    {
+      "file_index": 726,
+      "future_rows_skipped": 0,
+      "input_rows": 13445525,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 48,
+      "pairs_found": 47,
+      "scanned_rows": 13445525
+    },
+    {
+      "file_index": 727,
+      "future_rows_skipped": 0,
+      "input_rows": 13756172,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 41,
+      "pairs_found": 38,
+      "scanned_rows": 13756172
+    },
+    {
+      "file_index": 728,
+      "future_rows_skipped": 0,
+      "input_rows": 13794310,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 32,
+      "pairs_found": 32,
+      "scanned_rows": 13794310
+    },
+    {
+      "file_index": 729,
+      "future_rows_skipped": 0,
+      "input_rows": 13074192,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 39,
+      "pairs_found": 39,
+      "scanned_rows": 13074192
+    },
+    {
+      "file_index": 730,
+      "future_rows_skipped": 0,
+      "input_rows": 14131645,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 39,
+      "pairs_found": 39,
+      "scanned_rows": 14131645
+    },
+    {
+      "file_index": 731,
+      "future_rows_skipped": 14146747,
+      "input_rows": 14146747,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 732,
+      "future_rows_skipped": 14999820,
+      "input_rows": 14999820,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 733,
+      "future_rows_skipped": 15073051,
+      "input_rows": 15073051,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 734,
+      "future_rows_skipped": 13714670,
+      "input_rows": 13714670,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 735,
+      "future_rows_skipped": 14625561,
+      "input_rows": 14625561,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 736,
+      "future_rows_skipped": 14772129,
+      "input_rows": 14772129,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 737,
+      "future_rows_skipped": 0,
+      "input_rows": 370986,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 370986
+    },
+    {
+      "file_index": 738,
+      "future_rows_skipped": 0,
+      "input_rows": 243406,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 243406
+    },
+    {
+      "file_index": 739,
+      "future_rows_skipped": 0,
+      "input_rows": 223054,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 223054
+    },
+    {
+      "file_index": 740,
+      "future_rows_skipped": 0,
+      "input_rows": 256583,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 256583
+    },
+    {
+      "file_index": 741,
+      "future_rows_skipped": 0,
+      "input_rows": 244761,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 244761
+    },
+    {
+      "file_index": 742,
+      "future_rows_skipped": 0,
+      "input_rows": 263087,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 263087
+    },
+    {
+      "file_index": 743,
+      "future_rows_skipped": 0,
+      "input_rows": 258462,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 258462
+    },
+    {
+      "file_index": 744,
+      "future_rows_skipped": 0,
+      "input_rows": 304543,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 304543
+    },
+    {
+      "file_index": 745,
+      "future_rows_skipped": 0,
+      "input_rows": 333127,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 333127
+    },
+    {
+      "file_index": 746,
+      "future_rows_skipped": 0,
+      "input_rows": 346103,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 346103
+    },
+    {
+      "file_index": 747,
+      "future_rows_skipped": 0,
+      "input_rows": 312269,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 312269
+    },
+    {
+      "file_index": 748,
+      "future_rows_skipped": 0,
+      "input_rows": 341427,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 341427
+    },
+    {
+      "file_index": 749,
+      "future_rows_skipped": 0,
+      "input_rows": 360282,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 360282
+    },
+    {
+      "file_index": 750,
+      "future_rows_skipped": 0,
+      "input_rows": 388143,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 388143
+    },
+    {
+      "file_index": 751,
+      "future_rows_skipped": 0,
+      "input_rows": 358416,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 358416
+    },
+    {
+      "file_index": 752,
+      "future_rows_skipped": 0,
+      "input_rows": 346204,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 346204
+    },
+    {
+      "file_index": 753,
+      "future_rows_skipped": 0,
+      "input_rows": 334315,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 334315
+    },
+    {
+      "file_index": 754,
+      "future_rows_skipped": 0,
+      "input_rows": 312357,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 312357
+    },
+    {
+      "file_index": 755,
+      "future_rows_skipped": 0,
+      "input_rows": 287708,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 287708
+    },
+    {
+      "file_index": 756,
+      "future_rows_skipped": 0,
+      "input_rows": 309797,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 309797
+    },
+    {
+      "file_index": 757,
+      "future_rows_skipped": 0,
+      "input_rows": 331333,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 331333
+    },
+    {
+      "file_index": 758,
+      "future_rows_skipped": 0,
+      "input_rows": 397317,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 397317
+    },
+    {
+      "file_index": 759,
+      "future_rows_skipped": 0,
+      "input_rows": 350732,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 350732
+    },
+    {
+      "file_index": 760,
+      "future_rows_skipped": 0,
+      "input_rows": 428105,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 428105
+    },
+    {
+      "file_index": 761,
+      "future_rows_skipped": 0,
+      "input_rows": 360245,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 360245
+    },
+    {
+      "file_index": 762,
+      "future_rows_skipped": 0,
+      "input_rows": 389527,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 389527
+    },
+    {
+      "file_index": 763,
+      "future_rows_skipped": 0,
+      "input_rows": 392078,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 392078
+    },
+    {
+      "file_index": 764,
+      "future_rows_skipped": 0,
+      "input_rows": 365439,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 365439
+    },
+    {
+      "file_index": 765,
+      "future_rows_skipped": 0,
+      "input_rows": 426815,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 426815
+    },
+    {
+      "file_index": 766,
+      "future_rows_skipped": 0,
+      "input_rows": 341513,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 341513
+    },
+    {
+      "file_index": 767,
+      "future_rows_skipped": 0,
+      "input_rows": 372432,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 372432
+    },
+    {
+      "file_index": 768,
+      "future_rows_skipped": 0,
+      "input_rows": 371512,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 371512
+    },
+    {
+      "file_index": 769,
+      "future_rows_skipped": 0,
+      "input_rows": 377566,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 377566
+    },
+    {
+      "file_index": 770,
+      "future_rows_skipped": 0,
+      "input_rows": 378506,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 378506
+    },
+    {
+      "file_index": 771,
+      "future_rows_skipped": 0,
+      "input_rows": 340073,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 340073
+    },
+    {
+      "file_index": 772,
+      "future_rows_skipped": 0,
+      "input_rows": 467482,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 467482
+    },
+    {
+      "file_index": 773,
+      "future_rows_skipped": 0,
+      "input_rows": 1113193,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1113193
+    },
+    {
+      "file_index": 774,
+      "future_rows_skipped": 0,
+      "input_rows": 1305711,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1305711
+    },
+    {
+      "file_index": 775,
+      "future_rows_skipped": 0,
+      "input_rows": 1277818,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1277818
+    },
+    {
+      "file_index": 776,
+      "future_rows_skipped": 0,
+      "input_rows": 1313944,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1313944
+    },
+    {
+      "file_index": 777,
+      "future_rows_skipped": 0,
+      "input_rows": 1273566,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1273566
+    },
+    {
+      "file_index": 778,
+      "future_rows_skipped": 0,
+      "input_rows": 1223149,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1223149
+    },
+    {
+      "file_index": 779,
+      "future_rows_skipped": 0,
+      "input_rows": 1277792,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1277792
+    },
+    {
+      "file_index": 780,
+      "future_rows_skipped": 0,
+      "input_rows": 1358697,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1358697
+    },
+    {
+      "file_index": 781,
+      "future_rows_skipped": 0,
+      "input_rows": 1545592,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1545592
+    },
+    {
+      "file_index": 782,
+      "future_rows_skipped": 0,
+      "input_rows": 1733142,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1733142
+    },
+    {
+      "file_index": 783,
+      "future_rows_skipped": 0,
+      "input_rows": 1547687,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1547687
+    },
+    {
+      "file_index": 784,
+      "future_rows_skipped": 0,
+      "input_rows": 1706074,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1706074
+    },
+    {
+      "file_index": 785,
+      "future_rows_skipped": 0,
+      "input_rows": 1812170,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1812170
+    },
+    {
+      "file_index": 786,
+      "future_rows_skipped": 0,
+      "input_rows": 1848614,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1848614
+    },
+    {
+      "file_index": 787,
+      "future_rows_skipped": 0,
+      "input_rows": 1571742,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1571742
+    },
+    {
+      "file_index": 788,
+      "future_rows_skipped": 0,
+      "input_rows": 1452187,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1452187
+    },
+    {
+      "file_index": 789,
+      "future_rows_skipped": 0,
+      "input_rows": 1455294,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1455294
+    },
+    {
+      "file_index": 790,
+      "future_rows_skipped": 0,
+      "input_rows": 1316003,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1316003
+    },
+    {
+      "file_index": 791,
+      "future_rows_skipped": 0,
+      "input_rows": 1311825,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1311825
+    },
+    {
+      "file_index": 792,
+      "future_rows_skipped": 0,
+      "input_rows": 1279933,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1279933
+    },
+    {
+      "file_index": 793,
+      "future_rows_skipped": 0,
+      "input_rows": 1305386,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1305386
+    },
+    {
+      "file_index": 794,
+      "future_rows_skipped": 0,
+      "input_rows": 1510231,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1510231
+    },
+    {
+      "file_index": 795,
+      "future_rows_skipped": 0,
+      "input_rows": 1161726,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1161726
+    },
+    {
+      "file_index": 796,
+      "future_rows_skipped": 0,
+      "input_rows": 1203874,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1203874
+    },
+    {
+      "file_index": 797,
+      "future_rows_skipped": 0,
+      "input_rows": 1148629,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1148629
+    },
+    {
+      "file_index": 798,
+      "future_rows_skipped": 0,
+      "input_rows": 1148662,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1148662
+    },
+    {
+      "file_index": 799,
+      "future_rows_skipped": 0,
+      "input_rows": 1097065,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1097065
+    },
+    {
+      "file_index": 800,
+      "future_rows_skipped": 0,
+      "input_rows": 1145279,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1145279
+    },
+    {
+      "file_index": 801,
+      "future_rows_skipped": 0,
+      "input_rows": 1066956,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1066956
+    },
+    {
+      "file_index": 802,
+      "future_rows_skipped": 0,
+      "input_rows": 996003,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 996003
+    },
+    {
+      "file_index": 803,
+      "future_rows_skipped": 0,
+      "input_rows": 1001269,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1001269
+    },
+    {
+      "file_index": 804,
+      "future_rows_skipped": 0,
+      "input_rows": 957396,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 957396
+    },
+    {
+      "file_index": 805,
+      "future_rows_skipped": 0,
+      "input_rows": 1005205,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1005205
+    },
+    {
+      "file_index": 806,
+      "future_rows_skipped": 0,
+      "input_rows": 1081312,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1081312
+    },
+    {
+      "file_index": 807,
+      "future_rows_skipped": 0,
+      "input_rows": 1039015,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1039015
+    },
+    {
+      "file_index": 808,
+      "future_rows_skipped": 0,
+      "input_rows": 1177161,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1177161
+    },
+    {
+      "file_index": 809,
+      "future_rows_skipped": 0,
+      "input_rows": 1068202,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1068202
+    },
+    {
+      "file_index": 810,
+      "future_rows_skipped": 0,
+      "input_rows": 1059129,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1059129
+    },
+    {
+      "file_index": 811,
+      "future_rows_skipped": 0,
+      "input_rows": 1020030,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1020030
+    },
+    {
+      "file_index": 812,
+      "future_rows_skipped": 0,
+      "input_rows": 974546,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 974546
+    },
+    {
+      "file_index": 813,
+      "future_rows_skipped": 0,
+      "input_rows": 946530,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 946530
+    },
+    {
+      "file_index": 814,
+      "future_rows_skipped": 0,
+      "input_rows": 886341,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 886341
+    },
+    {
+      "file_index": 815,
+      "future_rows_skipped": 0,
+      "input_rows": 868084,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 868084
+    },
+    {
+      "file_index": 816,
+      "future_rows_skipped": 0,
+      "input_rows": 823810,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 823810
+    },
+    {
+      "file_index": 817,
+      "future_rows_skipped": 0,
+      "input_rows": 932106,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 932106
+    },
+    {
+      "file_index": 818,
+      "future_rows_skipped": 0,
+      "input_rows": 929165,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 929165
+    },
+    {
+      "file_index": 819,
+      "future_rows_skipped": 0,
+      "input_rows": 811173,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 811173
+    },
+    {
+      "file_index": 820,
+      "future_rows_skipped": 0,
+      "input_rows": 877450,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 877450
+    },
+    {
+      "file_index": 821,
+      "future_rows_skipped": 0,
+      "input_rows": 775562,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 775562
+    },
+    {
+      "file_index": 822,
+      "future_rows_skipped": 0,
+      "input_rows": 826779,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 826779
+    },
+    {
+      "file_index": 823,
+      "future_rows_skipped": 0,
+      "input_rows": 804990,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 804990
+    },
+    {
+      "file_index": 824,
+      "future_rows_skipped": 0,
+      "input_rows": 780071,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 780071
+    },
+    {
+      "file_index": 825,
+      "future_rows_skipped": 0,
+      "input_rows": 827321,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 827321
+    },
+    {
+      "file_index": 826,
+      "future_rows_skipped": 0,
+      "input_rows": 782197,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 782197
+    },
+    {
+      "file_index": 827,
+      "future_rows_skipped": 0,
+      "input_rows": 847670,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 847670
+    },
+    {
+      "file_index": 828,
+      "future_rows_skipped": 0,
+      "input_rows": 782135,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 782135
+    },
+    {
+      "file_index": 829,
+      "future_rows_skipped": 0,
+      "input_rows": 904224,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 904224
+    },
+    {
+      "file_index": 830,
+      "future_rows_skipped": 0,
+      "input_rows": 986470,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 986470
+    },
+    {
+      "file_index": 831,
+      "future_rows_skipped": 0,
+      "input_rows": 854653,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 854653
+    },
+    {
+      "file_index": 832,
+      "future_rows_skipped": 0,
+      "input_rows": 1004411,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 1004411
+    },
+    {
+      "file_index": 833,
+      "future_rows_skipped": 0,
+      "input_rows": 953276,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 953276
+    },
+    {
+      "file_index": 834,
+      "future_rows_skipped": 0,
+      "input_rows": 971652,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 971652
+    },
+    {
+      "file_index": 835,
+      "future_rows_skipped": 0,
+      "input_rows": 987628,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 987628
+    },
+    {
+      "file_index": 836,
+      "future_rows_skipped": 0,
+      "input_rows": 976150,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 976150
+    },
+    {
+      "file_index": 837,
+      "future_rows_skipped": 0,
+      "input_rows": 969484,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 969484
+    },
+    {
+      "file_index": 838,
+      "future_rows_skipped": 0,
+      "input_rows": 791131,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 791131
+    },
+    {
+      "file_index": 839,
+      "future_rows_skipped": 0,
+      "input_rows": 851371,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 851371
+    },
+    {
+      "file_index": 840,
+      "future_rows_skipped": 888392,
+      "input_rows": 888392,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 841,
+      "future_rows_skipped": 961266,
+      "input_rows": 961266,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 842,
+      "future_rows_skipped": 979242,
+      "input_rows": 979242,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 843,
+      "future_rows_skipped": 854571,
+      "input_rows": 854571,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 844,
+      "future_rows_skipped": 912309,
+      "input_rows": 912309,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 845,
+      "future_rows_skipped": 833637,
+      "input_rows": 833637,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 0
+    },
+    {
+      "file_index": 846,
+      "future_rows_skipped": 0,
+      "input_rows": 476653,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 476653
+    },
+    {
+      "file_index": 847,
+      "future_rows_skipped": 0,
+      "input_rows": 2869803,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2869803
+    },
+    {
+      "file_index": 848,
+      "future_rows_skipped": 0,
+      "input_rows": 3046503,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 3046503
+    },
+    {
+      "file_index": 849,
+      "future_rows_skipped": 0,
+      "input_rows": 3171425,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 3171425
+    },
+    {
+      "file_index": 850,
+      "future_rows_skipped": 0,
+      "input_rows": 2957407,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 2957407
+    },
+    {
+      "file_index": 851,
+      "future_rows_skipped": 0,
+      "input_rows": 3176490,
+      "invalid_time_rows_excluded": 0,
+      "pair_event_hits": 0,
+      "pairs_found": 0,
+      "scanned_rows": 3176490
+    }
+  ],
+  "reused_pairs": 2365947,
+  "scanned_pairs": 2250,
+  "unique_pairs": 2368197
+}

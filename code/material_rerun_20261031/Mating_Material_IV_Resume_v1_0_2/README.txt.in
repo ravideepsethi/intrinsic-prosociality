@@ -1,0 +1,74 @@
+MATING MATERIAL IV RESUME 1.0.2
+Prepared 31 October 2026, Toronto
+
+SAVE AND RUN
+Extract this folder in ~/Desktop/Lichess_Desktop, then run:
+  bash "$HOME/Desktop/Lichess_Desktop/Mating_Material_IV_Resume_v1_0_2/RUN_IV_RESUME.command"
+
+EXPECTED RUNTIME
+Allow 2–4 hours provisionally for verification and the four remaining stages:
+comparison chronology, cached metadata, comparison frames, and comparison
+models. A fresh local chronology scan or slow external drive can extend this.
+The previous fourteen stages are preserved. Startup tests take about one
+minute. XT_Pro must be mounted. MatingMaterial_IV_Env_v100 is reused.
+Defaults: 10 workers maximum, 11 GiB memory, one BLAS thread, at most two
+heavy data jobs and sequential model fits. Chronology joins run one chunk
+at a time with a 3 GB DuckDB limit. The startup free-space check is 160 GiB.
+Caffeinate prevents idle sleep on macOS. Keep the Mac plugged in.
+
+WHAT WAS FIXED
+The resumed run exhausted memory while joining about 45 million chronology
+rows in one query. Both the reuse join and the final eligibility join now:
+  - materialize at most one million integer row IDs per range before joining;
+  - verify source identity, unique IDs and exact coverage within every range;
+  - include old-only ranges so missing/extra rows cannot escape validation;
+  - checkpoint each completed range, with checksums and dependency checks;
+  - concatenate sorted results through 65,536-row Arrow batches.
+There is no full-frame hash join or full-frame sort in these two steps. New
+query rows still use the original cached local chronology scanner and merger.
+The prior fixed-effect solver and nested chronology-cache repairs are retained.
+
+VALIDATION
+62 batch/companion tests and 50 original Uniform90 tests passed. The new
+small-data tests agree exactly with the original SQL and exercise corrupt
+files, changed inputs, missing/extra/duplicate/null IDs, empty frames and
+resumption after an interrupted assembly. A five-million-row synthetic check
+reproduced the old out-of-memory failure at a 0.384 GB DuckDB limit; both
+bounded joins completed at that same limit and passed factual-value and
+eligibility checks. This synthetic timing is not a Mac production benchmark.
+See VALIDATION.json and validation/ for the executed tests and optional
+benchmark. The benchmark is not part of normal startup.
+
+PRESERVING COMPLETED WORK
+This repair targets the reviewed partial run 12093d55b7ee9f73 at:
+  __PRIVATE_VALUE_1__/derived/replication/
+  mating_material_iv_batch_v100_PRIVATE/12093d55b7ee9f73
+It requires the latest fourteen-stage state from the v1.0.1 return. It will
+not start a fresh full rerun if that run is absent. The baseline configuration
+and original package remain unchanged. REPAIR_V102.json separately records
+this execution repair and its package hash; REPAIR_V101.json is preserved.
+Completed receipt and comparison reports, material inputs, frames, candidate
+scores and primary estimates are authenticated. Completed stages are skipped.
+Run the same command after interruption to reuse completed chunks and stages.
+Checksums and dependency checks are not disabled.
+
+The all-time-five support rule, both-role author exclusions, 90-day windows,
+first-pair rules, zero-coded outcomes and shared-account-or-date CR0 covariance
+remain in effect. Production uses cached local files; no game downloads, API
+calls, Stockfish, rating replay or profile queries. If genuinely new comparison
+games lack cached metadata, OFFLINE_HOLD records them and preserves the work.
+
+RETURN THESE
+The consolidated desktop outputs are updated after every stage:
+  MATERIAL_IV_BATCH_12093d55b7ee9f73_RETURN.zip
+  MATERIAL_IV_BATCH_12093d55b7ee9f73_RETURN.zip.sha256
+Return the ZIP and checksum. Private Parquets remain on XT_Pro.
+BATCH_COMPLETE covers these eighteen named stages, not the whole paper.
+COVERAGE.json lists the remaining analyses and manuscript reconciliation.
+
+Optional verification without starting unfinished stages:
+  bash "$HOME/Desktop/Lichess_Desktop/Mating_Material_IV_Resume_v1_0_2/RUN_IV_RESUME.command" --preflight-only
+
+The complete production repair cannot be run here because those data are on
+the Mac. REVIEW_RESULTS.txt summarizes the verified return; VALIDATION.json
+records what has actually been tested.

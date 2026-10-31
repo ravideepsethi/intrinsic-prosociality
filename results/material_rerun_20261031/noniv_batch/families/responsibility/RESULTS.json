@@ -1,0 +1,51 @@
+{
+  "api_requests": 0,
+  "engine_evaluations": 0,
+  "parent_run_id": "aa7e95f275c18f43d9ad95af523b9b0d769704ddebf4aea4d3655a2e1b07ef5d",
+  "rating_replay_records": 0,
+  "run_id": "e7ce795bcd9ad76850df60b7e551f05a419ec999c0d2ba154312e40bfea69d7b",
+  "seconds_this_launch_including_authentication": 179.28873208299046,
+  "stage_seconds": {
+    "frame_join": 12.059799833019497,
+    "material_regressions": 59.28059216600377,
+    "reference_reproduction": 60.539695874991594
+  },
+  "status": "RESPONSIBILITY_COMPLETE_MORE_FAMILIES_PENDING",
+  "summary": {
+    "reference_reproduction": {
+      "max_absolute_difference": 5.513902578968555e-08,
+      "metrics": 67,
+      "models": 53,
+      "passed": true
+    },
+    "regression_results": {
+      "interaction_rows": 14,
+      "models": 53,
+      "paper_table_rows": 9
+    },
+    "resource_plan": {
+      "estimated_gib_per_worker": 0.3078047037124634,
+      "largest_shard_rows": 9827,
+      "maximum_design_columns": 154,
+      "memory_gb": 9.0,
+      "requested_workers": 10,
+      "shards": 32,
+      "workers": 10
+    },
+    "sample": {
+      "choosers": 19995,
+      "grants": 3760,
+      "grants_added_on_retained": 5,
+      "grants_removed_on_retained": 0,
+      "opportunities": 260750,
+      "original_choosers": 20000,
+      "original_grants": 3755,
+      "original_opportunities": 260863,
+      "removed_choosers": 5,
+      "removed_grants": 0,
+      "removed_opportunities": 113,
+      "replacement_accounts": 0
+    }
+  },
+  "whole_paper_rerun_complete": false
+}

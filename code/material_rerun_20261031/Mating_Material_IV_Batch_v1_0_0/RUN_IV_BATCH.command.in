@@ -1,0 +1,27 @@
+#!/bin/bash
+set -euo pipefail
+iv_package_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+iv_desktop="$HOME/Desktop/Lichess_Desktop"
+iv_env="$iv_desktop/MatingMaterial_IV_Env_v100"
+mkdir -p "$iv_desktop"
+if [ ! -x "$iv_env/bin/python" ]; then
+  iv_python="$(command -v python3 || command -v python || true)"
+  if [ -z "$iv_python" ]; then echo 'Python 3.11–3.13 is required.'; exit 1; fi
+  "$iv_python" -c 'import sys; assert (3,11)<=sys.version_info[:2]<(3,14), "Use Python 3.11–3.13"'
+  "$iv_python" -m venv "$iv_env"
+fi
+iv_req_hash="$(shasum -a 256 "$iv_package_dir/requirements.txt" | cut -d ' ' -f 1)"
+if [ ! -f "$iv_env/REQUIREMENTS_SHA256" ] || [ "$(cat "$iv_env/REQUIREMENTS_SHA256")" != "$iv_req_hash" ]; then
+  echo 'Installing the isolated IV environment once. Production uses cached local data only.'
+  "$iv_env/bin/python" -m pip install --prefer-binary -r "$iv_package_dir/requirements.txt"
+  printf '%s\n' "$iv_req_hash" > "$iv_env/REQUIREMENTS_SHA256"
+fi
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1
+export PYTHONDONTWRITEBYTECODE=1
+cd "$iv_package_dir"
+"$iv_env/bin/python" -m unittest discover -s tests -v
+if command -v caffeinate >/dev/null 2>&1; then
+  exec caffeinate -i "$iv_env/bin/python" -u "$iv_package_dir/run.py" --result-dir "$iv_desktop" "$@"
+else
+  exec "$iv_env/bin/python" -u "$iv_package_dir/run.py" --result-dir "$iv_desktop" "$@"
+fi

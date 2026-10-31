@@ -1,0 +1,87 @@
+"""Fresh exposure selection and future decisions; original SQL, pruned unused branches."""
+from util import *
+from checkpoints import copy_query
+from source import core
+def section(text,start,end):
+    require(text.count(start)==1 and text.count(end)==1,'Historical SQL template changed')
+    return text.split(start,1)[1].split(end,1)[0]
+
+def original_sql(paths,panel_end_ms):
+    return core.recipient_panel_sql([Path(p) for p in paths],Path('UNUSED_A3_CACHE'),panel_end_ms)
+
+def exposure_sql(paths,panel_end_ms):
+    text=original_sql(paths,panel_end_ms)
+    # Keep the original ranking, including its position of the non-arm filter.
+    return text.split('), future_labeled AS (',1)[0]+') SELECT * FROM exposure ORDER BY cohort_row_id'
+
+def outcomes_sql(paths,exposure):
+    # The exposure and its follow-up eligibility were already materialized using
+    # the original core's MAX(last-move timestamp) endpoint. The exposure CTE
+    # below is discarded, so this placeholder cannot alter follow-up eligibility.
+    text=original_sql(paths,0)
+    panel=section(text,'WITH panel AS (','), exposure_ranked AS (')
+    future=section(text,'), future_labeled AS (','), recipient_pre90 AS (')
+    disconnect=section(text,'), recipient_future_disconnect AS (','), chooser_time AS (')
+    return f'''WITH panel AS ({panel}), exposure AS (SELECT * FROM {parquet([exposure])}),
+      future_labeled AS ({future}), recipient_future_disconnect AS ({disconnect})
+      SELECT e.*,
+        COALESCE(f.reached_fair_chooser_within_90d,FALSE) AS reached_fair_chooser_within_90d,
+        COALESCE(f.any_fair_kind_grant_within_90d,FALSE) AS any_fair_kind_grant_within_90d,
+        f.* EXCLUDE(cohort_row_id,reached_fair_chooser_within_90d,any_fair_kind_grant_within_90d),
+        COALESCE(fd.recipient_future_disconnections_90d,0)::BIGINT AS recipient_future_disconnections_90d,
+        COALESCE(fd.recipient_future_mercy_receipts_90d,0)::BIGINT AS recipient_future_mercy_receipts_90d,
+        fd.recipient_next_disconnection_utc_ms
+      FROM exposure e LEFT JOIN future_summary f USING(cohort_row_id)
+      LEFT JOIN recipient_future_disconnect fd USING(cohort_row_id) ORDER BY e.cohort_row_id'''
+
+def validate_panel(c,paths):
+    c.execute('CREATE VIEW p AS SELECT * FROM '+parquet(paths))
+    bad=c.execute('''SELECT
+      count(*) FILTER(WHERE kind_draw IS DISTINCT FROM CAST(outcome_kind_draw AS BOOLEAN)),
+      count(*) FILTER(WHERE fair_competitive IS DISTINCT FROM (engine_eval_cp_disconnected>=-100)),
+      count(*) FILTER(WHERE chooser_has_mating_material IS DISTINCT FROM true OR timeout_draw_no_mating_material IS DISTINCT FROM false),
+      count(*) FILTER(WHERE chooser_username_norm IN ('__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__') OR disconnected_username_norm IN ('__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__')),
+      count(*) FILTER(WHERE chooser_user_id IS NULL OR disconnected_user_id IS NULL OR chooser_user_id<0 OR disconnected_user_id<0 OR chooser_user_id>=4294967296 OR disconnected_user_id>=4294967296 OR chooser_user_id=disconnected_user_id),
+      count(*) FILTER(WHERE utc_ms IS NULL OR api_last_move_at_ms IS NULL OR utc_ms<=0 OR api_last_move_at_ms<utc_ms),
+      count(*) FILTER(WHERE CAST(kind_draw AS INTEGER)+CAST(timeout_chooser_win AS INTEGER)+CAST(timeout_chooser_loss AS INTEGER) IS DISTINCT FROM 1)
+      FROM p''').fetchone()
+    require(not any(bad),'Receipt panel aliases/material/authors/identity/timing/partition failed: '+str(bad))
+    # The original first-exposure grouping is the account name, its history join the ID.
+    mismatch=c.execute('''WITH ids AS (SELECT disconnected_username_norm AS account_name,disconnected_user_id AS account_id FROM p
+      UNION ALL SELECT chooser_username_norm,chooser_user_id FROM p), byname AS (SELECT account_name FROM ids GROUP BY account_name HAVING count(DISTINCT account_id)<>1),
+      byid AS (SELECT account_id FROM ids GROUP BY account_id HAVING count(DISTINCT account_name)<>1)
+      SELECT (SELECT count(*) FROM byname),(SELECT count(*) FROM byid)''').fetchone()
+    require(not any(mismatch),'Name and numeric account identities are inconsistent')
+
+def build_exposures(folder,auth,workers,memory):
+    paths=[r['path'] for r in auth['records']];c=db(folder/'spill',memory,workers)
+    try:
+        validate_panel(c,paths)
+        endpoint=c.execute('SELECT max(CAST(api_last_move_at_ms AS BIGINT)) FROM p').fetchone()[0]
+        require(endpoint is not None,'No observed follow-up endpoint')
+        copy_query(c,exposure_sql(paths,int(endpoint)),folder/'exposures_private.parquet')
+        r=c.execute('''SELECT count(*) candidates,count(DISTINCT recipient_user_id) recipients,
+          sum(received_mercy)::BIGINT receipts,sum(exposure_claimed_win)::BIGINT claims,
+          sum(NOT arm_eligible)::BIGINT nonarm,sum(a1_90d_followup_eligible)::BIGINT complete_followup,
+          sum(exposure_chooser_loss)::BIGINT historical_losses FROM '''+parquet([folder/'exposures_private.parquet'])).fetchdf().iloc[0].to_dict()
+        r={k:int(v) for k,v in r.items()};require(r['candidates']==r['recipients'] and r['receipts']+r['claims']+r['nonarm']==r['candidates'],'Fresh exposure identity/arm gate failed')
+        r['panel_end_ms']=int(endpoint)
+        return r
+    finally:
+        c.close()
+        import shutil
+        shutil.rmtree(folder/'spill',ignore_errors=True)
+
+def build_outcomes(folder,auth,exposure,workers,memory):
+    c=db(folder/'spill',memory,workers)
+    try:
+        copy_query(c,outcomes_sql([r['path'] for r in auth['records']],exposure),folder/'outcomes_private.parquet')
+        r=c.execute('''SELECT count(*) candidates,sum(reached_fair_chooser_within_90d)::BIGINT reach,
+          sum(COALESCE(first_subsequent_kind_draw,FALSE))::BIGINT first_grants,
+          count(*) FILTER(WHERE reached_fair_chooser_within_90d AND (first_subsequent_kind_draw IS NULL OR first_subsequent_delta_ms<=0 OR first_subsequent_delta_ms>7776000000)) invalid
+          FROM '''+parquet([folder/'outcomes_private.parquet'])).fetchdf().iloc[0].to_dict()
+        r={k:int(v) for k,v in r.items()};require(r['invalid']==0,'Invalid subsequent choice');return r
+    finally:
+        c.close()
+        import shutil
+        shutil.rmtree(folder/'spill',ignore_errors=True)

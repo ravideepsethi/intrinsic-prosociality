@@ -1,0 +1,77 @@
+{
+  "package": "Mating_Material_IV_Resume_v1_0_1",
+  "scope": "Material-corrected core IV and selected receipt companions",
+  "whole_paper_complete": false,
+  "prior_noniv_batch": {
+    "status": "REVIEWED_COMPLETE_NOT_RERUN",
+    "run_id": "c6d1eef82b6b9890138ee2dfbc0c6a93709735a561d63953769827f887dcb39d",
+    "completed_families": 11,
+    "authority": "authority/prior_noniv_review.json"
+  },
+  "included": [
+    "Corrected donor arms, cross-fitted state reference and full candidate eligibility",
+    "Fresh primary, legacy and recent histories; fresh later-choice identities",
+    "Primary unspaced IV and same-row no-history model/balance",
+    "Spaced, first, repeated-recipient, recipient-FE and calendar/history variants",
+    "Minimum donor counts 3/5/10/20 with spacing rebuilt under each rule",
+    "Earlier/later/competitive/noncompetitive instruments with own history controls and paired common-row comparisons",
+    "Competitive-only minimum-three sensitivity and paired pooled score",
+    "Prior chooser experience splits and same-start/last-move UTC-hour sensitivity",
+    "Spaced model without opponent-environment controls",
+    "First-stage speed, rating, prior-history and month subgroups",
+    "Recipient-weighted IV, OLS, transformed-outcome complier means and joint differences",
+    "Exposure histogram, concentration, overlapping windows and shared future choices",
+    "Twenty-bin first-stage CSV/PDF/PNG",
+    "Merited receipt: later granting of both kinds, reach, first-choice type, proportional contrasts and matched association",
+    "Receipt and original August Patron snapshot with original sampling weights and selection diagnostics",
+    "Full hash-frame entry and ordinary-ending placebo rebuilt with fresh support, histories and outcomes",
+    "Primary, entry and ordinary-ending eight-trait balance without controlled traits",
+    "Receipt-minus-ordinary-ending joint covariance"
+  ],
+  "not_included_yet": [
+    {
+      "family": "iv_material_sensitivity",
+      "work": "Strict absolute final-material difference below four, preserving original FEN-validity rules"
+    },
+    {
+      "family": "iv_multiple_instruments",
+      "work": "Joint competitive/noncompetitive instruments, conditional first-stage diagnostics and efficient GMM overidentification test"
+    },
+    {
+      "family": "iv_complier_characteristics",
+      "work": "Spaced-frame weighted complier characteristics; primary transformed-outcome means are included"
+    },
+    {
+      "family": "iv_additional_balance",
+      "work": "Spaced recent-trait and fifteen-trait balance, no-environment balance, implied-bias calibration and repeated-recipient-FE balance"
+    },
+    {
+      "family": "receipt_lost_exposures",
+      "work": "Rebuild the clearly-worse receipt frame and cross-exposure joint comparisons"
+    },
+    {
+      "family": "receipt_mechanisms",
+      "work": "Ordinary draw versus ordinary loss overlap/matching/within-recipient models and position/stakes heterogeneity"
+    },
+    {
+      "family": "matched_receipt_auxiliaries",
+      "work": "Remaining A3, preliminary encouragement, and simultaneous-hour checks; primary IV overlap counts are included"
+    },
+    {
+      "family": "adjacent_payoff",
+      "work": "Remaining adjacent rating-payoff level check"
+    },
+    {
+      "family": "manuscript",
+      "work": "Reconcile every claim, update all numerical text/tables/figures, compile and inspect the full paper"
+    }
+  ],
+  "interpretation": "BATCH_COMPLETE certifies the named execution stages only. No old estimate is substituted for an analysis outside this batch.",
+  "runtime": {
+    "hours_low": 2,
+    "hours_high": 5,
+    "status": "PROVISIONAL_REMAINING_WORK",
+    "extra_time": "New local chronology scans may extend this"
+  },
+  "execution_repair": "1.0.1"
+}

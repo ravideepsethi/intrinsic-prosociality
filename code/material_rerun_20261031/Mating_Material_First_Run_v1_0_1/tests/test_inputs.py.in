@@ -1,0 +1,184 @@
+"""Exercise the production input resolver, including the missing-manifest failure."""
+from contextlib import ExitStack
+from pathlib import Path
+import copy
+import tempfile
+import unittest
+from unittest.mock import patch
+import pyarrow as pa
+import pyarrow.parquet as pq
+from fixtures import make_rows, row, FIXTURES, config
+from mmrerun import inputs
+from mmrerun.io import save, load, sha, record
+from mmrerun.worker import process_audit, build_panel
+from mmrerun.report import reconcile
+from mmrerun.run import execute
+
+
+class InputTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.base = Path(self.temp.name)
+        self.project = self.base / "project"
+        self.package = self.base / "package"
+        self.pool = self.project / "derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE"
+        self.core = self.project / "derived/replication/analysis_panel_24m_sf100k"
+        self.manifest = self.project / "derived/replication/author_exclusion_v100_PRIVATE/AUTHOR_EXCLUDED_MAIN_READY_PRIVATE.json"
+        self.clean = make_rows()
+        self.raw = copy.deepcopy(self.clean)
+        self.raw.append(row(*FIXTURES[-1], index=98, chooser="  __PRIVATE_VALUE_1__  ", result="1-0"))
+        opponent_author = row(*FIXTURES[-1], index=99, result="1-0")
+        opponent_author["disconnected_username_norm"] = " __PRIVATE_VALUE_2__ "
+        self.raw.append(opponent_author)
+        rel = "panel/month=2023-11/analysis_panel.parquet"
+        main = self.write(self.pool / rel, self.raw)
+        self.pins = dict(status="POOL_MAIN_SAMPLE_24M_CERTIFIED_OK", main_predicate="frozen pool predicate",
+                         contract_sha256="contract", code_sha256={"producer.py": "code"},
+                         observed_screen_certified=True, literal_immediate_rematches_certified=False,
+                         panel_outputs=[dict(month="2023-11", relative_path=rel, rows=len(self.raw),
+                                             sha256=main["sha256"], size_bytes=main["bytes"])])
+        save(self.package / "authority/MAIN_SAMPLE_REPORT.json", self.pins)
+        save(self.pool / "_SUCCESS.json", self.pins)
+        self.core_data = self.raw + [row(*FIXTURES[-1], index=100, result="1-0")]
+        core = self.write(self.core / "month=2023-11/analysis_panel.parquet", self.core_data)
+        save(self.core / "_SUCCESS.json", dict(monthly_outputs=[dict(month="2023-11", rows=len(self.core_data),
+                                                                   output_sha256=core["sha256"])]))
+        self.stack = ExitStack()
+        self.addCleanup(self.stack.close)
+        for key, value in dict(MONTHS=["2023-11"], PRE_AUTHOR_OPPORTUNITIES=len(self.raw),
+                               ALL_SOURCE_OPPORTUNITIES=len(self.core_data), BASELINE={"opportunities":len(self.clean)},
+                               CORE_RECEIPT=sha(self.core / "_SUCCESS.json")).items():
+            self.stack.enter_context(patch.object(inputs, key, value))
+
+    def write(self, path, data):
+        path.parent.mkdir(parents=True, exist_ok=True)
+        table = pa.Table.from_pylist(data)
+        table = table.set_column(table.schema.get_field_index("api_winner"), "api_winner",
+                                 pa.array([r["api_winner"] for r in data], type=pa.string()))
+        pq.write_table(table, path, compression="zstd", row_group_size=3)
+        return record(path)
+
+    def ready(self):
+        p = self.project / "existing_filtered/2023-11.parquet"
+        rec = self.write(p, self.clean)
+        m = dict(contract="AUTHOR_EXCLUDED_MAIN_24M_V1", policy=dict(excluded_usernames=list(inputs.AUTHORS)),
+                 audited_inputs=[dict(family="main_24m", month="2023-11", sha256=self.pins["panel_outputs"][0]["sha256"])],
+                 datasets=dict(main_24m=[dict(month="2023-11", path=str(p), rows=len(self.clean), sha256=rec["sha256"])]))
+        save(self.manifest, m)
+        return m
+
+    def inventory(self, manifest=None):
+        return inputs.inventory(self.project, self.package, manifest)
+
+    def test_missing_default_uses_only_pinned_originals_and_excludes_both_roles(self):
+        records, provenance = self.inventory()
+        self.assertEqual(provenance["main_expected_author_rows"], 2)
+        self.assertEqual(provenance["main_input_mode"], "pinned_originals_with_inline_author_exclusion")
+        self.assertFalse(self.manifest.exists())
+        authenticated = inputs.authenticate(records)
+        cfg = config(self.base)
+        cfg["main_expected_author_rows"] = 2
+        audits = [process_audit((r, cfg)) for r in authenticated]
+        result = reconcile(cfg, audits, enforce_baseline=False)
+        self.assertEqual(result["status"], "AUDIT_PASSED")
+        self.assertEqual(result["totals"]["main"]["author_rows"], 2)
+        self.assertEqual(result["censuses"]["main"]["opportunities"], len(self.clean))
+        main = next(r for r in authenticated if r["family"] == "main")
+        audit = next(r for r in audits if r["family"] == "main")
+        built = build_panel((main, cfg, audit))
+        rows = pq.ParquetFile(built["file"]["path"]).read().to_pylist()
+        self.assertTrue(all(r["game_id"] not in {"game000098", "game000099"} for r in rows))
+        self.assertEqual(sha(main["path"]), self.pins["panel_outputs"][0]["sha256"])
+
+    def test_raw_and_prefiltered_routes_produce_identical_panels(self):
+        raw_records, _ = self.inventory()
+        raw_records = inputs.authenticate(raw_records)
+        self.ready()
+        filtered_records, provenance = self.inventory()
+        self.assertEqual(provenance["main_expected_author_rows"], 0)
+        filtered_records = inputs.authenticate(filtered_records)
+        outputs = []
+        for label, records in [("raw", raw_records), ("filtered", filtered_records)]:
+            cfg = config(self.base / label)
+            item = next(r for r in records if r["family"] == "main")
+            audit = process_audit((item, cfg))
+            built = build_panel((item, cfg, audit))
+            outputs.append(pq.ParquetFile(built["file"]["path"]).read().replace_schema_metadata(None))
+        self.assertTrue(outputs[0].equals(outputs[1]))
+
+    def test_explicit_missing_manifest_does_not_fall_back(self):
+        with self.assertRaisesRegex(RuntimeError, "Explicit main ready manifest is missing"):
+            self.inventory(self.base / "missing.json")
+
+    def test_existing_invalid_manifest_does_not_fall_back(self):
+        save(self.manifest, dict(contract="WRONG"))
+        with self.assertRaisesRegex(RuntimeError, "Wrong author-exclusion contract"):
+            self.inventory()
+
+    def test_existing_wrong_author_policy_does_not_fall_back(self):
+        m = self.ready()
+        m["policy"]["excluded_usernames"] = ["someone_else", "__PRIVATE_VALUE_3__"]
+        save(self.manifest, m)
+        with self.assertRaisesRegex(RuntimeError, "account policy differs"):
+            self.inventory()
+
+    def test_changed_original_metadata_rejected(self):
+        live = copy.deepcopy(self.pins)
+        live["observed_screen_certified"] = False
+        save(self.pool / "_SUCCESS.json", live)
+        with self.assertRaisesRegex(RuntimeError, "Original main authority differs"):
+            self.inventory()
+
+    def test_changed_monthly_hash_rejected(self):
+        live = copy.deepcopy(self.pins)
+        live["panel_outputs"][0]["sha256"] = "0" * 64
+        save(self.pool / "_SUCCESS.json", live)
+        with self.assertRaisesRegex(RuntimeError, "monthly authority differs"):
+            self.inventory()
+
+    def test_duplicate_main_month_rejected(self):
+        live = copy.deepcopy(self.pins)
+        live["panel_outputs"].append(live["panel_outputs"][0])
+        save(self.pool / "_SUCCESS.json", live)
+        with self.assertRaisesRegex(RuntimeError, "month inventory differs"):
+            self.inventory()
+
+    def test_modified_source_bytes_rejected(self):
+        records, _ = self.inventory()
+        main = next(r for r in records if r["family"] == "main")
+        with Path(main["path"]).open("ab") as f:
+            f.write(b"changed")
+        with self.assertRaisesRegex(RuntimeError, "Input checksum mismatch"):
+            inputs.authenticate(records)
+
+    def test_modified_all_source_receipt_rejected(self):
+        save(self.core / "_SUCCESS.json", dict(monthly_outputs=[]))
+        with self.assertRaisesRegex(RuntimeError, "All-source Stage07 receipt differs"):
+            self.inventory()
+
+    def test_missing_both_sources_has_actionable_error(self):
+        (self.pool / "_SUCCESS.json").unlink()
+        with self.assertRaisesRegex(RuntimeError, "Neither.*certified original pool receipt"):
+            self.inventory()
+
+    def test_wrong_author_removal_count_blocks_certification(self):
+        records, _ = self.inventory()
+        cfg = config(self.base)
+        cfg["main_expected_author_rows"] = 1
+        audits = [process_audit((r, cfg)) for r in inputs.authenticate(records)]
+        result = reconcile(cfg, audits, enforce_baseline=False)
+        self.assertEqual(result["status"], "AUDIT_FAILED")
+
+    def test_inventory_to_full_pipeline_without_standalone_manifest(self):
+        records, provenance = self.inventory()
+        cfg = config(self.base)
+        cfg["main_expected_author_rows"] = provenance["main_expected_author_rows"]
+        package = Path(__file__).resolve().parents[1]
+        result = execute(inputs.authenticate(records), cfg, package, enforce_baseline=False)
+        self.assertEqual(result["status"], "INPUTS_READY_NOT_FULL_PAPER_RERUN")
+        self.assertFalse(self.manifest.exists())
+
+
+if __name__ == "__main__":
+    unittest.main()

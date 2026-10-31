@@ -1,0 +1,95 @@
+from __future__ import annotations
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+import pyarrow.parquet as pq
+from .io import require, load, sha, signature, heartbeat, digest
+from .material import COUNT_COLUMNS
+
+MONTHS = [f"{year}-{month:02}" for year in (2023, 2024, 2025) for month in range(1, 13)
+          if "2023-11" <= f"{year}-{month:02}" <= "2025-10"]
+AUTHORS = ("__PRIVATE_VALUE_1__", "__PRIVATE_VALUE_2__")
+CORE_RECEIPT = "8b7010b528ae5c6f1e1a9b517258648204c14c17ca41a2a6796f8ee5a1ed6db7"
+BASELINE = dict(opportunities=41534289, grants=570090, choosers=3224171, granters=276481,
+                competitive=15207414, competitive_grants=419462,
+                clearly_worse=22664787, clearly_worse_grants=106556)
+NEEDED = ["game_id", "chooser_username_norm", "disconnected_username_norm", "chooser_color",
+          "disconnected_color", "fen_after_last_move", "pgn_result", "api_status", "month",
+          "chooser_has_mating_material", "outcome_kind_draw", "engine_eval_cp_disconnected",
+          "ply_count", "api_speed", "chooser_elo", "chooser_win_premium_v2"] + COUNT_COLUMNS
+OPTIONAL_CHECKS = ["timeout_draw", "timeout_chooser_win", "timeout_chooser_loss", "api_is_draw",
+                   "api_winner", "api_rated", "api_variant", "pgn_api_result_consistent", "kind_draw"]
+
+
+def relocate(path, project):
+    p = Path(path).expanduser()
+    if p.is_file():
+        return p.resolve()
+    parts = p.parts
+    if "lichess_kindness" in parts:
+        p = project.joinpath(*parts[parts.index("lichess_kindness") + 1:])
+    return p.resolve()
+
+
+def inventory(project, root, manifest=None):
+    project, root = Path(project).resolve(), Path(root).resolve()
+    pins = load(root / "authority/MAIN_SAMPLE_REPORT.json")
+    require(pins["observed_screen_certified"] is True, "Uncertified pool sample authority")
+    parent = {r["month"]: r for r in pins["panel_outputs"]}
+    require(sorted(parent) == MONTHS, "Pinned main sample months differ")
+    require(sum(r["rows"] for r in parent.values()) == 41534331, "Wrong pre-author parent census")
+    default = project / "derived/replication/author_exclusion_v100_PRIVATE/AUTHOR_EXCLUDED_MAIN_READY_PRIVATE.json"
+    manifest = Path(manifest).expanduser().resolve() if manifest else default
+    require(manifest.is_file(), "Author-excluded main ready manifest is missing: " + str(manifest))
+    m = load(manifest)
+    require(m.get("contract") == "AUTHOR_EXCLUDED_MAIN_24M_V1", "Wrong author-exclusion contract")
+    require(tuple(sorted(x.strip().lower() for x in m["policy"]["excluded_usernames"])) == AUTHORS,
+            "Author-exclusion account policy differs")
+    old = {r["month"]: r for r in m["audited_inputs"] if r["family"] == "main_24m"}
+    require(sorted(old) == MONTHS, "Missing main parent lineage")
+    for month in MONTHS:
+        require(old[month]["sha256"] == parent[month]["sha256"], "Main parent bytes differ: " + month)
+    records = []
+    main = m["datasets"]["main_24m"]
+    require(len(main) == 24 and sorted(r["month"] for r in main) == MONTHS, "Main month inventory differs")
+    require(sum(r["rows"] for r in main) == BASELINE["opportunities"], "Main post-exclusion census differs")
+    for r in main:
+        records.append(dict(family="main", month=r["month"], path=str(relocate(r["path"], project)),
+                            rows=r["rows"], sha256=r["sha256"], already_author_excluded=True))
+    core_root = project / "derived/replication/analysis_panel_24m_sf100k"
+    core_receipt = core_root / "_SUCCESS.json"
+    require(core_receipt.is_file() and sha(core_receipt) == CORE_RECEIPT,
+            "All-source Stage07 receipt differs from the reviewed authority")
+    core = load(core_receipt)["monthly_outputs"]
+    require(len(core) == 24 and sorted(r["month"] for r in core) == MONTHS, "All-source month inventory differs")
+    require(sum(r["rows"] for r in core) == 47587020, "All-source census differs")
+    for r in core:
+        records.append(dict(family="all_source", month=r["month"],
+                            path=str(core_root / f'month={r["month"]}' / "analysis_panel.parquet"),
+                            rows=r["rows"], sha256=r["output_sha256"], already_author_excluded=False))
+    return sorted(records, key=lambda r: (r["family"], r["month"])), dict(
+        main_manifest_sha256=sha(manifest), main_parent_sha256=sha(root / "authority/MAIN_SAMPLE_REPORT.json"),
+        all_source_receipt_sha256=sha(core_receipt))
+
+
+def authenticate(records, workers=2):
+    def one(r):
+        p = Path(r["path"])
+        require(p.is_file(), "Missing input: " + str(p))
+        stamp = signature(p)
+        require(sha(p) == r["sha256"], "Input checksum mismatch: " + r["family"] + "/" + r["month"])
+        pf = pq.ParquetFile(p)
+        require(pf.metadata.num_rows == r["rows"], "Input row count mismatch")
+        names = pf.schema_arrow.names
+        require(len(names) == len(set(names)), "Duplicate column names in input")
+        require(set(NEEDED) <= set(names), "Missing required schema: " + str(sorted(set(NEEDED) - set(names))))
+        require(not any(n.startswith("mmr_") for n in names), "Already modified input supplied as original")
+        require(signature(p) == stamp, "Input changed during authentication")
+        return dict(r, signature=stamp, columns=names, bytes=stamp[2],
+                    schema_sha256=__import__("hashlib").sha256(pf.schema_arrow.serialize().to_pybytes()).hexdigest())
+    with heartbeat("Authenticating 48 monthly Parquets"), ThreadPoolExecutor(max_workers=workers) as pool:
+        return list(pool.map(one, records))
+
+
+def input_identity(records, provenance):
+    return digest(dict(provenance=provenance, records=[{k: r[k] for k in
+        ("family", "month", "rows", "sha256", "already_author_excluded", "schema_sha256")} for r in records]))

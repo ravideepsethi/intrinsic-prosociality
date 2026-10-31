@@ -1,0 +1,15 @@
+#!/bin/bash
+set -euo pipefail
+cd "$(dirname "$0")"
+runner="${LICHESS_PYTHON:-python3}"
+if ! "$runner" -c 'import duckdb, pyarrow, numpy, scipy, chess, requests' >/dev/null 2>&1; then
+  if [ ! -x .venv/bin/python ]; then "$runner" -m venv .venv; fi
+  .venv/bin/python -m pip install -r requirements.txt
+  runner="$PWD/.venv/bin/python"
+fi
+"$runner" -u self_test.py
+if command -v caffeinate >/dev/null 2>&1; then
+  exec caffeinate -i "$runner" -u run.py --phase all --fetch-profiles --fetch-games "$@"
+else
+  exec "$runner" -u run.py --phase all --fetch-profiles --fetch-games "$@"
+fi

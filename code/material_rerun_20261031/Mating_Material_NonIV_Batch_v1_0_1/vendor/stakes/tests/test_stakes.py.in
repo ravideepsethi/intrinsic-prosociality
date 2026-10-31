@@ -1,0 +1,123 @@
+import sys,tempfile,unittest
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'code'))
+import numpy as np
+import pandas as pd
+from common import *
+from measures import percentile,stakes,prior_features,add_ratios
+from prepare import prepare_month
+from history import speed_task
+from report import summarize,bundle
+
+def history(n=140):
+    return pd.DataFrame(dict(user_id=np.ones(n,dtype=np.int64),t=np.arange(n,dtype=np.int64)*1000,
+        game_id=[f'g{x:05d}' for x in range(n)],rating=1500+np.arange(n,dtype=float)))
+
+class NumericalTests(unittest.TestCase):
+    def test_counterfactual_percentile_endpoints(self):
+        h=pd.DataFrame({'rating':[1400,1500,1505,1510,1700],'n':[1,4,2,2,1]})
+        np.testing.assert_allclose(percentile(h,[1399,1400,1500,1506,1800]),[0,10,50,70,100])
+        b=pd.DataFrame(dict(rating=[1500.],rg=[-2.],rc=[4.],rd=[50.]))
+        x=stakes(b,h)
+        self.assertEqual(x.percentile_pp.iloc[0],40)
+        self.assertEqual(x.rating_draw.iloc[0],1498)
+        self.assertEqual(x.rating_win.iloc[0],1504)
+        self.assertTrue(x.cross_100.iloc[0])
+
+    def test_strict_anchor_and_future_invariance(self):
+        h=history();a=pd.DataFrame(dict(user_id=[1,1,2],t=[120000,120500,120500]))
+        f=prior_features(h,a)
+        self.assertAlmostEqual(f.sd100[0],np.std(h.rating.iloc[20:120],ddof=1))
+        self.assertAlmostEqual(f.sd100[1],np.std(h.rating.iloc[21:121],ddof=1))
+        self.assertTrue(np.isnan(f.sd100[2]))
+        altered=h.copy();altered.loc[altered.t>=120000,'rating']=99999
+        self.assertEqual(prior_features(altered,a).sd100[0],f.sd100[0])
+        self.assertLess(f.detrended_sd100[0],1e-9)
+
+    def test_missing_zero_and_tie_boundary(self):
+        h=history();h['rating']=1500.;a=pd.DataFrame(dict(user_id=[1],t=[120000]))
+        f=prior_features(h,a);f['ki']=6;f=add_ratios(f)
+        self.assertTrue(f.history100_zero[0]);self.assertTrue(np.isnan(f.premium_over_sd100[0]))
+        h.loc[40,'rating']=np.nan
+        self.assertTrue(np.isnan(prior_features(h,a).sd100[0]))
+        h=history();h.loc[19,'t']=20000
+        f=prior_features(h,a);self.assertEqual(f.tie100[0],1);self.assertTrue(np.isnan(f.sd100[0]))
+        self.assertTrue(np.isfinite(f.sd50[0]))
+
+    def test_random_histories_against_direct_reference(self):
+        rng=np.random.default_rng(51);parts=[]
+        for u in range(5):
+            n=150+u*17
+            parts.append(pd.DataFrame(dict(user_id=u,t=np.cumsum(rng.integers(1,5,n)),
+                game_id=[f'{u}:{x:05d}' for x in range(n)],rating=1500+rng.normal(size=n)*40)))
+        h=pd.concat(parts,ignore_index=True);a=pd.DataFrame(dict(user_id=rng.integers(0,6,180),t=rng.integers(1,950,180)))
+        f=prior_features(h,a,batch_size=13)
+        for i,row in a.iterrows():
+            z=h[(h.user_id==row.user_id)&(h.t<row.t)].tail(100)
+            expected=np.std(z.rating,ddof=1) if len(z)==100 else np.nan
+            np.testing.assert_allclose(f.sd100[i],expected,equal_nan=True,rtol=1e-12)
+
+class PipelineTests(unittest.TestCase):
+    def fixture(self,root):
+        work=root/'work';work.mkdir();ids={'__PRIVATE_VALUE_1__':98,'__PRIVATE_VALUE_2__':99}
+        frame(pd.DataFrame({'speed':['blitz','blitz'],'user_id':[1,2]}),work/'needed_users.parquet')
+        records=[]
+        for mi,month in enumerate(['2023-10','2023-11','2023-12']):
+            start=int(pd.Timestamp(month+'-01',tz='UTC').timestamp()*1000)
+            n=150;t=start+np.arange(n)*1000
+            e=pd.DataFrame(dict(game_id=[f'{month}_{j}' for j in range(n)],utc_ms=t,
+                white_id=np.ones(n,dtype=np.int64),black_id=np.full(n,2,dtype=np.int64),
+                white_elo=1500+((np.arange(n)+mi)%13),black_elo=1600+np.arange(n)%9))
+            source=root/f'{month}_history.parquet';frame(e,source)
+            records.append(dict(speed='blitz',month=month,path=str(source),rows=n,bytes=source.stat().st_size))
+            if month=='2023-10':continue
+            take=e.iloc[[0,3,7,12,21,50,100,149]].reset_index(drop=True);nn=len(take)
+            b=pd.DataFrame(dict(game_id=take.game_id,chooser_user_id=1,disconnected_user_id=2,
+                chooser_username_norm='a',disconnected_username_norm='b',api_created_at_ms=take.utc_ms+500,
+                api_speed='blitz',chooser_color='white',chooser_elo=take.white_elo,
+                disconnected_elo=take.black_elo,chooser_pre_rd_v2=60.,outcome_kind_draw=np.arange(nn)%2,
+                chooser_draw_payoff_v2=-1.,chooser_win_payoff_v2=5.,chooser_win_premium_v2=6.,
+                engine_eval_cp_disconnected=0.))
+            # Author games exercise name and numeric exclusion without entering history.
+            author=b.iloc[[0]].copy();author['game_id']='author_'+month
+            author['chooser_user_id']=98;author['chooser_username_norm']=' __PRIVATE_VALUE_3__ '
+            b=pd.concat([b,author],ignore_index=True);p=root/f'{month}_main.parquet';frame(b,p)
+            rec=dict(path=str(p),month=month,sha256=sha(p),rows=len(b),size_bytes=p.stat().st_size)
+            prepare_month((rec,str(work),ids,512))
+        return work,ids,records
+
+    def test_multimonth_restart_report_and_mutation(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);work,ids,records=self.fixture(root)
+            job=('blitz',records,str(work),ids,8,512,1,'test')
+            paths=speed_task(job);self.assertEqual(len(paths),2)
+            df=pd.concat([pd.read_parquet(p) for p in paths],ignore_index=True)
+            self.assertEqual(len(df),16);self.assertTrue(df.history100_complete.all())
+            self.assertTrue((df.t%1000==0).all())
+            # The focal row is excluded even when the API timestamp is 500ms later.
+            src=pd.read_parquet(records[0]['path']);expected=np.std(src.white_elo.tail(100),ddof=1)
+            self.assertAlmostEqual(df.sd100[0],expected)
+            before=[sha(p) for p in paths];self.assertEqual(speed_task(job),paths)
+            self.assertEqual([sha(p) for p in paths],before)
+            report=root/'report';self.assertEqual(summarize(work,report,paths,512),16)
+            self.assertTrue((report/'stakes_table.csv').is_file());self.assertTrue(bundle(report,root/'desktop').is_file())
+            # Source fingerprint/content changes must not silently reuse history.
+            src['white_elo']+=1;frame(src,records[0]['path'])
+            with self.assertRaisesRegex(RuntimeError,'differs|changed'):speed_task(job)
+
+    def test_resume_after_completed_prefix(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);work,ids,records=self.fixture(root)
+            first=('blitz',records[:2],str(work),ids,8,512,1,'test')
+            speed_task(first)
+            paths=speed_task(('blitz',records,str(work),ids,8,512,1,'test'))
+            self.assertEqual(len(paths),2);self.assertEqual(sum(pq.ParquetFile(p).metadata.num_rows for p in paths),16)
+
+    def test_wrong_focal_identity_rejected(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);work,ids,records=self.fixture(root)
+            p=work/'targets/2023-11.parquet';b=pd.read_parquet(p);b.loc[0,'rating']+=10;frame(b,p)
+            with self.assertRaisesRegex(RuntimeError,'reconciliation failed'):
+                speed_task(('blitz',records,str(work),ids,8,512,1,'test'))
+
+if __name__=='__main__':unittest.main()

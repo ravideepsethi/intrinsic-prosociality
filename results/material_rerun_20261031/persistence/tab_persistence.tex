@@ -1,0 +1,43 @@
+\begin{table}[!htbp]
+\centering
+\caption{Persistence of granting across years}
+\label{tab:persistence}
+\begin{threeparttable}
+\footnotesize
+\begin{tabular}{p{0.63\textwidth}r}
+\toprule
+\multicolumn{2}{l}{\textit{Panel A. Competitive-position rate, 665,720 accounts}} \\
+\midrule
+Correlation, equal account weights & 0.546 (0.003) \\
+Correlation, total-opportunity weights & 0.618 (0.003) \\
+Second-year rate, no first-year grant (\%) & 0.940 (0.007) \\
+Second-year rate, at least one first-year grant (\%) & 15.841 (0.125) \\
+Rate ratio: prior grant / none & 16.856 (0.177) \\
+\addlinespace
+\multicolumn{2}{l}{\textit{Panel B. By board state, 266,207 accounts}} \\
+Competitive rate across years & 0.728 (0.003) \\
+Clearly-worse rate across years & 0.495 (0.018) \\
+First-year competitive with second-year clearly-worse & 0.240 (0.007) \\
+First-year clearly-worse with second-year competitive & 0.271 (0.007) \\
+Implied correlation, first-year competitive direction & 0.400 (0.008) \\
+Implied correlation, first-year clearly-worse direction & 0.452 (0.008) \\
+\bottomrule
+\end{tabular}
+\medskip
+\begin{tabular}{lrrrrr}
+\toprule
+\multicolumn{6}{l}{\textit{Panel C. Second-year group by first-year group (percent of row)}} \\
+First-year group & Accounts & Neither & Competitive only & Clearly worse only & Both \\
+\midrule
+Neither & 231,723 & 92.742 (0.054) & 4.722 (0.044) & 2.129 (0.030) & 0.407 (0.013) \\
+Competitive only & 24,899 & 52.629 (0.318) & 40.572 (0.307) & 2.249 (0.095) & 4.550 (0.137) \\
+Clearly worse only & 5,836 & 81.768 (0.511) & 8.670 (0.362) & 7.300 (0.348) & 2.262 (0.191) \\
+Both & 3,749 & 33.422 (0.761) & 38.010 (0.779) & 4.615 (0.353) & 23.953 (0.679) \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]
+\scriptsize
+\item Notes: November 2023--October 2024 and November 2024--October 2025. Panel A requires at least one competitive opportunity in each year and four in total. Panels B and C require at least four opportunities in each state in each year. 1,999 uniform account bootstrap resamples retain complete two-year histories and original opportunity weights; B and C share each resample. Standard errors are the replication standard deviations. Never-granting accounts remain. Inference conditions on each observed returning cohort.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

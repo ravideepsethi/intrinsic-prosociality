@@ -1,0 +1,178 @@
+from pathlib import Path
+import sys,tempfile,unittest,contextlib,io,zipfile,json,hashlib,shutil,subprocess
+from unittest.mock import patch
+ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT/'code'))
+from util import *
+import numpy as np
+import pandas as pd
+from persistence import producer,build_accounts,audit_wide,reports
+from bootstrap import original,matrices,sample,publish
+import original_f_synthetic as reference
+
+def synthetic(path):
+    rng=np.random.default_rng(28395);accounts=1200;n=accounts*100;ids=np.repeat(np.arange(accounts),100)
+    latent=rng.beta(.6,4,accounts)*.6
+    lost=rng.beta(.4,8,accounts)*.4+.1*latent
+    cp=rng.choice([-450,-300,-299,-101,-100,0,400],n,p=[.2,.2,.08,.02,.2,.2,.1])
+    probability=np.where(cp>=-100,latent[ids],np.where(cp<=-300,lost[ids],.4*latent[ids]))
+    d=pd.DataFrame(dict(chooser_user_id=ids,disconnected_user_id=ids+10000,
+        chooser_username_norm=['account_'+str(i) for i in ids],disconnected_username_norm=['opponent_'+str(i) for i in ids],
+        outcome_kind_draw=rng.binomial(1,probability),chooser_has_mating_material=True,
+        engine_eval_cp_disconnected=cp,ply_count=rng.choice([2,10,11,30,80,100],n),
+        month=rng.choice(['2023-11','2024-10','2024-11','2025-10'],n),
+        api_speed=rng.choice(['bullet','blitz','rapid','classical'],n),
+        chooser_elo=rng.integers(800,2400,n),disconnected_elo=rng.integers(800,2400,n)))
+    d.to_parquet(path,index=False)
+    counted=dict(opportunities=n,grants=int(d.outcome_kind_draw.sum()),choosers=accounts,
+       competitive=int((cp>=-100).sum()),competitive_grants=int(d.loc[cp>=-100,'outcome_kind_draw'].sum()),
+       clearly_worse=int((cp<=-300).sum()),clearly_worse_grants=int(d.loc[cp<=-300,'outcome_kind_draw'].sum()))
+    manifest=path.parent/'manifest.json';save(manifest,{'synthetic':True})
+    auth=dict(records=[dict(record(path),signature=signature(path))],expected_census={'new_'+k:v for k,v in counted.items()},
+              manifest=str(manifest),manifest_sha256=sha(manifest))
+    return d,auth,counted
+
+class Pipeline(unittest.TestCase):
+    def test_original_estimators_and_full_control_set(self):
+        reference.test_groups();reference.test_wcor();reference.test_correlations();reference.test_regression()
+        d=reference.make_df();fits={}
+        for s in 'cl':
+            X,y,w,names=producer.design(d,s)
+            for k in ('ln_nC1','ln_nL1','ln_nC2','ln_nL2','P2_mean_chooser_rating','P2_mean_opponent_rating_gap','P2_mean_capped_engine_eval','P2_mean_plies'):
+                self.assertIn(k+'_standardized',names)
+            beta,V,score,bread=producer.weighted_wls(X,y,w)
+            inv=np.linalg.inv(X.T@(w[:,None]*X));expected_beta=inv@(X.T@(w*y))
+            np.testing.assert_allclose(beta,expected_beta,atol=1e-9)
+            literal=np.stack([X[i]*w[i]*(y[i]-X[i]@beta) for i in range(len(X))])
+            expected_V=inv@(literal.T@literal)@inv*len(X)/(len(X)-1)
+            np.testing.assert_allclose(V,expected_V,rtol=1e-8,atol=1e-9)
+            fits[s]=(score,bread,literal,inv)
+        a,b=fits['c'],fits['l']
+        np.testing.assert_allclose(a[1]@(a[0].T@b[0])@b[1],a[3]@(a[2].T@b[2])@b[3],atol=1e-9)
+
+    def test_original_bootstrap_against_literal_resampling(self):
+        import original_bootstrap_test
+        original_bootstrap_test.run()
+
+    def test_resume_worker_invariance_and_corruption(self):
+        rng=np.random.default_rng(992);n=1200;d=pd.DataFrame();latent=rng.beta(.5,3,n)
+        for s in ['c1','c2','l1','l2']:
+            d['n_'+s]=rng.integers(4,60,n);d['y_'+s]=rng.binomial(d['n_'+s],latent*(1 if s[0]=='c' else .35))
+        ma,mb=original.matrix_a(d),original.matrix_b(d)
+        with tempfile.TemporaryDirectory() as td,contextlib.redirect_stdout(io.StringIO()):
+            p=Path(td);x=sample(ma,mb,p/'resumed','key',37,7,1,stop_after=25)
+            self.assertEqual(len(x[0]),25)
+            a,b=sample(ma,mb,p/'resumed','key',37,7,3)
+            aa,bb=sample(ma,mb,p/'direct','key',37,7,1)
+            np.testing.assert_array_equal(a,aa);np.testing.assert_array_equal(b,bb)
+            with patch.object(original,'draw_stat',side_effect=AssertionError('Completed bootstrap repeated')):
+                sample(ma,mb,p/'resumed','key',37,7,2)
+            with self.assertRaisesRegex(RuntimeError,'configuration'):
+                sample(ma,mb,p/'resumed','other',37,7,2)
+            receipt=read(p/'resumed/BOOTSTRAP_CHECKPOINT.json');f=p/'resumed'/receipt['file']['path']
+            with f.open('ab') as stream:stream.write(b'corrupt')
+            with self.assertRaisesRegex(RuntimeError,'checksum'):sample(ma,mb,p/'resumed','key',37,7,2)
+
+    def test_full_fresh_aggregation_tables_bootstrap_and_private_report(self):
+        from inputs import census
+        from run_persistence import bundle,compare_previous,coverage
+        with tempfile.TemporaryDirectory() as td,contextlib.redirect_stdout(io.StringIO()):
+            p=Path(td);run=p/'run';(run/'PRIVATE').mkdir(parents=True);(run/'report').mkdir()
+            d,auth,expected=synthetic(p/'source.parquet')
+            count=census(auth,run,2,2)
+            for k,v in expected.items():self.assertEqual(count[k],v)
+            c=db(run/'PRIVATE/spill',2,2)
+            try:
+                build_accounts(c,auth,run,count,'key')
+                # Independently reconstruct every account/year/state count in pandas,
+                # including the -100/-300 boundaries and the October/November split.
+                dd=d.assign(chooser=d.chooser_user_id.astype(str),period=np.where(d.month<='2024-10',1,2),region=np.where(d.engine_eval_cp_disconnected>=-100,'C',np.where(d.engine_eval_cp_disconnected<=-300,'L','M')))
+                expected_cells=dd.groupby(['chooser','period','region']).agg(n=('outcome_kind_draw','size'),y=('outcome_kind_draw','sum')).sort_index()
+                actual=c.execute('SELECT chooser,period,region,n,y FROM f_annual').fetchdf().set_index(['chooser','period','region']).sort_index()
+                pd.testing.assert_frame_equal(actual,expected_cells,check_dtype=False,check_index_type=False)
+                expected_late=dd[dd.ply_count>10].groupby(['chooser','period','region']).agg(n_late=('outcome_kind_draw','size'),y_late=('outcome_kind_draw','sum')).reindex(expected_cells.index,fill_value=0)
+                actual_late=c.execute('SELECT chooser,period,region,n_late,y_late FROM f_annual').fetchdf().set_index(['chooser','period','region']).sort_index()
+                pd.testing.assert_frame_equal(actual_late,expected_late,check_dtype=False,check_index_type=False)
+                method=reports(c,run);ma,mb,pa,pb,cohort=matrices(c,run)
+                self.assertEqual(method['panel_A_accounts'],cohort['A'])
+                a,b=sample(ma,mb,run/'PRIVATE/bootstrap','key',51,20261025,2)
+                publish(run,a,b,pa,pb,cohort,20261025)
+                compare_previous(run);coverage(run)
+                with patch.object(producer,'build_account_panel',side_effect=AssertionError('Aggregation repeated')):
+                    build_accounts(c,auth,run,count,'key')
+                # No identifier-level caches in a return ZIP; all payload hashes verify.
+                report=bundle(run,p,True)
+                with zipfile.ZipFile(report) as z:
+                    self.assertIsNone(z.testzip())
+                    self.assertFalse(any('account_year_' in name or '/PRIVATE/' in name for name in z.namelist()))
+                    for r in json.loads(z.read('REPORT_MANIFEST.json')):
+                        raw=z.read(r['path']);self.assertEqual(len(raw),r['bytes']);self.assertEqual(hashlib.sha256(raw).hexdigest(),r['sha256'])
+                with np.load(run/'report/bootstrap/bootstrap_joint_covariance.npz',allow_pickle=False) as joint:
+                    np.testing.assert_allclose(np.diag(joint['A']),np.var(a,axis=0,ddof=1))
+                    np.testing.assert_allclose(np.diag(joint['B_C']),np.var(b,axis=0,ddof=1))
+                text=(run/'report/tab_persistence.tex').read_text()
+                self.assertIn(f'{cohort["A"]:,} accounts',text);self.assertIn('51 uniform account',text)
+                f=run/'PRIVATE/account_year_wide_private.parquet'
+                with f.open('ab') as stream:stream.write(b'corrupt')
+                with self.assertRaisesRegex(RuntimeError,'checksum'):build_accounts(c,auth,run,count,'key')
+            finally:c.close()
+
+    def test_author_on_opponent_side_and_invalid_grant_rejected(self):
+        with tempfile.TemporaryDirectory() as td,contextlib.redirect_stdout(io.StringIO()):
+            p=Path(td);run=p/'run';(run/'PRIVATE').mkdir(parents=True)
+            d,auth,count=synthetic(p/'source.parquet');d.loc[0,'disconnected_username_norm']=' __PRIVATE_VALUE_1__ '
+            d.to_parquet(p/'source.parquet',index=False)
+            c=db(run/'PRIVATE/spill',2,2)
+            try:
+                with self.assertRaisesRegex(RuntimeError,'author account'):build_accounts(c,auth,run,count,'key')
+                d.loc[0,'disconnected_username_norm']='other';d.loc[0,'outcome_kind_draw']=2
+                d.to_parquet(p/'source.parquet',index=False)
+                with self.assertRaises(ValueError):build_accounts(c,auth,run,count,'key')
+            finally:c.close()
+
+    def test_source_regression_and_bootstrap_functions_unchanged(self):
+        for r in read(ROOT/'authority/VENDORED_SOURCES.json'):verify(r,ROOT)
+
+    def test_full_cli_1999_resamples_complete_resume_and_integrity_failure(self):
+        # Entire production entry point, with an explicitly synthetic parent
+        # and authority in a temporary PACKAGE COPY; production gates untouched.
+        with tempfile.TemporaryDirectory() as td:
+            p=Path(td);pkg=p/'package';shutil.copytree(ROOT,pkg,ignore=shutil.ignore_patterns('.git','__pycache__','TEST_RESULTS.txt','SHA256SUMS.txt'))
+            project=p/'project';rid='f'*64
+            parent=project/'derived/replication/mating_material_first_run_v100_PRIVATE'/rid[:16]
+            parent.mkdir(parents=True);d,auth,counts=synthetic(p/'initial.parquet')
+            rng=np.random.default_rng(170);d['month']=rng.choice(MONTHS,len(d))
+            records=[]
+            for month in MONTHS:
+                frame=d[d.month==month];f=parent/'PRIVATE/panels/main'/f'month={month}'/'analysis_panel.parquet';f.parent.mkdir(parents=True)
+                frame.to_parquet(f,index=False);records.append(dict(record(f),month=month,rows=len(frame),grants=int(frame.outcome_kind_draw.sum())))
+            expected=read(pkg/'authority/REVIEW.json');expected['run_id']=rid
+            totals={'new_'+k:v for k,v in counts.items()}
+            expected['censuses']={name:totals.copy() for name in ('main','all_source')}
+            expected['monthly']={name:{r['month']:[r['rows'],r['grants']] for r in records} for name in ('main','all_source')}
+            returned=parent/'report/RESULTS.json';save(returned,dict(input_panels_built=True,checks=[{'passed':True}]))
+            expected['results_sha256']=sha(returned);expected['return_zip_sha256']='0'*64
+            save(pkg/'authority/REVIEW.json',expected)
+            manifest=parent/'MATERIAL_RESTRICTED_INPUTS_READY_PRIVATE.json'
+            save(manifest,dict(contract='MATING_MATERIAL_FIRST_RUN_V1',run_id=rid,rule=expected['rule'],
+                author_exclusion=['__PRIVATE_VALUE_2__','__PRIVATE_VALUE_1__'],excluded_from_decisions_not_chronology=True,
+                full_width_columns_preserved=True,price_layer='original',known_outcome_policy=expected['known_outcome_policy'],
+                censuses=expected['censuses'],datasets={name:records for name in ('main','all_source')}))
+            save(parent/'_SUCCESS.json',dict(status='INPUTS_READY_NOT_FULL_PAPER_RERUN',run_id=rid,report_sha256=expected['return_zip_sha256'],files=[record(manifest)]))
+            files=[f for f in pkg.rglob('*') if f.is_file()]
+            (pkg/'SHA256SUMS.txt').write_text(''.join(sha(f)+'  '+str(f.relative_to(pkg))+'\n' for f in sorted(files)))
+            command=[sys.executable,str(pkg/'run.py'),'--project-root',str(project),'--results-dir',str(p/'returns'),'--workers','2','--memory-gb','4']
+            result=subprocess.run(command,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+            self.assertEqual(result.returncode,0,result.stdout[-6000:])
+            pointer=read(p/'returns/MATERIAL_PERSISTENCE_LATEST_PRIVATE.json');run=Path(pointer['root'])
+            success=read(run/'_SUCCESS.json');self.assertEqual(success['replications'],1999)
+            initial_mtime=(run/'PRIVATE/bootstrap/BOOTSTRAP_CHECKPOINT.json').stat().st_mtime_ns
+            result=subprocess.run(command,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+            self.assertEqual(result.returncode,0,result.stdout[-6000:]);self.assertIn('no bootstrap resamples repeated',result.stdout)
+            self.assertEqual(initial_mtime,(run/'PRIVATE/bootstrap/BOOTSTRAP_CHECKPOINT.json').stat().st_mtime_ns)
+            with (run/'report/tab_persistence.csv').open('a') as f:f.write('corrupt')
+            result=subprocess.run(command,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+            self.assertEqual(result.returncode,1);self.assertIn('checksum',result.stdout)
+            failed=next((p/'returns').glob('*_FAILED.zip'))
+            with zipfile.ZipFile(failed) as z:self.assertFalse(json.loads(z.read('RETURN_STATUS.json'))['successful_return'])
+

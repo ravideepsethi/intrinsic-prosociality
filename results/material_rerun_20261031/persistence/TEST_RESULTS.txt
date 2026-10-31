@@ -1,0 +1,26 @@
+test_author_policy_rejected (contract_tests.Contracts.test_author_policy_rejected) ... ok
+test_changed_monthly_count_rejected (contract_tests.Contracts.test_changed_monthly_count_rejected) ... ok
+test_duplicate_path_rejected (contract_tests.Contracts.test_duplicate_path_rejected) ... ok
+test_incomplete_rejected (contract_tests.Contracts.test_incomplete_rejected) ... ok
+test_legacy_losses_not_reclassified (contract_tests.Contracts.test_legacy_losses_not_reclassified) ... ok
+test_manifest_hash_checked (contract_tests.Contracts.test_manifest_hash_checked) ... ok
+test_month_missing_rejected (contract_tests.Contracts.test_month_missing_rejected) ... ok
+test_no_chronology_rewrite (contract_tests.Contracts.test_no_chronology_rewrite) ... ok
+test_old_material_rule_rejected (contract_tests.Contracts.test_old_material_rule_rejected) ... ok
+test_price_change_rejected (contract_tests.Contracts.test_price_change_rejected) ... ok
+test_reviewed_contract (contract_tests.Contracts.test_reviewed_contract) ... ok
+test_source_changed_after_hash (contract_tests.Contracts.test_source_changed_after_hash) ... ok
+test_wrong_run_rejected (contract_tests.Contracts.test_wrong_run_rejected) ... ok
+test_author_on_opponent_side_and_invalid_grant_rejected (test_pipeline.Pipeline.test_author_on_opponent_side_and_invalid_grant_rejected) ... ok
+test_full_cli_1999_resamples_complete_resume_and_integrity_failure (test_pipeline.Pipeline.test_full_cli_1999_resamples_complete_resume_and_integrity_failure) ... ok
+test_full_fresh_aggregation_tables_bootstrap_and_private_report (test_pipeline.Pipeline.test_full_fresh_aggregation_tables_bootstrap_and_private_report) ... ok
+test_original_bootstrap_against_literal_resampling (test_pipeline.Pipeline.test_original_bootstrap_against_literal_resampling) ... ok
+test_original_estimators_and_full_control_set (test_pipeline.Pipeline.test_original_estimators_and_full_control_set) ... ok
+test_resume_worker_invariance_and_corruption (test_pipeline.Pipeline.test_resume_worker_invariance_and_corruption) ... ok
+test_source_regression_and_bootstrap_functions_unchanged (test_pipeline.Pipeline.test_source_regression_and_bootstrap_functions_unchanged) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 4.977s
+
+OK
+BOOTSTRAP_KERNEL_TESTS_OK: literal account resampling, weights, ratios, correlations and transitions

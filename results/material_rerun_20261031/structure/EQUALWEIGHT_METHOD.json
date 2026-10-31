@@ -1,0 +1,12 @@
+{
+  "choosers": 3223436,
+  "covariance": "Original joint chooser sandwich G/(G-1), G=state-varying accounts. Paired comparisons use the joint covariance; no outcome-based selection.",
+  "nongranters_retained": 1757019,
+  "state_varying_choosers": 1981606,
+  "state_varying_opportunities": 36026582,
+  "weighting": [
+    "F*L/(F+L)",
+    "F*L/(F+L)^2",
+    "1"
+  ]
+}

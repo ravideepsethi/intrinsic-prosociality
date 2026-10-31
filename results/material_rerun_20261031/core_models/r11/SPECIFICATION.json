@@ -1,0 +1,33 @@
+{
+  "adjusted_rates": "column1: average counterfactual predictions using mean_y + mean(X_cf-X)*beta. Setting position also sets C and updates BOTH stage and gap interactions. Setting stage holds observed positions/C/gaps fixed. No clipping of LPM predictions. Empirical composition uncertainty included.",
+  "all_games": "Not rerun; factual chronology unchanged",
+  "author_accounts": "excluded in both roles",
+  "clocks": "log1p(nonnegative seconds); invalid values use 0 plus missing indicator",
+  "columns": {
+    "column1": "Table 2: region-specific stage and gap, with x_g",
+    "column2": "same region-specific stage and gap, without all x_g controls and their missing indicators",
+    "column3": "region-specific stage, pooled gap, with x_g; same model space as R10 column 3"
+  },
+  "competitive": "evaluation >= -100; no redundant C main effect",
+  "covariance": "chooser cluster G/(G-1), including singleton choosers in G; no (N-1)/(N-K) multiplier",
+  "fixed_effects": [
+    "chooser",
+    "speed (bullet reference)",
+    "month (2023-11 reference)"
+  ],
+  "gap_missing": "nonfinite r is evaluated at r=0 plus its missing indicator, inherited from R10; every term is region-interacted in columns 1/2",
+  "gap_support": "six mutually exclusive raw-r segments: r<-300; -300<=r<-100; -100<=r<0; 0<=r<100; 100<=r<300; r>=300. Tails r<-600 and r>600 are overlapping subsets, not additional disjoint segments. Missing r is reported separately.",
+  "h": "h_R(r) = dot(b(r), gamma_R), R in {competitive,noncompetitive}; hinges are NOT centered at zero",
+  "inference": "two-sided asymptotic normal Wald p values, pointwise 95% normal Wald CIs; joint delta-method covariance for empirical weights and ratios",
+  "interpretation": "conditional descriptive associations; not identification of motives or causal effects",
+  "multiplicity": "Per column: Panel A family 7; Panel B pooled profile family 13 (7 baseline and 6 adjacent contrasts); Panel C five gap contrasts per region, two families of 5. Regional stage profiles, rebound differences, ratios, cross-region gap differences, slopes, adjusted rates and zero-gap translations are unadjusted and explicitly marked.",
+  "outcome": "100 * grant",
+  "position_interpretation": "tab_main.csv uses standardized rates and joint-covariance adjacent differences. Raw beta diagnostics remain separately labeled.",
+  "position_reference": "clearly_worse (evaluation <= -300)",
+  "quantiles": "exact histogram quantiles, linear interpolation with zero-based index (N-1)*p, p=.25,.5,.75 (Hyndman-Fan type 7)",
+  "rating_gap": "r = disconnected_elo - chooser_elo; g = clip(r,-600,600)/100; b(r) = [g, max(g+3,0), max(g+1,0), max(g,0), max(g-1,0), max(g-3,0), 1(r<-600), 1(r>600), 1(r missing)]",
+  "rating_logs": "natural log of positive premium and each RD, their squares, and missing indicators; invalid/nonpositive inputs use log(1)=0 plus indicator",
+  "sample": "41513719 material-restricted author-excluded opportunities",
+  "slopes": "six derivatives per 100 rating points INSIDE the clipping range: (-600,-300),(-300,-100),(-100,0),(0,100),(100,300),(300,600). Outside +/-600 derivatives are zero; tail indicators permit level jumps. Derivatives at knots are undefined.",
+  "stage": "seven indicators multiplied separately by C and (1-C); 0-4 reference in each region"
+}

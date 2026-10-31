@@ -1,0 +1,86 @@
+import sys,unittest,tempfile
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'code'))
+import r8_receipt as m
+from r8_util import *
+
+def fixture(n=3000):
+    rng=np.random.default_rng(4022)
+    d=dict(row_id=np.arange(n,dtype=np.int64),recipient_id=rng.integers(1,900,n),opponent_id=rng.integers(1000,1600,n),
+        recipient_rating=1400+rng.normal(0,80,n),archive_start_ms=1700000000000+rng.integers(0,35*m.r.DAY,n),month_code=np.full(n,6),
+        tc_base_s=np.full(n,120),tc_inc_s=np.zeros(n),n_7d=rng.integers(5,50,n),counterparts_7d=rng.integers(3,30,n),
+        expected_7d=rng.uniform(.01,.06,n),adjusted_7d=rng.normal(0,.06,n),pre_games_30d=rng.poisson(20,n))
+    d['opponent_rating']=d['recipient_rating']+rng.normal(0,100,n)
+    d['received']=rng.random(n)<np.clip(.3+2*d['adjusted_7d'],.01,.9);d['y']=rng.random(n)<.08
+    for days in (30,90):
+        fair=rng.poisson(3,n);fair[rng.random(n)<.2]=0
+        d[f'fair_{days}']=fair;d[f'kind_{days}']=rng.binomial(fair,.17)
+        for name in ('disconnect','receipt','claim'):d[f'{name}_{days}']=rng.poisson(2,n)
+    return d
+
+class ReceiptTests(unittest.TestCase):
+    def test_R2_against_explicit_dummy_OLS_and_archived_coefficient_gate(self):
+        d=fixture(1800);n=len(d['row_id'])
+        d['month_code'][:]=0;d['tc_base_s'][:]=120;d['tc_inc_s'][:]=0
+        d['archive_start_ms']=m.r.DAY*(np.arange(n)%4)+3600000*(np.arange(n)%3)
+        X,names,traits,groups=m.r.feature_design(d,'X0');T=np.column_stack([traits[k] for k in m.r.T15])
+        dummy=np.column_stack([np.eye(len(np.unique(g)))[pd.factorize(g,sort=True)[0]] for g in groups])
+        Z=np.column_stack([dummy,X[:,:7],T]);arch=[];want=[]
+        for out in ('y','received'):
+            y=np.asarray(d[out],float);b=np.linalg.lstsq(Z,y,rcond=1e-11)[0];e=y-Z@b
+            base=np.column_stack([dummy,X[:,:7]]);eb=y-base@np.linalg.lstsq(base,y,rcond=1e-11)[0]
+            want.append((1-float(e@e)/float(eb@eb),1-float(e@e)/float((y-y.mean())@(y-y.mean()))))
+            arch += [dict(sample='S0',control_level='X0',analysis='A1',dependent=out,trait=k,coefficient=b[-15+i]) for i,k in enumerate(m.r.T15)]
+        rows=m.r_squared(d,'S0',arch,None)
+        for row,w in zip(rows,want):np.testing.assert_allclose([row['trait_incremental_partial_R2'],row['FE_plus_NH_plus_traits_R2']],w,atol=2e-8)
+        arch[0]['coefficient']+=.01
+        with self.assertRaisesRegex(RuntimeError,'did not reproduce'):m.r_squared(d,'S0',arch,None)
+
+    def test_shared_cross_group_covariance_against_pair_indicator(self):
+        rng=np.random.default_rng(930);n=100
+        d=dict(recipient_id=rng.integers(1,20,n),opponent_id=rng.integers(21,40,n),archive_start_ms=(np.arange(n)%7)*m.r.DAY)
+        # Cross-role links connect the two subgroups.
+        d['opponent_id'][::3]=np.roll(d['recipient_id'],-1)[::3]
+        d['opponent_id'][d['opponent_id']==d['recipient_id']]=99
+        a=rng.normal(size=n);b=rng.normal(size=n);a[np.arange(n)%2==0]=0;b[np.arange(n)%2==1]=0
+        i,j,day=d['recipient_id'],d['opponent_id'],d['archive_start_ms']//m.r.DAY
+        H=(i[:,None]==i)|(i[:,None]==j)|(j[:,None]==i)|(j[:,None]==j)|(day[:,None]==day)
+        for s in (a,b,a-b):self.assertAlmostEqual(m.rm.covariance(d)(s)[0,0],float(s@H@s),9)
+        self.assertGreater(abs(float(a@H@b)),1e-6)
+
+    def test_strict_event_time_claims_grants_and_author_exclusion(self):
+        q=pd.DataFrame(dict(row_id=np.arange(7),recipient_id=np.arange(1,8),anchor_ms=[100]*7,
+            archive_start_ms=[80]*7,fair_90=[0]*7,kind_90=[0]*7))
+        s=pd.DataFrame(dict(chooser_user_id=[1,2,3,4,5,6,7,7],api_last_move_at_ms=[99,100,101,90,90,90,90,70],
+            chooser_username_norm=['one','two','three','four','five','six','seven','seven'],
+            disconnected_username_norm=['other']*5+['__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__','other'],
+            engine_eval_cp_disconnected=[0,0,0,-300,0,0,0,0],
+            kind_draw=[True,True,True,True,False,True,True,True],timeout_chooser_win=[False]*4+[True,False,False,False]))
+        with tempfile.TemporaryDirectory() as td:
+            c=duckdb.connect();c.register('q',q);c.register('src',s);p=Path(td)/'split.parquet'
+            m.attach_prior(c,p,'kind_draw');d=pd.read_parquet(p);c.close()
+            self.assertEqual(d.faced_recorded.tolist(),[True,False,False,False,True,False,True])
+            self.assertEqual(d.faced_before_game_start.tolist(),[False]*6+[True])
+
+    def test_AR_interval_union_projection(self):
+        self.assertEqual(interval_difference([[1,2],[5,6]],[[0,1]]),[[0,2],[4,6]])
+        self.assertEqual(interval_difference([['-inf',2]],[[1,'+inf']]),[['-inf',1]])
+
+    def test_subgroup_IV_influence_and_pooled_joint_2SLS(self):
+        d=fixture(4000);n=len(d['row_id']);code=np.arange(n)%2==0
+        d['month_code'][:]=0;d['tc_base_s'][:]=120;d['tc_inc_s'][:]=0
+        d['archive_start_ms']=m.r.DAY*(np.arange(n)%7)
+        row,inf,ar=m.group_iv(d,'all')
+        X,_,_,groups=m.r.feature_design(d,'X0');dummy=np.column_stack([np.eye(len(np.unique(g)))[pd.factorize(g,sort=True)[0]] for g in groups])
+        controls=np.column_stack([dummy,X]);P=lambda a:a-controls@np.linalg.lstsq(controls,a,rcond=1e-11)[0]
+        z,D,y=P(d['adjusted_7d']),P(d['received'].astype(float)),P(d['y'].astype(float))
+        beta=float(z@y)/float(z@D);self.assertAlmostEqual(row['iv_pp'],100*beta,7)
+        np.testing.assert_allclose(inf,100*z*(y-beta*D)/float(z@D),atol=1e-8)
+        got=m.pooled_interaction(d,code,'fixture')
+        C=np.column_stack([controls,code.astype(float)]);P=lambda a:a-C@np.linalg.lstsq(C,a,rcond=1e-11)[0]
+        y=P(d['y'].astype(float));D=P(np.column_stack([d['received']*(~code),d['received']*code]).astype(float))
+        Z=P(np.column_stack([d['adjusted_7d']*(~code),d['adjusted_7d']*code]).astype(float))
+        b=np.linalg.solve(Z.T@D,Z.T@y)
+        self.assertAlmostEqual(got['coefficient_pp'],100*(b[0]-b[1]),7)
+
+if __name__=='__main__':unittest.main(verbosity=2)

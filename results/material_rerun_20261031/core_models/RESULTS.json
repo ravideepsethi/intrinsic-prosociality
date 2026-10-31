@@ -1,0 +1,18 @@
+{
+  "api_requests": 0,
+  "completed_stages": [
+    "r11",
+    "merit"
+  ],
+  "engine_evaluations": 0,
+  "parent_run_id": "aa7e95f275c18f43d9ad95af523b9b0d769704ddebf4aea4d3655a2e1b07ef5d",
+  "rating_replay_records": 0,
+  "run_id": "4823c3c8c0eb800d3090fbd5c4ae7ababb6a9d7046ff62f0cb5636b6f821691b",
+  "seconds_this_launch": 1326.3079621250072,
+  "stage_seconds": {
+    "merit": 832.030907458,
+    "r11": 472.6399447080039
+  },
+  "status": "CORE_MODELS_COMPLETE_MORE_FAMILIES_PENDING",
+  "whole_paper_rerun_complete": false
+}

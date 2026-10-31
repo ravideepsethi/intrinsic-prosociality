@@ -1,0 +1,295 @@
+{
+  "run_id": "aa7e95f275c18f43d9ad95af523b9b0d769704ddebf4aea4d3655a2e1b07ef5d",
+  "return_zip_sha256": "1a5fd476597fb9fdce13bbcbaa051ed449a6b87529835505e630644cb6286118",
+  "results_sha256": "789788e7132828bbd0362bc751e23ee317fba04b0ffcdc6b0c184d17981474bb",
+  "rule": {
+    "drop": [
+      "chooser king only",
+      "chooser king + exactly one knight; opponent only king/queens",
+      "chooser king + bishops only; all board bishops on one square color; opponent no pawn/knight"
+    ],
+    "name": "SCALACHESS_CHOOSER_MATING_MATERIAL_2023_2025_V1",
+    "recorded_position": "final FEN, disconnected side to move",
+    "retained_claim": "recorded chooser win",
+    "retained_grant": "recorded draw",
+    "source_commits": [
+      "3050826",
+      "e8133fa"
+    ]
+  },
+  "censuses": {
+    "all_source": {
+      "accounts_losing_all_grants": 0,
+      "accounts_losing_all_opportunities": 1256,
+      "accounts_newly_granting": 188,
+      "choosers": 3556699,
+      "clearly_worse": 26090130,
+      "clearly_worse_grants": 130841,
+      "competitive": 17328120,
+      "competitive_grants": 487169,
+      "granters": 326467,
+      "grants": 669502,
+      "new_choosers": 3555443,
+      "new_clearly_worse": 26090130,
+      "new_clearly_worse_grants": 130841,
+      "new_competitive": 17302662,
+      "new_competitive_granters": 249161,
+      "new_competitive_grants": 487580,
+      "new_granters": 326655,
+      "new_grants": 669913,
+      "new_opportunities": 47561517,
+      "opportunities": 47586975,
+      "unique_games": 47586975
+    },
+    "main": {
+      "accounts_losing_all_grants": 0,
+      "accounts_losing_all_opportunities": 735,
+      "accounts_newly_granting": 146,
+      "choosers": 3224171,
+      "clearly_worse": 22664787,
+      "clearly_worse_grants": 106556,
+      "competitive": 15207414,
+      "competitive_grants": 419462,
+      "granters": 276481,
+      "grants": 570090,
+      "new_choosers": 3223436,
+      "new_clearly_worse": 22664787,
+      "new_clearly_worse_grants": 106556,
+      "new_competitive": 15186844,
+      "new_competitive_granters": 213013,
+      "new_competitive_grants": 419794,
+      "new_granters": 276627,
+      "new_grants": 570422,
+      "new_opportunities": 41513719,
+      "opportunities": 41534289,
+      "unique_games": 41534289
+    }
+  },
+  "known_outcome_policy": {
+    "all_source": {
+      "expected": 75,
+      "field": "source_chooser_loss_rows"
+    },
+    "limitation": "These records are not claimed wins. Their original chooser-role anomaly is not resolved by this audit; downstream models retain their original eligibility rules.",
+    "main": {
+      "expected": 65,
+      "field": "chooser_loss_rows",
+      "monthly": {
+        "2023-11": 14,
+        "2023-12": 8,
+        "2024-01": 37,
+        "2024-02": 1,
+        "2024-06": 2,
+        "2025-01": 2,
+        "2025-06": 1
+      }
+    },
+    "policy": "PRESERVE_PRIOR_NON_GRANT_CODING_WITH_SEPARATE_LOSS_FLAG",
+    "references": {
+      "all_source_receipt_sha256": "8b7010b528ae5c6f1e1a9b517258648204c14c17ca41a2a6796f8ee5a1ed6db7",
+      "main_counts_sha256": "8f881edbd83f503d3c89bdcd92ce3dc035cf9d070750ee58a8b90d334fb94f82",
+      "main_failed_report_sha256": "0fda1270aa370b69a0695779855cd8ebdc7380c1e24db1096f7c630e07570326",
+      "main_material_audit_sha256": "27431ac4f20578f126a0199527add3d27775b2e4024ce7e4629c324754f0b2d6",
+      "main_report": "COST_UPGRADE_8e0de916d036_100"
+    },
+    "scope": "Material-only rerun; no change to historical treatment of rare recorded chooser losses."
+  },
+  "monthly": {
+    "main": {
+      "2023-11": [
+        1731482,
+        23640
+      ],
+      "2023-12": [
+        1810555,
+        24720
+      ],
+      "2024-01": [
+        1767223,
+        24200
+      ],
+      "2024-02": [
+        1673410,
+        22991
+      ],
+      "2024-03": [
+        1753046,
+        23818
+      ],
+      "2024-04": [
+        1665897,
+        22887
+      ],
+      "2024-05": [
+        1747888,
+        24005
+      ],
+      "2024-06": [
+        1656227,
+        22524
+      ],
+      "2024-07": [
+        1647340,
+        22520
+      ],
+      "2024-08": [
+        1674136,
+        22651
+      ],
+      "2024-09": [
+        1608160,
+        21956
+      ],
+      "2024-10": [
+        1745976,
+        23986
+      ],
+      "2024-11": [
+        1657367,
+        22388
+      ],
+      "2024-12": [
+        1784000,
+        24693
+      ],
+      "2025-01": [
+        1797127,
+        25058
+      ],
+      "2025-02": [
+        1661867,
+        23159
+      ],
+      "2025-03": [
+        1840085,
+        25672
+      ],
+      "2025-04": [
+        1756586,
+        24857
+      ],
+      "2025-05": [
+        1812333,
+        25162
+      ],
+      "2025-06": [
+        1782571,
+        25245
+      ],
+      "2025-07": [
+        1825312,
+        25588
+      ],
+      "2025-08": [
+        1694948,
+        22389
+      ],
+      "2025-09": [
+        1659557,
+        22622
+      ],
+      "2025-10": [
+        1760626,
+        23691
+      ]
+    },
+    "all_source": {
+      "2023-11": [
+        2014694,
+        28228
+      ],
+      "2023-12": [
+        2099956,
+        29378
+      ],
+      "2024-01": [
+        2048173,
+        28895
+      ],
+      "2024-02": [
+        1930053,
+        27085
+      ],
+      "2024-03": [
+        2020731,
+        28149
+      ],
+      "2024-04": [
+        1916069,
+        26869
+      ],
+      "2024-05": [
+        2010296,
+        28236
+      ],
+      "2024-06": [
+        1902153,
+        26413
+      ],
+      "2024-07": [
+        1892487,
+        26374
+      ],
+      "2024-08": [
+        1922967,
+        26486
+      ],
+      "2024-09": [
+        1831120,
+        25479
+      ],
+      "2024-10": [
+        1989699,
+        27866
+      ],
+      "2024-11": [
+        1891417,
+        26116
+      ],
+      "2024-12": [
+        2035089,
+        28840
+      ],
+      "2025-01": [
+        2049126,
+        29213
+      ],
+      "2025-02": [
+        1893361,
+        27058
+      ],
+      "2025-03": [
+        2099584,
+        30168
+      ],
+      "2025-04": [
+        2003263,
+        29207
+      ],
+      "2025-05": [
+        2071710,
+        29574
+      ],
+      "2025-06": [
+        2041019,
+        29762
+      ],
+      "2025-07": [
+        2090492,
+        30193
+      ],
+      "2025-08": [
+        1929265,
+        26299
+      ],
+      "2025-09": [
+        1880703,
+        26317
+      ],
+      "2025-10": [
+        1998090,
+        27708
+      ]
+    }
+  }
+}

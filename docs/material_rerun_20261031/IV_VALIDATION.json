@@ -1,0 +1,60 @@
+{
+  "date_utc": "2026-10-31",
+  "python": "3.12",
+  "platform": "Linux synthetic execution environment",
+  "batch_and_companion_tests": 62,
+  "original_uniform_tests": 50,
+  "result": "PASS",
+  "synthetic_seconds": 31.809,
+  "original_tests_seconds": 19.381,
+  "production_repair_run_performed": false,
+  "production_data_location": "__PRIVATE_VALUE_1__ on the user Mac",
+  "production_runtime_status": "2\u20134 remaining hours provisional",
+  "memory_benchmark": {
+    "synthetic_rows": 5000001,
+    "duckdb_memory_gb": 0.384,
+    "maximum_ids_per_chunk": 200000,
+    "original_join": {
+      "status": "OUT_OF_MEMORY",
+      "error": "Out of Memory Error: could not allocate block of size 80.0 MiB (360.9 MiB/366.2 MiB used)",
+      "seconds": 1.3284065580010065
+    },
+    "bounded_reuse_seconds": 17.506237722998776,
+    "bounded_eligibility_seconds": 14.779219757998362,
+    "checks": "PASS",
+    "production_benchmark": false,
+    "retained_rows": 2500000
+  },
+  "prior_solver_validation": {
+    "rows": 2400023,
+    "seconds": 0.6396614600016619,
+    "max_error_vs_known_residual": 6.580174183312693e-10,
+    "diagnostics": [
+      {
+        "iterations": 51,
+        "orthogonality": 1.3163257576424594e-11,
+        "refinements": 1
+      }
+    ],
+    "structure": {
+      "components": 1,
+      "first_groups": 480,
+      "second_groups": 4800,
+      "free_second_groups": 4799,
+      "nnz": 96002,
+      "gauge": "one_second_factor_per_component"
+    },
+    "production_benchmark": false
+  },
+  "regressions": [
+    "Original SQL equivalence for reuse and final eligibility, including removed and added rows",
+    "Factual identity, duplicate, missing, extra and null key rejection",
+    "Typed empty frames, no-reuse cases, integer-range boundaries and old-only ranges",
+    "Chunk and final-output integrity checks; changed-input signature rejection",
+    "Resume after assembly interruption without repeating completed chunks",
+    "Complete control flow delegates genuinely missing rows to original chronology scanner",
+    "Completed comparison reports now authenticated along with receipt reports",
+    "Only unfinished stages launch; completed durations/results preserved",
+    "Previous hourly FE and chronology-remainder regression tests retained"
+  ]
+}

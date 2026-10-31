@@ -1,0 +1,109 @@
+{
+  "eligible_n": 28449,
+  "n": 22252,
+  "absorbed_groups": 5989,
+  "dropped_singletons": 6197,
+  "grants": 687,
+  "targets": [
+    "gap100"
+  ],
+  "controls": {
+    "cats": [
+      "month",
+      "speed",
+      "rating_tier",
+      "stage",
+      "board_bin"
+    ],
+    "nums": [
+      "payoff10",
+      "premium10",
+      "crd100",
+      "drd100",
+      "log_cc",
+      "log_dc",
+      "cc_missing",
+      "dc_missing"
+    ]
+  },
+  "categorical_levels": {
+    "month": [
+      "2023-11",
+      "2023-12",
+      "2024-01",
+      "2024-02",
+      "2024-03",
+      "2024-04",
+      "2024-05",
+      "2024-06",
+      "2024-07",
+      "2024-08",
+      "2024-09",
+      "2024-10",
+      "2024-11",
+      "2024-12",
+      "2025-01",
+      "2025-02",
+      "2025-03",
+      "2025-04",
+      "2025-05",
+      "2025-06",
+      "2025-07",
+      "2025-08",
+      "2025-09",
+      "2025-10"
+    ],
+    "speed": [
+      "blitz",
+      "bullet",
+      "classical",
+      "rapid"
+    ],
+    "rating_tier": [
+      "0_under1600",
+      "1_1600_1999",
+      "2_2000_2399",
+      "3_2400plus"
+    ],
+    "stage": [
+      "0_0_4",
+      "1_5_6",
+      "2_7_8",
+      "3_9_10",
+      "4_11_20",
+      "5_21_40",
+      "6_41_80",
+      "7_81plus"
+    ],
+    "board_bin": [
+      "2_equal",
+      "3_better",
+      "4_clearly_better"
+    ]
+  },
+  "status": "ESTIMATED",
+  "estimates": {
+    "gap100": {
+      "status": "ESTIMATED",
+      "coefficient_pp": 0.4173932150393322,
+      "se_pp": 0.20845343081672302,
+      "ci_low_pp": 0.008749398594216137,
+      "ci_high_pp": 0.8260370314844483,
+      "p_value": 0.04529392532265386
+    }
+  },
+  "target_covariance_pp2": [
+    [
+      0.04345283281926234
+    ]
+  ],
+  "clusters": 5989,
+  "residual_df": 16218,
+  "within_rank": 45,
+  "max_abs_group_residual_sum": 1.6410484082740595e-15,
+  "support": {},
+  "se": "CR1, full rank including absorbed effects; cluster=chooser",
+  "sample": "tenure_2",
+  "model": "competitive_gap",
+  "interpretation": "Descriptive LPM on account probability sample; age availability may select accounts"
+}

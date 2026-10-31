@@ -1,0 +1,128 @@
+{
+  "eligible_n": 71127,
+  "n": 64581,
+  "absorbed_groups": 11165,
+  "dropped_singletons": 6546,
+  "grants": 1081,
+  "targets": [
+    "competitive"
+  ],
+  "controls": {
+    "cats": [
+      "month",
+      "speed",
+      "rating_tier",
+      "stage",
+      "gap_bin"
+    ],
+    "nums": [
+      "payoff10",
+      "premium10",
+      "crd100",
+      "drd100",
+      "log_cc",
+      "log_dc",
+      "cc_missing",
+      "dc_missing"
+    ]
+  },
+  "categorical_levels": {
+    "month": [
+      "2023-11",
+      "2023-12",
+      "2024-01",
+      "2024-02",
+      "2024-03",
+      "2024-04",
+      "2024-05",
+      "2024-06",
+      "2024-07",
+      "2024-08",
+      "2024-09",
+      "2024-10",
+      "2024-11",
+      "2024-12",
+      "2025-01",
+      "2025-02",
+      "2025-03",
+      "2025-04",
+      "2025-05",
+      "2025-06",
+      "2025-07",
+      "2025-08",
+      "2025-09",
+      "2025-10"
+    ],
+    "speed": [
+      "blitz",
+      "bullet",
+      "classical",
+      "rapid"
+    ],
+    "rating_tier": [
+      "0_under1600",
+      "1_1600_1999",
+      "2_2000_2399",
+      "3_2400plus"
+    ],
+    "stage": [
+      "0_0_4",
+      "1_5_6",
+      "2_7_8",
+      "3_9_10",
+      "4_11_20",
+      "5_21_40",
+      "6_41_80",
+      "7_81plus"
+    ],
+    "gap_bin": [
+      "-1",
+      "-11",
+      "-2",
+      "-3",
+      "-4",
+      "-5",
+      "-6",
+      "-7",
+      "-8",
+      "-9",
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7"
+    ]
+  },
+  "status": "ESTIMATED",
+  "estimates": {
+    "competitive": {
+      "status": "ESTIMATED",
+      "coefficient_pp": 1.8909967944263455,
+      "se_pp": 0.16881354438012242,
+      "ci_low_pp": 1.5600924518283823,
+      "ci_high_pp": 2.221901137024309,
+      "p_value": 5.708198919662095e-29
+    }
+  },
+  "target_covariance_pp2": [
+    [
+      0.02849801276617956
+    ]
+  ],
+  "clusters": 11165,
+  "residual_df": 53356,
+  "within_rank": 60,
+  "max_abs_group_residual_sum": 4.440892098500626e-15,
+  "support": {
+    "treatment_switchers": 8565,
+    "switchers_with_outcome_variation": 560,
+    "never_granter_identifying_weight_share": 0.9199150897177646
+  },
+  "se": "CR1, full rank including absorbed effects; cluster=chooser",
+  "sample": "tenure_2",
+  "model": "gradient_full",
+  "interpretation": "Descriptive LPM on account probability sample; age availability may select accounts"
+}

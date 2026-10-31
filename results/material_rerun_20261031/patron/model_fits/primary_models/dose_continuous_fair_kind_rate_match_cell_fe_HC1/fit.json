@@ -1,0 +1,115 @@
+{
+  "coefficients": [
+    {
+      "ci95_high_pp": 0.12104742578760318,
+      "ci95_low_pp": 0.0936239300147468,
+      "clusters": null,
+      "coefficient_pp": 0.10733567790117499,
+      "covariance": "HC1",
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "dose_continuous_fair_kind_rate_match_cell_fe_HC1",
+      "n": 1043048,
+      "p_two_sided_approx": 3.9688223846110094e-53,
+      "rank": 3,
+      "se_pp": 0.006995918289613845,
+      "statistic": 15.34261457291829,
+      "status": "estimated",
+      "variable": "fair_kind_rate"
+    },
+    {
+      "ci95_high_pp": 0.13039942907176888,
+      "ci95_low_pp": -0.04604059750107821,
+      "clusters": null,
+      "coefficient_pp": 0.04217941578534534,
+      "covariance": "HC1",
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "dose_continuous_fair_kind_rate_match_cell_fe_HC1",
+      "n": 1043048,
+      "p_two_sided_approx": 0.3487120108087956,
+      "rank": 3,
+      "se_pp": 0.04501103794880506,
+      "statistic": 0.9370904939654943,
+      "status": "estimated",
+      "variable": "log_fair_opps"
+    },
+    {
+      "ci95_high_pp": 0.1712548362107827,
+      "ci95_low_pp": 0.10591616645258539,
+      "clusters": null,
+      "coefficient_pp": 0.13858550133168404,
+      "covariance": "HC1",
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "dose_continuous_fair_kind_rate_match_cell_fe_HC1",
+      "n": 1043048,
+      "p_two_sided_approx": 9.229682789688462e-17,
+      "rank": 3,
+      "se_pp": 0.016668334284094092,
+      "statistic": 8.314298175788958,
+      "status": "estimated",
+      "variable": "log_total_opps"
+    }
+  ],
+  "covariance": [
+    [
+      4.8942872714953506e-05,
+      -1.1085258075857954e-05,
+      1.5811705883937394e-05
+    ],
+    [
+      -1.1085258075857918e-05,
+      0.002025993537228769,
+      -0.00023403471084057723
+    ],
+    [
+      1.5811705883937387e-05,
+      -0.00023403471084057807,
+      0.00027783336780630647
+    ]
+  ],
+  "kept_names": [
+    "fair_kind_rate",
+    "log_fair_opps",
+    "log_total_opps"
+  ],
+  "model": {
+    "cluster": null,
+    "clusters": null,
+    "covariance": "HC1",
+    "dropped_regressors": {},
+    "estimand_class": "secondary",
+    "fixed_effect_levels": 36,
+    "fixed_effects": "match_cell",
+    "kept_regressors": [
+      "fair_kind_rate",
+      "log_fair_opps",
+      "log_total_opps"
+    ],
+    "model": "dose_continuous_fair_kind_rate_match_cell_fe_HC1",
+    "n": 1043048,
+    "outcome": "patron_pp",
+    "rank": 3,
+    "requested_regressors": [
+      "fair_kind_rate",
+      "log_fair_opps",
+      "log_total_opps"
+    ],
+    "standardization": {
+      "fair_kind_rate": {
+        "mean": 0.08902294409381958,
+        "sd_population": 0.2361102356963906
+      },
+      "log_fair_opps": {
+        "mean": 1.9185905270368655,
+        "sd_population": 0.9065721660402837
+      },
+      "log_total_opps": {
+        "mean": 2.6843713411577634,
+        "sd_population": 1.1083125081138092
+      }
+    },
+    "status": "estimated"
+  }
+}

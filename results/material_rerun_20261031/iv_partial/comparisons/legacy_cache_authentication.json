@@ -1,0 +1,30 @@
+{
+  "r12_report_sha256": "544898629cacef8220624c11f421ed7136608796e515bed96f302b5fe3421781",
+  "primary_frame_sha256": "f0a7d55487e6964217b6cdb47d2014d80ec82cb5171be8d8f5ac1790e530fc13",
+  "primary_score_sha256": "a3659e63cd68d139117f4212caca9f9243dd36e1c1388d6c4778f83ac4de0e4e",
+  "primary_rows": 3103280,
+  "primary_recipients": 1835628,
+  "primary_row_set_sha256": "a1b64aa63fc15793ebd792296a24e23a6c54a4a35e5485857b3b888fe3d65ced",
+  "verified_R12_fit": {
+    "exposures": 3103280,
+    "recipients": 1835628,
+    "score_sd": 0.04979005187533171,
+    "covariance": "shared_account_OR_exposure_date_CR0",
+    "first_stage": 7.12474091771812,
+    "first_stage_se": 0.03002342311473693,
+    "first_stage_p": 0.0,
+    "reduced_form": 0.025849016676742703,
+    "reduced_form_se": 0.006864664674532238,
+    "reduced_form_p": 0.00016620431532800078,
+    "iv": 0.36280640903671635,
+    "iv_se": 0.09640751522669201,
+    "iv_p": 0.00016771362752652046,
+    "ci_low": 0.17385115135340315,
+    "ci_high": 0.5517616667200296,
+    "first_stage_F": 56314.17671435269,
+    "status": "ESTIMATED",
+    "control_rank": 19,
+    "absorb_iterations": 6
+  },
+  "upstream_files_read_only": true
+}

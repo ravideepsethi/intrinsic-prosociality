@@ -1,0 +1,5 @@
+model,P2_outcome,dropped_covariate,weighted_relative_residual,reason
+binary_year_one_grant_history,c,P2_classical_share_standardized,1.00761385e-15,linearly redundant with earlier protected/retained columns
+binary_year_one_grant_history,l,P2_classical_share_standardized,1.23831225e-15,linearly redundant with earlier protected/retained columns
+continuous_first_year_rates,c,P2_classical_share_standardized,1.01350539e-15,linearly redundant with earlier protected/retained columns
+continuous_first_year_rates,l,P2_classical_share_standardized,1.24107056e-15,linearly redundant with earlier protected/retained columns

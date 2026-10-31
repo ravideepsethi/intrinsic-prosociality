@@ -1,0 +1,18 @@
+{
+  "censor": "Keep every baseline exposure; count a grant only if first later competitive choice strictly precedes next competitive disconnection.",
+  "controls": "Original 13 exposure-game variables, squared standardized terms and supported missingness indicators, cell and month FE. Later controls only in the marked sensitivity.",
+  "covariance": "Original exposure-chooser cluster correction. All hour models additionally report chooser-or-hour CR0. The zero-coded hour rows use that CR0 as paper_se, following the Uniform90 matched source; conditional/reach hour rows use the original companion chooser correction. Both are retained explicitly.",
+  "exposure_selection": "Rebuilt from material-restricted main panel; earliest competitive non-tournament event by start/archive/game within recipient name. Rank before excluding historical non-arm outcomes.",
+  "first_pair": "Equality of exposure start and earliest positive timestamp of unordered pair in the original all-game chronology. Only these factual pair dates are reused from the old certified recipient file.",
+  "intervals": "First choice within each interval, allowing one exposure in several intervals; no choice in interval is excluded, not zero-coded.",
+  "optimization": "Prune unused A3/encouragement SQL branches; reuse authenticated factual pair dates; project only three chronology columns for new pairs; checkpoint each file/model; bounded numerical crossproducts; exact Schur hour projection.",
+  "outcomes": "Original matched last-move anchor, strict later timestamp, <=90 days, original tie ordering; complete follow-up uses MAX(last-move timestamp) from the source panel as in the original core; no new different-opponent or game-start restriction.",
+  "pending": [
+    "All IV score/reference/support/exposure reconstructions and placebos",
+    "A3 engagement, preliminary encouragement and overlap diagnostics",
+    "Conditional both-exposure-and-later-hour sensitivity",
+    "Other paper families in DOWNSTREAM_STATUS.csv"
+  ],
+  "scope": "Matched receipt main table, five interval rows, original A1 companions and six exact-hour sensitivities",
+  "weights": "Recomputed over the fresh full candidate cohort before the complete-follow-up restriction, first pair and grant-or-claim only; >=5 grants and >=20 claims per original cell; treated weight 1, control weight cell grants/claims."
+}

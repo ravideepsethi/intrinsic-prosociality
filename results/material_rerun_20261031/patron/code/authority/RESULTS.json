@@ -1,0 +1,554 @@
+{
+  "censuses": {
+    "all_source": {
+      "accounts_losing_all_grants": 0,
+      "accounts_losing_all_opportunities": 1256,
+      "accounts_newly_granting": 188,
+      "choosers": 3556699,
+      "clearly_worse": 26090130,
+      "clearly_worse_grants": 130841,
+      "competitive": 17328120,
+      "competitive_grants": 487169,
+      "granters": 326467,
+      "grants": 669502,
+      "new_choosers": 3555443,
+      "new_clearly_worse": 26090130,
+      "new_clearly_worse_grants": 130841,
+      "new_competitive": 17302662,
+      "new_competitive_granters": 249161,
+      "new_competitive_grants": 487580,
+      "new_granters": 326655,
+      "new_grants": 669913,
+      "new_opportunities": 47561517,
+      "opportunities": 47586975,
+      "unique_games": 47586975
+    },
+    "main": {
+      "accounts_losing_all_grants": 0,
+      "accounts_losing_all_opportunities": 735,
+      "accounts_newly_granting": 146,
+      "choosers": 3224171,
+      "clearly_worse": 22664787,
+      "clearly_worse_grants": 106556,
+      "competitive": 15207414,
+      "competitive_grants": 419462,
+      "granters": 276481,
+      "grants": 570090,
+      "new_choosers": 3223436,
+      "new_clearly_worse": 22664787,
+      "new_clearly_worse_grants": 106556,
+      "new_competitive": 15186844,
+      "new_competitive_granters": 213013,
+      "new_competitive_grants": 419794,
+      "new_granters": 276627,
+      "new_grants": 570422,
+      "new_opportunities": 41513719,
+      "opportunities": 41534289,
+      "unique_games": 41534289
+    }
+  },
+  "checks": [
+    {
+      "actual": 75,
+      "check": "known_source_chooser_loss_rows",
+      "expected": 75,
+      "family": "all_source",
+      "passed": true
+    },
+    {
+      "actual": 65,
+      "check": "known_chooser_loss_rows",
+      "expected": 65,
+      "family": "main",
+      "passed": true
+    },
+    {
+      "actual": 14,
+      "check": "known_monthly_chooser_loss_rows",
+      "expected": 14,
+      "family": "main",
+      "month": "2023-11",
+      "passed": true
+    },
+    {
+      "actual": 8,
+      "check": "known_monthly_chooser_loss_rows",
+      "expected": 8,
+      "family": "main",
+      "month": "2023-12",
+      "passed": true
+    },
+    {
+      "actual": 37,
+      "check": "known_monthly_chooser_loss_rows",
+      "expected": 37,
+      "family": "main",
+      "month": "2024-01",
+      "passed": true
+    },
+    {
+      "actual": 1,
+      "check": "known_monthly_chooser_loss_rows",
+      "expected": 1,
+      "family": "main",
+      "month": "2024-02",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "check": "known_monthly_chooser_loss_rows",
+      "expected": 0,
+      "family": "main",
+      "month": "2024-03",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "check": "known_monthly_chooser_loss_rows",
+      "expected": 0,
+      "family": "main",
+      "month": "2024-04",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "check": "known_monthly_chooser_loss_rows",
+      "expected": 0,
+      "family": "main",
+      "month": "2024-05",
+      "passed": true
+    },
+    {
+      "actual": 2,
+      "check": "known_monthly_chooser_loss_rows",
+      "expected": 2,
+      "family": "main",
+      "month": "2024-06",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "check": "known_monthly_chooser_loss_rows",
+      "expected": 0,
+      "family": "main",
+      "month": "2024-07",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "check": "known_monthly_chooser_loss_rows",
+      "expected": 0,
+      "family": "main",
+      "month": "2024-08",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "check": "known_monthly_chooser_loss_rows",
+      "expected": 0,
+      "family": "main",
+      "month": "2024-09",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "check": "known_monthly_chooser_loss_rows",
+      "expected": 0,
+      "family": "main",
+      "month": "2024-10",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "check": "known_monthly_chooser_loss_rows",
+      "expected": 0,
+      "family": "main",
+      "month": "2024-11",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "check": "known_monthly_chooser_loss_rows",
+      "expected": 0,
+      "family": "main",
+      "month": "2024-12",
+      "passed": true
+    },
+    {
+      "actual": 2,
+      "check": "known_monthly_chooser_loss_rows",
+      "expected": 2,
+      "family": "main",
+      "month": "2025-01",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "check": "known_monthly_chooser_loss_rows",
+      "expected": 0,
+      "family": "main",
+      "month": "2025-02",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "check": "known_monthly_chooser_loss_rows",
+      "expected": 0,
+      "family": "main",
+      "month": "2025-03",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "check": "known_monthly_chooser_loss_rows",
+      "expected": 0,
+      "family": "main",
+      "month": "2025-04",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "check": "known_monthly_chooser_loss_rows",
+      "expected": 0,
+      "family": "main",
+      "month": "2025-05",
+      "passed": true
+    },
+    {
+      "actual": 1,
+      "check": "known_monthly_chooser_loss_rows",
+      "expected": 1,
+      "family": "main",
+      "month": "2025-06",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "check": "known_monthly_chooser_loss_rows",
+      "expected": 0,
+      "family": "main",
+      "month": "2025-07",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "check": "known_monthly_chooser_loss_rows",
+      "expected": 0,
+      "family": "main",
+      "month": "2025-08",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "check": "known_monthly_chooser_loss_rows",
+      "expected": 0,
+      "family": "main",
+      "month": "2025-09",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "check": "known_monthly_chooser_loss_rows",
+      "expected": 0,
+      "family": "main",
+      "month": "2025-10",
+      "passed": true
+    },
+    {
+      "actual": 42,
+      "check": "baseline_author_rows",
+      "expected": 42,
+      "family": "main",
+      "passed": true
+    },
+    {
+      "actual": 41534289,
+      "check": "baseline_opportunities",
+      "expected": 41534289,
+      "family": "main",
+      "passed": true
+    },
+    {
+      "actual": 570090,
+      "check": "baseline_grants",
+      "expected": 570090,
+      "family": "main",
+      "passed": true
+    },
+    {
+      "actual": 3224171,
+      "check": "baseline_choosers",
+      "expected": 3224171,
+      "family": "main",
+      "passed": true
+    },
+    {
+      "actual": 276481,
+      "check": "baseline_granters",
+      "expected": 276481,
+      "family": "main",
+      "passed": true
+    },
+    {
+      "actual": 15207414,
+      "check": "baseline_competitive",
+      "expected": 15207414,
+      "family": "main",
+      "passed": true
+    },
+    {
+      "actual": 419462,
+      "check": "baseline_competitive_grants",
+      "expected": 419462,
+      "family": "main",
+      "passed": true
+    },
+    {
+      "actual": 22664787,
+      "check": "baseline_clearly_worse",
+      "expected": 22664787,
+      "family": "main",
+      "passed": true
+    },
+    {
+      "actual": 106556,
+      "check": "baseline_clearly_worse_grants",
+      "expected": 106556,
+      "family": "main",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "check": "zero_win_conflicts",
+      "expected": 0,
+      "family": "main",
+      "passed": true
+    },
+    {
+      "actual": 41513719,
+      "check": "opportunity_identity",
+      "expected": 41513719,
+      "family": "main",
+      "passed": true
+    },
+    {
+      "actual": 570422,
+      "check": "grant_identity",
+      "expected": 570422,
+      "family": "main",
+      "passed": true
+    },
+    {
+      "actual": 3223436,
+      "check": "chooser_identity",
+      "expected": 3223436,
+      "family": "main",
+      "passed": true
+    },
+    {
+      "actual": 276627,
+      "check": "granter_identity",
+      "expected": 276627,
+      "family": "main",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "check": "dropped_outside_competitive",
+      "expected": 0,
+      "family": "main",
+      "informational": true,
+      "passed": true
+    },
+    {
+      "actual": 22664787,
+      "check": "clearly_worse_unchanged",
+      "expected": 22664787,
+      "family": "main",
+      "informational": true,
+      "passed": true
+    },
+    {
+      "actual": 106556,
+      "check": "clearly_worse_grants_unchanged",
+      "expected": 106556,
+      "family": "main",
+      "informational": true,
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "check": "zero_win_conflicts",
+      "expected": 0,
+      "family": "all_source",
+      "passed": true
+    },
+    {
+      "actual": 47561517,
+      "check": "opportunity_identity",
+      "expected": 47561517,
+      "family": "all_source",
+      "passed": true
+    },
+    {
+      "actual": 669913,
+      "check": "grant_identity",
+      "expected": 669913,
+      "family": "all_source",
+      "passed": true
+    },
+    {
+      "actual": 3555443,
+      "check": "chooser_identity",
+      "expected": 3555443,
+      "family": "all_source",
+      "passed": true
+    },
+    {
+      "actual": 326655,
+      "check": "granter_identity",
+      "expected": 326655,
+      "family": "all_source",
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "check": "dropped_outside_competitive",
+      "expected": 0,
+      "family": "all_source",
+      "informational": true,
+      "passed": true
+    },
+    {
+      "actual": 26090130,
+      "check": "clearly_worse_unchanged",
+      "expected": 26090130,
+      "family": "all_source",
+      "informational": true,
+      "passed": true
+    },
+    {
+      "actual": 130841,
+      "check": "clearly_worse_grants_unchanged",
+      "expected": 130841,
+      "family": "all_source",
+      "informational": true,
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "check": "main_is_identical_subset_of_all_source",
+      "expected": 0,
+      "family": "both",
+      "passed": true
+    }
+  ],
+  "completed_outputs": [
+    "tab_sample.csv",
+    "tab_app_state_ply_cells.csv",
+    "fig_desert_ply.csv",
+    "tab_app_stage_raw.csv",
+    "tab_app_composition.csv",
+    "tab_intro_rating_totals.csv"
+  ],
+  "descriptives_complete": true,
+  "inference_rerun_complete": false,
+  "input_panel_counts": {
+    "all_source": {
+      "grants": 669913,
+      "months": 24,
+      "rows": 47561517
+    },
+    "main": {
+      "grants": 570422,
+      "months": 24,
+      "rows": 41513719
+    }
+  },
+  "input_panels_built": true,
+  "known_outcome_policy": {
+    "all_source": {
+      "expected": 75,
+      "field": "source_chooser_loss_rows"
+    },
+    "limitation": "These records are not claimed wins. Their original chooser-role anomaly is not resolved by this audit; downstream models retain their original eligibility rules.",
+    "main": {
+      "expected": 65,
+      "field": "chooser_loss_rows",
+      "monthly": {
+        "2023-11": 14,
+        "2023-12": 8,
+        "2024-01": 37,
+        "2024-02": 1,
+        "2024-06": 2,
+        "2025-01": 2,
+        "2025-06": 1
+      }
+    },
+    "policy": "PRESERVE_PRIOR_NON_GRANT_CODING_WITH_SEPARATE_LOSS_FLAG",
+    "references": {
+      "all_source_receipt_sha256": "8b7010b528ae5c6f1e1a9b517258648204c14c17ca41a2a6796f8ee5a1ed6db7",
+      "main_counts_sha256": "8f881edbd83f503d3c89bdcd92ce3dc035cf9d070750ee58a8b90d334fb94f82",
+      "main_failed_report_sha256": "0fda1270aa370b69a0695779855cd8ebdc7380c1e24db1096f7c630e07570326",
+      "main_material_audit_sha256": "27431ac4f20578f126a0199527add3d27775b2e4024ce7e4629c324754f0b2d6",
+      "main_report": "COST_UPGRADE_8e0de916d036_100"
+    },
+    "scope": "Material-only rerun; no change to historical treatment of rare recorded chooser losses."
+  },
+  "rule": {
+    "drop": [
+      "chooser king only",
+      "chooser king + exactly one knight; opponent only king/queens",
+      "chooser king + bishops only; all board bishops on one square color; opponent no pawn/knight"
+    ],
+    "name": "SCALACHESS_CHOOSER_MATING_MATERIAL_2023_2025_V1",
+    "recorded_position": "final FEN, disconnected side to move",
+    "retained_claim": "recorded chooser win",
+    "retained_grant": "recorded draw",
+    "source_commits": [
+      "3050826",
+      "e8133fa"
+    ]
+  },
+  "run_id": "aa7e95f275c18f43d9ad95af523b9b0d769704ddebf4aea4d3655a2e1b07ef5d",
+  "scope": "material audit and certified replacement input panels",
+  "status": "INPUTS_READY_NOT_FULL_PAPER_RERUN",
+  "totals": {
+    "all_source": {
+      "author_rows": 45,
+      "chooser_loss_rows": 75,
+      "dropped": 25458,
+      "dropped_outside_competitive": 0,
+      "fens_fully_parsed": 44099,
+      "input_rows": 47587020,
+      "new_grants": 669913,
+      "new_opportunities": 47561517,
+      "old_grants": 669502,
+      "old_opportunities": 47586975,
+      "old_pass_new_fail": 0,
+      "reclassified_draws": 411,
+      "removed_old_grants": 0,
+      "retained_chooser_loss_rows": 75,
+      "source_chooser_loss_rows": 75,
+      "zero_win_conflicts": 0
+    },
+    "main": {
+      "author_rows": 42,
+      "chooser_loss_rows": 65,
+      "dropped": 20570,
+      "dropped_outside_competitive": 0,
+      "fens_fully_parsed": 36395,
+      "input_rows": 41534331,
+      "new_grants": 570422,
+      "new_opportunities": 41513719,
+      "old_grants": 570090,
+      "old_opportunities": 41534289,
+      "old_pass_new_fail": 0,
+      "reclassified_draws": 332,
+      "removed_old_grants": 0,
+      "retained_chooser_loss_rows": 65,
+      "source_chooser_loss_rows": 65,
+      "zero_win_conflicts": 0
+    }
+  }
+}

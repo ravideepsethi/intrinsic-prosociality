@@ -1,0 +1,91 @@
+Mating Material Non-IV Batch v1.0.1 — recovery of the reviewed v1.0.0 run
+
+Run RUN_ALL.command from ~/Desktop/Lichess_Desktop.
+Expected runtime on the 12-core MacBook Pro / XT_Pro: approximately 1–2 hours;
+allow 2.5 hours on a busy drive. This full-data recovery runtime is an estimate.
+The original countdown fit took about 57 minutes. No new engine evaluations,
+profile requests, downloads of game data, or Glicko replay are performed.
+
+WHAT THE RETURN SHOWED
+
+The reviewed v1.0.0 run, 99984ef97df55388, took 101.05 minutes. Eight of eleven
+families finished: split-half persistence, tenure, arena, first/repeat,
+reputation, stakes, K/RD decomposition, and nonparametric rating-gap profiles.
+All 231 report-file checksums match the uploaded report manifest.
+The first/repeat family retains the same three nonconverged repeat-only
+auxiliary models as its archived baseline; its required pooled interaction
+and eight estimable models completed. These auxiliary models are not silently
+treated as estimates and are not converted into a new specification here.
+
+THIS RECOVERY
+
+1. Authenticate and retain all eight completed families, including their
+   original permanent private output checksums. Do not rerun their models.
+   Aggregate reports are copied; large private caches stay in the original run.
+2. Patron: use fetch_record_batch, the Arrow streaming method supported by
+   pinned DuckDB 1.3.2. The SQL, model specification, batch size, coefficient
+   calculation, and HC1/chooser-CR1 covariance remain unchanged. Reuse the
+   committed rematch and postcertification fits, with their original keys and
+   byte checksums. Recreate and check the narrow opportunity cache, then finish
+   its three base models and twelve ply sensitivities.
+3. Countdown: the old source-stamp check blocked before any model was fit.
+   Rebuild the narrow features directly from the authenticated material panel
+   using the exact original feasibility projector. The projector uses existing
+   FENs and piece counts; it does not call a chess engine. Fit the unchanged
+   145 threshold/calendar models with the original covariance and convergence
+   checks. Monthly projections and models support checked resume.
+4. Responsibility: collect the existing failed run's complete aggregate
+   reproduction diagnostics, including covariance arrays. They were omitted
+   from the first combined return. Do not rerun the same failing check or relax
+   its tolerances. This stage remains REFERENCE_REVIEW_REQUIRED until those
+   diagnostics are reviewed. A diagnostic receipt is not analysis completion.
+
+INPUTS AND OUTPUTS
+
+Project root: __PRIVATE_VALUE_1__
+Input authority: the reviewed mating_material_first_run_v100_PRIVATE run
+ aa7e95f275c18f43; 41,513,719 main opportunities and 570,422 grants.
+Both author accounts, __PRIVATE_VALUE_2__ and __PRIVATE_VALUE_3__, remain excluded in both roles.
+The original price layer and factual history are preserved.
+The reviewed v1.0.0 run must still be present, with its private caches and
+native responsibility failure ZIP. Its files are read-only inputs. The launcher
+holds its existing run lock while reusing it, preventing simultaneous reruns.
+
+New private output:
+derived/replication/mating_material_noniv_batch_v101_PRIVATE/<run key>
+This does not overwrite the v1.0.0 run or standalone model outputs.
+
+The launcher uses the existing MatingMaterial_Models_Env_v100 environment.
+Dependencies are pinned; the offline tests run before production.
+At most ten workers and 11 GB total budget are requested. Countdown uses up to
+three projection workers, then up to four fitting workers under its memory
+scheduler. Each worker uses one BLAS thread. Families run sequentially.
+
+At the end return the newly printed MATERIAL_NONIV_BATCH_<new key>_RETURN.zip
+and its .sha256. The old run's return ZIP is preserved under its original name.
+The new combined report includes the eight retained families, Patron/countdown
+results or errors, and complete responsibility reproduction diagnostics.
+With successful Patron/countdown recovery the status is still BATCH_INCOMPLETE
+with ten completed/reused families and one REVIEW_REQUIRED family. Exit code 2
+at that point is expected: it does not mean the recovered results were lost.
+
+If interrupted, run the same command again. Authenticated completed families
+and committed submodel checkpoints are reused. Changed inputs or corrupt
+committed outputs cause an error rather than silent reuse.
+
+WHAT REMAINS AFTER THIS RECOVERY
+
+Responsibility diagnosis; the IV and remaining receipt companions; remaining
+recipient-side Patron/adjacent-payoff checks; then manuscript-to-output
+reconciliation, table/figure replacement, and compilation of the paper.
+This package does not claim the whole-paper rerun is finished.
+
+VALIDATION
+
+The release validation records the exact offline test result. Tests include
+actual DuckDB 1.3.2 Arrow streaming, expanded-data coefficient and covariance
+comparisons, all fifteen Patron opportunity specifications, committed Patron
+fit reuse/corruption checks, all twenty-four countdown months and 145 model
+tasks with resume, author-role and material checks, report privacy, and carrying
+a failed responsibility check forward as unresolved. Full production outputs
+can only be validated from the Mac return.

@@ -1,0 +1,140 @@
+{
+  "coefficients": [
+    {
+      "ci95_high_pp": 0.5002171021568855,
+      "ci95_low_pp": 0.3877580613504344,
+      "clusters": null,
+      "coefficient_pp": 0.44398758175366,
+      "covariance": "HC1",
+      "estimand_class": "frozen_primary_family_new_sample",
+      "fixed_effects": "match_cell",
+      "model": "diagnostic_horse_race_min4_exposure_match_cell_fe_HC1",
+      "n": 596569,
+      "p_two_sided_approx": 5.0501141432336474e-54,
+      "rank": 4,
+      "se_pp": 0.028689057986145093,
+      "statistic": 15.475850826753408,
+      "status": "estimated",
+      "variable": "ever_kind_fair_state"
+    },
+    {
+      "ci95_high_pp": -0.20747555466997655,
+      "ci95_low_pp": -0.32837094376327897,
+      "clusters": null,
+      "coefficient_pp": -0.26792324921662775,
+      "covariance": "HC1",
+      "estimand_class": "frozen_primary_family_new_sample",
+      "fixed_effects": "match_cell",
+      "model": "diagnostic_horse_race_min4_exposure_match_cell_fe_HC1",
+      "n": 596569,
+      "p_two_sided_approx": 3.7155171993099326e-18,
+      "rank": 4,
+      "se_pp": 0.03084122719777246,
+      "statistic": -8.687178609934781,
+      "status": "estimated",
+      "variable": "ever_kind_clearly_worse_state"
+    },
+    {
+      "ci95_high_pp": 0.15358087263121806,
+      "ci95_low_pp": 0.021218313031841893,
+      "clusters": null,
+      "coefficient_pp": 0.08739959283152998,
+      "covariance": "HC1",
+      "estimand_class": "frozen_primary_family_new_sample",
+      "fixed_effects": "match_cell",
+      "model": "diagnostic_horse_race_min4_exposure_match_cell_fe_HC1",
+      "n": 596569,
+      "p_two_sided_approx": 0.00964380438157973,
+      "rank": 4,
+      "se_pp": 0.03376657955029663,
+      "statistic": 2.588346050903524,
+      "status": "estimated",
+      "variable": "log_fair_opps"
+    },
+    {
+      "ci95_high_pp": 0.03539599417259927,
+      "ci95_low_pp": -0.023802281807799166,
+      "clusters": null,
+      "coefficient_pp": 0.005796856182400053,
+      "covariance": "HC1",
+      "estimand_class": "frozen_primary_family_new_sample",
+      "fixed_effects": "match_cell",
+      "model": "diagnostic_horse_race_min4_exposure_match_cell_fe_HC1",
+      "n": 596569,
+      "p_two_sided_approx": 0.7010896212592173,
+      "rank": 4,
+      "se_pp": 0.015101878515969398,
+      "statistic": 0.3838500075517227,
+      "status": "estimated",
+      "variable": "log_clearly_worse_opps"
+    }
+  ],
+  "covariance": [
+    [
+      0.0008230620481323956,
+      -0.00020435769401679004,
+      -3.2238355733549204e-05,
+      3.5162339278184865e-05
+    ],
+    [
+      -0.00020435769401678974,
+      0.0009511812950646198,
+      2.1226913287704228e-05,
+      -5.0150371550261064e-05
+    ],
+    [
+      -3.2238355733548974e-05,
+      2.122691328770378e-05,
+      0.0011401818945265107,
+      -0.00017049080502732012
+    ],
+    [
+      3.51623392781848e-05,
+      -5.015037155026163e-05,
+      -0.00017049080502732098,
+      0.00022806673471109808
+    ]
+  ],
+  "kept_names": [
+    "ever_kind_fair_state",
+    "ever_kind_clearly_worse_state",
+    "log_fair_opps",
+    "log_clearly_worse_opps"
+  ],
+  "model": {
+    "cluster": null,
+    "clusters": null,
+    "covariance": "HC1",
+    "dropped_regressors": {},
+    "estimand_class": "frozen_primary_family_new_sample",
+    "fixed_effect_levels": 24,
+    "fixed_effects": "match_cell",
+    "kept_regressors": [
+      "ever_kind_fair_state",
+      "ever_kind_clearly_worse_state",
+      "log_fair_opps",
+      "log_clearly_worse_opps"
+    ],
+    "model": "diagnostic_horse_race_min4_exposure_match_cell_fe_HC1",
+    "n": 596569,
+    "outcome": "patron_pp",
+    "rank": 4,
+    "requested_regressors": [
+      "ever_kind_fair_state",
+      "ever_kind_clearly_worse_state",
+      "log_fair_opps",
+      "log_clearly_worse_opps"
+    ],
+    "standardization": {
+      "log_clearly_worse_opps": {
+        "mean": 2.8275820055056453,
+        "sd_population": 0.7240768752551539
+      },
+      "log_fair_opps": {
+        "mean": 2.53665928166366,
+        "sd_population": 0.6553902043516475
+      }
+    },
+    "status": "estimated"
+  }
+}

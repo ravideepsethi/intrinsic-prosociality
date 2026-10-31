@@ -1,0 +1,120 @@
+{
+  "date_utc": "2026-10-31",
+  "scope": "Publication preparation only; original private analyses not rerun",
+  "packages_authenticated": [
+    {
+      "package": "Mating_Material_First_Run_v1_0_0",
+      "original_members": 26,
+      "source_files": 17,
+      "archive_sha256": "e234a00a21262fe3346f0ef7b786fce9d026934798a9626ab787b850afa641f6"
+    },
+    {
+      "package": "Mating_Material_First_Run_v1_0_1",
+      "original_members": 27,
+      "source_files": 18,
+      "archive_sha256": "c6935eebada215a0c766733d27aa4acf5e4197547a5073cfb5fd2f08ff62614e"
+    },
+    {
+      "package": "Mating_Material_First_Run_v1_0_2",
+      "original_members": 32,
+      "source_files": 20,
+      "archive_sha256": "bbcd458e0bc5435f558429e9bd89663988ff6aa6053bcfa7dd3b2c44d938df12"
+    },
+    {
+      "package": "Mating_Material_IV_Batch_v1_0_0",
+      "original_members": 938,
+      "source_files": 443,
+      "archive_sha256": "875e34d3eecd53b004bf18fc101950fde52038fe46bc37394a0354efb7de8031"
+    },
+    {
+      "package": "Mating_Material_IV_Resume_v1_0_1",
+      "original_members": 949,
+      "source_files": 446,
+      "archive_sha256": "648905bf0fe1a25f182eda39f51b24efc9edf482f4e90fcf5ae62a390492b99b"
+    },
+    {
+      "package": "Mating_Material_IV_Resume_v1_0_2",
+      "original_members": 955,
+      "source_files": 448,
+      "archive_sha256": "c41c0f342db427e0aaad82e45a77c34d1cd8acbc4896d83a5b3ff67435f2b58a"
+    },
+    {
+      "package": "Mating_Material_Models_v1_0_0",
+      "original_members": 33,
+      "source_files": 23,
+      "archive_sha256": "fc645fdaed34041d28b22e3bbbbdaacf96d51fe0796ead7d64b70a52e215137c"
+    },
+    {
+      "package": "Mating_Material_NonIV_Batch_v1_0_0",
+      "original_members": 331,
+      "source_files": 188,
+      "archive_sha256": "a3201cd52694b3521ba08defbf6ebd7614920b5b11064a34c2f8c18459280b4c"
+    },
+    {
+      "package": "Mating_Material_NonIV_Batch_v1_0_1",
+      "original_members": 344,
+      "source_files": 194,
+      "archive_sha256": "b34ac2c3f6437b123c1e99b7634a9d44e86b7ce9cfbaf2dfbf8cbda777ba13ed"
+    },
+    {
+      "package": "Mating_Material_NonIV_Batch_v1_0_2",
+      "original_members": 361,
+      "source_files": 197,
+      "archive_sha256": "9c68dc0d7edb60b3c16e2364fb4856e58a92d0847a7046e68be772ee169dcfa1"
+    },
+    {
+      "package": "Mating_Material_Patron_v1_0_0",
+      "original_members": 65,
+      "source_files": 29,
+      "archive_sha256": "07f38d22f5f407a25fde181d435e69796979564e7f8449bcf75cfc9cd402ba95"
+    },
+    {
+      "package": "Mating_Material_Persistence_v1_0_0",
+      "original_members": 52,
+      "source_files": 19,
+      "archive_sha256": "d32c44541627d223509a966902bb2c1dd2acaaea67aa0cdeee896e2f8f650349"
+    },
+    {
+      "package": "Mating_Material_Receipt_v1_0_0",
+      "original_members": 38,
+      "source_files": 22,
+      "archive_sha256": "510eb2307c9b535f12b17ab4468b8cdd65c90dfacd701f63a327338a6abe9b6e"
+    },
+    {
+      "package": "Mating_Material_Responsibility_v1_0_0",
+      "original_members": 55,
+      "source_files": 28,
+      "archive_sha256": "a6516c811c699b8297e5e5fe77ec1860249ccaf4cfe72d81c62578aa99348fbf"
+    },
+    {
+      "package": "Mating_Material_Responsibility_v1_0_1",
+      "original_members": 58,
+      "source_files": 28,
+      "archive_sha256": "d212fd8047c66f8f9af3dcf32152ad11648b0eb3713134a5b59e4a77240db6e0"
+    },
+    {
+      "package": "Mating_Material_Structure_v1_0_0",
+      "original_members": 46,
+      "source_files": 27,
+      "archive_sha256": "f13f811c16abc1530f6e3b6a7ac8682b3cd8849608064025a226403a91a2e5f9"
+    }
+  ],
+  "original_archive_members_verified": 4310,
+  "python_syntax_checked": 1726,
+  "shell_syntax_checked": 191,
+  "original_report_entries_verified": 911,
+  "package_preparation_tests_passed": 8,
+  "full_original_package_restore": {
+    "package": "Mating_Material_First_Run_v1_0_2",
+    "files": 32,
+    "byte_checks": "PASS",
+    "outside_repository": true
+  },
+  "aggregate_figures_metadata_and_text_screened": 40,
+  "private_literal_scan": "PASS",
+  "analyses_executed": false,
+  "production_repair_run_performed": false,
+  "whole_paper_complete": false,
+  "seconds": 4.25,
+  "delivered_repair_validation": "IV_VALIDATION.json records earlier 112 passing synthetic/original tests; it is not a completed production run"
+}

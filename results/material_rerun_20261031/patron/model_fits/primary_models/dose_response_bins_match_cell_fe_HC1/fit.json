@@ -1,0 +1,204 @@
+{
+  "coefficients": [
+    {
+      "ci95_high_pp": 0.24131107543465433,
+      "ci95_low_pp": 0.16418256411595597,
+      "clusters": null,
+      "coefficient_pp": 0.20274681977530515,
+      "covariance": "HC1",
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "dose_response_bins_match_cell_fe_HC1",
+      "n": 1101025,
+      "p_two_sided_approx": 6.740213840449781e-25,
+      "rank": 6,
+      "se_pp": 0.01967600219368269,
+      "statistic": 10.304269016619667,
+      "status": "estimated",
+      "variable": "dose_1"
+    },
+    {
+      "ci95_high_pp": 0.5530767840629525,
+      "ci95_low_pp": 0.3951507047636723,
+      "clusters": null,
+      "coefficient_pp": 0.4741137444133124,
+      "covariance": "HC1",
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "dose_response_bins_match_cell_fe_HC1",
+      "n": 1101025,
+      "p_two_sided_approx": 5.698584678149457e-32,
+      "rank": 6,
+      "se_pp": 0.04028800542892137,
+      "statistic": 11.768111609540304,
+      "status": "estimated",
+      "variable": "dose_2_4"
+    },
+    {
+      "ci95_high_pp": 1.1532384322455038,
+      "ci95_low_pp": 0.7339963797069055,
+      "clusters": null,
+      "coefficient_pp": 0.9436174059762046,
+      "covariance": "HC1",
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "dose_response_bins_match_cell_fe_HC1",
+      "n": 1101025,
+      "p_two_sided_approx": 1.1157678312788004e-18,
+      "rank": 6,
+      "se_pp": 0.1069514684569528,
+      "statistic": 8.822856007404926,
+      "status": "estimated",
+      "variable": "dose_5_9"
+    },
+    {
+      "ci95_high_pp": 1.0973660151026519,
+      "ci95_low_pp": 0.4358964601036834,
+      "clusters": null,
+      "coefficient_pp": 0.7666312376031676,
+      "covariance": "HC1",
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "dose_response_bins_match_cell_fe_HC1",
+      "n": 1101025,
+      "p_two_sided_approx": 5.542621955251077e-06,
+      "rank": 6,
+      "se_pp": 0.16874533415321813,
+      "statistic": 4.543125541516178,
+      "status": "estimated",
+      "variable": "dose_10_plus"
+    },
+    {
+      "ci95_high_pp": 0.10651736125689774,
+      "ci95_low_pp": -0.08366413763843576,
+      "clusters": null,
+      "coefficient_pp": 0.011426611809230991,
+      "covariance": "HC1",
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "dose_response_bins_match_cell_fe_HC1",
+      "n": 1101025,
+      "p_two_sided_approx": 0.8138053673592139,
+      "rank": 6,
+      "se_pp": 0.04851657999725018,
+      "statistic": 0.23551972974761673,
+      "status": "estimated",
+      "variable": "log_fair_opps"
+    },
+    {
+      "ci95_high_pp": 0.17744930651667223,
+      "ci95_low_pp": 0.11267468166426664,
+      "clusters": null,
+      "coefficient_pp": 0.14506199409046944,
+      "covariance": "HC1",
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "dose_response_bins_match_cell_fe_HC1",
+      "n": 1101025,
+      "p_two_sided_approx": 1.6547560132076697e-18,
+      "rank": 6,
+      "se_pp": 0.016524442633471727,
+      "statistic": 8.778631588858161,
+      "status": "estimated",
+      "variable": "log_total_opps"
+    }
+  ],
+  "covariance": [
+    [
+      0.000387145062325806,
+      3.622422166336688e-05,
+      2.793485694825984e-05,
+      2.966948574099291e-05,
+      -2.3720975487925672e-05,
+      3.1334142416077366e-05
+    ],
+    [
+      3.6224221663366865e-05,
+      0.0016231233814407978,
+      5.2810497202033564e-05,
+      5.011299488755423e-05,
+      -5.4978605485689345e-05,
+      5.215683149415807e-05
+    ],
+    [
+      2.7934856948259485e-05,
+      5.281049720203107e-05,
+      0.01143861660509857,
+      9.583747740407589e-05,
+      -0.0001878272440391613,
+      1.6641824118060167e-05
+    ],
+    [
+      2.9669485740992923e-05,
+      5.011299488755298e-05,
+      9.583747740407782e-05,
+      0.028474987798481247,
+      -4.197300380349333e-05,
+      4.9048137000779857e-05
+    ],
+    [
+      -2.372097548792562e-05,
+      -5.497860548568877e-05,
+      -0.0001878272440391641,
+      -4.197300380349094e-05,
+      0.0023538585346295766,
+      -0.00024185252258371824
+    ],
+    [
+      3.1334142416077394e-05,
+      5.215683149415866e-05,
+      1.664182411806336e-05,
+      4.9048137000779545e-05,
+      -0.0002418525225837186,
+      0.00027305720434689807
+    ]
+  ],
+  "kept_names": [
+    "dose_1",
+    "dose_2_4",
+    "dose_5_9",
+    "dose_10_plus",
+    "log_fair_opps",
+    "log_total_opps"
+  ],
+  "model": {
+    "cluster": null,
+    "clusters": null,
+    "covariance": "HC1",
+    "dropped_regressors": {},
+    "estimand_class": "secondary",
+    "fixed_effect_levels": 40,
+    "fixed_effects": "match_cell",
+    "kept_regressors": [
+      "dose_1",
+      "dose_2_4",
+      "dose_5_9",
+      "dose_10_plus",
+      "log_fair_opps",
+      "log_total_opps"
+    ],
+    "model": "dose_response_bins_match_cell_fe_HC1",
+    "n": 1101025,
+    "outcome": "patron_pp",
+    "rank": 6,
+    "requested_regressors": [
+      "dose_1",
+      "dose_2_4",
+      "dose_5_9",
+      "dose_10_plus",
+      "log_fair_opps",
+      "log_total_opps"
+    ],
+    "standardization": {
+      "log_fair_opps": {
+        "mean": 1.8175627365815932,
+        "sd_population": 0.9809280423842832
+      },
+      "log_total_opps": {
+        "mean": 2.5939246948726478,
+        "sd_population": 1.1486427649990363
+      }
+    },
+    "status": "estimated"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "package": "Mating_Material_First_Run_v1_0_2",
+  "version": "1.0.2",
+  "created_utc": "2026-10-28",
+  "upstream_repository": "https://github.com/ravideepsethi/intrinsic-prosociality",
+  "upstream_commit": "561590939aee88832480b42c5fa53428c944ca8b",
+  "pipeline_commit_scope": "Standalone first-stage producer; no remote push",
+  "production_data_executed": false,
+  "coverage": "audit, replacement main/all-source inputs and descriptives; statistical reruns pending",
+  "previous_pipeline_commit": "c35145ba2f1cbf6df7c617f77948d2a503e840de",
+  "fix": "Keep strict zero-win gate; validate documented legacy chooser losses against prior evidence and preserve their non-grant coding.",
+  "synthetic_tests_passed": 39,
+  "returned_main_audit_review": {
+    "archive_sha256": "0fda1270aa370b69a0695779855cd8ebdc7380c1e24db1096f7c630e07570326",
+    "zero_win_conflicts": 0,
+    "known_chooser_losses": 65,
+    "matching_historical_loss_checks": 25,
+    "dropped": 20570,
+    "reclassified_draws": 332,
+    "main_audit_seconds": 207,
+    "source": "User-returned failed run; full replacement panels not yet produced"
+  },
+  "pipeline_commit": "69aab3eb73933d344f617a1e7ffaaa5b719c0021"
+}

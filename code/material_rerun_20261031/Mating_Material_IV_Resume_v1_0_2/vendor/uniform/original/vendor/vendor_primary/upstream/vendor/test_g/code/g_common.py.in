@@ -1,0 +1,143 @@
+"""Local-only I/O, authenticated checkpoints, aggregate export and execution limits."""
+from __future__ import annotations
+import contextlib, datetime, hashlib, importlib.util, json, os, platform, shutil, subprocess, sys, time, zipfile
+from pathlib import Path
+from threading import Event, Thread
+import numpy as np
+import pandas as pd
+import pyarrow as pa
+import pyarrow.parquet as pq
+import duckdb
+
+ROOT = Path(__file__).resolve().parents[1]
+VERSION = '2.1.1'
+MONTHS = [f'{y}-{m:02d}' for y,m in [(2023,11),(2023,12)]+[(2024,m) for m in range(1,13)]+[(2025,m) for m in range(1,11)]]
+SPEEDS = ['ultrabullet','bullet','blitz','rapid','classical']
+AUTHORS = ('__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__')
+MAIN_REL = 'derived/replication/analysis_panel_pool_nonadjacent_24m_v100_PRIVATE'
+SNAPSHOT_REL = 'derived/replication/patron_profile_snapshot_24m_v100_FINAL_CERTIFIED/profile_snapshot_24m_private_lossless.parquet'
+SNAPSHOT_SHA = 'f42f28a6540a65c0a83f0da488663b4adddf60d1001daeed556f1ffbb961e238'
+SEED = 20261012
+CAVEAT = ('Omega benchmarks continuation by players who stay. It is not a claim about how the disconnected player would have continued. '
+          'No result identifies motives. All scientific conclusions remain conditional on calibration, support, and simulation precision.')
+
+class GateError(RuntimeError):
+    def __init__(self, code, message):
+        self.code=code
+        super().__init__(message)
+
+def require(condition, message, code='INTEGRITY_FAILURE'):
+    if not condition: raise GateError(code,message)
+
+def safe_error_location(exc):
+    """Export code locations only: never the message, locals, query values, or source paths."""
+    frames=[];tb=exc.__traceback__
+    while tb is not None:
+        code=tb.tb_frame.f_code
+        try:relative=Path(code.co_filename).resolve().relative_to(ROOT)
+        except ValueError:pass
+        else:frames.append(dict(file=relative.as_posix(),function=code.co_name,line=tb.tb_lineno))
+        tb=tb.tb_next
+    return dict(exception_type=type(exc).__name__,package_frames=frames)
+
+def now(): return datetime.datetime.now(datetime.timezone.utc).isoformat(timespec='seconds')
+def log(s): print(f'[{now()}] {s}',flush=True)
+def clean(x):
+    if isinstance(x,dict): return {str(k):clean(v) for k,v in x.items()}
+    if isinstance(x,(list,tuple)): return [clean(v) for v in x]
+    if isinstance(x,np.ndarray): return clean(x.tolist())
+    if isinstance(x,np.generic): return clean(x.item())
+    if isinstance(x,Path): return str(x)
+    if isinstance(x,float) and not np.isfinite(x): return str(x)
+    return x
+def digest(x): return hashlib.sha256(json.dumps(clean(x),sort_keys=True,separators=(',',':')).encode()).hexdigest()
+def sha(p):
+    h=hashlib.sha256()
+    with open(p,'rb') as f:
+        for b in iter(lambda:f.read(16*1024*1024),b''): h.update(b)
+    return h.hexdigest()
+def load(p): return json.loads(Path(p).read_text())
+def save(p,x):
+    p=Path(p);p.parent.mkdir(parents=True,exist_ok=True);q=p.with_name(p.name+'.partial')
+    q.write_text(json.dumps(clean(x),sort_keys=True,indent=2,allow_nan=False)+'\n');os.replace(q,p)
+def atomic_parquet(d,p):
+    p=Path(p);p.parent.mkdir(parents=True,exist_ok=True);q=p.with_suffix('.partial.parquet')
+    if isinstance(d,pd.DataFrame): d=pa.Table.from_pandas(d,preserve_index=False)
+    pq.write_table(d,q,compression='zstd');os.replace(q,p)
+def qs(x): return "'"+str(x).replace("'","''")+"'"
+def parq(paths): return 'read_parquet(['+','.join(qs(p) for p in paths)+'],hive_partitioning=false,union_by_name=true)'
+def db(work,memory=8,threads=1):
+    work=Path(work);work.mkdir(parents=True,exist_ok=True)
+    c=duckdb.connect();c.execute(f"SET memory_limit='{memory}GB'");c.execute(f'SET threads={threads}')
+    c.execute('SET temp_directory='+qs(work));c.execute('SET preserve_insertion_order=false');return c
+def stamp(p):
+    s=Path(p).stat();return [s.st_size,s.st_mtime_ns]
+def checkpoint(folder,key,inputs=(),outputs=(),summary=None):
+    save(Path(folder)/'_DONE.json',dict(key=key,inputs=[dict(path=str(p),stamp=stamp(p),sha256=sha(p)) for p in inputs],
+      outputs=[dict(path=str(p),stamp=stamp(p),sha256=sha(p)) for p in outputs],summary=summary or {},time=now()))
+def done(folder,key):
+    p=Path(folder)/'_DONE.json'
+    if not p.exists(): return False
+    r=load(p);require(r['key']==key,'Checkpoint configuration changed; use a new run directory.')
+    for v in r['inputs']+r['outputs']:
+        f=Path(v['path']);require(f.is_file(),'Checkpoint file missing: '+str(f))
+        # Byte hashing on any changed signature; static signatures are rechecked by source authentication.
+        if stamp(f)!=v['stamp']: require(sha(f)==v['sha256'],'Checkpoint file changed: '+str(f))
+    return True
+@contextlib.contextmanager
+def heartbeat(label):
+    event=Event();start=time.monotonic()
+    def run():
+        while not event.wait(45): log(f'{label}: active, elapsed {(time.monotonic()-start)/60:.1f} min')
+    t=Thread(target=run,daemon=True);t.start()
+    try: yield
+    finally: event.set();t.join()
+def authority():
+    p=ROOT/'vendor_sample/source/pool_wave1_common.py'
+    s=importlib.util.spec_from_file_location('test_g_sample_authority',p);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
+def table(report,name,rows,meta):
+    """Only caller-supplied aggregates enter exports. A JSON comment is the metadata header."""
+    report=Path(report);report.mkdir(parents=True,exist_ok=True)
+    d=rows if isinstance(rows,pd.DataFrame) else pd.DataFrame(rows)
+    require(not set(d.columns)&{'game_id','chooser','opponent','username','chooser_name','fen','moves'},'Private identifiers in export')
+    p=report/(name+'.csv');tmp=p.with_suffix('.partial.csv')
+    with tmp.open('w') as f:
+        f.write('# '+json.dumps(clean(dict(meta,caveat=CAVEAT)),sort_keys=True)+'\n');d.to_csv(f,index=False)
+    os.replace(tmp,p)
+def package(run,desktop,label,status):
+    run=Path(run);report=run/'report';report.mkdir(exist_ok=True)
+    save(report/'STATUS.json',dict(status=status,phase=label,run_id=run.name,time=now(),version=VERSION))
+    allowed=list(report.glob('*.csv'))+list(report.glob('*.json'))+list(report.glob('*.pdf'))+list(report.glob('*.txt'))
+    for p in (ROOT/'FROZEN_PROTOCOL.json',ROOT/'IMPLEMENTATION_NOTES.txt',ROOT/'PACKAGE_MANIFEST.sha256'):
+        if p.exists(): shutil.copy2(p,report/p.name);allowed.append(report/p.name)
+    paths=sorted(p for p in set(allowed) if p.name!='REPORT_SHA256SUMS.txt');manifest=''.join(sha(p)+'  '+p.name+'\n' for p in paths)
+    (report/'REPORT_SHA256SUMS.txt').write_text(manifest)
+    out=Path(desktop)/f'TEST_G_{label}_{run.name}.zip';tmp=out.with_suffix('.partial.zip');out.parent.mkdir(parents=True,exist_ok=True)
+    with zipfile.ZipFile(tmp,'w',zipfile.ZIP_DEFLATED) as z:
+        for p in paths+[report/'REPORT_SHA256SUMS.txt']: z.write(p,'report/'+p.name)
+        # The run log deliberately never prints records, identities, FENs or row-level examples.
+        if (run/'RUN.log').exists(): z.write(run/'RUN.log','RUN.log')
+    os.replace(tmp,out);out.with_suffix('.zip.sha256').write_text(sha(out)+'  '+out.name+'\n')
+    log('Aggregate report: '+str(out));return out
+def file_inventory(root,exclude=()):
+    excluded={Path(x).resolve() for x in exclude}
+    skip={'venv','.git','node_modules','__pycache__','tests','fixtures','vendor','vendors'}
+    for base,dirs,files in os.walk(root):
+        dirs[:]=[d for d in dirs if d not in skip and not d.startswith('.') and not any(t in d.lower() for t in ('synthetic','selftest','smoke'))
+                  and (Path(base)/d).resolve() not in excluded]
+        for f in files:
+            if not f.startswith('.') and '.partial' not in f: yield Path(base)/f
+def hash64(text,salt=''):
+    return int.from_bytes(hashlib.blake2b((str(text)+'|'+salt).encode(),digest_size=8).digest(),'big')
+def code_provenance():
+    import importlib.metadata
+    paths=sorted(p for p in ROOT.rglob('*.py') if 'tests' not in p.parts and '__pycache__' not in p.parts)
+    result={'code_sha256':digest({str(p.relative_to(ROOT)):sha(p) for p in paths}),'python':sys.version,'platform':platform.platform(),
+      'dependencies':{n:importlib.metadata.version(n) for n in ['numpy','pandas','scipy','pyarrow','duckdb','python-chess','zstandard','scikit-learn','matplotlib']}}
+    try: result['git_commit']=subprocess.check_output(['git','-C',str(ROOT),'rev-parse','HEAD'],stderr=subprocess.DEVNULL,text=True).strip()
+    except (OSError,subprocess.CalledProcessError):
+        p=ROOT/'CODE_PROVENANCE.json'
+        if p.exists():
+            saved=load(p);require(saved['code_sha256']==result['code_sha256'],'Packaged code differs from the committed release');result['git_commit']=saved['git_commit'];result['commit_status']='Committed release snapshot; independently checked code SHA256'
+        else:result['git_commit']=None;result['commit_status']='Development checkout; no release commit yet.'
+    return result

@@ -1,0 +1,68 @@
+{
+  "eligible_n": 865783,
+  "n": 865783,
+  "absorbed_groups": 36,
+  "dropped_singletons": 0,
+  "grants": 4218,
+  "targets": [
+    "ever_fair",
+    "ever_losing"
+  ],
+  "controls": {
+    "cats": [],
+    "nums": [
+      "rating100",
+      "log_nf",
+      "log_nl",
+      "log_age"
+    ]
+  },
+  "categorical_levels": {},
+  "status": "ESTIMATED",
+  "estimates": {
+    "ever_fair": {
+      "status": "ESTIMATED",
+      "coefficient_pp": 0.4562180570844015,
+      "se_pp": 0.035843256265723926,
+      "ci_low_pp": 0.3834523783650466,
+      "ci_high_pp": 0.5289837358037565,
+      "p_value": 1.0829102222845283e-14
+    },
+    "ever_losing": {
+      "status": "ESTIMATED",
+      "coefficient_pp": -0.20184626333493955,
+      "se_pp": 0.03274535613742634,
+      "ci_low_pp": -0.26832287044290976,
+      "ci_high_pp": -0.1353696562269693,
+      "p_value": 4.6963754642677e-07
+    }
+  },
+  "target_covariance_pp2": [
+    [
+      0.0012847390197303578,
+      -0.0008293404310911524
+    ],
+    [
+      -0.0008293404310911524,
+      0.0010722583485668848
+    ]
+  ],
+  "clusters": 36,
+  "residual_df": 865741,
+  "within_rank": 6,
+  "max_abs_group_residual_sum": 4.023980801348692e-10,
+  "support": {
+    "treatment_switchers": 36,
+    "switchers_with_outcome_variation": 34,
+    "never_granter_identifying_weight_share": 9.873369335809852e-05
+  },
+  "se": "CR1, full rank including absorbed effects; cluster=match_cell",
+  "minimum_each_state": 1,
+  "opportunity_min_age": 90,
+  "cohort": "pooled",
+  "population": "Returned active August profile acquisition frame; outcome-dependent sampling; not an unconditional population Patron rate",
+  "outcome": "August current Patron status; not observed payment or historical Patron adoption",
+  "specification": "New tenure sensitivity with original match-cell absorption, exposure counts, mean rating and baseline age; not exact rerun of prior all-control specification",
+  "fair_minus_losing_pp": 0.658064320419341,
+  "contrast_se_pp": 0.06336937928116029
+}

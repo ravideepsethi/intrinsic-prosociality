@@ -1,0 +1,5 @@
+model,test,chi_square,df,p_value
+early_late_interaction,joint equality of specified contrasts across groups,70.56760017541623,3,3.226350768222345e-15
+evaluation_by_rating_tier,joint equality of specified contrasts across groups,117.64553003706413,9,4.050659337283768e-21
+material_by_rating_tier_competitive,joint equality of specified contrasts across groups,177.2300056682089,21,1.0246679763939623e-26
+material_by_rating_tier_full,joint equality of specified contrasts across groups,927.0204886613919,21,9.599739244621562e-183
