@@ -1,0 +1,94 @@
+"""Intersect the frozen roster with fresh material membership; never top it up."""
+from util import *
+from checkpoints import stage,copy_query
+from sources import producers,prepare_targets
+import numpy as np,pandas as pd,pyarrow.parquet as pq
+
+FEATURES=['game_id','replay_status','trajectory_ok','material_swing4','recomputed_final_cp','recomputed_final_mate',
+          'own_loss100','own_kind','net2_loss100','net2_kind','net4_loss100','net4_kind']
+
+def check_features(d,f):
+    require(set(FEATURES)<=set(f.columns),'Repaired projection columns missing')
+    require(len(f)==len(d) and f.game_id.notna().all() and f.game_id.nunique()==len(f) and set(f.game_id)==set(d.game_id),'Feature roster is not the frozen target roster')
+    require(f.trajectory_ok.notna().all() and set(f.trajectory_ok.unique())<={True,False},'Invalid trajectory-support flag')
+    labels=set(producers()['features'].MATE_LABELS)
+    for prefix in ('own','net2','net4'):
+        require(f[prefix+'_kind'].isin(labels).all(),'Unknown repaired endpoint type')
+        x=f[prefix+'_loss100'];kind=f[prefix+'_kind'];finite=kind=='finite'
+        require(np.isfinite(x[finite]).all() and (x[finite].abs()<=10).all(),'Invalid finite loss proxy')
+        require(x[kind=='missing'].isna().all(),'Missing endpoint was coded as observed')
+        require((x[(~finite)&(kind!='missing')]==0).all(),'Exact mate transitions must use their separate indicators')
+        # Short games can have a verified available trajectory but no n-4 endpoint.
+        # Preserve the original missing-endpoint indicators, including in all-stage fits.
+    require((~f.trajectory_ok | (f.replay_status=='VERIFIED')).all(),'Supported trajectory is not verified')
+
+def compare_same(old,new,name):
+    a=old[name];b=new[name]
+    if pd.api.types.is_numeric_dtype(a) and pd.api.types.is_numeric_dtype(b):
+        ok=np.isclose(a.to_numpy(float),b.to_numpy(float),rtol=2e-12,atol=1e-9,equal_nan=True)
+    else:ok=((a==b)|(a.isna()&b.isna())).to_numpy()
+    require(ok.all(),'A canonical input other than material membership/y changed: '+name)
+
+def join_material(d,f,matched):
+    """Pure join used by production and fixtures. matched contains new y plus old covariates."""
+    check_features(d,f)
+    require(d.game_id.notna().all() and not d.game_id.duplicated().any(),'Frozen targets have duplicate/missing IDs')
+    require(matched.game_id.notna().all() and not matched.game_id.duplicated().any(),'Duplicate/missing material game IDs in frozen roster')
+    require(set(matched.game_id)<=set(d.game_id),'Material join added an unfrozen game')
+    require(set(matched.y.unique())<={0,1} and matched.y.notna().all(),'Invalid new grant indicator')
+    required=[x for x in d.columns if x not in ('y','cp','mate','ply','gap','premium','rd_c','rd_d','month_code','speed_code','stage','clock_c','clock_d','clock_ratio','clock_fraction','time_trouble','log_rival_clock')]
+    # compare only original target columns returned by the frozen preparer
+    require(set(required)<=set(matched.columns),'Material validation columns missing')
+    old=d.set_index('game_id').loc[matched.game_id].reset_index()
+    for name in required:
+        if name!='game_id':compare_same(old,matched.reset_index(drop=True),name)
+    reference=d.merge(f[FEATURES],on='game_id',validate='one_to_one',sort=False)
+    fresh=reference[reference.game_id.isin(matched.game_id)].copy()
+    labels=matched.set_index('game_id').y;fresh['old_y']=fresh.y
+    fresh['y']=fresh.game_id.map(labels).astype('int8')
+    removed=reference[~reference.game_id.isin(matched.game_id)].copy()
+    reclassified=fresh[fresh.old_y!=fresh.y][['game_id','chooser','old_y','y']].copy()
+    require(set(fresh.chooser)<=set(reference.chooser),'A replacement account entered')
+    audit=dict(original_opportunities=len(reference),original_choosers=int(reference.chooser.nunique()),original_grants=int(reference.y.sum()),
+        opportunities=len(fresh),choosers=int(fresh.chooser.nunique()),grants=int(fresh.y.sum()),
+        removed_opportunities=len(removed),removed_grants=int(removed.y.sum()),
+        removed_choosers=int(reference.chooser.nunique()-fresh.chooser.nunique()),
+        grants_added_on_retained=int(((fresh.old_y==0)&(fresh.y==1)).sum()),
+        grants_removed_on_retained=int(((fresh.old_y==1)&(fresh.y==0)).sum()),replacement_accounts=0)
+    require(audit['grants']==audit['original_grants']-audit['removed_grants']+audit['grants_added_on_retained']-audit['grants_removed_on_retained'],'Grant reconciliation failed')
+    return reference,fresh.drop(columns='old_y'),removed,reclassified,audit
+
+def prepare(auth,cache,run,key,workers,memory):
+    def build(folder):
+        from concurrent.futures import ThreadPoolExecutor
+        d=prepare_targets(cache['target'])
+        def read_one(p):return pq.ParquetFile(p).read(columns=FEATURES,use_threads=False).to_pandas(use_threads=False)
+        with ThreadPoolExecutor(max_workers=min(10,workers)) as pool:f=pd.concat(list(pool.map(read_one,cache['features'])),ignore_index=True)
+        c=db(folder/'spill',memory,min(4,workers))
+        try:
+            c.register('frozen_ids',d[['game_id']])
+            # Recreate the frozen producer's original projection for an identity check.
+            query='''SELECT p.game_id,chooser_user_id::BIGINT chooser,outcome_kind_draw::INTEGER y,
+               engine_eval_cp_disconnected::DOUBLE board,engine_eval_is_mate,ply_count,
+               chooser_elo::DOUBLE rating,(disconnected_elo-chooser_elo)/100. gap100,
+               chooser_win_premium_v2/10. premium10,chooser_pre_rd_v2/100. crd100,disconnected_pre_rd_v2/100. drd100,
+               month::VARCHAR AS month,api_speed::VARCHAR AS speed,time_control::VARCHAR AS time_control,
+               ln(1+greatest(0,coalesce(chooser_clock_last_obs_s,0))) log_cc,
+               ln(1+greatest(0,coalesce(disconnected_clock_last_obs_s,0))) log_dc,
+               (chooser_clock_last_obs_s IS NULL)::INTEGER cc_missing,(disconnected_clock_last_obs_s IS NULL)::INTEGER dc_missing,
+               api_created_at_ms::BIGINT game_ms,
+               lower(trim(chooser_username_norm)) chooser_name,lower(trim(disconnected_username_norm)) recipient_name
+               FROM '''+parquet([r['path'] for r in auth['records']])+''' p INNER JOIN frozen_ids t ON p.game_id=t.game_id'''
+            matched=c.execute(query).fetchdf()
+        finally:c.close()
+        require(not matched[['chooser_name','recipient_name']].isin(['__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__']).any().any(),'Author account survived material join')
+        require(matched[['chooser_name','recipient_name']].notna().all().all(),'Missing account names in source identity check')
+        reference,fresh,removed,changed,audit=join_material(d,f,matched.drop(columns=['chooser_name','recipient_name']))
+        reference.to_parquet(folder/'reference.parquet',index=False,compression='zstd')
+        fresh.to_parquet(folder/'material.parquet',index=False,compression='zstd')
+        removed.to_parquet(folder/'removed_PRIVATE.parquet',index=False,compression='zstd')
+        changed.to_parquet(folder/'reclassified_PRIVATE.parquet',index=False,compression='zstd')
+        table(folder/'SAMPLE_RECONCILIATION.csv',[audit])
+        return audit
+    with heartbeat('Joining the frozen sample to corrected material decisions'):
+        return stage(run/'PRIVATE','frames',digest([key,'frames']),build)

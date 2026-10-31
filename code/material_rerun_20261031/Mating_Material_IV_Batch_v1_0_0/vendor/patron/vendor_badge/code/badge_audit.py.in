@@ -1,0 +1,276 @@
+"""Offline coverage and design-sampling audit. No outcome regressions."""
+from pathlib import Path
+import csv, hashlib, json, os, time
+import duckdb
+import pyarrow.parquet as pq
+
+AUTHORS = ('__PRIVATE_VALUE_1__', '__PRIVATE_VALUE_2__')
+
+def require(ok, message):
+    if not ok:
+        raise RuntimeError(message)
+
+def lit(value):
+    return "'" + str(value).replace("'", "''") + "'"
+
+def qi(value):
+    return '"' + str(value).replace('"', '""') + '"'
+
+def parq(paths):
+    if isinstance(paths, (str, Path)):
+        paths = [paths]
+    return 'read_parquet([' + ','.join(lit(p) for p in paths) + '],union_by_name=false)'
+
+def sha(path):
+    h = hashlib.sha256()
+    with open(path, 'rb') as f:
+        for block in iter(lambda: f.read(8 * 1024 * 1024), b''):
+            h.update(block)
+    return h.hexdigest()
+
+def load(path):
+    return json.loads(Path(path).read_text())
+
+def save(path, value):
+    path = Path(path); path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix(path.suffix + '.tmp')
+    tmp.write_text(json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + '\n')
+    os.replace(tmp, path)
+
+def rows(c, sql):
+    cur = c.execute(sql)
+    keys = [x[0] for x in cur.description]
+    return [dict(zip(keys, row)) for row in cur.fetchall()]
+
+def one(c, sql):
+    return rows(c, sql)[0]
+
+def csv_out(c, sql, path):
+    c.execute('COPY (' + sql + ') TO ' + lit(path) + ' (FORMAT CSV, HEADER TRUE)')
+
+def copy(c, sql, path):
+    c.execute('COPY (' + sql + ') TO ' + lit(path) + ' (FORMAT PARQUET, COMPRESSION ZSTD)')
+
+def connect(folder, workers, memory):
+    folder = Path(folder); folder.mkdir(parents=True, exist_ok=True)
+    c = duckdb.connect()
+    c.execute('SET threads=' + str(workers))
+    c.execute('SET memory_limit=' + lit(str(max(.5, memory - 2)) + 'GiB'))
+    c.execute('SET temp_directory=' + lit(folder / 'spill'))
+    c.execute('SET preserve_insertion_order=false')
+    c.execute("SET TimeZone='UTC'")
+    return c
+
+def columns(path):
+    return set(pq.ParquetFile(path).schema_arrow.names)
+
+def speed_sql():
+    """Exact R9b speed(base,inc): searchsorted([180,480,1500], base+40*inc, right).
+
+    The certified model frames retain time controls, not a speed column.
+    Codes 0/1/2/3 match R9b's bullet/blitz/rapid/classical subgroup codes.
+    """
+    duration = '(CAST(tc_base_s AS DOUBLE)+40.0*CAST(tc_inc_s AS DOUBLE))'
+    return ('CASE WHEN '+duration+'<180 THEN 0 WHEN '+duration+'<480 THEN 1 '
+            'WHEN '+duration+'<1500 THEN 2 ELSE 3 END::TINYINT')
+
+def check_time_controls(c, view, label):
+    invalid = ' OR '.join(k+' IS NULL OR NOT isfinite('+k+') OR '+k+'<0'
+                          for k in ['tc_base_s','tc_inc_s'])
+    require(c.execute('SELECT count(*) FROM '+view+' WHERE '+invalid).fetchone()[0] == 0,
+            label+' has missing or invalid time controls')
+
+def project_frames(c, inputs, out, expected):
+    """Retain native row IDs and flags; verify R9b's exact S0 bridge."""
+    out = Path(out); out.mkdir(parents=True, exist_ok=True)
+    base = inputs['expanded']; scores = inputs['expanded_scores']
+    need = {'row_id','game_id','recipient_id','opponent_id','archive_start_ms','month_code',
+            'received','reached','y','spaced90','first_recipient','recipient_rating','tc_base_s','tc_inc_s'}
+    require(need <= columns(base), 'Expanded frame missing required columns: ' + str(sorted(need-columns(base))))
+    scorecols = ['n_A','counterparts_A','expected_A','adjusted_A']
+    require(set(scorecols + ['row_id']) <= columns(scores), 'Expanded Score A schema differs')
+    optional = [x for x in ['complete90','support7','history_window_complete','fair_90','kind_90'] if x in columns(base)]
+    selected = sorted(need) + optional
+    c.execute('CREATE VIEW source AS SELECT ' + ','.join(qi(k) for k in selected) + ','+speed_sql()+' AS speed FROM ' + parq(base))
+    check_time_controls(c,'source','Expanded frame')
+    c.execute('CREATE VIEW score AS SELECT row_id,' + ','.join(scorecols) + ' FROM ' + parq(scores))
+    for view in ['source','score']:
+        r = one(c, f'SELECT count(*) n,count(DISTINCT row_id) unique_rows FROM {view}')
+        require(r['n'] == r['unique_rows'] == expected['expanded'], 'Expanded source/score count or uniqueness changed')
+    require(c.execute('SELECT count(*) FROM source JOIN score USING(row_id)').fetchone()[0] == expected['expanded'], 'Expanded score IDs do not match')
+    invalid = ' OR '.join(k+' IS NULL OR NOT isfinite('+k+')' for k in scorecols)
+    require(c.execute('SELECT count(*) FROM score WHERE n_A<5 OR '+invalid).fetchone()[0] == 0, 'Score A support is incomplete')
+    for flag in ['spaced90','first_recipient']:
+        require(c.execute('SELECT count(*) FROM source WHERE ' + qi(flag) + ' IS NULL').fetchone()[0] == 0, 'Missing frozen selection flag')
+    for flag in ['complete90','support7','history_window_complete']:
+        if flag in optional:
+            require(c.execute('SELECT count(*) FROM source WHERE NOT coalesce('+qi(flag)+',FALSE)').fetchone()[0] == 0, 'Expanded frame violates frozen eligibility: '+flag)
+    keys = ['game_id','recipient_id','opponent_id','archive_start_ms','received','y','reached','tc_base_s','tc_inc_s']
+    c.execute('CREATE VIEW s0 AS SELECT row_id,' + ','.join(keys) + ' FROM ' + parq(inputs['S0']))
+    require(c.execute('SELECT count(*),count(DISTINCT row_id) FROM s0').fetchone() == (expected['S0'],expected['S0']), 'S0 identity/count changed')
+    cond = ' OR '.join('a.'+k+' IS DISTINCT FROM b.'+k for k in keys)
+    n, bad = c.execute('SELECT count(*),sum(('+cond+')::BIGINT) FROM source a JOIN s0 b USING(row_id) WHERE a.spaced90').fetchone()
+    require(n == expected['S0'] and not bad, 'R9b-to-R9 S0 identity/outcome bridge failed')
+    require(c.execute('SELECT count(*) FROM source WHERE spaced90').fetchone()[0] == expected['S0'], 'S0 flag changed')
+    c.execute('CREATE VIEW s0_score AS SELECT * FROM '+parq(inputs['S0_scores']))
+    require(c.execute('SELECT count(*),count(DISTINCT row_id) FROM s0_score').fetchone() == (expected['S0'],expected['S0']), 'S0 score row IDs differ')
+    require(c.execute('SELECT count(*) FROM s0_score JOIN s0 USING(row_id)').fetchone()[0] == expected['S0'], 'S0 score/source join failed')
+    require(c.execute('SELECT count(*) FROM s0_score WHERE n_A<5 OR '+invalid).fetchone()[0] == 0, 'S0 Score A contains missing or invalid values')
+    for key in scorecols:
+        delta = c.execute('SELECT max(abs(a.'+key+'-b.'+key+')) FROM score a JOIN s0_score b USING(row_id)').fetchone()[0]
+        require(delta is not None and delta < 2e-10, 'R9b/R9 Score A mismatch: '+key)
+    # Boolean and timing checks precede projection; no missing receipt becomes zero.
+    for key in ['received','y','reached']:
+        require(c.execute('SELECT count(*) FROM source WHERE '+qi(key)+' IS NULL OR '+qi(key)+' NOT IN (0,1)').fetchone()[0] == 0, 'Nonbinary/missing outcome: '+key)
+    keep = [x for x in selected if x not in ['y']] + ['speed']
+    copy(c, 'SELECT '+','.join('a.'+qi(k) for k in keep)+',s.n_A,s.adjusted_A FROM source a JOIN score s USING(row_id)', out/'expanded.parquet')
+    counts = one(c, 'SELECT count(*) expanded,count(*) FILTER(WHERE spaced90) S0,count(*) FILTER(WHERE first_recipient) first_reference,count(DISTINCT recipient_id) recipients FROM source')
+    require(counts['first_reference'] == expected['first_reference'], 'Frozen first-exposure count differs')
+    require(c.execute('SELECT count(*)-count(DISTINCT recipient_id) FROM source WHERE first_recipient').fetchone()[0] == 0, 'Frozen first exposure is not unique per recipient')
+    for name in ['F','O']:
+        p = inputs[name]; sc = inputs[name+'_scores']
+        fields = ['row_id','game_id','recipient_id','opponent_id','archive_start_ms','month_code','recipient_rating','tc_base_s','tc_inc_s']
+        require(set(fields) <= columns(p), name+' frame missing required columns: '+str(sorted(set(fields)-columns(p))))
+        c.execute('CREATE OR REPLACE VIEW q AS SELECT '+','.join(fields)+','+speed_sql()+' AS speed FROM '+parq(p))
+        check_time_controls(c,'q',name+' frame')
+        c.execute('CREATE OR REPLACE VIEW z AS SELECT row_id,n_A,adjusted_A FROM '+parq(sc))
+        for view in ['q','z']:
+            require(c.execute('SELECT count(*),count(DISTINCT row_id) FROM '+view).fetchone() == (expected[name],expected[name]), name+' source/score count or uniqueness mismatch')
+        require(c.execute('SELECT count(*) FROM q JOIN z USING(row_id)').fetchone()[0] == expected[name], name+' source/score ID mismatch')
+        require(c.execute('SELECT count(*) FROM z WHERE n_A IS NULL OR n_A<5 OR adjusted_A IS NULL OR NOT isfinite(adjusted_A)').fetchone()[0] == 0, name+' score support incomplete')
+        copy(c, 'SELECT q.*,z.n_A,z.adjusted_A FROM q JOIN z USING(row_id)', out/(name+'.parquet'))
+        counts[name] = expected[name]
+    require(c.execute('SELECT count(*) FROM '+parq(out/'O.parquet')+' o JOIN '+parq(out/'F.parquet')+' f USING(row_id) WHERE '+
+        ' AND '.join('o.'+k+' IS NOT DISTINCT FROM f.'+k for k in ['game_id','recipient_id','opponent_id','archive_start_ms','tc_base_s','tc_inc_s','speed','n_A','adjusted_A'])).fetchone()[0] == expected['O'], 'O is not the verified F subset')
+    counts['speed_definition']='R9b: tc_base_s + 40*tc_inc_s; <180=0, <480=1, <1500=2, otherwise=3'
+    save(out/'frame_checks.json', counts)
+    return counts
+
+def frame_queries(frames):
+    f = Path(frames)
+    return {
+        'S0': 'SELECT * FROM '+parq(f/'expanded.parquet')+' WHERE spaced90',
+        'first_reference': 'SELECT * FROM '+parq(f/'expanded.parquet')+' WHERE first_recipient',
+        'unspaced': 'SELECT * FROM '+parq(f/'expanded.parquet'),
+        'F75': 'SELECT * FROM '+parq(f/'F.parquet'),
+        'O75': 'SELECT * FROM '+parq(f/'O.parquet'),
+    }
+
+def build_accounts(c, inputs, frames, out, expected, frame_paths=None):
+    """Join explicit numeric IDs, reconstruct original (not rematched) sampling."""
+    out=Path(out);out.mkdir(parents=True,exist_ok=True)
+    paths=frame_paths if frame_paths is not None else [Path(frames)/x for x in ['expanded.parquet','F.parquet','O.parquet']]
+    c.execute('CREATE TABLE need AS SELECT DISTINCT recipient_id FROM ('+' UNION ALL '.join('SELECT recipient_id FROM '+parq(p) for p in paths)+')')
+    idcol=qi(inputs['dictionary_column'])
+    c.execute('CREATE VIEW dictionary AS SELECT '+idcol+'::BIGINT AS recipient_id,lower(trim(username_norm)) AS username_norm FROM '+parq(inputs['dictionary']))
+    # Read one global dictionary projection. Matching never hashes numeric IDs into names.
+    c.execute('CREATE TABLE identities AS SELECT d.* FROM dictionary d WHERE d.recipient_id IN (SELECT recipient_id FROM need) OR d.username_norm IN ('+','.join(lit(x) for x in AUTHORS)+')')
+    z=one(c,'SELECT count(*) n,count(DISTINCT recipient_id) ids,count(DISTINCT username_norm) name_count,count(*) FILTER(WHERE recipient_id IS NULL OR username_norm IS NULL OR username_norm=\'\') invalid FROM identities')
+    require(z['n']==z['ids']==z['name_count'] and not z['invalid'],'Numeric-ID dictionary is not one-to-one on relevant accounts')
+    authors=rows(c,'SELECT recipient_id FROM identities WHERE username_norm IN ('+','.join(lit(x) for x in AUTHORS)+')')
+    require(len(authors)==2,'Both author IDs must resolve uniquely')
+    author_ids=[x['recipient_id'] for x in authors]
+    for p in paths:
+        require(c.execute('SELECT count(*) FROM '+parq(p)+' WHERE recipient_id IN ('+','.join(map(str,author_ids))+') OR opponent_id IN ('+','.join(map(str,author_ids))+')').fetchone()[0]==0,'Author account survived in a frozen frame')
+    c.execute('CREATE VIEW universe AS SELECT lower(trim(chooser_id)) username_norm,match_cell,ever_kind_any_state FROM '+parq(inputs['chooser']))
+    r=one(c,'SELECT count(*) n,count(DISTINCT username_norm) name_count,count(*) FILTER(WHERE username_norm IS NULL OR username_norm=\'\' OR match_cell IS NULL OR ever_kind_any_state IS NULL) invalid,sum(ever_kind_any_state::BIGINT) kind FROM universe')
+    require(r['n']==r['name_count']==expected['chooser_users'] and r['kind']==expected['kind_users'] and not r['invalid'],'Original chooser universe changed')
+    c.execute('CREATE VIEW acquisition AS SELECT lower(trim(username_norm)) username_norm,match_cell,acquisition_role FROM '+parq(inputs['acquisition']))
+    c.execute('CREATE VIEW snapshot AS SELECT lower(trim(username_norm)) username_norm,match_cell,acquisition_role,returned,patron,queried_at_utc,coalesce(disabled,FALSE) disabled,coalesce(tos_violation,FALSE) tos_violation FROM '+parq(inputs['snapshot']))
+    for view in ['acquisition','snapshot']:
+        require(c.execute('SELECT count(*),count(DISTINCT username_norm) FROM '+view).fetchone()==(expected['profile_planned'],expected['profile_planned']), 'Original '+view+' count or uniqueness changed')
+    require(c.execute('SELECT count(*) FROM acquisition a FULL JOIN snapshot s USING(username_norm) WHERE a.username_norm IS NULL OR s.username_norm IS NULL OR a.match_cell IS DISTINCT FROM s.match_cell OR a.acquisition_role IS DISTINCT FROM s.acquisition_role').fetchone()[0]==0,'Snapshot and original acquisition membership disagree')
+    require(c.execute("SELECT count(*) FROM acquisition a LEFT JOIN universe u USING(username_norm) WHERE u.username_norm IS NULL OR a.match_cell IS DISTINCT FROM u.match_cell OR a.acquisition_role IS DISTINCT FROM CASE WHEN u.ever_kind_any_state THEN 'kind' ELSE 'control' END").fetchone()[0]==0,'Original acquisition roles disagree with original chooser histories')
+    qa=one(c,'SELECT count(*) planned,sum(returned::BIGINT) returned,sum(patron::BIGINT) patrons,count(*) FILTER(WHERE returned IS NULL OR (returned AND patron IS NULL) OR (NOT returned AND patron IS NOT NULL)) bad,count(*) FILTER(WHERE try_cast(queried_at_utc AS TIMESTAMPTZ) IS NULL) bad_query_dates FROM snapshot')
+    require(qa['returned']==expected['profile_returned'] and qa['patrons']==expected['patrons'] and not qa['bad'] and not qa['bad_query_dates'],'Snapshot status, missingness, or query timestamp contract failed')
+    c.execute("CREATE TABLE cells AS SELECT u.match_cell,count(*) FILTER(WHERE ever_kind_any_state)::BIGINT n_kind,count(*) FILTER(WHERE NOT ever_kind_any_state)::BIGINT n_control_reservoir,count(*) FILTER(WHERE NOT ever_kind_any_state AND a.username_norm IS NOT NULL)::BIGINT n_control_selected,count(*) FILTER(WHERE ever_kind_any_state AND a.username_norm IS NULL)::BIGINT missing_kind FROM universe u LEFT JOIN acquisition a USING(username_norm) GROUP BY u.match_cell")
+    require(c.execute('SELECT count(*) FROM cells WHERE missing_kind<>0 OR n_control_selected<>least(n_control_reservoir,3*n_kind)').fetchone()[0]==0,'Original all-kind/up-to-three control sampling counts do not reproduce')
+    c.execute('CREATE VIEW recorded_cells AS SELECT * FROM read_csv_auto('+lit(inputs['cell_diagnostics'])+", delim='\t', header=true)")
+    require(c.execute('SELECT count(*) FROM cells c FULL JOIN recorded_cells r USING(match_cell) WHERE c.match_cell IS NULL OR r.match_cell IS NULL OR c.n_kind IS DISTINCT FROM r.n_kind OR c.n_control_reservoir IS DISTINCT FROM r.n_control_reservoir OR c.n_control_selected IS DISTINCT FROM r.n_control_selected').fetchone()[0]==0,'Reconstructed sampling fractions disagree with original cell diagnostics')
+    seed=load(inputs['plan_summary'])['design_seed']
+    require(isinstance(seed,str) and seed,'Original acquisition hash seed missing')
+    # Confirm exact rank-selected control membership, not merely cell totals.
+    c.execute('CREATE TABLE ranked AS SELECT u.username_norm,u.match_cell,row_number() OVER(PARTITION BY u.match_cell ORDER BY sha256('+lit(seed)+" || '|control|' || u.username_norm),u.username_norm) rn FROM universe u WHERE NOT ever_kind_any_state")
+    require(c.execute('SELECT count(*) FROM ranked r JOIN cells c USING(match_cell) LEFT JOIN acquisition a USING(username_norm) WHERE (r.rn<=c.n_control_selected) IS DISTINCT FROM (a.username_norm IS NOT NULL)').fetchone()[0]==0,'Original deterministic control ranking does not reproduce')
+    csv_out(c,'SELECT *,CASE WHEN n_control_reservoir>0 THEN n_control_selected*1.0/n_control_reservoir END control_sampling_fraction FROM cells ORDER BY match_cell',out/'original_sampling_cells.csv')
+    sql="""SELECT n.recipient_id,d.username_norm,u.match_cell original_match_cell,u.ever_kind_any_state original_ever_kind,
+      d.recipient_id IS NOT NULL identity_resolved,u.username_norm IS NOT NULL in_original_chooser_universe,
+      a.username_norm IS NOT NULL originally_selected,coalesce(s.returned,FALSE) profile_returned,
+      s.patron,s.disabled,s.tos_violation,epoch_ms(try_cast(s.queried_at_utc AS TIMESTAMPTZ)) query_ms,
+      CASE WHEN d.recipient_id IS NULL THEN NULL WHEN u.username_norm IS NULL THEN 0.0
+        WHEN u.ever_kind_any_state THEN 1.0 ELSE c.n_control_selected*1.0/nullif(c.n_control_reservoir,0) END sampling_fraction,
+      CASE WHEN d.recipient_id IS NULL THEN 'unresolved_identity'
+        WHEN u.username_norm IS NULL THEN 'outside_original_chooser_universe'
+        WHEN NOT u.ever_kind_any_state AND c.n_control_selected=0 THEN 'zero_sampling_fraction'
+        WHEN a.username_norm IS NULL THEN 'eligible_not_selected'
+        WHEN NOT s.returned THEN 'selected_profile_nonreturn' ELSE 'observed' END coverage_status
+      FROM need n LEFT JOIN identities d USING(recipient_id) LEFT JOIN universe u USING(username_norm)
+      LEFT JOIN cells c ON u.match_cell=c.match_cell LEFT JOIN acquisition a USING(username_norm)
+      LEFT JOIN snapshot s USING(username_norm)"""
+    copy(c,sql,out/'recipient_profiles_PRIVATE.parquet')
+    c.execute('CREATE VIEW linked AS SELECT * FROM '+parq(out/'recipient_profiles_PRIVATE.parquet'))
+    require(c.execute('SELECT count(*),count(DISTINCT recipient_id) FROM linked').fetchone()==c.execute('SELECT count(*),count(*) FROM need').fetchone(),'Recipient linkage duplicates rows')
+    require(c.execute('SELECT count(*) FROM linked WHERE originally_selected AND (sampling_fraction IS NULL OR sampling_fraction<=0)').fetchone()[0]==0,'Selected account has no positive sampling support')
+    qa.update(relevant_recipients=c.execute('SELECT count(*) FROM need').fetchone()[0],identity_unresolved=c.execute('SELECT count(*) FROM linked WHERE NOT identity_resolved').fetchone()[0],original_hash_selection_reproduced=True,author_exclusion_verified=True)
+    save(out/'profile_checks.json',qa)
+    return qa
+
+def tabulate(c, frames, accounts, out):
+    out=Path(out);out.mkdir(parents=True,exist_ok=True)
+    c.execute('CREATE VIEW accounts AS SELECT * FROM '+parq(Path(accounts)/'recipient_profiles_PRIVATE.parquet'))
+    summaries=[]; weights=[]; statuses=[]; times=[]; breakdown=[]; multiplicity=[]
+    for frame,query in frame_queries(frames).items():
+        c.execute('CREATE OR REPLACE VIEW q AS '+query)
+        c.execute('CREATE OR REPLACE VIEW linked AS SELECT q.*,a.* EXCLUDE(recipient_id) FROM q LEFT JOIN accounts a USING(recipient_id)')
+        info=one(c,"SELECT count(*) exposures,count(DISTINCT recipient_id) recipients,count(*) FILTER(WHERE coverage_status='observed') observed_exposures,count(DISTINCT recipient_id) FILTER(WHERE coverage_status='observed') observed_recipients,count(*) FILTER(WHERE NOT identity_resolved) unresolved_exposures,count(*) FILTER(WHERE identity_resolved AND sampling_fraction=0) zero_support_exposures,count(*) FILTER(WHERE sampling_fraction>0) positive_support_exposures,count(*) FILTER(WHERE originally_selected AND NOT profile_returned) nonreturn_exposures,count(DISTINCT recipient_id) FILTER(WHERE patron) patron_recipients,count(*) FILTER(WHERE patron) patron_exposure_rows FROM linked")
+        require(info['exposures']==c.execute('SELECT count(*) FROM q').fetchone()[0],frame+' join changed row count')
+        info.update(frame=frame,observed_exposure_pct=100*info['observed_exposures']/info['exposures'],observed_recipient_pct=100*info['observed_recipients']/info['recipients'])
+        summaries.append(info)
+        ss=rows(c,'SELECT coverage_status,count(*) exposures,count(DISTINCT recipient_id) recipients FROM linked GROUP BY coverage_status ORDER BY coverage_status')
+        statuses += [dict(frame=frame,**r) for r in ss]
+        require(sum(r['exposures'] for r in ss)==info['exposures'],'Coverage categories do not partition frame')
+        rr=one(c,'SELECT min(k) min_exposures,median(k) median_exposures,max(k) max_exposures,sum(k) exposures,count(*) recipients,count(*) FILTER(WHERE k>1) repeat_recipients FROM (SELECT recipient_id,count(*) k FROM q GROUP BY recipient_id)')
+        multiplicity.append(dict(frame=frame,**rr))
+        t=one(c,"SELECT count(*) FILTER(WHERE profile_returned AND query_ms<=archive_start_ms) not_after_exposure,count(*) FILTER(WHERE profile_returned AND query_ms IS NULL) missing_date,min((query_ms-archive_start_ms)/86400000.0) FILTER(WHERE profile_returned) minimum_days,median((query_ms-archive_start_ms)/86400000.0) FILTER(WHERE profile_returned) median_days,max((query_ms-archive_start_ms)/86400000.0) FILTER(WHERE profile_returned) maximum_days FROM linked")
+        times.append(dict(frame=frame,**t))
+        for unit,src in [('exposure','SELECT sampling_fraction FROM linked WHERE profile_returned AND sampling_fraction>0'),('recipient','SELECT DISTINCT recipient_id,sampling_fraction FROM linked WHERE profile_returned AND sampling_fraction>0')]:
+            w=one(c,'SELECT count(*) observed_units,sum(w) sum_weights,sum(w*w) sum_squared_weights,max(w) maximum_weight,quantile_cont(w,0.5) median_weight,quantile_cont(w,0.99) p99_weight,sum(w)*sum(w)/nullif(sum(w*w),0) kish_effective_units FROM (SELECT 1.0/sampling_fraction w FROM ('+src+'))')
+            weights.append(dict(frame=frame,unit=unit,**w))
+        dims={'month':'CAST(month_code AS VARCHAR)','speed':'CAST(speed AS VARCHAR)',
+              'rating':"CASE WHEN recipient_rating IS NULL THEN 'missing' WHEN recipient_rating<1200 THEN '<1200' WHEN recipient_rating<1600 THEN '1200-1599' WHEN recipient_rating<2000 THEN '1600-1999' ELSE '2000+' END",
+              'original_kind':"coalesce(CAST(original_ever_kind AS VARCHAR),'outside_or_unresolved')"}
+        if frame in ['S0','first_reference','unspaced']:
+            dims.update(received='CAST(received AS VARCHAR)',reached='CAST(reached AS VARCHAR)')
+        for dimension,expr in dims.items():
+            rr=rows(c,'SELECT '+expr+' group_value,count(*) exposures,count(DISTINCT recipient_id) recipients,count(*) FILTER(WHERE profile_returned) observed_exposures,count(*) FILTER(WHERE sampling_fraction=0) zero_support_exposures,count(*) FILTER(WHERE NOT identity_resolved) unresolved_exposures FROM linked GROUP BY 1 ORDER BY 1')
+            breakdown += [dict(frame=frame,dimension=dimension,**r) for r in rr]
+        # Raw-score deciles diagnose coverage only; these are NOT residual-score or outcome regressions.
+        rr=rows(c,"SELECT CAST(decile AS VARCHAR) group_value,count(*) exposures,count(DISTINCT recipient_id) recipients,sum(profile_returned::BIGINT) observed_exposures,count(*) FILTER(WHERE sampling_fraction=0) zero_support_exposures,count(*) FILTER(WHERE NOT identity_resolved) unresolved_exposures FROM (SELECT *,ntile(10) OVER(ORDER BY adjusted_A,row_id) decile FROM linked) GROUP BY 1 ORDER BY try_cast(group_value AS INTEGER)")
+        breakdown += [dict(frame=frame,dimension='raw_Score_A_decile_NOT_adjusted',**r) for r in rr]
+    for name,data in [('coverage_summary',summaries),('coverage_status',statuses),('weight_diagnostics',weights),('snapshot_lags',times),('coverage_breakdowns',breakdown),('recipient_multiplicity',multiplicity)]:
+        save(out/(name+'.json'),data)
+        with (out/(name+'.csv')).open('w',newline='') as f:
+            writer=csv.DictWriter(f,fieldnames=list(data[0]));writer.writeheader();writer.writerows(data)
+    ready={x['frame']:{'all_recipient_identities_resolved':x['unresolved_exposures']==0,
+        'all_recipients_have_positive_sampling_support':x['zero_support_exposures']==0 and x['unresolved_exposures']==0,
+        'selected_profiles_all_returned':x['nonreturn_exposures']==0,
+        'observed_unique_patrons':x['patron_recipients']} for x in summaries}
+    for t in times: ready[t['frame']]['all_observed_snapshots_after_exposure']=t['not_after_exposure']==0 and t['missing_date']==0
+    save(out/'readiness.json',dict(frames=ready,estimation_performed=False,
+        sampling_weights='1 for original any-kind; original control reservoir / selected controls within original cell',
+        weighting_assumption='Hash ranking is exchangeable with respect to relevant outcomes within original sampling strata.',
+        weights_do_not_fix=['zero inclusion support','profile nonresponse','entry selection into active disconnect exposures','IV exclusion violations'],
+        next_action='Review coverage/support and choose an estimand before fitting patron RF/IV. No API calls are required for this audit.'))
+    lines=['PATRON IV COVERAGE AUDIT — COMPLETED', '', 'No regressions, API calls, engine searches, or changes to existing research inputs.', '',
+           'Frame | exposures | unique recipients | profiles observed | zero-support exposure rows | observed unique Patrons',
+           '--- | ---: | ---: | ---: | ---: | ---:']
+    for x in summaries: lines.append(f"{x['frame']} | {x['exposures']:,} | {x['recipients']:,} | {x['observed_exposure_pct']:.2f}% | {x['zero_support_exposures']:,} | {x['patron_recipients']:,}")
+    lines+=['','The first_reference is the existing frozen first_recipient flag, not a new first-retained-row sample.',
+            'The original acquisition universe precedes the pool/nonadjacent rebuild; its original kind classifications determine sampling fractions.',
+            'An unreturned profile is missing, never a non-Patron. Flagged but returned accounts remain observed; no post-exposure flag restriction is applied.',
+            'Profile counts and weights are tabulated separately per recipient and per exposure. Repeated exposure rows do not create independent Patron observations.',
+            'Score deciles describe raw-score coverage only. No leniency–Patron relationship has been estimated.',
+            'Weights are design-fraction diagnostics, not a correction for missing outcomes or entry selection. Zero-support groups cannot be recovered by weighting.',
+            'Read readiness.json, original_sampling_cells.csv, coverage_status.csv, and weight_diagnostics.csv before choosing the estimation sample.']
+    (out/'READ_RESULTS.txt').write_text('\n'.join(lines)+'\n')
+    return dict(frames=len(summaries),regressions=0,network_requests=0,stockfish_searches=0)

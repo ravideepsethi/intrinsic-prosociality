@@ -1,0 +1,14 @@
+{
+  "status": "RUNNING",
+  "updated_utc": "2026-10-30T02:12:49.522720+00:00",
+  "completed": 33,
+  "total": 33,
+  "failures": [],
+  "parallel_config": {
+    "physical_ram_gb": 18.0,
+    "logical_cpus": 12,
+    "model_workers": 3,
+    "worker_threads": 1,
+    "worker_memory_limit": "3.0GB"
+  }
+}

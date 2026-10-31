@@ -1,0 +1,72 @@
+test_author_policy_rejected (contract_tests.Contracts.test_author_policy_rejected) ... ok
+test_changed_monthly_count_rejected (contract_tests.Contracts.test_changed_monthly_count_rejected) ... ok
+test_duplicate_path_rejected (contract_tests.Contracts.test_duplicate_path_rejected) ... ok
+test_incomplete_rejected (contract_tests.Contracts.test_incomplete_rejected) ... ok
+test_legacy_losses_not_reclassified (contract_tests.Contracts.test_legacy_losses_not_reclassified) ... ok
+test_manifest_hash_checked (contract_tests.Contracts.test_manifest_hash_checked) ... ok
+test_month_missing_rejected (contract_tests.Contracts.test_month_missing_rejected) ... ok
+test_no_chronology_rewrite (contract_tests.Contracts.test_no_chronology_rewrite) ... ok
+test_old_material_rule_rejected (contract_tests.Contracts.test_old_material_rule_rejected) ... ok
+test_price_change_rejected (contract_tests.Contracts.test_price_change_rejected) ... ok
+test_reviewed_contract (contract_tests.Contracts.test_reviewed_contract) ... ok
+test_source_changed_after_hash (contract_tests.Contracts.test_source_changed_after_hash) ... ok
+test_wrong_run_rejected (contract_tests.Contracts.test_wrong_run_rejected) ... ok
+test_absent_speed_not_reported_as_identified_zero (test_structure.StructureTests.test_absent_speed_not_reported_as_identified_zero) ... ok
+test_chooser_partition_moments_equal_whole_frame (test_structure.StructureTests.test_chooser_partition_moments_equal_whole_frame) ... ok
+test_core_reference_gate_rejects_drift (test_structure.StructureTests.test_core_reference_gate_rejects_drift) ... ok
+test_dense_dummy_ols_and_chooser_covariance_oracle (test_structure.StructureTests.test_dense_dummy_ols_and_chooser_covariance_oracle) ... ok
+test_equal_weights_against_dense_weighted_fe (test_structure.StructureTests.test_equal_weights_against_dense_weighted_fe) ... ok
+test_full_pipeline_checkpoints_covariance_exports_and_privacy (test_structure.StructureTests.test_full_pipeline_checkpoints_covariance_exports_and_privacy) ... [2026-10-29 18:37:23 UTC] Three models share regression passes; 2 workers, estimated 0.20 GiB per worker
+[2026-10-29 18:37:24 UTC] Regression moments: 1/4 complete; stage ETA 0.0 min
+[2026-10-29 18:37:24 UTC] Regression moments: 2/4 complete; stage ETA 0.0 min
+[2026-10-29 18:37:24 UTC] Regression moments: 3/4 complete; stage ETA 0.0 min
+[2026-10-29 18:37:24 UTC] Regression moments: 4/4 complete; stage ETA 0.0 min
+[2026-10-29 18:37:25 UTC] Chooser covariance: 1/4 complete; stage ETA 0.0 min
+[2026-10-29 18:37:25 UTC] Chooser covariance: 2/4 complete; stage ETA 0.0 min
+[2026-10-29 18:37:25 UTC] Chooser covariance: 3/4 complete; stage ETA 0.0 min
+[2026-10-29 18:37:25 UTC] Chooser covariance: 4/4 complete; stage ETA 0.0 min
+[2026-10-29 18:37:25 UTC] Return report: /tmp/tmpliyvwk0o/return/MATERIAL_STRUCTURE_run_STRUCTURE_READY.zip
+[2026-10-29 18:37:25 UTC] Three models share regression passes; 2 workers, estimated 0.20 GiB per worker
+[2026-10-29 18:37:26 UTC] 0000: verified checkpoint
+[2026-10-29 18:37:26 UTC] 0001: verified checkpoint
+[2026-10-29 18:37:26 UTC] Regression moments: 1/4 complete; stage ETA 0.0 min
+[2026-10-29 18:37:26 UTC] Regression moments: 2/4 complete; stage ETA 0.0 min
+[2026-10-29 18:37:26 UTC] 0002: verified checkpoint
+[2026-10-29 18:37:26 UTC] Regression moments: 3/4 complete; stage ETA 0.0 min
+[2026-10-29 18:37:26 UTC] 0003: verified checkpoint
+[2026-10-29 18:37:26 UTC] Regression moments: 4/4 complete; stage ETA 0.0 min
+[2026-10-29 18:37:27 UTC] 0000: verified checkpoint
+[2026-10-29 18:37:27 UTC] 0001: verified checkpoint
+[2026-10-29 18:37:27 UTC] Chooser covariance: 1/4 complete; stage ETA 0.0 min
+[2026-10-29 18:37:27 UTC] 0002: verified checkpoint
+[2026-10-29 18:37:27 UTC] Chooser covariance: 2/4 complete; stage ETA 0.0 min
+[2026-10-29 18:37:27 UTC] Chooser covariance: 3/4 complete; stage ETA 0.0 min
+[2026-10-29 18:37:27 UTC] 0003: verified checkpoint
+[2026-10-29 18:37:27 UTC] Chooser covariance: 4/4 complete; stage ETA 0.0 min
+[2026-10-29 18:37:27 UTC] Three models share regression passes; 2 workers, estimated 0.20 GiB per worker
+[2026-10-29 18:37:28 UTC] 0000: verified checkpoint
+[2026-10-29 18:37:28 UTC] 0002: verified checkpoint
+[2026-10-29 18:37:28 UTC] Regression moments: 1/4 complete; stage ETA 0.0 min
+[2026-10-29 18:37:28 UTC] Regression moments: 2/4 complete; stage ETA 0.0 min
+[2026-10-29 18:37:28 UTC] 0003: verified checkpoint
+ok
+test_launcher_completion_resume_and_corrupt_cache_rejection (test_structure.StructureTests.test_launcher_completion_resume_and_corrupt_cache_rejection) ... [2026-10-29 18:37:28 UTC] Expected 10–20 minutes on the 12-core Mac/XT_Pro; allow 30 minutes on a busy drive. Based on the completed 22-minute core run, this package fits three models plus fast account summaries. Uses up to 10 workers with an 11 GB memory budget and one BLAS thread per worker. Existing environment is reused.
+[2026-10-29 18:37:28 UTC] Return report: /tmp/tmpridml01z/desktop/MATERIAL_STRUCTURE_3f17c37e3e933942_STRUCTURE_READY.zip
+[2026-10-29 18:37:28 UTC] Position and stage checks complete. Other families remain in DOWNSTREAM_STATUS.csv.
+[2026-10-29 18:37:28 UTC] Expected 10–20 minutes on the 12-core Mac/XT_Pro; allow 30 minutes on a busy drive. Based on the completed 22-minute core run, this package fits three models plus fast account summaries. Uses up to 10 workers with an 11 GB memory budget and one BLAS thread per worker. Existing environment is reused.
+[2026-10-29 18:37:28 UTC] Return report: /tmp/tmpridml01z/desktop/MATERIAL_STRUCTURE_3f17c37e3e933942_STRUCTURE_READY.zip
+[2026-10-29 18:37:28 UTC] Completed Structure run verified; no models repeated.
+[2026-10-29 18:37:28 UTC] Expected 10–20 minutes on the 12-core Mac/XT_Pro; allow 30 minutes on a busy drive. Based on the completed 22-minute core run, this package fits three models plus fast account summaries. Uses up to 10 workers with an 11 GB memory budget and one BLAS thread per worker. Existing environment is reused.
+[2026-10-29 18:37:28 UTC] STOPPED: File checksum differs: /tmp/tmpridml01z/project/derived/replication/mating_material_structure_v100_PRIVATE/3f17c37e3e933942/PRIVATE/fixture.json
+[2026-10-29 18:37:29 UTC] Return report: /tmp/tmpridml01z/desktop/MATERIAL_STRUCTURE_3f17c37e3e933942_FAILED.zip
+ok
+test_month_projection_original_alias_and_raw_stage (test_structure.StructureTests.test_month_projection_original_alias_and_raw_stage) ... [2026-10-29 18:37:29 UTC] 2023-11: verified checkpoint
+ok
+test_recovered_r10_hashes (test_structure.StructureTests.test_recovered_r10_hashes) ... ok
+test_stage_atomicity_and_key_rejection (test_structure.StructureTests.test_stage_atomicity_and_key_rejection) ... ok
+test_union_exact_original_model_columns (test_structure.StructureTests.test_union_exact_original_model_columns) ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 6.044s
+
+OK

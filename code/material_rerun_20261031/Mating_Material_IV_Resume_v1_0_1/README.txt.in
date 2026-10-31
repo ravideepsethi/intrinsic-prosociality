@@ -1,0 +1,63 @@
+MATING MATERIAL IV RESUME 1.0.1
+Prepared 30 October 2026, Toronto
+
+SAVE AND RUN
+Extract this folder in ~/Desktop/Lichess_Desktop, then run:
+  bash "$HOME/Desktop/Lichess_Desktop/Mating_Material_IV_Resume_v1_0_1/RUN_IV_RESUME.command"
+
+EXPECTED RUNTIME
+Allow 2–5 hours provisionally, including verification, the unfinished score
+sensitivities, and the entry/ordinary-ending comparisons. The previous partial
+run took 5 hours 9 minutes; this launcher preserves its completed stages.
+A fresh chronology scan or an unusually slow external drive can extend this.
+Tests take approximately one minute. XT_Pro must be mounted. The existing
+MatingMaterial_IV_Env_v100 environment is reused. Defaults: 10 workers maximum,
+11 GiB memory, one BLAS thread, two heavy data jobs and sequential model fits.
+The conservative startup free-space check remains 160 GiB. Caffeinate prevents
+idle sleep on macOS. Keep the Mac plugged in.
+
+WHAT WAS FIXED
+1. The last-move-hour fixed effects exceeded 1,000 demeaning sweeps. Two-factor
+   models now use a sparse normalized Schur solve with one gauge per connected
+   component. The fixed-effect span, rows, controls and original group-mean
+   tolerance are unchanged. Failed numerical certificates still stop the fit.
+   Other models retain the original projection routine.
+2. The completed chronology remainder is stored at
+   PRIVATE/chronology_merge90/complete/features.parquet. The previous launcher
+   looked one directory higher and combined only the cache hits. Both cache
+   parts are now authenticated and their counts, uniqueness and exact row
+   coverage are checked. Missing rows are not discarded or filled.
+
+PRESERVING COMPLETED WORK
+This repair targets only the reviewed partial run 12093d55b7ee9f73 at:
+  __PRIVATE_VALUE_1__/derived/replication/
+  mating_material_iv_batch_v100_PRIVATE/12093d55b7ee9f73
+It will not create a new full rerun if that run is absent. The original package
+and input data stay untouched. Its baseline configuration remains the cache
+identity; REPAIR_V101.json separately records this execution repair and its
+package hash. Completed public results, material inputs, saved frames and the
+primary estimate are verified. The eleven completed stages are skipped.
+Already completed sensitivity fits are checked and reused individually.
+Run the same resume command after interruption; completed repair stages are
+then skipped too. Checksums and dependency checks are not disabled.
+
+The original all-time-five, both-role author exclusions, 90-day windows,
+first-pair rules, zero-coded outcomes and shared-account-or-date CR0 covariance
+remain in effect. No game downloads, API calls, engine runs, rating replay or
+profile queries occur in production. If new comparison games genuinely lack
+cached metadata, the branch writes OFFLINE_HOLD and preserves all other work.
+
+RETURN THESE
+The same consolidated desktop outputs are updated after each stage:
+  MATERIAL_IV_BATCH_12093d55b7ee9f73_RETURN.zip
+  MATERIAL_IV_BATCH_12093d55b7ee9f73_RETURN.zip.sha256
+Return the ZIP and checksum when the launcher finishes. Private Parquets stay
+on XT_Pro. BATCH_COMPLETE covers the named batch only; COVERAGE.json lists the
+additional paper analyses and manuscript reconciliation still outstanding.
+
+Optional verification without launching the unfinished analyses:
+  bash "$HOME/Desktop/Lichess_Desktop/Mating_Material_IV_Resume_v1_0_1/RUN_IV_RESUME.command" --preflight-only
+
+The production-sized repair cannot be run here because its data are on the
+Mac. VALIDATION.json records the tests actually executed; REVIEW_RESULTS.txt
+summarizes the verified partial results.

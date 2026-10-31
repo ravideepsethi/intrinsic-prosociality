@@ -1,0 +1,309 @@
+#!/usr/bin/env python3
+"""Account bootstrap of Table 3 from the completed v1.4.2 private account cache.
+
+No opportunity-level refit, API access, game replay, or modification of inputs.
+"""
+from __future__ import annotations
+import os
+for _key in ('OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS',
+             'VECLIB_MAXIMUM_THREADS','NUMEXPR_NUM_THREADS'):
+    os.environ[_key] = '1'
+import argparse
+from concurrent.futures import ThreadPoolExecutor
+import hashlib
+import json
+from pathlib import Path
+import sys
+import time
+import zipfile
+import numpy as np
+import pandas as pd
+
+ROOT = Path(__file__).resolve().parents[1]
+RUN_ID = '1ec167a9f95859c2'
+GROUPS = ['NEI','CO','LO','BOTH']
+GROUP_LABELS = ['Neither','Competitive only','Clearly worse only','Both']
+NAMES_A = ['correlation_equal_accounts','correlation_total_opportunity_weighted',
+           'second_year_rate_no_prior_grant_pp','second_year_rate_prior_grant_pp',
+           'rate_ratio_prior_vs_none']
+NAMES_B = ['correlation_C1_C2','correlation_L1_L2','correlation_C1_L2',
+           'correlation_L1_C2','implied_correlation_C1_L2','implied_correlation_L1_C2',
+           'C1_own_minus_cross','L1_own_minus_cross']
+NAMES_B += [f'transition_{a}_{b}_percent' for a in GROUPS for b in GROUPS]
+
+def require(ok, message):
+    if not ok:
+        raise ValueError(message)
+
+def sha(path):
+    h = hashlib.sha256()
+    with open(path, 'rb') as f:
+        for block in iter(lambda: f.read(8 * 1024 * 1024), b''):
+            h.update(block)
+    return h.hexdigest()
+
+def write_json(path, data):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(path.suffix + '.partial')
+    temporary.write_text(json.dumps(data, indent=2, allow_nan=False) + '\n')
+    temporary.replace(path)
+
+def group(c, l):
+    return (np.asarray(c) > 0).astype(np.int8) + 2 * (np.asarray(l) > 0).astype(np.int8)
+
+def moments(x, y, w=None):
+    x = np.asarray(x, dtype=float); y = np.asarray(y, dtype=float)
+    if w is None:
+        w = np.ones(len(x))
+    return np.column_stack((w, w*x, w*y, w*x*x, w*y*y, w*x*y))
+
+def correlation(s):
+    w, x, y, xx, yy, xy = s
+    require(w > 0, 'Undefined bootstrap correlation')
+    den = (xx - x*x/w) * (yy - y*y/w)
+    require(den > 0, 'Undefined bootstrap correlation')
+    return (xy - x*y/w) / np.sqrt(den)
+
+def matrix_a(d):
+    x = d.y_c1.to_numpy(float) / d.n_c1.to_numpy(float)
+    y = d.y_c2.to_numpy(float) / d.n_c2.to_numpy(float)
+    g = d.y_c1.to_numpy() > 0
+    n2 = d.n_c2.to_numpy(float); y2 = d.y_c2.to_numpy(float)
+    return np.ascontiguousarray(np.column_stack((moments(x,y),
+        moments(x,y,d.n_c1.to_numpy(float)+n2),
+        (~g)*n2,(~g)*y2,g*n2,g*y2)))
+
+def decode_a(s):
+    require(s[12] > 0 and s[14] > 0 and s[13] > 0, 'Undefined bootstrap rate ratio')
+    p0 = 100*s[13]/s[12]; p1 = 100*s[15]/s[14]
+    return np.array([correlation(s[:6]),correlation(s[6:12]),p0,p1,p1/p0])
+
+def matrix_b(d):
+    r = {z: d['y_'+z].to_numpy(float)/d['n_'+z].to_numpy(float)
+         for z in ['c1','c2','l1','l2']}
+    g1 = group(d.y_c1,d.y_l1); g2 = group(d.y_c2,d.y_l2)
+    cell = g1*4+g2
+    return np.ascontiguousarray(np.column_stack([
+        moments(r[a],r[b]) for a,b in [('c1','c2'),('l1','l2'),('c1','l2'),('l1','c2')]
+        ] + [np.eye(16)[cell]]))
+
+def decode_b(s):
+    cc,ll,cl,lc = [correlation(s[j:j+6]) for j in range(0,24,6)]
+    require(cc*ll > 0, 'Undefined reliability-adjusted bootstrap correlation')
+    den = np.sqrt(cc*ll)
+    counts = s[24:].reshape(4,4)
+    require((counts.sum(axis=1)>0).all(), 'Empty first-year group in bootstrap draw')
+    return np.r_[cc,ll,cl,lc,cl/den,lc/den,cc-cl,ll-lc,
+                 (100*counts/counts.sum(axis=1)[:,None]).ravel()]
+
+def draw_stat(matrix, panel, seed, replicate):
+    # Uniform account resampling. Each multiplicity repeats the account's
+    # complete two-year history and its original opportunity weights.
+    rng = np.random.default_rng(np.random.SeedSequence([seed,panel,replicate]))
+    n = len(matrix)
+    multiplicity = np.bincount(rng.integers(0,n,size=n),minlength=n).astype(float)
+    sums = multiplicity @ matrix
+    return decode_a(sums) if panel == 0 else decode_b(sums)
+
+def load_and_verify(cache, run):
+    import pyarrow.parquet as pq
+    method = run/'report/tables/excluded/state_persistence/report/METHOD.json'
+    receipt = run/'report/stage_summaries/excluded/state_persistence.json'
+    provenance = json.loads((ROOT/'evidence/persistence_provenance.json').read_text())
+    for path, key in [(method,'method_sha256'),(receipt,'receipt_sha256')]:
+        require(path.is_file() and sha(path)==provenance[key],
+                'Completed v1.4.2 author-excluded provenance changed: '+str(path))
+    cols = ['chooser']+[f'{k}_{s}{y}' for y in (1,2) for s in 'clm' for k in ('n','y')]
+    d = pq.read_table(cache,columns=cols).to_pandas()
+    require(len(d)==3224171 and d.chooser.notna().all() and d.chooser.is_unique,
+            'Unexpected chooser count, missing IDs or duplicate account aggregates')
+    require(not d.chooser.astype(str).str.lower().isin(['__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__']).any(),
+            'An author account remains in the account cache')
+    for y in (1,2):
+        for s in 'clm':
+            n=d[f'n_{s}{y}'].to_numpy(float); k=d[f'y_{s}{y}'].to_numpy(float)
+            require(np.isfinite(n).all() and np.isfinite(k).all() and
+                    (n>=0).all() and (k>=0).all() and (k<=n).all() and
+                    (n==np.floor(n)).all() and (k==np.floor(k)).all(),
+                    'Invalid opportunity/grant counts')
+    reference=pd.read_csv(ROOT/'evidence/tabF1_opportunities_by_year_state.csv')
+    for row in reference.itertuples():
+        suffix=row.region.lower()+str(row.period)
+        require(int(d['n_'+suffix].sum())==int(row.opportunities) and
+                int(d['y_'+suffix].sum())==int(row.grants),
+                'Account-cache annual counts do not match the certified results')
+    a=d[(d.n_c1>=1)&(d.n_c2>=1)&(d.n_c1+d.n_c2>=4)].copy()
+    b=d[(d.n_c1>=4)&(d.n_c2>=4)&(d.n_l1>=4)&(d.n_l2>=4)].copy()
+    require(len(a)==666131 and len(b)==266399,'Table 3 cohort counts changed')
+    require(int((a.y_c1==0).sum())==603597 and int((a.y_c1>0).sum())==62534,
+            'Panel A group counts changed')
+    ma=matrix_a(a); mb=matrix_b(b)
+    pa=decode_a(ma.sum(axis=0)); pb=decode_b(mb.sum(axis=0))
+    f0=pd.read_csv(ROOT/'evidence/tabF0_original_competitive_reconciliation.csv').iloc[0]
+    expected_a=[f0.pearson_equal_account,f0.pearson_total_comp_opportunities_weighted,
+                100*41430/4415511,100*73685/465661,(73685/465661)/(41430/4415511)]
+    require(np.allclose(pa,expected_a,rtol=0,atol=2e-8),
+            'Panel A point estimates do not reproduce; do not bootstrap a different cohort')
+    c=pd.read_csv(ROOT/'evidence/tabF4_cross_year_correlations.csv')
+    c=c[c.min_opportunities_each_year_and_state==4]
+    expected_b=[float(c[(c.period1_state==x)&(c.period2_state==y)].correlation_equal_account.iloc[0])
+                for x,y in [('c','c'),('l','l'),('c','l'),('l','c')]]
+    require(np.allclose(pb[:4],expected_b,rtol=0,atol=2e-8),
+            'Panel B correlations do not reproduce')
+    t=pd.read_csv(ROOT/'evidence/tabF2_transition_4x4.csv')
+    expected_counts=np.array([int(t[(t.p1_group==x)&(t.p2_group==y)].accounts.iloc[0])
+                              for x in GROUPS for y in GROUPS])
+    require(np.array_equal(mb[:,24:].sum(axis=0),expected_counts),'Transition counts changed')
+    audit=dict(cache_sha256=sha(cache),source_run=RUN_ID,source_method_sha256=sha(method),
+               source_receipt_sha256=sha(receipt),panel_A_accounts=len(a),panel_B_accounts=len(b),
+               panel_A_points=pa.tolist(),panel_B_and_C_points=pb.tolist(),
+               all_point_estimate_gates_passed=True,
+               author_exclusion='Both-role exclusion inherited from authenticated v1.4.2 input; author chooser IDs absent')
+    return ma,mb,pa,pb,audit
+
+def make_table(results, target):
+    lookup=results.set_index(['panel','statistic'])
+    def cell(panel,name):
+        r=lookup.loc[(panel,name)]
+        return f'{r.estimate:.3f} ({r.bootstrap_se:.3f})'
+    lines=[r'\begin{table}[!htbp]',r'\centering',
+           r'\caption{Persistence of granting across years}',r'\label{tab:persistence}',
+           r'\begin{threeparttable}',r'\footnotesize',
+           r'\begin{tabular}{p{0.63\textwidth}r}',r'\toprule',
+           r'\multicolumn{2}{l}{\textit{Panel A. Competitive-position grant rate, 666,131 accounts}} \\',
+           r' & Estimate (bootstrap SE) \\',r'\midrule']
+    labels=['Correlation, equal account weights','Correlation, total-opportunity weights',
+            r'Second-year grant rate, no first-year grant (\%)',
+            r'Second-year grant rate, at least one first-year grant (\%)',
+            'Rate ratio: prior grant / no prior grant']
+    for name,label in zip(NAMES_A,labels):
+        lines.append(label+' & '+cell('A',name)+r' \\')
+    lines += [r'\addlinespace',
+        r'\multicolumn{2}{l}{\textit{Panel B. Persistence by board state, 266,399 accounts}} \\']
+    labels=['Correlation across years, competitive rate','Correlation across years, clearly-worse rate',
+            'Correlation, first-year competitive and second-year clearly-worse',
+            'Correlation, first-year clearly-worse and second-year competitive',
+            'Implied propensity correlation, first-year competitive direction',
+            'Implied propensity correlation, first-year clearly-worse direction']
+    for name,label in zip(NAMES_B[:6],labels):
+        lines.append(label+' & '+cell('B',name)+r' \\')
+    lines += [r'\bottomrule',r'\end{tabular}',r'\medskip',
+        r'\setlength{\tabcolsep}{3pt}',r'\begin{tabular}{lrrrr}',r'\toprule',
+        r'\multicolumn{5}{l}{\textit{Panel C. Second-year group by first-year group (percent of row)}} \\',
+        r'First-year group & Neither & Competitive only & Clearly worse only & Both \\',r'\midrule']
+    for g,label in zip(GROUPS,GROUP_LABELS):
+        lines.append(label+' & '+' & '.join(cell('C',f'transition_{g}_{h}_percent') for h in GROUPS)+r' \\')
+    lines += [r'\bottomrule',r'\end{tabular}',r'\begin{tablenotes}[flushleft]',r'\scriptsize',
+        r'\item Notes: Periods are November 2023--October 2024 and November 2024--October 2025. '+
+        r'Panel A retains accounts with at least one competitive opportunity in each year and four in total. '+
+        r'Panels B and C retain accounts with at least four opportunities in each state in each year. '+
+        "Standard errors resample accounts with replacement, retaining each selected account's complete two-year history. "+
+        r'Original opportunity weights are retained where applicable. Each panel uses 1,999 bootstrap replications; '+
+        r'Panels B and C share each resample. The two implied correlations divide the corresponding cross-state '+
+        r'correlation by the geometric mean of the two own-state correlations, recomputed in every replication. '+
+        r'Inference conditions on the observed returning cohorts. Never-granting accounts remain in every sample.',
+        r'\end{tablenotes}',r'\end{threeparttable}',r'\end{table}']
+    target.write_text('\n'.join(lines)+'\n')
+
+def checkpoint(out, run_id, progress, draws_a,draws_b,pa,pb,configuration):
+    report=out/'report'; report.mkdir(exist_ok=True)
+    rows=[]
+    for panel,names,points,draws in [('A',NAMES_A,pa,draws_a),('B',NAMES_B,pb,draws_b)]:
+        for j,name in enumerate(names):
+            lo,hi=np.quantile(draws[:,j],[.025,.975])
+            rows.append(dict(panel='C' if name.startswith('transition_') else panel,
+                statistic=name,estimate=float(points[j]),bootstrap_se=float(draws[:,j].std(ddof=1)),
+                ci95_low=float(lo),ci95_high=float(hi),replications=len(draws)))
+    table=pd.DataFrame(rows);table.to_csv(report/'table3_bootstrap.csv',index=False)
+    pd.DataFrame(draws_a,columns=NAMES_A).to_parquet(report/'replicates_A.parquet',index=False,compression='zstd')
+    pd.DataFrame(draws_b,columns=NAMES_B).to_parquet(report/'replicates_B_C.parquet',index=False,compression='zstd')
+    write_json(report/'METHOD.json',dict(**configuration,checkpoint_percent=progress,
+        status='COMPLETE' if progress==100 else 'PARTIAL',
+        completed_replications=len(draws_a),interval='Percentile 95%; SE is replication SD with ddof=1',
+        bootstrap='Uniform iid account resampling within each fixed eligible cohort; no within-account game resampling',
+        dependence='All metrics within a cohort share resamples; A and B/C resampled separately',
+        scope='Table 3 only. No bootstrap added to split-half, adjusted persistence or threshold sensitivity estimates elsewhere.'))
+    if progress==100:
+        make_table(table,report/'table3_with_bootstrap.tex')
+        # Keep the table's replication note correct if the user changes B.
+        p=report/'table3_with_bootstrap.tex'
+        p.write_text(p.read_text().replace('1,999 bootstrap',f'{len(draws_a):,} bootstrap'))
+    manifest=[dict(path=str(p.relative_to(report)),sha256=sha(p),bytes=p.stat().st_size)
+              for p in sorted(report.rglob('*')) if p.is_file() and p.name!='MANIFEST.json']
+    write_json(report/'MANIFEST.json',manifest)
+    dest=Path(configuration['report_directory'])
+    zpath=dest/f'TABLE3_BOOTSTRAP_{run_id}_{progress:03d}.zip'
+    temp=zpath.with_suffix('.zip.partial')
+    with zipfile.ZipFile(temp,'w',zipfile.ZIP_DEFLATED) as z:
+        for p in sorted(report.rglob('*')):
+            if p.is_file():z.write(p,'report/'+str(p.relative_to(report)))
+    temp.replace(zpath)
+    zpath.with_suffix('.zip.sha256').write_text(sha(zpath)+'  '+zpath.name+'\n')
+    return zpath
+
+def main():
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--project',type=Path,default=Path('__PRIVATE_VALUE_3__'))
+    parser.add_argument('--result-dir',type=Path,default=Path.home()/'Desktop/Lichess_Desktop')
+    parser.add_argument('--workers',type=int,default=10)
+    parser.add_argument('--replications',type=int,default=1999)
+    parser.add_argument('--seed',type=int,default=20261025)
+    args=parser.parse_args()
+    require(1<=args.workers<=10,'Choose 1 to 10 workers')
+    require(args.replications>=1999,'Use at least 1,999 replications')
+    require(args.seed>=0,'Seed must be nonnegative')
+    args.project=args.project.expanduser().resolve(); args.result_dir=args.result_dir.expanduser().resolve()
+    run=args.project/'derived/replication/author_exclusion_persistence_v142_PRIVATE'/RUN_ID
+    require(run.is_dir(),'The completed v1.4.2 run was not found: '+str(run))
+    caches=list((run/'PRIVATE/results/excluded').glob('*/PRIVATE/account_year_wide_private.parquet'))
+    require(len(caches)==1,'Expected exactly one completed excluded account cache; found '+str(len(caches)))
+    cache=caches[0]
+    print('Verify cached account aggregates and reproduce every Table 3 point estimate.',flush=True)
+    ma,mb,pa,pb,audit=load_and_verify(cache,run)
+    args.result_dir.mkdir(parents=True,exist_ok=True)
+    cfg=dict(source=audit,replications=args.replications,seed=args.seed,
+             code_sha256=sha(__file__),numpy=np.__version__,pandas=pd.__version__,
+             report_directory=str(args.result_dir))
+    run_id=hashlib.sha256(json.dumps(cfg,sort_keys=True).encode()).hexdigest()[:12]
+    out=args.project/'derived/replication/table3_bootstrap_20261025_PRIVATE'/run_id
+    out.mkdir(parents=True,exist_ok=True)
+    import fcntl
+    lock=(out/'RUNNING.lock').open('a+')
+    fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+    write_json(out/'CONFIG_PRIVATE.json',dict(**cfg,source_cache=str(cache)))
+    write_json(out/'report/POINT_ESTIMATE_GATES.json',audit)
+    saved=out/'draws_PRIVATE.npz'
+    da=np.empty((args.replications,len(NAMES_A)));db=np.empty((args.replications,len(NAMES_B)))
+    start=0
+    if saved.exists():
+        with np.load(saved) as old:
+            start=len(old['A']); da[:start]=old['A'];db[:start]=old['B']
+        print(f'Resume after {start} completed account resamples per cohort.',flush=True)
+    print('Gates passed: 666,131 / 266,399 accounts. Planning estimate: 5–20 minutes; live ETA follows.',flush=True)
+    begin=time.monotonic(); completed_at_start=start
+    targets={int(np.ceil(args.replications*p/100)):p for p in (25,50,75,100)}
+    def job(j):return draw_stat(ma,0,args.seed,j),draw_stat(mb,1,args.seed,j)
+    try:
+        with ThreadPoolExecutor(max_workers=args.workers) as pool:
+            while start<args.replications:
+                next_checkpoint=min(x for x in targets if x>start)
+                end=min(start+25,next_checkpoint)
+                for j,(a,b) in zip(range(start,end),pool.map(job,range(start,end))):
+                    da[j]=a;db[j]=b
+                start=end
+                elapsed=time.monotonic()-begin
+                eta=elapsed/max(start-completed_at_start,1)*(args.replications-start)/60
+                print(f'{start}/{args.replications} resamples per cohort; elapsed {elapsed/60:.1f} min; ETA {eta:.1f} min',flush=True)
+                with open(out/'draws_PRIVATE.partial','wb') as f:np.savez(f,A=da[:start],B=db[:start])
+                (out/'draws_PRIVATE.partial').replace(saved)
+                if start in targets:
+                    path=checkpoint(out,run_id,targets[start],da[:start],db[:start],pa,pb,cfg)
+                    print(f'CHECKPOINT {targets[start]}%: {path}',flush=True)
+        if completed_at_start==args.replications:
+            checkpoint(out,run_id,100,da,db,pa,pb,cfg)
+        print('TABLE3_BOOTSTRAP_COMPLETE_OK. Return the _100.zip and .sha256.',flush=True)
+    finally:lock.close()
+    return 0
+
+if __name__=='__main__':
+    sys.exit(main())

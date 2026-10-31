@@ -1,0 +1,160 @@
+"""One launcher; independent processes release all memory between stages."""
+from bootstrap import *
+from resume_guard import BASE_PACKAGE_HASH,EXPECTED_CONF,verify_resume
+import argparse,subprocess,signal,fcntl,shutil,zipfile,traceback
+STAGES=['authenticate','decisions','exposures','scores','features','core_models','supplements','sensitivities','subgroups','bins','receipt_kind','patron','comparison_auth','comparison_candidates','comparison_chronology','comparison_metadata','comparison_frames','comparison_models']
+CORE={'authenticate','decisions','exposures','scores','features'}
+
+def arguments():
+    p=argparse.ArgumentParser()
+    p.add_argument('--project',type=Path,default=Path('__PRIVATE_VALUE_1__'))
+    p.add_argument('--result-dir',type=Path,default=Path.home()/'Desktop/Lichess_Desktop')
+    p.add_argument('--material-manifest',type=Path)
+    p.add_argument('--legacy-root',type=Path)
+    p.add_argument('--workers',type=int,default=10);p.add_argument('--memory-gb',type=float,default=11.)
+    p.add_argument('--preflight-only',action='store_true')
+    p.add_argument('--_stage',choices=STAGES,help=argparse.SUPPRESS)
+    return p.parse_args()
+
+def setup(a):
+    a.project=a.project.expanduser().resolve();a.result_dir=a.result_dir.expanduser().resolve()
+    a.material_manifest=(a.material_manifest or a.project/'derived/replication/mating_material_first_run_v100_PRIVATE'/MATERIAL[:16]/'MATERIAL_RESTRICTED_INPUTS_READY_PRIVATE.json').expanduser().resolve()
+    a.legacy_root=(a.legacy_root or a.project/'derived/replication/receipt_iv_uniform90_v100_PRIVATE'/PARENT[:12]).expanduser().resolve()
+    require(a.project.is_dir(),'Project drive is not mounted: '+str(a.project))
+    old=read(a.legacy_root/'config.json');require(c.key(old)==PARENT,'Wrong legacy parent')
+    for k in ('r12_root','r9_root','local_plan','reuse_run','reuse_chronology'):
+        setattr(a,k,Path(old[k]) if old[k] is not None else None)
+    a.offline=True
+    hw=c.resources(a.workers,a.memory_gb);a.workers=min(10,hw['workers']);a.memory_gb=hw['memory_budget_gib']
+    os.environ['UNIFORM90_MEMORY_GIB']=str(a.memory_gb);os.environ['UNIFORM90_WORKERS']=str(a.workers)
+    from fast_digest_cache import install
+    install(c.frozen.r.io)
+    # Keep the verified cache identity. Execution changes have a separate,
+    # checksummed REPAIR_V101 receipt; the original package stays untouched.
+    config=dict(version='1.0.0',package=BASE_PACKAGE_HASH,project=str(a.project),material_manifest=str(a.material_manifest),material_parent=MATERIAL,legacy_parent=PARENT,legacy_root=str(a.legacy_root),production_network=False)
+    conf=c.key(config);run=a.project/'derived/replication/mating_material_iv_batch_v100_PRIVATE'/conf[:16]
+    require(conf==EXPECTED_CONF,'Repair target differs from reviewed run 12093d55b7ee9f73')
+    require((run/'config.json').is_file() and (run/'PRIVATE/STATE.json').is_file(),'Reviewed partial run is missing; do not start this repair as a fresh full run')
+    (run/'report').mkdir(parents=True,exist_ok=True);(run/'PRIVATE').mkdir(exist_ok=True);a.result_dir.mkdir(parents=True,exist_ok=True)
+    if (run/'config.json').exists():require(read(run/'config.json')==config,'Run configuration changed')
+    else:save(run/'config.json',config)
+    return run,conf
+
+def execute(a,run,conf):
+    name=a._stage
+    if name=='authenticate':authenticate(a,run,conf);return
+    auth=read(run/'PRIVATE/AUTHENTICATED.json');guard(auth)
+    import decision_inputs,exposures,features,models
+    if name=='decisions':decision_inputs.build(a,run,conf,auth);return
+    b=read(run/'PRIVATE/MATERIAL_BOUND.json')
+    if name=='exposures':
+        raw=exposures.build(a,run,conf,auth,b);b['raw']=str(raw);save(run/'PRIVATE/MATERIAL_BOUND.json',b);return
+    raw=Path(b['raw'])
+    if name=='scores':
+        sc=exposures.scores(a,run,conf,b,raw);src,sc=exposures.selection(a,run,conf,raw,sc)
+        save(run/'PRIVATE/SELECTED.json',dict(source=str(src),scores=str(sc)));return
+    if name=='features':
+        selected=read(run/'PRIVATE/SELECTED.json');src=features.behavior(a,run,conf,b['bound'],selected['source'])
+        src=features.volume(a,run,conf,b['bound'],src,[auth['legacy_frames']['source']],90)
+        src=features.volume(a,run,conf,b['bound'],src,b['known_features'],30)
+        removed=features.removed_main(a,run,conf,auth,b)
+        # Original primary reader accepts at most two pools. Collapse every
+        # verified available pool to one so no third source is silently ignored.
+        from rebuild_frames import pool_rates
+        envb=dict(b,known_rates=[str(pool_rates(a,run,conf,dict(primary=b)))])
+        src=features.environment(a,run,conf,envb,src,removed)
+        save(run/'PRIVATE/FRAMES90.json',dict(source=str(src),scores=selected['scores']))
+        save(run/'PRIVATE/REMOVED_MAIN.json',dict(path=str(removed)));return
+    f=read(run/'PRIVATE/FRAMES90.json')
+    if name=='core_models':models.main(a,run,conf,f['source'],f['scores']);return
+    if name=='supplements':models.supplements(a,run,conf,f['source'],f['scores']);return
+    if name=='sensitivities':models.sensitivities(a,run,conf,f['source'],f['scores']);return
+    if name=='subgroups':models.subgroups(a,run,conf,f['source'],f['scores']);return
+    if name in ('bins','receipt_kind','patron'):
+        import companions
+        if name=='bins':companions.bins(a,run,conf,f['source'],f['scores'])
+        elif name=='receipt_kind':companions.receipt_kind(a,run,conf,auth,b,f['source'],f['scores'])
+        else:companions.patron(a,run,conf,f['source'],f['scores'])
+        return
+    import comparisons
+    cr=run/'comparisons'
+    if name=='comparison_auth':comparisons.prepare(a,run,conf,b);return
+    cb=read(cr/'PRIVATE/BINDING90.json')
+    if name=='comparison_candidates':
+        from uniform_candidates import candidates
+        candidates(a,cr,conf,cb)
+    elif name=='comparison_chronology':comparisons.fc.chronology90(a,cr,conf,cb)
+    elif name=='comparison_metadata':comparisons.metadata(a,cr,conf,cb)
+    elif name=='comparison_frames':comparisons.make_frames(a,run,conf,cb,Path(read(run/'PRIVATE/REMOVED_MAIN.json')['path']))
+    elif name=='comparison_models':comparisons.models(a,run,conf)
+    guard(auth)
+
+def checkpoint(a,run,conf,state):
+    completed=[k for k in STAGES if state.get(k,{}).get('status')=='COMPLETE']
+    failed=[k for k in STAGES if state.get(k,{}).get('status') in ('FAILED','BLOCKED','INTERRUPTED')]
+    status='BATCH_COMPLETE' if len(completed)==len(STAGES) else 'PARTIAL' if failed else 'IN_PROGRESS'
+    save(run/'report/STATUS.json',dict(status=status,configuration=conf,completed=completed,failed_or_blocked=failed,stages=state,whole_paper_complete=False,private_rows_exported=False))
+    shutil.copy2(ROOT/'COVERAGE.json',run/'report/COVERAGE.json')
+    files=[]
+    for prefix,folder in [('receipt',run/'report'),('comparisons',run/'comparisons/report')]:
+        if folder.exists():
+            for f in sorted(folder.rglob('*')):
+                if f.is_file() and 'PRIVATE' not in str(f.relative_to(folder)):files.append((prefix+'/'+f.relative_to(folder).as_posix(),f))
+    target=a.result_dir/f'MATERIAL_IV_BATCH_{conf[:16]}_RETURN.zip';temp=target.with_suffix('.partial')
+    with zipfile.ZipFile(temp,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
+        for name,path in files:z.write(path,name)
+        if (run/'run.log').exists():z.write(run/'run.log','run.log')
+        z.writestr('REPORT_MANIFEST.json',json.dumps([dict(path=n,sha256=sha(p),bytes=p.stat().st_size) for n,p in files],indent=2))
+    os.replace(temp,target);Path(str(target)+'.sha256').write_text(sha(target)+'  '+target.name+'\n')
+    log('Return report: '+str(target))
+
+def verify_package():
+    for line in (ROOT/'PACKAGE_MANIFEST.sha256').read_text().splitlines():
+        digest_,name=line.split('  ',1);p=(ROOT/name).resolve()
+        require(p.is_relative_to(ROOT) and p.is_file() and sha(p)==digest_,'Package file changed: '+name)
+
+def main():
+    a=arguments();verify_package();run,conf=setup(a)
+    if a._stage:
+        no_network()
+        with heartbeat(a._stage):execute(a,run,conf)
+        return 0
+    # The threshold is a conservative startup reservation, not measured usage.
+    require(shutil.disk_usage(run).free>=160*2**30,'Need at least 160 GiB free on the project drive for isolated frames, model buffers and spill')
+    statepath=run/'PRIVATE/STATE.json';state=read(statepath) if statepath.exists() else {}
+    with (run/'RUN.lock').open('a+') as lock:
+        try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        except BlockingIOError:raise RuntimeError('This material IV batch is already running')
+        save(a.result_dir/'MATERIAL_IV_BATCH_LATEST_PRIVATE.json',dict(root=str(run),configuration=conf))
+        log('Material IV resume v1.0.1: provisional 2–5 hours remaining; new local chronology scans can extend this. Completed stages will be preserved.')
+        log(f'Compute budget: {a.workers} workers maximum, {a.memory_gb:.1f} GiB; at most two heavy data tasks, models sequential.')
+        with heartbeat('Verifying saved work'):verify_resume(a,run,conf,state)
+        if a.preflight_only:return 0
+        for name in STAGES:
+            if state.get(name,{}).get('status')=='COMPLETE':
+                log(name+': verified completed stage; skipped')
+                continue
+            if name.startswith('comparison_'):
+                prior=STAGES[STAGES.index(name)-1]
+                if prior.startswith('comparison_') and state.get(prior,{}).get('status')!='COMPLETE':
+                    state[name]=dict(status='BLOCKED',reason=prior);save(statepath,state);continue
+            if name in ('supplements','bins','receipt_kind','patron') and state.get('core_models',{}).get('status')!='COMPLETE':
+                state[name]=dict(status='BLOCKED',reason='core_models');save(statepath,state);continue
+            started=time.monotonic();state[name]=dict(status='RUNNING');save(statepath,state)
+            argv=[sys.executable,str(ROOT/'run.py'),*sys.argv[1:],'--_stage',name]
+            with (run/'run.log').open('a',buffering=1) as logfile:
+                child=subprocess.Popen(argv,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,bufsize=1,start_new_session=True)
+                try:
+                    for line in child.stdout:print(line,end='',flush=True);logfile.write(line)
+                    code=child.wait()
+                except KeyboardInterrupt:
+                    os.killpg(child.pid,signal.SIGTERM)
+                    try:child.wait(timeout=20)
+                    except subprocess.TimeoutExpired:os.killpg(child.pid,signal.SIGKILL);child.wait()
+                    state[name]=dict(status='INTERRUPTED',seconds=time.monotonic()-started);save(statepath,state);checkpoint(a,run,conf,state);return 130
+            state[name]=dict(status='COMPLETE' if code==0 else 'FAILED',exit_code=code,seconds=time.monotonic()-started);save(statepath,state);checkpoint(a,run,conf,state)
+            log(f'{name}: {state[name]["status"]}; elapsed {state[name]["seconds"]/60:.1f} min')
+            if code and name in CORE:return code
+            if a.preflight_only and name=='authenticate':return code
+        checkpoint(a,run,conf,state)
+        return 0 if all(state.get(k,{}).get('status')=='COMPLETE' for k in STAGES) else 2

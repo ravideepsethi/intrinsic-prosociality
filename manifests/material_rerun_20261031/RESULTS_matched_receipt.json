@@ -1,0 +1,5456 @@
+{
+  "group": "matched_receipt",
+  "reviewed_status": "COMPLETE_FOR_NAMED_MODULE",
+  "whole_paper_complete": false,
+  "return_archive_name": "MATERIAL_RECEIPT_9d87ae02e1407681_RECEIPT_READY.zip",
+  "return_archive_sha256": "480fd684b25d56b9f81535b059626412764640760df1c8a136d819fd40fb78fe",
+  "return_archive_bytes": 446478,
+  "original_report_manifest_sha256": "6dbc1a2148dde7e4ca9c08b249076e78067b0292de3da46bcb366a682f28bf7e",
+  "original_report_manifest": [
+    {
+      "path": "report/COMMON_SUPPORT.json",
+      "bytes": 574,
+      "sha256": "bdea58d62596df505b570c348843898e92222b3b20fb0b715b833df6e35fe615"
+    },
+    {
+      "path": "report/DOWNSTREAM_STATUS.csv",
+      "bytes": 2754,
+      "sha256": "774735eb8dd184ddc5d2680ede077f4d8f906819c8adeb8101cb34b0ef931d28"
+    },
+    {
+      "path": "report/ENVIRONMENT.json",
+      "bytes": 197,
+      "sha256": "93d8b0d7f2c8afa5910484e38af5aebe2d812c5065a9ae5b8a43a6bd12c96b10"
+    },
+    {
+      "path": "report/HISTORY_RECONSTRUCTION.json",
+      "bytes": 187010,
+      "sha256": "89ac81e55759fe42adf83254e2b7de02dc353736efc6ee1c043818702067883c"
+    },
+    {
+      "path": "report/INPUT_CELLS.csv",
+      "bytes": 688,
+      "sha256": "3a93d5e287ff81751c7008f582771fbaee2d0d114a522b260d94630086fe3a0a"
+    },
+    {
+      "path": "report/INPUT_CENSUS.csv",
+      "bytes": 203,
+      "sha256": "063fb4bc3ee5ec347773917926dec29873667529606c560bb653c10cf10addeb"
+    },
+    {
+      "path": "report/INPUT_LINEAGE.json",
+      "bytes": 7584,
+      "sha256": "eefc1f23f11bdee6916afda2bce1e3861408e70bcbc576bf2d3ae12be957c900"
+    },
+    {
+      "path": "report/MATCHED_SAMPLE_FLOW.csv",
+      "bytes": 191,
+      "sha256": "2d9f0eb98f7bc74cb6e1806e2dcc3ee8c3d943408a766752c92c9d2d0b157ede"
+    },
+    {
+      "path": "report/METHOD.json",
+      "bytes": 2372,
+      "sha256": "ff62808cf89fb2d9fd3269d1cb88710c519ea2584a20a13b7394ab1226169ca1"
+    },
+    {
+      "path": "report/RECEIPT_BEFORE_AFTER.csv",
+      "bytes": 2603,
+      "sha256": "704cd98dd8ef3e78c454544284ff076f688bc32e1efa01cd72bcadab3afd531d"
+    },
+    {
+      "path": "report/RESULTS.json",
+      "bytes": 1758,
+      "sha256": "7103d546d94d2772e33bd3c972ca00aca29b5558b4ea3339ed6e233fa89971eb"
+    },
+    {
+      "path": "report/common_support_cells.csv",
+      "bytes": 9762,
+      "sha256": "899969b290c946d721423d32d6b8a1bc566283620931f77b1c376e4dc0163e40"
+    },
+    {
+      "path": "report/matched_models.csv",
+      "bytes": 9676,
+      "sha256": "f01e2dbafcb697cf384a6013c4706377c46ce3193dbe58a114428fe90abef9c1"
+    },
+    {
+      "path": "report/models/any_later_grant.json",
+      "bytes": 25277,
+      "sha256": "48742fdebfc13af219ad17e8731aa009c13933d7a1c73978c01d195cec9596b8"
+    },
+    {
+      "path": "report/models/censored.json",
+      "bytes": 25383,
+      "sha256": "76a920e1756942cd9d18906a98b68b1cd261c372485ff4c6877a28a158e8b622"
+    },
+    {
+      "path": "report/models/conditional.json",
+      "bytes": 25121,
+      "sha256": "e30f0cc81d6323911149badfdbd29d5b0cdd09beb73103df8d0f7209fbd60e00"
+    },
+    {
+      "path": "report/models/conditional_last_move_hour.json",
+      "bytes": 25528,
+      "sha256": "4f9285b4aa0abeb372308414e53c1bc515c82167acb77acd9f9965226498f28e"
+    },
+    {
+      "path": "report/models/conditional_later_controls.json",
+      "bytes": 162533,
+      "sha256": "edbd8d13492ee3e0e6e5f0d160ec68c10f8a9fee80d59b2b7dd9f7a7c890bbd9"
+    },
+    {
+      "path": "report/models/conditional_start_hour.json",
+      "bytes": 25531,
+      "sha256": "6f65ce0e25162ed4a95f0dcd736d4efb4afa03f9a1a50017656e134a02e8c2c3"
+    },
+    {
+      "path": "report/models/decay_1d_kind.json",
+      "bytes": 24149,
+      "sha256": "a3839730892d8c31ad0a3daadcca3e2eb7026c979de66f64cda8b767c196f548"
+    },
+    {
+      "path": "report/models/decay_30d_kind.json",
+      "bytes": 25010,
+      "sha256": "56b55ea60cbadc0ab1e3caaa188e6d1a37122c4936c5f6174acf7b795da100d9"
+    },
+    {
+      "path": "report/models/decay_6h_kind.json",
+      "bytes": 23888,
+      "sha256": "f89a0e07be566d340c9f346f35e35868adc9eee9a3703f6f4d5fcb999f8a5862"
+    },
+    {
+      "path": "report/models/decay_7d_kind.json",
+      "bytes": 24686,
+      "sha256": "cffe9219b7d19f5e45b7f0cb68e022519e07f79ccc5a3d1c165c66c9d1ad561f"
+    },
+    {
+      "path": "report/models/decay_90d_kind.json",
+      "bytes": 25048,
+      "sha256": "f2dbab16f485850d667621fc3caa295fe7a2a0498a72cdbbddced68d6dedb15c"
+    },
+    {
+      "path": "report/models/later_receipt_count.json",
+      "bytes": 25550,
+      "sha256": "7fe728d4d20dbfa3747f9263407ef2239d028a9c105b4f89be59cf34eaa0b24a"
+    },
+    {
+      "path": "report/models/primary.json",
+      "bytes": 25334,
+      "sha256": "487083b8b0566de5fba2c448b70befe2592b56452c6945f81dc65af297773fff"
+    },
+    {
+      "path": "report/models/primary_last_move_hour.json",
+      "bytes": 25652,
+      "sha256": "e7489ac67b031d7aee9fd9f56cedc77f7cc2f3fcf0b448f75375bfda113ea613"
+    },
+    {
+      "path": "report/models/primary_start_hour.json",
+      "bytes": 25683,
+      "sha256": "c0ad40c36fc9848b8ecf5793f7dc8777d9f85c71dc300ceb5d512b7b6fd8ee34"
+    },
+    {
+      "path": "report/models/reach.json",
+      "bytes": 25090,
+      "sha256": "a318de42f0d8e1992ac550467b586bbda622f874fc7436d370943f1dd075dc53"
+    },
+    {
+      "path": "report/models/reach_last_move_hour.json",
+      "bytes": 25476,
+      "sha256": "6324014d467e925e74842b9ae28e50ebe4d767386449bdac5e183e2ecdb72ecc"
+    },
+    {
+      "path": "report/models/reach_start_hour.json",
+      "bytes": 25451,
+      "sha256": "0017fc8c9e9cde58a46f1517a1d31360bbbdf68a221781dcabd2a98a9e6d987d"
+    },
+    {
+      "path": "report/rows/any_later_grant.csv",
+      "bytes": 770,
+      "sha256": "54325e3b6df53af55af2a336437fecc2425bbe3948bf3c63b7c0c7ae33d09bce"
+    },
+    {
+      "path": "report/rows/censored.csv",
+      "bytes": 772,
+      "sha256": "dc74cea0dbfc79c2a733e30e7d449e3e7523aa23320104b20ff3f601648d50e0"
+    },
+    {
+      "path": "report/rows/conditional.csv",
+      "bytes": 759,
+      "sha256": "31e04a3d9631e70022ae39fede026c6760f45a410f0107679efc27655ea1921c"
+    },
+    {
+      "path": "report/rows/conditional_last_move_hour.csv",
+      "bytes": 1058,
+      "sha256": "a3ad2df4326f0eef255b025d6c7cf83c865ad64a9550857776808c03f0a963e4"
+    },
+    {
+      "path": "report/rows/conditional_later_controls.csv",
+      "bytes": 775,
+      "sha256": "f0a349715cf665dbd9894d3714587bb36992c92999281e3280f17ceaf166e198"
+    },
+    {
+      "path": "report/rows/conditional_start_hour.csv",
+      "bytes": 1056,
+      "sha256": "2b4ff92c6b78423ac3bdb491255df76dd16790f4ba6af0b93279b4ce1c97864b"
+    },
+    {
+      "path": "report/rows/decay_1d_kind.csv",
+      "bytes": 742,
+      "sha256": "85e686c8c91c7c7e708f0f4a194372c9c871ff21abc1700654b68044dded9edb"
+    },
+    {
+      "path": "report/rows/decay_30d_kind.csv",
+      "bytes": 750,
+      "sha256": "891d0ef37c0eb94d664f4a03470980228667a0f50912e30e9e618dc3dbbaee12"
+    },
+    {
+      "path": "report/rows/decay_6h_kind.csv",
+      "bytes": 741,
+      "sha256": "ed171fe6c28d07b300ab58a5f0c68b5864ac3d1c2ac4d1efafcc576ea388ee1d"
+    },
+    {
+      "path": "report/rows/decay_7d_kind.csv",
+      "bytes": 749,
+      "sha256": "00bdc86bf22510864c0cea0bebcecad6e82f15785cf360bc6d029496f492f946"
+    },
+    {
+      "path": "report/rows/decay_90d_kind.csv",
+      "bytes": 755,
+      "sha256": "e4a82f933d17ff2f0507a84a907ce4d8341c4eba2c1cf77b713c0500d8b9374c"
+    },
+    {
+      "path": "report/rows/later_receipt_count.csv",
+      "bytes": 795,
+      "sha256": "b65e29dfc923298a4e101b814ad0447af2f96584096ffc99a4e0fdc861e6065b"
+    },
+    {
+      "path": "report/rows/primary.csv",
+      "bytes": 752,
+      "sha256": "c598c4d9bd0c8925fcf818474ec5e414420a972026cfa43c66dc3d2952aa5b63"
+    },
+    {
+      "path": "report/rows/primary_last_move_hour.csv",
+      "bytes": 1060,
+      "sha256": "1bf98247f55fc3a3608988e7920116ffae6437030d78991db4d923359f174fe6"
+    },
+    {
+      "path": "report/rows/primary_start_hour.csv",
+      "bytes": 1054,
+      "sha256": "21eac5419eae3e7781f38c9459e36f6d859c25cecefda28dc372832b96b44359"
+    },
+    {
+      "path": "report/rows/reach.csv",
+      "bytes": 763,
+      "sha256": "58ee0a9570183d5297f59742dc82715ef7dca27dda4851f93e01ace80920715e"
+    },
+    {
+      "path": "report/rows/reach_last_move_hour.csv",
+      "bytes": 1065,
+      "sha256": "ce736c612151f676d360fbb6fde69bdc267d2c93ca3ecff1e2486c734b84aee3"
+    },
+    {
+      "path": "report/rows/reach_start_hour.csv",
+      "bytes": 1057,
+      "sha256": "9c9823fda130255dbf408a545823a855c9bd86e2d2e9dd610286a8e30a2d4adb"
+    },
+    {
+      "path": "report/tab_app_intervals.csv",
+      "bytes": 2738,
+      "sha256": "8f9e9b2c38e16623e0ea652d028e5d0dc76b45bbb1099caba626ede9d7c325c1"
+    },
+    {
+      "path": "report/tab_app_receipt_hours.csv",
+      "bytes": 4458,
+      "sha256": "59bf4227b1cd05d24c26c97ab22a0f2fc74ba2b9111f0895e590c5ffabe1df38"
+    },
+    {
+      "path": "report/tab_app_receipt_sensitivities.csv",
+      "bytes": 1925,
+      "sha256": "6072ce69836d048571888aeda425323dd6cb85a19e516e74aed725bf7c62a95d"
+    },
+    {
+      "path": "report/tab_dynamics.csv",
+      "bytes": 2339,
+      "sha256": "161970725e74a4355e379da0278c15509e0f54af9f0b411cab7dfc36228c7975"
+    },
+    {
+      "path": "report/tab_dynamics.tex",
+      "bytes": 487,
+      "sha256": "e7ec9c3d4d6508cfadd316b74d79df47a7c5082738535367ba3e6424b7d3fead"
+    },
+    {
+      "path": "code/code/checkpoints.py",
+      "bytes": 1233,
+      "sha256": "621b1a159419f650b38c2b97464960834297fa13807bf6bfe7e00d60f1d45ebf"
+    },
+    {
+      "path": "code/code/estimation.py",
+      "bytes": 9207,
+      "sha256": "c0276a426cc1de2070aed09d5a0987f5406649d9068cf8f664ecd051ccef214b"
+    },
+    {
+      "path": "code/code/history.py",
+      "bytes": 12013,
+      "sha256": "d08515be1e1c7655aa448e6030c6656dcfc96df418aa05bb890f03d0831bac60"
+    },
+    {
+      "path": "code/code/inputs.py",
+      "bytes": 6220,
+      "sha256": "bc4b2388e63459430385c50eef4e58ff5a822d60ad0a4a71db5d69cd3db8b235"
+    },
+    {
+      "path": "code/code/panel.py",
+      "bytes": 6204,
+      "sha256": "f96c2ee44f800241cfebe6e370d696620041e25e8d910c53c026cc612be53121"
+    },
+    {
+      "path": "code/code/receipt.py",
+      "bytes": 2710,
+      "sha256": "bce29e12c6947cc91fd46f64076efd6572a83e8fe25c33b8a05d34bfa5983b83"
+    },
+    {
+      "path": "code/code/reporting.py",
+      "bytes": 5839,
+      "sha256": "ddcc5be3c8c1c918c993f8212e07bf55b4844b0a9f53cddaea8df128ed24c3f1"
+    },
+    {
+      "path": "code/code/run_receipt.py",
+      "bytes": 10493,
+      "sha256": "21be94c9d8d9771e85493a99e1a1fcb33d7885e68e7b7e4b46e64810189b1f3e"
+    },
+    {
+      "path": "code/code/source.py",
+      "bytes": 596,
+      "sha256": "29e2640040e2c758c74ee9b5dfdcc0c84aec593bcfcf99d14567271358e63dfb"
+    },
+    {
+      "path": "code/code/util.py",
+      "bytes": 2850,
+      "sha256": "77257e38d97f08db8e2dacfc3a9034caf23e4bb309ab73b80b84c98bfe7f7da9"
+    },
+    {
+      "path": "code/vendor/local_common.py",
+      "bytes": 8937,
+      "sha256": "862c1981c1a43f23d72031b5498b8cc0ed7bd065fcf96fbbd7f96dd81cefd175"
+    },
+    {
+      "path": "code/vendor/matched.py",
+      "bytes": 6134,
+      "sha256": "68bc9d4694aae5a65a2a06d561a9350613f3802f9cb8957177354a38e481c414"
+    },
+    {
+      "path": "code/vendor/matched_absorption.py",
+      "bytes": 3636,
+      "sha256": "e1e5d149aa239049c9b660bf0a48673ad90948b8a0543b51c1060ea4231fb80a"
+    },
+    {
+      "path": "code/vendor/receipt_core.py",
+      "bytes": 177363,
+      "sha256": "8d2c218ef17342528326fead84ed883e1b9ec0344e21104003553052589b03da"
+    },
+    {
+      "path": "code/tests/contract_tests.py",
+      "bytes": 3640,
+      "sha256": "b24c3459efa9aa597bbabd72ed4674014d40be66337e9d23444a03f69e8b836d"
+    },
+    {
+      "path": "code/tests/run_tests.py",
+      "bytes": 480,
+      "sha256": "96f189d8cd5added46988b2b6b89be83bb8a8922c98dba05c69f48d597bbd28b"
+    },
+    {
+      "path": "code/tests/test_receipt.py",
+      "bytes": 19529,
+      "sha256": "49b7aa15f5dd96f404c61f769ff4977dd8c5c86bdd653b2681c72ffd65a3bbc3"
+    },
+    {
+      "path": "code/authority/HISTORY.json",
+      "bytes": 673,
+      "sha256": "33e917cbd08ce05b5ec2c84f90bb85b9e62ff13a6b272ac77ec53ca9d959e6f6"
+    },
+    {
+      "path": "code/authority/REVIEW.json",
+      "bytes": 6421,
+      "sha256": "a74eb6439368b96441bf2ebbcf862c0159be12129a0a624fdd9926b618711438"
+    },
+    {
+      "path": "code/authority/VENDORED_SOURCES.json",
+      "bytes": 594,
+      "sha256": "26ebfc138303fb497bb521edb4dbdab4dd6016002deb6fd84740d7a6db59b617"
+    },
+    {
+      "path": "code/authority/chronology.tsv",
+      "bytes": 247478,
+      "sha256": "c169bf9e346defde62047a3c2048758c296b1f0598fee70d2cc1e660121536d8"
+    },
+    {
+      "path": "code/evidence/patron_review/ACQUISITION_FLOW.csv",
+      "bytes": 322,
+      "sha256": "32c6c529a7219b4b96efe251331396f7134a84f00b2ec34eee17a67af0048326"
+    },
+    {
+      "path": "code/evidence/patron_review/DOWNSTREAM_STATUS.csv",
+      "bytes": 2641,
+      "sha256": "e1b21f5cfd49e8de6edbb2c2db36e5727b1a2242061d87d0782d8cea7f95a6db"
+    },
+    {
+      "path": "code/evidence/patron_review/PATRON_BEFORE_AFTER.csv",
+      "bytes": 715803,
+      "sha256": "52731c78a4a8175130620f65e68675dafac8350ec98b787fea563ffee3734b4b"
+    },
+    {
+      "path": "code/evidence/patron_review/RESULTS.json",
+      "bytes": 939,
+      "sha256": "9060c781559d39c6246cdc9a9f1da4eeb51511b2c8137f9fb94e6f1ed6497afc"
+    },
+    {
+      "path": "code/evidence/patron_review/REVIEWED.json",
+      "bytes": 384,
+      "sha256": "31ae0953890e6c9fdbf7cbc18accf215f11888138398da80a355ceffb053db6a"
+    },
+    {
+      "path": "code/evidence/patron_review/tab_patron.csv",
+      "bytes": 1228,
+      "sha256": "6734b8c52749ef84eb6c401660c43ebc84c0f7e7a72437d80f45f911da2dbd5e"
+    },
+    {
+      "path": "code/evidence/previous_receipt/a1_decay.csv",
+      "bytes": 2999,
+      "sha256": "2a1d7cd13a9399b638c90a63d4c3ab7fa68fb1f2f5f3d0e0fd45271d37182155"
+    },
+    {
+      "path": "code/evidence/previous_receipt/a1_models.csv",
+      "bytes": 3613,
+      "sha256": "9bbba31ad463b1d21503b1429a37851417d8ff37bb16d2ad7a51437a4fa86606"
+    },
+    {
+      "path": "code/evidence/previous_receipt/receipt_hours.csv",
+      "bytes": 2963,
+      "sha256": "ce420f3b24d5b86c2ff5af7d83c108365e6d766776e2bd799309cea3412e95e3"
+    },
+    {
+      "path": "README.txt",
+      "bytes": 7111,
+      "sha256": "749f456848c81bf2f54ae648b1c7741ee21b77a799860fae1ebc6bbbfd4253fe"
+    },
+    {
+      "path": "BUILD_INFO.json",
+      "bytes": 567,
+      "sha256": "8a142835482a9e1d5eaf96e8b0ed57801065cb8c69e6461901a6665f7f54b232"
+    },
+    {
+      "path": "SHA256SUMS.txt",
+      "bytes": 3343,
+      "sha256": "7ddffb0cc3d33cf23e5a335174a5c0a09616b4abb4e4c4d58aba739ae765938c"
+    },
+    {
+      "path": "requirements.txt",
+      "bytes": 71,
+      "sha256": "684b1e615aa60149c4212f14198c7639446d6bb7f27f127500dbd01c794eb9c5"
+    },
+    {
+      "path": "TEST_RESULTS.txt",
+      "bytes": 2569,
+      "sha256": "e24cf9b380860e78e5c6dcd90ff106f1c34b7b697060dd587e9e06b803dc7217"
+    },
+    {
+      "path": "run.log",
+      "bytes": 10122,
+      "sha256": "7512f392953661c8cfb840dfc0dd3d1ad8501005b867e1cc9e57e982f5d615e7"
+    },
+    {
+      "path": "RETURN_STATUS.json",
+      "bytes": 100,
+      "sha256": "855a4800a7d54edc09f55a56aa7dc30534e6d6c8273f1189a816e8be615c27db"
+    }
+  ],
+  "all_report_entries_verified": 91,
+  "files": [
+    {
+      "original_path": "report/COMMON_SUPPORT.json",
+      "original_sha256": "bdea58d62596df505b570c348843898e92222b3b20fb0b715b833df6e35fe615",
+      "original_bytes": 574,
+      "published_path": "results/material_rerun_20261031/matched_receipt/COMMON_SUPPORT.json",
+      "published_sha256": "bdea58d62596df505b570c348843898e92222b3b20fb0b715b833df6e35fe615",
+      "published_bytes": 574
+    },
+    {
+      "original_path": "report/DOWNSTREAM_STATUS.csv",
+      "original_sha256": "774735eb8dd184ddc5d2680ede077f4d8f906819c8adeb8101cb34b0ef931d28",
+      "original_bytes": 2754,
+      "published_path": "results/material_rerun_20261031/matched_receipt/DOWNSTREAM_STATUS.csv",
+      "published_sha256": "774735eb8dd184ddc5d2680ede077f4d8f906819c8adeb8101cb34b0ef931d28",
+      "published_bytes": 2754
+    },
+    {
+      "original_path": "report/ENVIRONMENT.json",
+      "original_sha256": "93d8b0d7f2c8afa5910484e38af5aebe2d812c5065a9ae5b8a43a6bd12c96b10",
+      "original_bytes": 197,
+      "published_path": "results/material_rerun_20261031/matched_receipt/ENVIRONMENT.json",
+      "published_sha256": "93d8b0d7f2c8afa5910484e38af5aebe2d812c5065a9ae5b8a43a6bd12c96b10",
+      "published_bytes": 197
+    },
+    {
+      "original_path": "report/HISTORY_RECONSTRUCTION.json",
+      "original_sha256": "89ac81e55759fe42adf83254e2b7de02dc353736efc6ee1c043818702067883c",
+      "original_bytes": 187010,
+      "published_path": "results/material_rerun_20261031/matched_receipt/HISTORY_RECONSTRUCTION.json",
+      "published_sha256": "89ac81e55759fe42adf83254e2b7de02dc353736efc6ee1c043818702067883c",
+      "published_bytes": 187010
+    },
+    {
+      "original_path": "report/INPUT_CELLS.csv",
+      "original_sha256": "3a93d5e287ff81751c7008f582771fbaee2d0d114a522b260d94630086fe3a0a",
+      "original_bytes": 688,
+      "published_path": "results/material_rerun_20261031/matched_receipt/INPUT_CELLS.csv",
+      "published_sha256": "3a93d5e287ff81751c7008f582771fbaee2d0d114a522b260d94630086fe3a0a",
+      "published_bytes": 688
+    },
+    {
+      "original_path": "report/INPUT_CENSUS.csv",
+      "original_sha256": "063fb4bc3ee5ec347773917926dec29873667529606c560bb653c10cf10addeb",
+      "original_bytes": 203,
+      "published_path": "results/material_rerun_20261031/matched_receipt/INPUT_CENSUS.csv",
+      "published_sha256": "063fb4bc3ee5ec347773917926dec29873667529606c560bb653c10cf10addeb",
+      "published_bytes": 203
+    },
+    {
+      "original_path": "report/INPUT_LINEAGE.json",
+      "original_sha256": "eefc1f23f11bdee6916afda2bce1e3861408e70bcbc576bf2d3ae12be957c900",
+      "original_bytes": 7584,
+      "published_path": "results/material_rerun_20261031/matched_receipt/INPUT_LINEAGE.json",
+      "published_sha256": "0672dff42b30f06817ed966cfb6f1a289718f3ee8b96ac0a6ad0caf7b43c5024",
+      "published_bytes": 7607,
+      "redactions": [
+        {
+          "start": 31,
+          "end": 38,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 46,
+          "end": 54,
+          "token": "__PRIVATE_VALUE_2__"
+        }
+      ]
+    },
+    {
+      "original_path": "report/MATCHED_SAMPLE_FLOW.csv",
+      "original_sha256": "2d9f0eb98f7bc74cb6e1806e2dcc3ee8c3d943408a766752c92c9d2d0b157ede",
+      "original_bytes": 191,
+      "published_path": "results/material_rerun_20261031/matched_receipt/MATCHED_SAMPLE_FLOW.csv",
+      "published_sha256": "2d9f0eb98f7bc74cb6e1806e2dcc3ee8c3d943408a766752c92c9d2d0b157ede",
+      "published_bytes": 191
+    },
+    {
+      "original_path": "report/METHOD.json",
+      "original_sha256": "ff62808cf89fb2d9fd3269d1cb88710c519ea2584a20a13b7394ab1226169ca1",
+      "original_bytes": 2372,
+      "published_path": "results/material_rerun_20261031/matched_receipt/METHOD.json",
+      "published_sha256": "ff62808cf89fb2d9fd3269d1cb88710c519ea2584a20a13b7394ab1226169ca1",
+      "published_bytes": 2372
+    },
+    {
+      "original_path": "report/RECEIPT_BEFORE_AFTER.csv",
+      "original_sha256": "704cd98dd8ef3e78c454544284ff076f688bc32e1efa01cd72bcadab3afd531d",
+      "original_bytes": 2603,
+      "published_path": "results/material_rerun_20261031/matched_receipt/RECEIPT_BEFORE_AFTER.csv",
+      "published_sha256": "704cd98dd8ef3e78c454544284ff076f688bc32e1efa01cd72bcadab3afd531d",
+      "published_bytes": 2603
+    },
+    {
+      "original_path": "report/RESULTS.json",
+      "original_sha256": "7103d546d94d2772e33bd3c972ca00aca29b5558b4ea3339ed6e233fa89971eb",
+      "original_bytes": 1758,
+      "published_path": "results/material_rerun_20261031/matched_receipt/RESULTS.json",
+      "published_sha256": "7103d546d94d2772e33bd3c972ca00aca29b5558b4ea3339ed6e233fa89971eb",
+      "published_bytes": 1758
+    },
+    {
+      "original_path": "report/common_support_cells.csv",
+      "original_sha256": "899969b290c946d721423d32d6b8a1bc566283620931f77b1c376e4dc0163e40",
+      "original_bytes": 9762,
+      "published_path": "results/material_rerun_20261031/matched_receipt/common_support_cells.csv",
+      "published_sha256": "899969b290c946d721423d32d6b8a1bc566283620931f77b1c376e4dc0163e40",
+      "published_bytes": 9762
+    },
+    {
+      "original_path": "report/matched_models.csv",
+      "original_sha256": "f01e2dbafcb697cf384a6013c4706377c46ce3193dbe58a114428fe90abef9c1",
+      "original_bytes": 9676,
+      "published_path": "results/material_rerun_20261031/matched_receipt/matched_models.csv",
+      "published_sha256": "f01e2dbafcb697cf384a6013c4706377c46ce3193dbe58a114428fe90abef9c1",
+      "published_bytes": 9676
+    },
+    {
+      "original_path": "report/models/any_later_grant.json",
+      "original_sha256": "48742fdebfc13af219ad17e8731aa009c13933d7a1c73978c01d195cec9596b8",
+      "original_bytes": 25277,
+      "published_path": "results/material_rerun_20261031/matched_receipt/models/any_later_grant.json",
+      "published_sha256": "48742fdebfc13af219ad17e8731aa009c13933d7a1c73978c01d195cec9596b8",
+      "published_bytes": 25277
+    },
+    {
+      "original_path": "report/models/censored.json",
+      "original_sha256": "76a920e1756942cd9d18906a98b68b1cd261c372485ff4c6877a28a158e8b622",
+      "original_bytes": 25383,
+      "published_path": "results/material_rerun_20261031/matched_receipt/models/censored.json",
+      "published_sha256": "76a920e1756942cd9d18906a98b68b1cd261c372485ff4c6877a28a158e8b622",
+      "published_bytes": 25383
+    },
+    {
+      "original_path": "report/models/conditional.json",
+      "original_sha256": "e30f0cc81d6323911149badfdbd29d5b0cdd09beb73103df8d0f7209fbd60e00",
+      "original_bytes": 25121,
+      "published_path": "results/material_rerun_20261031/matched_receipt/models/conditional.json",
+      "published_sha256": "e30f0cc81d6323911149badfdbd29d5b0cdd09beb73103df8d0f7209fbd60e00",
+      "published_bytes": 25121
+    },
+    {
+      "original_path": "report/models/conditional_last_move_hour.json",
+      "original_sha256": "4f9285b4aa0abeb372308414e53c1bc515c82167acb77acd9f9965226498f28e",
+      "original_bytes": 25528,
+      "published_path": "results/material_rerun_20261031/matched_receipt/models/conditional_last_move_hour.json",
+      "published_sha256": "4f9285b4aa0abeb372308414e53c1bc515c82167acb77acd9f9965226498f28e",
+      "published_bytes": 25528
+    },
+    {
+      "original_path": "report/models/conditional_later_controls.json",
+      "original_sha256": "edbd8d13492ee3e0e6e5f0d160ec68c10f8a9fee80d59b2b7dd9f7a7c890bbd9",
+      "original_bytes": 162533,
+      "published_path": "results/material_rerun_20261031/matched_receipt/models/conditional_later_controls.json",
+      "published_sha256": "edbd8d13492ee3e0e6e5f0d160ec68c10f8a9fee80d59b2b7dd9f7a7c890bbd9",
+      "published_bytes": 162533
+    },
+    {
+      "original_path": "report/models/conditional_start_hour.json",
+      "original_sha256": "6f65ce0e25162ed4a95f0dcd736d4efb4afa03f9a1a50017656e134a02e8c2c3",
+      "original_bytes": 25531,
+      "published_path": "results/material_rerun_20261031/matched_receipt/models/conditional_start_hour.json",
+      "published_sha256": "6f65ce0e25162ed4a95f0dcd736d4efb4afa03f9a1a50017656e134a02e8c2c3",
+      "published_bytes": 25531
+    },
+    {
+      "original_path": "report/models/decay_1d_kind.json",
+      "original_sha256": "a3839730892d8c31ad0a3daadcca3e2eb7026c979de66f64cda8b767c196f548",
+      "original_bytes": 24149,
+      "published_path": "results/material_rerun_20261031/matched_receipt/models/decay_1d_kind.json",
+      "published_sha256": "a3839730892d8c31ad0a3daadcca3e2eb7026c979de66f64cda8b767c196f548",
+      "published_bytes": 24149
+    },
+    {
+      "original_path": "report/models/decay_30d_kind.json",
+      "original_sha256": "56b55ea60cbadc0ab1e3caaa188e6d1a37122c4936c5f6174acf7b795da100d9",
+      "original_bytes": 25010,
+      "published_path": "results/material_rerun_20261031/matched_receipt/models/decay_30d_kind.json",
+      "published_sha256": "56b55ea60cbadc0ab1e3caaa188e6d1a37122c4936c5f6174acf7b795da100d9",
+      "published_bytes": 25010
+    },
+    {
+      "original_path": "report/models/decay_6h_kind.json",
+      "original_sha256": "f89a0e07be566d340c9f346f35e35868adc9eee9a3703f6f4d5fcb999f8a5862",
+      "original_bytes": 23888,
+      "published_path": "results/material_rerun_20261031/matched_receipt/models/decay_6h_kind.json",
+      "published_sha256": "f89a0e07be566d340c9f346f35e35868adc9eee9a3703f6f4d5fcb999f8a5862",
+      "published_bytes": 23888
+    },
+    {
+      "original_path": "report/models/decay_7d_kind.json",
+      "original_sha256": "cffe9219b7d19f5e45b7f0cb68e022519e07f79ccc5a3d1c165c66c9d1ad561f",
+      "original_bytes": 24686,
+      "published_path": "results/material_rerun_20261031/matched_receipt/models/decay_7d_kind.json",
+      "published_sha256": "cffe9219b7d19f5e45b7f0cb68e022519e07f79ccc5a3d1c165c66c9d1ad561f",
+      "published_bytes": 24686
+    },
+    {
+      "original_path": "report/models/decay_90d_kind.json",
+      "original_sha256": "f2dbab16f485850d667621fc3caa295fe7a2a0498a72cdbbddced68d6dedb15c",
+      "original_bytes": 25048,
+      "published_path": "results/material_rerun_20261031/matched_receipt/models/decay_90d_kind.json",
+      "published_sha256": "f2dbab16f485850d667621fc3caa295fe7a2a0498a72cdbbddced68d6dedb15c",
+      "published_bytes": 25048
+    },
+    {
+      "original_path": "report/models/later_receipt_count.json",
+      "original_sha256": "7fe728d4d20dbfa3747f9263407ef2239d028a9c105b4f89be59cf34eaa0b24a",
+      "original_bytes": 25550,
+      "published_path": "results/material_rerun_20261031/matched_receipt/models/later_receipt_count.json",
+      "published_sha256": "7fe728d4d20dbfa3747f9263407ef2239d028a9c105b4f89be59cf34eaa0b24a",
+      "published_bytes": 25550
+    },
+    {
+      "original_path": "report/models/primary.json",
+      "original_sha256": "487083b8b0566de5fba2c448b70befe2592b56452c6945f81dc65af297773fff",
+      "original_bytes": 25334,
+      "published_path": "results/material_rerun_20261031/matched_receipt/models/primary.json",
+      "published_sha256": "487083b8b0566de5fba2c448b70befe2592b56452c6945f81dc65af297773fff",
+      "published_bytes": 25334
+    },
+    {
+      "original_path": "report/models/primary_last_move_hour.json",
+      "original_sha256": "e7489ac67b031d7aee9fd9f56cedc77f7cc2f3fcf0b448f75375bfda113ea613",
+      "original_bytes": 25652,
+      "published_path": "results/material_rerun_20261031/matched_receipt/models/primary_last_move_hour.json",
+      "published_sha256": "e7489ac67b031d7aee9fd9f56cedc77f7cc2f3fcf0b448f75375bfda113ea613",
+      "published_bytes": 25652
+    },
+    {
+      "original_path": "report/models/primary_start_hour.json",
+      "original_sha256": "c0ad40c36fc9848b8ecf5793f7dc8777d9f85c71dc300ceb5d512b7b6fd8ee34",
+      "original_bytes": 25683,
+      "published_path": "results/material_rerun_20261031/matched_receipt/models/primary_start_hour.json",
+      "published_sha256": "c0ad40c36fc9848b8ecf5793f7dc8777d9f85c71dc300ceb5d512b7b6fd8ee34",
+      "published_bytes": 25683
+    },
+    {
+      "original_path": "report/models/reach.json",
+      "original_sha256": "a318de42f0d8e1992ac550467b586bbda622f874fc7436d370943f1dd075dc53",
+      "original_bytes": 25090,
+      "published_path": "results/material_rerun_20261031/matched_receipt/models/reach.json",
+      "published_sha256": "a318de42f0d8e1992ac550467b586bbda622f874fc7436d370943f1dd075dc53",
+      "published_bytes": 25090
+    },
+    {
+      "original_path": "report/models/reach_last_move_hour.json",
+      "original_sha256": "6324014d467e925e74842b9ae28e50ebe4d767386449bdac5e183e2ecdb72ecc",
+      "original_bytes": 25476,
+      "published_path": "results/material_rerun_20261031/matched_receipt/models/reach_last_move_hour.json",
+      "published_sha256": "6324014d467e925e74842b9ae28e50ebe4d767386449bdac5e183e2ecdb72ecc",
+      "published_bytes": 25476
+    },
+    {
+      "original_path": "report/models/reach_start_hour.json",
+      "original_sha256": "0017fc8c9e9cde58a46f1517a1d31360bbbdf68a221781dcabd2a98a9e6d987d",
+      "original_bytes": 25451,
+      "published_path": "results/material_rerun_20261031/matched_receipt/models/reach_start_hour.json",
+      "published_sha256": "0017fc8c9e9cde58a46f1517a1d31360bbbdf68a221781dcabd2a98a9e6d987d",
+      "published_bytes": 25451
+    },
+    {
+      "original_path": "report/rows/any_later_grant.csv",
+      "original_sha256": "54325e3b6df53af55af2a336437fecc2425bbe3948bf3c63b7c0c7ae33d09bce",
+      "original_bytes": 770,
+      "published_path": "results/material_rerun_20261031/matched_receipt/rows/any_later_grant.csv",
+      "published_sha256": "54325e3b6df53af55af2a336437fecc2425bbe3948bf3c63b7c0c7ae33d09bce",
+      "published_bytes": 770
+    },
+    {
+      "original_path": "report/rows/censored.csv",
+      "original_sha256": "dc74cea0dbfc79c2a733e30e7d449e3e7523aa23320104b20ff3f601648d50e0",
+      "original_bytes": 772,
+      "published_path": "results/material_rerun_20261031/matched_receipt/rows/censored.csv",
+      "published_sha256": "dc74cea0dbfc79c2a733e30e7d449e3e7523aa23320104b20ff3f601648d50e0",
+      "published_bytes": 772
+    },
+    {
+      "original_path": "report/rows/conditional.csv",
+      "original_sha256": "31e04a3d9631e70022ae39fede026c6760f45a410f0107679efc27655ea1921c",
+      "original_bytes": 759,
+      "published_path": "results/material_rerun_20261031/matched_receipt/rows/conditional.csv",
+      "published_sha256": "31e04a3d9631e70022ae39fede026c6760f45a410f0107679efc27655ea1921c",
+      "published_bytes": 759
+    },
+    {
+      "original_path": "report/rows/conditional_last_move_hour.csv",
+      "original_sha256": "a3ad2df4326f0eef255b025d6c7cf83c865ad64a9550857776808c03f0a963e4",
+      "original_bytes": 1058,
+      "published_path": "results/material_rerun_20261031/matched_receipt/rows/conditional_last_move_hour.csv",
+      "published_sha256": "a3ad2df4326f0eef255b025d6c7cf83c865ad64a9550857776808c03f0a963e4",
+      "published_bytes": 1058
+    },
+    {
+      "original_path": "report/rows/conditional_later_controls.csv",
+      "original_sha256": "f0a349715cf665dbd9894d3714587bb36992c92999281e3280f17ceaf166e198",
+      "original_bytes": 775,
+      "published_path": "results/material_rerun_20261031/matched_receipt/rows/conditional_later_controls.csv",
+      "published_sha256": "f0a349715cf665dbd9894d3714587bb36992c92999281e3280f17ceaf166e198",
+      "published_bytes": 775
+    },
+    {
+      "original_path": "report/rows/conditional_start_hour.csv",
+      "original_sha256": "2b4ff92c6b78423ac3bdb491255df76dd16790f4ba6af0b93279b4ce1c97864b",
+      "original_bytes": 1056,
+      "published_path": "results/material_rerun_20261031/matched_receipt/rows/conditional_start_hour.csv",
+      "published_sha256": "2b4ff92c6b78423ac3bdb491255df76dd16790f4ba6af0b93279b4ce1c97864b",
+      "published_bytes": 1056
+    },
+    {
+      "original_path": "report/rows/decay_1d_kind.csv",
+      "original_sha256": "85e686c8c91c7c7e708f0f4a194372c9c871ff21abc1700654b68044dded9edb",
+      "original_bytes": 742,
+      "published_path": "results/material_rerun_20261031/matched_receipt/rows/decay_1d_kind.csv",
+      "published_sha256": "85e686c8c91c7c7e708f0f4a194372c9c871ff21abc1700654b68044dded9edb",
+      "published_bytes": 742
+    },
+    {
+      "original_path": "report/rows/decay_30d_kind.csv",
+      "original_sha256": "891d0ef37c0eb94d664f4a03470980228667a0f50912e30e9e618dc3dbbaee12",
+      "original_bytes": 750,
+      "published_path": "results/material_rerun_20261031/matched_receipt/rows/decay_30d_kind.csv",
+      "published_sha256": "891d0ef37c0eb94d664f4a03470980228667a0f50912e30e9e618dc3dbbaee12",
+      "published_bytes": 750
+    },
+    {
+      "original_path": "report/rows/decay_6h_kind.csv",
+      "original_sha256": "ed171fe6c28d07b300ab58a5f0c68b5864ac3d1c2ac4d1efafcc576ea388ee1d",
+      "original_bytes": 741,
+      "published_path": "results/material_rerun_20261031/matched_receipt/rows/decay_6h_kind.csv",
+      "published_sha256": "ed171fe6c28d07b300ab58a5f0c68b5864ac3d1c2ac4d1efafcc576ea388ee1d",
+      "published_bytes": 741
+    },
+    {
+      "original_path": "report/rows/decay_7d_kind.csv",
+      "original_sha256": "00bdc86bf22510864c0cea0bebcecad6e82f15785cf360bc6d029496f492f946",
+      "original_bytes": 749,
+      "published_path": "results/material_rerun_20261031/matched_receipt/rows/decay_7d_kind.csv",
+      "published_sha256": "00bdc86bf22510864c0cea0bebcecad6e82f15785cf360bc6d029496f492f946",
+      "published_bytes": 749
+    },
+    {
+      "original_path": "report/rows/decay_90d_kind.csv",
+      "original_sha256": "e4a82f933d17ff2f0507a84a907ce4d8341c4eba2c1cf77b713c0500d8b9374c",
+      "original_bytes": 755,
+      "published_path": "results/material_rerun_20261031/matched_receipt/rows/decay_90d_kind.csv",
+      "published_sha256": "e4a82f933d17ff2f0507a84a907ce4d8341c4eba2c1cf77b713c0500d8b9374c",
+      "published_bytes": 755
+    },
+    {
+      "original_path": "report/rows/later_receipt_count.csv",
+      "original_sha256": "b65e29dfc923298a4e101b814ad0447af2f96584096ffc99a4e0fdc861e6065b",
+      "original_bytes": 795,
+      "published_path": "results/material_rerun_20261031/matched_receipt/rows/later_receipt_count.csv",
+      "published_sha256": "b65e29dfc923298a4e101b814ad0447af2f96584096ffc99a4e0fdc861e6065b",
+      "published_bytes": 795
+    },
+    {
+      "original_path": "report/rows/primary.csv",
+      "original_sha256": "c598c4d9bd0c8925fcf818474ec5e414420a972026cfa43c66dc3d2952aa5b63",
+      "original_bytes": 752,
+      "published_path": "results/material_rerun_20261031/matched_receipt/rows/primary.csv",
+      "published_sha256": "c598c4d9bd0c8925fcf818474ec5e414420a972026cfa43c66dc3d2952aa5b63",
+      "published_bytes": 752
+    },
+    {
+      "original_path": "report/rows/primary_last_move_hour.csv",
+      "original_sha256": "1bf98247f55fc3a3608988e7920116ffae6437030d78991db4d923359f174fe6",
+      "original_bytes": 1060,
+      "published_path": "results/material_rerun_20261031/matched_receipt/rows/primary_last_move_hour.csv",
+      "published_sha256": "1bf98247f55fc3a3608988e7920116ffae6437030d78991db4d923359f174fe6",
+      "published_bytes": 1060
+    },
+    {
+      "original_path": "report/rows/primary_start_hour.csv",
+      "original_sha256": "21eac5419eae3e7781f38c9459e36f6d859c25cecefda28dc372832b96b44359",
+      "original_bytes": 1054,
+      "published_path": "results/material_rerun_20261031/matched_receipt/rows/primary_start_hour.csv",
+      "published_sha256": "21eac5419eae3e7781f38c9459e36f6d859c25cecefda28dc372832b96b44359",
+      "published_bytes": 1054
+    },
+    {
+      "original_path": "report/rows/reach.csv",
+      "original_sha256": "58ee0a9570183d5297f59742dc82715ef7dca27dda4851f93e01ace80920715e",
+      "original_bytes": 763,
+      "published_path": "results/material_rerun_20261031/matched_receipt/rows/reach.csv",
+      "published_sha256": "58ee0a9570183d5297f59742dc82715ef7dca27dda4851f93e01ace80920715e",
+      "published_bytes": 763
+    },
+    {
+      "original_path": "report/rows/reach_last_move_hour.csv",
+      "original_sha256": "ce736c612151f676d360fbb6fde69bdc267d2c93ca3ecff1e2486c734b84aee3",
+      "original_bytes": 1065,
+      "published_path": "results/material_rerun_20261031/matched_receipt/rows/reach_last_move_hour.csv",
+      "published_sha256": "ce736c612151f676d360fbb6fde69bdc267d2c93ca3ecff1e2486c734b84aee3",
+      "published_bytes": 1065
+    },
+    {
+      "original_path": "report/rows/reach_start_hour.csv",
+      "original_sha256": "9c9823fda130255dbf408a545823a855c9bd86e2d2e9dd610286a8e30a2d4adb",
+      "original_bytes": 1057,
+      "published_path": "results/material_rerun_20261031/matched_receipt/rows/reach_start_hour.csv",
+      "published_sha256": "9c9823fda130255dbf408a545823a855c9bd86e2d2e9dd610286a8e30a2d4adb",
+      "published_bytes": 1057
+    },
+    {
+      "original_path": "report/tab_app_intervals.csv",
+      "original_sha256": "8f9e9b2c38e16623e0ea652d028e5d0dc76b45bbb1099caba626ede9d7c325c1",
+      "original_bytes": 2738,
+      "published_path": "results/material_rerun_20261031/matched_receipt/tab_app_intervals.csv",
+      "published_sha256": "8f9e9b2c38e16623e0ea652d028e5d0dc76b45bbb1099caba626ede9d7c325c1",
+      "published_bytes": 2738
+    },
+    {
+      "original_path": "report/tab_app_receipt_hours.csv",
+      "original_sha256": "59bf4227b1cd05d24c26c97ab22a0f2fc74ba2b9111f0895e590c5ffabe1df38",
+      "original_bytes": 4458,
+      "published_path": "results/material_rerun_20261031/matched_receipt/tab_app_receipt_hours.csv",
+      "published_sha256": "59bf4227b1cd05d24c26c97ab22a0f2fc74ba2b9111f0895e590c5ffabe1df38",
+      "published_bytes": 4458
+    },
+    {
+      "original_path": "report/tab_app_receipt_sensitivities.csv",
+      "original_sha256": "6072ce69836d048571888aeda425323dd6cb85a19e516e74aed725bf7c62a95d",
+      "original_bytes": 1925,
+      "published_path": "results/material_rerun_20261031/matched_receipt/tab_app_receipt_sensitivities.csv",
+      "published_sha256": "6072ce69836d048571888aeda425323dd6cb85a19e516e74aed725bf7c62a95d",
+      "published_bytes": 1925
+    },
+    {
+      "original_path": "report/tab_dynamics.csv",
+      "original_sha256": "161970725e74a4355e379da0278c15509e0f54af9f0b411cab7dfc36228c7975",
+      "original_bytes": 2339,
+      "published_path": "results/material_rerun_20261031/matched_receipt/tab_dynamics.csv",
+      "published_sha256": "161970725e74a4355e379da0278c15509e0f54af9f0b411cab7dfc36228c7975",
+      "published_bytes": 2339
+    },
+    {
+      "original_path": "report/tab_dynamics.tex",
+      "original_sha256": "e7ec9c3d4d6508cfadd316b74d79df47a7c5082738535367ba3e6424b7d3fead",
+      "original_bytes": 487,
+      "published_path": "results/material_rerun_20261031/matched_receipt/tab_dynamics.tex",
+      "published_sha256": "e7ec9c3d4d6508cfadd316b74d79df47a7c5082738535367ba3e6424b7d3fead",
+      "published_bytes": 487
+    },
+    {
+      "original_path": "code/authority/HISTORY.json",
+      "original_sha256": "33e917cbd08ce05b5ec2c84f90bb85b9e62ff13a6b272ac77ec53ca9d959e6f6",
+      "original_bytes": 673,
+      "published_path": "results/material_rerun_20261031/matched_receipt/code/authority/HISTORY.json",
+      "published_sha256": "0ae4a0f4af05587edba7202f8a643ce9ccf9f49b430fb5619e63849e86708d2e",
+      "published_bytes": 660,
+      "redactions": [
+        {
+          "start": 637,
+          "end": 669,
+          "token": "__PRIVATE_VALUE_1__"
+        }
+      ]
+    },
+    {
+      "original_path": "code/authority/REVIEW.json",
+      "original_sha256": "a74eb6439368b96441bf2ebbcf862c0159be12129a0a624fdd9926b618711438",
+      "original_bytes": 6421,
+      "published_path": "results/material_rerun_20261031/matched_receipt/code/authority/REVIEW.json",
+      "published_sha256": "a74eb6439368b96441bf2ebbcf862c0159be12129a0a624fdd9926b618711438",
+      "published_bytes": 6421
+    },
+    {
+      "original_path": "code/authority/VENDORED_SOURCES.json",
+      "original_sha256": "26ebfc138303fb497bb521edb4dbdab4dd6016002deb6fd84740d7a6db59b617",
+      "original_bytes": 594,
+      "published_path": "results/material_rerun_20261031/matched_receipt/code/authority/VENDORED_SOURCES.json",
+      "published_sha256": "26ebfc138303fb497bb521edb4dbdab4dd6016002deb6fd84740d7a6db59b617",
+      "published_bytes": 594
+    },
+    {
+      "original_path": "code/authority/chronology.tsv",
+      "original_sha256": "c169bf9e346defde62047a3c2048758c296b1f0598fee70d2cc1e660121536d8",
+      "original_bytes": 247478,
+      "published_path": "results/material_rerun_20261031/matched_receipt/code/authority/chronology.tsv",
+      "published_sha256": "36fca9c56ecd09289fc79e79690c2a99e03a2f49fefa91691b2a34bc88dce60c",
+      "published_bytes": 236402,
+      "redactions": [
+        {
+          "start": 106,
+          "end": 138,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 380,
+          "end": 412,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 654,
+          "end": 686,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 929,
+          "end": 961,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 1204,
+          "end": 1236,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 1479,
+          "end": 1511,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 1754,
+          "end": 1786,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 2030,
+          "end": 2062,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 2306,
+          "end": 2338,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 2582,
+          "end": 2614,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 2859,
+          "end": 2891,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 3136,
+          "end": 3168,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 3413,
+          "end": 3445,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 3690,
+          "end": 3722,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 3967,
+          "end": 3999,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 4244,
+          "end": 4276,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 4521,
+          "end": 4553,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 4798,
+          "end": 4830,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 5075,
+          "end": 5107,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 5352,
+          "end": 5384,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 5629,
+          "end": 5661,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 5906,
+          "end": 5938,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 6183,
+          "end": 6215,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 6460,
+          "end": 6492,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 6738,
+          "end": 6770,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 7016,
+          "end": 7048,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 7294,
+          "end": 7326,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 7572,
+          "end": 7604,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 7850,
+          "end": 7882,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 8128,
+          "end": 8160,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 8406,
+          "end": 8438,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 8684,
+          "end": 8716,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 8963,
+          "end": 8995,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 9242,
+          "end": 9274,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 9521,
+          "end": 9553,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 9800,
+          "end": 9832,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 10079,
+          "end": 10111,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 10358,
+          "end": 10390,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 10637,
+          "end": 10669,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 10916,
+          "end": 10948,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 11195,
+          "end": 11227,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 11474,
+          "end": 11506,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 11753,
+          "end": 11785,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 12032,
+          "end": 12064,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 12311,
+          "end": 12343,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 12590,
+          "end": 12622,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 12869,
+          "end": 12901,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 13148,
+          "end": 13180,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 13427,
+          "end": 13459,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 13706,
+          "end": 13738,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 13985,
+          "end": 14017,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 14264,
+          "end": 14296,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 14543,
+          "end": 14575,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 14823,
+          "end": 14855,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 15103,
+          "end": 15135,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 15383,
+          "end": 15415,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 15663,
+          "end": 15695,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 15943,
+          "end": 15975,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 16223,
+          "end": 16255,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 16503,
+          "end": 16535,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 16783,
+          "end": 16815,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 17063,
+          "end": 17095,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 17343,
+          "end": 17375,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 17624,
+          "end": 17656,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 17905,
+          "end": 17937,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 18187,
+          "end": 18219,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 18468,
+          "end": 18500,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 18750,
+          "end": 18782,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 19032,
+          "end": 19064,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 19314,
+          "end": 19346,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 19596,
+          "end": 19628,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 19878,
+          "end": 19910,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 20160,
+          "end": 20192,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 20442,
+          "end": 20474,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 20724,
+          "end": 20756,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 21006,
+          "end": 21038,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 21288,
+          "end": 21320,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 21570,
+          "end": 21602,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 21852,
+          "end": 21884,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 22134,
+          "end": 22166,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 22416,
+          "end": 22448,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 22698,
+          "end": 22730,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 22980,
+          "end": 23012,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 23262,
+          "end": 23294,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 23544,
+          "end": 23576,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 23826,
+          "end": 23858,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 24108,
+          "end": 24140,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 24390,
+          "end": 24422,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 24672,
+          "end": 24704,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 24954,
+          "end": 24986,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 25236,
+          "end": 25268,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 25518,
+          "end": 25550,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 25800,
+          "end": 25832,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 26082,
+          "end": 26114,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 26364,
+          "end": 26396,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 26646,
+          "end": 26678,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 26928,
+          "end": 26960,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 27210,
+          "end": 27242,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 27492,
+          "end": 27524,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 27774,
+          "end": 27806,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 28057,
+          "end": 28089,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 28340,
+          "end": 28372,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 28623,
+          "end": 28655,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 28906,
+          "end": 28938,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 29189,
+          "end": 29221,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 29472,
+          "end": 29504,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 29755,
+          "end": 29787,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 30038,
+          "end": 30070,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 30321,
+          "end": 30353,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 30604,
+          "end": 30636,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 30887,
+          "end": 30919,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 31170,
+          "end": 31202,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 31453,
+          "end": 31485,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 31736,
+          "end": 31768,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 32019,
+          "end": 32051,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 32302,
+          "end": 32334,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 32585,
+          "end": 32617,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 32868,
+          "end": 32900,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 33151,
+          "end": 33183,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 33434,
+          "end": 33466,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 33717,
+          "end": 33749,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 34000,
+          "end": 34032,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 34283,
+          "end": 34315,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 34567,
+          "end": 34599,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 34850,
+          "end": 34882,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 35133,
+          "end": 35165,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 35416,
+          "end": 35448,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 35699,
+          "end": 35731,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 35982,
+          "end": 36014,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 36265,
+          "end": 36297,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 36548,
+          "end": 36580,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 36955,
+          "end": 36987,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 37368,
+          "end": 37400,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 37784,
+          "end": 37816,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 38188,
+          "end": 38220,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 38598,
+          "end": 38630,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 39002,
+          "end": 39034,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 39409,
+          "end": 39441,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 39810,
+          "end": 39842,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 40211,
+          "end": 40243,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 40615,
+          "end": 40647,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 41013,
+          "end": 41045,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 41420,
+          "end": 41452,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 41821,
+          "end": 41853,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 42231,
+          "end": 42263,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 42644,
+          "end": 42676,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 43042,
+          "end": 43074,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 43452,
+          "end": 43484,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 43853,
+          "end": 43885,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 44257,
+          "end": 44289,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 44658,
+          "end": 44690,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 45062,
+          "end": 45094,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 45463,
+          "end": 45495,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 45858,
+          "end": 45890,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 46259,
+          "end": 46291,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 46657,
+          "end": 46689,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 46941,
+          "end": 46973,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 47224,
+          "end": 47256,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 47507,
+          "end": 47539,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 47790,
+          "end": 47822,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 48073,
+          "end": 48105,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 48350,
+          "end": 48382,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 48627,
+          "end": 48659,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 48904,
+          "end": 48936,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 49181,
+          "end": 49213,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 49458,
+          "end": 49490,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 49736,
+          "end": 49768,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 50014,
+          "end": 50046,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 50292,
+          "end": 50324,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 50570,
+          "end": 50602,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 50849,
+          "end": 50881,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 51128,
+          "end": 51160,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 51407,
+          "end": 51439,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 51686,
+          "end": 51718,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 51965,
+          "end": 51997,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 52244,
+          "end": 52276,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 52523,
+          "end": 52555,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 52802,
+          "end": 52834,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 53081,
+          "end": 53113,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 53360,
+          "end": 53392,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 53639,
+          "end": 53671,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 53918,
+          "end": 53950,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 54197,
+          "end": 54229,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 54476,
+          "end": 54508,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 54755,
+          "end": 54787,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 55034,
+          "end": 55066,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 55313,
+          "end": 55345,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 55592,
+          "end": 55624,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 55871,
+          "end": 55903,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 56151,
+          "end": 56183,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 56431,
+          "end": 56463,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 56711,
+          "end": 56743,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 56991,
+          "end": 57023,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 57272,
+          "end": 57304,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 57553,
+          "end": 57585,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 57834,
+          "end": 57866,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 58115,
+          "end": 58147,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 58396,
+          "end": 58428,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 58677,
+          "end": 58709,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 58958,
+          "end": 58990,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 59239,
+          "end": 59271,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 59520,
+          "end": 59552,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 59801,
+          "end": 59833,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 60082,
+          "end": 60114,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 60363,
+          "end": 60395,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 60644,
+          "end": 60676,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 60925,
+          "end": 60957,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 61206,
+          "end": 61238,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 61487,
+          "end": 61519,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 61768,
+          "end": 61800,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 62049,
+          "end": 62081,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 62330,
+          "end": 62362,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 62611,
+          "end": 62643,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 62892,
+          "end": 62924,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 63173,
+          "end": 63205,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 63454,
+          "end": 63486,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 63735,
+          "end": 63767,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 64016,
+          "end": 64048,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 64297,
+          "end": 64329,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 64578,
+          "end": 64610,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 64859,
+          "end": 64891,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 65140,
+          "end": 65172,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 65421,
+          "end": 65453,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 65703,
+          "end": 65735,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 65985,
+          "end": 66017,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 66267,
+          "end": 66299,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 66549,
+          "end": 66581,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 66831,
+          "end": 66863,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 67113,
+          "end": 67145,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 67395,
+          "end": 67427,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 67677,
+          "end": 67709,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 67959,
+          "end": 67991,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 68243,
+          "end": 68275,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 68527,
+          "end": 68559,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 68811,
+          "end": 68843,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 69095,
+          "end": 69127,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 69379,
+          "end": 69411,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 69663,
+          "end": 69695,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 69947,
+          "end": 69979,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 70231,
+          "end": 70263,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 70515,
+          "end": 70547,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 70799,
+          "end": 70831,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 71083,
+          "end": 71115,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 71367,
+          "end": 71399,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 71651,
+          "end": 71683,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 71935,
+          "end": 71967,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 72219,
+          "end": 72251,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 72503,
+          "end": 72535,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 72787,
+          "end": 72819,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 73071,
+          "end": 73103,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 73355,
+          "end": 73387,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 73639,
+          "end": 73671,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 73923,
+          "end": 73955,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 74207,
+          "end": 74239,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 74491,
+          "end": 74523,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 74775,
+          "end": 74807,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 75059,
+          "end": 75091,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 75343,
+          "end": 75375,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 75627,
+          "end": 75659,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 75911,
+          "end": 75943,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 76195,
+          "end": 76227,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 76479,
+          "end": 76511,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 76763,
+          "end": 76795,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 77047,
+          "end": 77079,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 77331,
+          "end": 77363,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 77615,
+          "end": 77647,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 77899,
+          "end": 77931,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 78183,
+          "end": 78215,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 78467,
+          "end": 78499,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 78751,
+          "end": 78783,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 79035,
+          "end": 79067,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 79319,
+          "end": 79351,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 79603,
+          "end": 79635,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 79887,
+          "end": 79919,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 80171,
+          "end": 80203,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 80455,
+          "end": 80487,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 80739,
+          "end": 80771,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 81023,
+          "end": 81055,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 81307,
+          "end": 81339,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 81591,
+          "end": 81623,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 81875,
+          "end": 81907,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 82159,
+          "end": 82191,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 82443,
+          "end": 82475,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 82727,
+          "end": 82759,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 83011,
+          "end": 83043,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 83295,
+          "end": 83327,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 83567,
+          "end": 83599,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 83851,
+          "end": 83883,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 84135,
+          "end": 84167,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 84419,
+          "end": 84451,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 84703,
+          "end": 84735,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 85078,
+          "end": 85110,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 85456,
+          "end": 85488,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 85837,
+          "end": 85869,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 86212,
+          "end": 86244,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 86590,
+          "end": 86622,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 86965,
+          "end": 86997,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 87343,
+          "end": 87375,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 87715,
+          "end": 87747,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 88087,
+          "end": 88119,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 88462,
+          "end": 88494,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 88834,
+          "end": 88866,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 89215,
+          "end": 89247,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 89590,
+          "end": 89622,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 89971,
+          "end": 90003,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 90355,
+          "end": 90387,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 90727,
+          "end": 90759,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 91108,
+          "end": 91140,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 91483,
+          "end": 91515,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 91861,
+          "end": 91893,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 92236,
+          "end": 92268,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 92614,
+          "end": 92646,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 92992,
+          "end": 93024,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 93361,
+          "end": 93393,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 93736,
+          "end": 93768,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 94108,
+          "end": 94140,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 94393,
+          "end": 94425,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 94677,
+          "end": 94709,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 94961,
+          "end": 94993,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 95245,
+          "end": 95277,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 95529,
+          "end": 95561,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 95809,
+          "end": 95841,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 96089,
+          "end": 96121,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 96370,
+          "end": 96402,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 96651,
+          "end": 96683,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 96932,
+          "end": 96964,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 97213,
+          "end": 97245,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 97495,
+          "end": 97527,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 97777,
+          "end": 97809,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 98059,
+          "end": 98091,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 98341,
+          "end": 98373,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 98623,
+          "end": 98655,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 98905,
+          "end": 98937,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 99187,
+          "end": 99219,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 99469,
+          "end": 99501,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 99751,
+          "end": 99783,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 100033,
+          "end": 100065,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 100315,
+          "end": 100347,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 100597,
+          "end": 100629,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 100879,
+          "end": 100911,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 101161,
+          "end": 101193,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 101443,
+          "end": 101475,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 101725,
+          "end": 101757,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 102007,
+          "end": 102039,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 102289,
+          "end": 102321,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 102571,
+          "end": 102603,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 102853,
+          "end": 102885,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 103133,
+          "end": 103165,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 103415,
+          "end": 103447,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 103698,
+          "end": 103730,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 103981,
+          "end": 104013,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 104264,
+          "end": 104296,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 104547,
+          "end": 104579,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 104830,
+          "end": 104862,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 105113,
+          "end": 105145,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 105396,
+          "end": 105428,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 105680,
+          "end": 105712,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 105964,
+          "end": 105996,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 106248,
+          "end": 106280,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 106532,
+          "end": 106564,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 106816,
+          "end": 106848,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 107100,
+          "end": 107132,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 107384,
+          "end": 107416,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 107668,
+          "end": 107700,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 107952,
+          "end": 107984,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 108236,
+          "end": 108268,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 108520,
+          "end": 108552,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 108804,
+          "end": 108836,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 109088,
+          "end": 109120,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 109372,
+          "end": 109404,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 109656,
+          "end": 109688,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 109940,
+          "end": 109972,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 110224,
+          "end": 110256,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 110508,
+          "end": 110540,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 110792,
+          "end": 110824,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 111076,
+          "end": 111108,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 111360,
+          "end": 111392,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 111644,
+          "end": 111676,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 111928,
+          "end": 111960,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 112210,
+          "end": 112242,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 112492,
+          "end": 112524,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 112774,
+          "end": 112806,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 113056,
+          "end": 113088,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 113339,
+          "end": 113371,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 113622,
+          "end": 113654,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 113905,
+          "end": 113937,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 114188,
+          "end": 114220,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 114471,
+          "end": 114503,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 114754,
+          "end": 114786,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 115037,
+          "end": 115069,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 115320,
+          "end": 115352,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 115603,
+          "end": 115635,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 115887,
+          "end": 115919,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 116171,
+          "end": 116203,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 116455,
+          "end": 116487,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 116739,
+          "end": 116771,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 117023,
+          "end": 117055,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 117307,
+          "end": 117339,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 117591,
+          "end": 117623,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 117875,
+          "end": 117907,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 118159,
+          "end": 118191,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 118443,
+          "end": 118475,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 118727,
+          "end": 118759,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 119011,
+          "end": 119043,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 119295,
+          "end": 119327,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 119579,
+          "end": 119611,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 119863,
+          "end": 119895,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 120147,
+          "end": 120179,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 120431,
+          "end": 120463,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 120714,
+          "end": 120746,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 120997,
+          "end": 121029,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 121280,
+          "end": 121312,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 121563,
+          "end": 121595,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 121846,
+          "end": 121878,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 122129,
+          "end": 122161,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 122412,
+          "end": 122444,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 122696,
+          "end": 122728,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 122980,
+          "end": 123012,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 123264,
+          "end": 123296,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 123548,
+          "end": 123580,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 123831,
+          "end": 123863,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 124114,
+          "end": 124146,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 124397,
+          "end": 124429,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 124680,
+          "end": 124712,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 124963,
+          "end": 124995,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 125246,
+          "end": 125278,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 125529,
+          "end": 125561,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 125812,
+          "end": 125844,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 126095,
+          "end": 126127,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 126378,
+          "end": 126410,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 126661,
+          "end": 126693,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 126944,
+          "end": 126976,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 127227,
+          "end": 127259,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 127510,
+          "end": 127542,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 127793,
+          "end": 127825,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 128076,
+          "end": 128108,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 128359,
+          "end": 128391,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 128642,
+          "end": 128674,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 128925,
+          "end": 128957,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 129208,
+          "end": 129240,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 129491,
+          "end": 129523,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 129774,
+          "end": 129806,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 130057,
+          "end": 130089,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 130340,
+          "end": 130372,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 130623,
+          "end": 130655,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 130906,
+          "end": 130938,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 131189,
+          "end": 131221,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 131472,
+          "end": 131504,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 131755,
+          "end": 131787,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 132038,
+          "end": 132070,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 132321,
+          "end": 132353,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 132605,
+          "end": 132637,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 132889,
+          "end": 132921,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 133173,
+          "end": 133205,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 133457,
+          "end": 133489,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 133741,
+          "end": 133773,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 134025,
+          "end": 134057,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 134309,
+          "end": 134341,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 134593,
+          "end": 134625,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 134877,
+          "end": 134909,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 135161,
+          "end": 135193,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 135445,
+          "end": 135477,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 135729,
+          "end": 135761,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 136013,
+          "end": 136045,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 136297,
+          "end": 136329,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 136581,
+          "end": 136613,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 136865,
+          "end": 136897,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 137149,
+          "end": 137181,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 137433,
+          "end": 137465,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 137717,
+          "end": 137749,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 138001,
+          "end": 138033,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 138285,
+          "end": 138317,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 138569,
+          "end": 138601,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 138853,
+          "end": 138885,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 139137,
+          "end": 139169,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 139421,
+          "end": 139453,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 139705,
+          "end": 139737,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 139988,
+          "end": 140020,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 140271,
+          "end": 140303,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 140554,
+          "end": 140586,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 140837,
+          "end": 140869,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 141118,
+          "end": 141150,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 141399,
+          "end": 141431,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 141680,
+          "end": 141712,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 141962,
+          "end": 141994,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 142244,
+          "end": 142276,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 142526,
+          "end": 142558,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 142808,
+          "end": 142840,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 143090,
+          "end": 143122,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 143372,
+          "end": 143404,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 143654,
+          "end": 143686,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 143936,
+          "end": 143968,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 144219,
+          "end": 144251,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 144502,
+          "end": 144534,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 144785,
+          "end": 144817,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 145068,
+          "end": 145100,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 145351,
+          "end": 145383,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 145634,
+          "end": 145666,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 145917,
+          "end": 145949,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 146200,
+          "end": 146232,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 146483,
+          "end": 146515,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 146766,
+          "end": 146798,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 147049,
+          "end": 147081,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 147332,
+          "end": 147364,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 147616,
+          "end": 147648,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 147900,
+          "end": 147932,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 148184,
+          "end": 148216,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 148468,
+          "end": 148500,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 148752,
+          "end": 148784,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 149036,
+          "end": 149068,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 149320,
+          "end": 149352,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 149604,
+          "end": 149636,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 149888,
+          "end": 149920,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 150172,
+          "end": 150204,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 150457,
+          "end": 150489,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 150742,
+          "end": 150774,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 151027,
+          "end": 151059,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 151312,
+          "end": 151344,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 151597,
+          "end": 151629,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 151882,
+          "end": 151914,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 152167,
+          "end": 152199,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 152452,
+          "end": 152484,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 152737,
+          "end": 152769,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 153022,
+          "end": 153054,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 153307,
+          "end": 153339,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 153592,
+          "end": 153624,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 153877,
+          "end": 153909,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 154162,
+          "end": 154194,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 154448,
+          "end": 154480,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 154734,
+          "end": 154766,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 155019,
+          "end": 155051,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 155305,
+          "end": 155337,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 155590,
+          "end": 155622,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 155875,
+          "end": 155907,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 156160,
+          "end": 156192,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 156445,
+          "end": 156477,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 156730,
+          "end": 156762,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 157015,
+          "end": 157047,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 157300,
+          "end": 157332,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 157585,
+          "end": 157617,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 157871,
+          "end": 157903,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 158157,
+          "end": 158189,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 158443,
+          "end": 158475,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 158729,
+          "end": 158761,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 159015,
+          "end": 159047,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 159301,
+          "end": 159333,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 159586,
+          "end": 159618,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 159871,
+          "end": 159903,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 160157,
+          "end": 160189,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 160443,
+          "end": 160475,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 160729,
+          "end": 160761,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 161015,
+          "end": 161047,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 161301,
+          "end": 161333,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 161587,
+          "end": 161619,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 161873,
+          "end": 161905,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 162159,
+          "end": 162191,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 162445,
+          "end": 162477,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 162731,
+          "end": 162763,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 163017,
+          "end": 163049,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 163303,
+          "end": 163335,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 163589,
+          "end": 163621,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 163875,
+          "end": 163907,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 164161,
+          "end": 164193,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 164447,
+          "end": 164479,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 164733,
+          "end": 164765,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 165019,
+          "end": 165051,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 165305,
+          "end": 165337,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 165591,
+          "end": 165623,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 165878,
+          "end": 165910,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 166165,
+          "end": 166197,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 166452,
+          "end": 166484,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 166739,
+          "end": 166771,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 167026,
+          "end": 167058,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 167312,
+          "end": 167344,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 167599,
+          "end": 167631,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 167886,
+          "end": 167918,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 168173,
+          "end": 168205,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 168460,
+          "end": 168492,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 168747,
+          "end": 168779,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 169034,
+          "end": 169066,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 169321,
+          "end": 169353,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 169608,
+          "end": 169640,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 169895,
+          "end": 169927,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 170182,
+          "end": 170214,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 170469,
+          "end": 170501,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 170756,
+          "end": 170788,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 171043,
+          "end": 171075,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 171330,
+          "end": 171362,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 171617,
+          "end": 171649,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 171904,
+          "end": 171936,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 172191,
+          "end": 172223,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 172478,
+          "end": 172510,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 172765,
+          "end": 172797,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 173052,
+          "end": 173084,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 173339,
+          "end": 173371,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 173626,
+          "end": 173658,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 173913,
+          "end": 173945,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 174200,
+          "end": 174232,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 174487,
+          "end": 174519,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 174774,
+          "end": 174806,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 175061,
+          "end": 175093,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 175348,
+          "end": 175380,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 175635,
+          "end": 175667,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 175922,
+          "end": 175954,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 176209,
+          "end": 176241,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 176496,
+          "end": 176528,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 176783,
+          "end": 176815,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 177070,
+          "end": 177102,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 177357,
+          "end": 177389,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 177643,
+          "end": 177675,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 177929,
+          "end": 177961,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 178216,
+          "end": 178248,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 178503,
+          "end": 178535,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 178790,
+          "end": 178822,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 179077,
+          "end": 179109,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 179364,
+          "end": 179396,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 179651,
+          "end": 179683,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 179938,
+          "end": 179970,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 180225,
+          "end": 180257,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 180512,
+          "end": 180544,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 180799,
+          "end": 180831,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 181086,
+          "end": 181118,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 181373,
+          "end": 181405,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 181660,
+          "end": 181692,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 181947,
+          "end": 181979,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 182234,
+          "end": 182266,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 182521,
+          "end": 182553,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 182808,
+          "end": 182840,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 183095,
+          "end": 183127,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 183382,
+          "end": 183414,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 183669,
+          "end": 183701,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 183956,
+          "end": 183988,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 184243,
+          "end": 184275,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 184530,
+          "end": 184562,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 184817,
+          "end": 184849,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 185104,
+          "end": 185136,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 185391,
+          "end": 185423,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 185677,
+          "end": 185709,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 185963,
+          "end": 185995,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 186249,
+          "end": 186281,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 186535,
+          "end": 186567,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 186815,
+          "end": 186847,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 187095,
+          "end": 187127,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 187375,
+          "end": 187407,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 187655,
+          "end": 187687,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 187935,
+          "end": 187967,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 188215,
+          "end": 188247,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 188495,
+          "end": 188527,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 188775,
+          "end": 188807,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 189055,
+          "end": 189087,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 189335,
+          "end": 189367,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 189615,
+          "end": 189647,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 189895,
+          "end": 189927,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 190175,
+          "end": 190207,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 190455,
+          "end": 190487,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 190735,
+          "end": 190767,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 191015,
+          "end": 191047,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 191295,
+          "end": 191327,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 191575,
+          "end": 191607,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 191855,
+          "end": 191887,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 192135,
+          "end": 192167,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 192415,
+          "end": 192447,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 192695,
+          "end": 192727,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 192975,
+          "end": 193007,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 193256,
+          "end": 193288,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 193539,
+          "end": 193571,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 193822,
+          "end": 193854,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 194104,
+          "end": 194136,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 194386,
+          "end": 194418,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 194668,
+          "end": 194700,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 194949,
+          "end": 194981,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 195231,
+          "end": 195263,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 195514,
+          "end": 195546,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 195797,
+          "end": 195829,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 196080,
+          "end": 196112,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 196363,
+          "end": 196395,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 196646,
+          "end": 196678,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 196929,
+          "end": 196961,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 197212,
+          "end": 197244,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 197495,
+          "end": 197527,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 197778,
+          "end": 197810,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 198061,
+          "end": 198093,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 198344,
+          "end": 198376,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 198627,
+          "end": 198659,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 198910,
+          "end": 198942,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 199193,
+          "end": 199225,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 199476,
+          "end": 199508,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 199759,
+          "end": 199791,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 200042,
+          "end": 200074,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 200325,
+          "end": 200357,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 200608,
+          "end": 200640,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 200891,
+          "end": 200923,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 201174,
+          "end": 201206,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 201457,
+          "end": 201489,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 201740,
+          "end": 201772,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 202023,
+          "end": 202055,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 202306,
+          "end": 202338,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 202589,
+          "end": 202621,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 202872,
+          "end": 202904,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 203155,
+          "end": 203187,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 203438,
+          "end": 203470,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 203721,
+          "end": 203753,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 204004,
+          "end": 204036,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 204287,
+          "end": 204319,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 204570,
+          "end": 204602,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 204853,
+          "end": 204885,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 205136,
+          "end": 205168,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 205419,
+          "end": 205451,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 205733,
+          "end": 205765,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 206050,
+          "end": 206082,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 206367,
+          "end": 206399,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 206681,
+          "end": 206713,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 206995,
+          "end": 207027,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 207309,
+          "end": 207341,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 207623,
+          "end": 207655,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 207934,
+          "end": 207966,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 208245,
+          "end": 208277,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 208559,
+          "end": 208591,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 208870,
+          "end": 208902,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 209184,
+          "end": 209216,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 209498,
+          "end": 209530,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 209815,
+          "end": 209847,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 210132,
+          "end": 210164,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 210446,
+          "end": 210478,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 210763,
+          "end": 210795,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 211077,
+          "end": 211109,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 211391,
+          "end": 211423,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 211705,
+          "end": 211737,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 212019,
+          "end": 212051,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 212333,
+          "end": 212365,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 212647,
+          "end": 212679,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 212964,
+          "end": 212996,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 213281,
+          "end": 213313,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 213565,
+          "end": 213597,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 213848,
+          "end": 213880,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 214131,
+          "end": 214163,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 214414,
+          "end": 214446,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 214697,
+          "end": 214729,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 214981,
+          "end": 215013,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 215265,
+          "end": 215297,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 215549,
+          "end": 215581,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 215833,
+          "end": 215865,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 216117,
+          "end": 216149,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 216401,
+          "end": 216433,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 216685,
+          "end": 216717,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 216969,
+          "end": 217001,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 217253,
+          "end": 217285,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 217537,
+          "end": 217569,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 217821,
+          "end": 217853,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 218105,
+          "end": 218137,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 218389,
+          "end": 218421,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 218673,
+          "end": 218705,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 218957,
+          "end": 218989,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 219241,
+          "end": 219273,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 219525,
+          "end": 219557,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 219809,
+          "end": 219841,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 220093,
+          "end": 220125,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 220377,
+          "end": 220409,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 220661,
+          "end": 220693,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 220945,
+          "end": 220977,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 221229,
+          "end": 221261,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 221513,
+          "end": 221545,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 221797,
+          "end": 221829,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 222081,
+          "end": 222113,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 222365,
+          "end": 222397,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 222649,
+          "end": 222681,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 222933,
+          "end": 222965,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 223217,
+          "end": 223249,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 223501,
+          "end": 223533,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 223785,
+          "end": 223817,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 224069,
+          "end": 224101,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 224353,
+          "end": 224385,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 224637,
+          "end": 224669,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 224921,
+          "end": 224953,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 225207,
+          "end": 225239,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 225493,
+          "end": 225525,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 225779,
+          "end": 225811,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 226065,
+          "end": 226097,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 226351,
+          "end": 226383,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 226637,
+          "end": 226669,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 226923,
+          "end": 226955,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 227209,
+          "end": 227241,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 227495,
+          "end": 227527,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 227781,
+          "end": 227813,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 228067,
+          "end": 228099,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 228353,
+          "end": 228385,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 228639,
+          "end": 228671,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 228925,
+          "end": 228957,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 229211,
+          "end": 229243,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 229497,
+          "end": 229529,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 229783,
+          "end": 229815,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 230069,
+          "end": 230101,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 230355,
+          "end": 230387,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 230641,
+          "end": 230673,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 230927,
+          "end": 230959,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 231213,
+          "end": 231245,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 231499,
+          "end": 231531,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 231785,
+          "end": 231817,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 232071,
+          "end": 232103,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 232357,
+          "end": 232389,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 232643,
+          "end": 232675,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 232929,
+          "end": 232961,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 233215,
+          "end": 233247,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 233500,
+          "end": 233532,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 233786,
+          "end": 233818,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 234071,
+          "end": 234103,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 234357,
+          "end": 234389,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 234643,
+          "end": 234675,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 234929,
+          "end": 234961,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 235215,
+          "end": 235247,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 235501,
+          "end": 235533,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 235787,
+          "end": 235819,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 236073,
+          "end": 236105,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 236358,
+          "end": 236390,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 236643,
+          "end": 236675,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 236928,
+          "end": 236960,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 237213,
+          "end": 237245,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 237499,
+          "end": 237531,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 237785,
+          "end": 237817,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 238071,
+          "end": 238103,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 238357,
+          "end": 238389,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 238643,
+          "end": 238675,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 238929,
+          "end": 238961,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 239215,
+          "end": 239247,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 239501,
+          "end": 239533,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 239787,
+          "end": 239819,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 240073,
+          "end": 240105,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 240359,
+          "end": 240391,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 240645,
+          "end": 240677,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 240931,
+          "end": 240963,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 241217,
+          "end": 241249,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 241503,
+          "end": 241535,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 241789,
+          "end": 241821,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 242078,
+          "end": 242110,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 242364,
+          "end": 242396,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 242650,
+          "end": 242682,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 242936,
+          "end": 242968,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 243222,
+          "end": 243254,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 243508,
+          "end": 243540,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 243794,
+          "end": 243826,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 244080,
+          "end": 244112,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 244366,
+          "end": 244398,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 244652,
+          "end": 244684,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 244937,
+          "end": 244969,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 245222,
+          "end": 245254,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 245507,
+          "end": 245539,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 245792,
+          "end": 245824,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 246072,
+          "end": 246104,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 246354,
+          "end": 246386,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 246636,
+          "end": 246668,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 246918,
+          "end": 246950,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 247200,
+          "end": 247232,
+          "token": "__PRIVATE_VALUE_1__"
+        }
+      ]
+    },
+    {
+      "original_path": "code/evidence/patron_review/ACQUISITION_FLOW.csv",
+      "original_sha256": "32c6c529a7219b4b96efe251331396f7134a84f00b2ec34eee17a67af0048326",
+      "original_bytes": 322,
+      "published_path": "results/material_rerun_20261031/matched_receipt/code/evidence/patron_review/ACQUISITION_FLOW.csv",
+      "published_sha256": "32c6c529a7219b4b96efe251331396f7134a84f00b2ec34eee17a67af0048326",
+      "published_bytes": 322
+    },
+    {
+      "original_path": "code/evidence/patron_review/DOWNSTREAM_STATUS.csv",
+      "original_sha256": "e1b21f5cfd49e8de6edbb2c2db36e5727b1a2242061d87d0782d8cea7f95a6db",
+      "original_bytes": 2641,
+      "published_path": "results/material_rerun_20261031/matched_receipt/code/evidence/patron_review/DOWNSTREAM_STATUS.csv",
+      "published_sha256": "e1b21f5cfd49e8de6edbb2c2db36e5727b1a2242061d87d0782d8cea7f95a6db",
+      "published_bytes": 2641
+    },
+    {
+      "original_path": "code/evidence/patron_review/PATRON_BEFORE_AFTER.csv",
+      "original_sha256": "52731c78a4a8175130620f65e68675dafac8350ec98b787fea563ffee3734b4b",
+      "original_bytes": 715803,
+      "published_path": "results/material_rerun_20261031/matched_receipt/code/evidence/patron_review/PATRON_BEFORE_AFTER.csv",
+      "published_sha256": "52731c78a4a8175130620f65e68675dafac8350ec98b787fea563ffee3734b4b",
+      "published_bytes": 715803
+    },
+    {
+      "original_path": "code/evidence/patron_review/RESULTS.json",
+      "original_sha256": "9060c781559d39c6246cdc9a9f1da4eeb51511b2c8137f9fb94e6f1ed6497afc",
+      "original_bytes": 939,
+      "published_path": "results/material_rerun_20261031/matched_receipt/code/evidence/patron_review/RESULTS.json",
+      "published_sha256": "9060c781559d39c6246cdc9a9f1da4eeb51511b2c8137f9fb94e6f1ed6497afc",
+      "published_bytes": 939
+    },
+    {
+      "original_path": "code/evidence/patron_review/REVIEWED.json",
+      "original_sha256": "31ae0953890e6c9fdbf7cbc18accf215f11888138398da80a355ceffb053db6a",
+      "original_bytes": 384,
+      "published_path": "results/material_rerun_20261031/matched_receipt/code/evidence/patron_review/REVIEWED.json",
+      "published_sha256": "31ae0953890e6c9fdbf7cbc18accf215f11888138398da80a355ceffb053db6a",
+      "published_bytes": 384
+    },
+    {
+      "original_path": "code/evidence/patron_review/tab_patron.csv",
+      "original_sha256": "6734b8c52749ef84eb6c401660c43ebc84c0f7e7a72437d80f45f911da2dbd5e",
+      "original_bytes": 1228,
+      "published_path": "results/material_rerun_20261031/matched_receipt/code/evidence/patron_review/tab_patron.csv",
+      "published_sha256": "6734b8c52749ef84eb6c401660c43ebc84c0f7e7a72437d80f45f911da2dbd5e",
+      "published_bytes": 1228
+    },
+    {
+      "original_path": "code/evidence/previous_receipt/a1_decay.csv",
+      "original_sha256": "2a1d7cd13a9399b638c90a63d4c3ab7fa68fb1f2f5f3d0e0fd45271d37182155",
+      "original_bytes": 2999,
+      "published_path": "results/material_rerun_20261031/matched_receipt/code/evidence/previous_receipt/a1_decay.csv",
+      "published_sha256": "2a1d7cd13a9399b638c90a63d4c3ab7fa68fb1f2f5f3d0e0fd45271d37182155",
+      "published_bytes": 2999
+    },
+    {
+      "original_path": "code/evidence/previous_receipt/a1_models.csv",
+      "original_sha256": "9bbba31ad463b1d21503b1429a37851417d8ff37bb16d2ad7a51437a4fa86606",
+      "original_bytes": 3613,
+      "published_path": "results/material_rerun_20261031/matched_receipt/code/evidence/previous_receipt/a1_models.csv",
+      "published_sha256": "9bbba31ad463b1d21503b1429a37851417d8ff37bb16d2ad7a51437a4fa86606",
+      "published_bytes": 3613
+    },
+    {
+      "original_path": "code/evidence/previous_receipt/receipt_hours.csv",
+      "original_sha256": "ce420f3b24d5b86c2ff5af7d83c108365e6d766776e2bd799309cea3412e95e3",
+      "original_bytes": 2963,
+      "published_path": "results/material_rerun_20261031/matched_receipt/code/evidence/previous_receipt/receipt_hours.csv",
+      "published_sha256": "ce420f3b24d5b86c2ff5af7d83c108365e6d766776e2bd799309cea3412e95e3",
+      "published_bytes": 2963
+    },
+    {
+      "original_path": "README.txt",
+      "original_sha256": "749f456848c81bf2f54ae648b1c7741ee21b77a799860fae1ebc6bbbfd4253fe",
+      "original_bytes": 7111,
+      "published_path": "results/material_rerun_20261031/matched_receipt/README.txt",
+      "published_sha256": "4f5dc6d0b09ad07ace1f7c610fb349ef1e4f290c484df373f74399c3a929c46b",
+      "published_bytes": 7085,
+      "redactions": [
+        {
+          "start": 720,
+          "end": 752,
+          "token": "__PRIVATE_VALUE_1__"
+        },
+        {
+          "start": 4927,
+          "end": 4959,
+          "token": "__PRIVATE_VALUE_1__"
+        }
+      ]
+    },
+    {
+      "original_path": "BUILD_INFO.json",
+      "original_sha256": "8a142835482a9e1d5eaf96e8b0ed57801065cb8c69e6461901a6665f7f54b232",
+      "original_bytes": 567,
+      "published_path": "results/material_rerun_20261031/matched_receipt/BUILD_INFO.json",
+      "published_sha256": "8a142835482a9e1d5eaf96e8b0ed57801065cb8c69e6461901a6665f7f54b232",
+      "published_bytes": 567
+    },
+    {
+      "original_path": "SHA256SUMS.txt",
+      "original_sha256": "7ddffb0cc3d33cf23e5a335174a5c0a09616b4abb4e4c4d58aba739ae765938c",
+      "original_bytes": 3343,
+      "published_path": "results/material_rerun_20261031/matched_receipt/SHA256SUMS.txt",
+      "published_sha256": "7ddffb0cc3d33cf23e5a335174a5c0a09616b4abb4e4c4d58aba739ae765938c",
+      "published_bytes": 3343
+    },
+    {
+      "original_path": "requirements.txt",
+      "original_sha256": "684b1e615aa60149c4212f14198c7639446d6bb7f27f127500dbd01c794eb9c5",
+      "original_bytes": 71,
+      "published_path": "results/material_rerun_20261031/matched_receipt/requirements.txt",
+      "published_sha256": "684b1e615aa60149c4212f14198c7639446d6bb7f27f127500dbd01c794eb9c5",
+      "published_bytes": 71
+    },
+    {
+      "original_path": "TEST_RESULTS.txt",
+      "original_sha256": "e24cf9b380860e78e5c6dcd90ff106f1c34b7b697060dd587e9e06b803dc7217",
+      "original_bytes": 2569,
+      "published_path": "results/material_rerun_20261031/matched_receipt/TEST_RESULTS.txt",
+      "published_sha256": "e24cf9b380860e78e5c6dcd90ff106f1c34b7b697060dd587e9e06b803dc7217",
+      "published_bytes": 2569
+    },
+    {
+      "original_path": "RETURN_STATUS.json",
+      "original_sha256": "855a4800a7d54edc09f55a56aa7dc30534e6d6c8273f1189a816e8be615c27db",
+      "original_bytes": 100,
+      "published_path": "results/material_rerun_20261031/matched_receipt/RETURN_STATUS.json",
+      "published_sha256": "855a4800a7d54edc09f55a56aa7dc30534e6d6c8273f1189a816e8be615c27db",
+      "published_bytes": 100
+    }
+  ],
+  "omitted_files": [
+    {
+      "original_path": "code/code/checkpoints.py",
+      "original_sha256": "621b1a159419f650b38c2b97464960834297fa13807bf6bfe7e00d60f1d45ebf",
+      "original_bytes": 1233,
+      "reason": "Binary duplicate or covariance artifact omitted; original hash retained"
+    },
+    {
+      "original_path": "code/code/estimation.py",
+      "original_sha256": "c0276a426cc1de2070aed09d5a0987f5406649d9068cf8f664ecd051ccef214b",
+      "original_bytes": 9207,
+      "reason": "Binary duplicate or covariance artifact omitted; original hash retained"
+    },
+    {
+      "original_path": "code/code/history.py",
+      "original_sha256": "d08515be1e1c7655aa448e6030c6656dcfc96df418aa05bb890f03d0831bac60",
+      "original_bytes": 12013,
+      "reason": "Binary duplicate or covariance artifact omitted; original hash retained"
+    },
+    {
+      "original_path": "code/code/inputs.py",
+      "original_sha256": "bc4b2388e63459430385c50eef4e58ff5a822d60ad0a4a71db5d69cd3db8b235",
+      "original_bytes": 6220,
+      "reason": "Binary duplicate or covariance artifact omitted; original hash retained"
+    },
+    {
+      "original_path": "code/code/panel.py",
+      "original_sha256": "f96c2ee44f800241cfebe6e370d696620041e25e8d910c53c026cc612be53121",
+      "original_bytes": 6204,
+      "reason": "Binary duplicate or covariance artifact omitted; original hash retained"
+    },
+    {
+      "original_path": "code/code/receipt.py",
+      "original_sha256": "bce29e12c6947cc91fd46f64076efd6572a83e8fe25c33b8a05d34bfa5983b83",
+      "original_bytes": 2710,
+      "reason": "Binary duplicate or covariance artifact omitted; original hash retained"
+    },
+    {
+      "original_path": "code/code/reporting.py",
+      "original_sha256": "ddcc5be3c8c1c918c993f8212e07bf55b4844b0a9f53cddaea8df128ed24c3f1",
+      "original_bytes": 5839,
+      "reason": "Binary duplicate or covariance artifact omitted; original hash retained"
+    },
+    {
+      "original_path": "code/code/run_receipt.py",
+      "original_sha256": "21be94c9d8d9771e85493a99e1a1fcb33d7885e68e7b7e4b46e64810189b1f3e",
+      "original_bytes": 10493,
+      "reason": "Binary duplicate or covariance artifact omitted; original hash retained"
+    },
+    {
+      "original_path": "code/code/source.py",
+      "original_sha256": "29e2640040e2c758c74ee9b5dfdcc0c84aec593bcfcf99d14567271358e63dfb",
+      "original_bytes": 596,
+      "reason": "Binary duplicate or covariance artifact omitted; original hash retained"
+    },
+    {
+      "original_path": "code/code/util.py",
+      "original_sha256": "77257e38d97f08db8e2dacfc3a9034caf23e4bb309ab73b80b84c98bfe7f7da9",
+      "original_bytes": 2850,
+      "reason": "Binary duplicate or covariance artifact omitted; original hash retained"
+    },
+    {
+      "original_path": "code/vendor/local_common.py",
+      "original_sha256": "862c1981c1a43f23d72031b5498b8cc0ed7bd065fcf96fbbd7f96dd81cefd175",
+      "original_bytes": 8937,
+      "reason": "Binary duplicate or covariance artifact omitted; original hash retained"
+    },
+    {
+      "original_path": "code/vendor/matched.py",
+      "original_sha256": "68bc9d4694aae5a65a2a06d561a9350613f3802f9cb8957177354a38e481c414",
+      "original_bytes": 6134,
+      "reason": "Binary duplicate or covariance artifact omitted; original hash retained"
+    },
+    {
+      "original_path": "code/vendor/matched_absorption.py",
+      "original_sha256": "e1e5d149aa239049c9b660bf0a48673ad90948b8a0543b51c1060ea4231fb80a",
+      "original_bytes": 3636,
+      "reason": "Binary duplicate or covariance artifact omitted; original hash retained"
+    },
+    {
+      "original_path": "code/vendor/receipt_core.py",
+      "original_sha256": "8d2c218ef17342528326fead84ed883e1b9ec0344e21104003553052589b03da",
+      "original_bytes": 177363,
+      "reason": "Binary duplicate or covariance artifact omitted; original hash retained"
+    },
+    {
+      "original_path": "code/tests/contract_tests.py",
+      "original_sha256": "b24c3459efa9aa597bbabd72ed4674014d40be66337e9d23444a03f69e8b836d",
+      "original_bytes": 3640,
+      "reason": "Binary duplicate or covariance artifact omitted; original hash retained"
+    },
+    {
+      "original_path": "code/tests/run_tests.py",
+      "original_sha256": "96f189d8cd5added46988b2b6b89be83bb8a8922c98dba05c69f48d597bbd28b",
+      "original_bytes": 480,
+      "reason": "Binary duplicate or covariance artifact omitted; original hash retained"
+    },
+    {
+      "original_path": "code/tests/test_receipt.py",
+      "original_sha256": "49b7aa15f5dd96f404c61f769ff4977dd8c5c86bdd653b2681c72ffd65a3bbc3",
+      "original_bytes": 19529,
+      "reason": "Binary duplicate or covariance artifact omitted; original hash retained"
+    },
+    {
+      "original_path": "run.log",
+      "original_sha256": "7512f392953661c8cfb840dfc0dd3d1ad8501005b867e1cc9e57e982f5d615e7",
+      "original_bytes": 10122,
+      "reason": "Binary duplicate or covariance artifact omitted; original hash retained"
+    }
+  ]
+}

@@ -1,0 +1,258 @@
+from __future__ import annotations
+import argparse
+from concurrent.futures import ProcessPoolExecutor, wait, FIRST_COMPLETED
+import multiprocessing as mp
+import os
+from pathlib import Path
+import platform
+import shutil
+import sys
+import time
+import traceback
+import numpy as np
+import pyarrow as pa
+import duckdb
+from . import VERSION
+from .io import require, digest, save, load, record, signature, verify, package_sha, log, lock, heartbeat
+from .inputs import inventory, authenticate, input_identity, MONTHS
+from .material import RULE
+from .worker import process_audit, build_panel
+from .report import aggregate_audits, reconcile, descriptives, bundle
+from .outcomes import known_outcome_checks
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def parallel(fn, jobs, workers, label):
+    """Spawn on both Mac and Linux; parent retains only receipts, never dataframes."""
+    results = []
+    started = time.monotonic()
+    executor = ProcessPoolExecutor(max_workers=min(workers, len(jobs)), mp_context=mp.get_context("spawn"))
+    futures = {executor.submit(fn, j): j[0] for j in jobs}
+    total_rows = sum(j[0]["rows"] for j in jobs)
+    processed = fresh = 0
+    try:
+        while futures:
+            finished, _ = wait(futures, timeout=20, return_when=FIRST_COMPLETED)
+            for f in finished:
+                item = futures.pop(f)
+                r = f.result()
+                results.append(r)
+                processed += item["rows"]
+                if not r.get("reused"):
+                    fresh += item["rows"]
+                log(f'{label}: {item["month"]} ' + ("verified cache" if r.get("reused") else "complete") +
+                    f'; {len(results)}/{len(jobs)} months, {processed:,}/{total_rows:,} source rows')
+            elapsed = time.monotonic()-started
+            if fresh and elapsed>5:
+                # Cache verification is included in wall time, so this is deliberately approximate.
+                eta = (total_rows-processed)/(fresh/elapsed)/60
+                log(f'{label}: elapsed {elapsed/60:.1f} min; approximate remaining stage ETA {eta:.1f} min')
+            elif not finished:
+                log(f'{label}: {len(results)}/{len(jobs)} months complete; elapsed {elapsed/60:.1f} min')
+    except BaseException:
+        for f in futures:
+            f.cancel()
+        # A Ctrl-C must not leave writers running after the lock is released.
+        children = list(getattr(executor, "_processes", {}).values())
+        for p in children:
+            if p.is_alive():
+                p.terminate()
+        for p in children:
+            p.join(timeout=10)
+            if p.is_alive():
+                p.kill()
+                p.join()
+        executor.shutdown(wait=True, cancel_futures=True)
+        raise
+    else:
+        executor.shutdown(wait=True)
+    return sorted(results, key=lambda r: (r["family"],r["month"]))
+
+
+def execute(items, config, package_root=ROOT, audit_only=False, enforce_baseline=True):
+    run = Path(config["run"])
+    report = run/"report"
+    report.mkdir(parents=True,exist_ok=True)
+    success = run/"_SUCCESS.json"
+    if success.is_file():
+        receipt = load(success)
+        require(receipt["run_id"]==config["id"], "Completion identity mismatch")
+        with heartbeat("Verifying completed panels and reports"):
+            for r in receipt["files"]:
+                verify(r)
+        target = bundle(config,package_root,"INPUTS_READY")
+        receipt.update(report_zip=str(target),report_sha256=sha_file(target))
+        save(success,receipt)
+        log("Completed inputs verified. Return report: " + str(target))
+        return receipt
+    save(report/"STATUS.json",dict(status="RUNNING",input_panels_ready=False,inference_rerun_complete=False))
+    save(report/"METHOD.json",dict(version=VERSION,rule=RULE,code_sha256=config["code_sha256"],
+        input_identity=config["input_identity"], environment=config["environment"],
+        source_commit=config["source_commit"],pipeline_commit=config.get("pipeline_commit"),
+        audit_scope="48 existing monthly panels: author-excluded pool main and all-source SF100k donor universe",
+        price="Original chooser_win_premium_v2 unchanged; no candidate cost layer",
+        optimization=dict(workers=config["workers"],batch_rows=config["batch_rows"],memory_budget_gib=config["memory_gb"],
+            libraries_threads=1,full_fen_check=config["verify_all_fens"],
+            default_fen_checks="all material-boundary rows plus every 4096th remaining row; side-to-move checked for all",
+            checkpoint="one immutable receipt per month, keyed by code and input hashes; full checksum verification on reuse",
+            regressions="not executed in this first-stage input migration")))
+    audits = []
+    for family in ("main","all_source"):
+        group = [r for r in items if r["family"]==family]
+        require(group, "Missing input family: " + family)
+        new = parallel(process_audit,[(r,config) for r in group],config["workers"],"Audit "+family)
+        audits += new
+        totals = aggregate_audits(audits,report)
+        conflicts = totals[family]["zero_win_conflicts"]
+        if conflicts:
+            result = dict(status="AUDIT_FAILED_RESULT_CONFLICT", run_id=config["id"], totals=totals,
+                          input_panels_built=False,inference_rerun_complete=False,
+                          private_exception_location="PRIVATE/audit/<family>/<month>/exceptions_PRIVATE.parquet")
+            save(report/"RESULTS.json",result)
+            bundle(config,package_root,"FAILED")
+            raise RuntimeError("Recorded result contradicts identified chooser/material. Audit stopped; inspect private exception Parquets.")
+        outcome_checks = known_outcome_checks(config, new)
+        if not all(r["passed"] for r in outcome_checks):
+            save(report/"RESULTS.json", dict(status="AUDIT_FAILED_KNOWN_OUTCOME_MISMATCH", run_id=config["id"],
+                 totals=totals, checks=outcome_checks, input_panels_built=False, inference_rerun_complete=False))
+            bundle(config, package_root, "FAILED")
+            raise RuntimeError("Recorded chooser-loss counts differ from the pinned prior audit; inspect private evidence.")
+        log(f"{family}: zero-win test passed; {totals[family]['chooser_loss_rows']} historical chooser-loss rows "
+            "reported separately with their original non-grant coding.")
+        if family=="main":
+            with heartbeat("Checking main-panel accounting and distinct accounts"):
+                main_audit = reconcile(config,audits,enforce_baseline=enforce_baseline)
+            require(main_audit["status"]=="AUDIT_PASSED", "Main baseline/reconciliation failed; no replacement panels written")
+    with heartbeat("Cross-checking the two universes and all account identities"):
+        result = reconcile(config,audits,enforce_baseline=enforce_baseline)
+    require(result["status"]=="AUDIT_PASSED", "Reconciliation failed; no replacement panels written")
+    with heartbeat("Computing exact descriptive tables and original-price totals"):
+        result = descriptives(config,audits)
+    bundle(config,package_root,"AUDIT")
+    if audit_only:
+        save(report/"STATUS.json",dict(status="AUDIT_PASSED",input_panels_ready=False,inference_rerun_complete=False))
+        bundle(config,package_root,"AUDIT")
+        log("Audit complete; --audit-only requested, so full-width panels have not been written.")
+        return result
+    panels = []
+    index = {(r["family"],r["month"]):r for r in audits}
+    for family in ("main","all_source"):
+        jobs = [(r,config,index[(family,r["month"])]) for r in items if r["family"]==family]
+        panels += parallel(build_panel,jobs,config["workers"],"Build "+family)
+    for item in items:
+        require(signature(item["path"])==item["signature"], "An original source changed before completion")
+    datasets = {family:[dict(month=r["month"],rows=r["rows"],grants=r["grants"],**r["file"]) for r in panels if r["family"]==family]
+                for family in ("main","all_source")}
+    for family, records in datasets.items():
+        require(sum(r["rows"] for r in records)==result["totals"][family]["new_opportunities"], "Built-family census differs")
+        require(sum(r["grants"] for r in records)==result["totals"][family]["new_grants"], "Built-family grants differ")
+    manifest = run/"MATERIAL_RESTRICTED_INPUTS_READY_PRIVATE.json"
+    save(manifest,dict(contract="MATING_MATERIAL_FIRST_RUN_V1",run_id=config["id"],rule=RULE,
+        datasets=datasets,censuses=result["censuses"],input_identity=config["input_identity"],
+        author_exclusion=["__PRIVATE_VALUE_1__","__PRIVATE_VALUE_2__"],full_width_columns_preserved=True,
+        changed_columns=["outcome_kind_draw","kind_draw (if present)","chooser_has_mating_material","timeout_draw_no_mating_material (if present)"],
+        excluded_from_decisions_not_chronology=True,statistical_models_rebuilt=False,
+        prior_analysis_ready_contracts_not_reused=True,price_layer="original"))
+    # Preserve the exception policy alongside the new data, so consumers cannot
+    # mistake an existing chooser loss for an observed win claim.
+    ready = load(manifest)
+    ready["known_outcome_policy"] = config.get("known_outcomes", {})
+    save(manifest, ready)
+    result.update(status="INPUTS_READY_NOT_FULL_PAPER_RERUN",input_panels_built=True,
+                  input_panel_counts={k:dict(rows=sum(x["rows"] for x in v),grants=sum(x["grants"] for x in v),months=len(v)) for k,v in datasets.items()})
+    save(report/"RESULTS.json",result)
+    save(report/"STATUS.json",dict(status=result["status"],input_panels_ready=True,inference_rerun_complete=False))
+    target = bundle(config,package_root,"INPUTS_READY")
+    files = [record(manifest)] + [r["file"] for r in panels]
+    files += [record(p) for p in sorted(report.iterdir()) if p.is_file()]
+    receipt = dict(status=result["status"],run_id=config["id"],files=files,report_zip=str(target),report_sha256=sha_file(target))
+    save(success,receipt)
+    save(Path(config["results_dir"])/"MATERIAL_RERUN_LATEST_PRIVATE.json",dict(root=str(run),manifest=str(manifest),run_id=config["id"],status=result["status"]))
+    log("Material-restricted main and donor inputs are ready. Statistical models still require the rebuilds listed in DOWNSTREAM_RERUN_REQUIRED.csv.")
+    log("Return report: " + str(target))
+    return receipt
+
+
+def sha_file(p):
+    from .io import sha
+    return sha(p)
+
+
+class Tee:
+    def __init__(self,*streams): self.streams=streams
+    def write(self,text):
+        for stream in self.streams: stream.write(text)
+        return len(text)
+    def flush(self):
+        for stream in self.streams: stream.flush()
+
+
+def main(argv=None):
+    parser=argparse.ArgumentParser(description="Mandatory first run: audit and construct exact-material main/all-source inputs. No regression estimates are run.")
+    parser.add_argument("--project-root",type=Path,default=Path("__PRIVATE_VALUE_3__"))
+    parser.add_argument("--results-dir",type=Path,default=Path.home()/"Desktop/Lichess_Desktop")
+    parser.add_argument("--main-manifest",type=Path)
+    parser.add_argument("--workers",type=int,default=10)
+    parser.add_argument("--hash-workers",type=int,default=2)
+    parser.add_argument("--memory-gb",type=float,default=11.)
+    parser.add_argument("--batch-rows",type=int,default=65536)
+    parser.add_argument("--verify-all-fens",action="store_true",help="Fully parse every FEN; slower independent check")
+    parser.add_argument("--audit-only",action="store_true",help="Run every audit and descriptive, skip full-width output copies")
+    parser.add_argument("--self-test",action="store_true")
+    parser.add_argument("--preflight-only",action="store_true",help="Authenticate files/schema and disk requirements, then exit")
+    a=parser.parse_args(argv)
+    if a.self_test:
+        import unittest
+        return 0 if unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.discover(str(ROOT/"tests"))).wasSuccessful() else 1
+    code=package_sha(ROOT)
+    require(1<=a.workers<=10 and 1<=a.hash_workers<=4, "Use 1–10 processing workers and 1–4 hash workers")
+    require(4<=a.memory_gb<=64 and 4096<=a.batch_rows<=131072, "Use 4–64 GiB and 4,096–131,072 rows per batch")
+    a.project_root=a.project_root.expanduser().resolve()
+    a.results_dir=a.results_dir.expanduser().resolve()
+    require(a.project_root.is_dir(),"Project drive is not mounted: "+str(a.project_root))
+    a.results_dir.mkdir(parents=True,exist_ok=True)
+    inventory_rows,provenance=inventory(a.project_root,ROOT,a.main_manifest)
+    items=authenticate(inventory_rows,a.hash_workers)
+    identity=input_identity(items,provenance)
+    environment=dict(python=platform.python_version(),numpy=np.__version__,pyarrow=pa.__version__,duckdb=duckdb.__version__)
+    run_id=digest(dict(code=code,input=identity,rule=RULE,verify_all_fens=a.verify_all_fens,environment=environment))
+    run=a.project_root/"derived/replication/mating_material_first_run_v100_PRIVATE"/run_id[:16]
+    run.mkdir(parents=True,exist_ok=True)
+    # Full-width outputs plus compact masks and conservative DuckDB spill allowance.
+    already_written=sum(p.stat().st_size for p in (run/"PRIVATE/panels").glob("*/month=*/analysis_panel.parquet"))
+    required=max(12*2**30,int(sum(r["bytes"] for r in items)*1.5)+12*2**30-already_written)
+    if a.audit_only:required=12*2**30
+    if (run/"_SUCCESS.json").exists():required=2*2**30
+    require(shutil.disk_usage(run).free>=required, f"Allow at least {required/2**30:.1f} GiB free for new outputs and spill")
+    workers=min(a.workers,max(1,(os.cpu_count() or 2)-2),max(1,int((a.memory_gb-2)/0.75)))
+    build=load(ROOT/"BUILD_INFO.json")
+    config=dict(id=run_id,run=str(run),results_dir=str(a.results_dir),workers=workers,memory_gb=a.memory_gb,
+        batch_rows=a.batch_rows,verify_all_fens=a.verify_all_fens,code_sha256=code,input_identity=identity,
+        main_input_mode=provenance["main_input_mode"],main_expected_author_rows=provenance["main_expected_author_rows"],
+        known_outcomes=load(ROOT/"authority/KNOWN_OUTCOMES.json"),
+        environment=environment,source_commit=build["upstream_commit"],pipeline_commit=build.get("pipeline_commit"))
+    with lock(run/"RUN.lock"),(run/"run.log").open("a",buffering=1,encoding="utf-8") as log_file:
+        prior=sys.stdout
+        sys.stdout=Tee(prior,log_file)
+        try:
+            save(run/"INPUTS_PRIVATE.json",dict(provenance=provenance,files=items))
+            save(run/"CONFIG_PRIVATE.json",config)
+            log(f"Verified 48 inputs. {workers} workers, one library thread each; {a.memory_gb:.1f} GiB planning budget. Original files remain untouched.")
+            if a.preflight_only:
+                log("Preflight passed. No material decisions or output panels have been computed.")
+                return 0
+            execute(items,config,audit_only=a.audit_only)
+            return 0
+        except KeyboardInterrupt:
+            log("Interrupted safely. Repeat the same command to resume verified monthly checkpoints.")
+            return 130
+        except Exception as e:
+            save(run/"ERROR_PRIVATE.json",dict(type=type(e).__name__,error=str(e),traceback=traceback.format_exc()))
+            log("STOPPED: "+str(e))
+            if (run/"report").is_dir():
+                save(run/"report/STATUS.json",dict(status="STOPPED",error_type=type(e).__name__,message=str(e),input_panels_ready=False,inference_rerun_complete=False))
+                bundle(config,ROOT,"FAILED")
+            return 1
+        finally:
+            sys.stdout=prior

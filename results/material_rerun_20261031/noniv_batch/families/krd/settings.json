@@ -1,0 +1,147 @@
+{
+  "adapter": {
+    "bytes": 3714,
+    "lineage": "pool_main_adapter",
+    "path": "__PRIVATE_VALUE_1__/Desktop/Lichess_Desktop/Mating_Material_NonIV_Batch_v1_0_0/vendor/wave1/runner/run_krd.py",
+    "repository": null,
+    "repository_head_inspected": null,
+    "sha256": "a22c9b00eee2ce863e1404cf4825e7a7ea3186bc226cc892e373b3e2fb82ae57"
+  },
+  "authority": {
+    "engine": "Stockfish 18 nodes=100,000",
+    "months": 24,
+    "panel": "__PRIVATE_VALUE_2__/derived/replication/mating_material_noniv_batch_v100_PRIVATE/99984ef97df55388/PRIVATE/input_links/panel",
+    "rows": 41513719
+  },
+  "board_eval_bands": [
+    [
+      "m600_m300",
+      -600.0,
+      -300.0
+    ],
+    [
+      "m300_m100",
+      -300.0,
+      -100.0
+    ],
+    [
+      "m100_p100",
+      -100.0,
+      100.0
+    ],
+    [
+      "p100_p300",
+      100.0,
+      300.0
+    ],
+    [
+      "p300_p600",
+      300.0,
+      600.0000001
+    ]
+  ],
+  "created_utc": "2026-10-30T02:01:50.938746+00:00",
+  "glicko_scale": 173.7178,
+  "privacy": "private cache contains chooser identifiers and must not be committed or uploaded; public CSV outputs contain aggregates/model coefficients only.",
+  "private_cache": "__PRIVATE_VALUE_2__/derived/replication/mating_material_noniv_batch_v100_PRIVATE/99984ef97df55388/PRIVATE/stages/krd/PRIVATE/model/private_cache/rating_gap_krd_derived_private.parquet",
+  "rating_gap_buckets": [
+    [
+      "far_weaker",
+      -600.0,
+      -200.0
+    ],
+    [
+      "near_weaker",
+      -200.0,
+      -50.0
+    ],
+    [
+      "near_equal",
+      -50.0,
+      50.0000001
+    ],
+    [
+      "near_stronger",
+      50.0,
+      200.0
+    ],
+    [
+      "far_stronger",
+      200.0,
+      600.0000001
+    ]
+  ],
+  "rating_gap_definition": "disconnected_elo - chooser_elo; positive means disconnected opponent higher-rated",
+  "render_program": {
+    "bytes": 3698,
+    "lineage": "surface_package_v1.0.0",
+    "path": "__PRIVATE_VALUE_1__/Desktop/Lichess_Desktop/Mating_Material_NonIV_Batch_v1_0_0/vendor/wave1/source/structural/render_rating_gap_krd.py",
+    "repository": null,
+    "repository_head_inspected": null,
+    "sha256": "c009c53fd0bf29fb7474ba7dfcad2f18b49833e874d641e4be1d17ab0420fa3b"
+  },
+  "sample_authority": {
+    "fair_kind_draws": 419794,
+    "fair_rows": 15186844,
+    "fingerprint": "19059a1d181a30e2bcc4ab37513f9617f37147f1fa598871beac6ddcd47e963f",
+    "kind_draws": 570422,
+    "literal_immediate_rematches_certified": false,
+    "main_predicate": "Reviewed main sample AND chooser has mating material; author excluded in both roles",
+    "months": [
+      "2023-11",
+      "2023-12",
+      "2024-01",
+      "2024-02",
+      "2024-03",
+      "2024-04",
+      "2024-05",
+      "2024-06",
+      "2024-07",
+      "2024-08",
+      "2024-09",
+      "2024-10",
+      "2024-11",
+      "2024-12",
+      "2025-01",
+      "2025-02",
+      "2025-03",
+      "2025-04",
+      "2025-05",
+      "2025-06",
+      "2025-07",
+      "2025-08",
+      "2025-09",
+      "2025-10"
+    ],
+    "observed_screen_certified": true,
+    "panel_root_machine_specific": "__PRIVATE_VALUE_2__/derived/replication/mating_material_noniv_batch_v100_PRIVATE/99984ef97df55388/PRIVATE/input_links/panel",
+    "report_sha256": "c1b6aedb3e95d42188163ef2926fa5a14cdac9538f24eb525cca5a26b3f9caec",
+    "rows": 41513719,
+    "sample_name": "material_restricted_pool_observed_nonadjacent",
+    "sample_status": "MATERIAL_INPUTS_VERIFIED",
+    "status": "MATERIAL_INPUTS_VERIFIED"
+  },
+  "scientific_status": "exploratory diagnostic re-estimated on the selected pool/observed-nonadjacent sample",
+  "software": {
+    "duckdb": "1.3.2",
+    "numpy": "2.3.5",
+    "pandas": "2.3.3",
+    "platform": "macOS-26.4.1-arm64-arm-64bit-Mach-O",
+    "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:11:29) [Clang 20.1.8 ]"
+  },
+  "source_program": {
+    "bytes": 26753,
+    "lineage": "surface_package_v1.0.0",
+    "path": "__PRIVATE_VALUE_1__/Desktop/Lichess_Desktop/Mating_Material_NonIV_Batch_v1_0_0/vendor/wave1/source/structural/rating_gap_krd_decomposition.py",
+    "repository": null,
+    "repository_head_inspected": null,
+    "sha256": "2b481180e25562632f568e8bc0737da17415593c34124372295bb1d5227a7eda"
+  },
+  "stages": [
+    "all",
+    "ply_le_10",
+    "ply_gt_10"
+  ],
+  "status": "POOL_MAIN_RATING_GAP_KRD_DECOMPOSITION_OK",
+  "upstream_producer_status": "RATING_GAP_KRD_DECOMPOSITION_OK"
+}

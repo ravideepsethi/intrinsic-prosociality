@@ -1,0 +1,20 @@
+{
+  "status": "MODEL_OK",
+  "model_id": "common_support_weaker__ply_gt_10__p300_p600",
+  "rows": 28012,
+  "clusters": 6868,
+  "terms_requested": 53,
+  "terms_kept": 53,
+  "rank": 53,
+  "condition_number": 37458195.85852115,
+  "runtime_seconds": 1.523818016052246,
+  "dropped_terms": [],
+  "key_terms": [
+    "is_weaker"
+  ],
+  "coefficient_parquet": "__PRIVATE_VALUE_1__/derived/replication/mating_material_noniv_batch_v100_PRIVATE/99984ef97df55388/PRIVATE/stages/nonparametric/PRIVATE/model/models/common_support_weaker__ply_gt_10__p300_p600_coefficients.parquet",
+  "coefficient_parquet_sha256": "faef913b240a4d0e09d74aa312ed130bafdde83ee49f46c287c8ac2d03d5c0d6",
+  "worker_pid": 8364,
+  "worker_threads": 1,
+  "worker_memory_limit": "3.0GB"
+}

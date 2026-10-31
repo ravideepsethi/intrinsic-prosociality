@@ -1,0 +1,129 @@
+MATING-MATERIAL RERUN: RESPONSIBILITY v1.0.0
+Build date: 2026-10-29
+
+EXPECTED RUNTIME
+5–15 minutes on the 12-core MacBook Pro with XT_Pro; allow 25 minutes on a
+busy drive. This is a provisional estimate until the first production run.
+The runner authenticates cached inputs, reproduces the 53 archived models,
+then estimates the same 53 specifications on the corrected material frame.
+It uses up to 10 workers, an 11 GB memory budget, one BLAS thread per worker,
+and 32 whole-chooser shards. At least 4 GiB free on XT_Pro is required.
+The installed five-package model environment is reused. Initial installation,
+if needed, usually adds 1–3 minutes. RESOURCE_BENCHMARK.json documents the
+synthetic compute benchmark; it is not a measurement on the user's Mac.
+
+RUN FROM A FRESH TERMINAL
+Save the ZIP and its .sha256 in ~/Desktop/Lichess_Desktop, then run:
+
+bash <<'BASH'
+set -e
+cd "$HOME/Desktop/Lichess_Desktop"
+shasum -a 256 -c Mating_Material_Responsibility_v1_0_0.zip.sha256
+unzip -oq Mating_Material_Responsibility_v1_0_0.zip
+bash Mating_Material_Responsibility_v1_0_0/RUN_RESPONSIBILITY.command
+BASH
+
+The launcher first runs the local tests. To run tests alone, add --self-test.
+For preflight authentication and census only, add --preflight-only.
+To print the runtime estimate only, add --estimate-only.
+Rerun the same command after an interruption: completed, hash-verified
+chooser shards are reused. A completed run is verified without refitting.
+Corrupt completed checkpoints stop the run; they are not silently accepted.
+
+SCOPE
+This package refreshes the responsibility / deliberate-departure checks.
+The original repaired A2 producer defines 53 specifications: late and all-stage
+evaluation profiles, own-move and two/four-ply losses, clock and material
+proxies, joint models, direct region interactions, three blunder thresholds,
+the rating-gap/blunder outcomes, rating-state controls, cross-region
+comparisons, and the low-loss/ample-clock sensitivity.
+
+The original target consists of 260,863 opportunities from the frozen
+20,000-account sample. The runner intersects these games with the reviewed
+material-restricted main panel and replaces y with the corrected grant
+indicator. It does not add accounts or replace removed games. It checks that
+all retained board, rating, clock, time, speed and chooser fields reproduce the
+frozen producer's values. Prior outcomes and all original files stay intact.
+Removed and reclassified game records remain in the private output tree.
+
+All original cutoffs, knots, controls, fixed effects, covariance formulas and
+planned Holm families are retained. The solver demeans whole chooser histories,
+retains singletons and never-granters under the original convention, detects
+non-estimable contrasts, and exports the full coefficient covariance and
+standardized-profile influence state. The compact paper table is an extraction
+from the full original contrast inventory, not a new specification search.
+
+Before accepting the new estimates, the runner fits the original frame and
+compares all 53 models to the archived repaired results: row-set hashes,
+sample sizes, ranks, coefficients, SEs, planned contrasts, adjusted profile
+levels and their SEs, and full covariance matrices. This is a reproduction
+check only; the paper-facing outputs come from the corrected material frame.
+
+The 53 archived models did not include prior-disconnection-history models.
+Those additional models are not added or reported as completed here.
+Countdown, tenure/arena/repeat, and the IV families remain separately listed
+in DOWNSTREAM_STATUS.csv. This is not completion of the whole paper rerun.
+
+INPUTS ALREADY ON THE MAC
+Project root: __PRIVATE_VALUE_1__
+
+1. Reviewed material-ready manifest:
+   derived/replication/mating_material_first_run_v100_PRIVATE/
+   aa7e95f275c18f43/MATERIAL_RESTRICTED_INPUTS_READY_PRIVATE.json
+   Its completion receipt, reviewed hashes, 24 monthly main Parquets, and
+   full main census are validated. The old missing author-exclusion-ready
+   manifest is not an input to this package.
+
+2. Original frozen target:
+   output/tenure_responsibility_v100/c539ba215e708b22/
+   PRIVATE/trajectory_targets.parquet
+   SHA-256:
+   a1b68dc9bdaf2d9a95494b9ec020ede0bcf75bd6fefcf340ba1e2b55ee5eba12
+
+3. Repaired A2 features and their producer receipts:
+   output/kac_a2_score_repair_v101/14eda066d25b14f4/
+   PRIVATE/projected/*.parquet
+   PRIVATE/overlay_shards/*.parquet
+   report/*
+   The frozen target hash, reviewed report hashes, exact unit membership,
+   overlay hashes and reconstructed projection receipt keys are checked.
+
+These inputs are reused read-only. No new engine searches, game downloads,
+profile queries, or rating replay are performed. The engine and chess Python
+package are not required: only the original target preparation, constants,
+designs, estimator and reporting functions are executed. Full source files are
+vendored byte-for-byte; the unused acquisition routines are never imported.
+
+OUTPUTS
+Private run root:
+  __PRIVATE_VALUE_1__/derived/replication/
+  mating_material_responsibility_v100_PRIVATE/<run hash>/
+
+Return these three files from ~/Desktop/Lichess_Desktop:
+  MATERIAL_RESPONSIBILITY_<run hash>_RESPONSIBILITY_READY.zip
+  MATERIAL_RESPONSIBILITY_<run hash>_RESPONSIBILITY_READY.zip.sha256
+  MATERIAL_RESPONSIBILITY_LATEST_PRIVATE.json
+
+The return ZIP contains aggregate results, code, lineage, checksums and a log.
+It excludes game rows, chooser identifiers, replays, source caches and profiles.
+Key tables include tab_app_responsibility.csv, planned_contrasts.csv,
+coefficients.csv, adjusted_profiles.csv, responsibility_region_interactions.csv,
+SAMPLE_RECONCILIATION.csv, REFERENCE_REPRODUCTION.csv and model_samples.csv.
+RESPONSIBILITY_BEFORE_AFTER.csv gives descriptive changes, with no invented
+paired standard error for estimates from different frames.
+
+VALIDATION
+22 tests cover the reviewed material contract, frozen source/specification
+identity, short-game missing endpoints, sample removal and label reconciliation,
+projection and author exclusion, feature receipt lineage, independent explicit
+chooser-dummy OLS and cluster-influence calculations, all 53 sharded fits versus
+whole-frame moments, resumable checkpoints, corruption rejection, reporting,
+wrapper completion/resume, and return-ZIP hashes and privacy gates.
+
+Python 3.11–3.13. Dependencies: numpy 2.3.5, pandas 2.3.3, pyarrow 20.0.0,
+duckdb 1.3.2, scipy 1.16.3. Default environment:
+  ~/Desktop/Lichess_Desktop/MatingMaterial_Models_Env_v100
+MMR_PYTHON can name an existing supported Python interpreter.
+MMRESPONSIBILITY_ENV can name a different isolated environment.
+Optional flags: --project-root, --results-dir, --manifest, --workers,
+--memory-gb, --hash-workers, --shards. Changing shards creates a new run identity.

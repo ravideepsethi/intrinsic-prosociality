@@ -1,0 +1,28 @@
+test_author_policy_rejected (__main__.Contracts.test_author_policy_rejected) ... ok
+test_changed_monthly_count_rejected (__main__.Contracts.test_changed_monthly_count_rejected) ... ok
+test_duplicate_path_rejected (__main__.Contracts.test_duplicate_path_rejected) ... ok
+test_incomplete_rejected (__main__.Contracts.test_incomplete_rejected) ... ok
+test_legacy_losses_not_reclassified (__main__.Contracts.test_legacy_losses_not_reclassified) ... ok
+test_manifest_hash_checked (__main__.Contracts.test_manifest_hash_checked) ... ok
+test_month_missing_rejected (__main__.Contracts.test_month_missing_rejected) ... ok
+test_no_chronology_rewrite (__main__.Contracts.test_no_chronology_rewrite) ... ok
+test_old_material_rule_rejected (__main__.Contracts.test_old_material_rule_rejected) ... ok
+test_price_change_rejected (__main__.Contracts.test_price_change_rejected) ... ok
+test_reviewed_contract (__main__.Contracts.test_reviewed_contract) ... ok
+test_source_changed_after_hash (__main__.Contracts.test_source_changed_after_hash) ... ok
+test_wrong_run_rejected (__main__.Contracts.test_wrong_run_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.030s
+
+OK
+R11_DENSE_AND_JOINT_COVARIANCE_OK {'rows': 1920, 'choosers': 70, 'max_abs_beta_difference': 3.4923175462608924e-12, 'max_abs_joint_covariance_difference': 4.1950443119276315e-10}
+NUMERICAL_SELF_TEST_OK: explicit dummy OLS, clustered covariance, level influence, 23 partitioned designs, boundaries and material orientation.
+R11_PIPELINE_RESUME_CORRUPTION_OK
+MERIT_PIPELINE_RESUME_CORRUPTION_OK
+[2026-10-29 05:00:13 UTC] r11: completed outputs verified; skipped
+[2026-10-29 05:00:13 UTC] merit: completed outputs verified; skipped
+[2026-10-29 05:00:13 UTC] Return report: /tmp/mm_models_test__pe7hoda/MATERIAL_MODELS_run_MODELS_READY.zip
+[2026-10-29 05:00:13 UTC] r11: completed outputs verified; skipped
+INTEGRATION_ALL_26_MODELS_AND_REPORTS_OK
+ALL_MODEL_TESTS_PASSED in 31.935s

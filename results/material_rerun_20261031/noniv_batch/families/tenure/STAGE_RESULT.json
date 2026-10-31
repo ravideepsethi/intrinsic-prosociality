@@ -1,0 +1,21 @@
+{
+  "elapsed_seconds": 289.9521858750086,
+  "factual_age_anchor_preserved": true,
+  "frozen_sample": {
+    "bytes": 1904570,
+    "path": "__PRIVATE_VALUE_1__/output/tenure_responsibility_v100/c539ba215e708b22/PRIVATE/selected_accounts.parquet",
+    "sha256": "7a3337725ab440d8f7dddbd98d71d1db8625d058dcd2ee64f40e1363f4a14162",
+    "verified_signature": [
+      "__PRIVATE_VALUE_1__/output/tenure_responsibility_v100/c539ba215e708b22/PRIVATE/selected_accounts.parquet",
+      16777244,
+      981140,
+      1904570,
+      1790138792543469935,
+      1790138792571312254
+    ]
+  },
+  "input_fingerprint": "19059a1d181a30e2bcc4ab37513f9617f37147f1fa598871beac6ddcd47e963f",
+  "new_account_sampling": false,
+  "new_profile_requests": 0,
+  "status": "TENURE_AND_AGE_RESTRICTED_PATRON_REFITTED"
+}

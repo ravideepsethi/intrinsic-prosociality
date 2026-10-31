@@ -1,0 +1,20 @@
+#!/bin/bash
+set -euo pipefail
+MMB_PACKAGE_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+MMB_PYTHON_BIN="${MMB_PYTHON:-}"
+if [[ -z "$MMB_PYTHON_BIN" ]]; then
+  for candidate in python3.13 python3.12 python3.11 python3; do
+    if command -v "$candidate" >/dev/null 2>&1 && "$candidate" -c 'import sys; raise SystemExit(not ((3,11) <= sys.version_info[:2] <= (3,13)))' 2>/dev/null; then
+      MMB_PYTHON_BIN="$(command -v "$candidate")"
+      break
+    fi
+  done
+fi
+if [[ -z "$MMB_PYTHON_BIN" ]]; then
+  echo "Python 3.11–3.13 is required. Set MMB_PYTHON to your installed interpreter." >&2
+  exit 1
+fi
+if command -v caffeinate >/dev/null 2>&1; then
+  exec caffeinate -i "$MMB_PYTHON_BIN" "$MMB_PACKAGE_DIR/setup_and_run.py" "$@"
+fi
+exec "$MMB_PYTHON_BIN" "$MMB_PACKAGE_DIR/setup_and_run.py" "$@"

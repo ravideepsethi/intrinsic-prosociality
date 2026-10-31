@@ -1,0 +1,12 @@
+{
+  "elapsed_seconds": 553.1599164580111,
+  "frozen_pair_sample": "1-in-50; separate from the current 1-in-5 reputation design",
+  "input_fingerprint": "19059a1d181a30e2bcc4ab37513f9617f37147f1fa598871beac6ddcd47e963f",
+  "models": 11,
+  "status": "COMPLETE_WITH_UNSUPPORTED_AUXILIARIES",
+  "unsupported": [
+    "X_C7R_fair_vs_clearly_worse_repeat_meetings",
+    "X_C7R_nonnegative_vs_costly_repeat_meetings",
+    "X_C7R_positive_vs_negative_repeat_meetings"
+  ]
+}

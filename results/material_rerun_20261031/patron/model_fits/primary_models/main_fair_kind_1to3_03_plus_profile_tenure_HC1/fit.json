@@ -1,0 +1,299 @@
+{
+  "coefficients": [
+    {
+      "ci95_high_pp": 0.32740225874775114,
+      "ci95_low_pp": 0.2540486031664136,
+      "clusters": null,
+      "coefficient_pp": 0.29072543095708236,
+      "covariance": "HC1",
+      "drop_reason": null,
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "main_fair_kind_1to3_03_plus_profile_tenure_HC1",
+      "n": 847680,
+      "p_two_sided_approx": 1.9794504462355404e-54,
+      "rank": 7,
+      "se_pp": 0.01871301109610734,
+      "statistic": 15.536004839838885,
+      "status": "estimated",
+      "variable": "is_kind_role"
+    },
+    {
+      "ci95_high_pp": 0.11110127957052882,
+      "ci95_low_pp": -0.08997040503842743,
+      "clusters": null,
+      "coefficient_pp": 0.010565437266050692,
+      "covariance": "HC1",
+      "drop_reason": null,
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "main_fair_kind_1to3_03_plus_profile_tenure_HC1",
+      "n": 847680,
+      "p_two_sided_approx": 0.836810389935015,
+      "rank": 7,
+      "se_pp": 0.051294739646999654,
+      "statistic": 0.20597506369580898,
+      "status": "estimated",
+      "variable": "log_fair_opps"
+    },
+    {
+      "ci95_high_pp": -0.06557220297432816,
+      "ci95_low_pp": -0.1458085789820242,
+      "clusters": null,
+      "coefficient_pp": -0.10569039097817617,
+      "covariance": "HC1",
+      "drop_reason": null,
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "main_fair_kind_1to3_03_plus_profile_tenure_HC1",
+      "n": 847680,
+      "p_two_sided_approx": 2.4240377170833476e-07,
+      "rank": 7,
+      "se_pp": 0.02046883938699648,
+      "statistic": -5.163477468357075,
+      "status": "estimated",
+      "variable": "log_total_opps"
+    },
+    {
+      "ci95_high_pp": 0.23456700960504295,
+      "ci95_low_pp": 0.18835538386419054,
+      "clusters": null,
+      "coefficient_pp": 0.21146119673461675,
+      "covariance": "HC1",
+      "drop_reason": null,
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "main_fair_kind_1to3_03_plus_profile_tenure_HC1",
+      "n": 847680,
+      "p_two_sided_approx": 6.029513298891706e-72,
+      "rank": 7,
+      "se_pp": 0.011788896659674319,
+      "statistic": 17.937318719397325,
+      "status": "estimated",
+      "variable": "account_age_days_at_query"
+    },
+    {
+      "ci95_high_pp": -0.12701576728694336,
+      "ci95_low_pp": -0.14191613527196062,
+      "clusters": null,
+      "coefficient_pp": -0.134465951279452,
+      "covariance": "HC1",
+      "drop_reason": null,
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "main_fair_kind_1to3_03_plus_profile_tenure_HC1",
+      "n": 847680,
+      "p_two_sided_approx": 4.1751008507609554e-274,
+      "rank": 7,
+      "se_pp": 0.003801184129542553,
+      "statistic": -35.37475341812344,
+      "status": "estimated",
+      "variable": "days_since_seen_at_query"
+    },
+    {
+      "ci95_high_pp": 0.3244072929285632,
+      "ci95_low_pp": 0.27133992060954504,
+      "clusters": null,
+      "coefficient_pp": 0.2978736067690541,
+      "covariance": "HC1",
+      "drop_reason": null,
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "main_fair_kind_1to3_03_plus_profile_tenure_HC1",
+      "n": 847680,
+      "p_two_sided_approx": 2.6935861196168717e-107,
+      "rank": 7,
+      "se_pp": 0.013537843740396956,
+      "statistic": 22.00303183292023,
+      "status": "estimated",
+      "variable": "log_playtime_total"
+    },
+    {
+      "ci95_high_pp": -0.10438860658365276,
+      "ci95_low_pp": -0.17847648346662173,
+      "clusters": null,
+      "coefficient_pp": -0.14143254502513725,
+      "covariance": "HC1",
+      "drop_reason": null,
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "main_fair_kind_1to3_03_plus_profile_tenure_HC1",
+      "n": 847680,
+      "p_two_sided_approx": 7.260155638314942e-14,
+      "rank": 7,
+      "se_pp": 0.018900315890333877,
+      "statistic": -7.483078370000662,
+      "status": "estimated",
+      "variable": "play_time_total_seconds__missing"
+    },
+    {
+      "ci95_high_pp": null,
+      "ci95_low_pp": null,
+      "clusters": null,
+      "coefficient_pp": null,
+      "covariance": "HC1",
+      "drop_reason": "zero_after_fixed_effect_absorption",
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "main_fair_kind_1to3_03_plus_profile_tenure_HC1",
+      "n": 847680,
+      "p_two_sided_approx": null,
+      "rank": 7,
+      "se_pp": null,
+      "statistic": null,
+      "status": "dropped",
+      "variable": "account_age_days_at_query__missing"
+    },
+    {
+      "ci95_high_pp": null,
+      "ci95_low_pp": null,
+      "clusters": null,
+      "coefficient_pp": null,
+      "covariance": "HC1",
+      "drop_reason": "zero_after_fixed_effect_absorption",
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "main_fair_kind_1to3_03_plus_profile_tenure_HC1",
+      "n": 847680,
+      "p_two_sided_approx": null,
+      "rank": 7,
+      "se_pp": null,
+      "statistic": null,
+      "status": "dropped",
+      "variable": "days_since_seen_at_query__missing"
+    }
+  ],
+  "covariance": [
+    [
+      0.0003501767842830364,
+      -3.928829463698162e-05,
+      2.2513493850771552e-05,
+      1.581897439610005e-05,
+      -4.748076899811636e-06,
+      2.330668329912944e-05,
+      4.61585979255308e-06
+    ],
+    [
+      -3.928829463698246e-05,
+      0.002631150315453478,
+      -0.0002929181733952077,
+      1.151575801366342e-05,
+      3.509346070732672e-06,
+      -3.158661969684819e-05,
+      4.9990737147650315e-05
+    ],
+    [
+      2.2513493850769397e-05,
+      -0.0002929181733952071,
+      0.00041897338585065845,
+      3.118117977320587e-05,
+      3.898274131540436e-06,
+      -0.00010057027155697917,
+      5.5760464046141595e-05
+    ],
+    [
+      1.581897439610286e-05,
+      1.1515758013666088e-05,
+      3.118117977320558e-05,
+      0.00013897808445248032,
+      -9.23576005971967e-06,
+      -6.90835818255265e-05,
+      0.00019206046359719308
+    ],
+    [
+      -4.748076899812832e-06,
+      3.5093460707312927e-06,
+      3.898274131540594e-06,
+      -9.235760059719736e-06,
+      1.4449000786686176e-05,
+      3.5272294624022096e-06,
+      1.3148868266524197e-05
+    ],
+    [
+      2.3306683299124513e-05,
+      -3.1586619696850006e-05,
+      -0.00010057027155697876,
+      -6.908358182552689e-05,
+      3.5272294624022706e-06,
+      0.00018327321313940507,
+      -0.00014786646031574556
+    ],
+    [
+      4.615859792554833e-06,
+      4.999073714765213e-05,
+      5.5760464046141514e-05,
+      0.00019206046359719313,
+      1.3148868266524283e-05,
+      -0.0001478664603157456,
+      0.0003572219407544073
+    ]
+  ],
+  "kept_names": [
+    "is_kind_role",
+    "log_fair_opps",
+    "log_total_opps",
+    "account_age_days_at_query",
+    "days_since_seen_at_query",
+    "log_playtime_total",
+    "play_time_total_seconds__missing"
+  ],
+  "model": {
+    "cluster": null,
+    "clusters": null,
+    "covariance": "HC1",
+    "dropped_regressors": {
+      "account_age_days_at_query__missing": "zero_after_fixed_effect_absorption",
+      "days_since_seen_at_query__missing": "zero_after_fixed_effect_absorption"
+    },
+    "estimand_class": "secondary",
+    "fixed_effect_levels": 36,
+    "fixed_effects": "match_cell",
+    "kept_regressors": [
+      "is_kind_role",
+      "log_fair_opps",
+      "log_total_opps",
+      "account_age_days_at_query",
+      "days_since_seen_at_query",
+      "log_playtime_total",
+      "play_time_total_seconds__missing"
+    ],
+    "model": "main_fair_kind_1to3_03_plus_profile_tenure_HC1",
+    "n": 847680,
+    "outcome": "patron_pp",
+    "rank": 7,
+    "requested_regressors": [
+      "is_kind_role",
+      "log_fair_opps",
+      "log_total_opps",
+      "account_age_days_at_query",
+      "days_since_seen_at_query",
+      "log_playtime_total",
+      "account_age_days_at_query__missing",
+      "days_since_seen_at_query__missing",
+      "play_time_total_seconds__missing"
+    ],
+    "standardization": {
+      "account_age_days_at_query": {
+        "mean": 1516.0476187400782,
+        "sd_population": 933.6115170437838
+      },
+      "days_since_seen_at_query": {
+        "mean": 157.42937265004986,
+        "sd_population": 241.2155037691913
+      },
+      "log_fair_opps": {
+        "mean": 1.8968904705194714,
+        "sd_population": 0.8985344736865168
+      },
+      "log_playtime_total": {
+        "mean": 13.44770728451158,
+        "sd_population": 1.655156485196258
+      },
+      "log_total_opps": {
+        "mean": 2.646239678698937,
+        "sd_population": 1.1070088979971893
+      }
+    },
+    "status": "estimated"
+  }
+}

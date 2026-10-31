@@ -1,0 +1,117 @@
+{
+  "completed": [
+    "authenticate",
+    "decisions",
+    "exposures",
+    "scores",
+    "features",
+    "core_models",
+    "supplements",
+    "sensitivities",
+    "subgroups",
+    "bins",
+    "receipt_kind",
+    "patron",
+    "comparison_auth",
+    "comparison_candidates"
+  ],
+  "configuration": "12093d55b7ee9f737696982b8ebaef7b0706c27adc4fb12482a99aabf985d482",
+  "failed_or_blocked": [
+    "comparison_chronology",
+    "comparison_metadata",
+    "comparison_frames",
+    "comparison_models"
+  ],
+  "private_rows_exported": false,
+  "stages": {
+    "authenticate": {
+      "exit_code": 0,
+      "seconds": 70.81058300001314,
+      "status": "COMPLETE"
+    },
+    "bins": {
+      "exit_code": 0,
+      "seconds": 152.0172656669747,
+      "status": "COMPLETE"
+    },
+    "comparison_auth": {
+      "exit_code": 0,
+      "seconds": 194.71386079199146,
+      "status": "COMPLETE"
+    },
+    "comparison_candidates": {
+      "exit_code": 0,
+      "seconds": 1072.6622285000049,
+      "status": "COMPLETE"
+    },
+    "comparison_chronology": {
+      "exit_code": 1,
+      "seconds": 33.52356037500431,
+      "status": "FAILED"
+    },
+    "comparison_frames": {
+      "reason": "comparison_metadata",
+      "status": "BLOCKED"
+    },
+    "comparison_metadata": {
+      "reason": "comparison_chronology",
+      "status": "BLOCKED"
+    },
+    "comparison_models": {
+      "reason": "comparison_frames",
+      "status": "BLOCKED"
+    },
+    "core_models": {
+      "exit_code": 0,
+      "seconds": 1782.4450154170045,
+      "status": "COMPLETE"
+    },
+    "decisions": {
+      "exit_code": 0,
+      "seconds": 280.39574787500896,
+      "status": "COMPLETE"
+    },
+    "exposures": {
+      "exit_code": 0,
+      "seconds": 1137.6239640830026,
+      "status": "COMPLETE"
+    },
+    "features": {
+      "exit_code": 0,
+      "seconds": 6250.746496959007,
+      "status": "COMPLETE"
+    },
+    "patron": {
+      "exit_code": 0,
+      "seconds": 2182.4362671249837,
+      "status": "COMPLETE"
+    },
+    "receipt_kind": {
+      "exit_code": 0,
+      "seconds": 2436.044379125,
+      "status": "COMPLETE"
+    },
+    "scores": {
+      "exit_code": 0,
+      "seconds": 428.09290254101506,
+      "status": "COMPLETE"
+    },
+    "sensitivities": {
+      "exit_code": 0,
+      "seconds": 1111.4716694170202,
+      "status": "COMPLETE"
+    },
+    "subgroups": {
+      "exit_code": 0,
+      "seconds": 1088.361808207992,
+      "status": "COMPLETE"
+    },
+    "supplements": {
+      "exit_code": 0,
+      "seconds": 1999.758811125008,
+      "status": "COMPLETE"
+    }
+  },
+  "status": "PARTIAL",
+  "whole_paper_complete": false
+}

@@ -1,0 +1,23 @@
+output,description,producer,status
+tab_main,"Position, region-specific stage and gap; same chooser FE and covariance",R11 region-gap producer,NOT_RUN_IN_THIS_FIRST_STAGE
+tab_app_main_spec,"Clocks, alternative controls, common-gap comparison",R11 + Wave1 core,NOT_RUN_IN_THIS_FIRST_STAGE
+tab_app_equalweights,Three weighting rules,Wave1 panel robustness,NOT_RUN_IN_THIS_FIRST_STAGE
+tab_app_merit_continuous,Spline and covariance,Continuous Merit + R11 continuous,NOT_RUN_IN_THIS_FIRST_STAGE
+tab_app_stage_speed,Stage by speed,R11 + v143 prose checks,NOT_RUN_IN_THIS_FIRST_STAGE
+tab_app_responsibility,Deliberate-departure proxies,v141 responsibility remaining,NOT_RUN_IN_THIS_FIRST_STAGE
+fig_countdown,Countdown threshold profiles,Countdown_Estimation_v1_0_0,NOT_RUN_IN_THIS_FIRST_STAGE
+tab_app_countdown,Countdown threshold fits,Countdown_Estimation_v1_0_0,NOT_RUN_IN_THIS_FIRST_STAGE
+tab_app_tenure_arena_repeat,"Tenure, arena and repeat sensitivities",v141 remaining workers,NOT_RUN_IN_THIS_FIRST_STAGE
+tab_app_repeat,Pair histories and re-encounter,First Repeat + Reputation,NOT_RUN_IN_THIS_FIRST_STAGE
+tab_app_rating,Rating-gap profile and adjacent levels,Wave1 KRD + C9,NOT_RUN_IN_THIS_FIRST_STAGE
+tab_app_stakes,Percentile and personal scales,Stakes producer,NOT_RUN_IN_THIS_FIRST_STAGE
+tab_persistence,"Persistence and account bootstrap, 1999 resamples",v142 corrected persistence + Submission_Checks_20261025,NOT_RUN_IN_THIS_FIRST_STAGE
+tab_supp_state_regressions,Weighted state regressions,v142 original_f_v102,NOT_RUN_IN_THIS_FIRST_STAGE
+tab_patron,Fixed acquisition design and snapshot; rebuilt behavior,v141 Patron adapters,NOT_RUN_IN_THIS_FIRST_STAGE
+tab_dynamics,Matched receipt and interval outcomes,R8 Independent + companion receipt core,NOT_RUN_IN_THIS_FIRST_STAGE
+tab_iv_main,Uniform90 primary and both placebos,"Uniform90 v105, rebuild from candidate universe",NOT_RUN_IN_THIS_FIRST_STAGE
+fig_iv_bins,Residualized first-stage bins,Model5_FirstStageBins_v1_0_0,NOT_RUN_IN_THIS_FIRST_STAGE
+tab_app_iv_companions,"Spaced variants, balance, entry, exclusion, compliers, mechanisms",R9/R12 + Model5 Submission,NOT_RUN_IN_THIS_FIRST_STAGE
+tab_app_receipt_kind,Merited and unmerited frames,Receipt_IV_Position_v1_0_0,NOT_RUN_IN_THIS_FIRST_STAGE
+tab_app_receipt_patron,Fixed profile acquisition and IPW,Patron_Model5_v1_0_0,NOT_RUN_IN_THIS_FIRST_STAGE
+tab_supp_iv_specs,"Subgroups, exposure variants, alternate scores",R9/R12 + Model5 supplements,NOT_RUN_IN_THIS_FIRST_STAGE

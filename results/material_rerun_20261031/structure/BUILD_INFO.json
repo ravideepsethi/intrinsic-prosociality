@@ -1,0 +1,20 @@
+{
+  "package": "Mating_Material_Structure_v1_0_0",
+  "version": "1.0.0",
+  "pipeline_commit": "1e3f635f5a695acaa4fb1ce5c4b6eca2b3086d5f",
+  "parent_input_run_id": "aa7e95f275c18f43d9ad95af523b9b0d769704ddebf4aea4d3655a2e1b07ef5d",
+  "tests_passed": 24,
+  "python_test_runtime": "3.12 Linux; user launcher supports 3.11\u20133.13",
+  "original_r10_run": "6bb9fb7c3d51",
+  "whole_paper_rerun_complete": false,
+  "expected_runtime": "10\u201320 minutes; allow 30 minutes on busy external drive",
+  "resource_benchmark": {
+    "synthetic_rows": 160000,
+    "synthetic_choosers": 4001,
+    "models": 3,
+    "union_columns": 123,
+    "peak_rss_gib_linux": 0.7894248962402344,
+    "seconds": 2.285450827999739,
+    "mac_production_runtime_measured": false
+  }
+}

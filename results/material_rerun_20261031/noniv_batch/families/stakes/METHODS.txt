@@ -1,0 +1,95 @@
+WIN PREMIUM STAKES v1.0.0 — FROZEN DEFINITIONS
+
+Question
+How large is foregoing the win in familiar rating units? These are descriptive
+scales. They neither identify subjective utility nor show a causal effect of
+stakes on generosity. Never divide the premium by the rating level: a rating's
+zero is arbitrary.
+
+Sample
+Use the frozen pool, observed nonadjacent 24-month main panel, November 2023 to
+October 2025. Apply exact author exclusion (__PRIVATE_VALUE_1__ and __PRIVATE_VALUE_2__, either player).
+Primary opportunities have engine_eval_cp_disconnected >= -100. Supported speeds
+are ultrabullet, bullet, blitz, rapid and classical. Retain all other main-panel
+selection rules; add no ply or rating-gap screen. Correspondence and other speeds
+are outside this report and counted in sample_coverage.csv. Reports distinguish
+all competitive opportunities, grants, chooser RD <= 110, and their intersection.
+RD <= 110 is a rating-uncertainty restriction, not a tenure definition.
+
+Premium and percentile cost
+Draw post-rating = pre-rating + chooser_draw_payoff_v2.
+Win post-rating  = pre-rating + chooser_win_payoff_v2.
+Premium = win post-rating - draw post-rating. Verify against the certified premium.
+The fields are model-based counterfactual rating updates, not rounded PGN updates.
+
+For each speed and preceding calendar month, construct an empirical CDF from one
+rating observation per account active in that month's existing chronology: its
+latest pregame rating. Exclude the two author accounts. Keep other players'
+factual rating histories, including games against those accounts. A missing
+latest rating or conflicting ratings at tied latest starts excludes that account
+from that snapshot and is reported. No RD filter is available for this population.
+This is an observed-history reference population, not the live Lichess leaderboard
+or a claim of complete platform coverage. Historical chronology and main-panel
+coverage can differ; every focal game must still reconcile exactly on IDs, colors,
+ratings and start times (API/PGN tolerance 1000ms).
+
+F(r) = fraction of those accounts with rating <= r, including ties.
+Cost in percentile points = 100 [F(win post-rating) - F(draw post-rating)].
+Both alternatives use exactly the same lagged reference population. Standings
+use 100 F(pre-rating). Compute row-specific costs, THEN medians/quantiles; do not
+apply the median premium to a nonlinear CDF and call it the median cost. Deciles
+are speed/month-relative; rating bands also have speed-specific tables.
+
+Personal variation
+For each focal opportunity, take the preceding 100 same-speed pregame rating
+observations in strictly earlier recorded starts; exclude every equal-time start.
+Align the API anchor to the focal game's own chronology second before looking
+back, so it cannot count itself. Use sample SD (denominator 99). Repeat with 50
+observations, the 100-observation IQR, and residual SD after a linear trend in
+game sequence (denominator 98). The trend diagnostic is not a claim that trends
+are known in real time beyond these past observations.
+
+Primary ratio = premium / prior SD100. Also show premium / SD50, IQR100 and
+detrended SD100. All observations in a window must have finite positive ratings. If a tie
+in recorded starts straddles the last-100 or last-50 cutoff, that window is
+unavailable. Missing, insufficient and zero-variation windows remain explicit
+coverage categories. Zero or numerical-zero denominators (<= 1e-9) give missing
+ratios, never infinity. Do not hide these players when interpreting coverage.
+Report the calendar span of the 100 observations and time since the last one.
+A short-lived run of stable ratings and a long dormant history are different.
+
+Default history begins August 2023 (three preceding months before the study).
+For any row with 100 observed strictly earlier starts, that last-100 window is
+complete within the authenticated monthly source sequence. Earlier unknown starts
+cannot change those 100 most recent observations. Other rows remain unavailable;
+there is no claim of lifetime coverage. --history-start permits an earlier warm-up
+and creates a separate cache. Never silently substitute a smaller window.
+
+Ordinary-win units
+Not estimated from this source. Its utc_ms field is a start timestamp. A realized
+rating difference/outcome from an earlier-started game may still have been unknown
+at the focal start. A future extension should authenticate completion timestamps,
+select strictly completed prior same-speed games, identify ordinary wins from
+verified scores/status, require enough wins, and show the number/span used.
+No result_code encoding is guessed and no start is relabeled as completion.
+
+Thresholds and weighting
+Report whether the win post-rating crosses a 100-point boundary while the draw
+does not, and analogous crossings of selected historical percentiles. These are
+descriptive contrasts, not a threshold-effect regression. No lifetime personal
+best is claimed. Main summaries weight opportunities equally. The equal-account
+sensitivity first takes medians within account and speed, then medians across
+accounts within speed. Account is a username identity, not necessarily a person.
+The same-sample sensitivity compares all four variation denominators on their
+intersection of valid observations. Quantile bands are distributional spread,
+not confidence intervals. No standard errors or significance claims are made.
+
+Validation and storage
+Frozen main SHA256 checks; source history row/byte/schema checks; run-bound raw
+Parquet footer digests and filesystem fingerprints; exact focal reconciliation;
+duplicate and count-conservation gates; numerical unit tests and multi-month
+synthetic pipeline tests. The historical manifest's legacy footer signature has
+an undocumented serialization. This runner does not pretend its raw-footer digest
+reproduces that signature or authenticates every source byte. Source history is
+read-only. PRIVATE local work contains account/game rows. Only aggregate reports
+are bundled. No API requests, rating replay or Stockfish execution.

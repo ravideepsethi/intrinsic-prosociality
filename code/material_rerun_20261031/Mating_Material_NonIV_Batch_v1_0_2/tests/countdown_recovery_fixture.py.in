@@ -1,0 +1,72 @@
+"""Full recovery adapter on 24 synthetic months; no old source tree required."""
+from pathlib import Path
+import sys,tempfile,datetime as dt,copy
+from types import SimpleNamespace
+ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'code'))
+import engine,cached_families
+import pyarrow as pa,pyarrow.parquet as pq
+
+
+def fixture(month):
+    rows=[]
+    for i in range(36):
+        deficit=i%9;pawns='p'*deficit+(str(8-deficit) if deficit<8 else '')
+        row=dict(game_id=month+f'_{i}',month=month,chooser_user_id=i%4,
+            chooser_username_norm='user'+str(i%4),disconnected_username_norm='other',
+            outcome_kind_draw=int(i%7==0),engine_eval_cp_disconnected=-250,
+            engine_eval_cp_disconnected_raw=-250,engine_eval_is_mate=False,ply_count=30,
+            api_speed='blitz',api_last_move_at_ms=int(dt.datetime.fromisoformat(month+'-15T12:00:00+00:00').timestamp()*1000),
+            disconnected_color='white',side_to_move_after_last='white',chooser_clock_last_obs_s=100.,
+            disconnected_clock_last_obs_s=180.,chooser_elo=1700.,disconnected_elo=1750.,api_status='timeout',
+            api_rated=True,api_variant='standard',five_second_rule_passed=True,sf100k_nodes_requested=100000,
+            sf100k_fen_turn_matches_disconnected_color=True,sf100k_disconnected_color_for_perspective='white',
+            fen_after_last_move=f'3qk3/{pawns}/8/8/8/8/8/3QK3 w - - 0 1',disconnected_minus_chooser_material=-deficit)
+        for role in ('chooser','disconnected'):
+            for piece in ('pawns','knights','bishops','rooks','queens'):
+                row[role+'_'+piece]=1 if piece=='queens' else deficit if piece=='pawns' and role=='chooser' else 0
+        rows.append(row)
+    return rows
+
+
+def main():
+    with tempfile.TemporaryDirectory() as td:
+        root=Path(td);out=root/'countdown';(out/'PRIVATE').mkdir(parents=True);(out/'report').mkdir()
+        records=[];total=grants=0
+        for month in engine.MONTHS:
+            rows=fixture(month)
+            if month=='2023-11':
+                rows=rows[1:]  # removed ineligible decision
+                rows[0]['outcome_kind_draw']=1  # repaired grant label
+            p=root/(month+'.parquet');pq.write_table(pa.Table.from_pylist(rows),p)
+            records.append(dict(engine.record(p),month=month,rows=len(rows)))
+            total+=len(rows);grants+=sum(r['outcome_kind_draw'] for r in rows)
+        auth=dict(records=records,fingerprint='fixture_corrected',census=dict(opportunities=total,grants=grants))
+        a=SimpleNamespace(project=root,workers=2,memory_gb=5)
+        result=cached_families.countdown(a,auth,out)
+        assert result['models']==145,result
+        projections=list((out/'PRIVATE/projection').glob('*/features.parquet'))
+        assert len(projections)==24
+        before={str(p):p.stat().st_mtime_ns for p in projections}
+        # Repeating the complete adapter verifies both projection and model caches.
+        cached_families.countdown(a,auth,out)
+        assert before=={str(p):p.stat().st_mtime_ns for p in projections}
+        from feature_projection import project_month
+        for changes in [dict(chooser_username_norm='__PRIVATE_VALUE_1__'),dict(disconnected_username_norm='__PRIVATE_VALUE_2__'),dict(chooser_pawns=4)]:
+            rows=fixture('2023-11');rows[0].update(changes)
+            p=root/'bad.parquet';pq.write_table(pa.Table.from_pylist(rows),p)
+            try:
+                project_month(dict(record=dict(path=str(p),month='2023-11',expected_sha256=engine.sha(p),rows=len(rows)),
+                    config='bad',out=str(root/'bad_out'),memory_gb=.5))
+            except RuntimeError:pass
+            else:raise AssertionError('Corrupt role/material source was accepted')
+        p=projections[0]
+        with p.open('ab') as stream:stream.write(b'tamper')
+        month=p.parent.name;r=next(r for r in records if r['month']==month)
+        from common import digest
+        key=engine.digest([auth['fingerprint'],engine.sha(ROOT/'vendor/countdown/code/feature_projection.py')])
+        try:project_month(dict(record=dict(r,expected_sha256=r['sha256']),config=key,out=str(p.parent),memory_gb=.5))
+        except RuntimeError:pass
+        else:raise AssertionError('Changed projection was reused')
+    print('Countdown full 24-month / 145-model adapter, corrected labels, resume, corruption rejection: PASS')
+
+if __name__=='__main__':main()

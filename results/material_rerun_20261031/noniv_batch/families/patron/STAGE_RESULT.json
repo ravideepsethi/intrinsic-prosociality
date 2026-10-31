@@ -1,0 +1,36 @@
+{
+  "cache": {
+    "accounts": 1101025,
+    "collapsed_rows": 25246320,
+    "kind_draws": 569187,
+    "mismatches": 0,
+    "opportunities": 26379337
+  },
+  "elapsed_seconds": 1837.5690495410236,
+  "input_fingerprint": "19059a1d181a30e2bcc4ab37513f9617f37147f1fa598871beac6ddcd47e963f",
+  "opportunity": {
+    "linear_combinations": 26,
+    "models": 3,
+    "not_estimable_contrasts": 0,
+    "scope": "opportunity"
+  },
+  "ply": {
+    "linear_combinations": 104,
+    "models": 12,
+    "not_estimable_contrasts": 0,
+    "scope": "ply"
+  },
+  "postcertification": {
+    "accounts": 1101025,
+    "five_bin_models": 7,
+    "not_estimable_contrasts": 0,
+    "price_count_rate_models": 10
+  },
+  "rematches": {
+    "models": 200,
+    "replicates": 100,
+    "root_seed": 20260826
+  },
+  "replacement_matches": 0,
+  "status": "COMPLETE"
+}

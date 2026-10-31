@@ -1,0 +1,58 @@
+[
+  {
+    "group": "inputs",
+    "status": "INPUTS_READY",
+    "published_files": 19,
+    "omitted_files": 15,
+    "manifest": "manifests/material_rerun_20261031/RESULTS_inputs.json"
+  },
+  {
+    "group": "core_models",
+    "status": "COMPLETE_FOR_NAMED_MODULE",
+    "published_files": 59,
+    "omitted_files": 23,
+    "manifest": "manifests/material_rerun_20261031/RESULTS_core_models.json"
+  },
+  {
+    "group": "persistence",
+    "status": "COMPLETE_FOR_NAMED_MODULE",
+    "published_files": 47,
+    "omitted_files": 18,
+    "manifest": "manifests/material_rerun_20261031/RESULTS_persistence.json"
+  },
+  {
+    "group": "patron",
+    "status": "COMPLETE_FOR_NAMED_MODULE",
+    "published_files": 93,
+    "omitted_files": 21,
+    "manifest": "manifests/material_rerun_20261031/RESULTS_patron.json"
+  },
+  {
+    "group": "matched_receipt",
+    "status": "COMPLETE_FOR_NAMED_MODULE",
+    "published_files": 73,
+    "omitted_files": 18,
+    "manifest": "manifests/material_rerun_20261031/RESULTS_matched_receipt.json"
+  },
+  {
+    "group": "structure",
+    "status": "COMPLETE_FOR_NAMED_MODULE",
+    "published_files": 56,
+    "omitted_files": 28,
+    "manifest": "manifests/material_rerun_20261031/RESULTS_structure.json"
+  },
+  {
+    "group": "noniv_batch",
+    "status": "REVIEWED_COMPLETE_WITH_DOCUMENTED_AUXILIARY_LIMITS",
+    "published_files": 357,
+    "omitted_files": 21,
+    "manifest": "manifests/material_rerun_20261031/RESULTS_noniv_batch.json"
+  },
+  {
+    "group": "iv_partial",
+    "status": "PARTIAL_14_OF_18_STAGES",
+    "published_files": 65,
+    "omitted_files": 0,
+    "manifest": "manifests/material_rerun_20261031/RESULTS_iv_partial.json"
+  }
+]

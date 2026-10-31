@@ -1,0 +1,86 @@
+"""Exercise the actual optimized orchestration with small coherent source files.
+
+Only production authentication and the published large-N numerical authority
+are replaced. Index construction, spawned workers, eligibility, chronology,
+feature reproduction, assembly, regressions, reports and reuse execute normally.
+"""
+import sys,tempfile,unittest,contextlib
+from pathlib import Path
+from unittest import mock
+from types import SimpleNamespace
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'code'))
+from cached_common import *
+import run_optimized as runner
+import phase_features as pf
+import test_phase_analysis as original_fixture
+
+class OptimizedRunnerTests(unittest.TestCase):
+    def test_full_optimized_pipeline_matches_original_and_resumes(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);fixture=root/'fixture';fixture.mkdir()
+            # The unchanged original integration fixture provides coherent parent
+            # outcomes, author effects, histories, entry labels and original fits.
+            with mock.patch('test_phase_analysis.tempfile.TemporaryDirectory',return_value=contextlib.nullcontext(str(fixture))):
+                original_fixture.PhaseTests('test_mixed_ending_pipeline_author_cleaning_and_entry_labels').test_mixed_ending_pipeline_author_cleaning_and_entry_labels()
+            h=io.read(fixture/'history.parquet');a=arrays(h);parts=[];sdir=root/'sources';sdir.mkdir()
+            for month in MONTHS:
+                for shard in range(16):
+                    use=(num.user_hash(a['j'])%np.uint64(16)==shard)&(month==MONTHS[6])
+                    path=sdir/f'{month}_{shard:02}.parquet';io.table(path,h.filter(pa.array(use)))
+                    parts.append(dict(path=str(path),month=month,shard=shard,sha256=io.sha(path),rows=int(use.sum())))
+            main=io.read(fixture/'main.parquet');panels=[]
+            for k,m in enumerate(MONTHS):
+                path=sdir/f'main_{m}.parquet';io.table(path,main if k==6 else main.slice(0,0))
+                panels.append(dict(path=str(path),sha256=io.sha(path),rows=pq.ParquetFile(path).metadata.num_rows))
+            chron=fixture/'chron.parquet'
+            source=dict(parts=parts,panels=panels,author_ids=dict(__PRIVATE_VALUE_1__=99,__PRIVATE_VALUE_2__=100),deltas=[],
+                legacy_outcome_parent=dict(path=str(fixture/'parent.parquet')),comparison=str(fixture/'baseline.parquet'),
+                stream=str(fixture/'stream.parquet'),entry_universe=str(fixture/'audit.parquet'),
+                chron=[dict(path=str(chron),rows=pq.ParquetFile(chron).metadata.num_rows,signature=io.sig(chron),file_index=0,minimum=original_fixture.T-2*DAY)])
+            qnew=io.read(fixture/'new.parquet');sources=[]
+            for month in ex.MONTHS:
+                folder=root/'coverage_source'/month;table=qnew if month==MONTHS[6] else qnew.slice(0,0)
+                info=dict(month=month,selected_frame_rows=len(table),pool_rows=len(table),ordinary_rows=int(sum(s in core.NARROW for s in table['status'].to_pylist())),
+                    unresolved_rows=0,dispositions=dict(CACHED_POOL_METADATA=len(table)),ending_counts=[])
+                def build(tmp,table=table,info=info):
+                    io.table(tmp/'pool.parquet',table);io.js(tmp/'coverage.json',info);return info
+                io.stage(folder,runner.recovery.PRIOR_CONF,build)
+                sources.append(runner.recovery.validated_source(dict(source=str(folder),month=month)))
+            local=dict(input_receipts=[],ledgers=[]);phase=dict(summary=dict(additional_frame_rows=2))
+            baseline=arrays(io.read(fixture/'baseline.parquet'))
+            def reference(inputs,removed,root,conf):
+                def build(tmp):
+                    np.save(tmp/'original.npy',np.full((2,24,4,4,500),.25))
+                    np.save(tmp/'clean.npy',np.full((2,24,4,4,500),.2))
+                    return dict(synthetic_reference=True)
+                return io.stage(root,conf,build)
+            args=SimpleNamespace(project_root=root/'project',desktop=root/'desktop',workers=2,memory_gb=5,plan=None)
+            with contextlib.ExitStack() as patches:
+                for target,values in [
+                    ('run_optimized.verify_release',{}),('run_optimized.no_network',{}),
+                    ('run_optimized.authenticate',dict(return_value=local)),
+                    ('run_optimized.inputs_code.authenticate_phase',dict(return_value=phase)),
+                    ('run_optimized.recovery.authenticate_coverage',dict(return_value=sources)),
+                    ('run_optimized.recovery.assert_reviewed_coverage',{}),
+                    ('run_optimized.recovery.reuse_v101_quarantine',dict(return_value=True)),
+                    ('run_optimized.inputs_code.research_inputs',dict(return_value=source)),
+                    ('run_optimized.prior_inputs.identity_check',dict(return_value=(None,dict(synthetic_identity=True)))),
+                    ('phase_features.verify_original',dict(return_value=(baseline,{}))),
+                    ('run_optimized.authors.prepare_reference',dict(side_effect=reference))]:
+                    patches.enter_context(mock.patch(target,**values))
+                runner.execute(args)
+                result=next(args.project_root.glob(runner.ANALYSIS_REL+'/*'))
+                for name in ['ordinary_new_phase10','ordinary_old_author_clean','entry_new_phase10','entry_old_author_clean','ordinary_pooled','entry_pooled']:
+                    old=arrays(io.read(fixture/'assembled'/(name+'.parquet')));new=arrays(io.read(result/'assembled'/(name+'.parquet')))
+                    self.assertEqual(set(old)-set(new),set())
+                    for k in old:
+                        if old[k].dtype.kind in 'fi':np.testing.assert_allclose(old[k],new[k],rtol=1e-10,atol=2e-11,equal_nan=True,err_msg=name+'/'+k)
+                        else:np.testing.assert_array_equal(old[k],new[k],err_msg=name+'/'+k)
+                report=io.load(result/'report/summary.json')
+                self.assertEqual(report['status'],'PHASE_010_AVAILABLE_CASE_ANALYSIS_COMPLETE')
+                self.assertIn('performance',report);self.assertIn('early_eligibility',report)
+                # A second execution reuses completed expensive calculations.
+                with mock.patch.object(runner.fast.ScoreIndex,'score',side_effect=AssertionError('must reuse')),mock.patch('performance_chronology.chronology_job',side_effect=AssertionError('must reuse')):
+                    runner.execute(args)
+
+if __name__=='__main__':unittest.main()

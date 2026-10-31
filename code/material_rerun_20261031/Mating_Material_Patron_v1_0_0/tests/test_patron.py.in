@@ -1,0 +1,185 @@
+from pathlib import Path
+import sys,tempfile,unittest,contextlib,io,zipfile,json,hashlib,shutil,subprocess,ast
+from unittest.mock import patch
+ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT/'code'))
+from util import *
+import patron
+from patron import producer,planner,rosters
+from source import synthetic_fixture_v101 as fixture
+import numpy as np
+import pandas as pd
+import duckdb
+
+def fixture_inputs(root):
+    panel,users=fixture.build_panel(groups=80)
+    panel['utc_ms']=1700000000000+np.arange(len(panel))*1000
+    panel['game_id']=['synthetic_game_'+str(i) for i in range(len(panel))]
+    panel['chooser_user_id']=pd.factorize(panel.chooser_username_norm)[0]
+    panel['disconnected_user_id']=panel.chooser_user_id+10000
+    panel['disconnected_username_norm']='synthetic_opponent'
+    panel['chooser_has_mating_material']=True
+    panel['outcome_kind_draw']=panel.kind_draw.astype(int)
+    panel['ply_count']=20+np.arange(len(panel))%80
+    snapshot=fixture.build_snapshot(panel,users)
+    c=duckdb.connect();c.register('input_panel',panel);c.execute('CREATE VIEW stage07 AS SELECT * FROM input_panel')
+    planner.build_chooser_summary(c);planner.build_matching(c)
+    roster=root/'original.parquet';c.execute('COPY acquisition_users TO '+sqlstr(roster)+' (FORMAT PARQUET)')
+    acquired=c.execute('SELECT * FROM acquisition_users ORDER BY query_index').fetchdf();c.close()
+    # New material classification changes a frozen control into a granter.
+    flip=acquired.loc[acquired.acquisition_role=='control','username_norm'].iloc[0]
+    row=panel.index[(panel.chooser_username_norm==flip)&panel.fair_competitive][0]
+    panel.loc[row,['kind_draw','outcome_kind_draw']]=[True,1]
+    # Remove material-ineligible decisions, shifting one control's count cell.
+    shift=acquired.loc[acquired.acquisition_role=='control','username_norm'].iloc[1]
+    drop=panel.index[(panel.chooser_username_norm==shift)&panel.fair_competitive][:10]
+    panel=panel.drop(drop).reset_index(drop=True)
+    # Snapshot design fields must never leak into fresh behavior/cells.
+    snapshot['match_cell']='obsolete_cell';snapshot['total_opps']=999999
+    missing=acquired.loc[acquired.acquisition_role=='control','username_norm'].iloc[5]
+    snapshot=snapshot.loc[snapshot.username_norm!=missing]
+    snapshot_path=root/'snapshot.parquet';snapshot.to_parquet(snapshot_path,index=False)
+    return panel,roster,snapshot_path,flip,shift,missing
+
+def auth_for(panel,root):
+    path=root/'panel.parquet';panel.to_parquet(path,index=False)
+    counts=dict(opportunities=len(panel),grants=int(panel.outcome_kind_draw.sum()),choosers=panel.chooser_user_id.nunique(),competitive=int(panel.fair_competitive.sum()),competitive_grants=int(panel.loc[panel.fair_competitive,'kind_draw'].sum()),clearly_worse=int(panel.clearly_worse.sum()),clearly_worse_grants=int(panel.loc[panel.clearly_worse,'kind_draw'].sum()))
+    return dict(records=[dict(record(path),signature=signature(path),month='synthetic')],expected_census={'new_'+k:v for k,v in counts.items()}),counts
+
+class PatronTests(unittest.TestCase):
+    def test_frozen_sources_and_authority(self):
+        for item in read(ROOT/'authority/VENDORED_SOURCES.json'):verify(item,ROOT)
+        status,config=producer.get_wave3a_authority()
+        self.assertEqual(status['checkpoint_receipts']['matching']['summary']['target_users'],1105919)
+        self.assertEqual(config['snapshot_sha256'],producer.prior.SNAPSHOT_SHA)
+        fixture.verify_nullable_integer_fractional_median()
+
+    def test_missing_outcome_bounds_against_exhaustive_binary_completion(self):
+        import itertools
+        d=pd.DataFrame(dict(group_ever_kind_fair=[True]*7,match_cell=['a','a','a','b','b','b','b'],is_kind_role=[1,0,0,1,1,0,0],returned=[True,True,False,False,True,True,False],patron=[1,0,None,None,0,1,None],outcome_status=['observed']*7))
+        b=producer.missing_outcome_bounds(d);raw=[];fe=[]
+        x=np.column_stack([np.ones(len(d)),d.is_kind_role,(d.match_cell=='b').astype(int)])
+        for values in itertools.product([0,1],repeat=3):
+            y=d.patron.copy();y.loc[~d.returned]=values;y=y.to_numpy(float)*100
+            t=d.is_kind_role.astype(bool);raw.append(y[t].mean()-y[~t].mean());fe.append(np.linalg.lstsq(x,y,rcond=None)[0][1])
+        for prefix,values in [('raw',raw),('cell_fe',fe)]:
+            self.assertAlmostEqual(b[prefix+'_lower_pp'],min(values));self.assertAlmostEqual(b[prefix+'_upper_pp'],max(values))
+
+    def test_ols_covariances_and_contrast_against_independent_dense_dummy_fit(self):
+        rng=np.random.default_rng(411);n=400;g=np.repeat(np.arange(8),50);x=rng.normal(size=(n,3));y=x@np.array([1.,-.7,.3])+g+rng.normal(size=n)
+        d=pd.DataFrame(dict(y=y,cell=g,a=x[:,0],b=x[:,1],c=x[:,2],duplicate=x[:,2]))
+        dummy=np.eye(8)[g];design=np.column_stack([dummy,x]);inverse=np.linalg.inv(design.T@design);beta=inverse@(design.T@y);u=y-design@beta
+        for covariance in ['HC1','CR1']:
+            fit=producer.common.fit_absorbed_ols(d,model_name='dense',y_col='y',regressors=['a','b','c','duplicate'],fe_col='cell',covariance=covariance,cluster_col='cell' if covariance=='CR1' else None)
+            self.assertEqual(fit.kept_names,['a','b','c'])
+            scores=design*u[:,None]
+            if covariance=='HC1':meat=scores.T@scores;scale=n/(n-3)
+            else:
+                clustered=np.array([scores[g==i].sum(axis=0) for i in range(8)]);meat=clustered.T@clustered;scale=8/7*(n-1)/(n-3)
+            v=(inverse@meat@inverse*scale)[8:,8:]
+            np.testing.assert_allclose(fit.covariance,v,rtol=1e-10,atol=1e-12)
+            np.testing.assert_allclose(fit.coefficients.query("status=='estimated'").coefficient_pp,beta[8:],rtol=1e-10)
+            diff=producer.common.coefficient_difference(fit,'a','b','a-b')
+            self.assertAlmostEqual(diff['se_pp'],np.sqrt(v[0,0]+v[1,1]-2*v[0,1]))
+
+    def test_roster_selection_matches_original_adapter_and_broad_preserves_changed_controls(self):
+        with tempfile.TemporaryDirectory() as td,contextlib.redirect_stdout(io.StringIO()):
+            root=Path(td);panel,original,snapshot,flip,shift,missing=fixture_inputs(root)
+            with duckdb.connect() as c:
+                c.register('p',panel);c.execute('CREATE VIEW stage07 AS SELECT * FROM p');planner.build_chooser_summary(c)
+                out=root/'new';result=rosters(c,original,out)
+                a=pd.read_parquet(out/'retained_acquisition_private.parquet');b=pd.read_parquet(out/'broad_acquisition_private.parquet')
+                self.assertNotIn(flip,set(a.username_norm));self.assertIn(flip,set(b.username_norm));self.assertNotIn(shift,set(a.username_norm))
+                flow=pd.read_csv(out/'ACQUISITION_FLOW.csv').set_index('reason').accounts
+                self.assertGreater(flow['04_frozen_control_now_grants'],0)
+                self.assertGreater(flow['05_fresh_matching_cell_mismatch'],0)
+            # Compile only the exact original function; no unrelated adapter imports.
+            source=(ROOT/'evidence/v141_adapters.py').read_text();tree=ast.parse(source)
+            fn=next(node for node in tree.body if isinstance(node,ast.FunctionDef) and node.name=='prepare_patron_roster')
+            namespace=dict(scan=patron.scan,ident=patron.ident,require=require)
+            def copy(c,query,target):
+                c.execute('COPY ('+query+') TO '+sqlstr(target)+' (FORMAT PARQUET)');return len(pd.read_parquet(target))
+            namespace['copy']=copy
+            exec(compile(ast.Module(body=[fn],type_ignores=[]),'<original_roster>','exec'),namespace)
+            with duckdb.connect() as c:
+                c.register('p',panel);c.execute('CREATE VIEW stage07 AS SELECT * FROM p');planner.build_chooser_summary(c)
+                namespace['prepare_patron_roster'](c,original,root/'reference.parquet')
+            pd.testing.assert_frame_equal(a,pd.read_parquet(root/'reference.parquet'))
+
+    def test_shared_cache_equals_separate_original_build_and_resumes(self):
+        with tempfile.TemporaryDirectory() as td,contextlib.redirect_stdout(io.StringIO()):
+            root=Path(td);panel,original,snapshot,flip,shift,missing=fixture_inputs(root);auth,counts=auth_for(panel,root)
+            profiles=dict(roster=dict(path=str(original),signature=signature(original)),snapshot=dict(path=str(snapshot),signature=signature(snapshot)))
+            state=root/'state';state.mkdir()
+            roster,receipt=producer.prior.checkpoint(state,'rosters','key',lambda d:patron.build_rosters(d,auth,profiles,2,1))
+            design,_=producer.prior.checkpoint(state,'design','key',lambda d:patron.build_design(d,auth,profiles,roster,receipt['summary'],2,1))
+            reference=root/'reference';reference.mkdir()
+            producer.build_design(reference,patron.argparse.Namespace(threads=2,memory_limit='1GB'),{'month_records':auth['records']},roster/'retained_acquisition_private.parquet',snapshot,receipt['summary']['retained_accounts'])
+            a=pd.read_parquet(design/'retained_design_private.parquet');b=pd.read_parquet(reference/'chooser_design_features_private.parquet')
+            pd.testing.assert_frame_equal(a[b.columns],b,check_exact=False,rtol=1e-12,atol=1e-12)
+            with duckdb.connect() as c:frame=producer.load_frames(c,design/'retained_design_private.parquet',snapshot)
+            self.assertNotIn('obsolete_cell',set(frame.match_cell));self.assertFalse((frame.total_opps==999999).any())
+            missing_row=frame.loc[frame.username_norm==missing].iloc[0];self.assertFalse(missing_row.returned);self.assertTrue(pd.isna(missing_row.patron))
+            with patch.object(patron,'build_rosters',side_effect=AssertionError('Aggregation repeated')):
+                producer.prior.checkpoint(state,'rosters','key',lambda d:patron.build_rosters(d,auth,profiles,2,1))
+            with (roster/'retained_acquisition_private.parquet').open('ab') as f:f.write(b'corrupt')
+            with self.assertRaisesRegex(RuntimeError,'checkpoint byte size'):
+                producer.prior.read_checkpoint(roster,'key')
+
+    def test_author_exclusion_in_both_roles_and_alias_validation(self):
+        with tempfile.TemporaryDirectory() as td,contextlib.redirect_stdout(io.StringIO()):
+            root=Path(td);panel,original,snapshot,*_=fixture_inputs(root);old=pd.read_parquet(original)
+            for field in ['username_norm','matched_kind_chooser_id']:
+                amended=old.copy();ix=old.index[old.acquisition_role==('kind' if field=='username_norm' else 'control')][0]
+                amended.loc[ix,field]='__PRIVATE_VALUE_1__'
+                if field=='username_norm':amended.loc[ix,'matched_kind_chooser_id']='__PRIVATE_VALUE_1__'
+                temp=root/(field+'.parquet');amended.to_parquet(temp,index=False)
+                with duckdb.connect() as c:
+                    c.register('p',panel);c.execute('CREATE VIEW stage07 AS SELECT * FROM p');planner.build_chooser_summary(c)
+                    rosters(c,temp,root/field)
+                    result=pd.read_parquet(root/field/'broad_acquisition_private.parquet')
+                    self.assertFalse(result.username_norm.isin(patron.AUTHORS).any());self.assertFalse(result.matched_kind_chooser_id.isin(patron.AUTHORS).any())
+            panel.loc[0,'disconnected_username_norm']='__PRIVATE_VALUE_2__';auth,_=auth_for(panel,root)
+            profiles=dict(roster=dict(path=str(original)))
+            with self.assertRaisesRegex(RuntimeError,'author account'):patron.build_rosters(root/'bad',auth,profiles,2,1)
+            panel.loc[0,'disconnected_username_norm']='someone';panel.loc[0,'kind_draw']=not panel.loc[0,'kind_draw'];auth,_=auth_for(panel,root)
+            with self.assertRaisesRegex(RuntimeError,'label aliases'):patron.build_rosters(root/'bad',auth,profiles,2,1)
+
+    def test_full_cli_40_models_complete_resume_report_privacy_and_corruption(self):
+        with tempfile.TemporaryDirectory() as td,contextlib.redirect_stdout(io.StringIO()):
+            p=Path(td);pkg=p/'package';shutil.copytree(ROOT,pkg,ignore=shutil.ignore_patterns('.git','__pycache__','TEST_RESULTS.txt','SHA256SUMS.txt'))
+            panel,original,snapshot,*_=fixture_inputs(p);_,counts=auth_for(panel,p)
+            project=p/'project';rid='f'*64;parent=project/'derived/replication/mating_material_first_run_v100_PRIVATE'/rid[:16];parent.mkdir(parents=True)
+            panel['month']=np.resize(np.array(MONTHS),len(panel));records=[]
+            for month in MONTHS:
+                frame=panel.loc[panel.month==month];f=parent/'PRIVATE/panels/main'/('month='+month)/'analysis_panel.parquet';f.parent.mkdir(parents=True)
+                frame.to_parquet(f,index=False);records.append(dict(record(f),month=month,rows=len(frame),grants=int(frame.outcome_kind_draw.sum())))
+            expected=read(pkg/'authority/REVIEW.json');expected['run_id']=rid
+            totals={'new_'+k:v for k,v in counts.items()};expected['censuses']={name:totals.copy() for name in ('main','all_source')}
+            expected['monthly']={name:{r['month']:[r['rows'],r['grants']] for r in records} for name in ('main','all_source')}
+            returned=parent/'report/RESULTS.json';save(returned,dict(input_panels_built=True,checks=[dict(passed=True)]));expected['results_sha256']=sha(returned);expected['return_zip_sha256']='0'*64
+            save(pkg/'authority/REVIEW.json',expected);manifest=parent/'MATERIAL_RESTRICTED_INPUTS_READY_PRIVATE.json'
+            save(manifest,dict(contract='MATING_MATERIAL_FIRST_RUN_V1',run_id=rid,rule=expected['rule'],author_exclusion=['__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__'],excluded_from_decisions_not_chronology=True,full_width_columns_preserved=True,price_layer='original',known_outcome_policy=expected['known_outcome_policy'],censuses=expected['censuses'],datasets={name:records for name in ('main','all_source')}))
+            save(parent/'_SUCCESS.json',dict(status='INPUTS_READY_NOT_FULL_PAPER_RERUN',run_id=rid,report_sha256=expected['return_zip_sha256'],files=[record(manifest)]))
+            files=[f for f in pkg.rglob('*') if f.is_file()];(pkg/'SHA256SUMS.txt').write_text(''.join(sha(f)+'  '+str(f.relative_to(pkg))+'\n' for f in sorted(files)))
+            profiles={key:dict(record(path),signature=signature(path)) for key,path in [('roster',original),('snapshot',snapshot)]}
+            save(p/'profiles.json',profiles)
+            # Test-only harness supplies a synthetic snapshot; no production CLI bypass.
+            driver=p/'driver.py';driver.write_text("import sys,json\nfrom pathlib import Path\nsys.path.insert(0,str(Path(sys.argv.pop(1))/'code'))\nimport run_patron as r\nfrom patron import producer\nprofiles=json.loads(Path(sys.argv.pop(1)).read_text())\nr.authenticate_profiles=lambda project:profiles\noriginal=producer.models.outcome_qa\nproducer.models.outcome_qa=lambda db,snapshot,fixture:original(db,snapshot,True)\nraise SystemExit(r.main())\n")
+            command=[sys.executable,str(driver),str(pkg),str(p/'profiles.json'),'--project-root',str(project),'--results-dir',str(p/'returns'),'--workers','2','--memory-gb','4']
+            result=subprocess.run(command,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+            self.assertEqual(result.returncode,0,result.stdout[-7000:])
+            pointer=read(p/'returns/MATERIAL_PATRON_LATEST_PRIVATE.json');run=Path(pointer['root']);done=read(run/'_SUCCESS.json');self.assertEqual(done['summary']['models'],40)
+            self.assertEqual(len(list((run/'report/model_fits').rglob('fit.json'))),40)
+            table_=pd.read_csv(run/'report/tab_patron.csv');self.assertEqual(set(table_.panel),{'A','B','C'})
+            with zipfile.ZipFile(pointer['report']) as z:
+                self.assertIsNone(z.testzip());self.assertFalse(any('/PRIVATE/' in n or n.endswith('.parquet') for n in z.namelist()))
+                for r in json.loads(z.read('REPORT_MANIFEST.json')):
+                    b=z.read(r['path']);self.assertEqual(len(b),r['bytes']);self.assertEqual(hashlib.sha256(b).hexdigest(),r['sha256'])
+            checkpoint=run/'PRIVATE/rosters/CHECKPOINT.json';mtime=checkpoint.stat().st_mtime_ns
+            result=subprocess.run(command,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+            self.assertEqual(result.returncode,0,result.stdout[-4000:]);self.assertIn('no models repeated',result.stdout);self.assertEqual(checkpoint.stat().st_mtime_ns,mtime)
+            with (run/'report/tab_patron.csv').open('a') as f:f.write('corrupt')
+            result=subprocess.run(command,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+            self.assertEqual(result.returncode,1);self.assertIn('checksum',result.stdout)
+            with zipfile.ZipFile(next((p/'returns').glob('*_FAILED.zip'))) as z:self.assertFalse(json.loads(z.read('RETURN_STATUS.json'))['successful_return'])

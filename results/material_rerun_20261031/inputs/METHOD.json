@@ -1,0 +1,40 @@
+{
+  "audit_scope": "48 existing monthly panels: author-excluded pool main and all-source SF100k donor universe",
+  "code_sha256": "b504008d535a9270c764e82e7d0a3ac5368843d9254b368bb29e1508b5039625",
+  "environment": {
+    "duckdb": "1.3.2",
+    "numpy": "2.3.5",
+    "pyarrow": "20.0.0",
+    "python": "3.13.9"
+  },
+  "input_identity": "2e7e5b289b36f4f3c874e599d3eb1459fdc59f4142899cf3efbe370e7e95eade",
+  "optimization": {
+    "batch_rows": 65536,
+    "checkpoint": "one immutable receipt per month, keyed by code and input hashes; full checksum verification on reuse",
+    "default_fen_checks": "all material-boundary rows plus every 4096th remaining row; side-to-move checked for all",
+    "full_fen_check": false,
+    "libraries_threads": 1,
+    "memory_budget_gib": 11.0,
+    "regressions": "not executed in this first-stage input migration",
+    "workers": 10
+  },
+  "pipeline_commit": "69aab3eb73933d344f617a1e7ffaaa5b719c0021",
+  "price": "Original chooser_win_premium_v2 unchanged; no candidate cost layer",
+  "rule": {
+    "drop": [
+      "chooser king only",
+      "chooser king + exactly one knight; opponent only king/queens",
+      "chooser king + bishops only; all board bishops on one square color; opponent no pawn/knight"
+    ],
+    "name": "SCALACHESS_CHOOSER_MATING_MATERIAL_2023_2025_V1",
+    "recorded_position": "final FEN, disconnected side to move",
+    "retained_claim": "recorded chooser win",
+    "retained_grant": "recorded draw",
+    "source_commits": [
+      "3050826",
+      "e8133fa"
+    ]
+  },
+  "source_commit": "561590939aee88832480b42c5fa53428c944ca8b",
+  "version": "1.0.2"
+}

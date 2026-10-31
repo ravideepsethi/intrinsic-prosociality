@@ -1,0 +1,91 @@
+MATING MATERIAL: CONSOLIDATED NON-IV BATCH 1.0.0
+
+Save this ZIP in ~/Desktop/Lichess_Desktop and extract it. Run:
+  bash "$HOME/Desktop/Lichess_Desktop/Mating_Material_NonIV_Batch_v1_0_0/RUN_ALL.command"
+
+Expected runtime on the 12-core MacBook Pro: roughly 3–7 hours initially;
+allow an overnight run if the drive is slow or fixed effects converge slowly.
+This is an estimate, not a measured full-scale benchmark of this new batch.
+The original countdown fit alone took about 57 minutes. Input verification,
+bootstrap/rematch fits and report hashing add time. Each family prints progress
+and its estimate; completed families are authenticated and skipped on restart.
+
+The default target is 10 workers, an 11 GB memory budget, one BLAS thread, and
+one family at a time. The countdown scheduler uses at most four fit workers;
+the gap closure uses at most three. Native numerical allocations can exceed a
+database's memory limit; close other memory-heavy applications for this run.
+Keep the Mac on power with XT_Pro attached. caffeinate prevents idle sleep.
+Keep at least 40 GiB free on XT_Pro for new caches and temporary spill.
+
+The batch includes:
+  1. All 53 responsibility specifications, including the v1.0.1 reference guard.
+  2. The original random split persistence benchmark.
+  3. Tenure, age-restricted Patron and condition-adjusted persistence.
+  4. The arena versus pool board-state interaction.
+  5. Frozen 1-in-50 first/repeat comparisons and the full-panel raw census.
+  6. The separate 1-in-5 reputation, re-encounter and repayment analysis.
+  7. Rating-point totals, percentile scales and own-history stakes.
+  8. Patron rematch, postcertification and opportunity-level sensitivities.
+  9. Rating-gap / K / RD decomposition.
+ 10. Finer nonparametric rating-gap profiles with exact K reference cutoffs.
+ 11. Countdown threshold, calendar and monthly diagnostics.
+
+No separate responsibility run is necessary. If the exact v1.0.1 responsibility
+run already finished successfully, its own authenticated checkpoint is reused.
+The completed main, core persistence, core Patron and main matched-receipt
+results are not rerun. Patron auxiliaries verify and use the reviewed corrected
+Patron caches. This package does not update the manuscript or assert that the
+whole paper is finished.
+
+What happens if a stage fails?
+The batch records the failure and continues independent families. Only the
+nonparametric gap stage depends on the K/RD stage. At the end, even a failed
+run produces ONE return ZIP. Return that ZIP and its .sha256 together, after
+the remaining families finish. Do not send each intermediate console message.
+Pressing Ctrl-C stops the run; the same command resumes verified completed
+families. Some interrupted families restart their current preparation; native
+countdown column/model and responsibility checkpoints preserve expensive work.
+A changed completed output is reported as a failure, never silently accepted.
+
+Outputs:
+  ~/Desktop/Lichess_Desktop/MATERIAL_NONIV_BATCH_<run>_RETURN.zip
+  ~/Desktop/Lichess_Desktop/MATERIAL_NONIV_BATCH_<run>_RETURN.zip.sha256
+
+The report contains BATCH_STATUS.csv, all family aggregate estimates and
+diagnostics, hashes, input reconciliation and REMAINING_AFTER_THIS_BATCH.csv.
+Private observations, profiles and complete model logs stay on XT_Pro under:
+  derived/replication/mating_material_noniv_batch_v100_PRIVATE/<run>/
+
+The NEXT consolidated batch must rebuild the IV scores, references, histories,
+exposure frames, primary and spaced estimates, both placebos, balance/entry,
+subgroups, compliers, bins and receipt/Patron companions. Remaining matched
+receipt companions, recipient-side Patron and the adjacent rating-payoff check
+are tracked explicitly for that batch/final audit. All resulting numbers need
+review before the final manuscript update.
+
+Input safety and optimization:
+This package accepts only the reviewed material build aa7e95f275c18f43...
+Both main and all-source inputs are SHA256 checked. The absent old
+AUTHOR_EXCLUDED_MAIN_READY_PRIVATE.json is NOT required. No source files are
+overwritten. Cached game chronology, engine features, profile acquisition and
+rating histories remain factual. Every eligible decision label is replaced
+from the new panels before refitting. No new profiles, game API requests,
+Stockfish searches or Glicko replay are launched. Dependency installation may
+use the network once; production stages use local data.
+
+Validation scope:
+Synthetic integration tests check material removal, relabelling, factual
+agreement, coverage, failure isolation, corrupt-checkpoint rejection and
+resume. The archived responsibility and countdown numerical tests are also
+run. Full production data and Mac runtime can only be validated by your run.
+
+Options (append to the command):
+  --workers 8 --memory-gb 9
+  --project-root __PRIVATE_VALUE_1__
+  --self-test
+  --preflight-only  (authenticate inputs; do not run models)
+
+Source provenance: repository commit 561590939aee88832480b42c5fa53428c944ca8b,
+authenticated archived producers, and the corrected material-run packages.
+Estimation functions retain the original specifications. Adapters change only
+input binding, material eligibility/labels, reporting and orchestration.

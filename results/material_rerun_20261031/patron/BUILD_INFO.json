@@ -1,0 +1,13 @@
+{
+  "package": "Mating_Material_Patron_v1_0_0",
+  "version": "1.0.0",
+  "git_commit": "9fadd79ee5143ff88ab892b4dd5590aefb269f2d",
+  "source_vendor": "Lichess_Author_Exclusion_Repair_v1_4_1/vendor/patron (unchanged)",
+  "production_models": 40,
+  "tests": 20,
+  "testing": "Full production-entry synthetic lifecycle, resume, corruption, covariance and cache equivalence",
+  "parent_material_run": "aa7e95f275c18f43d9ad95af523b9b0d769704ddebf4aea4d3655a2e1b07ef5d",
+  "persistence_review_run": "2843954ece49b1447ceb314e1dae06160f3471ce173700efe0ea6ee719b467db",
+  "full_data_models_run_here": false,
+  "expected_runtime": "10\u201330 minutes; up to 45 if drive/Mac busy"
+}

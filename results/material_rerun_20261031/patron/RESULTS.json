@@ -1,0 +1,33 @@
+{
+  "api_requests": 0,
+  "engine_evaluations": 0,
+  "parent_run_id": "aa7e95f275c18f43d9ad95af523b9b0d769704ddebf4aea4d3655a2e1b07ef5d",
+  "rating_replay_records": 0,
+  "run_id": "63bdeb25597c5ae3ffa991e7c480ef989235998bc254e2542002cdf8b4e383bc",
+  "seconds_this_launch_including_authentication": 380.73264545798884,
+  "stage_seconds": {
+    "design_seconds": 40.76021366700297,
+    "histories_and_rosters_seconds": 37.345251999999164,
+    "models_seconds": 263.4474669580086
+  },
+  "status": "PATRON_COMPLETE_MORE_FAMILIES_PENDING",
+  "summary": {
+    "broad_acquired": {
+      "accounts": 598787,
+      "match_cells": 24,
+      "models": 2,
+      "patrons": 3022
+    },
+    "corrected_dates": {
+      "models": 4
+    },
+    "main": {
+      "models": 34,
+      "primary_accounts": 847680,
+      "primary_control_accounts": 635239,
+      "primary_kind_accounts": 212441
+    },
+    "models": 40
+  },
+  "whole_paper_rerun_complete": false
+}

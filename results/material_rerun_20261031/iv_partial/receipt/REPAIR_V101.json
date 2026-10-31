@@ -1,0 +1,31 @@
+{
+  "baseline_configuration": "12093d55b7ee9f737696982b8ebaef7b0706c27adc4fb12482a99aabf985d482",
+  "baseline_package_manifest_sha256": "fcc1e08e1e3b1f50f21aa57f32137d2890d9df95f6e6e7214f55371ec944784c",
+  "completed_public_files_verified": 50,
+  "completed_stages_skipped": [
+    "authenticate",
+    "decisions",
+    "exposures",
+    "scores",
+    "features",
+    "core_models",
+    "supplements",
+    "subgroups",
+    "bins",
+    "receipt_kind",
+    "patron"
+  ],
+  "execution_repair": "1.0.1",
+  "expected_remaining_hours": [
+    2,
+    5
+  ],
+  "fixes": [
+    "two_way_FE_sparse_Schur_solver_same_accuracy",
+    "chronology_merge90_complete_directory"
+  ],
+  "no_completed_statistical_results_recomputed": true,
+  "production_network": false,
+  "repair_package_manifest_sha256": "78516e83459458d86e66e89330af3afc22e56410c1b2250025dd400661a92e5a",
+  "runtime_is_provisional": true
+}

@@ -1,0 +1,26 @@
+{
+  "package": "Mating_Material_Models_v1_0_0",
+  "version": "1.0.0",
+  "created_utc": "2026-10-29",
+  "pipeline_commit": "ccb902ad36a272a48b5279b86f002af8a735be28",
+  "upstream_repository": "https://github.com/ravideepsethi/intrinsic-prosociality",
+  "upstream_commit": "561590939aee88832480b42c5fa53428c944ca8b",
+  "parent_input_run": "aa7e95f275c18f43d9ad95af523b9b0d769704ddebf4aea4d3655a2e1b07ef5d",
+  "parent_return_sha256": "1a5fd476597fb9fdce13bbcbaa051ed449a6b87529835505e630644cb6286118",
+  "production_models_executed": false,
+  "scope": "three R11 specifications plus 23 continuous/material specifications; other paper families remain pending",
+  "tests": {
+    "contract_tests": 13,
+    "numerical": "independent dense fixed-effect OLS, chooser-cluster covariance, joint-composition influence, all 23 continuous designs",
+    "integration": "all 26 models, report export, checksums, private-data exclusion, resume and corruption gates",
+    "wall_seconds": 31.935
+  },
+  "runtime_minutes_provisional": [
+    45,
+    120
+  ],
+  "memory_gb_default": 11,
+  "workers_max": 10,
+  "shards_default": 256,
+  "old_vendor_code_byte_identical": true
+}

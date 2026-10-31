@@ -1,0 +1,68 @@
+{
+  "eligible_n": 52275,
+  "n": 52274,
+  "absorbed_groups": 23,
+  "dropped_singletons": 1,
+  "grants": 98,
+  "targets": [
+    "ever_fair",
+    "ever_losing"
+  ],
+  "controls": {
+    "cats": [],
+    "nums": [
+      "rating100",
+      "log_nf",
+      "log_nl",
+      "log_age"
+    ]
+  },
+  "categorical_levels": {},
+  "status": "ESTIMATED",
+  "estimates": {
+    "ever_fair": {
+      "status": "ESTIMATED",
+      "coefficient_pp": 0.2028667701091331,
+      "se_pp": 0.0445220863008426,
+      "ci_low_pp": 0.11053361440291733,
+      "ci_high_pp": 0.2951999258153488,
+      "p_value": 0.00015493656245648687
+    },
+    "ever_losing": {
+      "status": "ESTIMATED",
+      "coefficient_pp": -0.10615646421778123,
+      "se_pp": 0.03144161016660632,
+      "ci_low_pp": -0.17136237275384314,
+      "ci_high_pp": -0.040950555681719326,
+      "p_value": 0.002720801270183657
+    }
+  },
+  "target_covariance_pp2": [
+    [
+      0.0019822161685796764,
+      0.0004930034422202462
+    ],
+    [
+      0.0004930034422202462,
+      0.0009885748498688416
+    ]
+  ],
+  "clusters": 23,
+  "residual_df": 52245,
+  "within_rank": 6,
+  "max_abs_group_residual_sum": 5.422138432686907e-14,
+  "support": {
+    "treatment_switchers": 23,
+    "switchers_with_outcome_variation": 14,
+    "never_granter_identifying_weight_share": 0.014608089817216965
+  },
+  "se": "CR1, full rank including absorbed effects; cluster=match_cell",
+  "minimum_each_state": 4,
+  "opportunity_min_age": 0,
+  "cohort": "cohort_1",
+  "population": "Returned active August profile acquisition frame; outcome-dependent sampling; not an unconditional population Patron rate",
+  "outcome": "August current Patron status; not observed payment or historical Patron adoption",
+  "specification": "New tenure sensitivity with original match-cell absorption, exposure counts, mean rating and baseline age; not exact rerun of prior all-control specification",
+  "fair_minus_losing_pp": 0.3090232343269143,
+  "contrast_se_pp": 0.04455091619717855
+}

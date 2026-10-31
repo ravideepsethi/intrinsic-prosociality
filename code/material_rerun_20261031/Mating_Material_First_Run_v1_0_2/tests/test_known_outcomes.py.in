@@ -1,0 +1,108 @@
+from pathlib import Path
+import tempfile
+import unittest
+import pyarrow.parquet as pq
+from fixtures import make_rows, row, FIXTURES, write_input, config
+from mmrerun.worker import process_audit, build_panel
+from mmrerun.outcomes import known_outcome_checks
+from mmrerun.run import execute
+from mmrerun.io import load
+
+
+class KnownOutcomeTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.root = Path(self.temp.name)
+        self.cfg = config(self.root)
+        self.package = Path(__file__).resolve().parents[1]
+        data = make_rows()
+        data.append(row(*FIXTURES[-1], index=70, result="0-1"))
+        self.main = write_input(self.root, "main", data)
+        self.core = write_input(self.root, "all_source", data)
+        self.policy = dict(
+            main=dict(field="chooser_loss_rows", expected=1, monthly={"2023-11":1}),
+            all_source=dict(field="source_chooser_loss_rows", expected=1))
+
+    def test_known_loss_is_retained_without_relabeling_it_a_win(self):
+        self.cfg["known_outcomes"] = self.policy
+        result = execute([self.main, self.core], self.cfg, self.package, enforce_baseline=False)
+        self.assertEqual(result["status"], "INPUTS_READY_NOT_FULL_PAPER_RERUN")
+        manifest = load(Path(self.cfg["run"]) / "MATERIAL_RESTRICTED_INPUTS_READY_PRIVATE.json")
+        self.assertEqual(manifest["known_outcome_policy"], self.policy)
+        for family in ("main", "all_source"):
+            path = manifest["datasets"][family][0]["path"]
+            data = pq.ParquetFile(path).read().to_pylist()
+            loss = next(r for r in data if r["game_id"] == "game000070")
+            self.assertFalse(loss["outcome_kind_draw"])
+            self.assertFalse(loss["kind_draw"])
+            self.assertFalse(loss["timeout_chooser_win"])
+            self.assertTrue(loss["timeout_chooser_loss"])
+            self.assertEqual(loss["pgn_result"], "0-1")
+            self.assertEqual(loss["api_winner"], "black")
+        report = Path(self.cfg["run"]) / "report"
+        self.assertTrue((report / "known_chooser_losses_by_month_state.csv").exists())
+        self.assertIn("legacy_chooser_losses", (report / "recorded_outcomes.csv").read_text())
+
+    def test_unexpected_loss_still_stops_before_all_source_or_panels(self):
+        with self.assertRaisesRegex(RuntimeError, "chooser-loss counts differ"):
+            execute([self.main, self.core], self.cfg, self.package, enforce_baseline=False)
+        run = Path(self.cfg["run"])
+        self.assertFalse((run / "PRIVATE/audit/all_source").exists())
+        self.assertFalse((run / "PRIVATE/panels").exists())
+
+    def test_correct_total_in_wrong_month_fails(self):
+        audit = process_audit((self.main, self.cfg))
+        self.cfg["known_outcomes"] = dict(main=dict(field="chooser_loss_rows", expected=1,
+                                                   monthly={"2023-12":1}))
+        checks = known_outcome_checks(self.cfg, [audit])
+        self.assertTrue(checks[0]["passed"])
+        self.assertTrue(any(not c["passed"] for c in checks))
+
+    def test_unexpected_all_source_loss_blocks_every_panel(self):
+        data = make_rows()
+        data.append(row(*FIXTURES[-1], index=70, result="0-1"))
+        data.append(row(*FIXTURES[-1], index=71, result="0-1"))
+        core = write_input(self.root, "all_source", data)
+        self.cfg["known_outcomes"] = self.policy
+        with self.assertRaisesRegex(RuntimeError, "chooser-loss counts differ"):
+            execute([self.main, core], self.cfg, self.package, enforce_baseline=False)
+        self.assertFalse((Path(self.cfg["run"]) / "PRIVATE/panels").exists())
+
+    def test_author_loss_not_counted_as_a_behavioral_opportunity(self):
+        data = make_rows()
+        data.append(row(*FIXTURES[-1], index=71, chooser="__PRIVATE_VALUE_1__", result="0-1"))
+        item = write_input(self.root, "all_source", data)
+        audit = process_audit((item, self.cfg))
+        self.assertEqual(audit["counts"]["source_chooser_loss_rows"], 1)
+        self.assertEqual(audit["counts"]["chooser_loss_rows"], 0)
+        self.assertEqual(audit["counts"]["retained_chooser_loss_rows"], 0)
+        policy = dict(known_outcomes=dict(all_source=dict(field="source_chooser_loss_rows", expected=1)))
+        self.assertTrue(all(c["passed"] for c in known_outcome_checks(policy, [audit])))
+        built = build_panel((item, self.cfg, audit))
+        self.assertNotIn("game000071", pq.ParquetFile(built["file"]["path"]).read(columns=["game_id"])["game_id"].to_pylist())
+
+    def test_known_losses_do_not_relax_zero_win_gate(self):
+        data = make_rows()
+        data[0] = row(*FIXTURES[0], index=0, result="1-0")
+        data.append(row(*FIXTURES[-1], index=70, result="0-1"))
+        main = write_input(self.root, "main", data)
+        self.cfg["known_outcomes"] = self.policy
+        with self.assertRaisesRegex(RuntimeError, "Recorded result contradicts"):
+            execute([main, self.core], self.cfg, self.package, enforce_baseline=False)
+        self.assertFalse((Path(self.cfg["run"]) / "PRIVATE/panels").exists())
+
+    def test_bare_king_loss_is_excluded_by_material_without_becoming_a_grant(self):
+        data = make_rows()
+        data[0] = row(*FIXTURES[0], index=0, result="0-1")
+        main = write_input(self.root, "main", data)
+        audit = process_audit((main, self.cfg))
+        self.assertEqual(audit["counts"]["zero_win_conflicts"], 0)
+        self.assertEqual(audit["counts"]["chooser_loss_rows"], 1)
+        self.assertEqual(audit["counts"]["retained_chooser_loss_rows"], 0)
+        out = build_panel((main, self.cfg, audit))
+        self.assertNotIn("game000000", pq.ParquetFile(out["file"]["path"]).read(columns=["game_id"])["game_id"].to_pylist())
+
+
+if __name__ == "__main__":
+    unittest.main()

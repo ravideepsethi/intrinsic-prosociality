@@ -1,0 +1,13 @@
+family,outcome,old_pass,new_pass,rows
+all_source,draw,False,False,25458
+all_source,draw,False,True,411
+all_source,draw,True,True,669502
+all_source,chooser_win,False,True,6053
+all_source,chooser_win,True,True,46885476
+all_source,chooser_loss,True,True,75
+main,draw,False,False,20570
+main,draw,False,True,332
+main,draw,True,True,570090
+main,chooser_win,False,True,4921
+main,chooser_win,True,True,40938311
+main,chooser_loss,True,True,65

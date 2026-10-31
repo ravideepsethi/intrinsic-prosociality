@@ -1,0 +1,23 @@
+[
+  {
+    "kish_effective_rows": 3783430.9528175266,
+    "maximum_weight": 19.319102353585112,
+    "model": "exposure_IPW",
+    "sum_weights": 9301091.881720193,
+    "weighted_patron_rate_pp": 0.16469960658296737
+  },
+  {
+    "kish_effective_rows": 621226.0238325434,
+    "maximum_weight": 19.319102353585112,
+    "model": "recipient_IPW",
+    "sum_weights": 1607516.6623603217,
+    "weighted_patron_rate_pp": 0.23441956509720066
+  },
+  {
+    "kish_effective_rows": 6125693.0,
+    "maximum_weight": "1.0",
+    "model": "observed_unweighted",
+    "sum_weights": "6125693.0",
+    "weighted_patron_rate_pp": 0.18613404230345856
+  }
+]

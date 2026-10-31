@@ -1,0 +1,20 @@
+{
+  "repo_commit": "561590939aee88832480b42c5fa53428c944ca8b",
+  "r10_original_archive_sha256": "a7e1e2904d8efe75897cfeadfc920e096a3fd8231c683766ed49f21dceed7104",
+  "r10_library_file_id": "libfile_84189f4e10c48191b4ce166286967c37",
+  "r10_all_ten_producer_hashes_match_recorded_run": true,
+  "core_results_run_id": "4823c3c8c0eb800d3090fbd5c4ae7ababb6a9d7046ff62f0cb5636b6f821691b",
+  "receipt_results_run_id": "9d87ae02e14076814b25dd54db159661b49a526deac078cef333d4e607e389cb",
+  "clock_extension_source": "Manuscript app:main_spec and tab:app_clocks: R11 column1 plus the two log-clock terms interacted with C. Missing indicators remain pooled; reviewed main panels contain no missing/invalid clocks.",
+  "vendor_sha256": {
+    "vendor/r10/common.py": "e58f3a76078e2d153ee9f8b160ab3956b306f16df9ef24b9d1a8eb6963e3faff",
+    "vendor/r10/design.py": "f93f9483467677119b75c8070441c370cc6ea9be3852bfc3884ed4bb2e0d794b",
+    "vendor/r10/report.py": "83390f4aa3e8e60f46b6c568e1d6047870e98746836332a47e85a0a29a928b91",
+    "vendor/r10/estimate.py": "a2ad0f76d9b1152f4077cb171faa480ec885a6649190b4d628e30dd70dffce63",
+    "vendor/r11/common.py": "e58f3a76078e2d153ee9f8b160ab3956b306f16df9ef24b9d1a8eb6963e3faff",
+    "vendor/r11/design.py": "4175ef01dc8a93d68bf53900f7b4673631641f5c1350f35ec28261a6f3bfff24",
+    "vendor/r11/estimate.py": "e7d41aed3865f557ea51f18e8a3f308b3004d1580dc2f886a3356f26dbd89cc5",
+    "vendor/r11/prepare.py": "18cae4388164fd602b07a3e18647ff659d94bab7b7d367fcfd0da928d6cf886e",
+    "vendor/equal/statistics.py": "2b904d6da0c58b9b2bc812d52e1f57af0d8fd241835f5cd2aac6333eac59fa18"
+  }
+}

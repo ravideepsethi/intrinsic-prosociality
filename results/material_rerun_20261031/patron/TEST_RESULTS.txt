@@ -1,0 +1,26 @@
+test_author_policy_rejected (contract_tests.Contracts.test_author_policy_rejected) ... ok
+test_changed_monthly_count_rejected (contract_tests.Contracts.test_changed_monthly_count_rejected) ... ok
+test_duplicate_path_rejected (contract_tests.Contracts.test_duplicate_path_rejected) ... ok
+test_incomplete_rejected (contract_tests.Contracts.test_incomplete_rejected) ... ok
+test_legacy_losses_not_reclassified (contract_tests.Contracts.test_legacy_losses_not_reclassified) ... ok
+test_manifest_hash_checked (contract_tests.Contracts.test_manifest_hash_checked) ... ok
+test_month_missing_rejected (contract_tests.Contracts.test_month_missing_rejected) ... ok
+test_no_chronology_rewrite (contract_tests.Contracts.test_no_chronology_rewrite) ... ok
+test_old_material_rule_rejected (contract_tests.Contracts.test_old_material_rule_rejected) ... ok
+test_price_change_rejected (contract_tests.Contracts.test_price_change_rejected) ... ok
+test_reviewed_contract (contract_tests.Contracts.test_reviewed_contract) ... ok
+test_source_changed_after_hash (contract_tests.Contracts.test_source_changed_after_hash) ... ok
+test_wrong_run_rejected (contract_tests.Contracts.test_wrong_run_rejected) ... ok
+test_author_exclusion_in_both_roles_and_alias_validation (test_patron.PatronTests.test_author_exclusion_in_both_roles_and_alias_validation) ... ok
+test_frozen_sources_and_authority (test_patron.PatronTests.test_frozen_sources_and_authority) ... ok
+test_full_cli_40_models_complete_resume_report_privacy_and_corruption (test_patron.PatronTests.test_full_cli_40_models_complete_resume_report_privacy_and_corruption) ... ok
+test_missing_outcome_bounds_against_exhaustive_binary_completion (test_patron.PatronTests.test_missing_outcome_bounds_against_exhaustive_binary_completion) ... ok
+test_ols_covariances_and_contrast_against_independent_dense_dummy_fit (test_patron.PatronTests.test_ols_covariances_and_contrast_against_independent_dense_dummy_fit) ... ok
+test_roster_selection_matches_original_adapter_and_broad_preserves_changed_controls (test_patron.PatronTests.test_roster_selection_matches_original_adapter_and_broad_preserves_changed_controls) ... ok
+test_shared_cache_equals_separate_original_build_and_resumes (test_patron.PatronTests.test_shared_cache_equals_separate_original_build_and_resumes) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 5.796s
+
+OK
+PATRON_STAGE10_NULLABLE_INTEGER_IMPUTATION_REGRESSION_OK

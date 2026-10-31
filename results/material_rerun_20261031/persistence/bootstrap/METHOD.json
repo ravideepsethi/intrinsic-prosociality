@@ -1,0 +1,25 @@
+{
+  "cohorts": {
+    "A": 665720,
+    "A_grants": 245534,
+    "A_no_prior": 603157,
+    "A_opportunities": 10058104,
+    "A_prior": 62563,
+    "B": 266207,
+    "B_groups": {
+      "BOTH": 3749,
+      "CO": 24899,
+      "LO": 5836,
+      "NEI": 231723
+    }
+  },
+  "dependence": "A separately; B and C share every resample",
+  "interval": "Percentile 95%",
+  "order": "Account IDs sorted lexicographically; deterministic SeedSequence([seed,panel,replicate])",
+  "original_matrix_and_decode_and_draw_functions_unchanged": true,
+  "replications": 1999,
+  "resampling": "Uniform iid accounts within each fixed eligible cohort, complete histories and opportunity weights retained; no within-account game resampling",
+  "se": "Replication SD, ddof=1",
+  "seed": 20261025,
+  "status": "COMPLETE"
+}

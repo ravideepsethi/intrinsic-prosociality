@@ -1,0 +1,242 @@
+[
+  {
+    "package": "Mating_Material_First_Run_v1_0_0",
+    "archive_sha256": "e234a00a21262fe3346f0ef7b786fce9d026934798a9626ab787b850afa641f6",
+    "source_files": 17,
+    "python_files": 14,
+    "privacy_templates": 4,
+    "omitted_files": 9,
+    "entrypoints": [
+      "RUN_MATERIAL.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/material_rerun_20261031/Mating_Material_First_Run_v1_0_0.json"
+  },
+  {
+    "package": "Mating_Material_First_Run_v1_0_1",
+    "archive_sha256": "c6935eebada215a0c766733d27aa4acf5e4197547a5073cfb5fd2f08ff62614e",
+    "source_files": 18,
+    "python_files": 15,
+    "privacy_templates": 5,
+    "omitted_files": 9,
+    "entrypoints": [
+      "RUN_MATERIAL.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/material_rerun_20261031/Mating_Material_First_Run_v1_0_1.json"
+  },
+  {
+    "package": "Mating_Material_First_Run_v1_0_2",
+    "archive_sha256": "bbcd458e0bc5435f558429e9bd89663988ff6aa6053bcfa7dd3b2c44d938df12",
+    "source_files": 20,
+    "python_files": 17,
+    "privacy_templates": 6,
+    "omitted_files": 12,
+    "entrypoints": [
+      "RUN_MATERIAL.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/material_rerun_20261031/Mating_Material_First_Run_v1_0_2.json"
+  },
+  {
+    "package": "Mating_Material_IV_Batch_v1_0_0",
+    "archive_sha256": "875e34d3eecd53b004bf18fc101950fde52038fe46bc37394a0354efb7de8031",
+    "source_files": 443,
+    "python_files": 352,
+    "privacy_templates": 91,
+    "omitted_files": 495,
+    "entrypoints": [
+      "RUN_IV_BATCH.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/material_rerun_20261031/Mating_Material_IV_Batch_v1_0_0.json"
+  },
+  {
+    "package": "Mating_Material_IV_Resume_v1_0_1",
+    "archive_sha256": "648905bf0fe1a25f182eda39f51b24efc9edf482f4e90fcf5ae62a390492b99b",
+    "source_files": 446,
+    "python_files": 355,
+    "privacy_templates": 91,
+    "omitted_files": 503,
+    "entrypoints": [
+      "RUN_IV_RESUME.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/material_rerun_20261031/Mating_Material_IV_Resume_v1_0_1.json"
+  },
+  {
+    "package": "Mating_Material_IV_Resume_v1_0_2",
+    "archive_sha256": "c41c0f342db427e0aaad82e45a77c34d1cd8acbc4896d83a5b3ff67435f2b58a",
+    "source_files": 448,
+    "python_files": 357,
+    "privacy_templates": 91,
+    "omitted_files": 507,
+    "entrypoints": [
+      "RUN_IV_RESUME.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/material_rerun_20261031/Mating_Material_IV_Resume_v1_0_2.json"
+  },
+  {
+    "package": "Mating_Material_Models_v1_0_0",
+    "archive_sha256": "fc645fdaed34041d28b22e3bbbbdaacf96d51fe0796ead7d64b70a52e215137c",
+    "source_files": 23,
+    "python_files": 20,
+    "privacy_templates": 4,
+    "omitted_files": 10,
+    "entrypoints": [
+      "RUN_MODELS.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/material_rerun_20261031/Mating_Material_Models_v1_0_0.json"
+  },
+  {
+    "package": "Mating_Material_NonIV_Batch_v1_0_0",
+    "archive_sha256": "a3201cd52694b3521ba08defbf6ebd7614920b5b11064a34c2f8c18459280b4c",
+    "source_files": 188,
+    "python_files": 150,
+    "privacy_templates": 52,
+    "omitted_files": 143,
+    "entrypoints": [
+      "RUN_ALL.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/material_rerun_20261031/Mating_Material_NonIV_Batch_v1_0_0.json"
+  },
+  {
+    "package": "Mating_Material_NonIV_Batch_v1_0_1",
+    "archive_sha256": "b34ac2c3f6437b123c1e99b7634a9d44e86b7ce9cfbaf2dfbf8cbda777ba13ed",
+    "source_files": 194,
+    "python_files": 156,
+    "privacy_templates": 53,
+    "omitted_files": 150,
+    "entrypoints": [
+      "RUN_ALL.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/material_rerun_20261031/Mating_Material_NonIV_Batch_v1_0_1.json"
+  },
+  {
+    "package": "Mating_Material_NonIV_Batch_v1_0_2",
+    "archive_sha256": "9c68dc0d7edb60b3c16e2364fb4856e58a92d0847a7046e68be772ee169dcfa1",
+    "source_files": 197,
+    "python_files": 159,
+    "privacy_templates": 52,
+    "omitted_files": 164,
+    "entrypoints": [
+      "RUN_ALL.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/material_rerun_20261031/Mating_Material_NonIV_Batch_v1_0_2.json"
+  },
+  {
+    "package": "Mating_Material_Patron_v1_0_0",
+    "archive_sha256": "07f38d22f5f407a25fde181d435e69796979564e7f8449bcf75cfc9cd402ba95",
+    "source_files": 29,
+    "python_files": 22,
+    "privacy_templates": 8,
+    "omitted_files": 36,
+    "entrypoints": [
+      "RUN_PATRON.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/material_rerun_20261031/Mating_Material_Patron_v1_0_0.json"
+  },
+  {
+    "package": "Mating_Material_Persistence_v1_0_0",
+    "archive_sha256": "d32c44541627d223509a966902bb2c1dd2acaaea67aa0cdeee896e2f8f650349",
+    "source_files": 19,
+    "python_files": 16,
+    "privacy_templates": 9,
+    "omitted_files": 33,
+    "entrypoints": [
+      "RUN_PERSISTENCE.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/material_rerun_20261031/Mating_Material_Persistence_v1_0_0.json"
+  },
+  {
+    "package": "Mating_Material_Receipt_v1_0_0",
+    "archive_sha256": "510eb2307c9b535f12b17ab4468b8cdd65c90dfacd701f63a327338a6abe9b6e",
+    "source_files": 22,
+    "python_files": 19,
+    "privacy_templates": 7,
+    "omitted_files": 16,
+    "entrypoints": [
+      "RUN_RECEIPT.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/material_rerun_20261031/Mating_Material_Receipt_v1_0_0.json"
+  },
+  {
+    "package": "Mating_Material_Responsibility_v1_0_0",
+    "archive_sha256": "a6516c811c699b8297e5e5fe77ec1860249ccaf4cfe72d81c62578aa99348fbf",
+    "source_files": 28,
+    "python_files": 25,
+    "privacy_templates": 7,
+    "omitted_files": 27,
+    "entrypoints": [
+      "RUN_RESPONSIBILITY.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/material_rerun_20261031/Mating_Material_Responsibility_v1_0_0.json"
+  },
+  {
+    "package": "Mating_Material_Responsibility_v1_0_1",
+    "archive_sha256": "d212fd8047c66f8f9af3dcf32152ad11648b0eb3713134a5b59e4a77240db6e0",
+    "source_files": 28,
+    "python_files": 25,
+    "privacy_templates": 7,
+    "omitted_files": 30,
+    "entrypoints": [
+      "RUN_RESPONSIBILITY.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/material_rerun_20261031/Mating_Material_Responsibility_v1_0_1.json"
+  },
+  {
+    "package": "Mating_Material_Structure_v1_0_0",
+    "archive_sha256": "f13f811c16abc1530f6e3b6a7ac8682b3cd8849608064025a226403a91a2e5f9",
+    "source_files": 27,
+    "python_files": 24,
+    "privacy_templates": 4,
+    "omitted_files": 19,
+    "entrypoints": [
+      "RUN_STRUCTURE.command"
+    ],
+    "readmes": [
+      "README.txt"
+    ],
+    "manifest": "manifests/material_rerun_20261031/Mating_Material_Structure_v1_0_0.json"
+  }
+]

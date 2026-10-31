@@ -1,0 +1,24 @@
+{
+  "adjusted_rates": "column 2: mean_y + (counterfactual indicator - observed indicator share) beta; opportunity-weighted; cluster uncertainty includes empirical composition",
+  "all_games": "rated standard live games in the same 24 months, all match sources and termination reasons; no opportunity or author restriction",
+  "author_accounts": "retained, as explicitly requested in R10",
+  "clocks": "log1p(nonnegative seconds); missing/negative/nonfinite values use 0 plus missing indicator",
+  "covariance": "chooser-cluster sandwich, G/(G-1), no (N-1)/(N-K) multiplier; G includes singleton choosers",
+  "fixed_effects": [
+    "chooser",
+    "speed",
+    "month"
+  ],
+  "interpretation": "conditional descriptive associations; speed comparisons do not identify investment or motives",
+  "outcome": "100 * grant",
+  "p_values": "two-sided asymptotic normal Wald; 95% normal Wald intervals",
+  "panel_A": "7-test Holm family separately within each column",
+  "panel_B": "13-test Holm family separately within each column; columns 3/4 use opportunity-share-weighted stage profiles, including uncertainty of the weights",
+  "panel_C": "signed stage contrasts and signed change / raw region-specific 0-4 grant rate; joint delta-method covariance includes denominator uncertainty",
+  "panel_D": "five separate speed profiles; fast comparator is opportunity-weighted ultrabullet/bullet combination; weights and their uncertainty use the full analysis sample",
+  "position_reference": "clearly_worse",
+  "rating_gap": "disconnected_elo - chooser_elo; clipped at +/-600; knots -300,-100,0,100,300; lower/upper-tail and missing indicators",
+  "rating_logs": "natural log of positive premium and each RD, their squares, and missing indicators; invalid/nonpositive values use log(1)=0 plus indicator, matching prior code",
+  "sample": "41,534,331 certified pool/nonadjacent opportunities, November 2023 through October 2025",
+  "stage_reference": "0_4"
+}

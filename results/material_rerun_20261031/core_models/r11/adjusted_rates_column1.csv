@@ -1,0 +1,14 @@
+column,panel,group,contrast,unit,holm_family,adjustment,ci_type,status,estimate,se,p_value,ci_low,ci_high
+column1,adjusted_rates,position,clearly_worse,percent,,none; unadjusted,pointwise 95% normal Wald,ESTIMATED,0.6346922788931925,0.004736910229850877,0.0,0.6254081054446854,0.6439764523416995
+column1,adjusted_rates,position,modestly_worse,percent,,none; unadjusted,pointwise 95% normal Wald,ESTIMATED,1.1865308044153111,0.0077616636762365765,0.0,1.1713182231497747,1.2017433856808475
+column1,adjusted_rates,position,roughly_equal,percent,,none; unadjusted,pointwise 95% normal Wald,ESTIMATED,2.067753180413751,0.00935125415212577,0.0,2.0494250590653036,2.086081301762198
+column1,adjusted_rates,position,better,percent,,none; unadjusted,pointwise 95% normal Wald,ESTIMATED,2.364557467264353,0.011684509256539995,0.0,2.34165624994451,2.387458684584196
+column1,adjusted_rates,position,clearly_better,percent,,none; unadjusted,pointwise 95% normal Wald,ESTIMATED,3.6710057333545807,0.014827823724037908,0.0,3.6419437328863578,3.7000677338228036
+column1,adjusted_rates,stage,0_4,percent,,none; unadjusted,pointwise 95% normal Wald,ESTIMATED,2.9701816948139554,0.054894000092970595,0.0,2.8625914316643946,3.0777719579635163
+column1,adjusted_rates,stage,5_6,percent,,none; unadjusted,pointwise 95% normal Wald,ESTIMATED,2.2723813492365132,0.028853000925155713,0.0,2.215830506577307,2.3289321918957193
+column1,adjusted_rates,stage,7_8,percent,,none; unadjusted,pointwise 95% normal Wald,ESTIMATED,2.0473554805386653,0.020467310817913878,0.0,2.0072402884751672,2.0874706726021635
+column1,adjusted_rates,stage,9_10,percent,,none; unadjusted,pointwise 95% normal Wald,ESTIMATED,1.871659033687609,0.01701915662599023,0.0,1.838302099653422,1.9050159677217962
+column1,adjusted_rates,stage,11_20,percent,,none; unadjusted,pointwise 95% normal Wald,ESTIMATED,1.5471716826132693,0.007619458740532568,0.0,1.5322378179001366,1.562105547326402
+column1,adjusted_rates,stage,21_40,percent,,none; unadjusted,pointwise 95% normal Wald,ESTIMATED,1.1968371465457486,0.005230342914994223,0.0,1.1865858628055657,1.2070884302859315
+column1,adjusted_rates,stage,41_80,percent,,none; unadjusted,pointwise 95% normal Wald,ESTIMATED,1.127287813868502,0.005227558551883464,0.0,1.1170419873797361,1.137533640357268
+column1,adjusted_rates,stage,81_plus,percent,,none; unadjusted,pointwise 95% normal Wald,ESTIMATED,1.3385240159785465,0.012557749772578076,0.0,1.3139112786974274,1.3631367532596657

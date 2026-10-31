@@ -1,0 +1,14 @@
+{
+  "source_package": "Mating_Material_IV_Resume_v1_0_2",
+  "source_path": "VALIDATION.json",
+  "original_sha256": "c3e4dd757c53c8a82733bb88c0914b60d75712a6500d948711d2c78f01af291a",
+  "published_path": "docs/material_rerun_20261031/IV_VALIDATION.json",
+  "published_sha256": "ee24bfde8660b13da9e04b0868ade9d572fe971b49e7bc617ca62327d72b6cc1",
+  "redactions": [
+    {
+      "start": 334,
+      "end": 366,
+      "token": "__PRIVATE_VALUE_1__"
+    }
+  ]
+}

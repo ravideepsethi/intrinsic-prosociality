@@ -1,0 +1,23 @@
+output,description,producer,status
+tab_main,"Position, region-specific stage and gap; same chooser FE and covariance",R11 region-gap producer,COMPLETE
+tab_app_main_spec,"Clocks, alternative controls, common-gap comparison",R11 + Wave1 core,THREE_ORIGINAL_COLUMNS_COMPLETE; REGION_CLOCK_EXTENSION_PENDING
+tab_app_equalweights,Three weighting rules,Wave1 panel robustness,PENDING_SUBSEQUENT_PACKAGE
+tab_app_merit_continuous,Spline and covariance,Continuous Merit + R11 continuous,COMPLETE
+tab_app_stage_speed,Stage by speed,R11 + v143 prose checks,PENDING_SUBSEQUENT_PACKAGE
+tab_app_responsibility,Deliberate-departure proxies,v141 responsibility remaining,PENDING_SUBSEQUENT_PACKAGE
+fig_countdown,Countdown threshold profiles,Countdown_Estimation_v1_0_0,PENDING_SUBSEQUENT_PACKAGE
+tab_app_countdown,Countdown threshold fits,Countdown_Estimation_v1_0_0,PENDING_SUBSEQUENT_PACKAGE
+tab_app_tenure_arena_repeat,"Tenure, arena and repeat sensitivities",v141 remaining workers,PENDING_SUBSEQUENT_PACKAGE
+tab_app_repeat,Pair histories and re-encounter,First Repeat + Reputation,PENDING_SUBSEQUENT_PACKAGE
+tab_app_rating,Rating-gap profile and adjacent levels,Wave1 KRD + C9,PENDING_SUBSEQUENT_PACKAGE
+tab_app_stakes,Percentile and personal scales,Stakes producer,PENDING_SUBSEQUENT_PACKAGE
+tab_persistence,"Persistence and account bootstrap, 1999 resamples",v142 corrected persistence + Submission_Checks_20261025,COMPLETE_TABLE3_AND_STATE_SENSITIVITIES; SPLIT_HALF_AND_CONDITION_ADJUSTED_CHECKS_PENDING
+tab_supp_state_regressions,Weighted state regressions,v142 original_f_v102,COMPLETE_ORIGINAL_F_V102_SPECIFICATION
+tab_patron,Fixed acquisition design and snapshot; rebuilt behavior,v141 Patron adapters,PENDING_SUBSEQUENT_PACKAGE
+tab_dynamics,Matched receipt and interval outcomes,R8 Independent + companion receipt core,PENDING_SUBSEQUENT_PACKAGE
+tab_iv_main,Uniform90 primary and both placebos,"Uniform90 v105, rebuild from candidate universe",PENDING_SUBSEQUENT_PACKAGE
+fig_iv_bins,Residualized first-stage bins,Model5_FirstStageBins_v1_0_0,PENDING_SUBSEQUENT_PACKAGE
+tab_app_iv_companions,"Spaced variants, balance, entry, exclusion, compliers, mechanisms",R9/R12 + Model5 Submission,PENDING_SUBSEQUENT_PACKAGE
+tab_app_receipt_kind,Merited and unmerited frames,Receipt_IV_Position_v1_0_0,PENDING_SUBSEQUENT_PACKAGE
+tab_app_receipt_patron,Fixed profile acquisition and IPW,Patron_Model5_v1_0_0,PENDING_SUBSEQUENT_PACKAGE
+tab_supp_iv_specs,"Subgroups, exposure variants, alternate scores",R9/R12 + Model5 supplements,PENDING_SUBSEQUENT_PACKAGE

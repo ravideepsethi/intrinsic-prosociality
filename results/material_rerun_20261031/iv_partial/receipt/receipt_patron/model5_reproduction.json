@@ -1,0 +1,110 @@
+[
+  {
+    "actual": 7.253784217066368,
+    "difference": 0.0,
+    "expected": 7.253784217066368,
+    "field": "coefficient",
+    "passed": true,
+    "term": "first_stage",
+    "tolerance": 1.6507568434132735e-06
+  },
+  {
+    "actual": 0.024029314139244716,
+    "difference": 1.97758476261356e-16,
+    "expected": 0.024029314139244518,
+    "field": "standard_error",
+    "passed": true,
+    "term": "first_stage",
+    "tolerance": 2.0480586282784889e-07
+  },
+  {
+    "actual": 0.053498976124823676,
+    "difference": 0.0,
+    "expected": 0.053498976124823676,
+    "field": "native_residual_score_sd",
+    "passed": true,
+    "term": "first_stage",
+    "tolerance": 2.1069979522496472e-07
+  },
+  {
+    "actual": 0.023339885495512015,
+    "difference": 0.0,
+    "expected": 0.023339885495512015,
+    "field": "coefficient",
+    "passed": true,
+    "term": "rf_y",
+    "tolerance": 2.046679770991024e-07
+  },
+  {
+    "actual": 0.004092159720792046,
+    "difference": 1.734723475976807e-17,
+    "expected": 0.004092159720792063,
+    "field": "standard_error",
+    "passed": true,
+    "term": "rf_y",
+    "tolerance": 2.008184319441584e-07
+  },
+  {
+    "actual": 0.053498976124823676,
+    "difference": 0.0,
+    "expected": 0.053498976124823676,
+    "field": "native_residual_score_sd",
+    "passed": true,
+    "term": "rf_y",
+    "tolerance": 2.1069979522496472e-07
+  },
+  {
+    "actual": -0.01115580367494579,
+    "difference": 0.0,
+    "expected": -0.01115580367494579,
+    "field": "coefficient",
+    "passed": true,
+    "term": "rf_reached",
+    "tolerance": 2.0223116073498915e-07
+  },
+  {
+    "actual": 0.012819629917663224,
+    "difference": 6.938893903907228e-17,
+    "expected": 0.012819629917663293,
+    "field": "standard_error",
+    "passed": true,
+    "term": "rf_reached",
+    "tolerance": 2.0256392598353266e-07
+  },
+  {
+    "actual": 0.053498976124823676,
+    "difference": 0.0,
+    "expected": 0.053498976124823676,
+    "field": "native_residual_score_sd",
+    "passed": true,
+    "term": "rf_reached",
+    "tolerance": 2.1069979522496472e-07
+  },
+  {
+    "actual": 0.3217615081600995,
+    "difference": 0.0,
+    "expected": 0.3217615081600995,
+    "field": "coefficient",
+    "passed": true,
+    "term": "iv_y",
+    "tolerance": 2.643523016320199e-07
+  },
+  {
+    "actual": 0.05636795483665588,
+    "difference": 1.8041124150158794e-15,
+    "expected": 0.05636795483665408,
+    "field": "standard_error",
+    "passed": true,
+    "term": "iv_y",
+    "tolerance": 2.112735909673308e-07
+  },
+  {
+    "actual": 0.053498976124823676,
+    "difference": 0.0,
+    "expected": 0.053498976124823676,
+    "field": "native_residual_score_sd",
+    "passed": true,
+    "term": "iv_y",
+    "tolerance": 2.1069979522496472e-07
+  }
+]

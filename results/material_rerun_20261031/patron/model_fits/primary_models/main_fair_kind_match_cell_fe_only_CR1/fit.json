@@ -1,0 +1,50 @@
+{
+  "coefficients": [
+    {
+      "ci95_high_pp": 0.38602823617717136,
+      "ci95_low_pp": 0.23504045307253635,
+      "clusters": 36,
+      "coefficient_pp": 0.31053434462485385,
+      "covariance": "CR1",
+      "estimand_class": "sensitivity",
+      "fixed_effects": "match_cell",
+      "model": "main_fair_kind_match_cell_fe_only_CR1",
+      "n": 847680,
+      "p_two_sided_approx": 7.502059636459736e-16,
+      "rank": 1,
+      "se_pp": 0.03851799938560285,
+      "statistic": 8.062057987905895,
+      "status": "estimated",
+      "variable": "is_kind_role"
+    }
+  ],
+  "covariance": [
+    [
+      0.0014836362766693018
+    ]
+  ],
+  "kept_names": [
+    "is_kind_role"
+  ],
+  "model": {
+    "cluster": "match_cell",
+    "clusters": 36,
+    "covariance": "CR1",
+    "dropped_regressors": {},
+    "estimand_class": "sensitivity",
+    "fixed_effect_levels": 36,
+    "fixed_effects": "match_cell",
+    "kept_regressors": [
+      "is_kind_role"
+    ],
+    "model": "main_fair_kind_match_cell_fe_only_CR1",
+    "n": 847680,
+    "outcome": "patron_pp",
+    "rank": 1,
+    "requested_regressors": [
+      "is_kind_role"
+    ],
+    "standardization": {},
+    "status": "estimated"
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "coefficients": [
+    {
+      "ci95_high_pp": 0.5218309680908454,
+      "ci95_low_pp": 0.4005613428532586,
+      "clusters": null,
+      "coefficient_pp": 0.461196155472052,
+      "covariance": "HC1",
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "diagnostic_horse_race_min5_exposure_match_cell_fe_HC1",
+      "n": 528456,
+      "p_two_sided_approx": 2.935324268107705e-50,
+      "rank": 4,
+      "se_pp": 0.030936697356213193,
+      "statistic": 14.907737246859913,
+      "status": "estimated",
+      "variable": "ever_kind_fair_state"
+    },
+    {
+      "ci95_high_pp": -0.20591304959133547,
+      "ci95_low_pp": -0.3358712377554902,
+      "clusters": null,
+      "coefficient_pp": -0.27089214367341286,
+      "covariance": "HC1",
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "diagnostic_horse_race_min5_exposure_match_cell_fe_HC1",
+      "n": 528456,
+      "p_two_sided_approx": 3.0605177435990366e-16,
+      "rank": 4,
+      "se_pp": 0.033153208219449025,
+      "statistic": -8.170917935914765,
+      "status": "estimated",
+      "variable": "ever_kind_clearly_worse_state"
+    },
+    {
+      "ci95_high_pp": 0.14083646005357792,
+      "ci95_low_pp": 0.013762841309425053,
+      "clusters": null,
+      "coefficient_pp": 0.07729965068150148,
+      "covariance": "HC1",
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "diagnostic_horse_race_min5_exposure_match_cell_fe_HC1",
+      "n": 528456,
+      "p_two_sided_approx": 0.017101609580653078,
+      "rank": 4,
+      "se_pp": 0.03241733515168987,
+      "statistic": 2.3845158869411867,
+      "status": "estimated",
+      "variable": "log_fair_opps"
+    },
+    {
+      "ci95_high_pp": 0.03269572294416517,
+      "ci95_low_pp": -0.029390464469329435,
+      "clusters": null,
+      "coefficient_pp": 0.001652629237417871,
+      "covariance": "HC1",
+      "estimand_class": "secondary",
+      "fixed_effects": "match_cell",
+      "model": "diagnostic_horse_race_min5_exposure_match_cell_fe_HC1",
+      "n": 528456,
+      "p_two_sided_approx": 0.9168980687217285,
+      "rank": 4,
+      "se_pp": 0.01583860415375551,
+      "statistic": 0.10434184864870268,
+      "status": "estimated",
+      "variable": "log_clearly_worse_opps"
+    }
+  ],
+  "covariance": [
+    [
+      0.0009570792433099283,
+      -0.00024368733994794084,
+      -4.313814661549351e-05,
+      4.096025082999619e-05
+    ],
+    [
+      -0.00024368733994794054,
+      0.0010991352152421423,
+      2.952640929243976e-05,
+      -6.165832833141434e-05
+    ],
+    [
+      -4.313814661549325e-05,
+      2.952640929243943e-05,
+      0.0010508836183369876,
+      -0.0001734633244624111
+    ],
+    [
+      4.0960250829996314e-05,
+      -6.165832833141559e-05,
+      -0.000173463324462412,
+      0.0002508613815393613
+    ]
+  ],
+  "kept_names": [
+    "ever_kind_fair_state",
+    "ever_kind_clearly_worse_state",
+    "log_fair_opps",
+    "log_clearly_worse_opps"
+  ],
+  "model": {
+    "cluster": null,
+    "clusters": null,
+    "covariance": "HC1",
+    "dropped_regressors": {},
+    "estimand_class": "secondary",
+    "fixed_effect_levels": 20,
+    "fixed_effects": "match_cell",
+    "kept_regressors": [
+      "ever_kind_fair_state",
+      "ever_kind_clearly_worse_state",
+      "log_fair_opps",
+      "log_clearly_worse_opps"
+    ],
+    "model": "diagnostic_horse_race_min5_exposure_match_cell_fe_HC1",
+    "n": 528456,
+    "outcome": "patron_pp",
+    "rank": 4,
+    "requested_regressors": [
+      "ever_kind_fair_state",
+      "ever_kind_clearly_worse_state",
+      "log_fair_opps",
+      "log_clearly_worse_opps"
+    ],
+    "standardization": {
+      "log_clearly_worse_opps": {
+        "mean": 2.935598268986626,
+        "sd_population": 0.6830196931688773
+      },
+      "log_fair_opps": {
+        "mean": 2.6421791784590805,
+        "sd_population": 0.6176153898280161
+      }
+    },
+    "status": "estimated"
+  }
+}

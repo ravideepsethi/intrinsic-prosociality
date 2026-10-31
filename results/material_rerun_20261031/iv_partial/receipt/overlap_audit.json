@@ -1,0 +1,14 @@
+{
+  "exposures": 9736412,
+  "repeat_recipients": 1149609,
+  "rows_from_repeat_recipients": 9008608,
+  "max_exposures_per_repeat_recipient": 444,
+  "shared_future_choice_groups": 1372137,
+  "rows_sharing_a_future_choice": 4745866,
+  "extra_uses_of_shared_choices": 3373729,
+  "max_uses_of_one_choice": 82,
+  "exposures_with_overlapping_prior_90day_window": 7163688,
+  "next_retained_exposure_starts_before_outcome_game": 3374164,
+  "next_retained_exposure_starts_by_outcome_decision": 3374212,
+  "interpretation": "Exposure weighted; repeated rows and shared outcomes retained; these counts do not enumerate unsupported intervening receipts"
+}

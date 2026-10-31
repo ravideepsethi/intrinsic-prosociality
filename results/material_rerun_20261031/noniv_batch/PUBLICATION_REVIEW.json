@@ -1,0 +1,59 @@
+{
+  "review_status": "VERIFIED_COMPLETE_FOR_THIS_BATCH",
+  "run_id": "c6d1eef82b6b9890138ee2dfbc0c6a93709735a561d63953769827f887dcb39d",
+  "mac_root": "__PRIVATE_VALUE_1__/derived/replication/mating_material_noniv_batch_v102_PRIVATE/c6d1eef82b6b9890",
+  "upload_sha256": "d0b30324093a86b6d65c9548aade5aecfdd15c240e462c536cd0a9fe80685487",
+  "upload_bytes": 13687839,
+  "zip_entries": 393,
+  "report_files_verified": 377,
+  "seconds_this_launch": 369.5087384590006,
+  "complete_families": 11,
+  "total_families": 11,
+  "responsibility_reference_checks_passed": 67,
+  "responsibility_models_independently_recomputed": 53,
+  "coefficient_covariance_max_absolute_difference": 4.048388291266747e-10,
+  "input_lineage": {
+    "author_exclusion": [
+      "__PRIVATE_VALUE_2__",
+      "__PRIVATE_VALUE_3__"
+    ],
+    "broad_rows": 47561517,
+    "factual_chronology": "preserved",
+    "main_grants": 570422,
+    "main_rows": 41513719,
+    "manifest_sha256": "c1b6aedb3e95d42188163ef2926fa5a14cdac9538f24eb525cca5a26b3f9caec",
+    "new_API_requests": 0,
+    "new_engine_searches": 0,
+    "new_rating_replay": 0,
+    "parent_run_id": "aa7e95f275c18f43d9ad95af523b9b0d769704ddebf4aea4d3655a2e1b07ef5d",
+    "rating_price_layer": "original"
+  },
+  "known_auxiliary_limits": [
+    "Countdown: 29 empty ultrabullet auxiliary cells; 116 supported fits completed",
+    "First/repeat meetings: three previously documented nonconverged auxiliary fits are preserved and not reported as fitted"
+  ],
+  "whole_paper_rerun_complete": false,
+  "remaining": [
+    {
+      "family": "iv",
+      "work": "Rebuild eligibility, histories, donor references and scores; primary and spaced IV; balance, entry, ordinary-ending placebo, subgroups, compliers, bins and alternatives",
+      "status": "PENDING"
+    },
+    {
+      "family": "receipt_companions",
+      "work": "Remaining matched-receipt A3, overlap, preliminary encouragement and simultaneous-hour checks; receiver-side Patron comparison",
+      "status": "PENDING"
+    },
+    {
+      "family": "final_audit",
+      "work": "Adjacent rating-payoff level check and remaining manuscript-to-output reconciliation; verify every main and appendix numerical claim",
+      "status": "PENDING"
+    },
+    {
+      "family": "manuscript",
+      "work": "Update tables, figures, prose and sample counts; compile and inspect the paper",
+      "status": "PENDING"
+    }
+  ],
+  "new_iv_batch_written": false
+}

@@ -1,0 +1,125 @@
+"""Original persistence estimators on fresh material-restricted account histories."""
+from util import *
+import sys, shutil, gc
+import numpy as np
+import pandas as pd
+sys.path.insert(0, str(ROOT/'vendor/original_f'))
+import run_f as producer
+
+COUNT_MAP = dict(rows='opportunities', grants='grants', comp_n='competitive',
+                 comp_y='competitive_grants', lost_n='clearly_worse', lost_y='clearly_worse_grants')
+AGGREGATES = ('account_year_state_private.parquet', 'account_year_wide_private.parquet')
+
+def attach(c, private):
+    for view, name in zip(('f_annual','f_wide'), AGGREGATES):
+        c.execute('CREATE OR REPLACE VIEW '+view+' AS SELECT * FROM '+parquet([private/name]))
+
+def audit_wide(c, counts):
+    expressions = ['count(*) accounts', 'count(DISTINCT chooser) distinct_accounts',
+                   'count(*) FILTER(WHERE chooser IS NULL) missing_ids']
+    expressions += [f'sum({prefix}_{state}1+{prefix}_{state}2)::BIGINT {prefix}_{state}'
+                    for state in 'clm' for prefix in ('n','y')]
+    row=c.execute('SELECT '+','.join(expressions)+' FROM f_wide').fetchdf().iloc[0].to_dict()
+    row={k:int(v) for k,v in row.items()}
+    require(row['accounts']==row['distinct_accounts']==counts['choosers'] and row['missing_ids']==0,
+            'Missing or duplicated account aggregates')
+    require(sum(row['n_'+s] for s in 'clm')==counts['opportunities'] and
+            sum(row['y_'+s] for s in 'clm')==counts['grants'], 'Account aggregation lost observations')
+    for state, name in [('c','competitive'),('l','clearly_worse')]:
+        require(row['n_'+state]==counts[name] and row['y_'+state]==counts[name+'_grants'],
+                'Account aggregation changed a board-state total')
+    bad=[]
+    for year in (1,2):
+        for state in 'clm':
+            for tag in ('','late_'):
+                n=f'n_{tag}{state}{year}'; y=f'y_{tag}{state}{year}'
+                bad += [f'{n} IS NULL',f'{y} IS NULL',f'{n}<0',f'{y}<0',f'{y}>{n}']
+            bad += [f'n_late_{state}{year}>n_{state}{year}', f'y_late_{state}{year}>y_{state}{year}']
+    require(c.execute('SELECT count(*) FROM f_wide WHERE '+' OR '.join(bad)).fetchone()[0]==0,
+            'Invalid annual opportunity/grant counts')
+    return row
+
+def build_accounts(c, auth, run, counts, key):
+    private=run/'PRIVATE'; receipt=private/'ACCOUNTS_READY.json'
+    if receipt.exists():
+        saved=read(receipt); require(saved['key']==key, 'Account-cache configuration changed')
+        for entry in saved['files']:verify(entry,run)
+        attach(c,private); audit_wide(c,counts)
+        log('Account histories: authenticated cache reused')
+        return saved
+    source=parquet([r['path'] for r in auth['records']])
+    columns=producer.choose_columns(c,source)
+    producer.PAPER={k:counts[v] for k,v in COUNT_MAP.items()}
+    checks=producer.preflight(c)
+    # Full-width material panels preserve the certified normalized usernames.
+    names={r[0] for r in c.execute('DESCRIBE SELECT * FROM '+source+' LIMIT 0').fetchall()}
+    pair=('chooser_username_norm','disconnected_username_norm')
+    require(set(pair)<=names, 'Both-role normalized identity columns are required')
+    missing=' OR '.join(producer.ident(x)+' IS NULL' for x in pair)
+    author=' OR '.join('lower(trim('+producer.ident(x)+")) IN ('__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__')" for x in pair)
+    identity=c.execute('SELECT count(*) FILTER(WHERE '+missing+'),count(*) FILTER(WHERE '+author+') FROM '+source).fetchone()
+    require(identity==(0,0), 'Missing participant names or author account in material inputs')
+    staging=private/'aggregate_build.partial'
+    if staging.exists():shutil.rmtree(staging)  # Only this run's unfinished output directory.
+    staging.mkdir()
+    with heartbeat('Building annual account histories from the new decisions'):
+        producer.build_account_panel(c,staging)
+    for name in AGGREGATES:os.replace(staging/name,private/name)
+    staging.rmdir();attach(c,private)
+    audit=audit_wide(c,counts)
+    saved=dict(key=key,files=[record(private/name,run) for name in AGGREGATES],
+               audit=audit,preflight=checks,columns=columns,author_games=0,missing_names=0)
+    save(receipt,saved);return saved
+
+def reports(c, run):
+    public=run/'report/persistence';public.mkdir(parents=True,exist_ok=True)
+    producer.year_state_summary(c,public)
+    a=c.execute('SELECT n_c1,y_c1,n_c2,y_c2 FROM f_wide WHERE n_c1>=1 AND n_c2>=1 AND n_c1+n_c2>=4').fetchdf()
+    row=dict(accounts=len(a),pearson_equal_account=producer.wcor(producer.rate(a.y_c1,a.n_c1),producer.rate(a.y_c2,a.n_c2)),
+             pearson_total_comp_opportunities_weighted=producer.wcor(producer.rate(a.y_c1,a.n_c1),producer.rate(a.y_c2,a.n_c2),a.n_c1+a.n_c2),
+             competitive_opportunities=int(a.n_c1.sum()+a.n_c2.sum()),competitive_grants=int(a.y_c1.sum()+a.y_c2.sum()))
+    table(public/'tabF0_original_competitive_reconciliation.csv',[row])
+    # The old producer's f0 function contains a warning against the OLD sample N;
+    # compute the same statistics above without applying an obsolete cohort gate.
+    del a
+    retention=c.execute('''SELECT (y_c1>0) first_year_granted,count(*) first_year_accounts,
+        count(*) FILTER(WHERE n_c2>0) returning_accounts,
+        100.0*count(*) FILTER(WHERE n_c2>0)/count(*) return_percent
+        FROM f_wide WHERE n_c1>0 GROUP BY ALL ORDER BY ALL''').fetchdf()
+    table(public/'competitive_return.csv',retention)
+    producer.retention(c,public)
+    primary=producer.sample_account_panel(c,4)
+    require(len(primary)>0,'Empty balanced persistence cohort')
+    producer.save_csv(public/'tabF2_transition_4x4.csv',pd.DataFrame(producer.transition_rows(primary,'primary_balanced_C_L_4')))
+    producer.save_csv(public/'tabF3_P2_rates_by_P1_group.csv',pd.DataFrame(producer.p2_rates(primary,'primary_balanced_C_L_4')))
+    with heartbeat('Fitting the original state-specific persistence regressions'):
+        producer.cross_predict(primary,public)
+    primary_n=len(primary);del primary;gc.collect()
+    producer.threshold_table(c,public)
+    sensitivity=producer.sensitivities(c,public)
+    # Combine the five rows of the manuscript's threshold table, retaining both
+    # implied correlations and the original harmonic opportunity weighting.
+    corr=[]
+    for filename in ('tabF4_cross_year_correlations.csv','tabF7_stage_correlations_after10.csv','tabF7_noncompetitive_correlations.csv'):
+        frame=pd.read_csv(public/filename)
+        for label, group in frame.groupby('sample',sort=False):
+            second='n' if 'n' in set(group.period1_state) else 'l'
+            def get(s,t,column):
+                found=group[(group.period1_state==s)&(group.period2_state==t)]
+                require(len(found)==1,'Ambiguous correlation table key');return found.iloc[0][column]
+            cc,ll,cl,lc=[float(get(s,t,'correlation_equal_account')) for s,t in [('c','c'),(second,second),('c',second),(second,'c')]]
+            require(cc*ll>0,'Undefined implied propensity correlation')
+            corr.append(dict(sample=label,accounts=int(group.accounts.iloc[0]),C1_C2=cc,L1_L2=ll,C1_L2=cl,L1_C2=lc,
+                             implied_C1_L2=cl/np.sqrt(cc*ll),implied_L1_C2=lc/np.sqrt(cc*ll),
+                             harmonic_C1_C2=float(get('c','c','correlation_harmonic_opportunities'))))
+    table(run/'report/tab_supp_state_corr.csv',corr)
+    shutil.copy2(public/'tabF5_cross_prediction.csv',run/'report/tab_supp_state_regressions.csv')
+    method=dict(status='PERSISTENCE_POINT_ESTIMATES_COMPLETE',panel_A_accounts=int(row['accounts']),panel_B_C_accounts=primary_n,
+                sensitivities=sensitivity,original_estimation_functions_unchanged=True,
+                original_count_constants_replaced_by_authenticated_material_census=True,
+                regression_weight='Outcome-specific second-year opportunity count',
+                regression_covariance='Original account-robust joint sandwich, n/(n-1) correction',
+                regression_controls='Log opportunity counts in both years and states; outcome-state second-year mean rating, rating gap, capped evaluation, plies and speed shares. Standardized as in original_f_v102; redundant nuisance columns pruned.',
+                manuscript_note='The existing supplemental regression note mentions only speed shares. The recovered producer also contains the count and composition controls listed here; retain the producer and correct the note.',
+                scope='Table 3, state transitions/retention, thresholds 1/4/10, after-ply-10 and all-noncompetitive sensitivities, state regressions. Split-half and condition-adjusted persistence checks are not rerun by this package.')
+    save(run/'report/PERSISTENCE_METHOD.json',method);return method

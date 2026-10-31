@@ -1,0 +1,20 @@
+{
+  "status": "MODEL_OK",
+  "model_id": "common_support_stronger__ply_gt_10__m100_p100",
+  "rows": 139316,
+  "clusters": 22451,
+  "terms_requested": 53,
+  "terms_kept": 53,
+  "rank": 53,
+  "condition_number": 1046.7267738212338,
+  "runtime_seconds": 4.413524150848389,
+  "dropped_terms": [],
+  "key_terms": [
+    "is_stronger"
+  ],
+  "coefficient_parquet": "__PRIVATE_VALUE_1__/derived/replication/mating_material_noniv_batch_v100_PRIVATE/99984ef97df55388/PRIVATE/stages/nonparametric/PRIVATE/model/models/common_support_stronger__ply_gt_10__m100_p100_coefficients.parquet",
+  "coefficient_parquet_sha256": "9c32d9ade888fafd84dbd863a4a22eb892ec897f64b6c8405cd2845d1933a21c",
+  "worker_pid": 8365,
+  "worker_threads": 1,
+  "worker_memory_limit": "3.0GB"
+}

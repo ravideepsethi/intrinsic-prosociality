@@ -1,0 +1,17 @@
+#!/bin/bash
+set -euo pipefail
+MMR_PACKAGE_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+MMR_PYTHON_BIN="${MMR_PYTHON:-}"
+if [[ -z "$MMR_PYTHON_BIN" ]]; then
+  for candidate in python3.13 python3.12 python3.11 python3; do
+    if command -v "$candidate" >/dev/null 2>&1 && "$candidate" -c 'import sys; raise SystemExit(not ((3,11) <= sys.version_info[:2] <= (3,13)))' 2>/dev/null; then
+      MMR_PYTHON_BIN="$(command -v "$candidate")"
+      break
+    fi
+  done
+fi
+if [[ -z "$MMR_PYTHON_BIN" ]]; then
+  echo "Python 3.11, 3.12 or 3.13 is required. Set MMR_PYTHON to an installed interpreter and repeat this command." >&2
+  exit 1
+fi
+exec "$MMR_PYTHON_BIN" "$MMR_PACKAGE_DIR/setup_and_run.py" "$@"

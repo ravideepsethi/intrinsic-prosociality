@@ -1,0 +1,26 @@
+{
+  "package": "Pool_Main_Patron_Estimation_Wave3B1_v1_0_1",
+  "version": "3B1-1.0.1",
+  "build_date_utc": "2026-09-11",
+  "status": "OFFLINE_VALIDATION_PASSED",
+  "behavioral_test_groups": 4,
+  "synthetic_models_exercised": {"august_original_date": 34, "august_corrected_date": 4, "supplemented_original_date": 6, "supplemented_corrected_date": 4},
+  "verified_behaviors": [
+    "Exact source bindings and certified sample/Wave3A/gap report checks",
+    "Binary-outcome bounds agree with exhaustive completions and explicit dummy-variable least squares",
+    "Frozen new matching and histories override intentionally stale snapshot design metadata",
+    "Supplement appends missing controls without replacing any August account",
+    "Appended observation dates remain September and August acquisition flags remain false",
+    "All unchanged observed accounts retain their outcomes, dates and new-panel design fields",
+    "Covariance and off-diagonal contrast terms survive checkpoint resume",
+    "Corrupt checkpoints and changed gap membership are rejected",
+    "Result ZIP CRC, member hashes, and absence of private usernames in exported data"
+  ],
+  "python_and_shell_syntax": "PASS",
+  "runtime_test_environment": {"python": "3.12", "duckdb": "1.5.5", "numpy": "2.5.3", "pandas": "3.0.5", "pyarrow": "25.0.1"},
+  "private_production_data_available_during_build": false,
+  "production_models_claimed_as_run": false,
+  "api_calls_required": false,
+  "expected_runtime_minutes": [10, 30],
+  "runtime_estimate_status": "Estimate for the user's preceding Mac setup; full-data estimation runtime not yet measured"
+}

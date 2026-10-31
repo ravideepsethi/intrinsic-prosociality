@@ -1,0 +1,101 @@
+"""Local-only extension of the certified Uniform90 Model 5 pipeline."""
+from pathlib import Path
+import os, sys, json, hashlib, time, gc, shutil, csv, zipfile
+ROOT = Path(__file__).resolve().parent
+for name in ('OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','VECLIB_MAXIMUM_THREADS','NUMEXPR_NUM_THREADS'):
+    os.environ[name] = '1'
+sys.path.insert(0, str(ROOT/'vendor'))
+import fast_bootstrap as c
+import fast_models as model
+import fast_features as features
+import certified_model5 as cert
+import numpy as np
+import pyarrow as pa
+import pyarrow.parquet as pq
+from types import SimpleNamespace
+from scipy.stats import norm
+require, log, load, sha = c.require, c.log, c.load, c.sha
+DAY = c.DAY
+VERSION = '1.0.0'
+# All are zero coded on the SAME exposure rows. Waiting time is restricted to 90d.
+OUTCOMES = ['grant_comp','grant_lost','reach_comp','reach_lost',
+            'first_either_grant_comp','first_either_grant_lost',
+            'first_either_type_comp','first_either_type_lost',
+            'first_all_grant_comp','first_all_grant_lost','first_all_type_middle',
+            'wait_comp_days','wait_lost_days','wait_either_days']
+RULE = dict(version=VERSION,parent=cert.CONF,primary_row_hash=cert.ROW_HASH,
+    competitive='certified fair_competitive flag (evaluation >= -100 cp)',
+    lost='certified clearly_worse flag (evaluation <= -300 cp)',
+    middle='all other classified main-panel positions; kept for first-all sensitivity',
+    exposure='First observed unordered pair, real-time, draw-or-claim arm, complete 90d history/followup; all-time-five competitive Score A; no spacing/cap',
+    outcome='First qualifying later chooser decision; t > anchor and t <= anchor+90d; start > anchor; different opponent/game; author clean; no opportunity is zero',
+    first_either='First competitive OR clearly-lost opportunity, classified by position; middle positions skipped',
+    first_all='First opportunity including middle positions, classified by position',
+    controls='Exact Model 5 X0 + ENV and support indicator; 90d histories and volume',
+    covariance='Shared account (either exposure role) OR exposure date, CR0; scores held fixed',
+    baseline='Empirical untreated mean on the identical zero-coded exposure frame; denominator uncertainty included',
+    matching='CEM, ATT weights: month x exact time control x mean-rating 200 x signed gap 100 x evaluation bin x draw-payoff sign; both treatment arms required',
+    authors=['__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__'],api_requests=0,engine_evaluations=0,
+    interpretation='Matched differences are associations; opportunity arrival and first-choice type may respond to receipt; different exposure types need not share compliers')
+
+def save(path, value):
+    path=Path(path);path.parent.mkdir(parents=True,exist_ok=True)
+    tmp=path.with_name(path.name+'.tmp')
+    tmp.write_text(json.dumps(value,indent=2,sort_keys=True,allow_nan=False,default=lambda x: x.item() if isinstance(x,np.generic) else str(x))+'\n')
+    os.replace(tmp,path)
+
+def table(path,rows):
+    path=Path(path);path.parent.mkdir(parents=True,exist_ok=True)
+    if not rows: return
+    fields=list(dict.fromkeys(k for r in rows for k in r))
+    with path.open('w',newline='') as f:
+        w=csv.DictWriter(f,fieldnames=fields);w.writeheader();w.writerows(rows)
+
+def stage(root, conf, build, deps=()):
+    # Include input content in the key, not only file metadata. Parent stages are read-only.
+    root=Path(root); deps=list(map(Path,deps))
+    identity=c.key([conf,[(str(p.resolve()),sha(p)) for p in deps]])
+    receipt=root/'POSITION_DONE.json'
+    if receipt.exists():
+        r=load(receipt);require(r['identity']==identity,'Stage inputs changed: '+str(root))
+        for rec in r['files']:cert.checked_file(root/rec['path'],rec)
+        log('REUSE '+root.name);return root
+    tmp=root.with_name(root.name+'.partial')
+    if tmp.exists(): shutil.rmtree(tmp)
+    tmp.mkdir(parents=True);started=time.monotonic()
+    with cert.heartbeat(root.name): meta=build(tmp) or {}
+    require(identity==c.key([conf,[(str(p.resolve()),sha(p)) for p in deps]]),'Stage input changed during computation')
+    # Scratch/spill is not evidence and must not enter receipts or public reports.
+    for p in tmp.rglob('spill'):
+        if p.is_dir():shutil.rmtree(p)
+    files=[dict(path=str(p.relative_to(tmp)),bytes=p.stat().st_size,sha256=sha(p))
+           for p in sorted(tmp.rglob('*')) if p.is_file()]
+    save(tmp/'POSITION_DONE.json',dict(identity=identity,files=files,meta=meta,seconds=time.monotonic()-started))
+    if root.exists():raise RuntimeError('Unsealed stage exists: '+str(root))
+    os.replace(tmp,root);return root
+
+def sql(root,memory=3.):return c.conn(root,memory)
+def view(con,name,path):c.view(con,name,path)
+def copy(con,query,path):c.copy_query(con,query,path)
+def col(path,name):return pq.read_table(path,columns=[name]).column(0).to_numpy(zero_copy_only=False)
+def inference(beta,var,scale=1.):return model.inference90(float(beta),float(var),scale)
+
+def checkpoint(run,result_dir,percent,extra=None):
+    save(run/'report/STATUS.json',dict(milestone=percent,complete=percent==100,
+        milestone_is_not_elapsed_time_percent=True,**(extra or {})))
+    records=[dict(path=str(p.relative_to(run/'report')),bytes=p.stat().st_size,sha256=sha(p))
+             for p in sorted((run/'report').rglob('*')) if p.is_file() and p.name!='REPORT_MANIFEST.json']
+    save(run/'report/REPORT_MANIFEST.json',records)
+    dest=Path(result_dir)/f'RECEIPT_POSITION_{run.name}_{percent:03}.zip';tmp=dest.with_suffix('.partial')
+    with zipfile.ZipFile(tmp,'w',zipfile.ZIP_DEFLATED) as z:
+        for p in sorted((run/'report').rglob('*')):
+            if p.is_file():z.write(p,'report/'+str(p.relative_to(run/'report')))
+    os.replace(tmp,dest);dest.with_suffix(dest.suffix+'.sha256').write_text(sha(dest)+'  '+dest.name+'\n')
+    log('CHECKPOINT '+str(dest));return dest
+
+def covariance(path,columns,root):
+    # Explicit bounded implementation avoids an optimistic RAM decision for wide joint fits.
+    from fast_covariance import covariance as cov
+    n=pq.ParquetFile(path).metadata.num_rows
+    buckets=min(128,max(8,2**int(np.ceil(np.log2(max(1,n/1000000))))))
+    return cov(path,columns,root,memory=3.,buckets=buckets)

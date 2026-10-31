@@ -1,0 +1,217 @@
+from pathlib import Path
+import sys,tempfile,unittest,contextlib,io,shutil,subprocess,json,hashlib,zipfile,csv
+from unittest.mock import patch
+ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT/'code'))
+from util import *
+import numpy as np,pandas as pd,duckdb
+import pyarrow as pa,pyarrow.parquet as pq
+import panel,history,estimation
+from source import core,matched
+from checkpoints import stage
+
+DAY=86400000
+
+def fixture(n=800):
+    rng=np.random.default_rng(447);rows=[];start0=1706745600000
+    def event(game,chooser,recipient,start,draw,tournament=False):
+        recipient_rating=1400+rng.uniform(-50,50)
+        return dict(game_id=game,chooser_user_id=chooser,disconnected_user_id=recipient,
+          chooser_username_norm='user_'+str(chooser),disconnected_username_norm='user_'+str(recipient),
+          utc_ms=int(start),api_last_move_at_ms=int(start+300000),archive_ordinal=len(rows),
+          month=pd.Timestamp(start,unit='ms',tz='UTC').strftime('%Y-%m'),api_speed='blitz',
+          kind_draw=bool(draw),outcome_kind_draw=int(draw),timeout_chooser_win=not draw,timeout_chooser_loss=False,
+          timeout_draw_no_mating_material=False,chooser_has_mating_material=True,fair_competitive=True,clearly_worse=False,
+          tournament_like_event=tournament,engine_eval_cp_disconnected=float(rng.uniform(1,49)),
+          chooser_draw_payoff_v2=float(rng.uniform(1,3)),chooser_win_premium_v2=float(rng.uniform(4,12)),
+          chooser_elo=recipient_rating+rng.uniform(20,80),disconnected_elo=recipient_rating,
+          chooser_pre_rd_v2=float(rng.uniform(25,80)),disconnected_pre_rd_v2=float(rng.uniform(25,80)),
+          chooser_clock_last_obs_s=float(rng.uniform(50,180)),disconnected_clock_last_obs_s=float(rng.uniform(50,180)),
+          ply_count=int(rng.integers(15,55)),material_advantage_chooser=float(rng.uniform(-1,1)),tc_base_s=float(rng.uniform(180,300)),tc_inc_s=float(rng.integers(0,5)))
+    for i in range(n):
+        start=start0+(i%50)*DAY+(i%3)*3600000;iid=100+i
+        draw=bool(rng.random()<.25);e=event('exposure_'+str(i),10000+i%70,iid,start,draw);rows.append(e)
+        if i==2:e.update(kind_draw=False,outcome_kind_draw=0,timeout_chooser_win=False,timeout_chooser_loss=True)
+        if i%4:
+            for j,delta in enumerate([3600000,12*3600000,3*DAY,14*DAY,50*DAY]):
+                if i%5>j:continue
+                delta+=int(rng.integers(1000,500000))
+                # Tournament flag makes these future chooser decisions, without adding index recipients.
+                f=event('future_'+str(i)+'_'+str(j),iid,30000+i*5+j,start+delta,bool(rng.random()<.18),True)
+                rows.append(f)
+                if j==0:
+                    # Two decisions in the same interval: only the first is the interval outcome.
+                    rows.append(event('second_'+str(i),iid,50000+i,start+delta+100000,not f['kind_draw'],True))
+        if i%7==0:rows.append(event('censor_'+str(i),60000+i,iid,start+1800000,False,True))
+    rows.append(event('panel_end',900001,900002,1761954900000,False,True))
+    return pd.DataFrame(rows)
+
+def auth_for(frame,root):
+    path=root/'main.parquet';frame.to_parquet(path,index=False)
+    counts=dict(opportunities=len(frame),grants=int(frame.kind_draw.sum()),choosers=frame.chooser_user_id.nunique(),
+      competitive=int(frame.fair_competitive.sum()),competitive_grants=int(frame.loc[frame.fair_competitive,'kind_draw'].sum()),
+      clearly_worse=int(frame.clearly_worse.sum()),clearly_worse_grants=int(frame.loc[frame.clearly_worse,'kind_draw'].sum()))
+    return dict(records=[dict(record(path),signature=signature(path))],expected_census={'new_'+k:int(v) for k,v in counts.items()}),counts
+
+def old_and_chronology(frame,root):
+    e=frame[frame.game_id.str.startswith('exposure_')]
+    old=pd.DataFrame(dict(recipient_user_id=e.disconnected_user_id.to_numpy(),exposure_chooser_user_id=e.chooser_user_id.to_numpy(),
+       first_pair_utc_ms=e.utc_ms.to_numpy(),exposure_game_id=e.game_id.to_numpy(),cohort_row_id=np.arange(len(e))))
+    old.loc[1,'first_pair_utc_ms']-=DAY # A repeated pair, even though this is the first panel disconnection.
+    old.loc[0,'exposure_chooser_user_id']=777777 # Old first event was material-ineligible: fresh pair needs lookup.
+    old_path=root/'old.parquet';old.to_parquet(old_path,index=False)
+    chronology=pd.DataFrame(dict(utc_ms=frame.utc_ms,white_id=frame.chooser_user_id,black_id=frame.disconnected_user_id))
+    chronology=pd.concat([chronology,pd.DataFrame([dict(utc_ms=int(e.iloc[1].utc_ms)-DAY,white_id=int(e.iloc[1].chooser_user_id),black_id=int(e.iloc[1].disconnected_user_id)),dict(utc_ms=-1,white_id=10000,black_id=100)])],ignore_index=True)
+    path=root/'history.parquet';chronology.to_parquet(path,index=False,row_group_size=500)
+    row=dict(file_index=0,path=str(path),rows=len(chronology),bytes=path.stat().st_size,signature=signature(path),raw_footer_sha256=history.raw_footer_hash(path),authority_footer_signature='synthetic')
+    return dict(record(old_path),signature=signature(old_path),rows=len(old)),[row]
+
+class ReceiptTests(unittest.TestCase):
+    def test_vendored_sources_unchanged(self):
+        for item in read(ROOT/'authority/VENDORED_SOURCES.json'):verify(item,ROOT)
+
+    def test_pruned_sql_matches_original_complete_query_and_reselects_after_removal(self):
+        with tempfile.TemporaryDirectory() as td,contextlib.redirect_stdout(io.StringIO()):
+            root=Path(td);frame=fixture(80);auth,_=auth_for(frame,root);paths=[r['path'] for r in auth['records']]
+            # Earlier material-ineligible decision would previously win the first-event ranking.
+            dropped=frame.iloc[0].copy();dropped['game_id']='removed_first';dropped['utc_ms']-=DAY;dropped['api_last_move_at_ms']-=DAY
+            old_frame=pd.concat([pd.DataFrame([dropped]),frame],ignore_index=True);old_path=root/'before.parquet';old_frame.to_parquet(old_path,index=False)
+            with duckdb.connect() as c:
+                endpoint=int(frame.api_last_move_at_ms.max())
+                old_first=c.execute(panel.exposure_sql([old_path],endpoint)).fetchdf();fresh=c.execute(panel.exposure_sql(paths,endpoint)).fetchdf()
+                self.assertEqual(old_first.loc[old_first.recipient_user_id==100,'exposure_game_id'].iloc[0],'removed_first')
+                self.assertEqual(fresh.loc[fresh.recipient_user_id==100,'exposure_game_id'].iloc[0],'exposure_0')
+                self.assertFalse(fresh.loc[fresh.recipient_user_id==102,'arm_eligible'].iloc[0])
+                ex=root/'ex.parquet';fresh.to_parquet(ex,index=False)
+                a3=fresh[['cohort_row_id','recipient_user_id','exposure_game_id','exposure_anchor_utc_ms']].rename(columns={'recipient_user_id':'disconnected_user_id'})
+                for name in ['games_within_7d','games_within_30d']:a3[name]=0
+                for name in ['any_game_within_7d','any_game_within_30d']:a3[name]=False
+                a3['first_next_game_utc_ms']=pd.Series([pd.NA]*len(a3),dtype='Int64');a3path=root/'a3.parquet';a3.to_parquet(a3path,index=False)
+                reference=c.execute(core.recipient_panel_sql(paths,a3path,endpoint)).fetchdf()
+                actual=c.execute(panel.outcomes_sql(paths,ex)).fetchdf()
+                pd.testing.assert_frame_equal(actual,reference[actual.columns])
+                row=actual.loc[actual.recipient_user_id==105].iloc[0]
+                f=frame[frame.game_id=='future_5_0'].iloc[0]
+                self.assertEqual(row.first_subsequent_kind_draw,f.kind_draw);self.assertEqual(row.decay_6h_kind,f.kind_draw)
+                self.assertFalse(actual.loc[actual.recipient_user_id==100,'reached_fair_chooser_within_90d'].iloc[0])
+
+    def test_scan_parity_first_pair_recovery_resume_and_corruption(self):
+        with tempfile.TemporaryDirectory() as td,contextlib.redirect_stdout(io.StringIO()):
+            root=Path(td);frame=fixture(80);auth,_=auth_for(frame,root);old,catalog=old_and_chronology(frame,root)
+            exdir=root/'ex';exdir.mkdir();panel.build_exposures(exdir,auth,2,1)
+            seed=root/'seed';seed.mkdir();summary=history.seed_pairs(seed,exdir/'exposures_private.parquet',old,2,1)
+            self.assertEqual(summary['unresolved_pairs'],1)
+            pairs,r,_=history.reconstruct_pairs(root/'state',seed/'pairs_private.parquet',root,'abc',2,catalog)
+            expected=int(frame.loc[frame.game_id=='exposure_0','utc_ms'].iloc[0])
+            self.assertEqual(int(pairs.loc[(pairs.lo==100)&(pairs.hi==10000),'first_pair_utc_ms'].iloc[0]),expected)
+            self.assertEqual(r['files'][0]['invalid_time_rows_excluded'],1)
+            with patch.object(history,'scan_file',side_effect=AssertionError('Scan repeated')):
+                pairs2,_,_=history.reconstruct_pairs(root/'state',seed/'pairs_private.parquet',root,'abc',2,catalog)
+                pd.testing.assert_frame_equal(pairs,pairs2)
+            resolved=root/'resolved.parquet';pairs.to_parquet(resolved,index=False)
+            with patch.object(history,'chronology_catalog',side_effect=AssertionError('Unneeded chronology scan')):
+                _,summary,_=history.reconstruct_pairs(root/'all_known',resolved,root,'def',2)
+                self.assertEqual(summary['scanned_pairs'],0)
+            f=next((root/'state/history_files').rglob('minima_private.parquet'))
+            with f.open('ab') as stream:stream.write(b'corrupt')
+            with self.assertRaisesRegex(RuntimeError,'checksum'):
+                history.reconstruct_pairs(root/'state',seed/'pairs_private.parquet',root,'abc',2,catalog)
+
+    def test_vector_pair_scan_matches_dictionary_oracle_for_reversed_pairs_and_future_groups(self):
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td);rng=np.random.default_rng(334);n=3000
+            a=rng.integers(0,500,n);b=rng.integers(0,500,n);t=rng.integers(-1,1000,n)
+            target=sorted({tuple(sorted((int(x),int(y)))) for x,y in zip(a[:100],b[:100]) if x!=y})
+            keys=history.pair_keys(*np.array(target).T);p=root/'events.parquet'
+            pq.write_table(pa.table(dict(utc_ms=t,white_id=a,black_id=b)),p,row_group_size=300)
+            row=dict(file_index=0,path=str(p),signature=signature(p),rows=n,raw_footer_sha256=history.raw_footer_hash(p))
+            out=root/'scan';out.mkdir();history.scan_file(out,row,keys,800,history.endpoint_filter(keys),73)
+            actual=pq.read_table(out/'minima_private.parquet').to_pydict();oracle={}
+            for x,y,z in zip(a,b,t):
+                pair=tuple(sorted((int(x),int(y))))
+                if pair in target and 0<z<=800:oracle[pair]=min(oracle.get(pair,10**9),int(z))
+            expected={int(history.pair_keys([x],[y])[0]):v for (x,y),v in oracle.items()}
+            self.assertEqual(dict(zip(actual['pair_key'],actual['first_pair_utc_ms'])),expected)
+
+    def test_censor_boundary_and_absent_opportunities(self):
+        y=matched.censored_outcome(np.array([1,1,1,0],bool),np.array([1.,1.,1.,np.nan]),np.array([100]*4),
+          np.array([10.,10.,10.,np.nan]),np.array([111,110,-1,120]))
+        np.testing.assert_array_equal(y,[1,0,1,0])
+        with self.assertRaisesRegex(RuntimeError,'Censor precedes'):
+            matched.censored_outcome(np.array([1],bool),[1],np.array([100]),[10],[99])
+
+    def test_covariance_matches_independent_dense_fixed_effects_and_original_estimator(self):
+        with contextlib.redirect_stdout(io.StringIO()):
+            rng=np.random.default_rng(87);n=600;D=rng.binomial(1,.4,n);X=rng.normal(size=(n,3));w=rng.uniform(.2,2,n)
+            groups=[rng.integers(0,5,n),rng.integers(0,3,n)];cluster=rng.integers(0,40,n)
+            y=.3*D+X@np.array([.5,-.3,.1])+groups[0]+rng.normal(size=n)
+            for add_hour in (False,True):
+                gg=groups+[rng.integers(0,8,n)] if add_hour else groups
+                actual=estimation.fit(y,D,X,['a','b','c'],w,gg,cluster,np.arange(n),False,add_hour)
+                dummies=np.column_stack([np.eye(int(g.max())+1)[g] for g in gg]);design=np.column_stack([D,X,dummies])
+                bread=np.linalg.pinv((design*w[:,None]).T@design);b=bread@(design.T@(w*y));u=y-design@b
+                S=np.array([(design*w[:,None]*u[:,None])[cluster==g].sum(axis=0) for g in range(40)])
+                V=bread@(S.T@S)@bread*(40/39)*(n-1)/(n-4)
+                np.testing.assert_allclose(actual['coefficients'],b[:4],atol=1e-9)
+                np.testing.assert_allclose(actual['covariance'],V[:4,:4],rtol=1e-8,atol=1e-11)
+                if not add_hour:
+                    old=core.fit_weighted_cluster_model(outcome=y,treatment=D,controls=X,control_names=['a','b','c'],weights=w,cell_fe=gg[0],month_fe=gg[1],clusters=cluster,row_ids=np.arange(n),specification={},binary_outcome=False)
+                    self.assertAlmostEqual(actual['estimate'],old['coefficient'],places=10);self.assertAlmostEqual(actual['se'],old['standard_error'],places=10)
+                else:
+                    old=matched.fit(y,D,X,w,gg,cluster,core,two_way=True)
+                    self.assertAlmostEqual(actual['estimate']*100,old['estimate'],places=9)
+                    self.assertAlmostEqual(actual['se_chooser_or_hour_CR0']*100,old['se'],places=9)
+
+    def test_material_alias_author_partition_and_pair_fact_conflicts_rejected(self):
+        with tempfile.TemporaryDirectory() as td,contextlib.redirect_stdout(io.StringIO()):
+            root=Path(td);base=fixture(40)
+            for column,value in [('chooser_username_norm','__PRIVATE_VALUE_1__'),('disconnected_username_norm','__PRIVATE_VALUE_2__'),('outcome_kind_draw',7),('timeout_draw_no_mating_material',True),('timeout_chooser_win',False)]:
+                frame=base.copy();frame.loc[0,column]=value
+                if column=='timeout_chooser_win':frame.loc[0,['kind_draw','outcome_kind_draw']]=[False,0]
+                auth,_=auth_for(frame,root);out=root/column;out.mkdir()
+                with self.assertRaises(RuntimeError):panel.build_exposures(out,auth,2,1)
+            auth,_=auth_for(base,root);out=root/'valid';out.mkdir();panel.build_exposures(out,auth,2,1)
+            old,_=old_and_chronology(base,root);facts=pd.read_parquet(old['path']);duplicate=facts.iloc[[1]].copy();duplicate.first_pair_utc_ms+=1
+            pd.concat([facts,duplicate]).to_parquet(old['path'],index=False)
+            broken=root/'conflict';broken.mkdir()
+            with self.assertRaisesRegex(RuntimeError,'Conflicting'):
+                history.seed_pairs(broken,out/'exposures_private.parquet',old,2,1)
+
+    def test_full_cli_models_resume_privacy_and_failed_return(self):
+        with tempfile.TemporaryDirectory() as td,contextlib.redirect_stdout(io.StringIO()):
+            p=Path(td);pkg=p/'package';shutil.copytree(ROOT,pkg,ignore=shutil.ignore_patterns('.git','__pycache__','SHA256SUMS.txt','TEST_RESULTS.txt'))
+            frame=fixture();_,counts=auth_for(frame,p);old,catalog=old_and_chronology(frame,p)
+            project=p/'project';rid='f'*64;parent=project/'derived/replication/mating_material_first_run_v100_PRIVATE'/rid[:16];parent.mkdir(parents=True)
+            # Empty months are valid Parquet shards; the production contract still requires all 24.
+            records=[]
+            for month in MONTHS:
+                sub=frame.loc[frame.month==month];f=parent/'PRIVATE/panels/main'/('month='+month)/'analysis_panel.parquet';f.parent.mkdir(parents=True)
+                pq.write_table(pa.Table.from_pandas(sub,schema=pa.Table.from_pandas(frame,preserve_index=False).schema,preserve_index=False),f)
+                records.append(dict(record(f),month=month,rows=len(sub),grants=int(sub.kind_draw.sum())))
+            e=read(pkg/'authority/REVIEW.json');e['run_id']=rid;totals={'new_'+k:int(v) for k,v in counts.items()}
+            e['censuses']={k:totals.copy() for k in ('main','all_source')};e['monthly']={k:{r['month']:[r['rows'],r['grants']] for r in records} for k in ('main','all_source')}
+            result=parent/'report/RESULTS.json';save(result,dict(input_panels_built=True,checks=[dict(passed=True)]));e['results_sha256']=sha(result);e['return_zip_sha256']='0'*64
+            save(pkg/'authority/REVIEW.json',e);m=parent/'MATERIAL_RESTRICTED_INPUTS_READY_PRIVATE.json'
+            save(m,dict(contract='MATING_MATERIAL_FIRST_RUN_V1',run_id=rid,rule=e['rule'],author_exclusion=['__PRIVATE_VALUE_1__','__PRIVATE_VALUE_2__'],excluded_from_decisions_not_chronology=True,full_width_columns_preserved=True,price_layer='original',known_outcome_policy=e['known_outcome_policy'],censuses=e['censuses'],datasets={k:records for k in ('main','all_source')}))
+            save(parent/'_SUCCESS.json',dict(status='INPUTS_READY_NOT_FULL_PAPER_RERUN',run_id=rid,report_sha256=e['return_zip_sha256'],files=[record(m)]))
+            files=[f for f in pkg.rglob('*') if f.is_file()];(pkg/'SHA256SUMS.txt').write_text(''.join(sha(f)+'  '+str(f.relative_to(pkg))+'\n' for f in sorted(files)))
+            save(p/'history.json',dict(old=old,catalog=catalog))
+            driver=p/'driver.py';driver.write_text("import sys,json\nfrom pathlib import Path\nfrom types import SimpleNamespace\nsys.path.insert(0,str(Path(sys.argv.pop(1))/'code'))\nimport run_receipt as r,history\nh=json.loads(Path(sys.argv.pop(1)).read_text())\nr.authenticate_old=lambda project:h['old']\nhistory.chronology_catalog=lambda project,workers:h['catalog']\nr.shutil.disk_usage=lambda path:SimpleNamespace(free=100*2**30)\nraise SystemExit(r.main())\n")
+            command=[sys.executable,str(driver),str(pkg),str(p/'history.json'),'--project-root',str(project),'--results-dir',str(p/'returns'),'--workers','2','--memory-gb','4']
+            result=subprocess.run(command,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+            self.assertEqual(result.returncode,0,result.stdout[-7000:])
+            pointer=read(p/'returns/MATERIAL_RECEIPT_LATEST_PRIVATE.json');run=Path(pointer['root']);done=read(run/'_SUCCESS.json')
+            self.assertEqual(done['summary']['models'],18);self.assertEqual(done['summary']['history']['scanned_pairs'],1)
+            self.assertEqual(done['summary']['exposures']['panel_end_ms'],int(frame.api_last_move_at_ms.max()))
+            self.assertEqual(len(list((run/'report/models').glob('*.json'))),18)
+            table_=pd.read_csv(run/'report/tab_dynamics.csv');self.assertEqual(set(table_.name),{'primary','censored','reach','conditional'})
+            with zipfile.ZipFile(pointer['report']) as z:
+                self.assertIsNone(z.testzip());self.assertFalse(any('/PRIVATE/' in n or n.endswith('.parquet') for n in z.namelist()))
+                for item in json.loads(z.read('REPORT_MANIFEST.json')):
+                    b=z.read(item['path']);self.assertEqual(len(b),item['bytes']);self.assertEqual(hashlib.sha256(b).hexdigest(),item['sha256'])
+            checkpoint=run/'PRIVATE/exposures/CHECKPOINT.json';mtime=checkpoint.stat().st_mtime_ns
+            result=subprocess.run(command,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+            self.assertEqual(result.returncode,0,result.stdout[-5000:]);self.assertIn('no models repeated',result.stdout);self.assertEqual(checkpoint.stat().st_mtime_ns,mtime)
+            with (run/'report/tab_dynamics.csv').open('a') as f:f.write('corrupt')
+            result=subprocess.run(command,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT);self.assertEqual(result.returncode,1,result.stdout[-3000:])
+            with zipfile.ZipFile(next((p/'returns').glob('*_FAILED.zip'))) as z:self.assertFalse(json.loads(z.read('RETURN_STATUS.json'))['successful_return'])
