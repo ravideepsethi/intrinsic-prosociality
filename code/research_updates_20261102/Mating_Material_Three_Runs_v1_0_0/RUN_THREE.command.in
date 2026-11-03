@@ -1,0 +1,30 @@
+#!/bin/bash
+set -euo pipefail
+pc_package="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+pc_desktop="$HOME/Desktop/Lichess_Desktop"
+pc_env="$pc_desktop/MatingMaterial_IV_Env_v100"
+mkdir -p "$pc_desktop/Logs"
+echo 'Three authorized paper analyses v1.0.0'
+echo 'Expected runtime: 2–4 hours provisionally; drive I/O can extend this.'
+if [ ! -x "$pc_env/bin/python" ]; then
+  pc_python="$(command -v python3 || command -v python || true)"
+  [ -n "$pc_python" ] || { echo 'Python 3.11–3.13 required.'; exit 1; }
+  "$pc_python" -c 'import sys; assert (3,11)<=sys.version_info[:2]<(3,14), "Use Python 3.11–3.13"'
+  "$pc_python" -m venv "$pc_env"
+fi
+pc_hash="$(shasum -a 256 "$pc_package/requirements.txt" | cut -d ' ' -f 1)"
+if [ ! -f "$pc_env/REQUIREMENTS_SHA256" ] || [ "$(cat "$pc_env/REQUIREMENTS_SHA256")" != "$pc_hash" ]; then
+  echo 'Installing pinned packages once; production analysis is offline.'
+  "$pc_env/bin/python" -m pip install --prefer-binary -r "$pc_package/requirements.txt"
+  printf '%s\n' "$pc_hash" > "$pc_env/REQUIREMENTS_SHA256"
+fi
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1
+cd "$pc_package"
+pc_log="$(mktemp "$pc_desktop/Logs/THREE_RUNS_TESTS.XXXXXX")"
+echo "Startup tests, about 1–3 minutes: $pc_log"
+if "$pc_env/bin/python" -m unittest discover -s tests -v > "$pc_log" 2>&1; then tail -n 4 "$pc_log"; else tail -n 80 "$pc_log"; exit 1; fi
+if command -v caffeinate >/dev/null 2>&1; then
+  exec caffeinate -i "$pc_env/bin/python" -u "$pc_package/run.py" --result-dir "$pc_desktop" "$@"
+else
+  exec "$pc_env/bin/python" -u "$pc_package/run.py" --result-dir "$pc_desktop" "$@"
+fi

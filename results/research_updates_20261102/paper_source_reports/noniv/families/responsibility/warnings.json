@@ -1,0 +1,267 @@
+[
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "curve_late_all_rows",
+    "nuisance_or_focal_aliases": 1
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "curve_late_common_baseline",
+    "nuisance_or_focal_aliases": 1
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "curve_late_common_proxies",
+    "nuisance_or_focal_aliases": 14
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_late_competitive_own",
+    "nuisance_or_focal_aliases": 2
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_late_competitive_net2",
+    "nuisance_or_focal_aliases": 3
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_late_competitive_net4",
+    "nuisance_or_focal_aliases": 3
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_late_competitive_clock_log",
+    "nuisance_or_focal_aliases": 2
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_late_competitive_clock_ratio",
+    "nuisance_or_focal_aliases": 1
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_late_competitive_clock_trouble",
+    "nuisance_or_focal_aliases": 2
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_late_competitive_material",
+    "nuisance_or_focal_aliases": 2
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "joint_late_competitive",
+    "nuisance_or_focal_aliases": 14
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_late_losing_own",
+    "nuisance_or_focal_aliases": 9
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_late_losing_net2",
+    "nuisance_or_focal_aliases": 9
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_late_losing_net4",
+    "nuisance_or_focal_aliases": 9
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_late_losing_clock_log",
+    "nuisance_or_focal_aliases": 8
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_late_losing_clock_ratio",
+    "nuisance_or_focal_aliases": 7
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_late_losing_clock_trouble",
+    "nuisance_or_focal_aliases": 8
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_late_losing_material",
+    "nuisance_or_focal_aliases": 8
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "joint_late_losing",
+    "nuisance_or_focal_aliases": 21
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "asymmetry_late",
+    "nuisance_or_focal_aliases": 35
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "curve_all_all_rows",
+    "nuisance_or_focal_aliases": 2
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "curve_all_common_baseline",
+    "nuisance_or_focal_aliases": 2
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "curve_all_common_proxies",
+    "nuisance_or_focal_aliases": 14
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_all_competitive_own",
+    "nuisance_or_focal_aliases": 3
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_all_competitive_net2",
+    "nuisance_or_focal_aliases": 4
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_all_competitive_net4",
+    "nuisance_or_focal_aliases": 4
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_all_competitive_clock_log",
+    "nuisance_or_focal_aliases": 3
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_all_competitive_clock_ratio",
+    "nuisance_or_focal_aliases": 2
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_all_competitive_clock_trouble",
+    "nuisance_or_focal_aliases": 3
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_all_competitive_material",
+    "nuisance_or_focal_aliases": 2
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "joint_all_competitive",
+    "nuisance_or_focal_aliases": 14
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_all_losing_own",
+    "nuisance_or_focal_aliases": 11
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_all_losing_net2",
+    "nuisance_or_focal_aliases": 11
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_all_losing_net4",
+    "nuisance_or_focal_aliases": 11
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_all_losing_clock_log",
+    "nuisance_or_focal_aliases": 10
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_all_losing_clock_ratio",
+    "nuisance_or_focal_aliases": 9
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_all_losing_clock_trouble",
+    "nuisance_or_focal_aliases": 10
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "proxy_all_losing_material",
+    "nuisance_or_focal_aliases": 10
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "joint_all_losing",
+    "nuisance_or_focal_aliases": 23
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "asymmetry_all",
+    "nuisance_or_focal_aliases": 37
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "blunder100_competitive",
+    "nuisance_or_focal_aliases": 1
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "blunder100_losing",
+    "nuisance_or_focal_aliases": 7
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "gap_predicts_blunder100",
+    "nuisance_or_focal_aliases": 1
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "blunder200_competitive",
+    "nuisance_or_focal_aliases": 1
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "blunder200_losing",
+    "nuisance_or_focal_aliases": 7
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "gap_predicts_blunder200",
+    "nuisance_or_focal_aliases": 1
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "blunder300_competitive",
+    "nuisance_or_focal_aliases": 1
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "blunder300_losing",
+    "nuisance_or_focal_aliases": 7
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "gap_predicts_blunder300",
+    "nuisance_or_focal_aliases": 1
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "curve_late_common_proxies_rating",
+    "nuisance_or_focal_aliases": 19
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "cross_region_baseline",
+    "nuisance_or_focal_aliases": 1
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "cross_region_proxies",
+    "nuisance_or_focal_aliases": 9
+  },
+  {
+    "action": "Only estimable contrasts receive estimates; inspect focal statuses.",
+    "model": "curve_low_loss_ample_clock",
+    "nuisance_or_focal_aliases": 1
+  }
+]

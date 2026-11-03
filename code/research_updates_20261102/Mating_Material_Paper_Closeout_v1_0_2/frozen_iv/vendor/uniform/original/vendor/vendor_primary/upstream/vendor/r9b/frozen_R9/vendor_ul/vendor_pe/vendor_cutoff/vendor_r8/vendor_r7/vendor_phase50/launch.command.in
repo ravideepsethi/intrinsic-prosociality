@@ -1,0 +1,51 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+r2_mode="${1:?Specify analyze or tests}"; shift
+r2_package="$(cd "$(dirname "$0")" && pwd -P)"
+r2_project="${IV_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+r2_desktop="${IV_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+r2_python="${IV_PYTHON:-$r2_project/venv/bin/python}"
+if [[ ! -x "$r2_python" ]]; then echo "Research Python not found: $r2_python. Connect XT_Pro or set IV_PYTHON."; exit 2; fi
+if [[ "$r2_mode" != analyze && "$r2_mode" != tests ]]; then echo 'Use RUN_PHASE_50_ANALYSIS.command or RUN_TESTS.command.'; exit 2; fi
+mkdir -p "$r2_desktop"
+export PYTHONDONTWRITEBYTECODE=1
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1
+cd "$r2_package"
+"$r2_python" - <<'PY'
+import sys,numpy,pyarrow,duckdb
+assert sys.version_info>=(3,10)
+sys.path.insert(0,'code')
+from phase50_common import verify_package
+verify_package()
+print('PACKAGE_SHA256_OK; Python',sys.version.split()[0],'; NumPy',numpy.__version__,'; PyArrow',pyarrow.__version__,'; DuckDB',duckdb.__version__,'; SciPy not required',flush=True)
+PY
+r2_log="$r2_desktop/run2_phase50_analysis_${r2_mode}_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+echo "Log: $r2_log"
+r2_awake=()
+if [[ -x /usr/bin/caffeinate ]]; then r2_awake=(/usr/bin/caffeinate -i); fi
+set +e
+{
+ if [[ "$r2_mode" == tests ]]; then
+  echo 'Expected runtime: 30–120 seconds; synthetic tests, zero API calls.'
+  "$r2_python" -m unittest discover -s tests -p 'test_*.py' -v
+ else
+  echo 'Expected runtime: approximately 2–6 hours for the full 50% analysis; 1–5 minutes for reused coverage and the three-record audit. Unbenchmarked estimate based on earlier runs; SSD contention and cache availability matter. Reruns resume.'
+  echo 'Up to 10 memory-bounded local workers. Projected Parquet reads, reusable score/history/chronology features, checked numerical solver. Zero API requests; no Stockfish.'
+  echo 'Reuses completed 50% coverage; audits April 2024, January 2025 and June 2025 metadata flags. No replacements or invented metadata.'
+  echo 'Reads only CHECKPOINT_050_SAVED. The continuous downloader can remain running.'
+  echo 'Reproduces 25% features/results; fits fixed 50% and the added 25–50% band. Includes pooled and competitive-score ordinary/entry checks. Environment-rate controls and receipt IV are not rerun here.'
+  r2_tests="${r2_log%.log}_selftests.log"
+  echo "Offline self-tests: $r2_tests"
+  if "$r2_python" -m unittest discover -s tests -p 'test_*.py' -q > "$r2_tests" 2>&1; then
+   echo 'OFFLINE_SELF_TESTS_OK. Starting the fixed 50% analysis.'
+  else
+   r2_test_exit=$?; cat "$r2_tests"; echo 'Self-tests failed; production analysis did not start.'; exit "$r2_test_exit"
+  fi
+  "${r2_awake[@]}" "$r2_python" -u code/run_phase50.py --project-root "$r2_project" --desktop "$r2_desktop" "$@"
+ fi
+} 2>&1 | tee "$r2_log"
+r2_exit=${PIPESTATUS[0]}
+set -e
+if [[ "$r2_exit" -ne 0 ]]; then echo "Stopped with exit $r2_exit. Completed Parquets remain reusable. Return this log: $r2_log"; fi
+exit "$r2_exit"

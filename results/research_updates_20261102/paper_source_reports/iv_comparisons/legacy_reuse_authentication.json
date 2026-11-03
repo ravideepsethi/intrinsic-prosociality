@@ -1,0 +1,21 @@
+{
+  "parent_configuration": "56739829cf4a914d145af834bb5a0ccd3798b43fda1910dd2a93e643bc6b6b81",
+  "parent_package_manifest": "5292c74576ff24bfba584fdfde669d2c9bdc8a1566b81a65c4355bf159f88a4d",
+  "stages": [
+    {
+      "stage": "receipt_stream",
+      "receipt_sha256": "36abe9111c22720c25d0417a12339863d324007e5b78e3dbe1f48af7c011cda1"
+    },
+    {
+      "stage": "candidates",
+      "receipt_sha256": "96f2d98d7e69d3b05cbb600f7d8a316273b4f0be9b0ddc240d0c19bf15963180"
+    },
+    {
+      "stage": "supported",
+      "receipt_sha256": "ca0e25802a23c486affec4e832afe2cbf6b6e3411d7d8594d73502ad2c6982c5"
+    }
+  ],
+  "old_outputs_modified": false,
+  "selection_and_scores_recomputed": false,
+  "new_execution_version": "1.0.3"
+}

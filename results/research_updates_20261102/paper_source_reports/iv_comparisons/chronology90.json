@@ -1,0 +1,28 @@
+{
+  "config_sha256": "12093d55b7ee9f737696982b8ebaef7b0706c27adc4fb12482a99aabf985d482",
+  "files": [
+    {
+      "bytes": 186,
+      "path": "bounded_execution.json",
+      "sha256": "1e2253092ca354d20bbb2d638b45d59430214190e9f2429072604f6cb0ad3951"
+    },
+    {
+      "bytes": 999,
+      "path": "dependencies_PRIVATE.json",
+      "sha256": "d1292140aa330273f30063701baccda8c4b7b899778762be089e14cc0a19170f"
+    },
+    {
+      "bytes": 218456293,
+      "path": "hits.parquet",
+      "sha256": "119552ede25a198481af2f7c54710618d360ef7abc6665811686eedf787fca86"
+    },
+    {
+      "bytes": 53533,
+      "path": "missing.parquet",
+      "sha256": "759e3db8fb9ddc8625107a4369c3f42fee054d83d4029853ee75f4fe89210f7f"
+    }
+  ],
+  "missing": 25,
+  "reused": 45446145,
+  "rows": 45446170
+}

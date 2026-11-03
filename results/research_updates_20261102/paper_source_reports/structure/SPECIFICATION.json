@@ -1,0 +1,17 @@
+{
+  "clock_pooled": "Exact R11 column1, reproduces the reviewed corrected-material core fit.",
+  "clock_region": "Same R11 column1 plus C*log1p(clock_c) and C*log1p(clock_d); original missing indicators remain pooled. No invalid clocks in the reviewed frame.",
+  "core_reproduction": {
+    "all_passed": true,
+    "max_abs_estimate_difference": 2.955857780762017e-11,
+    "max_abs_se_difference": 1.4171164242071654e-11,
+    "terms": 68
+  },
+  "equalweight": "Exact original three-weight binary FE contrast; competitive >= -100 versus clearly worse <= -300; middle excluded only from this contrast.",
+  "rating_layer": "Original reconstructed premium and RD, no new rating replay.",
+  "raw_stage": "Ply 2, 3\u201310, by ply 4, by ply 10, after ply 10, and all eight roughly-equal bands rebuilt on new author-excluded material frame.",
+  "regions": "Competitive >= -100; noncompetitive < -100 includes modestly worse. Clock second column is NOT restricted to <= -300.",
+  "speed_tests": "Supplementary Wald tests use the four observed formats only. Absent ultrabullet is not treated as an estimated zero profile.",
+  "stage_covariance": "Chooser sandwich G/(G-1); all chooser clusters including singletons; no (N-1)/(N-K) factor.",
+  "stage_speed": "Exact recovered R10 column4: single pooled five-knot gap; stage x speed; position, month, speed, clock and original rating controls."
+}

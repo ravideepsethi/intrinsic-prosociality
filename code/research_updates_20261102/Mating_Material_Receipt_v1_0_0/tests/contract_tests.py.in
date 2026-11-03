@@ -1,0 +1,60 @@
+from pathlib import Path
+import sys,tempfile,copy,subprocess
+ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT/'code'))
+from util import *
+import unittest
+
+class Contracts(unittest.TestCase):
+    def setUp(self):
+        self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup);self.path=Path(self.temp.name)/'ready.json'
+        self.e=read(ROOT/'authority/REVIEW.json')
+        self.m=dict(contract='MATING_MATERIAL_FIRST_RUN_V1',run_id=self.e['run_id'],rule=self.e['rule'],author_exclusion=['AUTHOR_ACCOUNT_1','AUTHOR_ACCOUNT_2'],
+          excluded_from_decisions_not_chronology=True,full_width_columns_preserved=True,price_layer='original',known_outcome_policy=self.e['known_outcome_policy'],censuses=self.e['censuses'],datasets={})
+        for f in ['main','all_source']:
+            self.m['datasets'][f]=[dict(month=m,rows=n,grants=g,path=str(Path(self.temp.name)/f/(m+'.parquet'))) for m,(n,g) in self.e['monthly'][f].items()]
+        self.s=dict(status='INPUTS_READY_NOT_FULL_PAPER_RERUN',run_id=self.e['run_id'],report_sha256=self.e['return_zip_sha256'])
+    def check(self):
+        from inputs import validate_contract
+        save(self.path,self.m);self.s['files']=[record(self.path)]
+        validate_contract(self.m,self.s,self.e,self.path)
+    def test_reviewed_contract(self):self.check()
+    def test_incomplete_rejected(self):
+        self.s['status']='AUDIT_PASSED'
+        with self.assertRaisesRegex(RuntimeError,'incomplete'):self.check()
+    def test_wrong_run_rejected(self):
+        self.m['run_id']='old'
+        with self.assertRaisesRegex(RuntimeError,'Different'):self.check()
+    def test_old_material_rule_rejected(self):
+        self.m['rule']='old'
+        with self.assertRaisesRegex(RuntimeError,'rule differs'):self.check()
+    def test_price_change_rejected(self):
+        self.m['price_layer']='upgraded'
+        with self.assertRaisesRegex(RuntimeError,'rating-cost'):self.check()
+    def test_author_policy_rejected(self):
+        self.m['author_exclusion']=[]
+        with self.assertRaisesRegex(RuntimeError,'Author'):self.check()
+    def test_month_missing_rejected(self):
+        self.m['datasets']['main'].pop()
+        with self.assertRaisesRegex(RuntimeError,'month'):self.check()
+    def test_duplicate_path_rejected(self):
+        self.m['datasets']['main'][1]['path']=self.m['datasets']['main'][0]['path']
+        with self.assertRaisesRegex(RuntimeError,'Duplicate'):self.check()
+    def test_changed_monthly_count_rejected(self):
+        self.m['datasets']['main'][0]['rows']-=1
+        with self.assertRaisesRegex(RuntimeError,'Monthly'):self.check()
+    def test_legacy_losses_not_reclassified(self):
+        self.m['known_outcome_policy']=dict(policy='DROP_OR_CODE_AS_WIN')
+        with self.assertRaisesRegex(RuntimeError,'loss policy'):self.check()
+    def test_no_chronology_rewrite(self):
+        self.m['excluded_from_decisions_not_chronology']=False
+        with self.assertRaisesRegex(RuntimeError,'Chronology'):self.check()
+    def test_source_changed_after_hash(self):
+        from inputs import guard
+        self.path.write_text('original');r=dict(path=str(self.path),signature=signature(self.path));auth=dict(records=[r],manifest=str(self.path),manifest_sha256=sha(self.path))
+        guard(auth);self.path.write_text('changed')
+        with self.assertRaisesRegex(RuntimeError,'changed'):guard(auth)
+    def test_manifest_hash_checked(self):
+        from inputs import validate_contract
+        self.check();self.path.write_text('changed')
+        with self.assertRaisesRegex(RuntimeError,'checksum'):validate_contract(self.m,self.s,self.e,self.path)

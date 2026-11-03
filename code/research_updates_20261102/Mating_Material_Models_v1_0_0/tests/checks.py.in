@@ -1,0 +1,177 @@
+from pathlib import Path
+import sys,tempfile,copy,subprocess
+ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT/'code'))
+from util import *
+import unittest
+
+class Contracts(unittest.TestCase):
+    def setUp(self):
+        self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup);self.path=Path(self.temp.name)/'ready.json'
+        self.e=read(ROOT/'authority/REVIEW.json')
+        self.m=dict(contract='MATING_MATERIAL_FIRST_RUN_V1',run_id=self.e['run_id'],rule=self.e['rule'],author_exclusion=['AUTHOR_ACCOUNT_1','AUTHOR_ACCOUNT_2'],
+          excluded_from_decisions_not_chronology=True,full_width_columns_preserved=True,price_layer='original',known_outcome_policy=self.e['known_outcome_policy'],censuses=self.e['censuses'],datasets={})
+        for f in ['main','all_source']:
+            self.m['datasets'][f]=[dict(month=m,rows=n,grants=g,path=str(Path(self.temp.name)/f/(m+'.parquet'))) for m,(n,g) in self.e['monthly'][f].items()]
+        self.s=dict(status='INPUTS_READY_NOT_FULL_PAPER_RERUN',run_id=self.e['run_id'],report_sha256=self.e['return_zip_sha256'])
+    def check(self):
+        from inputs import validate_contract
+        save(self.path,self.m);self.s['files']=[record(self.path)]
+        validate_contract(self.m,self.s,self.e,self.path)
+    def test_reviewed_contract(self):self.check()
+    def test_incomplete_rejected(self):
+        self.s['status']='AUDIT_PASSED'
+        with self.assertRaisesRegex(RuntimeError,'incomplete'):self.check()
+    def test_wrong_run_rejected(self):
+        self.m['run_id']='old'
+        with self.assertRaisesRegex(RuntimeError,'Different'):self.check()
+    def test_old_material_rule_rejected(self):
+        self.m['rule']='old'
+        with self.assertRaisesRegex(RuntimeError,'rule differs'):self.check()
+    def test_price_change_rejected(self):
+        self.m['price_layer']='upgraded'
+        with self.assertRaisesRegex(RuntimeError,'rating-cost'):self.check()
+    def test_author_policy_rejected(self):
+        self.m['author_exclusion']=[]
+        with self.assertRaisesRegex(RuntimeError,'Author'):self.check()
+    def test_month_missing_rejected(self):
+        self.m['datasets']['main'].pop()
+        with self.assertRaisesRegex(RuntimeError,'month'):self.check()
+    def test_duplicate_path_rejected(self):
+        self.m['datasets']['main'][1]['path']=self.m['datasets']['main'][0]['path']
+        with self.assertRaisesRegex(RuntimeError,'Duplicate'):self.check()
+    def test_changed_monthly_count_rejected(self):
+        self.m['datasets']['main'][0]['rows']-=1
+        with self.assertRaisesRegex(RuntimeError,'Monthly'):self.check()
+    def test_legacy_losses_not_reclassified(self):
+        self.m['known_outcome_policy']=dict(policy='DROP_OR_CODE_AS_WIN')
+        with self.assertRaisesRegex(RuntimeError,'loss policy'):self.check()
+    def test_no_chronology_rewrite(self):
+        self.m['excluded_from_decisions_not_chronology']=False
+        with self.assertRaisesRegex(RuntimeError,'Chronology'):self.check()
+    def test_source_changed_after_hash(self):
+        from inputs import guard
+        self.path.write_text('original');r=dict(path=str(self.path),signature=signature(self.path));auth=dict(records=[r],manifest=str(self.path),manifest_sha256=sha(self.path))
+        guard(auth);self.path.write_text('changed')
+        with self.assertRaisesRegex(RuntimeError,'changed'):guard(auth)
+    def test_manifest_hash_checked(self):
+        from inputs import validate_contract
+        self.check();self.path.write_text('changed')
+        with self.assertRaisesRegex(RuntimeError,'checksum'):validate_contract(self.m,self.s,self.e,self.path)
+
+def r11_tests():
+    from worker import load_stage
+    common,design,prepare,estimate,report=load_stage('r11')
+    import r11_reference as r
+    with tempfile.TemporaryDirectory() as tmp:
+        p=Path(tmp);d=r.synthetic();r.test_basis();result=r.test_dense(d,p);r.test_rank_loss(d,p);r.test_projection(d,p)
+        # Check the newly exported standardized *adjacent* contrasts by direct
+        # counterfactual dense predictions, including the region switch at -100.
+        import numpy as np
+        from scipy.linalg import lstsq
+        X,names,ix=design.design(d);M,mnames=design.moments_design(d);mom=p/'all.npz';common.npz(mom,**estimate.first(d)[0])
+        fit=estimate.fit_first([mom],names,ix,mnames);V=fit['g']/(fit['g']-1)*estimate.second(d,fit)['column1']
+        m=report.Model('column1',fit,V)
+        dummy=np.eye(fit['g'])[d.chooser.to_numpy()];W=X[:,ix['column1']];Z=np.column_stack([dummy,W])
+        scale=np.sqrt(np.mean(Z**2,axis=0));scale[scale<1e-12]=1;beta=lstsq(Z/scale,100*d.y,cond=1e-12)[0]/scale
+        for hi,lo in [(1,0),(2,1),(3,2),(4,3),(4,0)]:
+            a=d.copy();a['position']=hi;b=d.copy();b['position']=lo
+            delta=(design.design(a)[0]-design.design(b)[0])[:,ix['column1']].mean(axis=0)
+            np.testing.assert_allclose((m.rate('position',hi)-m.rate('position',lo)).v,delta@beta[fit['g']:],atol=1e-7)
+        print('R11_DENSE_AND_JOINT_COVARIANCE_OK',result,flush=True)
+
+def merit_tests():
+    from worker import load_stage
+    load_stage('merit')
+    import merit_reference as r
+    r.numerical_tests()
+
+def synthetic_source(root):
+    import numpy as np,pandas as pd
+    rng=np.random.default_rng(416728);n=8000;ids=np.repeat(np.arange(100),80)
+    cp=rng.integers(-750,950,n);mate=rng.random(n)<.04;cp[mate]=rng.choice([-10000,10000],mate.sum())
+    month=np.where(rng.random(n)<.5,'2023-11','2023-12');ply=rng.choice([2,5,7,9,15,30,60,100],n)
+    d=pd.DataFrame(dict(game_id=['test'+str(i) for i in range(n)],month=month,chooser_user_id=ids,
+      outcome_kind_draw=rng.binomial(1,.12,n),engine_eval_cp_disconnected=cp,engine_eval_cp_disconnected_raw=cp,
+      engine_eval_is_mate=mate,ply_count=ply,sf100k_nodes_requested=100000,sf100k_fen_turn_matches_disconnected_color=True,
+      disconnected_color='black',sf100k_disconnected_color_for_perspective='black',side_to_move_after_last='black',api_status='timeout',
+      five_second_rule_passed=True,api_rated=True,api_variant='standard',api_speed=rng.choice(['bullet','blitz','rapid','classical'],n),
+      chooser_elo=rng.integers(1000,2700,n),disconnected_elo=rng.integers(1000,2700,n),chooser_has_mating_material=True,
+      chooser_clock_last_obs_s=rng.exponential(80,n),disconnected_clock_last_obs_s=rng.exponential(80,n),
+      chooser_win_premium_v2=np.exp(rng.normal(2,.5,n)),chooser_pre_rd_v2=np.exp(rng.normal(4,.5,n)),disconnected_pre_rd_v2=np.exp(rng.normal(4,.5,n)),
+      fen_after_last_move='4k3/8/8/8/8/8/8/Q3K2q b - - 0 1',disconnected_minus_chooser_material=0))
+    for role in ['chooser','disconnected']:
+        for piece in ['pawns','knights','bishops','rooks','queens']:d[role+'_'+piece]=1 if piece=='queens' else 0
+    records=[]
+    for m in sorted(d.month.unique()):
+        p=root/f'{m}.parquet';a=d[d.month==m];a.to_parquet(p,index=False)
+        records.append(dict(record(p),month=m,rows=len(a),grants=int(a.outcome_kind_draw.sum()),signature=signature(p)))
+    expected=dict(new_opportunities=n,new_grants=int(d.outcome_kind_draw.sum()),new_choosers=100,
+      new_competitive=int((cp>=-100).sum()),new_competitive_grants=int(d.loc[cp>=-100,'outcome_kind_draw'].sum()),
+      new_clearly_worse=int((cp<=-300).sum()),new_clearly_worse_grants=int(d.loc[cp<=-300,'outcome_kind_draw'].sum()))
+    return dict(records=records,expected_census=expected)
+
+def integration():
+    from inputs import census
+    with tempfile.TemporaryDirectory(prefix='mm_models_test_') as tmp:
+        p=Path(tmp);run=p/'run';(run/'report').mkdir(parents=True);auth=synthetic_source(p)
+        manifest=p/'synthetic_manifest.json';save(manifest,{'synthetic':True})
+        auth.update(manifest=str(manifest),manifest_sha256=sha(manifest))
+        counted=census(auth,run,2,2)
+        config=dict(id='synthetic',run=str(run),auth=auth,census=counted,workers=2,memory_gb=4,shards=4)
+        cfg=run/'PRIVATE/CONFIG.json';save(cfg,config)
+        for stage in ['r11','merit']:
+            command=[sys.executable,str(ROOT/'code/worker.py'),'--config',str(cfg),'--stage',stage]
+            r=subprocess.run(command,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+            if r.returncode:print(r.stdout);raise AssertionError(stage+' integration failed')
+            base=run/'PRIVATE/stages'/stage;before={str(f.relative_to(base)):sha(f) for f in (base/'PRIVATE/moments').glob('*.npz')}
+            assert len(before)==8
+            r=subprocess.run(command,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+            if r.returncode:print(r.stdout);raise AssertionError(stage+' resume failed')
+            assert before=={str(f.relative_to(base)):sha(f) for f in (base/'PRIVATE/moments').glob('*.npz')}
+            # A corrupt projection is rebuilt from the authenticated source.
+            target=base/'PRIVATE/projected/2023-11.parquet';goodhash=sha(target)
+            with target.open('ab') as f:f.write(b'damage')
+            r=subprocess.run(command,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+            if r.returncode:print(r.stdout);raise AssertionError(stage+' projection repair failed')
+            assert sha(target)==goodhash
+            # A changed partition must stop before estimation; no old fit is certified.
+            partition=next((base/'PRIVATE/by_chooser').glob('bucket=*/*.parquet'))
+            original=partition.read_bytes()
+            with partition.open('ab') as f:f.write(b'damage')
+            r=subprocess.run(command,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+            assert r.returncode!=0 and ('checksum' in r.stdout.lower() or 'Partition checkpoint changed' in r.stdout),r.stdout
+            partition.write_bytes(original)
+            print(stage.upper()+'_PIPELINE_RESUME_CORRUPTION_OK',flush=True)
+        # Reports must contain manuscript-standardized rows and both extra spline contrasts.
+        import pandas as pd
+        main=pd.read_csv(run/'PRIVATE/stages/r11/report/tab_main.csv')
+        assert len(main[main.panel=='A_adjusted_rate'])==5 and len(main[main.panel=='A_adjusted_difference'])==5
+        extra=pd.read_csv(run/'PRIVATE/stages/merit/report/additional_covariance_contrasts.csv')
+        assert set(extra.contrast)=={'300 minus 100','500 minus 300','-100 minus -300'}
+        assert (run/'PRIVATE/stages/merit/report/model_covariances.npz').exists()
+        from run_models import export_stage,execute,bundle,coverage
+        status={s:dict(status='COMPLETE',seconds=1,outputs=export_stage(run,s)) for s in ['r11','merit']}
+        save(run/'PRIVATE/STAGES.json',status);coverage(run,status)
+        assert execute(config,p)==status
+        (run/'PRIVATE/NEVER_EXPORT.parquet').write_text('private raw records')
+        artifact=bundle(run,p,'CORE_MODELS_COMPLETE_MORE_FAMILIES_PENDING')
+        import zipfile
+        with zipfile.ZipFile(artifact) as z:
+            assert z.testzip() is None and not any('NEVER_EXPORT' in n or n.startswith('PRIVATE/') for n in z.namelist())
+            for r in json.loads(z.read('REPORT_MANIFEST.json')):
+                data=z.read(r['path']);assert len(data)==r['bytes'] and hashlib.sha256(data).hexdigest()==r['sha256']
+        # The stage receipt also covers the named figure-data export.
+        with (run/'report/fig_merit_profiles.csv').open('a') as f:f.write('changed')
+        try:execute(config,p)
+        except RuntimeError as e:assert 'checksum' in str(e)
+        else:raise AssertionError('Changed completed figure data were not rejected')
+        print('INTEGRATION_ALL_26_MODELS_AND_REPORTS_OK',flush=True)
+
+if __name__=='__main__':
+    part=sys.argv[1]
+    if part=='contracts':
+        result=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromTestCase(Contracts));raise SystemExit(not result.wasSuccessful())
+    elif part=='r11':r11_tests()
+    elif part=='merit':merit_tests()
+    elif part=='integration':integration()

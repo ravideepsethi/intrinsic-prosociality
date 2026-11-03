@@ -1,0 +1,44 @@
+{
+  "eligible_n": 1058260,
+  "n": 1040473,
+  "absorbed_groups": 61549,
+  "dropped_singletons": 17787,
+  "grants": 14170,
+  "targets": [
+    "competitive"
+  ],
+  "controls": {
+    "cats": [],
+    "nums": []
+  },
+  "categorical_levels": {},
+  "status": "ESTIMATED",
+  "estimates": {
+    "competitive": {
+      "status": "ESTIMATED",
+      "coefficient_pp": 2.278364960906696,
+      "se_pp": 0.05978895610355484,
+      "ci_low_pp": 2.1611784557542943,
+      "ci_high_pp": 2.3955514660590973,
+      "p_value": 0.0
+    }
+  },
+  "target_covariance_pp2": [
+    [
+      0.003574719271952807
+    ]
+  ],
+  "clusters": 61549,
+  "residual_df": 978923,
+  "within_rank": 1,
+  "max_abs_group_residual_sum": 2.1538326677728037e-14,
+  "support": {
+    "treatment_switchers": 53157,
+    "switchers_with_outcome_variation": 6186,
+    "never_granter_identifying_weight_share": 0.8280687831807072
+  },
+  "se": "CR1, full rank including absorbed effects; cluster=chooser",
+  "sample": "age_ge_30",
+  "model": "gradient_minimal",
+  "interpretation": "Descriptive LPM on account probability sample; age availability may select accounts"
+}

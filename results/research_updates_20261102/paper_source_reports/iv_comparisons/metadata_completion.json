@@ -1,0 +1,11 @@
+{
+  "new_unresolved_rows": 0,
+  "existing_quarantine_rows": 3,
+  "pool_rows": 31836325,
+  "dispositions": {
+    "CACHED_POOL_METADATA": 31836325,
+    "CACHED_NONPOOL": 3197881,
+    "CACHE_CONFLICT_OR_PRIOR_FLAG": 3
+  },
+  "bounded_metadata": true
+}

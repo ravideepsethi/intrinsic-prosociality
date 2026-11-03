@@ -1,0 +1,12 @@
+{
+  "comparisons": "Every specification, cutoff, knot, control, fixed effect, missingness indicator and covariance rule comes from the frozen A2 source.",
+  "engine_features": "Existing A2_SCORE_REPAIR_V101 projected features; no engine evaluations or API calls.",
+  "excluded_history_models": "Prior 90-day disconnection rate, prepanel rate, no-prior-disconnection subset were not in the archived 53 models and are not added.",
+  "frozen_sample": "Original 20,000 chooser accounts, complete original opportunity histories, intersected with corrected material main frame; no replacements.",
+  "historical_chooser_losses": "Retained as non-grants, following reviewed material input policy.",
+  "inference": "Original chooser-cluster G/(G-1) covariance; full covariances and model state supplied; unchanged planned Holm families.",
+  "models": 53,
+  "outcome": "100 times new grant, except explicitly named gap_predicts_blunder threshold outcomes.",
+  "standardization": "Original joint chooser-cluster influence formula includes sampling variation in composition and baseline.",
+  "whole_paper_rerun_complete": false
+}

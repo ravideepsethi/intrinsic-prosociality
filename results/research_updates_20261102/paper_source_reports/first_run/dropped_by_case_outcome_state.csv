@@ -1,0 +1,17 @@
+family,case,case_name,outcome,state,rows
+all_source,1,bare_king,draw,roughly_equal,2577
+all_source,1,bare_king,draw,better,298
+all_source,1,bare_king,draw,clearly_better,22225
+all_source,2,one_knight_vs_king_queens,draw,roughly_equal,32
+all_source,2,one_knight_vs_king_queens,draw,better,1
+all_source,2,one_knight_vs_king_queens,draw,clearly_better,85
+all_source,3,same_color_bishops_no_opponent_pawn_knight,draw,roughly_equal,144
+all_source,3,same_color_bishops_no_opponent_pawn_knight,draw,clearly_better,96
+main,1,bare_king,draw,roughly_equal,2210
+main,1,bare_king,draw,better,240
+main,1,bare_king,draw,clearly_better,17834
+main,2,one_knight_vs_king_queens,draw,roughly_equal,28
+main,2,one_knight_vs_king_queens,draw,better,1
+main,2,one_knight_vs_king_queens,draw,clearly_better,61
+main,3,same_color_bishops_no_opponent_pawn_knight,draw,roughly_equal,121
+main,3,same_color_bishops_no_opponent_pawn_knight,draw,clearly_better,75

@@ -1,0 +1,138 @@
+{
+  "eligible_n": 396492,
+  "n": 380015,
+  "absorbed_groups": 40906,
+  "dropped_singletons": 16477,
+  "grants": 10236,
+  "targets": [
+    "stage_mid",
+    "stage_late"
+  ],
+  "controls": {
+    "cats": [
+      "month",
+      "speed",
+      "rating_tier",
+      "board_bin",
+      "gap_bin"
+    ],
+    "nums": [
+      "payoff10",
+      "premium10",
+      "crd100",
+      "drd100",
+      "log_cc",
+      "log_dc",
+      "cc_missing",
+      "dc_missing"
+    ]
+  },
+  "categorical_levels": {
+    "month": [
+      "2023-11",
+      "2023-12",
+      "2024-01",
+      "2024-02",
+      "2024-03",
+      "2024-04",
+      "2024-05",
+      "2024-06",
+      "2024-07",
+      "2024-08",
+      "2024-09",
+      "2024-10",
+      "2024-11",
+      "2024-12",
+      "2025-01",
+      "2025-02",
+      "2025-03",
+      "2025-04",
+      "2025-05",
+      "2025-06",
+      "2025-07",
+      "2025-08",
+      "2025-09",
+      "2025-10"
+    ],
+    "speed": [
+      "blitz",
+      "bullet",
+      "classical",
+      "rapid"
+    ],
+    "rating_tier": [
+      "0_under1600",
+      "1_1600_1999",
+      "2_2000_2399",
+      "3_2400plus"
+    ],
+    "board_bin": [
+      "2_equal",
+      "3_better",
+      "4_clearly_better"
+    ],
+    "gap_bin": [
+      "-1",
+      "-10",
+      "-2",
+      "-3",
+      "-4",
+      "-5",
+      "-6",
+      "-7",
+      "-8",
+      "-9",
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "9"
+    ]
+  },
+  "status": "ESTIMATED",
+  "estimates": {
+    "stage_mid": {
+      "status": "ESTIMATED",
+      "coefficient_pp": -1.5084509035034148,
+      "se_pp": 0.07678838015974142,
+      "ci_low_pp": -1.6589578164925796,
+      "ci_high_pp": -1.3579439905142503,
+      "p_value": 1.6068045006115582e-85
+    },
+    "stage_late": {
+      "status": "ESTIMATED",
+      "coefficient_pp": -1.634812280725884,
+      "se_pp": 0.10904146246146369,
+      "ci_low_pp": -1.8485359439775146,
+      "ci_high_pp": -1.4210886174742532,
+      "p_value": 1.119922790017105e-50
+    }
+  },
+  "target_covariance_pp2": [
+    [
+      0.005896455327556968,
+      0.006074877483480766
+    ],
+    [
+      0.006074877483480766,
+      0.011890040535734796
+    ]
+  ],
+  "clusters": 40906,
+  "residual_df": 339052,
+  "within_rank": 57,
+  "max_abs_group_residual_sum": 1.1489073581394393e-14,
+  "support": {
+    "treatment_switchers": 34214,
+    "switchers_with_outcome_variation": 3835,
+    "never_granter_identifying_weight_share": 0.8557783351613178
+  },
+  "se": "CR1, full rank including absorbed effects; cluster=chooser",
+  "sample": "age_ge_90",
+  "model": "competitive_stage",
+  "interpretation": "Descriptive LPM on account probability sample; age availability may select accounts"
+}

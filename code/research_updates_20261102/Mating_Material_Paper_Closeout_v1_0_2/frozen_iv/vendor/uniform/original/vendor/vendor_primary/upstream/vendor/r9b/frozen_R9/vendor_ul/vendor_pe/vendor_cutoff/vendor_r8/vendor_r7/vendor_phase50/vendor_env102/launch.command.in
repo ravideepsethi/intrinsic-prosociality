@@ -1,0 +1,62 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+environment_mode="${1:?Specify analyze or tests}"
+shift
+environment_package="$(cd "$(dirname "$0")" && pwd -P)"
+environment_project="${IV_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+environment_desktop="${IV_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+environment_python="${IV_PYTHON:-$environment_project/venv/bin/python}"
+if [[ ! -x "$environment_python" ]]; then
+  echo "Research Python not found: $environment_python. Connect XT_Pro or set IV_PYTHON."
+  exit 2
+fi
+if [[ "$environment_mode" != analyze && "$environment_mode" != tests ]]; then
+  echo 'Use RUN_ENVIRONMENT_DIAGNOSTICS.command or RUN_TESTS.command.'
+  exit 2
+fi
+mkdir -p "$environment_desktop"
+export PYTHONDONTWRITEBYTECODE=1
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1
+cd "$environment_package"
+"$environment_python" - <<'PY'
+import sys,numpy,pyarrow,duckdb
+assert sys.version_info >= (3,10), 'Python 3.10 or later required'
+sys.path.insert(0,'code')
+from env_common import verify_package
+verify_package()
+print('PACKAGE_SHA256_OK; Python',sys.version.split()[0],'; NumPy',numpy.__version__,'; PyArrow',pyarrow.__version__,'; DuckDB',duckdb.__version__,'; SciPy not required',flush=True)
+PY
+environment_log="$environment_desktop/run2_environment_diagnostics_${environment_mode}_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+echo "Log: $environment_log"
+environment_awake=()
+if [[ -x /usr/bin/caffeinate ]]; then environment_awake=(/usr/bin/caffeinate -i); fi
+set +e
+{
+  if [[ "$environment_mode" == tests ]]; then
+    echo 'Expected runtime: approximately 20–120 seconds; synthetic data only, zero API requests.'
+    "$environment_python" -m unittest discover -s tests -p 'test_*.py' -v
+  else
+    echo 'Expected runtime: 1–3 minutes to the status audit; approximately 5–20 minutes to the role/bin report; roughly 1–3 hours for the full run. These are laptop estimates based on the partial run; the full run remains unbenchmarked; SSD contention and the bounded scan size matter. Reused reruns are faster.'
+    echo 'Fix v1.0.2: checked fixed-effect calculations, compatible v1.0.1/v1.0.0 prepared Parquets, and an aggregate report after every completed fit.'
+    echo 'Reuses completed entry Parquets and score/history indexes. Builds pair-excluded rate denominators with one bounded, projected local game-history scan; no global sort, API requests, or Stockfish.'
+    echo 'Up to 10 workers for local scans and scoring; memory-weighted regression scheduling prevents parallel fits from exhausting RAM. Leave the downloader running.'
+    environment_tests="${environment_log%.log}_selftests.log"
+    echo "Offline self-tests: $environment_tests"
+    if "$environment_python" -m unittest discover -s tests -p 'test_*.py' -q > "$environment_tests" 2>&1; then
+      echo 'OFFLINE_SELF_TESTS_OK. Starting the environment diagnostics.'
+    else
+      environment_test_exit=$?
+      cat "$environment_tests"
+      echo 'Self-tests failed; production analysis did not start.'
+      exit "$environment_test_exit"
+    fi
+    "${environment_awake[@]}" "$environment_python" -u code/run_environment.py --project-root "$environment_project" --desktop "$environment_desktop" "$@"
+  fi
+} 2>&1 | tee "$environment_log"
+environment_exit=${PIPESTATUS[0]}
+set -e
+if [[ "$environment_exit" -ne 0 ]]; then
+  echo "Stopped with exit $environment_exit. Completed Parquet checkpoints remain reusable. Return this log: $environment_log"
+fi
+exit "$environment_exit"

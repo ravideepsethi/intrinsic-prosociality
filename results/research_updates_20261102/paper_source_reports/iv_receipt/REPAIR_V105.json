@@ -1,0 +1,49 @@
+{
+  "analytical_network": false,
+  "baseline_configuration": "12093d55b7ee9f737696982b8ebaef7b0706c27adc4fb12482a99aabf985d482",
+  "baseline_package_manifest_sha256": "fcc1e08e1e3b1f50f21aa57f32137d2890d9df95f6e6e7214f55371ec944784c",
+  "completed_history_shards_reused": 16,
+  "completed_public_files_verified": 72,
+  "completed_stages_skipped": [
+    "authenticate",
+    "decisions",
+    "exposures",
+    "scores",
+    "features",
+    "core_models",
+    "supplements",
+    "sensitivities",
+    "subgroups",
+    "bins",
+    "receipt_kind",
+    "patron",
+    "comparison_auth",
+    "comparison_candidates",
+    "comparison_chronology",
+    "comparison_metadata"
+  ],
+  "execution_repair": "1.0.5",
+  "expected_remaining_hours": [
+    2,
+    3
+  ],
+  "fixes": [
+    "bounded_streaming_history_and_volume_joins",
+    "narrow_label_and_environment_lookups_then_streaming_attachment",
+    "streaming_final_frames_and_score_alignment"
+  ],
+  "inherited_completed_repairs": [
+    "REPAIR_V101.json",
+    "REPAIR_V102.json",
+    "REPAIR_V103.json",
+    "REPAIR_V104.json"
+  ],
+  "maximum_right_row_group_rows": 65536,
+  "metadata_cache_acquisition": "Already complete; no acquisition or reconciliation is run",
+  "no_completed_statistical_results_recomputed": true,
+  "oversized_right_row_groups_normalized_sequentially": true,
+  "repair_package_manifest_sha256": "0d42148722bfcfb07b8cadf967c180686baa74feb790fca7713b97b2910a9578",
+  "runtime_is_provisional": true,
+  "streaming_left_batch_rows": 65536,
+  "streaming_right_buffer_rows_per_shard": 8192
+}

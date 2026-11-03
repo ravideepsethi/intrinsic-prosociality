@@ -1,0 +1,16 @@
+#!/bin/bash
+set -euo pipefail
+results_bundle_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+results_python="$HOME/Desktop/Lichess_Desktop/MatingMaterial_Env_v100/bin/python"
+if [ ! -x "$results_python" ]; then
+  echo "Existing MatingMaterial environment not found: $results_python"
+  exit 1
+fi
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1
+export NUMEXPR_NUM_THREADS=1 BLIS_NUM_THREADS=1
+cd "$results_bundle_dir"
+if command -v caffeinate >/dev/null 2>&1; then
+  caffeinate -i "$results_python" code/repair_censored.py "$@"
+else
+  "$results_python" code/repair_censored.py "$@"
+fi

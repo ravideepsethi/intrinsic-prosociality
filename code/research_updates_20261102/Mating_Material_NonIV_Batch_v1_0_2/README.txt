@@ -1,0 +1,98 @@
+Mating Material Non-IV Batch v1.0.2 — closeout of the reviewed v1.0.1 return
+
+EXPECTED RUNTIME
+5–15 minutes on the 12-core MacBook Pro / XT_Pro; allow 25 minutes on a busy
+drive. This includes authentication of the previous results, the source panels,
+and cached features. The prior reference regression took about 40 seconds.
+The full corrected responsibility run has not yet been measured on the Mac.
+Ten completed families are retained, including Patron and countdown. Their
+models are not fitted again. Up to 10 workers, 11 GB budget, one BLAS thread.
+No new engine evaluations, API requests, profile queries, or Glicko replay.
+
+RUN
+Save this ZIP and its .sha256 into ~/Desktop/Lichess_Desktop and run:
+
+bash <<'BASH'
+set -euo pipefail
+mm_base="$HOME/Desktop/Lichess_Desktop"
+mm_pkg="Mating_Material_NonIV_Batch_v1_0_2"
+cd "$mm_base"
+shasum -a 256 -c "$mm_pkg.zip.sha256"
+if [ ! -f "$mm_pkg/RUN_ALL.command" ]; then
+  unzip -q "$mm_pkg.zip" -d "$mm_base"
+fi
+bash "$mm_base/$mm_pkg/RUN_ALL.command"
+BASH
+
+WHAT WAS VERIFIED
+The uploaded v1.0.1 return, 847def5d91583190, ran for 93.995 minutes. All 339
+report-file checksums match. Ten of eleven families completed. Patron finished
+its 100 rematches (200 models), 17 postcertification models, and 15 opportunity
+models. Countdown finished 116 supported models; 29 ultrabullet tasks had no
+rows. The earlier three repeat-only auxiliary models remain nonconverged,
+exactly as explicitly recorded in that family. They are not reported as fits.
+
+RESPONSIBILITY DIAGNOSIS AND CORRECTION
+The original-sample reproduction agrees on all reported coefficients, standard
+errors, contrasts, adjusted profiles, sample sizes, row sets, and ranks. One
+88-by-88 raw covariance matrix failed. The nine distinct failed pairs all touch
+terms classified NOT_ESTIMABLE, with marginal variances around 1e-18. The block
+for individually estimable coefficients passes the unchanged tolerance by a
+wide margin: its largest tolerance ratio is 0.0000613.
+
+That pattern suggests numerical leakage from the eigensolver into absent
+design directions. The returned matrices alone do not prove a design column
+is absent. This runner therefore certifies exact zero within-chooser sums of
+squares AND exact zero cross-product rows from every original first-pass shard.
+Only such columns, also marked NOT_ESTIMABLE in both reports, can be set to zero
+for the covariance comparison. Nonzero but aliased columns stay in the full
+comparison. An approximate zero is never accepted as an exact zero.
+
+The old raw verdict remains visible. All raw matrices and full model state are
+returned, together with within_design_support.json. Every retained covariance
+entry keeps its existing 2e-8 + 2e-7 * archived_SE_i * archived_SE_j tolerance.
+No coefficient, contrast, profile, sample, rank, or row-set test is loosened.
+Gross covariance corruption still fails. No model equation or estimator changes.
+If the exact design proof does not support the discrepancy, the run stops with
+aggregate diagnostics in the combined return; it does not declare completion.
+
+After reference reproduction passes, the runner fits the original 53 models
+on the corrected material frame with corrected grant labels and the original
+frozen 20,000-account roster. It uses existing A2 engine features. It then
+collects those results and the ten retained families into one return ZIP.
+
+INPUTS AND OUTPUTS
+Project: /Volumes/XT_Pro/lichess_kindness
+Main input: reviewed material-ready run aa7e95f275c18f43, with 41,513,719
+opportunities and 570,422 grants. Both author accounts remain excluded in both
+roles. Original factual history, rating prices, and profile acquisition remain.
+The v100 and v101 batch directories and their private caches must remain present;
+the v101 completion receipts reference some outputs in v100. All are read-only.
+
+New batch output:
+  derived/replication/mating_material_noniv_batch_v102_PRIVATE/<run key>
+New responsibility output:
+  derived/replication/mating_material_responsibility_v102_PRIVATE/<run key>
+The existing MatingMaterial_Models_Env_v100 environment is reused.
+At least 8 GiB free on XT_Pro is required. Offline tests run before production.
+
+Return the new MATERIAL_NONIV_BATCH_<key>_RETURN.zip and .zip.sha256 from your
+Lichess_Desktop folder. The pointer JSON is optional. If responsibility passes,
+STATUS.json will show 11 completed/reused families and
+BATCH_COMPLETE_REVIEW_REQUIRED. That means numerical review is still needed,
+not that the whole paper is finished. If interrupted, rerun the same command.
+Completed results and committed regression shards are hash-verified and reused.
+
+REMAINING WORK
+The IV rebuild and remaining receipt companions have not run. Recipient-side
+Patron and the remaining payoff check, final manuscript-to-output reconciliation,
+updated tables/figures/prose, and a compiled paper also remain. The whole-paper
+completion flag stays false. No old IV estimates are relabeled as new results.
+
+VALIDATION
+See VALIDATION.json for the release test results. The suite covers exact versus
+near-zero design information, nonzero aliased directions, gross corruption,
+full 53-model sharded estimation against independent reference calculations,
+corrected frame/label construction, all original material and lineage guards,
+verified reuse of already-reused families, and one combined aggregate return.
+Full production validation requires the Mac return.

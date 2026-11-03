@@ -1,0 +1,45 @@
+{
+  "analytical_network": false,
+  "baseline_configuration": "12093d55b7ee9f737696982b8ebaef7b0706c27adc4fb12482a99aabf985d482",
+  "baseline_package_manifest_sha256": "fcc1e08e1e3b1f50f21aa57f32137d2890d9df95f6e6e7214f55371ec944784c",
+  "completed_public_files_verified": 66,
+  "completed_stages_skipped": [
+    "authenticate",
+    "decisions",
+    "exposures",
+    "scores",
+    "features",
+    "core_models",
+    "supplements",
+    "sensitivities",
+    "subgroups",
+    "bins",
+    "receipt_kind",
+    "patron",
+    "comparison_auth",
+    "comparison_candidates",
+    "comparison_chronology"
+  ],
+  "execution_repair": "1.0.3",
+  "expected_remaining_hours": [
+    2,
+    4
+  ],
+  "fixes": [
+    "reuse_completed_metadata_audit",
+    "scoped_15_game_public_metadata_cache_completion",
+    "offline_original_reconciliation_and_remaining_stages"
+  ],
+  "inherited_completed_repairs": [
+    "REPAIR_V101.json",
+    "REPAIR_V102.json"
+  ],
+  "metadata_cache_acquisition": {
+    "initial_requests": 1,
+    "maximum_distinct_games": 15,
+    "retries": "Only missing IDs or failed HTTP attempts; frozen rate-limit handling"
+  },
+  "no_completed_statistical_results_recomputed": true,
+  "repair_package_manifest_sha256": "2abd60ae94d15dc533196ae982cc9ffe3f6de4dd02e144ee7c95e5d4e7017223",
+  "runtime_is_provisional": true
+}

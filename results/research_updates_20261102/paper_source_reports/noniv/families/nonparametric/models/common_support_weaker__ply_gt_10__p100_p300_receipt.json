@@ -1,0 +1,20 @@
+{
+  "status": "MODEL_OK",
+  "model_id": "common_support_weaker__ply_gt_10__p100_p300",
+  "rows": 33924,
+  "clusters": 8256,
+  "terms_requested": 53,
+  "terms_kept": 53,
+  "rank": 53,
+  "condition_number": 386446.91160005925,
+  "runtime_seconds": 1.8448472023010254,
+  "dropped_terms": [],
+  "key_terms": [
+    "is_weaker"
+  ],
+  "coefficient_parquet": "/Volumes/XT_Pro/lichess_kindness/derived/replication/mating_material_noniv_batch_v100_PRIVATE/99984ef97df55388/PRIVATE/stages/nonparametric/PRIVATE/model/models/common_support_weaker__ply_gt_10__p100_p300_coefficients.parquet",
+  "coefficient_parquet_sha256": "ec5487d4494a17831962ceffe01554f8d25ae4fed46321d758cefc1ddd63343d",
+  "worker_pid": 8365,
+  "worker_threads": 1,
+  "worker_memory_limit": "3.0GB"
+}

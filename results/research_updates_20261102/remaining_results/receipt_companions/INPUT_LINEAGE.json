@@ -1,0 +1,31 @@
+{
+  "completed90_rows": 2112426,
+  "parent_run_id": "9d87ae02e14076814b25dd54db159661b49a526deac078cef333d4e607e389cb",
+  "sources": [
+    {
+      "bytes": 269607072,
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/mating_material_receipt_v100_PRIVATE/9d87ae02e1407681/PRIVATE/recipient/recipient_private.parquet",
+      "sha256": "b23e31b071af5f400984b25bc2d53b97ac73584ab37093ce63c1186e9569397d",
+      "signature": [
+        16777244,
+        6805280,
+        269607072,
+        1793293441028919967,
+        1793293441028919967
+      ]
+    },
+    {
+      "bytes": 25121,
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/mating_material_receipt_v100_PRIVATE/9d87ae02e1407681/report/models/conditional.json",
+      "sha256": "e30f0cc81d6323911149badfdbd29d5b0cdd09beb73103df8d0f7209fbd60e00",
+      "signature": [
+        16777244,
+        6805311,
+        25121,
+        1793293481072670036,
+        1793293481072747037
+      ]
+    }
+  ],
+  "support_rows": 2296216
+}

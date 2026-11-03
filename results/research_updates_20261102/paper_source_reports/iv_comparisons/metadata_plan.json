@@ -1,0 +1,24 @@
+{
+  "API_requests_at_most_initial": 1,
+  "bounded_metadata": true,
+  "duckdb_decimal_gb": 4.0,
+  "estimate_is_scenario_not_benchmark": true,
+  "estimated_hours_at_25_games_per_second": 0.00016666666666666666,
+  "first_pair_and_cooldown_applied_before_requests": false,
+  "first_pair_applied_before_requests": true,
+  "game_partition": "stable_MD5_all_copies_of_a_game_together",
+  "known_quarantine_candidates": 3,
+  "leaf_groups": 512,
+  "locally_eligible": 35034209,
+  "max_input_rows_per_leaf": 250000,
+  "metadata_counts": {
+    "CACHED_NONPOOL": 3197877,
+    "CACHED_POOL_METADATA": 31836314,
+    "CACHE_CONFLICT_OR_PRIOR_FLAG": 3,
+    "NO_CACHE": 15
+  },
+  "missing_metadata_targets": 15,
+  "production_network": false,
+  "receipt_cooldown_applied": false,
+  "workers": 1
+}

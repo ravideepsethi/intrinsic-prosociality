@@ -1,0 +1,18 @@
+#!/bin/bash
+set -euo pipefail
+R9B_PACKAGE_DIR="$(cd "$(dirname "$0")" && pwd)"
+R9B_PROJECT="/Volumes/XT_Pro/lichess_kindness"
+R9B_DESKTOP="$HOME/Desktop/Lichess_Desktop"
+R9B_PYTHON="$R9B_PROJECT/venv/bin/python"
+mkdir -p "$R9B_DESKTOP"
+R9B_LOG="$R9B_DESKTOP/R9B_run_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1
+export PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1
+{
+  echo "R9b: J.1–J.7, optional J.8 omitted; Figure 5 already drawn from certified bins."
+  echo "Provisional ETA: 2–4 hours. Stage progress updates revise this estimate."
+  "$R9B_PYTHON" -c 'import numpy,pyarrow,duckdb,scipy; print("Dependencies available")'
+  /usr/bin/caffeinate -dimsu "$R9B_PYTHON" "$R9B_PACKAGE_DIR/code/run_r9b.py" \
+      --project-root "$R9B_PROJECT" --desktop "$R9B_DESKTOP" --workers 10 --memory-gb 11
+} 2>&1 | tee "$R9B_LOG"
+

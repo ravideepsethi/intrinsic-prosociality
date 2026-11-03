@@ -1,0 +1,68 @@
+{
+  "eligible_n": 86603,
+  "n": 86603,
+  "absorbed_groups": 24,
+  "dropped_singletons": 0,
+  "grants": 243,
+  "targets": [
+    "ever_fair",
+    "ever_losing"
+  ],
+  "controls": {
+    "cats": [],
+    "nums": [
+      "rating100",
+      "log_nf",
+      "log_nl",
+      "log_age"
+    ]
+  },
+  "categorical_levels": {},
+  "status": "ESTIMATED",
+  "estimates": {
+    "ever_fair": {
+      "status": "ESTIMATED",
+      "coefficient_pp": 0.3833834621360338,
+      "se_pp": 0.0594599285390162,
+      "ci_low_pp": 0.2603812284488256,
+      "ci_high_pp": 0.506385695823242,
+      "p_value": 1.402957461153317e-06
+    },
+    "ever_losing": {
+      "status": "ESTIMATED",
+      "coefficient_pp": -0.04679242014391029,
+      "se_pp": 0.08885370641100868,
+      "ci_low_pp": -0.23060031612498247,
+      "ci_high_pp": 0.13701547583716192,
+      "p_value": 0.6034976077899279
+    }
+  },
+  "target_covariance_pp2": [
+    [
+      0.003535483101864914,
+      -0.002287061540054619
+    ],
+    [
+      -0.002287061540054619,
+      0.007894981142973722
+    ]
+  ],
+  "clusters": 24,
+  "residual_df": 86573,
+  "within_rank": 6,
+  "max_abs_group_residual_sum": 1.969820140335088e-12,
+  "support": {
+    "treatment_switchers": 23,
+    "switchers_with_outcome_variation": 17,
+    "never_granter_identifying_weight_share": 0.008727146159277173
+  },
+  "se": "CR1, full rank including absorbed effects; cluster=match_cell",
+  "minimum_each_state": 4,
+  "opportunity_min_age": 0,
+  "cohort": "cohort_3",
+  "population": "Returned active August profile acquisition frame; outcome-dependent sampling; not an unconditional population Patron rate",
+  "outcome": "August current Patron status; not observed payment or historical Patron adoption",
+  "specification": "New tenure sensitivity with original match-cell absorption, exposure counts, mean rating and baseline age; not exact rerun of prior all-control specification",
+  "fair_minus_losing_pp": 0.4301758822799441,
+  "contrast_se_pp": 0.12650923810120696
+}

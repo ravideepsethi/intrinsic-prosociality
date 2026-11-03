@@ -1,0 +1,12 @@
+{
+  "atol": 2e-07,
+  "coefficient_and_SE": true,
+  "passed": true,
+  "rtol": 2e-07,
+  "terms_checked": [
+    "first_stage",
+    "rf_y",
+    "rf_reached",
+    "iv_y"
+  ]
+}

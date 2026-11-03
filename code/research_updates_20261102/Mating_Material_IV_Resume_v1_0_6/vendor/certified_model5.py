@@ -1,0 +1,418 @@
+#!/usr/bin/env python3
+"""Twenty first-stage bins on the verified Uniform90 Model 5 frame."""
+from pathlib import Path
+import argparse
+import concurrent.futures as cf
+import contextlib
+import csv
+import fcntl
+import gc
+import hashlib
+import json
+import math
+import os
+import sys
+import tempfile
+import threading
+import time
+
+ROOT = Path(__file__).resolve().parent
+for _name in ('OMP_NUM_THREADS', 'OPENBLAS_NUM_THREADS', 'MKL_NUM_THREADS',
+              'VECLIB_MAXIMUM_THREADS', 'NUMEXPR_NUM_THREADS'):
+    os.environ[_name] = '1'
+sys.path.insert(0, str(ROOT / 'vendor'))
+import fast_bootstrap as c
+import fast_models as model
+import r7_memory
+import numpy as np
+import pyarrow as pa
+import pyarrow.parquet as pq
+
+VERSION = '1.0.0'
+CONF = 'af114813b1add1405ce5f4a40d6968648f6dbc79ffa49199b185085371411ab3'
+SUPP_CONF = '384bab3c77d7e148a8432225753194bb55194342f413de39bdaffa4d2c9e7b22'
+ROW_HASH = 'fdb12d9955b1005f3df61738499d279aa4da07d1bb126d0db040b9f53a9b487f'
+N = 9736182
+PEOPLE = 1877395
+SCALE = 0.04979005187533171
+SLOPE = 7.253485688088052
+SLOPE_SE = 0.024024429533857077
+NATIVE_SD = 0.05348283582545351
+Z95 = 1.959963984540054
+FIELDS = ['bin', 'exposures', 'mean_residual_score', 'mean_score_reference_sd',
+          'mean_residual_receipt_pp', 'ci_low_pp', 'ci_high_pp']
+INPUTS = {
+    'source': {'sha256': 'b212739a0d8092a58c7b7f8a20183ba0dab8e8d4c9479eabc8ac0c576b585bdf', 'bytes': 1086062556},
+    'scores': {'sha256': 'ef56bbe3053032d3ecf3e873a13fab669c79c5f86afde754bcc92c910ef00ccf', 'bytes': 178568087},
+    'baseline': {'sha256': '532f8ee8b19e72bf2fabc47d5843e0f2d29d48251102be3f08f697ca00c9272f', 'bytes': 6772},
+}
+
+
+def require(condition, message):
+    if not condition:
+        raise RuntimeError(message)
+
+
+def log(message):
+    print(time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()) + ' ' + message, flush=True)
+
+
+def load(path):
+    return json.loads(Path(path).read_text())
+
+
+def sha(path):
+    h = hashlib.sha256()
+    with Path(path).open('rb') as f:
+        for block in iter(lambda: f.read(8 * 1024**2), b''):
+            h.update(block)
+    return h.hexdigest()
+
+
+def checked_file(path, record):
+    path = Path(path)
+    require(path.is_file(), 'Missing authenticated file: ' + str(path))
+    before = path.stat()
+    digest = sha(path)
+    after = path.stat()
+    require((before.st_size, before.st_mtime_ns, before.st_ctime_ns) ==
+            (after.st_size, after.st_mtime_ns, after.st_ctime_ns), 'File changed while checking: ' + str(path))
+    require(before.st_size == record['bytes'] and digest == record['sha256'],
+            'Checksum/size mismatch: ' + str(path))
+    return path
+
+
+@contextlib.contextmanager
+def heartbeat(label):
+    stop = threading.Event()
+    start = time.monotonic()
+    def pulse():
+        while not stop.wait(30):
+            log(f'{label}: {(time.monotonic()-start)/60:.1f} min elapsed')
+    thread = threading.Thread(target=pulse, daemon=True)
+    thread.start()
+    try:
+        yield
+    finally:
+        stop.set()
+        thread.join()
+
+
+def verify_package():
+    for line in (ROOT / 'PACKAGE_MANIFEST.sha256').read_text().splitlines():
+        digest, name = line.split('  ', 1)
+        p = (ROOT / name).resolve()
+        require(p.is_relative_to(ROOT) and p.is_file() and sha(p) == digest,
+                'Package checksum mismatch: ' + name)
+    return sha(ROOT / 'PACKAGE_MANIFEST.sha256')
+
+
+def stage_files(root, names):
+    """Authenticate only the completed supplement files actually consumed."""
+    root = Path(root)
+    receipt = load(root / '_SUPP_DONE.json')
+    require(receipt['conf'] == SUPP_CONF, 'Supplement stage configuration changed')
+    entries = {x['path']: x for x in receipt['files']}
+    require(len(entries) == len(receipt['files']), 'Duplicate supplement manifest path')
+    for name in names:
+        require(name in entries, 'File missing from completed supplement receipt: ' + name)
+        p = (root / name).resolve()
+        require(p.is_relative_to(root.resolve()), 'Unsafe supplement receipt path')
+        checked_file(p, entries[name])
+
+
+def verify_supplement(root):
+    config = load(root / 'config.json')
+    require(c.key(config) == SUPP_CONF, 'Unexpected supplement configuration')
+    spec = config['specification']
+    require(spec['parent_configuration'] == CONF and spec['row_set_sha256'] == ROW_HASH,
+            'Supplement refers to a different Model 5 frame')
+    require(config['inputs'] == INPUTS, 'Supplement inputs differ from the verified report')
+
+
+def baseline_row(path):
+    checked_file(path, INPUTS['baseline'])
+    rows = [r for r in load(path)['estimates'] if r['term'] == 'first_stage']
+    require(len(rows) == 1, 'Missing/duplicated primary first-stage estimate')
+    r = rows[0]
+    require(r['sample'] == 'uniform_unspaced' and r['n'] == N and r['recipients'] == PEOPLE
+            and r['row_set_sha256'] == ROW_HASH, 'Wrong primary first-stage sample')
+    require(r['history'] == 'uniform90_gap0' and r['control_level'] == 'X0_ENV_indicator'
+            and not r['balance_without_recipient_history_controls'], 'Wrong primary model')
+    require('log_volume_90' in r['controls'] and 'log_volume_30' not in r['controls'],
+            'Wrong volume control')
+    require(r['score_sd'] == SCALE and r['supported'] is True, 'Invalid first-stage reference')
+    for field, value in [('coefficient', SLOPE), ('standard_error', SLOPE_SE),
+                         ('native_residual_score_sd', NATIVE_SD)]:
+        require(math.isclose(r[field], value, rel_tol=2e-10, abs_tol=2e-10),
+                'Verified first-stage reference changed: ' + field)
+    return r
+
+
+def input_binding(supplement, parent):
+    """Prefer the completed internal-SSD preparation; never mutate parent caches."""
+    supplement = Path(supplement).expanduser().resolve()
+    parent = Path(parent).expanduser().resolve()
+    design = supplement / 'PRIVATE/design'
+    inputs = supplement / 'PRIVATE/inputs'
+    if (supplement / 'config.json').is_file():
+        verify_supplement(supplement)
+        if (inputs / '_SUPP_DONE.json').is_file():
+            stage_files(inputs, ['baseline.json'])
+            ref = baseline_row(inputs / 'baseline.json')
+            if (design / '_SUPP_DONE.json').is_file():
+                names = ['design.json', 'base.dat', 'row_id.npy', 'recipient_id.npy',
+                         'opponent_id.npy', 'date.npy', 'group0.npy', 'group1.npy', 'group2.npy']
+                stage_files(design, names)
+                info = load(design / 'design.json')
+                require(info['targets'] == ['z', 'received', 'y', 'reached', 'y_times_d', 'y_times_one_minus_d']
+                        and info['width'] == 6, 'Unexpected cached design layout')
+                require(info['n'] == N and info['p'] == 6 + len(ref['controls']), 'Cached design dimensions changed')
+                check_meta(info['meta'], ref)
+                require((design / 'base.dat').stat().st_size == N * info['p'] * 8, 'Cached design byte count differs')
+                log('REUSE: authenticated Model 5 design, fixed-effect groups and account/date keys on the internal SSD')
+                return dict(mode='prepared_design', root=design, info=info, reference=ref)
+            # The source snapshot can still be used if the prepared design was removed.
+            names = ['source.parquet', 'scores.parquet']
+            if all((inputs / name).is_file() for name in names):
+                stage_files(inputs, names)
+                for label in ['source', 'scores']:
+                    checked_file(inputs / (label + '.parquet'), INPUTS[label])
+                log('REUSE: authenticated Model 5 source and score snapshots')
+                return dict(mode='source_snapshot', source=inputs/'source.parquet', scores=inputs/'scores.parquet', reference=ref)
+    config = load(parent / 'config.json')
+    require(c.key(config) == CONF and config['rule'] == c.RULE90, 'Parent configuration changed')
+    state = load(parent / 'PRIVATE/STATE.json')
+    require(state.get('receipt_models', {}).get('status') == 'COMPLETE', 'Parent receipt models are incomplete')
+    jobs = [j for j in load(parent/'PRIVATE/MODEL_PLAN90.json') if j['name'] == 'uniform_unspaced']
+    require(len(jobs) == 1, 'Missing/duplicated Model 5 job')
+    job = jobs[0]
+    require(job['conf'] == CONF and job['level'] == 'X0_ENV_indicator'
+            and job['outcomes'] == ['received', 'y', 'reached'] and job['iv']
+            and not job.get('legacy') and not job.get('balance'), 'Wrong Model 5 specification')
+    paths = dict(source=Path(job['input']).resolve(), scores=Path(job['scores']).resolve(),
+                 baseline=Path(job['output']).resolve()/'result.json')
+    for label, path in paths.items():
+        require(path.is_relative_to(parent) and '.partial' not in str(path), 'Uncommitted/outside-parent Model 5 input')
+        checked_file(path, INPUTS[label])
+    c.check_stage(paths['baseline'], CONF)
+    log('REUSE: authenticated completed Model 5 source and score files from the project drive')
+    return dict(mode='parent_source', source=paths['source'], scores=paths['scores'], reference=baseline_row(paths['baseline']))
+
+
+def check_meta(meta, reference):
+    for name in ['n', 'recipients', 'row_set_sha256', 'controls', 'fixed_effects',
+                 'history', 'control_level', 'score_sd', 'covariance', 'balance_without_recipient_history_controls']:
+        require(meta[name] == reference[name], 'Model design differs from primary: ' + name)
+
+
+def make_design(binding, work):
+    if binding['mode'] != 'prepared_design':
+        job = dict(input=str(binding['source']), scores=str(binding['scores']), name='uniform_unspaced',
+                   level='X0_ENV_indicator', outcomes=['received'], iv=False)
+        v, groups, actors, targets, meta, _ = model.build_buffer(job, work)
+        require(targets == ['z', 'received'], 'Unexpected target columns')
+    else:
+        d, info = binding['root'], binding['info']
+        base = np.memmap(d/'base.dat', dtype='float64', mode='r', shape=(info['n'], info['p']), order='F')
+        selected = [0, 1] + list(range(6, info['p']))
+        v = model.allocate_design(work/'design.dat', info['n'], len(selected))
+        for k, source in enumerate(selected):
+            v[:, k] = base[:, source]
+        del base
+        groups = [np.load(d/f'group{k}.npy', mmap_mode='r') for k in range(3)]
+        actors = {k: np.load(d/(k+'.npy'), mmap_mode='r') for k in ['row_id', 'recipient_id', 'opponent_id', 'date']}
+        meta = dict(info['meta'], sample='uniform_unspaced')
+    check_meta(meta, binding['reference'])
+    ids = actors['row_id']
+    require(len(ids) == N and np.all(ids[1:] > ids[:-1]), 'Model rows must be strictly ascending by row ID')
+    require(c.frozen.r.design.row_digest(ids) == ROW_HASH, 'Actual Model 5 row-set hash differs')
+    require(len(np.unique(actors['recipient_id'])) == PEOPLE, 'Actual recipient count differs')
+    for value in actors.values():
+        require(value.shape == (N,) and value.dtype.kind in 'iu', 'Invalid account/date/row keys')
+    require(not np.any(actors['recipient_id'] == actors['opponent_id']), 'Self pair in Model 5 frame')
+    return v, groups, actors, meta
+
+
+def cr0_variance(influence, recipient, opponent, date):
+    codes = c.frozen.r.stats.cmp.covariance_codes(recipient, opponent, date)
+    return float(r7_memory.shared_meat(influence, codes, True)[0, 0])
+
+
+def first_stage(z, d, actors):
+    zz = float(z @ z)
+    require(zz > 1e-14 and np.isfinite(z).all() and np.isfinite(d).all(), 'Invalid fitted residuals')
+    beta = float(z @ d) / zz
+    influence = z * (d - beta*z) / zz
+    variance = cr0_variance(influence, actors['recipient_id'], actors['opponent_id'], actors['date'])
+    require(np.isfinite(variance) and variance > 0, 'Unsupported first-stage CR0 variance; no clipping')
+    return dict(slope=100*SCALE*beta, standard_error=100*SCALE*math.sqrt(variance),
+                native_residual_score_SD=math.sqrt(zz/len(z)), native_slope=beta,
+                native_standard_error=math.sqrt(variance))
+
+
+def reproduction_gate(actual, reference):
+    targets = {'slope': reference['coefficient'], 'standard_error': reference['standard_error'],
+               'native_residual_score_SD': reference['native_residual_score_sd']}
+    for field, expected in targets.items():
+        require(math.isclose(actual[field], expected, rel_tol=2e-7, abs_tol=2e-7),
+                f'FIRST_STAGE_REPRODUCTION_FAILED: {field}; got {actual[field]:.17g}, expected {expected:.17g}')
+    return dict(passed=True, coefficient_and_SE=True, rtol=2e-7, atol=2e-7,
+                expected=targets, actual={k: actual[k] for k in targets})
+
+
+def equal_count_bins(z, row_id, count=20):
+    require(len(z) == len(row_id) and len(z) >= count, 'Invalid binning input dimensions')
+    require(np.isfinite(z).all(), 'Nonfinite residual score')
+    require(np.all(row_id[1:] > row_id[:-1]), 'Tie rule requires ascending unique row IDs')
+    # Same two calls as the frozen all-time figure producer. The first N % 20
+    # bins contain one additional row. For Model 5 these are bins 1 and 2.
+    return np.array_split(np.argsort(z, kind='stable'), count)
+
+
+def bin_summary(number, ix, z, d, actors):
+    n = len(ix)
+    x, y = z[ix], d[ix]
+    mean = float(y.mean())
+    influence = (y - mean) / n
+    # Outside-bin influences are exactly zero. Dropping those zeros before
+    # grouping gives the same five-term OR covariance as the old full-n vector.
+    variance = cr0_variance(influence, actors['recipient_id'][ix], actors['opponent_id'][ix], actors['date'][ix])
+    require(np.isfinite(variance) and variance > 0, f'Bin {number}: unsupported CR0 variance; no clipping')
+    half = Z95 * 100 * math.sqrt(variance)
+    score = float(x.mean())
+    return dict(bin=number, exposures=n, mean_residual_score=score, mean_score_reference_sd=score/SCALE,
+                mean_residual_receipt_pp=100*mean, ci_low_pp=100*mean-half, ci_high_pp=100*mean+half)
+
+
+def monotonicity(rows):
+    delta = np.diff([r['mean_residual_receipt_pp'] for r in rows])
+    return dict(bins_monotone_nondecreasing=bool(np.all(delta >= 0)), bins_strictly_increasing=bool(np.all(delta > 0)),
+                nonmonotone_steps=[dict(from_bin=k+1, to_bin=k+2, difference_pp=float(v))
+                                   for k, v in enumerate(delta) if v < 0],
+                bottom_bin_pp=rows[0]['mean_residual_receipt_pp'], top_bin_pp=rows[-1]['mean_residual_receipt_pp'],
+                top_minus_bottom_pp=rows[-1]['mean_residual_receipt_pp']-rows[0]['mean_residual_receipt_pp'])
+
+
+def publish(result_dir, rows, fit, gate, meta, provenance):
+    require(gate.get('passed') is True, 'Refusing output before first-stage reproduction')
+    require(len(rows) == 20 and sum(r['exposures'] for r in rows) == meta['n'], 'Bin accounting failed')
+    require([r['bin'] for r in rows] == list(range(1, 21)), 'Bin order changed')
+    require([r['exposures'] for r in rows] == [meta['n']//20 + (k < meta['n']%20) for k in range(20)], 'Bin sizes changed')
+    require(all(np.isfinite([r[k] for k in FIELDS]).all() for r in rows), 'Nonfinite bin output')
+    result_dir = Path(result_dir)
+    result_dir.mkdir(parents=True, exist_ok=True)
+    records = [dict(bin=r['bin'], rows=r['exposures'], mean_residual_score=r['mean_residual_score'],
+                    mean_score_reference_sd=r['mean_score_reference_sd'], mean_residual_receipt_pp=r['mean_residual_receipt_pp'],
+                    ci95_low_pp=r['ci_low_pp'], ci95_high_pp=r['ci_high_pp'], supported=True,
+                    tie_rule='stable row_id order; exact equal counts differ by at most one',
+                    interval='shared-account-OR-date CR0 conditional on fitted residuals and bins') for r in rows]
+    line = dict(meta, record_type='linear_first_stage', estimator='first_stage', outcome='received',
+                exposure_weights='one per exposure', reference_score_SD=SCALE,
+                native_residual_score_SD=fit['native_residual_score_SD'],
+                slope_receipt_pp_per_unit_residual_score=100*fit['native_slope'],
+                slope_receipt_pp_per_reference_sd=fit['slope'], standard_error_pp_per_reference_sd=fit['standard_error'],
+                reproduction_passed=True, reproduction=gate, **monotonicity(rows), **provenance)
+    records.append(line)
+    # A small staging directory prevents publishing a half-written CSV or JSON.
+    # The checksum sidecar is installed last and certifies the pair.
+    with tempfile.TemporaryDirectory(prefix='.bins_export_', dir=result_dir) as td:
+        td = Path(td)
+        with (td/'first_stage_bins.csv').open('w', newline='') as f:
+            writer = csv.DictWriter(f, fieldnames=FIELDS)
+            writer.writeheader(); writer.writerows(rows)
+        (td/'figure_source.json').write_text(json.dumps(records, indent=2, allow_nan=False)+'\n')
+        (td/'first_stage_bins.csv.sha256').write_text(''.join(sha(td/name)+'  '+name+'\n'
+                                                    for name in ['first_stage_bins.csv', 'figure_source.json']))
+        for name in ['first_stage_bins.csv', 'figure_source.json', 'first_stage_bins.csv.sha256']:
+            os.replace(td/name, result_dir/name)
+    return line
+
+
+def execute(args):
+    started = time.monotonic()
+    manifest = verify_package()
+    policy = c.resources()
+    os.environ['UNIFORM90_MEMORY_GIB'] = str(policy['memory_budget_gib'])
+    os.environ['UNIFORM90_WORKERS'] = str(policy['workers'])
+    workers = min(8, policy['logical_cpu_cores']) if args.workers is None else args.workers
+    require(1 <= workers <= policy['logical_cpu_cores'], 'Invalid bin worker count')
+    pa.set_cpu_count(min(4, policy['logical_cpu_cores']))
+    pa.set_io_thread_count(min(4, policy['logical_cpu_cores']))
+    work = args.work_dir.expanduser().resolve()
+    result = args.result_dir.expanduser().resolve()
+    for old in [args.parent_root.expanduser().resolve(), args.supplement_root.expanduser().resolve()]:
+        require(not work.is_relative_to(old) and not old.is_relative_to(work), 'Work directory overlaps a completed run')
+        require(not result.is_relative_to(old) and not old.is_relative_to(result), 'Output directory overlaps a completed run')
+    work.mkdir(parents=True, exist_ok=True)
+    with (work/'RUN.lock').open('a+') as lock:
+        try:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            raise RuntimeError('This first-stage-bin export is already running')
+        with heartbeat('Authenticating reusable Model 5 files'):
+            binding = input_binding(args.supplement_root, args.parent_root)
+        with tempfile.TemporaryDirectory(prefix='fit_', dir=work) as td:
+            with heartbeat('Model 5 first-stage residualization'):
+                v, groups, actors, meta = make_design(binding, Path(td))
+                res, rank, diag = model.project(v, groups, 2, Path(td))
+                del v, groups
+                gc.collect()
+            z, d = np.array(res[:, 0]), np.array(res[:, 1])
+            del res
+            gc.collect()
+            with heartbeat('Reproducing first-stage slope and CR0 standard error'):
+                fit = first_stage(z, d, actors)
+                gate = reproduction_gate(fit, binding['reference'])
+            log(f'FIRST_STAGE_REPRODUCED: {fit["slope"]:.11f} pp per reference SD; SE {fit["standard_error"]:.11f}; native residual SD {fit["native_residual_score_SD"]:.11f}')
+            meta.update(control_rank=rank, absorb_iterations=diag['iterations'])
+            bins = equal_count_bins(z, actors['row_id'])
+            rows = []
+            bin_start = time.monotonic()
+            log(f'20 bins; first two contain {len(bins[0]):,} rows, remaining eighteen {len(bins[-1]):,}; {workers} parallel covariance workers')
+            with heartbeat('Conditional bin-mean CR0 intervals'), cf.ThreadPoolExecutor(max_workers=workers) as pool:
+                pending = [pool.submit(bin_summary, k, ix, z, d, actors) for k, ix in enumerate(bins, 1)]
+                for future in cf.as_completed(pending):
+                    rows.append(future.result())
+                    elapsed = time.monotonic()-bin_start
+                    log(f'Bins {len(rows)}/20 complete; measured remaining bin ETA {elapsed/len(rows)*(20-len(rows))/60:.1f} min')
+            rows.sort(key=lambda r: r['bin'])
+            details = publish(result, rows, fit, gate, meta, dict(
+                execution_version=VERSION, parent_configuration_sha256=CONF,
+                package_manifest_sha256=manifest, reused_input=binding['mode'],
+                source_input_sha256=INPUTS, bin_covariance_workers=workers,
+                no_network_requests=True, no_figure_generated=True,
+                total_seconds=time.monotonic()-started))
+    if details['bins_monotone_nondecreasing']:
+        log('BIN_MEANS_MONOTONE: all 19 adjacent differences are nonnegative')
+    else:
+        log('NONMONOTONE_BIN_MEANS: '+json.dumps(details['nonmonotone_steps']))
+        log('The CSV retains the actual means. Update any every-bin monotonicity claim before plotting; no figure has been drawn.')
+    log(f'Bottom/top bin means: {details["bottom_bin_pp"]:.8f}, {details["top_bin_pp"]:.8f} pp; difference {details["top_minus_bottom_pp"]:.8f} pp')
+    log('COMPLETE: '+str(result/'first_stage_bins.csv'))
+    log('SOURCE: '+str(result/'figure_source.json'))
+    log('CHECKSUMS: '+str(result/'first_stage_bins.csv.sha256'))
+    return 0
+
+
+def main():
+    p = argparse.ArgumentParser(description=__doc__)
+    desktop = Path.home()/'Desktop/Lichess_Desktop'
+    p.add_argument('--parent-root', type=Path, default=Path('/Volumes/XT_Pro/lichess_kindness/derived/replication/receipt_iv_uniform90_v100_PRIVATE/af114813b1ad'))
+    p.add_argument('--supplement-root', type=Path, default=desktop/'Model5_Submission_PRIVATE/384bab3c77d7')
+    p.add_argument('--result-dir', type=Path, default=desktop/'MODEL5_FIRST_STAGE_BINS')
+    p.add_argument('--work-dir', type=Path, default=desktop/'Model5_FirstStageBins_PRIVATE')
+    p.add_argument('--workers', type=int, default=None)
+    args = p.parse_args()
+    return execute(args)
+
+
+if __name__ == '__main__':
+    try:
+        raise SystemExit(main())
+    except KeyboardInterrupt:
+        log('INTERRUPTED: completed upstream files are intact; rerun the same command')
+        raise SystemExit(130)
+    except Exception as exc:
+        log('STOPPED: '+str(exc))
+        raise

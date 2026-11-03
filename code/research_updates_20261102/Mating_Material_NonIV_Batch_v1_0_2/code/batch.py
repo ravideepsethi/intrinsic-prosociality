@@ -1,0 +1,172 @@
+#!/usr/bin/env python3
+"""One command, independent failures, authenticated resume, one return bundle."""
+from engine import *
+from bindings import public_copy
+from plan import STAGES,PENDING
+import argparse,subprocess,fcntl,zipfile,traceback,platform,signal
+import sources
+
+def release_check():
+    manifest=ROOT/'SHA256SUMS.txt'
+    for line in manifest.read_text().splitlines():
+        checksum,name=line.split('  ',1);p=(ROOT/name).resolve()
+        require(p.is_relative_to(ROOT.resolve()) and sha(p)==checksum,'Package checksum differs: '+name)
+    return sha(manifest)
+
+def build_binding(a,run):
+    expected=read(ROOT/'authority/REVIEW.json')
+    manifest=a.manifest or a.project/'derived/replication/mating_material_first_run_v100_PRIVATE'/expected['run_id'][:16]/'MATERIAL_RESTRICTED_INPUTS_READY_PRIVATE.json'
+    auth=sources.authenticate_all(manifest,expected,min(2,a.workers))
+    counts=sources.census(auth,run,a.workers,a.memory_gb-2)
+    auth['census']=counts;auth['fingerprint']=digest([auth['parent_run_id'],auth['manifest_sha256']])
+    auth['month_records']=[dict(r,expected_sha256=r['sha256']) for r in auth['records']]
+    # Historical readers expect this folder layout. Links are read-only inputs;
+    # they point only to the authenticated material outputs, never old panels.
+    panel=run/'PRIVATE/input_links/panel'
+    for r in auth['records']:
+        link=panel/('month='+r['month'])/'analysis_panel.parquet';link.parent.mkdir(parents=True,exist_ok=True)
+        if link.exists():require(link.resolve()==Path(r['path']).resolve(),'Input link points elsewhere')
+        else:link.symlink_to(Path(r['path']).resolve())
+    auth['sample_root']=str(panel.parent);auth['panel_root']=str(panel)
+    write(run/'PRIVATE/AUTH.json',auth)
+    write(run/'report/INPUT_LINEAGE.json',dict(parent_run_id=auth['parent_run_id'],manifest_sha256=auth['manifest_sha256'],
+          main_rows=counts['opportunities'],main_grants=counts['grants'],broad_rows=sum(r['rows'] for r in auth['all_source_records']),
+          author_exclusion=list(AUTHORS),rating_price_layer='original',factual_chronology='preserved',new_API_requests=0,new_engine_searches=0,new_rating_replay=0))
+    return auth
+
+def verified_done(path,fingerprint):
+    path=Path(path)
+    if not path.is_file():return None
+    d=read(path);require(d['status']=='COMPLETE' and d['input_fingerprint']==fingerprint,'Stage completion belongs to another input')
+    for r in d['files']:verify(r)
+    return d
+
+def write_status(run,states,started):
+    table(run/'report/BATCH_STATUS',[dict(stage=s[0],description=s[1],**states.get(s[0],dict(status='PENDING'))) for s in STAGES])
+    table(run/'report/REMAINING_AFTER_THIS_BATCH',[dict(family=n,work=d,status='PENDING') for n,d in PENDING])
+    good=sum(x.get('status') in ('COMPLETE','REUSED') for x in states.values())
+    write(run/'report/STATUS.json',dict(status='BATCH_COMPLETE_REVIEW_REQUIRED' if good==len(STAGES) else 'BATCH_INCOMPLETE',
+        complete_families=good,total_families=len(STAGES),whole_paper_rerun_complete=False,
+        seconds_this_launch=time.monotonic()-started,states=states,
+        next_batch='IV and receipt companions, then final manuscript reconciliation'))
+
+def export(run,results,key):
+    report=Path(run)/'report';report.mkdir(parents=True,exist_ok=True);results=Path(results);results.mkdir(parents=True,exist_ok=True)
+    for name,*_ in STAGES:
+        source=run/'PRIVATE/stages'/name/'report'
+        target=report/'families'/name
+        if target.exists():shutil.rmtree(target)
+        if source.is_dir():public_copy(source,target)
+    allowed=[]
+    for p in sorted(report.rglob('*')):
+        rel=p.relative_to(report)
+        if not p.is_file() or p.name=='REPORT_MANIFEST.json':continue
+        require(not any('private' in x.lower() for x in rel.parts),'Private path in aggregate report')
+        require(p.suffix in ('.csv','.json','.txt','.pdf','.png','.tex','.parquet','.npz'),'Unexpected report extension')
+        # engine.table also writes aggregate Parquets; all report directories
+        # above are designated aggregate outputs, never analytical caches.
+        allowed.append(p)
+    write(report/'REPORT_MANIFEST.json',[dict(path=str(p.relative_to(report)),bytes=p.stat().st_size,sha256=sha(p)) for p in allowed])
+    allowed.append(report/'REPORT_MANIFEST.json')
+    dest=results/f'MATERIAL_NONIV_BATCH_{key[:16]}_RETURN.zip';tmp=dest.with_suffix('.zip.partial')
+    with zipfile.ZipFile(tmp,'w',zipfile.ZIP_DEFLATED) as z:
+        for p in allowed:z.write(p,'report/'+str(p.relative_to(report)))
+        for p in sorted((ROOT/'code').glob('*.py')):z.write(p,'batch_code/'+p.name)
+        z.write(ROOT/'SHA256SUMS.txt','PACKAGE_SHA256SUMS.txt')
+    os.replace(tmp,dest);Path(str(dest)+'.sha256').write_text(sha(dest)+'  '+dest.name+'\n')
+    write(results/'MATERIAL_NONIV_BATCH_LATEST_PRIVATE.json',dict(root=str(run),report=str(dest),run_id=key))
+    log('RETURN_ZIP: '+str(dest));return dest
+
+def orchestrate(run,states,auth,execute,notify=lambda:None):
+    """Continue after independent failures. Completed files are verified first."""
+    for name,label,deps,low,high in STAGES:
+        failed=[d for d in deps if states.get(d,{}).get('status') not in ('COMPLETE','REUSED')]
+        if failed:
+            states[name]=dict(status='BLOCKED_DEPENDENCY',dependency=','.join(failed));notify();continue
+        out=run/'PRIVATE/stages'/name
+        try:
+            saved=verified_done(out/'DONE.json',auth['fingerprint'])
+            if saved:
+                status='REVIEW_REQUIRED' if saved['result'].get('status')=='REFERENCE_REVIEW_REQUIRED' else 'REUSED'
+                states[name]=dict(status=status,seconds=saved['result'].get('elapsed_seconds'),detail=saved['result'].get('status'))
+                log('VERIFIED REUSE '+name);notify();continue
+            states[name]=dict(status='RUNNING');notify();log(f'NEXT {name}: {label}; estimated {low}–{high} minutes')
+            started=time.monotonic();code=execute(name)
+            require(code==0,'Worker exit '+str(code)+'; see this family\'s STAGE_ERROR.json')
+            saved=verified_done(out/'DONE.json',auth['fingerprint']);require(saved is not None,'Worker returned without a completion receipt')
+            status='REVIEW_REQUIRED' if saved['result'].get('status')=='REFERENCE_REVIEW_REQUIRED' else 'COMPLETE'
+            states[name]=dict(status=status,seconds=time.monotonic()-started,detail=saved['result'].get('status'))
+        except Exception as exc:
+            states[name]=dict(status='FAILED',error_type=type(exc).__name__,message=str(exc))
+            log(name+': preserved failure; continuing independent families')
+        notify()
+    return states
+
+def main(argv=None):
+    p=argparse.ArgumentParser(description='Closeout: retain ten completed families and refit responsibility after exact design-support validation.')
+    p.add_argument('--project-root',dest='project',type=Path,default=Path('/Volumes/XT_Pro/lichess_kindness'))
+    p.add_argument('--results-dir',type=Path,default=Path.home()/'Desktop/Lichess_Desktop')
+    p.add_argument('--manifest',type=Path);p.add_argument('--workers',type=int,default=10);p.add_argument('--memory-gb',type=float,default=11)
+    p.add_argument('--self-test',action='store_true');p.add_argument('--preflight-only',action='store_true')
+    a=p.parse_args(argv);code=release_check()
+    a.project=a.project.expanduser().resolve();a.results_dir=a.results_dir.expanduser().resolve()
+    if a.manifest:a.manifest=a.manifest.expanduser().resolve()
+    if a.self_test:
+        return subprocess.call([sys.executable,'-m','unittest','discover','-s',str(ROOT/'tests'),'-v'])
+    require(1<=a.workers<=10 and a.memory_gb>=5,'Use 1–10 workers and at least 5 GB')
+    require(a.project.is_dir(),'Project drive is not mounted: '+str(a.project))
+    expected=read(ROOT/'authority/REVIEW.json');key=digest(dict(package_sha256=code,parent_run_id=expected['run_id']))
+    run=a.project/'derived/replication/mating_material_noniv_batch_v102_PRIVATE'/key[:16]
+    (run/'PRIVATE').mkdir(parents=True,exist_ok=True);(run/'report').mkdir(exist_ok=True);started=time.monotonic();states={}
+    with (run/'RUN.lock').open('a+') as lock,contextlib.ExitStack() as previous_resources:
+        try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        except BlockingIOError:raise RuntimeError('This batch is already running; leave the existing terminal open')
+        try:
+            from resume_previous import authenticate_prior,adopt_complete,prior_root
+            previous_lock=previous_resources.enter_context((prior_root(a.project)/'RUN.lock').open('r'))
+            try:fcntl.flock(previous_lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+            except BlockingIOError:raise RuntimeError('The original batch is still active; let it finish before recovery')
+            require(shutil.disk_usage(run).free>=8*2**30,'Keep at least 8 GiB free for new narrow caches and spill')
+            log('Closeout forecast: 5–15 minutes; allow 25 on a busy drive. Ten completed families are verified and reused.')
+            write(run/'report/ENVIRONMENT.json',dict(python=sys.version,platform=platform.platform(),workers=a.workers,memory_gb=a.memory_gb,
+                  blas_threads=1,stages_run_sequentially=True,forecast='5–15 minutes for closeout; allow 25 minutes on a busy drive'))
+            with heartbeat('Verifying corrected inputs'):auth=build_binding(a,run)
+            with heartbeat('Verifying and retaining the ten completed families'):
+                previous=authenticate_prior(a.project,auth)
+                adopt_complete(previous,run,auth)
+            (run/'report/BATCH_ERROR.json').unlink(missing_ok=True)
+            table(run/'report/PLAN',[dict(stage=n,description=d,dependencies=','.join(ds),expected_min=lo,expected_max=hi) for n,d,ds,lo,hi in STAGES])
+            if a.preflight_only:
+                write_status(run,states,started);export(run,a.results_dir,key);return 0
+            def execute(name):
+                folder=run/'PRIVATE/stages'/name;(folder/'PRIVATE').mkdir(parents=True,exist_ok=True)
+                error=folder/'report/STAGE_ERROR.json'
+                if error.exists():error.rename(folder/'PRIVATE'/('prior_error_'+str(time.time_ns())+'.json'))
+                command=[sys.executable,str(ROOT/'code/worker.py'),'--stage',name,'--batch-root',str(run),'--project',str(a.project),
+                         '--workers',str(a.workers),'--memory-gb',str(a.memory_gb)]
+                # stdout is mirrored to the terminal and a private stage log.
+                with (folder/'PRIVATE/console.log').open('a') as log_file:
+                    process=subprocess.Popen(command,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,bufsize=1,start_new_session=True)
+                    try:
+                        for line in process.stdout:print(line,end='',flush=True);log_file.write(line);log_file.flush()
+                        return process.wait()
+                    except BaseException:
+                        try:os.killpg(process.pid,signal.SIGTERM)
+                        except ProcessLookupError:pass
+                        try:process.wait(timeout=15)
+                        except subprocess.TimeoutExpired:
+                            try:os.killpg(process.pid,signal.SIGKILL)
+                            except ProcessLookupError:pass
+                            process.wait()
+                        raise
+            orchestrate(run,states,auth,execute,lambda:write_status(run,states,started))
+            sources.guard(auth);write_status(run,states,started);export(run,a.results_dir,key)
+            good=all(states.get(n,{}).get('status') in ('COMPLETE','REUSED') for n,*_ in STAGES)
+            log('Finished. Return this run\'s RETURN.zip and .sha256. Inspect STATUS.json for completion; the IV batch and manuscript work remain.')
+            return 0 if good else 2
+        except BaseException as exc:
+            (run/'PRIVATE/ERROR_PRIVATE.txt').write_text(traceback.format_exc())
+            write(run/'report/BATCH_ERROR.json',dict(type=type(exc).__name__,message=str(exc)))
+            write_status(run,states,started);export(run,a.results_dir,key);return 130 if isinstance(exc,KeyboardInterrupt) else 2
+
+if __name__=='__main__':sys.exit(main())

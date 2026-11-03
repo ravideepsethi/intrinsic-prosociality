@@ -1,0 +1,22 @@
+[
+  {
+    "coverage_status": "eligible_not_selected",
+    "exposures": 3196183,
+    "recipients": 814108
+  },
+  {
+    "coverage_status": "observed",
+    "exposures": 6125693,
+    "recipients": 794046
+  },
+  {
+    "coverage_status": "outside_original_chooser_universe",
+    "exposures": 413833,
+    "recipients": 269159
+  },
+  {
+    "coverage_status": "selected_profile_nonreturn",
+    "exposures": 703,
+    "recipients": 100
+  }
+]

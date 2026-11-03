@@ -1,0 +1,7 @@
+{
+  "action": "Return this report. Supply authenticated cached metadata for the missing games before resuming the comparison stages.",
+  "games": 15,
+  "private_target_file": "/Volumes/XT_Pro/lichess_kindness/derived/replication/mating_material_iv_batch_v100_PRIVATE/12093d55b7ee9f73/comparisons/PRIVATE/metadata_plan/targets.parquet",
+  "receipt_results_preserved": true,
+  "status": "BLOCKED_MISSING_CACHED_METADATA"
+}

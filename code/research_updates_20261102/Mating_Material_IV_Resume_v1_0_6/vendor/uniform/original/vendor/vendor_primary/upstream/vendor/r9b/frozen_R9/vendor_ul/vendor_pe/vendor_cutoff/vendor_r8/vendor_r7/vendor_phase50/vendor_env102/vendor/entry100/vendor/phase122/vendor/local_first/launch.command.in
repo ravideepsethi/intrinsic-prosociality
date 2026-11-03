@@ -1,0 +1,71 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+run2_mode="${1:?Specify prepare, download, status, or tests}"
+shift
+run2_package="$(cd "$(dirname "$0")" && pwd -P)"
+run2_project="${IV_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+run2_desktop="${IV_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+run2_python="${IV_PYTHON:-$run2_project/venv/bin/python}"
+if [[ ! -x "$run2_python" ]]; then
+  echo "Project Python not found: $run2_python. Connect XT_Pro or set IV_PYTHON to your research Python."
+  exit 2
+fi
+mkdir -p "$run2_desktop"
+export PYTHONDONTWRITEBYTECODE=1
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1
+cd "$run2_package"
+"$run2_python" - <<'PY'
+import sys
+assert sys.version_info >= (3,10), 'Python 3.10 or later is required'
+import numpy,pyarrow,duckdb
+print('Python',sys.version.split()[0],'; NumPy',numpy.__version__,'; PyArrow',pyarrow.__version__,'; DuckDB',duckdb.__version__,'; SciPy not required',flush=True)
+sys.path.insert(0,'code')
+from common import verify_package
+verify_package()
+print('PACKAGE_SHA256_OK',flush=True)
+PY
+run2_log="$run2_desktop/run2_local_first_${run2_mode}_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+echo "Log: $run2_log"
+run2_awake=()
+if [[ -x /usr/bin/caffeinate ]]; then run2_awake=(/usr/bin/caffeinate -i); fi
+set +e
+{
+  case "$run2_mode" in
+    prepare)
+      echo 'Expected runtime: approximately 15–60 minutes for the first local run; an unbenchmarked laptop estimate. A large additional cache inventory can take longer.'
+      echo 'Up to 10 local workers; Parquet checkpoints. ZERO API requests. Pause the old Run 2 download with Ctrl-C first if it is active.'
+      run2_test_log="${run2_log%.log}_selftests.log"
+      echo "Checking synthetic inputs (no API requests); test log: $run2_test_log"
+      if "$run2_python" -m unittest discover -s tests -p 'test_*.py' -q > "$run2_test_log" 2>&1; then
+        echo 'OFFLINE_SELF_TESTS_OK. Starting your local data preparation.'
+      else
+        run2_test_exit=$?
+        echo 'OFFLINE_SELF_TESTS_FAILED. Your local data preparation has not started.'
+        cat "$run2_test_log"
+        exit "$run2_test_exit"
+      fi
+      "${run2_awake[@]}" "$run2_python" -u code/run_local_first.py prepare --project-root "$run2_project" --desktop "$run2_desktop" "$@"
+      ;;
+    download)
+      echo 'Expected runtime: the reduced plan reports remaining IDs and an API ETA. One HTTP request at a time, up to 300 IDs/request.'
+      "${run2_awake[@]}" "$run2_python" -u code/run_local_first.py download --project-root "$run2_project" --desktop "$run2_desktop" "$@"
+      ;;
+    status)
+      echo 'Expected runtime: usually under one minute; verifies the reduced target file and reads its checkpoint.'
+      "$run2_python" -u code/run_local_first.py status --project-root "$run2_project" --desktop "$run2_desktop" "$@"
+      ;;
+    tests)
+      echo 'Expected runtime: approximately 5–30 seconds. Synthetic/local inputs and fake HTTP only.'
+      "$run2_python" -m unittest discover -s tests -p 'test_*.py' -v || exit "$?"
+      "$run2_python" comparison_original/run_tests.py
+      ;;
+    *) echo 'Unknown mode'; exit 2;;
+  esac
+} 2>&1 | tee "$run2_log"
+run2_exit=${PIPESTATUS[0]}
+set -e
+if [[ "$run2_exit" -ne 0 ]]; then
+  echo "Stopped with exit $run2_exit. Completed checkpoints remain reusable. Log: $run2_log"
+fi
+exit "$run2_exit"

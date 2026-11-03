@@ -1,0 +1,21 @@
+family,item,action,completion_condition
+rating,Corrected-frame realized rating validation,RUN,Current paired denominators and Pearson correlation MAE RMSE within-one-point share exact p99
+matched_receipt,Conditional exposure and later-choice hour effects,RUN,Same corrected conditional cohort with four FE groups and exposure chooser OR exposure-hour CR0 covariance
+matched_receipt,Conditional next-disconnection censoring,RUN,Re-estimated on the corrected conditional cohort with timestamp ties retained
+matched_receipt,Thirty-day log game count,RUN,Corrected support cohort with complete factual chronology and original cell weights
+matched_receipt,Any game within ten thirty and sixty minutes,RUN,Three estimates using the same corrected engagement cohort
+summary,Donor median mean and post-anchor share,RUN,Bound corrected spaced source and score caches
+summary,Missing opponent environment history,RUN,Corrected spaced denominator and zero support indicator
+summary,Reputation distinct unordered pairs,RUN,Follow completed v102 adoption receipt to producing private cache
+summary,Nominal tenure account sample,RUN,Verify frozen selected-account checksum and footer
+completed,Main and alternative IV estimates,REUSE,Completed corrected batch already exported
+completed,Primary balance and spaced balance calibration,REUSE,Completed corrected reports already exported
+completed,Position and stakes heterogeneity and complier characteristics,REUSE,Completed three-runs reports already exported
+completed,Persistence bootstrap and Patron comparisons,REUSE,Completed corrected reports already exported
+completed,Figures,NO_ACTION,Already rendered; this bundle does not draw or update figures
+omitted_from_current_draft,All-time IV on both-supported intersection,NO_NEW_FIT,Historical source recovered; current-sample value remains uncomputed and is absent from the supplied draft
+omitted_from_current_draft,Scalar partial first-stage R2,NO_NEW_FIT,Historical source recovered; current-sample value remains uncomputed and is absent from the supplied draft
+omitted_from_current_draft,Strict-material IV without environment controls,NO_NEW_FIT,Historical source recovered; current-sample value remains uncomputed and is absent from the supplied draft
+previously_dropped,Two-score overidentification and additional lost-exposure IV frame,NO_ACTION,Keep prior scope exclusions
+previously_dropped,Adjacent-rating check and recipient-side badge association,NO_ACTION,Keep prior scope exclusions
+editorial,Manuscript LaTeX and PDFs,NO_ACTION,Results only as requested

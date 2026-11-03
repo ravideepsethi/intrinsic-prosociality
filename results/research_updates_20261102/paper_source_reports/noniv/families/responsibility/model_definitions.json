@@ -1,0 +1,657 @@
+[
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "profile",
+    "name": "curve_late_all_rows",
+    "proxies": [],
+    "region": "competitive",
+    "stage": "late",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "profile",
+    "name": "curve_late_common_baseline",
+    "proxies": [],
+    "region": "competitive",
+    "stage": "late",
+    "support": "trajectory"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "profile",
+    "name": "curve_late_common_proxies",
+    "proxies": [
+      "own",
+      "net2",
+      "net4",
+      "clock",
+      "material"
+    ],
+    "region": "competitive",
+    "stage": "late",
+    "support": "trajectory"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_late_competitive_own",
+    "proxies": [
+      "own"
+    ],
+    "region": "competitive",
+    "stage": "late",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_late_competitive_net2",
+    "proxies": [
+      "net2"
+    ],
+    "region": "competitive",
+    "stage": "late",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_late_competitive_net4",
+    "proxies": [
+      "net4"
+    ],
+    "region": "competitive",
+    "stage": "late",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_late_competitive_clock_log",
+    "proxies": [
+      "clock_log"
+    ],
+    "region": "competitive",
+    "stage": "late",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_late_competitive_clock_ratio",
+    "proxies": [
+      "clock_ratio"
+    ],
+    "region": "competitive",
+    "stage": "late",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_late_competitive_clock_trouble",
+    "proxies": [
+      "clock_trouble"
+    ],
+    "region": "competitive",
+    "stage": "late",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_late_competitive_material",
+    "proxies": [
+      "material"
+    ],
+    "region": "competitive",
+    "stage": "late",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "joint_late_competitive",
+    "proxies": [
+      "own",
+      "net2",
+      "net4",
+      "clock",
+      "material"
+    ],
+    "region": "competitive",
+    "stage": "late",
+    "support": "trajectory"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_late_losing_own",
+    "proxies": [
+      "own"
+    ],
+    "region": "losing",
+    "stage": "late",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_late_losing_net2",
+    "proxies": [
+      "net2"
+    ],
+    "region": "losing",
+    "stage": "late",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_late_losing_net4",
+    "proxies": [
+      "net4"
+    ],
+    "region": "losing",
+    "stage": "late",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_late_losing_clock_log",
+    "proxies": [
+      "clock_log"
+    ],
+    "region": "losing",
+    "stage": "late",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_late_losing_clock_ratio",
+    "proxies": [
+      "clock_ratio"
+    ],
+    "region": "losing",
+    "stage": "late",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_late_losing_clock_trouble",
+    "proxies": [
+      "clock_trouble"
+    ],
+    "region": "losing",
+    "stage": "late",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_late_losing_material",
+    "proxies": [
+      "material"
+    ],
+    "region": "losing",
+    "stage": "late",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "joint_late_losing",
+    "proxies": [
+      "own",
+      "net2",
+      "net4",
+      "clock",
+      "material"
+    ],
+    "region": "losing",
+    "stage": "late",
+    "support": "trajectory"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "asymmetry",
+    "name": "asymmetry_late",
+    "proxies": [
+      "own",
+      "net2",
+      "net4",
+      "clock",
+      "material"
+    ],
+    "region": "binary",
+    "stage": "late",
+    "support": "trajectory"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "profile",
+    "name": "curve_all_all_rows",
+    "proxies": [],
+    "region": "competitive",
+    "stage": "all",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "profile",
+    "name": "curve_all_common_baseline",
+    "proxies": [],
+    "region": "competitive",
+    "stage": "all",
+    "support": "trajectory"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "profile",
+    "name": "curve_all_common_proxies",
+    "proxies": [
+      "own",
+      "net2",
+      "net4",
+      "clock",
+      "material"
+    ],
+    "region": "competitive",
+    "stage": "all",
+    "support": "trajectory"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_all_competitive_own",
+    "proxies": [
+      "own"
+    ],
+    "region": "competitive",
+    "stage": "all",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_all_competitive_net2",
+    "proxies": [
+      "net2"
+    ],
+    "region": "competitive",
+    "stage": "all",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_all_competitive_net4",
+    "proxies": [
+      "net4"
+    ],
+    "region": "competitive",
+    "stage": "all",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_all_competitive_clock_log",
+    "proxies": [
+      "clock_log"
+    ],
+    "region": "competitive",
+    "stage": "all",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_all_competitive_clock_ratio",
+    "proxies": [
+      "clock_ratio"
+    ],
+    "region": "competitive",
+    "stage": "all",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_all_competitive_clock_trouble",
+    "proxies": [
+      "clock_trouble"
+    ],
+    "region": "competitive",
+    "stage": "all",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_all_competitive_material",
+    "proxies": [
+      "material"
+    ],
+    "region": "competitive",
+    "stage": "all",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "joint_all_competitive",
+    "proxies": [
+      "own",
+      "net2",
+      "net4",
+      "clock",
+      "material"
+    ],
+    "region": "competitive",
+    "stage": "all",
+    "support": "trajectory"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_all_losing_own",
+    "proxies": [
+      "own"
+    ],
+    "region": "losing",
+    "stage": "all",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_all_losing_net2",
+    "proxies": [
+      "net2"
+    ],
+    "region": "losing",
+    "stage": "all",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_all_losing_net4",
+    "proxies": [
+      "net4"
+    ],
+    "region": "losing",
+    "stage": "all",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_all_losing_clock_log",
+    "proxies": [
+      "clock_log"
+    ],
+    "region": "losing",
+    "stage": "all",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_all_losing_clock_ratio",
+    "proxies": [
+      "clock_ratio"
+    ],
+    "region": "losing",
+    "stage": "all",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_all_losing_clock_trouble",
+    "proxies": [
+      "clock_trouble"
+    ],
+    "region": "losing",
+    "stage": "all",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "proxy_all_losing_material",
+    "proxies": [
+      "material"
+    ],
+    "region": "losing",
+    "stage": "all",
+    "support": "all"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "proxy",
+    "name": "joint_all_losing",
+    "proxies": [
+      "own",
+      "net2",
+      "net4",
+      "clock",
+      "material"
+    ],
+    "region": "losing",
+    "stage": "all",
+    "support": "trajectory"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "asymmetry",
+    "name": "asymmetry_all",
+    "proxies": [
+      "own",
+      "net2",
+      "net4",
+      "clock",
+      "material"
+    ],
+    "region": "binary",
+    "stage": "all",
+    "support": "trajectory"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "blunder_proxy",
+    "name": "blunder100_competitive",
+    "proxies": [],
+    "region": "competitive",
+    "stage": "late",
+    "support": "own_finite",
+    "threshold": 100
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "blunder_proxy",
+    "name": "blunder100_losing",
+    "proxies": [],
+    "region": "losing",
+    "stage": "late",
+    "support": "own_finite",
+    "threshold": 100
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "blunder_outcome",
+    "name": "gap_predicts_blunder100",
+    "proxies": [],
+    "region": "competitive",
+    "stage": "late",
+    "support": "own_finite",
+    "threshold": 100
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "blunder_proxy",
+    "name": "blunder200_competitive",
+    "proxies": [],
+    "region": "competitive",
+    "stage": "late",
+    "support": "own_finite",
+    "threshold": 200
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "blunder_proxy",
+    "name": "blunder200_losing",
+    "proxies": [],
+    "region": "losing",
+    "stage": "late",
+    "support": "own_finite",
+    "threshold": 200
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "blunder_outcome",
+    "name": "gap_predicts_blunder200",
+    "proxies": [],
+    "region": "competitive",
+    "stage": "late",
+    "support": "own_finite",
+    "threshold": 200
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "blunder_proxy",
+    "name": "blunder300_competitive",
+    "proxies": [],
+    "region": "competitive",
+    "stage": "late",
+    "support": "own_finite",
+    "threshold": 300
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "blunder_proxy",
+    "name": "blunder300_losing",
+    "proxies": [],
+    "region": "losing",
+    "stage": "late",
+    "support": "own_finite",
+    "threshold": 300
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "blunder_outcome",
+    "name": "gap_predicts_blunder300",
+    "proxies": [],
+    "region": "competitive",
+    "stage": "late",
+    "support": "own_finite",
+    "threshold": 300
+  },
+  {
+    "controls": "rating",
+    "history": false,
+    "kind": "profile",
+    "name": "curve_late_common_proxies_rating",
+    "proxies": [
+      "own",
+      "net2",
+      "net4",
+      "clock",
+      "material"
+    ],
+    "region": "competitive",
+    "stage": "late",
+    "support": "trajectory"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "region",
+    "name": "cross_region_baseline",
+    "proxies": [],
+    "region": "binary",
+    "stage": "late",
+    "support": "trajectory"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "region",
+    "name": "cross_region_proxies",
+    "proxies": [
+      "own",
+      "net2",
+      "net4",
+      "clock",
+      "material"
+    ],
+    "region": "binary",
+    "stage": "late",
+    "support": "trajectory"
+  },
+  {
+    "controls": "base",
+    "history": false,
+    "kind": "profile",
+    "name": "curve_low_loss_ample_clock",
+    "proxies": [],
+    "region": "competitive",
+    "stage": "late",
+    "support": "low_loss_clock"
+  }
+]

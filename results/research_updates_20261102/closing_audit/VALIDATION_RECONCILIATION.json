@@ -1,0 +1,20 @@
+{
+  "affected_other_outputs": 0,
+  "corrected_claim_rows": 40943232,
+  "corrected_paired_claims": 40707278,
+  "error_sign": "predicted minus recorded",
+  "inference_limit": "Source-code audit plus authenticated aggregate outputs, not a new null census over private Parquet files.",
+  "invalid_claim_sentence": "About -2 points does not describe corrected claimed wins; it belongs to the all-rated RD>=200 post-panel diagnostic.",
+  "low_RD_bin_choice": "RD<=110 is intentionally pooled so no unverified allocation of the 41 excluded author claims among finer low-RD bins is needed.",
+  "material_screen_removed_claims": 0,
+  "original_claim_rows": 40943273,
+  "post_panel": "Separate all-rated player-update diagnostic; exclude the 07:15\u201307:22 UTC transition bracket on November 18, 2025. Its pre and post samples both lie outside the paper panel.",
+  "private_data_models_rerun": 0,
+  "proof": "The corrected claim frame only removes author games; material_result_conflicts=0 proves no claimed wins are removed by the material restriction. RD and the original prediction are unchanged. RD>110 eligible and paired counts equal the old bins exactly, so every high-RD claim is retained. High-bin weighted signed and absolute sums reproduce the author-free cost report, which in turn matches the November 2 corrected-frame pooled validation. The low-RD bin is obtained by subtracting those sufficient sums from the corrected pooled sums.",
+  "rating_replays": 0,
+  "removed_author_claims": 41,
+  "requested_null_scope_complete": true,
+  "status": "VERIFIED_FROM_COMPLETED_AGGREGATES",
+  "unchanged_high_RD_eligible_claims": 1279632,
+  "unchanged_high_RD_paired_claims": 1118861
+}

@@ -1,0 +1,13 @@
+{
+  "calibration": "Fifteen-trait projection on headline nonhistory controls, including opponent-environment controls, and fixed effects; score adjustment uses all primary controls. Full first-order uncertainty includes estimating the projection.",
+  "configuration": "23405f1a54a1d1842588f3ac1541f6e308e47814584a0c4d8ee2c55f84bdb041",
+  "outputs": [
+    "F6 six-column ladder",
+    "extra eight trait rows",
+    "joint tests",
+    "implied-bias calibration"
+  ],
+  "source": "Original fifteen traits, same legacy gap-seven windows and current corrected features",
+  "spaced_frames": "Use the existing material-corrected all-ending frame; apply the original spaced eligibility and gap-seven history rules. Report actual diagnostic-frame counts and row hashes alongside the counts in the note; never substitute the reference count for an observed count.",
+  "status": "COMPUTED"
+}

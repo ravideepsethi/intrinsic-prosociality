@@ -1,0 +1,24 @@
+{
+  "all_archives_CRC_checked": true,
+  "audience_producer": "Exact executed code is embedded in the audience result archive; no separate launcher is necessary for its checksum coverage.",
+  "coverage_basis": "Authenticated November 1 integrated source inventory plus November 2 completed retained supplements, repair, and Appendix C validation sources",
+  "embedded_dependencies": "Producer ZIP hashes cover their vendored code and authority snapshots. Earlier failed/unused runs are excluded; the single superseded successful censor return is retained for the requested reconciliation.",
+  "missing_source_members": 0,
+  "package_archives": 46,
+  "policy": "Source records are authenticated without rebuilding figures or editing manuscripts. Hashes describe recovered artifact bytes, not a new verification of private source-data bytes.",
+  "source_families": [
+    "audience",
+    "closeout",
+    "first_run",
+    "iv_comparisons",
+    "iv_receipt",
+    "models",
+    "noniv",
+    "patron",
+    "persistence",
+    "receipt",
+    "structure"
+  ],
+  "source_inventory_files": 800,
+  "source_inventory_hashes_verified": 800
+}

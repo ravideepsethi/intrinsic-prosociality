@@ -1,0 +1,422 @@
+from __future__ import annotations
+
+import ast
+from datetime import datetime, timezone
+import hashlib
+import json
+import math
+from pathlib import Path
+import sys
+import tempfile
+import unittest
+
+import numpy as np
+import pyarrow as pa
+import pyarrow.parquet as pq
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "code"))
+import engine
+import support
+import worker
+import run
+import material
+
+
+def material_fields(fens, white):
+    values={"fen_after_last_move": fens}
+    for side in ("chooser", "disconnected"):
+        for role, char in zip(material.ROLES, "pnbrq"):
+            values[side+"_"+role]=np.array([
+                fen.split()[0].count(char.upper() if bool(w) == (side == "chooser") else char)
+                for fen,w in zip(fens,white)], dtype=np.int32)
+    p,n,b,r,q=(values["chooser_"+role] for role in material.ROLES)
+    values["chooser_has_mating_material"]=(p>0)|(r>0)|(q>0)|(b>=2)|((b>0)&(n>0))|(n>=2)
+    return values
+
+
+def replace_material(table, index, fen):
+    fens=table["fen_after_last_move"].to_pylist(); fens[index]=fen
+    white=table["chooser_color"].to_numpy() == "white"
+    fields=material_fields(fens,white)
+    fields["outcome_kind_draw"]=(table["pgn_result"].to_numpy()=="1/2-1/2") & fields["chooser_has_mating_material"]
+    for name, vals in fields.items():
+        table=table.set_column(table.schema.get_field_index(name),name,pa.array(vals))
+    return table
+
+
+def scalar_reference():
+    source = (ROOT / "sources/stage06_reference.py").read_text()
+    nodes = [x for x in ast.parse(source).body if isinstance(x, ast.FunctionDef) and x.name in
+             ("g_phi", "expected_score", "pred_diff_only", "volatility_update", "update_one")]
+    env = {"math":math, "SCALE":173.7178, "PI2":math.pi**2, "DEFAULT_SIGMA":.09}
+    exec(compile(ast.Module(body=nodes, type_ignores=[]), "pinned_reference", "exec"), env)
+    return env
+
+
+def fixture_table(month, n=36):
+    rng = np.random.default_rng(int(month.replace("-", "")))
+    r = rng.integers(700, 2400, n).astype(float)
+    ro = rng.integers(700, 2400, n).astype(float)
+    rd = rng.uniform(45, 320, n); rdo = rng.uniform(45, 320, n)
+    r[1] = 400.; ro[1] = 420.; rd[1] = 480.
+    k = engine.raw_changes(r, rd, ro, rdo)
+    o = engine.raw_changes(ro, rdo, r, rd)
+    white = np.arange(n)%2 == 0
+    draw = np.arange(n)%5 == 0
+    loss = (np.arange(n)%13 == 0) & ~draw
+    win = ~(draw|loss)
+    # Includes a legitimate claimed win with K+N vs K+P: the old material
+    # screen is false, but the platform's side-specific predicate is true.
+    fens=["7k/6p1/8/8/8/8/1P6/K7 "+("b" if w else "w")+" - - 0 1" for w in white]
+    fens[1]="7k/6n1/8/8/8/8/1P6/K7 w - - 0 1"
+    fens[5]="7k/8/8/8/8/8/1P6/K7 w - - 0 1"
+    mf=material_fields(fens,white); mat=mf["chooser_has_mating_material"]
+    result = np.where(draw, "1/2-1/2", np.where(win == white, "1-0", "0-1"))
+    actual = np.select([draw,win], [k["draw"], k["win"]], default=k["loss"])
+    opponent = np.select([draw,win], [o["draw"], o["loss"]], default=o["win"])
+    actual_w, actual_b = np.where(white,actual,opponent), np.where(white,opponent,actual)
+    obs_w, obs_b = np.floor(actual_w+.35), np.floor(actual_b+.63)
+    obs_w[7] = np.nan; obs_w[8] = np.nan; obs_b[8] = np.nan
+    ts = np.full(n, engine.epoch(month+"-15T12:00:00Z"), dtype=np.int64)
+    if month == "2024-11":
+        ts[2:6] = engine.epoch("2024-11-20T12:00:00Z")
+    names = np.array([f"chooser_{i}" for i in range(n)], dtype=object)
+    names[0] = " AUTHOR_ACCOUNT_1 "
+    vals = {"month":np.repeat(month,n), "game_id":[month+f"_g{i:04d}" for i in range(n)],
+        "chooser_username_norm":names, "disconnected_username_norm":[f"opponent_{i}" for i in range(n)],
+        "chooser_user_id":np.arange(n,dtype=np.int64), "disconnected_user_id":np.arange(n,dtype=np.int64)+10000,
+        "chooser_color":np.where(white,"white","black"), "disconnected_color":np.where(white,"black","white"),
+        "chooser_elo":r, "disconnected_elo":ro, "chooser_pre_rd_v2":rd, "disconnected_pre_rd_v2":rdo,
+        "chooser_pre_sigma_v2":np.full(n,.09), "disconnected_pre_sigma_v2":np.full(n,.09),
+        "chooser_draw_payoff_v2":k["draw"], "chooser_win_payoff_v2":k["win"], "chooser_win_premium_v2":k["K"]*.5,
+        "api_status":np.repeat("timeout",n), "api_speed":np.resize(["blitz","bullet","rapid","classical"],n),
+        "api_variant":np.repeat("standard",n), "api_rated":np.ones(n,bool), "api_last_move_at_ms":ts,
+        "api_created_at_ms":ts-60000, "utc_ms":ts-60000, "pgn_result":result,
+        "white_rating_diff_pgn":obs_w, "black_rating_diff_pgn":obs_b,
+        "white_realized_pred_ratingdiff_v2":actual_w, "black_realized_pred_ratingdiff_v2":actual_b,
+        "pgn_api_result_consistent":np.ones(n,bool), "outcome_kind_draw":draw&mat,
+        "timeout_draw":draw, "timeout_chooser_win":win, "timeout_chooser_loss":loss,
+        "chooser_has_mating_material":mat, "engine_eval_cp_disconnected":np.resize([-400,-100,0,100,400],n),
+        "ply_count":np.arange(n,dtype=np.int32)+2,
+        "both_ratingdiff_null":np.isnan(obs_w)&np.isnan(obs_b),
+        "hidden_state_update_applied":~(np.isnan(obs_w)&np.isnan(obs_b)),
+        "color_adv_applied":np.zeros(n,bool)}
+    for key in worker.CONSISTENCY:
+        vals[key]=np.ones(n,bool)
+    vals.update(mf)
+    return pa.table(vals)
+
+
+class MechanicsTests(unittest.TestCase):
+    def test_platform_material_exceptions_both_colors(self):
+        def fen(own, other, white):
+            pieces={"a1":"K", "h8":"k", **own, **other}
+            rows=[]
+            for rank in "87654321":
+                row=""; blanks=0
+                for file in "abcdefgh":
+                    char=pieces.get(file+rank)
+                    if char is None:
+                        blanks+=1
+                    else:
+                        if blanks: row+=str(blanks); blanks=0
+                        row+=char if white else char.swapcase()
+                if blanks: row+=str(blanks)
+                rows.append(row)
+            return "/".join(rows)+(" b" if white else " w")+" - - 0 1"
+        # Explicit examples of the pinned platform predicate, including cases
+        # where the historical screen disagrees in either direction.
+        cases=[({}, {"g7":"p"}, False),
+               ({"b1":"N"}, {}, False),
+               ({"b1":"N"}, {"g7":"q"}, False),
+               ({"b1":"N"}, {"g7":"r"}, True),
+               ({"b1":"N"}, {"g7":"b"}, True),
+               ({"b1":"N"}, {"g7":"n"}, True),
+               ({"b1":"N"}, {"g7":"p"}, True),
+               ({"c1":"B"}, {}, False),
+               ({"c1":"B"}, {"g7":"q"}, False),
+               ({"c1":"B"}, {"g7":"r"}, False),
+               ({"c1":"B"}, {"g7":"n"}, True),
+               ({"c1":"B"}, {"g7":"p"}, True),
+               ({"c1":"B"}, {"f8":"b"}, False),
+               ({"c1":"B"}, {"c8":"b"}, True),
+               ({"c1":"B", "e1":"B"}, {}, False),
+               ({"c1":"B", "f1":"B"}, {}, True),
+               ({"b1":"N", "g1":"N"}, {}, True),
+               ({"b1":"N", "c1":"B"}, {}, True),
+               ({"b2":"P"}, {}, True), ({"b1":"R"}, {}, True), ({"b1":"Q"}, {}, True)]
+        for white in (True,False):
+            fens=[fen(own,other,white) for own,other,_ in cases]
+            batch=pa.table(material_fields(fens,[white]*len(fens))).to_batches()[0]
+            old,new,checked=material.classify_material(batch,np.repeat(white,len(fens)))
+            np.testing.assert_array_equal(new,[x[2] for x in cases])
+            self.assertFalse(old[6]); self.assertTrue(new[6])
+            self.assertTrue(old[14]); self.assertFalse(new[14])
+            self.assertEqual(checked,4)
+
+    def test_real_win_failing_historical_screen_is_retained(self):
+        batch=fixture_table("2024-02").to_batches()[0]
+        cfg={"already_author_excluded":False,"calendar":None,"bot_status":None}
+        counts={"input_rows":0,"author_games_removed":0,"maximum_core_reproduction_error":0.}
+        metrics={}; out=worker.compute_batch(batch,"2024-02",cfg,metrics,counts)
+        row=out.to_pylist()[0]  # Original index 1; index 0 is author-excluded.
+        self.assertFalse(row["historical_material_screen"])
+        self.assertTrue(row["meaningful_choice"])
+        self.assertTrue(row["analysis_eligible_cost"])
+        self.assertGreater(row["chooser_cost_candidate"],0)
+        self.assertEqual(counts["wins_failing_historical_material_screen"],1)
+        self.assertEqual(counts["material_result_conflicts"],0)
+        self.assertEqual(metrics["chooser_claimed_win|all|old_unregulated"].n,
+                         counts["chooser_claimed_wins"])
+
+    def test_unresolved_material_conflict_is_null_and_still_validated(self):
+        table=replace_material(fixture_table("2024-02"),2,"7k/6q1/8/8/8/8/8/K7 b - - 0 1")
+        cfg={"already_author_excluded":False,"calendar":None,"bot_status":None}
+        counts={"input_rows":0,"author_games_removed":0,"maximum_core_reproduction_error":0.}
+        metrics={}; out=worker.compute_batch(table.to_batches()[0],"2024-02",cfg,metrics,counts)
+        row=out.to_pylist()[1]
+        self.assertTrue(row["material_result_conflict"])
+        self.assertFalse(row["analysis_eligible_cost"])
+        self.assertFalse(row["action_cost_known"])
+        for name in ("chooser_cost_candidate","chooser_claim_action_payoff_candidate",
+                     "opponent_benefit_candidate","cost_difference","chooser_cost_refactor_sensitivity"):
+            self.assertIsNone(row[name])
+        self.assertGreater(row["chooser_win_minus_draw_candidate"],0)
+        self.assertEqual(counts["material_result_conflicts"],1)
+        self.assertEqual(metrics["chooser_claimed_win|material_result_conflict|old_unregulated"].n,1)
+
+    def test_new_draw_label_is_separate_from_historical_outcome(self):
+        table=replace_material(fixture_table("2024-02"),10,"7k/6p1/8/8/8/8/8/KN6 b - - 0 1")
+        cfg={"already_author_excluded":False,"calendar":None,"bot_status":None}
+        counts={"input_rows":0,"author_games_removed":0,"maximum_core_reproduction_error":0.}
+        out=worker.compute_batch(table.to_batches()[0],"2024-02",cfg,{},counts)
+        row=out.to_pylist()[9]
+        self.assertFalse(row["kind_draw"])
+        self.assertTrue(row["kind_draw_platform_rule"])
+        self.assertGreater(row["chooser_cost_candidate"],0)
+        self.assertEqual(counts["draws_added_by_platform_material_rule"],1)
+
+    def test_original_validator_primary_samples_and_errors_match(self):
+        # Execute the earlier validator's unchanged consume function, not a
+        # second reimplementation of its inclusion rules.
+        tree=ast.parse((ROOT/"sources/Pool_Rating_Validation_reference.py").read_text())
+        funcs={"required_array","number_array","categorize","consume"}
+        consts={"FLOAT_COLUMNS","BOOL_COLUMNS","STRING_COLUMNS","PRIMARY"}
+        nodes=[x for x in tree.body if
+               (isinstance(x,ast.FunctionDef) and x.name in funcs) or
+               (isinstance(x,ast.Assign) and any(isinstance(t,ast.Name) and t.id in consts for t in x.targets))]
+        env={"np":np,"pa":pa,"require":engine.require}
+        exec(compile(ast.Module(body=nodes,type_ignores=[]),"pinned_validation", "exec"),env)
+        class Capture:
+            def __init__(self): self.metrics={}
+            def count(self,*args): pass
+            def add(self,series,dimension,level,observed,predicted):
+                if dimension=="overall":
+                    metric=worker.Metrics(); metric.add(observed,predicted,predicted)
+                    self.metrics[series]=metric
+        table=fixture_table("2024-02").slice(1)  # Same author-free rows.
+        target=Capture(); env["consume"](table.to_batches()[0],"2024-02",target)
+        cfg={"already_author_excluded":True,"calendar":None,"bot_status":None}
+        counts={"input_rows":0,"author_games_removed":0,"maximum_core_reproduction_error":0.}
+        metrics={}; worker.compute_batch(table.to_batches()[0],"2024-02",cfg,metrics,counts)
+        for arm in ("chooser_kind_draw","chooser_claimed_win"):
+            old=target.metrics[arm].report(); new=metrics[arm+"|all|old_unregulated"].report()
+            self.assertEqual(old,new)
+
+    def test_independent_pinned_core_and_volatility(self):
+        ref = scalar_reference()
+        differences=[]
+        for r,rd,ro,rdo,sig in [(1500,45,1500,45,.09),(1750,90,2000,140,.08),(400,500,900,45,.1)]:
+            raw = engine.raw_changes([r],[rd],[ro],[rdo])
+            for name, score in (("draw",.5),("win",1.),("loss",0.)):
+                want=ref["pred_diff_only"](r,rd,ro,rdo,score,45)
+                self.assertAlmostEqual(raw[name][0],want,places=10)
+            self.assertAlmostEqual((raw["win"]-raw["draw"])[0],raw["K"][0]/2,places=10)
+            d=ref["update_one"](r,rd,sig,ro,rdo,.5,.75,45,500,.1)
+            w=ref["update_one"](r,rd,sig,ro,rdo,1.,.75,45,500,.1)
+            self.assertAlmostEqual(w[0]-d[0],raw["K"][0]/2,places=10)
+            self.assertAlmostEqual(w[1],d[1],places=12)
+            differences.append(abs(d[2]-w[2]))
+        # The volatility cap may make both stored volatilities equal in a tail case.
+        self.assertGreater(max(differences),0.)
+
+    def test_regulator_piecewise_and_bounded_cost(self):
+        for timestamp in (engine.epoch("2024-01-01T00:00:00Z"), engine.epoch("2025-06-01T00:00:00Z")):
+            val, flags=engine.platform_transform([1500,1500],[10,-10],[1.015,1.015],timestamp)
+            np.testing.assert_allclose(val,[10.15,-10])
+            val,_=engine.platform_transform([400],[-10],[1.015],timestamp)
+            self.assertEqual(val[0],0)
+            val,_=engine.platform_transform([1500],[10],[1.015],timestamp,[True])
+            self.assertAlmostEqual(val[0],5.075)
+        old,_=engine.platform_transform([1500],[699],[1.015],engine.REFACTOR-1)
+        new,_=engine.platform_transform([1500],[699],[1.015],engine.REFACTOR)
+        self.assertAlmostEqual(old[0],709.485)
+        self.assertEqual(new[0],700)
+
+    def test_reset_and_floor_order(self):
+        x,f=engine.platform_transform([3990],[25],[1.015],engine.REFACTOR+1)
+        self.assertTrue(f["sanity_reset"][0]); self.assertEqual(x[0],1500-3990)
+        x,f=engine.platform_transform([500],[-200],[1.015],engine.REFACTOR+1)
+        self.assertTrue(f["rating_floor"][0]); self.assertEqual(x[0],-100)
+
+    def test_outcome_specific_extra_period(self):
+        ex=engine.extra_period_changes(np.array([1700.]),np.array([45.]),np.array([.09]),np.array([1500.]),np.array([45.]))
+        raw=engine.raw_changes([1700.],[45.],[1500.],[45.])
+        self.assertGreater(ex["win"][0]-ex["draw"][0],raw["K"][0]/2)
+        # Independent formula with pinned scalar volatility solver, within its cap.
+        ref=scalar_reference()
+        _,e,phi,g,v=engine.core_parameters([1700.],[45.],[1500.],[45.])
+        for name,s in (("draw",.5),("win",1.)):
+            ns=ref["volatility_update"](phi[0],.09,v[0]*g[0]*(s-e[0]),v[0],.75,.1)
+            post=1/(1/(phi[0]**2+ns**2)+1/v[0])
+            self.assertAlmostEqual(ex[name][0],engine.SCALE*post*g[0]*(s-e[0]),places=8)
+
+    def test_factor_history_and_calendar_failure(self):
+        f,_=engine.factors_for(["blitz","ultrabullet"],np.array([engine.REFACTOR-1]*2))
+        np.testing.assert_allclose(f,[1.005,1.])
+        with self.assertRaises(RuntimeError):
+            engine.factors_for(["blitz"],np.array([engine.REFACTOR]),{"periods":[]})
+
+    def test_integer_display_is_not_rounding_change(self):
+        lo,hi=engine.conditional_display_interval(np.array([.2,-.2,2.,-2.,1.9999999999999]))
+        np.testing.assert_array_equal(lo,[0,-1,2,-2,2])
+        np.testing.assert_array_equal(hi,[1,0,2,-2,2])
+
+    def test_author_filter_material_and_leakage(self):
+        b=fixture_table("2024-02").to_batches()[0]
+        cfg={"already_author_excluded":False,"calendar":None,"bot_status":None}
+        c={"input_rows":0,"author_games_removed":0,"maximum_core_reproduction_error":0.}
+        m={}; t=worker.compute_batch(b,"2024-02",cfg,m,c)
+        self.assertEqual(c["author_games_removed"],1)
+        self.assertEqual(t.num_rows,b.num_rows-1)
+        no_mat=np.logical_not(t["meaningful_choice"].to_numpy())
+        self.assertTrue(no_mat.any())
+        np.testing.assert_array_equal(t["chooser_cost_candidate"].to_numpy()[no_mat],0.)
+        self.assertFalse(any("username" in x for x in t.column_names))
+        # Altering observed changes cannot change a candidate; validation changes only.
+        tab=pa.Table.from_batches([b]); idx=tab.schema.get_field_index("white_rating_diff_pgn")
+        tab=tab.set_column(idx,"white_rating_diff_pgn",pa.array(tab["white_rating_diff_pgn"].to_numpy()+100))
+        c2={"input_rows":0,"author_games_removed":0,"maximum_core_reproduction_error":0.}
+        t2=worker.compute_batch(tab.to_batches()[0],"2024-02",cfg,{},c2)
+        np.testing.assert_array_equal(t["chooser_cost_candidate"].to_numpy(),t2["chooser_cost_candidate"].to_numpy())
+
+    def test_metrics_merge_and_observed_zeros(self):
+        y=np.array([0.,1.,-2.,np.nan]); x=np.array([.2,1.3,-1.8,5.])
+        whole=worker.Metrics(); whole.add(y,x,x)
+        a=worker.Metrics(); a.add(y[:2],x[:2],x[:2])
+        b=worker.Metrics(); b.add(y[2:],x[2:],x[2:]); a.merge(vars(b))
+        self.assertEqual(whole.report(),a.report())
+        self.assertEqual(a.observed,3); self.assertEqual(a.report()["missing"],1)
+
+    def test_stored_cost_mismatch_fails(self):
+        t=fixture_table("2025-01")
+        i=t.schema.get_field_index("chooser_win_premium_v2")
+        t=t.set_column(i,"chooser_win_premium_v2",pa.array(t["chooser_win_premium_v2"].to_numpy()+.01))
+        with self.assertRaisesRegex(RuntimeError,"premium"):
+            worker.compute_batch(t.to_batches()[0],"2025-01",{"already_author_excluded":False}, {},
+                                 {"input_rows":0,"author_games_removed":0,"maximum_core_reproduction_error":0.})
+
+
+class PipelineTests(unittest.TestCase):
+    def test_author_manifest_primary_route(self):
+        with tempfile.TemporaryDirectory(prefix="cost_author_test_") as folder:
+            root=Path(folder); project=root/"project"; project.mkdir()
+            originals=[]; audited=[]; retained=[]
+            for month in engine.MONTHS:
+                tab=fixture_table(month)
+                original=project/f"original/{month}.parquet"; original.parent.mkdir(exist_ok=True)
+                pq.write_table(tab,original)
+                h=support.sha(original)
+                originals.append({"month":month,"rows":36,"sha256":h,"relative_path":str(original.relative_to(project))})
+                audited.append({"family":"main_24m","month":month,"path":str(original),"sha256":h,"rows":36})
+                excluded=project/f"excluded/{month}.parquet"; excluded.parent.mkdir(exist_ok=True)
+                pq.write_table(tab.slice(1),excluded)
+                retained.append({"month":month,"path":str(excluded),"sha256":support.sha(excluded),"rows":35})
+            report=root/"authority.json"
+            support.write_json(report,{"observed_screen_certified":True,"panel_outputs":originals})
+            manifest=root/"manifest.json"
+            contents={"contract":"AUTHOR_EXCLUDED_MAIN_24M_V1","policy":{"excluded_usernames":list(engine.AUTHORS)},
+                      "policy_sha256":"fixture", "datasets":{"main_24m":retained},"audited_inputs":audited}
+            support.write_json(manifest,contents)
+            items,prov=support.authenticate(project,manifest_path=manifest,authority_path=report)
+            self.assertEqual(prov["mode"],"authenticated_author_excluded")
+            self.assertEqual(sum(x["rows"] for x in items),840)
+            b=pq.read_table(items[0]["path"]).to_batches()[0]
+            cfg={"already_author_excluded":True,"calendar":None,"bot_status":None}
+            counts={"input_rows":0,"author_games_removed":0,"maximum_core_reproduction_error":0.}
+            out=worker.compute_batch(b,items[0]["month"],cfg,{},counts)
+            self.assertEqual(out.num_rows,35); self.assertEqual(counts["author_games_removed"],0)
+            contents["audited_inputs"][0]["sha256"]="0"*64
+            support.write_json(manifest,contents)
+            with self.assertRaisesRegex(RuntimeError,"different parent"):
+                support.authenticate(project,manifest_path=manifest,authority_path=report)
+
+    def test_optional_bot_mapping_and_conflicting_status(self):
+        with tempfile.TemporaryDirectory(prefix="cost_bot_test_") as folder:
+            p=Path(folder)/"bots.parquet"
+            pq.write_table(pa.table({"username_norm":["chooser_1","opponent_1"],"is_bot":[False,True]}),p)
+            cfg={"already_author_excluded":False,"calendar":None,"bot_status":str(p)}
+            counts={"input_rows":0,"author_games_removed":0,"maximum_core_reproduction_error":0.}
+            b=fixture_table("2024-02").to_batches()[0]
+            out=worker.compute_batch(b,"2024-02",cfg,{},counts)
+            self.assertTrue(out["bot_status_verified"][0].as_py())
+            self.assertEqual(counts["human_vs_bot_rows"],1)
+            bad=Path(folder)/"bad.parquet"
+            pq.write_table(pa.table({"username_norm":[" X ","x"],"is_bot":[True,False]}),bad)
+            with self.assertRaisesRegex(RuntimeError,"Conflicting"):
+                worker.load_bots(str(bad))
+
+    def test_24_month_auth_parallel_resume_and_corruption(self):
+        with tempfile.TemporaryDirectory(prefix="cost_upgrade_test_") as folder:
+            root=Path(folder); project=root/"project"; base=project/"sample"; base.mkdir(parents=True)
+            support.write_json(base/"_SUCCESS.json",{"status":"SYNTHETIC"})
+            records=[]
+            for month in engine.MONTHS:
+                path=base/f"panel/month={month}/analysis_panel.parquet"; path.parent.mkdir(parents=True)
+                table=fixture_table(month)
+                pq.write_table(table,path)
+                records.append({"month":month,"relative_path":str(path.relative_to(base)),
+                                "rows":table.num_rows,"sha256":support.sha(path)})
+            authority=root/"authority.json"
+            support.write_json(authority,{"observed_screen_certified":True,"panel_outputs":records})
+            items,prov=support.authenticate(project,sample_root=base,authority_path=authority)
+            cfg={"version":"TEST", "fingerprint":"synthetic_fixture_"+support.digest(prov)[:16],
+                "run_root":str(root/"run"),"desktop":str(root/"desktop"),"workers":2,"memory_gb":4,
+                "batch_rows":16,"already_author_excluded":False,"calendar":None,"bot_status":None,
+                "code_identity":"synthetic","input_identity":"synthetic","environment":{"test":True}}
+            # Make one month first, then resume the remainder through spawn workers.
+            first=worker.process_month(items[0],cfg)
+            before=Path(first["output"]["path"]).stat().st_mtime_ns
+            result=run.execute(items,cfg,expected_rows=24*35)
+            self.assertEqual(result["status"],"COUNTERFACTUAL_COST_AUDIT_COMPLETE")
+            self.assertEqual(before,Path(first["output"]["path"]).stat().st_mtime_ns)
+            manifest=support.read_json(root/"run/COST_CANDIDATES_READY_PRIVATE.json")
+            self.assertEqual(manifest["counts"]["rows"],840)
+            self.assertEqual(manifest["counts"]["author_games_removed"],24)
+            self.assertEqual(manifest["counts"]["source_refactor_window_rows"],4)
+            # Completed-run reuse does not recompute.
+            run.execute(items,cfg,expected_rows=840)
+            self.assertEqual(before,Path(first["output"]["path"]).stat().st_mtime_ns)
+            import zipfile
+            archives=sorted((root/"desktop").glob("*.zip"))
+            self.assertEqual(len(archives),4)
+            with zipfile.ZipFile(archives[-1]) as z:
+                self.assertIn("SUMMARY.md",z.namelist())
+                self.assertFalse(any("PRIVATE" in x for x in z.namelist()))
+                for line in z.read("SHA256SUMS.txt").decode().splitlines():
+                    h,name=line.split("  ",1)
+                    self.assertEqual(hashlib.sha256(z.read(name)).hexdigest(),h)
+            # Corrupt outputs are rejected instead of silently reused.
+            output=Path(first["output"]["path"])
+            with output.open("ab") as f:f.write(b"changed")
+            with self.assertRaisesRegex(RuntimeError,"corrupt"):
+                run.execute(items,cfg,expected_rows=840)
+            # A source hash mismatch is independently detected at authentication.
+            with Path(items[0]["path"]).open("ab") as f:f.write(b"changed")
+            with self.assertRaisesRegex(RuntimeError,"checksum"):
+                support.authenticate(project,sample_root=base,authority_path=authority)
+
+
+if __name__=="__main__":
+    unittest.main(verbosity=2)

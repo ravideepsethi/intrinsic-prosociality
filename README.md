@@ -3,6 +3,27 @@
 Replication code, aggregate results and documentation for **The Structure of
 Intrinsic Prosociality: Field Evidence from Online Chess**.
 
+## November 2 results and repair update
+
+The [November release index](docs/research_updates_20261102/README.md) adds the
+material-corrected analysis sources and aggregate returns, the completed receipt
+censor repair, the nullable-integer audit, and corrected-frame rating validation.
+The consolidated [package hashes](manifests/research_updates_20261102/checksums.txt)
+and [censor reconciliation](manifests/research_updates_20261102/RECONCILIATION.csv)
+bind the returned evidence. No manuscript or figure is updated in this release.
+
+The corrected conditional censored receipt row is **1.121584 percentage points
+(SE 0.159006), N=625,066**; it supersedes 1.025175 (SE 0.213562), N=314,639.
+The zero-coded censored row remains **0.315239 points, N=2,112,426**.
+Use the dated index to distinguish current results, retained comparisons, and
+historical source snapshots; old numerical results do not fill current cells.
+
+Verify this publication without private data:
+
+```bash
+python3 operations/research_updates_20261102/verify_release.py
+```
+
 ## October 22 source update
 
 The [October source index](docs/research_updates_20261022/README.md) now covers
@@ -91,7 +112,7 @@ raw-data reconstruction. Source acquisition starts with the existing numbered
 replication stages. The paper-facing board evaluation is Stockfish 18 at 100,000
 nodes. Other exploratory extensions retain their own status and prerequisites.
 
-Verify the current source publication from the repository root:
+Verify the historical October source publication in a checkout of commit `5615909`:
 
 ```bash
 python3 operations/research_updates_20261022/verify_release.py

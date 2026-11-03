@@ -1,0 +1,114 @@
+[
+  {
+    "package": "Chooser_IV_Main_Rebuild_v1_0_1",
+    "manifest": "manifests/research_updates_20261102/source_packages/Chooser_IV_Main_Rebuild_v1_0_1.json",
+    "files": 12,
+    "templates": 1,
+    "archive": "Chooser_IV_Main_Rebuild_v1_0_1.zip",
+    "archive_sha256": "2ed70287f4969a2e1ad26e3e60273f9d566c887ea05cea73ca8fd18465bfa4cd"
+  },
+  {
+    "package": "Counterfactual_Cost_Upgrade_v1_0_1",
+    "manifest": "manifests/research_updates_20261102/source_packages/Counterfactual_Cost_Upgrade_v1_0_1.json",
+    "files": 18,
+    "templates": 4,
+    "archive": "Counterfactual_Cost_Upgrade_v1_0_1.zip",
+    "archive_sha256": "6f99243a1c27ee9e77c5f1e05dc6a115425efea9163ed26d5af20d86e8195f28"
+  },
+  {
+    "package": "Mating_Material_First_Run_v1_0_2",
+    "manifest": "manifests/research_updates_20261102/source_packages/Mating_Material_First_Run_v1_0_2.json",
+    "files": 20,
+    "templates": 6,
+    "archive": "Mating_Material_First_Run_v1_0_2.zip",
+    "archive_sha256": "bbcd458e0bc5435f558429e9bd89663988ff6aa6053bcfa7dd3b2c44d938df12"
+  },
+  {
+    "package": "Mating_Material_IV_Batch_v1_0_0",
+    "manifest": "manifests/research_updates_20261102/source_packages/Mating_Material_IV_Batch_v1_0_0.json",
+    "files": 449,
+    "templates": 76,
+    "archive": "Mating_Material_IV_Batch_v1_0_0.zip",
+    "archive_sha256": "875e34d3eecd53b004bf18fc101950fde52038fe46bc37394a0354efb7de8031"
+  },
+  {
+    "package": "Mating_Material_IV_Resume_v1_0_6",
+    "manifest": "manifests/research_updates_20261102/source_packages/Mating_Material_IV_Resume_v1_0_6.json",
+    "files": 467,
+    "templates": 76,
+    "archive": "Mating_Material_IV_Resume_v1_0_6.zip",
+    "archive_sha256": "4ff11fd291e35f9084de8c0674e90f31f39c6ef983cb0fcbdbd2c545097720f1"
+  },
+  {
+    "package": "Mating_Material_Models_v1_0_0",
+    "manifest": "manifests/research_updates_20261102/source_packages/Mating_Material_Models_v1_0_0.json",
+    "files": 23,
+    "templates": 4,
+    "archive": "Mating_Material_Models_v1_0_0.zip",
+    "archive_sha256": "fc645fdaed34041d28b22e3bbbbdaacf96d51fe0796ead7d64b70a52e215137c"
+  },
+  {
+    "package": "Mating_Material_NonIV_Batch_v1_0_2",
+    "manifest": "manifests/research_updates_20261102/source_packages/Mating_Material_NonIV_Batch_v1_0_2.json",
+    "files": 204,
+    "templates": 29,
+    "archive": "Mating_Material_NonIV_Batch_v1_0_2.zip",
+    "archive_sha256": "9c68dc0d7edb60b3c16e2364fb4856e58a92d0847a7046e68be772ee169dcfa1"
+  },
+  {
+    "package": "Mating_Material_Paper_Closeout_v1_0_2",
+    "manifest": "manifests/research_updates_20261102/source_packages/Mating_Material_Paper_Closeout_v1_0_2.json",
+    "files": 489,
+    "templates": 79,
+    "archive": "Mating_Material_Paper_Closeout_v1_0_2.zip",
+    "archive_sha256": "95491bd6a6a74fc828bc20c23ec19e1349bf919140decd0d9357923704e1de45"
+  },
+  {
+    "package": "Mating_Material_Patron_v1_0_0",
+    "manifest": "manifests/research_updates_20261102/source_packages/Mating_Material_Patron_v1_0_0.json",
+    "files": 31,
+    "templates": 7,
+    "archive": "Mating_Material_Patron_v1_0_0.zip",
+    "archive_sha256": "07f38d22f5f407a25fde181d435e69796979564e7f8449bcf75cfc9cd402ba95"
+  },
+  {
+    "package": "Mating_Material_Persistence_v1_0_0",
+    "manifest": "manifests/research_updates_20261102/source_packages/Mating_Material_Persistence_v1_0_0.json",
+    "files": 19,
+    "templates": 7,
+    "archive": "Mating_Material_Persistence_v1_0_0.zip",
+    "archive_sha256": "d32c44541627d223509a966902bb2c1dd2acaaea67aa0cdeee896e2f8f650349"
+  },
+  {
+    "package": "Mating_Material_Receipt_v1_0_0",
+    "manifest": "manifests/research_updates_20261102/source_packages/Mating_Material_Receipt_v1_0_0.json",
+    "files": 22,
+    "templates": 6,
+    "archive": "Mating_Material_Receipt_v1_0_0.zip",
+    "archive_sha256": "510eb2307c9b535f12b17ab4468b8cdd65c90dfacd701f63a327338a6abe9b6e"
+  },
+  {
+    "package": "Mating_Material_Structure_v1_0_0",
+    "manifest": "manifests/research_updates_20261102/source_packages/Mating_Material_Structure_v1_0_0.json",
+    "files": 27,
+    "templates": 4,
+    "archive": "Mating_Material_Structure_v1_0_0.zip",
+    "archive_sha256": "f13f811c16abc1530f6e3b6a7ac8682b3cd8849608064025a226403a91a2e5f9"
+  },
+  {
+    "package": "Mating_Material_Three_Runs_v1_0_0",
+    "manifest": "manifests/research_updates_20261102/source_packages/Mating_Material_Three_Runs_v1_0_0.json",
+    "files": 385,
+    "templates": 22,
+    "archive": "Mating_Material_Three_Runs_v1_0_0.zip",
+    "archive_sha256": "ed694065c8251c49cd27f4e2f532d02ed6acb52b1c72523a7cdffd4e750d46c9"
+  },
+  {
+    "package": "Remaining_Results_Consolidated_v1_0_2",
+    "manifest": "manifests/research_updates_20261102/source_packages/Remaining_Results_Consolidated_v1_0_2.json",
+    "files": 27,
+    "templates": 3,
+    "archive": "Remaining_Results_Consolidated_v1_0_2.zip",
+    "archive_sha256": "f416e6b135fcfee5333e0bb811232ec831d473ff8314375d3c1075e51af55379"
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "config_sha256": "12093d55b7ee9f737696982b8ebaef7b0706c27adc4fb12482a99aabf985d482",
+  "files": [
+    {
+      "bytes": 654,
+      "path": "dependencies_PRIVATE.json",
+      "sha256": "e4e33bc6d0d1e57a8ef7d0d99df158f11eb66154ec825a5efc47ea527bfdf7fc"
+    },
+    {
+      "bytes": 711113617,
+      "path": "raw.parquet",
+      "sha256": "15a9ceb275ce267e4b6f0f291b8b992fc54294c5114ac632e516e5edfdaab3c3"
+    }
+  ],
+  "first_recipient_recomputed_before_arm": true,
+  "fresh_pair_queries": 332,
+  "raw_exposures": 14058673
+}

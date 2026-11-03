@@ -1,0 +1,4 @@
+rd_bin,eligible_claims,paired_claims,mean_signed_error_predicted_minus_recorded,mean_absolute_error,construction
+RD <= 110,39663600,39588417,0.01795675160952641,0.40590331437261096,Corrected all-claim sufficient sums minus unchanged RD>110 sufficient sums
+110 < RD <= 200,921273,848538,0.8165237362136111,1.9341464926714713,"Original bin exactly retained: corrected claim frame is a subset, and total eligible RD>110 count is unchanged"
+RD > 200,358359,270323,0.16862834092955836,3.573308037818369,"Original bin exactly retained: corrected claim frame is a subset, and total eligible RD>110 count is unchanged"

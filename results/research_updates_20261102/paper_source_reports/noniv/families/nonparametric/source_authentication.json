@@ -1,0 +1,14 @@
+{
+  "status": "SOURCE_AUTHENTICATED_OK",
+  "created_utc": "2026-10-30T02:02:29.445037+00:00",
+  "source_settings": "/Volumes/XT_Pro/lichess_kindness/derived/replication/mating_material_noniv_batch_v100_PRIVATE/99984ef97df55388/PRIVATE/stages/krd/PRIVATE/model/settings.json",
+  "source_cache": "/Volumes/XT_Pro/lichess_kindness/derived/replication/mating_material_noniv_batch_v100_PRIVATE/99984ef97df55388/PRIVATE/stages/krd/PRIVATE/model/private_cache/rating_gap_krd_derived_private.parquet",
+  "source_settings_sha256": "af69852d6e5e51a9b907aec64e0a0dbb13cbfc96a0f50e6f3ffead01a0502afa",
+  "authority": {
+    "n": 41513719,
+    "months": 24,
+    "min_month": "2023-11",
+    "max_month": "2025-10",
+    "max_identity_error": 1.3642420526593924e-12
+  }
+}

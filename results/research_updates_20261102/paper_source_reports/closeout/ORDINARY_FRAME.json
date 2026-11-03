@@ -1,0 +1,31 @@
+{
+  "arms": [
+    {
+      "arm": 0,
+      "later_choices": 7421239,
+      "later_grants": 201803,
+      "recipients": 1969806,
+      "rows": 10448509
+    },
+    {
+      "arm": 1,
+      "later_choices": 706831,
+      "later_grants": 18507,
+      "recipients": 607569,
+      "rows": 983750
+    }
+  ],
+  "causal_identification": false,
+  "definition": "Corrected F frame; first observed pairs; all-time leave-pair-out score support >=5; complete pregame/follow-up 90 days; no receipt spacing. Ordinary draws: draw/stalemate with no winner. Ordinary losses: mate/resign with opposite-color winner.",
+  "estimator": "Empirical-cell overlap weights; coarsened exact support",
+  "execution_repair": "1.0.1",
+  "global_score_join": false,
+  "global_wide_sort": false,
+  "history": "90 days immediately before index start; volume uses the same 90 days",
+  "largest_metadata_partition": 274862,
+  "largest_query_partition": 171156,
+  "partitions": 128,
+  "rows": 11432259,
+  "same_as_old_1290237_sample": false,
+  "status": "READY"
+}

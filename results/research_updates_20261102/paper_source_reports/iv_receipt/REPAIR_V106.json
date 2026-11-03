@@ -1,0 +1,59 @@
+{
+  "analytical_network": false,
+  "baseline_configuration": "12093d55b7ee9f737696982b8ebaef7b0706c27adc4fb12482a99aabf985d482",
+  "baseline_package_manifest_sha256": "fcc1e08e1e3b1f50f21aa57f32137d2890d9df95f6e6e7214f55371ec944784c",
+  "completed_history_shards_reused": 16,
+  "completed_public_files_verified": 75,
+  "completed_stages_skipped": [
+    "authenticate",
+    "decisions",
+    "exposures",
+    "scores",
+    "features",
+    "core_models",
+    "supplements",
+    "sensitivities",
+    "subgroups",
+    "bins",
+    "receipt_kind",
+    "patron",
+    "comparison_auth",
+    "comparison_candidates",
+    "comparison_chronology",
+    "comparison_metadata"
+  ],
+  "environment_partitions": 128,
+  "execution_repair": "1.0.6",
+  "expected_remaining_hours": [
+    2,
+    3
+  ],
+  "fixes": [
+    "partitioned_environment_cache_agreement_and_priority",
+    "partitioned_missing_environment_requests_and_corrections",
+    "partitioned_environment_lookup_then_streaming_attachment",
+    "aggregate_reader_buffer_cap_for_128_partitions"
+  ],
+  "inherited_completed_repairs": [
+    "REPAIR_V101.json",
+    "REPAIR_V102.json",
+    "REPAIR_V103.json",
+    "REPAIR_V104.json",
+    "REPAIR_V105.json"
+  ],
+  "maximum_right_row_group_rows": 65536,
+  "maximum_total_right_row_group_rows": 1048576,
+  "metadata_cache_acquisition": "Already complete; no acquisition or reconciliation is run",
+  "new_completed_substeps_reused": [
+    "history_attachment",
+    "factual_volume90",
+    "roles24",
+    "labels90"
+  ],
+  "no_completed_statistical_results_recomputed": true,
+  "oversized_right_row_groups_normalized_sequentially": true,
+  "repair_package_manifest_sha256": "53727f8e8b5bc929e5aaf959a2a1eaf76d3c914d252b2c5301d36756fa1bd1ca",
+  "runtime_is_provisional": true,
+  "streaming_left_batch_rows": 65536,
+  "streaming_right_buffer_rows_per_shard": 8192
+}

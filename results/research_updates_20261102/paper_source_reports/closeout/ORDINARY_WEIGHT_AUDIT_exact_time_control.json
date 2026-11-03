@@ -1,0 +1,81 @@
+{
+  "absolute_tolerance": 1e-08,
+  "arms": [
+    {
+      "arm": 0,
+      "compensated_weight_sum": 890114.1702953448,
+      "expected_rows": 10387103,
+      "moments": [
+        {
+          "cell_formula": 890114.1702953448,
+          "moment": "weight_sum",
+          "observed": 890114.1702953448,
+          "passed": true
+        },
+        {
+          "cell_formula": 82564.43190067826,
+          "moment": "squared_weight_sum",
+          "observed": 82564.43190067826,
+          "passed": true
+        },
+        {
+          "cell_formula": 16950.611999022058,
+          "moment": "weighted_grants",
+          "observed": 16950.611999022058,
+          "passed": true
+        },
+        {
+          "cell_formula": 637993.920065541,
+          "moment": "weighted_reach",
+          "observed": 637993.920065541,
+          "passed": true
+        }
+      ],
+      "naive_weight_sum": 890114.1703031741,
+      "rows": 10387103
+    },
+    {
+      "arm": 1,
+      "compensated_weight_sum": 890114.1702953448,
+      "expected_rows": 982639,
+      "moments": [
+        {
+          "cell_formula": 890114.1702953448,
+          "moment": "weight_sum",
+          "observed": 890114.1702953448,
+          "passed": true
+        },
+        {
+          "cell_formula": 807549.7383946665,
+          "moment": "squared_weight_sum",
+          "observed": 807549.7383946665,
+          "passed": true
+        },
+        {
+          "cell_formula": 16663.426510512094,
+          "moment": "weighted_grants",
+          "observed": 16663.426510512094,
+          "passed": true
+        },
+        {
+          "cell_formula": 640184.592594615,
+          "moment": "weighted_reach",
+          "observed": 640184.592594615,
+          "passed": true
+        }
+      ],
+      "naive_weight_sum": 890114.1702946691,
+      "rows": 982639
+    }
+  ],
+  "compensated_relative_arm_gap": 0.0,
+  "failures": [],
+  "invalid_cells": 0,
+  "naive_relative_arm_gap": 9.554902562542496e-12,
+  "reference": "h_c=n0_c*n1_c/(n0_c+n1_c); exact integer arm counts; original cell outcome means",
+  "relative_tolerance": 1e-11,
+  "status": "PASSED",
+  "strata": 22231,
+  "summation": "DuckDB fsum (compensated)",
+  "weights_rescaled": false
+}

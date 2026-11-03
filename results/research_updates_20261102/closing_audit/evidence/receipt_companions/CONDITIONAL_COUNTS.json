@@ -1,0 +1,8 @@
+{
+  "censored": 625066,
+  "censoring_rule": "Retain a reached first choice if no competitive disconnection is within 90 days, or if choice <= next disconnection; timestamp ties retained.",
+  "complete90": 2112426,
+  "conditional": 994454,
+  "missing_timestamp_rule": "Present iff finite and > 0; null integers (-1) and NaN mean no recorded next disconnection.",
+  "zero_coded_censored_primary": "Existing 0.315 row is a separate outcome and is not replaced by this conditional estimate."
+}

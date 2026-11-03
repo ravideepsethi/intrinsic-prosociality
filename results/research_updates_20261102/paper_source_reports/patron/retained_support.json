@@ -1,0 +1,305 @@
+{
+  "cell_support": [
+    {
+      "acquired_users": 23336,
+      "fair_kind_group_controls": 0,
+      "fair_kind_groups": 0,
+      "match_cell": "00__blitz",
+      "overlap_cell_min20": false
+    },
+    {
+      "acquired_users": 6804,
+      "fair_kind_group_controls": 0,
+      "fair_kind_groups": 0,
+      "match_cell": "00__bullet",
+      "overlap_cell_min20": false
+    },
+    {
+      "acquired_users": 1984,
+      "fair_kind_group_controls": 0,
+      "fair_kind_groups": 0,
+      "match_cell": "00__classical_or_long",
+      "overlap_cell_min20": false
+    },
+    {
+      "acquired_users": 25888,
+      "fair_kind_group_controls": 0,
+      "fair_kind_groups": 0,
+      "match_cell": "00__rapid",
+      "overlap_cell_min20": false
+    },
+    {
+      "acquired_users": 76938,
+      "fair_kind_group_controls": 48285,
+      "fair_kind_groups": 16121,
+      "match_cell": "01__blitz",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 19195,
+      "fair_kind_group_controls": 11404,
+      "fair_kind_groups": 3805,
+      "match_cell": "01__bullet",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 5369,
+      "fair_kind_group_controls": 3586,
+      "fair_kind_groups": 1202,
+      "match_cell": "01__classical_or_long",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 73341,
+      "fair_kind_group_controls": 46119,
+      "fair_kind_groups": 15419,
+      "match_cell": "01__rapid",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 58037,
+      "fair_kind_group_controls": 36649,
+      "fair_kind_groups": 12249,
+      "match_cell": "02__blitz",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 13872,
+      "fair_kind_group_controls": 8365,
+      "fair_kind_groups": 2794,
+      "match_cell": "02__bullet",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 2320,
+      "fair_kind_group_controls": 1504,
+      "fair_kind_groups": 504,
+      "match_cell": "02__classical_or_long",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 45454,
+      "fair_kind_group_controls": 27912,
+      "fair_kind_groups": 9349,
+      "match_cell": "02__rapid",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 46761,
+      "fair_kind_group_controls": 29227,
+      "fair_kind_groups": 9771,
+      "match_cell": "03__blitz",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 11636,
+      "fair_kind_group_controls": 6653,
+      "fair_kind_groups": 2221,
+      "match_cell": "03__bullet",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 1234,
+      "fair_kind_group_controls": 764,
+      "fair_kind_groups": 258,
+      "match_cell": "03__classical_or_long",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 33907,
+      "fair_kind_group_controls": 20861,
+      "fair_kind_groups": 7005,
+      "match_cell": "03__rapid",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 38518,
+      "fair_kind_group_controls": 23966,
+      "fair_kind_groups": 8027,
+      "match_cell": "04__blitz",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 9677,
+      "fair_kind_group_controls": 5672,
+      "fair_kind_groups": 1893,
+      "match_cell": "04__bullet",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 840,
+      "fair_kind_group_controls": 537,
+      "fair_kind_groups": 181,
+      "match_cell": "04__classical_or_long",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 25361,
+      "fair_kind_group_controls": 15264,
+      "fair_kind_groups": 5128,
+      "match_cell": "04__rapid",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 132659,
+      "fair_kind_group_controls": 82742,
+      "fair_kind_groups": 27629,
+      "match_cell": "05_09__blitz",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 29459,
+      "fair_kind_group_controls": 17202,
+      "fair_kind_groups": 5739,
+      "match_cell": "05_09__bullet",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 2267,
+      "fair_kind_group_controls": 1424,
+      "fair_kind_groups": 478,
+      "match_cell": "05_09__classical_or_long",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 78812,
+      "fair_kind_group_controls": 47781,
+      "fair_kind_groups": 15991,
+      "match_cell": "05_09__rapid",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 1076,
+      "fair_kind_group_controls": 567,
+      "fair_kind_groups": 189,
+      "match_cell": "101_plus__blitz",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 51,
+      "fair_kind_group_controls": 20,
+      "fair_kind_groups": 7,
+      "match_cell": "101_plus__bullet",
+      "overlap_cell_min20": false
+    },
+    {
+      "acquired_users": 20,
+      "fair_kind_group_controls": 9,
+      "fair_kind_groups": 3,
+      "match_cell": "101_plus__classical_or_long",
+      "overlap_cell_min20": false
+    },
+    {
+      "acquired_users": 537,
+      "fair_kind_group_controls": 302,
+      "fair_kind_groups": 101,
+      "match_cell": "101_plus__rapid",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 126978,
+      "fair_kind_group_controls": 77011,
+      "fair_kind_groups": 25721,
+      "match_cell": "10_20__blitz",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 21936,
+      "fair_kind_group_controls": 12639,
+      "fair_kind_groups": 4216,
+      "match_cell": "10_20__bullet",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 1528,
+      "fair_kind_group_controls": 939,
+      "fair_kind_groups": 314,
+      "match_cell": "10_20__classical_or_long",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 59291,
+      "fair_kind_group_controls": 35546,
+      "fair_kind_groups": 11898,
+      "match_cell": "10_20__rapid",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 73332,
+      "fair_kind_group_controls": 42195,
+      "fair_kind_groups": 14098,
+      "match_cell": "21_50__blitz",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 7985,
+      "fair_kind_group_controls": 4550,
+      "fair_kind_groups": 1519,
+      "match_cell": "21_50__bullet",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 772,
+      "fair_kind_group_controls": 485,
+      "fair_kind_groups": 163,
+      "match_cell": "21_50__classical_or_long",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 28768,
+      "fair_kind_group_controls": 16822,
+      "fair_kind_groups": 5630,
+      "match_cell": "21_50__rapid",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 10358,
+      "fair_kind_group_controls": 5708,
+      "fair_kind_groups": 1909,
+      "match_cell": "51_100__blitz",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 754,
+      "fair_kind_group_controls": 412,
+      "fair_kind_groups": 138,
+      "match_cell": "51_100__bullet",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 138,
+      "fair_kind_group_controls": 76,
+      "fair_kind_groups": 28,
+      "match_cell": "51_100__classical_or_long",
+      "overlap_cell_min20": true
+    },
+    {
+      "acquired_users": 4115,
+      "fair_kind_group_controls": 2305,
+      "fair_kind_groups": 773,
+      "match_cell": "51_100__rapid",
+      "overlap_cell_min20": true
+    }
+  ],
+  "counts": {
+    "acquired_groups": 275910,
+    "acquired_users": 1101308,
+    "clearly_worse_kind_groups": 75574,
+    "fair_kind_groups": 212471,
+    "kind_groups_duration_2_40": 209791,
+    "kind_groups_legacy_2_20": 185574,
+    "match_cells": 40,
+    "overlap_cells_min20": 34,
+    "overlap_fair_kind_groups_min20": 212461
+  },
+  "created_utc": "2026-10-29T14:52:37.745495+00:00",
+  "duration_scaled_common_support": "kind chooser fair_opps in [2,40]",
+  "legacy_common_support": "kind group's fair-opportunity bin/value in [2,20]",
+  "main_exposure": "kind-role chooser with ever_kind_fair_state=true; controls are that chooser's immutable control_slot 1-3 users",
+  "one_to_one": "stored control_slot=1; slots 2 and 3 are leave-two-out sensitivities",
+  "overlap_cell_rule": "at least 20 fair-kind kind groups and 60 associated immutable controls in the match cell",
+  "patron_fields_read": false,
+  "primary_ratio": "stored exact 1:3",
+  "treatment_blind_rule": "Support defined from stored matching/exposure fields before patron outcome columns are read.",
+  "version": "1.0.1"
+}

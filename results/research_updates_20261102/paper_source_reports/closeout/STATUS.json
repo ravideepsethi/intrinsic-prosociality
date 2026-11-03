@@ -1,0 +1,36 @@
+{
+  "completed": [
+    "preflight",
+    "ordinary",
+    "material",
+    "balance",
+    "export"
+  ],
+  "configuration": "2854da0567adc38694949710ea608055f4d3157aaa92ebc5a9aa0ceb41d52aeb",
+  "failed": [],
+  "private_rows_exported": false,
+  "stages": {
+    "balance": {
+      "exit_code": 0,
+      "seconds": 363.32689870800823
+    },
+    "export": {
+      "exit_code": 0,
+      "seconds": 26.090807583008427
+    },
+    "material": {
+      "exit_code": 0,
+      "seconds": 282.09614729200257
+    },
+    "ordinary": {
+      "exit_code": 0,
+      "seconds": 2768.4979404160404
+    },
+    "preflight": {
+      "exit_code": 0,
+      "seconds": 33.527384000015445
+    }
+  },
+  "status": "RETAINED_ANALYSES_COMPLETE",
+  "whole_paper_complete": false
+}

@@ -1,0 +1,21 @@
+{
+  "claim_rows": 40943232,
+  "code_sha256": "49f187dfbed56a40e7c14231e5ab8383a6e7071f41bd509af7e6d88c84312fb7",
+  "correlation": "Pearson, stable centered streaming moments",
+  "errors": "prediction minus recorded header change",
+  "excluded_known_chooser_losses": 65,
+  "frame": "Corrected material-restricted main, author excluded",
+  "games_replayed": 0,
+  "grant_rows": 570422,
+  "limitation": "Realized-action validation does not independently observe counterfactual ratings; no inference on price responsiveness.",
+  "main_rows": 41513719,
+  "models_fitted": 0,
+  "network_requests": 0,
+  "numpy": "2.3.5",
+  "observed": "white/black_rating_diff_pgn, oriented by chooser_color; missing is never zero",
+  "p99": "exact linear quantile, position .99*(n-1)",
+  "predictions_rounded": false,
+  "primary_predictor": "chooser_draw_payoff_v2 for grants; chooser_win_payoff_v2 for claimed wins",
+  "secondary_predictor": "white/black_realized_pred_ratingdiff_v2, oriented by chooser_color",
+  "within_one": "absolute error <= 1 rating point"
+}

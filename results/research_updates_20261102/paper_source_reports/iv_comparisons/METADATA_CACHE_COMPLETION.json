@@ -1,0 +1,37 @@
+{
+  "analytical_network": false,
+  "approved_games": 15,
+  "attempts": [
+    {
+      "http_attempts": 1,
+      "http_seconds": 125.19745870796032,
+      "logical_requests": 1,
+      "seconds": 127.44095641700551,
+      "server_wait_seconds": 0,
+      "started_utc": "2026-10-31T13:19:54Z",
+      "status": "FAILED_OR_INTERRUPTED"
+    },
+    {
+      "http_attempts": 1,
+      "http_seconds": 5.60173770802794,
+      "logical_requests": 1,
+      "reused_complete_batch": false,
+      "seconds": 12.172572999959812,
+      "server_wait_seconds": 0,
+      "started_utc": "2026-10-31T14:12:41Z",
+      "status": "COMPLETE",
+      "transient_errors": []
+    }
+  ],
+  "configuration": "12093d55b7ee9f737696982b8ebaef7b0706c27adc4fb12482a99aabf985d482",
+  "endpoint": "https://lichess.org/api/games/export/_ids?moves=false&clocks=false&evals=false&opening=false&literate=false&pgnInJson=false&tags=true",
+  "execution_repair": "1.0.4",
+  "historical_offline_hold": "OFFLINE_HOLD.json",
+  "metadata_flags": 0,
+  "missing": 0,
+  "original_audit_reused": true,
+  "private_rows_exported": false,
+  "returned": 15,
+  "status": "CACHE_READY",
+  "target_sha256": "a3db5173c1bdb9b931b4b564242d089a9ede0af9da59b339ce1e9403d96c7659"
+}

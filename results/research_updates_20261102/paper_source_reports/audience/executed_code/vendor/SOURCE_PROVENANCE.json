@@ -1,0 +1,38 @@
+{
+  "created_utc": "2026-09-16T19:11:43.264297+00:00",
+  "source_files": [
+    {
+      "name": "Pool_Audience_Robustness_v1_0_0/run_audience.py",
+      "sha256": "d5e0567be6fcb8b7a2998da8c5a8bc6d5210613e1011dde8cc10bcd47d6997dc"
+    },
+    {
+      "name": "Pool_Audience_Robustness_v1_0_0/common.py",
+      "sha256": "732a7afb6850da2e74d571811b8b83af60b49c0e83510268a7710917be125bb1"
+    },
+    {
+      "name": "Pool_Audience_Robustness_v1_0_0/estimates.py",
+      "sha256": "f5e66cbe2071a300902924ad231138aa455000ba8e5d9328ee880d77d70e9e07"
+    },
+    {
+      "name": "Pool_Audience_Robustness_v1_0_0/registry.py",
+      "sha256": "2f4c060a105364571d9a0e08d3346f774433a2afdedb6698efcce8f636e1d5f5"
+    },
+    {
+      "name": "Pool_Audience_Robustness_v1_0_0/panel_authority.json",
+      "sha256": "162302dad3b67229ca0cb4185dbdd665ac3fb40518dfbdc6adc24998b5893ee7"
+    },
+    {
+      "name": "Patron_Audience_Cache_Audit_v1_0_0/audit_patron_audience.py",
+      "sha256": "8b108baf97aa5146df1bd2e956c16d201e151b6a76af9bb6ade258e2c43b157c"
+    }
+  ],
+  "changes": [
+    "Reused frozen panel verification and account-cell estimation with chooser-clustered covariance.",
+    "Added both-player channel-link and TV-positive flags from audited cached raw profiles.",
+    "Added explicit missing/zero TV coverage, independent overlap and grant-status diagnostics.",
+    "Reused original 260-account streamer directory without network access.",
+    "Added nested exclusions and coverage-restricted repetitions. Removed automatic exploratory equivalence labels.",
+    "Added independent OLS/cluster sandwich, end-to-end, cache resume and corruption tests."
+  ],
+  "research_run_performed_here": false
+}

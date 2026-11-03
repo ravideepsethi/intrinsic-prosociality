@@ -1,0 +1,18 @@
+{
+  "status": "TESTED_ON_SYNTHETIC_DATA_NOT_EXECUTED_ON_PRIVATE_PANEL",
+  "adapter_tests": 6,
+  "independent_estimator_metadata_resume_tests": 6,
+  "all_tests_passed": true,
+  "adapter_seconds": 12.173,
+  "frozen_tests_seconds": 5.595,
+  "python": "3.12",
+  "duckdb": "1.3.2",
+  "numpy": "2.3.5",
+  "scipy": "1.16.3",
+  "pyarrow": "20.0.0",
+  "expected_full_runtime_minutes": [
+    5,
+    15
+  ],
+  "production_data_accessible": false
+}

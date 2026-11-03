@@ -1,0 +1,215 @@
+{
+  "author_policy": "AUTHOR_ACCOUNT_1 and AUTHOR_ACCOUNT_2 excluded in both behavioral roles; factual chronology unchanged",
+  "calibration_scale": 0.04979005187533171,
+  "closeout_parent": "2854da0567adc386",
+  "configuration": "23405f1a54a1d1842588f3ac1541f6e308e47814584a0c4d8ee2c55f84bdb041",
+  "conflicting_sentence": "The old page-4 overidentification-retention sentence is superseded by the explicit four-analysis Do not rerun list and the closing statement that only the overidentification table goes.",
+  "dropped_by_author": [
+    "two-instrument overidentification extension and pooled both-supported companion",
+    "clearly-worse receipt frame and cross-exposure comparison",
+    "adjacent displayed-rating check and its variants",
+    "recipient-badge association"
+  ],
+  "execution_optimizations": [
+    "Reuse fixed completed exposure and score files; no exposure rebuild",
+    "Disk-backed FWL design with bounded covariance partitions",
+    "Sequential heavy stages and independent-process memory release",
+    "Read only recent traits for the two large diagnostic frames",
+    "Narrow one-pass material-to-stakes join; validate identities after joining",
+    "Reuse closeout balance columns 1, 2 and 6; no re-estimation"
+  ],
+  "expected_runtime": "2\u20134 hours provisionally; external-drive I/O can extend this",
+  "families": {
+    "act_stakes": {
+      "controls": "Headline spaced controls, cells, date and hour-of-week FE; add three band indicators and two centered stakes /5 only. No extra RD, board, clock, ply, or color nuisance terms. Score is not an ordinary control.",
+      "interpretation": "post-assignment exposure heterogeneity; nominal intervals",
+      "outputs": [
+        "D5 Panel B"
+      ],
+      "source": "Original R9b six-instrument interaction system",
+      "support": "at least twenty receipts and thirty recipients per arm in every band"
+    },
+    "balance": {
+      "calibration": "Fifteen-trait projection on headline nonhistory controls, including opponent-environment controls, and fixed effects; score adjustment uses all primary controls. Full first-order uncertainty includes estimating the projection.",
+      "outputs": [
+        "F6 six-column ladder",
+        "extra eight trait rows",
+        "joint tests",
+        "implied-bias calibration"
+      ],
+      "source": "Original fifteen traits, same legacy gap-seven windows and current corrected features",
+      "spaced_frames": "Use the existing material-corrected all-ending frame; apply the original spaced eligibility and gap-seven history rules. Report actual diagnostic-frame counts and row hashes alongside the counts in the note; never substitute the reference count for an observed count."
+    },
+    "compliers": {
+      "outputs": [
+        "D6 characteristics"
+      ],
+      "source": "Original R9b transformed D*trait moments",
+      "validation": "spaced IV effect and SE must reproduce verified parent before publishing traits",
+      "weighting": "instrument margin, including negative weights"
+    }
+  },
+  "figure_4": "Unresolved caption mapping; both source-profile candidate CSVs provided, with no invented figure assignment.",
+  "iv_parent": "12093d55b7ee9f73",
+  "material_parent": "aa7e95f275c18f43",
+  "multiplicity_adjustment": "None in delivered table or evidence columns; raw p-values only.",
+  "pending_companions": "Existing numeric evidence only. Missing additional models and counts remain explicitly pending; no fourth analysis family is scheduled.",
+  "pending_items": [
+    {
+      "item": "strict_material_without_environment",
+      "new_value": "",
+      "note": "No numeric result found in the reviewed archives. Revised note treats this as archive recovery, not an authorized new model run.",
+      "old_value": "0.326",
+      "paper_location": "D.4 Panel B",
+      "source_column": "NOT_EXPORTED",
+      "source_file": "",
+      "status": "ARCHIVE_GAP"
+    },
+    {
+      "item": "conditional_both_exposure_and_later_choice_hour",
+      "new_value": "",
+      "note": "Retained by author; requires new private-data computation. No extra model or data scan is scheduled under the revised three-runs-only instruction.",
+      "old_value": "0.839",
+      "paper_location": "D.5 Panel A",
+      "source_column": "",
+      "source_file": "",
+      "status": "PENDING_OUTSIDE_THREE_RUNS"
+    },
+    {
+      "item": "conditional_censored",
+      "new_value": "",
+      "note": "Retained by author; requires new private-data computation. No extra model or data scan is scheduled under the revised three-runs-only instruction.",
+      "old_value": "1.095; N=624521",
+      "paper_location": "D.5 Panel A",
+      "source_column": "",
+      "source_file": "",
+      "status": "PENDING_OUTSIDE_THREE_RUNS"
+    },
+    {
+      "item": "matched_receipt_engagement",
+      "new_value": "",
+      "note": "Corrected support cohort is 2296216; engagement outcomes must be attached and estimated. No extra model or data scan is scheduled under the revised three-runs-only instruction.",
+      "old_value": "2294011",
+      "paper_location": "D.5 Panel C",
+      "source_column": "",
+      "source_file": "",
+      "status": "PENDING_OUTSIDE_THREE_RUNS"
+    },
+    {
+      "item": "all_time_score_on_before_and_after_supported_rows",
+      "new_value": "",
+      "note": "Not found as a numeric result in the full return archive; not recomputed, per the RA note.",
+      "old_value": "N=2245892",
+      "paper_location": "Appendix D",
+      "source_column": "NOT_EXPORTED",
+      "source_file": "source_reports/iv_receipt",
+      "status": "ARCHIVE_GAP"
+    },
+    {
+      "item": "median_opponent_decisions",
+      "new_value": "",
+      "note": "Not found as a numeric result in the full return archive; not recomputed, per the RA note.",
+      "old_value": "41",
+      "paper_location": "6.1",
+      "source_column": "NOT_EXPORTED",
+      "source_file": "source_reports/iv_receipt",
+      "status": "ARCHIVE_GAP"
+    },
+    {
+      "item": "mean_opponent_decisions",
+      "new_value": "",
+      "note": "Not found as a numeric result in the full return archive; not recomputed, per the RA note.",
+      "old_value": "61",
+      "paper_location": "6.1",
+      "source_column": "NOT_EXPORTED",
+      "source_file": "source_reports/iv_receipt",
+      "status": "ARCHIVE_GAP"
+    },
+    {
+      "item": "instrument_partial_R2",
+      "new_value": "",
+      "note": "Not found as a numeric result in the full return archive; not recomputed, per the RA note.",
+      "old_value": "0.233",
+      "paper_location": "6.2 prose",
+      "source_column": "NOT_EXPORTED",
+      "source_file": "source_reports/iv_receipt",
+      "status": "ARCHIVE_GAP"
+    },
+    {
+      "item": "missing_environment_history_share",
+      "new_value": "",
+      "note": "Not found as a numeric result in the full return archive; not recomputed, per the RA note.",
+      "old_value": "11.2%",
+      "paper_location": "6.2",
+      "source_column": "NOT_EXPORTED",
+      "source_file": "source_reports/iv_receipt",
+      "status": "ARCHIVE_GAP"
+    },
+    {
+      "item": "one_in_five_pair_sample_count",
+      "new_value": "",
+      "note": "Find the exact corrected pair-sample count; no broad chronology rerun solely to obtain a count. No extra model or data scan is scheduled under the revised three-runs-only instruction.",
+      "old_value": "8279179",
+      "paper_location": "B.11",
+      "source_column": "",
+      "source_file": "",
+      "status": "PENDING_OUTSIDE_THREE_RUNS"
+    },
+    {
+      "item": "tenure_probability_sample_account_count",
+      "new_value": "",
+      "note": "Confirm nominal draw count versus observed and fitted accounts from producer metadata. No extra model or data scan is scheduled under the revised three-runs-only instruction.",
+      "old_value": "100000",
+      "paper_location": "5.1",
+      "source_column": "",
+      "source_file": "",
+      "status": "PENDING_OUTSIDE_THREE_RUNS"
+    },
+    {
+      "item": "caption_mapping",
+      "new_value": "",
+      "note": "The supplied October 31 source has no Figure 4 include or caption. Evaluation and gap data are supplied as candidates; no caption mapping is invented.",
+      "old_value": "",
+      "paper_location": "Figure 4",
+      "source_column": "filename",
+      "source_file": "figures",
+      "status": "FIGURE_MAPPING_UNRESOLVED"
+    },
+    {
+      "item": "entry_row_count",
+      "new_value": 17745309,
+      "note": "Actual fixed-rule diagnostic count. Exposure rows used by the three analyses are unchanged.",
+      "old_value": 17745415,
+      "paper_location": "F.6 diagnostic frame",
+      "source_column": "n",
+      "source_file": "raw/DIAGNOSTIC_FRAME_COUNTS.json",
+      "status": "UPDATED_DIAGNOSTIC_COUNT_REVIEW"
+    },
+    {
+      "item": "ordinary_row_count",
+      "new_value": 11410402,
+      "note": "Actual fixed-rule diagnostic count. Exposure rows used by the three analyses are unchanged.",
+      "old_value": 11410477,
+      "paper_location": "F.6 diagnostic frame",
+      "source_column": "n",
+      "source_file": "raw/DIAGNOSTIC_FRAME_COUNTS.json",
+      "status": "UPDATED_DIAGNOSTIC_COUNT_REVIEW"
+    }
+  ],
+  "price_layer": "Original rating replay and rating-validation denominators retained; no new replay or validation recomputation.",
+  "prior_completion_statement_withdrawn": true,
+  "production_analyses_executed": true,
+  "production_network": false,
+  "runtime_basis": "Provisional estimate from the size of the supplied frames and prior Mac logs; not a production benchmark of this new package.",
+  "scope": "Exactly three new analysis families",
+  "scope_authority": "RA Note What Remains After the November 1 Packages(1).pdf",
+  "scope_sha256": "6c94a18ddb6b76b65d13dbbd85b4c17c6861f3336234944fe4f325b7486e85c3",
+  "spaced_authority": {
+    "draw_receipts": 83978,
+    "exposures": 3103311,
+    "recipients": 1835645,
+    "row_set_sha256": "ce3751fda15f20b2ebe1840716e908a8c4cb182fbe20825498103c19cd94189e"
+  },
+  "status": "THREE_RUNS_COMPUTED_MANUSCRIPT_PENDING",
+  "whole_paper_complete": false
+}

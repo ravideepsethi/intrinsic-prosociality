@@ -1,0 +1,1374 @@
+{
+  "chronology_end_ms": 1777593598000,
+  "chronology_files_scanned": 150,
+  "complete_followup": true,
+  "definition": "Every rated-standard game start strictly after exposure last move and at most 30 days later; all speeds; true chronology retained.",
+  "file_summaries": [
+    {
+      "active_target_accounts": 112,
+      "file_index": 137,
+      "invalid_rows_excluded": 0,
+      "rows": 42263259,
+      "scanned_rows": 42263259,
+      "skipped_rows": 0,
+      "target_game_links": 6579
+    },
+    {
+      "active_target_accounts": 130,
+      "file_index": 133,
+      "invalid_rows_excluded": 0,
+      "rows": 43591473,
+      "scanned_rows": 43591473,
+      "skipped_rows": 0,
+      "target_game_links": 7526
+    },
+    {
+      "active_target_accounts": 118,
+      "file_index": 130,
+      "invalid_rows_excluded": 0,
+      "rows": 44182797,
+      "scanned_rows": 43181325,
+      "skipped_rows": 1001472,
+      "target_game_links": 8360
+    },
+    {
+      "active_target_accounts": 121,
+      "file_index": 135,
+      "invalid_rows_excluded": 0,
+      "rows": 43497126,
+      "scanned_rows": 43497126,
+      "skipped_rows": 0,
+      "target_game_links": 6517
+    },
+    {
+      "active_target_accounts": 216,
+      "file_index": 131,
+      "invalid_rows_excluded": 0,
+      "rows": 46344204,
+      "scanned_rows": 46344204,
+      "skipped_rows": 0,
+      "target_game_links": 21542
+    },
+    {
+      "active_target_accounts": 123,
+      "file_index": 134,
+      "invalid_rows_excluded": 0,
+      "rows": 45752167,
+      "scanned_rows": 45752167,
+      "skipped_rows": 0,
+      "target_game_links": 8421
+    },
+    {
+      "active_target_accounts": 167,
+      "file_index": 132,
+      "invalid_rows_excluded": 0,
+      "rows": 47163131,
+      "scanned_rows": 47163131,
+      "skipped_rows": 0,
+      "target_game_links": 11369
+    },
+    {
+      "active_target_accounts": 122,
+      "file_index": 136,
+      "invalid_rows_excluded": 0,
+      "rows": 44952429,
+      "scanned_rows": 44952429,
+      "skipped_rows": 0,
+      "target_game_links": 7663
+    },
+    {
+      "active_target_accounts": 84,
+      "file_index": 140,
+      "invalid_rows_excluded": 0,
+      "rows": 41552587,
+      "scanned_rows": 41552587,
+      "skipped_rows": 0,
+      "target_game_links": 5194
+    },
+    {
+      "active_target_accounts": 111,
+      "file_index": 138,
+      "invalid_rows_excluded": 0,
+      "rows": 42717115,
+      "scanned_rows": 42717115,
+      "skipped_rows": 0,
+      "target_game_links": 8056
+    },
+    {
+      "active_target_accounts": 85,
+      "file_index": 142,
+      "invalid_rows_excluded": 0,
+      "rows": 42462579,
+      "scanned_rows": 42462579,
+      "skipped_rows": 0,
+      "target_game_links": 3428
+    },
+    {
+      "active_target_accounts": 83,
+      "file_index": 145,
+      "invalid_rows_excluded": 0,
+      "rows": 41670220,
+      "scanned_rows": 41670220,
+      "skipped_rows": 0,
+      "target_game_links": 7005
+    },
+    {
+      "active_target_accounts": 93,
+      "file_index": 139,
+      "invalid_rows_excluded": 0,
+      "rows": 43599157,
+      "scanned_rows": 43599157,
+      "skipped_rows": 0,
+      "target_game_links": 6045
+    },
+    {
+      "active_target_accounts": 87,
+      "file_index": 141,
+      "invalid_rows_excluded": 0,
+      "rows": 44144371,
+      "scanned_rows": 44144371,
+      "skipped_rows": 0,
+      "target_game_links": 4074
+    },
+    {
+      "active_target_accounts": 73,
+      "file_index": 143,
+      "invalid_rows_excluded": 0,
+      "rows": 45432387,
+      "scanned_rows": 45432387,
+      "skipped_rows": 0,
+      "target_game_links": 3304
+    },
+    {
+      "active_target_accounts": 83,
+      "file_index": 144,
+      "invalid_rows_excluded": 0,
+      "rows": 46963478,
+      "scanned_rows": 46963478,
+      "skipped_rows": 0,
+      "target_game_links": 6479
+    },
+    {
+      "active_target_accounts": 90,
+      "file_index": 147,
+      "invalid_rows_excluded": 0,
+      "rows": 42777452,
+      "scanned_rows": 42777452,
+      "skipped_rows": 0,
+      "target_game_links": 6421
+    },
+    {
+      "active_target_accounts": 51,
+      "file_index": 152,
+      "invalid_rows_excluded": 0,
+      "rows": 40735097,
+      "scanned_rows": 40735097,
+      "skipped_rows": 0,
+      "target_game_links": 3667
+    },
+    {
+      "active_target_accounts": 70,
+      "file_index": 149,
+      "invalid_rows_excluded": 0,
+      "rows": 42430994,
+      "scanned_rows": 42430994,
+      "skipped_rows": 0,
+      "target_game_links": 4054
+    },
+    {
+      "active_target_accounts": 62,
+      "file_index": 150,
+      "invalid_rows_excluded": 0,
+      "rows": 43462379,
+      "scanned_rows": 43462379,
+      "skipped_rows": 0,
+      "target_game_links": 4652
+    },
+    {
+      "active_target_accounts": 94,
+      "file_index": 146,
+      "invalid_rows_excluded": 0,
+      "rows": 45535959,
+      "scanned_rows": 45535959,
+      "skipped_rows": 0,
+      "target_game_links": 5348
+    },
+    {
+      "active_target_accounts": 76,
+      "file_index": 148,
+      "invalid_rows_excluded": 0,
+      "rows": 43803522,
+      "scanned_rows": 43803522,
+      "skipped_rows": 0,
+      "target_game_links": 4553
+    },
+    {
+      "active_target_accounts": 62,
+      "file_index": 151,
+      "invalid_rows_excluded": 0,
+      "rows": 43000785,
+      "scanned_rows": 43000785,
+      "skipped_rows": 0,
+      "target_game_links": 2828
+    },
+    {
+      "active_target_accounts": 53,
+      "file_index": 153,
+      "invalid_rows_excluded": 0,
+      "rows": 42887275,
+      "scanned_rows": 42887275,
+      "skipped_rows": 0,
+      "target_game_links": 3902
+    },
+    {
+      "active_target_accounts": 24,
+      "file_index": 290,
+      "invalid_rows_excluded": 0,
+      "rows": 33457199,
+      "scanned_rows": 32455727,
+      "skipped_rows": 1001472,
+      "target_game_links": 523
+    },
+    {
+      "active_target_accounts": 77,
+      "file_index": 291,
+      "invalid_rows_excluded": 0,
+      "rows": 34848079,
+      "scanned_rows": 34848079,
+      "skipped_rows": 0,
+      "target_game_links": 3981
+    },
+    {
+      "active_target_accounts": 39,
+      "file_index": 295,
+      "invalid_rows_excluded": 0,
+      "rows": 33344167,
+      "scanned_rows": 33344167,
+      "skipped_rows": 0,
+      "target_game_links": 2639
+    },
+    {
+      "active_target_accounts": 54,
+      "file_index": 293,
+      "invalid_rows_excluded": 0,
+      "rows": 33284840,
+      "scanned_rows": 33284840,
+      "skipped_rows": 0,
+      "target_game_links": 4442
+    },
+    {
+      "active_target_accounts": 54,
+      "file_index": 294,
+      "invalid_rows_excluded": 0,
+      "rows": 34565085,
+      "scanned_rows": 34565085,
+      "skipped_rows": 0,
+      "target_game_links": 2539
+    },
+    {
+      "active_target_accounts": 62,
+      "file_index": 292,
+      "invalid_rows_excluded": 0,
+      "rows": 35905248,
+      "scanned_rows": 35905248,
+      "skipped_rows": 0,
+      "target_game_links": 2136
+    },
+    {
+      "active_target_accounts": 44,
+      "file_index": 296,
+      "invalid_rows_excluded": 0,
+      "rows": 34369002,
+      "scanned_rows": 34369002,
+      "skipped_rows": 0,
+      "target_game_links": 3358
+    },
+    {
+      "active_target_accounts": 24,
+      "file_index": 154,
+      "invalid_rows_excluded": 0,
+      "rows": 41954340,
+      "scanned_rows": 41954340,
+      "skipped_rows": 0,
+      "target_game_links": 800
+    },
+    {
+      "active_target_accounts": 48,
+      "file_index": 297,
+      "invalid_rows_excluded": 0,
+      "rows": 32774575,
+      "scanned_rows": 32774575,
+      "skipped_rows": 0,
+      "target_game_links": 2068
+    },
+    {
+      "active_target_accounts": 43,
+      "file_index": 298,
+      "invalid_rows_excluded": 0,
+      "rows": 32961862,
+      "scanned_rows": 32961862,
+      "skipped_rows": 0,
+      "target_game_links": 1045
+    },
+    {
+      "active_target_accounts": 41,
+      "file_index": 300,
+      "invalid_rows_excluded": 0,
+      "rows": 32335970,
+      "scanned_rows": 32335970,
+      "skipped_rows": 0,
+      "target_game_links": 1039
+    },
+    {
+      "active_target_accounts": 37,
+      "file_index": 299,
+      "invalid_rows_excluded": 0,
+      "rows": 33854960,
+      "scanned_rows": 33854960,
+      "skipped_rows": 0,
+      "target_game_links": 2358
+    },
+    {
+      "active_target_accounts": 34,
+      "file_index": 303,
+      "invalid_rows_excluded": 0,
+      "rows": 35289452,
+      "scanned_rows": 35289452,
+      "skipped_rows": 0,
+      "target_game_links": 1893
+    },
+    {
+      "active_target_accounts": 43,
+      "file_index": 301,
+      "invalid_rows_excluded": 0,
+      "rows": 35073586,
+      "scanned_rows": 35073586,
+      "skipped_rows": 0,
+      "target_game_links": 1790
+    },
+    {
+      "active_target_accounts": 34,
+      "file_index": 302,
+      "invalid_rows_excluded": 0,
+      "rows": 33596506,
+      "scanned_rows": 33596506,
+      "skipped_rows": 0,
+      "target_game_links": 2398
+    },
+    {
+      "active_target_accounts": 39,
+      "file_index": 304,
+      "invalid_rows_excluded": 0,
+      "rows": 36799550,
+      "scanned_rows": 36799550,
+      "skipped_rows": 0,
+      "target_game_links": 2068
+    },
+    {
+      "active_target_accounts": 38,
+      "file_index": 305,
+      "invalid_rows_excluded": 0,
+      "rows": 32783328,
+      "scanned_rows": 32783328,
+      "skipped_rows": 0,
+      "target_game_links": 2950
+    },
+    {
+      "active_target_accounts": 35,
+      "file_index": 307,
+      "invalid_rows_excluded": 0,
+      "rows": 33651067,
+      "scanned_rows": 33651067,
+      "skipped_rows": 0,
+      "target_game_links": 1012
+    },
+    {
+      "active_target_accounts": 46,
+      "file_index": 308,
+      "invalid_rows_excluded": 0,
+      "rows": 34773038,
+      "scanned_rows": 34773038,
+      "skipped_rows": 0,
+      "target_game_links": 1980
+    },
+    {
+      "active_target_accounts": 34,
+      "file_index": 306,
+      "invalid_rows_excluded": 0,
+      "rows": 35750432,
+      "scanned_rows": 35750432,
+      "skipped_rows": 0,
+      "target_game_links": 1733
+    },
+    {
+      "active_target_accounts": 27,
+      "file_index": 311,
+      "invalid_rows_excluded": 0,
+      "rows": 34170241,
+      "scanned_rows": 34170241,
+      "skipped_rows": 0,
+      "target_game_links": 1490
+    },
+    {
+      "active_target_accounts": 33,
+      "file_index": 309,
+      "invalid_rows_excluded": 0,
+      "rows": 33555469,
+      "scanned_rows": 33555469,
+      "skipped_rows": 0,
+      "target_game_links": 2078
+    },
+    {
+      "active_target_accounts": 33,
+      "file_index": 310,
+      "invalid_rows_excluded": 0,
+      "rows": 34120686,
+      "scanned_rows": 34120686,
+      "skipped_rows": 0,
+      "target_game_links": 863
+    },
+    {
+      "active_target_accounts": 21,
+      "file_index": 312,
+      "invalid_rows_excluded": 0,
+      "rows": 31760103,
+      "scanned_rows": 31760103,
+      "skipped_rows": 0,
+      "target_game_links": 815
+    },
+    {
+      "active_target_accounts": 12,
+      "file_index": 450,
+      "invalid_rows_excluded": 0,
+      "rows": 571255,
+      "scanned_rows": 571255,
+      "skipped_rows": 0,
+      "target_game_links": 317
+    },
+    {
+      "active_target_accounts": 24,
+      "file_index": 451,
+      "invalid_rows_excluded": 0,
+      "rows": 605106,
+      "scanned_rows": 605106,
+      "skipped_rows": 0,
+      "target_game_links": 324
+    },
+    {
+      "active_target_accounts": 13,
+      "file_index": 455,
+      "invalid_rows_excluded": 0,
+      "rows": 538429,
+      "scanned_rows": 538429,
+      "skipped_rows": 0,
+      "target_game_links": 115
+    },
+    {
+      "active_target_accounts": 15,
+      "file_index": 453,
+      "invalid_rows_excluded": 0,
+      "rows": 565852,
+      "scanned_rows": 565852,
+      "skipped_rows": 0,
+      "target_game_links": 384
+    },
+    {
+      "active_target_accounts": 25,
+      "file_index": 454,
+      "invalid_rows_excluded": 0,
+      "rows": 589134,
+      "scanned_rows": 589134,
+      "skipped_rows": 0,
+      "target_game_links": 370
+    },
+    {
+      "active_target_accounts": 20,
+      "file_index": 452,
+      "invalid_rows_excluded": 0,
+      "rows": 632968,
+      "scanned_rows": 632968,
+      "skipped_rows": 0,
+      "target_game_links": 288
+    },
+    {
+      "active_target_accounts": 20,
+      "file_index": 313,
+      "invalid_rows_excluded": 0,
+      "rows": 33054432,
+      "scanned_rows": 33054432,
+      "skipped_rows": 0,
+      "target_game_links": 1835
+    },
+    {
+      "active_target_accounts": 11,
+      "file_index": 314,
+      "invalid_rows_excluded": 0,
+      "rows": 32687358,
+      "scanned_rows": 32687358,
+      "skipped_rows": 0,
+      "target_game_links": 384
+    },
+    {
+      "active_target_accounts": 18,
+      "file_index": 459,
+      "invalid_rows_excluded": 0,
+      "rows": 536678,
+      "scanned_rows": 536678,
+      "skipped_rows": 0,
+      "target_game_links": 945
+    },
+    {
+      "active_target_accounts": 16,
+      "file_index": 461,
+      "invalid_rows_excluded": 0,
+      "rows": 532300,
+      "scanned_rows": 532300,
+      "skipped_rows": 0,
+      "target_game_links": 311
+    },
+    {
+      "active_target_accounts": 13,
+      "file_index": 460,
+      "invalid_rows_excluded": 0,
+      "rows": 490331,
+      "scanned_rows": 490331,
+      "skipped_rows": 0,
+      "target_game_links": 246
+    },
+    {
+      "active_target_accounts": 11,
+      "file_index": 457,
+      "invalid_rows_excluded": 0,
+      "rows": 534638,
+      "scanned_rows": 534638,
+      "skipped_rows": 0,
+      "target_game_links": 42
+    },
+    {
+      "active_target_accounts": 10,
+      "file_index": 456,
+      "invalid_rows_excluded": 0,
+      "rows": 574802,
+      "scanned_rows": 574802,
+      "skipped_rows": 0,
+      "target_game_links": 84
+    },
+    {
+      "active_target_accounts": 8,
+      "file_index": 458,
+      "invalid_rows_excluded": 0,
+      "rows": 522150,
+      "scanned_rows": 522150,
+      "skipped_rows": 0,
+      "target_game_links": 138
+    },
+    {
+      "active_target_accounts": 16,
+      "file_index": 462,
+      "invalid_rows_excluded": 0,
+      "rows": 541826,
+      "scanned_rows": 541826,
+      "skipped_rows": 0,
+      "target_game_links": 123
+    },
+    {
+      "active_target_accounts": 10,
+      "file_index": 463,
+      "invalid_rows_excluded": 0,
+      "rows": 590478,
+      "scanned_rows": 590478,
+      "skipped_rows": 0,
+      "target_game_links": 77
+    },
+    {
+      "active_target_accounts": 6,
+      "file_index": 465,
+      "invalid_rows_excluded": 0,
+      "rows": 544049,
+      "scanned_rows": 544049,
+      "skipped_rows": 0,
+      "target_game_links": 229
+    },
+    {
+      "active_target_accounts": 8,
+      "file_index": 464,
+      "invalid_rows_excluded": 0,
+      "rows": 616788,
+      "scanned_rows": 616788,
+      "skipped_rows": 0,
+      "target_game_links": 47
+    },
+    {
+      "active_target_accounts": 10,
+      "file_index": 469,
+      "invalid_rows_excluded": 0,
+      "rows": 543573,
+      "scanned_rows": 543573,
+      "skipped_rows": 0,
+      "target_game_links": 108
+    },
+    {
+      "active_target_accounts": 10,
+      "file_index": 467,
+      "invalid_rows_excluded": 0,
+      "rows": 535046,
+      "scanned_rows": 535046,
+      "skipped_rows": 0,
+      "target_game_links": 102
+    },
+    {
+      "active_target_accounts": 10,
+      "file_index": 468,
+      "invalid_rows_excluded": 0,
+      "rows": 569110,
+      "scanned_rows": 569110,
+      "skipped_rows": 0,
+      "target_game_links": 144
+    },
+    {
+      "active_target_accounts": 15,
+      "file_index": 466,
+      "invalid_rows_excluded": 0,
+      "rows": 574557,
+      "scanned_rows": 574557,
+      "skipped_rows": 0,
+      "target_game_links": 85
+    },
+    {
+      "active_target_accounts": 8,
+      "file_index": 470,
+      "invalid_rows_excluded": 0,
+      "rows": 541578,
+      "scanned_rows": 541578,
+      "skipped_rows": 0,
+      "target_game_links": 59
+    },
+    {
+      "active_target_accounts": 8,
+      "file_index": 471,
+      "invalid_rows_excluded": 0,
+      "rows": 536148,
+      "scanned_rows": 536148,
+      "skipped_rows": 0,
+      "target_game_links": 60
+    },
+    {
+      "active_target_accounts": 2,
+      "file_index": 610,
+      "invalid_rows_excluded": 0,
+      "rows": 72420,
+      "scanned_rows": 72420,
+      "skipped_rows": 0,
+      "target_game_links": 3
+    },
+    {
+      "active_target_accounts": 1,
+      "file_index": 474,
+      "invalid_rows_excluded": 0,
+      "rows": 550236,
+      "scanned_rows": 550236,
+      "skipped_rows": 0,
+      "target_game_links": 1
+    },
+    {
+      "active_target_accounts": 4,
+      "file_index": 612,
+      "invalid_rows_excluded": 0,
+      "rows": 97249,
+      "scanned_rows": 97249,
+      "skipped_rows": 0,
+      "target_game_links": 16
+    },
+    {
+      "active_target_accounts": 5,
+      "file_index": 473,
+      "invalid_rows_excluded": 0,
+      "rows": 531461,
+      "scanned_rows": 531461,
+      "skipped_rows": 0,
+      "target_game_links": 10
+    },
+    {
+      "active_target_accounts": 1,
+      "file_index": 472,
+      "invalid_rows_excluded": 0,
+      "rows": 481138,
+      "scanned_rows": 481138,
+      "skipped_rows": 0,
+      "target_game_links": 1
+    },
+    {
+      "active_target_accounts": 4,
+      "file_index": 611,
+      "invalid_rows_excluded": 0,
+      "rows": 83844,
+      "scanned_rows": 83844,
+      "skipped_rows": 0,
+      "target_game_links": 16
+    },
+    {
+      "active_target_accounts": 5,
+      "file_index": 614,
+      "invalid_rows_excluded": 0,
+      "rows": 94115,
+      "scanned_rows": 94115,
+      "skipped_rows": 0,
+      "target_game_links": 10
+    },
+    {
+      "active_target_accounts": 2,
+      "file_index": 613,
+      "invalid_rows_excluded": 0,
+      "rows": 92320,
+      "scanned_rows": 92320,
+      "skipped_rows": 0,
+      "target_game_links": 2
+    },
+    {
+      "active_target_accounts": 1,
+      "file_index": 615,
+      "invalid_rows_excluded": 0,
+      "rows": 86817,
+      "scanned_rows": 86817,
+      "skipped_rows": 0,
+      "target_game_links": 1
+    },
+    {
+      "active_target_accounts": 2,
+      "file_index": 616,
+      "invalid_rows_excluded": 0,
+      "rows": 79825,
+      "scanned_rows": 79825,
+      "skipped_rows": 0,
+      "target_game_links": 2
+    },
+    {
+      "active_target_accounts": 1,
+      "file_index": 618,
+      "invalid_rows_excluded": 0,
+      "rows": 58029,
+      "scanned_rows": 58029,
+      "skipped_rows": 0,
+      "target_game_links": 1
+    },
+    {
+      "active_target_accounts": 1,
+      "file_index": 617,
+      "invalid_rows_excluded": 0,
+      "rows": 68403,
+      "scanned_rows": 68403,
+      "skipped_rows": 0,
+      "target_game_links": 1
+    },
+    {
+      "active_target_accounts": 1,
+      "file_index": 620,
+      "invalid_rows_excluded": 0,
+      "rows": 56576,
+      "scanned_rows": 56576,
+      "skipped_rows": 0,
+      "target_game_links": 1
+    },
+    {
+      "active_target_accounts": 1,
+      "file_index": 619,
+      "invalid_rows_excluded": 0,
+      "rows": 57911,
+      "scanned_rows": 57911,
+      "skipped_rows": 0,
+      "target_game_links": 1
+    },
+    {
+      "active_target_accounts": 7,
+      "file_index": 621,
+      "invalid_rows_excluded": 0,
+      "rows": 68702,
+      "scanned_rows": 68702,
+      "skipped_rows": 0,
+      "target_game_links": 60
+    },
+    {
+      "active_target_accounts": 2,
+      "file_index": 622,
+      "invalid_rows_excluded": 0,
+      "rows": 59099,
+      "scanned_rows": 59099,
+      "skipped_rows": 0,
+      "target_game_links": 3
+    },
+    {
+      "active_target_accounts": 1,
+      "file_index": 623,
+      "invalid_rows_excluded": 0,
+      "rows": 66726,
+      "scanned_rows": 66726,
+      "skipped_rows": 0,
+      "target_game_links": 1
+    },
+    {
+      "active_target_accounts": 3,
+      "file_index": 627,
+      "invalid_rows_excluded": 0,
+      "rows": 60226,
+      "scanned_rows": 60226,
+      "skipped_rows": 0,
+      "target_game_links": 4
+    },
+    {
+      "active_target_accounts": 1,
+      "file_index": 628,
+      "invalid_rows_excluded": 0,
+      "rows": 64864,
+      "scanned_rows": 64864,
+      "skipped_rows": 0,
+      "target_game_links": 1
+    },
+    {
+      "active_target_accounts": 1,
+      "file_index": 625,
+      "invalid_rows_excluded": 0,
+      "rows": 58025,
+      "scanned_rows": 58025,
+      "skipped_rows": 0,
+      "target_game_links": 4
+    },
+    {
+      "active_target_accounts": 5,
+      "file_index": 624,
+      "invalid_rows_excluded": 0,
+      "rows": 66314,
+      "scanned_rows": 66314,
+      "skipped_rows": 0,
+      "target_game_links": 6
+    },
+    {
+      "active_target_accounts": 0,
+      "file_index": 626,
+      "invalid_rows_excluded": 0,
+      "rows": 71689,
+      "scanned_rows": 71689,
+      "skipped_rows": 0,
+      "target_game_links": 0
+    },
+    {
+      "active_target_accounts": 1,
+      "file_index": 629,
+      "invalid_rows_excluded": 0,
+      "rows": 54211,
+      "scanned_rows": 54211,
+      "skipped_rows": 0,
+      "target_game_links": 2
+    },
+    {
+      "active_target_accounts": 3,
+      "file_index": 630,
+      "invalid_rows_excluded": 0,
+      "rows": 55741,
+      "scanned_rows": 55741,
+      "skipped_rows": 0,
+      "target_game_links": 3
+    },
+    {
+      "active_target_accounts": 1,
+      "file_index": 634,
+      "invalid_rows_excluded": 0,
+      "rows": 56211,
+      "scanned_rows": 56211,
+      "skipped_rows": 0,
+      "target_game_links": 2
+    },
+    {
+      "active_target_accounts": 0,
+      "file_index": 631,
+      "invalid_rows_excluded": 0,
+      "rows": 51178,
+      "scanned_rows": 51178,
+      "skipped_rows": 0,
+      "target_game_links": 0
+    },
+    {
+      "active_target_accounts": 1,
+      "file_index": 633,
+      "invalid_rows_excluded": 0,
+      "rows": 58252,
+      "scanned_rows": 58252,
+      "skipped_rows": 0,
+      "target_game_links": 2
+    },
+    {
+      "active_target_accounts": 1,
+      "file_index": 632,
+      "invalid_rows_excluded": 0,
+      "rows": 49752,
+      "scanned_rows": 49752,
+      "skipped_rows": 0,
+      "target_game_links": 1
+    },
+    {
+      "active_target_accounts": 189,
+      "file_index": 708,
+      "invalid_rows_excluded": 0,
+      "rows": 14084712,
+      "scanned_rows": 14084712,
+      "skipped_rows": 0,
+      "target_game_links": 11597
+    },
+    {
+      "active_target_accounts": 88,
+      "file_index": 707,
+      "invalid_rows_excluded": 0,
+      "rows": 13253826,
+      "scanned_rows": 13253826,
+      "skipped_rows": 0,
+      "target_game_links": 5237
+    },
+    {
+      "active_target_accounts": 147,
+      "file_index": 709,
+      "invalid_rows_excluded": 0,
+      "rows": 14262291,
+      "scanned_rows": 14262291,
+      "skipped_rows": 0,
+      "target_game_links": 10472
+    },
+    {
+      "active_target_accounts": 119,
+      "file_index": 710,
+      "invalid_rows_excluded": 0,
+      "rows": 13221018,
+      "scanned_rows": 13221018,
+      "skipped_rows": 0,
+      "target_game_links": 8462
+    },
+    {
+      "active_target_accounts": 108,
+      "file_index": 714,
+      "invalid_rows_excluded": 0,
+      "rows": 12878418,
+      "scanned_rows": 12878418,
+      "skipped_rows": 0,
+      "target_game_links": 5744
+    },
+    {
+      "active_target_accounts": 107,
+      "file_index": 713,
+      "invalid_rows_excluded": 0,
+      "rows": 13588048,
+      "scanned_rows": 13588048,
+      "skipped_rows": 0,
+      "target_game_links": 5718
+    },
+    {
+      "active_target_accounts": 115,
+      "file_index": 711,
+      "invalid_rows_excluded": 0,
+      "rows": 13924525,
+      "scanned_rows": 13924525,
+      "skipped_rows": 0,
+      "target_game_links": 6787
+    },
+    {
+      "active_target_accounts": 105,
+      "file_index": 712,
+      "invalid_rows_excluded": 0,
+      "rows": 13132484,
+      "scanned_rows": 13132484,
+      "skipped_rows": 0,
+      "target_game_links": 5707
+    },
+    {
+      "active_target_accounts": 91,
+      "file_index": 716,
+      "invalid_rows_excluded": 0,
+      "rows": 13144810,
+      "scanned_rows": 13144810,
+      "skipped_rows": 0,
+      "target_game_links": 4529
+    },
+    {
+      "active_target_accounts": 96,
+      "file_index": 715,
+      "invalid_rows_excluded": 0,
+      "rows": 12876078,
+      "scanned_rows": 12876078,
+      "skipped_rows": 0,
+      "target_game_links": 3853
+    },
+    {
+      "active_target_accounts": 79,
+      "file_index": 717,
+      "invalid_rows_excluded": 0,
+      "rows": 12463856,
+      "scanned_rows": 12463856,
+      "skipped_rows": 0,
+      "target_game_links": 2747
+    },
+    {
+      "active_target_accounts": 78,
+      "file_index": 718,
+      "invalid_rows_excluded": 0,
+      "rows": 13565303,
+      "scanned_rows": 13565303,
+      "skipped_rows": 0,
+      "target_game_links": 3369
+    },
+    {
+      "active_target_accounts": 83,
+      "file_index": 719,
+      "invalid_rows_excluded": 0,
+      "rows": 13225493,
+      "scanned_rows": 13225493,
+      "skipped_rows": 0,
+      "target_game_links": 3978
+    },
+    {
+      "active_target_accounts": 88,
+      "file_index": 721,
+      "invalid_rows_excluded": 0,
+      "rows": 14794506,
+      "scanned_rows": 14794506,
+      "skipped_rows": 0,
+      "target_game_links": 3739
+    },
+    {
+      "active_target_accounts": 94,
+      "file_index": 722,
+      "invalid_rows_excluded": 0,
+      "rows": 13353368,
+      "scanned_rows": 13353368,
+      "skipped_rows": 0,
+      "target_game_links": 3636
+    },
+    {
+      "active_target_accounts": 73,
+      "file_index": 720,
+      "invalid_rows_excluded": 0,
+      "rows": 14272031,
+      "scanned_rows": 14272031,
+      "skipped_rows": 0,
+      "target_game_links": 3502
+    },
+    {
+      "active_target_accounts": 92,
+      "file_index": 723,
+      "invalid_rows_excluded": 0,
+      "rows": 14548242,
+      "scanned_rows": 14548242,
+      "skipped_rows": 0,
+      "target_game_links": 4336
+    },
+    {
+      "active_target_accounts": 91,
+      "file_index": 724,
+      "invalid_rows_excluded": 0,
+      "rows": 13602149,
+      "scanned_rows": 13602149,
+      "skipped_rows": 0,
+      "target_game_links": 3639
+    },
+    {
+      "active_target_accounts": 73,
+      "file_index": 725,
+      "invalid_rows_excluded": 0,
+      "rows": 13860753,
+      "scanned_rows": 13860753,
+      "skipped_rows": 0,
+      "target_game_links": 3493
+    },
+    {
+      "active_target_accounts": 76,
+      "file_index": 726,
+      "invalid_rows_excluded": 0,
+      "rows": 13445525,
+      "scanned_rows": 13445525,
+      "skipped_rows": 0,
+      "target_game_links": 3390
+    },
+    {
+      "active_target_accounts": 0,
+      "file_index": 816,
+      "invalid_rows_excluded": 0,
+      "rows": 823810,
+      "scanned_rows": 823810,
+      "skipped_rows": 0,
+      "target_game_links": 0
+    },
+    {
+      "active_target_accounts": 66,
+      "file_index": 727,
+      "invalid_rows_excluded": 0,
+      "rows": 13756172,
+      "scanned_rows": 13756172,
+      "skipped_rows": 0,
+      "target_game_links": 4297
+    },
+    {
+      "active_target_accounts": 60,
+      "file_index": 729,
+      "invalid_rows_excluded": 0,
+      "rows": 13074192,
+      "scanned_rows": 13074192,
+      "skipped_rows": 0,
+      "target_game_links": 2775
+    },
+    {
+      "active_target_accounts": 71,
+      "file_index": 728,
+      "invalid_rows_excluded": 0,
+      "rows": 13794310,
+      "scanned_rows": 13794310,
+      "skipped_rows": 0,
+      "target_game_links": 4768
+    },
+    {
+      "active_target_accounts": 79,
+      "file_index": 730,
+      "invalid_rows_excluded": 0,
+      "rows": 14131645,
+      "scanned_rows": 14131645,
+      "skipped_rows": 0,
+      "target_game_links": 3274
+    },
+    {
+      "active_target_accounts": 1,
+      "file_index": 818,
+      "invalid_rows_excluded": 0,
+      "rows": 929165,
+      "scanned_rows": 929165,
+      "skipped_rows": 0,
+      "target_game_links": 4
+    },
+    {
+      "active_target_accounts": 2,
+      "file_index": 817,
+      "invalid_rows_excluded": 0,
+      "rows": 932106,
+      "scanned_rows": 932106,
+      "skipped_rows": 0,
+      "target_game_links": 37
+    },
+    {
+      "active_target_accounts": 38,
+      "file_index": 731,
+      "invalid_rows_excluded": 0,
+      "rows": 14146747,
+      "scanned_rows": 14146747,
+      "skipped_rows": 0,
+      "target_game_links": 1274
+    },
+    {
+      "active_target_accounts": 1,
+      "file_index": 819,
+      "invalid_rows_excluded": 0,
+      "rows": 811173,
+      "scanned_rows": 811173,
+      "skipped_rows": 0,
+      "target_game_links": 12
+    },
+    {
+      "active_target_accounts": 0,
+      "file_index": 821,
+      "invalid_rows_excluded": 0,
+      "rows": 775562,
+      "scanned_rows": 775562,
+      "skipped_rows": 0,
+      "target_game_links": 0
+    },
+    {
+      "active_target_accounts": 2,
+      "file_index": 824,
+      "invalid_rows_excluded": 0,
+      "rows": 780071,
+      "scanned_rows": 780071,
+      "skipped_rows": 0,
+      "target_game_links": 19
+    },
+    {
+      "active_target_accounts": 2,
+      "file_index": 822,
+      "invalid_rows_excluded": 0,
+      "rows": 826779,
+      "scanned_rows": 826779,
+      "skipped_rows": 0,
+      "target_game_links": 48
+    },
+    {
+      "active_target_accounts": 2,
+      "file_index": 825,
+      "invalid_rows_excluded": 0,
+      "rows": 827321,
+      "scanned_rows": 827321,
+      "skipped_rows": 0,
+      "target_game_links": 17
+    },
+    {
+      "active_target_accounts": 2,
+      "file_index": 823,
+      "invalid_rows_excluded": 0,
+      "rows": 804990,
+      "scanned_rows": 804990,
+      "skipped_rows": 0,
+      "target_game_links": 13
+    },
+    {
+      "active_target_accounts": 1,
+      "file_index": 820,
+      "invalid_rows_excluded": 0,
+      "rows": 877450,
+      "scanned_rows": 877450,
+      "skipped_rows": 0,
+      "target_game_links": 2
+    },
+    {
+      "active_target_accounts": 2,
+      "file_index": 826,
+      "invalid_rows_excluded": 0,
+      "rows": 782197,
+      "scanned_rows": 782197,
+      "skipped_rows": 0,
+      "target_game_links": 20
+    },
+    {
+      "active_target_accounts": 5,
+      "file_index": 827,
+      "invalid_rows_excluded": 0,
+      "rows": 847670,
+      "scanned_rows": 847670,
+      "skipped_rows": 0,
+      "target_game_links": 11
+    },
+    {
+      "active_target_accounts": 0,
+      "file_index": 829,
+      "invalid_rows_excluded": 0,
+      "rows": 904224,
+      "scanned_rows": 904224,
+      "skipped_rows": 0,
+      "target_game_links": 0
+    },
+    {
+      "active_target_accounts": 3,
+      "file_index": 828,
+      "invalid_rows_excluded": 0,
+      "rows": 782135,
+      "scanned_rows": 782135,
+      "skipped_rows": 0,
+      "target_game_links": 72
+    },
+    {
+      "active_target_accounts": 2,
+      "file_index": 833,
+      "invalid_rows_excluded": 0,
+      "rows": 953276,
+      "scanned_rows": 953276,
+      "skipped_rows": 0,
+      "target_game_links": 3
+    },
+    {
+      "active_target_accounts": 3,
+      "file_index": 832,
+      "invalid_rows_excluded": 0,
+      "rows": 1004411,
+      "scanned_rows": 1004411,
+      "skipped_rows": 0,
+      "target_game_links": 34
+    },
+    {
+      "active_target_accounts": 1,
+      "file_index": 831,
+      "invalid_rows_excluded": 0,
+      "rows": 854653,
+      "scanned_rows": 854653,
+      "skipped_rows": 0,
+      "target_game_links": 1
+    },
+    {
+      "active_target_accounts": 1,
+      "file_index": 830,
+      "invalid_rows_excluded": 0,
+      "rows": 986470,
+      "scanned_rows": 986470,
+      "skipped_rows": 0,
+      "target_game_links": 6
+    },
+    {
+      "active_target_accounts": 3,
+      "file_index": 834,
+      "invalid_rows_excluded": 0,
+      "rows": 971652,
+      "scanned_rows": 971652,
+      "skipped_rows": 0,
+      "target_game_links": 14
+    },
+    {
+      "active_target_accounts": 2,
+      "file_index": 835,
+      "invalid_rows_excluded": 0,
+      "rows": 987628,
+      "scanned_rows": 987628,
+      "skipped_rows": 0,
+      "target_game_links": 71
+    },
+    {
+      "active_target_accounts": 2,
+      "file_index": 836,
+      "invalid_rows_excluded": 0,
+      "rows": 976150,
+      "scanned_rows": 976150,
+      "skipped_rows": 0,
+      "target_game_links": 13
+    },
+    {
+      "active_target_accounts": 0,
+      "file_index": 838,
+      "invalid_rows_excluded": 0,
+      "rows": 791131,
+      "scanned_rows": 791131,
+      "skipped_rows": 0,
+      "target_game_links": 0
+    },
+    {
+      "active_target_accounts": 0,
+      "file_index": 840,
+      "invalid_rows_excluded": 0,
+      "rows": 888392,
+      "scanned_rows": 888392,
+      "skipped_rows": 0,
+      "target_game_links": 0
+    },
+    {
+      "active_target_accounts": 1,
+      "file_index": 839,
+      "invalid_rows_excluded": 0,
+      "rows": 851371,
+      "scanned_rows": 851371,
+      "skipped_rows": 0,
+      "target_game_links": 2
+    },
+    {
+      "active_target_accounts": 2,
+      "file_index": 837,
+      "invalid_rows_excluded": 0,
+      "rows": 969484,
+      "scanned_rows": 969484,
+      "skipped_rows": 0,
+      "target_game_links": 5
+    }
+  ],
+  "old_activity_source": {
+    "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/pool_main_reanalysis_v100_PRIVATE/wave2b1/project_view/derived/replication/dynamic_prosociality_core_v102_PRIVATE/recipient_with_chronology_private.parquet",
+    "rows": 2369530,
+    "sha256": "55ffdfae9179007fa6437930e3a838f112b28c7906c36ff6438521214cce261b",
+    "signature": [
+      16777244,
+      845980,
+      312041710,
+      1789048433561597522,
+      1789048435780570411
+    ]
+  },
+  "positive_30d": 2149977,
+  "reused_exact_exposures": 2294054,
+  "rows": 2296216,
+  "scanned_exposures": 2162
+}

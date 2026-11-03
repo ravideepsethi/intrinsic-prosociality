@@ -1,0 +1,334 @@
+{
+  "package": "Counterfactual_Cost_Upgrade_v1_0_1",
+  "archive": "Counterfactual_Cost_Upgrade_v1_0_1.zip",
+  "archive_sha256": "6f99243a1c27ee9e77c5f1e05dc6a115425efea9163ed26d5af20d86e8195f28",
+  "files": [
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/CHANGELOG.md",
+      "original_sha256": "1ebbe542dc040ef8659710497752cfb62c090de1235a2dc513386f259c7cbbb9",
+      "original_bytes": 1941,
+      "path": "code/research_updates_20261102/Counterfactual_Cost_Upgrade_v1_0_1/CHANGELOG.md",
+      "published_sha256": "1ebbe542dc040ef8659710497752cfb62c090de1235a2dc513386f259c7cbbb9",
+      "published_bytes": 1941,
+      "original_relative_path": "CHANGELOG.md",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/METHODS.md",
+      "original_sha256": "af1f9c6effc105e648c2da5cca33fb7ea19f7346d896a7d2d4c7b2faea6985c7",
+      "original_bytes": 9308,
+      "path": "code/research_updates_20261102/Counterfactual_Cost_Upgrade_v1_0_1/METHODS.md",
+      "published_sha256": "af1f9c6effc105e648c2da5cca33fb7ea19f7346d896a7d2d4c7b2faea6985c7",
+      "published_bytes": 9308,
+      "original_relative_path": "METHODS.md",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/README_FIRST.md",
+      "original_sha256": "125be86d1f2d2948060306b1a8b4eb421114be18f2903b830eea7ad474f5a1d2",
+      "original_bytes": 7924,
+      "path": "code/research_updates_20261102/Counterfactual_Cost_Upgrade_v1_0_1/README_FIRST.md",
+      "published_sha256": "125be86d1f2d2948060306b1a8b4eb421114be18f2903b830eea7ad474f5a1d2",
+      "published_bytes": 7924,
+      "original_relative_path": "README_FIRST.md",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/RUN_COST_UPGRADE.command",
+      "original_sha256": "2057a63792d28c174b8ed474b3687ea36c138954ff20656f8fb3f947733e577b",
+      "original_bytes": 2060,
+      "path": "code/research_updates_20261102/Counterfactual_Cost_Upgrade_v1_0_1/RUN_COST_UPGRADE.command.in",
+      "published_sha256": "2057a63792d28c174b8ed474b3687ea36c138954ff20656f8fb3f947733e577b",
+      "published_bytes": 2060,
+      "original_relative_path": "RUN_COST_UPGRADE.command",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/VALIDATION.md",
+      "original_sha256": "2508f866a2934f96f6ff1f86f772ddf9cc7c5ef02614c9a2b41c3950d073d679",
+      "original_bytes": 2362,
+      "path": "code/research_updates_20261102/Counterfactual_Cost_Upgrade_v1_0_1/VALIDATION.md",
+      "published_sha256": "2508f866a2934f96f6ff1f86f772ddf9cc7c5ef02614c9a2b41c3950d073d679",
+      "published_bytes": 2362,
+      "original_relative_path": "VALIDATION.md",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/code/engine.py",
+      "original_sha256": "8030f630d5d3cebe70668e25cabc762bbc9393d2ae3e4b28cdaeb529dac28450",
+      "original_bytes": 7795,
+      "path": "code/research_updates_20261102/Counterfactual_Cost_Upgrade_v1_0_1/code/engine.py.in",
+      "published_sha256": "e59b75474de50fae3c0dabced3bde68d7fe52b90d207ce68c456287d30fcce5e",
+      "published_bytes": 7812,
+      "original_relative_path": "code/engine.py",
+      "substitutions": [
+        {
+          "replacement": "AUTHOR_ACCOUNT_1",
+          "occurrences": 1
+        },
+        {
+          "replacement": "AUTHOR_ACCOUNT_2",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/code/material.py",
+      "original_sha256": "2109f794d0bee8c04c146a85f642802ece18508bc04005e201b7d0e5038dfe1c",
+      "original_bytes": 3794,
+      "path": "code/research_updates_20261102/Counterfactual_Cost_Upgrade_v1_0_1/code/material.py",
+      "published_sha256": "2109f794d0bee8c04c146a85f642802ece18508bc04005e201b7d0e5038dfe1c",
+      "published_bytes": 3794,
+      "original_relative_path": "code/material.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/code/reporting.py",
+      "original_sha256": "98396b9afc1d2c61a632b5054ddf73b4d15f528d714cdd96dd3a4e6cde1f8e07",
+      "original_bytes": 14693,
+      "path": "code/research_updates_20261102/Counterfactual_Cost_Upgrade_v1_0_1/code/reporting.py",
+      "published_sha256": "98396b9afc1d2c61a632b5054ddf73b4d15f528d714cdd96dd3a4e6cde1f8e07",
+      "published_bytes": 14693,
+      "original_relative_path": "code/reporting.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/code/run.py",
+      "original_sha256": "5f62151d80257b2aa53508de9ea8a67fc65aa3e3dba722d087724caa67b8a284",
+      "original_bytes": 12232,
+      "path": "code/research_updates_20261102/Counterfactual_Cost_Upgrade_v1_0_1/code/run.py",
+      "published_sha256": "5f62151d80257b2aa53508de9ea8a67fc65aa3e3dba722d087724caa67b8a284",
+      "published_bytes": 12232,
+      "original_relative_path": "code/run.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/code/support.py",
+      "original_sha256": "216a9dd40fcf3c10b256439b27ad8aa04494e77774153b98892949bcc000bba3",
+      "original_bytes": 9551,
+      "path": "code/research_updates_20261102/Counterfactual_Cost_Upgrade_v1_0_1/code/support.py",
+      "published_sha256": "216a9dd40fcf3c10b256439b27ad8aa04494e77774153b98892949bcc000bba3",
+      "published_bytes": 9551,
+      "original_relative_path": "code/support.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/code/worker.py",
+      "original_sha256": "3afe230204bb99ca98eb74b2cb4177bd6f290749152f3dc4a5eb2e28998a6244",
+      "original_bytes": 24070,
+      "path": "code/research_updates_20261102/Counterfactual_Cost_Upgrade_v1_0_1/code/worker.py",
+      "published_sha256": "3afe230204bb99ca98eb74b2cb4177bd6f290749152f3dc4a5eb2e28998a6244",
+      "published_bytes": 24070,
+      "original_relative_path": "code/worker.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/requirements.txt",
+      "original_sha256": "2c202b92d9673c361d1ac78ab7fb54ce15ae9a707fad69aa6f852331463030af",
+      "original_bytes": 46,
+      "path": "code/research_updates_20261102/Counterfactual_Cost_Upgrade_v1_0_1/requirements.txt",
+      "published_sha256": "2c202b92d9673c361d1ac78ab7fb54ce15ae9a707fad69aa6f852331463030af",
+      "published_bytes": 46,
+      "original_relative_path": "requirements.txt",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/sources/LILA_COPYING.md",
+      "original_sha256": "5249e3e7edf59b798aedb0fba85dbc1b1182ac177a4e01db874f16268d5658d5",
+      "original_bytes": 9767,
+      "path": "code/research_updates_20261102/Counterfactual_Cost_Upgrade_v1_0_1/sources/LILA_COPYING.md",
+      "published_sha256": "5249e3e7edf59b798aedb0fba85dbc1b1182ac177a4e01db874f16268d5658d5",
+      "published_bytes": 9767,
+      "original_relative_path": "sources/LILA_COPYING.md",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/sources/Pool_Rating_Validation_README.md",
+      "original_sha256": "533efdc35efa8040099ec255203a4ab763316a4a61055b1f16a80041e7d174d9",
+      "original_bytes": 7180,
+      "path": "code/research_updates_20261102/Counterfactual_Cost_Upgrade_v1_0_1/sources/Pool_Rating_Validation_README.md",
+      "published_sha256": "533efdc35efa8040099ec255203a4ab763316a4a61055b1f16a80041e7d174d9",
+      "published_bytes": 7180,
+      "original_relative_path": "sources/Pool_Rating_Validation_README.md",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/sources/Pool_Rating_Validation_reference.py",
+      "original_sha256": "b1593263555c0e777917eeb2487afb0ea20f0c2c7353bcdc79deb1b4d975bcb9",
+      "original_bytes": 34167,
+      "path": "code/research_updates_20261102/Counterfactual_Cost_Upgrade_v1_0_1/sources/Pool_Rating_Validation_reference.py",
+      "published_sha256": "b1593263555c0e777917eeb2487afb0ea20f0c2c7353bcdc79deb1b4d975bcb9",
+      "published_bytes": 34167,
+      "original_relative_path": "sources/Pool_Rating_Validation_reference.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/sources/stage05_material_reference.py",
+      "original_sha256": "eb8f7e7629c323ee8d5a9f7d4a96b5f9982980189cf27500289582457f0dfe80",
+      "original_bytes": 101978,
+      "path": "code/research_updates_20261102/Counterfactual_Cost_Upgrade_v1_0_1/sources/stage05_material_reference.py.in",
+      "published_sha256": "3077a0ef2ef84ef39f39cceb38f05113d97dd1d712dc4e9e26d5b03898670395",
+      "published_bytes": 101970,
+      "original_relative_path": "sources/stage05_material_reference.py",
+      "substitutions": [
+        {
+          "replacement": "/LOCAL_HOME",
+          "occurrences": 2
+        }
+      ]
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/sources/stage06_reference.py",
+      "original_sha256": "e1a72414b4c4a18dca5b583b704cbbf97e0bff7de2a837e6ad85e078ecf00cca",
+      "original_bytes": 102322,
+      "path": "code/research_updates_20261102/Counterfactual_Cost_Upgrade_v1_0_1/sources/stage06_reference.py",
+      "published_sha256": "e1a72414b4c4a18dca5b583b704cbbf97e0bff7de2a837e6ad85e078ecf00cca",
+      "published_bytes": 102322,
+      "original_relative_path": "sources/stage06_reference.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/tests/test_costs.py",
+      "original_sha256": "e3a1f9ca8b0da603fc722d0de66d7fd80dfa151233718d40756f47bf762c81e0",
+      "original_bytes": 24845,
+      "path": "code/research_updates_20261102/Counterfactual_Cost_Upgrade_v1_0_1/tests/test_costs.py.in",
+      "published_sha256": "c336c3e6ea25be25ffa6743ed43166a5cd60bfd516d86ae197aa0e82fdbd1211",
+      "published_bytes": 24854,
+      "original_relative_path": "tests/test_costs.py",
+      "substitutions": [
+        {
+          "replacement": "AUTHOR_ACCOUNT_1",
+          "occurrences": 1
+        }
+      ]
+    }
+  ],
+  "omitted": [
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/authority/MAIN_SAMPLE_REPORT.json",
+      "original_sha256": "0ef50e424e004c5698c0c3dbc9815748627e5f23e6504fdaedfd526225ee184e",
+      "original_bytes": 510451,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/sources/LILA_LICENSE.txt",
+      "original_sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0",
+      "original_bytes": 34523,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/sources/PROVENANCE.json",
+      "original_sha256": "14c334cf4d8cb0f9b6ec0606ac20bb7b4213ec33e8d89dc384a989d4bc04113a",
+      "original_bytes": 6828,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/sources/SCALACHESS_LICENSE.txt",
+      "original_sha256": "8e015da4220dce88e2ffd6a164897284dae1881bb31c18af6652be35721723ec",
+      "original_bytes": 1084,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/sources/factor_hardcoding_commit.json",
+      "original_sha256": "4c88eb3be3b683e8be06df8742fbcf194e83cd8a83ad2ce5bb8c1e1ded983670",
+      "original_bytes": 12601,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/sources/lila_Nov20_PerfsUpdater.scala",
+      "original_sha256": "d4f1a3925eeadd3ca6082e005fdbc9325cdf85afd4c723901511866b70d16c42",
+      "original_bytes": 4008,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/sources/lila_end_Perf.scala",
+      "original_sha256": "ff9b5662034548b08b17eb0bb3e787efcdd2906a33b1435b3ee15fef8a2406d3",
+      "original_bytes": 2914,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/sources/lila_end_PerfsUpdater.scala",
+      "original_sha256": "228bbfec22a622b01dcdbbcc5e76bfc072923d9fd825da8838dcb35e860af8bc",
+      "original_bytes": 4118,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/sources/lila_end_RatingRegulator.scala",
+      "original_sha256": "5aea5af194a7d7924116bd19299ba88d327e153d0f0949b4eea30314fab86f80",
+      "original_bytes": 1313,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/sources/lila_start_Glicko.scala",
+      "original_sha256": "e31559a7251b4f70c98610e3aaefa92c72088132dfc931f66786030057e7c40c",
+      "original_bytes": 3815,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/sources/lila_start_Perf.scala",
+      "original_sha256": "a79c756c6bfc70919912e26262ad875cee6a1eedc624b1f6a177cf841a4034a8",
+      "original_bytes": 3949,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/sources/lila_start_PerfsUpdater.scala",
+      "original_sha256": "e45d74388fdc2e16e8a7fc2591b936835862344321485e728d8b89ec1b31e224",
+      "original_bytes": 8715,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/sources/lila_start_RatingCalculator.scala",
+      "original_sha256": "293ab1507087363cf2429dbd68a5f03732f237e24527e81d8a7541d1c0679694",
+      "original_bytes": 8080,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/sources/lila_start_RatingRegulator.scala",
+      "original_sha256": "2d8e421b14aa49ad0ffe7e953d5d92f102b19de94a69d22f0b8b39a322066b9e",
+      "original_bytes": 841,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/sources/lila_start_RoundAsyncActor.scala",
+      "original_sha256": "5db48aacb802bceef675f76295daea869beb809277d191556cae8f312a64be76",
+      "original_bytes": 16685,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/sources/november_skip_fix_commit.json",
+      "original_sha256": "7f4600df0bda38e258ffc34c82f68bf329a23ea21aa3ffaa4ea6a4aa27128af5",
+      "original_bytes": 5056,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/sources/pre_hardcode_Env.scala",
+      "original_sha256": "5f8637435852404fd74180412cb535d859d2917c766dffcce5f3617cb5943e95",
+      "original_bytes": 8257,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/sources/scalachess_RatingCalculator.scala",
+      "original_sha256": "ded798f4a6a8478d92bfc96ee3754f195442f59e720952531ee40bbf9a7e2b72",
+      "original_bytes": 8497,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/sources/scalachess_material_2023.scala",
+      "original_sha256": "2402dfe9f91dcfb15091443dbe675abfb7fbe7cb8e73c64c8f81e22cbb4608dd",
+      "original_bytes": 2181,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/sources/scalachess_material_2025.scala",
+      "original_sha256": "9aa21a5a83bb7e9c380b38efc417073addbc3713f69f62dcceb5166494694779",
+      "original_bytes": 2330,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Counterfactual_Cost_Upgrade_v1_0_1/SHA256SUMS.txt",
+      "original_sha256": "dc749b552cd527baccfcb80579abb65f3f74b5e2fadfb6f875dc186ca8d5403f",
+      "original_bytes": 3599,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    }
+  ]
+}

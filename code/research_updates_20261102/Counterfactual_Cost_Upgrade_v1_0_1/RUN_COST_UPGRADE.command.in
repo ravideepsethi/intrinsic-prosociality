@@ -1,0 +1,45 @@
+#!/bin/bash
+set -euo pipefail
+package_root="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+desktop_root="${LICHESS_TRANSFER_ROOT:-$HOME/Desktop/Lichess_Desktop}"
+mkdir -p "$desktop_root"
+cd "$package_root"
+shasum -a 256 -c SHA256SUMS.txt
+
+cost_python=""
+for candidate in "${LICHESS_COST_PYTHON:-}" "$(command -v python3 || true)" "$(command -v python || true)"; do
+  if [ -n "$candidate" ] && [ -x "$candidate" ] && "$candidate" -c 'import sys; assert sys.version_info >= (3,10); import numpy, pyarrow, duckdb' >/dev/null 2>&1; then
+    cost_python="$candidate"
+    break
+  fi
+done
+if [ -z "$cost_python" ]; then
+  bootstrap_python="${LICHESS_COST_PYTHON:-$(command -v python3 || true)}"
+  if [ -z "$bootstrap_python" ]; then
+    echo 'Python 3.10+ is required. Set LICHESS_COST_PYTHON to the Python used by your earlier analyses.' >&2
+    exit 1
+  fi
+  "$bootstrap_python" -c 'import sys; assert sys.version_info >= (3,10), "Python 3.10+ required"'
+  environment_path="$desktop_root/Counterfactual_Cost_Upgrade_python_v100"
+  if [ ! -x "$environment_path/bin/python" ]; then
+    "$bootstrap_python" -m venv "$environment_path"
+  fi
+  cost_python="$environment_path/bin/python"
+  "$cost_python" -m pip install --disable-pip-version-check -r "$package_root/requirements.txt"
+fi
+
+run_log="$desktop_root/COST_UPGRADE_RUN_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+echo 'Expected runtime: about 20-60 minutes with 10 workers on a modern Mac and external SSD.'
+echo 'The run uses cached Parquets, writes separate Parquet cost files, and resumes completed months.'
+echo "Log: $run_log"
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1
+command_args=("$cost_python" -u "$package_root/code/run.py" --desktop "$desktop_root")
+if [ -n "${LICHESS_PROJECT_ROOT:-}" ]; then
+  command_args+=(--project-root "$LICHESS_PROJECT_ROOT")
+fi
+command_args+=("$@")
+if command -v caffeinate >/dev/null 2>&1; then
+  caffeinate -dimsu "${command_args[@]}" 2>&1 | tee "$run_log"
+else
+  "${command_args[@]}" 2>&1 | tee "$run_log"
+fi

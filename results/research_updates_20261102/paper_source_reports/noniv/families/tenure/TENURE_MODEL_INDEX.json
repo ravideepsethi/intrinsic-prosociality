@@ -1,0 +1,578 @@
+[
+  {
+    "file": "TENURE_MODEL_all_sample_gradient_minimal.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "competitive": {
+        "status": "ESTIMATED",
+        "coefficient_pp": 2.264736875085694,
+        "se_pp": 0.05640157017914568,
+        "ci_low_pp": 2.154189975829047,
+        "ci_high_pp": 2.3752837743423414,
+        "p_value": 0.0
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_all_sample_gradient_full.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "competitive": {
+        "status": "ESTIMATED",
+        "coefficient_pp": 1.985277861602474,
+        "se_pp": 0.053016689094492135,
+        "ci_low_pp": 1.8813653185715917,
+        "ci_high_pp": 2.089190404633356,
+        "p_value": 5.78244560378027e-304
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_all_sample_competitive_stage.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "stage_mid": {
+        "status": "ESTIMATED",
+        "coefficient_pp": -1.459518571983439,
+        "se_pp": 0.07116740612923313,
+        "ci_low_pp": -1.5990074476217049,
+        "ci_high_pp": -1.3200296963451728,
+        "p_value": 4.336561232387965e-93
+      },
+      "stage_late": {
+        "status": "ESTIMATED",
+        "coefficient_pp": -1.5706262259478003,
+        "se_pp": 0.10204447802112566,
+        "ci_low_pp": -1.7706344920691324,
+        "ci_high_pp": -1.3706179598264683,
+        "p_value": 2.4605316739019366e-53
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_all_sample_competitive_gap.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "gap100": {
+        "status": "ESTIMATED",
+        "coefficient_pp": 0.35583290678469426,
+        "se_pp": 0.04539989031883635,
+        "ci_low_pp": 0.2668486371715041,
+        "ci_high_pp": 0.44481717639788443,
+        "p_value": 4.675674905430334e-15
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_age_ge_30_gradient_minimal.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "competitive": {
+        "status": "ESTIMATED",
+        "coefficient_pp": 2.278364960906696,
+        "se_pp": 0.05978895610355484,
+        "ci_low_pp": 2.1611784557542943,
+        "ci_high_pp": 2.3955514660590973,
+        "p_value": 0.0
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_age_ge_30_gradient_full.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "competitive": {
+        "status": "ESTIMATED",
+        "coefficient_pp": 2.001360008316496,
+        "se_pp": 0.055949374815763155,
+        "ci_low_pp": 1.891699092197386,
+        "ci_high_pp": 2.111020924435606,
+        "p_value": 2.232872339405467e-277
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_age_ge_30_competitive_stage.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "stage_mid": {
+        "status": "ESTIMATED",
+        "coefficient_pp": -1.5007655946737841,
+        "se_pp": 0.07452155889638888,
+        "ci_low_pp": -1.6468291411370584,
+        "ci_high_pp": -1.3547020482105099,
+        "p_value": 8.517629295170433e-90
+      },
+      "stage_late": {
+        "status": "ESTIMATED",
+        "coefficient_pp": -1.6199136318678615,
+        "se_pp": 0.10620904292823435,
+        "ci_low_pp": -1.8280851959938473,
+        "ci_high_pp": -1.4117420677418755,
+        "p_value": 2.1635013321304435e-52
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_age_ge_30_competitive_gap.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "gap100": {
+        "status": "ESTIMATED",
+        "coefficient_pp": 0.3770864463783748,
+        "se_pp": 0.04916293291198901,
+        "ci_low_pp": 0.2807262461624194,
+        "ci_high_pp": 0.47344664659433017,
+        "p_value": 1.752995698072854e-14
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_age_ge_90_gradient_minimal.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "competitive": {
+        "status": "ESTIMATED",
+        "coefficient_pp": 2.2719148750765656,
+        "se_pp": 0.06194145923054964,
+        "ci_low_pp": 2.1505092342676813,
+        "ci_high_pp": 2.39332051588545,
+        "p_value": 4.470578915531208e-291
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_age_ge_90_gradient_full.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "competitive": {
+        "status": "ESTIMATED",
+        "coefficient_pp": 1.9992782729081697,
+        "se_pp": 0.05767393509922632,
+        "ci_low_pp": 1.886237005626591,
+        "ci_high_pp": 2.1123195401897488,
+        "p_value": 1.4895205533341755e-260
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_age_ge_90_competitive_stage.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "stage_mid": {
+        "status": "ESTIMATED",
+        "coefficient_pp": -1.5084509035034148,
+        "se_pp": 0.07678838015974142,
+        "ci_low_pp": -1.6589578164925796,
+        "ci_high_pp": -1.3579439905142503,
+        "p_value": 1.6068045006115582e-85
+      },
+      "stage_late": {
+        "status": "ESTIMATED",
+        "coefficient_pp": -1.634812280725884,
+        "se_pp": 0.10904146246146369,
+        "ci_low_pp": -1.8485359439775146,
+        "ci_high_pp": -1.4210886174742532,
+        "p_value": 1.119922790017105e-50
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_age_ge_90_competitive_gap.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "gap100": {
+        "status": "ESTIMATED",
+        "coefficient_pp": 0.37946980920060036,
+        "se_pp": 0.05050062622879884,
+        "ci_low_pp": 0.2804874717440142,
+        "ci_high_pp": 0.47845214665718644,
+        "p_value": 5.84431832057578e-14
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_age_ge_365_gradient_minimal.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "competitive": {
+        "status": "ESTIMATED",
+        "coefficient_pp": 2.313435155837784,
+        "se_pp": 0.0678231244930646,
+        "ci_low_pp": 2.180500665208889,
+        "ci_high_pp": 2.446369646466679,
+        "p_value": 9.298268487891988e-252
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_age_ge_365_gradient_full.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "competitive": {
+        "status": "ESTIMATED",
+        "coefficient_pp": 2.0263641101936147,
+        "se_pp": 0.0626649457710004,
+        "ci_low_pp": 1.903539738585564,
+        "ci_high_pp": 2.1491884818016653,
+        "p_value": 9.104666871167998e-227
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_age_ge_365_competitive_stage.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "stage_mid": {
+        "status": "ESTIMATED",
+        "coefficient_pp": -1.628583069996584,
+        "se_pp": 0.08578595867970114,
+        "ci_low_pp": -1.796726660708654,
+        "ci_high_pp": -1.460439479284514,
+        "p_value": 6.179869111846701e-80
+      },
+      "stage_late": {
+        "status": "ESTIMATED",
+        "coefficient_pp": -1.7978770549828174,
+        "se_pp": 0.12041130683240363,
+        "ci_low_pp": -2.033887584033697,
+        "ci_high_pp": -1.561866525931938,
+        "p_value": 3.023824544149781e-50
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_age_ge_365_competitive_gap.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "gap100": {
+        "status": "ESTIMATED",
+        "coefficient_pp": 0.44047037279592566,
+        "se_pp": 0.05485371861952419,
+        "ci_low_pp": 0.33295509460181755,
+        "ci_high_pp": 0.5479856509900337,
+        "p_value": 1.0077778834689505e-15
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_tenure_0_gradient_minimal.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "competitive": {
+        "status": "ESTIMATED",
+        "coefficient_pp": 2.791992916846044,
+        "se_pp": 0.4199608913771999,
+        "ci_low_pp": 1.9686645173925148,
+        "ci_high_pp": 3.615321316299573,
+        "p_value": 3.31820843286712e-11
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_tenure_0_gradient_full.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "competitive": {
+        "status": "ESTIMATED",
+        "coefficient_pp": 1.9332154524939957,
+        "se_pp": 0.4406604205194591,
+        "ci_low_pp": 1.0693058690586685,
+        "ci_high_pp": 2.797125035929323,
+        "p_value": 1.1749149708864069e-05
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_tenure_0_competitive_stage.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "stage_mid": {
+        "status": "ESTIMATED",
+        "coefficient_pp": -1.7876506517404744,
+        "se_pp": 1.2716129263134497,
+        "ci_low_pp": -4.281978859561566,
+        "ci_high_pp": 0.706677556080618,
+        "p_value": 0.15998660209953652
+      },
+      "stage_late": {
+        "status": "ESTIMATED",
+        "coefficient_pp": -2.334032968058955,
+        "se_pp": 1.8815129191265965,
+        "ci_low_pp": -6.024708526983271,
+        "ci_high_pp": 1.3566425908653603,
+        "p_value": 0.21498132807517437
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_tenure_0_competitive_gap.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "gap100": {
+        "status": "ESTIMATED",
+        "coefficient_pp": 0.19318934765017512,
+        "se_pp": 0.5721398699764588,
+        "ci_low_pp": -0.9290897570760656,
+        "ci_high_pp": 1.315468452376416,
+        "p_value": 0.735665877958825
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_tenure_1_gradient_minimal.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "competitive": {
+        "status": "ESTIMATED",
+        "coefficient_pp": 1.9762192763077238,
+        "se_pp": 0.2163705356935221,
+        "ci_low_pp": 1.5520777676188697,
+        "ci_high_pp": 2.400360784996578,
+        "p_value": 8.24199827598974e-20
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_tenure_1_gradient_full.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "competitive": {
+        "status": "ESTIMATED",
+        "coefficient_pp": 1.7676763911425655,
+        "se_pp": 0.23148614769855283,
+        "ci_low_pp": 1.3139044225575907,
+        "ci_high_pp": 2.2214483597275403,
+        "p_value": 2.490895596422627e-14
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_tenure_1_competitive_stage.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "stage_mid": {
+        "status": "ESTIMATED",
+        "coefficient_pp": -0.9567281596475045,
+        "se_pp": 0.5191892490783606,
+        "ci_low_pp": -1.9746706091187423,
+        "ci_high_pp": 0.0612142898237333,
+        "p_value": 0.06545181025554338
+      },
+      "stage_late": {
+        "status": "ESTIMATED",
+        "coefficient_pp": -1.2390558661560154,
+        "se_pp": 0.8022108654818184,
+        "ci_low_pp": -2.811901403405872,
+        "ci_high_pp": 0.33378967109384156,
+        "p_value": 0.12254476799476709
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_tenure_1_competitive_gap.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "gap100": {
+        "status": "ESTIMATED",
+        "coefficient_pp": 0.13778326243051475,
+        "se_pp": 0.24664213715148348,
+        "ci_low_pp": -0.3457928163894625,
+        "ci_high_pp": 0.621359341250492,
+        "p_value": 0.5764454828717598
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_tenure_2_gradient_minimal.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "competitive": {
+        "status": "ESTIMATED",
+        "coefficient_pp": 2.2196791472273523,
+        "se_pp": 0.16229846806279757,
+        "ci_low_pp": 1.901545504123178,
+        "ci_high_pp": 2.5378127903315266,
+        "p_value": 3.068733002189568e-42
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_tenure_2_gradient_full.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "competitive": {
+        "status": "ESTIMATED",
+        "coefficient_pp": 1.8909967944263455,
+        "se_pp": 0.16881354438012242,
+        "ci_low_pp": 1.5600924518283823,
+        "ci_high_pp": 2.221901137024309,
+        "p_value": 5.708198919662095e-29
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_tenure_2_competitive_stage.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "stage_mid": {
+        "status": "ESTIMATED",
+        "coefficient_pp": -1.0840059461570157,
+        "se_pp": 0.3393985373314339,
+        "ci_low_pp": -1.749349342270028,
+        "ci_high_pp": -0.4186625500440033,
+        "p_value": 0.001410906400743082
+      },
+      "stage_late": {
+        "status": "ESTIMATED",
+        "coefficient_pp": -0.9294410253289568,
+        "se_pp": 0.5050846360082908,
+        "ci_low_pp": -1.9195888606394318,
+        "ci_high_pp": 0.06070680998151844,
+        "p_value": 0.06579290776328767
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_tenure_2_competitive_gap.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "gap100": {
+        "status": "ESTIMATED",
+        "coefficient_pp": 0.4173932150393322,
+        "se_pp": 0.20845343081672302,
+        "ci_low_pp": 0.008749398594216137,
+        "ci_high_pp": 0.8260370314844483,
+        "p_value": 0.04529392532265386
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_tenure_3_gradient_minimal.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "competitive": {
+        "status": "ESTIMATED",
+        "coefficient_pp": 2.0499697642678982,
+        "se_pp": 0.11673935427725106,
+        "ci_low_pp": 1.8211493964142116,
+        "ci_high_pp": 2.2787901321215847,
+        "p_value": 1.856902127586249e-68
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_tenure_3_gradient_full.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "competitive": {
+        "status": "ESTIMATED",
+        "coefficient_pp": 1.8465961034677785,
+        "se_pp": 0.11735505292097431,
+        "ci_low_pp": 1.616568907025601,
+        "ci_high_pp": 2.076623299909956,
+        "p_value": 2.0396835278648793e-55
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_tenure_3_competitive_stage.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "stage_mid": {
+        "status": "ESTIMATED",
+        "coefficient_pp": -1.0222274513172813,
+        "se_pp": 0.1743029187147369,
+        "ci_low_pp": -1.3638911727527847,
+        "ci_high_pp": -0.6805637298817779,
+        "p_value": 4.625455929032355e-09
+      },
+      "stage_late": {
+        "status": "ESTIMATED",
+        "coefficient_pp": -0.9105650143552496,
+        "se_pp": 0.26003595875984215,
+        "ci_low_pp": -1.420280250520283,
+        "ci_high_pp": -0.4008497781902163,
+        "p_value": 0.0004640885117920918
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_tenure_3_competitive_gap.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "gap100": {
+        "status": "ESTIMATED",
+        "coefficient_pp": 0.1954424585101126,
+        "se_pp": 0.1284847661982506,
+        "ci_low_pp": -0.05640979784199717,
+        "ci_high_pp": 0.4472947148622224,
+        "p_value": 0.12825412237516542
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_tenure_4_gradient_minimal.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "competitive": {
+        "status": "ESTIMATED",
+        "coefficient_pp": 2.313435155837784,
+        "se_pp": 0.06782312449306459,
+        "ci_low_pp": 2.180500665208889,
+        "ci_high_pp": 2.446369646466679,
+        "p_value": 9.298268487887755e-252
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_tenure_4_gradient_full.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "competitive": {
+        "status": "ESTIMATED",
+        "coefficient_pp": 2.02636411019368,
+        "se_pp": 0.06266494577100218,
+        "ci_low_pp": 1.9035397385856256,
+        "ci_high_pp": 2.149188481801734,
+        "p_value": 9.104666871132772e-227
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_tenure_4_competitive_stage.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "stage_mid": {
+        "status": "ESTIMATED",
+        "coefficient_pp": -1.6285830699963102,
+        "se_pp": 0.08578595867968898,
+        "ci_low_pp": -1.7967266607083567,
+        "ci_high_pp": -1.460439479284264,
+        "p_value": 6.1798691119051764e-80
+      },
+      "stage_late": {
+        "status": "ESTIMATED",
+        "coefficient_pp": -1.7978770549815917,
+        "se_pp": 0.1204113068323289,
+        "ci_low_pp": -2.0338875840323247,
+        "ci_high_pp": -1.5618665259308586,
+        "p_value": 3.023824544190958e-50
+      }
+    }
+  },
+  {
+    "file": "TENURE_MODEL_tenure_4_competitive_gap.json",
+    "status": "ESTIMATED",
+    "estimates": {
+      "gap100": {
+        "status": "ESTIMATED",
+        "coefficient_pp": 0.44047037279591683,
+        "se_pp": 0.05485371861952431,
+        "ci_low_pp": 0.3329550946018085,
+        "ci_high_pp": 0.5479856509900252,
+        "p_value": 1.0077778834704259e-15
+      }
+    }
+  }
+]

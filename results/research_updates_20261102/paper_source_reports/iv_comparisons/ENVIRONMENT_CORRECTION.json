@@ -1,0 +1,18 @@
+{
+  "config_sha256": "12093d55b7ee9f737696982b8ebaef7b0706c27adc4fb12482a99aabf985d482",
+  "factual_game_denominators_preserved": true,
+  "files": [
+    {
+      "bytes": 675,
+      "path": "dependencies_PRIVATE.json",
+      "sha256": "8080478f1d4bd26a6adaeefee9bbb221666074f6b57c78ab30bcafea7e89beb9"
+    },
+    {
+      "bytes": 614019605,
+      "path": "rates.parquet",
+      "sha256": "5a1131ce32cb6ac70d0815a868a75488a70a1e50a7a304161074efb89706e0ca"
+    }
+  ],
+  "keys": 40541872,
+  "removed_decisions": 20570
+}

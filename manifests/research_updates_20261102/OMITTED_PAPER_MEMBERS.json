@@ -1,0 +1,356 @@
+[
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/audience/executed_code/RUN_AUDIENCE.command",
+    "sha256": "e2d9363e32c54f0c820897758e8505a92430e92aa4fc4ad3ff808be25f4f4d04",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/audience/executed_code/run.py",
+    "sha256": "401f1f6eb7e3a3a22e309ed9bf856b8cbefc734e9608fc402f4ae5714fb16d20",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/audience/executed_code/tests/test_material_audience.py",
+    "sha256": "43f64cb8a647a2548801823c36eb7ae405b28f35ff21d2c0dc89941bef8ad0b7",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/audience/executed_code/vendor/analysis.py",
+    "sha256": "f96f356b334202d4936936112f4e224c45fb7196b9e1d79260ea8355fe170c49",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/audience/executed_code/vendor/common.py",
+    "sha256": "732a7afb6850da2e74d571811b8b83af60b49c0e83510268a7710917be125bb1",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/audience/executed_code/vendor/estimates.py",
+    "sha256": "a91cd3c5d60c5648ae5e11665bb8798c3878552aff85a61bddc3d3350158723f",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/audience/executed_code/vendor/metadata.py",
+    "sha256": "32be950937e8322b95e99228fd3589ec57e9104e3f33b4b93669d77f562c6172",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/audience/executed_code/vendor/panel.py",
+    "sha256": "f0fdc35ff06ee0786b0bb3586e44e314a640af0577848e8068a86119ad748a44",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/audience/executed_code/vendor/registry_frozen.py",
+    "sha256": "22ad62e4101ce06e74279d4aa26e4e754a9b708c46647b3289b7b1cd84276c38",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/audience/executed_code/vendor/report.py",
+    "sha256": "25c9c002e0a51dd089e20314b0f60084367c35acd6c6a7cdfb37b3a8f7da4e9d",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/audience/executed_code/vendor/run_expanded.py",
+    "sha256": "c6c441d1e18a204cd6bdd6b27bb0f38c32dc270e20b85f0fccbc04fdb0b4013d",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/audience/executed_code/vendor/self_test.py",
+    "sha256": "dbedd37cdd58c168f2867306c02a0a7409e110d02aa4262357645ae7d27f9a87",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/closeout/manuscript_tables/closeout_tables.tex",
+    "sha256": "8b524d9c64e6680bfaf244b2c8183b25ed227f2ec3a9ec8d8906efe6786c9b66",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/closeout/manuscript_tables/material.tex",
+    "sha256": "321dbb60c31a2cb71bed1236ddf960c8874e74522294f8cba19a0e7e2d413604",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/closeout/manuscript_tables/ordinary.tex",
+    "sha256": "dcdb62682dd81334a02931a04d99e593fd8c326453b1c4d9344f797e0734f370",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/closeout/manuscript_tables/recent_balance.tex",
+    "sha256": "afb88ec6a0e77ca2108cf4efe9f56aea50f72db8eb1e805d5935c6ad965691db",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/iv_receipt/fig5_iv_bins_material.pdf",
+    "sha256": "91c41c0a1797b2afd137f61ea9473e46ed2a6fed37b9b7bd5d497ddcb8dc5265",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/iv_receipt/fig5_iv_bins_material.png",
+    "sha256": "ebaea18ab26283c94c0ca354eca1d7dccfe16723d6e38228cb29350e8ba4caaf",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/countdown/calendar_august/adjusted_profiles.pdf",
+    "sha256": "5623783024dc8e0c6e0f8a329dc008616b3288279f9732f82aa05b0ba643c010",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/countdown/calendar_august/adjusted_profiles.png",
+    "sha256": "cd7e21b4c000381e023b00f92e9b14935c55ca2c1ee231c91325ed01041ea3d7",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/countdown/calendar_september/adjusted_profiles.pdf",
+    "sha256": "0b6c47c1013022a804c384d1cd18345b197a07fcff7eebe6742bb3de78817e79",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/countdown/calendar_september/adjusted_profiles.png",
+    "sha256": "2dc1bfcd443fa70e5ecbc0b897b018a0ffe922e4a87733736331a681d3716c7f",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/countdown/clock_long/adjusted_profiles.pdf",
+    "sha256": "aa9af03374d60cfe8dd16efbf2360094fee5a5a057be904fa4d1b79b579dc433",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/countdown/clock_long/adjusted_profiles.png",
+    "sha256": "f287549f12877d7151eb4dacd25567e49aa04ab12be9aacec6a1ae804564f9af",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/countdown/clock_twice/adjusted_profiles.pdf",
+    "sha256": "5cb9d4d619c7956d5c3f9ea09b4aba6c2c29b2796ad5300d774e6c5b9ab28715",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/countdown/clock_twice/adjusted_profiles.png",
+    "sha256": "3aad1e583e1a5c93f5290997b28999f8f9a5d825488d4ce42ed92530bf86040e",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/countdown/monthly/monthly_thresholds.pdf",
+    "sha256": "905fe461d5b93a32b44b7dc53e3161a9e778dbd4b618e6385499c9c8819449c3",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/countdown/monthly/monthly_thresholds.png",
+    "sha256": "fe6c92e4a543f0e2f1e3f2ffc96c47f134dd9cccfb98d915829930adb6aabf66",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/countdown/primary/adjusted_profiles.pdf",
+    "sha256": "50484b995dbb0f4d19c1704ccef212437766be2ed653e6d970a8766860923fba",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/countdown/primary/adjusted_profiles.png",
+    "sha256": "344a5f97ec6665a58402899db96ff2f999f7d7ef71a7a4108664d5a8c910180d",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/krd/plots/expected_score_distance_all.png",
+    "sha256": "5691479d9726875bf5fcd1946285c7850ae2f590a203ab1bb662b4c495b930a3",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/krd/plots/expected_score_distance_ply_gt_10.png",
+    "sha256": "2722e5ec66c9f512ba74704d9a0bc4d6ce66be5f575417c88edc37edb9e60a20",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/krd/plots/rating_gap_curves_all.pdf",
+    "sha256": "4a4421eb78c21a4fb2b42452f7b1fe63b2f937bd9aa27b7afacdc80b300954c4",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/krd/plots/rating_gap_curves_all.png",
+    "sha256": "ae907fd4a2d2193d15e8e7ce9b820f748a94a4d71c87f3ee03ccd5cdf702d4ee",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/krd/plots/rating_gap_curves_ply_gt_10.pdf",
+    "sha256": "cb31eee4c877cb5b28b51de132a5dda19871804a3a0c82d405f4239c05307adb",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/krd/plots/rating_gap_curves_ply_gt_10.png",
+    "sha256": "9d2a8922be077a27964add3a43e39ea39ac4de675f71389d73410c2a99eac640",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/krd/plots/rating_gap_curves_ply_le_10.pdf",
+    "sha256": "27b1ab5b65d8b7326d948e0945bdbf5b4de72b1319fcd464747fb6c54801e16c",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/krd/plots/rating_gap_curves_ply_le_10.png",
+    "sha256": "6aa25aaa34b9c43c4fdf0bffe253d30987f0aeef189c494e9551135f11344324",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/krd/plots/rating_gap_year_replication_long_m100_p100.png",
+    "sha256": "9dba7f87d1956d7de9544fe84a1176d3787b89148a4a2a66e7a1e65caab32ae5",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/krd/plots/rating_gap_year_replication_long_p100_p300.png",
+    "sha256": "0af178ecf9ef0c397b0ccd2173b3c954ffeb796c93becd34e80beb847b201e90",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/krd/plots/rating_gap_year_replication_long_p300_p600.png",
+    "sha256": "b7764f5645500723e6043487e5ab04b824f7697156a2f232c3b8089bb95f7506",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/nonparametric/plots/krd_closure_long_m100_p100.png",
+    "sha256": "73c2e8032f4cb1affbb53227c9363350dfdbe1e1bacc93925b6adb02cecf23de",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/nonparametric/plots/krd_closure_long_p100_p300.png",
+    "sha256": "6f84badca1d6aa9d967f751400ae5d6f628fb29d6da62a6a12e9a93573eb51de",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/nonparametric/plots/krd_closure_long_p300_p600.png",
+    "sha256": "76b889e21d2994455ddeb00b30121cd348a8c4c04e0a1094a0ccfe2f1eafbe38",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/nonparametric/plots/primary_nonparametric_all.pdf",
+    "sha256": "1a955c667d2b94b8f9b2b0547eb5864d220da09957a66fc7477a9c6ca2f9ac08",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/nonparametric/plots/primary_nonparametric_all.png",
+    "sha256": "0cf8774daa3b17cb39c15d582b7b55267a5c69f367fba04330390384dee20e96",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/nonparametric/plots/primary_nonparametric_ply_gt_10.pdf",
+    "sha256": "b6a36e0ddc08d39f5de6aa618e11eb6cfe3f18c774dee749801dc3c22f421315",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/nonparametric/plots/primary_nonparametric_ply_gt_10.png",
+    "sha256": "e4433a51f1a29e84e4e6028e3419e44374265d89f1a328f8a43ec28b2f49d7c5",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/nonparametric/plots/primary_nonparametric_ply_le_10.pdf",
+    "sha256": "d7f97cf067d7d4cde3864d7b6686458dcaf2437c7555a0eff60a4722ffa88468",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/nonparametric/plots/primary_nonparametric_ply_le_10.png",
+    "sha256": "abe4f4e8960fe5ff586d72df15ea4a9250f00e781256e4c095ae36564655becf",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/nonparametric/plots/year_replication_long_m100_p100.png",
+    "sha256": "968cd9969469a99d7d8bd892ecc197bd46babf3357ac52d8f60adb7fcf19f41e",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/nonparametric/plots/year_replication_long_p100_p300.png",
+    "sha256": "3383c8d669ab6027ebd1d8e3db4fb45ccd55225bf9b81f549221f8079ebfb584",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/nonparametric/plots/year_replication_long_p300_p600.png",
+    "sha256": "c232ffee3a4edfb7d88c46e0905adb3aa428e614849c18b0dd994182a3d99ab4",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/responsibility/a2_profile.png",
+    "sha256": "9b49db7ab7a3147aed408870230b7e38a846dcf22f347f24264d3e8e52a6016f",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/stakes/stakes_by_standing.pdf",
+    "sha256": "890bdbf82a179a1b4a1d23651b7817c20b96cd55dbb7a85c76c0b035b4eb62cb",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/noniv/families/stakes/stakes_by_standing.png",
+    "sha256": "1ee70bd73080c1cf95f2f4ed12d21c06d9b80b9f9155e319bb87d3c5a1b698e0",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/patron/tab_patron.tex",
+    "sha256": "c07267584fce1a6c80f6fc0dc1ecd89c7bff6022954c1d649bc330f16b6ff8d6",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/persistence/tab_persistence.tex",
+    "sha256": "7e8aff2d58edf756b0d68129f4325e70f6a4f01cbe7f22f0cca28a824ee6b2eb",
+    "reason": "Rendering/manuscript or non-result source"
+  },
+  {
+    "archive": "Intrinsic_Prosociality_Final_20261101.zip",
+    "member": "Intrinsic_Prosociality_Final_20261101/source_reports/receipt/tab_dynamics.tex",
+    "sha256": "e7ec9c3d4d6508cfadd316b74d79df47a7c5082738535367ba3e6424b7d3fead",
+    "reason": "Rendering/manuscript or non-result source"
+  }
+]

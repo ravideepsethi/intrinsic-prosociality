@@ -1,0 +1,91 @@
+"""Local-only closeout: immutable parent, bounded jobs, aggregate-only export."""
+from pathlib import Path
+import os,sys,json,hashlib,time,shutil
+ROOT=Path(__file__).resolve().parents[1]
+for k in ('OPENBLAS_NUM_THREADS','OMP_NUM_THREADS','MKL_NUM_THREADS','VECLIB_MAXIMUM_THREADS','NUMEXPR_NUM_THREADS','BLIS_NUM_THREADS'):os.environ[k]='1'
+sys.path.insert(0,str(ROOT/'frozen_iv/code'))
+import bootstrap as b
+from bootstrap import np,pa,pq,c,require,read,save,sha,signature,record,log,heartbeat,DAY
+sys.path.insert(0,str(ROOT/'closeout'))
+PARENT_CONF='12093d55b7ee9f737696982b8ebaef7b0706c27adc4fb12482a99aabf985d482'
+MAIN_ROWS=41513719
+
+def connect(folder,memory=4.):return b.connect(Path(folder),memory)
+def view(db,name,paths):return b.view(db,name,paths)
+def copy(db,sql,path):return b.copy(db,sql,path)
+def stage(folder,conf,fn,deps=()):return b.stage(Path(folder),conf,fn,deps)
+def rows(path):return pq.ParquetFile(path).metadata.num_rows
+def names(path):return set(pq.ParquetFile(path).schema_arrow.names)
+def columns(path,required):
+    require(Path(path).is_file(),'Required input missing: '+str(path))
+    require(set(required)<=names(path),'Missing columns in '+str(path)+': '+str(set(required)-names(path)))
+def assert_zero(db,sql,message):require(db.execute(sql).fetchone()[0]==0,message)
+def public_csv(path,records):c.csv_out(Path(path),records)
+def verify_package():
+    for line in (ROOT/'PACKAGE_MANIFEST.sha256').read_text().splitlines():
+        h,name=line.split('  ',1);p=(ROOT/name).resolve()
+        require(p.is_relative_to(ROOT),'Unsafe package path');require(p.is_file() and sha(p)==h,'Package file differs: '+name)
+def stage_record(path,conf):
+    p=Path(path);receipt=read(p.parent/'_DONE.json')
+    require(receipt.get('config_sha256')==conf,'Wrong producer configuration: '+str(p))
+    found=[r for r in receipt['files'] if r['path']==p.name]
+    require(len(found)==1,'Producer receipt does not bind '+str(p))
+    r=found[0];before=signature(p)
+    require(p.stat().st_size==r['bytes'] and sha(p)==r['sha256'],'Producer checksum differs: '+str(p))
+    require(signature(p)==before,'Input changed during authentication')
+    return dict(path=str(p),sha256=r['sha256'],bytes=r['bytes'],signature=before)
+def guard(auth):
+    for r in auth['files']:
+        require(signature(r['path'])==r['signature'],'Authenticated input changed: '+r['path'])
+def private_paths(parent):
+    p=Path(parent);return dict(frame=str(p/'comparisons/PRIVATE/frames90/F.parquet'),
+      frame_scores=str(p/'comparisons/PRIVATE/frames90/F_scores.parquet'),
+      metadata=str(p/'comparisons/PRIVATE/metadata_complete/metadata.parquet'),
+      spaced=str(p/'PRIVATE/model_inputs/legacy_spaced/source.parquet'),
+      spaced_scores=str(p/'PRIVATE/model_inputs/legacy_spaced/scores.parquet'),
+      repeated=str(p/'PRIVATE/model_inputs/repeated_recipient_FE/source.parquet'),
+      repeated_scores=str(p/'PRIVATE/model_inputs/repeated_recipient_FE/scores.parquet'))
+
+def preflight(a,run,conf):
+    require(shutil.disk_usage(run).free>=20*2**30,'At least 20 GiB of free space is required for bounded intermediate files')
+    parent=a.parent;require(parent.is_dir(),'Completed IV run not found: '+str(parent))
+    require(c.key(read(parent/'config.json'))==PARENT_CONF,'Unexpected IV parent configuration')
+    status=read(parent/'report/STATUS.json');require(status['status']=='BATCH_COMPLETE','IV parent is not complete')
+    reference=ROOT/'authority/completed_iv'
+    for branch,folder in [('receipt',parent/'report'),('comparisons',parent/'comparisons/report')]:
+        for p in (reference/branch).rglob('*'):
+            if p.is_file():require(sha(folder/p.relative_to(reference/branch))==sha(p),'Reviewed parent aggregate differs: '+p.name)
+    paths=private_paths(parent);files=[]
+    for label,path in paths.items():
+        with heartbeat('Authenticating '+label):files.append(stage_record(path,PARENT_CONF))
+    columns(paths['frame'],['row_id','game_id','recipient_color','recipient_id','opponent_id','recipient_username','opponent_username','status','complete90','eligible_main','first_observed_pair','history_window_complete','y','reached','outcome_opponent','outcome_start','outcome_t','outcome_gid','anchor_ms','archive_start_ms','month_code','tc_base_s','tc_inc_s','recipient_rating','opponent_rating','fair_90','kind_90','disconnect_90','receipt_90','claim_90','pre_games_90d'])
+    columns(paths['metadata'],['game_id','winner','status','white_username','black_username','anchor_ms','tc_base_s','tc_inc_s'])
+    require(rows(paths['frame'])==31836325,'Reviewed comparison frame row count differs')
+    require(rows(paths['spaced'])==3103311,'Reviewed spaced row count differs')
+    for label in ('spaced','repeated'):
+        columns(paths[label],['recent_'+x+'_90' for x in ('fair','kind','disconnect','receipt','claim')]+['pre_games_30d'])
+    # These source records are already authenticated by the completed producer;
+    # the closeout verifies their bytes again before its material join.
+    old=read(parent/'PRIVATE/AUTHENTICATED.json');material=old['material'];panels=[]
+    manifest=Path(material['manifest'])
+    require(sha(manifest)=='c1b6aedb3e95d42188163ef2926fa5a14cdac9538f24eb525cca5a26b3f9caec','Material manifest differs from reviewed core inputs')
+    manifest_data=read(manifest)
+    require([{k:r[k] for k in ('path','bytes','sha256','rows','month')} for r in material['records']]==[{k:r[k] for k in ('path','bytes','sha256','rows','month')} for r in sorted(manifest_data['datasets']['main'],key=lambda r:r['month'])],'Private material binding differs from the authenticated manifest')
+    files.append(dict(path=str(manifest),bytes=manifest.stat().st_size,sha256=sha(manifest),signature=signature(manifest)))
+    for r in material['records']:
+        p=Path(r['path']);before=signature(p)
+        with heartbeat('Authenticating material month '+r['month']):
+            require(p.stat().st_size==r['bytes'] and sha(p)==r['sha256'],'Material input differs: '+str(p))
+        require(signature(p)==before,'Material input changed during authentication')
+        columns(p,['game_id','fen_after_last_move','ply_count','chooser_user_id','disconnected_user_id','api_last_move_at_ms','kind_draw','engine_eval_cp_disconnected'])
+        panels.append(dict(r,signature=before));files.append(dict(path=str(p),bytes=r['bytes'],sha256=r['sha256'],signature=before))
+    require(len(panels)==24 and sum(r['rows'] for r in panels)==MAIN_ROWS,'Material panel coverage differs')
+    bound=read(parent/'PRIVATE/MATERIAL_BOUND.json');authors=bound['bound']['binding']['author_ids']
+    require(len(authors)==2,'Author-ID binding differs')
+    for label in ('legacy_spaced','repeated_recipient_FE','spaced_without_environment'):
+        for name in ('result.json','influence_PRIVATE.parquet'):
+            files.append(stage_record(parent/'PRIVATE/models'/label/name,PARENT_CONF))
+    auth=dict(paths=paths,panels=panels,files=files,authors=list(map(int,authors)),parent=str(parent),parent_conf=PARENT_CONF)
+    save(run/'PRIVATE/AUTHENTICATED.json',auth)
+    save(run/'report/PREFLIGHT.json',dict(status='PASSED',parent_conf=PARENT_CONF,main_rows=MAIN_ROWS,comparison_rows=rows(paths['frame']),spaced_rows=rows(paths['spaced']),author_usernames=['AUTHOR_ACCOUNT_1','AUTHOR_ACCOUNT_2'],network=False,originals_modified=False))
+    return auth

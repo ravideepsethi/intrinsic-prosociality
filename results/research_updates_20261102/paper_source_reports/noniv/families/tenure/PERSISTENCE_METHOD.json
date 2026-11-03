@@ -1,0 +1,11 @@
+{
+  "region": "competitive in both years",
+  "years": [
+    "2023-11 through 2024-10",
+    "2024-11 through 2025-10"
+  ],
+  "cohort": "Account age at first competitive opportunity in year one; creation missing stays unknown",
+  "weights": "n1*n2/(n1+n2); explicitly differs from any earlier unspecified opportunity-count weighting",
+  "adjustment": "Within each year subtract leave-one-account-out cell rate: board five-bin category \u00d7 eight ply bins \u00d7 speed; aggregate residuals by account",
+  "limits": "Descriptive correlations among observed returners; no assertion of stable preferences or removal of all state heterogeneity; no confidence intervals for correlations"
+}

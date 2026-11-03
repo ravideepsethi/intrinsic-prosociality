@@ -1,0 +1,45 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+countdown_root="$(cd "$(dirname "$0")" && pwd -P)"
+countdown_project="/Volumes/XT_Pro/lichess_kindness"
+countdown_previous=""
+for countdown_argument in "$@"; do
+  if [ "$countdown_previous" = "--project" ]; then countdown_project="$countdown_argument"; fi
+  case "$countdown_argument" in --project=*) countdown_project="${countdown_argument#--project=}";; esac
+  countdown_previous="$countdown_argument"
+done
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1
+export PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1
+countdown_python=""
+for candidate in "${COUNTDOWN_PYTHON:-}" "${VIRTUAL_ENV:-/nonexistent}/bin/python" \
+  "$countdown_project/venv/bin/python" "$countdown_project/.venv/bin/python" \
+  "$HOME/Desktop/Lichess_Desktop/author_exclusion_python/bin/python" \
+  "$HOME/Desktop/Lichess_Desktop"/author_exclusion_python.*/bin/python \
+  "$(command -v python3 || true)" "$(command -v python || true)" \
+  "$HOME/miniconda3/bin/python" "$HOME/anaconda3/bin/python" /opt/anaconda3/bin/python \
+  "$HOME/miniforge3/bin/python" /opt/homebrew/bin/python3; do
+  if [ -n "$candidate" ] && [ -x "$candidate" ] && "$candidate" -c 'import sys,duckdb,pyarrow,numpy,scipy,matplotlib; assert sys.version_info >= (3,10)' >/dev/null 2>&1; then
+    countdown_python="$candidate"
+    break
+  fi
+done
+if [ -z "$countdown_python" ]; then
+  echo 'No Python >=3.10 with duckdb, pyarrow, numpy, scipy and matplotlib was found. Activate the environment used for your recent runs, or set COUNTDOWN_PYTHON to its executable.' >&2
+  exit 2
+fi
+echo "Python: $countdown_python"
+"$countdown_python" "$countdown_root/code/run.py" --help >/dev/null
+"$countdown_python" -c "import sys; sys.path.insert(0, sys.argv[1]); from run import verify_package; verify_package(); print('PACKAGE_SHA256_OK')" "$countdown_root/code"
+countdown_test_log="$(mktemp "${TMPDIR:-/tmp}/countdown_est_tests.XXXXXX")"
+if ! "$countdown_python" -m unittest discover -s "$countdown_root/tests" -p 'test_*.py' -v > "$countdown_test_log" 2>&1; then
+  cat "$countdown_test_log"
+  echo "SELF_TEST_FAILED; details: $countdown_test_log" >&2
+  exit 2
+fi
+echo 'SELF_TEST_OK: 8 numerical, covariance, authentication, export and resume tests passed'
+if command -v caffeinate >/dev/null 2>&1; then
+  exec caffeinate -i "$countdown_python" "$countdown_root/code/run.py" "$@"
+else
+  exec "$countdown_python" "$countdown_root/code/run.py" "$@"
+fi

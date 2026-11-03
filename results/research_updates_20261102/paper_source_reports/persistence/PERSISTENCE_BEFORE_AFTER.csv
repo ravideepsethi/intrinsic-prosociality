@@ -1,0 +1,175 @@
+source,key,metric,before,after,change
+bootstrap/table3_bootstrap.csv,"{""panel"": ""A"", ""statistic"": ""correlation_equal_accounts""}",estimate,0.5453033906387101,0.5457730065650469,0.00046961592633676386
+bootstrap/table3_bootstrap.csv,"{""panel"": ""A"", ""statistic"": ""correlation_equal_accounts""}",bootstrap_se,0.0026449534250578,0.0026858596118868,4.090618682900003e-05
+bootstrap/table3_bootstrap.csv,"{""panel"": ""A"", ""statistic"": ""correlation_total_opportunity_weighted""}",estimate,0.6178209175770303,0.618138586800194,0.00031766922316367463
+bootstrap/table3_bootstrap.csv,"{""panel"": ""A"", ""statistic"": ""correlation_total_opportunity_weighted""}",bootstrap_se,0.0027681234339673,0.0027935770642286,2.5453630261300115e-05
+bootstrap/table3_bootstrap.csv,"{""panel"": ""A"", ""statistic"": ""rate_ratio_prior_vs_none""}",estimate,16.864569486075638,16.85614140898426,-0.008428077091377162
+bootstrap/table3_bootstrap.csv,"{""panel"": ""A"", ""statistic"": ""rate_ratio_prior_vs_none""}",bootstrap_se,0.1759373353956115,0.1766013072992251,0.0006639719036136138
+bootstrap/table3_bootstrap.csv,"{""panel"": ""A"", ""statistic"": ""second_year_rate_no_prior_grant_pp""}",estimate,0.9382832473976398,0.939750893553713,0.001467646156073199
+bootstrap/table3_bootstrap.csv,"{""panel"": ""A"", ""statistic"": ""second_year_rate_no_prior_grant_pp""}",bootstrap_se,0.0068185107173491,0.0066614656707735,-0.0001570450465755999
+bootstrap/table3_bootstrap.csv,"{""panel"": ""A"", ""statistic"": ""second_year_rate_prior_grant_pp""}",estimate,15.823743023358194,15.8405739509607,0.016830927602505596
+bootstrap/table3_bootstrap.csv,"{""panel"": ""A"", ""statistic"": ""second_year_rate_prior_grant_pp""}",bootstrap_se,0.1232181550864466,0.1252289773283512,0.002010822241904603
+bootstrap/table3_bootstrap.csv,"{""panel"": ""B"", ""statistic"": ""C1_own_minus_cross""}",estimate,0.4879936302012667,0.487772983126272,-0.00022064707499469538
+bootstrap/table3_bootstrap.csv,"{""panel"": ""B"", ""statistic"": ""C1_own_minus_cross""}",bootstrap_se,0.0068838454784428,0.006806566835874,-7.727864256879945e-05
+bootstrap/table3_bootstrap.csv,"{""panel"": ""B"", ""statistic"": ""L1_own_minus_cross""}",estimate,0.2235866668457892,0.223959184120572,0.0003725172747827965
+bootstrap/table3_bootstrap.csv,"{""panel"": ""B"", ""statistic"": ""L1_own_minus_cross""}",bootstrap_se,0.0142046369816883,0.0144780750487356,0.00027343806704730085
+bootstrap/table3_bootstrap.csv,"{""panel"": ""B"", ""statistic"": ""correlation_C1_C2""}",estimate,0.7273936063647298,0.727539843591992,0.00014623722726214705
+bootstrap/table3_bootstrap.csv,"{""panel"": ""B"", ""statistic"": ""correlation_C1_C2""}",bootstrap_se,0.0034039494451181,0.0032943793358707,-0.0001095701092474
+bootstrap/table3_bootstrap.csv,"{""panel"": ""B"", ""statistic"": ""correlation_C1_L2""}",estimate,0.2393999761634631,0.23976686046572,0.00036688430225689794
+bootstrap/table3_bootstrap.csv,"{""panel"": ""B"", ""statistic"": ""correlation_C1_L2""}",bootstrap_se,0.0070042422365609,0.0070926750852122,8.843284865129968e-05
+bootstrap/table3_bootstrap.csv,"{""panel"": ""B"", ""statistic"": ""correlation_L1_C2""}",estimate,0.2708597788512829,0.2709195821456127,5.980329432980769e-05
+bootstrap/table3_bootstrap.csv,"{""panel"": ""B"", ""statistic"": ""correlation_L1_C2""}",bootstrap_se,0.0067433115889513,0.0069281285566351,0.00018481696768380025
+bootstrap/table3_bootstrap.csv,"{""panel"": ""B"", ""statistic"": ""correlation_L1_L2""}",estimate,0.4944464456970721,0.4948787662661848,0.00043232056911274297
+bootstrap/table3_bootstrap.csv,"{""panel"": ""B"", ""statistic"": ""correlation_L1_L2""}",bootstrap_se,0.0180800485830402,0.0183613478600318,0.00028129927699159854
+bootstrap/table3_bootstrap.csv,"{""panel"": ""B"", ""statistic"": ""implied_correlation_C1_L2""}",estimate,0.3991900736371097,0.3995870044363581,0.00039693079924840724
+bootstrap/table3_bootstrap.csv,"{""panel"": ""B"", ""statistic"": ""implied_correlation_C1_L2""}",bootstrap_se,0.0076428551360677,0.0077435913898346,0.00010073625376689956
+bootstrap/table3_bootstrap.csv,"{""panel"": ""B"", ""statistic"": ""implied_correlation_L1_C2""}",estimate,0.4516480611140372,0.4515050331077461,-0.00014302800629112378
+bootstrap/table3_bootstrap.csv,"{""panel"": ""B"", ""statistic"": ""implied_correlation_L1_C2""}",bootstrap_se,0.0079779058602817,0.0082515404315491,0.00027363457126739973
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_BOTH_BOTH_percent""}",estimate,23.946666666666665,23.95305414777274,0.006387481106074233
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_BOTH_BOTH_percent""}",bootstrap_se,0.6800948965156336,0.6794216294674081,-0.0006732670482254566
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_BOTH_CO_percent""}",estimate,37.946666666666665,38.01013603627634,0.06346936960967753
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_BOTH_CO_percent""}",bootstrap_se,0.7813181114981147,0.7789723764523795,-0.002345735045735209
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_BOTH_LO_percent""}",estimate,4.64,4.614563883702321,-0.025436116297679057
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_BOTH_LO_percent""}",bootstrap_se,0.3455739133032252,0.3526368114892863,0.007062898186061095
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_BOTH_NEI_percent""}",estimate,33.46666666666667,33.4222459322486,-0.044420734418068264
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_BOTH_NEI_percent""}",bootstrap_se,0.7680276566802743,0.7609301833365121,-0.007097473343762206
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_CO_BOTH_percent""}",estimate,4.5509318766066835,4.550383549540142,-0.0005483270665411766
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_CO_BOTH_percent""}",bootstrap_se,0.1346735547306551,0.1367756058947096,0.0021020511640545136
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_CO_CO_percent""}",estimate,40.56073264781491,40.57191051849472,0.011177870679809132
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_CO_CO_percent""}",bootstrap_se,0.3139818907148161,0.3065562531506626,-0.007425637564153487
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_CO_LO_percent""}",estimate,2.257390745501285,2.249086308687096,-0.008304436814189131
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_CO_LO_percent""}",bootstrap_se,0.0933418637240827,0.0951821964794307,0.0018403327553480064
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_CO_NEI_percent""}",estimate,52.63094473007712,52.62861962327804,-0.002325106799077048
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_CO_NEI_percent""}",bootstrap_se,0.3166944157832705,0.3181108194519845,0.0014164036687139836
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_LO_BOTH_percent""}",estimate,2.2400820793433653,2.2618231665524333,0.021741087209067977
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_LO_BOTH_percent""}",bootstrap_se,0.1977250552781638,0.1907126782429814,-0.007012377035182399
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_LO_CO_percent""}",estimate,8.652530779753763,8.670322138450993,0.01779135869723092
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_LO_CO_percent""}",bootstrap_se,0.3782235586695545,0.3624841071629834,-0.01573945150657108
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_LO_LO_percent""}",estimate,7.335841313269494,7.299520219328307,-0.03632109394118732
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_LO_LO_percent""}",bootstrap_se,0.3532137300341886,0.3478161970700914,-0.005397532964097174
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_LO_NEI_percent""}",estimate,81.77154582763337,81.76833447566827,-0.003211351965106246
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_LO_NEI_percent""}",bootstrap_se,0.5272935522565667,0.51088591581278,-0.016407636443786733
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_NEI_BOTH_percent""}",estimate,0.4057696039326448,0.4065198534457089,0.0007502495130641273
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_NEI_BOTH_percent""}",bootstrap_se,0.0131819923083529,0.0130030604340755,-0.0001789318742774007
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_NEI_CO_percent""}",estimate,4.716155322222462,4.722017236096546,0.005861913874084301
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_NEI_CO_percent""}",bootstrap_se,0.0436164591255428,0.0441698315535937,0.0005533724280508967
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_NEI_LO_percent""}",estimate,2.1297514068260712,2.129266408599923,-0.0004849982261481145
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_NEI_LO_percent""}",bootstrap_se,0.0297715343114979,0.0295084041936927,-0.00026313011780519993
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_NEI_NEI_percent""}",estimate,92.74832366701882,92.74219650185782,-0.0061271651610042
+bootstrap/table3_bootstrap.csv,"{""panel"": ""C"", ""statistic"": ""transition_NEI_NEI_percent""}",bootstrap_se,0.05369050567336,0.0540475868972386,0.00035708122387859836
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 1, ""period1_state"": ""c"", ""period2_state"": ""c"", ""sample"": ""balanced_C_L_each_year_min_1""}",accounts,670480.0,670252.0,-228.0
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 1, ""period1_state"": ""c"", ""period2_state"": ""c"", ""sample"": ""balanced_C_L_each_year_min_1""}",correlation_equal_account,0.522465844,0.522618464,0.00015262000000004772
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 1, ""period1_state"": ""c"", ""period2_state"": ""c"", ""sample"": ""balanced_C_L_each_year_min_1""}",correlation_harmonic_opportunities,0.643505879,0.643596793,9.091399999994199e-05
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 1, ""period1_state"": ""c"", ""period2_state"": ""l"", ""sample"": ""balanced_C_L_each_year_min_1""}",accounts,670480.0,670252.0,-228.0
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 1, ""period1_state"": ""c"", ""period2_state"": ""l"", ""sample"": ""balanced_C_L_each_year_min_1""}",correlation_equal_account,0.163725718,0.163919578,0.0001938600000000179
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 1, ""period1_state"": ""c"", ""period2_state"": ""l"", ""sample"": ""balanced_C_L_each_year_min_1""}",correlation_harmonic_opportunities,0.214726106,0.214902576,0.0001764700000000119
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 1, ""period1_state"": ""l"", ""period2_state"": ""c"", ""sample"": ""balanced_C_L_each_year_min_1""}",accounts,670480.0,670252.0,-228.0
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 1, ""period1_state"": ""l"", ""period2_state"": ""c"", ""sample"": ""balanced_C_L_each_year_min_1""}",correlation_equal_account,0.180719652,0.180737015,1.7362999999992468e-05
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 1, ""period1_state"": ""l"", ""period2_state"": ""c"", ""sample"": ""balanced_C_L_each_year_min_1""}",correlation_harmonic_opportunities,0.239573938,0.239589151,1.521300000001391e-05
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 1, ""period1_state"": ""l"", ""period2_state"": ""l"", ""sample"": ""balanced_C_L_each_year_min_1""}",accounts,670480.0,670252.0,-228.0
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 1, ""period1_state"": ""l"", ""period2_state"": ""l"", ""sample"": ""balanced_C_L_each_year_min_1""}",correlation_equal_account,0.299624061,0.299779919,0.0001558580000000087
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 1, ""period1_state"": ""l"", ""period2_state"": ""l"", ""sample"": ""balanced_C_L_each_year_min_1""}",correlation_harmonic_opportunities,0.441782841,0.441876891,9.405000000001218e-05
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 10, ""period1_state"": ""c"", ""period2_state"": ""c"", ""sample"": ""balanced_C_L_each_year_min_10""}",accounts,82311.0,82200.0,-111.0
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 10, ""period1_state"": ""c"", ""period2_state"": ""c"", ""sample"": ""balanced_C_L_each_year_min_10""}",correlation_equal_account,0.793478379,0.793576612,9.823300000000312e-05
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 10, ""period1_state"": ""c"", ""period2_state"": ""c"", ""sample"": ""balanced_C_L_each_year_min_10""}",correlation_harmonic_opportunities,0.799704827,0.799825331,0.00012050399999996575
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 10, ""period1_state"": ""c"", ""period2_state"": ""l"", ""sample"": ""balanced_C_L_each_year_min_10""}",accounts,82311.0,82200.0,-111.0
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 10, ""period1_state"": ""c"", ""period2_state"": ""l"", ""sample"": ""balanced_C_L_each_year_min_10""}",correlation_equal_account,0.294922551,0.294477098,-0.00044545299999998456
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 10, ""period1_state"": ""c"", ""period2_state"": ""l"", ""sample"": ""balanced_C_L_each_year_min_10""}",correlation_harmonic_opportunities,0.306906334,0.306768928,-0.00013740600000000658
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 10, ""period1_state"": ""l"", ""period2_state"": ""c"", ""sample"": ""balanced_C_L_each_year_min_10""}",accounts,82311.0,82200.0,-111.0
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 10, ""period1_state"": ""l"", ""period2_state"": ""c"", ""sample"": ""balanced_C_L_each_year_min_10""}",correlation_equal_account,0.321044675,0.319497418,-0.001547257000000024
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 10, ""period1_state"": ""l"", ""period2_state"": ""c"", ""sample"": ""balanced_C_L_each_year_min_10""}",correlation_harmonic_opportunities,0.348506868,0.347536323,-0.0009705450000000448
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 10, ""period1_state"": ""l"", ""period2_state"": ""l"", ""sample"": ""balanced_C_L_each_year_min_10""}",accounts,82311.0,82200.0,-111.0
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 10, ""period1_state"": ""l"", ""period2_state"": ""l"", ""sample"": ""balanced_C_L_each_year_min_10""}",correlation_equal_account,0.61635616,0.615687908,-0.0006682520000000913
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 10, ""period1_state"": ""l"", ""period2_state"": ""l"", ""sample"": ""balanced_C_L_each_year_min_10""}",correlation_harmonic_opportunities,0.657028967,0.656738721,-0.0002902460000000495
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 4, ""period1_state"": ""c"", ""period2_state"": ""c"", ""sample"": ""balanced_C_L_each_year_min_4""}",accounts,266399.0,266207.0,-192.0
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 4, ""period1_state"": ""c"", ""period2_state"": ""c"", ""sample"": ""balanced_C_L_each_year_min_4""}",correlation_equal_account,0.727393606,0.727539844,0.00014623800000002074
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 4, ""period1_state"": ""c"", ""period2_state"": ""c"", ""sample"": ""balanced_C_L_each_year_min_4""}",correlation_harmonic_opportunities,0.750980373,0.751142002,0.00016162900000005198
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 4, ""period1_state"": ""c"", ""period2_state"": ""l"", ""sample"": ""balanced_C_L_each_year_min_4""}",accounts,266399.0,266207.0,-192.0
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 4, ""period1_state"": ""c"", ""period2_state"": ""l"", ""sample"": ""balanced_C_L_each_year_min_4""}",correlation_equal_account,0.239399976,0.23976686,0.00036688400000001176
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 4, ""period1_state"": ""c"", ""period2_state"": ""l"", ""sample"": ""balanced_C_L_each_year_min_4""}",correlation_harmonic_opportunities,0.261168754,0.261481205,0.0003124509999999914
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 4, ""period1_state"": ""l"", ""period2_state"": ""c"", ""sample"": ""balanced_C_L_each_year_min_4""}",accounts,266399.0,266207.0,-192.0
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 4, ""period1_state"": ""l"", ""period2_state"": ""c"", ""sample"": ""balanced_C_L_each_year_min_4""}",correlation_equal_account,0.270859779,0.270919582,5.980299999996941e-05
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 4, ""period1_state"": ""l"", ""period2_state"": ""c"", ""sample"": ""balanced_C_L_each_year_min_4""}",correlation_harmonic_opportunities,0.298713008,0.298703621,-9.387000000027346e-06
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 4, ""period1_state"": ""l"", ""period2_state"": ""l"", ""sample"": ""balanced_C_L_each_year_min_4""}",accounts,266399.0,266207.0,-192.0
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 4, ""period1_state"": ""l"", ""period2_state"": ""l"", ""sample"": ""balanced_C_L_each_year_min_4""}",correlation_equal_account,0.494446446,0.494878766,0.00043232000000004156
+persistence/tabF4_cross_year_correlations.csv,"{""min_opportunities_each_year_and_state"": 4, ""period1_state"": ""l"", ""period2_state"": ""l"", ""sample"": ""balanced_C_L_each_year_min_4""}",correlation_harmonic_opportunities,0.562827491,0.56301976,0.00019226900000002267
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""c"", ""estimand"": ""P1_both_interaction"", ""model"": ""binary_year_one_grant_history""}",estimate,12.3285483,12.3437323,0.015183999999999642
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""c"", ""estimand"": ""P1_both_interaction"", ""model"": ""binary_year_one_grant_history""}",se,0.63440051,0.634856791,0.00045628100000005833
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""c"", ""estimand"": ""P1_ever_C"", ""model"": ""binary_year_one_grant_history""}",estimate,10.9528915,10.9628103,0.00991879999999945
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""c"", ""estimand"": ""P1_ever_C"", ""model"": ""binary_year_one_grant_history""}",se,0.134343195,0.134419723,7.652799999999238e-05
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""c"", ""estimand"": ""P1_ever_L"", ""model"": ""binary_year_one_grant_history""}",estimate,0.917528769,0.920300705,0.0027719360000000304
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""c"", ""estimand"": ""P1_ever_L"", ""model"": ""binary_year_one_grant_history""}",se,0.066903152,0.0670296856,0.00012653360000000613
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""c"", ""estimand"": ""intercept"", ""model"": ""binary_year_one_grant_history""}",estimate,0.559718623,0.560764986,0.0010463630000000501
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""c"", ""estimand"": ""intercept"", ""model"": ""binary_year_one_grant_history""}",se,0.00670858866,0.00671887898,1.0290320000000061e-05
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""l"", ""estimand"": ""P1_both_interaction"", ""model"": ""binary_year_one_grant_history""}",estimate,4.54896164,4.55017689,0.0012152500000004451
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""l"", ""estimand"": ""P1_both_interaction"", ""model"": ""binary_year_one_grant_history""}",se,0.345488236,0.345554557,6.632099999998031e-05
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""l"", ""estimand"": ""P1_ever_C"", ""model"": ""binary_year_one_grant_history""}",estimate,0.350535831,0.349935883,-0.0005999480000000168
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""l"", ""estimand"": ""P1_ever_C"", ""model"": ""binary_year_one_grant_history""}",se,0.0150397243,0.0150322018,-7.522499999999127e-06
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""l"", ""estimand"": ""P1_ever_L"", ""model"": ""binary_year_one_grant_history""}",estimate,0.508411701,0.507370836,-0.001040865000000002
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""l"", ""estimand"": ""P1_ever_L"", ""model"": ""binary_year_one_grant_history""}",se,0.0406974242,0.0407150656,1.7641400000004137e-05
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""l"", ""estimand"": ""intercept"", ""model"": ""binary_year_one_grant_history""}",estimate,0.164251126,0.164202497,-4.862899999999448e-05
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""l"", ""estimand"": ""intercept"", ""model"": ""binary_year_one_grant_history""}",se,0.00243681665,0.00243712246,3.0580999999972255e-07
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""outcome_normalized_comparison"", ""estimand"": ""C1_predicts_C2_more_than_L2"", ""model"": ""binary_year_one_grant_history""}",estimate,4.46239593,4.45866016,-0.003735769999999583
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""outcome_normalized_comparison"", ""estimand"": ""C1_predicts_C2_more_than_L2"", ""model"": ""binary_year_one_grant_history""}",se,0.0773940522,0.0773158688,-7.818339999998702e-05
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""outcome_normalized_comparison"", ""estimand"": ""L1_predicts_L2_more_than_C2"", ""model"": ""binary_year_one_grant_history""}",estimate,1.26158901,1.25806744,-0.003521569999999974
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""outcome_normalized_comparison"", ""estimand"": ""L1_predicts_L2_more_than_C2"", ""model"": ""binary_year_one_grant_history""}",se,0.131675312,0.131757276,8.196400000001769e-05
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""c"", ""estimand"": ""P1_competitive_rate_pp"", ""model"": ""continuous_first_year_rates""}",estimate,0.701973071,0.702201778,0.0002287070000001057
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""c"", ""estimand"": ""P1_competitive_rate_pp"", ""model"": ""continuous_first_year_rates""}",se,0.00558981171,0.00558893355,-8.78159999999524e-07
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""c"", ""estimand"": ""P1_lost_rate_pp"", ""model"": ""continuous_first_year_rates""}",estimate,0.138361952,0.136613643,-0.0017483090000000034
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""c"", ""estimand"": ""P1_lost_rate_pp"", ""model"": ""continuous_first_year_rates""}",se,0.020597634,0.0206120723,1.4438299999999099e-05
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""c"", ""estimand"": ""intercept"", ""model"": ""continuous_first_year_rates""}",estimate,0.406900434,0.407797187,0.0008967530000000279
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""c"", ""estimand"": ""intercept"", ""model"": ""continuous_first_year_rates""}",se,0.00956790844,0.00957106753,3.1590899999996147e-06
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""l"", ""estimand"": ""P1_competitive_rate_pp"", ""model"": ""continuous_first_year_rates""}",estimate,0.0241009493,0.0240500827,-5.086660000000118e-05
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""l"", ""estimand"": ""P1_competitive_rate_pp"", ""model"": ""continuous_first_year_rates""}",se,0.00171538195,0.001724169,8.787049999999918e-06
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""l"", ""estimand"": ""P1_lost_rate_pp"", ""model"": ""continuous_first_year_rates""}",estimate,0.484503397,0.484576961,7.356399999997043e-05
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""l"", ""estimand"": ""P1_lost_rate_pp"", ""model"": ""continuous_first_year_rates""}",se,0.0284543086,0.0284660967,1.1788100000000024e-05
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""l"", ""estimand"": ""intercept"", ""model"": ""continuous_first_year_rates""}",estimate,0.0883684525,0.0883259694,-4.2483100000004215e-05
+persistence/tabF5_cross_prediction.csv,"{""P2_outcome"": ""l"", ""estimand"": ""intercept"", ""model"": ""continuous_first_year_rates""}",se,0.00659842727,0.00658889628,-9.530990000000163e-06
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""BOTH"", ""p2_group"": ""BOTH"", ""sample"": ""primary_balanced_C_L_4""}",accounts,898.0,898.0,0.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""BOTH"", ""p2_group"": ""BOTH"", ""sample"": ""primary_balanced_C_L_4""}",p1_group_accounts,3750.0,3749.0,-1.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""BOTH"", ""p2_group"": ""BOTH"", ""sample"": ""primary_balanced_C_L_4""}",p2_share_percent,23.9466667,23.9530541,0.006387399999997712
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""BOTH"", ""p2_group"": ""CO"", ""sample"": ""primary_balanced_C_L_4""}",accounts,1423.0,1425.0,2.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""BOTH"", ""p2_group"": ""CO"", ""sample"": ""primary_balanced_C_L_4""}",p1_group_accounts,3750.0,3749.0,-1.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""BOTH"", ""p2_group"": ""CO"", ""sample"": ""primary_balanced_C_L_4""}",p2_share_percent,37.9466667,38.010136,0.06346930000000128
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""BOTH"", ""p2_group"": ""LO"", ""sample"": ""primary_balanced_C_L_4""}",accounts,174.0,173.0,-1.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""BOTH"", ""p2_group"": ""LO"", ""sample"": ""primary_balanced_C_L_4""}",p1_group_accounts,3750.0,3749.0,-1.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""BOTH"", ""p2_group"": ""LO"", ""sample"": ""primary_balanced_C_L_4""}",p2_share_percent,4.64,4.61456388,-0.025436119999999285
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""BOTH"", ""p2_group"": ""NEI"", ""sample"": ""primary_balanced_C_L_4""}",accounts,1255.0,1253.0,-2.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""BOTH"", ""p2_group"": ""NEI"", ""sample"": ""primary_balanced_C_L_4""}",p1_group_accounts,3750.0,3749.0,-1.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""BOTH"", ""p2_group"": ""NEI"", ""sample"": ""primary_balanced_C_L_4""}",p2_share_percent,33.4666667,33.4222459,-0.044420799999997485
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""CO"", ""p2_group"": ""BOTH"", ""sample"": ""primary_balanced_C_L_4""}",accounts,1133.0,1133.0,0.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""CO"", ""p2_group"": ""BOTH"", ""sample"": ""primary_balanced_C_L_4""}",p1_group_accounts,24896.0,24899.0,3.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""CO"", ""p2_group"": ""BOTH"", ""sample"": ""primary_balanced_C_L_4""}",p2_share_percent,4.55093188,4.55038355,-0.0005483299999999858
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""CO"", ""p2_group"": ""CO"", ""sample"": ""primary_balanced_C_L_4""}",accounts,10098.0,10102.0,4.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""CO"", ""p2_group"": ""CO"", ""sample"": ""primary_balanced_C_L_4""}",p1_group_accounts,24896.0,24899.0,3.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""CO"", ""p2_group"": ""CO"", ""sample"": ""primary_balanced_C_L_4""}",p2_share_percent,40.5607326,40.5719105,0.011177899999999852
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""CO"", ""p2_group"": ""LO"", ""sample"": ""primary_balanced_C_L_4""}",accounts,562.0,560.0,-2.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""CO"", ""p2_group"": ""LO"", ""sample"": ""primary_balanced_C_L_4""}",p1_group_accounts,24896.0,24899.0,3.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""CO"", ""p2_group"": ""LO"", ""sample"": ""primary_balanced_C_L_4""}",p2_share_percent,2.25739075,2.24908631,-0.008304439999999857
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""CO"", ""p2_group"": ""NEI"", ""sample"": ""primary_balanced_C_L_4""}",accounts,13103.0,13104.0,1.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""CO"", ""p2_group"": ""NEI"", ""sample"": ""primary_balanced_C_L_4""}",p1_group_accounts,24896.0,24899.0,3.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""CO"", ""p2_group"": ""NEI"", ""sample"": ""primary_balanced_C_L_4""}",p2_share_percent,52.6309447,52.6286196,-0.002325100000000191
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""LO"", ""p2_group"": ""BOTH"", ""sample"": ""primary_balanced_C_L_4""}",accounts,131.0,132.0,1.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""LO"", ""p2_group"": ""BOTH"", ""sample"": ""primary_balanced_C_L_4""}",p1_group_accounts,5848.0,5836.0,-12.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""LO"", ""p2_group"": ""BOTH"", ""sample"": ""primary_balanced_C_L_4""}",p2_share_percent,2.24008208,2.26182317,0.021741089999999907
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""LO"", ""p2_group"": ""CO"", ""sample"": ""primary_balanced_C_L_4""}",accounts,506.0,506.0,0.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""LO"", ""p2_group"": ""CO"", ""sample"": ""primary_balanced_C_L_4""}",p1_group_accounts,5848.0,5836.0,-12.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""LO"", ""p2_group"": ""CO"", ""sample"": ""primary_balanced_C_L_4""}",p2_share_percent,8.65253078,8.67032214,0.017791360000000367
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""LO"", ""p2_group"": ""LO"", ""sample"": ""primary_balanced_C_L_4""}",accounts,429.0,426.0,-3.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""LO"", ""p2_group"": ""LO"", ""sample"": ""primary_balanced_C_L_4""}",p1_group_accounts,5848.0,5836.0,-12.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""LO"", ""p2_group"": ""LO"", ""sample"": ""primary_balanced_C_L_4""}",p2_share_percent,7.33584131,7.29952022,-0.03632109000000039
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""LO"", ""p2_group"": ""NEI"", ""sample"": ""primary_balanced_C_L_4""}",accounts,4782.0,4772.0,-10.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""LO"", ""p2_group"": ""NEI"", ""sample"": ""primary_balanced_C_L_4""}",p1_group_accounts,5848.0,5836.0,-12.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""LO"", ""p2_group"": ""NEI"", ""sample"": ""primary_balanced_C_L_4""}",p2_share_percent,81.7715458,81.7683345,-0.0032113000000038028
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""NEI"", ""p2_group"": ""BOTH"", ""sample"": ""primary_balanced_C_L_4""}",accounts,941.0,942.0,1.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""NEI"", ""p2_group"": ""BOTH"", ""sample"": ""primary_balanced_C_L_4""}",p1_group_accounts,231905.0,231723.0,-182.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""NEI"", ""p2_group"": ""BOTH"", ""sample"": ""primary_balanced_C_L_4""}",p2_share_percent,0.405769604,0.406519853,0.0007502489999999806
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""NEI"", ""p2_group"": ""CO"", ""sample"": ""primary_balanced_C_L_4""}",accounts,10937.0,10942.0,5.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""NEI"", ""p2_group"": ""CO"", ""sample"": ""primary_balanced_C_L_4""}",p1_group_accounts,231905.0,231723.0,-182.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""NEI"", ""p2_group"": ""CO"", ""sample"": ""primary_balanced_C_L_4""}",p2_share_percent,4.71615532,4.72201724,0.005861919999999188
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""NEI"", ""p2_group"": ""LO"", ""sample"": ""primary_balanced_C_L_4""}",accounts,4939.0,4934.0,-5.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""NEI"", ""p2_group"": ""LO"", ""sample"": ""primary_balanced_C_L_4""}",p1_group_accounts,231905.0,231723.0,-182.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""NEI"", ""p2_group"": ""LO"", ""sample"": ""primary_balanced_C_L_4""}",p2_share_percent,2.12975141,2.12926641,-0.00048499999999984666
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""NEI"", ""p2_group"": ""NEI"", ""sample"": ""primary_balanced_C_L_4""}",accounts,215088.0,214905.0,-183.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""NEI"", ""p2_group"": ""NEI"", ""sample"": ""primary_balanced_C_L_4""}",p1_group_accounts,231905.0,231723.0,-182.0
+persistence/tabF2_transition_4x4.csv,"{""p1_group"": ""NEI"", ""p2_group"": ""NEI"", ""sample"": ""primary_balanced_C_L_4""}",p2_share_percent,92.7483237,92.7421965,-0.006127199999994559

@@ -1,0 +1,16 @@
+{
+  "analytical_sample_changed": false,
+  "baseline_package_manifest_sha256": "f523e9fbeab12e955a95d35721ee0165a9362226241eacd82f0048469f6f7fac",
+  "covariance_partitions": 128,
+  "estimator_changed": false,
+  "execution_version": "1.0.1",
+  "global_wide_sort_removed": true,
+  "matching_partitions": 128,
+  "material_selection_streamed": true,
+  "ordinary_sql_limit_gb": 1.5,
+  "ordinary_sql_threads": 1,
+  "production_network": false,
+  "query_and_metadata_partitions": 128,
+  "repaired_package_manifest_sha256": "39eb87379995171a1a1326734e4ef37c81909aec38a138a9c78d3f2ded582e69",
+  "scientific_configuration": "2854da0567adc38694949710ea608055f4d3157aaa92ebc5a9aa0ceb41d52aeb"
+}

@@ -1,0 +1,26 @@
+{
+  "completion_scope": "Rating validation, six retained matched-receipt companions, donor/environment/reputation/tenure counts",
+  "elapsed_seconds": 24.095540500013158,
+  "jobs": [
+    {
+      "execution": "reused_verified_completed_results",
+      "job": "counts",
+      "status": "COMPLETE"
+    },
+    {
+      "execution": "one_model_corrected_five_reused",
+      "job": "receipt_companions",
+      "status": "COMPLETE"
+    },
+    {
+      "execution": "reused_verified_completed_results",
+      "job": "rating_validation",
+      "status": "COMPLETE"
+    }
+  ],
+  "manuscript_or_pdf_modified": false,
+  "prior_return_sha256": "1e7b388ffc1f97efae796139fa17bcfbf83ce6db59aa6a2d1bdf12845663641c",
+  "repair_completed": true,
+  "status": "ALL_REQUESTED_RESULT_JOBS_COMPLETE",
+  "whole_paper_completion_certified": false
+}

@@ -1,0 +1,61 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+iv_mode="${1:?Specify analyze or tests}"
+shift
+iv_package="$(cd "$(dirname "$0")" && pwd -P)"
+iv_project="${IV_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+iv_desktop="${IV_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+iv_python="${IV_PYTHON:-$iv_project/venv/bin/python}"
+if [[ ! -x "$iv_python" ]]; then
+  echo "Research Python not found: $iv_python. Connect XT_Pro or set IV_PYTHON."
+  exit 2
+fi
+mkdir -p "$iv_desktop"
+export PYTHONDONTWRITEBYTECODE=1
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1
+cd "$iv_package"
+"$iv_python" - <<'PY'
+import sys,platform
+assert sys.version_info >= (3,10), 'Python 3.10 or later required'
+try:
+    import numpy,pyarrow,duckdb,chess,pandas
+except ImportError as e:
+    raise SystemExit('Missing existing research dependency: '+str(e)+'. No packages were downloaded.')
+sys.path.insert(0,'code')
+from iv_common import verify_package
+verify_package()
+print('IV_CUTOFF_MATERIAL_PACKAGE_SHA256_OK;',platform.platform(),'; Python',sys.version.split()[0],flush=True)
+PY
+iv_log="$iv_desktop/iv_cutoff_material_${iv_mode}_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+iv_awake=()
+if [[ -x /usr/bin/caffeinate ]]; then iv_awake=(/usr/bin/caffeinate -i); fi
+echo "Log: $iv_log"
+set +e
+{
+  if [[ "$iv_mode" == tests ]]; then
+    "$iv_python" -m unittest discover -s tests -p 'test_*.py' -v
+  elif [[ "$iv_mode" == analyze ]]; then
+    echo 'Fixed author-clean S0; cumulative donor history ending 24h before exposure; strict abs(material)<4 exposure robustness.'
+    echo 'No API, Stockfish, package installs, manuscript changes, expanded-cohort rebuild, or writes to old runs.'
+    echo 'Up to 10 workers within an estimated 11 GiB budget; fits sequential. Whole-run Mac duration is unbenchmarked.'
+    echo 'Measured stage ETAs, 30–35-second heartbeats, and report checkpoints at 25/50/75/100 percent.'
+    iv_tests="${iv_log%.log}_selftests.log"
+    if "$iv_python" -m unittest discover -s tests -p 'test_*.py' -q > "$iv_tests" 2>&1; then
+      echo "OFFLINE_SELF_TESTS_OK: $iv_tests"
+    else
+      cat "$iv_tests"
+      exit 3
+    fi
+    "${iv_awake[@]}" "$iv_python" -u code/run_iv.py --project-root "$iv_project" --desktop "$iv_desktop" "$@"
+  else
+    echo 'Use RUN_IV_CUTOFF_MATERIAL.command or RUN_TESTS.command.'
+    exit 2
+  fi
+} 2>&1 | tee "$iv_log"
+iv_exit=${PIPESTATUS[0]}
+set -e
+if [[ "$iv_exit" -ne 0 ]]; then
+  echo "Stopped with exit $iv_exit. Completed checkpoints remain reusable. Return this log: $iv_log"
+fi
+exit "$iv_exit"

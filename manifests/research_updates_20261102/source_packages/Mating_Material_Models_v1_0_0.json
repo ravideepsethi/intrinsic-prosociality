@@ -1,0 +1,326 @@
+{
+  "package": "Mating_Material_Models_v1_0_0",
+  "archive": "Mating_Material_Models_v1_0_0.zip",
+  "archive_sha256": "fc645fdaed34041d28b22e3bbbbdaacf96d51fe0796ead7d64b70a52e215137c",
+  "files": [
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/README.txt",
+      "original_sha256": "1022c592708d239f50be81f44913d81869ade3df035c36f89ccf4d8dcb47433f",
+      "original_bytes": 8465,
+      "path": "code/research_updates_20261102/Mating_Material_Models_v1_0_0/README.txt",
+      "published_sha256": "1022c592708d239f50be81f44913d81869ade3df035c36f89ccf4d8dcb47433f",
+      "published_bytes": 8465,
+      "original_relative_path": "README.txt",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/RUN_MODELS.command",
+      "original_sha256": "4225c3a9c8e8b4a4d047b5dd431d17cdac1f47c21c80896bb1c2366c4007e682",
+      "original_bytes": 707,
+      "path": "code/research_updates_20261102/Mating_Material_Models_v1_0_0/RUN_MODELS.command.in",
+      "published_sha256": "4225c3a9c8e8b4a4d047b5dd431d17cdac1f47c21c80896bb1c2366c4007e682",
+      "published_bytes": 707,
+      "original_relative_path": "RUN_MODELS.command",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/code/inputs.py",
+      "original_sha256": "b63e3a8f562fc673c8827dd05a5a3b851a1ccc991d424b6c2cadf9efee9ac275",
+      "original_bytes": 6169,
+      "path": "code/research_updates_20261102/Mating_Material_Models_v1_0_0/code/inputs.py.in",
+      "published_sha256": "1a5d810eaa7127f386a6f087797006ee83926ea6d5778279bc70d2813f56f049",
+      "published_bytes": 6186,
+      "original_relative_path": "code/inputs.py",
+      "substitutions": [
+        {
+          "replacement": "AUTHOR_ACCOUNT_1",
+          "occurrences": 1
+        },
+        {
+          "replacement": "AUTHOR_ACCOUNT_2",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/code/run_models.py",
+      "original_sha256": "dc75ec34b1f5b287581b3fb4bebc88a41487630fea5677942f22357f6b81a1f6",
+      "original_bytes": 10555,
+      "path": "code/research_updates_20261102/Mating_Material_Models_v1_0_0/code/run_models.py.in",
+      "published_sha256": "44dc8e603fff5d7a549806ae700bbf74edf1715d141f7c14143b504bbdca0005",
+      "published_bytes": 10572,
+      "original_relative_path": "code/run_models.py",
+      "substitutions": [
+        {
+          "replacement": "AUTHOR_ACCOUNT_1",
+          "occurrences": 1
+        },
+        {
+          "replacement": "AUTHOR_ACCOUNT_2",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/code/util.py",
+      "original_sha256": "77257e38d97f08db8e2dacfc3a9034caf23e4bb309ab73b80b84c98bfe7f7da9",
+      "original_bytes": 2850,
+      "path": "code/research_updates_20261102/Mating_Material_Models_v1_0_0/code/util.py",
+      "published_sha256": "77257e38d97f08db8e2dacfc3a9034caf23e4bb309ab73b80b84c98bfe7f7da9",
+      "published_bytes": 2850,
+      "original_relative_path": "code/util.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/code/worker.py",
+      "original_sha256": "0c472e3bfa9b412aa39657b8f51c3a3258514737029060df32a37754b4d9d9c9",
+      "original_bytes": 10877,
+      "path": "code/research_updates_20261102/Mating_Material_Models_v1_0_0/code/worker.py",
+      "published_sha256": "0c472e3bfa9b412aa39657b8f51c3a3258514737029060df32a37754b4d9d9c9",
+      "published_bytes": 10877,
+      "original_relative_path": "code/worker.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/requirements.txt",
+      "original_sha256": "684b1e615aa60149c4212f14198c7639446d6bb7f27f127500dbd01c794eb9c5",
+      "original_bytes": 71,
+      "path": "code/research_updates_20261102/Mating_Material_Models_v1_0_0/requirements.txt",
+      "published_sha256": "684b1e615aa60149c4212f14198c7639446d6bb7f27f127500dbd01c794eb9c5",
+      "published_bytes": 71,
+      "original_relative_path": "requirements.txt",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/run.py",
+      "original_sha256": "c938c9a63130499d87ecfc60a3106ed050b80341539d5e1f6ab39ff2be4e63c3",
+      "original_bytes": 199,
+      "path": "code/research_updates_20261102/Mating_Material_Models_v1_0_0/run.py",
+      "published_sha256": "c938c9a63130499d87ecfc60a3106ed050b80341539d5e1f6ab39ff2be4e63c3",
+      "published_bytes": 199,
+      "original_relative_path": "run.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/setup_and_run.py",
+      "original_sha256": "5072e4193cc7711c38f03093bd099c5a2bad219d8da105009c2a1b3e8c79192a",
+      "original_bytes": 1847,
+      "path": "code/research_updates_20261102/Mating_Material_Models_v1_0_0/setup_and_run.py",
+      "published_sha256": "5072e4193cc7711c38f03093bd099c5a2bad219d8da105009c2a1b3e8c79192a",
+      "published_bytes": 1847,
+      "original_relative_path": "setup_and_run.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/tests/checks.py",
+      "original_sha256": "9f97dbe880c5960ccab2bcf440666bfbf8d7da357a43ca44ee6605a225a59a7f",
+      "original_bytes": 11991,
+      "path": "code/research_updates_20261102/Mating_Material_Models_v1_0_0/tests/checks.py.in",
+      "published_sha256": "7af54527feeca951d416b97e08090d9440f67c788ac43cab1b5dab5b1ac1da1e",
+      "published_bytes": 12008,
+      "original_relative_path": "tests/checks.py",
+      "substitutions": [
+        {
+          "replacement": "AUTHOR_ACCOUNT_1",
+          "occurrences": 1
+        },
+        {
+          "replacement": "AUTHOR_ACCOUNT_2",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/tests/merit_reference.py",
+      "original_sha256": "aa1d94a718341c355f00c72070d018642167aa0078b5567a3e00e3d4c35c034f",
+      "original_bytes": 8836,
+      "path": "code/research_updates_20261102/Mating_Material_Models_v1_0_0/tests/merit_reference.py",
+      "published_sha256": "aa1d94a718341c355f00c72070d018642167aa0078b5567a3e00e3d4c35c034f",
+      "published_bytes": 8836,
+      "original_relative_path": "tests/merit_reference.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/tests/r11_reference.py",
+      "original_sha256": "095127d5140e5661fafa2cd184428e17292a22cc87d2138c2208a6563f21760e",
+      "original_bytes": 12840,
+      "path": "code/research_updates_20261102/Mating_Material_Models_v1_0_0/tests/r11_reference.py",
+      "published_sha256": "095127d5140e5661fafa2cd184428e17292a22cc87d2138c2208a6563f21760e",
+      "published_bytes": 12840,
+      "original_relative_path": "tests/r11_reference.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/tests/run_tests.py",
+      "original_sha256": "8460b73324ef4b85b03c1b2c15b22dfeebe089610ca56ce23b8eabc203297410",
+      "original_bytes": 461,
+      "path": "code/research_updates_20261102/Mating_Material_Models_v1_0_0/tests/run_tests.py",
+      "published_sha256": "8460b73324ef4b85b03c1b2c15b22dfeebe089610ca56ce23b8eabc203297410",
+      "published_bytes": 461,
+      "original_relative_path": "tests/run_tests.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/vendor/merit/common.py",
+      "original_sha256": "e58f3a76078e2d153ee9f8b160ab3956b306f16df9ef24b9d1a8eb6963e3faff",
+      "original_bytes": 3154,
+      "path": "code/research_updates_20261102/Mating_Material_Models_v1_0_0/vendor/merit/common.py",
+      "published_sha256": "e58f3a76078e2d153ee9f8b160ab3956b306f16df9ef24b9d1a8eb6963e3faff",
+      "published_bytes": 3154,
+      "original_relative_path": "vendor/merit/common.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/vendor/merit/design.py",
+      "original_sha256": "87b5272c53a943f818c4cfff73b75bd6bf1e10ae270121ad4dd3d0cee4d4b85b",
+      "original_bytes": 6804,
+      "path": "code/research_updates_20261102/Mating_Material_Models_v1_0_0/vendor/merit/design.py",
+      "published_sha256": "87b5272c53a943f818c4cfff73b75bd6bf1e10ae270121ad4dd3d0cee4d4b85b",
+      "published_bytes": 6804,
+      "original_relative_path": "vendor/merit/design.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/vendor/merit/estimate.py",
+      "original_sha256": "b6be89f0a1a041302418a0b7072c963e668c09d8eb0cfe9b49b87083c1623b8f",
+      "original_bytes": 5867,
+      "path": "code/research_updates_20261102/Mating_Material_Models_v1_0_0/vendor/merit/estimate.py",
+      "published_sha256": "b6be89f0a1a041302418a0b7072c963e668c09d8eb0cfe9b49b87083c1623b8f",
+      "published_bytes": 5867,
+      "original_relative_path": "vendor/merit/estimate.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/vendor/merit/prepare.py",
+      "original_sha256": "259b17b08c17309340d9ef4782ec949e91308d851c3e94245e37744f1ad1068c",
+      "original_bytes": 8196,
+      "path": "code/research_updates_20261102/Mating_Material_Models_v1_0_0/vendor/merit/prepare.py",
+      "published_sha256": "259b17b08c17309340d9ef4782ec949e91308d851c3e94245e37744f1ad1068c",
+      "published_bytes": 8196,
+      "original_relative_path": "vendor/merit/prepare.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/vendor/merit/report.py",
+      "original_sha256": "12bc8f645bb768dbab918c80188d4cd738d9741a2a081009050a483d95552ac5",
+      "original_bytes": 11616,
+      "path": "code/research_updates_20261102/Mating_Material_Models_v1_0_0/vendor/merit/report.py",
+      "published_sha256": "12bc8f645bb768dbab918c80188d4cd738d9741a2a081009050a483d95552ac5",
+      "published_bytes": 11616,
+      "original_relative_path": "vendor/merit/report.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/vendor/r11/common.py",
+      "original_sha256": "e58f3a76078e2d153ee9f8b160ab3956b306f16df9ef24b9d1a8eb6963e3faff",
+      "original_bytes": 3154,
+      "path": "code/research_updates_20261102/Mating_Material_Models_v1_0_0/vendor/r11/common.py",
+      "published_sha256": "e58f3a76078e2d153ee9f8b160ab3956b306f16df9ef24b9d1a8eb6963e3faff",
+      "published_bytes": 3154,
+      "original_relative_path": "vendor/r11/common.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/vendor/r11/design.py",
+      "original_sha256": "4175ef01dc8a93d68bf53900f7b4673631641f5c1350f35ec28261a6f3bfff24",
+      "original_bytes": 7558,
+      "path": "code/research_updates_20261102/Mating_Material_Models_v1_0_0/vendor/r11/design.py",
+      "published_sha256": "4175ef01dc8a93d68bf53900f7b4673631641f5c1350f35ec28261a6f3bfff24",
+      "published_bytes": 7558,
+      "original_relative_path": "vendor/r11/design.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/vendor/r11/estimate.py",
+      "original_sha256": "e7d41aed3865f557ea51f18e8a3f308b3004d1580dc2f886a3356f26dbd89cc5",
+      "original_bytes": 4378,
+      "path": "code/research_updates_20261102/Mating_Material_Models_v1_0_0/vendor/r11/estimate.py",
+      "published_sha256": "e7d41aed3865f557ea51f18e8a3f308b3004d1580dc2f886a3356f26dbd89cc5",
+      "published_bytes": 4378,
+      "original_relative_path": "vendor/r11/estimate.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/vendor/r11/prepare.py",
+      "original_sha256": "18cae4388164fd602b07a3e18647ff659d94bab7b7d367fcfd0da928d6cf886e",
+      "original_bytes": 10865,
+      "path": "code/research_updates_20261102/Mating_Material_Models_v1_0_0/vendor/r11/prepare.py",
+      "published_sha256": "18cae4388164fd602b07a3e18647ff659d94bab7b7d367fcfd0da928d6cf886e",
+      "published_bytes": 10865,
+      "original_relative_path": "vendor/r11/prepare.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/vendor/r11/report.py",
+      "original_sha256": "7274137b6c6dba0a7156b8fbc12a8b3a28cf0fd7cb97cf4741a869c1a6c361c8",
+      "original_bytes": 15982,
+      "path": "code/research_updates_20261102/Mating_Material_Models_v1_0_0/vendor/r11/report.py",
+      "published_sha256": "7274137b6c6dba0a7156b8fbc12a8b3a28cf0fd7cb97cf4741a869c1a6c361c8",
+      "published_bytes": 15982,
+      "original_relative_path": "vendor/r11/report.py",
+      "substitutions": []
+    }
+  ],
+  "omitted": [
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/BUILD_INFO.json",
+      "original_sha256": "3a259911164a156bcc88525d068ef454fd13a31b83b7d1199a814d7bcc647937",
+      "original_bytes": 1154,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/SHA256SUMS.txt",
+      "original_sha256": "ef4c38be16d0f8c5c31289a4335b01ce1673e626a9656955004bcd6b65ce8346",
+      "original_bytes": 2794,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/TEST_RESULTS.txt",
+      "original_sha256": "bf72134cbcf36cbe456639a32580562512fbc73760acdf0f81fbee2574c7483f",
+      "original_bytes": 1987,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/authority/DOWNSTREAM_RERUN_REQUIRED.csv",
+      "original_sha256": "e4010dd8a7208b258b1f7748bd861fae5dddc50da435b4afc04bde9d6cf46e35",
+      "original_bytes": 2510,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/authority/RESULTS.json",
+      "original_sha256": "789788e7132828bbd0362bc751e23ee317fba04b0ffcdc6b0c184d17981474bb",
+      "original_bytes": 13629,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/authority/REVIEW.json",
+      "original_sha256": "a74eb6439368b96441bf2ebbcf862c0159be12129a0a624fdd9926b618711438",
+      "original_bytes": 6421,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/authority/REVIEWED_POINTER.json",
+      "original_sha256": "41fa6a1b7ffe324eb4e9c9f9c89958a74e42088f8d4908aa3bb47dd5144afcb8",
+      "original_bytes": 426,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/authority/UPSTREAM_FILES.json",
+      "original_sha256": "efaecc216265a40dac55539bd5eb4b7827b5a63e59252f1241913c56ea749dd0",
+      "original_bytes": 2455,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/authority/sample_flow_by_month.csv",
+      "original_sha256": "f83c7cd804f28eb842c9bfd73f67c8d6779468d3d26faf2488b455da875175a7",
+      "original_bytes": 4211,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_Models_v1_0_0/authority/tab_sample.csv",
+      "original_sha256": "34f45cadfe2ebac44a1f19ec27b83af4e3fbbcc0f5b5627dae3eb83a28e1613f",
+      "original_bytes": 437,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    }
+  ]
+}

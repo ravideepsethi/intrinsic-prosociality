@@ -1,0 +1,155 @@
+import sys,unittest,tempfile,subprocess,zipfile
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'code'))
+import engine,bindings,batch,sources
+import pandas as pd
+from unittest.mock import patch
+
+class MaterialBridge(unittest.TestCase):
+    def setUp(self):
+        self.temp=tempfile.TemporaryDirectory();self.root=Path(self.temp.name)
+        self.c=engine.db(self.root/'spill',.25,1)
+        self.old=self.root/'old.parquet';self.new=self.root/'new.parquet';self.target=self.root/'updated.parquet'
+        pd.DataFrame(dict(game_id=['keep','relabel','drop'],y=[0,0,0],chooser=[1,2,3],factual_count=[4,8,20])).to_parquet(self.old,index=False)
+        pd.DataFrame(dict(game_id=['keep','relabel'],outcome_kind_draw=[0,1],chooser_user_id=[1,2])).to_parquet(self.new,index=False)
+    def tearDown(self):self.c.close();self.temp.cleanup()
+    def run_bridge(self,**kwargs):
+        return bindings.guarded_join(self.c,self.old,self.new,self.target,replacements={'y':'n.outcome_kind_draw'},checks={'chooser':'n.chooser_user_id'},**kwargs)
+    def test_removal_and_label_change_preserve_factual_columns(self):
+        flow=self.run_bridge(cover_fresh=True);d=pd.read_parquet(self.target).set_index('game_id')
+        self.assertEqual(flow['removed'],1);self.assertEqual(flow['relabelled']['y'],1)
+        self.assertEqual(d.loc['relabel','y'],1);self.assertEqual(d.loc['relabel','factual_count'],8)
+    def test_bad_factual_identity_fails_before_write(self):
+        d=pd.read_parquet(self.new);d.loc[1,'chooser_user_id']=99;d.to_parquet(self.new,index=False)
+        with self.assertRaisesRegex(RuntimeError,'Factual'):self.run_bridge()
+        self.assertFalse(self.target.exists())
+    def test_missing_factual_coverage_rejected(self):
+        d=pd.read_parquet(self.new);d.loc[len(d)]=['new',1,4];d.to_parquet(self.new,index=False)
+        with self.assertRaisesRegex(RuntimeError,'lacks'):self.run_bridge(cover_fresh=True)
+    def test_duplicate_fresh_identity_rejected(self):
+        d=pd.read_parquet(self.new);pd.concat([d,d.iloc[:1]]).to_parquet(self.new,index=False)
+        with self.assertRaisesRegex(RuntimeError,'Duplicate'):self.run_bridge()
+    def test_duplicate_factual_identity_rejected(self):
+        d=pd.read_parquet(self.old);pd.concat([d,d.iloc[:1]]).to_parquet(self.old,index=False)
+        with self.assertRaisesRegex(RuntimeError,'Duplicate'):self.run_bridge()
+    def test_frozen_subsample_has_no_replacement(self):
+        d=pd.read_parquet(self.new);d.loc[len(d)]=['new',1,4];d.to_parquet(self.new,index=False)
+        flow=self.run_bridge();self.assertEqual(flow['after'],2)
+    def test_missing_replacement_field_rejected(self):
+        with self.assertRaisesRegex(RuntimeError,'Replacement'):
+            bindings.guarded_join(self.c,self.old,self.new,self.target,replacements={'wrong':'n.outcome_kind_draw'})
+    def test_broad_arena_inputs_preserve_arena_games(self):
+        # An all-source-only arena game must not be lost through a main-panel join.
+        d=pd.read_parquet(self.new);d.loc[len(d)]=['drop',1,3];d.to_parquet(self.new,index=False)
+        flow=self.run_bridge();self.assertEqual(flow['after'],3)
+        self.assertEqual(int(pd.read_parquet(self.target).y.sum()),2)
+    def test_outcome_type_is_preserved_when_cast(self):
+        bindings.guarded_join(self.c,self.old,self.new,self.target,replacements={'y':'n.outcome_kind_draw::BOOLEAN'})
+        self.assertEqual(str(pd.read_parquet(self.target).y.dtype),'bool')
+    def test_stakes_factual_pgn_seconds_are_preserved(self):
+        from cached_families import stakes_bridge_checks
+        pd.DataFrame(dict(game_id=['a'],t=[100000],y=[0])).to_parquet(self.old,index=False)
+        pd.DataFrame(dict(game_id=['a'],t=[100731],y=[1])).to_parquet(self.new,index=False)
+        bindings.guarded_join(self.c,self.old,self.new,self.target,replacements={'y':'n.y'},checks=stakes_bridge_checks(['game_id','t','y']))
+        self.assertEqual(pd.read_parquet(self.target).t.iloc[0],100000)
+    def test_stakes_excess_clock_discrepancy_rejected(self):
+        from cached_families import stakes_bridge_checks
+        pd.DataFrame(dict(game_id=['a'],t=[100000],y=[0])).to_parquet(self.old,index=False)
+        pd.DataFrame(dict(game_id=['a'],t=[101001],y=[1])).to_parquet(self.new,index=False)
+        with self.assertRaisesRegex(RuntimeError,'Factual'):
+            bindings.guarded_join(self.c,self.old,self.new,self.target,replacements={'y':'n.y'},checks=stakes_bridge_checks(['game_id','t','y']))
+
+class Orchestration(unittest.TestCase):
+    def setUp(self):
+        self.temp=tempfile.TemporaryDirectory();self.root=Path(self.temp.name);self.calls=[];self.auth={'fingerprint':'material'}
+        self.plan=[('a','one',[],0,1),('b','two',[],0,1),('c','three',['a'],0,1)]
+    def tearDown(self):self.temp.cleanup()
+    def done(self,name):
+        out=self.root/'PRIVATE/stages'/name;out.mkdir(parents=True,exist_ok=True)
+        path=out/'result.txt';path.write_text('verified result')
+        engine.write(out/'DONE.json',dict(status='COMPLETE',input_fingerprint='material',result={'status':'COMPLETE','elapsed_seconds':1},files=[engine.record(path)]))
+    def test_independent_failure_continues_and_dependency_blocks(self):
+        def execute(name):
+            self.calls.append(name)
+            if name=='a':return 2
+            self.done(name);return 0
+        with patch.object(batch,'STAGES',self.plan):states=batch.orchestrate(self.root,{},self.auth,execute)
+        self.assertEqual(self.calls,['a','b']);self.assertEqual(states['b']['status'],'COMPLETE');self.assertEqual(states['c']['status'],'BLOCKED_DEPENDENCY')
+    def test_verified_completed_stage_skipped_on_resume(self):
+        for n,*_ in self.plan:self.done(n)
+        with patch.object(batch,'STAGES',self.plan):states=batch.orchestrate(self.root,{},self.auth,lambda n:self.calls.append(n))
+        self.assertEqual(self.calls,[]);self.assertTrue(all(r['status']=='REUSED' for r in states.values()))
+    def test_corrupt_completed_stage_is_not_silently_rerun(self):
+        self.done('a');(self.root/'PRIVATE/stages/a/result.txt').write_text('corrupt')
+        with patch.object(batch,'STAGES',self.plan[:1]):states=batch.orchestrate(self.root,{},self.auth,lambda n:self.calls.append(n))
+        self.assertEqual(self.calls,[]);self.assertEqual(states['a']['status'],'FAILED')
+    def test_success_exit_without_receipt_rejected(self):
+        with patch.object(batch,'STAGES',self.plan[:1]):states=batch.orchestrate(self.root,{},self.auth,lambda n:0)
+        self.assertEqual(states['a']['status'],'FAILED')
+    def test_other_parent_receipt_rejected(self):
+        self.done('a')
+        with self.assertRaisesRegex(RuntimeError,'another input'):batch.verified_done(self.root/'PRIVATE/stages/a/DONE.json','other')
+    def test_export_only_aggregate_and_clear_stale_failure(self):
+        report=self.root/'PRIVATE/stages/a/report';report.mkdir(parents=True)
+        (report/'result.csv').write_text('value\n1\n');(report/'STAGE_ERROR.json').write_text('{}')
+        (report/'prediction_private').mkdir();(report/'prediction_private/rows.json').write_text('[1,2,3]')
+        (self.root/'report').mkdir()
+        with patch.object(batch,'STAGES',self.plan[:1]):
+            dest=batch.export(self.root,self.root/'desktop','a'*64)
+            (report/'STAGE_ERROR.json').unlink();dest=batch.export(self.root,self.root/'desktop','a'*64)
+        with zipfile.ZipFile(dest) as z:
+            self.assertIn('report/families/a/result.csv',z.namelist())
+            self.assertFalse(any('prediction_private' in p or 'STAGE_ERROR' in p for p in z.namelist()))
+    def test_changed_broad_panel_guard(self):
+        source=self.root/'broad.parquet';source.write_text('old');manifest=self.root/'manifest.json';manifest.write_text('{}')
+        a=dict(records=[],all_source_records=[dict(path=str(source),signature=sources.signature(source))],manifest=str(manifest),manifest_sha256=sources.sha(manifest))
+        source.write_text('changed')
+        with self.assertRaisesRegex(RuntimeError,'changed'):sources.guard(a)
+
+class ArchivedProducers(unittest.TestCase):
+    def execute(self,folder,code):
+        cp=subprocess.run([sys.executable,'-c',code],cwd=ROOT,env={**__import__('os').environ,'PYTHONPATH':str(ROOT/folder)},capture_output=True,text=True)
+        self.assertEqual(cp.returncode,0,cp.stdout+'\n'+cp.stderr)
+    def test_tenure_imports(self):self.execute('vendor/tenure','import prepare,tenure')
+    def test_arena_imports(self):self.execute('vendor/arena','import common,analysis')
+    def test_patron_imports(self):self.execute('vendor/patron_remaining','from runner import families,opportunity; from source import wave3b1_helpers,chooser_models_v101')
+    def test_pair_imports(self):self.execute('vendor/wave2b2a/source/c7r','import run_campaign1_c7r_closure_v102')
+    def test_gap_imports(self):self.execute('vendor/wave1','from runner import run_krd,run_nonparametric')
+    def test_reputation_imports(self):self.execute('vendor/reputation/code','import core,inputs,history,analysis; assert core.AUTHORS==["AUTHOR_ACCOUNT_1","AUTHOR_ACCOUNT_2"]')
+    def test_reputation_factual_meetings_and_corrected_returns_are_distinct(self):
+        self.execute('vendor/reputation/code',r'''
+import tempfile
+from pathlib import Path
+import numpy as np
+import pyarrow as pa,pyarrow.parquet as pq
+from core import pairs,START,DAY
+import analysis
+with tempfile.TemporaryDirectory() as td:
+    root=Path(td);h=root/'history';h.mkdir()
+    k=pairs(np.array([1,3]),np.array([2,4]));s=START+20*DAY
+    q=pa.table(dict(gid=['a','b'],pair_key=k,j=[1,3],i=[2,4],start=[s,s],anchor=[s+1000,s+1000],qid=[5,99],y=[True,False]))
+    pq.write_table(q,h/'features.parquet')
+    e=pa.table(dict(pair_key=np.array([k[0],k[0],k[0],k[1]],dtype=np.uint64),t=[s,s+DAY,s+2*DAY,s]))
+    pq.write_table(e,h/'events.parquet')
+    # Two factual later meetings; only one is an eligible material decision.
+    r=pa.table(dict(gid=['return'],j=[2],i=[1],start=[s+DAY],anchor=[s+DAY+1000],y=[True],recipient_gain=[5.]))
+    pq.write_table(r,root/'returns.parquet')
+    analysis.make_features(h,[root/'returns.parquet'],root/'features',1,256,'corrected')
+    d=pq.read_table(root/'features/analysis.parquet').to_pydict()
+    assert d['qid']==[5,99]
+    assert d['meet90']==[2,0]
+    assert d['repay_opportunities90']==[1,0] and d['repayments90']==[1,0]
+    assert d['received_points90']==[5.,0.]
+''')
+    def test_stakes_imports(self):self.execute('vendor/stakes/code','import prepare,report')
+    def test_countdown_imports(self):self.execute('vendor/countdown/code','import inputs,run,estimate,report')
+    def test_countdown_original_numerics(self):
+        p=ROOT/'vendor/countdown'
+        cp=subprocess.run([sys.executable,'-m','unittest','discover','-s',str(p/'tests'),'-v'],cwd=p,capture_output=True,text=True)
+        self.assertEqual(cp.returncode,0,cp.stdout+'\n'+cp.stderr)
+    def test_responsibility_original_validation(self):
+        p=ROOT/'components/Mating_Material_Responsibility_v1_0_2'
+        cp=subprocess.run([sys.executable,str(p/'run.py'),'--self-test'],cwd=p,capture_output=True,text=True)
+        self.assertEqual(cp.returncode,0,cp.stdout+'\n'+cp.stderr)
+
+if __name__=='__main__':unittest.main()

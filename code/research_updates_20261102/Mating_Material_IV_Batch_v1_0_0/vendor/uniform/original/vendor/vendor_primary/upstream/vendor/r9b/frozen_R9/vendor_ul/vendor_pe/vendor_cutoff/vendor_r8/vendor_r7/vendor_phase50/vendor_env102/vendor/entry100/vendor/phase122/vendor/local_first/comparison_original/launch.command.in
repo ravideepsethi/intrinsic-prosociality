@@ -1,0 +1,71 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+task_mode="$1"
+shift
+task_package="$(cd "$(dirname "$0")" && pwd -P)"
+cd "$task_package"
+/usr/bin/shasum -a 256 -c PACKAGE_MANIFEST.sha256
+export PYTHONDONTWRITEBYTECODE=1
+export OPENBLAS_NUM_THREADS=1
+export OMP_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export NUMEXPR_NUM_THREADS=1
+export VECLIB_MAXIMUM_THREADS=1
+export TMPDIR="$(cd "${TMPDIR:-/tmp}" && pwd -P)"
+task_project="${COMP_EXP_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+task_desktop="${COMP_EXP_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+task_probe='import sys,numpy,duckdb,pyarrow; assert sys.version_info >= (3,10); assert duckdb.__version__ == "1.5.4"; assert pyarrow.__version__ == "21.0.0"; assert numpy.__version__ in ("2.2.6","2.3.5")'
+task_python=''
+if [[ -n "${COMP_EXP_PYTHON:-}" ]]; then
+  "$COMP_EXP_PYTHON" -c "$task_probe"
+  task_python="$COMP_EXP_PYTHON"
+else
+  task_base="$(command -v python3 || command -v python || true)"
+  for task_candidate in "$task_base" \
+    "$task_desktop/Chooser_IV_Expanded_python/bin/python3" \
+    "$task_desktop/Chooser_IV_Main_Rebuild_python/bin/python3" \
+    "$task_desktop/A1_Session_Trajectory_Prepare_v1_0_0/.venv/bin/python" \
+    "$task_desktop/Chooser_Comparison_Expansion_python/bin/python3"; do
+    if [[ -x "$task_candidate" ]] && "$task_candidate" -c "$task_probe" >/dev/null 2>&1; then
+      task_python="$task_candidate"
+      break
+    fi
+  done
+  if [[ -z "$task_python" ]]; then
+    [[ -n "$task_base" ]] || { echo 'Python 3.10+ is required. Open the usual Anaconda terminal.'; exit 2; }
+    task_env="$task_desktop/Chooser_Comparison_Expansion_python"
+    if [[ ! -x "$task_env/bin/python3" ]]; then
+      "$task_base" -m venv "$task_env"
+    fi
+    task_python="$task_env/bin/python3"
+    "$task_python" -m pip install --disable-pip-version-check \
+      'numpy==2.2.6' 'pyarrow==21.0.0' 'duckdb==1.5.4' certifi zstandard
+  fi
+fi
+echo "Python: $task_python"
+task_log="$task_desktop/comparison_expansion_${task_mode}_$(/bin/date -u +%Y%m%dT%H%M%SZ)_$$.log"
+echo "Log: $task_log"
+set +e
+{
+  if [[ "$task_mode" != status ]]; then
+    "$task_python" "$task_package/run_tests.py" || exit "$?"
+  fi
+  if [[ "$task_mode" == prepare ]]; then
+    echo 'Local preparation: NO API requests, NO Stockfish, NO effect estimates.'
+    /usr/bin/caffeinate -i "$task_python" -u "$task_package/prepare_expansion.py" \
+      --project-root "$task_project" --desktop "$task_desktop" \
+      --workers "${COMP_EXP_WORKERS:-10}" --memory-gb "${COMP_EXP_MEMORY_GB:-4}" "$@"
+  else
+    /usr/bin/caffeinate -i "$task_python" -u "$task_package/download_expansion.py" "$task_mode" \
+      --desktop "$task_desktop" --project-root "$task_project" "$@"
+  fi
+} 2>&1 | /usr/bin/tee "$task_log"
+task_exit=${PIPESTATUS[0]}
+set -e
+if [[ "$task_exit" -ne 0 ]]; then
+  echo "Stopped with exit $task_exit. Keep the log: $task_log"
+else
+  echo "Finished. Log: $task_log"
+fi
+exit "$task_exit"

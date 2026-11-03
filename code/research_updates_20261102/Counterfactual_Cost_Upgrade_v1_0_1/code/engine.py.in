@@ -1,0 +1,179 @@
+"""One-game counterfactuals, conditional on reconstructed state and rule settings.
+
+The default core is the actual skipDeviationIncrease=True branch. Volatility
+is solved only for the explicitly labelled November-refactor sensitivity.
+No realization is used to calibrate an individual counterfactual.
+"""
+from __future__ import annotations
+
+from datetime import datetime, timezone
+import math
+import numpy as np
+
+SCALE = 173.7178
+TAU = 0.75
+MIN_RATING = 400.0
+MAX_DELTA = 700.0
+FACTORS = {"bullet": 1.015, "blitz": 1.005, "rapid": 1.015,
+           "classical": 1.015, "ultrabullet": 1.013, "correspondence": 1.0}
+MONTHS = [f"{y}-{m:02d}" for y in (2023, 2024, 2025) for m in range(1, 13)
+          if "2023-11" <= f"{y}-{m:02d}" <= "2025-10"]
+AUTHORS = ("AUTHOR_ACCOUNT_1", "AUTHOR_ACCOUNT_2")
+
+
+def epoch(iso):
+    return int(datetime.fromisoformat(iso.replace("Z", "+00:00")).timestamp() * 1000)
+
+
+# Source commit times, NOT authenticated production deployment times.
+REFACTOR = epoch("2024-11-20T10:24:14Z")
+SKIP_FIX = epoch("2024-11-22T09:08:03Z")
+HARDCODED = epoch("2025-04-17T06:42:35Z")
+NOVEMBER_START = epoch("2024-11-01T00:00:00Z")
+NOVEMBER_END = epoch("2024-12-01T00:00:00Z")
+
+
+def require(ok, message):
+    if not bool(ok):
+        raise RuntimeError(message)
+
+
+def core_parameters(rating, rd, opponent_rating, opponent_rd):
+    r, rd, ro, rdo = np.broadcast_arrays(*[np.asarray(x, dtype=np.float64)
+                                          for x in (rating, rd, opponent_rating, opponent_rd)])
+    for a in (r, rd, ro, rdo):
+        require(np.isfinite(a).all(), "Nonfinite reconstructed rating state")
+    require(((rd >= 45 - 1e-6) & (rd <= 500 + 1e-5)).all(), "Own RD outside certified bounds")
+    require(((rdo >= 45 - 1e-6) & (rdo <= 500 + 1e-5)).all(), "Opponent RD outside certified bounds")
+    phi = np.maximum(rd, 45) / SCALE
+    phij = np.maximum(rdo, 45) / SCALE
+    g = 1 / np.sqrt(1 + 3 * phij * phij / (math.pi * math.pi))
+    z = g * (r - ro) / SCALE
+    e = np.clip(1 / (1 + np.exp(np.clip(-z, -700, 700))), 1e-12, 1 - 1e-12)
+    variance = 1 / (g * g * e * (1 - e))
+    post_phi2 = 1 / (1 / (phi * phi) + 1 / variance)
+    k = SCALE * post_phi2 * g
+    return k, e, phi, g, variance
+
+
+def raw_changes(rating, rd, opponent_rating, opponent_rd):
+    k, e, _, _, _ = core_parameters(rating, rd, opponent_rating, opponent_rd)
+    return {"draw": k * (.5 - e), "win": k * (1 - e), "loss": -k * e,
+            "K": k, "E": e}
+
+
+def volatility(phi, sigma, delta, variance):
+    """Illinois root solver, independently scalar, matching the pinned source.
+
+    This returns the un-clamped working volatility; the platform caps stored
+    volatility later. Applying the cap before same-game inflation is different.
+    """
+    require(all(math.isfinite(x) for x in (phi, sigma, delta, variance)) and sigma > 0,
+            "Invalid volatility input")
+    a = math.log(sigma * sigma)
+
+    def f(x):
+        ex = math.exp(x)
+        return ex * (delta * delta - phi * phi - variance - ex) / (
+            2 * (phi * phi + variance + ex) ** 2) - (x - a) / (TAU * TAU)
+
+    A = a
+    if delta * delta > phi * phi + variance:
+        B = math.log(delta * delta - phi * phi - variance)
+    else:
+        kk = 1
+        B = a - kk * TAU
+        while f(B) < 0:
+            kk += 1
+            require(kk <= 10000, "Volatility bracketing did not converge")
+            B = a - kk * TAU
+    fA, fB = f(A), f(B)
+    for _ in range(1000):
+        if abs(B - A) <= 1e-6:
+            return math.exp(A / 2)
+        C = A + (A - B) * fA / (fB - fA)
+        fC = f(C)
+        if fC * fB <= 0:
+            A, fA = B, fB
+        else:
+            fA /= 2
+        B, fB = C, fC
+    raise RuntimeError("Volatility iteration did not converge")
+
+
+def extra_period_changes(rating, rd, sigma, opponent_rating, opponent_rd):
+    """Counterfactuals for the temporary default-false source branch only."""
+    _, e, phi, g, v = core_parameters(rating, rd, opponent_rating, opponent_rd)
+    sig = np.broadcast_to(np.asarray(sigma, float), e.shape)
+    out = {}
+    for name, score in (("draw", .5), ("win", 1.), ("loss", 0.)):
+        delta = v * g * (score - e)
+        new_sigma = np.array([volatility(float(a), float(b), float(c), float(d))
+                              for a, b, c, d in zip(phi.flat, sig.flat, delta.flat, v.flat)]).reshape(e.shape)
+        post_phi2 = 1 / (1 / (phi * phi + new_sigma * new_sigma) + 1 / v)
+        out[name] = SCALE * post_phi2 * g * (score - e)
+    return out
+
+
+def factors_for(speed, timestamp, calendar=None):
+    s = np.char.lower(np.asarray(speed, dtype=str))
+    t = np.asarray(timestamp, dtype=np.int64)
+    require(np.isin(s, list(FACTORS)).all(), "Unrecognized standard speed")
+    f = np.array([FACTORS[x] for x in s], dtype=float)
+    # Old PerfsUpdater did not call RatingRegulator for ultrabullet.
+    f[(s == "ultrabullet") & (t < REFACTOR)] = 1.0
+    evidence = np.where(t < HARDCODED, "assumed_2025_factors_for_runtime_setting",
+                        "hardcoded_source_commit_time_proxy").astype(object)
+    if calendar is not None:
+        seen = np.zeros(len(t), dtype=np.int8)
+        for row in calendar["periods"]:
+            m = (t >= epoch(row["start_utc"])) & (t < epoch(row["end_utc"]))
+            seen[m] += 1
+            for key in np.unique(s[m]):
+                require(key in row["factors"], f"Factor calendar lacks {key}")
+                f[m & (s == key)] = float(row["factors"][key])
+            evidence[m] = "user_supplied_calendar"
+        require((seen == 1).all(), "Factor calendar must cover every completion timestamp exactly once")
+    require(np.isfinite(f).all() and ((f > 0) & (f <= 2)).all(), "Invalid gain multiplier")
+    return f, evidence
+
+
+def platform_transform(rating, change, factor, timestamp, half_vs_bot=False):
+    """Pinned historical operation order, conditional on ratings and bot flags.
+
+    Old: +/-700 cap -> sanity reset -> 400 floor -> human/bot half -> gain factor.
+    New: gain factor -> human/bot half -> +/-700 cap -> sanity reset -> 400 floor.
+    RD and volatility sanity checks are verified separately by the caller.
+    """
+    r, d, f, t, half = np.broadcast_arrays(np.asarray(rating, float), np.asarray(change, float),
+        np.asarray(factor, float), np.asarray(timestamp, np.int64), np.asarray(half_vs_bot, bool))
+    old = t < REFACTOR
+    capped_old = np.clip(d, -MAX_DELTA, MAX_DELTA)
+    raw_old = r + capped_old
+    reset_old = (raw_old <= 0) | (raw_old >= 4000)
+    post_old = np.maximum(np.where(reset_old, 1500.0, raw_old), MIN_RATING)
+    delta_old = (post_old - r) * np.where(half, .5, 1.)
+    delta_old = np.where(delta_old > 0, delta_old * f, delta_old)
+    scaled = np.where(d > 0, d * f, d) * np.where(half, .5, 1.)
+    capped_new = np.clip(scaled, -MAX_DELTA, MAX_DELTA)
+    raw_new = r + capped_new
+    reset_new = (raw_new <= 0) | (raw_new >= 4000)
+    post_new = np.maximum(np.where(reset_new, 1500.0, raw_new), MIN_RATING)
+    delta_new = post_new - r
+    out = np.where(old, delta_old, delta_new)
+    return out, {"sanity_reset": np.where(old, reset_old, reset_new),
+                 "delta_cap": np.where(old, np.abs(d) > MAX_DELTA, np.abs(scaled) > MAX_DELTA),
+                 "rating_floor": np.where(old, (raw_old < MIN_RATING) & ~reset_old,
+                                           (raw_new < MIN_RATING) & ~reset_new)}
+
+
+def conditional_display_interval(change):
+    """Integer update range if only a common pre-rating fractional part is unknown.
+
+    This does not bound state-reconstruction error. Truncating positive full
+    ratings is not the same operation as rounding the continuous rating change.
+    """
+    d = np.asarray(change, float)
+    nearest = np.rint(d)
+    d = np.where(np.abs(d - nearest) < 1e-10, nearest, d)
+    return np.floor(d), np.ceil(d)

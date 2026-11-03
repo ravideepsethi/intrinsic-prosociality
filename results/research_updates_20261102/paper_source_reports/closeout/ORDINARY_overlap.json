@@ -1,0 +1,228 @@
+{
+  "balance": [
+    {
+      "matched_smd": 0.004107571589320357,
+      "raw_smd": 0.13078445546757256,
+      "variable": "recipient_rating"
+    },
+    {
+      "matched_smd": -0.008258038846639747,
+      "raw_smd": 0.11663037708972793,
+      "variable": "opponent_rating"
+    },
+    {
+      "matched_smd": 0.08296786065027212,
+      "raw_smd": 0.09487238471343892,
+      "variable": "rating_gap"
+    },
+    {
+      "matched_smd": -0.011850662884354378,
+      "raw_smd": 0.006465920991949064,
+      "variable": "log_pre_games"
+    },
+    {
+      "matched_smd": 0.0035016903254904176,
+      "raw_smd": 0.021045371632588943,
+      "variable": "log_fair90"
+    },
+    {
+      "matched_smd": 0.00045055704054384327,
+      "raw_smd": -0.003283901199355178,
+      "variable": "prior_kind_rate"
+    },
+    {
+      "matched_smd": 0.0,
+      "raw_smd": 0.01648407011963828,
+      "variable": "fair_history_present"
+    },
+    {
+      "matched_smd": 0.0007699549500911259,
+      "raw_smd": 0.005386261958179176,
+      "variable": "log_disconnect90"
+    },
+    {
+      "matched_smd": -0.004015902738797828,
+      "raw_smd": -0.004772621082402782,
+      "variable": "log_receipt90"
+    },
+    {
+      "matched_smd": 0.0008214286649909043,
+      "raw_smd": 0.005495688715341619,
+      "variable": "log_claim90"
+    },
+    {
+      "matched_smd": -0.0036929868465916046,
+      "raw_smd": -0.007540100035290534,
+      "variable": "adjusted_A"
+    },
+    {
+      "matched_smd": 0.04480237580028062,
+      "raw_smd": 0.04083832158975111,
+      "variable": "expected_A"
+    },
+    {
+      "matched_smd": -0.014872667689950861,
+      "raw_smd": -0.02259058908304593,
+      "variable": "log_nA"
+    }
+  ],
+  "causal_identification": false,
+  "cells": [
+    "month_code",
+    "speed_class",
+    "rating_band",
+    "gap_band",
+    "fair_band",
+    "prior_kind",
+    "volume_band"
+  ],
+  "cells_never_split": true,
+  "covariance": "Any shared account among recipient, index opponent and later-choice opponent; inclusion-exclusion HC1; no date clustering; fixed weights/cells",
+  "definition_change": "Corrected all-time-supported F frame, no cooldown, 90-day immediate histories and volume",
+  "estimates": [
+    {
+      "HC1_factor": 1.000921996869601,
+      "ci95_high": 0.02351791625794746,
+      "ci95_low": -0.03269081778315785,
+      "estimate_pp": -0.004586450762605193,
+      "inference_status": "nominal_large_sample",
+      "loss_mean_pp": 1.885735182522113,
+      "outcome": "y",
+      "p_value": 0.7490794388743274,
+      "recipient_cluster_se_pp": 0.014288962840469769,
+      "recipient_clusters": 2019915,
+      "rows": 11398826,
+      "specification": "overlap",
+      "standard_error_pp": 0.014339226252235406,
+      "strata": 10500,
+      "treated_mean_pp": 1.8811487317595077
+    },
+    {
+      "HC1_factor": 1.000921996869601,
+      "ci95_high": 0.521867489477358,
+      "ci95_low": 0.3487240369032239,
+      "estimate_pp": 0.43529576319029095,
+      "inference_status": "nominal_large_sample",
+      "loss_mean_pp": 71.46442508222796,
+      "outcome": "reached",
+      "p_value": 6.521927517982733e-23,
+      "recipient_cluster_se_pp": 0.04397510613550084,
+      "recipient_clusters": 2019915,
+      "rows": 11398826,
+      "specification": "overlap",
+      "standard_error_pp": 0.044170059740859406,
+      "strata": 10500,
+      "treated_mean_pp": 71.89972084541824
+    }
+  ],
+  "execution_repair": "1.0.2",
+  "largest_absolute_matched_smd": 0.08296786065027212,
+  "largest_matching_partition": 159363,
+  "matching_partitions": 128,
+  "status": "COMPLETE",
+  "support": [
+    {
+      "arm": 0,
+      "effective_rows": 9857914.120090982,
+      "grant_rate_pp": 1.885735182522113,
+      "grants": 200529,
+      "reach_rate_pp": 71.46442508222796,
+      "reached": 7404474,
+      "recipients": 1958229,
+      "rows": 10415568,
+      "weight_sum": 893344.5894975072
+    },
+    {
+      "arm": 1,
+      "effective_rows": 982368.8926568397,
+      "grant_rate_pp": 1.8811487317595077,
+      "grants": 18484,
+      "reach_rate_pp": 71.89972084541824,
+      "reached": 706594,
+      "recipients": 607243,
+      "rows": 983258,
+      "weight_sum": 893344.5894975072
+    }
+  ],
+  "weight_audit": {
+    "absolute_tolerance": 1e-08,
+    "arms": [
+      {
+        "arm": 0,
+        "compensated_weight_sum": 893344.5894975072,
+        "expected_rows": 10415568,
+        "moments": [
+          {
+            "cell_formula": 893344.5894975072,
+            "moment": "weight_sum",
+            "observed": 893344.5894975072,
+            "passed": true
+          },
+          {
+            "cell_formula": 80956.73647206656,
+            "moment": "squared_weight_sum",
+            "observed": 80956.73647206656,
+            "passed": true
+          },
+          {
+            "cell_formula": 16846.113225312238,
+            "moment": "weighted_grants",
+            "observed": 16846.113225312238,
+            "passed": true
+          },
+          {
+            "cell_formula": 638423.5748875829,
+            "moment": "weighted_reach",
+            "observed": 638423.5748875829,
+            "passed": true
+          }
+        ],
+        "naive_weight_sum": 893344.5895057989,
+        "rows": 10415568
+      },
+      {
+        "arm": 1,
+        "compensated_weight_sum": 893344.5894975072,
+        "expected_rows": 983258,
+        "moments": [
+          {
+            "cell_formula": 893344.5894975072,
+            "moment": "weight_sum",
+            "observed": 893344.5894975072,
+            "passed": true
+          },
+          {
+            "cell_formula": 812387.8530254407,
+            "moment": "squared_weight_sum",
+            "observed": 812387.8530254407,
+            "passed": true
+          },
+          {
+            "cell_formula": 16805.140415574537,
+            "moment": "weighted_grants",
+            "observed": 16805.140415574537,
+            "passed": true
+          },
+          {
+            "cell_formula": 642312.2660363553,
+            "moment": "weighted_reach",
+            "observed": 642312.2660363553,
+            "passed": true
+          }
+        ],
+        "naive_weight_sum": 893344.5894965935,
+        "rows": 983258
+      }
+    ],
+    "compensated_relative_arm_gap": 0.0,
+    "failures": [],
+    "invalid_cells": 0,
+    "naive_relative_arm_gap": 1.0304450562935581e-11,
+    "reference": "h_c=n0_c*n1_c/(n0_c+n1_c); exact integer arm counts; original cell outcome means",
+    "relative_tolerance": 1e-11,
+    "status": "PASSED",
+    "strata": 10500,
+    "summation": "DuckDB fsum (compensated)",
+    "weights_rescaled": false
+  }
+}

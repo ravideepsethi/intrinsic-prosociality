@@ -1,0 +1,68 @@
+{
+  "eligible_n": 374202,
+  "n": 374202,
+  "absorbed_groups": 24,
+  "dropped_singletons": 0,
+  "grants": 2713,
+  "targets": [
+    "ever_fair",
+    "ever_losing"
+  ],
+  "controls": {
+    "cats": [],
+    "nums": [
+      "rating100",
+      "log_nf",
+      "log_nl",
+      "log_age"
+    ]
+  },
+  "categorical_levels": {},
+  "status": "ESTIMATED",
+  "estimates": {
+    "ever_fair": {
+      "status": "ESTIMATED",
+      "coefficient_pp": 0.6429053289307401,
+      "se_pp": 0.05736649446325645,
+      "ci_low_pp": 0.5242336935762629,
+      "ci_high_pp": 0.7615769642852174,
+      "p_value": 8.54113059915767e-11
+    },
+    "ever_losing": {
+      "status": "ESTIMATED",
+      "coefficient_pp": -0.2981162252619194,
+      "se_pp": 0.05500119056105446,
+      "ci_low_pp": -0.41189485669815257,
+      "ci_high_pp": -0.1843375938256862,
+      "p_value": 1.6550358188364666e-05
+    }
+  },
+  "target_covariance_pp2": [
+    [
+      0.003290914687002833,
+      -0.0018596298324800482
+    ],
+    [
+      -0.0018596298324800482,
+      0.0030251309631334263
+    ]
+  ],
+  "clusters": 24,
+  "residual_df": 374172,
+  "within_rank": 6,
+  "max_abs_group_residual_sum": 4.734821562601965e-11,
+  "support": {
+    "treatment_switchers": 24,
+    "switchers_with_outcome_variation": 22,
+    "never_granter_identifying_weight_share": 0.00016939565019119968
+  },
+  "se": "CR1, full rank including absorbed effects; cluster=match_cell",
+  "minimum_each_state": 4,
+  "opportunity_min_age": 0,
+  "cohort": "cohort_4",
+  "population": "Returned active August profile acquisition frame; outcome-dependent sampling; not an unconditional population Patron rate",
+  "outcome": "August current Patron status; not observed payment or historical Patron adoption",
+  "specification": "New tenure sensitivity with original match-cell absorption, exposure counts, mean rating and baseline age; not exact rerun of prior all-control specification",
+  "fair_minus_losing_pp": 0.9410215541926595,
+  "contrast_se_pp": 0.10017637104175993
+}

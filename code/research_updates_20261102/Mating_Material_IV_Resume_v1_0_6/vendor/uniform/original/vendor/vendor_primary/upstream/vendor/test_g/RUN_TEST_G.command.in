@@ -1,0 +1,26 @@
+#!/bin/bash
+set -euo pipefail
+PACKAGE_DIR="$(cd -- "$(dirname -- "$0")" && pwd)"
+PROJECT="/Volumes/XT_Pro/lichess_kindness"
+DESKTOP_DIR="$HOME/Desktop/Lichess_Desktop"
+BASE_PYTHON="$PROJECT/venv/bin/python"
+TEST_G_ENV="$PROJECT/venv_test_g_v210"
+cd "$PACKAGE_DIR"
+shasum -a 256 -c PACKAGE_MANIFEST.sha256
+if [ ! -x "$BASE_PYTHON" ]; then
+  echo "Missing project Python: $BASE_PYTHON"
+  exit 2
+fi
+if [ ! -x "$TEST_G_ENV/bin/python" ]; then
+  "$BASE_PYTHON" -m venv "$TEST_G_ENV"
+fi
+"$TEST_G_ENV/bin/python" -m pip install --disable-pip-version-check -r "$PACKAGE_DIR/requirements.txt"
+export OPENBLAS_NUM_THREADS=1
+export OMP_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export VECLIB_MAXIMUM_THREADS=1
+export NUMEXPR_NUM_THREADS=1
+"$TEST_G_ENV/bin/python" -m unittest discover -s "$PACKAGE_DIR/tests" -v
+exec "$TEST_G_ENV/bin/python" -u "$PACKAGE_DIR/run_test_g.py" \
+  --project-root "$PROJECT" --desktop "$DESKTOP_DIR" \
+  --workers 10 --memory-gb 11 --positions 2000000 --max-g1-draws 500 "$@"

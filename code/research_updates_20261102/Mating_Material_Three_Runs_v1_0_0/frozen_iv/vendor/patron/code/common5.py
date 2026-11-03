@@ -1,0 +1,64 @@
+"""Patron outcome extension on the byte-authenticated Model 5 receipt frame."""
+from pathlib import Path
+import os,sys,json,hashlib,time,shutil,csv,zipfile,argparse,threading,contextlib
+ROOT=Path(__file__).resolve().parents[1]
+for k in ('OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','VECLIB_MAXIMUM_THREADS','NUMEXPR_NUM_THREADS'):os.environ[k]='1'
+sys.path.insert(0,str(ROOT/'vendor_model5'))
+import certified_model5 as cert
+import fast_bootstrap as c
+import fast_models as model
+import numpy as np
+import pyarrow as pa
+import pyarrow.parquet as pq
+require,sha,load,log=c.require,c.sha,c.load,c.log
+SD=cert.SCALE
+def save(p,v):
+    p=Path(p);p.parent.mkdir(parents=True,exist_ok=True);t=p.with_name(p.name+'.tmp')
+    t.write_text(json.dumps(v,sort_keys=True,indent=2,allow_nan=False,default=lambda x:x.item() if isinstance(x,np.generic) else str(x))+'\n');os.replace(t,p)
+def table(p,rows):
+    rows=list(rows);save(Path(p).with_suffix('.json'),rows)
+    fields=list(dict.fromkeys(k for r in rows for k in r)) or ['status']
+    with Path(p).with_suffix('.csv').open('w',newline='') as f:
+        w=csv.DictWriter(f,fields);w.writeheader()
+        for r in rows:w.writerow({k:json.dumps(v) if isinstance(v,(dict,list)) else v for k,v in r.items()})
+def records(con,sql):
+    cur=con.execute(sql);names=[r[0] for r in cur.description];return [dict(zip(names,r)) for r in cur.fetchall()]
+def stage(root,conf,build,deps=()):
+    root=Path(root);identity=c.key([conf,[(str(Path(p).resolve()),sha(p)) for p in deps]])
+    receipt=root/'PATRON5_DONE.json'
+    if receipt.exists():
+        r=load(receipt);require(r['identity']==identity,'Stage inputs changed: '+root.name)
+        for rec in r['files']:cert.checked_file(root/rec['path'],rec)
+        log('REUSE '+root.name);return root,r['meta']
+    tmp=root.with_name(root.name+'.partial')
+    if tmp.exists():shutil.rmtree(tmp)
+    tmp.mkdir(parents=True);started=time.monotonic()
+    with cert.heartbeat(root.name):info=build(tmp) or {}
+    require(identity==c.key([conf,[(str(Path(p).resolve()),sha(p)) for p in deps]]),'Stage inputs changed during computation')
+    for p in tmp.rglob('spill'):
+        if p.is_dir():shutil.rmtree(p)
+    entries=[dict(path=str(p.relative_to(tmp)),bytes=p.stat().st_size,sha256=sha(p)) for p in sorted(tmp.rglob('*')) if p.is_file()]
+    save(tmp/'PATRON5_DONE.json',dict(identity=identity,files=entries,meta=info,seconds=time.monotonic()-started))
+    require(not root.exists(),'Unsealed final stage: '+str(root));os.replace(tmp,root);return root,info
+def export(run,dest,percent,status):
+    report=run/'report';save(report/'STATUS.json',dict(status=status,milestone_percent=percent,complete=percent==100 and status=='COMPLETE',milestones_are_not_time_percentages=True,parent_configuration=cert.CONF,primary_frame_rows=cert.N,profile_snapshot='August 2026',api_requests=0))
+    files=[p for p in sorted(report.rglob('*')) if p.is_file() and p.name!='REPORT_MANIFEST.json']
+    require(all('PRIVATE' not in str(p.relative_to(report)) and p.suffix in ('.json','.csv','.txt') for p in files),'Private data in public report')
+    save(report/'REPORT_MANIFEST.json',[dict(path=str(p.relative_to(report)),bytes=p.stat().st_size,sha256=sha(p)) for p in files])
+    name=f'PATRON_MODEL5_{run.name}_{percent:03}'+('_BLOCKED' if status=='STOPPED' else '')
+    dest=Path(dest)/(name+'.zip');tmp=dest.with_suffix('.partial.zip')
+    with zipfile.ZipFile(tmp,'w',zipfile.ZIP_DEFLATED) as z:
+        for p in sorted(report.rglob('*')):
+            if p.is_file():z.write(p,'report/'+str(p.relative_to(report)))
+    os.replace(tmp,dest);Path(str(dest)+'.sha256').write_text(sha(dest)+'  '+dest.name+'\n');log('CHECKPOINT '+str(dest))
+def parser():
+    p=argparse.ArgumentParser();p.add_argument('--project',type=Path,default=Path('/Volumes/XT_Pro/lichess_kindness'))
+    p.add_argument('--result-dir',type=Path,default=Path.home()/'Desktop/Lichess_Desktop');p.add_argument('--work-dir',type=Path)
+    p.add_argument('--workers',type=int,default=10);p.add_argument('--memory-gb',type=float,default=11.)
+    p.add_argument('--run',type=Path);p.add_argument('--conf');p.add_argument('--mode');return p
+def verify_package():
+    manifest=ROOT/'PACKAGE_MANIFEST.sha256'
+    for line in manifest.read_text().splitlines():
+        digest,name=line.split('  ',1);p=(ROOT/name).resolve()
+        require(p.is_relative_to(ROOT) and sha(p)==digest,'Package checksum mismatch: '+name)
+    return sha(manifest)

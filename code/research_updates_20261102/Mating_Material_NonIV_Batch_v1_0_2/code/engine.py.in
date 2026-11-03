@@ -1,0 +1,93 @@
+"""Audited, immutable inputs and isolated outputs for author-exclusion reruns."""
+from __future__ import annotations
+import os
+for name in ('OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','VECLIB_MAXIMUM_THREADS','NUMEXPR_NUM_THREADS'):
+    os.environ[name]='1'
+import contextlib, csv, hashlib, importlib.util, json, math, shutil, sys, threading, time
+from pathlib import Path
+import duckdb
+import numpy as np
+import pandas as pd
+import pyarrow as pa
+import pyarrow.parquet as pq
+
+ROOT=Path(__file__).resolve().parents[1]
+AUTHORS=('AUTHOR_ACCOUNT_1','AUTHOR_ACCOUNT_2')
+MONTHS=[str(m) for m in pd.period_range('2023-11','2025-10',freq='M')]
+POLICY={'accounts':list(AUTHORS),'match':'lower(trim(username)), exact equality',
+ 'analytical_games':'exclude either participant','account_samples':'exclude both accounts',
+ 'behavioral_aggregates':'rebuild from eligible events before fitting',
+ 'factual_histories':'preserve actual ratings, timestamps, adjacency, activity and session positions',
+ 'frozen_samples':'no replacement accounts; no replacement first exposures',
+ 'decision_date':'2026-09-28','reaffirmed_date':'2026-10-20',
+ 'result_claim':'no automatic claim of invariance; compare included and excluded estimates'}
+
+def log(s):print(time.strftime('[%Y-%m-%d %H:%M:%S] ')+s,flush=True)
+def require(ok,s):
+    if not ok:raise RuntimeError(s)
+_HASH_CACHE={}
+def signature(p):
+    p=Path(p).resolve();s=p.stat()
+    return [str(p),s.st_dev,s.st_ino,s.st_size,s.st_mtime_ns,s.st_ctime_ns]
+def sha(p):
+    before=signature(p);cache_key=tuple(before)
+    if cache_key in _HASH_CACHE:return _HASH_CACHE[cache_key]
+    h=hashlib.sha256()
+    with Path(p).open('rb') as f:
+        for b in iter(lambda:f.read(8*1024**2),b''):h.update(b)
+    require(signature(p)==before,'File changed during checksum: '+str(p))
+    value=h.hexdigest();_HASH_CACHE[cache_key]=value;return value
+def clean(x):
+    if isinstance(x,dict):return {str(k):clean(v) for k,v in x.items()}
+    if isinstance(x,(list,tuple,np.ndarray)):return [clean(v) for v in x]
+    if isinstance(x,np.generic):return clean(x.item())
+    if isinstance(x,Path):return str(x)
+    if isinstance(x,float) and not math.isfinite(x):return None
+    return x
+def digest(x):return hashlib.sha256(json.dumps(clean(x),sort_keys=True,separators=(',',':')).encode()).hexdigest()
+def read(p):return json.loads(Path(p).read_text())
+def write(p,x):
+    p=Path(p);p.parent.mkdir(parents=True,exist_ok=True);t=p.with_name(p.name+'.partial')
+    t.write_text(json.dumps(clean(x),indent=2,sort_keys=True,allow_nan=False)+'\n');os.replace(t,p)
+def q(x):return "'"+str(x).replace("'","''")+"'"
+def ident(x):return '"'+str(x).replace('"','""')+'"'
+def scan(paths):
+    if isinstance(paths,(str,Path)):paths=[paths]
+    require(bool(paths),'Empty input file list')
+    return 'read_parquet(['+','.join(map(q,paths))+'],hive_partitioning=false)'
+def db(temp,memory=2,threads=1):
+    Path(temp).mkdir(parents=True,exist_ok=True)
+    c=duckdb.connect(config={'threads':str(threads),'memory_limit':str(memory)+'GB','temp_directory':str(temp)})
+    c.execute('SET preserve_insertion_order=false');return c
+def copy(c,sql,p):
+    p=Path(p);p.parent.mkdir(parents=True,exist_ok=True);t=p.with_name(p.name+'.partial')
+    n=c.execute('COPY ('+sql+') TO '+q(t)+' (FORMAT PARQUET,COMPRESSION ZSTD,ROW_GROUP_SIZE 122880)').fetchone()[0]
+    os.replace(t,p);return int(n)
+def record(p):
+    sig=signature(p);h=sha(p);require(signature(p)==sig,'File changed while recording checksum')
+    return {'path':str(Path(p).resolve()),'sha256':h,'bytes':Path(p).stat().st_size,'verified_signature':sig}
+def verify(r):
+    p=Path(r['path']);require(p.is_file() and p.stat().st_size==r['bytes'] and sha(p)==r['sha256'],'Changed input/checkpoint: '+str(p));return p
+def module(name,path):
+    s=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(s);sys.modules[name]=m;s.loader.exec_module(m);return m
+@contextlib.contextmanager
+def heartbeat(label):
+    stop=threading.Event()
+    def beat():
+        while not stop.wait(40):log(label+' — working')
+    t=threading.Thread(target=beat,daemon=True);t.start()
+    try:yield
+    finally:stop.set();t.join()
+def table(path,rows):
+    p=Path(path);p.parent.mkdir(parents=True,exist_ok=True)
+    d=rows if isinstance(rows,pd.DataFrame) else pd.DataFrame(rows)
+    d.to_csv(p.with_suffix('.csv'),index=False)
+    d.to_parquet(p.with_suffix('.parquet'),index=False,compression='zstd')
+def names_pair(path):
+    types={f.name:f.type for f in pq.ParquetFile(path).schema_arrow}
+    for pair in [('chooser_username_norm','disconnected_username_norm'),('chooser_username','disconnected_username'),('white_username','black_username')]:
+        if all(x in types and (pa.types.is_string(types[x]) or pa.types.is_large_string(types[x])) for x in pair):return pair
+    raise RuntimeError('No verified username pair in '+str(path))
+def author_sql(columns,alias='s'):
+    return '('+' OR '.join('lower(trim('+alias+'.'+ident(n)+')) IN ('+','.join(map(q,AUTHORS))+')' for n in columns)+')'
+

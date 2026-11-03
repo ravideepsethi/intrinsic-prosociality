@@ -1,0 +1,41 @@
+{
+  "frames_manifest_sha256": "7b9707ab219d4379cc0f368cc6f749ad4e582bdce46df95f8435e905c0fc97e8",
+  "iv_files": [
+    {
+      "bytes": 267444486,
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/mating_material_iv_batch_v100_PRIVATE/12093d55b7ee9f73/PRIVATE/model_inputs/legacy_spaced/source.parquet",
+      "sha256": "18aa6644664e2eb17cdad01ea9bcff03996fa6e55a8d6c070eb6793664d3e304",
+      "signature": [
+        16777244,
+        6856672,
+        267444486,
+        1793392868839392561,
+        1793392871006519986
+      ]
+    },
+    {
+      "bytes": 57030664,
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/mating_material_iv_batch_v100_PRIVATE/12093d55b7ee9f73/PRIVATE/model_inputs/legacy_spaced/scores.parquet",
+      "sha256": "fcbffbab0b06550e9bebfaac1302d748f932677dae8f531125c35cabdb365428",
+      "signature": [
+        16777244,
+        6856673,
+        57030664,
+        1793392872173065786,
+        1793392874268473900
+      ]
+    },
+    {
+      "bytes": 843489226,
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/mating_material_iv_batch_v100_PRIVATE/12093d55b7ee9f73/PRIVATE/selection90/scores.parquet",
+      "sha256": "be460c8fb101a2972449dca2c9966b5bf0f8ef825727eae260bc1b4db152a63c",
+      "signature": [
+        16777244,
+        6851595,
+        843489226,
+        1793386322985190514,
+        1793386325125986141
+      ]
+    }
+  ]
+}

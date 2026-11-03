@@ -1,0 +1,76 @@
+"""Consume only the reviewed material-ready contract; no historical sample fallback."""
+from util import *
+from concurrent.futures import ThreadPoolExecutor
+
+def validate_contract(manifest,success,expected,manifest_path):
+    require(success.get('status')=='INPUTS_READY_NOT_FULL_PAPER_RERUN','Parent input build is incomplete')
+    require(success.get('run_id')==expected['run_id']==manifest.get('run_id'),'Different material audit run')
+    require(success.get('report_sha256')==expected['return_zip_sha256'],'Parent is not the reviewed returned build')
+    entries=[r for r in success['files'] if Path(r['path']).resolve()==Path(manifest_path).resolve()]
+    require(len(entries)==1,'Parent completion receipt does not bind its material manifest')
+    verify(entries[0])
+    require(manifest.get('contract')=='MATING_MATERIAL_FIRST_RUN_V1','Wrong input contract')
+    require(manifest.get('rule')==expected['rule'],'Material rule differs')
+    require(manifest.get('author_exclusion')==['AUTHOR_ACCOUNT_1','AUTHOR_ACCOUNT_2'],'Author exclusions differ')
+    require(manifest.get('excluded_from_decisions_not_chronology') is True,'Chronology policy differs')
+    require(manifest.get('full_width_columns_preserved') is True and manifest.get('price_layer')=='original','Column or rating-cost policy differs')
+    require(manifest.get('known_outcome_policy')==expected['known_outcome_policy'],'Historical loss policy differs')
+    require(manifest.get('censuses')==expected['censuses'],'Ready-manifest census differs from returned audit')
+    for family in ('main','all_source'):
+        items=manifest['datasets'][family]
+        require(sorted(r['month'] for r in items)==MONTHS,'Missing or duplicate month: '+family)
+        require(len({str(Path(r['path']).resolve()) for r in items})==24,'Duplicate monthly input path')
+        for r in items:
+            require((r['rows'],r['grants'])==tuple(expected['monthly'][family][r['month']]),'Monthly source totals differ: '+family+'/'+r['month'])
+        census=expected['censuses'][family]
+        require(sum(r['rows'] for r in items)==census['new_opportunities'] and sum(r['grants'] for r in items)==census['new_grants'],'Ready file totals differ')
+
+def authenticate(path,expected,hash_workers):
+    path=Path(path).expanduser().resolve();require(path.is_file(),'Material-ready manifest missing: '+str(path))
+    parent=path.parent;receipt=parent/'_SUCCESS.json'
+    require(receipt.is_file(),'Material first-stage completion receipt is missing')
+    manifest=read(path);success=read(receipt);validate_contract(manifest,success,expected,path)
+    result=parent/'report/RESULTS.json'
+    require(sha(result)==expected['results_sha256'],'Returned input-build results differ')
+    observed=read(result)
+    require(observed['input_panels_built'] and all(c['passed'] for c in observed['checks']),'Parent audit is not fully passed')
+    def check(r):
+        import pyarrow.parquet as pq
+        p=Path(r['path']);before=signature(p);verify(r)
+        require(pq.ParquetFile(p).metadata.num_rows==r['rows'],'Parquet footer row count differs')
+        require(before==signature(p),'Input changed during authentication')
+        require(p.resolve().is_relative_to(parent/'PRIVATE/panels/main'),'Main input is outside the material build')
+        return dict(r,signature=before)
+    with heartbeat('Authenticating the 24 new main panels'),ThreadPoolExecutor(max_workers=hash_workers) as pool:
+        records=list(pool.map(check,sorted(manifest['datasets']['main'],key=lambda r:r['month'])))
+    return dict(manifest=str(path),manifest_sha256=sha(path),parent_run_id=manifest['run_id'],records=records,
+                expected_census=manifest['censuses']['main'],expected=expected)
+
+def guard(auth):
+    for r in auth['records']:require(signature(r['path'])==r['signature'],'A material panel changed during the run')
+    require(sha(auth['manifest'])==auth['manifest_sha256'],'Material-ready manifest changed during the run')
+
+def census(auth,out,workers,memory):
+    c=db(Path(out)/'PRIVATE/spill_census',memory,min(4,workers))
+    try:
+        c.execute('CREATE VIEW p AS SELECT * FROM '+parquet([r['path'] for r in auth['records']]))
+        x=c.execute('''SELECT count(*) opportunities,sum(outcome_kind_draw)::BIGINT grants,
+          count(DISTINCT chooser_user_id) choosers,
+          count(*) FILTER(WHERE engine_eval_cp_disconnected>=-100) competitive,
+          sum(outcome_kind_draw) FILTER(WHERE engine_eval_cp_disconnected>=-100)::BIGINT competitive_grants,
+          count(*) FILTER(WHERE engine_eval_cp_disconnected>=-100 AND ply_count>10) competitive_late,
+          count(*) FILTER(WHERE engine_eval_cp_disconnected<=-300) clearly_worse,
+          sum(outcome_kind_draw) FILTER(WHERE engine_eval_cp_disconnected<=-300)::BIGINT clearly_worse_grants,
+          count(*) FILTER(WHERE chooser_has_mating_material IS DISTINCT FROM true OR outcome_kind_draw NOT IN (0,1)
+            OR outcome_kind_draw IS NULL) invalid_material_label FROM p''').fetchdf().iloc[0].to_dict()
+        import pandas as pd
+        x={k:(0 if pd.isna(v) else int(v)) for k,v in x.items()}
+        for name in ['opportunities','grants','choosers','competitive','competitive_grants','clearly_worse','clearly_worse_grants']:
+            require(x[name]==auth['expected_census']['new_'+name],'Main input census mismatch: '+name)
+        require(x['invalid_material_label']==0,'Material-restricted input contains an invalid decision')
+        cells=c.execute('''SELECT CASE WHEN engine_eval_cp_disconnected>=300 THEN 4 WHEN engine_eval_cp_disconnected>=101 THEN 3 WHEN engine_eval_cp_disconnected>=-100 THEN 2 WHEN engine_eval_cp_disconnected>=-299 THEN 1 ELSE 0 END position_code,
+          CASE WHEN ply_count<=4 THEN 0 WHEN ply_count<=6 THEN 1 WHEN ply_count<=8 THEN 2 WHEN ply_count<=10 THEN 3 WHEN ply_count<=20 THEN 4 WHEN ply_count<=40 THEN 5 WHEN ply_count<=80 THEN 6 ELSE 7 END stage_code,
+          count(*) opportunities,sum(outcome_kind_draw)::BIGINT grants FROM p GROUP BY ALL ORDER BY ALL''').fetchdf()
+        table(Path(out)/'report/INPUT_CENSUS.csv',[x]);table(Path(out)/'report/INPUT_CELLS.csv',cells)
+        x['board_stage_cells']=cells.to_dict('records');return x
+    finally:c.close()

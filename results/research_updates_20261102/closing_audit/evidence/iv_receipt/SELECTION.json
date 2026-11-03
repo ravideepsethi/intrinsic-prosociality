@@ -1,0 +1,28 @@
+{
+  "config_sha256": "12093d55b7ee9f737696982b8ebaef7b0706c27adc4fb12482a99aabf985d482",
+  "files": [
+    {
+      "bytes": 649,
+      "path": "dependencies_PRIVATE.json",
+      "sha256": "ef3e06f33980e619944191348e675754435beeb38e59bb8d6f3f2a9efd0ca578"
+    },
+    {
+      "bytes": 25602398,
+      "path": "flags.parquet",
+      "sha256": "f4feb5df6e3dced9f9dfb457c5b6b9a822dcde5852225ee9db2e9c20a82094be"
+    },
+    {
+      "bytes": 843489226,
+      "path": "scores.parquet",
+      "sha256": "be460c8fb101a2972449dca2c9966b5bf0f8ef825727eae260bc1b4db152a63c"
+    },
+    {
+      "bytes": 506412587,
+      "path": "source.parquet",
+      "sha256": "f562f02ba963a424fef998e156f72c287872d44570de820696abc5ad6d1405cd"
+    }
+  ],
+  "pre_support": 14058673,
+  "primary": 9736412,
+  "spaced_legacy": 3103311
+}

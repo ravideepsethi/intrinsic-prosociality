@@ -1,0 +1,45 @@
+{
+  "api_requests": 0,
+  "engine_evaluations": 0,
+  "parent_run_id": "aa7e95f275c18f43d9ad95af523b9b0d769704ddebf4aea4d3655a2e1b07ef5d",
+  "rating_replay_records": 0,
+  "run_id": "9807d8e394969d56e03d2dc981106308d77458e799d3ae00f4fb710d777eb4f1",
+  "seconds_this_launch_including_authentication": 1186.3492372080218,
+  "stage_seconds": {
+    "descriptives_and_equal_weights": 41.7902929999982,
+    "partition": 603.9828595420113,
+    "project": 49.340550791006535,
+    "regressions": 437.9377092909999,
+    "reporting": 23.543146542011527
+  },
+  "status": "STRUCTURE_COMPLETE_MORE_FAMILIES_PENDING",
+  "summary": {
+    "choosers": 3223436,
+    "equal_weights": {
+      "choosers": 3223436,
+      "covariance": "Original joint chooser sandwich G/(G-1), G=state-varying accounts. Paired comparisons use the joint covariance; no outcome-based selection.",
+      "nongranters_retained": 1757019,
+      "state_varying_choosers": 1981606,
+      "state_varying_opportunities": 36026582,
+      "weighting": [
+        "F*L/(F+L)",
+        "F*L/(F+L)^2",
+        "1"
+      ]
+    },
+    "grants": 570422,
+    "opportunities": 41513719,
+    "regression_results": {
+      "clock_rows": 8,
+      "core_reproduction": {
+        "all_passed": true,
+        "max_abs_estimate_difference": 2.955857780762017e-11,
+        "max_abs_se_difference": 1.4171164242071654e-11,
+        "terms": 68
+      },
+      "models": 3,
+      "speed_contrasts": 39
+    }
+  },
+  "whole_paper_rerun_complete": false
+}

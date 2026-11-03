@@ -1,0 +1,171 @@
+{
+  "package": "Chooser_IV_Main_Rebuild_v1_0_1",
+  "archive": "Chooser_IV_Main_Rebuild_v1_0_1.zip",
+  "archive_sha256": "2ed70287f4969a2e1ad26e3e60273f9d566c887ea05cea73ca8fd18465bfa4cd",
+  "files": [
+    {
+      "archive_member": "Chooser_IV_Main_Rebuild_v1_0_1/CHANGELOG.md",
+      "original_sha256": "32f343a5978e8fecbf09f529763c28421d7ad18dfb192d93ed9ff3a04b920b3f",
+      "original_bytes": 1569,
+      "path": "code/research_updates_20261102/Chooser_IV_Main_Rebuild_v1_0_1/CHANGELOG.md",
+      "published_sha256": "32f343a5978e8fecbf09f529763c28421d7ad18dfb192d93ed9ff3a04b920b3f",
+      "published_bytes": 1569,
+      "original_relative_path": "CHANGELOG.md",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Chooser_IV_Main_Rebuild_v1_0_1/README.md",
+      "original_sha256": "a7bf23b02f851c00c73c60106ec9d7c527b52090ea322dbb47c41952977bfafe",
+      "original_bytes": 7243,
+      "path": "code/research_updates_20261102/Chooser_IV_Main_Rebuild_v1_0_1/README.md",
+      "published_sha256": "a7bf23b02f851c00c73c60106ec9d7c527b52090ea322dbb47c41952977bfafe",
+      "published_bytes": 7243,
+      "original_relative_path": "README.md",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Chooser_IV_Main_Rebuild_v1_0_1/RUN_IV_MAIN.command",
+      "original_sha256": "ad289db9e0a3c15438c0a27ce412e75f56cbbc82e8bb457faff8def2c3f511ea",
+      "original_bytes": 1735,
+      "path": "code/research_updates_20261102/Chooser_IV_Main_Rebuild_v1_0_1/RUN_IV_MAIN.command.in",
+      "published_sha256": "ad289db9e0a3c15438c0a27ce412e75f56cbbc82e8bb457faff8def2c3f511ea",
+      "published_bytes": 1735,
+      "original_relative_path": "RUN_IV_MAIN.command",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Chooser_IV_Main_Rebuild_v1_0_1/comparison_core.py",
+      "original_sha256": "9dd031642e3f2106a154ee4fb8173fbc9f5813c3627cc598ba6cacfab4ea1fa9",
+      "original_bytes": 11364,
+      "path": "code/research_updates_20261102/Chooser_IV_Main_Rebuild_v1_0_1/comparison_core.py",
+      "published_sha256": "9dd031642e3f2106a154ee4fb8173fbc9f5813c3627cc598ba6cacfab4ea1fa9",
+      "published_bytes": 11364,
+      "original_relative_path": "comparison_core.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Chooser_IV_Main_Rebuild_v1_0_1/iv_models.py",
+      "original_sha256": "23e5cf92231b9ebb5c24c35053b8f424bac1b04220bcd463c96eabe2858875e7",
+      "original_bytes": 9599,
+      "path": "code/research_updates_20261102/Chooser_IV_Main_Rebuild_v1_0_1/iv_models.py",
+      "published_sha256": "23e5cf92231b9ebb5c24c35053b8f424bac1b04220bcd463c96eabe2858875e7",
+      "published_bytes": 9599,
+      "original_relative_path": "iv_models.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Chooser_IV_Main_Rebuild_v1_0_1/iv_numerics.py",
+      "original_sha256": "ef709b4ff6b37e410ecb4ad549f5bfdc0b798a4627dcfdd6cc4a757f982d2066",
+      "original_bytes": 12442,
+      "path": "code/research_updates_20261102/Chooser_IV_Main_Rebuild_v1_0_1/iv_numerics.py",
+      "published_sha256": "ef709b4ff6b37e410ecb4ad549f5bfdc0b798a4627dcfdd6cc4a757f982d2066",
+      "published_bytes": 12442,
+      "original_relative_path": "iv_numerics.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Chooser_IV_Main_Rebuild_v1_0_1/local_io.py",
+      "original_sha256": "2d850530ab8490bd8fc133020e7283684d6690fc8c5776129246b63f777cfa2b",
+      "original_bytes": 5370,
+      "path": "code/research_updates_20261102/Chooser_IV_Main_Rebuild_v1_0_1/local_io.py",
+      "published_sha256": "2d850530ab8490bd8fc133020e7283684d6690fc8c5776129246b63f777cfa2b",
+      "published_bytes": 5370,
+      "original_relative_path": "local_io.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Chooser_IV_Main_Rebuild_v1_0_1/preliminary_core.py",
+      "original_sha256": "468d1b1f603aee97799f90a187bdd81552f5fbf6752b196115f41357a39a911b",
+      "original_bytes": 14866,
+      "path": "code/research_updates_20261102/Chooser_IV_Main_Rebuild_v1_0_1/preliminary_core.py",
+      "published_sha256": "468d1b1f603aee97799f90a187bdd81552f5fbf6752b196115f41357a39a911b",
+      "published_bytes": 14866,
+      "original_relative_path": "preliminary_core.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Chooser_IV_Main_Rebuild_v1_0_1/rebuild_logic.py",
+      "original_sha256": "8c5c2ccbbdf71badd642931c275f8bbb0da1346b897af362e4cec5013f93f405",
+      "original_bytes": 7276,
+      "path": "code/research_updates_20261102/Chooser_IV_Main_Rebuild_v1_0_1/rebuild_logic.py",
+      "published_sha256": "8c5c2ccbbdf71badd642931c275f8bbb0da1346b897af362e4cec5013f93f405",
+      "published_bytes": 7276,
+      "original_relative_path": "rebuild_logic.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Chooser_IV_Main_Rebuild_v1_0_1/rematch_logic.py",
+      "original_sha256": "33a0145a20110be40ef018fb0dfd83801ab140ea4861d25641ea512ba7272c7c",
+      "original_bytes": 6238,
+      "path": "code/research_updates_20261102/Chooser_IV_Main_Rebuild_v1_0_1/rematch_logic.py",
+      "published_sha256": "33a0145a20110be40ef018fb0dfd83801ab140ea4861d25641ea512ba7272c7c",
+      "published_bytes": 6238,
+      "original_relative_path": "rematch_logic.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Chooser_IV_Main_Rebuild_v1_0_1/run_rebuild.py",
+      "original_sha256": "0e2392236925944c8caac3940b3ad19a302b0dd484a3b916088cc95b3310d088",
+      "original_bytes": 41159,
+      "path": "code/research_updates_20261102/Chooser_IV_Main_Rebuild_v1_0_1/run_rebuild.py",
+      "published_sha256": "0e2392236925944c8caac3940b3ad19a302b0dd484a3b916088cc95b3310d088",
+      "published_bytes": 41159,
+      "original_relative_path": "run_rebuild.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Chooser_IV_Main_Rebuild_v1_0_1/test_rebuild.py",
+      "original_sha256": "ae61fbb3fe4b9c70cf9c6dbcd3c6f613ed3782b047c79fa07609497e05b975d3",
+      "original_bytes": 18561,
+      "path": "code/research_updates_20261102/Chooser_IV_Main_Rebuild_v1_0_1/test_rebuild.py",
+      "published_sha256": "ae61fbb3fe4b9c70cf9c6dbcd3c6f613ed3782b047c79fa07609497e05b975d3",
+      "published_bytes": 18561,
+      "original_relative_path": "test_rebuild.py",
+      "substitutions": []
+    }
+  ],
+  "omitted": [
+    {
+      "archive_member": "Chooser_IV_Main_Rebuild_v1_0_1/PACKAGE_MANIFEST.sha256",
+      "original_sha256": "2b635ebdfce96171944ea2a313884b29e62508adf2d78818fa2ee0d9a1e11438",
+      "original_bytes": 1552,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Chooser_IV_Main_Rebuild_v1_0_1/VALIDATION.json",
+      "original_sha256": "674b449ffc86449fe86936d23cdc1888cf626d05edcd842c1dc0fe95feb367c9",
+      "original_bytes": 2199,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Chooser_IV_Main_Rebuild_v1_0_1/evidence/comparison_config_v110.json",
+      "original_sha256": "a7c2899cd7f971d07496d8fe39f155df6b5191bee55d905dc132329ebda90792",
+      "original_bytes": 1758,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Chooser_IV_Main_Rebuild_v1_0_1/evidence/hash_reproduction.json",
+      "original_sha256": "4610886fce3147fd0a0c74f20975958775bf83630f23150ea74a97a55f18c536",
+      "original_bytes": 621,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Chooser_IV_Main_Rebuild_v1_0_1/evidence/main_sample_report.json",
+      "original_sha256": "0ef50e424e004c5698c0c3dbc9815748627e5f23e6504fdaedfd526225ee184e",
+      "original_bytes": 510451,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Chooser_IV_Main_Rebuild_v1_0_1/evidence/panel_authority.zip",
+      "original_sha256": "0a1a62f6efda4746f034a45c7fc82f2f44735cf1c98bde77ea3a3ddbca4f8d10",
+      "original_bytes": 527328,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Chooser_IV_Main_Rebuild_v1_0_1/evidence/prior_authority.json",
+      "original_sha256": "d04fabae492d2e33d9dd0ebe576a3384ce456d69c8ad65d0c4f28e73455f4100",
+      "original_bytes": 3854,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    }
+  ]
+}

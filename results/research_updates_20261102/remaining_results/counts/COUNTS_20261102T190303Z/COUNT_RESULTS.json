@@ -1,0 +1,135 @@
+{
+  "status": "COMPLETE",
+  "private_models_executed": false,
+  "counts_executed": true,
+  "expected_spaced_row_sha256": "ce3751fda15f20b2ebe1840716e908a8c4cb182fbe20825498103c19cd94189e",
+  "elapsed_seconds": 5.386763832997531,
+  "results": [
+    {
+      "item": "median_opponent_decisions",
+      "value": 41.0,
+      "units": "decisions per exposure opponent",
+      "n": 3103311,
+      "source_file": "/Volumes/XT_Pro/lichess_kindness/derived/replication/mating_material_iv_batch_v100_PRIVATE/12093d55b7ee9f73/PRIVATE/model_inputs/legacy_spaced/scores.parquet",
+      "source_column": "n_A",
+      "definition": "Median across spaced exposure rows, after full pair exclusion; opponents are not deduplicated."
+    },
+    {
+      "item": "mean_opponent_decisions",
+      "value": 61.247486958284235,
+      "units": "decisions per exposure opponent",
+      "n": 3103311,
+      "source_file": "/Volumes/XT_Pro/lichess_kindness/derived/replication/mating_material_iv_batch_v100_PRIVATE/12093d55b7ee9f73/PRIVATE/model_inputs/legacy_spaced/scores.parquet",
+      "source_column": "n_A",
+      "definition": "Arithmetic mean across spaced exposure rows, after full pair exclusion."
+    },
+    {
+      "item": "missing_environment_rows",
+      "value": 346545,
+      "units": "exposures",
+      "n": 3103311,
+      "source_file": "/Volumes/XT_Pro/lichess_kindness/derived/replication/mating_material_iv_batch_v100_PRIVATE/12093d55b7ee9f73/PRIVATE/model_inputs/legacy_spaced/source.parquet",
+      "source_column": "environment_supported",
+      "definition": "Count of support indicator equal to zero on authenticated spaced rows."
+    },
+    {
+      "item": "missing_environment_share_percent",
+      "value": 11.166943951154106,
+      "units": "percent of exposures",
+      "n": 3103311,
+      "source_file": "/Volumes/XT_Pro/lichess_kindness/derived/replication/mating_material_iv_batch_v100_PRIVATE/12093d55b7ee9f73/PRIVATE/model_inputs/legacy_spaced/source.parquet",
+      "source_column": "environment_supported",
+      "definition": "100 times unsupported exposures divided by all spaced exposures."
+    },
+    {
+      "item": "after_anchor_share_decision_links_percent",
+      "value": 50.080878097543014,
+      "units": "percent of exposure-donor links",
+      "n": 3103311,
+      "source_file": "/Volumes/XT_Pro/lichess_kindness/derived/replication/mating_material_iv_batch_v100_PRIVATE/12093d55b7ee9f73/PRIVATE/selection90/scores.parquet",
+      "source_column": "n_C / n_A",
+      "definition": "Ratio of summed strictly-after-anchor counts to summed all-time counts; a donor linked to multiple exposures counts for each link."
+    },
+    {
+      "item": "after_anchor_share_mean_exposure_percent",
+      "value": 49.99207755331031,
+      "units": "percent, equal exposure weights",
+      "n": 3103311,
+      "source_file": "/Volumes/XT_Pro/lichess_kindness/derived/replication/mating_material_iv_batch_v100_PRIVATE/12093d55b7ee9f73/PRIVATE/selection90/scores.parquet",
+      "source_column": "n_C / n_A",
+      "definition": "Mean of each exposure opponent history share strictly after the exposure last-move anchor. Not after game start."
+    },
+    {
+      "item": "retained_reputation_unordered_pairs",
+      "value": 8275002,
+      "units": "distinct unordered account pairs",
+      "n": 8296678,
+      "source_file": "/Volumes/XT_Pro/lichess_kindness/derived/replication/mating_material_noniv_batch_v100_PRIVATE/99984ef97df55388/PRIVATE/stages/reputation/PRIVATE/features/analysis.parquet",
+      "source_column": "pair_key",
+      "definition": "Distinct canonical pair keys among the corrected retained reputation focal opportunities; not all pairs in the original fold index."
+    },
+    {
+      "item": "tenure_selected_account_rows",
+      "value": 100000,
+      "units": "nominal selected-account rows",
+      "n": 100000,
+      "source_file": "/Volumes/XT_Pro/lichess_kindness/output/tenure_responsibility_v100/c539ba215e708b22/PRIVATE/selected_accounts.parquet",
+      "source_column": "Parquet footer num_rows",
+      "definition": "Independent footer check of the already-sourced original 100,000-account sampling design. Not fitted clusters."
+    }
+  ],
+  "errors": [],
+  "inputs": [
+    {
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/mating_material_iv_batch_v100_PRIVATE/12093d55b7ee9f73/PRIVATE/model_inputs/legacy_spaced/source.parquet",
+      "bytes": 267444486,
+      "mtime_ns": 1793392868839392561
+    },
+    {
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/mating_material_iv_batch_v100_PRIVATE/12093d55b7ee9f73/PRIVATE/model_inputs/legacy_spaced/scores.parquet",
+      "bytes": 57030664,
+      "mtime_ns": 1793392872173065786
+    },
+    {
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/mating_material_iv_batch_v100_PRIVATE/12093d55b7ee9f73/PRIVATE/FRAMES90.json",
+      "bytes": 336,
+      "mtime_ns": 1793392585262830449
+    },
+    {
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/mating_material_iv_batch_v100_PRIVATE/12093d55b7ee9f73/PRIVATE/selection90/scores.parquet",
+      "bytes": 843489226,
+      "mtime_ns": 1793386322985190514
+    },
+    {
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/mating_material_noniv_batch_v100_PRIVATE/99984ef97df55388/PRIVATE/stages/reputation/PRIVATE/features/analysis.parquet",
+      "bytes": 736964416,
+      "mtime_ns": 1793322747951278567
+    },
+    {
+      "path": "/Volumes/XT_Pro/lichess_kindness/output/tenure_responsibility_v100/c539ba215e708b22/PRIVATE/selected_accounts.parquet",
+      "bytes": 1904570,
+      "mtime_ns": 1790138792543469935,
+      "sha256": "7a3337725ab440d8f7dddbd98d71d1db8625d058dcd2ee64f40e1363f4a14162"
+    }
+  ],
+  "reputation_resolution": {
+    "resolved_file": {
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/mating_material_noniv_batch_v100_PRIVATE/99984ef97df55388/PRIVATE/stages/reputation/PRIVATE/features/analysis.parquet",
+      "bytes": 736964416,
+      "mtime_ns": 1793322747951278567,
+      "sha256": "0372cb70398300def1203842c2b315e23effccc13ff18723ecff2401816486b4"
+    },
+    "receipts": [
+      {
+        "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/mating_material_noniv_batch_v102_PRIVATE/c6d1eef82b6b9890/PRIVATE/stages/reputation/DONE.json",
+        "bytes": 129476,
+        "mtime_ns": 1793362808884009125,
+        "sha256": "18c8c90bc32da22681717cb3900b0c503d3bf991fbe86a4c449ba69721deba82"
+      }
+    ],
+    "input_fingerprint": "19059a1d181a30e2bcc4ab37513f9617f37147f1fa598871beac6ddcd47e963f",
+    "resolution": "DONE.json private file record"
+  },
+  "requested_scope": "all_remaining_counts",
+  "version": "1.0.1"
+}

@@ -1,0 +1,3 @@
+ci95_high,ci95_low,coefficient,contrast,p_value,standard_error,supported,units,original_csv_line
+0.04167788703398809,-0.1460934273982499,-0.05220777018213091,OLS_minus_IV,0.27576014594509113,0.04790172572387916,True,percentage points per receipt,2
+0.09011950725764556,-0.15584239233354485,-0.03286144253794965,recipient_weighted_minus_exposure_weighted_IV,0.6004752214025406,0.06274653553108794,True,percentage points per receipt,3

@@ -1,0 +1,67 @@
+{
+  "IV": {
+    "color_control": "Recipient color x post at the later outcome choice; no post-Nov18 exposure enters if censoring is late January.",
+    "estimation_status": "Not run before shared censoring and incident dependencies are resolved.",
+    "exclusion_sensitivity": "(RF-delta)/FS in consistent instrument-SD units; reported 0.020 pp/SD is a historical benchmark, not a result of this run.",
+    "exposures": "Require full 90-day follow-up before the observed censor timestamp; new completed cohorts principally Aug-Oct2025.",
+    "histories": "Strictly prior opponent decisions; compare five/ten on the same eligible sample and report sample selection separately.",
+    "incident_control": "Hourly platform-wide timeout share leave-one-out, same controls in first stage, RF and 2SLS; top percentile sensitivity frozen without receipt outcomes."
+  },
+  "advantage_elo": 11.782457,
+  "announcement_utc": "2025-12-22T22:35:00Z",
+  "color_cutoff_utc": "2025-11-18T07:22:00Z",
+  "descriptive_sample": "All source timeout opportunities, excluding self-player records. The completed pool/non-immediate-rematch sidecar is not re-created or applied here; these weekly series are not the manuscript A2 sample.",
+  "dose_definition": "d_G=draw_new-draw_old; d_C=win_new-win_old; delta_kappa=d_C-d_G at the same anchored pregame state.",
+  "established_diagnostic_cohort": "At least 100 same-speed rated updates by October 31 2023. Fixed conservative cohort; not the final A2 cohort specification.",
+  "further_information_date": "2026-01-07",
+  "grace_denominator": "Targeted >=5-second time-forfeit candidate frame. Not all disconnections and not platform-wide timeout share.",
+  "grace_issue_date": "2026-01-30",
+  "grace_production_cutoff": null,
+  "integer_visibility": "Blocked: the authenticated producer stores no fractional rating state; rounding diagnostics do not establish exact visibility.",
+  "later_A3": "Include d_G main effect and Post*d_G; individual and week effects, color, pre-rule K and E, board, stage, clocks, tenure. Diagnose residualized support; two-way clustering alone does not solve serial dependence or confounding.",
+  "later_A4": "Freeze symmetric g in [-30,30] profiles and two sign-flip bands. No predeclared null; displayed vs underlying thresholds are distinct predictions.",
+  "later_A5": "Split Nov18-Dec22 announcement, announcement-Jan7, Jan7-censor; public code or feedback can generate awareness before announcement.",
+  "later_A6_A8": "Decompose raw/adjusted sign reversals by controls. Clearly-losing comparison is a specificity test.",
+  "normalization_window": [
+    "2023-09",
+    "2026-04"
+  ],
+  "power_gate": {
+    "awareness_scenarios": [
+      0.05,
+      0.1,
+      0.2,
+      0.5,
+      1.0
+    ],
+    "established_go": "Detect the exact predicted statistic at <=20% awareness under frozen pre-period dependence-aware inference.",
+    "inference": "Pre-period weekly/blocked-placebo noise; effective time support, not opportunity-count-only SEs. Two-way chooser/week inference is secondary.",
+    "no_go": "Report institutional validation and precision bound if the MDE cannot address plausible responses.",
+    "planning_effect_pp_single_color": [
+      0.03535,
+      0.04713
+    ],
+    "planning_effect_pp_white_minus_black": [
+      0.07069,
+      0.09426
+    ],
+    "status": "PENDING_VALIDATED_DOSE_CENSORING_AND_RESIDUALIZED_SUPPORT",
+    "targeted_go": "Detect at <=50% awareness in a predeclared established stratum with support.",
+    "warning": "The symmetric color x period x band statistic can cancel linear relocation; derive its own F. These planning effects are not MDEs."
+  },
+  "primary_matched_reconstruction_baseline": "All rated games November 1 to November 18 07:15 UTC, within outcome, speed, color, RD bin, and opponent-minus-own gap bin.",
+  "reconstruction_decision": "Review post-month cell errors and signed errors against matched pre cells; no automatic pooled MAE certification. The transition bracket is separate.",
+  "replay_months": [
+    "2025-11",
+    "2025-12",
+    "2026-01"
+  ],
+  "replay_start_checkpoint": "2025-10",
+  "returning_support": "RD>=200, fixed established cohort, >=90 days since previous same-speed rated update. Account age alone is not used.",
+  "scope": "Institutional reconstruction and first-pass descriptive diagnostics. Behavioral/IV specifications remain gated.",
+  "transition_bracket": [
+    "2025-11-18T07:15:00Z",
+    "2025-11-18T07:22:00Z"
+  ],
+  "version": "1.0.0"
+}

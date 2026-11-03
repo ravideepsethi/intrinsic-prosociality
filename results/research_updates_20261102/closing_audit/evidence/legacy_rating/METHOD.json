@@ -1,0 +1,44 @@
+{
+  "analysis_fingerprint": "098946ce9b839368adf32209786f83125ead95d8297987c902ff53feab7a106f",
+  "api_requests": 0,
+  "coefficient_fitting": false,
+  "counterfactual_warning": "Only the realized outcome is observed. The unchosen payoff and win premium are not directly validated.",
+  "local_payoff_sample": "evaluation >= -100 and absolute chooser_draw_payoff_v2 < 1; all game stages; no regression-cell filter",
+  "missing_updates": "excluded only from observed/predicted metrics; retained in coverage",
+  "one_sided_missing": "each player side evaluated independently",
+  "primary_observed": "white_rating_diff_pgn or black_rating_diff_pgn selected by chooser_color",
+  "primary_predicted": {
+    "chooser_claimed_win": "chooser_win_payoff_v2",
+    "chooser_kind_draw": "chooser_draw_payoff_v2"
+  },
+  "primary_series_overlap_with_supplement": true,
+  "rating_replay_recomputed": false,
+  "reconstruction_convention": "existing anchored_timeaware_glicko2_novol_noreg fields; no new regulator or rounding model",
+  "rounding": "continuous prediction compared with recorded integer difference; no fitted rounding correction",
+  "runtime": {
+    "numpy": "2.3.5",
+    "platform": "macOS-26.4.1-arm64-arm-64bit-Mach-O",
+    "pyarrow": "21.0.0",
+    "python": "3.13.9"
+  },
+  "sample_fingerprint": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+  "source_code_hashes": {
+    "DELIVERY_CHECKS.json": "96cc1fe778e3414c11375094369106302c878228097979bf7c434079b183e405",
+    "README.md": "533efdc35efa8040099ec255203a4ab763316a4a61055b1f16a80041e7d174d9",
+    "RUN_VALIDATION.command": "c629d368efdd807a35ae56d19a58bb486f06461069d973a6bccc88e5e667583d",
+    "SOURCE_PROVENANCE.json": "ddb3264dbb2a572c6c37dfd464fa50ad006c8846067775dbb7ac015804fc8e27",
+    "authority/SAMPLE_AUTHORITY.json": "81c34113e7a888629a834a17235a71dcf369a2d590755fd9412ee42151d9b2f3",
+    "evidence/Pool_Main_Sample_24M_Report.zip": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+    "evidence/Pool_Main_Sample_24M_Report.zip.sha256": "d2e6c0953ff2de7cc7235b98d568c884e4fa8067b8aa81d22efe1ac3484d6f59",
+    "requirements.txt": "f36e09889cd85b453f290034f15715ead3f33b0615b48a0cf461617f09f92846",
+    "source/__init__.py": "52b1da5d4a8717236fccd7317e87a652c65eebe4de6a71d6d6981d413934b76d",
+    "source/pool_wave1_common.py": "f9c714c549c6cd68a7d2dbdb2c17d5abacfdfc12dc6526752f03ab2505bbff43",
+    "test_validation.py": "54fe20dda1b4088e9f7028f96fd5141bdc87055e090c55728ebe23f1b593bfee",
+    "validate_ratings.py": "b1593263555c0e777917eeb2487afb0ea20f0c2c7353bcdc79deb1b4d975bcb9"
+  },
+  "subgroups": "one diagnostic dimension at a time; rows across subgroup tables must not be summed",
+  "supplemental_predictions": "color-specific realized_pred_ratingdiff_v2 selected by role",
+  "uncertainty": "Descriptive census error metrics; no iid confidence intervals or accuracy certification",
+  "unit_primary": "one chooser side per current-sample game",
+  "version": "1.0.0"
+}

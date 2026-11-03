@@ -1,0 +1,63 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+r9_mode="${1:?Specify analyze or tests}"
+shift
+r9_package="$(cd "$(dirname "$0")" && pwd -P)"
+r9_project="${IV_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+r9_desktop="${IV_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+r9_python="${IV_PYTHON:-$r9_project/venv/bin/python}"
+if [[ ! -x "$r9_python" ]]; then
+  echo "Research Python unavailable: $r9_python. Connect XT_Pro or set IV_PYTHON."
+  exit 2
+fi
+mkdir -p "$r9_desktop"
+export PYTHONDONTWRITEBYTECODE=1
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 BLIS_NUM_THREADS=1
+cd "$r9_package"
+r9_log="$r9_desktop/R9_CERTIFIED_${r9_mode}_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+r9_awake=()
+if [[ -x /usr/bin/caffeinate ]]; then r9_awake=(/usr/bin/caffeinate -i); fi
+echo "Log: $r9_log"
+set +e
+(
+  set -euo pipefail
+  "$r9_python" - <<'PY'
+import sys
+assert sys.version_info >= (3,10), 'Python 3.10 or later is required'
+try:
+    import numpy,pyarrow,duckdb,pandas
+except ImportError as error:
+    raise SystemExit('Missing existing research dependency: '+str(error))
+sys.path.insert(0,'code')
+from r9_common import verify_package
+verify_package()
+print('R9_PACKAGE_SHA256_OK',flush=True)
+PY
+  if [[ "$r9_mode" == tests ]]; then
+    "$r9_python" -m unittest discover -s tests -p 'test_*.py' -v
+  elif [[ "$r9_mode" == analyze ]]; then
+    echo 'ETA: roughly 1–3 hours for the first run; missing ENV histories and drive throughput may take longer.'
+    echo 'The live log updates stage and finish ETAs every 30 seconds. Completed stages resume.'
+    echo 'Baseline 2a4e617b40bc is read-only; all 14 models and both saved scores must reproduce.'
+    echo 'Up to 10 workers, total 11 GiB planning budget, one BLAS thread each; Parquet column projection.'
+    echo 'API requests: zero. Stockfish searches: zero. No manuscript writes.'
+    r9_tests="${r9_log%.log}_selftests.log"
+    if "$r9_python" -m unittest discover -s tests -p 'test_*.py' -q > "$r9_tests" 2>&1; then
+      echo "R9_OFFLINE_SELF_TESTS_OK: $r9_tests"
+    else
+      cat "$r9_tests"
+      exit 3
+    fi
+    "${r9_awake[@]}" "$r9_python" -u code/run_r9.py --project-root "$r9_project" --desktop "$r9_desktop" "$@"
+  else
+    echo 'Use RUN_R9.command or RUN_TESTS.command.'
+    exit 2
+  fi
+) 2>&1 | tee "$r9_log"
+r9_exit=${PIPESTATUS[0]}
+set -e
+if [[ "$r9_exit" -ne 0 ]]; then
+  echo "Stopped with exit $r9_exit. Completed checkpoints remain reusable. Return this log: $r9_log"
+fi
+exit "$r9_exit"

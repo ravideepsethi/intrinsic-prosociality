@@ -1,0 +1,19 @@
+{
+  "parent_configuration": "25d22fd1d9e9af03752bc2b253ff051f3151a410a0453c12a5d24fe3ce29355d",
+  "parent_package_manifest": "227c42c648c5b0fe40252471d810a933b2f61051debfeb95921471d25e34dcca",
+  "stages": [
+    {
+      "stage": "chronology",
+      "receipt_sha256": "f16fc8e2c94bff915aa701f0c668ae0e48485a37479354bb9f02ee2d57177ec5",
+      "rows": 26643193
+    },
+    {
+      "stage": "locally_eligible",
+      "receipt_sha256": "9a1c6c06039b963f884e8ac0587dcccb2cc163a63391ad4558198a3187cb3293",
+      "rows": 20220847
+    }
+  ],
+  "old_outputs_modified": false,
+  "raw_game_scans_started": 0,
+  "chronology_merge_repeated": false
+}

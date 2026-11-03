@@ -1,0 +1,554 @@
+{
+  "donor_history_changed": false,
+  "limitation": "Does not eliminate play bans, rating effects, prior sorting, or selection into active resolution.",
+  "monthly": [
+    {
+      "flow": {},
+      "month": "2023-11",
+      "rows": 0,
+      "status_counts": {}
+    },
+    {
+      "flow": {},
+      "month": "2023-12",
+      "rows": 0,
+      "status_counts": {}
+    },
+    {
+      "flow": {},
+      "month": "2024-01",
+      "rows": 0,
+      "status_counts": {}
+    },
+    {
+      "flow": {
+        "all": {
+          "reached": 88589,
+          "received": 4128,
+          "rows": 151086,
+          "y": 2460
+        },
+        "strict_lt4": {
+          "reached": 80690,
+          "received": 3670,
+          "rows": 137925,
+          "y": 2231
+        },
+        "valid": {
+          "reached": 88589,
+          "received": 4128,
+          "rows": 151086,
+          "y": 2460
+        }
+      },
+      "month": "2024-02",
+      "rows": 151086,
+      "status_counts": {
+        "valid": 151086
+      }
+    },
+    {
+      "flow": {
+        "all": {
+          "reached": 98788,
+          "received": 4759,
+          "rows": 176999,
+          "y": 2755
+        },
+        "strict_lt4": {
+          "reached": 89726,
+          "received": 4234,
+          "rows": 161390,
+          "y": 2516
+        },
+        "valid": {
+          "reached": 98788,
+          "received": 4759,
+          "rows": 176999,
+          "y": 2755
+        }
+      },
+      "month": "2024-03",
+      "rows": 176999,
+      "status_counts": {
+        "valid": 176999
+      }
+    },
+    {
+      "flow": {
+        "all": {
+          "reached": 85032,
+          "received": 4307,
+          "rows": 157271,
+          "y": 2574
+        },
+        "strict_lt4": {
+          "reached": 77317,
+          "received": 3823,
+          "rows": 143555,
+          "y": 2341
+        },
+        "valid": {
+          "reached": 85032,
+          "received": 4307,
+          "rows": 157271,
+          "y": 2574
+        }
+      },
+      "month": "2024-04",
+      "rows": 157271,
+      "status_counts": {
+        "valid": 157271
+      }
+    },
+    {
+      "flow": {
+        "all": {
+          "reached": 99044,
+          "received": 4830,
+          "rows": 176033,
+          "y": 2980
+        },
+        "strict_lt4": {
+          "reached": 90151,
+          "received": 4290,
+          "rows": 160637,
+          "y": 2715
+        },
+        "valid": {
+          "reached": 99044,
+          "received": 4830,
+          "rows": 176033,
+          "y": 2980
+        }
+      },
+      "month": "2024-05",
+      "rows": 176033,
+      "status_counts": {
+        "valid": 176033
+      }
+    },
+    {
+      "flow": {
+        "all": {
+          "reached": 95378,
+          "received": 4499,
+          "rows": 168892,
+          "y": 2689
+        },
+        "strict_lt4": {
+          "reached": 86785,
+          "received": 4010,
+          "rows": 154207,
+          "y": 2443
+        },
+        "valid": {
+          "reached": 95378,
+          "received": 4499,
+          "rows": 168892,
+          "y": 2689
+        }
+      },
+      "month": "2024-06",
+      "rows": 168892,
+      "status_counts": {
+        "valid": 168892
+      }
+    },
+    {
+      "flow": {
+        "all": {
+          "reached": 90341,
+          "received": 4304,
+          "rows": 162026,
+          "y": 2640
+        },
+        "strict_lt4": {
+          "reached": 82248,
+          "received": 3855,
+          "rows": 148142,
+          "y": 2384
+        },
+        "valid": {
+          "reached": 90341,
+          "received": 4304,
+          "rows": 162026,
+          "y": 2640
+        }
+      },
+      "month": "2024-07",
+      "rows": 162026,
+      "status_counts": {
+        "valid": 162026
+      }
+    },
+    {
+      "flow": {
+        "all": {
+          "reached": 93814,
+          "received": 4416,
+          "rows": 167905,
+          "y": 2666
+        },
+        "strict_lt4": {
+          "reached": 85462,
+          "received": 3966,
+          "rows": 153393,
+          "y": 2427
+        },
+        "valid": {
+          "reached": 93814,
+          "received": 4416,
+          "rows": 167905,
+          "y": 2666
+        }
+      },
+      "month": "2024-08",
+      "rows": 167905,
+      "status_counts": {
+        "valid": 167905
+      }
+    },
+    {
+      "flow": {
+        "all": {
+          "reached": 93974,
+          "received": 4506,
+          "rows": 168056,
+          "y": 2708
+        },
+        "strict_lt4": {
+          "reached": 85543,
+          "received": 3999,
+          "rows": 153497,
+          "y": 2457
+        },
+        "valid": {
+          "reached": 93974,
+          "received": 4506,
+          "rows": 168056,
+          "y": 2708
+        }
+      },
+      "month": "2024-09",
+      "rows": 168056,
+      "status_counts": {
+        "valid": 168056
+      }
+    },
+    {
+      "flow": {
+        "all": {
+          "reached": 99187,
+          "received": 4864,
+          "rows": 180381,
+          "y": 2780
+        },
+        "strict_lt4": {
+          "reached": 90070,
+          "received": 4350,
+          "rows": 164424,
+          "y": 2543
+        },
+        "valid": {
+          "reached": 99187,
+          "received": 4864,
+          "rows": 180381,
+          "y": 2780
+        }
+      },
+      "month": "2024-10",
+      "rows": 180381,
+      "status_counts": {
+        "valid": 180381
+      }
+    },
+    {
+      "flow": {
+        "all": {
+          "reached": 91181,
+          "received": 4359,
+          "rows": 166032,
+          "y": 2686
+        },
+        "strict_lt4": {
+          "reached": 83055,
+          "received": 3919,
+          "rows": 151760,
+          "y": 2442
+        },
+        "valid": {
+          "reached": 91181,
+          "received": 4359,
+          "rows": 166032,
+          "y": 2686
+        }
+      },
+      "month": "2024-11",
+      "rows": 166032,
+      "status_counts": {
+        "valid": 166032
+      }
+    },
+    {
+      "flow": {
+        "all": {
+          "reached": 101838,
+          "received": 4905,
+          "rows": 184583,
+          "y": 2993
+        },
+        "strict_lt4": {
+          "reached": 92611,
+          "received": 4382,
+          "rows": 168636,
+          "y": 2715
+        },
+        "valid": {
+          "reached": 101838,
+          "received": 4905,
+          "rows": 184583,
+          "y": 2993
+        }
+      },
+      "month": "2024-12",
+      "rows": 184583,
+      "status_counts": {
+        "valid": 184583
+      }
+    },
+    {
+      "flow": {
+        "all": {
+          "reached": 99596,
+          "received": 5116,
+          "rows": 182166,
+          "y": 2904
+        },
+        "strict_lt4": {
+          "reached": 90615,
+          "received": 4553,
+          "rows": 166230,
+          "y": 2611
+        },
+        "valid": {
+          "reached": 99596,
+          "received": 5116,
+          "rows": 182166,
+          "y": 2904
+        }
+      },
+      "month": "2025-01",
+      "rows": 182166,
+      "status_counts": {
+        "valid": 182166
+      }
+    },
+    {
+      "flow": {
+        "all": {
+          "reached": 90427,
+          "received": 4470,
+          "rows": 164645,
+          "y": 2602
+        },
+        "strict_lt4": {
+          "reached": 82291,
+          "received": 4003,
+          "rows": 150248,
+          "y": 2362
+        },
+        "valid": {
+          "reached": 90427,
+          "received": 4470,
+          "rows": 164645,
+          "y": 2602
+        }
+      },
+      "month": "2025-02",
+      "rows": 164645,
+      "status_counts": {
+        "valid": 164645
+      }
+    },
+    {
+      "flow": {
+        "all": {
+          "reached": 100067,
+          "received": 4965,
+          "rows": 180285,
+          "y": 2933
+        },
+        "strict_lt4": {
+          "reached": 90821,
+          "received": 4410,
+          "rows": 164237,
+          "y": 2617
+        },
+        "valid": {
+          "reached": 100067,
+          "received": 4965,
+          "rows": 180285,
+          "y": 2933
+        }
+      },
+      "month": "2025-03",
+      "rows": 180285,
+      "status_counts": {
+        "valid": 180285
+      }
+    },
+    {
+      "flow": {
+        "all": {
+          "reached": 97719,
+          "received": 4846,
+          "rows": 174061,
+          "y": 2856
+        },
+        "strict_lt4": {
+          "reached": 88917,
+          "received": 4294,
+          "rows": 158795,
+          "y": 2587
+        },
+        "valid": {
+          "reached": 97719,
+          "received": 4846,
+          "rows": 174061,
+          "y": 2856
+        }
+      },
+      "month": "2025-04",
+      "rows": 174061,
+      "status_counts": {
+        "valid": 174061
+      }
+    },
+    {
+      "flow": {
+        "all": {
+          "reached": 99991,
+          "received": 4760,
+          "rows": 178012,
+          "y": 2839
+        },
+        "strict_lt4": {
+          "reached": 91088,
+          "received": 4234,
+          "rows": 162541,
+          "y": 2615
+        },
+        "valid": {
+          "reached": 99991,
+          "received": 4760,
+          "rows": 178012,
+          "y": 2839
+        }
+      },
+      "month": "2025-05",
+      "rows": 178012,
+      "status_counts": {
+        "valid": 178012
+      }
+    },
+    {
+      "flow": {
+        "all": {
+          "reached": 100019,
+          "received": 4847,
+          "rows": 177092,
+          "y": 2943
+        },
+        "strict_lt4": {
+          "reached": 91013,
+          "received": 4327,
+          "rows": 161592,
+          "y": 2665
+        },
+        "valid": {
+          "reached": 100019,
+          "received": 4847,
+          "rows": 177092,
+          "y": 2943
+        }
+      },
+      "month": "2025-06",
+      "rows": 177092,
+      "status_counts": {
+        "valid": 177092
+      }
+    },
+    {
+      "flow": {
+        "all": {
+          "reached": 100319,
+          "received": 4819,
+          "rows": 177563,
+          "y": 2869
+        },
+        "strict_lt4": {
+          "reached": 91378,
+          "received": 4299,
+          "rows": 162029,
+          "y": 2610
+        },
+        "valid": {
+          "reached": 100319,
+          "received": 4819,
+          "rows": 177563,
+          "y": 2869
+        }
+      },
+      "month": "2025-07",
+      "rows": 177563,
+      "status_counts": {
+        "valid": 177563
+      }
+    },
+    {
+      "flow": {
+        "all": {
+          "reached": 5561,
+          "received": 278,
+          "rows": 10223,
+          "y": 151
+        },
+        "strict_lt4": {
+          "reached": 5071,
+          "received": 257,
+          "rows": 9346,
+          "y": 141
+        },
+        "valid": {
+          "reached": 5561,
+          "received": 278,
+          "rows": 10223,
+          "y": 151
+        }
+      },
+      "month": "2025-08",
+      "rows": 10223,
+      "status_counts": {
+        "valid": 10223
+      }
+    },
+    {
+      "flow": {},
+      "month": "2025-09",
+      "rows": 0,
+      "status_counts": {}
+    },
+    {
+      "flow": {},
+      "month": "2025-10",
+      "rows": 0,
+      "status_counts": {}
+    }
+  ],
+  "post_assignment_sensitivity": true,
+  "rows_after": 2832584,
+  "rows_before": 3103311,
+  "rule": "-4 < white-minus-black material < 4; P1/N3/B3/R5/Q9; exact six-field FEN, valid board and FEN ply match",
+  "status": "COMPLETE"
+}

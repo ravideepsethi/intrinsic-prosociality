@@ -1,0 +1,42 @@
+{
+  "status": "MODEL_OK",
+  "model_id": "primary_k20__ply_le_10__p300_p600",
+  "rows": 39600,
+  "clusters": 37281,
+  "terms_requested": 74,
+  "terms_kept": 69,
+  "rank": 69,
+  "condition_number": 32711734.55530192,
+  "runtime_seconds": 2.6861939430236816,
+  "dropped_terms": [
+    "gap_m9",
+    "gap_m8",
+    "gap_p9",
+    "gap_p10",
+    "gap_p11"
+  ],
+  "key_terms": [
+    "gap_m11",
+    "gap_m10",
+    "gap_m7",
+    "gap_m6",
+    "gap_m5",
+    "gap_m4",
+    "gap_m3",
+    "gap_m2",
+    "gap_m1",
+    "gap_p1",
+    "gap_p2",
+    "gap_p3",
+    "gap_p4",
+    "gap_p5",
+    "gap_p6",
+    "gap_p7",
+    "gap_p8"
+  ],
+  "coefficient_parquet": "/Volumes/XT_Pro/lichess_kindness/derived/replication/mating_material_noniv_batch_v100_PRIVATE/99984ef97df55388/PRIVATE/stages/nonparametric/PRIVATE/model/models/primary_k20__ply_le_10__p300_p600_coefficients.parquet",
+  "coefficient_parquet_sha256": "9552e7f3a5005b90e966207b565b755f1912cd9b4b7bf6825484efd3ebc6ff1a",
+  "worker_pid": 8364,
+  "worker_threads": 1,
+  "worker_memory_limit": "3.0GB"
+}

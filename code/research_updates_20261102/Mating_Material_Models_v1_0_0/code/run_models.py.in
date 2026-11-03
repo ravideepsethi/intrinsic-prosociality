@@ -1,0 +1,145 @@
+from util import *
+from inputs import authenticate,census,guard
+import argparse,fcntl,subprocess,sys,shutil,traceback,zipfile,platform
+
+STAGES=('r11','merit')
+EXPECTED_VERSIONS={'numpy':'2.3.5','pandas':'2.3.3','pyarrow':'20.0.0','duckdb':'1.3.2','scipy':'1.16.3'}
+
+def verify_package():
+    for line in (ROOT/'SHA256SUMS.txt').read_text().splitlines():
+        checksum,name=line.split('  ',1);p=(ROOT/name).resolve()
+        require(p.is_relative_to(ROOT) and p.is_file() and sha(p)==checksum,'Package checksum mismatch: '+name)
+
+def coverage(run,status):
+    import csv
+    rows=list(csv.DictReader((ROOT/'authority/DOWNSTREAM_RERUN_REQUIRED.csv').open()))
+    for r in rows:
+        if r['output']=='tab_main':r['status']=status.get('r11',{}).get('status','PENDING')
+        elif r['output']=='tab_app_main_spec':r['status']='THREE_ORIGINAL_COLUMNS_'+status.get('r11',{}).get('status','PENDING')+'; REGION_CLOCK_EXTENSION_PENDING'
+        elif r['output']=='tab_app_merit_continuous':r['status']=status.get('merit',{}).get('status','PENDING')
+        else:r['status']='PENDING_SUBSEQUENT_PACKAGE'
+    table(run/'report/DOWNSTREAM_STATUS.csv',rows)
+
+def export_stage(run,stage):
+    source=run/'PRIVATE/stages'/stage/'report';target=run/'report'/stage;target.mkdir(parents=True,exist_ok=True)
+    # Only aggregate model products. Never copy PRIVATE, input frames or identifiers.
+    allowed={'.csv','.npz','.json'}
+    for p in source.iterdir():
+        if p.is_file() and p.suffix in allowed:shutil.copy2(p,target/p.name)
+    named={'r11':['tab_main.csv','tab_app_main_spec.csv'],'merit':['tab_app_merit_continuous.csv']}
+    for name in named[stage]:shutil.copy2(source/name,run/'report'/name)
+    extra=[]
+    if stage=='merit':
+        shutil.copy2(source/'adjusted_profiles.csv',run/'report/fig_merit_profiles.csv');extra=['fig_merit_profiles.csv']
+    return [record(p,run) for p in sorted(target.iterdir()) if p.is_file()]+[record(run/'report'/name,run) for name in named[stage]+extra]
+
+def bundle(run,destination,status):
+    destination=Path(destination);destination.mkdir(parents=True,exist_ok=True)
+    suffix='MODELS_READY' if status=='CORE_MODELS_COMPLETE_MORE_FAMILIES_PENDING' else 'FAILED'
+    p=destination/f'MATERIAL_MODELS_{run.name}_{suffix}.zip';tmp=p.with_suffix('.zip.partial')
+    manifest=[]
+    with zipfile.ZipFile(tmp,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
+        def add(src,name):
+            z.write(src,name);manifest.append(dict(path=name,sha256=sha(src),bytes=src.stat().st_size))
+        for f in sorted((run/'report').rglob('*')):
+            if f.is_file():add(f,'report/'+str(f.relative_to(run/'report')))
+        for folder in ['code','vendor','tests','authority']:
+            for f in sorted((ROOT/folder).rglob('*')):
+                if f.is_file() and '__pycache__' not in f.parts and f.suffix in ['.py','.json','.csv']:add(f,'code/'+str(f.relative_to(ROOT)))
+        for name in ['README.txt','BUILD_INFO.json','requirements.txt','SHA256SUMS.txt','TEST_RESULTS.txt']:
+            if (ROOT/name).is_file():add(ROOT/name,name)
+        if (run/'run.log').exists():add(run/'run.log','run.log')
+        z.writestr('REPORT_MANIFEST.json',json.dumps(manifest,indent=2)+'\n')
+    os.replace(tmp,p);p.with_suffix('.zip.sha256').write_text(sha(p)+'  '+p.name+'\n');log('Return report: '+str(p));return p
+
+class Tee:
+    def __init__(self,*streams):self.streams=streams
+    def write(self,text):
+        for s in self.streams:s.write(text)
+        return len(text)
+    def flush(self):
+        for s in self.streams:s.flush()
+
+def execute(config,destination):
+    run=Path(config['run']);statefile=run/'PRIVATE/STAGES.json';statuses=read(statefile) if statefile.exists() else {}
+    for stage in STAGES:
+        if statuses.get(stage,{}).get('status')=='COMPLETE':
+            for r in statuses[stage]['outputs']:verify(r,run)
+            log(stage+': completed outputs verified; skipped');continue
+        start=time.monotonic();log('Starting '+stage)
+        cmd=[sys.executable,str(ROOT/'code/worker.py'),'--config',str(run/'PRIVATE/CONFIG.json'),'--stage',stage]
+        proc=subprocess.Popen(cmd,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,bufsize=1)
+        try:
+            for line in proc.stdout:print(line,end='',flush=True)
+            require(proc.wait()==0,'Model stage failed: '+stage+'; see run.log')
+        except BaseException:
+            if proc.poll() is None:
+                proc.terminate()
+                try:proc.wait(timeout=10)
+                except subprocess.TimeoutExpired:proc.kill();proc.wait()
+            raise
+        guard(config['auth'])
+        statuses[stage]=dict(status='COMPLETE',seconds=time.monotonic()-start,outputs=export_stage(run,stage))
+        save(statefile,statuses);coverage(run,statuses)
+        log(f'{stage}: completed in {statuses[stage]["seconds"]/60:.1f} min')
+    return statuses
+
+def main(argv=None):
+    p=argparse.ArgumentParser(description='Material-restricted main regression and 23 continuous/material specifications; IV, Patron and persistence remain later stages.')
+    p.add_argument('--project-root',type=Path,default=Path('/Volumes/XT_Pro/lichess_kindness'))
+    p.add_argument('--results-dir',type=Path,default=Path.home()/'Desktop/Lichess_Desktop')
+    p.add_argument('--manifest',type=Path)
+    p.add_argument('--workers',type=int,default=10);p.add_argument('--hash-workers',type=int,default=2)
+    p.add_argument('--memory-gb',type=float,default=11);p.add_argument('--shards',type=int,default=256)
+    p.add_argument('--self-test',action='store_true');p.add_argument('--preflight-only',action='store_true');p.add_argument('--estimate-only',action='store_true')
+    a=p.parse_args(argv)
+    if a.estimate_only:
+        print('Expected 45–120 minutes, provisional: authentication/projections 5–15; main model 5–25; 23 continuous/material specifications 30–80. First environment setup adds about 1–3 minutes. Completed input panels are reused.');return 0
+    if a.self_test:
+        return subprocess.call([sys.executable,str(ROOT/'tests/run_tests.py')])
+    verify_package()
+    require(1<=a.workers<=10 and 1<=a.hash_workers<=4 and 4<=a.memory_gb<=32 and a.shards>=32,'Use 1–10 workers, 1–4 hash workers, 4–32 GB, >=32 shards')
+    from importlib.metadata import version
+    versions={name:version(name) for name in EXPECTED_VERSIONS};require(versions==EXPECTED_VERSIONS,'Use RUN_MODELS.command for the tested environment')
+    a.project_root=a.project_root.expanduser().resolve();a.results_dir=a.results_dir.expanduser().resolve()
+    expected=read(ROOT/'authority/REVIEW.json')
+    manifest=a.manifest or a.project_root/'derived/replication/mating_material_first_run_v100_PRIVATE'/expected['run_id'][:16]/'MATERIAL_RESTRICTED_INPUTS_READY_PRIVATE.json'
+    # The exact reviewed parent is the default; no broad search or fallback to older data.
+    auth=authenticate(manifest,expected,a.hash_workers)
+    config=dict(version='1.0.0',code_sha256=sha(ROOT/'SHA256SUMS.txt'),parent_run_id=auth['parent_run_id'],manifest_sha256=auth['manifest_sha256'],
+        source_files=[{k:r[k] for k in ('month','sha256','rows','grants')} for r in auth['records']],environment=versions,shards=a.shards)
+    key=digest(config);run=a.project_root/'derived/replication/mating_material_models_v100_PRIVATE'/key[:16]
+    run.mkdir(parents=True,exist_ok=True);(run/'PRIVATE').mkdir(exist_ok=True);(run/'report').mkdir(exist_ok=True)
+    required=2*2**30 if (run/'_SUCCESS.json').exists() else 24*2**30
+    require(shutil.disk_usage(run).free>=required,f'Need {required/2**30:.0f} GiB free for narrow projections, chooser partitions and spill')
+    workers=min(a.workers,max(1,(os.cpu_count() or 2)-2))
+    config.update(id=key,run=str(run),auth=auth,workers=workers,memory_gb=a.memory_gb)
+    lock=(run/'RUNNING.lock').open('a+')
+    try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+    except BlockingIOError:raise RuntimeError('This exact model run is already active')
+    with lock,(run/'run.log').open('a',buffering=1) as logfile:
+        old=sys.stdout;sys.stdout=Tee(old,logfile);start=time.monotonic()
+        try:
+            log('Expected 45–120 minutes; the same command resumes validated checkpoints.')
+            save(run/'report/ENVIRONMENT.json',dict(versions=versions,python=platform.python_version(),workers=workers,memory_gb=a.memory_gb,shards=a.shards))
+            with heartbeat('Independently checking the new main-panel census'):
+                config['census']=census(auth,run,workers,a.memory_gb)
+            guard(auth);save(run/'PRIVATE/CONFIG.json',config)
+            save(run/'report/INPUT_LINEAGE.json',dict(parent_run_id=auth['parent_run_id'],parent_manifest_sha256=auth['manifest_sha256'],census=config['census'],price_layer='original',author_exclusion=['AUTHOR_ACCOUNT_1','AUTHOR_ACCOUNT_2'],material_rule=expected['rule'],known_outcome_policy=expected['known_outcome_policy']))
+            if a.preflight_only:log('Preflight passed; no model fitted.');return 0
+            statuses=execute(config,a.results_dir)
+            result=dict(status='CORE_MODELS_COMPLETE_MORE_FAMILIES_PENDING',whole_paper_rerun_complete=False,parent_run_id=auth['parent_run_id'],run_id=key,
+                        completed_stages=list(STAGES),seconds_this_launch=time.monotonic()-start,stage_seconds={k:r['seconds'] for k,r in statuses.items()},api_requests=0,engine_evaluations=0,rating_replay_records=0)
+            save(run/'report/RESULTS.json',result);coverage(run,statuses)
+            artifact=bundle(run,a.results_dir,result['status'])
+            save(run/'_SUCCESS.json',dict(result,report_zip=str(artifact),sha256=sha(artifact)))
+            save(a.results_dir/'MATERIAL_MODELS_LATEST_PRIVATE.json',dict(root=str(run),run_id=key,parent_run_id=auth['parent_run_id'],status=result['status']))
+            log('Main and continuous model stages are complete. Remaining families are listed in report/DOWNSTREAM_STATUS.csv.');return 0
+        except BaseException as exc:
+            save(run/'PRIVATE/ERROR.json',dict(error=str(exc),traceback=traceback.format_exc()))
+            save(run/'report/RESULTS.json',dict(status='STOPPED',error_type=type(exc).__name__,whole_paper_rerun_complete=False))
+            coverage(run,read(run/'PRIVATE/STAGES.json') if (run/'PRIVATE/STAGES.json').exists() else {})
+            log('STOPPED: '+str(exc));bundle(run,a.results_dir,'STOPPED');return 130 if isinstance(exc,KeyboardInterrupt) else 1
+        finally:sys.stdout=old
+
+if __name__=='__main__':raise SystemExit(main())

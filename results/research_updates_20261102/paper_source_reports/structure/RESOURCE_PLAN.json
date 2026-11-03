@@ -1,0 +1,10 @@
+{
+  "estimated_worker_gib": 1.123950570821762,
+  "largest_partition_rows": 170534,
+  "memory_budget_gb": 9,
+  "requested_workers": 10,
+  "shards": 256,
+  "single_blas_thread": true,
+  "union_columns": 123,
+  "workers": 7
+}

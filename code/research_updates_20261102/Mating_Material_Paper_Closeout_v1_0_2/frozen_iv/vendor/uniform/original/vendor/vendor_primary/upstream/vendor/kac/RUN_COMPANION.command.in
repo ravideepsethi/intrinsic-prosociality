@@ -1,0 +1,26 @@
+#!/bin/bash
+set -euo pipefail
+KAC_PACKAGE="$(cd "$(dirname "$0")" && pwd)"
+KAC_DESKTOP="$HOME/Desktop/Lichess_Desktop"
+KAC_PROJECT="/Volumes/XT_Pro/lichess_kindness"
+KAC_PYTHON=""
+for KAC_CANDIDATE in \
+  "$KAC_DESKTOP"/kac_next.*/KAC_Next_Analyses_v1_0_0/.venv/bin/python \
+  "$KAC_PROJECT/venv/bin/python"; do
+  if [[ -x "$KAC_CANDIDATE" ]] && "$KAC_CANDIDATE" -c 'import numpy,pandas,pyarrow,duckdb,scipy' >/dev/null 2>&1; then
+    KAC_PYTHON="$KAC_CANDIDATE"
+    break
+  fi
+done
+if [[ -z "$KAC_PYTHON" ]]; then
+  echo 'No compatible existing Lichess Python environment found. No existing environment was changed.' >&2
+  exit 1
+fi
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1
+echo "PYTHON $KAC_PYTHON"
+"$KAC_PYTHON" "$KAC_PACKAGE/run.py" --self-test
+if command -v caffeinate >/dev/null 2>&1; then
+  exec caffeinate -i "$KAC_PYTHON" -u "$KAC_PACKAGE/run.py" --project-root "$KAC_PROJECT" --desktop "$KAC_DESKTOP" "$@"
+else
+  exec "$KAC_PYTHON" -u "$KAC_PACKAGE/run.py" --project-root "$KAC_PROJECT" --desktop "$KAC_DESKTOP" "$@"
+fi

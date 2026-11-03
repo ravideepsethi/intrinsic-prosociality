@@ -1,0 +1,68 @@
+{
+  "eligible_n": 623600,
+  "n": 623600,
+  "absorbed_groups": 24,
+  "dropped_singletons": 0,
+  "grants": 3238,
+  "targets": [
+    "ever_fair",
+    "ever_losing"
+  ],
+  "controls": {
+    "cats": [],
+    "nums": [
+      "rating100",
+      "log_nf",
+      "log_nl",
+      "log_age"
+    ]
+  },
+  "categorical_levels": {},
+  "status": "ESTIMATED",
+  "estimates": {
+    "ever_fair": {
+      "status": "ESTIMATED",
+      "coefficient_pp": 0.4804478829089246,
+      "se_pp": 0.0425902684237237,
+      "ci_low_pp": 0.3923432000043988,
+      "ci_high_pp": 0.5685525658134504,
+      "p_value": 7.511241619746272e-11
+    },
+    "ever_losing": {
+      "status": "ESTIMATED",
+      "coefficient_pp": -0.2016752763287258,
+      "se_pp": 0.040017198026134224,
+      "ci_low_pp": -0.2844571575731342,
+      "ci_high_pp": -0.11889339508431743,
+      "p_value": 4.22717727915085e-05
+    }
+  },
+  "target_covariance_pp2": [
+    [
+      0.0018139309644048362,
+      -0.001204400272436375
+    ],
+    [
+      -0.001204400272436375,
+      0.0016013761378628408
+    ]
+  ],
+  "clusters": 24,
+  "residual_df": 623570,
+  "within_rank": 6,
+  "max_abs_group_residual_sum": 6.752287444455884e-11,
+  "support": {
+    "treatment_switchers": 24,
+    "switchers_with_outcome_variation": 22,
+    "never_granter_identifying_weight_share": 0.00013868547669560895
+  },
+  "se": "CR1, full rank including absorbed effects; cluster=match_cell",
+  "minimum_each_state": 4,
+  "opportunity_min_age": 0,
+  "cohort": "pooled",
+  "population": "Returned active August profile acquisition frame; outcome-dependent sampling; not an unconditional population Patron rate",
+  "outcome": "August current Patron status; not observed payment or historical Patron adoption",
+  "specification": "New tenure sensitivity with original match-cell absorption, exposure counts, mean rating and baseline age; not exact rerun of prior all-control specification",
+  "fair_minus_losing_pp": 0.6821231592376504,
+  "contrast_se_pp": 0.0763158413905031
+}

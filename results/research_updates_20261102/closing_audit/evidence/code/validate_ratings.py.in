@@ -1,0 +1,268 @@
+#!/usr/bin/env python3
+"""Read-only validation of the retained original rating layer on the corrected main frame.
+
+Streams existing monthly Parquets, checkpoints one month at a time, and exports
+aggregates only. Does not replay games, refit models, or change source files.
+"""
+from pathlib import Path
+from dataclasses import dataclass, asdict
+from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo
+from contextlib import contextmanager
+import argparse, csv, hashlib, json, math, os, shutil, sys, threading, time, traceback, zipfile
+import numpy as np
+import pyarrow.parquet as pq
+
+ROOT=Path(__file__).resolve().parents[1]
+FIELDS=['chooser_color','outcome_kind_draw','timeout_chooser_win','timeout_chooser_loss',
+ 'chooser_has_mating_material','white_rating_diff_pgn','black_rating_diff_pgn',
+ 'chooser_draw_payoff_v2','chooser_win_payoff_v2',
+ 'white_realized_pred_ratingdiff_v2','black_realized_pred_ratingdiff_v2']
+GROUPS=[a+'__'+p for a in ['grant','claim'] for p in ['action_payoff','realized_replay']]
+
+def require(ok,msg):
+    if not ok:raise RuntimeError(msg)
+def load(p):return json.loads(Path(p).read_text())
+def sha(p):
+    h=hashlib.sha256()
+    with Path(p).open('rb') as f:
+        for b in iter(lambda:f.read(8*1024*1024),b''):h.update(b)
+    return h.hexdigest()
+def signature(p):
+    s=Path(p).stat();return [s.st_dev,s.st_ino,s.st_size,s.st_mtime_ns,s.st_ctime_ns]
+def save(p,d):
+    p=Path(p);p.parent.mkdir(parents=True,exist_ok=True);tmp=p.with_name(p.name+'.partial')
+    with tmp.open('w') as f:json.dump(d,f,indent=2,sort_keys=True,allow_nan=False);f.write('\n')
+    os.replace(tmp,p)
+def csv_save(p,rows):
+    with Path(p).open('w',newline='') as f:
+        w=csv.DictWriter(f,fieldnames=list(rows[0]));w.writeheader();w.writerows(rows)
+def log(s):print(datetime.now(ZoneInfo('America/Toronto')).strftime('[%Y-%m-%d %H:%M:%S %Z] ')+s,flush=True)
+@contextmanager
+def heartbeat(label):
+    done=threading.Event();start=time.monotonic()
+    def beat():
+        while not done.wait(25):log(f'{label}; elapsed {(time.monotonic()-start)/60:.1f} min')
+    thread=threading.Thread(target=beat,daemon=True);thread.start()
+    try:yield
+    finally:done.set();thread.join()
+
+@dataclass
+class Moments:
+    n:int=0
+    mean_observed:float=0.
+    mean_predicted:float=0.
+    ss_observed:float=0.
+    ss_predicted:float=0.
+    cross:float=0.
+    absolute_error_sum:float=0.
+    squared_error_sum:float=0.
+    signed_error_sum:float=0.
+    within_one:int=0
+    def add(self,x,y):
+        if not len(x):return
+        dx=x-x.mean();dy=y-y.mean();e=y-x
+        b=Moments(len(x),float(x.mean()),float(y.mean()),float(dx@dx),float(dy@dy),float(dx@dy),
+                  float(np.abs(e).sum()),float(e@e),float(e.sum()),int((np.abs(e)<=1.).sum()))
+        self.merge(b)
+    def merge(self,b):
+        if not b.n:return
+        if not self.n:self.__dict__.update(asdict(b));return
+        n=self.n+b.n;w=self.n*b.n/n
+        dx=b.mean_observed-self.mean_observed;dy=b.mean_predicted-self.mean_predicted
+        self.ss_observed+=b.ss_observed+dx*dx*w
+        self.ss_predicted+=b.ss_predicted+dy*dy*w;self.cross+=b.cross+dx*dy*w
+        self.mean_observed+=dx*b.n/n;self.mean_predicted+=dy*b.n/n;self.n=n
+        for k in ['absolute_error_sum','squared_error_sum','signed_error_sum','within_one']:
+            setattr(self,k,getattr(self,k)+getattr(b,k))
+    def result(self):
+        return dict(n_valid=self.n,correlation=(self.cross/math.sqrt(self.ss_observed*self.ss_predicted)
+                    if self.ss_observed>0 and self.ss_predicted>0 else None),
+          mean_absolute_error=(self.absolute_error_sum/self.n if self.n else None),
+          rmse=(math.sqrt(self.squared_error_sum/self.n) if self.n else None),
+          mean_signed_error_predicted_minus_recorded=(self.signed_error_sum/self.n if self.n else None),
+          within_one_point_count=self.within_one,
+          within_one_point_pct=(100*self.within_one/self.n if self.n else None))
+
+def extract(batch):
+    require(set(FIELDS)<=set(batch.schema.names),'Required rating columns missing')
+    d={k:batch.column(batch.schema.get_field_index(k)) for k in FIELDS}
+    for k in ['chooser_color','outcome_kind_draw','timeout_chooser_win','timeout_chooser_loss','chooser_has_mating_material']:
+        require(d[k].null_count==0,'Null decision/role field: '+k)
+    color=np.array(d['chooser_color'].to_pylist());white=color=='white'
+    require(np.all(white|(color=='black')),'Unknown chooser color')
+    def numeric(k):return d[k].to_numpy(zero_copy_only=False).astype(float)
+    def boolean(k):
+        x=numeric(k);require(np.all((x==0)|(x==1)),'Invalid boolean '+k);return x.astype(bool)
+    grant=boolean('outcome_kind_draw');claim=boolean('timeout_chooser_win');loss=boolean('timeout_chooser_loss')
+    require(np.all(boolean('chooser_has_mating_material')),'Non-mating-material row in corrected frame')
+    require(np.all(grant.astype(int)+claim.astype(int)+loss.astype(int)==1),'Conflicting or unclassified outcome')
+    observed=np.where(white,numeric('white_rating_diff_pgn'),numeric('black_rating_diff_pgn'))
+    action=np.where(grant,numeric('chooser_draw_payoff_v2'),numeric('chooser_win_payoff_v2'))
+    replay=np.where(white,numeric('white_realized_pred_ratingdiff_v2'),numeric('black_realized_pred_ratingdiff_v2'))
+    return dict(grant=grant,claim=claim,loss=loss,observed=observed,action_payoff=action,realized_replay=replay)
+
+def process_month(path,folder,expected_rows,expected_grants,expected_losses,batch_rows=131072):
+    path=Path(path);folder=Path(folder);folder.mkdir(parents=True,exist_ok=True)
+    pf=pq.ParquetFile(path)
+    require(pf.metadata.num_rows==expected_rows,'Monthly source row count differs')
+    require(set(FIELDS)<=set(pf.schema_arrow.names),'Missing fields: '+str(set(FIELDS)-set(pf.schema_arrow.names)))
+    before=signature(path);mom={g:Moments() for g in GROUPS}
+    missing={g:dict(eligible=0,missing_recorded=0,missing_prediction=0,missing_both=0) for g in GROUPS}
+    handles={g:(folder/(g+'.f64')).open('wb') for g in GROUPS}
+    n=grants=claims=losses=diff_n=0;diff_sum=diff_max=0.
+    try:
+        for batch in pf.iter_batches(batch_size=batch_rows,columns=FIELDS,use_threads=False):
+            d=extract(batch);n+=len(batch);grants+=int(d['grant'].sum());claims+=int(d['claim'].sum());losses+=int(d['loss'].sum())
+            for g in GROUPS:
+                arm,pred=g.split('__');mask=d[arm];x=d['observed'];y=d[pred]
+                fx=np.isfinite(x);fy=np.isfinite(y);m=missing[g]
+                m['eligible']+=int(mask.sum());m['missing_recorded']+=int((mask&~fx).sum())
+                m['missing_prediction']+=int((mask&~fy).sum());m['missing_both']+=int((mask&~fx&~fy).sum())
+                take=mask&fx&fy;xx=x[take];yy=y[take];mom[g].add(xx,yy)
+                np.asarray(np.abs(yy-xx),dtype='<f8').tofile(handles[g])
+            take=(d['grant']|d['claim'])&np.isfinite(d['action_payoff'])&np.isfinite(d['realized_replay'])
+            e=np.abs(d['action_payoff'][take]-d['realized_replay'][take]);diff_n+=len(e)
+            if len(e):diff_sum+=float(e.sum());diff_max=max(diff_max,float(e.max()))
+    finally:
+        for f in handles.values():f.close()
+    require((n,grants,losses)==(expected_rows,expected_grants,expected_losses),'Monthly decision census differs')
+    require(n==grants+claims+losses,'Outcomes fail to exhaust frame')
+    require(signature(path)==before,'Input changed during read')
+    return dict(rows=n,grants=grants,claims=claims,excluded_known_chooser_losses=losses,
+        moments={g:asdict(mom[g]) for g in GROUPS},missing=missing,
+        prediction_agreement=dict(n=diff_n,absolute_sum=diff_sum,max_absolute_difference=diff_max),
+        error_files={g:dict(name=g+'.f64',bytes=(folder/(g+'.f64')).stat().st_size,sha256=sha(folder/(g+'.f64'))) for g in GROUPS})
+
+def exact_p99(files,n,work):
+    if not n:return None
+    require(sum(Path(p).stat().st_size for p in files)==n*8,'Error-stream length mismatch')
+    temp=Path(work)/'quantile_work.f64'
+    with temp.open('wb') as out:
+        for p in files:
+            with Path(p).open('rb') as f:shutil.copyfileobj(f,out,8*1024*1024)
+    a=np.memmap(temp,dtype='<f8',mode='r+',shape=(n,))
+    at=.99*(n-1);lo=math.floor(at);hi=math.ceil(at)
+    a.partition((lo,hi));answer=float(a[lo]+(at-lo)*(a[hi]-a[lo]));del a;temp.unlink()
+    return answer
+
+def authenticate_manifest(project,expected):
+    parent=project/'derived/replication/mating_material_first_run_v100_PRIVATE'/expected['run_id'][:16]
+    path=parent/'MATERIAL_RESTRICTED_INPUTS_READY_PRIVATE.json';m=load(path);success=load(parent/'_SUCCESS.json')
+    require(success['status']=='INPUTS_READY_NOT_FULL_PAPER_RERUN','Material parent incomplete')
+    require(success['run_id']==m['run_id']==expected['run_id'],'Wrong material run')
+    require(success['report_sha256']==expected['return_zip_sha256'],'Wrong material build receipt')
+    bound=[r for r in success['files'] if Path(r['path']).resolve()==path.resolve()]
+    require(len(bound)==1 and sha(path)==bound[0]['sha256'] and path.stat().st_size==bound[0]['bytes'],'Manifest not bound by receipt')
+    require(sha(parent/'report/RESULTS.json')==expected['results_sha256'],'Parent result hash differs')
+    result=load(parent/'report/RESULTS.json')
+    require(result['input_panels_built'] and all(x['passed'] for x in result['checks']),'Parent audit has failed checks')
+    require(m['contract']=='MATING_MATERIAL_FIRST_RUN_V1' and m['rule']==expected['rule'],'Wrong material rule')
+    require(m['price_layer']=='original' and m['full_width_columns_preserved'] is True,'Wrong rating layer')
+    require(m['author_exclusion']==['AUTHOR_ACCOUNT_1','AUTHOR_ACCOUNT_2'] and m['excluded_from_decisions_not_chronology'] is True,'Wrong author exclusion')
+    require(m['known_outcome_policy']==expected['known_outcome_policy'] and m['censuses']==expected['censuses'],'Frame policy differs')
+    records=sorted(m['datasets']['main'],key=lambda r:r['month'])
+    require(len(records)==24 and {r['month'] for r in records}==set(expected['monthly']['main']),'Monthly inventory differs')
+    require(len({str(Path(r['path']).resolve()) for r in records})==24,'Repeated source path')
+    for r in records:
+        require(Path(r['path']).resolve().is_relative_to(parent/'PRIVATE/panels/main'),'Input outside corrected main folder')
+        require([r['rows'],r['grants']]==expected['monthly']['main'][r['month']],'Monthly manifest counts differ')
+    return path,records
+
+def run(project,results):
+    expected=load(ROOT/'authority/material_REVIEW.json')
+    path,records=authenticate_manifest(project,expected)
+    key=hashlib.sha256((sha(Path(__file__))+sha(path)).encode()).hexdigest()[:16]
+    work=project/'derived/replication/rating_validation_material_v100_PRIVATE'/key
+    report=work/'report';report.mkdir(parents=True,exist_ok=True);results.mkdir(parents=True,exist_ok=True)
+    log('Private checkpoints: '+str(work));code_sha=sha(Path(__file__))
+    summaries=[];folders=[];source_records=[]
+    try:
+        schema={r['month']:[dict(name=f.name,type=str(f.type)) for f in pq.ParquetFile(r['path']).schema_arrow] for r in records}
+        save(report/'SCHEMA.json',schema)
+        for k,r in enumerate(records,1):
+            p=Path(r['path']);sig=signature(p)
+            require(p.stat().st_size==r['bytes'],'Source size differs: '+str(p))
+            with heartbeat(f'Checksum {r["month"]}'):
+                require(sha(p)==r['sha256'],'Source checksum differs: '+str(p))
+            require(signature(p)==sig,'Input changed during hashing')
+            folder=work/'PRIVATE/months'/r['month'];receipt=folder/'DONE.json'
+            if receipt.exists():
+                d=load(receipt)
+                require(d['source_sha256']==r['sha256'] and d['code_sha256']==code_sha,'Checkpoint lineage differs')
+                for f in d['summary']['error_files'].values():
+                    q=folder/f['name'];require(q.stat().st_size==f['bytes'] and sha(q)==f['sha256'],'Corrupt month checkpoint')
+                summary=d['summary'];log(f'{r["month"]}: verified checkpoint ({k}/24)')
+            else:
+                folder.mkdir(parents=True,exist_ok=True)
+                with heartbeat(f'Validation {r["month"]}'):
+                    summary=process_month(p,folder,r['rows'],r['grants'],expected['known_outcome_policy']['main']['monthly'].get(r['month'],0))
+                save(receipt,dict(source_sha256=r['sha256'],code_sha256=code_sha,summary=summary))
+                log(f'{r["month"]}: {summary["rows"]:,} rows complete ({k}/24)')
+            require(signature(p)==sig,'Source changed while validating/reusing checkpoint')
+            source_records.append(dict(month=r['month'],path=str(p),sha256=r['sha256'],signature=sig))
+            summaries.append(summary);folders.append(folder)
+        census=expected['censuses']['main']
+        require(sum(s['rows'] for s in summaries)==census['new_opportunities']==41513719,'Current-frame row count differs')
+        require(sum(s['grants'] for s in summaries)==census['new_grants']==570422,'Current-frame grant count differs')
+        require(sum(s['excluded_known_chooser_losses'] for s in summaries)==65,'Known chooser losses differ')
+        table=[];monthly=[]
+        with heartbeat('Combining exact aggregate validation'):
+            for g in GROUPS:
+                total=Moments();missing={k:0 for k in summaries[0]['missing'][g]}
+                for r,s in zip(records,summaries):
+                    m=Moments(**s['moments'][g]);total.merge(m)
+                    monthly.append(dict(month=r['month'],group=g,**s['missing'][g],**m.result()))
+                    for k,v in s['missing'][g].items():missing[k]+=v
+                require(total.n==missing['eligible']-missing['missing_recorded']-missing['missing_prediction']+missing['missing_both'],'Validation denominator mismatch')
+                p99=exact_p99([f/(g+'.f64') for f in folders],total.n,work)
+                table.append(dict(group=g,**missing,**total.result(),absolute_error_p99=p99))
+        for r in source_records:require(signature(r['path'])==r['signature'],'Source changed before completion')
+        save(report/'INPUT_LINEAGE.json',dict(manifest=str(path),manifest_sha256=sha(path),source_records=source_records))
+        csv_save(report/'RATING_VALIDATION.csv',table);csv_save(report/'RATING_VALIDATION_BY_MONTH.csv',monthly)
+        agreement=dict(n=sum(s['prediction_agreement']['n'] for s in summaries),
+          absolute_sum=sum(s['prediction_agreement']['absolute_sum'] for s in summaries),
+          max_absolute_difference=max(s['prediction_agreement']['max_absolute_difference'] for s in summaries))
+        save(report/'PREDICTION_AGREEMENT.json',agreement)
+        save(report/'METHOD.json',dict(frame='Corrected material-restricted main, author excluded',
+            main_rows=41513719,grant_rows=570422,claim_rows=40943232,excluded_known_chooser_losses=65,
+            primary_predictor='chooser_draw_payoff_v2 for grants; chooser_win_payoff_v2 for claimed wins',
+            secondary_predictor='white/black_realized_pred_ratingdiff_v2, oriented by chooser_color',
+            observed='white/black_rating_diff_pgn, oriented by chooser_color; missing is never zero',
+            predictions_rounded=False,within_one='absolute error <= 1 rating point',
+            correlation='Pearson, stable centered streaming moments',p99='exact linear quantile, position .99*(n-1)',
+            errors='prediction minus recorded header change',
+            limitation='Realized-action validation does not independently observe counterfactual ratings; no inference on price responsiveness.',
+            models_fitted=0,games_replayed=0,network_requests=0,code_sha256=code_sha,
+            numpy=np.__version__))
+        save(report/'STATUS.json',dict(status='CURRENT_FRAME_VALIDATION_COMPLETE',whole_paper_complete=False))
+        log('Validation complete. Use the two action_payoff rows for the paper; compare the realized_replay rows as a consistency check.')
+        return_code=0
+    except Exception as e:
+        save(report/'STATUS.json',dict(status='PAUSED',error=type(e).__name__+': '+str(e)))
+        (report/'ERROR.txt').write_text(traceback.format_exc());traceback.print_exc();return_code=1
+    finally:
+        bundle=results/('RATING_VALIDATION_'+key+'_RETURN.zip')
+        with zipfile.ZipFile(bundle,'w',compression=zipfile.ZIP_DEFLATED) as z:
+            for p in sorted(report.rglob('*')):
+                if p.is_file():z.write(p,str(p.relative_to(work)))
+        bundle.with_name(bundle.name+'.sha256').write_text(sha(bundle)+'  '+bundle.name+'\n')
+        log('Return this single file: '+str(bundle))
+    return return_code
+
+def main():
+    a=argparse.ArgumentParser();a.add_argument('--project',type=Path,default=Path('/Volumes/XT_Pro/lichess_kindness'))
+    a.add_argument('--results',type=Path,default=Path.home()/'Desktop/Lichess_Desktop');args=a.parse_args()
+    now=datetime.now(ZoneInfo('America/Toronto'))
+    print('Expected runtime: 5-20 minutes provisionally; full source checksums and drive I/O can extend this.',flush=True)
+    print('Toronto start: '+now.strftime('%Y-%m-%d %I:%M %p %Z')+'; provisional finish '+
+          (now+timedelta(minutes=5)).strftime('%I:%M %p %Z')+' to '+(now+timedelta(minutes=20)).strftime('%I:%M %p %Z'),flush=True)
+    try:return run(args.project.expanduser().resolve(),args.results.expanduser().resolve())
+    except Exception as e:
+        results=args.results.expanduser().resolve();results.mkdir(parents=True,exist_ok=True)
+        bundle=results/'RATING_VALIDATION_PREFLIGHT_RETURN.zip'
+        with zipfile.ZipFile(bundle,'w',compression=zipfile.ZIP_DEFLATED) as z:
+            z.writestr('STATUS.json',json.dumps(dict(status='PREFLIGHT_PAUSED',error=str(e)),indent=2))
+            z.writestr('ERROR.txt',traceback.format_exc())
+        traceback.print_exc();log('Return this single file: '+str(bundle));return 1
+if __name__=='__main__':raise SystemExit(main())

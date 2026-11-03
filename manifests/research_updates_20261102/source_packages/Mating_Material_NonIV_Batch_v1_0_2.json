@@ -1,0 +1,3146 @@
+{
+  "package": "Mating_Material_NonIV_Batch_v1_0_2",
+  "archive": "Mating_Material_NonIV_Batch_v1_0_2.zip",
+  "archive_sha256": "9c68dc0d7edb60b3c16e2364fb4856e58a92d0847a7046e68be772ee169dcfa1",
+  "files": [
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/README.txt",
+      "original_sha256": "3f8c8ca39f8f3490bcc3cc4fa3db6fddf9def1e3b2eb3e971aa081711ba9df32",
+      "original_bytes": 5409,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/README.txt",
+      "published_sha256": "3f8c8ca39f8f3490bcc3cc4fa3db6fddf9def1e3b2eb3e971aa081711ba9df32",
+      "published_bytes": 5409,
+      "original_relative_path": "README.txt",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/RUN_ALL.command",
+      "original_sha256": "407d76828da1d5014c37cb6f3213507b8986a5acbd61177e7c1a0a2072392b5a",
+      "original_bytes": 808,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/RUN_ALL.command.in",
+      "published_sha256": "407d76828da1d5014c37cb6f3213507b8986a5acbd61177e7c1a0a2072392b5a",
+      "published_bytes": 808,
+      "original_relative_path": "RUN_ALL.command",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/stakes/Win_Premium_Stakes_Report/METHODS.txt",
+      "original_sha256": "cf534e04f967f18002067d8a483e20fd300b7e3ac2232f3b7c8452e2f43ac814",
+      "original_bytes": 6050,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/authority/stakes/Win_Premium_Stakes_Report/METHODS.txt.in",
+      "published_sha256": "e8168671995128c6c3f12584da5885de209def68b090bac761fd524465c0560c",
+      "published_bytes": 6067,
+      "original_relative_path": "authority/stakes/Win_Premium_Stakes_Report/METHODS.txt",
+      "substitutions": [
+        {
+          "replacement": "AUTHOR_ACCOUNT_1",
+          "occurrences": 1
+        },
+        {
+          "replacement": "AUTHOR_ACCOUNT_2",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/code/auth_util.py",
+      "original_sha256": "77257e38d97f08db8e2dacfc3a9034caf23e4bb309ab73b80b84c98bfe7f7da9",
+      "original_bytes": 2850,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/code/auth_util.py",
+      "published_sha256": "77257e38d97f08db8e2dacfc3a9034caf23e4bb309ab73b80b84c98bfe7f7da9",
+      "published_bytes": 2850,
+      "original_relative_path": "code/auth_util.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/code/batch.py",
+      "original_sha256": "b2e22fd7e079e364299f48b35888d85ad5554935efeee375d4f702635e7fa97a",
+      "original_bytes": 12312,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/code/batch.py",
+      "published_sha256": "b2e22fd7e079e364299f48b35888d85ad5554935efeee375d4f702635e7fa97a",
+      "published_bytes": 12312,
+      "original_relative_path": "code/batch.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/code/bindings.py",
+      "original_sha256": "f4cb95078f6399a3ea379922e8044caaa5119ed2e25db63d3b74e802e63f33be",
+      "original_bytes": 3687,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/code/bindings.py",
+      "published_sha256": "f4cb95078f6399a3ea379922e8044caaa5119ed2e25db63d3b74e802e63f33be",
+      "published_bytes": 3687,
+      "original_relative_path": "code/bindings.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/code/cached_families.py",
+      "original_sha256": "22b4970f309e66240c11a24d2fdeef83cebcda27e931134146c99f669547fab5",
+      "original_bytes": 12029,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/code/cached_families.py",
+      "published_sha256": "22b4970f309e66240c11a24d2fdeef83cebcda27e931134146c99f669547fab5",
+      "published_bytes": 12029,
+      "original_relative_path": "code/cached_families.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/code/engine.py",
+      "original_sha256": "7fc8dc43c3e1fc08e934d8f11d870fff69761c4389e9383a5f98dcfe41a25849",
+      "original_bytes": 5058,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/code/engine.py.in",
+      "published_sha256": "87353a121f7413bc5ac7c58d66fbb47c5ec9571f0e515311cb691e3e1dbb9aaa",
+      "published_bytes": 5075,
+      "original_relative_path": "code/engine.py",
+      "substitutions": [
+        {
+          "replacement": "AUTHOR_ACCOUNT_1",
+          "occurrences": 1
+        },
+        {
+          "replacement": "AUTHOR_ACCOUNT_2",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/code/families.py",
+      "original_sha256": "db02e0e8096c896c72a62214299ca29d3d3958b21638335793fe5eef99e10041",
+      "original_bytes": 12702,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/code/families.py",
+      "published_sha256": "db02e0e8096c896c72a62214299ca29d3d3958b21638335793fe5eef99e10041",
+      "published_bytes": 12702,
+      "original_relative_path": "code/families.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/code/gap.py",
+      "original_sha256": "07490b0cecc7b0b161668b3c184a8560db7def4ff1e06d5527093514025317d0",
+      "original_bytes": 4640,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/code/gap.py",
+      "published_sha256": "07490b0cecc7b0b161668b3c184a8560db7def4ff1e06d5527093514025317d0",
+      "published_bytes": 4640,
+      "original_relative_path": "code/gap.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/code/patron_compat.py",
+      "original_sha256": "1c27d8a05da1671641a241c3793f7b753f5a853d72a4c3f01d9b35c7aa17a527",
+      "original_bytes": 515,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/code/patron_compat.py",
+      "published_sha256": "1c27d8a05da1671641a241c3793f7b753f5a853d72a4c3f01d9b35c7aa17a527",
+      "published_bytes": 515,
+      "original_relative_path": "code/patron_compat.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/code/plan.py",
+      "original_sha256": "e19dc7a093fd6b55814f8fc2b5a82957edcaa12cfd9d4d493f237e9de3bedf93",
+      "original_bytes": 1538,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/code/plan.py",
+      "published_sha256": "e19dc7a093fd6b55814f8fc2b5a82957edcaa12cfd9d4d493f237e9de3bedf93",
+      "published_bytes": 1538,
+      "original_relative_path": "code/plan.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/code/remaining_common.py",
+      "original_sha256": "da367043dd385b1aaa0c2a5aa8c1516c69f555b784aef93c22739afc0cca71a9",
+      "original_bytes": 641,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/code/remaining_common.py",
+      "published_sha256": "da367043dd385b1aaa0c2a5aa8c1516c69f555b784aef93c22739afc0cca71a9",
+      "published_bytes": 641,
+      "original_relative_path": "code/remaining_common.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/code/resume_previous.py",
+      "original_sha256": "fc77edcb19ab367005cfdeaea9547f5fbb288e45507d03025ffb7930b3f77f6b",
+      "original_bytes": 8805,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/code/resume_previous.py",
+      "published_sha256": "fc77edcb19ab367005cfdeaea9547f5fbb288e45507d03025ffb7930b3f77f6b",
+      "published_bytes": 8805,
+      "original_relative_path": "code/resume_previous.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/code/sources.py",
+      "original_sha256": "d41f2dc636843271daee1b3d3a83d140c596808adf67bdd5e83cabf0ab88102d",
+      "original_bytes": 7121,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/code/sources.py.in",
+      "published_sha256": "fec3cc48c2a02be9c328abb8f74098dad26bad2e15ec6fcac7fd7fc047a5905e",
+      "published_bytes": 7138,
+      "original_relative_path": "code/sources.py",
+      "substitutions": [
+        {
+          "replacement": "AUTHOR_ACCOUNT_1",
+          "occurrences": 1
+        },
+        {
+          "replacement": "AUTHOR_ACCOUNT_2",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/code/tenure_remaining.py",
+      "original_sha256": "afe12d47d91ce4f05a7c21e9486f890b8f9b3a88b855bd37720998e9f52a42cf",
+      "original_bytes": 3431,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/code/tenure_remaining.py",
+      "published_sha256": "afe12d47d91ce4f05a7c21e9486f890b8f9b3a88b855bd37720998e9f52a42cf",
+      "published_bytes": 3431,
+      "original_relative_path": "code/tenure_remaining.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/code/worker.py",
+      "original_sha256": "e1659b155c55fdea8cdf9cfc2e1976610ec94625f580137f1312af77fabbe3b2",
+      "original_bytes": 2600,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/code/worker.py",
+      "published_sha256": "e1659b155c55fdea8cdf9cfc2e1976610ec94625f580137f1312af77fabbe3b2",
+      "published_bytes": 2600,
+      "original_relative_path": "code/worker.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/README.txt",
+      "original_sha256": "22d6f4966b820240802e91612e05dd02ac5dbe214298bbdee789181966049237",
+      "original_bytes": 1440,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/README.txt",
+      "published_sha256": "22d6f4966b820240802e91612e05dd02ac5dbe214298bbdee789181966049237",
+      "published_bytes": 1440,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/README.txt",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/RUN_RESPONSIBILITY.command",
+      "original_sha256": "4225c3a9c8e8b4a4d047b5dd431d17cdac1f47c21c80896bb1c2366c4007e682",
+      "original_bytes": 707,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/RUN_RESPONSIBILITY.command.in",
+      "published_sha256": "4225c3a9c8e8b4a4d047b5dd431d17cdac1f47c21c80896bb1c2366c4007e682",
+      "published_bytes": 707,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/RUN_RESPONSIBILITY.command",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/code/cache_inputs.py",
+      "original_sha256": "6d6c2335e5b252c102dc2c63c41fc4ac4d303d99037c579ef9ea8eb43efc939b",
+      "original_bytes": 4646,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/code/cache_inputs.py",
+      "published_sha256": "6d6c2335e5b252c102dc2c63c41fc4ac4d303d99037c579ef9ea8eb43efc939b",
+      "published_bytes": 4646,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/code/cache_inputs.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/code/checkpoints.py",
+      "original_sha256": "621b1a159419f650b38c2b97464960834297fa13807bf6bfe7e00d60f1d45ebf",
+      "original_bytes": 1233,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/code/checkpoints.py",
+      "published_sha256": "621b1a159419f650b38c2b97464960834297fa13807bf6bfe7e00d60f1d45ebf",
+      "published_bytes": 1233,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/code/checkpoints.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/code/design_support.py",
+      "original_sha256": "3f0ed4a7844085e5fa2022ff70401ec2792b9fe66d1b1eb31b0e64ee9a864031",
+      "original_bytes": 4097,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/code/design_support.py",
+      "published_sha256": "3f0ed4a7844085e5fa2022ff70401ec2792b9fe66d1b1eb31b0e64ee9a864031",
+      "published_bytes": 4097,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/code/design_support.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/code/estimation.py",
+      "original_sha256": "98dcf2fc4855d407846eeb23bd2d7ad3956ab9134947f2d495c76db928af9a85",
+      "original_bytes": 6743,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/code/estimation.py",
+      "published_sha256": "98dcf2fc4855d407846eeb23bd2d7ad3956ab9134947f2d495c76db928af9a85",
+      "published_bytes": 6743,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/code/estimation.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/code/inputs.py",
+      "original_sha256": "bc4b2388e63459430385c50eef4e58ff5a822d60ad0a4a71db5d69cd3db8b235",
+      "original_bytes": 6220,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/code/inputs.py.in",
+      "published_sha256": "411719628f783f1ad93b400859f8f6c633c93d8e203eb09b4ee52eda156015e8",
+      "published_bytes": 6237,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/code/inputs.py",
+      "substitutions": [
+        {
+          "replacement": "AUTHOR_ACCOUNT_1",
+          "occurrences": 1
+        },
+        {
+          "replacement": "AUTHOR_ACCOUNT_2",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/code/panel.py",
+      "original_sha256": "5b54c0725e8bc35b7ef81dfafd5cffe0a9118e1944cdd764267c3d36f65d83c2",
+      "original_bytes": 7384,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/code/panel.py.in",
+      "published_sha256": "95bf021bf880376cdd03967fa8324ff808ccf44e4b42ae6742fd903f263ff4d6",
+      "published_bytes": 7401,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/code/panel.py",
+      "substitutions": [
+        {
+          "replacement": "AUTHOR_ACCOUNT_1",
+          "occurrences": 1
+        },
+        {
+          "replacement": "AUTHOR_ACCOUNT_2",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/code/reporting.py",
+      "original_sha256": "29b860f0f85199793716544f4f545d3f0743cf4795adefe345591820247b8233",
+      "original_bytes": 8987,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/code/reporting.py",
+      "published_sha256": "29b860f0f85199793716544f4f545d3f0743cf4795adefe345591820247b8233",
+      "published_bytes": 8987,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/code/reporting.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/code/responsibility.py",
+      "original_sha256": "d1d548197c2cccd39d177cfca2adae1777293f1f38e96379218f9c6fbdc2927f",
+      "original_bytes": 2735,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/code/responsibility.py",
+      "published_sha256": "d1d548197c2cccd39d177cfca2adae1777293f1f38e96379218f9c6fbdc2927f",
+      "published_bytes": 2735,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/code/responsibility.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/code/run_responsibility.py",
+      "original_sha256": "ca7b9d1460e7edf3ba44ac2feb2e0cb7edd94d619b0ff39297b7f70711f5c008",
+      "original_bytes": 10638,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/code/run_responsibility.py.in",
+      "published_sha256": "7bea0a061b2605edff3f55c4ef6b4b73eeb29155dd116b088395d16ea51e560f",
+      "published_bytes": 10655,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/code/run_responsibility.py",
+      "substitutions": [
+        {
+          "replacement": "AUTHOR_ACCOUNT_1",
+          "occurrences": 1
+        },
+        {
+          "replacement": "AUTHOR_ACCOUNT_2",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/code/sources.py",
+      "original_sha256": "c25a95730da7ebc695b192d3dec90b290bc00ed6c9d6362a5cf308cf4a374fa5",
+      "original_bytes": 2472,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/code/sources.py",
+      "published_sha256": "c25a95730da7ebc695b192d3dec90b290bc00ed6c9d6362a5cf308cf4a374fa5",
+      "published_bytes": 2472,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/code/sources.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/code/util.py",
+      "original_sha256": "77257e38d97f08db8e2dacfc3a9034caf23e4bb309ab73b80b84c98bfe7f7da9",
+      "original_bytes": 2850,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/code/util.py",
+      "published_sha256": "77257e38d97f08db8e2dacfc3a9034caf23e4bb309ab73b80b84c98bfe7f7da9",
+      "published_bytes": 2850,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/code/util.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/requirements.txt",
+      "original_sha256": "684b1e615aa60149c4212f14198c7639446d6bb7f27f127500dbd01c794eb9c5",
+      "original_bytes": 71,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/requirements.txt",
+      "published_sha256": "684b1e615aa60149c4212f14198c7639446d6bb7f27f127500dbd01c794eb9c5",
+      "published_bytes": 71,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/requirements.txt",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/run.py",
+      "original_sha256": "9ebc0538061120e02f4adbe6db8072a2fb6884f2d46040e78fa87218311f226e",
+      "original_bytes": 207,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/run.py",
+      "published_sha256": "9ebc0538061120e02f4adbe6db8072a2fb6884f2d46040e78fa87218311f226e",
+      "published_bytes": 207,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/run.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/setup_and_run.py",
+      "original_sha256": "24a08a2d78e7bec67aecd3ef1faa207eebfb6ab87e41eef672db1c5c9f0eef6e",
+      "original_bytes": 1860,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/setup_and_run.py",
+      "published_sha256": "24a08a2d78e7bec67aecd3ef1faa207eebfb6ab87e41eef672db1c5c9f0eef6e",
+      "published_bytes": 1860,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/setup_and_run.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/tests/contract_tests.py",
+      "original_sha256": "b24c3459efa9aa597bbabd72ed4674014d40be66337e9d23444a03f69e8b836d",
+      "original_bytes": 3640,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/tests/contract_tests.py.in",
+      "published_sha256": "1210892ab4e15004e8d996c0b5fd326fde03f12a82ad20558e1089dab8e777e3",
+      "published_bytes": 3657,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/tests/contract_tests.py",
+      "substitutions": [
+        {
+          "replacement": "AUTHOR_ACCOUNT_1",
+          "occurrences": 1
+        },
+        {
+          "replacement": "AUTHOR_ACCOUNT_2",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/tests/fixtures.py",
+      "original_sha256": "806484b4ea609ceb81a38de00c5836d96a812ebc538f8f4c1edf6170f287322c",
+      "original_bytes": 2678,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/tests/fixtures.py",
+      "published_sha256": "806484b4ea609ceb81a38de00c5836d96a812ebc538f8f4c1edf6170f287322c",
+      "published_bytes": 2678,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/tests/fixtures.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/tests/run_tests.py",
+      "original_sha256": "77edf3ad7d96e9c2107e8ecf14ec3ee920e9c2f27c7bbca20a75b2c95db8466c",
+      "original_bytes": 564,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/tests/run_tests.py",
+      "published_sha256": "77edf3ad7d96e9c2107e8ecf14ec3ee920e9c2f27c7bbca20a75b2c95db8466c",
+      "published_bytes": 564,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/tests/run_tests.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/tests/test_design_support.py",
+      "original_sha256": "84b2964603e0142a7308e4ec28906447687cc4d3b75b056bc765cc45fa592680",
+      "original_bytes": 3859,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/tests/test_design_support.py",
+      "published_sha256": "84b2964603e0142a7308e4ec28906447687cc4d3b75b056bc765cc45fa592680",
+      "published_bytes": 3859,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/tests/test_design_support.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/tests/test_responsibility.py",
+      "original_sha256": "34656476098ae7c2dda31ba87e384d0aa6eb1f22021d5d4fc4b737b583f76803",
+      "original_bytes": 14780,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/tests/test_responsibility.py.in",
+      "published_sha256": "39bcb2ae14a2202c563270d7d9620c1ce51cf708e9380b99773d972bee2a1c7d",
+      "published_bytes": 14789,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/tests/test_responsibility.py",
+      "substitutions": [
+        {
+          "replacement": "AUTHOR_ACCOUNT_1",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/vendor/a2/a1_design.py",
+      "original_sha256": "87b5272c53a943f818c4cfff73b75bd6bf1e10ae270121ad4dd3d0cee4d4b85b",
+      "original_bytes": 6804,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/vendor/a2/a1_design.py",
+      "published_sha256": "87b5272c53a943f818c4cfff73b75bd6bf1e10ae270121ad4dd3d0cee4d4b85b",
+      "published_bytes": 6804,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/vendor/a2/a1_design.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/vendor/a2/analysis_runner.py",
+      "original_sha256": "e2c7a314e5e13f22cb78277cb2203ff152e7c7c760b4bc8a09a4855a08de08e4",
+      "original_bytes": 12033,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/vendor/a2/analysis_runner.py",
+      "published_sha256": "e2c7a314e5e13f22cb78277cb2203ff152e7c7c760b4bc8a09a4855a08de08e4",
+      "published_bytes": 12033,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/vendor/a2/analysis_runner.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/vendor/a2/common.py",
+      "original_sha256": "e58f3a76078e2d153ee9f8b160ab3956b306f16df9ef24b9d1a8eb6963e3faff",
+      "original_bytes": 3154,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/vendor/a2/common.py",
+      "published_sha256": "e58f3a76078e2d153ee9f8b160ab3956b306f16df9ef24b9d1a8eb6963e3faff",
+      "published_bytes": 3154,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/vendor/a2/common.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/vendor/a2/design.py",
+      "original_sha256": "fec8d94af8210e959a27512a5631ac92ba614e2a6e7687a40c0ac182c40bb59d",
+      "original_bytes": 8007,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/vendor/a2/design.py",
+      "published_sha256": "fec8d94af8210e959a27512a5631ac92ba614e2a6e7687a40c0ac182c40bb59d",
+      "published_bytes": 8007,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/vendor/a2/design.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/vendor/a2/estimate.py",
+      "original_sha256": "0a86b2bc3c26074a589563757b5e1e4b10490a72dcc8b97458c1f02cf1b5465f",
+      "original_bytes": 5658,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/vendor/a2/estimate.py",
+      "published_sha256": "0a86b2bc3c26074a589563757b5e1e4b10490a72dcc8b97458c1f02cf1b5465f",
+      "published_bytes": 5658,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/vendor/a2/estimate.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/vendor/a2/features.py",
+      "original_sha256": "092456732c086b74dd3003d8d96cbff1442b97dd350cf35dea5207d39116fb0b",
+      "original_bytes": 5190,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/vendor/a2/features.py",
+      "published_sha256": "092456732c086b74dd3003d8d96cbff1442b97dd350cf35dea5207d39116fb0b",
+      "published_bytes": 5190,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/vendor/a2/features.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/vendor/a2/history.py",
+      "original_sha256": "cb134706a8018b997b5b03d9ac70e057e179cd5cbda9103d4faf41031ec1ef28",
+      "original_bytes": 3406,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/vendor/a2/history.py",
+      "published_sha256": "cb134706a8018b997b5b03d9ac70e057e179cd5cbda9103d4faf41031ec1ef28",
+      "published_bytes": 3406,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/vendor/a2/history.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/vendor/a2/lineage.py",
+      "original_sha256": "a4bace80065e69f4add20ab0dedbf17a7e9c397f6e408289a72f089b12c9e40d",
+      "original_bytes": 2719,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/vendor/a2/lineage.py",
+      "published_sha256": "a4bace80065e69f4add20ab0dedbf17a7e9c397f6e408289a72f089b12c9e40d",
+      "published_bytes": 2719,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/vendor/a2/lineage.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/vendor/a2/report.py",
+      "original_sha256": "12d76a184031de82b11e526c069f4e37b11b8148ffb09d18329704bc894f820d",
+      "original_bytes": 6756,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/vendor/a2/report.py",
+      "published_sha256": "12d76a184031de82b11e526c069f4e37b11b8148ffb09d18329704bc894f820d",
+      "published_bytes": 6756,
+      "original_relative_path": "components/Mating_Material_Responsibility_v1_0_2/vendor/a2/report.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/requirements.txt",
+      "original_sha256": "d462f0163ac89b427a9321a98d7830920903800a3844e899e39b61819299e999",
+      "original_bytes": 90,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/requirements.txt",
+      "published_sha256": "d462f0163ac89b427a9321a98d7830920903800a3844e899e39b61819299e999",
+      "published_bytes": 90,
+      "original_relative_path": "requirements.txt",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/run.py",
+      "original_sha256": "52ca31682a2c344b253449343fcaea997c5c1c9f3beafb3cc12ca971bd2e93f8",
+      "original_bytes": 194,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/run.py",
+      "published_sha256": "52ca31682a2c344b253449343fcaea997c5c1c9f3beafb3cc12ca971bd2e93f8",
+      "published_bytes": 194,
+      "original_relative_path": "run.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/setup_and_run.py",
+      "original_sha256": "532682359378dde744c6a61f949d5bc965858a491f9f04036a2803f1b9384b8e",
+      "original_bytes": 1841,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/setup_and_run.py",
+      "published_sha256": "532682359378dde744c6a61f949d5bc965858a491f9f04036a2803f1b9384b8e",
+      "published_bytes": 1841,
+      "original_relative_path": "setup_and_run.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/tests/countdown_recovery_fixture.py",
+      "original_sha256": "348a2b37c65dda667ea9cf37f80fa9ca6659474aebf00b9a520767be48477c55",
+      "original_bytes": 4391,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/tests/countdown_recovery_fixture.py.in",
+      "published_sha256": "a89d48ffdf122af8e9bfac1f3c8cb04180256990835a80fe56652f3a2268d431",
+      "published_bytes": 4408,
+      "original_relative_path": "tests/countdown_recovery_fixture.py",
+      "substitutions": [
+        {
+          "replacement": "AUTHOR_ACCOUNT_1",
+          "occurrences": 1
+        },
+        {
+          "replacement": "AUTHOR_ACCOUNT_2",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/tests/patron_recovery_fixture.py",
+      "original_sha256": "b267b3aeffedec1d2f9686efb9f05d6fc5dbc56604a7019efdf33561cf1fb23a",
+      "original_bytes": 5539,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/tests/patron_recovery_fixture.py",
+      "published_sha256": "b267b3aeffedec1d2f9686efb9f05d6fc5dbc56604a7019efdf33561cf1fb23a",
+      "published_bytes": 5539,
+      "original_relative_path": "tests/patron_recovery_fixture.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/tests/test_batch.py",
+      "original_sha256": "b0933a53bdfb930b6b31b7f5338f6027d32774be36cf1741b7f9e9dec3333a22",
+      "original_bytes": 11284,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/tests/test_batch.py.in",
+      "published_sha256": "9a0d027a90fdfdcb868f7dfe081275952b3f6db896dcb98ce7ad397cce4ecb99",
+      "published_bytes": 11301,
+      "original_relative_path": "tests/test_batch.py",
+      "substitutions": [
+        {
+          "replacement": "AUTHOR_ACCOUNT_1",
+          "occurrences": 1
+        },
+        {
+          "replacement": "AUTHOR_ACCOUNT_2",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/tests/test_closeout.py",
+      "original_sha256": "7ba38e78bcc39e611b826d50ffa75a15cb720414b67bd7230405ee73489cad1a",
+      "original_bytes": 2665,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/tests/test_closeout.py",
+      "published_sha256": "7ba38e78bcc39e611b826d50ffa75a15cb720414b67bd7230405ee73489cad1a",
+      "published_bytes": 2665,
+      "original_relative_path": "tests/test_closeout.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/tests/test_recovery.py",
+      "original_sha256": "641080fbcc27d238cfe000ad2efcecea1b86b983c5266f2eb40d93e1611ba185",
+      "original_bytes": 8073,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/tests/test_recovery.py",
+      "published_sha256": "641080fbcc27d238cfe000ad2efcecea1b86b983c5266f2eb40d93e1611ba185",
+      "published_bytes": 8073,
+      "original_relative_path": "tests/test_recovery.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/README_FIRST.md",
+      "original_sha256": "44338e2ed840e9c726550dc8f0633c666d927faaf2044f51ebd5e42b2c72541a",
+      "original_bytes": 11962,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/README_FIRST.md",
+      "published_sha256": "44338e2ed840e9c726550dc8f0633c666d927faaf2044f51ebd5e42b2c72541a",
+      "published_bytes": 11962,
+      "original_relative_path": "vendor/arena/README_FIRST.md",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/REPAIR_NOTE.md",
+      "original_sha256": "2e7b9453655ca59e63c8f47b3b9f58365a9e0df0ae1a02f2e978044649e0ba65",
+      "original_bytes": 2702,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/REPAIR_NOTE.md",
+      "published_sha256": "2e7b9453655ca59e63c8f47b3b9f58365a9e0df0ae1a02f2e978044649e0ba65",
+      "published_bytes": 2702,
+      "original_relative_path": "vendor/arena/REPAIR_NOTE.md",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/RUN_ARENA_REPLICATION.command",
+      "original_sha256": "540dc3591fc86981570d4267a940a44f3864f5115bf354077c851461ea4c47cd",
+      "original_bytes": 1599,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/RUN_ARENA_REPLICATION.command.in",
+      "published_sha256": "540dc3591fc86981570d4267a940a44f3864f5115bf354077c851461ea4c47cd",
+      "published_bytes": 1599,
+      "original_relative_path": "vendor/arena/RUN_ARENA_REPLICATION.command",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/analysis.py",
+      "original_sha256": "c49b94431fb4b1ce3a517b864eb317a0e276b53fd7cf7ae1a4745b2c8ddb53aa",
+      "original_bytes": 14166,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/analysis.py",
+      "published_sha256": "c49b94431fb4b1ce3a517b864eb317a0e276b53fd7cf7ae1a4745b2c8ddb53aa",
+      "published_bytes": 14166,
+      "original_relative_path": "vendor/arena/analysis.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/authority/V101_REPAIR_NOTE.md",
+      "original_sha256": "007b19b7d04eae36f3740307022b459c932e335436df3df930cf0084a240fa1d",
+      "original_bytes": 2417,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/authority/V101_REPAIR_NOTE.md",
+      "published_sha256": "007b19b7d04eae36f3740307022b459c932e335436df3df930cf0084a240fa1d",
+      "published_bytes": 2417,
+      "original_relative_path": "vendor/arena/authority/V101_REPAIR_NOTE.md",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/build.py",
+      "original_sha256": "a43005ef51a18f4eec2b51238a138a18cc296bb95b90c7d7c820fe151c7fe040",
+      "original_bytes": 10414,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/build.py",
+      "published_sha256": "a43005ef51a18f4eec2b51238a138a18cc296bb95b90c7d7c820fe151c7fe040",
+      "published_bytes": 10414,
+      "original_relative_path": "vendor/arena/build.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/common.py",
+      "original_sha256": "b8fc89effa6cf510c784372f602a04ff009e65d10567fcd80c0d2ab4597ff7a2",
+      "original_bytes": 6304,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/common.py",
+      "published_sha256": "b8fc89effa6cf510c784372f602a04ff009e65d10567fcd80c0d2ab4597ff7a2",
+      "published_bytes": 6304,
+      "original_relative_path": "vendor/arena/common.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/estimation.py",
+      "original_sha256": "bcadea042869e69856e7f3c1d1bc1082462f87c19d5a41c1106bd48afbd931ca",
+      "original_bytes": 5890,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/estimation.py",
+      "published_sha256": "bcadea042869e69856e7f3c1d1bc1082462f87c19d5a41c1106bd48afbd931ca",
+      "published_bytes": 5890,
+      "original_relative_path": "vendor/arena/estimation.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/legacy_structural.py",
+      "original_sha256": "e9b8787af2f9a8ccde223cc741a52579704b08851eada4900724322d8a9e48e3",
+      "original_bytes": 9073,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/legacy_structural.py",
+      "published_sha256": "e9b8787af2f9a8ccde223cc741a52579704b08851eada4900724322d8a9e48e3",
+      "published_bytes": 9073,
+      "original_relative_path": "vendor/arena/legacy_structural.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/requirements.txt",
+      "original_sha256": "12e7c9c4ecb16b62fe991751db25b75cb8af75cf24155306c465e1c105acf78d",
+      "original_bytes": 79,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/requirements.txt",
+      "published_sha256": "12e7c9c4ecb16b62fe991751db25b75cb8af75cf24155306c465e1c105acf78d",
+      "published_bytes": 79,
+      "original_relative_path": "vendor/arena/requirements.txt",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/run.py",
+      "original_sha256": "a8e6bb4d13eb200d48ccad53accd68e4c6248203c2708f3cd29585f2a59c9123",
+      "original_bytes": 11648,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/run.py",
+      "published_sha256": "a8e6bb4d13eb200d48ccad53accd68e4c6248203c2708f3cd29585f2a59c9123",
+      "published_bytes": 11648,
+      "original_relative_path": "vendor/arena/run.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/auth/audit_io.py",
+      "original_sha256": "f1a2cc45180ae74791ec36dd737f0db9d046586da4ddb2ec84e69a52e1dd810a",
+      "original_bytes": 7300,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/auth/audit_io.py",
+      "published_sha256": "f1a2cc45180ae74791ec36dd737f0db9d046586da4ddb2ec84e69a52e1dd810a",
+      "published_bytes": 7300,
+      "original_relative_path": "vendor/arena/source/auth/audit_io.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/auth/build_main_sample.py",
+      "original_sha256": "7c54b775194916308f861129ddece3bca52ebea4aad0af3284322d1ac6172fb4",
+      "original_bytes": 39789,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/auth/build_main_sample.py",
+      "published_sha256": "7c54b775194916308f861129ddece3bca52ebea4aad0af3284322d1ac6172fb4",
+      "published_bytes": 39789,
+      "original_relative_path": "vendor/arena/source/auth/build_main_sample.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/auth/sample_rules.py",
+      "original_sha256": "60f7edd9a06ef084f1435f0ed96db740dbcae47739bde16d0ea82b3592561d39",
+      "original_bytes": 4513,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/auth/sample_rules.py",
+      "published_sha256": "60f7edd9a06ef084f1435f0ed96db740dbcae47739bde16d0ea82b3592561d39",
+      "published_bytes": 4513,
+      "original_relative_path": "vendor/arena/source/auth/sample_rules.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/certified/05_build_timeout_opportunity_panel.py",
+      "original_sha256": "eb8f7e7629c323ee8d5a9f7d4a96b5f9982980189cf27500289582457f0dfe80",
+      "original_bytes": 101978,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/certified/05_build_timeout_opportunity_panel.py.in",
+      "published_sha256": "3077a0ef2ef84ef39f39cceb38f05113d97dd1d712dc4e9e26d5b03898670395",
+      "published_bytes": 101970,
+      "original_relative_path": "vendor/arena/source/certified/05_build_timeout_opportunity_panel.py",
+      "substitutions": [
+        {
+          "replacement": "/LOCAL_HOME",
+          "occurrences": 2
+        }
+      ]
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/certified/07_build_analysis_panel.py",
+      "original_sha256": "0411d4061ea9831c20449208a9782aaf668e160139918d106a2b7d63aaa56e6e",
+      "original_bytes": 107133,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/certified/07_build_analysis_panel.py",
+      "published_sha256": "0411d4061ea9831c20449208a9782aaf668e160139918d106a2b7d63aaa56e6e",
+      "published_bytes": 107133,
+      "original_relative_path": "vendor/arena/source/certified/07_build_analysis_panel.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/wave1/controlled/METHOD_NOTE.md",
+      "original_sha256": "75dcaeadf55162fe375f245bc01ea4d84f75f2db054392df1bec412a1db352d1",
+      "original_bytes": 7096,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/wave1/controlled/METHOD_NOTE.md",
+      "published_sha256": "75dcaeadf55162fe375f245bc01ea4d84f75f2db054392df1bec412a1db352d1",
+      "published_bytes": 7096,
+      "original_relative_path": "vendor/arena/source/wave1/controlled/METHOD_NOTE.md",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/wave1/controlled/controlled_reference_price_figure.py",
+      "original_sha256": "04f2389dbf895e94f9108ef98b100bb23233a3fea8a5a1fea397203ada1012d6",
+      "original_bytes": 29928,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/wave1/controlled/controlled_reference_price_figure.py",
+      "published_sha256": "04f2389dbf895e94f9108ef98b100bb23233a3fea8a5a1fea397203ada1012d6",
+      "published_bytes": 29928,
+      "original_relative_path": "vendor/arena/source/wave1/controlled/controlled_reference_price_figure.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/wave1/controlled/reference_price_model_v110.py",
+      "original_sha256": "a7cb4e723599705e3aae7416431d5b46fad27ea0bbd8a92671f1390f132b178f",
+      "original_bytes": 62615,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/wave1/controlled/reference_price_model_v110.py",
+      "published_sha256": "a7cb4e723599705e3aae7416431d5b46fad27ea0bbd8a92671f1390f132b178f",
+      "published_bytes": 62615,
+      "original_relative_path": "vendor/arena/source/wave1/controlled/reference_price_model_v110.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/wave1/core/08_make_core_paper_results.py",
+      "original_sha256": "e9dd80c52da5ffef3d406c3af25912bd924f6423f123ca535cf4077cb039c41f",
+      "original_bytes": 89481,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/wave1/core/08_make_core_paper_results.py",
+      "published_sha256": "e9dd80c52da5ffef3d406c3af25912bd924f6423f123ca535cf4077cb039c41f",
+      "published_bytes": 89481,
+      "original_relative_path": "vendor/arena/source/wave1/core/08_make_core_paper_results.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/wave1/core/09_build_panel_robustness.py",
+      "original_sha256": "f0b3d8d638523e22e4bc3b665d3067a261bcfb1c3d2831d9bf8fb81e6c521431",
+      "original_bytes": 59125,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/wave1/core/09_build_panel_robustness.py",
+      "published_sha256": "f0b3d8d638523e22e4bc3b665d3067a261bcfb1c3d2831d9bf8fb81e6c521431",
+      "published_bytes": 59125,
+      "original_relative_path": "vendor/arena/source/wave1/core/09_build_panel_robustness.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/wave1/structural/rating_gap_krd_decomposition.py",
+      "original_sha256": "2b481180e25562632f568e8bc0737da17415593c34124372295bb1d5227a7eda",
+      "original_bytes": 26753,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/wave1/structural/rating_gap_krd_decomposition.py",
+      "published_sha256": "2b481180e25562632f568e8bc0737da17415593c34124372295bb1d5227a7eda",
+      "published_bytes": 26753,
+      "original_relative_path": "vendor/arena/source/wave1/structural/rating_gap_krd_decomposition.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/wave1/structural/rating_gap_nonparametric_closure_parallel.py",
+      "original_sha256": "458b6545d8a563180397dd3b568efab3b08f19c086893610a59260734722f1ff",
+      "original_bytes": 38653,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/wave1/structural/rating_gap_nonparametric_closure_parallel.py",
+      "published_sha256": "458b6545d8a563180397dd3b568efab3b08f19c086893610a59260734722f1ff",
+      "published_bytes": 38653,
+      "original_relative_path": "vendor/arena/source/wave1/structural/rating_gap_nonparametric_closure_parallel.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/wave1/structural/render_rating_gap_krd.py",
+      "original_sha256": "c009c53fd0bf29fb7474ba7dfcad2f18b49833e874d641e4be1d17ab0420fa3b",
+      "original_bytes": 3698,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/wave1/structural/render_rating_gap_krd.py",
+      "published_sha256": "c009c53fd0bf29fb7474ba7dfcad2f18b49833e874d641e4be1d17ab0420fa3b",
+      "published_bytes": 3698,
+      "original_relative_path": "vendor/arena/source/wave1/structural/render_rating_gap_krd.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/wave1/structural/render_rating_gap_nonparametric_closure.py",
+      "original_sha256": "73aba5e088a71945bb959739d29a88e90d0aea5d37e0d33537d3fdfb0ae1c477",
+      "original_bytes": 3853,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/wave1/structural/render_rating_gap_nonparametric_closure.py",
+      "published_sha256": "73aba5e088a71945bb959739d29a88e90d0aea5d37e0d33537d3fdfb0ae1c477",
+      "published_bytes": 3853,
+      "original_relative_path": "vendor/arena/source/wave1/structural/render_rating_gap_nonparametric_closure.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/support.py",
+      "original_sha256": "82b2cda4531b276c1451d42c8c63fc6ae371f9e1ecb06530773b55b9870bdb8d",
+      "original_bytes": 7555,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/support.py",
+      "published_sha256": "82b2cda4531b276c1451d42c8c63fc6ae371f9e1ecb06530773b55b9870bdb8d",
+      "published_bytes": 7555,
+      "original_relative_path": "vendor/arena/support.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/tests.py",
+      "original_sha256": "f2b54c98b2196b7ddd5da0c3addca609690b0041425ca019c6cf640ffe6c9e3b",
+      "original_bytes": 21183,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/tests.py",
+      "published_sha256": "f2b54c98b2196b7ddd5da0c3addca609690b0041425ca019c6cf640ffe6c9e3b",
+      "published_bytes": 21183,
+      "original_relative_path": "vendor/arena/tests.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/validation.py",
+      "original_sha256": "581408de9fd652421a3fda1e6ffc8e12115b4774cbc5679d8f120b492c2bdea9",
+      "original_bytes": 7734,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/validation.py",
+      "published_sha256": "581408de9fd652421a3fda1e6ffc8e12115b4774cbc5679d8f120b492c2bdea9",
+      "published_bytes": 7734,
+      "original_relative_path": "vendor/arena/validation.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/README.txt",
+      "original_sha256": "4d3f83b16e88647b7c59632706c1205d2d56e3e0e7fe01e59231f5edaab194fa",
+      "original_bytes": 8931,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/README.txt",
+      "published_sha256": "4d3f83b16e88647b7c59632706c1205d2d56e3e0e7fe01e59231f5edaab194fa",
+      "published_bytes": 8931,
+      "original_relative_path": "vendor/countdown/README.txt",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/RUN_COUNTDOWN_ESTIMATION.command",
+      "original_sha256": "cbefeaa4ff390289cae4ab5ff78ebdc18e7edabbe1d7bbfc1c36a9defc4a1ab5",
+      "original_bytes": 2482,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/RUN_COUNTDOWN_ESTIMATION.command.in",
+      "published_sha256": "cbefeaa4ff390289cae4ab5ff78ebdc18e7edabbe1d7bbfc1c36a9defc4a1ab5",
+      "published_bytes": 2482,
+      "original_relative_path": "vendor/countdown/RUN_COUNTDOWN_ESTIMATION.command",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/code/base.py",
+      "original_sha256": "3b6a06459d97c2dd90aec098770a10486fbc5b48ee07fa1bdc8462eb858607e0",
+      "original_bytes": 3834,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/code/base.py.in",
+      "published_sha256": "930d80c100fd9313e5aa86ee351af41f2e0844449eb61f7f229a5c8f4fa0c207",
+      "published_bytes": 3851,
+      "original_relative_path": "vendor/countdown/code/base.py",
+      "substitutions": [
+        {
+          "replacement": "AUTHOR_ACCOUNT_1",
+          "occurrences": 1
+        },
+        {
+          "replacement": "AUTHOR_ACCOUNT_2",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/code/common.py",
+      "original_sha256": "0b03e2aa079b995c3ccc9ae7781d28a7e933c4397e832b81601a3a92dd149249",
+      "original_bytes": 1427,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/code/common.py",
+      "published_sha256": "0b03e2aa079b995c3ccc9ae7781d28a7e933c4397e832b81601a3a92dd149249",
+      "published_bytes": 1427,
+      "original_relative_path": "vendor/countdown/code/common.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/code/design.py",
+      "original_sha256": "6c104bb67a9ce4c7261f99d850be07f5205bbbb94a3146d1c2f298882312c60b",
+      "original_bytes": 3662,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/code/design.py",
+      "published_sha256": "6c104bb67a9ce4c7261f99d850be07f5205bbbb94a3146d1c2f298882312c60b",
+      "published_bytes": 3662,
+      "original_relative_path": "vendor/countdown/code/design.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/code/estimate.py",
+      "original_sha256": "4e2601085da43b62ed06319a318eb0861cde3f3daeef98e4f4d0b1c4d7b600f5",
+      "original_bytes": 10169,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/code/estimate.py",
+      "published_sha256": "4e2601085da43b62ed06319a318eb0861cde3f3daeef98e4f4d0b1c4d7b600f5",
+      "published_bytes": 10169,
+      "original_relative_path": "vendor/countdown/code/estimate.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/code/feature_projection.py",
+      "original_sha256": "46e1908d6504ecdb571da258c3c7d91c3df91e80146521d993df5a7b93b1f160",
+      "original_bytes": 11344,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/code/feature_projection.py",
+      "published_sha256": "46e1908d6504ecdb571da258c3c7d91c3df91e80146521d993df5a7b93b1f160",
+      "published_bytes": 11344,
+      "original_relative_path": "vendor/countdown/code/feature_projection.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/code/inputs.py",
+      "original_sha256": "4c87e7c147e57b1d201f0f225c43e756399ac209161ca31e438e6ceacc702de8",
+      "original_bytes": 4721,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/code/inputs.py",
+      "published_sha256": "4c87e7c147e57b1d201f0f225c43e756399ac209161ca31e438e6ceacc702de8",
+      "published_bytes": 4721,
+      "original_relative_path": "vendor/countdown/code/inputs.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/code/numerics.py",
+      "original_sha256": "409f29fa27270070943f31a64af20e5bf9781ae11e316138ec89f214d0d03966",
+      "original_bytes": 3796,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/code/numerics.py",
+      "published_sha256": "409f29fa27270070943f31a64af20e5bf9781ae11e316138ec89f214d0d03966",
+      "published_bytes": 3796,
+      "original_relative_path": "vendor/countdown/code/numerics.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/code/report.py",
+      "original_sha256": "d338500b352f9e304ace28f3e09205cefc7860514d5c1068bed0c430e5bd2366",
+      "original_bytes": 11227,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/code/report.py",
+      "published_sha256": "d338500b352f9e304ace28f3e09205cefc7860514d5c1068bed0c430e5bd2366",
+      "published_bytes": 11227,
+      "original_relative_path": "vendor/countdown/code/report.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/code/run.py",
+      "original_sha256": "0cd052d96338bb915976e895d4ec2459b4a7e4f35d2ea9a261391ed9a600411c",
+      "original_bytes": 11631,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/code/run.py",
+      "published_sha256": "0cd052d96338bb915976e895d4ec2459b4a7e4f35d2ea9a261391ed9a600411c",
+      "published_bytes": 11631,
+      "original_relative_path": "vendor/countdown/code/run.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/requirements.txt",
+      "original_sha256": "0e2b51147c780082795dfff6a6c4727b23ede194ef5ca7877016c333f350970d",
+      "original_bytes": 139,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/requirements.txt",
+      "published_sha256": "0e2b51147c780082795dfff6a6c4727b23ede194ef5ca7877016c333f350970d",
+      "published_bytes": 139,
+      "original_relative_path": "vendor/countdown/requirements.txt",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/tests/test_estimation.py",
+      "original_sha256": "21bb12f3c7b4d7d840e89987b750bc8d569130a5f1e8c4479fdbf5050abca026",
+      "original_bytes": 10476,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/tests/test_estimation.py",
+      "published_sha256": "21bb12f3c7b4d7d840e89987b750bc8d569130a5f1e8c4479fdbf5050abca026",
+      "published_bytes": 10476,
+      "original_relative_path": "vendor/countdown/tests/test_estimation.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/ANALYSIS_SCOPE.md",
+      "original_sha256": "ebc67d0a8952e03fa8a7338c80f099a15f3b45bd44a038eff80fbe274f753241",
+      "original_bytes": 5876,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/ANALYSIS_SCOPE.md",
+      "published_sha256": "ebc67d0a8952e03fa8a7338c80f099a15f3b45bd44a038eff80fbe274f753241",
+      "published_bytes": 5876,
+      "original_relative_path": "vendor/patron_remaining/ANALYSIS_SCOPE.md",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/PATCH_NOTES_v1.0.1.md",
+      "original_sha256": "18c09e9bb1fe866ea09bd811fb5f01c4741dad89f96825c4693b9e402f23bf7e",
+      "original_bytes": 2000,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/PATCH_NOTES_v1.0.1.md",
+      "published_sha256": "18c09e9bb1fe866ea09bd811fb5f01c4741dad89f96825c4693b9e402f23bf7e",
+      "published_bytes": 2000,
+      "original_relative_path": "vendor/patron_remaining/PATCH_NOTES_v1.0.1.md",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/README_FIRST.md",
+      "original_sha256": "ab8f11304e2c80c6ece8dfb7625347afb1c883229cabe3e7eb96a091865ae8b6",
+      "original_bytes": 2414,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/README_FIRST.md",
+      "published_sha256": "ab8f11304e2c80c6ece8dfb7625347afb1c883229cabe3e7eb96a091865ae8b6",
+      "published_bytes": 2414,
+      "original_relative_path": "vendor/patron_remaining/README_FIRST.md",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/RUN_WAVE3B2.command",
+      "original_sha256": "f24176f1d3e20f515f00b38246fd57ae17f62a56ce7412997957604eefae9d59",
+      "original_bytes": 2595,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/RUN_WAVE3B2.command.in",
+      "published_sha256": "f24176f1d3e20f515f00b38246fd57ae17f62a56ce7412997957604eefae9d59",
+      "published_bytes": 2595,
+      "original_relative_path": "vendor/patron_remaining/RUN_WAVE3B2.command",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/authority/PATRON_STAGE10_IMPLEMENTATION_CONTRACT_v1.0.0.md",
+      "original_sha256": "786409406e0ff12bcd98e0c13f260b85ed920aca90fa183efad1cc3c874160a3",
+      "original_bytes": 10560,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/authority/PATRON_STAGE10_IMPLEMENTATION_CONTRACT_v1.0.0.md",
+      "published_sha256": "786409406e0ff12bcd98e0c13f260b85ed920aca90fa183efad1cc3c874160a3",
+      "published_bytes": 10560,
+      "original_relative_path": "vendor/patron_remaining/authority/PATRON_STAGE10_IMPLEMENTATION_CONTRACT_v1.0.0.md",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/runner/__init__.py",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/runner/__init__.py",
+      "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_bytes": 0,
+      "original_relative_path": "vendor/patron_remaining/runner/__init__.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/runner/dyad.py",
+      "original_sha256": "44b67f70af87120ac419cfd1126cb04b69f177395b6ed4885b948b40a3d5c574",
+      "original_bytes": 4706,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/runner/dyad.py",
+      "published_sha256": "44b67f70af87120ac419cfd1126cb04b69f177395b6ed4885b948b40a3d5c574",
+      "published_bytes": 4706,
+      "original_relative_path": "vendor/patron_remaining/runner/dyad.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/runner/families.py",
+      "original_sha256": "a71551aa7284fcc98cc9c35a3338c70c9ad98e9440300367c11064c509d6b186",
+      "original_bytes": 7161,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/runner/families.py",
+      "published_sha256": "a71551aa7284fcc98cc9c35a3338c70c9ad98e9440300367c11064c509d6b186",
+      "published_bytes": 7161,
+      "original_relative_path": "vendor/patron_remaining/runner/families.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/runner/opportunity.py",
+      "original_sha256": "987157f7884b6330d87b4e75f71220e00b3f7bb5ec2e7ca46630f5eb1b038759",
+      "original_bytes": 10107,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/runner/opportunity.py",
+      "published_sha256": "987157f7884b6330d87b4e75f71220e00b3f7bb5ec2e7ca46630f5eb1b038759",
+      "published_bytes": 10107,
+      "original_relative_path": "vendor/patron_remaining/runner/opportunity.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/runner/run.py",
+      "original_sha256": "254bf5b1180da34f4bce874bf611c5ccc3f4aee0e5d2b80b63a6ed7db60a8d93",
+      "original_bytes": 16289,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/runner/run.py",
+      "published_sha256": "254bf5b1180da34f4bce874bf611c5ccc3f4aee0e5d2b80b63a6ed7db60a8d93",
+      "published_bytes": 16289,
+      "original_relative_path": "vendor/patron_remaining/runner/run.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/runner/self_test.py",
+      "original_sha256": "7e00eaf24e0585116e25b2a4bd5210fc7b44a681cc7efe64b71ba73e21d441f6",
+      "original_bytes": 17420,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/runner/self_test.py",
+      "published_sha256": "7e00eaf24e0585116e25b2a4bd5210fc7b44a681cc7efe64b71ba73e21d441f6",
+      "published_bytes": 17420,
+      "original_relative_path": "vendor/patron_remaining/runner/self_test.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/__init__.py",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/__init__.py",
+      "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_bytes": 0,
+      "original_relative_path": "vendor/patron_remaining/source/__init__.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/acquisition_planner_v100.py",
+      "original_sha256": "aaaa70e119456258c2fd351dca5b59e52cfe6924421fe6103211e6e812f730de",
+      "original_bytes": 40054,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/acquisition_planner_v100.py",
+      "published_sha256": "aaaa70e119456258c2fd351dca5b59e52cfe6924421fe6103211e6e812f730de",
+      "published_bytes": 40054,
+      "original_relative_path": "vendor/patron_remaining/source/acquisition_planner_v100.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/cache_builder_v101.py",
+      "original_sha256": "77bd8970e98e5f79e311e3758ac84d173fcfd94612f9b15dbd0849bbd8c8e353",
+      "original_bytes": 36775,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/cache_builder_v101.py",
+      "published_sha256": "77bd8970e98e5f79e311e3758ac84d173fcfd94612f9b15dbd0849bbd8c8e353",
+      "published_bytes": 36775,
+      "original_relative_path": "vendor/patron_remaining/source/cache_builder_v101.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/chooser_models_v101.py",
+      "original_sha256": "b9cfb4502bb529c0668746e279b09cdc7c45111baedb407c03e0c96a07d1bacd",
+      "original_bytes": 39202,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/chooser_models_v101.py",
+      "published_sha256": "b9cfb4502bb529c0668746e279b09cdc7c45111baedb407c03e0c96a07d1bacd",
+      "published_bytes": 39202,
+      "original_relative_path": "vendor/patron_remaining/source/chooser_models_v101.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/dyad_auth.py",
+      "original_sha256": "10bfbd0250ce99f672d437ebe25ae9aab95b1fa92b7d98ef65d532b8b2911f49",
+      "original_bytes": 5531,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/dyad_auth.py",
+      "published_sha256": "10bfbd0250ce99f672d437ebe25ae9aab95b1fa92b7d98ef65d532b8b2911f49",
+      "published_bytes": 5531,
+      "original_relative_path": "vendor/patron_remaining/source/dyad_auth.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/frequent_dyad_v101.py",
+      "original_sha256": "de468744408ebb29107d09c00e11d407dfc6ded036caf78f4b3e86077a2309aa",
+      "original_bytes": 73654,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/frequent_dyad_v101.py",
+      "published_sha256": "de468744408ebb29107d09c00e11d407dfc6ded036caf78f4b3e86077a2309aa",
+      "published_bytes": 73654,
+      "original_relative_path": "vendor/patron_remaining/source/frequent_dyad_v101.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/opportunity_models_cov_v100.py",
+      "original_sha256": "10c34ca94eb315d02729e8a01220838b84ebcf6a4946273b3d4432cd12cafcc0",
+      "original_bytes": 24477,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/opportunity_models_cov_v100.py",
+      "published_sha256": "10c34ca94eb315d02729e8a01220838b84ebcf6a4946273b3d4432cd12cafcc0",
+      "published_bytes": 24477,
+      "original_relative_path": "vendor/patron_remaining/source/opportunity_models_cov_v100.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/opportunity_models_v101.py",
+      "original_sha256": "61f42a7e6f09431ef6ad7c918a36f65ac0a7ffcefa40bbb216667f3e02ff4796",
+      "original_bytes": 24271,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/opportunity_models_v101.py",
+      "published_sha256": "61f42a7e6f09431ef6ad7c918a36f65ac0a7ffcefa40bbb216667f3e02ff4796",
+      "published_bytes": 24271,
+      "original_relative_path": "vendor/patron_remaining/source/opportunity_models_v101.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/paperwide_dyad_v100.py",
+      "original_sha256": "79e2fbf36a4d2a05591b15ea9797212fb50ac8affa039f5db92217fdc891a3d2",
+      "original_bytes": 79712,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/paperwide_dyad_v100.py",
+      "published_sha256": "79e2fbf36a4d2a05591b15ea9797212fb50ac8affa039f5db92217fdc891a3d2",
+      "published_bytes": 79712,
+      "original_relative_path": "vendor/patron_remaining/source/paperwide_dyad_v100.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/patron_stage10_common.py",
+      "original_sha256": "b9dafa18bb616199db63d39a617fd1eff7168bf54123ee9f7d0e34778e32e7c0",
+      "original_bytes": 23776,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/patron_stage10_common.py",
+      "published_sha256": "b9dafa18bb616199db63d39a617fd1eff7168bf54123ee9f7d0e34778e32e7c0",
+      "published_bytes": 23776,
+      "original_relative_path": "vendor/patron_remaining/source/patron_stage10_common.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/pool_sample_common_v100.py",
+      "original_sha256": "b0953daa5090d901372f44191f503911eef34913926f2905d3693ece0a01831f",
+      "original_bytes": 24302,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/pool_sample_common_v100.py",
+      "published_sha256": "b0953daa5090d901372f44191f503911eef34913926f2905d3693ece0a01831f",
+      "published_bytes": 24302,
+      "original_relative_path": "vendor/patron_remaining/source/pool_sample_common_v100.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/postcertification_v100.py",
+      "original_sha256": "6a6d7b612161ff52635b8fba9ac266f69bd550ab35f9dcd0acfd97d953a6f702",
+      "original_bytes": 31720,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/postcertification_v100.py",
+      "published_sha256": "6a6d7b612161ff52635b8fba9ac266f69bd550ab35f9dcd0acfd97d953a6f702",
+      "published_bytes": 31720,
+      "original_relative_path": "vendor/patron_remaining/source/postcertification_v100.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/synthetic_fixture_v101.py",
+      "original_sha256": "3d308d5ccd7dd80f1918616b2034f5ae4aa76d41f917dada176f317e1910ad7c",
+      "original_bytes": 16848,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/synthetic_fixture_v101.py",
+      "published_sha256": "3d308d5ccd7dd80f1918616b2034f5ae4aa76d41f917dada176f317e1910ad7c",
+      "published_bytes": 16848,
+      "original_relative_path": "vendor/patron_remaining/source/synthetic_fixture_v101.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/wave2b2b1_preflight_original.py",
+      "original_sha256": "237a003936ab19f7700cb38fa9583c3efad3fc39226210f08860ce281009116f",
+      "original_bytes": 14549,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/wave2b2b1_preflight_original.py",
+      "published_sha256": "237a003936ab19f7700cb38fa9583c3efad3fc39226210f08860ce281009116f",
+      "published_bytes": 14549,
+      "original_relative_path": "vendor/patron_remaining/source/wave2b2b1_preflight_original.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/wave3a_design.py",
+      "original_sha256": "9a3534c64d646e1b91c848f9996987a2ed413318c344d7c339707021ce9513e0",
+      "original_bytes": 26685,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/wave3a_design.py",
+      "published_sha256": "9a3534c64d646e1b91c848f9996987a2ed413318c344d7c339707021ce9513e0",
+      "published_bytes": 26685,
+      "original_relative_path": "vendor/patron_remaining/source/wave3a_design.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/wave3b1_helpers.py",
+      "original_sha256": "90cd70d1e08e5b7bab468ebbbd6f64f560d8793306accc8273f1a7f38473d0f0",
+      "original_bytes": 31352,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/source/wave3b1_helpers.py",
+      "published_sha256": "90cd70d1e08e5b7bab468ebbbd6f64f560d8793306accc8273f1a7f38473d0f0",
+      "published_bytes": 31352,
+      "original_relative_path": "vendor/patron_remaining/source/wave3b1_helpers.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/reputation/METHODS.txt",
+      "original_sha256": "1e2d320b26530cffc6cdbda16f77e86bcd751b5930d978f36ca6dfd191ce1fb0",
+      "original_bytes": 6768,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/reputation/METHODS.txt",
+      "published_sha256": "1e2d320b26530cffc6cdbda16f77e86bcd751b5930d978f36ca6dfd191ce1fb0",
+      "published_bytes": 6768,
+      "original_relative_path": "vendor/reputation/METHODS.txt",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/reputation/README.txt",
+      "original_sha256": "5419accb0ae1520061f2fa3d5d9d221d83612e5ae8cda7e94d54b2c687fe6628",
+      "original_bytes": 6307,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/reputation/README.txt.in",
+      "published_sha256": "2db3aef6d78e62680409a7f86502669cbe1579e6c5e9885d5893615dcf67cbd7",
+      "published_bytes": 6324,
+      "original_relative_path": "vendor/reputation/README.txt",
+      "substitutions": [
+        {
+          "replacement": "AUTHOR_ACCOUNT_1",
+          "occurrences": 1
+        },
+        {
+          "replacement": "AUTHOR_ACCOUNT_2",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/reputation/RUN_REPUTATION.command",
+      "original_sha256": "d65e5296aaad84b5c49c25d08cbf9fc366fc2faac1a58e3ac0354ecef58714a5",
+      "original_bytes": 2115,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/reputation/RUN_REPUTATION.command.in",
+      "published_sha256": "d65e5296aaad84b5c49c25d08cbf9fc366fc2faac1a58e3ac0354ecef58714a5",
+      "published_bytes": 2115,
+      "original_relative_path": "vendor/reputation/RUN_REPUTATION.command",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/reputation/code/analysis.py",
+      "original_sha256": "f533ebf274c652da8f17ed43a0949b568354b0b0e70419506a59ba9385c34773",
+      "original_bytes": 14101,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/reputation/code/analysis.py",
+      "published_sha256": "f533ebf274c652da8f17ed43a0949b568354b0b0e70419506a59ba9385c34773",
+      "published_bytes": 14101,
+      "original_relative_path": "vendor/reputation/code/analysis.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/reputation/code/core.py",
+      "original_sha256": "bb4a6d223825197ca5d048c061c4b3d7eccff8ea145f98d6ebc94b7d6e2f91f3",
+      "original_bytes": 5813,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/reputation/code/core.py.in",
+      "published_sha256": "0e76a1d67d7a0a8c2d728d6411b1a3134ce6427f7d178c6f292dca0a5daf4798",
+      "published_bytes": 5830,
+      "original_relative_path": "vendor/reputation/code/core.py",
+      "substitutions": [
+        {
+          "replacement": "AUTHOR_ACCOUNT_1",
+          "occurrences": 1
+        },
+        {
+          "replacement": "AUTHOR_ACCOUNT_2",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/reputation/code/history.py",
+      "original_sha256": "e4384ecae61290bb61e690268943815b693c4f3be26bd007792043f03b5cf5e5",
+      "original_bytes": 9585,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/reputation/code/history.py",
+      "published_sha256": "e4384ecae61290bb61e690268943815b693c4f3be26bd007792043f03b5cf5e5",
+      "published_bytes": 9585,
+      "original_relative_path": "vendor/reputation/code/history.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/reputation/code/inputs.py",
+      "original_sha256": "a691ea20b0407974836535abd1bd62b7694abce528bded5d2ec9a8a307f8a41d",
+      "original_bytes": 12396,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/reputation/code/inputs.py",
+      "published_sha256": "a691ea20b0407974836535abd1bd62b7694abce528bded5d2ec9a8a307f8a41d",
+      "published_bytes": 12396,
+      "original_relative_path": "vendor/reputation/code/inputs.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/reputation/code/rep_stats.py",
+      "original_sha256": "a52cc6dfaf2b7b6e0914b4ea7a25579556b78058926eca0c8c3347c624cc2d18",
+      "original_bytes": 4824,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/reputation/code/rep_stats.py",
+      "published_sha256": "a52cc6dfaf2b7b6e0914b4ea7a25579556b78058926eca0c8c3347c624cc2d18",
+      "published_bytes": 4824,
+      "original_relative_path": "vendor/reputation/code/rep_stats.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/reputation/code/run.py",
+      "original_sha256": "ec7621685d96573b902ef69dc3764b1f651a1ae2a0c82a18fdde1f5ab3e596a1",
+      "original_bytes": 10944,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/reputation/code/run.py",
+      "published_sha256": "ec7621685d96573b902ef69dc3764b1f651a1ae2a0c82a18fdde1f5ab3e596a1",
+      "published_bytes": 10944,
+      "original_relative_path": "vendor/reputation/code/run.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/reputation/tests/test_reputation.py",
+      "original_sha256": "896728d64e0ca8da980f612d4fd846319613a996accbec9fc65bfe006b7e0547",
+      "original_bytes": 11421,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/reputation/tests/test_reputation.py.in",
+      "published_sha256": "4c643f46b795942aa5c136a0668ee2665e4b673325cbfbf4b02da0f34d9beacd",
+      "published_bytes": 11438,
+      "original_relative_path": "vendor/reputation/tests/test_reputation.py",
+      "substitutions": [
+        {
+          "replacement": "AUTHOR_ACCOUNT_1",
+          "occurrences": 1
+        },
+        {
+          "replacement": "AUTHOR_ACCOUNT_2",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/METHODS.txt",
+      "original_sha256": "cf534e04f967f18002067d8a483e20fd300b7e3ac2232f3b7c8452e2f43ac814",
+      "original_bytes": 6050,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/METHODS.txt.in",
+      "published_sha256": "e8168671995128c6c3f12584da5885de209def68b090bac761fd524465c0560c",
+      "published_bytes": 6067,
+      "original_relative_path": "vendor/stakes/METHODS.txt",
+      "substitutions": [
+        {
+          "replacement": "AUTHOR_ACCOUNT_1",
+          "occurrences": 1
+        },
+        {
+          "replacement": "AUTHOR_ACCOUNT_2",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/README.txt",
+      "original_sha256": "5ddfd1ef33aa77a0257ade008a001d01e9eeb65f0781f5b013c1bf1532774642",
+      "original_bytes": 2666,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/README.txt",
+      "published_sha256": "5ddfd1ef33aa77a0257ade008a001d01e9eeb65f0781f5b013c1bf1532774642",
+      "published_bytes": 2666,
+      "original_relative_path": "vendor/stakes/README.txt",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/RUN_STAKES.command",
+      "original_sha256": "67e2c988850288c5a816e10c20ea3d2e46b1037aff16d5d796f5bbce074e0ad1",
+      "original_bytes": 1884,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/RUN_STAKES.command.in",
+      "published_sha256": "67e2c988850288c5a816e10c20ea3d2e46b1037aff16d5d796f5bbce074e0ad1",
+      "published_bytes": 1884,
+      "original_relative_path": "vendor/stakes/RUN_STAKES.command",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/code/common.py",
+      "original_sha256": "e96a2e23b8a4fdda16502a24f9eb788a1a0d05dd74e94c7c4e8515980adb407c",
+      "original_bytes": 4878,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/code/common.py",
+      "published_sha256": "e96a2e23b8a4fdda16502a24f9eb788a1a0d05dd74e94c7c4e8515980adb407c",
+      "published_bytes": 4878,
+      "original_relative_path": "vendor/stakes/code/common.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/code/exclusion.py",
+      "original_sha256": "62dcdd8de383ba3f4d5bf4621aaa55f434ce29bb0cbf3c866b68af2e54776f6e",
+      "original_bytes": 2874,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/code/exclusion.py",
+      "published_sha256": "62dcdd8de383ba3f4d5bf4621aaa55f434ce29bb0cbf3c866b68af2e54776f6e",
+      "published_bytes": 2874,
+      "original_relative_path": "vendor/stakes/code/exclusion.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/code/history.py",
+      "original_sha256": "36616e8138da030bbdd5982944bc8dce7d6d2469474274a4de2876d3c0a76f1d",
+      "original_bytes": 10694,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/code/history.py",
+      "published_sha256": "36616e8138da030bbdd5982944bc8dce7d6d2469474274a4de2876d3c0a76f1d",
+      "published_bytes": 10694,
+      "original_relative_path": "vendor/stakes/code/history.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/code/measures.py",
+      "original_sha256": "95e264a5b5c33f721b24832e0535877779b8afd4ce43059df6eb20ac49264381",
+      "original_bytes": 4893,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/code/measures.py",
+      "published_sha256": "95e264a5b5c33f721b24832e0535877779b8afd4ce43059df6eb20ac49264381",
+      "published_bytes": 4893,
+      "original_relative_path": "vendor/stakes/code/measures.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/code/prepare.py",
+      "original_sha256": "cca0ac4b446da40f694f387b94c305c31d5342b2934bcc56887926d9c6f77c20",
+      "original_bytes": 7099,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/code/prepare.py",
+      "published_sha256": "cca0ac4b446da40f694f387b94c305c31d5342b2934bcc56887926d9c6f77c20",
+      "published_bytes": 7099,
+      "original_relative_path": "vendor/stakes/code/prepare.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/code/report.py",
+      "original_sha256": "e7c348bc564b66ecc236d6e7b357c0744888985c7e2f26724184a777beec0e42",
+      "original_bytes": 10669,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/code/report.py",
+      "published_sha256": "e7c348bc564b66ecc236d6e7b357c0744888985c7e2f26724184a777beec0e42",
+      "published_bytes": 10669,
+      "original_relative_path": "vendor/stakes/code/report.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/code/run.py",
+      "original_sha256": "b1a509e266c15c7bf9a9b129ef59c3af9eabd8a5db1b5e716f28ed6b03304f60",
+      "original_bytes": 5169,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/code/run.py",
+      "published_sha256": "b1a509e266c15c7bf9a9b129ef59c3af9eabd8a5db1b5e716f28ed6b03304f60",
+      "published_bytes": 5169,
+      "original_relative_path": "vendor/stakes/code/run.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/requirements.txt",
+      "original_sha256": "6b93a92221e8ea34b155ebfc96c73b913c34e17e1e3015a4fff777e817d3308d",
+      "original_bytes": 82,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/requirements.txt",
+      "published_sha256": "6b93a92221e8ea34b155ebfc96c73b913c34e17e1e3015a4fff777e817d3308d",
+      "published_bytes": 82,
+      "original_relative_path": "vendor/stakes/requirements.txt",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/tests/test_stakes.py",
+      "original_sha256": "3a5f92610e2f5ebbf5a9fd1a61db22b9ed789aa0645defb858264ffaa62e610e",
+      "original_bytes": 7365,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/tests/test_stakes.py.in",
+      "published_sha256": "0b378d2b56c74bc0bee039a0eb85d8066b8a9d4f538acedfa10fe31066c329ee",
+      "published_bytes": 7391,
+      "original_relative_path": "vendor/stakes/tests/test_stakes.py",
+      "substitutions": [
+        {
+          "replacement": "AUTHOR_ACCOUNT_1",
+          "occurrences": 2
+        },
+        {
+          "replacement": "AUTHOR_ACCOUNT_2",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/METHODS.md",
+      "original_sha256": "6fde1a896a06b0d64b8b802f595693451eefe7fd71ca82b7cdf3e87238673f2a",
+      "original_bytes": 10268,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/METHODS.md",
+      "published_sha256": "6fde1a896a06b0d64b8b802f595693451eefe7fd71ca82b7cdf3e87238673f2a",
+      "published_bytes": 10268,
+      "original_relative_path": "vendor/tenure/METHODS.md",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/README.md",
+      "original_sha256": "df9030367eef91d68a63104799c780d1ca8e66e857c4c2f9e2c851061928eb0c",
+      "original_bytes": 4870,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/README.md",
+      "published_sha256": "df9030367eef91d68a63104799c780d1ca8e66e857c4c2f9e2c851061928eb0c",
+      "published_bytes": 4870,
+      "original_relative_path": "vendor/tenure/README.md",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/RUN_ALL.command",
+      "original_sha256": "c08368a945790939d46421c829d87fdff516d2071b30742a861d9383332ce58b",
+      "original_bytes": 583,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/RUN_ALL.command.in",
+      "published_sha256": "c08368a945790939d46421c829d87fdff516d2071b30742a861d9383332ce58b",
+      "published_bytes": 583,
+      "original_relative_path": "vendor/tenure/RUN_ALL.command",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/common.py",
+      "original_sha256": "df453760125f5d63454acdb50b241ee8425597fef4cb2929154b3e4368f10b6a",
+      "original_bytes": 5869,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/common.py",
+      "published_sha256": "df453760125f5d63454acdb50b241ee8425597fef4cb2929154b3e4368f10b6a",
+      "published_bytes": 5869,
+      "original_relative_path": "vendor/tenure/common.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/estimate.py",
+      "original_sha256": "a06817bf769ae6f217cb8962cce41581cbc32ddefa4264cca9cf17cf50e7028d",
+      "original_bytes": 4171,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/estimate.py",
+      "published_sha256": "a06817bf769ae6f217cb8962cce41581cbc32ddefa4264cca9cf17cf50e7028d",
+      "published_bytes": 4171,
+      "original_relative_path": "vendor/tenure/estimate.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/network.py",
+      "original_sha256": "995456751b113055d4e52fc61e1ba7a848d50370062e367fb32472a5253476f8",
+      "original_bytes": 5081,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/network.py",
+      "published_sha256": "995456751b113055d4e52fc61e1ba7a848d50370062e367fb32472a5253476f8",
+      "published_bytes": 5081,
+      "original_relative_path": "vendor/tenure/network.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/prepare.py",
+      "original_sha256": "41a4001e631686a4615d10cd90be9f166998a5c72d9188b4c1071fc1ac08a73c",
+      "original_bytes": 10648,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/prepare.py",
+      "published_sha256": "41a4001e631686a4615d10cd90be9f166998a5c72d9188b4c1071fc1ac08a73c",
+      "published_bytes": 10648,
+      "original_relative_path": "vendor/tenure/prepare.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/requirements.txt",
+      "original_sha256": "7f55ec151afc5147a9cb35cb3fe6881b21dccc23d37423ee0513f244599c658c",
+      "original_bytes": 83,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/requirements.txt",
+      "published_sha256": "7f55ec151afc5147a9cb35cb3fe6881b21dccc23d37423ee0513f244599c658c",
+      "published_bytes": 83,
+      "original_relative_path": "vendor/tenure/requirements.txt",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/run.py",
+      "original_sha256": "a3dc41affd5dfb5c2160845bac4141053c81fd2d7bc2a72c65e14810e4386210",
+      "original_bytes": 4642,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/run.py",
+      "published_sha256": "a3dc41affd5dfb5c2160845bac4141053c81fd2d7bc2a72c65e14810e4386210",
+      "published_bytes": 4642,
+      "original_relative_path": "vendor/tenure/run.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/self_test.py",
+      "original_sha256": "45a411178847eefefa41271caf5256625bbfb8654795cdf2f728f7c18a638255",
+      "original_bytes": 8969,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/self_test.py",
+      "published_sha256": "45a411178847eefefa41271caf5256625bbfb8654795cdf2f728f7c18a638255",
+      "published_bytes": 8969,
+      "original_relative_path": "vendor/tenure/self_test.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/source/pool_wave1_common.py",
+      "original_sha256": "f9c714c549c6cd68a7d2dbdb2c17d5abacfdfc12dc6526752f03ab2505bbff43",
+      "original_bytes": 21988,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/source/pool_wave1_common.py",
+      "published_sha256": "f9c714c549c6cd68a7d2dbdb2c17d5abacfdfc12dc6526752f03ab2505bbff43",
+      "published_bytes": 21988,
+      "original_relative_path": "vendor/tenure/source/pool_wave1_common.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/tenure.py",
+      "original_sha256": "a7b1768abd60a5051d7081a2f3a37ed54490c09c5f79a0bb7c99f0d65c26b654",
+      "original_bytes": 12617,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/tenure.py",
+      "published_sha256": "a7b1768abd60a5051d7081a2f3a37ed54490c09c5f79a0bb7c99f0d65c26b654",
+      "published_bytes": 12617,
+      "original_relative_path": "vendor/tenure/tenure.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/trajectory.py",
+      "original_sha256": "a8838bb129f6ab8358820b4e3188028cecf7fd0c1899efb356e2239f8dd471b5",
+      "original_bytes": 16585,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/trajectory.py",
+      "published_sha256": "a8838bb129f6ab8358820b4e3188028cecf7fd0c1899efb356e2239f8dd471b5",
+      "published_bytes": 16585,
+      "original_relative_path": "vendor/tenure/trajectory.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/FULL_RESET_SCOPE.md",
+      "original_sha256": "2fdae56cd7f3df3e84cb24635dffe6cd313b4333273fac820d42a1f9effa5ab3",
+      "original_bytes": 2327,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/FULL_RESET_SCOPE.md",
+      "published_sha256": "2fdae56cd7f3df3e84cb24635dffe6cd313b4333273fac820d42a1f9effa5ab3",
+      "published_bytes": 2327,
+      "original_relative_path": "vendor/wave1/FULL_RESET_SCOPE.md",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/README_FIRST.md",
+      "original_sha256": "a71cf27337f8335ccdc1591eb9d4967a620fc979eefb3f2da6e759429ed44f75",
+      "original_bytes": 3562,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/README_FIRST.md.in",
+      "published_sha256": "a0d8e7a8271c59888541fec6d0b7457674b64a498d2497530148feea24ce25cc",
+      "published_bytes": 3554,
+      "original_relative_path": "vendor/wave1/README_FIRST.md",
+      "substitutions": [
+        {
+          "replacement": "/LOCAL_HOME",
+          "occurrences": 2
+        }
+      ]
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/RUN_WAVE1.command",
+      "original_sha256": "0cd29e53b4ae42e05b10a6edf55455b569e0acaa11717868922025848bce2ac2",
+      "original_bytes": 4885,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/RUN_WAVE1.command.in",
+      "published_sha256": "0cd29e53b4ae42e05b10a6edf55455b569e0acaa11717868922025848bce2ac2",
+      "published_bytes": 4885,
+      "original_relative_path": "vendor/wave1/RUN_WAVE1.command",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/requirements.lock.txt",
+      "original_sha256": "76848df36c9601b5f3ee65148297ea8604ceedc85deec73aa25f0dcd6dc47665",
+      "original_bytes": 91,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/requirements.lock.txt",
+      "published_sha256": "76848df36c9601b5f3ee65148297ea8604ceedc85deec73aa25f0dcd6dc47665",
+      "published_bytes": 91,
+      "original_relative_path": "vendor/wave1/requirements.lock.txt",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/runner/__init__.py",
+      "original_sha256": "46db064005b75cfe251fcd9ce933aa71fa25c54669996eb229edd9c684140120",
+      "original_bytes": 42,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/runner/__init__.py",
+      "published_sha256": "46db064005b75cfe251fcd9ce933aa71fa25c54669996eb229edd9c684140120",
+      "published_bytes": 42,
+      "original_relative_path": "vendor/wave1/runner/__init__.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/runner/collect.py",
+      "original_sha256": "fc2abb0b51abaff6bcc642cc709c4bc020d3b23797337377570ad1ae55ae1931",
+      "original_bytes": 6212,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/runner/collect.py",
+      "published_sha256": "fc2abb0b51abaff6bcc642cc709c4bc020d3b23797337377570ad1ae55ae1931",
+      "published_bytes": 6212,
+      "original_relative_path": "vendor/wave1/runner/collect.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/runner/common.py",
+      "original_sha256": "f9c714c549c6cd68a7d2dbdb2c17d5abacfdfc12dc6526752f03ab2505bbff43",
+      "original_bytes": 21988,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/runner/common.py",
+      "published_sha256": "f9c714c549c6cd68a7d2dbdb2c17d5abacfdfc12dc6526752f03ab2505bbff43",
+      "published_bytes": 21988,
+      "original_relative_path": "vendor/wave1/runner/common.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/runner/orchestrate.py",
+      "original_sha256": "02445e46bc16d0aec47145e59779b75f14808776e2e00f9ecbc5e95811f3bcff",
+      "original_bytes": 13760,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/runner/orchestrate.py.in",
+      "published_sha256": "61f7dc44577a7349cd4060fe35495aa0bf4397743641a1bcfbdfa1f84c064192",
+      "published_bytes": 13756,
+      "original_relative_path": "vendor/wave1/runner/orchestrate.py",
+      "substitutions": [
+        {
+          "replacement": "/LOCAL_HOME",
+          "occurrences": 1
+        }
+      ]
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/runner/preflight.py",
+      "original_sha256": "652b649656666614c4c7870a07a7c2397d47f2c363128e2b287e825e6a2f9fa8",
+      "original_bytes": 2405,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/runner/preflight.py",
+      "published_sha256": "652b649656666614c4c7870a07a7c2397d47f2c363128e2b287e825e6a2f9fa8",
+      "published_bytes": 2405,
+      "original_relative_path": "vendor/wave1/runner/preflight.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/runner/run_controlled_reference.py",
+      "original_sha256": "ffc158e463d0468f60c50375a82988551514798c62425e9ba6814747946da5bf",
+      "original_bytes": 10247,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/runner/run_controlled_reference.py",
+      "published_sha256": "ffc158e463d0468f60c50375a82988551514798c62425e9ba6814747946da5bf",
+      "published_bytes": 10247,
+      "original_relative_path": "vendor/wave1/runner/run_controlled_reference.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/runner/run_core.py",
+      "original_sha256": "b804eb86544976fda689cbf31ba0d8a0c56a4571b0ee5b73faa71efc40d57b48",
+      "original_bytes": 2830,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/runner/run_core.py",
+      "published_sha256": "b804eb86544976fda689cbf31ba0d8a0c56a4571b0ee5b73faa71efc40d57b48",
+      "published_bytes": 2830,
+      "original_relative_path": "vendor/wave1/runner/run_core.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/runner/run_krd.py",
+      "original_sha256": "a22c9b00eee2ce863e1404cf4825e7a7ea3186bc226cc892e373b3e2fb82ae57",
+      "original_bytes": 3714,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/runner/run_krd.py",
+      "published_sha256": "a22c9b00eee2ce863e1404cf4825e7a7ea3186bc226cc892e373b3e2fb82ae57",
+      "published_bytes": 3714,
+      "original_relative_path": "vendor/wave1/runner/run_krd.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/runner/run_nonparametric.py",
+      "original_sha256": "3995d6f21ecb64ea3d1c3b7dae06aa34dbf43d380f6ed51650a199086e318086",
+      "original_bytes": 4393,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/runner/run_nonparametric.py",
+      "published_sha256": "3995d6f21ecb64ea3d1c3b7dae06aa34dbf43d380f6ed51650a199086e318086",
+      "published_bytes": 4393,
+      "original_relative_path": "vendor/wave1/runner/run_nonparametric.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/runner/run_panel_robustness.py",
+      "original_sha256": "5dd4a9fe2e9388bf08b84beaa3c51b74b430beb4d1425153d674256635e3f53d",
+      "original_bytes": 4029,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/runner/run_panel_robustness.py",
+      "published_sha256": "5dd4a9fe2e9388bf08b84beaa3c51b74b430beb4d1425153d674256635e3f53d",
+      "published_bytes": 4029,
+      "original_relative_path": "vendor/wave1/runner/run_panel_robustness.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/runner/self_test.py",
+      "original_sha256": "8a7e17dbedd53c8d7e95cb0d2dafb417f71dc3e2d6db1b0db3aa6090d1feecab",
+      "original_bytes": 4681,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/runner/self_test.py",
+      "published_sha256": "8a7e17dbedd53c8d7e95cb0d2dafb417f71dc3e2d6db1b0db3aa6090d1feecab",
+      "published_bytes": 4681,
+      "original_relative_path": "vendor/wave1/runner/self_test.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/source/controlled/METHOD_NOTE.md",
+      "original_sha256": "75dcaeadf55162fe375f245bc01ea4d84f75f2db054392df1bec412a1db352d1",
+      "original_bytes": 7096,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/source/controlled/METHOD_NOTE.md",
+      "published_sha256": "75dcaeadf55162fe375f245bc01ea4d84f75f2db054392df1bec412a1db352d1",
+      "published_bytes": 7096,
+      "original_relative_path": "vendor/wave1/source/controlled/METHOD_NOTE.md",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/source/controlled/controlled_reference_price_figure.py",
+      "original_sha256": "04f2389dbf895e94f9108ef98b100bb23233a3fea8a5a1fea397203ada1012d6",
+      "original_bytes": 29928,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/source/controlled/controlled_reference_price_figure.py",
+      "published_sha256": "04f2389dbf895e94f9108ef98b100bb23233a3fea8a5a1fea397203ada1012d6",
+      "published_bytes": 29928,
+      "original_relative_path": "vendor/wave1/source/controlled/controlled_reference_price_figure.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/source/controlled/reference_price_model_v110.py",
+      "original_sha256": "a7cb4e723599705e3aae7416431d5b46fad27ea0bbd8a92671f1390f132b178f",
+      "original_bytes": 62615,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/source/controlled/reference_price_model_v110.py",
+      "published_sha256": "a7cb4e723599705e3aae7416431d5b46fad27ea0bbd8a92671f1390f132b178f",
+      "published_bytes": 62615,
+      "original_relative_path": "vendor/wave1/source/controlled/reference_price_model_v110.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/source/core/08_make_core_paper_results.py",
+      "original_sha256": "e9dd80c52da5ffef3d406c3af25912bd924f6423f123ca535cf4077cb039c41f",
+      "original_bytes": 89481,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/source/core/08_make_core_paper_results.py",
+      "published_sha256": "e9dd80c52da5ffef3d406c3af25912bd924f6423f123ca535cf4077cb039c41f",
+      "published_bytes": 89481,
+      "original_relative_path": "vendor/wave1/source/core/08_make_core_paper_results.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/source/core/09_build_panel_robustness.py",
+      "original_sha256": "f0b3d8d638523e22e4bc3b665d3067a261bcfb1c3d2831d9bf8fb81e6c521431",
+      "original_bytes": 59125,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/source/core/09_build_panel_robustness.py",
+      "published_sha256": "f0b3d8d638523e22e4bc3b665d3067a261bcfb1c3d2831d9bf8fb81e6c521431",
+      "published_bytes": 59125,
+      "original_relative_path": "vendor/wave1/source/core/09_build_panel_robustness.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/source/structural/rating_gap_krd_decomposition.py",
+      "original_sha256": "2b481180e25562632f568e8bc0737da17415593c34124372295bb1d5227a7eda",
+      "original_bytes": 26753,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/source/structural/rating_gap_krd_decomposition.py",
+      "published_sha256": "2b481180e25562632f568e8bc0737da17415593c34124372295bb1d5227a7eda",
+      "published_bytes": 26753,
+      "original_relative_path": "vendor/wave1/source/structural/rating_gap_krd_decomposition.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/source/structural/rating_gap_nonparametric_closure_parallel.py",
+      "original_sha256": "458b6545d8a563180397dd3b568efab3b08f19c086893610a59260734722f1ff",
+      "original_bytes": 38653,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/source/structural/rating_gap_nonparametric_closure_parallel.py",
+      "published_sha256": "458b6545d8a563180397dd3b568efab3b08f19c086893610a59260734722f1ff",
+      "published_bytes": 38653,
+      "original_relative_path": "vendor/wave1/source/structural/rating_gap_nonparametric_closure_parallel.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/source/structural/render_rating_gap_krd.py",
+      "original_sha256": "c009c53fd0bf29fb7474ba7dfcad2f18b49833e874d641e4be1d17ab0420fa3b",
+      "original_bytes": 3698,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/source/structural/render_rating_gap_krd.py",
+      "published_sha256": "c009c53fd0bf29fb7474ba7dfcad2f18b49833e874d641e4be1d17ab0420fa3b",
+      "published_bytes": 3698,
+      "original_relative_path": "vendor/wave1/source/structural/render_rating_gap_krd.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/source/structural/render_rating_gap_nonparametric_closure.py",
+      "original_sha256": "73aba5e088a71945bb959739d29a88e90d0aea5d37e0d33537d3fdfb0ae1c477",
+      "original_bytes": 3853,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/source/structural/render_rating_gap_nonparametric_closure.py",
+      "published_sha256": "73aba5e088a71945bb959739d29a88e90d0aea5d37e0d33537d3fdfb0ae1c477",
+      "published_bytes": 3853,
+      "original_relative_path": "vendor/wave1/source/structural/render_rating_gap_nonparametric_closure.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/C7X_LOW_SUPPORT_LAUNCHER_AMENDMENT.md",
+      "original_sha256": "c57d0f2663bda646dae474c9655ab42396cde7fd6af7979548679b1f1d291cca",
+      "original_bytes": 1506,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/C7X_LOW_SUPPORT_LAUNCHER_AMENDMENT.md",
+      "published_sha256": "c57d0f2663bda646dae474c9655ab42396cde7fd6af7979548679b1f1d291cca",
+      "published_bytes": 1506,
+      "original_relative_path": "vendor/wave2b2a/C7X_LOW_SUPPORT_LAUNCHER_AMENDMENT.md",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/README_FIRST.md",
+      "original_sha256": "3745b4d39e27c02675641b621d131faa85161eddb01f2e5ea0a2349f47b9b86b",
+      "original_bytes": 1951,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/README_FIRST.md",
+      "published_sha256": "3745b4d39e27c02675641b621d131faa85161eddb01f2e5ea0a2349f47b9b86b",
+      "published_bytes": 1951,
+      "original_relative_path": "vendor/wave2b2a/README_FIRST.md",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/RUN_WAVE2B2A.command",
+      "original_sha256": "8e66b9da90fc903b39889cdcec1a566eb2df9ea11983f21f99f537157663c376",
+      "original_bytes": 6712,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/RUN_WAVE2B2A.command.in",
+      "published_sha256": "8e66b9da90fc903b39889cdcec1a566eb2df9ea11983f21f99f537157663c376",
+      "published_bytes": 6712,
+      "original_relative_path": "vendor/wave2b2a/RUN_WAVE2B2A.command",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/SOURCE_BINDING_METHOD.md",
+      "original_sha256": "226f82e577a5b6fd781f688d3cae1879ab0dc24ce6e5e5d48286503e934f1b03",
+      "original_bytes": 1466,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/SOURCE_BINDING_METHOD.md",
+      "published_sha256": "226f82e577a5b6fd781f688d3cae1879ab0dc24ce6e5e5d48286503e934f1b03",
+      "published_bytes": 1466,
+      "original_relative_path": "vendor/wave2b2a/SOURCE_BINDING_METHOD.md",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/WAVE2B2A_SCOPE.md",
+      "original_sha256": "6cc30d0d133cbc7aa76e3049d4d0014ab2770b804c401c5ab4d89a5c6d8c490a",
+      "original_bytes": 1431,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/WAVE2B2A_SCOPE.md",
+      "published_sha256": "6cc30d0d133cbc7aa76e3049d4d0014ab2770b804c401c5ab4d89a5c6d8c490a",
+      "published_bytes": 1431,
+      "original_relative_path": "vendor/wave2b2a/WAVE2B2A_SCOPE.md",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/requirements.lock.txt",
+      "original_sha256": "76848df36c9601b5f3ee65148297ea8604ceedc85deec73aa25f0dcd6dc47665",
+      "original_bytes": 91,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/requirements.lock.txt",
+      "published_sha256": "76848df36c9601b5f3ee65148297ea8604ceedc85deec73aa25f0dcd6dc47665",
+      "published_bytes": 91,
+      "original_relative_path": "vendor/wave2b2a/requirements.lock.txt",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/runner/__init__.py",
+      "original_sha256": "6b90970c04f6544518d240a6211e674fedab43baa530457ac38514025ba7b0a6",
+      "original_bytes": 47,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/runner/__init__.py",
+      "published_sha256": "6b90970c04f6544518d240a6211e674fedab43baa530457ac38514025ba7b0a6",
+      "published_bytes": 47,
+      "original_relative_path": "vendor/wave2b2a/runner/__init__.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/runner/bind_source.py",
+      "original_sha256": "3806bf138dffe192b2cf2bcc0088fa5470c9229a347d77f3e6f0eaaf1ecc67dc",
+      "original_bytes": 5012,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/runner/bind_source.py",
+      "published_sha256": "3806bf138dffe192b2cf2bcc0088fa5470c9229a347d77f3e6f0eaaf1ecc67dc",
+      "published_bytes": 5012,
+      "original_relative_path": "vendor/wave2b2a/runner/bind_source.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/runner/collect.py",
+      "original_sha256": "df5e96403f8e571e65f636dfd478b8547c2f666756cd89db26ee061e41c2422e",
+      "original_bytes": 9565,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/runner/collect.py",
+      "published_sha256": "df5e96403f8e571e65f636dfd478b8547c2f666756cd89db26ee061e41c2422e",
+      "published_bytes": 9565,
+      "original_relative_path": "vendor/wave2b2a/runner/collect.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/runner/common.py",
+      "original_sha256": "ae7aa0218c4be2c4e222e208d751469644b04e19ee828320bf7911df184c8458",
+      "original_bytes": 24300,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/runner/common.py",
+      "published_sha256": "ae7aa0218c4be2c4e222e208d751469644b04e19ee828320bf7911df184c8458",
+      "published_bytes": 24300,
+      "original_relative_path": "vendor/wave2b2a/runner/common.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/runner/orchestrate.py",
+      "original_sha256": "309fe4cb7593679b1d6c6f4b3013c8897ba21962ec517ee882ca015e6b12ed07",
+      "original_bytes": 27974,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/runner/orchestrate.py",
+      "published_sha256": "309fe4cb7593679b1d6c6f4b3013c8897ba21962ec517ee882ca015e6b12ed07",
+      "published_bytes": 27974,
+      "original_relative_path": "vendor/wave2b2a/runner/orchestrate.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/runner/preflight.py",
+      "original_sha256": "eb4eff7e0ea9181a7dd7f618fe13e49f92c07cb272df670a148adf38a65fed11",
+      "original_bytes": 6379,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/runner/preflight.py",
+      "published_sha256": "eb4eff7e0ea9181a7dd7f618fe13e49f92c07cb272df670a148adf38a65fed11",
+      "published_bytes": 6379,
+      "original_relative_path": "vendor/wave2b2a/runner/preflight.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/runner/retarget.py",
+      "original_sha256": "4f9b25b078ff5009e87aa58aa422ecdfc827a88cd2d84c48d2b056aefbbd42a3",
+      "original_bytes": 2960,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/runner/retarget.py",
+      "published_sha256": "4f9b25b078ff5009e87aa58aa422ecdfc827a88cd2d84c48d2b056aefbbd42a3",
+      "published_bytes": 2960,
+      "original_relative_path": "vendor/wave2b2a/runner/retarget.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/runner/self_test.py",
+      "original_sha256": "3322fb94a238eb2df1663e1cd892bc0b9c6a9c5477504c73df027c24523823bc",
+      "original_bytes": 8055,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/runner/self_test.py",
+      "published_sha256": "3322fb94a238eb2df1663e1cd892bc0b9c6a9c5477504c73df027c24523823bc",
+      "published_bytes": 8055,
+      "original_relative_path": "vendor/wave2b2a/runner/self_test.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/source/c7r/c7r_modeling_v102.py",
+      "original_sha256": "8fe65619941f5d2712827d47ea8a56053a9d865857959243f8908c8cadcaa817",
+      "original_bytes": 9411,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/source/c7r/c7r_modeling_v102.py",
+      "published_sha256": "8fe65619941f5d2712827d47ea8a56053a9d865857959243f8908c8cadcaa817",
+      "published_bytes": 9411,
+      "original_relative_path": "vendor/wave2b2a/source/c7r/c7r_modeling_v102.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/source/c7r/campaign1_nonprofile_common_v102.py",
+      "original_sha256": "f629876216c797180265d1b848a4424f211fe9a43cffa4dabdb3de67acbc5f1c",
+      "original_bytes": 22701,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/source/c7r/campaign1_nonprofile_common_v102.py",
+      "published_sha256": "f629876216c797180265d1b848a4424f211fe9a43cffa4dabdb3de67acbc5f1c",
+      "published_bytes": 22701,
+      "original_relative_path": "vendor/wave2b2a/source/c7r/campaign1_nonprofile_common_v102.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/source/c7r/run_campaign1_c7r_closure_v102.py",
+      "original_sha256": "87caf0cb2c008635f9a8d0db0bd8e67f758fa10d35ae9a8b00058fe84dda1003",
+      "original_bytes": 69235,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/source/c7r/run_campaign1_c7r_closure_v102.py",
+      "published_sha256": "87caf0cb2c008635f9a8d0db0bd8e67f758fa10d35ae9a8b00058fe84dda1003",
+      "published_bytes": 69235,
+      "original_relative_path": "vendor/wave2b2a/source/c7r/run_campaign1_c7r_closure_v102.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/source/c7x/c7x_duplicate_order_diagnostic_v101.py",
+      "original_sha256": "b48f10e5aa34b5d6b6596a3e21a7ced8e9a1572928fc0cfc8d496e4dbb33767e",
+      "original_bytes": 6252,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/source/c7x/c7x_duplicate_order_diagnostic_v101.py",
+      "published_sha256": "b48f10e5aa34b5d6b6596a3e21a7ced8e9a1572928fc0cfc8d496e4dbb33767e",
+      "published_bytes": 6252,
+      "original_relative_path": "vendor/wave2b2a/source/c7x/c7x_duplicate_order_diagnostic_v101.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/source/c7x/campaign1_nonprofile_common_v102.py",
+      "original_sha256": "f629876216c797180265d1b848a4424f211fe9a43cffa4dabdb3de67acbc5f1c",
+      "original_bytes": 22701,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/source/c7x/campaign1_nonprofile_common_v102.py",
+      "published_sha256": "f629876216c797180265d1b848a4424f211fe9a43cffa4dabdb3de67acbc5f1c",
+      "published_bytes": 22701,
+      "original_relative_path": "vendor/wave2b2a/source/c7x/campaign1_nonprofile_common_v102.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/source/c7x/run_campaign1_c7x_fullpanel_v101.py",
+      "original_sha256": "04fb1366706ed1f934f53b5f946d0dcab7480d233fa894ac7569325d9a125a98",
+      "original_bytes": 71360,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/source/c7x/run_campaign1_c7x_fullpanel_v101.py",
+      "published_sha256": "04fb1366706ed1f934f53b5f946d0dcab7480d233fa894ac7569325d9a125a98",
+      "published_bytes": 71360,
+      "original_relative_path": "vendor/wave2b2a/source/c7x/run_campaign1_c7x_fullpanel_v101.py",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/source/docs/C7R_FROZEN_ANALYSIS_CONTRACT_20260828.md",
+      "original_sha256": "7f3d8fa570b2ee2fab9ab8dc06afd9672e2dfad32d967ebd4e18a0ba91c13e94",
+      "original_bytes": 6686,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/source/docs/C7R_FROZEN_ANALYSIS_CONTRACT_20260828.md",
+      "published_sha256": "7f3d8fa570b2ee2fab9ab8dc06afd9672e2dfad32d967ebd4e18a0ba91c13e94",
+      "published_bytes": 6686,
+      "original_relative_path": "vendor/wave2b2a/source/docs/C7R_FROZEN_ANALYSIS_CONTRACT_20260828.md",
+      "substitutions": []
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/source/docs/dynamics_paper2_campaign1_c7x_fullpanel_exploratory_plan_v1_0_1_2026-08-27.md",
+      "original_sha256": "c496a2bdbb63041a9f6a09886cd0d51dfdb72249df9b001ca65ffe22665d6c7e",
+      "original_bytes": 7254,
+      "path": "code/research_updates_20261102/Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/source/docs/dynamics_paper2_campaign1_c7x_fullpanel_exploratory_plan_v1_0_1_2026-08-27.md",
+      "published_sha256": "c496a2bdbb63041a9f6a09886cd0d51dfdb72249df9b001ca65ffe22665d6c7e",
+      "published_bytes": 7254,
+      "original_relative_path": "vendor/wave2b2a/source/docs/dynamics_paper2_campaign1_c7x_fullpanel_exploratory_plan_v1_0_1_2026-08-27.md",
+      "substitutions": []
+    }
+  ],
+  "omitted": [
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/SHA256SUMS.txt",
+      "original_sha256": "9fd082bc505ab8e7ea5bcd7169557ca03c974cda6d68ede9140a78205c6fbd6c",
+      "original_bytes": 41851,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/SOURCE_CHANGES.json",
+      "original_sha256": "5d0ee2f9be3d04c0f193bd6d1298c3f2b7597cac6c68484f4d2cbfa30e12b075",
+      "original_bytes": 711,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/TEST_RESULTS.txt",
+      "original_sha256": "210b6aaad040809bc8718e58d670a1a2f74dc7c9bdfdba960542f2a2bca57d3c",
+      "original_bytes": 6453,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/VALIDATION.json",
+      "original_sha256": "ac0010efee9897569bf1058f80d9d99020e45d90650e72b1686e79b6401eb92d",
+      "original_bytes": 1013,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/REVIEW.json",
+      "original_sha256": "a74eb6439368b96441bf2ebbcf862c0159be12129a0a624fdd9926b618711438",
+      "original_bytes": 6421,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/first_repeat_baseline.json",
+      "original_sha256": "8fa37cf49cab2f667bc2750892d4c30a67e88e44a53d0a7dcc291aed72445751",
+      "original_bytes": 16446,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/patron_review.json",
+      "original_sha256": "9060c781559d39c6246cdc9a9f1da4eeb51511b2c8137f9fb94e6f1ed6497afc",
+      "original_bytes": 939,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/prior_batch/AUDIT.json",
+      "original_sha256": "2a28578c2e078f33d6ae33aa7f6cb479bdaebc8d68272c02645221adda091d22",
+      "original_bytes": 591,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/prior_batch/INPUT_LINEAGE.json",
+      "original_sha256": "6b6cf14733b00fb9777cd2d9e66eedc1e9e519d53d3d958ccc70905b028b505f",
+      "original_bytes": 466,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/prior_batch/LOCATION.json",
+      "original_sha256": "9f7efb4453abb5ec4a694e894d9b3cb3722c350969c1e57012b89d7a2e39d4a4",
+      "original_bytes": 183,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/prior_batch/REPORT_MANIFEST.json",
+      "original_sha256": "6a24a1a589d1538cf14f401686cbe44f8cfb811b99a322eae6dd274c1ef6fda7",
+      "original_bytes": 59701,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/prior_batch/REVIEW_VERIFIED.json",
+      "original_sha256": "3667f02ede57cf80aeb984f9e450587884f2bfd07d7e155d31c2ffb3784fc1b2",
+      "original_bytes": 4029,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/prior_batch/STATUS.json",
+      "original_sha256": "4eb876c163b8191e9f4276aba082d2e6d2ac1ef5363c2a41d27135ba37371def",
+      "original_bytes": 1655,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/receipt_review.json",
+      "original_sha256": "7103d546d94d2772e33bd3c972ca00aca29b5558b4ea3339ed6e233fa89971eb",
+      "original_bytes": 1758,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/reputation/ACCOUNT_EXCLUSION.json",
+      "original_sha256": "eeb1ded14b6630bc31d5c7173422b9d816efdf5ee765c310faec4589f3a3bad5",
+      "original_bytes": 144,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/reputation/DESIGN.json",
+      "original_sha256": "2f09eb46a8d018058ef29e0a6c29f7ae566240f2b187a7d692d22b77cf3efc17",
+      "original_bytes": 805,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/reputation/ENVIRONMENT.json",
+      "original_sha256": "21468b1970a51f02e959a6ab09a76fd8fe2baa884ed12c60e732de5661791879",
+      "original_bytes": 219,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/reputation/FEATURE_QA.json",
+      "original_sha256": "e3c659ea40d0060c963b74a833817aa56857ecd02987e1cf2a98b98c7d29c917",
+      "original_bytes": 392,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/reputation/HISTORY_QA.json",
+      "original_sha256": "e5343cca018dd70fd0d741fe37f4362d967656894d863e5ca1592dee2e716802",
+      "original_bytes": 107,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/reputation/HISTORY_WORK.json",
+      "original_sha256": "1d2377601e98a3242d74ce1592547caa60020eda5492348ea8e00376e0ce09cb",
+      "original_bytes": 174,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/reputation/INPUT_SCOPE.json",
+      "original_sha256": "8728c59a9c5058e4517893851a8309c3b46a57b91cda627a3774cf5cc4514633",
+      "original_bytes": 322,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/reputation/READ_RESULTS.txt",
+      "original_sha256": "16fcd75aba16274147faa09b222da466c10f28ab59ac838be8da66b2e5b42869",
+      "original_bytes": 972,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/reputation/REPORT_MANIFEST.json",
+      "original_sha256": "1aa9c77c961f44469d057f827289f31112bb9ad00cb43ee370d91b3948adc255",
+      "original_bytes": 3467,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/reputation/SAMPLE.json",
+      "original_sha256": "deae74036ad1e2624932c82c7dae19f9a9e7257ac3904d0bb926903fb2962852",
+      "original_bytes": 102,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/reputation/SUMMARY.json",
+      "original_sha256": "60e485893c58fa856d5d0a174895fee81d8c6a3b175dc94d5db01062963b94b7",
+      "original_bytes": 431,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/reputation/estimates.csv",
+      "original_sha256": "99a27bc2a13b490e422720df400a9a53cd67ab339112c720161452bb992413e1",
+      "original_bytes": 7363,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/reputation/estimates.json",
+      "original_sha256": "3040140a99cb9942182779249ce747e355051d66bb5e90fb7af086d285fd8333",
+      "original_bytes": 12750,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/reputation/evaluation_gradient.json",
+      "original_sha256": "d4ac09ead0d8034b879c17a90be828c6bdf9d186e8b5e6ef12b41903af41ced2",
+      "original_bytes": 1775,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/reputation/first_repeat_gradient.json",
+      "original_sha256": "8c0d18b27be98902691aa26039071ba9a37166a33ca77f332e05d2fcb8380d47",
+      "original_bytes": 5396,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/reputation/full_panel_census.csv",
+      "original_sha256": "f3bf02766e26d8b953c20e7fd949caf1bb9973625deb4f6cf348c9f9bc8fa65f",
+      "original_bytes": 3701,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/reputation/low_risk_first_gradient.json",
+      "original_sha256": "470fa12f502705301a869f2dbcdbbf3031619ff9c2051af15a7614011d2230b1",
+      "original_bytes": 1810,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/reputation/low_risk_gradient.json",
+      "original_sha256": "4ac6517a50be589d50141f7ae4fbca201f6b205393e579972ebc39d58e892f5b",
+      "original_bytes": 1801,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/reputation/low_risk_grant_rates.csv",
+      "original_sha256": "1c320474224c073ed7d56f29f1ecc123ba508700f0cfbf9a919fa1ce7f2e890c",
+      "original_bytes": 1308,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/reputation/module_status.json",
+      "original_sha256": "5ec2991a29d7430751e1f33a62d0e7f92e0c69cacbb1249ea51855e8b0955ca7",
+      "original_bytes": 78,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/reputation/prediction_calibration.csv",
+      "original_sha256": "87dc8e173cff4478093a3f731545f95824d969e465391fcb91413bc8307c436d",
+      "original_bytes": 1397,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/reputation/prediction_design.json",
+      "original_sha256": "a821b7c103f39b078bc264cb049584a9d5fa9ed8355819750b2dc18a47682244",
+      "original_bytes": 2885,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/reputation/reencounters_and_repayment.csv",
+      "original_sha256": "83e2a67ea199ea84bc1669c2dbe9fd03e6b9faca91a165be61bb5ad857b04365",
+      "original_bytes": 24956,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/reputation/repeat_premium_competitive.json",
+      "original_sha256": "8417c2815aeaebddc909b36d016d682ae669e4efb9f780e5e1e1a66306efe2aa",
+      "original_bytes": 1832,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/reputation/timestamp_sensitivity.csv",
+      "original_sha256": "b33a88ea4a53758d8f0bbcbc4702fda553e4c284a27607f9015b31b911b2b36a",
+      "original_bytes": 170,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/stakes/Win_Premium_Stakes_Report/PREFLIGHT.json",
+      "original_sha256": "6a49a45ee92678e3a01b4fd74e892d96a9bded7735d7a48ec513bd9cfad19419",
+      "original_bytes": 246,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/stakes/Win_Premium_Stakes_Report/READ_ME.txt",
+      "original_sha256": "843ed49c3dbdbd5ef6714ec511e7106b4f2f0fbb30694f95798cbb2cadd82976",
+      "original_bytes": 1884,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/stakes/Win_Premium_Stakes_Report/RUN_TIME.json",
+      "original_sha256": "517264c9781cb5a1cbecf7123a232035f741df1e52fc532fe5b61c6f1dd4613f",
+      "original_bytes": 73,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/stakes/Win_Premium_Stakes_Report/SUMMARY.json",
+      "original_sha256": "092f13eb0e4ed4eaf4b8d9bb7d57b6e235138733f040e5e592611b3422a3a7ce",
+      "original_bytes": 940,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/stakes/Win_Premium_Stakes_Report/equal_account_sensitivity.csv",
+      "original_sha256": "89109ce6d836d913ae9fd4ec13ae12fae5d70e1df0a6ad0555d8739a06703636",
+      "original_bytes": 513,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/stakes/Win_Premium_Stakes_Report/history_coverage.csv",
+      "original_sha256": "473c92f5abc22a4ae9fdde27465b97dce96678e494deb00b37992333c50ba8fd",
+      "original_bytes": 5712,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/stakes/Win_Premium_Stakes_Report/reference_population_coverage.csv",
+      "original_sha256": "578309aa54be65f52f8c083c237f631472743127ff69f4fa13299eb5cc857af0",
+      "original_bytes": 4709,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/stakes/Win_Premium_Stakes_Report/same_sample_sensitivity.csv",
+      "original_sha256": "7a16fc70774cb348695874bc43e381df50455ac2a07f01abbac9d1e1935e5900",
+      "original_bytes": 171,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/stakes/Win_Premium_Stakes_Report/sample_coverage.csv",
+      "original_sha256": "43c7dd712c9ddcebb6ebb624cd85a0c9fa62317e6a5029d8d526399b4b2071aa",
+      "original_bytes": 1122,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/stakes/Win_Premium_Stakes_Report/stage_timings.csv",
+      "original_sha256": "f0781be96952632b2b8e5cd1cfb7ad29c1bfcaa6865e1440a8b9e2785f19ee60",
+      "original_bytes": 6495,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/stakes/Win_Premium_Stakes_Report/stakes_by_standing.pdf",
+      "original_sha256": "4f778d2b42b4c9e1372edb88c1568c1f453504d38da87d6e2e51139afe39d85d",
+      "original_bytes": 19791,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/stakes/Win_Premium_Stakes_Report/stakes_by_standing.png",
+      "original_sha256": "c4dfae484e89ef983b71632c2072e997210ce5d5c8f87081991de210a78007ae",
+      "original_bytes": 145380,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/authority/stakes/Win_Premium_Stakes_Report/stakes_table.csv",
+      "original_sha256": "aa0476ae5813b3a4c8032b4fb0f80511c2265ab1df0dcd26c33009f0ae9b18ef",
+      "original_bytes": 164736,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/BUILD_INFO.json",
+      "original_sha256": "4ad99e3a2e7961710fb7e2930a873982423514dd0108455a9e291d95c7a8489b",
+      "original_bytes": 1048,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/RESOURCE_BENCHMARK.json",
+      "original_sha256": "bdc18c6a7b165ca26093bb8b7a64265cb3a93ec123c75560a75f7dc0b959a372",
+      "original_bytes": 754,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/SHA256SUMS.txt",
+      "original_sha256": "25ffe768e16f496595e29bdff8bf627664c4121a2eadfcc78705f5cd1c581058",
+      "original_bytes": 7273,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/TEST_RESULTS.txt",
+      "original_sha256": "15b2e2aa69e0040287c94319e22a6d2aa9f163483d6f0a3f2ccb3c8b0b61d4e7",
+      "original_bytes": 4099,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/authority/REVIEW.json",
+      "original_sha256": "a74eb6439368b96441bf2ebbcf862c0159be12129a0a624fdd9926b618711438",
+      "original_bytes": 6421,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/authority/SOURCES.json",
+      "original_sha256": "55e07415bcd8e281b9e8e375fa02f49b209afa4c52c1d6c56bab057a51e3eb16",
+      "original_bytes": 1887,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/a2_reference/CLOCK_SUPPORT.json",
+      "original_sha256": "f8b690adb9d98393c4c128fccb5fa138ac3bb50d1a9a81a4f42fa8465f779a55",
+      "original_bytes": 350,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/a2_reference/COMPLETION.json",
+      "original_sha256": "7b879976c2c0720ab9ca3428408eca0a9ff1a8e01b0fe9d3b916ddfe15bb21e1",
+      "original_bytes": 343,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/a2_reference/HISTORY_STATUS.json",
+      "original_sha256": "391fec60bf2150ef5c9d03fc300d1ee76dcba29a6c29c367d5a7675a76c86170",
+      "original_bytes": 112,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/a2_reference/LINEAGE.json",
+      "original_sha256": "7d1673009909ef25854de266717a1d7f1c19138221d42d4d1b6ffba151076a77",
+      "original_bytes": 906,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/a2_reference/REPORT_HASHES.json",
+      "original_sha256": "8d538b6be82bb5a44241618b995dfa8ed91fdf3a0679b514d2d498de2e8f03d5",
+      "original_bytes": 3700,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/a2_reference/adjusted_profiles.csv",
+      "original_sha256": "84cf2df3bd4a56e50d6dd6e79bcd51f9efcfbff8a64cffa0277b5f23af7abaed",
+      "original_bytes": 70202,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/a2_reference/coefficient_order.json",
+      "original_sha256": "7e9ff4aed68d4e694f83faf35c67c7b195e2011306b59458a9232524d31a81c6",
+      "original_bytes": 61498,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/a2_reference/coefficients.csv",
+      "original_sha256": "2d3d4f7748b6ce90e8a3700d17c79891b93f16f32fd9c81b138db8636f196aee",
+      "original_bytes": 356551,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/a2_reference/coverage.csv",
+      "original_sha256": "655205e6141ae8e07ce43ff8592d36b4b8e8810a1ed110a3a92359b3b91116c1",
+      "original_bytes": 417,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/a2_reference/model_covariances.npz",
+      "original_sha256": "6a963d39ef31815e8d5d5c13e88f4378c03ba7cb34c949ef60d54162daa39679",
+      "original_bytes": 1043266,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/a2_reference/model_definitions.json",
+      "original_sha256": "e2ef048944411b0b5312797985dcb0eb4ed4df9c066fe1da7de30677e24c3409",
+      "original_bytes": 12656,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/a2_reference/model_row_support.csv",
+      "original_sha256": "334fbeaff3556843c07e36dcfba479c12aa9268fa8457bdde3df46ee9159e2d4",
+      "original_bytes": 5482,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/a2_reference/model_samples.csv",
+      "original_sha256": "c88a38498d57cf9b6f892401bdb08ae6c25b63fe271d021c7d85908b5504c883",
+      "original_bytes": 5589,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/a2_reference/planned_contrasts.csv",
+      "original_sha256": "c8fa61f4e2fea1aa5edb6d80a681d0ea86033f5a03705cdb68fc2692d013000b",
+      "original_bytes": 20137,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/a2_reference/proxy_endpoint_support.csv",
+      "original_sha256": "e230985e04875d53867f1b3eab88b071a170028648dd67f4707280aed1f61356",
+      "original_bytes": 2990,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/failure_review/REFERENCE_REPRODUCTION.csv",
+      "original_sha256": "9662975b68046318219867039e59b0c4db435683861af996c775132535158e4a",
+      "original_bytes": 4876,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/failure_review/RESULTS.json",
+      "original_sha256": "93935601dd17bfd66c4315ea7a1942df39810bf9223f79b0223e069cc9778031",
+      "original_bytes": 97,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/failure_review/REVIEW.json",
+      "original_sha256": "976a6d3fccee9fcd0b891f7d9703c8e794b84bbf5d4be3c9fbbc2300bfb34e9d",
+      "original_bytes": 409,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/structure_review/DOWNSTREAM_STATUS.csv",
+      "original_sha256": "81f0e05c0ca60d688feed76deaf8e75e4e4e23fb61052b7c48cfc182af2cdd07",
+      "original_bytes": 2960,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/structure_review/RESULTS.json",
+      "original_sha256": "30613916a616e13ca2988bdfcf8f4281470c10047d0cc6cc6dbbb4e023709dde",
+      "original_bytes": 1479,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/structure_review/REVIEW_VERIFIED.json",
+      "original_sha256": "af7f7c01a180c2d0af58dd7023ab4c5280c7f6d7170c9374274ca2decf18babc",
+      "original_bytes": 427,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/structure_review/stage_speed_joint_tests.csv",
+      "original_sha256": "11a029ea3cc9bcea1dfe41c42d8d4e4ecc4fe9ee134029a5ac8c6c1219f36622",
+      "original_bytes": 239,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/structure_review/tab_app_clocks.csv",
+      "original_sha256": "c0d7e21f63ea31c4b886a5810ea6cd4d30cfceed71a7b15d139b7a715300b29f",
+      "original_bytes": 1669,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/structure_review/tab_app_equalweights.csv",
+      "original_sha256": "786fe0b023ae8e40fe2af97c21849855861e4fe67a9c5dfdfe7d199512c919cb",
+      "original_bytes": 536,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/v101_return_review/ENVIRONMENT.json",
+      "original_sha256": "ae8db2eb010943d3f68282a77ca65e5bd3e7ec3637ededd7148aba20b0c218c7",
+      "original_bytes": 199,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/v101_return_review/INPUT_CELLS.csv",
+      "original_sha256": "3a93d5e287ff81751c7008f582771fbaee2d0d114a522b260d94630086fe3a0a",
+      "original_bytes": 688,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/v101_return_review/INPUT_CENSUS.csv",
+      "original_sha256": "063fb4bc3ee5ec347773917926dec29873667529606c560bb653c10cf10addeb",
+      "original_bytes": 203,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/v101_return_review/INPUT_LINEAGE.json",
+      "original_sha256": "cca9ab45ec954507727eda31d7b8400c1992eae93c173a5132d94ae9cc5d9fba",
+      "original_bytes": 7383,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/v101_return_review/REFERENCE_REPRODUCTION.csv",
+      "original_sha256": "2f1e64b9c88f520b87065235374d711406dadd9e4b2ac745cc735687896de1cc",
+      "original_bytes": 13767,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/v101_return_review/RESULTS.json",
+      "original_sha256": "93935601dd17bfd66c4315ea7a1942df39810bf9223f79b0223e069cc9778031",
+      "original_bytes": 97,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/v101_return_review/reference_reproduction/adjusted_profiles.csv",
+      "original_sha256": "6c4f882017b5879cedde23819e62f7c9820b06a451f2690f93c5622bbc5313be",
+      "original_bytes": 70262,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/v101_return_review/reference_reproduction/coefficient_order.json",
+      "original_sha256": "7e9ff4aed68d4e694f83faf35c67c7b195e2011306b59458a9232524d31a81c6",
+      "original_bytes": 61498,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/v101_return_review/reference_reproduction/coefficients.csv",
+      "original_sha256": "b8cae1934cac0c74a1ecebb7c4b543e896f931b73012e7cd152e17bbf21f3820",
+      "original_bytes": 356711,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/v101_return_review/reference_reproduction/model_covariances.npz",
+      "original_sha256": "11a6d49ef0569ecb3aec6493e875df99eacb089a4c10dabe3e93bf611a659f53",
+      "original_bytes": 1041459,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/v101_return_review/reference_reproduction/model_row_support.csv",
+      "original_sha256": "334fbeaff3556843c07e36dcfba479c12aa9268fa8457bdde3df46ee9159e2d4",
+      "original_bytes": 5482,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/v101_return_review/reference_reproduction/model_samples.csv",
+      "original_sha256": "c88a38498d57cf9b6f892401bdb08ae6c25b63fe271d021c7d85908b5504c883",
+      "original_bytes": 5589,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/components/Mating_Material_Responsibility_v1_0_2/evidence/v101_return_review/reference_reproduction/planned_contrasts.csv",
+      "original_sha256": "269a0cc5e4387ac23c0fb86dc3ca86c843dfc55ffdf5d19cdb8525cca9fe8a3f",
+      "original_bytes": 20155,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/PACKAGE_MANIFEST.sha256",
+      "original_sha256": "116a25901e3b7cd6dbc5b25d4964bf7c78fd5b50cfb3a4756a32575218a35525",
+      "original_bytes": 4269,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/TERMINAL_COMMAND.txt",
+      "original_sha256": "00005cbc0edcc49ff6e6c1486c05c7e52c23c3cef8173e3e7a31bd2a4f7ebaa1",
+      "original_bytes": 1120,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/VALIDATION.json",
+      "original_sha256": "c3da9b9e6fc996bdfa401e9d9fbc8de42c191f095ce7bc0ac6e6d2a0a3466ea7",
+      "original_bytes": 1720,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/authority/OPPORTUNITY_CONTRACT.json",
+      "original_sha256": "a88abd1fda0140efcbcacc79794a2bf8fa89975747bfc44e835737370730d5ad",
+      "original_bytes": 861,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/authority/POOL_SAMPLE_AUTHORITY.json",
+      "original_sha256": "81c34113e7a888629a834a17235a71dcf369a2d590755fd9412ee42151d9b2f3",
+      "original_bytes": 1234,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/authority/Pool_Main_Sample_24M_Report.zip",
+      "original_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+      "original_bytes": 96936,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/authority/STAGE07_CERTIFICATE.json",
+      "original_sha256": "8b7010b528ae5c6f1e1a9b517258648204c14c17ca41a2a6796f8ee5a1ed6db7",
+      "original_bytes": 27816,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/authority/UPSTREAM_FILES.json",
+      "original_sha256": "dac4c501cd8da30621cf9decd10df18a0efa743e0fa9261d8f4317d93e537e7b",
+      "original_bytes": 2975,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/authority/UPSTREAM_SOURCE_AUTHORITY.json",
+      "original_sha256": "44c5a759cc364b457ff878f2ddac72094046fbdd2ac1e051131cc4246e3b7c21",
+      "original_bytes": 2074,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/authority/V100_FAILURE_REPORT.json",
+      "original_sha256": "f206a7d3fd08de08a4625797fbba2669ecdb265d9527be0d8077ed4e67f17c1f",
+      "original_bytes": 1562,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/authority/V100_LOCAL_VALIDATION.json",
+      "original_sha256": "a8a110c262e068c34de490ede001d912d7f7887c848cd217539b9d9fe9f77258",
+      "original_bytes": 2238,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/authority/V101_LOCAL_VALIDATION.json",
+      "original_sha256": "161c809b05a0617968615d676ea1e30865eda9008ace5a49d2f88a90f3ae3c2f",
+      "original_bytes": 2447,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/authority/V101_TERMINAL_EVIDENCE.json",
+      "original_sha256": "c10c4c5a09e1036541f738f771e69919fc42a4122b08e047709e51baf8bf7139",
+      "original_bytes": 545,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/auth/evidence/PANEL_AUTHORITY_REPORT.zip",
+      "original_sha256": "0a1a62f6efda4746f034a45c7fc82f2f44735cf1c98bde77ea3a3ddbca4f8d10",
+      "original_bytes": 527328,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/auth/evidence/SOURCE_JOIN_REPORT.zip",
+      "original_sha256": "3a661bae8d5a912e197c22d35ebc6c6c750505760fbc6b516cbabba4a3596254",
+      "original_bytes": 42866,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/arena/source/auth/evidence/SOURCE_UNION_REPORT.zip",
+      "original_sha256": "a801d1000109124d888874c1d4bfdaca95045c5f150b7398a86a0bb55db7b680",
+      "original_bytes": 13533,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/INTERPRETATION.txt",
+      "original_sha256": "ab45a55d688788365c510aa3c7f54935e676006a7ead49c9cc58d039aea4c66c",
+      "original_bytes": 4620,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/PACKAGE_MANIFEST.json",
+      "original_sha256": "b006dc03f5ad874065566626e3914185de22ef5dc7bde2e853fa531038e10551",
+      "original_bytes": 2126,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/VALIDATION.txt",
+      "original_sha256": "de7777443d3aa1358993c41b493a111fba3d286927c426d80973408766faa791",
+      "original_bytes": 2344,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/authority/AUTHOR_EXCLUSION.json",
+      "original_sha256": "0267b55c9536ae0f9302a08c338b01f5f7cd2e2f2d6a8d54a7d4621a58cb77a7",
+      "original_bytes": 882,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/authority/FEASIBILITY_INPUT.json",
+      "original_sha256": "4d0052509eaef2c8aee60eb97adda2d1d1aa9036eb31e08f456fd5a6d8c20133",
+      "original_bytes": 707,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/countdown/authority/FEASIBILITY_STATUS.json",
+      "original_sha256": "d0f4249ee1211cc82734853d68df51434d8ba3e32e2c97cf4b69028440c5e110",
+      "original_bytes": 598,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/PACKAGE_BUILD_VALIDATION.json",
+      "original_sha256": "723cf6e3ebf2a7b4cf3ce6e1d272b425d3175d134f6c446a305f311de87e55c1",
+      "original_bytes": 1849,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/PACKAGE_MANIFEST.sha256",
+      "original_sha256": "3a101f3b01e5eea586787a0fc741fb638fcc24f0c57687c89cb67ca80fae8a82",
+      "original_bytes": 3294,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/RUN_COMMAND.txt",
+      "original_sha256": "70a95e587768ae8645717696fb41ef9b138e6f461c2252e65df1bcfe77c6a79a",
+      "original_bytes": 304,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/authority/SAMPLE_AUTHORITY.json",
+      "original_sha256": "81c34113e7a888629a834a17235a71dcf369a2d590755fd9412ee42151d9b2f3",
+      "original_bytes": 1234,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/authority/SOURCE_BINDINGS.json",
+      "original_sha256": "f92ee567cd787e95bd617f8fdcdff668c4d4da484d6f653ec20e89ba67fc8726",
+      "original_bytes": 5866,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/evidence/Pool_Main_Sample_24M_Report.zip",
+      "original_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+      "original_bytes": 96936,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/evidence/Pool_Main_Sample_24M_Report.zip.sha256",
+      "original_sha256": "d2e6c0953ff2de7cc7235b98d568c884e4fa8067b8aa81d22efe1ac3484d6f59",
+      "original_bytes": 128,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/evidence/WAVE3A_RESULTS.zip",
+      "original_sha256": "f56407f3de5bdd02366df28858e689da5f10a05c657f6c5e2feb71a7e227a592",
+      "original_bytes": 9404,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/patron_remaining/evidence/WAVE3B1_RESULTS.zip",
+      "original_sha256": "34b71da5e684ee07cf1abfbb9d9406dbc3601db20ff099e2737574790f0a5616",
+      "original_bytes": 143128,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/reputation/PACKAGE_MANIFEST.sha256",
+      "original_sha256": "a27e18354a49d50d12c17df0fc34811afe5ad6e3bb66ccb81f93a76c7e21fa71",
+      "original_bytes": 1106,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/reputation/VALIDATION.json",
+      "original_sha256": "eb2755887e70de1b8d761db78175aa19914e5111349425036f05c7f470fd7757",
+      "original_bytes": 1632,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/reputation/authority/first_pair_authority.json",
+      "original_sha256": "58d28f583d994fc1d4142aa8ef5e17dd0a1f3e76e9c2ca6d9f6ff23d2631ede2",
+      "original_bytes": 1036,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/reputation/authority/main_sample_report.json",
+      "original_sha256": "0ef50e424e004c5698c0c3dbc9815748627e5f23e6504fdaedfd526225ee184e",
+      "original_bytes": 510451,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/AUTHOR_EXCLUSION.json",
+      "original_sha256": "0267b55c9536ae0f9302a08c338b01f5f7cd2e2f2d6a8d54a7d4621a58cb77a7",
+      "original_bytes": 882,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/PACKAGE_MANIFEST.sha256",
+      "original_sha256": "a8e62de0011591ac09807fb827356b23a3b0224f184380bfd07da18cf7f94eee",
+      "original_bytes": 1332,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/VALIDATION.txt",
+      "original_sha256": "24a4d612c7e3a216fdf11bea63449465c5994218908bf33767d4acbaedec6a7c",
+      "original_bytes": 1290,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/authority/chronology.tsv",
+      "original_sha256": "c169bf9e346defde62047a3c2048758c296b1f0598fee70d2cc1e660121536d8",
+      "original_bytes": 247478,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/stakes/authority/pool_main.json",
+      "original_sha256": "06e3a0067c24026973fa1dce9c85b05ceee6a158232a36807263c4beb969666f",
+      "original_bytes": 6626,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/CODE_PROVENANCE.json",
+      "original_sha256": "fc9d30ee24d6edc528a190f100a49a8400170ac4a8a36e70c1aa013d8c25eccf",
+      "original_bytes": 670,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/PACKAGE_HASHES.json",
+      "original_sha256": "e7e5c474e001e22425315612966d5cf6dd3c3b8fc608800f06d8f527a6ce882b",
+      "original_bytes": 1644,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/VALIDATION.txt",
+      "original_sha256": "a832f49e0111df2d573240dd526ce9d640654e04566bc56b4f1735dc912d9f43",
+      "original_bytes": 865,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/authority/SAMPLE_AUTHORITY.json",
+      "original_sha256": "81c34113e7a888629a834a17235a71dcf369a2d590755fd9412ee42151d9b2f3",
+      "original_bytes": 1234,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/evidence/Pool_Main_Sample_24M_Report.zip",
+      "original_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+      "original_bytes": 96936,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/tenure/evidence/Pool_Main_Sample_24M_Report.zip.sha256",
+      "original_sha256": "d2e6c0953ff2de7cc7235b98d568c884e4fa8067b8aa81d22efe1ac3484d6f59",
+      "original_bytes": 128,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/PACKAGE_BUILD_VALIDATION.json",
+      "original_sha256": "32020042dd301d27fc862dfb8ac75ccfe27ccbe54445cac73af2c24934bb92bb",
+      "original_bytes": 1350,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/PACKAGE_MANIFEST.sha256",
+      "original_sha256": "e3909dcd482548a9ce75699ed926d1f4f54eb331309e0a466c4dc7f9f2e2c0ba",
+      "original_bytes": 2914,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/authority/SAMPLE_AUTHORITY.json",
+      "original_sha256": "81c34113e7a888629a834a17235a71dcf369a2d590755fd9412ee42151d9b2f3",
+      "original_bytes": 1234,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/authority/SOURCE_AUTHORITY.json",
+      "original_sha256": "44c5a759cc364b457ff878f2ddac72094046fbdd2ac1e051131cc4246e3b7c21",
+      "original_bytes": 2074,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/evidence/Pool_Main_Sample_24M_Report.zip",
+      "original_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+      "original_bytes": 96936,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave1/evidence/Pool_Main_Sample_24M_Report.zip.sha256",
+      "original_sha256": "d2e6c0953ff2de7cc7235b98d568c884e4fa8067b8aa81d22efe1ac3484d6f59",
+      "original_bytes": 128,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/PACKAGE_BUILD_VALIDATION.json",
+      "original_sha256": "935b57e55caca4f91c3ef624c8a4b10d9990d6fbac755e4b47d3037c1ca0808e",
+      "original_bytes": 2096,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/PACKAGE_MANIFEST.sha256",
+      "original_sha256": "987da79badecb6ee6dece9187aa0af65b43c29e727c2cb5b39d3c47b9e0fa317",
+      "original_bytes": 3060,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/RUN_COMMAND.txt",
+      "original_sha256": "ff9bbda1a5633bcd39d10da324222a2a4a415823c52137fb13115653335a675b",
+      "original_bytes": 107,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/authority/SAMPLE_AUTHORITY.json",
+      "original_sha256": "81c34113e7a888629a834a17235a71dcf369a2d590755fd9412ee42151d9b2f3",
+      "original_bytes": 1234,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/authority/WAVE2B1_HISTORY_SUCCESS.json",
+      "original_sha256": "2e5ba421a1c628591e5004e6a60a89a39d7d017a3f5578ba88b4809f6853b417",
+      "original_bytes": 1010,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/authority/WAVE2B1_HISTORY_SUMMARY.json",
+      "original_sha256": "61400d62e8b92bc0b8fe7e7a9746f650e37144fd63de49d92699aaf0e1f103d7",
+      "original_bytes": 1911,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/authority/WAVE2B1_RUN_STATUS.json",
+      "original_sha256": "d3010bb7b4dd41fbb486b4ce829dcde9d58e6c2f8c14e45c16b3093d77eebc67",
+      "original_bytes": 17079,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/evidence/Pool_Main_Sample_24M_Report.zip",
+      "original_sha256": "917aa14ed8a8dbb7e82f9af1424aae079797edf4b1b06a4c27de084aca102c57",
+      "original_bytes": 96936,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/evidence/Pool_Main_Sample_24M_Report.zip.sha256",
+      "original_sha256": "d2e6c0953ff2de7cc7235b98d568c884e4fa8067b8aa81d22efe1ac3484d6f59",
+      "original_bytes": 128,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    },
+    {
+      "archive_member": "Mating_Material_NonIV_Batch_v1_0_2/vendor/wave2b2a/source/c7x/c7_results.json",
+      "original_sha256": "197d3d287294b792bb0657de04369686afa1ffc8cadc4d6e67ba074c36ce387a",
+      "original_bytes": 3175,
+      "reason": "Non-source asset: retained in authenticated original archive"
+    }
+  ]
+}

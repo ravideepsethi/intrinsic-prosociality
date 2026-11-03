@@ -1,0 +1,11 @@
+phase,rd_bin,player_updates,mean_signed_error_predicted_minus_recorded,mean_absolute_error,period,population
+pre,45 <= RD < 45.01 (floor),57093529,-0.027856123344884985,0.3378747057745993,2025-11-01 to 2025-11-18 07:15 UTC,"all rated observed player-updates, both colors and all outcomes; outside main panel"
+pre,45.01 <= RD < 60,36550893,-0.028453122704342394,0.3789906028145666,2025-11-01 to 2025-11-18 07:15 UTC,"all rated observed player-updates, both colors and all outcomes; outside main panel"
+pre,60 <= RD < 100,6069735,-0.08443651547134129,0.8523758296907801,2025-11-01 to 2025-11-18 07:15 UTC,"all rated observed player-updates, both colors and all outcomes; outside main panel"
+pre,100 <= RD < 200,2343931,-0.2758461226155773,1.6051377007702858,2025-11-01 to 2025-11-18 07:15 UTC,"all rated observed player-updates, both colors and all outcomes; outside main panel"
+pre,RD >= 200,908538,-2.1119761598891733,4.89505396871651,2025-11-01 to 2025-11-18 07:15 UTC,"all rated observed player-updates, both colors and all outcomes; outside main panel"
+post,45 <= RD < 45.01 (floor),251776256,-0.023218854830240648,0.3344187057479265,2025-11-18 07:22 UTC through 2026-01,"all rated observed player-updates, both colors and all outcomes; outside main panel"
+post,45.01 <= RD < 60,159533370,-0.02558776428245134,0.3773802789854417,2025-11-18 07:22 UTC through 2026-01,"all rated observed player-updates, both colors and all outcomes; outside main panel"
+post,60 <= RD < 100,26475318,-0.07827390182588508,0.8353679007954103,2025-11-18 07:22 UTC through 2026-01,"all rated observed player-updates, both colors and all outcomes; outside main panel"
+post,100 <= RD < 200,10344394,-0.26048260257225897,1.5782861987168073,2025-11-18 07:22 UTC through 2026-01,"all rated observed player-updates, both colors and all outcomes; outside main panel"
+post,RD >= 200,4002628,-2.127769821809969,4.825753102511124,2025-11-18 07:22 UTC through 2026-01,"all rated observed player-updates, both colors and all outcomes; outside main panel"

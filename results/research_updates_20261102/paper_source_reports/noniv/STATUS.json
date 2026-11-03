@@ -1,0 +1,65 @@
+{
+  "complete_families": 11,
+  "next_batch": "IV and receipt companions, then final manuscript reconciliation",
+  "seconds_this_launch": 369.5087384590006,
+  "states": {
+    "arena": {
+      "detail": "COMPLETE",
+      "seconds": 829.6501067079953,
+      "status": "REUSED"
+    },
+    "countdown": {
+      "detail": "COMPLETE_WITH_UNSUPPORTED_AUXILIARIES",
+      "seconds": 3616.70993833401,
+      "status": "REUSED"
+    },
+    "first_repeat": {
+      "detail": "COMPLETE_WITH_UNSUPPORTED_AUXILIARIES",
+      "seconds": 553.1599164580111,
+      "status": "REUSED"
+    },
+    "krd": {
+      "detail": "COMPLETE",
+      "seconds": 84.30562662499142,
+      "status": "REUSED"
+    },
+    "nonparametric": {
+      "detail": "COMPLETE",
+      "seconds": 656.6303562079847,
+      "status": "REUSED"
+    },
+    "patron": {
+      "detail": "COMPLETE",
+      "seconds": 1837.5690495410236,
+      "status": "REUSED"
+    },
+    "reputation": {
+      "detail": "COMPLETE",
+      "seconds": 1268.8705380829924,
+      "status": "REUSED"
+    },
+    "responsibility": {
+      "detail": "COMPLETE",
+      "seconds": 197.80700408300618,
+      "status": "COMPLETE"
+    },
+    "split_half": {
+      "detail": "COMPLETE",
+      "seconds": 2.7699665410036687,
+      "status": "REUSED"
+    },
+    "stakes": {
+      "detail": "COMPLETE",
+      "seconds": 837.0286920829967,
+      "status": "REUSED"
+    },
+    "tenure": {
+      "detail": "TENURE_AND_AGE_RESTRICTED_PATRON_REFITTED",
+      "seconds": 289.9521858750086,
+      "status": "REUSED"
+    }
+  },
+  "status": "BATCH_COMPLETE_REVIEW_REQUIRED",
+  "total_families": 11,
+  "whole_paper_rerun_complete": false
+}

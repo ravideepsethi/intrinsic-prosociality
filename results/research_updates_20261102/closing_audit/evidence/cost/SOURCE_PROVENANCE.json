@@ -1,0 +1,118 @@
+{
+  "sources": [
+    {
+      "file": "sources/stage06_reference.py",
+      "github_blob_sha": "d7dba49e967494de62dbf3ec9d712ba007a15fc3",
+      "url": "https://github.com/ravideepsethi/intrinsic-prosociality/blob/main/code/06_build_glicko2_cost_layer.py",
+      "sha256": "e1a72414b4c4a18dca5b583b704cbbf97e0bff7de2a837e6ad85e078ecf00cca"
+    },
+    {
+      "file": "sources/Pool_Rating_Validation_README.md",
+      "github_blob_sha": "23f44bc982900798b65822d7b2849d6d2e99a126",
+      "url": "https://github.com/ravideepsethi/intrinsic-prosociality/blob/main/code/research_updates_20261022/Pool_Rating_Validation_v1_0_0/README.md",
+      "sha256": "533efdc35efa8040099ec255203a4ab763316a4a61055b1f16a80041e7d174d9"
+    },
+    {
+      "file": "sources/lila_start_RatingCalculator.scala",
+      "github_blob_sha": "99d9efc77ec554874c5176f7775cb3abd7b00402",
+      "url": "https://github.com/lichess-org/lila/blob/4443a238352bc10aab12df6e9ffe5806ec5b68ca/modules/rating/src/main/glicko2/RatingCalculator.scala",
+      "sha256": "293ab1507087363cf2429dbd68a5f03732f237e24527e81d8a7541d1c0679694"
+    },
+    {
+      "file": "sources/lila_start_PerfsUpdater.scala",
+      "github_blob_sha": "1cef43c4bdd4f6b560f041292ee25b6c101e0eeb",
+      "url": "https://github.com/lichess-org/lila/blob/4443a238352bc10aab12df6e9ffe5806ec5b68ca/modules/round/src/main/PerfsUpdater.scala",
+      "sha256": "e45d74388fdc2e16e8a7fc2591b936835862344321485e728d8b89ec1b31e224"
+    },
+    {
+      "file": "sources/lila_start_Perf.scala",
+      "github_blob_sha": "f658e2f1e1a637d4fca24ad153938040505cdabe",
+      "url": "https://github.com/lichess-org/lila/blob/4443a238352bc10aab12df6e9ffe5806ec5b68ca/modules/rating/src/main/Perf.scala",
+      "sha256": "a79c756c6bfc70919912e26262ad875cee6a1eedc624b1f6a177cf841a4034a8"
+    },
+    {
+      "file": "sources/lila_start_Glicko.scala",
+      "github_blob_sha": "3064c670d8183d2688ff1316d11bb955da94b036",
+      "url": "https://github.com/lichess-org/lila/blob/4443a238352bc10aab12df6e9ffe5806ec5b68ca/modules/rating/src/main/Glicko.scala",
+      "sha256": "e31559a7251b4f70c98610e3aaefa92c72088132dfc931f66786030057e7c40c"
+    },
+    {
+      "file": "sources/lila_start_RatingRegulator.scala",
+      "github_blob_sha": "14592c4562b51d5c2481607694163b1f671d6f9b",
+      "url": "https://github.com/lichess-org/lila/blob/4443a238352bc10aab12df6e9ffe5806ec5b68ca/modules/rating/src/main/RatingRegulator.scala",
+      "sha256": "2d8e421b14aa49ad0ffe7e953d5d92f102b19de94a69d22f0b8b39a322066b9e"
+    },
+    {
+      "file": "sources/lila_end_PerfsUpdater.scala",
+      "github_blob_sha": "88f6767c51ce05e109eb83c1ea0c9895b6c06ce3",
+      "url": "https://github.com/lichess-org/lila/blob/6d667d47636031bc4087f07d81bd91bfdcc5336a/modules/round/src/main/PerfsUpdater.scala",
+      "sha256": "228bbfec22a622b01dcdbbcc5e76bfc072923d9fd825da8838dcb35e860af8bc"
+    },
+    {
+      "file": "sources/lila_end_Perf.scala",
+      "github_blob_sha": "95049f7f706d55acf6f2f3a91f3d4f7583955996",
+      "url": "https://github.com/lichess-org/lila/blob/6d667d47636031bc4087f07d81bd91bfdcc5336a/modules/rating/src/main/Perf.scala",
+      "sha256": "ff9b5662034548b08b17eb0bb3e787efcdd2906a33b1435b3ee15fef8a2406d3"
+    },
+    {
+      "file": "sources/lila_end_RatingRegulator.scala",
+      "github_blob_sha": "fd2f7339996fe96d619b732e714144f195291333",
+      "url": "https://github.com/lichess-org/lila/blob/6d667d47636031bc4087f07d81bd91bfdcc5336a/modules/rating/src/main/RatingRegulator.scala",
+      "sha256": "5aea5af194a7d7924116bd19299ba88d327e153d0f0949b4eea30314fab86f80"
+    },
+    {
+      "file": "sources/scalachess_RatingCalculator.scala",
+      "github_blob_sha": "09585bb0de73189d1786107404d58f289cc3ddf3",
+      "url": "https://github.com/lichess-org/scalachess/blob/17.12.3/rating/src/main/scala/glicko/impl/RatingCalculator.scala",
+      "sha256": "ded798f4a6a8478d92bfc96ee3754f195442f59e720952531ee40bbf9a7e2b72"
+    },
+    {
+      "file": "sources/pre_hardcode_Env.scala",
+      "github_blob_sha": "cc0c7a5af624f58bf6c7d3429e99054cb51499a9",
+      "url": "https://github.com/lichess-org/lila/blob/dbfe9edf3651cb34148014423199aae831d55dce/modules/round/src/main/Env.scala",
+      "sha256": "5f8637435852404fd74180412cb535d859d2917c766dffcce5f3617cb5943e95"
+    },
+    {
+      "file": "sources/lila_Nov20_PerfsUpdater.scala",
+      "github_blob_sha": "aecaf704a19d5d86de38448c3531b1212f3cddbd",
+      "url": "https://github.com/lichess-org/lila/blob/fc1040f756e350740edabe51abbb439d23dd9f74/modules/round/src/main/PerfsUpdater.scala",
+      "sha256": "d4f1a3925eeadd3ca6082e005fdbc9325cdf85afd4c723901511866b70d16c42"
+    },
+    {
+      "file": "authority/MAIN_SAMPLE_REPORT.json",
+      "github_blob_sha": "c11e04e8f8820848c2ccd02eec6353b31d0f2fe9",
+      "url": "https://github.com/ravideepsethi/intrinsic-prosociality/blob/main/results/pool_main_reanalysis_v100/sample/MAIN_SAMPLE_REPORT.json",
+      "sha256": "0ef50e424e004c5698c0c3dbc9815748627e5f23e6504fdaedfd526225ee184e"
+    },
+    {
+      "file": "sources/stage05_material_reference.py",
+      "github_blob_sha": "21db19ac197d4a292b598e3436603bdbd36b0e23",
+      "url": "https://github.com/ravideepsethi/intrinsic-prosociality/blob/main/code/05_build_timeout_opportunity_panel.py",
+      "sha256": "eb8f7e7629c323ee8d5a9f7d4a96b5f9982980189cf27500289582457f0dfe80"
+    },
+    {
+      "file": "sources/Pool_Rating_Validation_reference.py",
+      "github_blob_sha": "b8f0e37f3cbd7e76e9f85201189e4af2105aee25",
+      "url": "https://github.com/ravideepsethi/intrinsic-prosociality/blob/main/code/research_updates_20261022/Pool_Rating_Validation_v1_0_0/validate_ratings.py",
+      "sha256": "b1593263555c0e777917eeb2487afb0ea20f0c2c7353bcdc79deb1b4d975bcb9"
+    },
+    {
+      "file": "sources/scalachess_material_2023.scala",
+      "github_blob_sha": "ee7f5ad6e11ed3fd6191f1d84bc3e1927738989b",
+      "url": "https://github.com/lichess-org/scalachess/blob/03c865979f1e07799bbba7bd096d6cfc7104c1ea/src/main/scala/InsufficientMatingMaterial.scala",
+      "sha256": "2402dfe9f91dcfb15091443dbe675abfb7fbe7cb8e73c64c8f81e22cbb4608dd"
+    },
+    {
+      "file": "sources/scalachess_material_2025.scala",
+      "github_blob_sha": "4df16c0059a6806b56fc307246a682a0a8359f78",
+      "url": "https://github.com/lichess-org/scalachess/blob/17.12.3/core/src/main/scala/InsufficientMatingMaterial.scala",
+      "sha256": "9aa21a5a83bb7e9c380b38efc417073addbc3713f69f62dcceb5166494694779"
+    },
+    {
+      "file": "sources/lila_start_RoundAsyncActor.scala",
+      "github_blob_sha": "54848ad3e740c6078e523c2b668e5150d0175df5",
+      "url": "https://github.com/lichess-org/lila/blob/4443a238352bc10aab12df6e9ffe5806ec5b68ca/modules/round/src/main/RoundAsyncActor.scala",
+      "sha256": "5db48aacb802bceef675f76295daea869beb809277d191556cae8f312a64be76"
+    }
+  ]
+}

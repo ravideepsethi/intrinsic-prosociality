@@ -1,0 +1,25 @@
+{
+  "analysis.py": {
+    "identical_to_adopted_producer": true,
+    "member": "Lichess_Reputation_v1_0_0/code/analysis.py",
+    "original_package": "Lichess_Reputation_v1_0_0.zip",
+    "sha256": "f533ebf274c652da8f17ed43a0949b568354b0b0e70419506a59ba9385c34773"
+  },
+  "core.py": {
+    "identical_to_adopted_producer": true,
+    "member": "Lichess_Reputation_v1_0_0/code/core.py",
+    "original_package": "Lichess_Reputation_v1_0_0.zip",
+    "sha256": "bb4a6d223825197ca5d048c061c4b3d7eccff8ea145f98d6ebc94b7d6e2f91f3"
+  },
+  "historical_first_pair": {
+    "code_sha256": "8c5c2ccbbdf71badd642931c275f8bbb0da1346b897af362e4cec5013f93f405",
+    "matches_frozen_authority": true,
+    "report_sha256": "04315ee80b96700498d7c0bf6c016f856d3ca68c9f4916ef3af33889f8ebf31e"
+  },
+  "history.py": {
+    "identical_to_adopted_producer": true,
+    "member": "Lichess_Reputation_v1_0_0/code/history.py",
+    "original_package": "Lichess_Reputation_v1_0_0.zip",
+    "sha256": "e4384ecae61290bb61e690268943815b693c4f3be26bd007792043f03b5cf5e5"
+  }
+}

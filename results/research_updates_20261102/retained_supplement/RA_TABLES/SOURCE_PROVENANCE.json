@@ -1,0 +1,143 @@
+[
+  {
+    "path": "source_reports/receipt/tab_app_receipt_hours.csv",
+    "original_sha256": "59bf4227b1cd05d24c26c97ab22a0f2fc74ba2b9111f0895e590c5ffabe1df38",
+    "delivered_sha256": "3eb8903d9b82b54b2d9cdb53f36f1059f72379e04ea0ffd5bb51087ee24ed5bd",
+    "transformation": "Multiplicity-adjustment keys omitted; numeric estimate columns unchanged."
+  },
+  {
+    "path": "source_reports/iv_receipt/EXPOSURE_COUNTS.json",
+    "original_sha256": "14bddb1c33d66899926f670d3a58cb2196b4dc3ab75b7f079688ecbda260d14a",
+    "delivered_sha256": "14bddb1c33d66899926f670d3a58cb2196b4dc3ab75b7f079688ecbda260d14a",
+    "transformation": "Multiplicity-adjustment keys omitted; numeric estimate columns unchanged."
+  },
+  {
+    "path": "source_reports/iv_receipt/EXPOSURE_THRESHOLDS.csv",
+    "original_sha256": "d23134d45d69e36ee1e4aa1f05ff26d570095dcacb7e6fa79f81572713842e40",
+    "delivered_sha256": "d23134d45d69e36ee1e4aa1f05ff26d570095dcacb7e6fa79f81572713842e40",
+    "transformation": "Multiplicity-adjustment keys omitted; numeric estimate columns unchanged."
+  },
+  {
+    "path": "source_reports/patron/outcome_coverage_flow.csv",
+    "original_sha256": "2d20bbbaa2712238b63cb30eae7df4cb8f636127898523c5c9653d7900e07cd6",
+    "delivered_sha256": "3574891be5ba26078d2fc564ff467686f505c772b8ed469bd39d400aa809dc3f",
+    "transformation": "Multiplicity-adjustment keys omitted; numeric estimate columns unchanged."
+  },
+  {
+    "path": "source_reports/patron/sample_flow.csv",
+    "original_sha256": "3bd32321938c3e3c945ac8e9c3f72139de33b29f2733f4f81ba0cc8afbdaf9c6",
+    "delivered_sha256": "a92846a4fc1ca9b1452d291c3badad4a80dd7824bca9a1b1fe770220e9ff22b7",
+    "transformation": "Multiplicity-adjustment keys omitted; numeric estimate columns unchanged."
+  },
+  {
+    "path": "source_reports/noniv/families/tenure/TENURE_MODEL_tenure_0_gradient_full.json",
+    "original_sha256": "d42d1f3a81acaa8f94db5d3b823f3b04bfeeb82f4ddfc8271acd9be6780308b0",
+    "delivered_sha256": "d42d1f3a81acaa8f94db5d3b823f3b04bfeeb82f4ddfc8271acd9be6780308b0",
+    "transformation": "Multiplicity-adjustment keys omitted; numeric estimate columns unchanged."
+  },
+  {
+    "path": "source_reports/noniv/families/tenure/TENURE_MODEL_tenure_1_gradient_full.json",
+    "original_sha256": "6cc8ff77d2195ce156a475147bfb98cbccb45c46116396b6d33aad5ba432be00",
+    "delivered_sha256": "6cc8ff77d2195ce156a475147bfb98cbccb45c46116396b6d33aad5ba432be00",
+    "transformation": "Multiplicity-adjustment keys omitted; numeric estimate columns unchanged."
+  },
+  {
+    "path": "source_reports/noniv/families/tenure/TENURE_MODEL_tenure_2_gradient_full.json",
+    "original_sha256": "22ede088032f56c9fdb3e1f76590ce27a838acb76eb63372e99169ff5e829891",
+    "delivered_sha256": "22ede088032f56c9fdb3e1f76590ce27a838acb76eb63372e99169ff5e829891",
+    "transformation": "Multiplicity-adjustment keys omitted; numeric estimate columns unchanged."
+  },
+  {
+    "path": "source_reports/noniv/families/tenure/TENURE_MODEL_tenure_3_gradient_full.json",
+    "original_sha256": "28b392afd1bb94e963f28d65ad2d49fdcd044b75e27ce4b69c5d06a0e7e22c02",
+    "delivered_sha256": "28b392afd1bb94e963f28d65ad2d49fdcd044b75e27ce4b69c5d06a0e7e22c02",
+    "transformation": "Multiplicity-adjustment keys omitted; numeric estimate columns unchanged."
+  },
+  {
+    "path": "source_reports/noniv/families/tenure/TENURE_MODEL_tenure_4_gradient_full.json",
+    "original_sha256": "c6055e1cd75f890489c3a5669c44a068ee51e3731e5b5193d75472b3380fbaad",
+    "delivered_sha256": "c6055e1cd75f890489c3a5669c44a068ee51e3731e5b5193d75472b3380fbaad",
+    "transformation": "Multiplicity-adjustment keys omitted; numeric estimate columns unchanged."
+  },
+  {
+    "path": "tables/tenure_gradients.csv",
+    "original_sha256": "0038f85af3870ddab41714aa0884e075deef306816d12a2f184a924e21739e86",
+    "delivered_sha256": "0038f85af3870ddab41714aa0884e075deef306816d12a2f184a924e21739e86",
+    "transformation": "Multiplicity-adjustment keys omitted; numeric estimate columns unchanged."
+  },
+  {
+    "path": "source_reports/patron/broad_acquired_models.json",
+    "original_sha256": "95a3d6b0a3204fd24bf315571d94dc46f2a791e9047a9c02dd25ab2b78f49cb2",
+    "delivered_sha256": "95a3d6b0a3204fd24bf315571d94dc46f2a791e9047a9c02dd25ab2b78f49cb2",
+    "transformation": "Multiplicity-adjustment keys omitted; numeric estimate columns unchanged."
+  },
+  {
+    "path": "source_reports/structure/SPECIFICATION.json",
+    "original_sha256": "6b051abc66022de4f30acd64964967301bf3cc53638e652a3626d759f3d48e48",
+    "delivered_sha256": "6b051abc66022de4f30acd64964967301bf3cc53638e652a3626d759f3d48e48",
+    "transformation": "Multiplicity-adjustment keys omitted; numeric estimate columns unchanged."
+  },
+  {
+    "source_file": "source_reports/iv_receipt/model_estimates.csv",
+    "original_sha256": "6b2f03794ff78120cbc623ab96161d5b025ed009d8cc63b88a3d7905d7969e03",
+    "delivered_file": "source_extracts/iv_receipt/model_estimates.csv",
+    "delivered_sha256": "679c44e91bbf7789cb6c3f9103d904fc3e68384b7e396e56f06bd397544c0bab",
+    "transformation": "Only rows referenced by retained tables; raw p-values; original_csv_line preserves source location"
+  },
+  {
+    "source_file": "source_reports/iv_receipt/SUPPLEMENTS.csv",
+    "original_sha256": "2b097f1c1686c6a8721c086dfa3c5fe22b12656459b3201cfe9e04f133a266c3",
+    "delivered_file": "source_extracts/iv_receipt/SUPPLEMENTS.csv",
+    "delivered_sha256": "2a0a014eb4415498206e47dffa52bb9506487b9aeda3be15d90a624889fddf24",
+    "transformation": "Only rows referenced by retained tables; raw p-values; original_csv_line preserves source location"
+  },
+  {
+    "source_file": "source_reports/iv_receipt/SUPPLEMENT_CONTRASTS.csv",
+    "original_sha256": "f707e8dd3ac3d0783af2294055baf1769589e8ebf84f5d0d70795de19691f6bd",
+    "delivered_file": "source_extracts/iv_receipt/SUPPLEMENT_CONTRASTS.csv",
+    "delivered_sha256": "f01912c7a7f590d5ee1cc57d28d47c6e78021d4744685753d147ac614b6cf93d",
+    "transformation": "Only rows referenced by retained tables; raw p-values; original_csv_line preserves source location"
+  },
+  {
+    "source_file": "source_reports/closeout/model_estimates.csv",
+    "original_sha256": "ab88966c1cd9d1a1cee1437f26a48ba604c11d7b89c8ef4d7c73f60d82bc42c6",
+    "delivered_file": "source_extracts/closeout/model_estimates.csv",
+    "delivered_sha256": "13b55e7eb4e10c0131116ac31a7fc3aabc0f46c019b365b6c2054f27a2afeb28",
+    "transformation": "Only rows referenced by retained tables; raw p-values; original_csv_line preserves source location"
+  },
+  {
+    "source_file": "source_reports/closeout/material_contrast.csv",
+    "original_sha256": "4d05be63f9c05fb7559dcd4f5c6667e47b4dc6c455e79478d8d4d073f489393c",
+    "delivered_file": "source_extracts/closeout/material_contrast.csv",
+    "delivered_sha256": "d7aafe413330c705ac476e6e4d8b68e3df1174b9c071bda40a3d6d7ba82be76f",
+    "transformation": "Only rows referenced by retained tables; raw p-values; original_csv_line preserves source location"
+  },
+  {
+    "source_file": "source_reports/receipt/tab_dynamics.csv",
+    "original_sha256": "161970725e74a4355e379da0278c15509e0f54af9f0b411cab7dfc36228c7975",
+    "delivered_file": "source_extracts/receipt/tab_dynamics.csv",
+    "delivered_sha256": "8f1428934c5ac66c327306ab5572f2acd0e9031bd1c66762ba4f5e3d88a4c982",
+    "transformation": "Only rows referenced by retained tables; raw p-values; original_csv_line preserves source location"
+  },
+  {
+    "source_file": "source_reports/receipt/tab_app_receipt_sensitivities.csv",
+    "original_sha256": "6072ce69836d048571888aeda425323dd6cb85a19e516e74aed725bf7c62a95d",
+    "delivered_file": "source_extracts/receipt/tab_app_receipt_sensitivities.csv",
+    "delivered_sha256": "d93f88b9afe9734012cd09fec187e1a58b53a5e84e95f2b609102b7a0c091ca9",
+    "transformation": "Only rows referenced by retained tables; raw p-values; original_csv_line preserves source location"
+  },
+  {
+    "source_file": "source_reports/receipt/tab_app_receipt_hours.csv",
+    "original_sha256": "59bf4227b1cd05d24c26c97ab22a0f2fc74ba2b9111f0895e590c5ffabe1df38",
+    "delivered_file": "source_extracts/receipt/tab_app_receipt_hours.csv",
+    "delivered_sha256": "e14e4a14dfc323d29c1762abdecd2a138716caeddd89ef01a1250ff7110b7c6d",
+    "transformation": "Only rows referenced by retained tables; raw p-values; original_csv_line preserves source location"
+  },
+  {
+    "source_file": "source_reports/receipt/rows/later_receipt_count.csv",
+    "original_sha256": "b65e29dfc923298a4e101b814ad0447af2f96584096ffc99a4e0fdc861e6065b",
+    "delivered_file": "source_extracts/receipt/rows/later_receipt_count.csv",
+    "delivered_sha256": "d9fd3c11ba0e3c42dbc4c72e6306e2633186cc16504b6068d721baa868de6b01",
+    "transformation": "Only rows referenced by retained tables; raw p-values; original_csv_line preserves source location"
+  }
+]

@@ -1,0 +1,145 @@
+[
+  {
+    "controls": "base",
+    "kind": "spline",
+    "name": "primary_competitive_late",
+    "sample": "competitive_late"
+  },
+  {
+    "controls": "base",
+    "kind": "spline",
+    "name": "competitive_all_stages",
+    "sample": "competitive_all"
+  },
+  {
+    "controls": "base",
+    "kind": "spline",
+    "name": "competitive_plies11_80",
+    "sample": "competitive_11_80"
+  },
+  {
+    "alternative": true,
+    "controls": "base",
+    "kind": "spline",
+    "name": "alternative_knots",
+    "sample": "competitive_late"
+  },
+  {
+    "controls": "clocks",
+    "kind": "spline",
+    "name": "competitive_late_clocks",
+    "sample": "competitive_late"
+  },
+  {
+    "controls": "rating",
+    "kind": "spline",
+    "name": "competitive_late_rating",
+    "sample": "competitive_late"
+  },
+  {
+    "controls": "base",
+    "interaction": "late",
+    "kind": "spline",
+    "name": "early_late_interaction",
+    "sample": "competitive_all"
+  },
+  {
+    "controls": "base",
+    "kind": "spline",
+    "name": "full_range_late",
+    "sample": "full_late"
+  },
+  {
+    "controls": "base",
+    "kind": "bins",
+    "name": "eight_bins_late",
+    "sample": "competitive_late"
+  },
+  {
+    "controls": "base",
+    "kind": "bins",
+    "name": "eight_bins_all",
+    "sample": "competitive_all"
+  },
+  {
+    "controls": "base",
+    "kind": "linear",
+    "name": "linear_summary_late",
+    "sample": "competitive_late"
+  },
+  {
+    "controls": "base",
+    "kind": "material",
+    "name": "material_competitive_late_base",
+    "sample": "competitive_late"
+  },
+  {
+    "controls": "clocks",
+    "kind": "material",
+    "name": "material_competitive_late_clocks",
+    "sample": "competitive_late"
+  },
+  {
+    "controls": "rating",
+    "kind": "material",
+    "name": "material_competitive_late_rating",
+    "sample": "competitive_late"
+  },
+  {
+    "controls": "base",
+    "kind": "material",
+    "name": "material_full_late_base",
+    "sample": "full_late"
+  },
+  {
+    "controls": "clocks",
+    "kind": "material",
+    "name": "material_full_late_clocks",
+    "sample": "full_late"
+  },
+  {
+    "controls": "rating",
+    "kind": "material",
+    "name": "material_full_late_rating",
+    "sample": "full_late"
+  },
+  {
+    "controls": "base",
+    "interaction": "tier",
+    "kind": "spline",
+    "name": "evaluation_by_rating_tier",
+    "sample": "competitive_late"
+  },
+  {
+    "controls": "base",
+    "interaction": "tier",
+    "kind": "material",
+    "name": "material_by_rating_tier_competitive",
+    "sample": "competitive_late"
+  },
+  {
+    "controls": "base",
+    "interaction": "tier",
+    "kind": "material",
+    "name": "material_by_rating_tier_full",
+    "sample": "full_late"
+  },
+  {
+    "controls": "base",
+    "kind": "joint",
+    "name": "joint_eval_material_base",
+    "sample": "competitive_late"
+  },
+  {
+    "controls": "clocks",
+    "kind": "joint",
+    "name": "joint_eval_material_clocks",
+    "sample": "competitive_late"
+  },
+  {
+    "controls": "rating",
+    "kind": "joint",
+    "name": "joint_eval_material_rating",
+    "sample": "competitive_late"
+  }
+]

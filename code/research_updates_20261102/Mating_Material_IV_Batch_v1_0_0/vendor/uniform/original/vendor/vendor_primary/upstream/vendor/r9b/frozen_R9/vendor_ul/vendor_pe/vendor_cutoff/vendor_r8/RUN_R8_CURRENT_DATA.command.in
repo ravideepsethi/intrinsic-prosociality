@@ -1,0 +1,51 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+r8_package="$(cd "$(dirname "$0")" && pwd -P)"
+r8_project="${IV_PROJECT_ROOT:-/Volumes/XT_Pro/lichess_kindness}"
+r8_desktop="${IV_DESKTOP:-$HOME/Desktop/Lichess_Desktop}"
+r8_python="${IV_PYTHON:-$r8_project/venv/bin/python}"
+if [[ ! -x "$r8_python" ]]; then
+  echo "Existing research Python not found: $r8_python. Connect XT_Pro or set IV_PYTHON."
+  exit 2
+fi
+export PYTHONDONTWRITEBYTECODE=1
+export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 BLIS_NUM_THREADS=1
+export VECLIB_MAXIMUM_THREADS=1 NUMEXPR_NUM_THREADS=1
+mkdir -p "$r8_desktop"
+cd "$r8_package"
+r8_log="$r8_desktop/r8_current_data_$(date -u +%Y%m%dT%H%M%SZ)_$$.log"
+echo "Log: $r8_log"
+r8_awake=()
+if [[ -x /usr/bin/caffeinate ]]; then r8_awake=(/usr/bin/caffeinate -i); fi
+set +e
+{
+  "$r8_python" - <<'PY'
+import sys
+assert sys.version_info >= (3,10), 'Python 3.10 or later required'
+try:
+    import numpy,pandas,scipy,pyarrow,duckdb
+except ImportError as e:
+    raise SystemExit('Missing existing research dependency: '+str(e)+'. Set IV_PYTHON to your installed research environment. No packages were downloaded.')
+sys.path.insert(0,'code')
+from run_r8 import verify_package
+print('R8 PACKAGE_SHA256_OK',verify_package(),flush=True)
+PY
+  r8_gate=$?
+  if [[ "$r8_gate" -eq 0 ]]; then
+    if [[ " ${*:-} " == *" --status "* ]]; then
+      "${r8_awake[@]}" "$r8_python" -u code/run_r8.py --project-root "$r8_project" --desktop "$r8_desktop" "$@"
+    elif "$r8_python" -u tests/run_tests.py; then
+      "${r8_awake[@]}" "$r8_python" -u code/run_r8.py --project-root "$r8_project" --desktop "$r8_desktop" "$@"
+    else
+      echo 'Offline numerical self-tests failed; production did not start.'
+      exit 2
+    fi
+  else
+    exit "$r8_gate"
+  fi
+} 2>&1 | tee "$r8_log"
+r8_exit=${PIPESTATUS[0]}
+set -e
+if [[ "$r8_exit" -ne 0 ]]; then echo "Stopped with exit $r8_exit. Checkpoints remain reusable. Return this log: $r8_log"; fi
+exit "$r8_exit"

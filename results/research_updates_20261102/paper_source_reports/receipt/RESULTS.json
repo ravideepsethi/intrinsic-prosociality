@@ -1,0 +1,57 @@
+{
+  "api_requests": 0,
+  "engine_evaluations": 0,
+  "parent_run_id": "aa7e95f275c18f43d9ad95af523b9b0d769704ddebf4aea4d3655a2e1b07ef5d",
+  "rating_replay_records": 0,
+  "run_id": "9d87ae02e14076814b25dd54db159661b49a526deac078cef333d4e607e389cb",
+  "seconds_this_launch_including_authentication": 250.87522216700017,
+  "stage_seconds": {
+    "exposure_selection": 11.952258916018764,
+    "first_pair_history": 89.94353858300019,
+    "history_join": 1.919446332991356,
+    "models": 123.93978887499543,
+    "outcomes": 4.562022375001106
+  },
+  "status": "RECEIPT_COMPLETE_MORE_FAMILIES_PENDING",
+  "summary": {
+    "exposures": {
+      "candidates": 2368215,
+      "claims": 2299124,
+      "complete_followup": 2180900,
+      "historical_losses": 26,
+      "nonarm": 26,
+      "panel_end_ms": 1761956196752,
+      "receipts": 69065,
+      "recipients": 2368215
+    },
+    "history": {
+      "chronology_validation": "Frozen manifest bytes/rows/row groups; current footer SHA and stat bound to each scan checkpoint. Historical full-file SHA is not computed.",
+      "reused_pairs": 2365947,
+      "scanned_pairs": 2250,
+      "unique_pairs": 2368197
+    },
+    "models": 18,
+    "outcomes": {
+      "candidates": 2368215,
+      "first_grants": 36359,
+      "invalid": 0,
+      "reach": 1096969
+    },
+    "pair_seed": {
+      "invalid": 0,
+      "pairs": 2368197,
+      "reused_pairs": 2365947,
+      "unresolved_pairs": 2250
+    },
+    "sample": {
+      "all_fresh_exposures": 2368215,
+      "common_support": 2296216,
+      "common_support_complete90": 2112426,
+      "complete90_claims": 2050097,
+      "complete90_reached": 994454,
+      "complete90_receipts": 62329,
+      "first_observed_pair": 2298947
+    }
+  },
+  "whole_paper_rerun_complete": false
+}

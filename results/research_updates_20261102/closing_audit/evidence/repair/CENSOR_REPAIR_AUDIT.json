@@ -1,0 +1,129 @@
+{
+  "choice_after_next_excluded": 369388,
+  "choice_before_next": 314639,
+  "choice_ties_next": 0,
+  "complete90": 2112426,
+  "conditional": 994454,
+  "corrected_rows": 625066,
+  "corrected_sample_sha256": "af29d2b6e33a2b1539d692faa336806e28d4f81686bfd8ddc2ea688fac4febdb",
+  "legacy_rows": 314639,
+  "legacy_sample_sha256": "afa0cca94db78a6b2d4883ac8c41c9f7088691363e70be7493cbec6d694a10d7",
+  "missing_next_disconnection": 310427,
+  "negative_one_sentinels": 310427,
+  "prior_return": "REMAINING_RESULTS_20261102T190254Z_RETURN.zip",
+  "prior_return_sha256": "1e7b388ffc1f97efae796139fa17bcfbf83ce6db59aa6a2d1bdf12845663641c",
+  "reason": "Integer Arrow nulls are loaded as -1, not NaN; the earlier mask treated -1 as a real censor.",
+  "reference_estimate_difference": 0.0,
+  "reference_se_difference": -6.938893903907228e-17,
+  "removed_rows": 0,
+  "repair_package_sha256": "4a333ea7761e07b38b8083cf0458e4b8d28960d7e605d797275ff7620eb61c18",
+  "restored_rows": 310427,
+  "reused_result_files": [
+    {
+      "path": "counts/COUNTS_20261102T190303Z/COUNT_RESULTS.csv",
+      "sha256": "ba57a1f47bcf22805f513be30eedd47af604d89008b8513dddafa157e2debd5a"
+    },
+    {
+      "path": "counts/COUNTS_20261102T190303Z/COUNT_RESULTS.json",
+      "sha256": "b81c1fa604769d1fcd4177ba5d2fe77ba2705c3a8222a6248562eba875809f85"
+    },
+    {
+      "path": "counts/COUNTS_20261102T190303Z/checksums.txt",
+      "sha256": "5ca9f4b7196951c6ee629426b06a2d242a9b971023a11cf274a0f1af1c33fff2"
+    },
+    {
+      "path": "counts/INPUT_LINEAGE.json",
+      "sha256": "1708314e61cd60a982db8f90cbf43f15e07db63f6664db689d548161a83e05c9"
+    },
+    {
+      "path": "counts/STATUS.json",
+      "sha256": "5fc0cb84006cf59ae3faa54729a4bdb1810d8a0794c229a662a6b7d807f6115a"
+    },
+    {
+      "path": "counts/run.log",
+      "sha256": "787f6614d5f22756a84aae5d78403ed1c4af2e6c9329385b88ecefd183bbb5e2"
+    },
+    {
+      "path": "rating_validation/aggregate/report/INPUT_LINEAGE.json",
+      "sha256": "ab79536f2f172f3fcd3a876c8b7ffbb4ca55fb27a2103f5f707a0d696b98b620"
+    },
+    {
+      "path": "rating_validation/aggregate/report/METHOD.json",
+      "sha256": "ad53cdf2c8b2e47087a34fbe69ecc4c1071ada2f44cb089b0d9da14b792d14ea"
+    },
+    {
+      "path": "rating_validation/aggregate/report/PREDICTION_AGREEMENT.json",
+      "sha256": "16fd9fce3ea17223b30decab865b8fd747085ddd017d87bad2963a16b0f7f1c0"
+    },
+    {
+      "path": "rating_validation/aggregate/report/RATING_VALIDATION.csv",
+      "sha256": "3653ee3024ae6eb0455d849670d0d83996f1b474f74ff531b459a9796ce1c6d5"
+    },
+    {
+      "path": "rating_validation/aggregate/report/RATING_VALIDATION_BY_MONTH.csv",
+      "sha256": "14aa912d444bb5a0bdb1cfe76068f110d67fa7e75b6b5fd87292ec0502a3d6f6"
+    },
+    {
+      "path": "rating_validation/aggregate/report/SCHEMA.json",
+      "sha256": "b3965c697f4f80c4ff4f077f30657fdde14c87db480024661dcc5907501bfe2b"
+    },
+    {
+      "path": "rating_validation/aggregate/report/STATUS.json",
+      "sha256": "af6b069e5a1248d953945612be14b7dbc2f4aa98cd5c70e9a92df09d27d0ce13"
+    },
+    {
+      "path": "rating_validation/run.log",
+      "sha256": "24b1c113e3fa5ad96b89cd3c8e34bd8bb293435c2b88b08b48f7b6761e3a0004"
+    },
+    {
+      "path": "receipt_companions/conditional_exposure_and_later_choice_hours.json",
+      "sha256": "6ef58d694496880fea8ada1568679eb73bff6b546b83ec6db829699a8d57efc0"
+    },
+    {
+      "path": "receipt_companions/engagement_any_game_10m.json",
+      "sha256": "65eba9acc60096109fcaa1c3f9326f0906cb29269f5f8249158a14b5a90c58b2"
+    },
+    {
+      "path": "receipt_companions/engagement_any_game_30m.json",
+      "sha256": "be1da4ada9b90a17eabe5f1ccd7c90bedfe8bb0809b6db5795383f74435d2e09"
+    },
+    {
+      "path": "receipt_companions/engagement_any_game_60m.json",
+      "sha256": "d8e043727f332e4a3f5cf9edd9bdb762e4744ddc0801ca6a5a758b7595501a96"
+    },
+    {
+      "path": "receipt_companions/engagement_log1p_games_30d.json",
+      "sha256": "6ace61a70332cf72f80bed8315b8699299e09d12bda18268ac0570e6951275df"
+    }
+  ],
+  "rule": "Complete reached windows; no positive finite next-disconnection timestamp, or first later choice <= next disconnection. Ties retained.",
+  "sources": [
+    {
+      "bytes": 269607072,
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/mating_material_receipt_v100_PRIVATE/9d87ae02e1407681/PRIVATE/recipient/recipient_private.parquet",
+      "sha256": "b23e31b071af5f400984b25bc2d53b97ac73584ab37093ce63c1186e9569397d",
+      "signature": [
+        16777244,
+        6805280,
+        269607072,
+        1793293441028919967,
+        1793293441028919967
+      ]
+    },
+    {
+      "bytes": 25121,
+      "path": "/Volumes/XT_Pro/lichess_kindness/derived/replication/mating_material_receipt_v100_PRIVATE/9d87ae02e1407681/report/models/conditional.json",
+      "sha256": "e30f0cc81d6323911149badfdbd29d5b0cdd09beb73103df8d0f7209fbd60e00",
+      "signature": [
+        16777244,
+        6805311,
+        25121,
+        1793293481072670036,
+        1793293481072747037
+      ]
+    }
+  ],
+  "status": "MASK_REPAIR_VALIDATED",
+  "timestamp_arrow_type": "int64",
+  "zero_coded_primary_modified": false
+}

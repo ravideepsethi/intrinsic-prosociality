@@ -1,0 +1,1424 @@
+[
+  {
+    "absorption_iterations": 299,
+    "absorption_last_adjustment": 9.689634677824494e-10,
+    "absorption_maximum_iterations": 2000,
+    "absorption_tolerance": 1e-09,
+    "analysis_role": "post-gate exploratory C7R",
+    "causal_claim": false,
+    "cluster": "chooser_id",
+    "cluster_correction": 1.0000124402761785,
+    "clusters": 533302,
+    "clusters_requested": 533302,
+    "covariance_probability_units": [
+      [
+        2.8175441930702486e-07,
+        -6.558817159569267e-09,
+        -1.0047343023055036e-08,
+        -1.0591039253159473e-08,
+        -9.427956682211394e-10,
+        -3.752001344301624e-08,
+        -2.886400556994393e-09,
+        6.252836335998125e-09,
+        6.4165625557832175e-09
+      ],
+      [
+        -6.558817159569265e-09,
+        2.4761942217456016e-07,
+        -1.417181816932385e-07,
+        2.857636086156643e-09,
+        -8.053325744863394e-09,
+        2.4206484618599296e-07,
+        -2.340924142637937e-07,
+        1.4787108874984731e-07,
+        -5.3053747513139645e-09
+      ],
+      [
+        -1.0047343023055043e-08,
+        -1.417181816932384e-07,
+        4.6268725485214916e-06,
+        -3.217784646279666e-08,
+        -1.8057107309417716e-08,
+        -3.2462905344166243e-07,
+        2.4618663845970113e-07,
+        -4.1832413685779816e-06,
+        1.2292464306615822e-07
+      ],
+      [
+        -1.0591039253159501e-08,
+        2.8576360861566395e-09,
+        -3.21778464627967e-08,
+        4.4041465883370935e-07,
+        -1.9743048781995233e-07,
+        -4.2437229335455734e-08,
+        2.852524414749859e-08,
+        2.812413933912653e-08,
+        -7.896405575434248e-09
+      ],
+      [
+        -9.427956682211142e-10,
+        -8.053325744863389e-09,
+        -1.8057107309417716e-08,
+        -1.9743048781995262e-07,
+        4.12873523399754e-07,
+        2.635367578618755e-09,
+        -6.619445674119309e-09,
+        9.94276128887239e-09,
+        -3.3555427399277106e-09
+      ],
+      [
+        -3.752001344301626e-08,
+        2.420648461859934e-07,
+        -3.2462905344166195e-07,
+        -4.243722933545569e-08,
+        2.6353675786187293e-09,
+        2.7643797238589287e-06,
+        -1.6748616387691995e-06,
+        3.9689215746248914e-07,
+        -2.5929552194013076e-08
+      ],
+      [
+        -2.886400556994354e-09,
+        -2.3409241426379377e-07,
+        2.4618663845970055e-07,
+        2.852524414749856e-08,
+        -6.619445674119303e-09,
+        -1.6748616387691964e-06,
+        1.7120587393513563e-06,
+        -2.343075426970486e-07,
+        2.169587837641161e-08
+      ],
+      [
+        6.252836335998128e-09,
+        1.4787108874984713e-07,
+        -4.183241368577983e-06,
+        2.8124139339126497e-08,
+        9.942761288872374e-09,
+        3.9689215746248935e-07,
+        -2.3430754269704894e-07,
+        4.366346621711437e-06,
+        -1.1748837600419635e-07
+      ],
+      [
+        6.416562555783221e-09,
+        -5.305374751313964e-09,
+        1.2292464306615825e-07,
+        -7.89640557543424e-09,
+        -3.3555427399277164e-09,
+        -2.5929552194013092e-08,
+        2.1695878376411623e-08,
+        -1.1748837600419632e-07,
+        4.751761527614444e-08
+      ]
+    ],
+    "covariance_terms": [
+      "fair_minus_clearly_worse",
+      "z_draw_payoff",
+      "z_win_premium",
+      "z_chooser_clock",
+      "z_opponent_clock",
+      "z_chooser_elo",
+      "z_opponent_elo",
+      "z_chooser_rd",
+      "z_opponent_rd"
+    ],
+    "epistemic_label": "X",
+    "exposure_means": {
+      "fair_minus_clearly_worse": 0.4018668385242784
+    },
+    "fair_minus_clearly_worse_ones_requested": 304300,
+    "fair_minus_clearly_worse_zeros_requested": 452916,
+    "fixed_effects": [
+      "chooser_id",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "fixed_effects_requested": [
+      "chooser_id",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "matrix_rank": 9,
+    "model": "X_C7R_fair_vs_clearly_worse_all_meetings",
+    "numeric_controls": [
+      "z_draw_payoff",
+      "z_win_premium",
+      "z_chooser_clock",
+      "z_opponent_clock",
+      "z_chooser_elo",
+      "z_opponent_elo",
+      "z_chooser_rd",
+      "z_opponent_rd"
+    ],
+    "outcome_mean": 0.014091091577568356,
+    "results": [
+      {
+        "coefficient": 0.015760009295202975,
+        "p_value_two_sided": 1.0110442196596174e-193,
+        "standard_error": 0.000530805443931225,
+        "t_cluster": 29.69074540472301,
+        "term": "fair_minus_clearly_worse"
+      }
+    ],
+    "rows": 757216,
+    "rows_requested": 757216,
+    "sample_specification_sha256": "9c1c6c151dc550709ec80a244b8b2fa836b932041d536b2d1cf2fd6d4d7a481a",
+    "smallest_singular_value": 47.63122821908669,
+    "status": "ESTIMATED"
+  },
+  {
+    "absorption_iterations": 303,
+    "absorption_last_adjustment": 9.548126793774393e-10,
+    "absorption_maximum_iterations": 2000,
+    "absorption_tolerance": 1e-09,
+    "analysis_role": "post-gate exploratory C7R",
+    "causal_claim": false,
+    "cluster": "chooser_id",
+    "cluster_correction": 1.0000133139776555,
+    "clusters": 513490,
+    "clusters_requested": 513490,
+    "covariance_probability_units": [
+      [
+        3.3273140970788795e-07,
+        2.2386008240313518e-10,
+        -1.6623391746089505e-08,
+        -1.0573973832304297e-08,
+        1.3197396605336334e-09,
+        -3.6531096117371875e-08,
+        -1.0362370225343129e-08,
+        1.5096652666856375e-08,
+        9.00661816575142e-09
+      ],
+      [
+        2.2386008240313048e-10,
+        1.0141420798431825e-07,
+        -9.478278265117762e-08,
+        -6.046666053850717e-09,
+        3.6545105919877224e-09,
+        1.5794988043291854e-07,
+        -1.3947466569710361e-07,
+        7.198235334593676e-08,
+        -5.22429679849798e-09
+      ],
+      [
+        -1.6623391746089498e-08,
+        -9.47827826511776e-08,
+        7.380294424552459e-06,
+        -2.9163886635602905e-08,
+        -9.377912533434574e-09,
+        -4.109317870383312e-07,
+        2.9263565574556636e-07,
+        -6.736471640521336e-06,
+        1.8511979365563365e-07
+      ],
+      [
+        -1.0573973832304296e-08,
+        -6.0466660538507166e-09,
+        -2.9163886635602882e-08,
+        5.291262628958028e-07,
+        -2.3371933769753063e-07,
+        -5.140388338735458e-08,
+        3.8441603148972466e-08,
+        2.452114048111245e-08,
+        -9.151759035865953e-09
+      ],
+      [
+        1.319739660533641e-09,
+        3.6545105919877266e-09,
+        -9.377912533434627e-09,
+        -2.3371933769753058e-07,
+        4.910198869388961e-07,
+        9.630903256507155e-09,
+        -1.748538596346483e-08,
+        2.243675232057127e-09,
+        -5.695708225793931e-09
+      ],
+      [
+        -3.653109611737188e-08,
+        1.5794988043291846e-07,
+        -4.109317870383298e-07,
+        -5.1403883387354606e-08,
+        9.630903256507145e-09,
+        3.114760205665353e-06,
+        -1.9130537198851663e-06,
+        4.893189461844365e-07,
+        -2.780806473085907e-08
+      ],
+      [
+        -1.036237022534314e-08,
+        -1.3947466569710364e-07,
+        2.926356557455654e-07,
+        3.844160314897248e-08,
+        -1.748538596346483e-08,
+        -1.9130537198851654e-06,
+        1.931094577732253e-06,
+        -2.6818713018541317e-07,
+        2.1256369635673696e-08
+      ],
+      [
+        1.509665266685636e-08,
+        7.198235334593669e-08,
+        -6.736471640521335e-06,
+        2.4521140481112454e-08,
+        2.2436752320570827e-09,
+        4.893189461844379e-07,
+        -2.68187130185414e-07,
+        6.770985975284078e-06,
+        -1.7489210381499462e-07
+      ],
+      [
+        9.006618165751417e-09,
+        -5.2242967984979745e-09,
+        1.8511979365563373e-07,
+        -9.15175903586595e-09,
+        -5.695708225793933e-09,
+        -2.780806473085911e-08,
+        2.125636963567372e-08,
+        -1.7489210381499475e-07,
+        5.5965400930580565e-08
+      ]
+    ],
+    "covariance_terms": [
+      "fair_minus_clearly_worse",
+      "z_draw_payoff",
+      "z_win_premium",
+      "z_chooser_clock",
+      "z_opponent_clock",
+      "z_chooser_elo",
+      "z_opponent_elo",
+      "z_chooser_rd",
+      "z_opponent_rd"
+    ],
+    "epistemic_label": "X",
+    "exposure_means": {
+      "fair_minus_clearly_worse": 0.4003512201775424
+    },
+    "fair_minus_clearly_worse_ones_requested": 281780,
+    "fair_minus_clearly_worse_zeros_requested": 422052,
+    "fixed_effects": [
+      "chooser_id",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "fixed_effects_requested": [
+      "chooser_id",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "matrix_rank": 9,
+    "model": "X_C7R_fair_vs_clearly_worse_first_meetings",
+    "numeric_controls": [
+      "z_draw_payoff",
+      "z_win_premium",
+      "z_chooser_clock",
+      "z_opponent_clock",
+      "z_chooser_elo",
+      "z_opponent_elo",
+      "z_chooser_rd",
+      "z_opponent_rd"
+    ],
+    "outcome_mean": 0.014355698518964753,
+    "results": [
+      {
+        "coefficient": 0.01630927517500673,
+        "p_value_two_sided": 7.210393651663571e-176,
+        "standard_error": 0.000576828752497557,
+        "t_cluster": 28.274032985337016,
+        "term": "fair_minus_clearly_worse"
+      }
+    ],
+    "rows": 703832,
+    "rows_requested": 703832,
+    "sample_specification_sha256": "c07fcf1dc57e85c96b3aa95391ea9b2c3f65b2bfe5095501abe16e79bd1384cd",
+    "smallest_singular_value": 44.714814619005416,
+    "status": "ESTIMATED"
+  },
+  {
+    "causal_claim": false,
+    "cluster": "chooser_id",
+    "clusters_requested": 46725,
+    "epistemic_label": "X",
+    "error_message": "HDFE absorption did not converge: iterations=2000 tolerance=1.000e-09 last_adjustment=1.632e-06",
+    "error_type": "RuntimeError",
+    "fair_minus_clearly_worse_ones_requested": 22520,
+    "fair_minus_clearly_worse_zeros_requested": 30864,
+    "fixed_effects_requested": [
+      "chooser_id",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "model": "X_C7R_fair_vs_clearly_worse_repeat_meetings",
+    "rows_requested": 53384,
+    "status": "ESTIMATION_FAILURE_RETAINED"
+  },
+  {
+    "absorption_iterations": 299,
+    "absorption_last_adjustment": 9.689634677824494e-10,
+    "absorption_maximum_iterations": 2000,
+    "absorption_tolerance": 1e-09,
+    "analysis_role": "post-gate exploratory C7R",
+    "causal_claim": false,
+    "cluster": "chooser_id",
+    "cluster_correction": 1.0000150816016855,
+    "clusters": 533302,
+    "clusters_requested": 533302,
+    "covariance_probability_units": [
+      [
+        3.0136052996483284e-07,
+        5.403554826102098e-08,
+        -1.9357433474714347e-07,
+        -4.6300401632946126e-09,
+        -1.116757190597597e-08,
+        -1.0108643027374376e-08,
+        1.3627732369259233e-09,
+        -3.704393281089792e-08,
+        -4.312961341960558e-09,
+        7.3126314806154275e-09,
+        6.860392211341979e-09
+      ],
+      [
+        5.4035548261020915e-08,
+        4.463547071787875e-07,
+        -4.5535512133220294e-07,
+        4.938247153355311e-09,
+        1.2711767365205553e-08,
+        5.571025480812758e-09,
+        2.6795227495753113e-09,
+        -6.644633699986196e-09,
+        -1.1781822011065794e-08,
+        -3.878499181145543e-09,
+        1.1592693913194777e-08
+      ],
+      [
+        -1.9357433474714336e-07,
+        -4.553551213322035e-07,
+        1.895522833414592e-06,
+        -1.9788236274060432e-08,
+        1.123929649366106e-08,
+        -4.45348220895543e-09,
+        -2.376885042858488e-08,
+        -4.7590789546776106e-09,
+        1.2380913928250004e-08,
+        -1.0617538401968382e-08,
+        -3.103445026705883e-09
+      ],
+      [
+        -4.630040163294619e-09,
+        4.9382471533553096e-09,
+        -1.9788236274060426e-08,
+        2.479908670931146e-07,
+        -1.4279389206133086e-07,
+        2.8259236499337573e-09,
+        -8.164341004464705e-09,
+        2.423225187213894e-07,
+        -2.3434478595844379e-07,
+        1.4874838489252303e-07,
+        -5.356130620131467e-09
+      ],
+      [
+        -1.1167571905975965e-08,
+        1.2711767365205544e-08,
+        1.123929649366107e-08,
+        -1.427938920613307e-07,
+        4.62600487295439e-06,
+        -3.2033014720030916e-08,
+        -1.8111305643080153e-08,
+        -3.254826831517048e-07,
+        2.4646523659997423e-07,
+        -4.182614525177234e-06,
+        1.232497264974465e-07
+      ],
+      [
+        -1.0108643027374373e-08,
+        5.571025480812763e-09,
+        -4.4534822089554445e-09,
+        2.825923649933753e-09,
+        -3.2033014720030916e-08,
+        4.404845768203599e-07,
+        -1.975751024514409e-07,
+        -4.2490795166109915e-08,
+        2.840741519673081e-08,
+        2.8063002418122338e-08,
+        -7.786305010732806e-09
+      ],
+      [
+        1.362773236925924e-09,
+        2.679522749575304e-09,
+        -2.3768850428584862e-08,
+        -8.164341004464698e-09,
+        -1.8111305643080156e-08,
+        -1.9757510245144081e-07,
+        4.125404932311833e-07,
+        2.7832305162500283e-09,
+        -6.568275882256231e-09,
+        9.856214624780122e-09,
+        -3.4777363911516603e-09
+      ],
+      [
+        -3.7043932810897915e-08,
+        -6.644633699986217e-09,
+        -4.759078954677634e-09,
+        2.423225187213895e-07,
+        -3.2548268315170436e-07,
+        -4.2490795166109895e-08,
+        2.7832305162500023e-09,
+        2.7642806225627947e-06,
+        -1.6746097134142832e-06,
+        3.975247314284808e-07,
+        -2.6136232421108284e-08
+      ],
+      [
+        -4.312961341960558e-09,
+        -1.1781822011065771e-08,
+        1.2380913928249997e-08,
+        -2.343447859584441e-07,
+        2.464652365999742e-07,
+        2.840741519673084e-08,
+        -6.568275882256249e-09,
+        -1.6746097134142849e-06,
+        1.7122975612685485e-06,
+        -2.3467594599669106e-07,
+        2.1442281799293877e-08
+      ],
+      [
+        7.312631480615421e-09,
+        -3.8784991811455275e-09,
+        -1.0617538401968385e-08,
+        1.4874838489252298e-07,
+        -4.182614525177229e-06,
+        2.8063002418122338e-08,
+        9.856214624780116e-09,
+        3.975247314284812e-07,
+        -2.3467594599669122e-07,
+        4.365863292485447e-06,
+        -1.1762360709274668e-07
+      ],
+      [
+        6.860392211341973e-09,
+        1.1592693913194785e-08,
+        -3.1034450267058823e-09,
+        -5.356130620131464e-09,
+        1.2324972649744652e-07,
+        -7.786305010732811e-09,
+        -3.477736391151657e-09,
+        -2.613623242110829e-08,
+        2.144228179929388e-08,
+        -1.1762360709274672e-07,
+        4.782326409155008e-08
+      ]
+    ],
+    "covariance_terms": [
+      "fair",
+      "repeat",
+      "fair_x_repeat",
+      "z_draw_payoff",
+      "z_win_premium",
+      "z_chooser_clock",
+      "z_opponent_clock",
+      "z_chooser_elo",
+      "z_opponent_elo",
+      "z_chooser_rd",
+      "z_opponent_rd"
+    ],
+    "epistemic_label": "X",
+    "exposure_means": {
+      "fair": 0.4018668385242784,
+      "fair_x_repeat": 0.02974052317964755,
+      "repeat": 0.07050035921058193
+    },
+    "fair_ones_requested": 304300,
+    "fair_x_repeat_ones_requested": 22520,
+    "fair_x_repeat_zeros_requested": 734696,
+    "fair_zeros_requested": 452916,
+    "fixed_effects": [
+      "chooser_id",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "fixed_effects_requested": [
+      "chooser_id",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "matrix_rank": 11,
+    "model": "X_C7R_fair_repeat_interaction_all_meetings",
+    "numeric_controls": [
+      "z_draw_payoff",
+      "z_win_premium",
+      "z_chooser_clock",
+      "z_opponent_clock",
+      "z_chooser_elo",
+      "z_opponent_elo",
+      "z_chooser_rd",
+      "z_opponent_rd"
+    ],
+    "outcome_mean": 0.014091091577568356,
+    "repeat_ones_requested": 53384,
+    "repeat_zeros_requested": 703832,
+    "results": [
+      {
+        "coefficient": 0.016076332478614615,
+        "p_value_two_sided": 1.614768335928109e-188,
+        "standard_error": 0.0005489631408071336,
+        "t_cluster": 29.284903272335892,
+        "term": "fair"
+      },
+      {
+        "coefficient": 0.0013279365752822518,
+        "p_value_two_sided": 0.0468517494785041,
+        "standard_error": 0.0006680978275513157,
+        "t_cluster": 1.9876379184607584,
+        "term": "repeat"
+      },
+      {
+        "coefficient": -0.0031954656826513835,
+        "p_value_two_sided": 0.020288428202499802,
+        "standard_error": 0.0013767798783446074,
+        "t_cluster": -2.3209706452810024,
+        "term": "fair_x_repeat"
+      }
+    ],
+    "rows": 757216,
+    "rows_requested": 757216,
+    "sample_specification_sha256": "f002a500bfe25648e321ac1823860b1b22607935a7aec053f371a29b1e84121f",
+    "smallest_singular_value": 47.62903692608325,
+    "status": "ESTIMATED"
+  },
+  {
+    "absorption_iterations": 541,
+    "absorption_last_adjustment": 9.68113419277962e-10,
+    "absorption_maximum_iterations": 2000,
+    "absorption_tolerance": 1e-09,
+    "analysis_role": "post-gate exploratory C7R",
+    "causal_claim": false,
+    "cluster": "chooser_id",
+    "cluster_correction": 1.0000301959689712,
+    "clusters": 256067,
+    "clusters_requested": 256067,
+    "covariance_probability_units": [
+      [
+        2.6145482862910386e-06,
+        4.689841981361375e-08,
+        3.1302361931327887e-07,
+        6.596175733962622e-08,
+        -9.591145543477993e-08,
+        2.501365129623022e-07,
+        -6.678894133701903e-08,
+        -1.1561011268647553e-07,
+        1.0149164698290016e-07
+      ],
+      [
+        4.689841981361376e-08,
+        1.2927164544655002e-06,
+        1.1007437270166114e-06,
+        -2.252052049359108e-08,
+        5.2753146998606306e-08,
+        2.12560410255469e-06,
+        -2.198981035754929e-06,
+        -8.931497466826063e-07,
+        3.848210584356883e-08
+      ],
+      [
+        3.1302361931327903e-07,
+        1.1007437270166135e-06,
+        1.395469914632073e-05,
+        -3.020323026986325e-09,
+        -3.4547447525375573e-07,
+        1.7328890146029764e-06,
+        -1.1990298115232848e-06,
+        -1.0653225173653418e-05,
+        5.592683833181202e-07
+      ],
+      [
+        6.596175733962621e-08,
+        -2.2520520493591082e-08,
+        -3.020323026986383e-09,
+        3.6506185243982847e-06,
+        -1.5761264940754143e-06,
+        -4.323328209640112e-07,
+        3.422602366210667e-07,
+        -1.1422301403844496e-07,
+        -1.3677398078589196e-08
+      ],
+      [
+        -9.59114554347799e-08,
+        5.275314699860628e-08,
+        -3.454744752537556e-07,
+        -1.5761264940754147e-06,
+        4.491729729897333e-06,
+        -2.6461455706748184e-07,
+        5.4558297941686394e-08,
+        3.566641880693236e-07,
+        -2.8876410397178115e-08
+      ],
+      [
+        2.501365129623021e-07,
+        2.1256041025546887e-06,
+        1.7328890146029815e-06,
+        -4.323328209640111e-07,
+        -2.6461455706748184e-07,
+        2.0496139932975958e-05,
+        -1.3351341382918656e-05,
+        -7.634453007196756e-07,
+        -3.638405407591743e-08
+      ],
+      [
+        -6.678894133701908e-08,
+        -2.1989810357549304e-06,
+        -1.1990298115232852e-06,
+        3.4226023662106685e-07,
+        5.455829794168626e-08,
+        -1.3351341382918672e-05,
+        1.3650141977184264e-05,
+        9.05922352103828e-07,
+        4.6082042782396004e-08
+      ],
+      [
+        -1.1561011268647577e-07,
+        -8.931497466826088e-07,
+        -1.0653225173653396e-05,
+        -1.1422301403844495e-07,
+        3.566641880693238e-07,
+        -7.634453007196731e-07,
+        9.059223521038279e-07,
+        1.4874049191784267e-05,
+        -5.425724747844659e-07
+      ],
+      [
+        1.0149164698290017e-07,
+        3.8482105843568884e-08,
+        5.5926838331812e-07,
+        -1.3677398078589204e-08,
+        -2.887641039717813e-08,
+        -3.6384054075917506e-08,
+        4.6082042782396004e-08,
+        -5.425724747844662e-07,
+        3.4688060580989295e-07
+      ]
+    ],
+    "covariance_terms": [
+      "repeat_meeting",
+      "z_draw_payoff",
+      "z_win_premium",
+      "z_chooser_clock",
+      "z_opponent_clock",
+      "z_chooser_elo",
+      "z_opponent_elo",
+      "z_chooser_rd",
+      "z_opponent_rd"
+    ],
+    "epistemic_label": "X",
+    "exposure_means": {
+      "repeat_meeting": 0.07400591521524812
+    },
+    "fixed_effects": [
+      "chooser_id",
+      "eval_bin",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "fixed_effects_requested": [
+      "chooser_id",
+      "eval_bin",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "matrix_rank": 9,
+    "model": "X_C7R_repeat_association_within_fair",
+    "numeric_controls": [
+      "z_draw_payoff",
+      "z_win_premium",
+      "z_chooser_clock",
+      "z_opponent_clock",
+      "z_chooser_elo",
+      "z_opponent_elo",
+      "z_chooser_rd",
+      "z_opponent_rd"
+    ],
+    "outcome_mean": 0.028113703581991455,
+    "repeat_meeting_ones_requested": 22520,
+    "repeat_meeting_zeros_requested": 281780,
+    "results": [
+      {
+        "coefficient": 0.0012884163915151611,
+        "p_value_two_sided": 0.4255580486023431,
+        "standard_error": 0.0016169564886820667,
+        "t_cluster": 0.7968157464554356,
+        "term": "repeat_meeting"
+      }
+    ],
+    "rows": 304300,
+    "rows_requested": 304300,
+    "sample_specification_sha256": "9012cf6ebf34013be777e9e9badaff652848c6cf3d1cfaeb3aa1f8df93a551df",
+    "smallest_singular_value": 21.173950952110037,
+    "status": "ESTIMATED"
+  },
+  {
+    "absorption_iterations": 541,
+    "absorption_last_adjustment": 9.68113419277962e-10,
+    "absorption_maximum_iterations": 2000,
+    "absorption_tolerance": 1e-09,
+    "analysis_role": "post-gate exploratory C7R",
+    "causal_claim": false,
+    "cluster": "chooser_id",
+    "cluster_correction": 1.0000269095526477,
+    "clusters": 256067,
+    "clusters_requested": 256067,
+    "covariance_probability_units": [
+      [
+        1.992024912103057e-06,
+        -4.281105402615096e-07,
+        6.03779155558543e-08,
+        -4.2103721357525505e-08,
+        3.855190903578953e-06,
+        -3.840646368966932e-06,
+        3.54090962416967e-07,
+        -2.9560013353052364e-08
+      ],
+      [
+        -4.281105402615099e-07,
+        1.894852122769212e-05,
+        -3.1819000956385564e-08,
+        -3.0896669972056064e-07,
+        -2.549047817109357e-06,
+        2.8667145813050465e-06,
+        -1.5214633751954087e-05,
+        6.619231371261577e-07
+      ],
+      [
+        6.037791555585429e-08,
+        -3.181900095638572e-08,
+        3.6494854517598714e-06,
+        -1.5737385223278785e-06,
+        -2.62090808799014e-07,
+        1.7294760408930468e-07,
+        -8.845101157989386e-08,
+        -1.5537572161703535e-08
+      ],
+      [
+        -4.2103721357525425e-08,
+        -3.0896669972056027e-07,
+        -1.5737385223278785e-06,
+        4.4884160720779795e-06,
+        -4.5691757044329445e-07,
+        2.468857171991514e-07,
+        3.222105318577035e-07,
+        -2.6066752266711473e-08
+      ],
+      [
+        3.8551909035789475e-06,
+        -2.5490478171093543e-06,
+        -2.6209080879901397e-07,
+        -4.5691757044329466e-07,
+        2.4697214936150557e-05,
+        -1.7318995188116037e-05,
+        2.8810648980214166e-06,
+        -2.0466105460344995e-07
+      ],
+      [
+        -3.840646368966931e-06,
+        2.866714581305048e-06,
+        1.7294760408930482e-07,
+        2.468857171991517e-07,
+        -1.7318995188116054e-05,
+        1.741031342087062e-05,
+        -2.53144996414052e-06,
+        2.064909766556418e-07
+      ],
+      [
+        3.540909624169679e-07,
+        -1.5214633751954051e-05,
+        -8.84510115798938e-08,
+        3.222105318577041e-07,
+        2.8810648980214204e-06,
+        -2.5314499641405206e-06,
+        1.9033737822236527e-05,
+        -6.426547909060885e-07
+      ],
+      [
+        -2.956001335305237e-08,
+        6.619231371261577e-07,
+        -1.5537572161703515e-08,
+        -2.6066752266711496e-08,
+        -2.0466105460345e-07,
+        2.0649097665564166e-07,
+        -6.426547909060894e-07,
+        3.4604869622055244e-07
+      ]
+    ],
+    "covariance_terms": [
+      "nonnegative_minus_costly",
+      "z_win_premium",
+      "z_chooser_clock",
+      "z_opponent_clock",
+      "z_chooser_elo",
+      "z_opponent_elo",
+      "z_chooser_rd",
+      "z_opponent_rd"
+    ],
+    "epistemic_label": "X",
+    "exposure_means": {
+      "nonnegative_minus_costly": 0.5077719355898784
+    },
+    "fixed_effects": [
+      "chooser_id",
+      "eval_bin",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "fixed_effects_requested": [
+      "chooser_id",
+      "eval_bin",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "matrix_rank": 8,
+    "model": "X_C7R_nonnegative_vs_costly_all_meetings",
+    "nonnegative_minus_costly_ones_requested": 154515,
+    "nonnegative_minus_costly_zeros_requested": 149785,
+    "numeric_controls": [
+      "z_win_premium",
+      "z_chooser_clock",
+      "z_opponent_clock",
+      "z_chooser_elo",
+      "z_opponent_elo",
+      "z_chooser_rd",
+      "z_opponent_rd"
+    ],
+    "outcome_mean": 0.028113703581991455,
+    "results": [
+      {
+        "coefficient": -0.0008402787830806134,
+        "p_value_two_sided": 0.5516061897482929,
+        "standard_error": 0.0014113911265496383,
+        "t_cluster": -0.5953550134148877,
+        "term": "nonnegative_minus_costly"
+      }
+    ],
+    "rows": 304300,
+    "rows_requested": 304300,
+    "sample_specification_sha256": "0830bbdc855525406dd9e0107e2c24acf0228886b0416691a38dd8645263886e",
+    "smallest_singular_value": 18.02573220881281,
+    "status": "ESTIMATED"
+  },
+  {
+    "absorption_iterations": 558,
+    "absorption_last_adjustment": 9.888948770504327e-10,
+    "absorption_maximum_iterations": 2000,
+    "absorption_tolerance": 1e-09,
+    "analysis_role": "post-gate exploratory C7R",
+    "causal_claim": false,
+    "cluster": "chooser_id",
+    "cluster_correction": 1.0000289689425566,
+    "clusters": 242363,
+    "clusters_requested": 242363,
+    "covariance_probability_units": [
+      [
+        2.7019411249005214e-06,
+        -1.4846724113160997e-07,
+        9.860245215750436e-08,
+        -5.883631916645155e-08,
+        5.60046575838816e-06,
+        -5.508497691687664e-06,
+        1.0481492126449847e-07,
+        -2.7587887645776813e-08
+      ],
+      [
+        -1.4846724113161103e-07,
+        2.108860313151343e-05,
+        -5.161638923739326e-08,
+        -3.828106306423099e-07,
+        -8.422280958274029e-07,
+        1.1690788948453036e-06,
+        -1.903790988931941e-05,
+        6.905222275729137e-07
+      ],
+      [
+        9.860245215750434e-08,
+        -5.161638923739331e-08,
+        4.370740975116782e-06,
+        -1.7853360213320951e-06,
+        -1.5366943837585703e-07,
+        1.3714767542493503e-07,
+        -1.0641195359839563e-07,
+        -5.716911736930571e-09
+      ],
+      [
+        -5.883631916645151e-08,
+        -3.8281063064230983e-07,
+        -1.7853360213320968e-06,
+        5.2684657026175225e-06,
+        -6.320499527381089e-07,
+        3.357629930117731e-07,
+        3.996531335710496e-07,
+        -4.8164623004890176e-08
+      ],
+      [
+        5.600465758388155e-06,
+        -8.422280958274053e-07,
+        -1.5366943837585713e-07,
+        -6.320499527381089e-07,
+        3.280413915090311e-05,
+        -2.45303252835223e-05,
+        1.6957020807531627e-06,
+        -1.8167488939865747e-07
+      ],
+      [
+        -5.50849769168766e-06,
+        1.1690788948453031e-06,
+        1.3714767542493482e-07,
+        3.3576299301177353e-07,
+        -2.4530325283522293e-05,
+        2.4305696069899465e-05,
+        -1.2482831898460685e-06,
+        1.7183793026632065e-07
+      ],
+      [
+        1.0481492126449847e-07,
+        -1.9037909889319452e-05,
+        -1.0641195359839573e-07,
+        3.9965313357104933e-07,
+        1.6957020807531568e-06,
+        -1.248283189846065e-06,
+        2.4332286369435056e-05,
+        -7.335562615542714e-07
+      ],
+      [
+        -2.758788764577686e-08,
+        6.905222275729142e-07,
+        -5.716911736930541e-09,
+        -4.8164623004890176e-08,
+        -1.8167488939865747e-07,
+        1.7183793026632075e-07,
+        -7.335562615542704e-07,
+        4.239234658240201e-07
+      ]
+    ],
+    "covariance_terms": [
+      "nonnegative_minus_costly",
+      "z_win_premium",
+      "z_chooser_clock",
+      "z_opponent_clock",
+      "z_chooser_elo",
+      "z_opponent_elo",
+      "z_chooser_rd",
+      "z_opponent_rd"
+    ],
+    "epistemic_label": "X",
+    "exposure_means": {
+      "nonnegative_minus_costly": 0.5075945773298318
+    },
+    "fixed_effects": [
+      "chooser_id",
+      "eval_bin",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "fixed_effects_requested": [
+      "chooser_id",
+      "eval_bin",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "matrix_rank": 8,
+    "model": "X_C7R_nonnegative_vs_costly_first_meetings",
+    "nonnegative_minus_costly_ones_requested": 143030,
+    "nonnegative_minus_costly_zeros_requested": 138750,
+    "numeric_controls": [
+      "z_win_premium",
+      "z_chooser_clock",
+      "z_opponent_clock",
+      "z_chooser_elo",
+      "z_opponent_elo",
+      "z_chooser_rd",
+      "z_opponent_rd"
+    ],
+    "outcome_mean": 0.028674852721981687,
+    "results": [
+      {
+        "coefficient": -0.0016515081009239958,
+        "p_value_two_sided": 0.31503423537809505,
+        "standard_error": 0.0016437582318882913,
+        "t_cluster": -1.00471472561193,
+        "term": "nonnegative_minus_costly"
+      }
+    ],
+    "rows": 281780,
+    "rows_requested": 281780,
+    "sample_specification_sha256": "03a3caf663c871832c4842be0666f2153cea5813224d7ebaaf3121f770af7b3a",
+    "smallest_singular_value": 16.028588580587627,
+    "status": "ESTIMATED"
+  },
+  {
+    "causal_claim": false,
+    "cluster": "chooser_id",
+    "clusters_requested": 21113,
+    "epistemic_label": "X",
+    "error_message": "HDFE absorption did not converge: iterations=2000 tolerance=1.000e-09 last_adjustment=3.384e-04",
+    "error_type": "RuntimeError",
+    "fixed_effects_requested": [
+      "chooser_id",
+      "eval_bin",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "model": "X_C7R_nonnegative_vs_costly_repeat_meetings",
+    "nonnegative_minus_costly_ones_requested": 11485,
+    "nonnegative_minus_costly_zeros_requested": 11035,
+    "rows_requested": 22520,
+    "status": "ESTIMATION_FAILURE_RETAINED"
+  },
+  {
+    "absorption_iterations": 548,
+    "absorption_last_adjustment": 9.71370078925852e-10,
+    "absorption_maximum_iterations": 2000,
+    "absorption_tolerance": 1e-09,
+    "analysis_role": "post-gate exploratory C7R",
+    "causal_claim": false,
+    "cluster": "chooser_id",
+    "cluster_correction": 1.0000273117603764,
+    "clusters": 252822,
+    "clusters_requested": 252822,
+    "covariance_probability_units": [
+      [
+        2.0788882549137754e-06,
+        -6.307255531488099e-07,
+        6.033721565606624e-08,
+        -3.3765244921692684e-08,
+        3.995134923552561e-06,
+        -3.990310114911758e-06,
+        5.029020260398214e-07,
+        -2.037312717371012e-08
+      ],
+      [
+        -6.30725553148811e-07,
+        2.3301678600340003e-05,
+        -4.3802638866140464e-08,
+        -3.155277369554467e-07,
+        -3.5075808875507746e-06,
+        3.883347116755455e-06,
+        -1.901763999989239e-05,
+        7.282747321614185e-07
+      ],
+      [
+        6.033721565606626e-08,
+        -4.380263886614052e-08,
+        3.6717846338849675e-06,
+        -1.5162412492369928e-06,
+        -2.7244564293234367e-07,
+        1.792925006219831e-07,
+        -1.103866762830629e-07,
+        -2.6719754088769908e-08
+      ],
+      [
+        -3.376524492169265e-08,
+        -3.1552773695544667e-07,
+        -1.516241249236992e-06,
+        4.529899795732257e-06,
+        -4.4029503938873015e-07,
+        2.0700911517354476e-07,
+        3.6813462991015947e-07,
+        -3.388647619890733e-08
+      ],
+      [
+        3.995134923552554e-06,
+        -3.507580887550773e-06,
+        -2.7244564293234346e-07,
+        -4.402950393887307e-07,
+        2.523592654922768e-05,
+        -1.766893055107923e-05,
+        3.6101226674406e-06,
+        -1.348867719320208e-07
+      ],
+      [
+        -3.990310114911757e-06,
+        3.883347116755452e-06,
+        1.7929250062198315e-07,
+        2.0700911517354508e-07,
+        -1.7668930551079247e-05,
+        1.782905400263901e-05,
+        -3.326092327664148e-06,
+        1.406165898808197e-07
+      ],
+      [
+        5.029020260398214e-07,
+        -1.901763999989241e-05,
+        -1.103866762830629e-07,
+        3.681346299101593e-07,
+        3.6101226674405974e-06,
+        -3.326092327664147e-06,
+        2.2704173299780513e-05,
+        -6.737164921556216e-07
+      ],
+      [
+        -2.037312717371017e-08,
+        7.282747321614184e-07,
+        -2.6719754088769878e-08,
+        -3.388647619890735e-08,
+        -1.3488677193202084e-07,
+        1.4061658988081986e-07,
+        -6.737164921556203e-07,
+        3.318229363673479e-07
+      ]
+    ],
+    "covariance_terms": [
+      "positive_minus_negative",
+      "z_win_premium",
+      "z_chooser_clock",
+      "z_opponent_clock",
+      "z_chooser_elo",
+      "z_opponent_elo",
+      "z_chooser_rd",
+      "z_opponent_rd"
+    ],
+    "epistemic_label": "X",
+    "exposure_means": {
+      "positive_minus_negative": 0.5002385615572231
+    },
+    "fixed_effects": [
+      "chooser_id",
+      "eval_bin",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "fixed_effects_requested": [
+      "chooser_id",
+      "eval_bin",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "matrix_rank": 8,
+    "model": "X_C7R_positive_vs_negative_all_meetings",
+    "numeric_controls": [
+      "z_win_premium",
+      "z_chooser_clock",
+      "z_opponent_clock",
+      "z_chooser_elo",
+      "z_opponent_elo",
+      "z_chooser_rd",
+      "z_opponent_rd"
+    ],
+    "outcome_mean": 0.028066850620426874,
+    "positive_minus_negative_ones_requested": 149928,
+    "positive_minus_negative_zeros_requested": 149785,
+    "results": [
+      {
+        "coefficient": -0.0008266727058741578,
+        "p_value_two_sided": 0.5664093378366306,
+        "standard_error": 0.001441835030408741,
+        "t_cluster": -0.5733476357831361,
+        "term": "positive_minus_negative"
+      }
+    ],
+    "rows": 299713,
+    "rows_requested": 299713,
+    "sample_specification_sha256": "a4e4635e75f62c2682cd9abc937cfbb86cb3b6da54cdc1e64f68243a811da283",
+    "smallest_singular_value": 17.782830410334487,
+    "status": "ESTIMATED"
+  },
+  {
+    "absorption_iterations": 565,
+    "absorption_last_adjustment": 9.819107389568563e-10,
+    "absorption_maximum_iterations": 2000,
+    "absorption_tolerance": 1e-09,
+    "analysis_role": "post-gate exploratory C7R",
+    "causal_claim": false,
+    "cluster": "chooser_id",
+    "cluster_correction": 1.0000293969223695,
+    "clusters": 239259,
+    "clusters_requested": 239259,
+    "covariance_probability_units": [
+      [
+        2.799989530376496e-06,
+        -5.427510007893229e-07,
+        9.967743921391882e-08,
+        -3.393339452218911e-08,
+        5.726681175884109e-06,
+        -5.6443048296746846e-06,
+        4.438795485121223e-07,
+        -1.3065439871176903e-08
+      ],
+      [
+        -5.427510007893246e-07,
+        3.350954377028648e-05,
+        -9.095155703825865e-08,
+        -4.0533182083643553e-07,
+        -2.758181236190757e-06,
+        3.098166418549682e-06,
+        -2.9993151608647402e-05,
+        8.930123957502013e-07
+      ],
+      [
+        9.967743921391884e-08,
+        -9.09515570382586e-08,
+        4.392240658813328e-06,
+        -1.687833005522365e-06,
+        -1.6137648186400632e-07,
+        1.4064010961701476e-07,
+        -1.0903748516475278e-07,
+        -2.065062292870435e-08
+      ],
+      [
+        -3.393339452218912e-08,
+        -4.053318208364354e-07,
+        -1.687833005522365e-06,
+        5.309117696217572e-06,
+        -5.89315536776697e-07,
+        2.5836062359320595e-07,
+        4.7039893005095196e-07,
+        -5.941456448342583e-08
+      ],
+      [
+        5.7266811758841065e-06,
+        -2.7581812361907622e-06,
+        -1.6137648186400638e-07,
+        -5.893155367766971e-07,
+        3.32218468904544e-05,
+        -2.4755862859693956e-05,
+        3.4090747739282536e-06,
+        -7.987855206817544e-08
+      ],
+      [
+        -5.64430482967468e-06,
+        3.098166418549683e-06,
+        1.4064010961701474e-07,
+        2.5836062359320605e-07,
+        -2.4755862859693942e-05,
+        2.460010687388772e-05,
+        -2.9831869294218165e-06,
+        7.477429879784373e-08
+      ],
+      [
+        4.4387954851212346e-07,
+        -2.9993151608647436e-05,
+        -1.0903748516475262e-07,
+        4.7039893005095185e-07,
+        3.409074773928246e-06,
+        -2.983186929421813e-06,
+        3.4294728223573986e-05,
+        -8.862280336250194e-07
+      ],
+      [
+        -1.3065439871176898e-08,
+        8.930123957502037e-07,
+        -2.065062292870437e-08,
+        -5.941456448342583e-08,
+        -7.987855206817515e-08,
+        7.477429879784347e-08,
+        -8.862280336250209e-07,
+        4.0761477204794125e-07
+      ]
+    ],
+    "covariance_terms": [
+      "positive_minus_negative",
+      "z_win_premium",
+      "z_chooser_clock",
+      "z_opponent_clock",
+      "z_chooser_elo",
+      "z_opponent_elo",
+      "z_chooser_rd",
+      "z_opponent_rd"
+    ],
+    "epistemic_label": "X",
+    "exposure_means": {
+      "positive_minus_negative": 0.5001729131543682
+    },
+    "fixed_effects": [
+      "chooser_id",
+      "eval_bin",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "fixed_effects_requested": [
+      "chooser_id",
+      "eval_bin",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "matrix_rank": 8,
+    "model": "X_C7R_positive_vs_negative_first_meetings",
+    "numeric_controls": [
+      "z_win_premium",
+      "z_chooser_clock",
+      "z_opponent_clock",
+      "z_chooser_elo",
+      "z_opponent_elo",
+      "z_chooser_rd",
+      "z_opponent_rd"
+    ],
+    "outcome_mean": 0.028627934120088187,
+    "positive_minus_negative_ones_requested": 138846,
+    "positive_minus_negative_zeros_requested": 138750,
+    "results": [
+      {
+        "coefficient": -0.0017732124514374258,
+        "p_value_two_sided": 0.2892815090242438,
+        "standard_error": 0.0016733169246668416,
+        "t_cluster": -1.0596991073824664,
+        "term": "positive_minus_negative"
+      }
+    ],
+    "rows": 277596,
+    "rows_requested": 277596,
+    "sample_specification_sha256": "a4bd6102e731c25632067463253885870bc586a8be9ed077b287d38a85f3b668",
+    "smallest_singular_value": 15.82249019491331,
+    "status": "ESTIMATED"
+  },
+  {
+    "causal_claim": false,
+    "cluster": "chooser_id",
+    "clusters_requested": 20755,
+    "epistemic_label": "X",
+    "error_message": "HDFE absorption did not converge: iterations=2000 tolerance=1.000e-09 last_adjustment=3.254e-04",
+    "error_type": "RuntimeError",
+    "fixed_effects_requested": [
+      "chooser_id",
+      "eval_bin",
+      "speed_code",
+      "month_code",
+      "hour_of_week",
+      "ply_band"
+    ],
+    "model": "X_C7R_positive_vs_negative_repeat_meetings",
+    "positive_minus_negative_ones_requested": 11082,
+    "positive_minus_negative_zeros_requested": 11035,
+    "rows_requested": 22117,
+    "status": "ESTIMATION_FAILURE_RETAINED"
+  }
+]

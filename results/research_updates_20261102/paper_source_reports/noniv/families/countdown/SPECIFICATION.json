@@ -1,0 +1,67 @@
+{
+  "control_slopes": "separate by period and speed",
+  "controls": [
+    "log1p chooser last clock",
+    "log1p disconnected last clock",
+    "rating gap / 100",
+    "chooser rating / 100"
+  ],
+  "curvature_grid_pp_per_deficit_squared": [
+    0.0,
+    0.01,
+    0.025,
+    0.05,
+    0.1
+  ],
+  "curvature_method": "conservative bias-expanded normal interval; not optimized Kolesar-Rothe",
+  "effects": [
+    "chooser by speed",
+    "10cp evaluation bin by stage by period by speed",
+    "calendar month by speed"
+  ],
+  "exploratory": true,
+  "families": [
+    {
+      "clock_multiple": 0,
+      "name": "primary",
+      "post_start": "2025-08-11",
+      "pre_end": "2025-07-19"
+    },
+    {
+      "clock_multiple": 1,
+      "name": "clock_long",
+      "post_start": "2025-08-11",
+      "pre_end": "2025-07-19"
+    },
+    {
+      "clock_multiple": 2,
+      "name": "clock_twice",
+      "post_start": "2025-08-11",
+      "pre_end": "2025-07-19"
+    },
+    {
+      "clock_multiple": 0,
+      "name": "calendar_august",
+      "post_start": "2025-08-01",
+      "pre_end": "2025-07-01"
+    },
+    {
+      "clock_multiple": 0,
+      "name": "calendar_september",
+      "post_start": "2025-09-01",
+      "pre_end": "2025-07-01"
+    }
+  ],
+  "missing": "reject missing or invalid model fields",
+  "monthly": "separate month/speed models with chooser and eval10-by-stage FE; joint chooser covariance across months",
+  "primary_contrast": "mu4 minus equal-weight OLS linear extrapolation of mu0..mu3 to 4",
+  "primary_inference": "chooser clustered CR0; normal 95% intervals; full joint covariance",
+  "profile": "saturated deficit indicators, reference 3",
+  "sample": "author-excluded main; finite non-mate cp < -100; deficits 0..8",
+  "secondary_contrast": "0.5*mu2 - 1.5*mu3 + 1.5*mu4 - 0.5*mu5",
+  "secondary_inference": "chooser + UTC last-move date - chooser/date CR0; no PSD repair",
+  "singletons": "iteratively remove FE-singleton rows; report retained sample",
+  "stage": "ply 0-10,11-20,21-40,41-80,81+",
+  "version": "1.0.0",
+  "warning": "Calendar windows do not verify deployment; adjusted contrasts do not isolate selection from behavior"
+}

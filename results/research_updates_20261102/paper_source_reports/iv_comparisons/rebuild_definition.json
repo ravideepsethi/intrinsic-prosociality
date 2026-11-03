@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "history_days": 90,
+  "history_gap_days": 0,
+  "spacing_days": 0,
+  "history_interval": "[exposure game start minus 90 days, exposure game start)",
+  "behavioral_event_time": "Inherited decision timestamp t; author-clean history counts",
+  "volume": "All-game starts in the same 90-day interval; factual chronology, not completed-game counts",
+  "support": "At least five eligible grant-or-claim decisions by opponent j across the observed 24-month panel, after excluding every j-to-i decision and both author accounts in both roles; finite adjusted score and expected rate.",
+  "score": "All-time Score A, donor-own-month held-out-pair-fold state reference, every focal-pair decision removed.",
+  "score_scale": 0.04979005187533171,
+  "outcome": "First qualifying competitive chooser decision with decision time > anchor and <= anchor+90 days; game start > anchor; different opponent; no choice is zero",
+  "followup": "Existing complete90 rule retained; anchor+90 days strictly before panel end",
+  "observation": "All eligible exposure rows; no recipient spacing or one-row cap; exposure weighted",
+  "covariance": "shared-account-OR-exposure-date CR0; generated scores treated as fixed",
+  "primary_controls": "X0_ENV_indicator with log_volume_90",
+  "balance": "Eight 90-day history/volume traits under NH+ENV, omitting recipient-history controls; controlled traits are not independent balance evidence",
+  "comparison": "Same fixed Phase100 additional-game hash frame; same support and first-pair/predecessor rules; remove receipt cooldown, use history90",
+  "author_accounts": [
+    "AUTHOR_ACCOUNT_1",
+    "AUTHOR_ACCOUNT_2"
+  ],
+  "legacy_files_read_only": true,
+  "no_stockfish": true,
+  "progress": "25/50/75/100 are stage milestones, not fractions of elapsed runtime"
+}

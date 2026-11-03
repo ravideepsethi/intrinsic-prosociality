@@ -1,0 +1,23 @@
+{
+  "cache_contract": "Original target hash, repaired report hashes, original unit ID roster, overlay hashes and each repaired projection receipt key verified.",
+  "cache_files": 870,
+  "lineage": {
+    "choosers": 20000,
+    "code_sha256": "5508d1fdc1fb4511a26d1e8aead101d7c76bc9eb5d85baf4f57faabc0a3ef3e0",
+    "collector_sha256": "b2346b6841da10f8443256104cde51fc5924552a54c4c51becdbe82811655a4a",
+    "contract": "A2_SCORE_REPAIR_V101",
+    "engine_sha256": "ae4c93fa9676ca7750d0714342fd8a5b1d018000fc6e0f6cedf112067b5ef374",
+    "grants": 3755,
+    "key": "14eda066d25b14f4e33ded4d385f5023d3d325724238977ebd4ddff90e0e993f",
+    "legacy_run": "c539ba215e708b2218662d0fcbe507655abbb705ed13c5179c6601329036ce40",
+    "opportunities": 260863,
+    "parent_result_key": "6147f8e2098bf8166821436c10fe99d7a6c1112d06a28698e051e609732f0e5a",
+    "parent_result_sha256": "9522a443e2ea761e409d0befdc761639460a748a017f0b71c72f660737011f90",
+    "source_sample": "a17c89d750cb4fdfdf84f950859e45c58b19996efae02045def68285e305cf30",
+    "target_sha256": "a1b68dc9bdaf2d9a95494b9ec020ede0bcf75bd6fefcf340ba1e2b55ee5eba12",
+    "workers": 10
+  },
+  "new_api_calls": 0,
+  "new_engine_evaluations": 0,
+  "target_sha256": "a1b68dc9bdaf2d9a95494b9ec020ede0bcf75bd6fefcf340ba1e2b55ee5eba12"
+}

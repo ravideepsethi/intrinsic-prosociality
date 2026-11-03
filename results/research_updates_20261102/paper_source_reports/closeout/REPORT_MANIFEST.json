@@ -1,0 +1,132 @@
+[
+  {
+    "bytes": 1112,
+    "path": "COVERAGE.json",
+    "sha256": "f7dab091c3e9a79fae8b3f561c4d375fe5d7c595b6d518f9ffec7101702a61c9"
+  },
+  {
+    "bytes": 462,
+    "path": "INTEGRATION_CHECKS.json",
+    "sha256": "273b863fb952b98cc0c9ef07a3035c26c93b3b0556fe53cec66e2948dba89b6e"
+  },
+  {
+    "bytes": 11176,
+    "path": "MATERIAL_SCREEN.json",
+    "sha256": "4d5c40a5e57d2bd5bd20bbd3f57e5e3f6877111bda758588b3bae7e8967b0b74"
+  },
+  {
+    "bytes": 1024,
+    "path": "ORDINARY_FRAME.json",
+    "sha256": "360a9ec32c16a1b049f9b47b1f30da5e0a33e1a806e67a3c0697aec0179355c0"
+  },
+  {
+    "bytes": 2198,
+    "path": "ORDINARY_WEIGHT_AUDIT_exact_time_control.json",
+    "sha256": "5c692d54f06699c273d736954ef5bb1a391f482a8ee8886b3ab95e5165ac6921"
+  },
+  {
+    "bytes": 2203,
+    "path": "ORDINARY_WEIGHT_AUDIT_overlap.json",
+    "sha256": "aeb9e151300ba9e3f1c99a8ba1d9f4db2cd88dbffde44ff6d9a8fa554549d2cb"
+  },
+  {
+    "bytes": 2200,
+    "path": "ORDINARY_WEIGHT_AUDIT_within_recipient.json",
+    "sha256": "4c027a5ddc8bf6170a1da16a9fd674e06b69bf8c8176ac8e8a1823c170178ae6"
+  },
+  {
+    "bytes": 6578,
+    "path": "ORDINARY_exact_time_control.json",
+    "sha256": "328a8425c54cab32b283a0193e0d8f82d72aa8230c2938394ed0b002e90aec0f"
+  },
+  {
+    "bytes": 6545,
+    "path": "ORDINARY_overlap.json",
+    "sha256": "2d75fccef5e373afd06b0b4d97acc20578e5dbf58febdad48785fdb3f89b3782"
+  },
+  {
+    "bytes": 6487,
+    "path": "ORDINARY_within_recipient.json",
+    "sha256": "dfcada7d0120febdc36ef5a906f59d6d043193b2514765c7dbd8c6732b126899"
+  },
+  {
+    "bytes": 302,
+    "path": "PREFLIGHT.json",
+    "sha256": "f7177f5c6c7e4e94a71a591b003c61a1b605a2eb77e21b6b8c5526a683b47c70"
+  },
+  {
+    "bytes": 357,
+    "path": "RECENT_BALANCE_DEFINITION.json",
+    "sha256": "c267bc25d65cce5cf8d897ba31b76328f63074c5012a95b9a849f1828af69112"
+  },
+  {
+    "bytes": 682,
+    "path": "REPAIR_V101.json",
+    "sha256": "e6f2c0eaf6a695bfe82b1d6f495197f9330e1c848a730dfdcfa901dd5bf701e7"
+  },
+  {
+    "bytes": 831,
+    "path": "REPAIR_V102.json",
+    "sha256": "3e7d0cc8e55e4218912343378289a0fc9667a194392c247bb04f783cb59765f4"
+  },
+  {
+    "bytes": 745,
+    "path": "STATUS.json",
+    "sha256": "4ee637544bcce702200c0d649511d1cb6a37a72bd2d079b5446d6925c0be63c3"
+  },
+  {
+    "bytes": 3145,
+    "path": "balance_joint.csv",
+    "sha256": "9f31e199d832e1a63e6af46abd05dfcb2881692f110814253c70bf4d7d0cf27d"
+  },
+  {
+    "bytes": 239,
+    "path": "manuscript_tables/NUMERICAL_LINEAGE.json",
+    "sha256": "f4f9070ca78ed05071615167f9c798fb8bb771ecdf4eb3ae03fab74e3270c57a"
+  },
+  {
+    "bytes": 2942,
+    "path": "manuscript_tables/closeout_tables.tex",
+    "sha256": "8b524d9c64e6680bfaf244b2c8183b25ed227f2ec3a9ec8d8906efe6786c9b66"
+  },
+  {
+    "bytes": 712,
+    "path": "manuscript_tables/material.tex",
+    "sha256": "321dbb60c31a2cb71bed1236ddf960c8874e74522294f8cba19a0e7e2d413604"
+  },
+  {
+    "bytes": 998,
+    "path": "manuscript_tables/ordinary.tex",
+    "sha256": "dcdb62682dd81334a02931a04d99e593fd8c326453b1c4d9344f797e0734f370"
+  },
+  {
+    "bytes": 761,
+    "path": "manuscript_tables/recent_balance.tex",
+    "sha256": "afb88ec6a0e77ca2108cf4efe9f56aea50f72db8eb1e805d5935c6ad965691db"
+  },
+  {
+    "bytes": 288,
+    "path": "material_contrast.csv",
+    "sha256": "4d05be63f9c05fb7559dcd4f5c6667e47b4dc6c455e79478d8d4d073f489393c"
+  },
+  {
+    "bytes": 24449,
+    "path": "model_estimates.csv",
+    "sha256": "ab88966c1cd9d1a1cee1437f26a48ba604c11d7b89c8ef4d7c73f60d82bc42c6"
+  },
+  {
+    "bytes": 2807,
+    "path": "ordinary_balance.csv",
+    "sha256": "2edd69f9a1d21149bf870f818e1d527c60659d2d3ce9203d970958126c32433c"
+  },
+  {
+    "bytes": 1650,
+    "path": "ordinary_draw_vs_loss.csv",
+    "sha256": "1a10ed0fe3d35f4e9f712b42e6320f4537c091bfaeaf3b18e503cf4bfff283c7"
+  },
+  {
+    "bytes": 818,
+    "path": "ordinary_support.csv",
+    "sha256": "5f5e52b2b6781492207348d9c0ba7b53d1727f7cec0413f9c9f19753952ceba8"
+  }
+]

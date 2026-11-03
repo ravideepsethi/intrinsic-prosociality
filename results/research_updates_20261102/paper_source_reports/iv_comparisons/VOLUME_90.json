@@ -1,0 +1,24 @@
+{
+  "config_sha256": "12093d55b7ee9f737696982b8ebaef7b0706c27adc4fb12482a99aabf985d482",
+  "days": 90,
+  "files": [
+    {
+      "bytes": 657,
+      "path": "dependencies_PRIVATE.json",
+      "sha256": "745d6511130aac05ff69d980cd41b9a3e05acbeeb4338464c971a6d3ad6d9d9f"
+    },
+    {
+      "bytes": 89290765,
+      "path": "known.parquet",
+      "sha256": "3823c4d7e3c5c161d8042fba56a32a0612315e47e80d887512381b42a5ab9a4f"
+    },
+    {
+      "bytes": 115859,
+      "path": "missing.parquet",
+      "sha256": "b8b9eb86e94c6b8cf25351abc426f35bb1dbf6470c6709779aac14ffc2484b4a"
+    }
+  ],
+  "missing": 11,
+  "reused": 31836314,
+  "total": 31836325
+}

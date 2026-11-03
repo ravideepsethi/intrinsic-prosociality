@@ -1,0 +1,68 @@
+{
+  "eligible_n": 974993,
+  "n": 974993,
+  "absorbed_groups": 36,
+  "dropped_singletons": 0,
+  "grants": 4295,
+  "targets": [
+    "ever_fair",
+    "ever_losing"
+  ],
+  "controls": {
+    "cats": [],
+    "nums": [
+      "rating100",
+      "log_nf",
+      "log_nl",
+      "log_age"
+    ]
+  },
+  "categorical_levels": {},
+  "status": "ESTIMATED",
+  "estimates": {
+    "ever_fair": {
+      "status": "ESTIMATED",
+      "coefficient_pp": 0.4066256142932053,
+      "se_pp": 0.03773473328015639,
+      "ci_low_pp": 0.3300200330907478,
+      "ci_high_pp": 0.48323119549566285,
+      "p_value": 1.157704610179941e-12
+    },
+    "ever_losing": {
+      "status": "ESTIMATED",
+      "coefficient_pp": -0.16037791375724184,
+      "se_pp": 0.031043427322276284,
+      "ci_low_pp": -0.22339942168425822,
+      "ci_high_pp": -0.09735640583022545,
+      "p_value": 9.702473692645128e-06
+    }
+  },
+  "target_covariance_pp2": [
+    [
+      0.0014239100957245425,
+      -0.0008581871171281437
+    ],
+    [
+      -0.0008581871171281437,
+      0.0009636943799134496
+    ]
+  ],
+  "clusters": 36,
+  "residual_df": 974951,
+  "within_rank": 6,
+  "max_abs_group_residual_sum": 2.1444454198493723e-10,
+  "support": {
+    "treatment_switchers": 36,
+    "switchers_with_outcome_variation": 34,
+    "never_granter_identifying_weight_share": 8.968432269961721e-05
+  },
+  "se": "CR1, full rank including absorbed effects; cluster=match_cell",
+  "minimum_each_state": 1,
+  "opportunity_min_age": 0,
+  "cohort": "pooled",
+  "population": "Returned active August profile acquisition frame; outcome-dependent sampling; not an unconditional population Patron rate",
+  "outcome": "August current Patron status; not observed payment or historical Patron adoption",
+  "specification": "New tenure sensitivity with original match-cell absorption, exposure counts, mean rating and baseline age; not exact rerun of prior all-control specification",
+  "fair_minus_losing_pp": 0.5670035280504472,
+  "contrast_se_pp": 0.0640623033452145
+}

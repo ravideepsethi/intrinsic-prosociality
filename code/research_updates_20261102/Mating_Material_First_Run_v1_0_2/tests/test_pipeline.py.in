@@ -1,0 +1,158 @@
+from pathlib import Path
+import copy
+import csv
+import tempfile
+import unittest
+import zipfile
+import pyarrow.parquet as pq
+from fixtures import make_rows, row, FIXTURES, write_input, config
+from mmrerun.worker import process_audit, build_panel
+from mmrerun.report import reconcile, descriptives, bundle
+from mmrerun.io import load, record
+from mmrerun.run import execute
+from mmrerun.consume import authenticated_paths
+
+
+class PipelineTests(unittest.TestCase):
+    def setUp(self):
+        self.temp=tempfile.TemporaryDirectory()
+        self.root=Path(self.temp.name)
+        self.cfg=config(self.root)
+        self.main=write_input(self.root,"main",make_rows())
+        extra=make_rows()
+        # Old author wins are factual games, but neither behavioral universe retains them.
+        extra.append(row(*FIXTURES[-1],index=99,chooser="  AUTHOR_ACCOUNT_2  ",result="1-0"))
+        extra.append(row(*FIXTURES[-1],index=100,result="1-0"))
+        self.core=write_input(self.root,"all_source",extra)
+        self.package=Path(__file__).resolve().parents[1]
+
+    def tearDown(self):self.temp.cleanup()
+
+    def audits(self):return [process_audit((r,self.cfg)) for r in (self.main,self.core)]
+
+    def test_full_width_write_keeps_originals_and_updates_both_labels(self):
+        audits=self.audits()
+        before=record(self.main["path"])
+        out=build_panel((self.main,self.cfg,audits[0]))
+        data=pq.ParquetFile(out["file"]["path"]).read().to_pylist()
+        expected=[r for r,fixture in zip(make_rows(),FIXTURES) if not fixture[2]]
+        self.assertEqual(len(data),len(expected))
+        allowed={"outcome_kind_draw","kind_draw","chooser_has_mating_material","timeout_draw_no_mating_material"}
+        for actual,source in zip(data,expected):
+            self.assertTrue(actual["outcome_kind_draw"] and actual["kind_draw"])
+            self.assertTrue(actual["chooser_has_mating_material"])
+            self.assertFalse(actual["timeout_draw_no_mating_material"])
+            for key in set(source)-allowed:self.assertEqual(actual[key],source[key],key)
+        self.assertEqual(record(self.main["path"]),before)
+
+    def test_reconciliation_accounts_additions_removals_and_subset(self):
+        audits=self.audits()
+        result=reconcile(self.cfg,audits,enforce_baseline=False)
+        self.assertEqual(result["status"],"AUDIT_PASSED")
+        t=result["totals"]["main"]
+        self.assertEqual(t["reclassified_draws"],3)
+        self.assertEqual(t["removed_old_grants"],1)
+        self.assertEqual(t["old_opportunities"],12)
+        self.assertEqual(t["new_opportunities"],6)
+        self.assertTrue(all(r["passed"] for r in result["checks"] if not r.get("informational")))
+        described=descriptives(self.cfg,audits)
+        self.assertFalse(described["inference_rerun_complete"])
+        self.assertTrue((Path(self.cfg["run"])/"report/fig_desert_ply.csv").is_file())
+
+    def test_resume_and_corrupt_mask_rejection(self):
+        first=process_audit((self.main,self.cfg))
+        self.assertFalse(first["reused"])
+        second=process_audit((self.main,self.cfg))
+        self.assertTrue(second["reused"])
+        with Path(second["files"][0]["path"]).open("ab") as f:f.write(b"corrupt")
+        with self.assertRaisesRegex(RuntimeError,"checksum mismatch"):
+            process_audit((self.main,self.cfg))
+
+    def test_corrupt_full_width_output_rejected(self):
+        a=process_audit((self.main,self.cfg))
+        out=build_panel((self.main,self.cfg,a))
+        self.assertTrue(build_panel((self.main,self.cfg,a))["reused"])
+        with Path(out["file"]["path"]).open("ab") as f:f.write(b"corrupt")
+        with self.assertRaisesRegex(RuntimeError,"checksum mismatch"):
+            build_panel((self.main,self.cfg,a))
+
+    def test_changed_original_rejected(self):
+        a=process_audit((self.main,self.cfg))
+        with Path(self.main["path"]).open("ab") as f:f.write(b"changed")
+        with self.assertRaisesRegex(RuntimeError,"Source changed"):
+            build_panel((self.main,self.cfg,a))
+
+    def test_win_conflict_blocks_panel_build_and_keeps_private_evidence(self):
+        data=make_rows()
+        data[0]=row(*FIXTURES[0],index=0,result="1-0")
+        source=write_input(self.root,"main",data)
+        a=process_audit((source,self.cfg))
+        self.assertEqual(a["counts"]["zero_win_conflicts"],1)
+        self.assertEqual(len(a["files"]),2)
+        with self.assertRaisesRegex(RuntimeError,"contradictory result"):
+            build_panel((source,self.cfg,a))
+        self.assertFalse((Path(self.cfg["run"])/"MATERIAL_RESTRICTED_INPUTS_READY_PRIVATE.json").exists())
+
+    def test_duplicate_games_fail_global_gate(self):
+        data=make_rows();data[1]["game_id"]=data[0]["game_id"]
+        source=write_input(self.root,"main",data)
+        a=process_audit((source,self.cfg))
+        with self.assertRaisesRegex(RuntimeError,"Duplicate game IDs"):
+            reconcile(self.cfg,[a],enforce_baseline=False)
+
+    def test_main_must_be_identical_subset(self):
+        data=make_rows();data[0]["game_id"]="missing_from_core"
+        source=write_input(self.root,"main",data)
+        a=process_audit((source,self.cfg));b=process_audit((self.core,self.cfg))
+        result=reconcile(self.cfg,[a,b],enforce_baseline=False)
+        self.assertEqual(result["status"],"AUDIT_FAILED")
+
+    def test_author_policy_is_exact_names_and_both_roles(self):
+        data=make_rows()
+        data[0]["chooser_username_norm"]="AUTHOR_ACCOUNT_2"
+        source=write_input(self.root,"main",data)
+        with self.assertRaisesRegex(RuntimeError,"Author account remains"):
+            process_audit((source,self.cfg))
+
+    def test_audit_then_build_and_complete_resume(self):
+        result=execute([self.main,self.core],self.cfg,self.package,audit_only=True,enforce_baseline=False)
+        self.assertEqual(result["status"],"AUDIT_PASSED")
+        self.assertFalse((Path(self.cfg["run"])/"PRIVATE/panels").exists())
+        result=execute([self.main,self.core],self.cfg,self.package,enforce_baseline=False)
+        self.assertEqual(result["status"],"INPUTS_READY_NOT_FULL_PAPER_RERUN")
+        manifest=Path(self.cfg["run"])/"MATERIAL_RESTRICTED_INPUTS_READY_PRIVATE.json"
+        self.assertEqual(len(authenticated_paths(manifest,"main")),1)
+        # Worker count and batch size do not invalidate semantic input identity.
+        changed=dict(self.cfg,workers=1,batch_rows=7)
+        again=execute([self.main,self.core],changed,self.package,enforce_baseline=False)
+        self.assertEqual(again["run_id"],result["run_id"])
+        audit_again=execute([self.main,self.core],changed,self.package,audit_only=True,enforce_baseline=False)
+        self.assertEqual(audit_again["status"],result["status"])
+        self.assertEqual(load(Path(self.cfg["run"])/"report/RESULTS.json")["status"],result["status"])
+        target=Path(again["report_zip"])
+        with zipfile.ZipFile(target) as z:
+            self.assertTrue(all("PRIVATE" not in n and not n.endswith(".parquet") for n in z.namelist()))
+            self.assertIn("report/RECONCILIATION.csv",z.namelist())
+            self.assertIn("report/DOWNSTREAM_RERUN_REQUIRED.csv",z.namelist())
+            self.assertNotIn("chooser0",z.read("report/RESULTS.json").decode())
+
+    def test_result_conflict_stops_before_all_source_or_any_panels(self):
+        data=make_rows();data[0]=row(*FIXTURES[0],index=0,result="1-0")
+        source=write_input(self.root,"main",data)
+        with self.assertRaisesRegex(RuntimeError,"Recorded result contradicts"):
+            execute([source,self.core],self.cfg,self.package,enforce_baseline=False)
+        run=Path(self.cfg["run"])
+        self.assertFalse((run/"PRIVATE/audit/all_source").exists())
+        self.assertFalse((run/"PRIVATE/panels").exists())
+        self.assertEqual(load(run/"report/RESULTS.json")["status"],"AUDIT_FAILED_RESULT_CONFLICT")
+
+    def test_missing_fen_and_bad_alias_fail_audit(self):
+        for change in ("fen_after_last_move","kind_draw"):
+            case=self.root/change;case.mkdir()
+            data=make_rows()
+            data[0][change]=None if change=="fen_after_last_move" else True
+            source=write_input(case,"main",data)
+            with self.assertRaises(RuntimeError):process_audit((source,config(case)))
+
+
+if __name__=="__main__":unittest.main()

@@ -1,0 +1,197 @@
+from util import *
+import unittest,tempfile,shutil,zipfile,contextlib,io
+from unittest.mock import patch
+import numpy as np,pandas as pd,pyarrow.parquet as pq
+from sources import producers,prepare_targets
+from panel import join_material,check_features,prepare
+from estimation import fit_models
+from reporting import compare_reference,manuscript_tables,covariance_comparison
+from cache_inputs import authenticate_cache,guard_cache,legacy_digest
+from fixtures import frames,joined
+
+class ResponsibilityTests(unittest.TestCase):
+    def test_covariance_gate_scales_near_zero_entries_by_standard_errors(self):
+        old=np.diag([706.,64.,0.]);new=old.copy()
+        new[0,1]=new[1,0]=8.31e-8
+        result=covariance_comparison(new,old,['a','b','zero'])
+        self.assertTrue(result['passed'])
+        self.assertFalse(result['elementwise_relative_check_passed'])
+        self.assertLess(result['max_tolerance_ratio'],1.)
+        # A meaningful change in correlation cannot hide behind unchanged SEs.
+        new[0,1]=new[1,0]=.01*np.sqrt(old[0,0]*old[1,1])
+        self.assertFalse(covariance_comparison(new,old,['a','b','zero'])['passed'])
+        # A zero variance gives no relative allowance.
+        new=old.copy();new[0,2]=new[2,0]=3e-8
+        self.assertFalse(covariance_comparison(new,old,['a','b','zero'])['passed'])
+
+    def test_covariance_gate_rejects_invalid_matrices_and_diagonal_change(self):
+        old=np.diag([4.,9.]);names=['a','b']
+        for new in (np.array([[4.,np.nan],[0.,9.]]),np.array([[-1.,0.],[0.,9.]]),
+                    np.array([[4.,.1],[0.,9.]]),np.eye(3)):
+            with self.assertRaises(RuntimeError):covariance_comparison(new,old,names)
+        new=old.copy();new[0,0]+=.01
+        self.assertFalse(covariance_comparison(new,old,names)['passed'])
+
+    def test_source_and_specification_inventory(self):
+        authority=read(ROOT/'authority/SOURCES.json')
+        for name,h in authority['producer_files'].items():self.assertEqual(sha(ROOT/name),h)
+        specs=producers()['design'].specifications(False)
+        self.assertEqual(specs,read(ROOT/'evidence/a2_reference/model_definitions.json'))
+        self.assertEqual(len(specs),53)
+        self.assertFalse(any(s['history'] for s in specs))
+
+    def test_short_game_missing_endpoint_is_preserved(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            raw,d,f=frames(tmp,160)
+            check_features(d,f)
+            self.assertTrue((f.loc[d.ply<4,'net4_kind']=='missing').all())
+            m,names=producers()['design'].proxy_matrix(d.merge(f,on='game_id'),['net4'])
+            self.assertTrue((m[d.ply<4,names.index('net4_missing')]==1).all())
+
+    def test_material_join_reconciles_both_label_directions_and_drops(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            raw,d,f=frames(tmp,160);new=raw.iloc[4:].copy();new.loc[new.index[0],'y']=1-raw.y.iloc[4]
+            reference,fresh,removed,changed,audit=join_material(d,f,new)
+            self.assertEqual(len(removed),4);self.assertEqual(len(changed),1)
+            self.assertEqual(len(fresh),156);self.assertEqual(audit['replacement_accounts'],0)
+            self.assertEqual(set(fresh.game_id),set(new.game_id))
+            self.assertEqual(int(fresh.y.sum()),int(new.y.sum()))
+            self.assertEqual(reference.y.tolist(),raw.y.tolist())
+
+    def test_join_rejects_covariate_change_duplicate_and_invented_rows(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            raw,d,f=frames(tmp,160)
+            for bad in (raw.assign(board=raw.board+1),pd.concat([raw,raw.iloc[:1]]),raw.assign(game_id='invented')):
+                with self.assertRaises(RuntimeError):join_material(d,f,bad)
+            bad=f.copy();bad.loc[0,'own_kind']='invented'
+            with self.assertRaises(RuntimeError):join_material(d,bad,raw)
+            bad=f.copy();bad.loc[0,['own_kind','own_loss100']]=['missing',0.]
+            with self.assertRaises(RuntimeError):join_material(d,bad,raw)
+
+    def test_dense_dummy_ols_and_cluster_influence_oracle(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            d=joined(tmp,1800).sort_values('chooser',kind='stable');p=producers();des=p['design'];eng=p['estimate']
+            chosen=['curve_late_common_proxies','asymmetry_late','blunder200_losing']
+            for s in [s for s in des.specifications(False) if s['name'] in chosen]:
+                a=des.select(d,s);X,names,kf,group,ng=des.design(a,s);y=100*a.y.to_numpy(float)
+                C=pd.get_dummies(a.chooser,dtype=float).to_numpy();n=len(y);g=C.shape[1]
+                # Orthogonal projection against explicit chooser dummies, independent
+                # of the production reduceat implementation.
+                W=X-C@np.linalg.lstsq(C,X,rcond=1e-12)[0]
+                v=y-C@np.linalg.lstsq(C,y,rcond=1e-12)[0]
+                scale=np.linalg.norm(W,axis=0);scale[scale<1e-10]=1
+                A=W/scale;pinv=np.linalg.pinv(A,rcond=1e-8);b=(pinv@v)/scale
+                bread=(pinv@pinv.T)/scale[:,None]/scale[None,:]
+                u=v-W@b;score=C.T@(W*u[:,None]);V=g/(g-1)*bread@(score.T@score)@bread
+                m,_,_,_=eng.moments(d,s);beta,inv,sc,null,rank=eng.solve(m['xx'],m['xy'])
+                fit=dict(beta=beta,inverse=inv,scale=sc,null=null,rank=rank,names=names,p=kf,ng=ng,
+                    mean_y=float(m['y_sum']/m['n']),mean_f=m['f_sum']/m['n'],group_share=m['group_sum']/m['n'],n=int(m['n']),g=int(m['g']))
+                M=eng.meat(d,s,fit);actual=eng.coefficient_cov(fit,M)
+                self.assertTrue(np.allclose(W@beta,W@b,atol=1e-6,rtol=1e-6),s['name'])
+                for j in range(kf):
+                    t=np.eye(len(names))[j]
+                    if eng.estimable(fit,t):
+                        self.assertAlmostEqual(beta[j],b[j],places=5)
+                        self.assertAlmostEqual(actual[j,j],V[j,j],places=5)
+                if s['kind']=='profile':
+                    counter=des.point_vector(fit,300)[:kf][None,:]
+                    level,se,ok=eng.level(fit,M,counter);self.assertTrue(ok)
+                    delta=np.zeros(X.shape[1]);delta[:kf]=counter[0]-X[:,:kf].mean(axis=0)
+                    # Independently assemble cluster influence of the standardized level.
+                    influence=(C.T@(y-y.mean()))/n-(C.T@(X[:,:kf]-X[:,:kf].mean(axis=0)))@b[:kf]/n+score@bread@delta
+                    self.assertAlmostEqual(level,y.mean()+delta@b,places=5)
+                    self.assertAlmostEqual(se,np.sqrt(g/(g-1)*influence@influence),places=5)
+
+    def test_full_53_fit_resume_reference_gate_and_report(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);d=joined(root,2400);path=root/'prepared.parquet';d.to_parquet(path,index=False)
+            run=root/'run'
+            with contextlib.redirect_stdout(io.StringIO()):
+                result=fit_models(path,run,'fixture',2,2,4)
+            self.assertEqual(result['models'],53)
+            # Sharding must agree with whole-frame moments, including singletons.
+            p=producers();engine=p['estimate'];specs=p['design'].specifications(False)
+            metadata=read(run/'report/model_state.json');whole=d.sort_values('chooser',kind='stable')
+            with np.load(run/'report/model_state.npz',allow_pickle=False) as arrays:
+                for i,s in enumerate(specs):
+                    m,_,_,_=engine.moments(whole,s);beta,_,_,_,_=engine.solve(m['xx'],m['xy'])
+                    self.assertTrue(np.allclose(beta,arrays[f'm{i}_beta'],rtol=1e-6,atol=1e-6),s['name'])
+                    self.assertEqual(int(m['n']),metadata[i]['n']);self.assertEqual(int(m['g']),metadata[i]['g'])
+            old={str(p):signature(p) for p in (run/'PRIVATE').rglob('moments.npz')}
+            with contextlib.redirect_stdout(io.StringIO()):fit_models(path,run,'fixture',1,2,4)
+            self.assertEqual(old,{str(p):signature(p) for p in (run/'PRIVATE').rglob('moments.npz')})
+            out=root/'reproduction.csv'
+            self.assertTrue(compare_reference(run/'report',run/'report',out)['passed'])
+            table_meta=manuscript_tables(run/'report',run/'report');self.assertEqual(table_meta['paper_table_rows'],9)
+            wrong=root/'wrong';shutil.copytree(run/'report',wrong)
+            a=pd.read_csv(wrong/'coefficients.csv');i=a.index[a.status=='ESTIMATED'][0];a.loc[i,'estimate']+=1;a.to_csv(wrong/'coefficients.csv',index=False)
+            with self.assertRaises(RuntimeError):compare_reference(run/'report',wrong,out)
+            p=next((run/'PRIVATE').rglob('moments.npz'));p.write_bytes(b'broken')
+            with self.assertRaises(RuntimeError):
+                with contextlib.redirect_stdout(io.StringIO()):fit_models(path,run,'fixture',1,2,4)
+
+    def test_material_projection_integration_and_author_gate(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);raw,d,f=frames(root,160);features=root/'features.parquet';f.to_parquet(features,index=False)
+            names={'chooser':'chooser_user_id','y':'outcome_kind_draw','board':'engine_eval_cp_disconnected','rating':'chooser_elo','speed':'api_speed','game_ms':'api_created_at_ms'}
+            p=raw.rename(columns=names).copy()
+            p['disconnected_elo']=p.chooser_elo+raw.gap100*100
+            p['chooser_win_premium_v2']=raw.premium10*10;p['chooser_pre_rd_v2']=raw.crd100*100;p['disconnected_pre_rd_v2']=raw.drd100*100
+            p['chooser_clock_last_obs_s']=np.expm1(raw.log_cc).where(raw.cc_missing==0,np.nan)
+            p['disconnected_clock_last_obs_s']=np.expm1(raw.log_dc).where(raw.dc_missing==0,np.nan)
+            p['chooser_username_norm']='synthetic_chooser';p['disconnected_username_norm']='synthetic_recipient'
+            source=root/'main.parquet';p=p.iloc[3:].copy();p.iloc[0,p.columns.get_loc('outcome_kind_draw')]=1-int(p.iloc[0].outcome_kind_draw);p.to_parquet(source,index=False)
+            auth=dict(records=[dict(path=str(source))]);cache=dict(target=str(root/'target.parquet'),features=[str(features)])
+            run=root/'run';(run/'PRIVATE').mkdir(parents=True)
+            out,audit=prepare(auth,cache,run,'fixture',1,1)
+            self.assertEqual(audit['removed_opportunities'],3)
+            self.assertEqual(pq.ParquetFile(out/'material.parquet').metadata.num_rows,157)
+            p.iloc[0,p.columns.get_loc('chooser_username_norm')]='AUTHOR_ACCOUNT_1';p.to_parquet(source,index=False)
+            with self.assertRaises(RuntimeError):prepare(auth,cache,root/'different','different',1,1)
+
+    def test_feature_cache_lineage_keys_and_post_auth_change(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);raw,d,f=frames(root,160);raw['sf100k_stockfish_sha256']='engine';raw.to_parquet(root/'target.parquet',index=False)
+            old=root/'repair';(old/'report').mkdir(parents=True);(old/'PRIVATE/projected').mkdir(parents=True);(old/'PRIVATE/overlay_shards').mkdir()
+            reference=root/'expected';reference.mkdir()
+            lin=dict(legacy_run='legacy',key='repair',target_sha256=sha(root/'target.parquet'),opportunities=len(raw),choosers=int(raw.chooser.nunique()),grants=int(raw.y.sum()),engine_sha256='engine')
+            for path in (reference/'LINEAGE.json',old/'report/LINEAGE.json'):save(path,lin)
+            save(old/'report/COMPLETION.json',dict(status='A2_SCORE_REPAIR_COMPLETE_REVIEW_REQUIRED',models=53))
+            save(reference/'REPORT_HASHES.json',{p.name:sha(p) for p in (old/'report').iterdir()})
+            save(str(root/'target.parquet')+'.receipt.json',dict(key='legacy',sha256=sha(root/'target.parquet')))
+            overlay=old/'PRIVATE/overlay_shards/000000.parquet';pd.DataFrame(dict(example=[0])).to_parquet(overlay,index=False)
+            save(str(overlay)+'.ok.json',dict(key='overlay',sha256=sha(overlay)))
+            file=old/'PRIVATE/projected/000000.parquet';f.to_parquet(file,index=False)
+            unit=legacy_digest(['legacy',raw.game_id.tolist(),'engine']);key=legacy_digest(['repair',unit,'projection',sha(overlay)])
+            save(str(file)+'.ok.json',dict(key=key,sha256=sha(file)))
+            authority=dict(frozen_target_relative='target.parquet',repaired_root_relative='repair')
+            cache=authenticate_cache(root,1,authority,reference);guard_cache(cache)
+            save(str(file)+'.ok.json',dict(key='another_lineage',sha256=sha(file)))
+            with self.assertRaises(RuntimeError):guard_cache(cache)
+            with self.assertRaises(RuntimeError):authenticate_cache(root,1,authority,reference)
+
+    def test_wrapper_complete_resume_failure_and_zip_privacy(self):
+        import run_responsibility as runner
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);auth=dict(parent_run_id='parent',manifest_sha256='manifest',records=[])
+            cache=dict(key='cache')
+            def census(auth,run,*args):return dict(opportunities=100)
+            def execute(auth,cache,run,*args):
+                table(run/'report/example.csv',[dict(model='fixture',estimate=1.)]);save(run/'PRIVATE/cache.json',dict(test=True))
+                return dict(models=53),{}
+            args=['--project-root',str(root),'--results-dir',str(root/'Desktop'),'--workers','1']
+            with patch.multiple(runner,verify_package=lambda:None,authenticate=lambda *a:auth,authenticate_cache=lambda *a,**k:cache,
+                guard=lambda *a:None,guard_cache=lambda *a:None,census=census,execute=execute):
+                with contextlib.redirect_stdout(io.StringIO()):self.assertEqual(runner.main(args),0)
+                latest=read(root/'Desktop/MATERIAL_RESPONSIBILITY_LATEST_PRIVATE.json');report=Path(latest['report'])
+                with zipfile.ZipFile(report) as z:
+                    self.assertFalse(any('/PRIVATE/' in n for n in z.namelist()))
+                    for item in json.loads(z.read('REPORT_MANIFEST.json')):self.assertEqual(hashlib.sha256(z.read(item['path'])).hexdigest(),item['sha256'])
+                with patch.object(runner,'execute',side_effect=AssertionError('Completed model rerun')):
+                    with contextlib.redirect_stdout(io.StringIO()):self.assertEqual(runner.main(args),0)
+                good_hash=sha(report);cache_path=Path(latest['root'])/'PRIVATE/cache.json';cache_path.write_text('corrupted')
+                with contextlib.redirect_stdout(io.StringIO()):self.assertEqual(runner.main(args),1)
+                self.assertEqual(sha(report),good_hash)
+                bad_report=list((root/'Desktop').glob('*FAILED.zip'));self.assertEqual(len(bad_report),1)
+            bad=root/'privacy';(bad/'report').mkdir(parents=True);table(bad/'report/leak.csv',[dict(game_id='private')])
+            with self.assertRaises(RuntimeError):runner.bundle(bad,root/'Desktop',False)

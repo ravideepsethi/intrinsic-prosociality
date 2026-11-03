@@ -1,0 +1,15 @@
+{
+  "support": "At least five eligible grant-or-claim decisions by opponent j across the observed 24-month panel, after excluding every j-to-i decision and both author accounts in both roles; finite adjusted score and expected rate.",
+  "no_pre_exposure_opponent_support_screen": true,
+  "spacing": "Recipient/start/row_id order; accept only if start is strictly greater than previous accepted anchor + gap days; unsupported exposures do not start a window. Spacing precedes complete90/history-window cuts.",
+  "first_exposure": "Original first_recipient flag: first observed candidate exposure, followed by all-time support and observation-window cuts. Not first supported exposure.",
+  "history": "Existing 97-day coverage and seven-day-buffered recipient history controls retained; distinct from opponent score eligibility.",
+  "score": "All-time Score A, donor-own-month held-out-pair-fold state reference, every focal-pair decision removed.",
+  "covariance": "shared-account-OR-exposure-date CR0; generated scores treated as fixed",
+  "score_scale": 0.04979005187533171,
+  "scale_note": "Fixed R9 reference SD retained for comparability; native residual SD also reported. This is not claimed to be the new cohort SD.",
+  "primary_controls": "X0_ENV_indicator",
+  "secondary_controls": "X0",
+  "intervals": "95% normal Wald; no Anderson-Rubin",
+  "author_accounts": "Excluded in both exposure roles, donors, and behavioral histories"
+}

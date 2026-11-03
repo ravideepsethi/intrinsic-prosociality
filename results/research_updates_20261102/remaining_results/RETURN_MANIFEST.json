@@ -1,0 +1,202 @@
+[
+  {
+    "path": "ENVIRONMENT.json",
+    "bytes": 891,
+    "sha256": "37ed16f01b86dfde1536dc46208511b1c80923a7d9091e31239d80aabc7da0d2"
+  },
+  {
+    "path": "JOB_STATUS.json",
+    "bytes": 351,
+    "sha256": "c5fb62d66119dcff09652dda1cf13daf3de9beefdb359bb0a4357b5a2666c617"
+  },
+  {
+    "path": "RESULTS_SCOPE.csv",
+    "bytes": 2560,
+    "sha256": "0a0b52e538ea80989e26597eff1f2741e6fea5e2f85ee6d2762de18a762d3bef"
+  },
+  {
+    "path": "SELF_TEST.log",
+    "bytes": 4476,
+    "sha256": "382582e07a212deca6cdfed77d5afc9241951eb9c8ccf4a5a105de593815b326"
+  },
+  {
+    "path": "STATUS.json",
+    "bytes": 821,
+    "sha256": "e1dc0fec183833ab64816cc63c5f3d392d1e8754fd44eb12eaaf18be5dbe6b4d"
+  },
+  {
+    "path": "counts/COUNTS_20261102T190303Z/COUNT_RESULTS.csv",
+    "bytes": 2819,
+    "sha256": "ba57a1f47bcf22805f513be30eedd47af604d89008b8513dddafa157e2debd5a"
+  },
+  {
+    "path": "counts/COUNTS_20261102T190303Z/COUNT_RESULTS.json",
+    "bytes": 6698,
+    "sha256": "b81c1fa604769d1fcd4177ba5d2fe77ba2705c3a8222a6248562eba875809f85"
+  },
+  {
+    "path": "counts/COUNTS_20261102T190303Z/checksums.txt",
+    "bytes": 169,
+    "sha256": "5ca9f4b7196951c6ee629426b06a2d242a9b971023a11cf274a0f1af1c33fff2"
+  },
+  {
+    "path": "counts/INPUT_LINEAGE.json",
+    "bytes": 1416,
+    "sha256": "1708314e61cd60a982db8f90cbf43f15e07db63f6664db689d548161a83e05c9"
+  },
+  {
+    "path": "counts/STATUS.json",
+    "bytes": 47,
+    "sha256": "5fc0cb84006cf59ae3faa54729a4bdb1810d8a0794c229a662a6b7d807f6115a"
+  },
+  {
+    "path": "counts/run.log",
+    "bytes": 665,
+    "sha256": "787f6614d5f22756a84aae5d78403ed1c4af2e6c9329385b88ecefd183bbb5e2"
+  },
+  {
+    "path": "rating_validation/aggregate/report/INPUT_LINEAGE.json",
+    "bytes": 10994,
+    "sha256": "ab79536f2f172f3fcd3a876c8b7ffbb4ca55fb27a2103f5f707a0d696b98b620"
+  },
+  {
+    "path": "rating_validation/aggregate/report/METHOD.json",
+    "bytes": 1043,
+    "sha256": "ad53cdf2c8b2e47087a34fbe69ecc4c1071ada2f44cb089b0d9da14b792d14ea"
+  },
+  {
+    "path": "rating_validation/aggregate/report/PREDICTION_AGREEMENT.json",
+    "bytes": 77,
+    "sha256": "16fd9fce3ea17223b30decab865b8fd747085ddd017d87bad2963a16b0f7f1c0"
+  },
+  {
+    "path": "rating_validation/aggregate/report/RATING_VALIDATION.csv",
+    "bytes": 906,
+    "sha256": "3653ee3024ae6eb0455d849670d0d83996f1b474f74ff531b459a9796ce1c6d5"
+  },
+  {
+    "path": "rating_validation/aggregate/report/RATING_VALIDATION_BY_MONTH.csv",
+    "bytes": 15239,
+    "sha256": "14aa912d444bb5a0bdb1cfe76068f110d67fa7e75b6b5fd87292ec0502a3d6f6"
+  },
+  {
+    "path": "rating_validation/aggregate/report/SCHEMA.json",
+    "bytes": 272139,
+    "sha256": "b3965c697f4f80c4ff4f077f30657fdde14c87db480024661dcc5907501bfe2b"
+  },
+  {
+    "path": "rating_validation/aggregate/report/STATUS.json",
+    "bytes": 85,
+    "sha256": "af6b069e5a1248d953945612be14b7dbc2f4aa98cd5c70e9a92df09d27d0ce13"
+  },
+  {
+    "path": "rating_validation/run.log",
+    "bytes": 2299,
+    "sha256": "24b1c113e3fa5ad96b89cd3c8e34bd8bb293435c2b88b08b48f7b6761e3a0004"
+  },
+  {
+    "path": "receipt_companions/CONDITIONAL_COUNTS.json",
+    "bytes": 490,
+    "sha256": "09513405e9e29a57f83689da873e7b8de2773b71356138bd51a631fac5a24844"
+  },
+  {
+    "path": "receipt_companions/ENGAGEMENT_CONSTRUCTION.json",
+    "bytes": 33478,
+    "sha256": "887aa94d2f840cde2110e8277bfc1805aa8c8c451130d3c777747703dc767149"
+  },
+  {
+    "path": "receipt_companions/INPUT_LINEAGE.json",
+    "bytes": 1008,
+    "sha256": "80b6b5ca733af2deb0bd8e6245df9366759b029b8e8595dccbfbffaf2acd6d79"
+  },
+  {
+    "path": "receipt_companions/RECEIPT_COMPANIONS.csv",
+    "bytes": 2602,
+    "sha256": "1e6eef9df2919d98ce08ff83e50e1c9344d1e2301978344d5d3e750764892d69"
+  },
+  {
+    "path": "receipt_companions/REFERENCE_CHECK.json",
+    "bytes": 497,
+    "sha256": "0e8a4a65d80d6228802fc227bbe611449ff4b265a47d2a58778034e0fe1a77e2"
+  },
+  {
+    "path": "receipt_companions/STATUS.json",
+    "bytes": 319,
+    "sha256": "3dca2c32051c96ca35f99671b61612dc8f2de1292060a0da25698d56420df583"
+  },
+  {
+    "path": "receipt_companions/conditional_censored_at_next_competitive_disconnection.json",
+    "bytes": 3224,
+    "sha256": "443191e0f0c764193ee6d5f61023e57da4b6aa763f922cddc4bb5374ff461f2b"
+  },
+  {
+    "path": "receipt_companions/conditional_exposure_and_later_choice_hours.json",
+    "bytes": 3500,
+    "sha256": "6ef58d694496880fea8ada1568679eb73bff6b546b83ec6db829699a8d57efc0"
+  },
+  {
+    "path": "receipt_companions/engagement_any_game_10m.json",
+    "bytes": 3193,
+    "sha256": "65eba9acc60096109fcaa1c3f9326f0906cb29269f5f8249158a14b5a90c58b2"
+  },
+  {
+    "path": "receipt_companions/engagement_any_game_30m.json",
+    "bytes": 3190,
+    "sha256": "be1da4ada9b90a17eabe5f1ccd7c90bedfe8bb0809b6db5795383f74435d2e09"
+  },
+  {
+    "path": "receipt_companions/engagement_any_game_60m.json",
+    "bytes": 3189,
+    "sha256": "d8e043727f332e4a3f5cf9edd9bdb762e4744ddc0801ca6a5a758b7595501a96"
+  },
+  {
+    "path": "receipt_companions/engagement_log1p_games_30d.json",
+    "bytes": 3229,
+    "sha256": "6ace61a70332cf72f80bed8315b8699299e09d12bda18268ac0570e6951275df"
+  },
+  {
+    "path": "receipt_companions/reference_conditional_validation.json",
+    "bytes": 3213,
+    "sha256": "a0bb6fc54f9f5ecf8acb3e95389d9735cc004b32de149549bdd89468a64db0d1"
+  },
+  {
+    "path": "receipt_companions/run.log",
+    "bytes": 293,
+    "sha256": "551596be3583ab2330f6d740133ac97b6fe6a4fde71cf4c5cc619749063fd9f0"
+  },
+  {
+    "path": "repair/CENSOR_REPAIR_AUDIT.json",
+    "bytes": 5144,
+    "sha256": "4ddf4bb44ada7efaa2b34eb34b64e6ec2d789fa5ca5610f607698f6289d25032"
+  },
+  {
+    "path": "repair/ENVIRONMENT.json",
+    "bytes": 912,
+    "sha256": "f4b53d68f68f61a320ec93c720477e8d6a6fc851c0f925845e73164ccf9970aa"
+  },
+  {
+    "path": "repair/SUPERSEDED_INVALID_CENSOR_ESTIMATE.json",
+    "bytes": 3620,
+    "sha256": "82e837565433527c009a9a23c5e0621b78e6e2583b78da123966a214a6eeff62"
+  },
+  {
+    "path": "repair/original_run/JOB_STATUS.json",
+    "bytes": 361,
+    "sha256": "db5bf3b4efde6db83b85a6aaa1428fe18b5ef7f428bc52e438231801ac2b4d0d"
+  },
+  {
+    "path": "repair/original_run/SELF_TEST.log",
+    "bytes": 3692,
+    "sha256": "d7af56185ec9f3fc1497b243a96503d1f58f799ad62849df7f10a9a409e63bbf"
+  },
+  {
+    "path": "repair/original_run/STATUS.json",
+    "bytes": 715,
+    "sha256": "62f3c5955f107a35cdc56170c46c1d563143179ed3c69f03e8db8d4d30c8378b"
+  },
+  {
+    "path": "repair/original_run/receipt_companions/run.log",
+    "bytes": 3111,
+    "sha256": "6655a9042a770dd1d400d27707c2f33ac765f114108dc926fe4f989211438b82"
+  }
+]

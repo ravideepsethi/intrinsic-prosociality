@@ -1,0 +1,36 @@
+{
+  "baseline_configuration": "12093d55b7ee9f737696982b8ebaef7b0706c27adc4fb12482a99aabf985d482",
+  "baseline_package_manifest_sha256": "fcc1e08e1e3b1f50f21aa57f32137d2890d9df95f6e6e7214f55371ec944784c",
+  "completed_public_files_verified": 61,
+  "completed_stages_skipped": [
+    "authenticate",
+    "decisions",
+    "exposures",
+    "scores",
+    "features",
+    "core_models",
+    "supplements",
+    "sensitivities",
+    "subgroups",
+    "bins",
+    "receipt_kind",
+    "patron",
+    "comparison_auth",
+    "comparison_candidates"
+  ],
+  "execution_repair": "1.0.2",
+  "expected_remaining_hours": [
+    2,
+    4
+  ],
+  "fixes": [
+    "bounded_chronology_reuse_join",
+    "bounded_chronology_eligibility_join",
+    "per_range_checkpoints_and_streamed_ordered_assembly"
+  ],
+  "inherited_completed_repairs": "REPAIR_V101.json",
+  "no_completed_statistical_results_recomputed": true,
+  "production_network": false,
+  "repair_package_manifest_sha256": "c6242de2d6eb169467d32eb570b9b825eb0cd14fc6b2baabcf93fa6ef7e47d99",
+  "runtime_is_provisional": true
+}
